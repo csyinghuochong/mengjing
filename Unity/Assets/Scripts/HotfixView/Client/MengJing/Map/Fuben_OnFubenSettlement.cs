@@ -83,9 +83,6 @@ namespace ET.Client
                     await uiComponent.ShowWindowAsync(WindowID.WindowID_CellDungeonSettlement);
                     uiComponent.GetDlgLogic<DlgCellDungeonSettlement>().OnUpdateUI(args.m2C_FubenSettlement, sceneTypeEnum).Coroutine();
                     break;
-                case MapTypeEnum.PetMatch:
-                    Log.Error("宠物挑战赛结算没处理！！");
-                    break;
                 case MapTypeEnum.PetMelee:
                     star = 0;
                     for (int i = 0; i < args.m2C_FubenSettlement.StarInfos.Count; i++)
@@ -101,6 +98,17 @@ namespace ET.Client
                     scene.GetComponent<UIComponent>().GetDlgLogic<DlgPetMeleeMain>().Stop();
                     PopupTipHelp.OpenPopupTip_2(scene, args.m2C_FubenSettlement.BattleResult == CombatResultEnum.Win ? "胜利" : "失败",
                         args.m2C_FubenSettlement.BattleResult == CombatResultEnum.Win ? "宠物乱斗胜利" : "宠物乱斗失败",
+                        () => { EnterMapHelper.RequestQuitFuben(scene); }).Coroutine();
+                    break;
+                case MapTypeEnum.PetMatch:
+                    star = 0;
+                    for (int i = 0; i < args.m2C_FubenSettlement.StarInfos.Count; i++)
+                    {
+                        star += args.m2C_FubenSettlement.StarInfos[i];
+                    }
+                    scene.GetComponent<UIComponent>().GetDlgLogic<DlgPetMeleeMain>().Stop();
+                    PopupTipHelp.OpenPopupTip_2(scene, args.m2C_FubenSettlement.BattleResult == CombatResultEnum.Win ? "胜利" : "失败",
+                        args.m2C_FubenSettlement.BattleResult == CombatResultEnum.Win ? "宠物决战胜利" : "宠物决战失败",
                         () => { EnterMapHelper.RequestQuitFuben(scene); }).Coroutine();
                     break;
                 default:

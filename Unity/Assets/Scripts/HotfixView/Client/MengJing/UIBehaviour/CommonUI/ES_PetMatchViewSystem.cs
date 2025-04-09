@@ -41,7 +41,7 @@ namespace ET.Client
 			
 			self.MainPetItem = self.EG_MainPetListRectTransform.GetChild(0).gameObject;
 			self.InitItemList();
-			
+			self.RequestMyScore().Coroutine();
 			//self.E_FunctionSetBtnToggleGroup.OnSelectIndex(self.Root().GetComponent<PetComponentC>().PetMeleePlan);
 		}
 
@@ -60,8 +60,7 @@ namespace ET.Client
 				self.MainPetItemList.Add(go);
 			}
 		}
-
-
+		
 		private static void RefreshItemList(this ES_PetMatch self)
 		{
 			PetComponentC petComponent = self.Root().GetComponent<PetComponentC>();
@@ -157,6 +156,27 @@ namespace ET.Client
 			await ETTask.CompletedTask;
 		}
 
+		private static async ETTask RequestMyScore(this ES_PetMatch self)
+		{
+			self.E_Text_RankText.text = "未上榜";
+			self.E_Text_ScoreText.text = "0";
+			PetMatch2C_RankListResponse response = await PetMatchNetHelper.RequestPetMatchRankList(self.Root());
+			if (response == null)
+			{
+				return;
+			}
+
+			long selfid = UnitHelper.GetMyUnitId(self.Root());
+			for (int i = 0; i < response.PetMatchPlayerInfoList.Count; i++)
+			{
+				if (selfid == response.PetMatchPlayerInfoList[i].UnitId)
+				{
+					self.E_Text_RankText.text = (i + 1).ToString();
+					self.E_Text_ScoreText.text = response.PetMatchPlayerInfoList[i].Score.ToString();
+				}
+			}
+		}
+		
 		public static void OnUpdateUI(this ES_PetMatch self)
 		{
 			self.E_FunctionSetBtnToggleGroup.OnSelectIndex(self.Root().GetComponent<PetComponentC>().PetMeleePlan);

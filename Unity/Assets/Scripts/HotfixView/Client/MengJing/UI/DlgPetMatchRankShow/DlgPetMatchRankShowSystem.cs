@@ -60,30 +60,6 @@ namespace ET.Client
             PetMatch2C_RankListResponse response = await PetMatchNetHelper.RequestPetMatchRankList(self.Root());
             
             // 测试
-            PetMatchPlayerInfo petMatchPlayerInfo1 = PetMatchPlayerInfo.Create();
-            petMatchPlayerInfo1.UnitId = self.Root().GetComponent<UserInfoComponentC>().UserInfo.UserId;
-            petMatchPlayerInfo1.Name = self.Root().GetComponent<UserInfoComponentC>().UserInfo.Name;
-            petMatchPlayerInfo1.Occ = self.Root().GetComponent<UserInfoComponentC>().UserInfo.Occ;
-            petMatchPlayerInfo1.Score = 1000;
-            petMatchPlayerInfo1.RankId = 1;
-            response.PetMatchPlayerInfoList.Add(petMatchPlayerInfo1);
-            
-            PetMatchPlayerInfo petMatchPlayerInfo2 = PetMatchPlayerInfo.Create();
-            petMatchPlayerInfo2.UnitId = 22222;
-            petMatchPlayerInfo2.Name = "张三";
-            petMatchPlayerInfo2.Occ = 1;
-            petMatchPlayerInfo2.Score = 800;
-            petMatchPlayerInfo2.RankId = 2;
-            response.PetMatchPlayerInfoList.Add(petMatchPlayerInfo2);
-            
-            PetMatchPlayerInfo petMatchPlayerInfo3 = PetMatchPlayerInfo.Create();
-            petMatchPlayerInfo3.UnitId = 33333;
-            petMatchPlayerInfo3.Name = "李四";
-            petMatchPlayerInfo3.Occ = 2;
-            petMatchPlayerInfo3.Score = 600;
-            petMatchPlayerInfo3.RankId = 3;
-            response.PetMatchPlayerInfoList.Add(petMatchPlayerInfo3);
-            
             if (instanceid != self.InstanceId)
             {
                 return;

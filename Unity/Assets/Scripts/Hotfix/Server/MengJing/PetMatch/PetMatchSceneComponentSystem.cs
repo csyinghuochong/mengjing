@@ -121,16 +121,64 @@ namespace ET.Server
             await ETTask.CompletedTask;
         }
         
+         private static async ETTask SendPetReward(this PetMatchSceneComponent self)
+        {
+            int zone = self.Zone();
+            await self.Root().GetComponent<TimerComponent>().WaitAsync(RandomHelper.RandomNumber(1000, 10000));
+            DateTime dateTime = TimeHelper.DateTimeNow();
+            if (!RankHelper.HaveReward(2, (int)dateTime.DayOfWeek))
+            {
+                return;
+            }
+
+           
+            self.MatchList.Sort(delegate(PetMatchPlayerInfo a, PetMatchPlayerInfo b) { return (int)(b.Score - a.Score); });
+            List<PetMatchPlayerInfo> rankList = self.RankList;
+            
+            for (int i = 0; i < rankList.Count; i++)
+            {
+                if (rankList[i].RobotId > 0)
+                {
+                    continue;
+                }
+
+                RankRewardConfig rankRewardConfig = RankHelper.GetRankReward(i+1, 8);
+                if (rankRewardConfig == null)
+                {
+                    continue;
+                }
+                
+                MailInfo mailInfo = MailInfo.Create();
+                mailInfo.Status = 0;
+                mailInfo.Context = $"恭喜您获得宠物战排行榜第{i + 1}名奖励";
+                mailInfo.Title = "宠物战排行榜奖励";
+                mailInfo.MailId = IdGenerater.Instance.GenerateId();
+
+                string[] needList = rankRewardConfig.RewardItems.Split('@');
+                for (int k = 0; k < needList.Length; k++)
+                {
+                    string[] itemInfo = needList[k].Split(';');
+                    if (itemInfo.Length < 2)
+                    {
+                        continue;
+                    }
+
+                    int itemId = int.Parse(itemInfo[0]);
+                    int itemNum = int.Parse(itemInfo[1]);
+                    mailInfo.ItemList.Add(   ItemHelper.GetBagInfo(itemId, itemNum, ItemGetWay.RankReward) );
+                }
+
+                await MailHelp.SendUserMail(self.Root(), rankList[i].UnitId, mailInfo, ItemGetWay.RankReward);
+            }
+        }
+        
         public static async ETTask OnSoloOver(this PetMatchSceneComponent self)
         {
             Log.Warning($"OnSoloOver: {self.Zone()}");
-
-            self.MatchList.Clear();
-
+            
             self.RecordSoloRank().Coroutine();
-
-            long serverTime = TimeHelper.ServerNow();
-
+            self.SendPetReward().Coroutine();
+            
             //销毁所有场景
             List<long> childids = self.Children.Keys.ToList();
             //foreach ((long id, Entity entity) in self.Children)
@@ -158,6 +206,9 @@ namespace ET.Server
             {
                 self.G2RobotMessage(NoticeType.PetMatchClose).Coroutine();
             }
+            
+            self.MatchList.Clear();
+            self.RankList.Clear();
         }
         
         public static void OnRecvUnitLeave(this PetMatchSceneComponent self, long userId)
@@ -197,6 +248,24 @@ namespace ET.Server
                     self.MatchList.RemoveAt(i);
                 }
             }
+
+            long score = -1;
+            for (int i = self.RankList.Count - 1; i>=0; i--)
+            {
+                if (self.RankList[i].UnitId == petMatchPlayerInfo.UnitId)
+                {
+                    score = self.RankList[i].Score;
+                }
+            }
+
+            if (score < 0)
+            {
+                self.RankList.Add( petMatchPlayerInfo );
+            }
+            else
+            {
+                petMatchPlayerInfo.Score = score;
+            }
             self.MatchList.Add( petMatchPlayerInfo );
 
             return ErrorCode.ERR_Success;
@@ -220,7 +289,7 @@ namespace ET.Server
             //}
 
             //定义了一个比较器进行排序
-            self.MatchList.Sort(delegate(PetMatchPlayerInfo a, PetMatchPlayerInfo b) { return (int)(a.Score - b.Score); });
+            self.MatchList.Sort(delegate(PetMatchPlayerInfo a, PetMatchPlayerInfo b) { return (int)(b.Score - a.Score); });
             
             Dictionary<long, long> fubenids = new Dictionary<long, long>();
 
@@ -325,15 +394,42 @@ namespace ET.Server
             //Game.Scene.GetComponent<RecastPathComponent>().Update(mapComponent.NavMeshId);
             return fubenid;
         }
-        
+
+        public static void OnUpdateScore(this PetMatchSceneComponent self , long unitid, int resultEnum)
+        {
+            if (resultEnum == CombatResultEnum.Win)
+            {
+                if (!self.WinTimesList.ContainsKey(unitid))
+                {
+                    self.WinTimesList[unitid] = 0;
+                }
+
+                self.WinTimesList[unitid]++;
+            }
+            if (resultEnum == CombatResultEnum.Fail)
+            {
+                if (!self.FailTimesList.ContainsKey(unitid))
+                {
+                    self.FailTimesList[unitid] = 0;
+                }
+                self.FailTimesList[unitid]++;
+            }
+
+            for (int i = 0; i < self.RankList.Count; i++)
+            {
+                int wintimes = 0;
+                self.WinTimesList.TryGetValue(self.RankList[i].UnitId, out wintimes);
+                self.RankList[i].Score = wintimes;
+            }
+            
+            self.RankList.Sort(delegate(PetMatchPlayerInfo a, PetMatchPlayerInfo b) { return (int)(b.Score - a.Score); });
+        }
+
         public static List<PetMatchPlayerInfo> GetSoloResult(this PetMatchSceneComponent self)
         {
             //返回坏存
             
             //进行排序
-        
-            List<PetMatchPlayerInfo> soloResultInfoList = new List<PetMatchPlayerInfo>();
-
             //更新 胜负次数 排名
             return self.RankList;
         }

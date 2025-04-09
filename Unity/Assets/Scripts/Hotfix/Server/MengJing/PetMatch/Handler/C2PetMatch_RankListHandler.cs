@@ -13,16 +13,6 @@ namespace ET.Server
             List<PetMatchPlayerInfo> petMatchPlayerInfos =  soloSceneComponent.GetSoloResult();
             response.PetMatchPlayerInfoList .AddRange( petMatchPlayerInfos );
 
-            if (response.PetMatchPlayerInfoList.Count == 0)
-            {
-                PetMatchPlayerInfo petMatchPlayerInfo = PetMatchPlayerInfo.Create();
-                petMatchPlayerInfo.UnitId = 1;
-                petMatchPlayerInfo.Name = "XX";
-                petMatchPlayerInfo.Occ = 2;
-                petMatchPlayerInfo.Score = 100;
-                petMatchPlayerInfo.RankId = 3;
-            }
-
             await ETTask.CompletedTask;
         }
     }

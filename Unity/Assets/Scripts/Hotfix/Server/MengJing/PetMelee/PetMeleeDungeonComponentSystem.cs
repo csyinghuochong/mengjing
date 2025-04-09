@@ -11,7 +11,7 @@ namespace ET.Server
         {
             try
             {
-                self.SetGameOver(CombatResultEnum.Fail);
+                self.SetGameOver(-1);
             }
             catch (Exception e)
             {
@@ -103,9 +103,9 @@ namespace ET.Server
         public static void SetPlayer(this PetMeleeDungeonComponent self, Unit player)
         {
             self.InitPlayerData(player.Id);
-            
+
             self.DealFirstCards(player);
-            
+
             player.GetComponent<NumericComponentS>().ApplyValue(NumericType.PetMeleeMoLi, ConfigData.PetMeleeMoLiBase);
         }
 
@@ -119,7 +119,7 @@ namespace ET.Server
 
                 if (random <= ConfigData.PetMeleeMainPetProb)
                 {
-                    cardInfo = self.CreateCard(PetMeleeCarType.MainPet,player);
+                    cardInfo = self.CreateCard(PetMeleeCarType.MainPet, player);
                 }
                 else if (random <= ConfigData.PetMeleeMainPetProb + ConfigData.PetMeleeAssistPetProb)
                 {
@@ -143,13 +143,13 @@ namespace ET.Server
 
             return cardInfo;
         }
-        
+
         // 发放初始卡牌
         private static void DealFirstCards(this PetMeleeDungeonComponent self, Unit player)
         {
             for (int i = 0; i < ConfigData.PetMeleeFirstMainPetNum; i++)
             {
-                PetMeleeCardInfo cardInfo = self.CreateCard(PetMeleeCarType.MainPet,player);
+                PetMeleeCardInfo cardInfo = self.CreateCard(PetMeleeCarType.MainPet, player);
 
                 if (cardInfo != null)
                 {
@@ -159,7 +159,7 @@ namespace ET.Server
 
             for (int i = 0; i < ConfigData.PetMeleeFirstAssistPetNum; i++)
             {
-                PetMeleeCardInfo cardInfo = self.CreateCard(PetMeleeCarType.AssistPet,player);
+                PetMeleeCardInfo cardInfo = self.CreateCard(PetMeleeCarType.AssistPet, player);
 
                 if (cardInfo != null)
                 {
@@ -169,7 +169,7 @@ namespace ET.Server
 
             for (int i = 0; i < ConfigData.PetMeleeFirstMagicNum; i++)
             {
-                PetMeleeCardInfo cardInfo = self.CreateCard(PetMeleeCarType.Magic,player);
+                PetMeleeCardInfo cardInfo = self.CreateCard(PetMeleeCarType.Magic, player);
 
                 if (cardInfo != null)
                 {
@@ -288,7 +288,7 @@ namespace ET.Server
                 self.DealCardsByPlayer(player);
             }
         }
-        
+
         public static void DealCardsByPlayer(this PetMeleeDungeonComponent self, Unit player)
         {
             if (self.GameOver)
@@ -378,7 +378,7 @@ namespace ET.Server
                 //     response.Error = ErrorCode.ERR_RequestRepeatedly;
                 //     return;
                 // }
-                
+
                 Unit pet = UnitFactory.CreateTianTiPet(self.Scene(), player.Id, player.GetBattleCamp(), rolePetInfo, position, 90, -1);
                 if (self.GameStart)
                 {
@@ -399,7 +399,7 @@ namespace ET.Server
                 }
 
                 PetComponentS petComponent = player.GetComponent<PetComponentS>();
-                
+
                 int petnumber = 0;
                 List<Unit> allpet = UnitHelper.GetUnitList(self.Scene(), UnitType.Pet);
                 for (int petindex = 0; petindex < allpet.Count; petindex++)
@@ -409,6 +409,7 @@ namespace ET.Server
                         petnumber++;
                     }
                 }
+
                 if (petnumber >= ConfigData.PetMeleeMaxPetsInLine)
                 {
                     return ErrorCode.ERR_PetMelee_PetNumMax;
@@ -499,11 +500,11 @@ namespace ET.Server
 
             NumericComponentS numericComponentS = player.GetComponent<NumericComponentS>();
             int num = numericComponentS.GetAsInt(NumericType.PetMeleeMoLi);
-            int add = ConfigData.PetMeleeMoLiRPS * (int)(1 + numericComponentS.GetAsFloat(NumericType.PetMeleeMoLiAdd) );
+            int add = ConfigData.PetMeleeMoLiRPS * (int)(1 + numericComponentS.GetAsFloat(NumericType.PetMeleeMoLiAdd));
             player.GetComponent<NumericComponentS>().ApplyValue(NumericType.PetMeleeMoLi,
-                num +add > ConfigData.PetMeleeMoLiMax ? ConfigData.PetMeleeMoLiMax : num +add );
+                num + add > ConfigData.PetMeleeMoLiMax ? ConfigData.PetMeleeMoLiMax : num + add);
         }
-        
+
         public static bool IsGameStart(this PetMeleeDungeonComponent self)
         {
             return self.GameStart;
@@ -513,8 +514,8 @@ namespace ET.Server
         {
             return self.GameOver;
         }
-        
-        public static void SetGameStart(this PetMeleeDungeonComponent self,Unit player, int mapType)
+
+        public static void SetGameStart(this PetMeleeDungeonComponent self, Unit player, int mapType)
         {
             if (!self.BegingPlayers.Contains(player.Id))
             {
@@ -545,64 +546,67 @@ namespace ET.Server
             self.GenerateFuben();
         }
 
-        public static void SetGameOver(this PetMeleeDungeonComponent self, int combatResult)
+        public static void SetGameOver(this PetMeleeDungeonComponent self, int winCamp)
         {
             if (self.GameOver)
             {
                 return;
             }
 
-            
             self.GameOver = true;
+
             List<Unit> players = UnitHelper.GetUnitList(self.Scene(), UnitType.Player);
-            if (players.Count == 0)
+            for (int playerindex = 0; playerindex < players.Count; playerindex++)
             {
-                return;
-            }
+                Unit player = players[playerindex];
+                int combatResult = winCamp == player.GetBattleCamp() ? CombatResultEnum.Win : CombatResultEnum.Fail;
 
-            M2C_FubenSettlement m2C_FubenSettlement = M2C_FubenSettlement.Create();
-            m2C_FubenSettlement.BattleResult = combatResult;
-            long nowTime = TimeInfo.Instance.ServerNow();
-            // 先按通关时间来判断星星
-            if (nowTime - self.StartTime <= 60 * 1000)
-            {
-                // 3星
-                m2C_FubenSettlement.StarInfos = new List<int>() { 1, 1, 1 };
-            }
-            else if (nowTime - self.StartTime <= 120 * 1000)
-            {
-                // 2星
-                m2C_FubenSettlement.StarInfos = new List<int>() { 1, 1, 0 };
-            }
-            else
-            {
-                // 1星
-                m2C_FubenSettlement.StarInfos = new List<int>() { 1, 0, 0 };
-            }
-
-            if (combatResult == CombatResultEnum.Win)
-            {
-                NumericComponentS numericComponent = players[0].GetComponent<NumericComponentS>();
-                if (self.Scene().GetComponent<MapComponent>().SceneId > numericComponent.GetAsInt(NumericType.PetMeleeDungeonId))
+                M2C_FubenSettlement m2C_FubenSettlement = M2C_FubenSettlement.Create();
+                m2C_FubenSettlement.BattleResult = combatResult;
+                long nowTime = TimeInfo.Instance.ServerNow();
+                // 先按通关时间来判断星星
+                if (nowTime - self.StartTime <= 60 * 1000)
                 {
-                    players[0].GetComponent<NumericComponentS>().ApplyValue(NumericType.PetMeleeDungeonId, self.Scene().GetComponent<MapComponent>().SceneId);
+                    // 3星
+                    m2C_FubenSettlement.StarInfos = new List<int>() { 1, 1, 1 };
+                }
+                else if (nowTime - self.StartTime <= 120 * 1000)
+                {
+                    // 2星
+                    m2C_FubenSettlement.StarInfos = new List<int>() { 1, 1, 0 };
+                }
+                else
+                {
+                    // 1星
+                    m2C_FubenSettlement.StarInfos = new List<int>() { 1, 0, 0 };
                 }
 
-                int sceneId = self.Scene().GetComponent<MapComponent>().SceneId;
-                // SceneConfig sceneConfig = SceneConfigCategory.Instance.Get(sceneId);
-                // m2C_FubenSettlement.ReardList.AddRange(rewardItems);
-                // self.Player.GetComponent<BagComponentS>().OnAddItemData(sceneConfig.RewardShow, $"{ItemGetWay.PetMeleeReward}_{TimeHelper.ServerNow()}");
-
-                int star = 0;
-                for (int i = 0; i < m2C_FubenSettlement.StarInfos.Count; i++)
+                MapComponent mapComponent = self.Scene().GetComponent<MapComponent>();
+                if (mapComponent.MapType == MapTypeEnum.PetMelee &&  combatResult == CombatResultEnum.Win)
                 {
-                    star += m2C_FubenSettlement.StarInfos[i];
+                    int sceneId = mapComponent.SceneId;
+                    NumericComponentS numericComponent = player.GetComponent<NumericComponentS>();
+                    if (sceneId > numericComponent.GetAsInt(NumericType.PetMeleeDungeonId))
+                    {
+                        player.GetComponent<NumericComponentS>().ApplyValue(NumericType.PetMeleeDungeonId, self.Scene().GetComponent<MapComponent>().SceneId);
+                    }
+                    
+                    int star = 0;
+                    for (int i = 0; i < m2C_FubenSettlement.StarInfos.Count; i++)
+                    {
+                        star += m2C_FubenSettlement.StarInfos[i];
+                    }
+
+                    player.GetComponent<PetComponentS>().OnPassPetMeleeFuben(sceneId, star);
                 }
 
-                players[0].GetComponent<PetComponentS>().OnPassPetMeleeFuben(sceneId, star);
-            }
+                if (mapComponent.MapType == MapTypeEnum.PetMatch)
+                {
+                    self.Scene().GetParent<PetMatchSceneComponent>().OnUpdateScore(player.Id, combatResult);
+                }
 
-            MapMessageHelper.SendToClient( players[0], m2C_FubenSettlement);
+                MapMessageHelper.SendToClient(player, m2C_FubenSettlement);
+            }
         }
 
         private static void GenerateFuben(this PetMeleeDungeonComponent self)
@@ -612,9 +616,27 @@ namespace ET.Server
             FubenHelp.CreateMonsterList(self.Scene(), SceneConfigCategory.Instance.Get(mapComponent.SceneId).CreateMonsterPosi);
         }
 
-        public static void KickOutPlayer(this PetMeleeDungeonComponent sel)
+        public static void KickOutPlayer(this PetMeleeDungeonComponent self)
         {
-            Console.WriteLine($"PetMeleeDungeonComponent no handler!!!");
+            //Console.WriteLine($"PetMeleeDungeonComponent no handler!!!");
+            C2M_TransferMap actor_Transfer = C2M_TransferMap.Create();
+            actor_Transfer.SceneType = MapTypeEnum.MainCityScene;
+            List<EntityRef<Unit>> units = self.Scene().GetComponent<UnitComponent>().GetAll();
+            for (int i = 0; i < units.Count; i++)
+            {
+                Unit unit = units[i];
+                if (unit.Type != UnitType.Player)
+                {
+                    continue;
+                }
+
+                if (unit.IsDisposed || unit.IsRobot())
+                {
+                    continue;
+                }
+                
+                TransferHelper.TransferUnit(units[i], actor_Transfer).Coroutine();
+            }
         }
 
         public static void OnUnitReturn(this PetMeleeDungeonComponent self, long unitid)
@@ -630,7 +652,7 @@ namespace ET.Server
             {
                 return;
             }
-            
+
             C2M_TransferMap actor_Transfer = C2M_TransferMap.Create();
             actor_Transfer.SceneType = MapTypeEnum.MainCityScene;
             TransferHelper.TransferUnit(units[0], actor_Transfer).Coroutine();
@@ -643,24 +665,20 @@ namespace ET.Server
                 return;
             }
 
-            switch (mapType)
+            if (defend.Type != UnitType.Monster)
             {
-                case MapTypeEnum.PetMelee:
-                    
-                    if (defend.Type == UnitType.Monster)
-                    {
-                        MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(defend.ConfigId);
-                        if (monsterConfig.MonsterSonType == MonsterSonTypeEnum.Type_62)
-                        {
-                            self.Scene().RemoveComponent<YeWaiRefreshComponent>();
-
-                            int battleCamp = defend.GetComponent<NumericComponentS>().GetAsInt(NumericType.BattleCamp);
-                            self.SetGameOver(battleCamp == 1 ? CombatResultEnum.Fail : CombatResultEnum.Win);
-                        }
-                    }
-                    break;
+                return;
             }
-          
+
+            MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(defend.ConfigId);
+            if (monsterConfig.MonsterSonType != MonsterSonTypeEnum.Type_62)
+            {
+                return;
+            }
+
+            self.Scene().RemoveComponent<YeWaiRefreshComponent>();
+            int battleCamp = defend.GetBattleCamp();
+            self.SetGameOver(battleCamp == CampEnum.CampPlayer_1 ? CampEnum.CampPlayer_2 : CampEnum.CampPlayer_1);
         }
     }
 }
