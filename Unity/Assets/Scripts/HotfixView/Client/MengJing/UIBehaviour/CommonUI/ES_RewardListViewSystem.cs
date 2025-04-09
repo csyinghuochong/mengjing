@@ -101,7 +101,7 @@ namespace ET.Client
                     continue;
                 }
 
-                itemCommonItem.ES_CommonItem.E_ImageReceived.gameObject.SetActive(recv);
+                itemCommonItem.ES_CommonItem.E_ImageReceived?.gameObject.SetActive(recv);
             }
         }
 
