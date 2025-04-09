@@ -99,9 +99,45 @@ namespace ET
             }
 
             self.ActDistance = self.Root().GetComponent<AttackComponent>().AttackDistance;
+
+            self.InitBehaviour();
+        }
+
+        public static void InitBehaviour(this BehaviourComponent self)
+        {
+            self.TargetID = 0;
+            
+            int NewBehaviour = -1;
+            switch (self.RobotConfig.Behaviour)
+            { 
+                case 0:
+                    NewBehaviour = BehaviourType.Behaviour_Test;
+                    break;
+                case 2:
+                    NewBehaviour = BehaviourType.Behaviour_TeamDungeon;
+                    break;
+                case 3:
+                    NewBehaviour = BehaviourType.Behaviour_Battle;
+                    break;
+                case 11:
+                    NewBehaviour = BehaviourType.Behaviour_DragonDungeon;
+                    break;
+                case 12:
+                    NewBehaviour = BehaviourType.Behaviour_PetMatch;
+                    break;
+                default:
+                    break;
+            }
+                
+            if (NewBehaviour < 0)
+            {
+                Log.Error($"behaviourComponent.RobotConfig:  {self.RobotConfig}");
+                return;
+            }
+            self.Stop();
+            self.ChangeBehaviour(NewBehaviour);
             self.Start();
         }
-        
 
         public static int GetBehaviour(this BehaviourComponent self)
         {
