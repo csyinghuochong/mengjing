@@ -305,7 +305,6 @@ namespace ET.Client
             //判断当前技能是否再CD状态
             UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
             ItemConfig itemConfig = ItemConfigCategory.Instance.Get(self.BagInfo.ItemID);
-            int errorCode = ErrorCode.ERR_Success;
             string usrPar = "";
 
             if (itemConfig.DayUseNum > 0 && userInfoComponent.GetDayItemUse(itemConfig.Id) >= itemConfig.DayUseNum)
@@ -577,14 +576,21 @@ namespace ET.Client
             }
 
             long instanceid = self.InstanceId;
-            errorCode = await BagClientNetHelper.RequestUseItem(self.Root(), self.BagInfo, usrPar);
+            M2C_ItemOperateResponse response = await BagClientNetHelper.RequestUseItem(self.Root(), self.BagInfo, usrPar);
 
-            if (errorCode == ErrorCode.ERR_Success)
+            if (response != null && response.Error == ErrorCode.ERR_Success)
             {
                 FlyTipComponent.Instance.ShowFlyTip(LanguageComponent.Instance.LoadLocalization("道具使用成功!"));
+
+                if (response.RewardList.Count > 0)
+                {
+                    await self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_CommonReward);
+                    DlgCommonReward dlgCommonReward = self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgCommonReward>();
+                    dlgCommonReward.OnUpdateUI(response.RewardList);
+                }
             }
 
-            if (errorCode == ErrorCode.ERR_ItemOnlyUseOcc)
+            if (response != null && response.Error == ErrorCode.ERR_ItemOnlyUseOcc)
             {
                 OccupationConfig occupationConfig = OccupationConfigCategory.Instance.Get(itemConfig.UseOcc);
                 string tip;

@@ -6602,6 +6602,9 @@ namespace ET
         [MemoryPackOrder(0)]
         public string OperatePar { get; set; }
 
+        [MemoryPackOrder(1)]
+        public List<RewardItem> RewardList { get; set; } = new();
+
         public override void Dispose()
         {
             if (!this.IsFromPool)
@@ -6613,6 +6616,7 @@ namespace ET
             this.Message = default;
             this.Error = default;
             this.OperatePar = default;
+            this.RewardList.Clear();
 
             ObjectPool.Instance.Recycle(this);
         }
@@ -12092,7 +12096,7 @@ namespace ET
         /// 奖励列表
         /// </summary>
         [MemoryPackOrder(0)]
-        public List<RewardItem> ReardList { get; set; } = new();
+        public List<RewardItem> RewardList { get; set; } = new();
 
         public override void Dispose()
         {
@@ -12104,7 +12108,7 @@ namespace ET
             this.RpcId = default;
             this.Message = default;
             this.Error = default;
-            this.ReardList.Clear();
+            this.RewardList.Clear();
 
             ObjectPool.Instance.Recycle(this);
         }
@@ -12159,7 +12163,7 @@ namespace ET
         public int Error { get; set; }
 
         [MemoryPackOrder(0)]
-        public List<RewardItem> ReardList { get; set; } = new();
+        public List<RewardItem> RewardList { get; set; } = new();
 
         public override void Dispose()
         {
@@ -12171,7 +12175,7 @@ namespace ET
             this.RpcId = default;
             this.Message = default;
             this.Error = default;
-            this.ReardList.Clear();
+            this.RewardList.Clear();
 
             ObjectPool.Instance.Recycle(this);
         }
@@ -12599,7 +12603,7 @@ namespace ET
         /// 奖励列表
         /// </summary>
         [MemoryPackOrder(0)]
-        public List<RewardItem> ReardList { get; set; } = new();
+        public List<RewardItem> RewardList { get; set; } = new();
 
         public override void Dispose()
         {
@@ -12611,7 +12615,7 @@ namespace ET
             this.RpcId = default;
             this.Message = default;
             this.Error = default;
-            this.ReardList.Clear();
+            this.RewardList.Clear();
 
             ObjectPool.Instance.Recycle(this);
         }
@@ -14505,13 +14509,13 @@ namespace ET
         /// 奖励列表
         /// </summary>
         [MemoryPackOrder(4)]
-        public List<RewardItem> ReardList { get; set; } = new();
+        public List<RewardItem> RewardList { get; set; } = new();
 
         /// <summary>
         /// 冒险家额外奖励
         /// </summary>
         [MemoryPackOrder(5)]
-        public List<RewardItem> ReardListExcess { get; set; } = new();
+        public List<RewardItem> RewardListExcess { get; set; } = new();
 
         /// <summary>
         /// 领主 时间 伤害
@@ -14533,8 +14537,8 @@ namespace ET
             this.BattleGrade = default;
             this.RewardExp = default;
             this.RewardGold = default;
-            this.ReardList.Clear();
-            this.ReardListExcess.Clear();
+            this.RewardList.Clear();
+            this.RewardListExcess.Clear();
             this.StarInfos.Clear();
 
             ObjectPool.Instance.Recycle(this);
@@ -19523,13 +19527,13 @@ namespace ET
         /// 奖励列表
         /// </summary>
         [MemoryPackOrder(4)]
-        public List<RewardItem> ReardList { get; set; } = new();
+        public List<RewardItem> RewardList { get; set; } = new();
 
         /// <summary>
         /// 冒险家额外奖励
         /// </summary>
         [MemoryPackOrder(5)]
-        public List<RewardItem> ReardListExcess { get; set; } = new();
+        public List<RewardItem> RewardListExcess { get; set; } = new();
 
         [MemoryPackOrder(6)]
         public int Star { get; set; }
@@ -19547,8 +19551,8 @@ namespace ET
             this.PassTime = default;
             this.PlayerList.Clear();
             this.RewardExtraItem.Clear();
-            this.ReardList.Clear();
-            this.ReardListExcess.Clear();
+            this.RewardList.Clear();
+            this.RewardListExcess.Clear();
             this.Star = default;
 
             ObjectPool.Instance.Recycle(this);

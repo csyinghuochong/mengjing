@@ -31,9 +31,9 @@ namespace ET.Client
                 return;
             }
 
-            int errorCode = await BagClientNetHelper.RequestUseItem(self.Root(), self.BagInfo, self.EggId.ToString());
+            M2C_ItemOperateResponse response = await BagClientNetHelper.RequestUseItem(self.Root(), self.BagInfo, self.EggId.ToString());
 
-            if (errorCode != ErrorCode.ERR_Success)
+            if (response == null ||  response.Error!= ErrorCode.ERR_Success)
             {
                 return;
             }

@@ -50,7 +50,7 @@ namespace ET.Client
             return response.Error;
         }
 
-        public static async ETTask<int> RequestUseItem(Scene root, ItemInfo bagInfo, string parinfo = "")
+        public static async ETTask<M2C_ItemOperateResponse> RequestUseItem(Scene root, ItemInfo bagInfo, string parinfo = "")
         {
             UserInfoComponentC infoComponent = root.GetComponent<UserInfoComponentC>();
 
@@ -58,7 +58,9 @@ namespace ET.Client
             int occ = infoComponent.UserInfo.Occ;
             if (itemConfig.UseOcc != 0 && itemConfig.UseOcc != occ)
             {
-                return ErrorCode.ERR_ItemOnlyUseOcc;
+                M2C_ItemOperateResponse response_0 = M2C_ItemOperateResponse.Create();
+                response_0.Error = ErrorCode.ERR_ItemOnlyUseOcc;
+                return response_0;
             }
 
             C2M_ItemOperateRequest request = C2M_ItemOperateRequest.Create();
@@ -70,7 +72,7 @@ namespace ET.Client
 
             if (response.Error != ErrorCode.ERR_Success)
             {
-                return response.Error;
+                return response;
             }
 
             // if (itemConfig.ItemSubType == 2)
@@ -130,7 +132,7 @@ namespace ET.Client
                 infoComponent.OnDayItemUse(itemConfig.Id);
             }
 
-            return response.Error;
+            return response;
         }
 
         public static async ETTask RequestWearEquip(Scene root, ItemInfo bagInfo)

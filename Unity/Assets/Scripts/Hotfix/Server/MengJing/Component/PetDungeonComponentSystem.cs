@@ -66,7 +66,7 @@ namespace ET.Server
                 DropHelper.DropIDToDropItem(dropId, rewardItems);
                 DropHelper.zhenglirewardItems(rewardItems);
             
-                m2C_FubenSettlement.ReardList.AddRange(rewardItems);
+                m2C_FubenSettlement.RewardList.AddRange(rewardItems);
                 players[0].GetComponent<BagComponentS>().OnAddItemData(rewardItems, string.Empty, $"{ItemGetWay.PetFubenReward}_{TimeHelper.ServerNow()}");
             
                 int petfubeId = self.Scene().GetComponent<MapComponent>().SonSceneId;

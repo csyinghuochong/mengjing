@@ -112,7 +112,7 @@ namespace ET.Server
                  List<RewardItem> rewardItems = new List<RewardItem>();
                  DropHelper.DropIDToDropItem(dropId, rewardItems);
                  DropHelper.zhenglirewardItems(rewardItems);
-                 m2C_FubenSettlement.ReardList.AddRange(rewardItems);
+                 m2C_FubenSettlement.RewardList.AddRange(rewardItems);
                  m2C_FubenSettlement.StarInfos = new List<int> { 1, 1, 1 };
 
                  self.MainUnit.GetComponent<BagComponentS>().OnAddItemData(rewardItems, string.Empty, $"{ItemGetWay.PetTianTiReward}_{TimeHelper.ServerNow()}");

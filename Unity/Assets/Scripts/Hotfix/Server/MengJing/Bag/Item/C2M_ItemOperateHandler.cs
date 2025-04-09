@@ -237,6 +237,7 @@ namespace ET.Server
                                     $"{ItemGetWay.ItemBox_6}_{TimeHelper.ServerNow()}_{itemConfig.Id}");
                             }
 
+                            response.RewardList = droplist;
                             break;
                         //兑换：
                         case 8:

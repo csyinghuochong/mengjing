@@ -71,7 +71,7 @@ namespace ET.Server
                 DropHelper.DropIDToDropItem_2(dropId, rewardItems);
             }
             unit.GetComponent<BagComponentS>().OnAddItemData(rewardItems, string.Empty, $"{ItemGetWay.PetExplore}_{TimeHelper.ServerNow()}_{exploreLuck}");
-            response.ReardList = rewardItems;
+            response.RewardList = rewardItems;
             await ETTask.CompletedTask;
         }
     }

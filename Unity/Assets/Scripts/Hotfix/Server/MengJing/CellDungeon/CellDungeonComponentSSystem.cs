@@ -601,13 +601,13 @@ namespace ET.Server
                 m2C_FubenSettlement.RewardExp = chapterConfig.RewardExp;
                 m2C_FubenSettlement.RewardGold = chapterConfig.RewardGold;
 
-                DropHelper.DropIDToDropItem_2(chapterConfig.BoxDropID, m2C_FubenSettlement.ReardList);
-                DropHelper.DropIDToDropItem_2(chapterConfig.BoxDropID, m2C_FubenSettlement.ReardList);
-                DropHelper.DropIDToDropItem_2(chapterConfig.BoxDropID, m2C_FubenSettlement.ReardList);
+                DropHelper.DropIDToDropItem_2(chapterConfig.BoxDropID, m2C_FubenSettlement.RewardList);
+                DropHelper.DropIDToDropItem_2(chapterConfig.BoxDropID, m2C_FubenSettlement.RewardList);
+                DropHelper.DropIDToDropItem_2(chapterConfig.BoxDropID, m2C_FubenSettlement.RewardList);
 
-                DropHelper.DropIDToDropItem_2(chapterConfig.BoxDropID, m2C_FubenSettlement.ReardListExcess);
-                DropHelper.DropIDToDropItem_2(chapterConfig.BoxDropID, m2C_FubenSettlement.ReardListExcess);
-                DropHelper.DropIDToDropItem_2(chapterConfig.BoxDropID, m2C_FubenSettlement.ReardListExcess);
+                DropHelper.DropIDToDropItem_2(chapterConfig.BoxDropID, m2C_FubenSettlement.RewardListExcess);
+                DropHelper.DropIDToDropItem_2(chapterConfig.BoxDropID, m2C_FubenSettlement.RewardListExcess);
+                DropHelper.DropIDToDropItem_2(chapterConfig.BoxDropID, m2C_FubenSettlement.RewardListExcess);
 
                 m2C_FubenSettlement.StarInfos.Add(1);
                 m2C_FubenSettlement.StarInfos.Add((needTime <= 5 * 60 * 1000) ? 1 : 0);

@@ -45,7 +45,7 @@ namespace ET.Client
                 self.View.E_Button_continueButton.gameObject.SetActive(false);
             }
 
-            self.View.ES_RewardList.Refresh(message.ReardList);
+            self.View.ES_RewardList.Refresh(message.RewardList);
         }
 
         public static void OnButton_exit(this DlgPetFubenResult self)

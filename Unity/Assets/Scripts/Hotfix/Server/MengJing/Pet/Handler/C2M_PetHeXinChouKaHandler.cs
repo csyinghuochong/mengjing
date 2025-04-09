@@ -64,7 +64,7 @@ namespace ET.Server
             
             unit.GetComponent<BagComponentS>()
                     .OnAddItemData(rewardItems, string.Empty, $"{ItemGetWay.PetExplore}_{TimeHelper.ServerNow()}");
-            response.ReardList = rewardItems;
+            response.RewardList = rewardItems;
 
             await ETTask.CompletedTask;
         }

@@ -201,14 +201,14 @@ namespace ET.Client
         public static void OnUpdateUI(this DlgTeamDungeonSettlement self, M2C_TeamDungeonSettlement m2C_FubenSettlement)
         {
             // 奖励列表
-            for (int i = 0; i < m2C_FubenSettlement.ReardList.Count; i++)
+            for (int i = 0; i < m2C_FubenSettlement.RewardList.Count; i++)
             {
-                self.RewardUIList[i].OnUpdateData(m2C_FubenSettlement.ReardList[i]);
+                self.RewardUIList[i].OnUpdateData(m2C_FubenSettlement.RewardList[i]);
             }
 
-            for (int i = 0; i < m2C_FubenSettlement.ReardListExcess.Count; i++)
+            for (int i = 0; i < m2C_FubenSettlement.RewardListExcess.Count; i++)
             {
-                self.RewardUIList[i + 3].OnUpdateData(m2C_FubenSettlement.ReardListExcess[i]);
+                self.RewardUIList[i + 3].OnUpdateData(m2C_FubenSettlement.RewardListExcess[i]);
             }
 
             long idExtra = 0;

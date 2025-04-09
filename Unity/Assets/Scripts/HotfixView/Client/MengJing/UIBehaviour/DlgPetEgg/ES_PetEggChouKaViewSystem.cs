@@ -170,7 +170,7 @@ namespace ET.Client
 
             await self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_CommonReward);
             DlgCommonReward dlgCommonReward = self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgCommonReward>();
-            dlgCommonReward.OnUpdateUI(response.ReardList);
+            dlgCommonReward.OnUpdateUI(response.RewardList);
         }
     }
 }

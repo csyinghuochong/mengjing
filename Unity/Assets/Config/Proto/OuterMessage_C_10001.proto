@@ -1524,6 +1524,7 @@ message M2C_ItemOperateResponse // ILocationResponse
 	string Message = 91;
 	int32 Error = 92;
 	string OperatePar = 1;
+	repeated RewardItem RewardList = 2;
 }
 
 //猎人穿戴装备特殊处理
@@ -2787,7 +2788,7 @@ message M2C_PetEggChouKaResponse // ILocationResponse
 	int32 RpcId = 90;
 	string Message = 91;
 	int32 Error = 92;
-	repeated RewardItem ReardList = 1;		//奖励列表
+	repeated RewardItem RewardList = 1;		//奖励列表
 }
 
 //ResponseType M2C_PetEggDuiHuanResponse
@@ -2802,7 +2803,7 @@ message M2C_PetEggDuiHuanResponse // ILocationResponse
 	int32 RpcId = 90;
 	string Message = 91;
 	int32 Error = 92;
-	repeated RewardItem ReardList = 1;
+	repeated RewardItem RewardList = 1;
 }
 
 //ResponseType M2C_PetEquipResponse
@@ -2901,7 +2902,7 @@ message M2C_PetHeXinChouKaResponse // ILocationResponse
 	int32 RpcId = 90;
 	string Message = 91;
 	int32 Error = 92;
-	repeated RewardItem ReardList = 1;		//奖励列表
+	repeated RewardItem RewardList = 1;		//奖励列表
 }
 
 //ResponseType M2C_PetHeXinExploreReward 
@@ -3339,8 +3340,8 @@ message M2C_FubenSettlement // IMessage
 	int32 RewardExp = 3;
 	int32 RewardGold = 4;
 
-	repeated RewardItem ReardList = 5;		//奖励列表
-	repeated RewardItem ReardListExcess = 6;	//冒险家额外奖励
+	repeated RewardItem RewardList = 5;		//奖励列表
+	repeated RewardItem RewardListExcess = 6;	//冒险家额外奖励
 
 	repeated int32 StarInfos = 7;			//领主 时间 伤害
 }
@@ -4485,8 +4486,8 @@ message M2C_TeamDungeonSettlement // IMessage
 	int64 PassTime = 1;
 	repeated TeamPlayerInfo PlayerList = 2;
 	repeated RewardItem RewardExtraItem = 4;			//额外奖励
-	repeated RewardItem ReardList = 5;		//奖励列表
-	repeated RewardItem ReardListExcess = 6;	//冒险家额外奖励
+	repeated RewardItem RewardList = 5;		//奖励列表
+	repeated RewardItem RewardListExcess = 6;	//冒险家额外奖励
 	int32 Star = 7;
 }
 
