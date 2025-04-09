@@ -28,7 +28,7 @@ namespace ET
                 await PetMatchNetHelper.RequestPetMatch(root);
                 
                 // 因为协程可能被中断，任何协程都要传入cancellationToken，判断如果是中断则要返回
-                await timerComponent.WaitAsync(TimeHelper.Minute, cancellationToken);
+                await timerComponent.WaitAsync(TimeHelper.Minute * 10, cancellationToken);
                 if (cancellationToken.IsCancel())
                 {
                     Console.WriteLine("Behaviour_PetMatch.Exit: IsCancel");

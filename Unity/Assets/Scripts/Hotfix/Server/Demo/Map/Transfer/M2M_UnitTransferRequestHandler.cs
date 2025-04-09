@@ -104,7 +104,7 @@ namespace ET.Server
                         PetMeleeDungeonComponent petMeleeDungeonComponent = scene.GetComponent<PetMeleeDungeonComponent>();
                         List<Unit> playerList = UnitHelper.GetUnitList(scene, UnitType.Player);
                         int battlecamp = 0;
-                        if (playerList.Count <= 0)
+                        if (playerList.Count <= 1)
                         {
                             battlecamp  = RandomHelper.RandomNumber(1,3);
                         }
