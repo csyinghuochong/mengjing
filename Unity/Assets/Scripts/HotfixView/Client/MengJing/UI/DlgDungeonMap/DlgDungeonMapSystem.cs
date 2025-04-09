@@ -170,6 +170,11 @@ namespace ET.Client
 
         private static bool CanOpen(this DlgDungeonMap self, int chapterId)
         {
+            if (chapterId == 9)
+            {
+                return true;
+            }
+
             if (!DungeonSectionConfigCategory.Instance.Contain(chapterId))
             {
                 return false;
