@@ -138,9 +138,9 @@ namespace ET.Server
                     continue;
                 }
 
-                string targetinfo = target.GetAIPriorityParams();
+                string  targetinfo= target.GetAIPriorityParams();
                 
-                if (!targetinfo.Equals(aiNodeParams))
+                if (!aiNodeParams.Contains(targetinfo))
                 {
                     continue;
                 }

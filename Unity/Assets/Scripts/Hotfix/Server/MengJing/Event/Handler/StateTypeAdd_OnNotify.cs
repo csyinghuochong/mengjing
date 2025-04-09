@@ -9,7 +9,7 @@ namespace ET.Server
             Unit unit = args.UnitDefend;
             long nowStateType = args.nowStateType;
             StateComponentS stateComponentS = unit.GetComponent<StateComponentS>();
-            if (ErrorCode.ERR_Success != stateComponentS.CanMove())
+            if (ErrorCode.ERR_Success != stateComponentS.CanMove() && unit.GetComponent<MoveComponent>()!=null)
             {
                 unit.Stop(0);      
             }

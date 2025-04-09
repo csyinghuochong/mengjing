@@ -18,7 +18,7 @@ namespace ET.Server
             string targetinfo = target != null ? target.GetAIPriorityParams() : string.Empty;
 
            //不是优先级最高的怪物
-           if (target !=null && !target.IsDisposed && !targetinfo.Equals(aiConfig.NodeParams))
+           if (target !=null && !target.IsDisposed && !aiConfig.NodeParams.Contains(targetinfo))
            {
                 //寻找优先级最高的怪物
                 Unit nearest = GetTargetHelpS.GetNearestEnemyAIPriority(unit, aiComponent.ActRange, aiConfig.NodeParams, false);
