@@ -62,6 +62,11 @@ namespace ET.Client
         {
             for (int i = 0; i < self.ScrollItemBagItems.Keys.Count - 1; i++)
             {
+                if (i >=  self.ScrollItemHouseItems.Count)
+                {
+                    break;
+                }
+
                 Scroll_Item_CommonItem scrollItemCommonItem = self.ScrollItemHouseItems[i];
                 if (scrollItemCommonItem.uiTransform != null)
                 {
