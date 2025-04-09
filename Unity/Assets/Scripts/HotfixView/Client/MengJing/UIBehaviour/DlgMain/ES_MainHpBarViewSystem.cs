@@ -299,6 +299,18 @@ namespace ET.Client
             {
                 //更新怪物血条
                 self.E_Img_MonsterHpImage.fillAmount = blood;
+                RectTransform HpRight = self.E_Img_MonsterHpImage.transform.Find("HpRight").transform.GetComponent<RectTransform>();
+                if (blood <= 0 || Mathf.Approximately(blood, 1f))
+                {
+                    HpRight.gameObject.SetActive(false);
+                }
+                else
+                {
+                    HpRight.gameObject.SetActive(true);
+                    Vector2 highlightPos = HpRight.localPosition;
+                    highlightPos.x =self.E_Img_MonsterHpImage.rectTransform.sizeDelta.x * blood - 7f;
+                    HpRight.localPosition = highlightPos;
+                }
             }
 
             if (self.LockBossId == unit.Id)
