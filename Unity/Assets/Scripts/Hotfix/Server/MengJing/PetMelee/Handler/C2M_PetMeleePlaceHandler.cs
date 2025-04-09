@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 namespace ET.Server
@@ -12,6 +13,14 @@ namespace ET.Server
                 case MapTypeEnum.PetMelee:
                 case MapTypeEnum.PetMatch:
                     PetMeleeDungeonComponent petMeleeDungeonComponent = unit.Scene().GetComponent<PetMeleeDungeonComponent>();
+
+                    if (petMeleeDungeonComponent == null)
+                    {
+                        MapComponent mapComponent = unit.Scene().GetComponent<MapComponent>();
+                        Console.WriteLine($"mapComponent.type: {mapComponent.MapType}  {unit.Id}");
+                        return;
+                    }
+
                     if (petMeleeDungeonComponent.IsGameOver())
                     {
                         response.Error = ErrorCode.ERR_Error;
