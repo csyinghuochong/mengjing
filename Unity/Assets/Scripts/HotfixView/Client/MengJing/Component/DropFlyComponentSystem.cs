@@ -18,11 +18,17 @@ namespace ET.Client
         [EntitySystem]
         private static void Update(this DropFlyComponent self)
         {
-            if (self.MyUnit.IsDisposed || self.TargetUnit.IsDisposed)
+            if (self.MyUnit == null || self.MyUnit.IsDisposed)
             {
                 return;
             }
 
+            if (self.TargetUnit == null || self.TargetUnit.IsDisposed)
+            {
+                self.Dispose();
+                return;
+            }
+            
             if (!self.IsPlayEffect)
             {
                 self.IsPlayEffect = true;
