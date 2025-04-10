@@ -144,14 +144,14 @@ namespace ET.Client
             self.E_QiangHuaProgress.text = $"{qianghuaLevel}/{maxLevel}";
             self.E_TextGold.text = equipQiangHuaConfig.CostGold.ToString();
 
-            if (bagComponent.GetItemNumber(1) < equipQiangHuaConfig.CostGold)
-            {
-                self.E_TextGold.color =  Color.red;
-            }
-            else
-            {
-                self.E_TextGold.color = Color.white;
-            }
+            // if (bagComponent.GetItemNumber(1) < equipQiangHuaConfig.CostGold)
+            // {
+            //     self.E_TextGold.color =  Color.red;
+            // }
+            // else
+            // {
+            //     self.E_TextGold.color = Color.white;
+            // }
         }
 
         public static async ETTask OnQiangHuaButton(this ES_RoleQiangHua self)
