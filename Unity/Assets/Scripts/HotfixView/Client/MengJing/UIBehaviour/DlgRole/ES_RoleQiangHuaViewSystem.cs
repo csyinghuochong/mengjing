@@ -16,38 +16,27 @@ namespace ET.Client
             self.uiTransform = transform;
 
             self.E_QiangHuaButton.AddListenerAsync(self.OnQiangHuaButton);
-
-            self.ES_RoleQiangHuaItem_1.OnInitUI(1);
+            
             self.ES_RoleQiangHuaItem_1.SetClickHandler(self.OnBtn_EquipHandler);
             self.QiangHuaItemList.Add(self.ES_RoleQiangHuaItem_1);
-            self.ES_RoleQiangHuaItem_2.OnInitUI(2);
             self.ES_RoleQiangHuaItem_2.SetClickHandler(self.OnBtn_EquipHandler);
             self.QiangHuaItemList.Add(self.ES_RoleQiangHuaItem_2);
-            self.ES_RoleQiangHuaItem_3.OnInitUI(3);
             self.ES_RoleQiangHuaItem_3.SetClickHandler(self.OnBtn_EquipHandler);
             self.QiangHuaItemList.Add(self.ES_RoleQiangHuaItem_3);
-            self.ES_RoleQiangHuaItem_4.OnInitUI(4);
             self.ES_RoleQiangHuaItem_4.SetClickHandler(self.OnBtn_EquipHandler);
             self.QiangHuaItemList.Add(self.ES_RoleQiangHuaItem_4);
-            self.ES_RoleQiangHuaItem_5.OnInitUI(5);
             self.ES_RoleQiangHuaItem_5.SetClickHandler(self.OnBtn_EquipHandler);
             self.QiangHuaItemList.Add(self.ES_RoleQiangHuaItem_5);
-            self.ES_RoleQiangHuaItem_6.OnInitUI(6);
             self.ES_RoleQiangHuaItem_6.SetClickHandler(self.OnBtn_EquipHandler);
             self.QiangHuaItemList.Add(self.ES_RoleQiangHuaItem_6);
-            self.ES_RoleQiangHuaItem_7.OnInitUI(7);
             self.ES_RoleQiangHuaItem_7.SetClickHandler(self.OnBtn_EquipHandler);
             self.QiangHuaItemList.Add(self.ES_RoleQiangHuaItem_7);
-            self.ES_RoleQiangHuaItem_8.OnInitUI(8);
             self.ES_RoleQiangHuaItem_8.SetClickHandler(self.OnBtn_EquipHandler);
             self.QiangHuaItemList.Add(self.ES_RoleQiangHuaItem_8);
-            self.ES_RoleQiangHuaItem_9.OnInitUI(9);
             self.ES_RoleQiangHuaItem_9.SetClickHandler(self.OnBtn_EquipHandler);
             self.QiangHuaItemList.Add(self.ES_RoleQiangHuaItem_9);
-            self.ES_RoleQiangHuaItem_10.OnInitUI(10);
             self.ES_RoleQiangHuaItem_10.SetClickHandler(self.OnBtn_EquipHandler);
             self.QiangHuaItemList.Add(self.ES_RoleQiangHuaItem_10);
-            self.ES_RoleQiangHuaItem_11.OnInitUI(11);
             self.ES_RoleQiangHuaItem_11.SetClickHandler(self.OnBtn_EquipHandler);
             self.QiangHuaItemList.Add(self.ES_RoleQiangHuaItem_11);
         }
@@ -60,6 +49,18 @@ namespace ET.Client
 
         public static void OnUpdateUI(this ES_RoleQiangHua self)
         {
+            self.ES_RoleQiangHuaItem_1.OnInitUI(1);
+            self.ES_RoleQiangHuaItem_2.OnInitUI(2);
+            self.ES_RoleQiangHuaItem_3.OnInitUI(3);
+            self.ES_RoleQiangHuaItem_4.OnInitUI(4);
+            self.ES_RoleQiangHuaItem_5.OnInitUI(5);
+            self.ES_RoleQiangHuaItem_6.OnInitUI(6);
+            self.ES_RoleQiangHuaItem_7.OnInitUI(7);
+            self.ES_RoleQiangHuaItem_8.OnInitUI(8);
+            self.ES_RoleQiangHuaItem_9.OnInitUI(9);
+            self.ES_RoleQiangHuaItem_10.OnInitUI(10);
+            self.ES_RoleQiangHuaItem_11.OnInitUI(11);
+            
             BagComponentC bagComponent = self.Root().GetComponent<BagComponentC>();
             for (int i = 0; i < self.QiangHuaItemList.Count; i++)
             {

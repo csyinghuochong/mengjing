@@ -52,14 +52,14 @@ namespace ET.Client
             self.E_EquipQualityImage.gameObject.SetActive(false);
             self.EG_BangDingRectTransform.gameObject.SetActive(false);
             self.E_QiangHuaNameText.text = ItemViewHelp.GetItemSubType3Name(subType);
-            if (subType < 100)
-            {
-                string qianghuaName = ItemViewData.EquipWeiZhiToName[subType].Icon;
-                string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.OtherIcon, qianghuaName);
-                Sprite sp = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
-
-                self.E_EquipBackImage.sprite = sp;
-            }
+            // if (subType < 100)
+            // {
+            //     string qianghuaName = ItemViewData.EquipWeiZhiToName[subType].Icon;
+            //     string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.OtherIcon, qianghuaName);
+            //     Sprite sp = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
+            //
+            //     self.E_EquipBackImage.sprite = sp;
+            // }
         }
 
         public static void UpdateData(this ES_EquipSetItem self, ItemInfo bagInfo, int occ, ItemOperateEnum itemOperateEnum,

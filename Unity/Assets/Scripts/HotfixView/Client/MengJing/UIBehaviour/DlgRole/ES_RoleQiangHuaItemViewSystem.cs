@@ -26,6 +26,9 @@ namespace ET.Client
             
             BagComponentC bagComponent = self.Root().GetComponent<BagComponentC>();
             ItemInfo bagInfo = bagComponent.GetEquipBySubType(ItemLocType.ItemLocEquip, index);
+            
+            self.E_EquipIconImage.gameObject.SetActive(false);
+            self.E_EquipQualityImage.gameObject.SetActive(false);
             if (bagInfo != null)
             {
                 self.E_EquipIconImage.gameObject.SetActive(true);
