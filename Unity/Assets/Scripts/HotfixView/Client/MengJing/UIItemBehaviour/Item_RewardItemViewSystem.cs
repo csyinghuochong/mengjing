@@ -37,6 +37,7 @@ namespace ET.Client
             }
 
             self.E_ItemNameText.text = itemConfig.ItemName;
+            self.E_ItemNameText.color = FunctionUI.QualityReturnColorDi(itemConfig.ItemQuality);
         }
 
         public static void ShowUIEffect(this Scroll_Item_RewardItem self, int effectid)
