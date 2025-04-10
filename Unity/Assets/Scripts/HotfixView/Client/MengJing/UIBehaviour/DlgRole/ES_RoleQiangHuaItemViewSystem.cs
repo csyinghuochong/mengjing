@@ -57,7 +57,7 @@ namespace ET.Client
         {
             using (zstring.Block())
             {
-                self.E_QiangHuaText.text = zstring.Format("强化+{0}", qianghuaLevel);
+                self.E_QiangHuaText.text = zstring.Format("共鸣+{0}", qianghuaLevel);
             }
         }
     }

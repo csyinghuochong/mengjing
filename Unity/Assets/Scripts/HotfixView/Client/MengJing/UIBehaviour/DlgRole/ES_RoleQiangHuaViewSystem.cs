@@ -97,7 +97,7 @@ namespace ET.Client
             string qianghuaName = ItemViewData.EquipWeiZhiToName[subType].Name;
             using (zstring.Block())
             {
-                self.E_QiangHuaNameText.text = zstring.Format("{0}强化 +{1}", qianghuaName, qianghuaLevel);
+                self.E_QiangHuaNameText.text = zstring.Format("{0}共鸣 +{1}", qianghuaName, qianghuaLevel);
                 self.E_QiangHuaLevel.text = zstring.Format("{0}级", qianghuaLevel);
             }
 
@@ -135,7 +135,7 @@ namespace ET.Client
                 costItems += zstring.Format("@{0};1", ConfigData.QiangHuaLuckyCostId);
                 self.ES_CostList.Refresh(costItems);
 
-                self.E_SuccessRateText.text = zstring.Format("强化成功率: {0}%", (int)(equipQiangHuaConfig.SuccessPro * 100));
+                self.E_SuccessRateText.text = zstring.Format("共鸣成功率: {0}%", (int)(equipQiangHuaConfig.SuccessPro * 100));
                 double addPro = QiangHuaHelper.GetQiangHuaConfig(subType, qianghuaLevel).AdditionPro * bagComponent.QiangHuaFails[subType];
                 self.E_SuccessAdditionText.text = zstring.Format("附加成功率 {0}%", (int)(addPro * 100));
             }
