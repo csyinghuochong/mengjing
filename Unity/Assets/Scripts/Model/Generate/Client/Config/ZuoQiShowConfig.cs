@@ -73,6 +73,8 @@ namespace ET
 		public string TuoWeiEffectID { get; set; }
 		/// <summary>描述</summary>
 		public string Des { get; set; }
+		/// <summary>属性描述</summary>
+		public string AddPropertyDes { get; set; }
 		/// <summary>额外属性</summary>
 		public string AddProperty { get; set; }
 		/// <summary>描述</summary>

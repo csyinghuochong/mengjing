@@ -21,5 +21,20 @@
 
             return false;
         }
+        
+        public static void OnActiveTile(this TitleComponentC self, int titleId)
+        {
+            for (int i = self.TitleList.Count - 1; i >= 0; i--)
+            {
+                if (self.TitleList[i].KeyId == titleId)
+                {
+                    self.TitleList.RemoveAt(i);
+                }
+            }
+
+            TitleConfig titleConfig = TitleConfigCategory.Instance.Get(titleId);
+            long endTime = titleConfig.ValidityTime == -1 ? -1 : TimeHelper.ServerNow() + titleConfig.ValidityTime * 1000;
+            self.TitleList.Add(new KeyValuePairInt() { KeyId = titleId, Value = endTime });
+        }
     }
 }

@@ -75,45 +75,46 @@ namespace ET.Client
                 return response;
             }
 
-            // if (itemConfig.ItemSubType == 2)
-            // {
-            //     flyTipComponent.SpawnFlyTip($"恭喜你获得{itemConfig.ItemUsePar}经验!");
-            // }
-            //
-            // if (itemConfig.ItemSubType == 16)
-            // {
-            //     EquipMakeConfig equipMake = EquipMakeConfigCategory.Instance.Get(int.Parse(itemConfig.ItemUsePar));
-            //     flyTipComponent.SpawnFlyTip($"恭喜你学习 {ItemConfigCategory.Instance.Get(equipMake.MakeItemID).ItemName}!");
-            //     infoComponent.UserInfo.MakeList.Add(int.Parse(itemConfig.ItemUsePar));
-            // }
-            //
-            // if (itemConfig.ItemSubType == 112)
-            // {
-            //     flyTipComponent.SpawnFlyTip($"恭喜你获得{response.OperatePar}经验!");
-            // }
+            if (itemConfig.ItemSubType == 2)
+            {
+                EventSystem.Instance.Publish(root, new ShowFlyTip() { Str = $"恭喜你获得{itemConfig.ItemUsePar}经验!" });
+            }
+            
+            if (itemConfig.ItemSubType == 16)
+            {
+                EquipMakeConfig equipMake = EquipMakeConfigCategory.Instance.Get(int.Parse(itemConfig.ItemUsePar));
+                EventSystem.Instance.Publish(root, new ShowFlyTip() { Str = $"恭喜你学习 {ItemConfigCategory.Instance.Get(equipMake.MakeItemID).ItemName}!" });
+                infoComponent.UserInfo.MakeList.Add(int.Parse(itemConfig.ItemUsePar));
+            }
+            
+            if (itemConfig.ItemSubType == 112)
+            {
+                EventSystem.Instance.Publish(root, new ShowFlyTip() { Str = $"恭喜你获得{response.OperatePar}经验!" });
+            }
 
-            // if (itemConfig.ItemSubType == 115)
-            // {
-            //     self.ZoneScene().GetComponent<PetComponent>().OnUnlockSkin(itemConfig.ItemUsePar);
-            // }
-            //
-            // if (itemConfig.ItemSubType == 125)
-            // {
-            //     self.ZoneScene().GetComponent<UserInfoComponent>().OnHorseActive(int.Parse(itemConfig.ItemUsePar), true);
-            // }
-            //
-            // if (itemConfig.ItemSubType == 128)
-            // {
-            //     self.ZoneScene().GetComponent<TitleComponent>().OnActiveTile(int.Parse(itemConfig.ItemUsePar));
-            // }
-            //
+            if (itemConfig.ItemSubType == 115)
+            {
+                root.GetComponent<PetComponentC>().OnUnlockSkin(itemConfig.ItemUsePar);
+            }
+            
+            if (itemConfig.ItemSubType == 125)
+            {
+                root.GetComponent<UserInfoComponentC>().OnHorseActive(int.Parse(itemConfig.ItemUsePar), true);
+            }
+            
+            if (itemConfig.ItemSubType == 128)
+            {
+                root.GetComponent<TitleComponentC>().OnActiveTile(int.Parse(itemConfig.ItemUsePar));
+            }
+            
             if (itemConfig.ItemSubType == 129)
             {
                 root.GetComponent<ChengJiuComponentC>().OnActiveJingLing(int.Parse(itemConfig.ItemUsePar));
             }
-            //
+            
             // if (itemConfig.ItemSubType == 139)
             // {
+            //     
             //     self.AdditionalCellNum[0]++;
             //     HintHelp.GetInstance().DataUpdate(DataType.BagItemUpdate);
             // }
