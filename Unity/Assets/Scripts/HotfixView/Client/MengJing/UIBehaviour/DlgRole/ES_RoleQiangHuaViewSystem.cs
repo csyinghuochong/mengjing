@@ -88,7 +88,6 @@ namespace ET.Client
             ItemInfo bagInfo = bagComponent.GetEquipBySubType(ItemLocType.ItemLocEquip, subType);
             self.ES_EquipSetItem.UpdateData(bagInfo, 0, ItemOperateEnum.None, new List<ItemInfo>());
             self.E_QiangItemNameText.text = bagInfo != null ? ItemConfigCategory.Instance.Get(bagInfo.ItemID).ItemName : String.Empty;
-            self.E_TextGold.text = bagComponent.GetItemNumber(1).ToString();
             self.EG_MaxNodeRectTransform.gameObject.SetActive(qianghuaLevel >= maxLevel - 1);
             self.EG_NextNodeRectTransform.gameObject.SetActive(!self.EG_MaxNodeRectTransform.gameObject.activeSelf);
 
@@ -143,6 +142,16 @@ namespace ET.Client
 
             self.E_Img_LodingValue.fillAmount = (qianghuaLevel * 1f / maxLevel);
             self.E_QiangHuaProgress.text = $"{qianghuaLevel}/{maxLevel}";
+            self.E_TextGold.text = equipQiangHuaConfig.CostGold.ToString();
+
+            if (bagComponent.GetItemNumber(1) < equipQiangHuaConfig.CostGold)
+            {
+                self.E_TextGold.color =  Color.red;
+            }
+            else
+            {
+                self.E_TextGold.color = Color.white;
+            }
         }
 
         public static async ETTask OnQiangHuaButton(this ES_RoleQiangHua self)
