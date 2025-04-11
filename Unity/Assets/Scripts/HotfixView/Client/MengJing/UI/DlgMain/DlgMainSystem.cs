@@ -81,7 +81,7 @@ namespace ET.Client
         {
             if (unit.MainHero)
             {
-                unit.Root().GetComponent<UIComponent>().GetDlgLogic<DlgMain>()?.View.E_UnionButton.gameObject.SetActive(args.NewValue > 0);
+                //unit.Root().GetComponent<UIComponent>().GetDlgLogic<DlgMain>()?.View.E_UnionButton.gameObject.SetActive(args.NewValue > 0);
             }
         }
     }
@@ -2009,8 +2009,7 @@ namespace ET.Client
             self.View.ES_MainSkill.OnSkillSetUpdate();
             self.View.ES_RoleHead.OnEnterScene(sceneTypeEnum);
             // self.ZoneScene().GetComponent<RelinkComponent>().OnApplicationFocusHandler(true);
-
-            self.View.E_UnionButton.gameObject.SetActive(self.MainUnit.GetComponent<NumericComponentC>().GetAsLong(NumericType.UnionId_0) > 0);
+            //self.View.E_UnionButton.gameObject.SetActive(self.MainUnit.GetComponent<NumericComponentC>().GetAsLong(NumericType.UnionId_0) > 0);
             if (sceneTypeEnum == MapTypeEnum.LocalDungeon)
             {
                 self.Root().GetComponent<GuideComponent>().OnTrigger(GuideTriggerType.EnterFuben, sceneid.ToString());

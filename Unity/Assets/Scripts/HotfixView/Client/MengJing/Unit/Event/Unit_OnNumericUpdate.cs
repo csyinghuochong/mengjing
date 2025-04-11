@@ -154,7 +154,7 @@
 
                     if (args.Defend.MainHero)
                     {
-                        root.GetComponent<UIComponent>().GetDlgLogic<DlgMain>().View.E_UnionButton.gameObject.SetActive(unionId > 0);
+                        //root.GetComponent<UIComponent>().GetDlgLogic<DlgMain>().View.E_UnionButton.gameObject.SetActive(unionId > 0);
                     }
 
                     break;
