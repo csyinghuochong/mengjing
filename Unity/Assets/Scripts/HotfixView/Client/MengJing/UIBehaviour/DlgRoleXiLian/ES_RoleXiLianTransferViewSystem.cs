@@ -36,6 +36,7 @@ namespace ET.Client
             Scroll_Item_CommonItem scrollItemCommonItem = self.ScrollItemCommonItems[index].BindTrans(transform);
             scrollItemCommonItem.Refresh(self.ShowBagInfos[index], ItemOperateEnum.SkillSet);
             scrollItemCommonItem.ES_CommonItem.SetEventTrigger(true);
+            scrollItemCommonItem.ES_CommonItem.HideItemNumber();
             scrollItemCommonItem.ES_CommonItem.BeginDragHandler = (ItemInfo binfo, PointerEventData pdata) => { self.BeginDrag(binfo, pdata); };
             scrollItemCommonItem.ES_CommonItem.DragingHandler = (ItemInfo binfo, PointerEventData pdata) => { self.Draging(binfo, pdata); };
             scrollItemCommonItem.ES_CommonItem.EndDragHandler = (ItemInfo binfo, PointerEventData pdata) => { self.EndDrag(binfo, pdata); };
@@ -148,6 +149,8 @@ namespace ET.Client
             ES_CommonItem esCommonItem1 = self.UIItem_Transfer[1];
             esCommonItem0.UpdateItem(bagInfo_1, ItemOperateEnum.None);
             esCommonItem1.UpdateItem(bagInfo_2, ItemOperateEnum.None);
+            esCommonItem0.HideItemNumber();
+            esCommonItem1.HideItemNumber();
         }
 
         public static void UpdateEquipItemUI(this ES_RoleXiLianTransfer self)
@@ -279,6 +282,7 @@ namespace ET.Client
                 ES_CommonItem esCommonItem = self.UIItem_Transfer[index];
                 esCommonItem.uiTransform.gameObject.SetActive(true);
                 esCommonItem.UpdateItem(binfo, ItemOperateEnum.None);
+                esCommonItem.HideItemNumber();
                 break;
             }
 
