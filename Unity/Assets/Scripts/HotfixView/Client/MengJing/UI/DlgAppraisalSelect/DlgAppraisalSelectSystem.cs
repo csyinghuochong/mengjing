@@ -78,37 +78,37 @@ namespace ET.Client
 
             if (chaValue < 0)
             {
-                jianDingStr = "沧海觅珠";
+                jianDingStr = "大海捞针";
                 self.View.E_JianDingShowText.color = new Color(130f / 255f, 130f / 255f, 130f / 255f);
             }
 
             if (chaValue >= 0 && chaValue < 8)
             {
-                jianDingStr = "机会均等";
+                jianDingStr = "一击必中";
                 self.View.E_JianDingShowText.color = new Color(175f / 255f, 200f / 255f, 20f / 255f);
             }
 
             if (chaValue >= 8 && chaValue < 16)
             {
-                jianDingStr = "十中其一";
+                jianDingStr = "十发十中";
                 self.View.E_JianDingShowText.color = CommonViewHelper.QualityReturnColor(2);
             }
 
             if (chaValue >= 16 && chaValue < 24)
             {
-                jianDingStr = "百中一遇";
+                jianDingStr = "百年不遇";
                 self.View.E_JianDingShowText.color = CommonViewHelper.QualityReturnColor(3);
             }
 
             if (chaValue >= 24 && chaValue < 32)
             {
-                jianDingStr = "千年一遇";
+                jianDingStr = "千载难逢";
                 self.View.E_JianDingShowText.color = CommonViewHelper.QualityReturnColor(4);
             }
 
             if (chaValue >= 32 && chaValue < 999)
             {
-                jianDingStr = "万中取一";
+                jianDingStr = "万里挑一";
                 self.View.E_JianDingShowText.color = CommonViewHelper.QualityReturnColor(5);
             }
 
@@ -141,7 +141,7 @@ namespace ET.Client
             //鉴定符
             for (int i = 0; i < bagInfos.Count; i++)
             {
-                if (bagInfos[i].ItemID != self.AppraisalItemConfigId && bagInfos[i].ItemID != 11200000)
+                if (bagInfos[i].ItemID != self.AppraisalItemConfigId && bagInfos[i].ItemID != 1140003)
                 {
                     continue;
                 }
