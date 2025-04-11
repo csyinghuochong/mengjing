@@ -196,7 +196,7 @@ namespace ET.Client
                 effect = gameObject.AddComponent<HighlightEffect>();
 
                 // 一些物体不用高亮描边
-                effect.excludeNameFilter = new[] { "BackDi" };
+                effect.excludeNameFilter = new[] { "BackDi", "fake shadow (5)" };
 
                 // 描边
                 effect.outline = 1;
