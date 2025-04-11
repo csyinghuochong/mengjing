@@ -53,7 +53,7 @@ namespace ET.Client
                 item.Refresh();
                 if (position == item.Position)
                 {
-                    self.E_ImageSelectImage.transform.SetParent(item.uiTransform);
+                    self.E_ImageSelectImage.transform.SetParent(item.EG_SelectRectTransform);
                     self.E_ImageSelectImage.transform.localPosition = Vector3.zero;
                     self.E_ImageSelectImage.gameObject.SetActive(true);
                 }
@@ -61,7 +61,8 @@ namespace ET.Client
 
             UnionKeJiConfig nowUnionKeJiConfig = UnionKeJiConfigCategory.Instance.Get(self.UnionMyInfo.UnionKeJiList[position]);
 
-            if (self.UnionMyInfo.KeJiActitePos != -1)
+            bool jinxing = self.UnionMyInfo.KeJiActitePos != -1 && self.UnionMyInfo.KeJiActiteTime != 0;
+            if (jinxing)
             {
                 self.NeedTime = UnionKeJiConfigCategory.Instance.Get(self.UnionMyInfo.UnionKeJiList[self.UnionMyInfo.KeJiActitePos]).NeedTime;
                 // "研究中"
@@ -70,8 +71,8 @@ namespace ET.Client
             {
                 self.NeedTime = 0;
             }
-            self.EG_ProgressRectTransform.gameObject.SetActive(self.UnionMyInfo.KeJiActitePos == position);
-            self.E_UpBtnButton.gameObject.SetActive(self.UnionMyInfo.KeJiActitePos != position);
+            self.EG_ProgressRectTransform.gameObject.SetActive(jinxing);
+            self.E_UpBtnButton.gameObject.SetActive(!jinxing);
 
             ResourcesLoaderComponent resourcesLoaderComponent = self.Root().GetComponent<ResourcesLoaderComponent>();
             

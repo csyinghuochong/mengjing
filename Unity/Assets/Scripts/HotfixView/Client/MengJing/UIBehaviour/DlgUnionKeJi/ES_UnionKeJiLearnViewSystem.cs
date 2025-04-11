@@ -52,7 +52,7 @@ namespace ET.Client
                 item.Refresh();
                 if (position == item.Position)
                 {
-                    self.E_ImageSelectImage.transform.SetParent(item.uiTransform);
+                    self.E_ImageSelectImage.transform.SetParent(item.EG_SelectRectTransform);
                     self.E_ImageSelectImage.transform.localPosition = Vector3.zero;
                     self.E_ImageSelectImage.gameObject.SetActive(true);
                 }

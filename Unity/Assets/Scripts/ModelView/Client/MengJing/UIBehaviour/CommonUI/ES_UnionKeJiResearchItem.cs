@@ -47,6 +47,25 @@ namespace ET.Client
 			}
 		}
 
+		public RectTransform EG_SelectRectTransform
+		{
+			get
+			{
+				if (this.uiTransform == null)
+				{
+					Log.Error("uiTransform is null.");
+					return null;
+				}
+
+				if (this.m_EG_SelectRectTransform == null)
+				{
+					this.m_EG_SelectRectTransform = UIFindHelper.FindDeepChild<RectTransform>(this.uiTransform.gameObject, "EG_Select");
+				}
+
+				return this.m_EG_SelectRectTransform;
+			}
+		}
+		
 		public UnityEngine.UI.Text E_PointText
 		{
 			get
@@ -88,6 +107,7 @@ namespace ET.Client
 
 		private UnityEngine.UI.Button m_E_ImageIconButton = null;
 		private UnityEngine.UI.Image m_E_ImageIconImage = null;
+		private RectTransform m_EG_SelectRectTransform = null;
 		private UnityEngine.UI.Text m_E_PointText = null;
 		public Transform uiTransform = null;
 	}
