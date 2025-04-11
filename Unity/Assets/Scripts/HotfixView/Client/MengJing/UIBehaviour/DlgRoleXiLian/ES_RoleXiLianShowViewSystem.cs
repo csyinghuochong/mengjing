@@ -154,7 +154,8 @@ namespace ET.Client
         public static void OnUpdateUI(this ES_RoleXiLianShow self)
         {
             self.XilianBagInfo = null;
-            self.OnItemTypeSet(0);
+            self.EG_XiLianInfoRectTransform.gameObject.SetActive(false);
+            self.E_ItemTypeSetToggleGroup.OnSelectIndex(0);
         }
 
         private static void OnBagItemsRefresh(this ES_RoleXiLianShow self, Transform transform, int index)
