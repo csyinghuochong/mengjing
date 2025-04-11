@@ -117,16 +117,16 @@ namespace ET.Client
         {
             UnionKeJiConfig unionKeJiConfig = UnionKeJiConfigCategory.Instance.Get(self.UserInfo.UnionKeJiList[self.Position]);
 
+            if (unionKeJiConfig.NextID > self.UnionMyInfo.UnionKeJiList[self.Position])
+            {
+                FlyTipComponent.Instance.ShowFlyTip("已达当前最高等级！");
+                return;
+            }
+            
             BagComponentC bagComponent = self.Root().GetComponent<BagComponentC>();
             if (!bagComponent.CheckNeedItem(unionKeJiConfig.LearnCost))
             {
                 FlyTipComponent.Instance.ShowFlyTip("道具数量不足！");
-                return;
-            }
-
-            if (unionKeJiConfig.NextID > self.UnionMyInfo.UnionKeJiList[self.Position])
-            {
-                FlyTipComponent.Instance.ShowFlyTip("已达当前最高等级！");
                 return;
             }
 
