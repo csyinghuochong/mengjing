@@ -3,37 +3,38 @@ using UnityEngine;
 
 namespace ET.Client
 {
-    [FriendOf(typeof (Scroll_Item_RoleXiLianSkillItem))]
-    [EntitySystemOf(typeof (ES_RoleXiLianSkill))]
-    [FriendOfAttribute(typeof (ES_RoleXiLianSkill))]
+    [FriendOf(typeof(Scroll_Item_RoleXiLianSkillItem))]
+    [EntitySystemOf(typeof(ES_RoleXiLianSkill))]
+    [FriendOfAttribute(typeof(ES_RoleXiLianSkill))]
     public static partial class ES_RoleXiLianSkillSystem
     {
         [EntitySystem]
         private static void Awake(this ES_RoleXiLianSkill self, Transform transform)
         {
             self.uiTransform = transform;
-            self.E_RoleXiLianSkillItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnRoleXiLianSkillItemsRefresh);
             self.OnInitUI();
         }
 
         [EntitySystem]
         private static void Destroy(this ES_RoleXiLianSkill self)
         {
-            self.DestroyWidget();
-        }
+            ResourcesLoaderComponent resourcesLoaderComponent = self.Root().GetComponent<ResourcesLoaderComponent>();
+            for (int i = 0; i < self.AssetList.Count; i++)
+            {
+                resourcesLoaderComponent.UnLoadAsset(self.AssetList[i]);
+            }
 
-        private static void OnRoleXiLianSkillItemsRefresh(this ES_RoleXiLianSkill self, Transform transform, int index)
-        {
-            Scroll_Item_RoleXiLianSkillItem scrollItemRoleXiLianSkillItem = self.ScrollItemRoleXiLianSkillItems[index].BindTrans(transform);
-            scrollItemRoleXiLianSkillItem.OnInitUI(self.ShouJiConfigs[index]);
-            scrollItemRoleXiLianSkillItem.OnUpdateUI(self.XilianLevel);
+            self.AssetList.Clear();
+            self.AssetList = null;
+
+            self.DestroyWidget();
         }
 
         public static int GetXiLianLevel(this ES_RoleXiLianSkill self, Unit unit)
         {
             int xiliandu = unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.ItemXiLianDu);
             int xilianLevel = XiLianHelper.GetXiLianId(xiliandu);
-            xilianLevel = xilianLevel != 0? EquipXiLianConfigCategory.Instance.Get(xilianLevel).XiLianLevel : 0;
+            xilianLevel = xilianLevel != 0 ? EquipXiLianConfigCategory.Instance.Get(xilianLevel).XiLianLevel : 0;
             return xilianLevel;
         }
 
@@ -43,8 +44,39 @@ namespace ET.Client
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
             self.XilianLevel = self.GetXiLianLevel(unit);
 
-            self.AddUIScrollItems(ref self.ScrollItemRoleXiLianSkillItems, self.ShouJiConfigs.Count);
-            self.E_RoleXiLianSkillItemsLoopVerticalScrollRect.SetVisible(true, self.ShouJiConfigs.Count);
+            ResourcesLoaderComponent resourcesLoaderComponent = self.Root().GetComponent<ResourcesLoaderComponent>();
+            for (int i = 0; i < self.ShouJiConfigs.Count; i++)
+            {
+                if (!self.ScrollItemRoleXiLianSkillItems.ContainsKey(i))
+                {
+                    Scroll_Item_RoleXiLianSkillItem item = self.AddChild<Scroll_Item_RoleXiLianSkillItem>();
+                    string path = "Assets/Bundles/UI/Item/Item_RoleXiLianSkillItem.prefab";
+                    if (!self.AssetList.Contains(path))
+                    {
+                        self.AssetList.Add(path);
+                    }
+
+                    GameObject prefab = resourcesLoaderComponent.LoadAssetSync<GameObject>(path);
+                    GameObject go = UnityEngine.Object.Instantiate(prefab,
+                        self.E_RoleXiLianSkillItemsScrollRect.transform.Find("Content").gameObject.transform);
+                    item.BindTrans(go.transform);
+                    self.ScrollItemRoleXiLianSkillItems.Add(i, item);
+                }
+
+                Scroll_Item_RoleXiLianSkillItem scrollItemRoleXiLianSkillItem = self.ScrollItemRoleXiLianSkillItems[i];
+                scrollItemRoleXiLianSkillItem.uiTransform.gameObject.SetActive(true);
+                scrollItemRoleXiLianSkillItem.OnInitUI(self.ShouJiConfigs[i]);
+                scrollItemRoleXiLianSkillItem.OnUpdateUI(self.XilianLevel);
+            }
+
+            if (self.ScrollItemRoleXiLianSkillItems.Count > self.ShouJiConfigs.Count)
+            {
+                for (int i = self.ScrollItemRoleXiLianSkillItems.Count; i < self.ScrollItemRoleXiLianSkillItems.Count; i++)
+                {
+                    Scroll_Item_RoleXiLianSkillItem scrollItemRoleXiLianSkillItem = self.ScrollItemRoleXiLianSkillItems[i];
+                    scrollItemRoleXiLianSkillItem.uiTransform.gameObject.SetActive(false);
+                }
+            }
 
             self.OnUpdateUI();
         }

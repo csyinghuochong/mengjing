@@ -1,18 +1,19 @@
-﻿using System.Collections.Generic;
+﻿
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
 namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class ES_RoleXiLianSkill : Entity,IAwake<Transform>,IDestroy,IUILogic
+	public  class ES_RoleXiLianSkill : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy
 	{
-		public Dictionary<int, EntityRef<Scroll_Item_RoleXiLianSkillItem>> ScrollItemRoleXiLianSkillItems;
+		public Dictionary<int, EntityRef<Scroll_Item_RoleXiLianSkillItem>> ScrollItemRoleXiLianSkillItems = new();
 		public List<EquipXiLianConfig> ShouJiConfigs;
 		public int XilianLevel;
+		public List<string> AssetList { get; set; } = new();
 		
-		public LoopVerticalScrollRect E_RoleXiLianSkillItemsLoopVerticalScrollRect
+		public UnityEngine.UI.ScrollRect E_RoleXiLianSkillItemsScrollRect
      	{
      		get
      		{
@@ -21,11 +22,28 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_E_RoleXiLianSkillItemsLoopVerticalScrollRect == null )
+     			if( this.m_E_RoleXiLianSkillItemsScrollRect == null )
      			{
-		    		this.m_E_RoleXiLianSkillItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<LoopVerticalScrollRect>(this.uiTransform.gameObject,"E_RoleXiLianSkillItems");
+		    		this.m_E_RoleXiLianSkillItemsScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.ScrollRect>(this.uiTransform.gameObject,"E_RoleXiLianSkillItems");
      			}
-     			return this.m_E_RoleXiLianSkillItemsLoopVerticalScrollRect;
+     			return this.m_E_RoleXiLianSkillItemsScrollRect;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_RoleXiLianSkillItemsImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_RoleXiLianSkillItemsImage == null )
+     			{
+		    		this.m_E_RoleXiLianSkillItemsImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_RoleXiLianSkillItems");
+     			}
+     			return this.m_E_RoleXiLianSkillItemsImage;
      		}
      	}
 
@@ -43,11 +61,13 @@ namespace ET.Client
 
 		public void DestroyWidget()
 		{
-			this.m_E_RoleXiLianSkillItemsLoopVerticalScrollRect = null;
+			this.m_E_RoleXiLianSkillItemsScrollRect = null;
+			this.m_E_RoleXiLianSkillItemsImage = null;
 			this.uiTransform = null;
 		}
 
-		private LoopVerticalScrollRect m_E_RoleXiLianSkillItemsLoopVerticalScrollRect = null;
+		private UnityEngine.UI.ScrollRect m_E_RoleXiLianSkillItemsScrollRect = null;
+		private UnityEngine.UI.Image m_E_RoleXiLianSkillItemsImage = null;
 		public Transform uiTransform = null;
 	}
 }

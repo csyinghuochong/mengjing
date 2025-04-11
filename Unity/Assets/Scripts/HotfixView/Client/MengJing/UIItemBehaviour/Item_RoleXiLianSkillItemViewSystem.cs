@@ -67,10 +67,7 @@ namespace ET.Client
                 CommonViewHelper.SetImageGray(self.Root(), item.E_ImageIconImage.gameObject, gray);
             }
 
-            if (gray)
-            {
-                self.EG_JiHuoSetRectTransform.gameObject.SetActive(false);
-            }
+            self.EG_JiHuoSetRectTransform.gameObject.SetActive(!gray);
         }
     }
 }
