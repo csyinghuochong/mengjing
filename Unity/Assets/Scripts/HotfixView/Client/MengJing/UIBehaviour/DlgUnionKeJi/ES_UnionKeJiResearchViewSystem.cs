@@ -209,7 +209,18 @@ namespace ET.Client
             }
             if (!havePre)
             {
-                FlyTipComponent.Instance.ShowFlyTip("请先激活前置科技！");
+                string tip = "请先激活前置科技:";
+                for (int i = 0; i < unionKeJiConfig.PreId.Length; i++)
+                {
+                    if (i != 0)
+                    {
+                        tip += "、";
+                    }
+                    
+                    UnionKeJiConfig config = UnionKeJiConfigCategory.Instance.Get(unionKeJiConfig.PreId[i]);
+                    tip += config.Id;
+                }
+                FlyTipComponent.Instance.ShowFlyTip(tip);
                 return;
             }
 
