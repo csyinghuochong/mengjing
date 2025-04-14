@@ -369,15 +369,18 @@ namespace ET.Client
 
         public static void ShowBossHPBar(this ES_MainHpBar self, Unit unit)
         {
-            if (self.EG_BossNodeRectTransform.gameObject.activeSelf && unit != null)
+            bool activeSelf = self.EG_BossNodeRectTransform.gameObject.activeSelf;
+           
+            if (!activeSelf && unit == null)
+            {
+                return;
+            }
+            
+            if (activeSelf && unit != null && unit.Id ==  self.LockBossId)
             {
                 return;
             }
 
-            if (!self.EG_BossNodeRectTransform.gameObject.activeSelf && unit == null)
-            {
-                return;
-            }
 
             if (unit == null || unit.GetComponent<NumericComponentC>()?.GetAsInt(NumericType.Now_Dead) == 1)
             {
