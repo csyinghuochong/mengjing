@@ -180,7 +180,6 @@ namespace ET.Client
                     break;
                 case UnitType.Stall:
                     self.UnitAssetsPath = ABPathHelper.GetUnitPath("Player/BaiTan");
-                    ;
                     break;
                 case UnitType.Monster:
                     int monsterId = unit.ConfigId;
@@ -409,13 +408,6 @@ namespace ET.Client
             go.transform.localPosition = unit.Position;
             go.transform.rotation = unit.Rotation;
 
-            CommonViewHelper.SetParent(self.GameObject, HoreseHelper.GetHorseNode(self.ObjectHorse));
-            self.GameObject.transform.localScale = HoreseHelper.GetRoleScale(go, horseId) * Vector3.one;
-            //特殊处理
-            if (horseId == 10008)
-            {
-                self.GameObject.transform.localRotation = Quaternion.Euler(0, 90, 0);
-            }
 
             unit.GetComponent<FsmComponent>()?.SetHorseState();
             try
@@ -426,6 +418,13 @@ namespace ET.Client
             catch (Exception ex)
             {
                 Log.Error($"OnShangMaError:  {ex.ToString()}");
+            }
+            CommonViewHelper.SetParent(self.GameObject, HoreseHelper.GetHorseNode(self.ObjectHorse));
+            self.GameObject.transform.localScale = HoreseHelper.GetRoleScale(go, horseId) * Vector3.one;
+            //特殊处理
+            if (horseId == 10008)
+            {
+                self.GameObject.transform.localRotation = Quaternion.Euler(0, 90, 0);
             }
 
             self.ShowRoleDi(false);
