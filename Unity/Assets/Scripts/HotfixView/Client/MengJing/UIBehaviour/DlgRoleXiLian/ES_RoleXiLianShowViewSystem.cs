@@ -160,8 +160,18 @@ namespace ET.Client
 
         private static void OnBagItemsRefresh(this ES_RoleXiLianShow self, Transform transform, int index)
         {
+            foreach (Scroll_Item_CommonItem item in self.ScrollItemCommonItems.Values)
+            {
+                if (item.uiTransform == transform)
+                {
+                    item.uiTransform = null;
+                }
+            }
+            
             Scroll_Item_CommonItem scrollItemCommonItem = self.ScrollItemCommonItems[index].BindTrans(transform);
             scrollItemCommonItem.Refresh(self.ShowBagInfos[index], ItemOperateEnum.ItemXiLian, self.OnSelectBagItem);
+            scrollItemCommonItem.ES_CommonItem.E_ItemDragEventTrigger.gameObject.SetActive(false);
+            self.OnSelectBagItem(self.XilianBagInfo);
         }
 
         private static void OnSelectBagItem(this ES_RoleXiLianShow self, ItemInfo bagInfo)
