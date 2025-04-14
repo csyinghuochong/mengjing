@@ -479,9 +479,7 @@ namespace ET.Client
                 }
 
                 ZuoQiShowConfig zuoQiShowConfig = ZuoQiShowConfigCategory.Instance.Get(horseRide);
-
-                // self.HorseAssetsPath = ABPathHelper.GetUnitPath($"ZuoQi/{zuoQiShowConfig.ModelID}");
-                self.HorseAssetsPath = ABPathHelper.GetUnitPath($"ZuoQi/{10001}");
+                self.HorseAssetsPath = ABPathHelper.GetUnitPath($"ZuoQi/{zuoQiShowConfig.ModelID}");
                 self.Root().GetComponent<GameObjectLoadComponent>().AddLoadQueue(self.HorseAssetsPath, self.InstanceId, true, self.OnLoadHorse);
             }
             else
