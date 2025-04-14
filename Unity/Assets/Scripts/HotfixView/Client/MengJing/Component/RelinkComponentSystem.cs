@@ -143,7 +143,7 @@
                     break;
                 }
 
-                await timerComponent.WaitAsync(3000);
+                await timerComponent.WaitAsync(1000);
                 if (instanceid != self.InstanceId)
                 {
                     break;
@@ -154,7 +154,7 @@
                     break;
                 }
                 
-                self.SendLogin().Coroutine();
+                await self.SendLogin();
                 if (i == 4)
                 {
                     EventSystem.Instance.Publish(self.Root(), new ReturnLogin());
