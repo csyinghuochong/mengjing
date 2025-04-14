@@ -7917,6 +7917,9 @@ namespace ET
         [MemoryPackOrder(2)]
         public List<HideProList> XiLianHideTeShuProLists { get; set; } = new();
 
+        [MemoryPackOrder(3)]
+        public long ChangeCombat { get; set; }
+
         public override void Dispose()
         {
             if (!this.IsFromPool)
@@ -7927,6 +7930,7 @@ namespace ET
             this.XiLianHideProLists.Clear();
             this.HideSkillLists.Clear();
             this.XiLianHideTeShuProLists.Clear();
+            this.ChangeCombat = default;
 
             ObjectPool.Instance.Recycle(this);
         }

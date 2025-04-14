@@ -1434,15 +1434,16 @@ namespace ET.Server
 
         /// <summary>
         /// 更新基础的属性
+        /// ItemInfo itemInfo 不为空则只是用来模拟计算战力。。。。。 itemInfo.BagInfoID 用来返回战力
         /// </summary>
         /// <param name="unit"></param>
-        public static void UnitUpdateProperty_Base(Unit unit, bool notice, bool rank)
+        public static void UnitUpdateProperty_Base(Unit unit, bool notice, bool rank, ItemInfo testItemInfo = null)
         {
             if (unit.SceneType == MapTypeEnum.RunRace)
             {
                 return;
             }
-
+           
             //基础职业属性
             UserInfoComponentS unitInfoComponentS = unit.GetComponent<UserInfoComponentS>();
             UserInfo userInfo = unitInfoComponentS.UserInfo;
@@ -1486,6 +1487,34 @@ namespace ET.Server
             List<int> equipIDList = new List<int>();
             List<int> equipSuitIDList = new List<int>();
             List<ItemInfo> equipList = unit.GetComponent<BagComponentS>().GetItemByLoc(ItemLocType.ItemLocEquip);
+
+            
+            ///替换equipList
+            if (testItemInfo != null)
+            {
+                int subtype = ItemConfigCategory.Instance.Get(testItemInfo.ItemID).ItemSubType;
+                int havenum = 0;
+                for (int i = equipList.Count - 1; i >= 0; i--)
+                {
+                    ItemInfo userBagInfo = equipList[i];
+                    if (!ItemConfigCategory.Instance.Contain(userBagInfo.ItemID))
+                    {
+                        equipList.RemoveAt(i);
+                        continue;
+                    }
+
+                    int ItemSubType = ItemConfigCategory.Instance.Get(userBagInfo.ItemID).ItemSubType;
+                    if (ItemSubType == subtype && ( (subtype != 5 && havenum >= 0 || (subtype == 5 && havenum >= 2) ) ) )
+                    {
+                        havenum++;
+                        equipList.RemoveAt(i);
+                        break;
+                    }
+                }
+                
+                equipList.Add(testItemInfo);
+            }
+
 
             for (int i = equipList.Count - 1; i >= 0; i--)
             {
@@ -2237,7 +2266,7 @@ namespace ET.Server
             AddUpdateProDicList((int)NumericType.Base_ZhongJiPro_Add, zhongjiLv, UpdateProDicList);
 
             // 更新战力
-            UnitUpdateCombat(unit, notice, rank, UpdateProDicList);
+            UnitUpdateCombat(unit, notice, rank, UpdateProDicList, equipList, testItemInfo);
             
             // --- 以下方法不加入战力计算 ---
 
@@ -2515,7 +2544,7 @@ namespace ET.Server
             return nowPropertyValue / 10000f;
         }
         
-        private static void UnitUpdateCombat(Unit unit, bool notice, bool rank, Dictionary<int, long> UpdateProDicList)
+        private static void UnitUpdateCombat(Unit unit, bool notice, bool rank, Dictionary<int, long> UpdateProDicList, List<ItemInfo> equipList , ItemInfo testItemInfo)
         {
             //基础职业属性
             UserInfoComponentS unitInfoComponentS = unit.GetComponent<UserInfoComponentS>();
@@ -2530,8 +2559,6 @@ namespace ET.Server
             int PointTiZhi = GetPoint(numericComponent.GetAsInt(NumericType.PointTiZhi), roleLv);
             int PointNaiLi = GetPoint(numericComponent.GetAsInt(NumericType.PointNaiLi), roleLv);
             int PointMinJie = GetPoint(numericComponent.GetAsInt(NumericType.PointMinJie), roleLv);
-            
-            List<ItemInfo> equipList = unit.GetComponent<BagComponentS>().GetItemByLoc(ItemLocType.ItemLocEquip);
             
             long Power_value = GetOnePro(NumericType.Now_Power, UpdateProDicList);
             long Agility_value = GetOnePro(NumericType.Now_Agility, UpdateProDicList);
@@ -2742,7 +2769,15 @@ namespace ET.Server
             }
 
             //更新战力
-            unit.GetComponent<UserInfoComponentS>().UpdateRoleData(UserDataType.Combat, zhanliValue.ToString(), notice);
+            if (testItemInfo == null)
+            {
+                unit.GetComponent<UserInfoComponentS>().UpdateRoleData(UserDataType.Combat, zhanliValue.ToString(), notice);
+            }
+            else
+            {
+                testItemInfo.BagInfoID = zhanliValue;
+            }
+
 
             //排行榜
             if (rank)

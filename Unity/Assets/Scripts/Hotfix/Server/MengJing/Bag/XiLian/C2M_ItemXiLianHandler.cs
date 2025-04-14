@@ -115,9 +115,25 @@ namespace ET.Server
                     unit.GetComponent<SkillSetComponentS>().OnWearEquip(bagInfo);
                 }
 
+                ItemInfo  bagInfoOld = CommonHelp.DeepCopy<ItemInfo>(bagInfo);
+                    
+                Function_Fight.UnitUpdateProperty_Base( unit, false, false, bagInfoOld );
+                
                 for (int i = 0; i < response.ItemXiLianResults.Count; i++)
                 {
                     ItemXiLianResult itemXiLianResult = response.ItemXiLianResults[i];
+                    
+                    ItemInfo  bagInfoCopy = CommonHelp.DeepCopy<ItemInfo>(bagInfo);
+                    
+                    bagInfoCopy.XiLianHideProLists = itemXiLianResult.XiLianHideProLists;              //基础属性洗炼
+                    bagInfoCopy.HideSkillLists = itemXiLianResult.HideSkillLists;                      //隐藏技能
+                    bagInfoCopy.XiLianHideTeShuProLists = itemXiLianResult.XiLianHideTeShuProLists;    //特殊属性洗炼
+                    
+                    Function_Fight.UnitUpdateProperty_Base( unit, false, false, bagInfoCopy );
+
+                    response.ItemXiLianResults[i].ChangeCombat = bagInfoCopy.BagInfoID - bagInfoOld.BagInfoID;
+                    //Console.WriteLine($"oldcombat:  {bagInfoOld.BagInfoID}   bagInfocopy:{bagInfoCopy.BagInfoID}");
+                    
                     for (int skill = 0; skill < itemXiLianResult.HideSkillLists.Count; skill++)
                     {
                         unit.GetComponent<ChengJiuComponentS>().TriggerEvent(ChengJiuTargetEnum.EquipActiveSkillId_222, itemXiLianResult.HideSkillLists[skill], 1);

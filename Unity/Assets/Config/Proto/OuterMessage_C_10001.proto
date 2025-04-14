@@ -1829,6 +1829,7 @@ message ItemXiLianResult
 	repeated HideProList XiLianHideProLists = 1;
 	repeated int32 HideSkillLists = 2;
 	repeated HideProList XiLianHideTeShuProLists = 3;
+	int64 ChangeCombat = 4;
 }
 
 message M2C_FashionUpdate // IMessage

@@ -15,10 +15,14 @@ namespace ET.Client
 
             self.ButtonSelect = rc.Get<GameObject>("ButtonSelect");
             self.ButtonSelect.GetComponent<Button>().AddListenerAsync(self.OnButtonSelect);
-
+            
             self.Obj_EquipPropertyText = rc.Get<GameObject>("Obj_EquipPropertyText");
             self.Obj_EquipPropertyText.SetActive(false);
             self.EquipBaseSetList = rc.Get<GameObject>("EquipBaseSetList");
+        
+            self.E_CombatDown = rc.Get<GameObject>("E_CombatDown");
+            self.E_CombatUp = rc.Get<GameObject>("E_CombatUp");
+            self.E_BattleAdd = rc.Get<GameObject>("E_BattleAdd").GetComponent<Text>();
         }
 
         public static void OnInitUI(this UIRoleXiLianTenItem self, ItemInfo bagInfo, ItemXiLianResult index)
@@ -27,6 +31,10 @@ namespace ET.Client
             self.ItemXiLianResult = index;
             BagComponentC bagComponent = self.Root().GetComponent<BagComponentC>();
             ItemViewHelp.ShowBaseAttribute(bagComponent.GetEquipList(), bagInfo, self.Obj_EquipPropertyText, self.EquipBaseSetList);
+
+            self.E_BattleAdd.text = $"预计战力增长:{index.ChangeCombat}";
+            self.E_CombatDown.gameObject.SetActive(index.ChangeCombat < 0);
+            self.E_CombatUp.gameObject.SetActive(index.ChangeCombat > 0);
         }
 
         public static async ETTask OnButtonSelect(this UIRoleXiLianTenItem self)
