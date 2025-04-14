@@ -233,6 +233,23 @@ namespace ET.Client
      			return this.m_E_Lab_BossNameText;
      		}
      	}
+		
+		public UnityEngine.UI.Image E_Boss_Icon
+		{
+			get
+			{
+				if (this.uiTransform == null)
+				{
+					Log.Error("uiTransform is null.");
+					return null;
+				}
+				if( this.m_E_Boss_Icon == null )
+				{
+					this.m_E_Boss_Icon = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_BossNode/Img_Di2Mask/E_Boss_Icon");
+				}
+				return this.m_E_Boss_Icon;
+			}
+		}
 
 		public UnityEngine.UI.Text E_Lab_BossLvText
      	{
@@ -353,6 +370,7 @@ namespace ET.Client
      		}
      	}
 
+	
 		    public Transform UITransform
          {
      	    get
@@ -386,6 +404,7 @@ namespace ET.Client
 			this.m_E_Img_MonsterHpImage = null;
 			this.m_E_Lab_MonsterNameText = null;
 			this.m_E_Lab_MonsterLvText = null;
+			this.m_E_Boss_Icon = null;
 			this.uiTransform = null;
 		}
 
@@ -408,6 +427,7 @@ namespace ET.Client
 		private UnityEngine.UI.Image m_E_Img_MonsterHpImage = null;
 		private UnityEngine.UI.Text m_E_Lab_MonsterNameText = null;
 		private UnityEngine.UI.Text m_E_Lab_MonsterLvText = null;
+		private UnityEngine.UI.Image m_E_Boss_Icon = null;
 		public Transform uiTransform = null;
 	}
 }

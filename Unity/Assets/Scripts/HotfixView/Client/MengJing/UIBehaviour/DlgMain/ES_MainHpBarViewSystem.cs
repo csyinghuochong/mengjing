@@ -357,8 +357,14 @@ namespace ET.Client
             MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(monsterId);
             using (zstring.Block())
             {
-                self.ES_ModelShow.ShowOtherModel(zstring.Format("Monster/{0}", monsterConfig.MonsterModelID)).Coroutine();
+                //self.ES_ModelShow.ShowOtherModel(zstring.Format("Monster/{0}", monsterConfig.MonsterModelID)).Coroutine();
             }
+            self.ES_ModelShow.SetShow(false);
+            
+            string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.MonsterIcon, monsterConfig.MonsterHeadIcon);
+            Sprite sp = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
+            self.E_Boss_Icon.gameObject.SetActive(true);
+            self.E_Boss_Icon.sprite = sp;
         }
 
         public static void ShowBossHPBar(this ES_MainHpBar self, Unit unit)
@@ -383,6 +389,7 @@ namespace ET.Client
                 self.EG_MonsterNodeRectTransform.gameObject.SetActive(false);
                 self.E_Lab_OwnerText.text = string.Empty;
                 self.ES_ModelShow.RemoveModel();
+                self.E_Boss_Icon.gameObject.SetActive(false);
             }
             else
             {
