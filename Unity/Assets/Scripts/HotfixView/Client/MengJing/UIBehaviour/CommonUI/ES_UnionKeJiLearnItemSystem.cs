@@ -49,6 +49,7 @@ namespace ET.Client
                 self.E_PointText.text = zstring.Format("{0}/{1}", curlv, maxlv);
             }
 
+            self.E_NameText.text = nowUnionKeJiConfig.EquipSpaceName;
             string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.OtherIcon, nowUnionKeJiConfig.Icon);
             Sprite sp = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
             self.E_ImageIconImage.sprite = sp;

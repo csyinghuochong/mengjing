@@ -218,7 +218,7 @@ namespace ET.Client
                     }
                     
                     UnionKeJiConfig config = UnionKeJiConfigCategory.Instance.Get(unionKeJiConfig.PreId[i]);
-                    tip += config.Id;
+                    tip += config.EquipSpaceName;
                 }
                 FlyTipComponent.Instance.ShowFlyTip(tip);
                 return;
