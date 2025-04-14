@@ -21,6 +21,8 @@ namespace ET.Client
 				this.BagInfoID = value == null ? 0 : value.BagInfoID;
 			}
 		}
+		
+		public Dictionary<long, (ItemInfo, int)> EquipCombatChangeDic { get; set; }= new();
 
 		public Dictionary<int, EntityRef<Scroll_Item_XiLianShowEquipItem>> ScrollItemXiLianShowEquipItems = new();
 		public Dictionary<int, EntityRef<Scroll_Item_CommonItem>> ScrollItemCommonItems;
@@ -110,40 +112,6 @@ namespace ET.Client
 		    		this.m_E_XiLianShowEquipItemsImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Left/E_XiLianShowEquipItems");
      			}
      			return this.m_E_XiLianShowEquipItemsImage;
-     		}
-     	}
-
-		public UnityEngine.UI.Image E_CombatUpImage
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_CombatUpImage == null )
-     			{
-		    		this.m_E_CombatUpImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Right/E_CombatUp");
-     			}
-     			return this.m_E_CombatUpImage;
-     		}
-     	}
-
-		public UnityEngine.UI.Image E_CombatDownImage
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_CombatDownImage == null )
-     			{
-		    		this.m_E_CombatDownImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Right/E_CombatDown");
-     			}
-     			return this.m_E_CombatDownImage;
      		}
      	}
 
@@ -246,6 +214,40 @@ namespace ET.Client
 		    		this.m_E_BatAddText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Right/EG_XiLianInfo/EG_XuanZhonItem/E_BatAdd");
      			}
      			return this.m_E_BatAddText;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_CombatUpImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_CombatUpImage == null )
+     			{
+		    		this.m_E_CombatUpImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Right/EG_XiLianInfo/EG_XuanZhonItem/E_CombatUp");
+     			}
+     			return this.m_E_CombatUpImage;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_CombatDownImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_CombatDownImage == null )
+     			{
+		    		this.m_E_CombatDownImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Right/EG_XiLianInfo/EG_XuanZhonItem/E_CombatDown");
+     			}
+     			return this.m_E_CombatDownImage;
      		}
      	}
 
@@ -540,14 +542,14 @@ namespace ET.Client
 			this.m_E_EquipItemsLoopVerticalScrollRect = null;
 			this.m_E_XiLianShowEquipItemsScrollRect = null;
 			this.m_E_XiLianShowEquipItemsImage = null;
-			this.m_E_CombatUpImage = null;
-			this.m_E_CombatDownImage = null;
 			this.m_EG_XiLianInfoRectTransform = null;
 			this.m_EG_XuanZhonItemRectTransform = null;
 			this.m_E_XuanZhonItemItemQualityImage = null;
 			this.m_E_XuanZhonItemItemIconImage = null;
 			this.m_E_XuanZhonItemNameText = null;
 			this.m_E_BatAddText = null;
+			this.m_E_CombatUpImage = null;
+			this.m_E_CombatDownImage = null;
 			this.m_E_XiLianShowEquipPropertyItemsScrollRect = null;
 			this.m_E_XiLianShowEquipPropertyItemsImage = null;
 			this.m_E_NeedDiamondText = null;
@@ -572,14 +574,14 @@ namespace ET.Client
 		private UnityEngine.UI.LoopVerticalScrollRect m_E_EquipItemsLoopVerticalScrollRect = null;
 		private UnityEngine.UI.ScrollRect m_E_XiLianShowEquipItemsScrollRect = null;
 		private UnityEngine.UI.Image m_E_XiLianShowEquipItemsImage = null;
-		private UnityEngine.UI.Image m_E_CombatUpImage = null;
-		private UnityEngine.UI.Image m_E_CombatDownImage = null;
 		private UnityEngine.RectTransform m_EG_XiLianInfoRectTransform = null;
 		private UnityEngine.RectTransform m_EG_XuanZhonItemRectTransform = null;
 		private UnityEngine.UI.Image m_E_XuanZhonItemItemQualityImage = null;
 		private UnityEngine.UI.Image m_E_XuanZhonItemItemIconImage = null;
 		private UnityEngine.UI.Text m_E_XuanZhonItemNameText = null;
 		private UnityEngine.UI.Text m_E_BatAddText = null;
+		private UnityEngine.UI.Image m_E_CombatUpImage = null;
+		private UnityEngine.UI.Image m_E_CombatDownImage = null;
 		private UnityEngine.UI.ScrollRect m_E_XiLianShowEquipPropertyItemsScrollRect = null;
 		private UnityEngine.UI.Image m_E_XiLianShowEquipPropertyItemsImage = null;
 		private UnityEngine.UI.Text m_E_NeedDiamondText = null;
