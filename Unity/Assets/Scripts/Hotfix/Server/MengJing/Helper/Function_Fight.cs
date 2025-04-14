@@ -1486,7 +1486,9 @@ namespace ET.Server
             //装备属性
             List<int> equipIDList = new List<int>();
             List<int> equipSuitIDList = new List<int>();
-            List<ItemInfo> equipList = unit.GetComponent<BagComponentS>().GetItemByLoc(ItemLocType.ItemLocEquip);
+
+            List<ItemInfo> equipList = new List<ItemInfo>();
+            equipList.AddRange( unit.GetComponent<BagComponentS>().GetItemByLoc(ItemLocType.ItemLocEquip));
 
             
             ///替换equipList
