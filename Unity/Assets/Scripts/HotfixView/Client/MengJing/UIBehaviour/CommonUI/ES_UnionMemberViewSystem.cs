@@ -5,6 +5,7 @@ using UnityEngine;
 
 namespace ET.Client
 {
+	[FriendOf(typeof(Scroll_Item_UnionMemberItem))]
 	[EntitySystemOf(typeof(ES_UnionMember))]
 	[FriendOfAttribute(typeof(ES_UnionMember))]
 	public static partial class ES_UnionMemberSystem 
@@ -35,6 +36,14 @@ namespace ET.Client
 		
 		private static void OnUnionMyItemsRefresh(this ES_UnionMember self, Transform transform, int index)
 		{
+			foreach (Scroll_Item_UnionMemberItem item in self.ScrollItemUnionMyItems.Values)
+			{
+				if (item.uiTransform == transform)
+				{
+					item.uiTransform = null;
+				}
+			}
+			
 			Scroll_Item_UnionMemberItem scrollItemUnionMyItem = self.ScrollItemUnionMyItems[index].BindTrans(transform);
 			scrollItemUnionMyItem.OnUpdateUI(self.UnionInfo, self.ShowUnionPlayerInfos[index]);
 		}

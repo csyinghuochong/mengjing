@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace ET.Client
 {
+    [FriendOf(typeof(Scroll_Item_ActivityTokenItem))]
     [EntitySystemOf(typeof(ES_ActivityToken))]
     [FriendOfAttribute(typeof(ES_ActivityToken))]
     public static partial class ES_ActivityTokenSystem
@@ -27,6 +28,14 @@ namespace ET.Client
 
         private static void OnActivityTokenItemsRefresh(this ES_ActivityToken self, Transform transform, int index)
         {
+            foreach (Scroll_Item_ActivityTokenItem item in self.ScrollItemActivityTokenItems.Values)
+            {
+                if (item.uiTransform == transform)
+                {
+                    item.uiTransform = null;
+                }
+            }
+            
             Scroll_Item_ActivityTokenItem scrollItemActivityTokenItem = self.ScrollItemActivityTokenItems[index].BindTrans(transform);
             scrollItemActivityTokenItem.OnInitUI(self.ShowActivityConfigs[index]);
         }

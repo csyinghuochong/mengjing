@@ -3,6 +3,7 @@ using UnityEngine;
 
 namespace ET.Client
 {
+    [FriendOf(typeof(Scroll_Item_JiaYuanDaShiShowItem))]
     [EntitySystemOf(typeof (ES_JiaYuanDaShiShow))]
     [FriendOfAttribute(typeof (ES_JiaYuanDaShiShow))]
     public static partial class ES_JiaYuanDaShiShowSystem
@@ -23,6 +24,14 @@ namespace ET.Client
 
         private static void OnJiaYuanDaShiShowItemsRefresh(this ES_JiaYuanDaShiShow self, Transform transform, int index)
         {
+            foreach (Scroll_Item_JiaYuanDaShiShowItem item in self.ScrollItemJiaYuanDaShiShowItems.Values)
+            {
+                if (item.uiTransform == transform)
+                {
+                    item.uiTransform = null;
+                }
+            }
+            
             Scroll_Item_JiaYuanDaShiShowItem scrollItemJiaYuanDaShiShowItem = self.ScrollItemJiaYuanDaShiShowItems[index].BindTrans(transform);
             JiaYuanComponentC jiaYuanComponentC = self.Root().GetComponent<JiaYuanComponentC>();
             scrollItemJiaYuanDaShiShowItem.OnUpdateUI(self.ShowIndex[index], jiaYuanComponentC.JiaYuanDaShiTime_1);

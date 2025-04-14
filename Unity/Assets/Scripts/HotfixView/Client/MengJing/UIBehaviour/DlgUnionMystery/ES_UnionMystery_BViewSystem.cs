@@ -72,6 +72,14 @@ namespace ET.Client
 
         private static void OnBattleShopItemsRefresh(this ES_UnionMystery_B self, Transform transform, int index)
         {
+            foreach (Scroll_Item_BattleShopItem item in self.ScrollItemBattleShopItems.Values)
+            {
+                if (item.uiTransform == transform)
+                {
+                    item.uiTransform = null;
+                }
+            }
+            
             Scroll_Item_BattleShopItem scrollItemBattleShopItem = self.ScrollItemBattleShopItems[index].BindTrans(transform);
             scrollItemBattleShopItem.OnUpdateData(self.ShowStoreSellConfigs[index]);
             scrollItemBattleShopItem.SetClickHandler(self.OnClickHandler);

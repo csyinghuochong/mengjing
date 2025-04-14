@@ -224,6 +224,14 @@ namespace ET.Client
                 Log.Debug(zstring.Format("self.uiTransform != null:  {0}", self.ShowPetFubenConfig[index].Id));
             }
 
+            foreach (Scroll_Item_PetChallengeItem item in self.ScrollItemPetChallengeItems.Values)
+            {
+                if (item.uiTransform == transform)
+                {
+                    item.uiTransform = null;
+                }
+            }
+            
             Scroll_Item_PetChallengeItem scrollItemNPetChallengeItem =
                     self.ScrollItemPetChallengeItems[index].BindTrans(transform);
 

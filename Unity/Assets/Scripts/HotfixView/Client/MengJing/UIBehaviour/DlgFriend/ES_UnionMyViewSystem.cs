@@ -24,6 +24,7 @@ namespace ET.Client
         }
     }
 
+    [FriendOf(typeof(Scroll_Item_UnionMyItem))]
     [EntitySystemOf(typeof(ES_UnionMy))]
     [FriendOfAttribute(typeof(ES_UnionMy))]
     public static partial class ES_UnionMySystem
@@ -315,6 +316,14 @@ namespace ET.Client
 
         private static void OnUnionMyItemsRefresh(this ES_UnionMy self, Transform transform, int index)
         {
+            foreach (Scroll_Item_UnionMyItem item in self.ScrollItemUnionMyItems.Values)
+            {
+                if (item.uiTransform == transform)
+                {
+                    item.uiTransform = null;
+                }
+            }
+            
             Scroll_Item_UnionMyItem scrollItemUnionMyItem = self.ScrollItemUnionMyItems[index].BindTrans(transform);
             scrollItemUnionMyItem.OnUpdateUI(self.UnionInfo, self.ShowUnionPlayerInfos[index]);
         }

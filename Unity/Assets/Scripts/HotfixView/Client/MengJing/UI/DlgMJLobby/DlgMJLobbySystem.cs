@@ -3,6 +3,7 @@ using UnityEngine;
 
 namespace ET.Client
 {
+    [FriendOf(typeof(Scroll_Item_CreateRoleItem))]
     [FriendOf(typeof(DlgMJLobby))]
     [FriendOf(typeof(PlayerInfoComponent))]
     public static class DlgMJLobbySystem
@@ -24,6 +25,14 @@ namespace ET.Client
 
         private static void OnCreateRoleItemsRefresh(this DlgMJLobby self, Transform transform, int index)
         {
+            foreach (Scroll_Item_CreateRoleItem item in self.ScrollItemCreateRoleItems.Values)
+            {
+                if (item.uiTransform == transform)
+                {
+                    item.uiTransform = null;
+                }
+            }
+            
             Scroll_Item_CreateRoleItem scrollItemCreateRoleItem = self.ScrollItemCreateRoleItems[index].BindTrans(transform);
             scrollItemCreateRoleItem.Refresh(self.ShowCreateRoleInfos[index], self.UpdateSelect);
         }

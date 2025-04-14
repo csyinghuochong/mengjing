@@ -379,6 +379,7 @@ namespace ET.Client
         }
     }
 
+    [FriendOf(typeof(Scroll_Item_MainTask))]
     [FriendOf(typeof(ES_CellDungeonCellMini))]
     [FriendOf(typeof(ES_MainPetFight))]
     [FriendOf(typeof(ES_DigTreasure))]
@@ -881,6 +882,14 @@ namespace ET.Client
 
         private static void OnMainTaskItemsRefresh(this DlgMain self, Transform transform, int index)
         {
+            foreach (Scroll_Item_MainTask item in self.ScrollItemMainTasks.Values)
+            {
+                if (item.uiTransform == transform)
+                {
+                    item.uiTransform = null;
+                }
+            }
+            
             Scroll_Item_MainTask scrollItemMainTask = self.ScrollItemMainTasks[index].BindTrans(transform);
             scrollItemMainTask.Refresh(self.ShowTaskPros[index]);
         }
@@ -954,6 +963,14 @@ namespace ET.Client
 
         private static void OnMainTeamItemsRefresh(this DlgMain self, Transform transform, int index)
         {
+            foreach (Scroll_Item_MainTeamItem item in self.ScrollItemMainTeamItems.Values)
+            {
+                if (item.uiTransform == transform)
+                {
+                    item.uiTransform = null;
+                }
+            }
+            
             Scroll_Item_MainTeamItem scrollItemMainTeamItem = self.ScrollItemMainTeamItems[index].BindTrans(transform);
             scrollItemMainTeamItem.OnUpdateItem(self.ShowTeamInfo.PlayerList[index]);
         }

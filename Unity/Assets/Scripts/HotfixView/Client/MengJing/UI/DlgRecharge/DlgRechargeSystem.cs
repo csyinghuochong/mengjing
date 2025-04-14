@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace ET.Client
 {
+    [FriendOf(typeof(Scroll_Item_RechargeItem))]
     [FriendOf(typeof(DlgRecharge))]
     public static class DlgRechargeSystem
     {
@@ -55,9 +56,17 @@ namespace ET.Client
 
         private static void OnRechargeItemsRefresh(this DlgRecharge self, Transform transform, int index)
         {
-            var item = ConfigData.RechargeGive.ToList()[index];
+            foreach (Scroll_Item_RechargeItem item in self.ScrollItemRechargeItems.Values)
+            {
+                if (item.uiTransform == transform)
+                {
+                    item.uiTransform = null;
+                }
+            }
+            
+            var item1 = ConfigData.RechargeGive.ToList()[index];
             Scroll_Item_RechargeItem scrollItemRechargeItem = self.ScrollItemRechargeItems[index].BindTrans(transform);
-            scrollItemRechargeItem.OnInitData(item.Key, item.Value);
+            scrollItemRechargeItem.OnInitData(item1.Key, item1.Value);
             scrollItemRechargeItem.SetClickHandler((number) => { self.OnClickRechargeItem(number).Coroutine(); });
         }
 

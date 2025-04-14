@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
+    [FriendOf(typeof(Scroll_Item_CountryTaskItem))]
     [EntitySystemOf(typeof (ES_CountryTask))]
     [FriendOfAttribute(typeof (ES_CountryTask))]
     public static partial class ES_CountryTaskSystem
@@ -143,6 +144,14 @@ namespace ET.Client
 
         private static void OnCountryTaskItemsRefresh(this ES_CountryTask self, Transform transform, int index)
         {
+            foreach (Scroll_Item_CountryTaskItem item in self.ScrollItemCountryTaskItems.Values)
+            {
+                if (item.uiTransform == transform)
+                {
+                    item.uiTransform = null;
+                }
+            }
+            
             Scroll_Item_CountryTaskItem scrollItemCountryTaskItem = self.ScrollItemCountryTaskItems[index].BindTrans(transform);
             scrollItemCountryTaskItem.OnUpdateData(self.ShowTaskPros[index]);
         }

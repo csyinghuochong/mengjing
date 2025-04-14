@@ -2,6 +2,7 @@ using UnityEngine;
 
 namespace ET.Client
 {
+    [FriendOf(typeof(Scroll_Item_SelectRewardItem))]
     [FriendOf(typeof(DlgSelectReward))]
     public static class DlgSelectRewardSystem
     {
@@ -17,11 +18,19 @@ namespace ET.Client
 
         private static void OnSelectRewardItemsRefresh(this DlgSelectReward self, Transform transform, int index)
         {
+            foreach (Scroll_Item_SelectRewardItem item in self.ScrollItemSelectRewardItems.Values)
+            {
+                if (item.uiTransform == transform)
+                {
+                    item.uiTransform = null;
+                }
+            }
+            
             Scroll_Item_SelectRewardItem scrollItemSelectRewardItem = self.ScrollItemSelectRewardItems[index].BindTrans(transform);
-            string[] item = self.Items[index].Split(';');
+            string[] item1 = self.Items[index].Split(';');
             ItemInfo bagInfoNew = new ItemInfo();
-            bagInfoNew.ItemID = int.Parse(item[0]);
-            bagInfoNew.ItemNum = int.Parse(item[1]);
+            bagInfoNew.ItemID = int.Parse(item1[0]);
+            bagInfoNew.ItemNum = int.Parse(item1[1]);
             scrollItemSelectRewardItem.ES_CommonItem.UpdateItem(bagInfoNew, ItemOperateEnum.None);
             scrollItemSelectRewardItem.E_GetBtnButton.AddListener(() => { self.OnGetBtn(index).Coroutine(); });
         }

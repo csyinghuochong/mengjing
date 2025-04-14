@@ -3,6 +3,7 @@ using UnityEngine;
 
 namespace ET.Client
 {
+    [FriendOf(typeof(Scroll_Item_PaiMaiBuyItem))]
     [FriendOf(typeof (UITypeViewComponent))]
     [FriendOf(typeof (UITypeButtonComponent))]
     [EntitySystemOf(typeof (ES_PaiMaiBuy))]
@@ -442,6 +443,14 @@ namespace ET.Client
 
         private static void OnPaiMaiBuyItemsRefresh(this ES_PaiMaiBuy self, Transform transform, int index)
         {
+            foreach (Scroll_Item_PaiMaiBuyItem item in self.ScrollItemPaiMaiBuyItems.Values)
+            {
+                if (item.uiTransform == transform)
+                {
+                    item.uiTransform = null;
+                }
+            }
+            
             Scroll_Item_PaiMaiBuyItem scrollItemPaiMaiBuyItem = self.ScrollItemPaiMaiBuyItems[index].BindTrans(transform);
             scrollItemPaiMaiBuyItem.OnUpdateItem(self.PaiMaiIteminfos_Now[index]);
         }

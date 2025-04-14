@@ -149,6 +149,14 @@ namespace ET.Client
 
         private static void OnPaiMaiShopItemsRefresh(this ES_PaiMaiShop self, Transform transform, int index)
         {
+            foreach (Scroll_Item_PaiMaiShopItem item in self.ScrollItemPaiMaiShopItems.Values)
+            {
+                if (item.uiTransform == transform)
+                {
+                    item.uiTransform = null;
+                }
+            }
+            
             Scroll_Item_PaiMaiShopItem scrollItemPaiMaiShopItem = self.ScrollItemPaiMaiShopItems[index].BindTrans(transform);
             scrollItemPaiMaiShopItem.SetClickHandler((int paimaiId) => { self.OnClickPaiMaiBuyItem(paimaiId); });
             scrollItemPaiMaiShopItem.OnUpdateData(self.ShowPaiMaiIds[index],

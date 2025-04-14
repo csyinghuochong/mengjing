@@ -2,6 +2,7 @@ using UnityEngine;
 
 namespace ET.Client
 {
+    [FriendOf(typeof(Scroll_Item_RunRaceItem))]
     [FriendOf(typeof (DlgRunRace))]
     public static class DlgRunRaceSystem
     {
@@ -20,6 +21,14 @@ namespace ET.Client
 
         private static void OnRunRaceItemsRefresh(this DlgRunRace self, Transform transform, int index)
         {
+            foreach (Scroll_Item_RunRaceItem item in self.ScrollItemRunRaceItems.Values)
+            {
+                if (item.uiTransform == transform)
+                {
+                    item.uiTransform = null;
+                }
+            }
+            
             Scroll_Item_RunRaceItem scrollItemRunRaceItem = self.ScrollItemRunRaceItems[index].BindTrans(transform);
             scrollItemRunRaceItem.OnUpdate(self.ShowRankRewardConfigs[index]);
         }

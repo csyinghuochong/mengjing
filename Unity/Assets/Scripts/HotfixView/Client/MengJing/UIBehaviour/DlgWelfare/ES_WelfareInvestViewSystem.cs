@@ -3,6 +3,7 @@ using UnityEngine;
 
 namespace ET.Client
 {
+    [FriendOf(typeof(Scroll_Item_WelfareInvestItem))]
     [EntitySystemOf(typeof(ES_WelfareInvest))]
     [FriendOfAttribute(typeof(ES_WelfareInvest))]
     public static partial class ES_WelfareInvestSystem
@@ -29,6 +30,14 @@ namespace ET.Client
 
         private static void OnWelfareInvestItemsRefresh(this ES_WelfareInvest self, Transform transform, int index)
         {
+            foreach (Scroll_Item_WelfareInvestItem item in self.ScrollItemWelfareInvestItems.Values)
+            {
+                if (item.uiTransform == transform)
+                {
+                    item.uiTransform = null;
+                }
+            }
+            
             Scroll_Item_WelfareInvestItem scrollItemWelfareInvestItem = self.ScrollItemWelfareInvestItems[index].BindTrans(transform);
             scrollItemWelfareInvestItem.OnUpdateData(index);
         }

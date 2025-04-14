@@ -2,6 +2,7 @@ using UnityEngine;
 
 namespace ET.Client
 {
+    [FriendOf(typeof(Scroll_Item_FriendApplyItem))]
     [FriendOf(typeof (FriendComponent))]
     [EntitySystemOf(typeof (ES_FriendApply))]
     [FriendOfAttribute(typeof (ES_FriendApply))]
@@ -23,6 +24,14 @@ namespace ET.Client
 
         private static void OnFriendBlackItemsRefresh(this ES_FriendApply self, Transform transform, int index)
         {
+            foreach (Scroll_Item_FriendApplyItem item in self.ScrollItemFriendApplyItems.Values)
+            {
+                if (item.uiTransform == transform)
+                {
+                    item.uiTransform = null;
+                }
+            }
+            
             Scroll_Item_FriendApplyItem scrollItemFriendApplyItem = self.ScrollItemFriendApplyItems[index].BindTrans(transform);
             scrollItemFriendApplyItem.Refresh(self.ShowFriendInfos[index]);
         }

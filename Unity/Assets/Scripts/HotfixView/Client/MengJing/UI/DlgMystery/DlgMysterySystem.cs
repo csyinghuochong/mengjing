@@ -3,6 +3,7 @@ using UnityEngine;
 
 namespace ET.Client
 {
+    [FriendOf(typeof(Scroll_Item_MysteryItem))]
     [FriendOf(typeof (DlgMystery))]
     public static class DlgMysterySystem
     {
@@ -20,6 +21,14 @@ namespace ET.Client
 
         private static void OnMysteryItemsRefresh(this DlgMystery self, Transform transform, int index)
         {
+            foreach (Scroll_Item_MysteryItem item in self.ScrollItemMysteryItems.Values)
+            {
+                if (item.uiTransform == transform)
+                {
+                    item.uiTransform = null;
+                }
+            }
+            
             Scroll_Item_MysteryItem scrollItemMysteryItem = self.ScrollItemMysteryItems[index].BindTrans(transform);
             scrollItemMysteryItem.OnUpdateUI(self.MysteryItemInfos[index], self.Root().GetComponent<UIComponent>().CurrentNpcId);
         }

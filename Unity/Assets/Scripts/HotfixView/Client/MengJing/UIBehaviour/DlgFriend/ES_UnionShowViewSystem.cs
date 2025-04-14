@@ -52,6 +52,14 @@ namespace ET.Client
 
         private static void OnUnionListItemsRefresh(this ES_UnionShow self, Transform transform, int index)
         {
+            foreach (Scroll_Item_UnionListItem item in self.ScrollItemUnionListItems.Values)
+            {
+                if (item.uiTransform == transform)
+                {
+                    item.uiTransform = null;
+                }
+            }
+            
             Scroll_Item_UnionListItem scrollItemUnionListItem = self.ScrollItemUnionListItems[index].BindTrans(transform);
             scrollItemUnionListItem.Refresh(self.ShowUnionListItems[index], self.OnSelectUnionItem);
 

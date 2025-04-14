@@ -4,6 +4,8 @@ using UnityEngine.EventSystems;
 
 namespace ET.Client
 {
+    [FriendOf(typeof(Scroll_Item_RolePropertyBaseItem))]
+    [FriendOf(typeof(Scroll_Item_RolePropertyTeShuItem))]
     [FriendOf(typeof(UserInfoComponentC))]
     [EntitySystemOf(typeof(ES_RoleProperty))]
     [FriendOfAttribute(typeof(ES_RoleProperty))]
@@ -105,12 +107,28 @@ namespace ET.Client
 
         private static void OnRolePropertyTeShuItemsRefresh(this ES_RoleProperty self, Transform transform, int index)
         {
+            foreach (Scroll_Item_RolePropertyTeShuItem item in self.ScrollItemRolePropertyTeShuItems.Values)
+            {
+                if (item.uiTransform == transform)
+                {
+                    item.uiTransform = null;
+                }
+            }
+            
             Scroll_Item_RolePropertyTeShuItem scrollItemRolePropertyTeShuItem = self.ScrollItemRolePropertyTeShuItems[index].BindTrans(transform);
             scrollItemRolePropertyTeShuItem.Refresh(self.ShowPropertyLists[index], index);
         }
 
         private static void OnRolePropertyBaseItemsRefresh(this ES_RoleProperty self, Transform transform, int index)
         {
+            foreach (Scroll_Item_RolePropertyBaseItem item in self.ScrollItemRolePropertyBaseItems.Values)
+            {
+                if (item.uiTransform == transform)
+                {
+                    item.uiTransform = null;
+                }
+            }
+            
             Scroll_Item_RolePropertyBaseItem scrollItemRolePropertyBaseItem = self.ScrollItemRolePropertyBaseItems[index].BindTrans(transform);
             scrollItemRolePropertyBaseItem.Refresh(self.ShowPropertyLists[index]);
         }

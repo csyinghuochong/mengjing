@@ -3,6 +3,7 @@ using UnityEngine;
 
 namespace ET.Client
 {
+    [FriendOf(typeof(Scroll_Item_UnionMysteryItem_A))]
     [EntitySystemOf(typeof(ES_UnionMystery_A))]
     [FriendOfAttribute(typeof(ES_UnionMystery_A))]
     public static partial class ES_UnionMystery_ASystem
@@ -24,6 +25,14 @@ namespace ET.Client
 
         private static void OnUnionMysteryItemsRefresh(this ES_UnionMystery_A self, Transform transform, int index)
         {
+            foreach (Scroll_Item_UnionMysteryItem_A item in self.ScrollItemUnionMysteryItemAs.Values)
+            {
+                if (item.uiTransform == transform)
+                {
+                    item.uiTransform = null;
+                }
+            }
+            
             Scroll_Item_UnionMysteryItem_A scrollItemUnionMysteryItemA = self.ScrollItemUnionMysteryItemAs[index].BindTrans(transform);
             scrollItemUnionMysteryItemA.OnUpdateUI(self.ShowMysteryItemInfos[index]);
         }

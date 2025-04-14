@@ -3,6 +3,7 @@ using UnityEngine;
 
 namespace ET.Client
 {
+    [FriendOf(typeof(Scroll_Item_CommonSkillItem))]
     [EntitySystemOf(typeof(ES_RoleXiLianLevelItem))]
     [FriendOfAttribute(typeof(ES_RoleXiLianLevelItem))]
     public static partial class ES_RoleXiLianLevelItemSystem
@@ -24,6 +25,14 @@ namespace ET.Client
 
         private static void OnCommonSkillItemsRefresh(this ES_RoleXiLianLevelItem self, Transform transform, int index)
         {
+            foreach (Scroll_Item_CommonSkillItem item in self.ScrollItemCommonSkillItems.Values)
+            {
+                if (item.uiTransform == transform)
+                {
+                    item.uiTransform = null;
+                }
+            }
+            
             Scroll_Item_CommonSkillItem scrollItemCommonSkillItem = self.ScrollItemCommonSkillItems[index].BindTrans(transform);
             scrollItemCommonSkillItem.OnUpdateUI((int)self.ShowSkill[index].Value, ABAtlasTypes.RoleSkillIcon, false,
                 ItemViewHelp.XiLianWeiZhiTip(self.ShowSkill[index].KeyId));

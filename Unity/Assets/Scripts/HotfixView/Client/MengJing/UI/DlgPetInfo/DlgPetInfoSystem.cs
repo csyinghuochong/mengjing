@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
+    [FriendOf(typeof(Scroll_Item_CommonSkillItem))]
     [FriendOf(typeof(Scroll_Item_PetSkinIconItem))]
     [FriendOf(typeof(DlgPetInfo))]
     public static class DlgPetInfoSystem
@@ -97,6 +98,14 @@ namespace ET.Client
 
         private static void OnPetSkinIconItemsRefresh(this DlgPetInfo self, Transform transform, int index)
         {
+            foreach (Scroll_Item_PetSkinIconItem item in self.ScrollItemPetSkinIconItems.Values)
+            {
+                if (item.uiTransform == transform)
+                {
+                    item.uiTransform = null;
+                }
+            }
+            
             Scroll_Item_PetSkinIconItem scrollItemPetSkinIconItem = self.ScrollItemPetSkinIconItems[index].BindTrans(transform);
             scrollItemPetSkinIconItem.OnUpdateUI(self.ShowPetSkins[index], self.ShowPetSkins[index] == self.LastSelectItem.SkinId);
             scrollItemPetSkinIconItem.SetClickHandler(self.OnSelectSkinHandler);
@@ -104,6 +113,14 @@ namespace ET.Client
 
         private static void OnCommonSkillItemsRefresh(this DlgPetInfo self, Transform transform, int index)
         {
+            foreach (Scroll_Item_CommonSkillItem item in self.ScrollItemCommonSkillItems.Values)
+            {
+                if (item.uiTransform == transform)
+                {
+                    item.uiTransform = null;
+                }
+            }
+            
             Scroll_Item_CommonSkillItem scrollItemCommonSkillItem = self.ScrollItemCommonSkillItems[index].BindTrans(transform);
             bool unactive = self.ShowPetSkills[index] == self.UnactiveId;
             scrollItemCommonSkillItem.OnUpdatePetSkill(self.ShowPetSkills[index], ABAtlasTypes.RoleSkillIcon,

@@ -26,6 +26,14 @@ namespace ET.Client
 
         private static void OnBattleRecruitItemsRefresh(this DlgBattleRecruit self, Transform transform, int index)
         {
+            foreach (Scroll_Item_BattleRecruitItem item in self.ScrollItemBattleRecruitItems.Values)
+            {
+                if (item.uiTransform == transform)
+                {
+                    item.uiTransform = null;
+                }
+            }
+            
             Scroll_Item_BattleRecruitItem scrollItemBattleRecruitItem = self.ScrollItemBattleRecruitItems[index].BindTrans(transform);
             scrollItemBattleRecruitItem.OnRecruitAction = (i1, i2) => { self.OnRecruit(i1, i2).Coroutine(); };
             scrollItemBattleRecruitItem.InitUI(self.ShowBattleSummonInfos[index]);

@@ -3,6 +3,7 @@ using UnityEngine;
 
 namespace ET.Client
 {
+    [FriendOf(typeof(Scroll_Item_ChouKaRewardItem))]
     [FriendOf(typeof(DlgChouKaReward))]
     public static class DlgChouKaRewardSystem
     {
@@ -33,6 +34,14 @@ namespace ET.Client
 
         private static void OnChouKaRewardItemsRefresh(this DlgChouKaReward self, Transform transform, int index)
         {
+            foreach (Scroll_Item_ChouKaRewardItem item in self.ScrollItemChouKaRewardItems.Values)
+            {
+                if (item.uiTransform == transform)
+                {
+                    item.uiTransform = null;
+                }
+            }
+            
             Scroll_Item_ChouKaRewardItem scrollItemRoleXiLianNumRewardItem = self.ScrollItemChouKaRewardItems[index].BindTrans(transform);
             scrollItemRoleXiLianNumRewardItem.OnUpdateUI(self.TakeCardRewardConfigs[index]);
         }

@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace ET.Client
 {
+    [FriendOf(typeof(Scroll_Item_ZhanQuLevelItem))]
     [EntitySystemOf(typeof(ES_ZhanQuLevel))]
     [FriendOfAttribute(typeof(ES_ZhanQuLevel))]
     public static partial class ES_ZhanQuLevelSystem
@@ -26,6 +27,14 @@ namespace ET.Client
 
         private static void OnZhanQuLevelItemsRefresh(this ES_ZhanQuLevel self, Transform transform, int index)
         {
+            foreach (Scroll_Item_ZhanQuLevelItem item in self.ScrollItemZhanQuLevelItems.Values)
+            {
+                if (item.uiTransform == transform)
+                {
+                    item.uiTransform = null;
+                }
+            }
+            
             Scroll_Item_ZhanQuLevelItem scrollItemZhanQuLevelItem = self.ScrollItemZhanQuLevelItems[index].BindTrans(transform);
             scrollItemZhanQuLevelItem.OnInitUI(self.ShowActivityConfigs[index]);
         }

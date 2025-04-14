@@ -2,6 +2,7 @@ using UnityEngine;
 
 namespace ET.Client
 {
+    [FriendOf(typeof(Scroll_Item_JiaYuanPetWalkItem))]
     [EntitySystemOf(typeof (ES_JiaYuanPetWalk))]
     [FriendOfAttribute(typeof (ES_JiaYuanPetWalk))]
     public static partial class ES_JiaYuanPetWalkSystem
@@ -64,6 +65,14 @@ namespace ET.Client
 
         private static void OnJiaYuanPetWalkItemsRefresh(this ES_JiaYuanPetWalk self, Transform transform, int index)
         {
+            foreach (Scroll_Item_JiaYuanPetWalkItem item in self.ScrollItemJiaYuanPetWalkItems.Values)
+            {
+                if (item.uiTransform == transform)
+                {
+                    item.uiTransform = null;
+                }
+            }
+            
             Scroll_Item_JiaYuanPetWalkItem scrollItemJiaYuanPetWalkItem = self.ScrollItemJiaYuanPetWalkItems[index].BindTrans(transform);
 
             PetComponentC petComponent = self.Root().GetComponent<PetComponentC>();

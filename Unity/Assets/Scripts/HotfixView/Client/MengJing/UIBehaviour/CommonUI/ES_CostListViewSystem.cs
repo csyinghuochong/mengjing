@@ -3,6 +3,7 @@ using UnityEngine;
 
 namespace ET.Client
 {
+    [FriendOf(typeof(Scroll_Item_CommonCostItem))]
     [EntitySystemOf(typeof(ES_CostList))]
     [FriendOfAttribute(typeof(ES_CostList))]
     public static partial class ES_CostListSystem
@@ -23,6 +24,14 @@ namespace ET.Client
 
         private static void OnBagItemsRefresh(this ES_CostList self, Transform transform, int index)
         {
+            foreach (Scroll_Item_CommonCostItem item in self.ScrollItemCommonCostItems.Values)
+            {
+                if (item.uiTransform == transform)
+                {
+                    item.uiTransform = null;
+                }
+            }
+            
             Scroll_Item_CommonCostItem scrollItemCommonCostItem = self.ScrollItemCommonCostItems[index].BindTrans(transform);
             scrollItemCommonCostItem.UpdateItem(self.ShowBagInfos[index].ItemID, self.ShowBagInfos[index].ItemNum);
         }

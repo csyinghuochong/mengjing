@@ -2,6 +2,7 @@
 
 namespace ET.Client
 {
+    [FriendOf(typeof(Scroll_Item_UnionRecordsItem))]
     [FriendOf(typeof (DlgUnionRecords))]
     public static class DlgUnionRecordsSystem
     {
@@ -26,6 +27,14 @@ namespace ET.Client
 
         private static void OnUnionRecordsItemsRefresh(this DlgUnionRecords self, Transform transform, int index)
         {
+            foreach (Scroll_Item_UnionRecordsItem item in self.ScrollItemUnionRecordsItems.Values)
+            {
+                if (item.uiTransform == transform)
+                {
+                    item.uiTransform = null;
+                }
+            }
+            
             Scroll_Item_UnionRecordsItem scrollItemChatItem = self.ScrollItemUnionRecordsItems[index].BindTrans(transform);
             scrollItemChatItem.Refresh(self.ShowInfo[index]);
         }

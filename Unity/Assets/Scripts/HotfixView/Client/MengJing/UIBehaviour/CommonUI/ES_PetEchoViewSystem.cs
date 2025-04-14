@@ -137,6 +137,14 @@ namespace ET.Client
 
 		private static void OnPetEchoItemsRefresh(this ES_PetEcho self, Transform transform, int index)
 		{
+			foreach (Scroll_Item_PetEchoItem item in self.ScrollItemPetEchoItems.Values)
+			{
+				if (item.uiTransform == transform)
+				{
+					item.uiTransform = null;
+				}
+			}
+			
 			Scroll_Item_PetEchoItem scrollItemPetListItem = self.ScrollItemPetEchoItems[index].BindTrans(transform);
 			scrollItemPetListItem.SetClickHandler(self.OnClickPetEchoItemHandler);
             scrollItemPetListItem.OnInitData(ConfigData.PetEchoAttri[index], index);
@@ -149,6 +157,14 @@ namespace ET.Client
 
 		private static void OnPetEchoSkillItemsRefresh(this ES_PetEcho self, Transform transform, int index)
 		{
+			foreach (Scroll_Item_PetEchoSkillItem item in self.ScrollItemPetEchoSkillItems.Values)
+			{
+				if (item.uiTransform == transform)
+				{
+					item.uiTransform = null;
+				}
+			}
+			
 			Scroll_Item_PetEchoSkillItem scrollItemPetListItem = self.ScrollItemPetEchoSkillItems[index].BindTrans(transform);
 			scrollItemPetListItem.OnInitData(ConfigData.PetEchoSkill[index], index);
 		}

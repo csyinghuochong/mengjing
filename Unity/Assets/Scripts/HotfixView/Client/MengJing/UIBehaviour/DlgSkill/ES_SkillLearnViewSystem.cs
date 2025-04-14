@@ -111,6 +111,14 @@ namespace ET.Client
 
         private static void OnSkillLearnItemsRefresh(this ES_SkillLearn self, Transform transform, int index)
         {
+            foreach (Scroll_Item_SkillLearnItem item in self.ScrollItemSkillLearnItems.Values)
+            {
+                if (item.uiTransform == transform)
+                {
+                    item.uiTransform = null;
+                }
+            }
+            
             Scroll_Item_SkillLearnItem scrollItemSkillLearnItem = self.ScrollItemSkillLearnItems[index].BindTrans(transform);
             scrollItemSkillLearnItem.SetClickHander((SkillPro skillpro) => { self.OnSelectSkill(skillpro); });
             scrollItemSkillLearnItem.OnUpdateUI(self.ShowLearnSkillPros[index]);

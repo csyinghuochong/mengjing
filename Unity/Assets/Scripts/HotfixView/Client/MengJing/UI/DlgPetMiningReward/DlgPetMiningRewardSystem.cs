@@ -3,6 +3,7 @@ using UnityEngine;
 
 namespace ET.Client
 {
+    [FriendOf(typeof(Scroll_Item_PetMiningRewardItem))]
     [FriendOf(typeof (DlgPetMiningReward))]
     public static class DlgPetMiningRewardSystem
     {
@@ -23,6 +24,14 @@ namespace ET.Client
 
         private static void OnPetMiningRewardItemsRefresh(this DlgPetMiningReward self, Transform transform, int index)
         {
+            foreach (Scroll_Item_PetMiningRewardItem item in self.ScrollItemPetMiningRewardItems.Values)
+            {
+                if (item.uiTransform == transform)
+                {
+                    item.uiTransform = null;
+                }
+            }
+            
             Scroll_Item_PetMiningRewardItem scrollItemPetMiningRewardItem = self.ScrollItemPetMiningRewardItems[index].BindTrans(transform);
             scrollItemPetMiningRewardItem.OnInitUI(self.ShowTaskPros[index]);
         }

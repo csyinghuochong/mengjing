@@ -89,6 +89,14 @@ namespace ET.Client
 
         private static void OnTaskTypeItemsRefresh(this ES_TaskType self, Transform transform, int index)
         {
+            foreach (Scroll_Item_TaskTypeItem item in self.ScrollItemTaskTypeItems.Values)
+            {
+                if (item.uiTransform == transform)
+                {
+                    item.uiTransform = null;
+                }
+            }
+            
             Scroll_Item_TaskTypeItem scrollItemTaskTypeItem = self.ScrollItemTaskTypeItems[index].BindTrans(transform);
             scrollItemTaskTypeItem.Refresh(self.ShowTaskPros[index], self.UpdateHighlight);
         }

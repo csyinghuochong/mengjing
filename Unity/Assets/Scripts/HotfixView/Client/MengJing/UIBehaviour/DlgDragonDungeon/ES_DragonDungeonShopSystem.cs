@@ -2,6 +2,7 @@ using UnityEngine;
 
 namespace ET.Client
 {
+    [FriendOf(typeof(Scroll_Item_DragonDungeonShopItem))]
     [FriendOf(typeof(Scroll_Item_BattleShopItem))]
     [EntitySystemOf(typeof(ES_DragonDungeonShop))]
     [FriendOfAttribute(typeof(ES_DragonDungeonShop))]
@@ -55,6 +56,14 @@ namespace ET.Client
 
         private static void OnDragonDungeonShopItemsRefresh(this ES_DragonDungeonShop self, Transform transform, int index)
         {
+            foreach (Scroll_Item_DragonDungeonShopItem item in self.ScrollItemDragonDungeonShopItems.Values)
+            {
+                if (item.uiTransform == transform)
+                {
+                    item.uiTransform = null;
+                }
+            }
+            
             Scroll_Item_DragonDungeonShopItem scrollItemDragonDungeonShopItem = self.ScrollItemDragonDungeonShopItems[index].BindTrans(transform);
             scrollItemDragonDungeonShopItem.OnUpdateUI(self.ShowItems[index]);
         }

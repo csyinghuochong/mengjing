@@ -3,6 +3,7 @@ using UnityEngine;
 
 namespace ET.Client
 {
+    [FriendOf(typeof(Scroll_Item_TeamDungeonItem))]
     [EntitySystemOf(typeof(ES_TeamDungeonList))]
     [FriendOfAttribute(typeof(ES_TeamDungeonList))]
     public static partial class ES_TeamDungeonListSystem
@@ -36,6 +37,14 @@ namespace ET.Client
 
         private static void OnTeamDungeonItemsRefresh(this ES_TeamDungeonList self, Transform transform, int index)
         {
+            foreach (Scroll_Item_TeamDungeonItem item in self.ScrollItemTeamDungeonItems.Values)
+            {
+                if (item.uiTransform == transform)
+                {
+                    item.uiTransform = null;
+                }
+            }
+            
             Scroll_Item_TeamDungeonItem scrollItemTeamDungeonItem = self.ScrollItemTeamDungeonItems[index].BindTrans(transform);
             scrollItemTeamDungeonItem.OnUpdateUI(self.ShowTeamInfos[index],MapTypeEnum.TeamDungeon);
         }

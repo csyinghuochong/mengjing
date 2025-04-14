@@ -2,6 +2,7 @@ using UnityEngine;
 
 namespace ET.Client
 {
+    [FriendOf(typeof(Scroll_Item_StoreItem))]
     [FriendOf(typeof(DlgStore))]
     public static class DlgStoreSystem
     {
@@ -62,6 +63,14 @@ namespace ET.Client
 
         private static void OnStoreItemsRefresh(this DlgStore self, Transform transform, int index)
         {
+            foreach (Scroll_Item_StoreItem item in self.ScrollItemStoreItems.Values)
+            {
+                if (item.uiTransform == transform)
+                {
+                    item.uiTransform = null;
+                }
+            }
+            
             Scroll_Item_StoreItem scrollItemStoreItem = self.ScrollItemStoreItems[index].BindTrans(transform);
             StoreSellConfig storeSellConfig = StoreSellConfigCategory.Instance.Get(self.ShowStores[index]);
             scrollItemStoreItem.OnUpdateData(storeSellConfig);

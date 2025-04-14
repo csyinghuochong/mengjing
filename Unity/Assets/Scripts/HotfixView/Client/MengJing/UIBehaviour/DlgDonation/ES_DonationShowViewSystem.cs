@@ -2,6 +2,7 @@ using UnityEngine;
 
 namespace ET.Client
 {
+    [FriendOf(typeof(Scroll_Item_DonationShowItem))]
     [EntitySystemOf(typeof(ES_DonationShow))]
     [FriendOfAttribute(typeof(ES_DonationShow))]
     public static partial class ES_DonationShowSystem
@@ -62,6 +63,14 @@ namespace ET.Client
 
         private static void OnDonationShowItemsRefresh(this ES_DonationShow self, Transform transform, int index)
         {
+            foreach (Scroll_Item_DonationShowItem item in self.ScrollItemDonationShowItems.Values)
+            {
+                if (item.uiTransform == transform)
+                {
+                    item.uiTransform = null;
+                }
+            }
+            
             Scroll_Item_DonationShowItem scrollItemDonationShowItem = self.ScrollItemDonationShowItems[index].BindTrans(transform);
             scrollItemDonationShowItem.OnUpdateUI(index + 1, self.ShowRankingInfos[index]);
         }

@@ -3,6 +3,7 @@ using UnityEngine;
 
 namespace ET.Client
 {
+    [FriendOf(typeof(Scroll_Item_CommonItem))]
     [FriendOf(typeof(Scroll_Item_PetListItem))]
     [FriendOf(typeof(ES_PetInfoShow))]
     [EntitySystemOf(typeof(ES_PetXiLian))]
@@ -207,6 +208,14 @@ namespace ET.Client
 
         private static void OnCommonItemsRefresh(this ES_PetXiLian self, Transform transform, int index)
         {
+            foreach (Scroll_Item_CommonItem item in self.ScrollItemCommonItems.Values)
+            {
+                if (item.uiTransform == transform)
+                {
+                    item.uiTransform = null;
+                }
+            }
+            
             Scroll_Item_CommonItem scrollItemCommonItem = self.ScrollItemCommonItems[index].BindTrans(transform);
             scrollItemCommonItem.UpdateItem(self.ShowBagInfos[index], ItemOperateEnum.PetXiLian);
             scrollItemCommonItem.SetClickHandler((bagInfo) => { self.OnSelectItem(bagInfo); });
@@ -261,6 +270,14 @@ namespace ET.Client
 
         private static void OnPetListItemsRefresh(this ES_PetXiLian self, Transform transform, int index)
         {
+            foreach (Scroll_Item_PetListItem item in self.ScrollItemPetListItems.Values)
+            {
+                if (item.uiTransform == transform)
+                {
+                    item.uiTransform = null;
+                }
+            }
+            
             Scroll_Item_PetListItem scrollItemPetListItem = self.ScrollItemPetListItems[index].BindTrans(transform);
             scrollItemPetListItem.SetClickHandler((long petId) =>
             {

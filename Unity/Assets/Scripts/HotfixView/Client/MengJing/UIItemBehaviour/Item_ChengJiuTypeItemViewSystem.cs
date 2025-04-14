@@ -104,6 +104,14 @@ namespace ET.Client
 
         private static void OnChengJiuTypeItemItemsRefresh(this Scroll_Item_ChengJiuTypeItem self, Transform transform, int index)
         {
+            foreach (Scroll_Item_ChengJiuTypeItemItem item in self.ScrollItemChengJiuTypeItemItems.Values)
+            {
+                if (item.uiTransform == transform)
+                {
+                    item.uiTransform = null;
+                }
+            }
+            
             Scroll_Item_ChengJiuTypeItemItem scrollItemChengJiuTypeItemItem = self.ScrollItemChengJiuTypeItemItems[index].BindTrans(transform);
             scrollItemChengJiuTypeItemItem.SetClickSubTypeHandler((int chapterid) => { self.OnClickTaskTypeItem(chapterid); });
             scrollItemChengJiuTypeItemItem.OnUpdateData(self.ChengJiuTypeId, self.ShowChapter[index]);

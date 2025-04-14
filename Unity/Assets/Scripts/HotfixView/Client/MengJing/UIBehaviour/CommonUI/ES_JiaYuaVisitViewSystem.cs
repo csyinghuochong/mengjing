@@ -2,6 +2,7 @@ using UnityEngine;
 
 namespace ET.Client
 {
+    [FriendOf(typeof(Scroll_Item_JiaYuanVisitItem))]
     [EntitySystemOf(typeof(ES_JiaYuaVisit))]
     [FriendOfAttribute(typeof(ES_JiaYuaVisit))]
     public static partial class ES_JiaYuaVisitSystem
@@ -34,6 +35,14 @@ namespace ET.Client
 
         private static void OnJiaYuanVisitItemsRefresh(this ES_JiaYuaVisit self, Transform transform, int index)
         {
+            foreach (Scroll_Item_JiaYuanVisitItem item in self.ScrollItemJiaYuanVisitItems.Values)
+            {
+                if (item.uiTransform == transform)
+                {
+                    item.uiTransform = null;
+                }
+            }
+            
             Scroll_Item_JiaYuanVisitItem scrollItemJiaYuanVisitItem = self.ScrollItemJiaYuanVisitItems[index].BindTrans(transform);
             scrollItemJiaYuanVisitItem.OnUpdateUI(self.Visits[index]);
         }

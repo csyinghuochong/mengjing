@@ -3,6 +3,7 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
+    [FriendOf(typeof(Scroll_Item_CommonSkillItem))]
     [FriendOf(typeof(DlgCommonProperty))]
     public static class DlgCommonPropertySystem
     {
@@ -25,6 +26,14 @@ namespace ET.Client
 
         private static void OnCommonSkillItemsRefresh(this DlgCommonProperty self, Transform transform, int index)
         {
+            foreach (Scroll_Item_CommonSkillItem item in self.ScrollItemCommonSkillItems.Values)
+            {
+                if (item.uiTransform == transform)
+                {
+                    item.uiTransform = null;
+                }
+            }
+            
             Scroll_Item_CommonSkillItem scrollItemCommonSkillItem = self.ScrollItemCommonSkillItems[index].BindTrans(transform);
             scrollItemCommonSkillItem.OnUpdatePetSkill(self.ShowPetSkills[index], ABAtlasTypes.RoleSkillIcon);
         }

@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
+    [FriendOf(typeof(Scroll_Item_RankShowItem))]
     [FriendOf(typeof(ES_RankReward))]
     [EntitySystemOf(typeof(ES_RankShow))]
     [FriendOfAttribute(typeof(ES_RankShow))]
@@ -55,6 +56,14 @@ namespace ET.Client
 
         private static void OnRankShowItemsRefresh(this ES_RankShow self, Transform transform, int index)
         {
+            foreach (Scroll_Item_RankShowItem item in self.ScrollItemRankShowItems.Values)
+            {
+                if (item.uiTransform == transform)
+                {
+                    item.uiTransform = null;
+                }
+            }
+            
             Scroll_Item_RankShowItem scrollItemRankShowItem = self.ScrollItemRankShowItems[index].BindTrans(transform);
             scrollItemRankShowItem.Refresh(index + 1, self.ShowRankingInfos[index]);
         }

@@ -7,6 +7,7 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
+    [FriendOf(typeof(Scroll_Item_RankRewardItem))]
     [FriendOf(typeof(DlgPetMatchReward))]
     public static class DlgPetMatchRewardSystem
     {
@@ -45,6 +46,14 @@ namespace ET.Client
 
         private static void OnRankShowItemsRefresh(this DlgPetMatchReward self, Transform transform, int index)
         {
+            foreach (Scroll_Item_RankRewardItem item in self.ScrollItemRankRewardItems.Values)
+            {
+                if (item.uiTransform == transform)
+                {
+                    item.uiTransform = null;
+                }
+            }
+            
             Scroll_Item_RankRewardItem scrollItemRankRewardItem = self.ScrollItemRankRewardItems[index].BindTrans(transform);
             scrollItemRankRewardItem.OnUpdateUI(self.ShowRankRewardConfigs[index]);
         }

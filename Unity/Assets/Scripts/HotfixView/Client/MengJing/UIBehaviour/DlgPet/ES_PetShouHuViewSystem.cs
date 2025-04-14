@@ -2,6 +2,7 @@
 
 namespace ET.Client
 {
+    [FriendOf(typeof(Scroll_Item_PetShouHuItem))]
     [FriendOf(typeof(ES_ShouhuInfo))]
     [EntitySystemOf(typeof(ES_PetShouHu))]
     [FriendOfAttribute(typeof(ES_PetShouHu))]
@@ -60,6 +61,14 @@ namespace ET.Client
 
         private static void OnPetShouHuItemsRefresh(this ES_PetShouHu self, Transform transform, int index)
         {
+            foreach (Scroll_Item_PetShouHuItem item in self.ScrollItemPetShouHuItems.Values)
+            {
+                if (item.uiTransform == transform)
+                {
+                    item.uiTransform = null;
+                }
+            }
+            
             Scroll_Item_PetShouHuItem scrollItemPetShouHuItem = self.ScrollItemPetShouHuItems[index].BindTrans(transform);
             scrollItemPetShouHuItem.SetButtonShouHuHandler((long petid) => { self.OnButtonShouHuHandler(petid).Coroutine(); });
             scrollItemPetShouHuItem.OnInitUI(self.ShowRolePetInfos[index]);

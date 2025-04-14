@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace ET.Client
 {
+    [FriendOf(typeof(Scroll_Item_JiaYuanMysteryItem))]
     [EntitySystemOf(typeof(ES_JiaYuanMystery_B))]
     [FriendOfAttribute(typeof(ES_JiaYuanMystery_B))]
     public static partial class ES_JiaYuanMystery_BSystem
@@ -30,6 +31,14 @@ namespace ET.Client
 
         private static void OnJiaYuanMysteryItemsRefresh(this ES_JiaYuanMystery_B self, Transform transform, int index)
         {
+            foreach (Scroll_Item_JiaYuanMysteryItem item in self.ScrollItemJiaYuanMysteryItems.Values)
+            {
+                if (item.uiTransform == transform)
+                {
+                    item.uiTransform = null;
+                }
+            }
+            
             Scroll_Item_JiaYuanMysteryItem scrollItemCommonItem = self.ScrollItemJiaYuanMysteryItems[index].BindTrans(transform);
             scrollItemCommonItem.OnUpdateUI(self.ShowMysteryItemInfos[index]);
         }

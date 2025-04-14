@@ -3,6 +3,7 @@ using UnityEngine;
 
 namespace ET.Client
 {
+    [FriendOf(typeof(Scroll_Item_PetEggChouKaRewardItem))]
     [FriendOf(typeof(DlgPetEggChouKaReward))]
     public static class DlgPetEggChouKaRewardSystem
     {
@@ -39,6 +40,14 @@ namespace ET.Client
 
         private static void OnPetEggChouKaRewardItemsRefresh(this DlgPetEggChouKaReward self, Transform transform, int index)
         {
+            foreach (Scroll_Item_PetEggChouKaRewardItem item in self.ScrollItemPetEggChouKaRewardItems.Values)
+            {
+                if (item.uiTransform == transform)
+                {
+                    item.uiTransform = null;
+                }
+            }
+            
             Scroll_Item_PetEggChouKaRewardItem scrollItemPetEggChouKaRewardItem = self.ScrollItemPetEggChouKaRewardItems[index].BindTrans(transform);
             scrollItemPetEggChouKaRewardItem.OnUpdateUI(self.ShowInfo[index]);
         }

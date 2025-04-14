@@ -3,6 +3,7 @@ using UnityEngine;
 
 namespace ET.Client
 {
+    [FriendOf(typeof(Scroll_Item_HuntTaskItem))]
     [EntitySystemOf(typeof (ES_HuntTask))]
     [FriendOfAttribute(typeof (ES_HuntTask))]
     public static partial class ES_HuntTaskSystem
@@ -23,6 +24,14 @@ namespace ET.Client
 
         private static void OnHuntTaskItemsRefresh(this ES_HuntTask self, Transform transform, int index)
         {
+            foreach (Scroll_Item_HuntTaskItem item in self.ScrollItemHuntTaskItems.Values)
+            {
+                if (item.uiTransform == transform)
+                {
+                    item.uiTransform = null;
+                }
+            }
+            
             Scroll_Item_HuntTaskItem scrollItemHuntTaskItem = self.ScrollItemHuntTaskItems[index].BindTrans(transform);
             scrollItemHuntTaskItem.OnUpdateData(self.ShowTaskPro[index]);
         }

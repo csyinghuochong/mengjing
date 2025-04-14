@@ -27,6 +27,14 @@ namespace ET.Client
 
         private static void OnNewYearCollectionWordItemsRefresh(this ES_NewYearCollectionWord self, Transform transform, int index)
         {
+            foreach (Scroll_Item_NewYearCollectionWordItem item in self.ScrollItemNewYearCollectionWordItems.Values)
+            {
+                if (item.uiTransform == transform)
+                {
+                    item.uiTransform = null;
+                }
+            }
+            
             Scroll_Item_NewYearCollectionWordItem scrollItemNewYearCollectionWordItem =
                     self.ScrollItemNewYearCollectionWordItems[index].BindTrans(transform);
 

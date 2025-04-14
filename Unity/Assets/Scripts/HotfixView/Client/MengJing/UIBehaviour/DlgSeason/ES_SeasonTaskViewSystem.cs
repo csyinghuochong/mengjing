@@ -37,6 +37,14 @@ namespace ET.Client
 
         private static void OnSeasonTaskItemsRefresh(this ES_SeasonTask self, Transform transform, int index)
         {
+            foreach (Scroll_Item_SeasonTaskItem item in self.ScrollItemSeasonTaskItems.Values)
+            {
+                if (item.uiTransform == transform)
+                {
+                    item.uiTransform = null;
+                }
+            }
+            
             Scroll_Item_SeasonTaskItem scrollItemSeasonTaskItem = self.ScrollItemSeasonTaskItems[index].BindTrans(transform);
             scrollItemSeasonTaskItem.OnUpdateData(self.ShowTaskIds[index]);
             scrollItemSeasonTaskItem.SetCurId(self.TaskPro.taskID);
@@ -44,6 +52,14 @@ namespace ET.Client
 
         private static void OnSeasonDayTaskItemsRefresh(this ES_SeasonTask self, Transform transform, int index)
         {
+            foreach (Scroll_Item_SeasonDayTaskItem item in self.ScrollItemSeasonDayTaskItems.Values)
+            {
+                if (item.uiTransform == transform)
+                {
+                    item.uiTransform = null;
+                }
+            }
+            
             Scroll_Item_SeasonDayTaskItem scrollItemSeasonDayTaskItem = self.ScrollItemSeasonDayTaskItems[index].BindTrans(transform);
             scrollItemSeasonDayTaskItem.OnUpdateData(self.ShowTaskPros[index]);
         }

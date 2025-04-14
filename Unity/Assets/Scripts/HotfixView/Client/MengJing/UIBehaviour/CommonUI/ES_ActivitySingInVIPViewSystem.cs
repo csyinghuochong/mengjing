@@ -102,6 +102,14 @@ namespace ET.Client
 
         private static void OnActivitySingInItemsRefresh(this ES_ActivitySingInVIP self, Transform transform, int index)
         {
+            foreach (Scroll_Item_ActivitySingInItem item in self.ScrollItemActivitySingInItems.Values)
+            {
+                if (item.uiTransform == transform)
+                {
+                    item.uiTransform = null;
+                }
+            }
+            
             Scroll_Item_ActivitySingInItem scrollItemActivitySingInItem = self.ScrollItemActivitySingInItems[index].BindTrans(transform);
             scrollItemActivitySingInItem.OnUpdateUI(self.ShowActivityConfigs[index],
                 (activityId) => { self.OnClickSignItem(activityId).Coroutine(); });

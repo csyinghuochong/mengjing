@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
+    [FriendOf(typeof(Scroll_Item_MonsterItem))]
     [FriendOf(typeof(Scroll_Item_PetMeleeLevelItem))]
     [FriendOf(typeof(DlgPetMeleeLevel))]
     public static class DlgPetMeleeLevelSystem
@@ -104,6 +105,14 @@ namespace ET.Client
 
         private static void OnMonsterItemsRefresh(this DlgPetMeleeLevel self, Transform transform, int index)
         {
+            foreach (Scroll_Item_MonsterItem item in self.ScrollItemMonsterItems.Values)
+            {
+                if (item.uiTransform == transform)
+                {
+                    item.uiTransform = null;
+                }
+            }
+            
             Scroll_Item_MonsterItem scrollItemMonsterItem = self.ScrollItemMonsterItems[index].BindTrans(transform);
             scrollItemMonsterItem.Refresh(self.ShowMonsterIds[index]);
         }

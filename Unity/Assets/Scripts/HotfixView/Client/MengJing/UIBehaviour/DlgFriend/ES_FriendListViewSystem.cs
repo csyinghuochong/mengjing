@@ -2,6 +2,7 @@ using UnityEngine;
 
 namespace ET.Client
 {
+    [FriendOf(typeof(Scroll_Item_FriendListItem))]
     [FriendOf(typeof (FriendComponent))]
     [FriendOf(typeof (ES_ChatView))]
     [EntitySystemOf(typeof (ES_FriendList))]
@@ -27,6 +28,14 @@ namespace ET.Client
 
         private static void OnFriendListItemsRefresh(this ES_FriendList self, Transform transform, int index)
         {
+            foreach (Scroll_Item_FriendListItem item in self.ScrollItemFriendListItems.Values)
+            {
+                if (item.uiTransform == transform)
+                {
+                    item.uiTransform = null;
+                }
+            }
+            
             Scroll_Item_FriendListItem scrollItemFriendListItem = self.ScrollItemFriendListItems[index].BindTrans(transform);
             scrollItemFriendListItem.Refresh(self.ShowFriendInfos[index], self.OnDeleteHandler, self.OnChatHandler);
         }

@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
+    [FriendOf(typeof(Scroll_Item_WelfareTaskItem))]
     [EntitySystemOf(typeof(ES_WelfareTask))]
     [FriendOfAttribute(typeof(ES_WelfareTask))]
     public static partial class ES_WelfareTaskSystem
@@ -55,6 +56,14 @@ namespace ET.Client
 
         private static void OnWelfareTaskItemsRefresh(this ES_WelfareTask self, Transform transform, int index)
         {
+            foreach (Scroll_Item_WelfareTaskItem item in self.ScrollItemWelfareTaskItems.Values)
+            {
+                if (item.uiTransform == transform)
+                {
+                    item.uiTransform = null;
+                }
+            }
+            
             Scroll_Item_WelfareTaskItem scrollItemWelfareTaskItem = self.ScrollItemWelfareTaskItems[index].BindTrans(transform);
             scrollItemWelfareTaskItem.OnUpdateData(self.ShowTaskPros[index], self.Day);
         }

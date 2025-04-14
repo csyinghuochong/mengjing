@@ -47,6 +47,14 @@ namespace ET.Client
 
         private static void OnBagItemsRefresh(this ES_RoleHuiShou self, Transform transform, int index)
         {
+            foreach (Scroll_Item_CommonItem item in self.ScrollItemCommonItems.Values)
+            {
+                if (item.uiTransform == transform)
+                {
+                    item.uiTransform = null;
+                }
+            }
+            
             Scroll_Item_CommonItem scrollItemCommonItem = self.ScrollItemCommonItems[index].BindTrans(transform);
             scrollItemCommonItem.Refresh(self.ShowBagInfos[index], ItemOperateEnum.HuishouBag);
             scrollItemCommonItem.SetEventTrigger(true);

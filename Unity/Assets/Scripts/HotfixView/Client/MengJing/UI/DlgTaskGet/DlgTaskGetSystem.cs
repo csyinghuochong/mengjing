@@ -13,6 +13,7 @@ namespace ET.Client
         }
     }
 
+    [FriendOf(typeof(Scroll_Item_TaskRewardItem))]
     [FriendOf(typeof(Scroll_Item_TaskFubenItem))]
     [FriendOf(typeof(Scroll_Item_TaskGetItem))]
     [FriendOf(typeof(DlgTaskGet))]
@@ -639,6 +640,14 @@ namespace ET.Client
         
         private static void OnBagItemsRefresh(this DlgTaskGet self, Transform transform, int index)
         {
+            foreach (Scroll_Item_TaskRewardItem item in self.ScrollItemTaskRewardItems.Values)
+            {
+                if (item.uiTransform == transform)
+                {
+                    item.uiTransform = null;
+                }
+            }
+            
             Scroll_Item_TaskRewardItem scrollItemTaskGetItem = self.ScrollItemTaskRewardItems[index].BindTrans(transform);
             scrollItemTaskGetItem.Refresh(self.ShowBagInfos[index], ItemOperateEnum.None);
         }

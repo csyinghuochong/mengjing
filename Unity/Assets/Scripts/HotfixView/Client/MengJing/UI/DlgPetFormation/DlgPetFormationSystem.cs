@@ -191,6 +191,14 @@ namespace ET.Client
 
         private static void OnPetFormationItemRefresh(this DlgPetFormation self, Transform transform, int index)
         {
+            foreach (Scroll_Item_PetFormationItem item in self.ScrollItemPetFormationItems.Values)
+            {
+                if (item.uiTransform == transform)
+                {
+                    item.uiTransform = null;
+                }
+            }
+            
             Scroll_Item_PetFormationItem scrollItemPetFormationItem = self.ScrollItemPetFormationItems[index].BindTrans(transform);
             scrollItemPetFormationItem.BeginDragHandler = (binfo, pdata) => { self.BeginDrag(binfo, pdata); };
             scrollItemPetFormationItem.DragingHandler = (binfo, pdata) => { self.Draging(binfo, pdata); };

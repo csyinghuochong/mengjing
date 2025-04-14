@@ -3,6 +3,7 @@ using UnityEngine;
 
 namespace ET.Client
 {
+    [FriendOf(typeof(Scroll_Item_JiaYuanPastureItem_A))]
     [EntitySystemOf(typeof(ES_JiaYuanPasture_A))]
     [FriendOfAttribute(typeof(ES_JiaYuanPasture_A))]
     public static partial class ES_JiaYuanPasture_ASystem
@@ -42,6 +43,14 @@ namespace ET.Client
 
         private static void OnJJiaYuanPastureItemsRefresh(this ES_JiaYuanPasture_A self, Transform transform, int index)
         {
+            foreach (Scroll_Item_JiaYuanPastureItem_A item in self.ScrollItemJiaYuanPastureItemAs.Values)
+            {
+                if (item.uiTransform == transform)
+                {
+                    item.uiTransform = null;
+                }
+            }
+            
             Scroll_Item_JiaYuanPastureItem_A scrollItemCommonItem = self.ScrollItemJiaYuanPastureItemAs[index].BindTrans(transform);
             scrollItemCommonItem.OnUpdateUI(self.ShowMysteryItemInfos[index], index);
         }

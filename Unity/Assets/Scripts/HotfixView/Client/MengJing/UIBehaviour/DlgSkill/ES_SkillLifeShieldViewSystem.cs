@@ -270,6 +270,14 @@ namespace ET.Client
 
         private static void OnCommonItemsRefresh(this ES_SkillLifeShield self, Transform transform, int index)
         {
+            foreach (Scroll_Item_CommonItem item in self.ScrollItemCommonItems.Values)
+            {
+                if (item.uiTransform == transform)
+                {
+                    item.uiTransform = null;
+                }
+            }
+            
             Scroll_Item_CommonItem scrollItemCommonItem = self.ScrollItemCommonItems[index].BindTrans(transform);
             scrollItemCommonItem.UpdateItem(self.ShowBagInfos[index], ItemOperateEnum.HuishouBag);
             scrollItemCommonItem.HideItemName();

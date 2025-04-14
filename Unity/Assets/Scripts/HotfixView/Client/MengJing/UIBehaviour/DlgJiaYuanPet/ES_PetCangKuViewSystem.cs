@@ -2,6 +2,8 @@ using UnityEngine;
 
 namespace ET.Client
 {
+    [FriendOf(typeof(Scroll_Item_PetCangKuDefend))]
+    [FriendOf(typeof(Scroll_Item_PetCangKuItem))]
     [EntitySystemOf(typeof (ES_PetCangKu))]
     [FriendOfAttribute(typeof (ES_PetCangKu))]
     public static partial class ES_PetCangKuSystem
@@ -24,12 +26,28 @@ namespace ET.Client
 
         private static void OnPetCangKuItemsRefresh(this ES_PetCangKu self, Transform transform, int index)
         {
+            foreach (Scroll_Item_PetCangKuItem item in self.ScrollItemPetCangKuItems.Values)
+            {
+                if (item.uiTransform == transform)
+                {
+                    item.uiTransform = null;
+                }
+            }
+            
             Scroll_Item_PetCangKuItem scrollItemPetCangKuItem = self.ScrollItemPetCangKuItems[index].BindTrans(transform);
             scrollItemPetCangKuItem.OnUpdateUI(self.ShowRolePetInfos[index]);
         }
 
         private static void OnPetCangKuDefendsRefresh(this ES_PetCangKu self, Transform transform, int index)
         {
+            foreach (Scroll_Item_PetCangKuDefend item in self.ScrollItemPetCangKuDefends.Values)
+            {
+                if (item.uiTransform == transform)
+                {
+                    item.uiTransform = null;
+                }
+            }
+            
             Scroll_Item_PetCangKuDefend scrollItemPetCangKuDefend = self.ScrollItemPetCangKuDefends[index].BindTrans(transform);
             scrollItemPetCangKuDefend.SetAction(self.OnPetPutCangku);
             scrollItemPetCangKuDefend.OnUpdateUI(self.Root().GetComponent<UserInfoComponentC>().UserInfo.JiaYuanLv,

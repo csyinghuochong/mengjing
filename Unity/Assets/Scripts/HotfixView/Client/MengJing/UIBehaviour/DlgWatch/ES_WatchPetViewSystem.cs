@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
+    [FriendOf(typeof(Scroll_Item_CommonSkillItem))]
     [FriendOf(typeof(Scroll_Item_CommonItem))]
     [FriendOf(typeof(Scroll_Item_PetSkinIconItem))]
     [FriendOf(typeof(Scroll_Item_PetListItem))]
@@ -134,6 +135,14 @@ namespace ET.Client
 
         private static void OnPetListItemsRefresh(this ES_WatchPet self, Transform transform, int index)
         {
+            foreach (Scroll_Item_PetListItem item in self.ScrollItemPetListItems.Values)
+            {
+                if (item.uiTransform == transform)
+                {
+                    item.uiTransform = null;
+                }
+            }
+            
             Scroll_Item_PetListItem scrollItemPetListItem = self.ScrollItemPetListItems[index].BindTrans(transform);
             scrollItemPetListItem.SetClickHandler((long petId) => { self.OnClickPetHandler(petId); });
 
@@ -162,6 +171,14 @@ namespace ET.Client
 
         private static void OnPetSkinIconItemsRefresh(this ES_WatchPet self, Transform transform, int index)
         {
+            foreach (Scroll_Item_PetSkinIconItem item in self.ScrollItemPetSkinIconItems.Values)
+            {
+                if (item.uiTransform == transform)
+                {
+                    item.uiTransform = null;
+                }
+            }
+            
             Scroll_Item_PetSkinIconItem scrollItemPetSkinIconItem = self.ScrollItemPetSkinIconItems[index].BindTrans(transform);
             scrollItemPetSkinIconItem.OnUpdateUI(self.ShowPetSkins[index], self.ShowPetSkins[index] == self.LastSelectItem.SkinId);
             scrollItemPetSkinIconItem.SetClickHandler(self.OnSelectSkinHandler);
@@ -169,6 +186,14 @@ namespace ET.Client
 
         private static void OnCommonSkillItemsRefresh(this ES_WatchPet self, Transform transform, int index)
         {
+            foreach (Scroll_Item_CommonSkillItem item in self.ScrollItemCommonSkillItems.Values)
+            {
+                if (item.uiTransform == transform)
+                {
+                    item.uiTransform = null;
+                }
+            }
+            
             Scroll_Item_CommonSkillItem scrollItemCommonSkillItem = self.ScrollItemCommonSkillItems[index].BindTrans(transform);
             bool unactive = self.ShowPetSkills[index] == self.UnactiveId;
             scrollItemCommonSkillItem.OnUpdatePetSkill(self.ShowPetSkills[index], ABAtlasTypes.RoleSkillIcon,

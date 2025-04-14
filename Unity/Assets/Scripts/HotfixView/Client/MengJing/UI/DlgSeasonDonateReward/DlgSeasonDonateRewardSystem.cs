@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace ET.Client
 {
+	[FriendOf(typeof(Scroll_Item_SeasonDonateItem))]
 	[FriendOf(typeof(DlgSeasonDonateReward))]
 	public static  class DlgSeasonDonateRewardSystem
 	{
@@ -26,9 +27,17 @@ namespace ET.Client
 
 		 private static void OnRechargeItemsRefresh(this DlgSeasonDonateReward self, Transform transform, int index)
 		 {
-			 var item = ConfigData.CommonSeasonDonateReward.ToList()[index];
+			 foreach (Scroll_Item_SeasonDonateItem item in self.ScrollItemRechargeItems.Values)
+			 {
+				 if (item.uiTransform == transform)
+				 {
+					 item.uiTransform = null;
+				 }
+			 }
+			 
+			 var item1 = ConfigData.CommonSeasonDonateReward.ToList()[index];
 			 Scroll_Item_SeasonDonateItem scrollItemRechargeItem = self.ScrollItemRechargeItems[index].BindTrans(transform);
-			 scrollItemRechargeItem.OnInitData(item.Key, item.Value);
+			 scrollItemRechargeItem.OnInitData(item1.Key, item1.Value);
 			 //scrollItemRechargeItem.SetOnInitDataClickHandler((number) => { self.OnClickRechargeItem(number).Coroutine(); });
 		 }
 		

@@ -29,6 +29,14 @@ namespace ET.Client
 
         private static void OnChengJiuRewardItemsRefresh(this ES_ChengJiuReward self, Transform transform, int index)
         {
+            foreach (Scroll_Item_ChengJiuRewardItem item in self.ScrollItemChengJiuRewardItems.Values)
+            {
+                if (item.uiTransform == transform)
+                {
+                    item.uiTransform = null;
+                }
+            }
+            
             ChengJiuComponentC chengJiuComponent = self.Root().GetComponent<ChengJiuComponentC>();
             Scroll_Item_ChengJiuRewardItem scrollItemChengJiuRewardItem = self.ScrollItemChengJiuRewardItems[index].BindTrans(transform);
             scrollItemChengJiuRewardItem.OnInitData(self.ShowChengJiuRewardConfigs[index],

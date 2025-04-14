@@ -118,6 +118,14 @@ namespace ET.Client
 
         private static void OnEquipItemsRefresh(this ES_EquipmentIncreaseTransfer self, Transform transform, int index)
         {
+            foreach (Scroll_Item_CommonItem item in self.ScrollItemEquipItems.Values)
+            {
+                if (item.uiTransform == transform)
+                {
+                    item.uiTransform = null;
+                }
+            }
+            
             Scroll_Item_CommonItem scrollItemCommonItem = self.ScrollItemEquipItems[index].BindTrans(transform);
             scrollItemCommonItem.Refresh(self.ShowEquipBagInfos[index], ItemOperateEnum.SkillSet);
 

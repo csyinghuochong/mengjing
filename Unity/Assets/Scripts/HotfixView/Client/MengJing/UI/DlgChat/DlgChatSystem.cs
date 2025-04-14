@@ -17,6 +17,7 @@ namespace ET.Client
     }
 
   
+    [FriendOf(typeof(Scroll_Item_ChatItem))]
     [FriendOf(typeof(PlayerInfoComponent))]
     [FriendOf(typeof(DlgChat))]
     public static class DlgChatSystem
@@ -236,6 +237,14 @@ namespace ET.Client
 
         private static void OnChatItemsRefresh(this DlgChat self, Transform transform, int index)
         {
+            foreach (Scroll_Item_ChatItem item in self.ScrollItemChatItems.Values)
+            {
+                if (item.uiTransform == transform)
+                {
+                    item.uiTransform = null;
+                }
+            }
+            
             Scroll_Item_ChatItem scrollItemChatItem = self.ScrollItemChatItems[index].BindTrans(transform);
             scrollItemChatItem.Refresh(self.ShowChatInfos[index]);
         }

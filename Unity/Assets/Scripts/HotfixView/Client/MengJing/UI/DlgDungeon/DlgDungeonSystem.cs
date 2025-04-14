@@ -21,6 +21,8 @@ namespace ET.Client
         }
     }
 
+    [FriendOf(typeof(Scroll_Item_BossRefreshSettingItem))]
+    [FriendOf(typeof(Scroll_Item_DungeonItem))]
     [FriendOf(typeof(Scroll_Item_BossRefreshTimeItem))]
     [FriendOf(typeof(DlgDungeon))]
     public static class DlgDungeonSystem
@@ -51,6 +53,14 @@ namespace ET.Client
 
         private static void OnDungeonItemsRefresh(this DlgDungeon self, Transform transform, int index)
         {
+            foreach (Scroll_Item_DungeonItem item in self.ScrollItemDungeonItems.Values)
+            {
+                if (item.uiTransform == transform)
+                {
+                    item.uiTransform = null;
+                }
+            }
+            
             Scroll_Item_DungeonItem scrollItemDungeonItem = self.ScrollItemDungeonItems[index].BindTrans(transform);
             scrollItemDungeonItem.OnInitData(index, self.ShowChapter[index]).Coroutine();
         }
@@ -82,6 +92,14 @@ namespace ET.Client
 
         private static void OnBossRefreshTimeItemsRefresh(this DlgDungeon self, Transform transform, int index)
         {
+            foreach (Scroll_Item_BossRefreshTimeItem item in self.ScrollItemBossRefreshTimeItems.Values)
+            {
+                if (item.uiTransform == transform)
+                {
+                    item.uiTransform = null;
+                }
+            }
+            
             Scroll_Item_BossRefreshTimeItem scrollItemBossRefreshTimeItem = self.ScrollItemBossRefreshTimeItems[index].BindTrans(transform);
             scrollItemBossRefreshTimeItem.Refresh(self.ShowBoosRefreshTime[index].KeyId, long.Parse(self.ShowBoosRefreshTime[index].Value));
         }
@@ -150,6 +168,14 @@ namespace ET.Client
 
         private static void OnBossRefreshSettingItemsRefresh(this DlgDungeon self, Transform transform, int index)
         {
+            foreach (Scroll_Item_BossRefreshSettingItem item in self.ScrollItemBossRefreshSettingItems.Values)
+            {
+                if (item.uiTransform == transform)
+                {
+                    item.uiTransform = null;
+                }
+            }
+            
             Scroll_Item_BossRefreshSettingItem scrollItemBossRefreshSettingItem = self.ScrollItemBossRefreshSettingItems[index].BindTrans(transform);
             scrollItemBossRefreshSettingItem.Refresh(self.ShowBossSetting[index]);
             scrollItemBossRefreshSettingItem.E_ToggleBtnButton.AddListener(() =>

@@ -28,6 +28,14 @@ namespace ET.Client
 
         private static void OnWeiJingShopItemsRefresh(this DlgWeiJingShop self, Transform transform, int index)
         {
+            foreach (Scroll_Item_WeiJingShopItem item in self.ScrollItemWeiJingShopItems.Values)
+            {
+                if (item.uiTransform == transform)
+                {
+                    item.uiTransform = null;
+                }
+            }
+            
             Scroll_Item_WeiJingShopItem scrollItemWeiJingShopItem = self.ScrollItemWeiJingShopItems[index].BindTrans(transform);
 
             scrollItemWeiJingShopItem.OnUpdateData(self.ShowStoreSellConfigs[index]);

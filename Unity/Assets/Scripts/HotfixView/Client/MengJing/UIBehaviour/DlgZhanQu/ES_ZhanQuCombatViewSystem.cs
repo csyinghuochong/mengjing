@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
+    [FriendOf(typeof(Scroll_Item_ZhanQuCombatItem))]
     [EntitySystemOf(typeof(ES_ZhanQuCombat))]
     [FriendOfAttribute(typeof(ES_ZhanQuCombat))]
     public static partial class ES_ZhanQuCombatSystem
@@ -51,6 +52,14 @@ namespace ET.Client
 
         private static void OnZhanQuCombatItemsRefresh(this ES_ZhanQuCombat self, Transform transform, int index)
         {
+            foreach (Scroll_Item_ZhanQuCombatItem item in self.ScrollItemZhanQuCombatItems.Values)
+            {
+                if (item.uiTransform == transform)
+                {
+                    item.uiTransform = null;
+                }
+            }
+            
             Scroll_Item_ZhanQuCombatItem scrollItemZhanQuCombatItem = self.ScrollItemZhanQuCombatItems[index].BindTrans(transform);
             scrollItemZhanQuCombatItem.OnInitUI(self.ShowActivityConfigs[index]);
         }

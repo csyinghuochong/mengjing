@@ -84,6 +84,14 @@ namespace ET.Client
 
         private static void OnEquipItemsRefresh(this ES_EquipmentIncreaseShow self, Transform transform, int index)
         {
+            foreach (Scroll_Item_CommonItem item in self.ScrollItemEquipItems.Values)
+            {
+                if (item.uiTransform == transform)
+                {
+                    item.uiTransform = null;
+                }
+            }
+            
             Scroll_Item_CommonItem scrollItemCommonItem = self.ScrollItemEquipItems[index].BindTrans(transform);
             scrollItemCommonItem.Refresh(self.ShowEquipBagInfos[index], ItemOperateEnum.ItemXiLian, self.OnSelectEquip);
         }
@@ -145,6 +153,14 @@ namespace ET.Client
 
         private static void OnReelItemsRefresh(this ES_EquipmentIncreaseShow self, Transform transform, int index)
         {
+            foreach (Scroll_Item_CommonItem item in self.ScrollItemReelItems.Values)
+            {
+                if (item.uiTransform == transform)
+                {
+                    item.uiTransform = null;
+                }
+            }
+            
             Scroll_Item_CommonItem scrollItemCommonItem = self.ScrollItemReelItems[index].BindTrans(transform);
             scrollItemCommonItem.Refresh(self.ShowReelBagInfos[index], ItemOperateEnum.None, self.OnSelectReel);
         }

@@ -13,6 +13,7 @@ namespace ET.Client
         }
     }
 
+    [FriendOf(typeof(Scroll_Item_CommonItem))]
     [FriendOf(typeof(DlgJiaYuanTreasureMapStorage))]
     public static class DlgJiaYuanTreasureMapStorageSystem
     {
@@ -51,6 +52,14 @@ namespace ET.Client
 
         private static void OnHouseItemsRefresh(this DlgJiaYuanTreasureMapStorage self, Transform transform, int index)
         {
+            foreach (Scroll_Item_CommonItem item in self.ScrollItemHouseItems.Values)
+            {
+                if (item.uiTransform == transform)
+                {
+                    item.uiTransform = null;
+                }
+            }
+            
             Scroll_Item_CommonItem scrollItemCommonItem = self.ScrollItemHouseItems[index].BindTrans(transform);
 
             if (index < self.ShowHouseBagInfos.Count)
@@ -77,6 +86,14 @@ namespace ET.Client
 
         private static void OnBagItemsRefresh(this DlgJiaYuanTreasureMapStorage self, Transform transform, int index)
         {
+            foreach (Scroll_Item_CommonItem item in self.ScrollItemBagItems.Values)
+            {
+                if (item.uiTransform == transform)
+                {
+                    item.uiTransform = null;
+                }
+            }
+            
             Scroll_Item_CommonItem scrollItemCommonItem = self.ScrollItemBagItems[index].BindTrans(transform);
 
             if (index < self.ShowBagBagInfos.Count)

@@ -120,6 +120,14 @@ namespace ET.Client
 
         private static void OnTaskGrowUpItemsRefresh(this ES_TaskGrowUp self, Transform transform, int index)
         {
+            foreach (Scroll_Item_TaskGrowUpItem item in self.ScrollItemTaskGrowUpItems.Values)
+            {
+                if (item.uiTransform == transform)
+                {
+                    item.uiTransform = null;
+                }
+            }
+            
             Scroll_Item_TaskGrowUpItem scrollItemTaskGrowUpItem = self.ScrollItemTaskGrowUpItems[index].BindTrans(transform);
             int i = index % 4;
             Vector3 posi = Vector3.zero;

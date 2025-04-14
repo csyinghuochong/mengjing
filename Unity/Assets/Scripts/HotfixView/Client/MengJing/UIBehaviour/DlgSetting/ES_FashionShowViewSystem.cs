@@ -51,6 +51,14 @@ namespace ET.Client
 
         private static void OnFashionShowItemsRefresh(this ES_FashionShow self, Transform transform, int index)
         {
+            foreach (Scroll_Item_FashionShowItem item in self.ScrollItemFashionShowItems.Values)
+            {
+                if (item.uiTransform == transform)
+                {
+                    item.uiTransform = null;
+                }
+            }
+            
             Scroll_Item_FashionShowItem scrollItemFashionShowItem = self.ScrollItemFashionShowItems[index].BindTrans(transform);
             scrollItemFashionShowItem.Position = index + 2;
             scrollItemFashionShowItem.OnUpdateUI(self.ShowFashion[index]);

@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
+    [FriendOf(typeof(Scroll_Item_RunRaceItem))]
     [EntitySystemOf(typeof(ES_HuntRanking))]
     [FriendOfAttribute(typeof(ES_HuntRanking))]
     public static partial class ES_HuntRankingSystem
@@ -35,6 +36,14 @@ namespace ET.Client
 
         private static void OnRunRaceItemsRefresh(this ES_HuntRanking self, Transform transform, int index)
         {
+            foreach (Scroll_Item_RunRaceItem item in self.ScrollItemRunRaceItems.Values)
+            {
+                if (item.uiTransform == transform)
+                {
+                    item.uiTransform = null;
+                }
+            }
+            
             Scroll_Item_RunRaceItem scrollItemRunRaceItem = self.ScrollItemRunRaceItems[index].BindTrans(transform);
             scrollItemRunRaceItem.OnUpdate(self.ShowRankRewardConfigs[index]);
         }

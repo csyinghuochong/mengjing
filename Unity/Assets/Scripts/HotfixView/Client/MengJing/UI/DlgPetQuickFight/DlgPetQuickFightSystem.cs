@@ -159,6 +159,14 @@ namespace ET.Client
 
         private static void OnPetQuickFightItemsRefresh(this DlgPetQuickFight self, Transform transform, int index)
         {
+            foreach (Scroll_Item_PetQuickFightItem item in self.ScrollItemPetQuickFightItems.Values)
+            {
+                if (item.uiTransform == transform)
+                {
+                    item.uiTransform = null;
+                }
+            }
+            
             Scroll_Item_PetQuickFightItem scrollItemPetQuickFightItem = self.ScrollItemPetQuickFightItems[index].BindTrans(transform);
             scrollItemPetQuickFightItem.OnInitUI2(self.ShowRolePetInfos[index], self.OnClickHandler);
         }

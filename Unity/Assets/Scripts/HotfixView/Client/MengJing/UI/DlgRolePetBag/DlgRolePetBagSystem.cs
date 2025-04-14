@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
+    [FriendOf(typeof(Scroll_Item_CommonSkillItem))]
     [FriendOf(typeof(Scroll_Item_RolePetBagItem))]
     [FriendOf(typeof(DlgRolePetBag))]
     public static class DlgRolePetBagSystem
@@ -41,6 +42,14 @@ namespace ET.Client
 
         private static void OnCommonSkillItemsRefresh(this DlgRolePetBag self, Transform transform, int index)
         {
+            foreach (Scroll_Item_CommonSkillItem item in self.ScrollItemCommonSkillItems.Values)
+            {
+                if (item.uiTransform == transform)
+                {
+                    item.uiTransform = null;
+                }
+            }
+            
             Scroll_Item_CommonSkillItem scrollItemCommonSkillItem = self.ScrollItemCommonSkillItems[index].BindTrans(transform);
             scrollItemCommonSkillItem.OnUpdateUI(self.ShowSkills[index], ABAtlasTypes.RoleSkillIcon,
                 self.RolePetInfo.LockSkill.Contains(self.ShowSkills[index]));
@@ -48,6 +57,14 @@ namespace ET.Client
 
         private static void OnRolePetBagItemsRefresh(this DlgRolePetBag self, Transform transform, int index)
         {
+            foreach (Scroll_Item_RolePetBagItem item in self.ScrollItemRolePetBagItems.Values)
+            {
+                if (item.uiTransform == transform)
+                {
+                    item.uiTransform = null;
+                }
+            }
+            
             Scroll_Item_RolePetBagItem scrollItemRolePetBagItem = self.ScrollItemRolePetBagItems[index].BindTrans(transform);
             scrollItemRolePetBagItem.OnInitUI(self.ShowRolePetInfos[index]);
             scrollItemRolePetBagItem.SetClickHandler((petId) => { self.OnClickPetHandler(petId); });

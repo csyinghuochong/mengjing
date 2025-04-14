@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
+    [FriendOf(typeof(Scroll_Item_CommonSkillItem))]
     [FriendOf(typeof(DlgPetChouKaGet))]
     public static class DlgPetChouKaGetSystem
     {
@@ -106,6 +107,14 @@ namespace ET.Client
 
         private static void OnCommonSkillItemsRefresh(this DlgPetChouKaGet self, Transform transform, int index)
         {
+            foreach (Scroll_Item_CommonSkillItem item in self.ScrollItemCommonSkillItems.Values)
+            {
+                if (item.uiTransform == transform)
+                {
+                    item.uiTransform = null;
+                }
+            }
+            
             Scroll_Item_CommonSkillItem scrollItemCommonSkillItem = self.ScrollItemCommonSkillItems[index].BindTrans(transform);
             scrollItemCommonSkillItem.OnUpdatePetSkill(self.RolePetInfo.PetSkill[index], ABAtlasTypes.RoleSkillIcon);
             if (self.OldRolePetInfo != null)

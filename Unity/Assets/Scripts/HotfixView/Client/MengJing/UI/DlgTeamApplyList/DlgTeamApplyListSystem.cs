@@ -2,6 +2,7 @@ using UnityEngine;
 
 namespace ET.Client
 {
+    [FriendOf(typeof(Scroll_Item_TeamApplyItem))]
     [FriendOf(typeof (DlgTeamApplyList))]
     public static class DlgTeamApplyListSystem
     {
@@ -24,6 +25,14 @@ namespace ET.Client
 
         private static void OnTeamApplyItemsRefresh(this DlgTeamApplyList self, Transform transform, int index)
         {
+            foreach (Scroll_Item_TeamApplyItem item in self.ScrollItemTeamApplyItems.Values)
+            {
+                if (item.uiTransform == transform)
+                {
+                    item.uiTransform = null;
+                }
+            }
+            
             Scroll_Item_TeamApplyItem scrollItemTeamApplyItem = self.ScrollItemTeamApplyItems[index].BindTrans(transform);
             scrollItemTeamApplyItem.OnUpdateUI(self.ShowTeamPlayerInfos[index]);
         }

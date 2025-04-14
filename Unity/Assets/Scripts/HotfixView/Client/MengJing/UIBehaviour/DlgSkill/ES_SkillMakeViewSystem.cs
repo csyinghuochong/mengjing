@@ -384,6 +384,14 @@ namespace ET.Client
 
         private static void OnMakeNeedItemsRefresh(this ES_SkillMake self, Transform transform, int index)
         {
+            foreach (Scroll_Item_MakeNeedItem item in self.ScrollItemMakeNeedItems.Values)
+            {
+                if (item.uiTransform == transform)
+                {
+                    item.uiTransform = null;
+                }
+            }
+            
             Scroll_Item_MakeNeedItem scrollItemMakeNeedItem = self.ScrollItemMakeNeedItems[index].BindTrans(transform);
             scrollItemMakeNeedItem.UpdateItem(self.ShowMakeNeed[index].Item1, self.ShowMakeNeed[index].Item2);
         }
@@ -457,6 +465,14 @@ namespace ET.Client
 
         private static void OnMakeItemsRefresh(this ES_SkillMake self, Transform transform, int index)
         {
+            foreach (Scroll_Item_MakeItem item in self.ScrollItemMakeItems.Values)
+            {
+                if (item.uiTransform == transform)
+                {
+                    item.uiTransform = null;
+                }
+            }
+            
             Scroll_Item_MakeItem scrollItemMakeItem = self.ScrollItemMakeItems[index].BindTrans(transform);
             scrollItemMakeItem.SetClickAction((int itemid) => { self.OnSelectMakeItem(itemid); });
             scrollItemMakeItem.OnUpdateUI(self.ShowMake[index]);
@@ -644,6 +660,14 @@ namespace ET.Client
 
         private static void OnCommonItemsRefresh(this ES_SkillMake self, Transform transform, int index)
         {
+            foreach (Scroll_Item_CommonItem item in self.ScrollItemCommonItems.Values)
+            {
+                if (item.uiTransform == transform)
+                {
+                    item.uiTransform = null;
+                }
+            }
+            
             Scroll_Item_CommonItem scrollItemCommonItem = self.ScrollItemCommonItems[index].BindTrans(transform);
             scrollItemCommonItem.UpdateItem(self.ShowBagInfos[index], ItemOperateEnum.HuishouBag);
             scrollItemCommonItem.SetEventTrigger(true);

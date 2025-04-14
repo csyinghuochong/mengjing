@@ -86,6 +86,14 @@ namespace ET.Client
 
         private static void OnDungeonLevelItemsRefresh(this DlgDungeonLevel self, Transform transform, int index)
         {
+            foreach (Scroll_Item_DungeonLevelItem item in self.ScrollItemDungeonLevelItems.Values)
+            {
+                if (item.uiTransform == transform)
+                {
+                    item.uiTransform = null;
+                }
+            }
+            
             Scroll_Item_DungeonLevelItem scrollItemDungeonLevelItem = self.ScrollItemDungeonLevelItems[index].BindTrans(transform);
             scrollItemDungeonLevelItem.OnInitData(0, self.ShowLevel[index], self.DungeonSectionConfig.RandomArea[self.ShowLevel[index]]);
         }

@@ -3,6 +3,7 @@ using UnityEngine;
 
 namespace ET.Client
 {
+    [FriendOf(typeof(Scroll_Item_RankItem))]
     [EntitySystemOf(typeof(ES_TrialRank))]
     [FriendOfAttribute(typeof(ES_TrialRank))]
     public static partial class ES_TrialRankSystem
@@ -42,6 +43,14 @@ namespace ET.Client
 
         private static void OnRankItemsRefresh(this ES_TrialRank self, Transform transform, int index)
         {
+            foreach (Scroll_Item_RankItem item in self.ScrollItemRankItems.Values)
+            {
+                if (item.uiTransform == transform)
+                {
+                    item.uiTransform = null;
+                }
+            }
+            
             Scroll_Item_RankItem scrollItemRankShowItem = self.ScrollItemRankItems[index].BindTrans(transform);
             scrollItemRankShowItem.OnInitData(index + 1, self.ShowRankingTrialInfos[index]);
         }

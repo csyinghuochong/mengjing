@@ -446,6 +446,14 @@ namespace ET.Client
 
         private static void OnMapBigNpcItemsRefresh(this DlgMapBig self, Transform transform, int index)
         {
+            foreach (Scroll_Item_MapBigNpcItem item in self.ScrollItemMapBigNpcItems.Values)
+            {
+                if (item.uiTransform == transform)
+                {
+                    item.uiTransform = null;
+                }
+            }
+            
             Scroll_Item_MapBigNpcItem scrollItemMapBigNpcItem = self.ScrollItemMapBigNpcItems[index].BindTrans(transform);
             if (index < self.ShowNpc.Count)
             {

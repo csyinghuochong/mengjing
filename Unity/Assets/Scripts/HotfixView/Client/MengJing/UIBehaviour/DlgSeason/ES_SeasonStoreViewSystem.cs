@@ -2,6 +2,7 @@ using UnityEngine;
 
 namespace ET.Client
 {
+    [FriendOf(typeof(Scroll_Item_SeasonStoreItem))]
     [EntitySystemOf(typeof (ES_SeasonStore))]
     [FriendOfAttribute(typeof (ES_SeasonStore))]
     public static partial class ES_SeasonStoreSystem
@@ -24,6 +25,14 @@ namespace ET.Client
 
         private static void OnSeasonStoreItemsRefresh(this ES_SeasonStore self, Transform transform, int index)
         {
+            foreach (Scroll_Item_SeasonStoreItem item in self.ScrollItemSeasonStoreItems.Values)
+            {
+                if (item.uiTransform == transform)
+                {
+                    item.uiTransform = null;
+                }
+            }
+            
             Scroll_Item_SeasonStoreItem scrollItemCommonItem = self.ScrollItemSeasonStoreItems[index].BindTrans(transform);
             scrollItemCommonItem.OnUpdateUI(self.ShowItems[index]);
         }

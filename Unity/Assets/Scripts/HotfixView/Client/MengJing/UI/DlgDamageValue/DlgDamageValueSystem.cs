@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
+	[FriendOf(typeof(Scroll_Item_DamageValueItem))]
 	[FriendOf(typeof(DlgDamageValue))]
 	public static  class DlgDamageValueSystem
 	{
@@ -29,9 +30,16 @@ namespace ET.Client
 		
 		private static void OnRDamageItemsRefresh(this DlgDamageValue self, Transform transform, int index)
 		{
-			var item = self.DamageValueList[index];
+			foreach (Scroll_Item_DamageValueItem item in self.ScrollItemRechargeItems.Values)
+			{
+				if (item.uiTransform == transform)
+				{
+					item.uiTransform = null;
+				}
+			}
+
 			Scroll_Item_DamageValueItem scrollItemRechargeItem = self.ScrollItemRechargeItems[index].BindTrans(transform);
-			scrollItemRechargeItem.OnInitData(item);
+			scrollItemRechargeItem.OnInitData(self.DamageValueList[index]);
 		}
 
 		public static void OnInitUI(this DlgDamageValue self, M2C_DamageValueListResponse info)

@@ -21,6 +21,14 @@ namespace ET.Client
 
         private static void OnPetSelectItemsRefresh(this DlgPetSelect self, Transform transform, int index)
         {
+            foreach (Scroll_Item_PetSelectItem item in self.ScrollItemPetSelectItems.Values)
+            {
+                if (item.uiTransform == transform)
+                {
+                    item.uiTransform = null;
+                }
+            }
+            
             Scroll_Item_PetSelectItem scrollItemPetSelectItem = self.ScrollItemPetSelectItems[index].BindTrans(transform);
             scrollItemPetSelectItem.OnInitData(self.ShowRolePetInfos[index]);
             scrollItemPetSelectItem.OperationType = self.OperationType;

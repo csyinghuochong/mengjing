@@ -26,6 +26,14 @@ namespace ET.Client
 
         private static void OnPetListItemsRefresh(this ES_ProtectPet self, Transform transform, int index)
         {
+            foreach (Scroll_Item_PetListItem item in self.ScrollItemPetListItems.Values)
+            {
+                if (item.uiTransform == transform)
+                {
+                    item.uiTransform = null;
+                }
+            }
+            
             Scroll_Item_PetListItem scrollItemPetListItem = self.ScrollItemPetListItems[index].BindTrans(transform);
             scrollItemPetListItem.SetClickHandler((petId) => { self.OnClickPetHandler(petId); });
             scrollItemPetListItem.OnInitData(self.ShowRolePetInfos[index], 0);

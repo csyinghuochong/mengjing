@@ -3,6 +3,7 @@ using UnityEngine;
 
 namespace ET.Client
 {
+    [FriendOf(typeof(Scroll_Item_SelectServerItem))]
     [FriendOf(typeof(DlgSelectServer))]
     public static class DlgSelectServerSystem
     {
@@ -22,6 +23,14 @@ namespace ET.Client
 
         private static void OnSelectServerItems1Refresh(this DlgSelectServer self, Transform transform, int index)
         {
+            foreach (Scroll_Item_SelectServerItem item in self.ScrollItemSelectServerItems1.Values)
+            {
+                if (item.uiTransform == transform)
+                {
+                    item.uiTransform = null;
+                }
+            }
+            
             Scroll_Item_SelectServerItem scrollItemSelectServerItem = self.ScrollItemSelectServerItems1[index].BindTrans(transform);
             scrollItemSelectServerItem.SetClickHandler((ServerItem serverId) => { self.OnClickServerItem(serverId); });
             scrollItemSelectServerItem.OnUpdateData(self.AllserverList[index], index);
@@ -29,6 +38,14 @@ namespace ET.Client
 
         private static void OnSelectServerItems2Refresh(this DlgSelectServer self, Transform transform, int index)
         {
+            foreach (Scroll_Item_SelectServerItem item in self.ScrollItemSelectServerItems2.Values)
+            {
+                if (item.uiTransform == transform)
+                {
+                    item.uiTransform = null;
+                }
+            }
+            
             Scroll_Item_SelectServerItem scrollItemSelectServerItem = self.ScrollItemSelectServerItems2[index].BindTrans(transform);
             scrollItemSelectServerItem.SetClickHandler((ServerItem serverId) => { self.OnClickServerItem(serverId); });
             scrollItemSelectServerItem.OnUpdateData(self.MyServers[index], -1);

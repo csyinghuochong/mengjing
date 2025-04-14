@@ -2,6 +2,7 @@
 
 namespace ET.Client
 {
+    [FriendOf(typeof(Scroll_Item_UnionApplyListItem))]
     [FriendOf(typeof(DlgUnionApplyList))]
     public static class DlgUnionApplyListSystem
     {
@@ -19,6 +20,14 @@ namespace ET.Client
 
         private static void OnUnionApplyListItemsRefresh(this DlgUnionApplyList self, Transform transform, int index)
         {
+            foreach (Scroll_Item_UnionApplyListItem item in self.ScrollItemUnionApplyListItems.Values)
+            {
+                if (item.uiTransform == transform)
+                {
+                    item.uiTransform = null;
+                }
+            }
+            
             Scroll_Item_UnionApplyListItem scrollItemUnionApplyListItem = self.ScrollItemUnionApplyListItems[index].BindTrans(transform);
             scrollItemUnionApplyListItem.OnUpdateUI(self.ApplyPlayerInfos[index]);
         }

@@ -34,6 +34,14 @@ namespace ET.Client
 
         private static void OnTaskShopItemsRefresh(this ES_TaskShop self, Transform transform, int index)
         {
+            foreach (Scroll_Item_TaskShopItem item in self.ScrollItemTaskShopItems.Values)
+            {
+                if (item.uiTransform == transform)
+                {
+                    item.uiTransform = null;
+                }
+            }
+            
             Scroll_Item_TaskShopItem scrollItemBattleShopItem = self.ScrollItemTaskShopItems[index].BindTrans(transform);
             scrollItemBattleShopItem.OnUpdateData(self.ShowStoreSellConfigs[index]);
         }

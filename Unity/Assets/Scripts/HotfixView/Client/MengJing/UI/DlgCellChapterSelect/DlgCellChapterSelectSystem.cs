@@ -7,6 +7,7 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
+    [FriendOf(typeof(Scroll_Item_CellDungeonItem))]
     [FriendOf(typeof(DlgCellChapterSelectViewComponent))]
     [FriendOf(typeof(DlgCellChapterSelect))]
     public static class DlgCellChapterSelectSystem
@@ -63,6 +64,14 @@ namespace ET.Client
 
         private static void OnCellDungeonItemsRefresh(this DlgCellChapterSelect self, Transform transform, int index)
         {
+            foreach (Scroll_Item_CellDungeonItem item in self.ScrollItemCellDungeonItems.Values)
+            {
+                if (item.uiTransform == transform)
+                {
+                    item.uiTransform = null;
+                }
+            }
+            
             Scroll_Item_CellDungeonItem scrollItemDungeonMapLevelItem = self.ScrollItemCellDungeonItems[index].BindTrans(transform);
             CellChapterConfig cellChapterConfig = CellChapterConfigCategory.Instance.Get(self.ChapterId);
             scrollItemDungeonMapLevelItem.Refresh(cellChapterConfig.RandomArea[index]);

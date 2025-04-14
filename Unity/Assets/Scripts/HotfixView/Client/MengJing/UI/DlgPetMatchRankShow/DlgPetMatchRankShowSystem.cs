@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
+    [FriendOf(typeof(Scroll_Item_PetMatchRankShowItem))]
     [FriendOf(typeof(DlgPetMatchRankShow))]
     public static class DlgPetMatchRankShowSystem
     {
@@ -45,6 +46,14 @@ namespace ET.Client
 
         private static void OnRankShowItemsRefresh(this DlgPetMatchRankShow self, Transform transform, int index)
         {
+            foreach (Scroll_Item_PetMatchRankShowItem item in self.ScrollItemRankShowItems.Values)
+            {
+                if (item.uiTransform == transform)
+                {
+                    item.uiTransform = null;
+                }
+            }
+            
             Scroll_Item_PetMatchRankShowItem scrollItemRankShowItem = self.ScrollItemRankShowItems[index].BindTrans(transform);
             scrollItemRankShowItem.Refresh(index + 1, self.ShowRankingInfos[index]);
         }

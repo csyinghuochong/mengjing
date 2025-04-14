@@ -36,6 +36,14 @@ namespace ET.Client
 
         private static void OnChengJiuShowItemsRefresh(this ES_ChengJiuShow self, Transform transform, int index)
         {
+            foreach (Scroll_Item_ChengJiuShowItem item in self.ScrollItemChengJiuShowItems.Values)
+            {
+                if (item.uiTransform == transform)
+                {
+                    item.uiTransform = null;
+                }
+            }
+            
             Scroll_Item_ChengJiuShowItem scrollItemChengJiuShowItem = self.ScrollItemChengJiuShowItems[index].BindTrans(transform);
             scrollItemChengJiuShowItem.OnUpdateData(self.ShowTask[index]);
         }

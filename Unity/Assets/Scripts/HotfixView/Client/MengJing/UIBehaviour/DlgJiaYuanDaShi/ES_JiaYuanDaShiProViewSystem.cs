@@ -3,6 +3,7 @@ using UnityEngine;
 
 namespace ET.Client
 {
+    [FriendOf(typeof(Scroll_Item_JiaYuanDaShiProItem))]
     [FriendOf(typeof(Scroll_Item_CommonItem))]
     [EntitySystemOf(typeof(ES_JiaYuanDaShiPro))]
     [FriendOfAttribute(typeof(ES_JiaYuanDaShiPro))]
@@ -32,6 +33,14 @@ namespace ET.Client
 
         private static void OnJiaYuanDaShiProItemsRefresh(this ES_JiaYuanDaShiPro self, Transform transform, int index)
         {
+            foreach (Scroll_Item_JiaYuanDaShiProItem item in self.ScrollItemJiaYuanDaShiProItems.Values)
+            {
+                if (item.uiTransform == transform)
+                {
+                    item.uiTransform = null;
+                }
+            }
+            
             Scroll_Item_JiaYuanDaShiProItem scrollItemJiaYuanDaShiProItem = self.ScrollItemJiaYuanDaShiProItems[index].BindTrans(transform);
 
             string[] proinfo = self.ShowProlist[index].Split(',');
@@ -69,6 +78,14 @@ namespace ET.Client
 
         private static void OnCommonItemsRefresh(this ES_JiaYuanDaShiPro self, Transform transform, int index)
         {
+            foreach (Scroll_Item_CommonItem item in self.ScrollItemCommonItems.Values)
+            {
+                if (item.uiTransform == transform)
+                {
+                    item.uiTransform = null;
+                }
+            }
+            
             Scroll_Item_CommonItem scrollItemCommonItem = self.ScrollItemCommonItems[index].BindTrans(transform);
             scrollItemCommonItem.Refresh(self.ShowBagInfos[index], ItemOperateEnum.None, self.OnSelectItem);
         }

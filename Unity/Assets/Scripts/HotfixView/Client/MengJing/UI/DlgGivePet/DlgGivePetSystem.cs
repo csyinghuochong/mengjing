@@ -44,6 +44,14 @@ namespace ET.Client
 
         private static void OnPetListItemsRefresh(this DlgGivePet self, Transform transform, int index)
         {
+            foreach (Scroll_Item_PetListItem item in self.ScrollItemPetListItems.Values)
+            {
+                if (item.uiTransform == transform)
+                {
+                    item.uiTransform = null;
+                }
+            }
+            
             Scroll_Item_PetListItem scrollItemPetListItem = self.ScrollItemPetListItems[index].BindTrans(transform);
             scrollItemPetListItem.SetClickHandler(self.OnClickPetHandler);
             scrollItemPetListItem.OnInitData(self.ShowRolePetInfos[index], self.NextPetNumber());

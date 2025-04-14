@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
+    [FriendOf(typeof(Scroll_Item_CommonItem))]
+    [FriendOf(typeof(Scroll_Item_SkillSetItem))]
     [FriendOf(typeof (ES_CommonItem))]
     [EntitySystemOf(typeof (ES_SkillSet))]
     [FriendOfAttribute(typeof (ES_SkillSet))]
@@ -85,12 +87,28 @@ namespace ET.Client
 
         private static void OnSkillSetItemsRefresh(this ES_SkillSet self, Transform transform, int index)
         {
+            foreach (Scroll_Item_SkillSetItem item in self.ScrollItemSkillSetItems.Values)
+            {
+                if (item.uiTransform == transform)
+                {
+                    item.uiTransform = null;
+                }
+            }
+            
             Scroll_Item_SkillSetItem scrollItemSkillSetItem = self.ScrollItemSkillSetItems[index].BindTrans(transform);
             scrollItemSkillSetItem.OnUpdateUI(self.ShowSkillPros[index]);
         }
 
         private static void OnCommonItemsRefresh(this ES_SkillSet self, Transform transform, int index)
         {
+            foreach (Scroll_Item_CommonItem item in self.ScrollItemCommonItems.Values)
+            {
+                if (item.uiTransform == transform)
+                {
+                    item.uiTransform = null;
+                }
+            }
+            
             Scroll_Item_CommonItem scrollItemCommonItem = self.ScrollItemCommonItems[index].BindTrans(transform);
 
             scrollItemCommonItem.UpdateItem(self.ShowBagInfos[index], ItemOperateEnum.SkillSet);

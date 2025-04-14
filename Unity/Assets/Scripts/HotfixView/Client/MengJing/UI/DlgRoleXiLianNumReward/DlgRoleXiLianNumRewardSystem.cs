@@ -3,6 +3,7 @@ using UnityEngine;
 
 namespace ET.Client
 {
+    [FriendOf(typeof(Scroll_Item_RoleXiLianNumRewardItem))]
     [FriendOf(typeof(DlgRoleXiLianNumReward))]
     public static class DlgRoleXiLianNumRewardSystem
     {
@@ -39,8 +40,15 @@ namespace ET.Client
 
         private static void OnRoleXiLianNumRewardItemsRefresh(this DlgRoleXiLianNumReward self, Transform transform, int index)
         {
-            Scroll_Item_RoleXiLianNumRewardItem scrollItemRoleXiLianNumRewardItem =
-                    self.ScrollItemRoleXiLianNumRewardItems[index].BindTrans(transform);
+            foreach (Scroll_Item_RoleXiLianNumRewardItem item in self.ScrollItemRoleXiLianNumRewardItems.Values)
+            {
+                if (item.uiTransform == transform)
+                {
+                    item.uiTransform = null;
+                }
+            }
+            
+            Scroll_Item_RoleXiLianNumRewardItem scrollItemRoleXiLianNumRewardItem = self.ScrollItemRoleXiLianNumRewardItems[index].BindTrans(transform);
             scrollItemRoleXiLianNumRewardItem.OnUpdateUI(self.ShowInfo[index]);
         }
 

@@ -27,6 +27,14 @@ namespace ET.Client
         {
             TitleComponentC titleComponent = self.Root().GetComponent<TitleComponentC>();
 
+            foreach (Scroll_Item_SettingTitleItem item in self.ScrollItemSettingTitleItems.Values)
+            {
+                if (item.uiTransform == transform)
+                {
+                    item.uiTransform = null;
+                }
+            }
+            
             Scroll_Item_SettingTitleItem scrollItemSettingTitleItem = self.ScrollItemSettingTitleItems[index].BindTrans(transform);
             scrollItemSettingTitleItem.OnInitUI(self.ShowTitleConfigs[index].Id, titleComponent.IsHaveTitle(self.ShowTitleConfigs[index].Id));
         }

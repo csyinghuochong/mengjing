@@ -161,6 +161,14 @@ namespace ET.Client
 
         private static void OnJiaYuanPurchaseItemsRefresh(this ES_JiaYuanPurchase self, Transform transform, int index)
         {
+            foreach (Scroll_Item_JiaYuanPurchaseItem item in self.ScrollItemJiaYuanPurchaseItems.Values)
+            {
+                if (item.uiTransform == transform)
+                {
+                    item.uiTransform = null;
+                }
+            }
+            
             Scroll_Item_JiaYuanPurchaseItem scrollItemJiaYuanPurchaseItem = self.ScrollItemJiaYuanPurchaseItems[index].BindTrans(transform);
             scrollItemJiaYuanPurchaseItem.OnUpdateUI(self.JiaYuanComponentC.PurchaseItemList_7[index], self.OnUpdateItem);
         }

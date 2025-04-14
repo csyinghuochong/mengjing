@@ -4,6 +4,8 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
+    [FriendOf(typeof(Scroll_Item_RankUnionTaskItem))]
+    [FriendOf(typeof(Scroll_Item_RunRaceItem))]
     [EntitySystemOf(typeof(ES_RankUnion))]
     [FriendOfAttribute(typeof(ES_RankUnion))]
     public static partial class ES_RankUnionSystem
@@ -30,12 +32,28 @@ namespace ET.Client
 
         private static void OnRunRaceItemsRefresh(this ES_RankUnion self, Transform transform, int index)
         {
+            foreach (Scroll_Item_RunRaceItem item in self.ScrollItemRunRaceItems.Values)
+            {
+                if (item.uiTransform == transform)
+                {
+                    item.uiTransform = null;
+                }
+            }
+            
             Scroll_Item_RunRaceItem scrollItemRunRaceItem = self.ScrollItemRunRaceItems[index].BindTrans(transform);
             scrollItemRunRaceItem.OnUpdate(self.ShowRankRewardConfigs[index]);
         }
 
         private static void OnRankUnionTaskItemsRefresh(this ES_RankUnion self, Transform transform, int index)
         {
+            foreach (Scroll_Item_RankUnionTaskItem item in self.ScrollItemRankUnionTaskItems.Values)
+            {
+                if (item.uiTransform == transform)
+                {
+                    item.uiTransform = null;
+                }
+            }
+            
             Scroll_Item_RankUnionTaskItem scrollItemRankUnionTaskItem = self.ScrollItemRankUnionTaskItems[index].BindTrans(transform);
             scrollItemRankUnionTaskItem.OnUpdateData(self.ShowTaskPros[index]);
         }

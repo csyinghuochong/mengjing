@@ -2,6 +2,7 @@ using UnityEngine;
 
 namespace ET.Client
 {
+    [FriendOf(typeof(Scroll_Item_SeasonTowerRankItem))]
     [EntitySystemOf(typeof(ES_SeasonTower))]
     [FriendOfAttribute(typeof(ES_SeasonTower))]
     public static partial class ES_SeasonTowerSystem
@@ -26,6 +27,14 @@ namespace ET.Client
 
         private static void OnSeasonTowerRankItemsRefresh(this ES_SeasonTower self, Transform transform, int index)
         {
+            foreach (Scroll_Item_SeasonTowerRankItem item in self.ScrollItemSeasonTowerRankItems.Values)
+            {
+                if (item.uiTransform == transform)
+                {
+                    item.uiTransform = null;
+                }
+            }
+            
             Scroll_Item_SeasonTowerRankItem scrollItemSeasonTowerRankItem = self.ScrollItemSeasonTowerRankItems[index].BindTrans(transform);
             scrollItemSeasonTowerRankItem.UpdateInfo(index + 1, self.ShowRankSeasonTowerInfos[index]);
         }

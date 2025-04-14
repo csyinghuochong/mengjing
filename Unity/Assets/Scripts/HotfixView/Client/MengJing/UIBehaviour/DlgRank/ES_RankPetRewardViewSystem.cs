@@ -3,6 +3,7 @@ using UnityEngine;
 
 namespace ET.Client
 {
+    [FriendOf(typeof(Scroll_Item_RankRewardItem))]
     [EntitySystemOf(typeof (ES_RankPetReward))]
     [FriendOfAttribute(typeof (ES_RankPetReward))]
     public static partial class ES_RankPetRewardSystem
@@ -46,6 +47,14 @@ namespace ET.Client
 
         private static void OnRankShowItemsRefresh(this ES_RankPetReward self, Transform transform, int index)
         {
+            foreach (Scroll_Item_RankRewardItem item in self.ScrollItemRankRewardItems.Values)
+            {
+                if (item.uiTransform == transform)
+                {
+                    item.uiTransform = null;
+                }
+            }
+            
             Scroll_Item_RankRewardItem scrollItemRankRewardItem = self.ScrollItemRankRewardItems[index].BindTrans(transform);
             scrollItemRankRewardItem.OnUpdateUI(self.ShowRankRewardConfigs[index]);
         }

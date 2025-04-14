@@ -3,6 +3,7 @@ using UnityEngine;
 
 namespace ET.Client
 {
+    [FriendOf(typeof(Scroll_Item_BattleTaskItem))]
     [EntitySystemOf(typeof (ES_BattleTask))]
     [FriendOfAttribute(typeof (ES_BattleTask))]
     public static partial class ES_BattleTaskSystem
@@ -23,6 +24,14 @@ namespace ET.Client
 
         private static void OnBattleTaskItemsRefresh(this ES_BattleTask self, Transform transform, int index)
         {
+            foreach (Scroll_Item_BattleTaskItem item in self.ScrollItemBattleTaskItems.Values)
+            {
+                if (item.uiTransform == transform)
+                {
+                    item.uiTransform = null;
+                }
+            }
+            
             Scroll_Item_BattleTaskItem scrollItemBattleTaskItem = self.ScrollItemBattleTaskItems[index].BindTrans(transform);
             scrollItemBattleTaskItem.OnUpdateData(self.ShowTaskPro[index]);
         }

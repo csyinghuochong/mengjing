@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
+    [FriendOf(typeof(Scroll_Item_CommonSkillItem))]
     [FriendOf(typeof(Scroll_Item_PetTuJianItem))]
     [EntitySystemOf(typeof(ES_PetTuJian))]
     [FriendOfAttribute(typeof(ES_PetTuJian))]
@@ -240,6 +241,14 @@ namespace ET.Client
 
         private static void OnCommonSkillItemsRefresh(this ES_PetTuJian self, Transform transform, int index)
         {
+            foreach (Scroll_Item_CommonSkillItem item in self.ScrollItemCommonSkillItems.Values)
+            {
+                if (item.uiTransform == transform)
+                {
+                    item.uiTransform = null;
+                }
+            }
+            
             Scroll_Item_CommonSkillItem scrollItemCommonSkillItem = self.ScrollItemCommonSkillItems[index].BindTrans(transform);
             scrollItemCommonSkillItem.OnUpdateUI(self.ShowSkill[index], ABAtlasTypes.RoleSkillIcon);
         }

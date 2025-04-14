@@ -2,6 +2,7 @@
 
 namespace ET.Client
 {
+    [FriendOf(typeof(Scroll_Item_JingXuanItem))]
     [FriendOf(typeof(DlgUnionJingXuan))]
     public static class DlgUnionJingXuanSystem
     {
@@ -59,6 +60,14 @@ namespace ET.Client
 
         private static void OnJingXuanItemsRefresh(this DlgUnionJingXuan self, Transform transform, int index)
         {
+            foreach (Scroll_Item_JingXuanItem item in self.ScrollItemJingXuanItems.Values)
+            {
+                if (item.uiTransform == transform)
+                {
+                    item.uiTransform = null;
+                }
+            }
+            
             Scroll_Item_JingXuanItem scrollItemJingXuanItem = self.ScrollItemJingXuanItems[index].BindTrans(transform);
             scrollItemJingXuanItem.OnUpdateUI(self.UnionPlayerInfos[index].Item1, self.UnionPlayerInfos[index].Item2);
         }

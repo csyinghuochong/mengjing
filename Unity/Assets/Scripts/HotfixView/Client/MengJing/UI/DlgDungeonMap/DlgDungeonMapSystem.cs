@@ -156,6 +156,14 @@ namespace ET.Client
 
         private static void OnDungeonMapLevelItemsRefresh(this DlgDungeonMap self, Transform transform, int index)
         {
+            foreach (Scroll_Item_DungeonMapLevelItem item in self.ScrollItemDungeonMapLevelItems.Values)
+            {
+                if (item.uiTransform == transform)
+                {
+                    item.uiTransform = null;
+                }
+            }
+            
             Scroll_Item_DungeonMapLevelItem scrollItemDungeonMapLevelItem = self.ScrollItemDungeonMapLevelItems[index].BindTrans(transform);
             scrollItemDungeonMapLevelItem.Refresh(self.ShowBoosRefreshTime[index].KeyId, long.Parse(self.ShowBoosRefreshTime[index].Value));
         }

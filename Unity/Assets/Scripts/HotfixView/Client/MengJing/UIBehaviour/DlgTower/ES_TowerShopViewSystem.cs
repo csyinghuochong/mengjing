@@ -2,6 +2,7 @@ using UnityEngine;
 
 namespace ET.Client
 {
+    [FriendOf(typeof(Scroll_Item_TowerShopItem))]
     [FriendOf(typeof(Scroll_Item_WeiJingShopItem))]
     [EntitySystemOf(typeof(ES_TowerShop))]
     [FriendOfAttribute(typeof(ES_TowerShop))]
@@ -24,6 +25,14 @@ namespace ET.Client
 
         private static void OnTowerShopItemsRefresh(this ES_TowerShop self, Transform transform, int index)
         {
+            foreach (Scroll_Item_TowerShopItem item in self.ScrollItemTowerShopItems.Values)
+            {
+                if (item.uiTransform == transform)
+                {
+                    item.uiTransform = null;
+                }
+            }
+            
             Scroll_Item_TowerShopItem scrollItemTowerShopItem = self.ScrollItemTowerShopItems[index].BindTrans(transform);
             scrollItemTowerShopItem.OnUpdateUI(self.ShowItems[index]);
         }

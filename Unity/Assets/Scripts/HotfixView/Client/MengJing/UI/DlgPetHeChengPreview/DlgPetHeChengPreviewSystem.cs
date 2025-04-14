@@ -3,6 +3,7 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
+    [FriendOf(typeof(Scroll_Item_CommonSkillItem))]
     [FriendOf(typeof(DlgPetHeChengPreview))]
     public static class DlgPetHeChengPreviewSystem
     {
@@ -31,18 +32,42 @@ namespace ET.Client
 
         private static void OnCommonSkillItems_ARefresh(this DlgPetHeChengPreview self, Transform transform, int index)
         {
+            foreach (Scroll_Item_CommonSkillItem item in self.ScrollItemCommonSkillItems_A.Values)
+            {
+                if (item.uiTransform == transform)
+                {
+                    item.uiTransform = null;
+                }
+            }
+
             Scroll_Item_CommonSkillItem scrollItemCommonSkillItem = self.ScrollItemCommonSkillItems_A[index].BindTrans(transform);
             scrollItemCommonSkillItem.OnUpdatePetSkill(self.PetAbaseSkillId[index], ABAtlasTypes.RoleSkillIcon);
         }
 
         private static void OnCommonSkillItems_BRefresh(this DlgPetHeChengPreview self, Transform transform, int index)
         {
+            foreach (Scroll_Item_CommonSkillItem item in self.ScrollItemCommonSkillItems_B.Values)
+            {
+                if (item.uiTransform == transform)
+                {
+                    item.uiTransform = null;
+                }
+            }
+            
             Scroll_Item_CommonSkillItem scrollItemCommonSkillItem = self.ScrollItemCommonSkillItems_B[index].BindTrans(transform);
             scrollItemCommonSkillItem.OnUpdatePetSkill(self.PetBbaseSkillId[index], ABAtlasTypes.RoleSkillIcon);
         }
 
         private static void OnCommonSkillItemsRefresh(this DlgPetHeChengPreview self, Transform transform, int index)
         {
+            foreach (Scroll_Item_CommonSkillItem item in self.ScrollItemCommonSkillItems.Values)
+            {
+                if (item.uiTransform == transform)
+                {
+                    item.uiTransform = null;
+                }
+            }
+            
             Scroll_Item_CommonSkillItem scrollItemCommonSkillItem = self.ScrollItemCommonSkillItems[index].BindTrans(transform);
             scrollItemCommonSkillItem.OnUpdatePetSkill(self.AllSkillId[index], ABAtlasTypes.RoleSkillIcon);
         }

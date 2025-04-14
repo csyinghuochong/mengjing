@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace ET.Client
 {
+    [FriendOf(typeof(Scroll_Item_ActivitySingleRechargeItem))]
     [EntitySystemOf(typeof (ES_ActivitySingleRecharge))]
     [FriendOfAttribute(typeof (ES_ActivitySingleRecharge))]
     public static partial class ES_ActivitySingleRechargeSystem
@@ -31,6 +32,14 @@ namespace ET.Client
 
         private static void OnActivitySingleRechargeItemsRefresh(this ES_ActivitySingleRecharge self, Transform transform, int index)
         {
+            foreach (Scroll_Item_ActivitySingleRechargeItem item in self.ScrollItemActivitySingleRechargeItems.Values)
+            {
+                if (item.uiTransform == transform)
+                {
+                    item.uiTransform = null;
+                }
+            }
+            
             Scroll_Item_ActivitySingleRechargeItem scrollItemActivitySingleRechargeItem =
                     self.ScrollItemActivitySingleRechargeItems[index].BindTrans(transform);
             scrollItemActivitySingleRechargeItem.OnUpdateData(self.ShowItem[index]);

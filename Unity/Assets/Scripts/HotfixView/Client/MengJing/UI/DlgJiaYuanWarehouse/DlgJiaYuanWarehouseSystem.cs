@@ -162,6 +162,14 @@ namespace ET.Client
 
         private static void OnHouseItemsRefresh(this DlgJiaYuanWarehouse self, Transform transform, int index)
         {
+            foreach (Scroll_Item_CommonItem item in self.ScrollItemHouseItems.Values)
+            {
+                if (item.uiTransform == transform)
+                {
+                    item.uiTransform = null;
+                }
+            }
+            
             Scroll_Item_CommonItem scrollItemCommonItem = self.ScrollItemHouseItems[index].BindTrans(transform);
 
             if (index < self.ShowHouseBagInfos.Count)
@@ -177,6 +185,14 @@ namespace ET.Client
 
         private static void OnBagItemsRefresh(this DlgJiaYuanWarehouse self, Transform transform, int index)
         {
+            foreach (Scroll_Item_CommonItem item in self.ScrollItemBagItems.Values)
+            {
+                if (item.uiTransform == transform)
+                {
+                    item.uiTransform = null;
+                }
+            }
+            
             Scroll_Item_CommonItem scrollItemCommonItem = self.ScrollItemBagItems[index].BindTrans(transform);
             scrollItemCommonItem.Refresh(index < self.ShowBagBagInfos.Count ? self.ShowBagBagInfos[index] : null, ItemOperateEnum.CangkuBag,
                 self.UpdateBagSelect, self.View.E_ItemTypeSetToggleGroup.GetCurrentIndex() + (int)ItemLocType.JianYuanWareHouse1);

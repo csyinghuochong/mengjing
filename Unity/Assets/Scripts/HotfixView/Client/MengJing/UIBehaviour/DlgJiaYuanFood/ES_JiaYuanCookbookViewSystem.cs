@@ -3,6 +3,7 @@ using UnityEngine;
 
 namespace ET.Client
 {
+    [FriendOf(typeof(Scroll_Item_JiaYuanCookbookItem))]
     [EntitySystemOf(typeof (ES_JiaYuanCookbook))]
     [FriendOfAttribute(typeof (ES_JiaYuanCookbook))]
     public static partial class ES_JiaYuanCookbookSystem
@@ -22,6 +23,14 @@ namespace ET.Client
 
         private static void OnJiaYuanCookbookItemsRefresh(this ES_JiaYuanCookbook self, Transform transform, int index)
         {
+            foreach (Scroll_Item_JiaYuanCookbookItem item in self.ScrollItemJiaYuanCookbookItems.Values)
+            {
+                if (item.uiTransform == transform)
+                {
+                    item.uiTransform = null;
+                }
+            }
+            
             Scroll_Item_JiaYuanCookbookItem scrollItemJiaYuanCookbookItem = self.ScrollItemJiaYuanCookbookItems[index].BindTrans(transform);
             JiaYuanComponentC jiaYuanComponentC = self.Root().GetComponent<JiaYuanComponentC>();
             scrollItemJiaYuanCookbookItem.OnUpdateUI(self.ShowFoods[index], jiaYuanComponentC.LearnMakeIds_7.Contains(self.ShowFoods[index]));

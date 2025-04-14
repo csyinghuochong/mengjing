@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
+    [FriendOf(typeof(Scroll_Item_CommonItem))]
     [FriendOf(typeof(ES_PetEggListItem))]
     [EntitySystemOf(typeof(ES_PetEggList))]
     [FriendOfAttribute(typeof(ES_PetEggList))]
@@ -42,6 +43,14 @@ namespace ET.Client
 
         private static void OnBagItemsRefresh(this ES_PetEggList self, Transform transform, int index)
         {
+            foreach (Scroll_Item_CommonItem item in self.ScrollItemCommonItems.Values)
+            {
+                if (item.uiTransform == transform)
+                {
+                    item.uiTransform = null;
+                }
+            }
+            
             Scroll_Item_CommonItem scrollItemCommonItem = self.ScrollItemCommonItems[index].BindTrans(transform);
             scrollItemCommonItem.Refresh(self.ShowBagInfos[index], ItemOperateEnum.SkillSet);
             scrollItemCommonItem.SetEventTrigger(true);
