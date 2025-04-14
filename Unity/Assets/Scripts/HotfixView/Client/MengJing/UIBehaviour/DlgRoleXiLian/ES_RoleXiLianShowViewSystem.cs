@@ -395,6 +395,7 @@ namespace ET.Client
                 else
                 {
                     GameObject newGo = self.ShowPropertyText_2(0, textShow, "0", propertyGO, parentGO);
+                    self.ShowProgressBar(hidePropertyValue, equipConfig.HideMax, newGo);
                     properShowNum += 1;
                 }
             }
@@ -863,21 +864,27 @@ namespace ET.Client
 
         private static void UpdateCombat(this ES_RoleXiLianShow self)
         {
-            int combat = self.Root().GetComponent<UserInfoComponentC>().UserInfo.Combat;
-            using (zstring.Block())
+            int combatChange = 0;
+            if (self.EquipCombatChangeDic.ContainsKey(self.XilianBagInfo.BagInfoID))
             {
-                self.E_BatAddText.text = zstring.Format("预计战力增长：{0}", 0);
+                (ItemInfo, int) valueTuple = self.EquipCombatChangeDic[self.XilianBagInfo.BagInfoID];
+                combatChange = self.CalculateCombat(self.XilianBagInfo) - valueTuple.Item2;
             }
             
-            self.E_CombatUpImage.gameObject.SetActive(false);
-            self.E_CombatDownImage.gameObject.SetActive(false);
+            using (zstring.Block())
+            {
+                self.E_BatAddText.text = zstring.Format("预计战力增长：{0}", combatChange);
+            }
+
+            self.E_CombatUpImage.gameObject.SetActive(combatChange > 0);
+            self.E_CombatDownImage.gameObject.SetActive(combatChange < 0);
         }
 
         # region 计算装备大概的战力
 
-        private static int CalculateCombat(this ES_RoleXiLianShow self)
+        private static int CalculateCombat(this ES_RoleXiLianShow self, ItemInfo itemInfo)
         {
-            ItemConfig itemCof = ItemConfigCategory.Instance.Get(self.XilianBagInfo.ItemID);
+            ItemConfig itemCof = ItemConfigCategory.Instance.Get(itemInfo.ItemID);
 
             int zhanliValue = 0;
 
@@ -898,7 +905,7 @@ namespace ET.Client
             if (occTwoValue != 0)
             {
                 if (itemCof.EquipType == 11 || itemCof.EquipType == 12 ||
-                    itemCof.EquipType == 13 && self.XilianBagInfo.Loc == (int)ItemLocType.ItemLocEquip)
+                    itemCof.EquipType == 13 && itemInfo.Loc == (int)ItemLocType.ItemLocEquip)
                 {
                     int selfMastery = OccupationTwoConfigCategory.Instance.Get(occTwoValue).ArmorMastery;
                     if (selfMastery != itemCof.EquipType)
@@ -912,53 +919,53 @@ namespace ET.Client
             if (ifAddHidePro)
             {
                 //存储装备精炼数值
-                if (self.XilianBagInfo.HideProLists != null)
+                if (itemInfo.HideProLists != null)
                 {
-                    for (int y = 0; y < self.XilianBagInfo.HideProLists.Count; y++)
+                    for (int y = 0; y < itemInfo.HideProLists.Count; y++)
                     {
-                        HideProList hidePro = self.XilianBagInfo.HideProLists[y];
+                        HideProList hidePro = itemInfo.HideProLists[y];
                         AddUpdateProDicList(hidePro.HideID, hidePro.HideValue, UpdateProDicList);
                     }
                 }
             }
 
             //存储洗炼数值
-            if (self.XilianBagInfo.XiLianHideProLists != null)
+            if (itemInfo.XiLianHideProLists != null)
             {
-                for (int y = 0; y < self.XilianBagInfo.XiLianHideProLists.Count; y++)
+                for (int y = 0; y < itemInfo.XiLianHideProLists.Count; y++)
                 {
-                    HideProList hidePro = self.XilianBagInfo.XiLianHideProLists[y];
+                    HideProList hidePro = itemInfo.XiLianHideProLists[y];
                     AddUpdateProDicList(hidePro.HideID, hidePro.HideValue, UpdateProDicList);
                 }
             }
 
             //存储洗炼数值
-            if (self.XilianBagInfo.XiLianHideTeShuProLists != null)
+            if (itemInfo.XiLianHideTeShuProLists != null)
             {
-                for (int y = 0; y < self.XilianBagInfo.XiLianHideTeShuProLists.Count; y++)
+                for (int y = 0; y < itemInfo.XiLianHideTeShuProLists.Count; y++)
                 {
-                    HideProList hidePro = self.XilianBagInfo.XiLianHideTeShuProLists[y];
+                    HideProList hidePro = itemInfo.XiLianHideTeShuProLists[y];
                     HideProListConfig hideproCof = HideProListConfigCategory.Instance.Get(hidePro.HideID);
                     AddUpdateProDicList(hideproCof.PropertyType, hidePro.HideValue, UpdateProDicList);
                 }
             }
 
             //存储附魔属性
-            if (self.XilianBagInfo.FumoProLists != null)
+            if (itemInfo.FumoProLists != null)
             {
-                for (int y = 0; y < self.XilianBagInfo.FumoProLists.Count; y++)
+                for (int y = 0; y < itemInfo.FumoProLists.Count; y++)
                 {
-                    HideProList hidePro = self.XilianBagInfo.FumoProLists[y];
+                    HideProList hidePro = itemInfo.FumoProLists[y];
                     AddUpdateProDicList(hidePro.HideID, hidePro.HideValue, UpdateProDicList);
                 }
             }
 
             // 存储增幅属性
-            if (self.XilianBagInfo.IncreaseProLists != null && self.XilianBagInfo.IncreaseProLists.Count > 0)
+            if (itemInfo.IncreaseProLists != null && itemInfo.IncreaseProLists.Count > 0)
             {
-                for (int j = 0; j < self.XilianBagInfo.IncreaseProLists.Count; j++)
+                for (int j = 0; j < itemInfo.IncreaseProLists.Count; j++)
                 {
-                    HideProList hideProList = self.XilianBagInfo.IncreaseProLists[j];
+                    HideProList hideProList = itemInfo.IncreaseProLists[j];
                     HideProListConfig hideProListConfig = HideProListConfigCategory.Instance.Get(hideProList.HideID);
                     AddUpdateProDicList(hideProListConfig.PropertyType, hideProList.HideValue, UpdateProDicList);
                 }
@@ -966,11 +973,11 @@ namespace ET.Client
 
             //.InheritSkills //传承技能
             // 存储增幅技能属性
-            if (self.XilianBagInfo.IncreaseSkillLists != null && self.XilianBagInfo.IncreaseSkillLists.Count > 0)
+            if (itemInfo.IncreaseSkillLists != null && itemInfo.IncreaseSkillLists.Count > 0)
             {
-                for (int s = 0; s < self.XilianBagInfo.IncreaseSkillLists.Count; s++)
+                for (int s = 0; s < itemInfo.IncreaseSkillLists.Count; s++)
                 {
-                    HideProListConfig hideProListConfig = HideProListConfigCategory.Instance.Get(self.XilianBagInfo.IncreaseSkillLists[s]);
+                    HideProListConfig hideProListConfig = HideProListConfigCategory.Instance.Get(itemInfo.IncreaseSkillLists[s]);
                     SkillConfig skillConfig = SkillConfigCategory.Instance.Get(hideProListConfig.PropertyType);
 
                     if (skillConfig.SkillType != (int)SkillTypeEnum.PassiveAddProSkill)
@@ -1025,19 +1032,19 @@ namespace ET.Client
             //极品属性
             float addPro = 0;
 
-            if (self.XilianBagInfo.HideSkillLists.Contains(68000104) || self.XilianBagInfo.IncreaseSkillLists.Contains(3903))
+            if (itemInfo.HideSkillLists.Contains(68000104) || itemInfo.IncreaseSkillLists.Contains(3903))
             {
                 addPro = 0.2f;
             }
 
             //虚弱属性
-            if (self.XilianBagInfo.HideSkillLists.Contains(68000107))
+            if (itemInfo.HideSkillLists.Contains(68000107))
             {
                 addPro = -0.1f;
             }
 
             //胜算属性
-            if (self.XilianBagInfo.HideSkillLists.Contains(68000105) || self.XilianBagInfo.IncreaseSkillLists.Contains(3904))
+            if (itemInfo.HideSkillLists.Contains(68000105) || itemInfo.IncreaseSkillLists.Contains(3904))
             {
                 mEquipCon.Equip_MinAct = mEquipCon.Equip_MaxAct;
             }
@@ -1071,12 +1078,12 @@ namespace ET.Client
             }
 
             //获取宝石属性
-            if (string.IsNullOrEmpty(self.XilianBagInfo.GemIDNew))
+            if (string.IsNullOrEmpty(itemInfo.GemIDNew))
             {
-                self.XilianBagInfo.GemIDNew = ConfigData.DefaultGem;
+                itemInfo.GemIDNew = ConfigData.DefaultGem;
             }
 
-            string[] gemList = self.XilianBagInfo.GemIDNew.Split('_');
+            string[] gemList = itemInfo.GemIDNew.Split('_');
 
             for (int z = 0; z < gemList.Length; z++)
             {
@@ -1135,8 +1142,8 @@ namespace ET.Client
                     }
 
                     //宝石专精
-                    if (self.XilianBagInfo.HideSkillLists.Contains(68000108) || self.XilianBagInfo.IncreaseSkillLists.Contains(2108) ||
-                        self.XilianBagInfo.IncreaseSkillLists.Contains(3902))
+                    if (itemInfo.HideSkillLists.Contains(68000108) || itemInfo.IncreaseSkillLists.Contains(2108) ||
+                        itemInfo.IncreaseSkillLists.Contains(3902))
                     {
                         gemValue = (long)((float)gemValue * 1.2f);
                     }
@@ -1184,7 +1191,7 @@ namespace ET.Client
 
             //传承鉴定特殊属性加成
             int chuanchengProAdd = 0;
-            if (self.XilianBagInfo.InheritSkills.Count >= 1)
+            if (itemInfo.InheritSkills.Count >= 1)
             {
                 chuanchengProAdd += 500;
             }
@@ -1198,14 +1205,14 @@ namespace ET.Client
             //隐藏技能战力
             int skillFightValue = 0;
 
-            for (int z = 0; z < self.XilianBagInfo.HideSkillLists.Count; z++)
+            for (int z = 0; z < itemInfo.HideSkillLists.Count; z++)
             {
                 Dictionary<int, HideProListConfig> hideCof = new Dictionary<int, HideProListConfig>();
                 hideCof = HideProListConfigCategory.Instance.GetAll();
 
                 foreach (HideProListConfig hideProConfig in hideCof.Values)
                 {
-                    if (hideProConfig.PropertyType == self.XilianBagInfo.HideSkillLists[z])
+                    if (hideProConfig.PropertyType == itemInfo.HideSkillLists[z])
                     {
                         skillFightValue += hideProConfig.AddFightValue;
                     }
@@ -1462,8 +1469,14 @@ namespace ET.Client
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
             int oldXiLianDu = unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.ItemXiLianDu);
 
+            if (!self.EquipCombatChangeDic.ContainsKey(bagInfo.BagInfoID))
+            {
+                int combat = self.CalculateCombat(bagInfo);
+                self.EquipCombatChangeDic.Add(bagInfo.BagInfoID, (bagInfo, combat));
+            }
+            
             M2C_ItemXiLianResponse response = await BagClientNetHelper.RquestItemXiLian(self.Root(), bagInfo.BagInfoID, times);
-            if (response.Error != 0)
+            if (response.Error != ErrorCode.ERR_Success)
             {
                 return;
             }
