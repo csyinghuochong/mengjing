@@ -46,8 +46,9 @@ namespace ET.Client
             }
         }
 
-        public static void OnXiLianReturn(this DlgRoleXiLian self)
+        public static void OnXiLianReturn(this DlgRoleXiLian self, long bagInfoID, long changeCombat)
         {
+            self.View.ES_RoleXiLianShow.UpdateEquipCombatChange(bagInfoID, changeCombat);
             self.View.ES_RoleXiLianShow.OnXiLianReturn();
         }
     }

@@ -22,7 +22,7 @@ namespace ET.Client
 			}
 		}
 		
-		public Dictionary<long, (ItemInfo, int)> EquipCombatChangeDic { get; set; }= new();
+		public Dictionary<long, (ItemInfo, long)> EquipCombatChangeDic { get; set; }= new();
 
 		public Dictionary<int, EntityRef<Scroll_Item_XiLianShowEquipItem>> ScrollItemXiLianShowEquipItems = new();
 		public Dictionary<int, EntityRef<Scroll_Item_CommonItem>> ScrollItemCommonItems;

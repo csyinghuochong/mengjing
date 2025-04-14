@@ -45,7 +45,7 @@ namespace ET.Client
                 return;
             }
 
-            self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgRoleXiLian>().OnXiLianReturn();
+            self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgRoleXiLian>().OnXiLianReturn(self.BagInfo.BagInfoID, self.ItemXiLianResult.ChangeCombat);
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_RoleXiLianTen);
         }
     }

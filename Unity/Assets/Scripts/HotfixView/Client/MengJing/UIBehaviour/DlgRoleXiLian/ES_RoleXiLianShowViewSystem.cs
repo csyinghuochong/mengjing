@@ -926,8 +926,7 @@ namespace ET.Client
             
             if (!self.EquipCombatChangeDic.ContainsKey(bagInfo.BagInfoID))
             {
-                int combat = self.CalculateCombat(bagInfo);
-                self.EquipCombatChangeDic.Add(bagInfo.BagInfoID, (bagInfo, combat));
+                self.EquipCombatChangeDic.Add(bagInfo.BagInfoID, (bagInfo, 0));
             }
 
             self.UpdateAttribute(bagInfo);
@@ -965,11 +964,11 @@ namespace ET.Client
 
         private static void UpdateCombat(this ES_RoleXiLianShow self)
         {
-            int combatChange = 0;
+            long combatChange = 0;
             if (self.EquipCombatChangeDic.ContainsKey(self.XilianBagInfo.BagInfoID))
             {
-                (ItemInfo, int) valueTuple = self.EquipCombatChangeDic[self.XilianBagInfo.BagInfoID];
-                combatChange = self.CalculateCombat(self.XilianBagInfo) - valueTuple.Item2;
+                (ItemInfo, long) valueTuple = self.EquipCombatChangeDic[self.XilianBagInfo.BagInfoID];
+                combatChange = valueTuple.Item2;
             }
             
             using (zstring.Block())
@@ -1579,6 +1578,7 @@ namespace ET.Client
             if (times == 1)
             {
                 FlyTipComponent.Instance.ShowFlyTip("洗炼道具成功");
+                self.UpdateEquipCombatChange(bagInfo.BagInfoID, response.ItemXiLianResults[0].ChangeCombat);
                 self.OnXiLianReturn();
                 self.ShowXiLianEffect().Coroutine();
             }
@@ -1606,6 +1606,15 @@ namespace ET.Client
             // #endif
         }
 
+        public static void UpdateEquipCombatChange(this ES_RoleXiLianShow self, long bagInfoID, long changeCombat)
+        {
+            if (self.EquipCombatChangeDic.ContainsKey(bagInfoID))
+            {
+                (ItemInfo, long) info = self.EquipCombatChangeDic[bagInfoID];
+                self.EquipCombatChangeDic[bagInfoID] = (info.Item1, changeCombat);
+            }
+        }
+        
         public static void OnXiLianReturn(this ES_RoleXiLianShow self)
         {
             self.XilianBagInfo = self.Root().GetComponent<BagComponentC>().GetBagInfo(self.BagInfoID);
