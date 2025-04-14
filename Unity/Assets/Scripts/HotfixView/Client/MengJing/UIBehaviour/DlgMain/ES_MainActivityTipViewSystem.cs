@@ -90,7 +90,7 @@ namespace ET.Client
 
             self.ActivityShowList.Sort(delegate(ActivityTipConfig a, ActivityTipConfig b) { return (a.OpenTime > b.OpenTime ? 1 : 0); });
 
-            self.StartTimer();
+            ///self.StartTimer();
         }
 
         public static void StartTimer(this ES_MainActivityTip self)

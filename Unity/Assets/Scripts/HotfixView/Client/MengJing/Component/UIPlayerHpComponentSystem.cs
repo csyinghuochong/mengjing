@@ -212,8 +212,8 @@ namespace ET.Client
             self.UIPlayerHpText.transform.SetParent(globalComponent.BloodText_Layer0.transform);
             self.UIPlayerHpText.transform.localScale = Vector3.one;
             HeadBarUI HeadBarUI_1 = self.UIPlayerHpText.GetComponent<HeadBarUI>();
-            // HeadBarUI_1.enabled = !unit.MainHero;
-            HeadBarUI_1.enabled = true;
+            HeadBarUI_1.enabled = !unit.MainHero;
+            //HeadBarUI_1.enabled = true;
             HeadBarUI_1.HeadPos = self.UIPosition;
             HeadBarUI_1.HeadBar = self.UIPlayerHpText;
             HeadBarUI_1.UiCamera = globalComponent.UICamera.GetComponent<Camera>();
@@ -221,8 +221,8 @@ namespace ET.Client
             HeadBarUI_1.UpdatePostion();
 
             HeadBarUI HeadBarUI_2 = self.GameObject.GetComponent<HeadBarUI>();
-            // HeadBarUI_2.enabled =  !unit.MainHero;
-            HeadBarUI_2.enabled = true;
+            HeadBarUI_2.enabled =  !unit.MainHero;
+            //HeadBarUI_2.enabled = true;
             HeadBarUI_2.HeadPos = self.UIPosition;
             HeadBarUI_2.HeadBar = self.GameObject;
             HeadBarUI_2.UiCamera = globalComponent.UICamera.GetComponent<Camera>();
@@ -271,17 +271,22 @@ namespace ET.Client
             }
 
             Unit unit = self.GetParent<Unit>();
+            if (!unit.MainHero)
+            {
+                return;
+            }
+
             NumericComponentC numericComponent = unit.GetComponent<NumericComponentC>();
             int horseRide = numericComponent.GetAsInt(NumericType.HorseRide);
 
-            Vector3 vector3_zuoqi = new Vector3(0f, 180f, 0f);
-            Vector3 vector3_normal = new Vector3(0f, 120f, 0f);
+            Vector3 vector3_zuoqi = new Vector3(30f, 200f, 0f);  //坐骑状态
+            Vector3 vector3_normal = new Vector3(30f, 120f, 0f); //非坐骑状态
             if (horseRide > 0)
             {
                 ZuoQiShowConfig zuoQiShowConfig = ZuoQiShowConfigCategory.Instance.Get(horseRide);
                 vector3_zuoqi.y += (float)zuoQiShowConfig.NameShowUp;
             }
-
+            
             self.GameObject.transform.localPosition = horseRide > 0 ? vector3_zuoqi : vector3_normal;
             if (unit.MainHero)
             {
