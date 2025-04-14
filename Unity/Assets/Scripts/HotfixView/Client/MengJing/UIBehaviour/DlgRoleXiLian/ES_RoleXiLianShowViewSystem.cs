@@ -236,12 +236,11 @@ namespace ET.Client
             self.ShowXiLianAttribute(bagComponent.GetEquipList(), bagInfo, prefab, self.E_XiLianShowEquipPropertyItemsScrollRect.transform.Find("Content").gameObject);
         }
 
-        public static int ShowXiLianAttribute(this ES_RoleXiLianShow self, List<ItemInfo> equipItemList, ItemInfo baginfo, GameObject propertyGO,
+        public static int ShowXiLianAttribute(this ES_RoleXiLianShow self, List<ItemInfo> equipItemList, ItemInfo itemInfo, GameObject propertyGO,
         GameObject parentGO)
         {
             int properShowNum = 0;
-            ItemConfig itemConfig = ItemConfigCategory.Instance.Get(baginfo.ItemID);
-
+            ItemConfig itemConfig = ItemConfigCategory.Instance.Get(itemInfo.ItemID);
             EquipConfig equipConfig = EquipConfigCategory.Instance.Get(itemConfig.ItemEquipID);
             int equip_Hp = equipConfig.Equip_Hp;
             int equip_MinAct = equipConfig.Equip_MinAct;
@@ -260,13 +259,32 @@ namespace ET.Client
             double equip_Speed = equipConfig.Equip_Speed;
             double equip_Lucky = equipConfig.Equip_Lucky;
 
+            ItemInfo last_itemInfo = self.EquipCombatChangeDic[itemInfo.BagInfoID].Item1;
+            int last_equip_Hp = equipConfig.Equip_Hp;
+            int last_equip_MinAct = equipConfig.Equip_MinAct;
+            int last_equip_MaxAct = equipConfig.Equip_MaxAct;
+            int last_equip_MinMagAct = equipConfig.Equip_MinMagAct;
+            int last_equip_MaxMagAct = equipConfig.Equip_MaxMagAct;
+            int last_equip_MinDef = equipConfig.Equip_MinDef;
+            int last_equip_MaxDef = equipConfig.Equip_MaxDef;
+            int last_equip_MinAdf = equipConfig.Equip_MinAdf;
+            int last_equip_MaxAdf = equipConfig.Equip_MaxAdf;
+            double last_equip_Cri = equipConfig.Equip_Cri;
+            double last_equip_Hit = equipConfig.Equip_Hit;
+            double last_equip_Dodge = equipConfig.Equip_Dodge;
+            double last_equip_DamgeAdd = equipConfig.Equip_DamgeAdd;
+            double last_equip_DamgeSub = equipConfig.Equip_DamgeSub;
+            double last_equip_Speed = equipConfig.Equip_Speed;
+            double last_equip_Lucky = equipConfig.Equip_Lucky;
+            
+            
             // 换算总显示数值
-            if (baginfo.XiLianHideProLists != null)
+            if (itemInfo.XiLianHideProLists != null)
             {
-                for (int i = 0; i < baginfo.XiLianHideProLists.Count; i++)
+                for (int i = 0; i < itemInfo.XiLianHideProLists.Count; i++)
                 {
-                    int hidePropertyType = baginfo.XiLianHideProLists[i].HideID;
-                    int hidePropertyValue = (int)baginfo.XiLianHideProLists[i].HideValue;
+                    int hidePropertyType = itemInfo.XiLianHideProLists[i].HideID;
+                    int hidePropertyValue = (int)itemInfo.XiLianHideProLists[i].HideValue;
 
                     switch (hidePropertyType)
                     {
@@ -285,6 +303,30 @@ namespace ET.Client
                     }
                 }
             }
+            if (last_itemInfo.XiLianHideProLists != null)
+            {
+                for (int i = 0; i < last_itemInfo.XiLianHideProLists.Count; i++)
+                {
+                    int hidePropertyType = last_itemInfo.XiLianHideProLists[i].HideID;
+                    int hidePropertyValue = (int)last_itemInfo.XiLianHideProLists[i].HideValue;
+
+                    switch (hidePropertyType)
+                    {
+                        case NumericType.Base_MaxHp_Base:
+                            last_equip_Hp = equip_Hp + hidePropertyValue;
+                            break;
+                        case NumericType.Base_MaxAct_Base:
+                            last_equip_MaxAct = equip_MaxAct + hidePropertyValue;
+                            break;
+                        case NumericType.Base_MaxDef_Base:
+                            last_equip_MaxDef = equip_MaxDef + hidePropertyValue;
+                            break;
+                        case NumericType.Base_MaxAdf_Base:
+                            last_equip_MaxAdf = equip_MaxAdf + hidePropertyValue;
+                            break;
+                    }
+                }
+            }
 
             // 显示职业护甲加成
             string occShowStr = "";
@@ -299,30 +341,43 @@ namespace ET.Client
                 bool ifHideProperty = false;
                 int hidePropertyType = 0;
                 int hidePropertyValue = 0;
-                if (baginfo.XiLianHideProLists != null)
+                if (itemInfo.XiLianHideProLists != null)
                 {
-                    for (int i = 0; i < baginfo.XiLianHideProLists.Count; i++)
+                    for (int i = 0; i < itemInfo.XiLianHideProLists.Count; i++)
                     {
-                        hidePropertyType = baginfo.XiLianHideProLists[i].HideID;
+                        hidePropertyType = itemInfo.XiLianHideProLists[i].HideID;
 
                         if (hidePropertyType == NumericType.Base_MaxHp_Base)
                         {
-                            hidePropertyValue = (int)baginfo.XiLianHideProLists[i].HideValue;
+                            hidePropertyValue = (int)itemInfo.XiLianHideProLists[i].HideValue;
                             textShow = langStr + " ：" + equip_Hp + "(+" + hidePropertyValue + ")" + occShowStr + occShowStr;
                             ifHideProperty = true;
+                        }
+                    }
+                }
+                int last_hidePropertyValue = 0;
+                if (last_itemInfo.XiLianHideProLists != null)
+                {
+                    for (int i = 0; i < last_itemInfo.XiLianHideProLists.Count; i++)
+                    {
+                        hidePropertyType = last_itemInfo.XiLianHideProLists[i].HideID;
+
+                        if (hidePropertyType == NumericType.Base_MaxHp_Base)
+                        {
+                            last_hidePropertyValue = (int)last_itemInfo.XiLianHideProLists[i].HideValue;
                         }
                     }
                 }
 
                 if (ifHideProperty)
                 {
-                    GameObject newGo = self.ShowPropertyText_2(0, textShow, "1", propertyGO, parentGO);
+                    GameObject newGo = self.ShowPropertyText_2(0, textShow, "1", propertyGO, parentGO, hidePropertyValue - last_hidePropertyValue);
                     self.ShowProgressBar(hidePropertyValue, equipConfig.HideMax, newGo);
                     properShowNum += 1;
                 }
                 else
                 {
-                    GameObject newGo = self.ShowPropertyText_2(0, textShow, "0", propertyGO, parentGO);
+                    GameObject newGo = self.ShowPropertyText_2(0, textShow, "0", propertyGO, parentGO, hidePropertyValue - last_hidePropertyValue);
                     self.ShowProgressBar(hidePropertyValue, equipConfig.HideMax, newGo);
                     properShowNum += 1;
                 }
@@ -335,30 +390,43 @@ namespace ET.Client
                 bool ifHideProperty = false;
                 int hidePropertyType = 0;
                 int hidePropertyValue = 0;
-                if (baginfo.XiLianHideProLists != null)
+                if (itemInfo.XiLianHideProLists != null)
                 {
-                    for (int i = 0; i < baginfo.XiLianHideProLists.Count; i++)
+                    for (int i = 0; i < itemInfo.XiLianHideProLists.Count; i++)
                     {
-                        hidePropertyType = baginfo.XiLianHideProLists[i].HideID;
+                        hidePropertyType = itemInfo.XiLianHideProLists[i].HideID;
 
                         if (hidePropertyType == NumericType.Base_MaxAct_Base)
                         {
-                            hidePropertyValue = (int)baginfo.XiLianHideProLists[i].HideValue;
+                            hidePropertyValue = (int)itemInfo.XiLianHideProLists[i].HideValue;
                             textShow = langStr + " ：" + equip_MinAct + " - " + equip_MaxAct + "(+" + hidePropertyValue + ")" + occShowStr;
                             ifHideProperty = true;
+                        }
+                    }
+                }
+                int last_hidePropertyValue = 0;
+                if (last_itemInfo.XiLianHideProLists != null)
+                {
+                    for (int i = 0; i < last_itemInfo.XiLianHideProLists.Count; i++)
+                    {
+                        hidePropertyType = last_itemInfo.XiLianHideProLists[i].HideID;
+
+                        if (hidePropertyType == NumericType.Base_MaxAct_Base)
+                        {
+                            last_hidePropertyValue = (int)last_itemInfo.XiLianHideProLists[i].HideValue;
                         }
                     }
                 }
 
                 if (ifHideProperty)
                 {
-                    GameObject newGo = self.ShowPropertyText_2(0, textShow, "1", propertyGO, parentGO);
+                    GameObject newGo = self.ShowPropertyText_2(0, textShow, "1", propertyGO, parentGO, hidePropertyValue - last_hidePropertyValue);
                     self.ShowProgressBar(hidePropertyValue, equipConfig.HideMax, newGo);
                     properShowNum += 1;
                 }
                 else
                 {
-                    GameObject newGo = self.ShowPropertyText_2(0, textShow, "0", propertyGO, parentGO);
+                    GameObject newGo = self.ShowPropertyText_2(0, textShow, "0", propertyGO, parentGO, hidePropertyValue - last_hidePropertyValue);
                     self.ShowProgressBar(hidePropertyValue, equipConfig.HideMax, newGo);
                     properShowNum += 1;
                 }
@@ -371,30 +439,43 @@ namespace ET.Client
                 bool ifHideProperty = false;
                 int hidePropertyType = 0;
                 int hidePropertyValue = 0;
-                if (baginfo.XiLianHideProLists != null)
+                if (itemInfo.XiLianHideProLists != null)
                 {
-                    for (int i = 0; i < baginfo.XiLianHideProLists.Count; i++)
+                    for (int i = 0; i < itemInfo.XiLianHideProLists.Count; i++)
                     {
-                        hidePropertyType = baginfo.XiLianHideProLists[i].HideID;
+                        hidePropertyType = itemInfo.XiLianHideProLists[i].HideID;
 
                         if (hidePropertyType == NumericType.Base_MaxDef_Base)
                         {
-                            hidePropertyValue = (int)baginfo.XiLianHideProLists[i].HideValue;
+                            hidePropertyValue = (int)itemInfo.XiLianHideProLists[i].HideValue;
                             textShow = langStr + " ：" + equip_MinDef + " - " + equip_MaxDef + "(+" + hidePropertyValue + ")" + occShowStr;
                             ifHideProperty = true;
+                        }
+                    }
+                }
+                int last_hidePropertyValue = 0;
+                if (last_itemInfo.XiLianHideProLists != null)
+                {
+                    for (int i = 0; i < last_itemInfo.XiLianHideProLists.Count; i++)
+                    {
+                        hidePropertyType = last_itemInfo.XiLianHideProLists[i].HideID;
+
+                        if (hidePropertyType == NumericType.Base_MaxDef_Base)
+                        {
+                            last_hidePropertyValue = (int)last_itemInfo.XiLianHideProLists[i].HideValue;
                         }
                     }
                 }
 
                 if (ifHideProperty)
                 {
-                    GameObject newGo = self.ShowPropertyText_2(0, textShow, "1", propertyGO, parentGO);
+                    GameObject newGo = self.ShowPropertyText_2(0, textShow, "1", propertyGO, parentGO, hidePropertyValue - last_hidePropertyValue);
                     self.ShowProgressBar(hidePropertyValue, equipConfig.HideMax, newGo);
                     properShowNum += 1;
                 }
                 else
                 {
-                    GameObject newGo = self.ShowPropertyText_2(0, textShow, "0", propertyGO, parentGO);
+                    GameObject newGo = self.ShowPropertyText_2(0, textShow, "0", propertyGO, parentGO, hidePropertyValue - last_hidePropertyValue);
                     self.ShowProgressBar(hidePropertyValue, equipConfig.HideMax, newGo);
                     properShowNum += 1;
                 }
@@ -407,30 +488,43 @@ namespace ET.Client
                 bool ifHideProperty = false;
                 int hidePropertyType = 0;
                 int hidePropertyValue = 0;
-                if (baginfo.XiLianHideProLists != null)
+                if (itemInfo.XiLianHideProLists != null)
                 {
-                    for (int i = 0; i < baginfo.XiLianHideProLists.Count; i++)
+                    for (int i = 0; i < itemInfo.XiLianHideProLists.Count; i++)
                     {
-                        hidePropertyType = baginfo.XiLianHideProLists[i].HideID;
+                        hidePropertyType = itemInfo.XiLianHideProLists[i].HideID;
 
                         if (hidePropertyType == NumericType.Base_MaxAdf_Base)
                         {
-                            hidePropertyValue = (int)baginfo.XiLianHideProLists[i].HideValue;
+                            hidePropertyValue = (int)itemInfo.XiLianHideProLists[i].HideValue;
                             textShow = langStr + " ：" + equip_MinAdf + " - " + equip_MaxAdf + "(+" + hidePropertyValue + ")" + occShowStr;
                             ifHideProperty = true;
+                        }
+                    }
+                }
+                int last_hidePropertyValue = 0;
+                if (last_itemInfo.XiLianHideProLists != null)
+                {
+                    for (int i = 0; i < last_itemInfo.XiLianHideProLists.Count; i++)
+                    {
+                        hidePropertyType = last_itemInfo.XiLianHideProLists[i].HideID;
+
+                        if (hidePropertyType == NumericType.Base_MaxAdf_Base)
+                        {
+                            last_hidePropertyValue = (int)last_itemInfo.XiLianHideProLists[i].HideValue;
                         }
                     }
                 }
 
                 if (ifHideProperty)
                 {
-                    GameObject newGo = self.ShowPropertyText_2(0, textShow, "1", propertyGO, parentGO);
+                    GameObject newGo = self.ShowPropertyText_2(0, textShow, "1", propertyGO, parentGO, hidePropertyValue - last_hidePropertyValue);
                     self.ShowProgressBar(hidePropertyValue, equipConfig.HideMax, newGo);
                     properShowNum += 1;
                 }
                 else
                 {
-                    GameObject newGo = self.ShowPropertyText_2(0, textShow, "0", propertyGO, parentGO);
+                    GameObject newGo = self.ShowPropertyText_2(0, textShow, "0", propertyGO, parentGO, hidePropertyValue - last_hidePropertyValue);
                     self.ShowProgressBar(hidePropertyValue, equipConfig.HideMax, newGo);
                     properShowNum += 1;
                 }
@@ -500,16 +594,16 @@ namespace ET.Client
             }
 
             //显示隐藏洗炼属性
-            if (baginfo.XiLianHideTeShuProLists != null)
+            if (itemInfo.XiLianHideTeShuProLists != null)
             {
-                for (int i = 0; i < baginfo.XiLianHideTeShuProLists.Count; i++)
+                for (int i = 0; i < itemInfo.XiLianHideTeShuProLists.Count; i++)
                 {
-                    int nowType = baginfo.XiLianHideTeShuProLists[i].HideID;
+                    int nowType = itemInfo.XiLianHideTeShuProLists[i].HideID;
                     if (nowType != NumericType.Base_MaxHp_Base && nowType != NumericType.Base_MaxAct_Base &&
                         nowType != NumericType.Base_MaxDef_Base && nowType != NumericType.Base_MaxAdf_Base)
                     {
-                        int hidePropertyType = baginfo.XiLianHideTeShuProLists[i].HideID;
-                        long hidePropertyValue = baginfo.XiLianHideTeShuProLists[i].HideValue;
+                        int hidePropertyType = itemInfo.XiLianHideTeShuProLists[i].HideID;
+                        long hidePropertyValue = itemInfo.XiLianHideTeShuProLists[i].HideValue;
                         HideProListConfig hidePro = HideProListConfigCategory.Instance.Get(hidePropertyType);
                         string proStr = "";
                         string showColor = "1";
@@ -541,12 +635,12 @@ namespace ET.Client
             }
 
             //显示隐藏技能
-            if (baginfo.HideSkillLists != null)
+            if (itemInfo.HideSkillLists != null)
             {
                 string skillTip = itemConfig.EquipType == 301 ? "套装效果，附加技能：" : "隐藏技能：";
-                for (int i = 0; i < baginfo.HideSkillLists.Count; i++)
+                for (int i = 0; i < itemInfo.HideSkillLists.Count; i++)
                 {
-                    int skillID = baginfo.HideSkillLists[i];
+                    int skillID = itemInfo.HideSkillLists[i];
                     SkillConfig skillCof = SkillConfigCategory.Instance.Get(skillID);
                     string proStr = LanguageComponent.Instance.LoadLocalization(skillTip) + skillCof.SkillName;
                     GameObject newGo = self.ShowPropertyText_2(2, proStr, "2", propertyGO, parentGO);
@@ -752,17 +846,14 @@ namespace ET.Client
             return properShowNum;
         }
 
-        public static GameObject ShowPropertyText_2(this ES_RoleXiLianShow self, int showIcon, string showText, string showType, GameObject proItem, GameObject parObj)
+        public static GameObject ShowPropertyText_2(this ES_RoleXiLianShow self, int showIcon, string showText, string showType, GameObject proItem, GameObject parObj, int change = 0)
         {
             GameObject go = UnityEngine.Object.Instantiate(proItem, parObj.transform, true);
             go.transform.localScale = new Vector3(1, 1, 1);
 
-            GameObject Image_BasePro = go.transform.Find("Image_BasePro").gameObject;
-            GameObject Image_ExtraPro = go.transform.Find("Image_ExtraPro").gameObject;
-            GameObject Image_Skill = go.transform.Find("Image_Skill").gameObject;
-            Image_BasePro.SetActive(showIcon == 0);
-            Image_ExtraPro.SetActive(showIcon == 1);
-            Image_Skill.SetActive(showIcon == 2);
+            go.transform.Find("Image_BasePro").gameObject.SetActive(showIcon == 0);
+            go.transform.Find("Image_ExtraPro").gameObject.SetActive(showIcon == 1);
+            go.transform.Find("Image_Skill").gameObject.SetActive(showIcon == 2);
             
             Text textComponent = go.GetComponent<Text>();
             if (textComponent == null)
@@ -806,6 +897,9 @@ namespace ET.Client
                     break;
             }
 
+            go.transform.Find("Image_Down").gameObject.SetActive(change < 0);
+            go.transform.Find("Image_Up").gameObject.SetActive(change > 0);
+
             return go;
         }
 
@@ -825,12 +919,19 @@ namespace ET.Client
         {
             ItemInfo bagInfo = self.XilianBagInfo;
             self.EG_XiLianInfoRectTransform.gameObject.SetActive(bagInfo != null);
-            self.UpdateAttribute(bagInfo);
             if (bagInfo == null)
             {
                 return;
             }
+            
+            if (!self.EquipCombatChangeDic.ContainsKey(bagInfo.BagInfoID))
+            {
+                int combat = self.CalculateCombat(bagInfo);
+                self.EquipCombatChangeDic.Add(bagInfo.BagInfoID, (bagInfo, combat));
+            }
 
+            self.UpdateAttribute(bagInfo);
+            
             ResourcesLoaderComponent resourcesLoaderComponent = self.Root().GetComponent<ResourcesLoaderComponent>();
 
             ItemConfig itemConfig = ItemConfigCategory.Instance.Get(bagInfo.ItemID);
@@ -1468,12 +1569,6 @@ namespace ET.Client
 
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
             int oldXiLianDu = unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.ItemXiLianDu);
-
-            if (!self.EquipCombatChangeDic.ContainsKey(bagInfo.BagInfoID))
-            {
-                int combat = self.CalculateCombat(bagInfo);
-                self.EquipCombatChangeDic.Add(bagInfo.BagInfoID, (bagInfo, combat));
-            }
             
             M2C_ItemXiLianResponse response = await BagClientNetHelper.RquestItemXiLian(self.Root(), bagInfo.BagInfoID, times);
             if (response.Error != ErrorCode.ERR_Success)
