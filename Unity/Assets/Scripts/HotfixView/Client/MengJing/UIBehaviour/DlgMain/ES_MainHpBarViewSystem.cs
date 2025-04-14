@@ -389,7 +389,6 @@ namespace ET.Client
                 self.EG_MonsterNodeRectTransform.gameObject.SetActive(false);
                 self.E_Lab_OwnerText.text = string.Empty;
                 self.ES_ModelShow.RemoveModel();
-                self.E_Boss_Icon.gameObject.SetActive(false);
             }
             else
             {
