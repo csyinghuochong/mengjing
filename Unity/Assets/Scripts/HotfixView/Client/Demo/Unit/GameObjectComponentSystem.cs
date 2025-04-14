@@ -427,6 +427,7 @@ namespace ET.Client
                 self.GameObject.transform.localRotation = Quaternion.Euler(0, 90, 0);
             }
 
+            
             self.ShowRoleDi(false);
             self.CheckRunState();
         }
