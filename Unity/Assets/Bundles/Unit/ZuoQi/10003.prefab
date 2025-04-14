@@ -230,7 +230,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data:
   - key: Head
-    gameObject: {fileID: 8928607648317737751}
+    gameObject: {fileID: 9013134820360316840}
 --- !u!1 &2799870526047214269
 GameObject:
   m_ObjectHideFlags: 0
@@ -587,6 +587,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 8971423186176519003}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &9013134820360316840
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2905599752905322121}
+  m_Layer: 0
+  m_Name: ZuoQiPosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2905599752905322121
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9013134820360316840}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 3.17, y: -0.14, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7499603811868182000}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &388851777282465079
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -672,7 +703,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 7887644969838762183, guid: d9918ca34280f884983de5ae9ed7d962,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2905599752905322121}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 7887644969838920969, guid: d9918ca34280f884983de5ae9ed7d962,
         type: 3}
@@ -692,6 +727,12 @@ Animator:
 --- !u!4 &7499603811868181982 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7887644969838762217, guid: d9918ca34280f884983de5ae9ed7d962,
+    type: 3}
+  m_PrefabInstance: {fileID: 388851777282465079}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &7499603811868182000 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7887644969838762183, guid: d9918ca34280f884983de5ae9ed7d962,
     type: 3}
   m_PrefabInstance: {fileID: 388851777282465079}
   m_PrefabAsset: {fileID: 0}

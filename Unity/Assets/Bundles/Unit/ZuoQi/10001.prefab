@@ -131,7 +131,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data:
   - key: Head
-    gameObject: {fileID: 651990979512492653}
+    gameObject: {fileID: 4858807166815200571}
 --- !u!1 &1269159412831181043
 GameObject:
   m_ObjectHideFlags: 0
@@ -162,6 +162,37 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8101095089570929152}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &4858807166815200571
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6165730232333898728}
+  m_Layer: 0
+  m_Name: ZuoQiPosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6165730232333898728
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4858807166815200571}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.577, y: -0.463, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3972754664330804}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5825893682824119128
 GameObject:
@@ -413,9 +444,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 3149228046482163961, guid: 87de6daa06e230e46ae108a64fc15793,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6165730232333898728}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 87de6daa06e230e46ae108a64fc15793, type: 3}
+--- !u!4 &3972754664330804 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3149228046482163961, guid: 87de6daa06e230e46ae108a64fc15793,
+    type: 3}
+  m_PrefabInstance: {fileID: 3150922192079314637}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6567660296253587565 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8115300934502424224, guid: 87de6daa06e230e46ae108a64fc15793,
