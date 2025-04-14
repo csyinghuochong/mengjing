@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.Net.Mime;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace ET.Client
 {
@@ -231,8 +233,591 @@ namespace ET.Client
             }
 
             GameObject prefab = resourcesLoader.LoadAssetSync<GameObject>(path);
-            ItemViewHelp.ShowXiLianAttribute(bagComponent.GetEquipList(), bagInfo, prefab,
-                self.E_XiLianShowEquipPropertyItemsScrollRect.transform.Find("Content").gameObject);
+            self.ShowXiLianAttribute(bagComponent.GetEquipList(), bagInfo, prefab, self.E_XiLianShowEquipPropertyItemsScrollRect.transform.Find("Content").gameObject);
+        }
+
+        public static int ShowXiLianAttribute(this ES_RoleXiLianShow self, List<ItemInfo> equipItemList, ItemInfo baginfo, GameObject propertyGO,
+        GameObject parentGO)
+        {
+            int properShowNum = 0;
+            ItemConfig itemConfig = ItemConfigCategory.Instance.Get(baginfo.ItemID);
+
+            EquipConfig equipConfig = EquipConfigCategory.Instance.Get(itemConfig.ItemEquipID);
+            int equip_Hp = equipConfig.Equip_Hp;
+            int equip_MinAct = equipConfig.Equip_MinAct;
+            int equip_MaxAct = equipConfig.Equip_MaxAct;
+            int equip_MinMagAct = equipConfig.Equip_MinMagAct;
+            int equip_MaxMagAct = equipConfig.Equip_MaxMagAct;
+            int equip_MinDef = equipConfig.Equip_MinDef;
+            int equip_MaxDef = equipConfig.Equip_MaxDef;
+            int equip_MinAdf = equipConfig.Equip_MinAdf;
+            int equip_MaxAdf = equipConfig.Equip_MaxAdf;
+            double equip_Cri = equipConfig.Equip_Cri;
+            double equip_Hit = equipConfig.Equip_Hit;
+            double equip_Dodge = equipConfig.Equip_Dodge;
+            double equip_DamgeAdd = equipConfig.Equip_DamgeAdd;
+            double equip_DamgeSub = equipConfig.Equip_DamgeSub;
+            double equip_Speed = equipConfig.Equip_Speed;
+            double equip_Lucky = equipConfig.Equip_Lucky;
+
+            // 换算总显示数值
+            if (baginfo.XiLianHideProLists != null)
+            {
+                for (int i = 0; i < baginfo.XiLianHideProLists.Count; i++)
+                {
+                    int hidePropertyType = baginfo.XiLianHideProLists[i].HideID;
+                    int hidePropertyValue = (int)baginfo.XiLianHideProLists[i].HideValue;
+
+                    switch (hidePropertyType)
+                    {
+                        case NumericType.Base_MaxHp_Base:
+                            equip_Hp = equip_Hp + hidePropertyValue;
+                            break;
+                        case NumericType.Base_MaxAct_Base:
+                            equip_MaxAct = equip_MaxAct + hidePropertyValue;
+                            break;
+                        case NumericType.Base_MaxDef_Base:
+                            equip_MaxDef = equip_MaxDef + hidePropertyValue;
+                            break;
+                        case NumericType.Base_MaxAdf_Base:
+                            equip_MaxAdf = equip_MaxAdf + hidePropertyValue;
+                            break;
+                    }
+                }
+            }
+
+            // 显示职业护甲加成
+            string occShowStr = "";
+            string textShow = "";
+            string langStr = "";
+
+            if (equip_Hp != 0)
+            {
+                langStr = LanguageComponent.Instance.LoadLocalization("生命");
+                textShow = langStr + "  " + equip_Hp + occShowStr;
+
+                bool ifHideProperty = false;
+                int hidePropertyType = 0;
+                int hidePropertyValue = 0;
+                if (baginfo.XiLianHideProLists != null)
+                {
+                    for (int i = 0; i < baginfo.XiLianHideProLists.Count; i++)
+                    {
+                        hidePropertyType = baginfo.XiLianHideProLists[i].HideID;
+
+                        if (hidePropertyType == NumericType.Base_MaxHp_Base)
+                        {
+                            hidePropertyValue = (int)baginfo.XiLianHideProLists[i].HideValue;
+                            textShow = langStr + " ：" + equip_Hp + "(+" + hidePropertyValue + ")" + occShowStr + occShowStr;
+                            ifHideProperty = true;
+                        }
+                    }
+                }
+
+                if (ifHideProperty)
+                {
+                    GameObject newGo = self.ShowPropertyText_2(0, textShow, "1", propertyGO, parentGO);
+                    self.ShowProgressBar(hidePropertyValue, equipConfig.HideMax, newGo);
+                    properShowNum += 1;
+                }
+                else
+                {
+                    GameObject newGo = self.ShowPropertyText_2(0, textShow, "0", propertyGO, parentGO);
+                    self.ShowProgressBar(hidePropertyValue, equipConfig.HideMax, newGo);
+                    properShowNum += 1;
+                }
+            }
+
+            if (equip_MinAct != 0 || equip_MaxAct != 0)
+            {
+                langStr = LanguageComponent.Instance.LoadLocalization("攻击");
+                textShow = langStr + " ：" + equip_MinAct + " - " + equip_MaxAct;
+                bool ifHideProperty = false;
+                int hidePropertyType = 0;
+                int hidePropertyValue = 0;
+                if (baginfo.XiLianHideProLists != null)
+                {
+                    for (int i = 0; i < baginfo.XiLianHideProLists.Count; i++)
+                    {
+                        hidePropertyType = baginfo.XiLianHideProLists[i].HideID;
+
+                        if (hidePropertyType == NumericType.Base_MaxAct_Base)
+                        {
+                            hidePropertyValue = (int)baginfo.XiLianHideProLists[i].HideValue;
+                            textShow = langStr + " ：" + equip_MinAct + " - " + equip_MaxAct + "(+" + hidePropertyValue + ")" + occShowStr;
+                            ifHideProperty = true;
+                        }
+                    }
+                }
+
+                if (ifHideProperty)
+                {
+                    GameObject newGo = self.ShowPropertyText_2(0, textShow, "1", propertyGO, parentGO);
+                    self.ShowProgressBar(hidePropertyValue, equipConfig.HideMax, newGo);
+                    properShowNum += 1;
+                }
+                else
+                {
+                    GameObject newGo = self.ShowPropertyText_2(0, textShow, "0", propertyGO, parentGO);
+                    self.ShowProgressBar(hidePropertyValue, equipConfig.HideMax, newGo);
+                    properShowNum += 1;
+                }
+            }
+
+            if (equip_MinDef != 0 || equip_MaxDef != 0)
+            {
+                langStr = LanguageComponent.Instance.LoadLocalization("防御");
+                textShow = langStr + " ：" + equip_MinDef + " - " + equip_MaxDef;
+                bool ifHideProperty = false;
+                int hidePropertyType = 0;
+                int hidePropertyValue = 0;
+                if (baginfo.XiLianHideProLists != null)
+                {
+                    for (int i = 0; i < baginfo.XiLianHideProLists.Count; i++)
+                    {
+                        hidePropertyType = baginfo.XiLianHideProLists[i].HideID;
+
+                        if (hidePropertyType == NumericType.Base_MaxDef_Base)
+                        {
+                            hidePropertyValue = (int)baginfo.XiLianHideProLists[i].HideValue;
+                            textShow = langStr + " ：" + equip_MinDef + " - " + equip_MaxDef + "(+" + hidePropertyValue + ")" + occShowStr;
+                            ifHideProperty = true;
+                        }
+                    }
+                }
+
+                if (ifHideProperty)
+                {
+                    GameObject newGo = self.ShowPropertyText_2(0, textShow, "1", propertyGO, parentGO);
+                    self.ShowProgressBar(hidePropertyValue, equipConfig.HideMax, newGo);
+                    properShowNum += 1;
+                }
+                else
+                {
+                    GameObject newGo = self.ShowPropertyText_2(0, textShow, "0", propertyGO, parentGO);
+                    properShowNum += 1;
+                }
+            }
+
+            if (equip_MinAdf != 0 || equip_MaxAdf != 0)
+            {
+                langStr = LanguageComponent.Instance.LoadLocalization("魔防");
+                textShow = langStr + " ：" + equip_MinAdf + " - " + equip_MaxAdf;
+                bool ifHideProperty = false;
+                int hidePropertyType = 0;
+                int hidePropertyValue = 0;
+                if (baginfo.XiLianHideProLists != null)
+                {
+                    for (int i = 0; i < baginfo.XiLianHideProLists.Count; i++)
+                    {
+                        hidePropertyType = baginfo.XiLianHideProLists[i].HideID;
+
+                        if (hidePropertyType == NumericType.Base_MaxAdf_Base)
+                        {
+                            hidePropertyValue = (int)baginfo.XiLianHideProLists[i].HideValue;
+                            textShow = langStr + " ：" + equip_MinAdf + " - " + equip_MaxAdf + "(+" + hidePropertyValue + ")" + occShowStr;
+                            ifHideProperty = true;
+                        }
+                    }
+                }
+
+                if (ifHideProperty)
+                {
+                    GameObject newGo = self.ShowPropertyText_2(0, textShow, "1", propertyGO, parentGO);
+                    self.ShowProgressBar(hidePropertyValue, equipConfig.HideMax, newGo);
+                    properShowNum += 1;
+                }
+                else
+                {
+                    GameObject newGo = self.ShowPropertyText_2(0, textShow, "0", propertyGO, parentGO);
+                    self.ShowProgressBar(hidePropertyValue, equipConfig.HideMax, newGo);
+                    properShowNum += 1;
+                }
+            }
+
+            if (equip_Cri != 0)
+            {
+                langStr = LanguageComponent.Instance.LoadLocalization("暴击");
+                textShow = langStr + "  " + equip_Cri * 100 + "%\n";
+                GameObject newGo = self.ShowPropertyText_2(0, textShow, "0", propertyGO, parentGO);
+                self.ShowProgressBar(1, 1, newGo);
+                properShowNum += 1;
+            }
+            
+            if (equip_Hit != 0)
+            {
+                langStr = LanguageComponent.Instance.LoadLocalization("命中");
+                textShow = langStr + "  " + equip_Hit * 100 + "%\n";
+                GameObject newGo = self.ShowPropertyText_2(0, textShow, "0", propertyGO, parentGO);
+                self.ShowProgressBar(1, 1, newGo);
+                properShowNum += 1;
+            }
+            
+            if (equip_Dodge != 0)
+            {
+                langStr = LanguageComponent.Instance.LoadLocalization("闪避");
+                textShow = langStr + "  " + equip_Dodge * 100 + "%\n";
+                GameObject newGo = self.ShowPropertyText_2(0, textShow, "0", propertyGO, parentGO);
+                self.ShowProgressBar(1, 1, newGo);
+                properShowNum += 1;
+            }
+            
+            if (equip_DamgeAdd != 0)
+            {
+                langStr = LanguageComponent.Instance.LoadLocalization("伤害加成");
+                textShow = langStr + "  " + equip_DamgeAdd * 100 + "%\n";
+                GameObject newGo = self.ShowPropertyText_2(0, textShow, "0", propertyGO, parentGO);
+                self.ShowProgressBar(1, 1, newGo);
+                properShowNum += 1;
+            }
+            
+            if (equip_DamgeSub != 0)
+            {
+                langStr = LanguageComponent.Instance.LoadLocalization("伤害减免");
+                textShow = langStr + "  " + equip_DamgeSub * 100 + "%\n";
+                GameObject newGo = self.ShowPropertyText_2(0, textShow, "0", propertyGO, parentGO);
+                self.ShowProgressBar(1, 1, newGo);
+                properShowNum += 1;
+            }
+            
+            if (equip_Speed != 0)
+            {
+                langStr = LanguageComponent.Instance.LoadLocalization("移动速度");
+                textShow = langStr + "  " + equip_Dodge;
+                GameObject newGo = self.ShowPropertyText_2(0, textShow, "0", propertyGO, parentGO);
+                self.ShowProgressBar(1, 1, newGo);
+                properShowNum += 1;
+            }
+            
+            if (equip_Lucky != 0)
+            {
+                langStr = LanguageComponent.Instance.LoadLocalization("幸运值");
+                textShow = langStr + "  " + equip_Lucky;
+                GameObject newGo = self.ShowPropertyText_2(0, textShow, "6", propertyGO, parentGO);
+                self.ShowProgressBar(1, 1, newGo);
+                properShowNum += 1;
+            }
+
+            //显示隐藏洗炼属性
+            if (baginfo.XiLianHideTeShuProLists != null)
+            {
+                for (int i = 0; i < baginfo.XiLianHideTeShuProLists.Count; i++)
+                {
+                    int nowType = baginfo.XiLianHideTeShuProLists[i].HideID;
+                    if (nowType != NumericType.Base_MaxHp_Base && nowType != NumericType.Base_MaxAct_Base &&
+                        nowType != NumericType.Base_MaxDef_Base && nowType != NumericType.Base_MaxAdf_Base)
+                    {
+                        int hidePropertyType = baginfo.XiLianHideTeShuProLists[i].HideID;
+                        long hidePropertyValue = baginfo.XiLianHideTeShuProLists[i].HideValue;
+                        HideProListConfig hidePro = HideProListConfigCategory.Instance.Get(hidePropertyType);
+                        string proStr = "";
+                        string showColor = "1";
+                        if (NumericHelp.GetNumericValueType(hidePro.PropertyType) == 2)
+                        {
+                            proStr = hidePro.Name + LanguageComponent.Instance.LoadLocalization("提升") +
+                                    ((float)hidePropertyValue / 100.0f).ToString("0.##") +
+                                    "%"; // 0.82   0.80
+                        }
+                        else
+                        {
+                            proStr = hidePro.Name + LanguageComponent.Instance.LoadLocalization("提升") + hidePropertyValue +
+                                    LanguageComponent.Instance.LoadLocalization("点");
+
+                            if (hidePro.Name == "幸运值")
+                            {
+                                showColor = "6";
+                            }
+                        }
+
+                        GameObject newGo = self.ShowPropertyText_2(1, proStr, showColor, propertyGO, parentGO);
+                        HideProListConfig hideProListConfig = HideProListConfigCategory.Instance.Get(hidePropertyType);
+                        float propertyValueMax = float.Parse(hideProListConfig.PropertyValueMax);
+                        self.ShowProgressBar(hidePropertyValue, NumericHelp.NumericValueSaveType(hideProListConfig.PropertyType, propertyValueMax), newGo);
+
+                        properShowNum += 1;
+                    }
+                }
+            }
+
+            //显示隐藏技能
+            if (baginfo.HideSkillLists != null)
+            {
+                string skillTip = itemConfig.EquipType == 301 ? "套装效果，附加技能：" : "隐藏技能：";
+                for (int i = 0; i < baginfo.HideSkillLists.Count; i++)
+                {
+                    int skillID = baginfo.HideSkillLists[i];
+                    SkillConfig skillCof = SkillConfigCategory.Instance.Get(skillID);
+                    string proStr = LanguageComponent.Instance.LoadLocalization(skillTip) + skillCof.SkillName;
+                    GameObject newGo = self.ShowPropertyText_2(2, proStr, "2", propertyGO, parentGO);
+                    self.ShowProgressBar(1, 1, newGo);
+
+                    properShowNum += 1;
+                }
+            }
+
+            //显示装备附加属性
+            // for (int i = 0; i < equipConfig.AddPropreListType.Length; i++)
+            // {
+            //     if (equipConfig.AddPropreListIfShow.Length <= i)
+            //     {
+            //         continue;
+            //     }
+            //
+            //     if (equipConfig.AddPropreListIfShow[i] == 0)
+            //     {
+            //         int numericType = equipConfig.AddPropreListType[i];
+            //         if (numericType == 0)
+            //         {
+            //             continue;
+            //         }
+            //
+            //         string attribute = "";
+            //         long numericValue = equipConfig.AddPropreListValue[i];
+            //
+            //         for (int y = 0; y < baginfo.XiLianHideProLists.Count; y++)
+            //         {
+            //             if (equipConfig.AddPropreListType.Length <= y)
+            //             {
+            //                 break;
+            //             }
+            //
+            //             if (baginfo.XiLianHideProLists[y].HideID == equipConfig.AddPropreListType[i])
+            //             {
+            //                 numericValue += baginfo.XiLianHideProLists[i].HideValue;
+            //             }
+            //         }
+            //
+            //         int showType = NumericHelp.GetNumericValueType(numericType);
+            //         if (showType == 2)
+            //         {
+            //             float value = (float)numericValue / 100f;
+            //             attribute = $"{GetAttributeName(numericType)} + " + value.ToString("0.##") + "%";
+            //         }
+            //         else
+            //         {
+            //             attribute = $"{GetAttributeName(numericType)} + {numericValue}";
+            //         }
+            //
+            //         ShowPropertyText(attribute, "0", propertyGO, parentGO);
+            //         properShowNum += 1;
+            //     }
+            // }
+
+            //显示附魔属性
+            // for (int i = 0; i < baginfo.FumoProLists.Count; i++)
+            // {
+            //     HideProList hideProList = baginfo.FumoProLists[i];
+            //     int showType = NumericHelp.GetNumericValueType(hideProList.HideID);
+            //     string attribute;
+            //     if (showType == 2)
+            //     {
+            //         float value = (float)hideProList.HideValue / 100f;
+            //         attribute = $"附魔属性: {GetAttributeName(hideProList.HideID)} + " + value.ToString("0.##") + "%";
+            //     }
+            //     else
+            //     {
+            //         attribute = $"附魔属性: {GetAttributeName(hideProList.HideID)} + {hideProList.HideValue}";
+            //     }
+            //
+            //     ShowPropertyText(attribute, "1", propertyGO, parentGO);
+            //     properShowNum += 1;
+            // }
+
+            // 显示增幅属性
+            // for (int i = 0; i < baginfo.IncreaseProLists.Count; i++)
+            // {
+            //     HideProList hide = baginfo.IncreaseProLists[i];
+            //     string canTransf = "";
+            //     HideProListConfig hideProListConfig = HideProListConfigCategory.Instance.Get(hide.HideID);
+            //     string proName = GetAttributeName(hideProListConfig.PropertyType);
+            //     int showType = NumericHelp.GetNumericValueType(hideProListConfig.PropertyType);
+            //
+            //     if (hideProListConfig.IfMove == 1)
+            //     {
+            //         canTransf = "传承";
+            //     }
+            //
+            //     string attribute;
+            //     if (showType == 2)
+            //     {
+            //         float value = (float)hide.HideValue / 100f;
+            //         attribute = $"{canTransf}增幅: {proName} + " + value.ToString("0.##") + "%";
+            //     }
+            //     else
+            //     {
+            //         attribute = $"{canTransf}增幅: {proName} + {hide.HideValue}";
+            //     }
+            //
+            //     ShowPropertyText(attribute, "1", propertyGO, parentGO);
+            //     properShowNum += 1;
+            // }
+
+            // 显示增幅技能
+            // for (int i = 0; i < baginfo.IncreaseSkillLists.Count; i++)
+            // {
+            //     int hide = baginfo.IncreaseSkillLists[i];
+            //     string canTransf = "";
+            //     HideProListConfig hideProListConfig = HideProListConfigCategory.Instance.Get(hide);
+            //     SkillConfig skillConfig = SkillConfigCategory.Instance.Get(hideProListConfig.PropertyType);
+            //     string skillName = skillConfig.SkillName;
+            //     if (hideProListConfig.IfMove == 1)
+            //     {
+            //         canTransf = "传承";
+            //     }
+            //
+            //     string attribute = $"{canTransf}增幅: " + skillName;
+            //     ShowPropertyText(attribute, "1", propertyGO, parentGO);
+            //     properShowNum += 1;
+            // }
+
+            // 显示描述
+            // if (itemConfig.ItemDes != "" && itemConfig.ItemDes != "0" && itemConfig.ItemDes != null)
+            // {
+            //     string[] des = itemConfig.ItemDes.Split('\n');
+            //     foreach (string s in des)
+            //     {
+            //         int allLength = s.Length;
+            //         int addNum = Mathf.CeilToInt(allLength / 18f);
+            //         for (int a = 0; a < addNum; a++)
+            //         {
+            //             int leftNum = allLength - a * 18;
+            //             leftNum = Math.Min(leftNum, 18);
+            //             ShowPropertyText(s.Substring(a * 18, leftNum), "1", propertyGO, parentGO);
+            //         }
+            //
+            //         properShowNum += addNum;
+            //     }
+            // }
+
+            //显示传承技能
+            // string showYanSe = "2";
+            // if (baginfo.InheritSkills != null)
+            // {
+            //     for (int i = 0; i < baginfo.InheritSkills.Count; i++)
+            //     {
+            //         int skillID = baginfo.InheritSkills[i];
+            //         if (skillID != 0)
+            //         {
+            //             SkillConfig skillCof = SkillConfigCategory.Instance.Get(skillID);
+            //             string proStr = LanguageComponent.Instance.LoadLocalization("传承鉴定") + ":" + skillCof.SkillDescribe;
+            //
+            //             //获取当前穿戴的装备是否有相同的传承属性
+            //             bool ifRepeat = false;
+            //
+            //             for (int y = 0; y < equipItemList.Count; y++)
+            //             {
+            //                 //Debug.Log("equipItemList.Count = " + equipItemList.Count);
+            //                 List<int> inheritSkills = equipItemList[i].InheritSkills;
+            //                 Debug.Log("inheritSkills.Count = " + inheritSkills.Count);
+            //
+            //                 for (int z = 0; z < inheritSkills.Count; z++)
+            //                 {
+            //                     if (inheritSkills[z] == skillID && equipItemList[y].BagInfoID != baginfo.BagInfoID)
+            //                     {
+            //                         proStr += "\n(同类传承属性只激活一种)";
+            //                         ifRepeat = true;
+            //                         showYanSe = "11";
+            //                         break;
+            //                     }
+            //                 }
+            //             }
+            //
+            //             //////防止循环多次
+            //             if (ifRepeat)
+            //             {
+            //                 break;
+            //             }
+            //
+            //             //ShowPropertyText(proStr, "2", Obj_EquipPropertyText, Obj_EquipBaseSetList);
+            //
+            //             int allLength = proStr.Length;
+            //             int addNum = Mathf.CeilToInt(allLength / 18f);
+            //             if (ifRepeat && allLength <= 18)
+            //             {
+            //                 addNum += 1;
+            //             }
+            //
+            //             for (int a = 0; a < addNum; a++)
+            //             {
+            //                 int leftNum = allLength - a * 18;
+            //                 leftNum = Math.Min(leftNum, 18);
+            //                 ShowPropertyText(proStr.Substring(a * 18, leftNum), showYanSe, propertyGO, parentGO);
+            //                 properShowNum += 1;
+            //             }
+            //         }
+            //     }
+            // }
+
+            return properShowNum;
+        }
+
+        public static GameObject ShowPropertyText_2(this ES_RoleXiLianShow self, int showIcon, string showText, string showType, GameObject proItem, GameObject parObj)
+        {
+            GameObject go = UnityEngine.Object.Instantiate(proItem, parObj.transform, true);
+            go.transform.localScale = new Vector3(1, 1, 1);
+
+            GameObject Image_BasePro = go.transform.Find("Image_BasePro").gameObject;
+            GameObject Image_ExtraPro = go.transform.Find("Image_ExtraPro").gameObject;
+            GameObject Image_Skill = go.transform.Find("Image_Skill").gameObject;
+            Image_BasePro.SetActive(showIcon == 0);
+            Image_ExtraPro.SetActive(showIcon == 1);
+            Image_Skill.SetActive(showIcon == 2);
+            
+            Text textComponent = go.GetComponent<Text>();
+            if (textComponent == null)
+            {
+                textComponent = go.GetComponentInChildren<Text>();
+            }
+
+            textComponent.text = showText;
+            go.transform.localPosition = new Vector3(0, 0, 0);
+            go.SetActive(true);
+
+            switch (showType)
+            {
+                //极品提示  绿色
+                case "1":
+                    textComponent.color = new Color(169f / 255f, 255f / 255f, 30 / 255f);
+                    break;
+                //隐藏技能  橙色
+                case "2":
+                    textComponent.color = new Color(248 / 255f, 62f / 255, 191f / 255f);
+                    break;
+                //红色
+                case "3":
+                    textComponent.color = Color.red;
+                    break;
+                //蓝色
+                case "4":
+                    textComponent.color = new Color(1f, 0.5f, 1f);
+                    break;
+                //白色
+                case "5":
+                    textComponent.color = new Color(100f / 255f, 80f / 255f, 60f / 255f);
+                    break;
+                //橙色
+                case "6":
+                    textComponent.color = new Color(255f / 255f, 90f / 255f, 0f);
+                    break;
+                //灰色
+                case "11":
+                    textComponent.color = new Color(0.66f, 0.66f, 0.66f);
+                    break;
+            }
+
+            return go;
+        }
+
+        public static void ShowProgressBar(this ES_RoleXiLianShow self, float now, float max, GameObject proItem)
+        {
+            float ziZhi_HpProp = Mathf.Clamp(now / max, 0f, 1f);
+            proItem.transform.Find("E_ImageExpValue").GetComponent<Image>().fillAmount = ziZhi_HpProp;
+
+            // float showImage_56 = 0.1f;
+            // RectTransform imageRectTransform = proItem.transform.Find("Image_56").GetComponent<RectTransform>();
+            // Vector2 last = imageRectTransform.localPosition;
+            // imageRectTransform.gameObject.SetActive(ziZhi_HpProp >= showImage_56);
+            // imageRectTransform.localPosition = new Vector2(285 - 409 * (1f - ziZhi_HpProp), last.y);
         }
 
         private static void OnUpdateXinLian(this ES_RoleXiLianShow self)
@@ -276,9 +861,21 @@ namespace ET.Client
             }
         }
 
+        private static void UpdateCombat(this ES_RoleXiLianShow self)
+        {
+            int combat = self.Root().GetComponent<UserInfoComponentC>().UserInfo.Combat;
+            using (zstring.Block())
+            {
+                self.E_BatAddText.text = zstring.Format("预计战力增长：{0}", 0);
+            }
+            
+            self.E_CombatUpImage.gameObject.SetActive(false);
+            self.E_CombatDownImage.gameObject.SetActive(false);
+        }
+
         # region 计算装备大概的战力
 
-        private static void UpdateCombat(this ES_RoleXiLianShow self)
+        private static int CalculateCombat(this ES_RoleXiLianShow self)
         {
             ItemConfig itemCof = ItemConfigCategory.Instance.Get(self.XilianBagInfo.ItemID);
 
@@ -558,7 +1155,6 @@ namespace ET.Client
             long BaseMaxDef = equipMaxDefSum;
             long BaseMinAdf = equipMinAdfSum;
             long BaseMaxAdf = equipMaxAdfSum;
-            
 
             //更新基础属性
             AddUpdateProDicList(NumericType.Base_MaxHp_Base, BaseHp, UpdateProDicList);
@@ -697,10 +1293,7 @@ namespace ET.Client
                 zhanliValue = zhanliValue + addZhanliValue;
             }
 
-            using (zstring.Block())
-            {
-                self.E_BatAddText.text = zstring.Format("预计战力增长：{0}", zhanliValue);
-            }
+            return zhanliValue;
         }
 
         private static void AddUpdateProDicList(int typeID, long typeValue, Dictionary<int, long> dic)
