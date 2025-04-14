@@ -29,8 +29,7 @@ namespace ET.Client
             self.ZuoQiConfig = zuoQiConfig;
 
             ResourcesLoaderComponent resourcesLoaderComponent = self.Root().GetComponent<ResourcesLoaderComponent>();
-            string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.MonsterIcon, "70001004");
-            // string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ZuoQiIcon, zuoQiConfig.Icon);
+            string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ZuoQiIcon, zuoQiConfig.Icon);
             self.E_IconImage.sprite = resourcesLoaderComponent.LoadAssetSync<Sprite>(path);
             CommonViewHelper.SetImageGray(self.Root(), self.E_IconImage.gameObject, !self.IsHaveZuoQi(zuoQiConfig.Id));
             

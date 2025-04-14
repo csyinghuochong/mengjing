@@ -80,14 +80,12 @@ namespace ET.Client
             self.ZuoQiConfig = zuoQiConfig;
 
             // 虚空龙的在UI上无法显示，这里暂时替换
-            // string modelID = zuoQiConfig.ModelID;
+            string modelID = zuoQiConfig.ModelID;
             // if (zuoQiConfig.ModelID == "10010")
             // {
             //     modelID = "10010Show";
             // }
-
-            // self.ES_ModelShow.ShowOtherModel("ZuoQi/" + modelID).Coroutine();
-            self.ES_ModelShow.ShowOtherModel("Monster/70001001").Coroutine();
+            self.ES_ModelShow.ShowOtherModel("ZuoQi/" + modelID).Coroutine();
             self.ES_ModelShow.SetCameraPosition(new Vector3(0f, 112f, 450f));
             self.ES_ModelShow.SetModelParentRotation(Quaternion.Euler(0f, -45f, 0f));
 

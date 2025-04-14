@@ -17,6 +17,7 @@
         public const string OtherIcon = "OtherIcon";
         public const string PlayerIcon = "PlayerIcon";
         public const string ChengHaoIcon = "ChengHaoIcon";
+        public const string ZuoQiIcon = "ZuoQiIcon";
         public const string MulLanguageIcon = "MulLanguageIcon";
     }
 }
