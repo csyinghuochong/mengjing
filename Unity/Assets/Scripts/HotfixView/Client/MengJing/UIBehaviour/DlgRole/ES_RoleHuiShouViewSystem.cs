@@ -137,7 +137,7 @@ namespace ET.Client
                     }
 
                     scrollItemCommonItem.E_XuanZhongImage.gameObject.SetActive(have);
-                    scrollItemCommonItem.E_ImageReceived.gameObject.SetActive(have);
+                    scrollItemCommonItem.E_ImageReceivedImage.gameObject.SetActive(have);
                 }
             }
         }

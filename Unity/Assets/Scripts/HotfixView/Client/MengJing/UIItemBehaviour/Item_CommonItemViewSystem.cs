@@ -214,10 +214,7 @@ namespace ET.Client
             self.E_UpTipImage.gameObject.SetActive(false);
             self.E_ProtectImage.gameObject.SetActive(false);
             self.E_LockButton.gameObject.SetActive(false);
-            if (self.E_ImageReceived != null)
-            {
-                self.E_ImageReceived.gameObject.SetActive(false);
-            }
+            self.E_ImageReceivedImage.gameObject.SetActive(false);
 
             if (bagInfo != null)
             {
