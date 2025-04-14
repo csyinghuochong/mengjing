@@ -49,9 +49,9 @@ namespace ET.Client
         {
             Scroll_Item_CommonItem scrollItemCommonItem = self.ScrollItemCommonItems[index].BindTrans(transform);
             scrollItemCommonItem.Refresh(self.ShowBagInfos[index], ItemOperateEnum.HuishouBag);
-            scrollItemCommonItem.ES_CommonItem.SetEventTrigger(true);
-            scrollItemCommonItem.ES_CommonItem.PointerDownHandler = (binfo, pdata) => { self.OnPointerDown(binfo, pdata).Coroutine(); };
-            scrollItemCommonItem.ES_CommonItem.PointerUpHandler = (binfo, pdata) => { self.OnPointerUp(binfo, pdata); };
+            scrollItemCommonItem.SetEventTrigger(true);
+            scrollItemCommonItem.PointerDownHandler = (binfo, pdata) => { self.OnPointerDown(binfo, pdata).Coroutine(); };
+            scrollItemCommonItem.PointerUpHandler = (binfo, pdata) => { self.OnPointerUp(binfo, pdata); };
         }
 
         public static void OnHuiShouSelect(this ES_RoleHuiShou self, string dataparams)
@@ -120,7 +120,7 @@ namespace ET.Client
                 // 滚动组件的子物体是动态从对象池里拿的，只引用看的到的
                 if (scrollItemCommonItem.uiTransform != null)
                 {
-                    if (scrollItemCommonItem.ES_CommonItem.Baginfo == null)
+                    if (scrollItemCommonItem.Baginfo == null)
                     {
                         continue;
                     }
@@ -129,15 +129,15 @@ namespace ET.Client
                     for (int h = 0; h < self.HuiShouInfos.Length; h++)
                     {
                         if (self.HuiShouInfos[h] != null &&
-                            self.HuiShouInfos[h].BagInfoID == scrollItemCommonItem.ES_CommonItem.Baginfo.BagInfoID)
+                            self.HuiShouInfos[h].BagInfoID == scrollItemCommonItem.Baginfo.BagInfoID)
                         {
                             have = true;
                             break;
                         }
                     }
 
-                    scrollItemCommonItem.ES_CommonItem.E_XuanZhongImage.gameObject.SetActive(have);
-                    scrollItemCommonItem.ES_CommonItem.E_ImageReceived.gameObject.SetActive(have);
+                    scrollItemCommonItem.E_XuanZhongImage.gameObject.SetActive(have);
+                    scrollItemCommonItem.E_ImageReceived.gameObject.SetActive(have);
                 }
             }
         }

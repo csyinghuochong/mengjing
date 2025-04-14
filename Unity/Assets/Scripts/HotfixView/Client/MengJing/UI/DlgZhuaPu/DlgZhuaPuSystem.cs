@@ -45,7 +45,7 @@ namespace ET.Client
         {
             Scroll_Item_CommonItem scrollItemCommonItem = self.ScrollItemCommonItems[index].BindTrans(transform);
             scrollItemCommonItem.Refresh(self.ShowBagInfos[index], ItemOperateEnum.None, self.OnClickItem);
-            scrollItemCommonItem.ES_CommonItem.ShowTip = false;
+            scrollItemCommonItem.ShowTip = false;
         }
         
         public static void UpdateItemList(this DlgZhuaPu self)
@@ -60,14 +60,14 @@ namespace ET.Client
                         continue;
                     }
 
-                    int itemid = item.ES_CommonItem.ItemID;
+                    int itemid = item.ItemID;
                     long number = bagComponent.GetItemNumber(itemid);
                     
                     Log.Debug($"itemid: {itemid}   number:{number}" );
 
-                    item.ES_CommonItem.E_ItemNumText.text = ItemViewHelp.ReturnNumStr(number);
-                    CommonViewHelper.SetImageGray(self.Root(), item.ES_CommonItem.E_ItemIconImage.gameObject, number <= 0);
-                    CommonViewHelper.SetImageGray(self.Root(), item.ES_CommonItem.E_ItemQualityImage.gameObject, number <= 0);
+                    item.E_ItemNumText.text = ItemViewHelp.ReturnNumStr(number);
+                    CommonViewHelper.SetImageGray(self.Root(), item.E_ItemIconImage.gameObject, number <= 0);
+                    CommonViewHelper.SetImageGray(self.Root(), item.E_ItemQualityImage.gameObject, number <= 0);
                 }
             }
         }
@@ -83,7 +83,7 @@ namespace ET.Client
                         continue;
                     }
 
-                    item.ES_CommonItem.E_XuanZhongImage.gameObject.SetActive(itemid == item.ES_CommonItem.ItemID);
+                    item.E_XuanZhongImage.gameObject.SetActive(itemid == item.ItemID);
                 }
             }
         }

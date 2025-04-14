@@ -40,11 +40,11 @@ namespace ET.Client
             Scroll_Item_CommonItem scrollItemCommonItem = self.ScrollItemCommonItems[index].BindTrans(transform);
             scrollItemCommonItem.Refresh(self.ShowBagInfos[index], ItemOperateEnum.None);
 
-            scrollItemCommonItem.ES_CommonItem.E_ItemNumText.gameObject.SetActive(self.ShowNum);
-            scrollItemCommonItem.ES_CommonItem.E_ItemNameText.gameObject.SetActive(self.ShowName);
-            scrollItemCommonItem.ES_CommonItem.E_ItemNameText.GetComponent<Outline>().enabled = self.ShowNameOutline;
+            scrollItemCommonItem.E_ItemNumText.gameObject.SetActive(self.ShowNum);
+            scrollItemCommonItem.E_ItemNameText.gameObject.SetActive(self.ShowName);
+            scrollItemCommonItem.E_ItemNameText.GetComponent<Outline>().enabled = self.ShowNameOutline;
             scrollItemCommonItem.uiTransform.localScale = Vector3.one * self.Scale;
-            scrollItemCommonItem.ES_CommonItem.E_BindingImage.gameObject.SetActive(self.GetWay == ItemGetWay.Activity_DayTeHui ||
+            scrollItemCommonItem.E_BindingImage.gameObject.SetActive(self.GetWay == ItemGetWay.Activity_DayTeHui ||
                 self.GetWay == ItemGetWay.ActivityNewYear);
         }
 
@@ -101,7 +101,7 @@ namespace ET.Client
                     continue;
                 }
 
-                itemCommonItem.ES_CommonItem.E_ImageReceived?.gameObject.SetActive(recv);
+                itemCommonItem.E_ImageReceived?.gameObject.SetActive(recv);
             }
         }
 

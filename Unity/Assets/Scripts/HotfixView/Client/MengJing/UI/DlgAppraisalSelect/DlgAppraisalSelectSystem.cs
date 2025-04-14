@@ -172,7 +172,7 @@ namespace ET.Client
                 // 滚动组件的子物体是动态从对象池里拿的，只引用看的到的
                 if (scrollItemCommonItem.uiTransform != null)
                 {
-                    scrollItemCommonItem.UpdateSelectStatus(bagInfo);
+                    scrollItemCommonItem.SetSelected(bagInfo);
                 }
             }
         }

@@ -167,14 +167,14 @@ namespace ET.Client
                     continue;
                 }
 
-                ItemInfo bagInfo = uIItemComponent.ES_CommonItem.Baginfo;
+                ItemInfo bagInfo = uIItemComponent.Baginfo;
                 if (bagInfo == null)
                 {
                     continue;
                 }
 
                 bool have = self.HuiShoulist.Contains(bagInfo.BagInfoID);
-                uIItemComponent.ES_CommonItem.E_XuanZhongImage.gameObject.SetActive(have);
+                uIItemComponent.E_XuanZhongImage.gameObject.SetActive(have);
             }
         }
 
@@ -271,17 +271,17 @@ namespace ET.Client
         private static void OnCommonItemsRefresh(this ES_SkillLifeShield self, Transform transform, int index)
         {
             Scroll_Item_CommonItem scrollItemCommonItem = self.ScrollItemCommonItems[index].BindTrans(transform);
-            scrollItemCommonItem.ES_CommonItem.UpdateItem(self.ShowBagInfos[index], ItemOperateEnum.HuishouBag);
-            scrollItemCommonItem.ES_CommonItem.HideItemName();
-            scrollItemCommonItem.ES_CommonItem.SetEventTrigger(true);
-            scrollItemCommonItem.ES_CommonItem.PointerDownHandler = (ItemInfo binfo, PointerEventData pdata) =>
+            scrollItemCommonItem.UpdateItem(self.ShowBagInfos[index], ItemOperateEnum.HuishouBag);
+            scrollItemCommonItem.HideItemName();
+            scrollItemCommonItem.SetEventTrigger(true);
+            scrollItemCommonItem.PointerDownHandler = (ItemInfo binfo, PointerEventData pdata) =>
             {
                 self.OnPointerDown(binfo, pdata).Coroutine();
             };
-            scrollItemCommonItem.ES_CommonItem.PointerUpHandler = (ItemInfo binfo, PointerEventData pdata) => { self.OnPointerUp(binfo, pdata); };
+            scrollItemCommonItem.PointerUpHandler = (ItemInfo binfo, PointerEventData pdata) => { self.OnPointerUp(binfo, pdata); };
             // scrollItemCommonItem.ES_CommonItem.BeginDragHandler = (ItemInfo binfo, PointerEventData pdata) => { self.OnBeginDrag(binfo, pdata); };
             // scrollItemCommonItem.ES_CommonItem.DragingHandler = (ItemInfo binfo, PointerEventData pdata) => { self.OnDraging(binfo, pdata); };
-            scrollItemCommonItem.ES_CommonItem.EndDragHandler = (ItemInfo binfo, PointerEventData pdata) => { self.OnEndDrag(binfo, pdata); };
+            scrollItemCommonItem.EndDragHandler = (ItemInfo binfo, PointerEventData pdata) => { self.OnEndDrag(binfo, pdata); };
             //scrollItemCommonItem.ES_CommonItem.ClickItemHandler =  (ItemInfo binfo) => { self.OnClickItem(binfo); };
         }
 

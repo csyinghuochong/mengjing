@@ -110,7 +110,7 @@ namespace ET.Client
                         continue;
                     }
 
-                    item.ES_CommonItem.E_XuanZhongImage.gameObject.SetActive(item.ES_CommonItem.Baginfo.BagInfoID == bagInfo.BagInfoID);
+                    item.E_XuanZhongImage.gameObject.SetActive(item.Baginfo.BagInfoID == bagInfo.BagInfoID);
                 }
             }
 
@@ -149,7 +149,7 @@ namespace ET.Client
                         continue;
                     }
 
-                    if (item.ES_CommonItem.Baginfo.BagInfoID != self.ES_CommonItem.Baginfo.BagInfoID)
+                    if (item.Baginfo.BagInfoID != self.ES_CommonItem.Baginfo.BagInfoID)
                     {
                         continue;
                     }
@@ -198,14 +198,14 @@ namespace ET.Client
             Scroll_Item_CommonItem scrollItemCommonItem = self.ScrollItemCommonItems[index];
             if (scrollItemCommonItem.uiTransform.gameObject.activeSelf)
             {
-                self.OnSelectItem(scrollItemCommonItem.ES_CommonItem.Baginfo);
+                self.OnSelectItem(scrollItemCommonItem.Baginfo);
             }
             else if (index > 0)
             {
                 Scroll_Item_CommonItem scrollItemCommonItem1 = self.ScrollItemCommonItems[index - 1];
                 if (scrollItemCommonItem1.uiTransform.gameObject.activeSelf)
                 {
-                    self.OnSelectItem(scrollItemCommonItem1.ES_CommonItem.Baginfo);
+                    self.OnSelectItem(scrollItemCommonItem1.Baginfo);
                 }
             }
         }

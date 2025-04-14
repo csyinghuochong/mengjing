@@ -35,16 +35,16 @@ namespace ET.Client
         {
             Scroll_Item_CommonItem scrollItemCommonItem = self.ScrollItemCommonItems[index].BindTrans(transform);
             scrollItemCommonItem.Refresh(self.ShowBagInfos[index], ItemOperateEnum.SkillSet);
-            scrollItemCommonItem.ES_CommonItem.SetEventTrigger(true);
-            scrollItemCommonItem.ES_CommonItem.HideItemNumber();
-            scrollItemCommonItem.ES_CommonItem.BeginDragHandler = (ItemInfo binfo, PointerEventData pdata) => { self.BeginDrag(binfo, pdata); };
-            scrollItemCommonItem.ES_CommonItem.DragingHandler = (ItemInfo binfo, PointerEventData pdata) => { self.Draging(binfo, pdata); };
-            scrollItemCommonItem.ES_CommonItem.EndDragHandler = (ItemInfo binfo, PointerEventData pdata) => { self.EndDrag(binfo, pdata); };
-            scrollItemCommonItem.ES_CommonItem.PointerDownHandler = (ItemInfo binfo, PointerEventData pdata) =>
+            scrollItemCommonItem.SetEventTrigger(true);
+            scrollItemCommonItem.HideItemNumber();
+            scrollItemCommonItem.BeginDragHandler = (ItemInfo binfo, PointerEventData pdata) => { self.BeginDrag(binfo, pdata); };
+            scrollItemCommonItem.DragingHandler = (ItemInfo binfo, PointerEventData pdata) => { self.Draging(binfo, pdata); };
+            scrollItemCommonItem.EndDragHandler = (ItemInfo binfo, PointerEventData pdata) => { self.EndDrag(binfo, pdata); };
+            scrollItemCommonItem.PointerDownHandler = (ItemInfo binfo, PointerEventData pdata) =>
             {
                 self.OnPointerDown(binfo, pdata).Coroutine();
             };
-            scrollItemCommonItem.ES_CommonItem.PointerUpHandler = (ItemInfo binfo, PointerEventData pdata) => { self.OnPointerUp(binfo, pdata); };
+            scrollItemCommonItem.PointerUpHandler = (ItemInfo binfo, PointerEventData pdata) => { self.OnPointerUp(binfo, pdata); };
         }
 
         public static async ETTask OnButtonTransferButton(this ES_RoleXiLianTransfer self)
@@ -250,9 +250,9 @@ namespace ET.Client
                         continue;
                     }
 
-                    long bagInfoId = item.ES_CommonItem.Baginfo.BagInfoID;
+                    long bagInfoId = item.Baginfo.BagInfoID;
                     bool selected = self.IsSelcted(bagInfoId);
-                    item.ES_CommonItem.E_XuanZhongImage.gameObject.SetActive(selected);
+                    item.E_XuanZhongImage.gameObject.SetActive(selected);
                 }
             }
         }

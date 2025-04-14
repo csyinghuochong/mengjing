@@ -98,10 +98,10 @@ namespace ET.Client
                     continue;
                 }
 
-                if (item.ES_CommonItem.Baginfo != null && item.ES_CommonItem.Baginfo.BagInfoID == bagInfo.BagInfoID)
+                if (item.Baginfo != null && item.Baginfo.BagInfoID == bagInfo.BagInfoID)
                 {
-                    selected = !item.ES_CommonItem.E_XuanZhongImage.gameObject.activeSelf;
-                    item.ES_CommonItem.E_XuanZhongImage.gameObject.SetActive(selected);
+                    selected = !item.E_XuanZhongImage.gameObject.activeSelf;
+                    item.E_XuanZhongImage.gameObject.SetActive(selected);
 
                     List<int> valuerange = ItemHelper.GetJingHeAddQulity(new List<int>() { int.Parse(bagInfo.ItemPar) });
                     if (selected)

@@ -93,11 +93,11 @@ namespace ET.Client
         {
             Scroll_Item_CommonItem scrollItemCommonItem = self.ScrollItemCommonItems[index].BindTrans(transform);
 
-            scrollItemCommonItem.ES_CommonItem.UpdateItem(self.ShowBagInfos[index], ItemOperateEnum.SkillSet);
-            scrollItemCommonItem.ES_CommonItem.SetEventTrigger(true);
-            scrollItemCommonItem.ES_CommonItem.BeginDragHandler = (ItemInfo binfo, PointerEventData pdata) => { self.BeginDrag(binfo, pdata); };
-            scrollItemCommonItem.ES_CommonItem.DragingHandler = (ItemInfo binfo, PointerEventData pdata) => { self.Draging(binfo, pdata); };
-            scrollItemCommonItem.ES_CommonItem.EndDragHandler = (ItemInfo binfo, PointerEventData pdata) => { self.EndDrag(binfo, pdata); };
+            scrollItemCommonItem.UpdateItem(self.ShowBagInfos[index], ItemOperateEnum.SkillSet);
+            scrollItemCommonItem.SetEventTrigger(true);
+            scrollItemCommonItem.BeginDragHandler = (ItemInfo binfo, PointerEventData pdata) => { self.BeginDrag(binfo, pdata); };
+            scrollItemCommonItem.DragingHandler = (ItemInfo binfo, PointerEventData pdata) => { self.Draging(binfo, pdata); };
+            scrollItemCommonItem.EndDragHandler = (ItemInfo binfo, PointerEventData pdata) => { self.EndDrag(binfo, pdata); };
         }
 
         public static void UpdateSkillListUI(this ES_SkillSet self)

@@ -196,7 +196,7 @@ namespace ET.Client
 
                 bool have = equipList.Any(itemInfo => itemInfo.ItemID == self.ShowBagInfos[index].ItemID);
                 ItemConfig itemConfig = ItemConfigCategory.Instance.Get(self.ShowBagInfos[index].ItemID);
-                scrollItemCommonItem.ES_CommonItem.E_UpTipImage.gameObject.SetActive(!have && userInfoComponentC.UserInfo.Lv >= itemConfig.UseLv);
+                scrollItemCommonItem.E_UpTipImage.gameObject.SetActive(!have && userInfoComponentC.UserInfo.Lv >= itemConfig.UseLv);
             }
             else
             {
@@ -210,7 +210,7 @@ namespace ET.Client
             {
                 if (scrollItemCommonItem.uiTransform != null)
                 {
-                    scrollItemCommonItem.UpdateSelectStatus(bagInfo);
+                    scrollItemCommonItem.SetSelected(bagInfo);
                 }
             }
         }

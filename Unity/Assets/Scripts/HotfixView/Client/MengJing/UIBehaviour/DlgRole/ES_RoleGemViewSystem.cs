@@ -108,7 +108,7 @@ namespace ET.Client
                 Scroll_Item_CommonItem scrollItemCommonItem = self.ScrollItemCommonItems[i];
                 if (scrollItemCommonItem.uiTransform != null)
                 {
-                    scrollItemCommonItem.UpdateSelectStatus(bagInfo);
+                    scrollItemCommonItem.SetSelected(bagInfo);
                 }
             }
         }

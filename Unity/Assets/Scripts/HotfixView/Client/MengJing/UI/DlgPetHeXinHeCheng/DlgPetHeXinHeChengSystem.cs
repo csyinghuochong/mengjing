@@ -59,23 +59,23 @@ namespace ET.Client
         {
             Scroll_Item_CommonItem scrollItemCommonItem = self.ScrollItemCommonItems[index].BindTrans(transform);
 
-            scrollItemCommonItem.ES_CommonItem.PointerDownHandler = (ItemInfo binfo, PointerEventData pdata) =>
+            scrollItemCommonItem.PointerDownHandler = (ItemInfo binfo, PointerEventData pdata) =>
             {
                 self.PointerDown(binfo, pdata).Coroutine();
             };
-            scrollItemCommonItem.ES_CommonItem.PointerUpHandler = (ItemInfo binfo, PointerEventData pdata) => { self.PointerUp(binfo, pdata); };
-            scrollItemCommonItem.ES_CommonItem.BeginDragHandler = (ItemInfo binfo, PointerEventData pdata) => { self.BeginDrag(binfo, pdata); };
-            scrollItemCommonItem.ES_CommonItem.DragingHandler = (ItemInfo binfo, PointerEventData pdata) => { self.Draging(binfo, pdata); };
-            scrollItemCommonItem.ES_CommonItem.EndDragHandler = (ItemInfo binfo, PointerEventData pdata) => { self.EndDrag(binfo, pdata); };
+            scrollItemCommonItem.PointerUpHandler = (ItemInfo binfo, PointerEventData pdata) => { self.PointerUp(binfo, pdata); };
+            scrollItemCommonItem.BeginDragHandler = (ItemInfo binfo, PointerEventData pdata) => { self.BeginDrag(binfo, pdata); };
+            scrollItemCommonItem.DragingHandler = (ItemInfo binfo, PointerEventData pdata) => { self.Draging(binfo, pdata); };
+            scrollItemCommonItem.EndDragHandler = (ItemInfo binfo, PointerEventData pdata) => { self.EndDrag(binfo, pdata); };
 
             scrollItemCommonItem.Refresh(self.ShowBagInfos[index], ItemOperateEnum.None);
 
             ItemConfig itemConfig = ItemConfigCategory.Instance.Get(self.ShowBagInfos[index].ItemID);
-            scrollItemCommonItem.ES_CommonItem.HideItemName();
-            scrollItemCommonItem.ES_CommonItem.SetEventTrigger(true);
+            scrollItemCommonItem.HideItemName();
+            scrollItemCommonItem.SetEventTrigger(true);
             using (zstring.Block())
             {
-                scrollItemCommonItem.ES_CommonItem.E_ItemNumText.text = zstring.Format("{0}级", itemConfig.UseLv);
+                scrollItemCommonItem.E_ItemNumText.text = zstring.Format("{0}级", itemConfig.UseLv);
                 scrollItemCommonItem.uiTransform.GetChild(0).name =
                         zstring.Format("PetHeXinHeCheng_Image_ItemButton@{0}", self.ShowBagInfos[index].BagInfoID);
             }

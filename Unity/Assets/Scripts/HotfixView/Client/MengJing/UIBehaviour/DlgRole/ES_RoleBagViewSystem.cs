@@ -38,7 +38,7 @@ namespace ET.Client
             int openell = bagComponent.GetBagTotalCell(ItemLocType.ItemLocBag);
             if (index < openell)
             {
-                scrollItemCommonItem.ES_CommonItem.UpdateUnLock(true);
+                scrollItemCommonItem.UpdateUnLock(true);
                 scrollItemCommonItem.Refresh(index < self.ShowBagInfos.Count ? self.ShowBagInfos[index] : null, ItemOperateEnum.Bag,
                     self.UpdateSelect);
             }
@@ -53,11 +53,11 @@ namespace ET.Client
                 bagInfoNew.BagInfoID = index;
                 bagInfoNew.ItemNum = itemnum;
                 scrollItemCommonItem.Refresh(bagInfoNew, ItemOperateEnum.None);
-                scrollItemCommonItem.ES_CommonItem.E_LockButton.AddListener(self.OnClickImage_Lock);
-                scrollItemCommonItem.ES_CommonItem.UpdateUnLock(false);
+                scrollItemCommonItem.E_LockButton.AddListener(self.OnClickImage_Lock);
+                scrollItemCommonItem.UpdateUnLock(false);
             }
 
-            ItemInfo bagInfo = scrollItemCommonItem.ES_CommonItem.Baginfo;
+            ItemInfo bagInfo = scrollItemCommonItem.Baginfo;
             if (bagInfo == null)
             {
                 return;
@@ -135,7 +135,7 @@ namespace ET.Client
                 }
             }
 
-            scrollItemCommonItem.ES_CommonItem.E_UpTipImage.gameObject.SetActive(userInfoComponent.UserInfo.Lv >= itemConfig.UseLv
+            scrollItemCommonItem.E_UpTipImage.gameObject.SetActive(userInfoComponent.UserInfo.Lv >= itemConfig.UseLv
                 && itemConfig.UseLv > curLevel && itemConfig.ItemQuality > curQulity && itemConfig.EquipType != 201); // 晶核不显示箭头
         }
 
@@ -197,7 +197,7 @@ namespace ET.Client
                 Scroll_Item_CommonItem scrollItemCommonItem = self.ScrollItemCommonItems[i];
                 if (scrollItemCommonItem.uiTransform != null)
                 {
-                    scrollItemCommonItem.UpdateSelectStatus(bagInfo);
+                    scrollItemCommonItem.SetSelected(bagInfo);
                 }
             }
         }

@@ -164,7 +164,7 @@ namespace ET.Client
 
             if (index < openell)
             {
-                scrollItemCommonItem.ES_CommonItem.UpdateUnLock(true);
+                scrollItemCommonItem.UpdateUnLock(true);
             }
             else
             {
@@ -177,8 +177,8 @@ namespace ET.Client
                 bagInfoNew.ItemID = itemid;
                 bagInfoNew.ItemNum = itemnum;
                 scrollItemCommonItem.Refresh(bagInfoNew, ItemOperateEnum.None);
-                scrollItemCommonItem.ES_CommonItem.UpdateUnLock(false);
-                scrollItemCommonItem.ES_CommonItem.E_LockButton.AddListener(self.OnClickImage_Lock);
+                scrollItemCommonItem.UpdateUnLock(false);
+                scrollItemCommonItem.E_LockButton.AddListener(self.OnClickImage_Lock);
             }
         }
 
@@ -198,7 +198,7 @@ namespace ET.Client
                     Scroll_Item_CommonItem scrollItemCommonItem = value;
                     if (scrollItemCommonItem.uiTransform != null)
                     {
-                        scrollItemCommonItem.UpdateSelectStatus(bagInfo);
+                        scrollItemCommonItem.SetSelected(bagInfo);
                     }
                 }
             }
@@ -213,7 +213,7 @@ namespace ET.Client
                     Scroll_Item_CommonItem scrollItemCommonItem = value;
                     if (scrollItemCommonItem.uiTransform != null)
                     {
-                        scrollItemCommonItem.UpdateSelectStatus(bagInfo);
+                        scrollItemCommonItem.SetSelected(bagInfo);
                     }
                 }
             }

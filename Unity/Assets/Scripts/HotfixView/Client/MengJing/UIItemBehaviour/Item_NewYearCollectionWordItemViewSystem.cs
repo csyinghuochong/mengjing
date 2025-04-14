@@ -41,9 +41,9 @@ namespace ET.Client
                     continue;
                 }
 
-                bool gray = bagComponent.GetItemNumber(item.ES_CommonItem.Baginfo.ItemID) <= 0;
-                CommonViewHelper.SetImageGray(self.Root(), item.ES_CommonItem.E_ItemIconImage.gameObject, gray);
-                CommonViewHelper.SetImageGray(self.Root(), item.ES_CommonItem.E_ItemQualityImage.gameObject, gray);
+                bool gray = bagComponent.GetItemNumber(item.Baginfo.ItemID) <= 0;
+                CommonViewHelper.SetImageGray(self.Root(), item.E_ItemIconImage.gameObject, gray);
+                CommonViewHelper.SetImageGray(self.Root(), item.E_ItemQualityImage.gameObject, gray);
             }
 
             ActivityConfig activityConfig = self.ActivityConfig;

@@ -208,10 +208,10 @@ namespace ET.Client
         private static void OnCommonItemsRefresh(this ES_PetXiLian self, Transform transform, int index)
         {
             Scroll_Item_CommonItem scrollItemCommonItem = self.ScrollItemCommonItems[index].BindTrans(transform);
-            scrollItemCommonItem.ES_CommonItem.UpdateItem(self.ShowBagInfos[index], ItemOperateEnum.PetXiLian);
-            scrollItemCommonItem.ES_CommonItem.SetClickHandler((bagInfo) => { self.OnSelectItem(bagInfo); });
-            scrollItemCommonItem.ES_CommonItem.HideItemName();
-            scrollItemCommonItem.ES_CommonItem.E_ItemNumText.gameObject.SetActive(true);
+            scrollItemCommonItem.UpdateItem(self.ShowBagInfos[index], ItemOperateEnum.PetXiLian);
+            scrollItemCommonItem.SetClickHandler((bagInfo) => { self.OnSelectItem(bagInfo); });
+            scrollItemCommonItem.HideItemName();
+            scrollItemCommonItem.E_ItemNumText.gameObject.SetActive(true);
         }
 
         private static void UpdateConsume(this ES_PetXiLian self)

@@ -122,15 +122,15 @@ namespace ET.Client
         {
             Scroll_Item_CommonItem scrollItemCommonItem = self.ScrollItemCommonItems[index].BindTrans(transform);
             scrollItemCommonItem.Refresh(index < self.ShowBagInfos.Count ? self.ShowBagInfos[index] : null, ItemOperateEnum.HuishouBag);
-            scrollItemCommonItem.ES_CommonItem.PointerDownHandler = (ItemInfo binfo, PointerEventData pdata) =>
+            scrollItemCommonItem.PointerDownHandler = (ItemInfo binfo, PointerEventData pdata) =>
             {
                 self.OnPointerDown(binfo, pdata).Coroutine();
             };
-            scrollItemCommonItem.ES_CommonItem.PointerUpHandler = (ItemInfo binfo, PointerEventData pdata) => { self.OnPointerUp(binfo, pdata); };
-            scrollItemCommonItem.ES_CommonItem.SetEventTrigger(true);
+            scrollItemCommonItem.PointerUpHandler = (ItemInfo binfo, PointerEventData pdata) => { self.OnPointerUp(binfo, pdata); };
+            scrollItemCommonItem.SetEventTrigger(true);
 
-            scrollItemCommonItem.ES_CommonItem.E_ItemDragEventTrigger.gameObject.SetActive(index < self.ShowBagInfos.Count);
-            scrollItemCommonItem.ES_CommonItem.E_ItemNameText.gameObject.SetActive(false);
+            scrollItemCommonItem.E_ItemDragEventTrigger.gameObject.SetActive(index < self.ShowBagInfos.Count);
+            scrollItemCommonItem.E_ItemNameText.gameObject.SetActive(false);
         }
 
         public static void UpdateBagUI(this ES_JiaYuanCooking self, int itemType = -1)
@@ -164,7 +164,7 @@ namespace ET.Client
                         continue;
                     }
 
-                    ItemInfo bagInfo = item.ES_CommonItem.Baginfo;
+                    ItemInfo bagInfo = item.Baginfo;
                     if (bagInfo == null)
                     {
                         continue;
@@ -180,7 +180,7 @@ namespace ET.Client
                         }
                     }
 
-                    item.ES_CommonItem.E_XuanZhongImage.gameObject.SetActive(have);
+                    item.E_XuanZhongImage.gameObject.SetActive(have);
                 }
             }
         }

@@ -44,10 +44,10 @@ namespace ET.Client
         {
             Scroll_Item_CommonItem scrollItemCommonItem = self.ScrollItemCommonItems[index].BindTrans(transform);
             scrollItemCommonItem.Refresh(self.ShowBagInfos[index], ItemOperateEnum.SkillSet);
-            scrollItemCommonItem.ES_CommonItem.SetEventTrigger(true);
-            scrollItemCommonItem.ES_CommonItem.BeginDragHandler = (binfo, pdata) => { self.BeginDrag(binfo, pdata); };
-            scrollItemCommonItem.ES_CommonItem.DragingHandler = (binfo, pdata) => { self.Draging(binfo, pdata); };
-            scrollItemCommonItem.ES_CommonItem.EndDragHandler = (binfo, pdata) => { self.EndDrag(binfo, pdata); };
+            scrollItemCommonItem.SetEventTrigger(true);
+            scrollItemCommonItem.BeginDragHandler = (binfo, pdata) => { self.BeginDrag(binfo, pdata); };
+            scrollItemCommonItem.DragingHandler = (binfo, pdata) => { self.Draging(binfo, pdata); };
+            scrollItemCommonItem.EndDragHandler = (binfo, pdata) => { self.EndDrag(binfo, pdata); };
         }
 
         public static void UpdateEggItemUI(this ES_PetEggList self)

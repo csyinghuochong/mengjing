@@ -137,7 +137,7 @@ namespace ET.Client
                     Scroll_Item_CommonItem scrollItemCommonItem = self.ScrollItemEquipItems[0];
                     if (scrollItemCommonItem.uiTransform != null)
                     {
-                        scrollItemCommonItem.ES_CommonItem.OnClickUIItem();
+                        scrollItemCommonItem.OnClickUIItem();
                     }
                 }
             }
@@ -176,7 +176,7 @@ namespace ET.Client
                     Scroll_Item_CommonItem item = value;
                     if (item.uiTransform != null)
                     {
-                        item.ES_CommonItem.SetSelected(bagInfo);
+                        item.SetSelected(bagInfo);
                     }
                 }
             }
@@ -192,7 +192,7 @@ namespace ET.Client
                     Scroll_Item_CommonItem item = value;
                     if (item.uiTransform != null)
                     {
-                        item.ES_CommonItem.SetSelected(bagInfo);
+                        item.SetSelected(bagInfo);
                     }
                 }
             }

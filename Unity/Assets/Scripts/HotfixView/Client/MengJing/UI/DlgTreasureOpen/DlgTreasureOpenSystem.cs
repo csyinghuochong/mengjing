@@ -55,7 +55,7 @@ namespace ET.Client
             ItemInfo bagInfo = new ItemInfo();
             bagInfo.ItemID = self.RewardShowItems[index];
             scrollItemCommonItem.Refresh(bagInfo, ItemOperateEnum.None);
-            scrollItemCommonItem.ES_CommonItem.E_ItemNumText.gameObject.SetActive(false);
+            scrollItemCommonItem.E_ItemNumText.gameObject.SetActive(false);
         }
 
         public static void OnInitUI(this DlgTreasureOpen self, ItemInfo bagInfo)
@@ -165,7 +165,7 @@ namespace ET.Client
                 Scroll_Item_CommonItem item = self.ScrollItemCommonItems[i];
                 if (item.uiTransform != null)
                 {
-                    if (item.ES_CommonItem.Baginfo.ItemID == targetItem)
+                    if (item.Baginfo.ItemID == targetItem)
                     {
                         self.TargetIndex = i;
                         break;

@@ -614,7 +614,7 @@ namespace ET.Client
                 }
 
                 Scroll_Item_CommonItem uIItemComponent = self.ScrollItemCommonItems[i];
-                ItemInfo bagInfo = uIItemComponent.ES_CommonItem.Baginfo;
+                ItemInfo bagInfo = uIItemComponent.Baginfo;
                 if (bagInfo == null)
                 {
                     continue;
@@ -629,7 +629,7 @@ namespace ET.Client
                     }
                 }
 
-                uIItemComponent.ES_CommonItem.E_XuanZhongImage.gameObject.SetActive(have);
+                uIItemComponent.E_XuanZhongImage.gameObject.SetActive(have);
             }
         }
 
@@ -645,11 +645,11 @@ namespace ET.Client
         private static void OnCommonItemsRefresh(this ES_SkillMake self, Transform transform, int index)
         {
             Scroll_Item_CommonItem scrollItemCommonItem = self.ScrollItemCommonItems[index].BindTrans(transform);
-            scrollItemCommonItem.ES_CommonItem.UpdateItem(self.ShowBagInfos[index], ItemOperateEnum.HuishouBag);
-            scrollItemCommonItem.ES_CommonItem.SetEventTrigger(true);
-            scrollItemCommonItem.ES_CommonItem.PointerDownHandler = (ItemInfo binfo, PointerEventData pdata) => { self.OnPointerDown(binfo, pdata); };
-            scrollItemCommonItem.ES_CommonItem.PointerUpHandler = (ItemInfo binfo, PointerEventData pdata) => { self.OnPointerUp(binfo, pdata); };
-            scrollItemCommonItem.ES_CommonItem.E_ItemNameText.gameObject.SetActive(true);
+            scrollItemCommonItem.UpdateItem(self.ShowBagInfos[index], ItemOperateEnum.HuishouBag);
+            scrollItemCommonItem.SetEventTrigger(true);
+            scrollItemCommonItem.PointerDownHandler = (ItemInfo binfo, PointerEventData pdata) => { self.OnPointerDown(binfo, pdata); };
+            scrollItemCommonItem.PointerUpHandler = (ItemInfo binfo, PointerEventData pdata) => { self.OnPointerUp(binfo, pdata); };
+            scrollItemCommonItem.E_ItemNameText.gameObject.SetActive(true);
         }
 
         public static void UpdateBagUI(this ES_SkillMake self, int itemType = -1)

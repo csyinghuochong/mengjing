@@ -128,7 +128,7 @@ namespace ET.Client
                         continue;
                     }
 
-                    item.ES_CommonItem.SetSelected(bagInfo);
+                    item.SetSelected(bagInfo);
                 }
             }
         }

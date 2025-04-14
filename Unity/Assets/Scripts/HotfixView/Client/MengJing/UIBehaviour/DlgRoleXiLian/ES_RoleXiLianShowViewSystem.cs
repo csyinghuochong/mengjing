@@ -141,7 +141,7 @@ namespace ET.Client
                         Scroll_Item_CommonItem scrollItemCommonItem = self.ScrollItemCommonItems[0];
                         if (scrollItemCommonItem.uiTransform != null)
                         {
-                            scrollItemCommonItem.ES_CommonItem.OnClickUIItem();
+                            scrollItemCommonItem.OnClickUIItem();
                         }
                     }
 
@@ -170,7 +170,7 @@ namespace ET.Client
             
             Scroll_Item_CommonItem scrollItemCommonItem = self.ScrollItemCommonItems[index].BindTrans(transform);
             scrollItemCommonItem.Refresh(self.ShowBagInfos[index], ItemOperateEnum.ItemXiLian, self.OnSelectBagItem);
-            scrollItemCommonItem.ES_CommonItem.E_ItemDragEventTrigger.gameObject.SetActive(false);
+            scrollItemCommonItem.E_ItemDragEventTrigger.gameObject.SetActive(false);
             self.OnSelectBagItem(self.XilianBagInfo);
         }
 
@@ -187,7 +187,7 @@ namespace ET.Client
                         continue;
                     }
 
-                    item.UpdateSelectStatus(bagInfo);
+                    item.SetSelected(bagInfo);
                 }
             }
 

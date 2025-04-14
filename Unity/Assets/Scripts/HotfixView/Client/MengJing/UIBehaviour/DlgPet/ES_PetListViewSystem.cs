@@ -741,11 +741,11 @@ namespace ET.Client
         {
             Scroll_Item_CommonItem scrollItemCommonItem = self.ScrollItemCommonItems[index].BindTrans(transform);
             scrollItemCommonItem.Refresh(self.ShowBagInfos[index], ItemOperateEnum.PetHeXinBag);
-            scrollItemCommonItem.ES_CommonItem.SetClickHandler(self.SelectItemHandlder);
+            scrollItemCommonItem.SetClickHandler(self.SelectItemHandlder);
             ItemConfig itemConfig = ItemConfigCategory.Instance.Get(self.ShowBagInfos[index].ItemID);
             using (zstring.Block())
             {
-                scrollItemCommonItem.ES_CommonItem.E_ItemNumText.text = zstring.Format("{0}级", itemConfig.UseLv);
+                scrollItemCommonItem.E_ItemNumText.text = zstring.Format("{0}级", itemConfig.UseLv);
             }
         }
 
@@ -757,7 +757,7 @@ namespace ET.Client
                 Scroll_Item_CommonItem scrollItemCommonItem = self.ScrollItemCommonItems[i];
                 if (scrollItemCommonItem.uiTransform != null)
                 {
-                    scrollItemCommonItem.ES_CommonItem.SetSelected(bagInfo);
+                    scrollItemCommonItem.SetSelected(bagInfo);
                 }
             }
         }

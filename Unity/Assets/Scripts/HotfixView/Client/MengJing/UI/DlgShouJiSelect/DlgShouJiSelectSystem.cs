@@ -28,7 +28,7 @@ namespace ET.Client
         {
             Scroll_Item_CommonItem scrollItemCommonItem = self.ScrollItemCommonItems[index].BindTrans(transform);
             scrollItemCommonItem.Refresh(self.ShowBagInfos[index], ItemOperateEnum.None, self.OnSelectItem);
-            scrollItemCommonItem.ES_CommonItem.E_ItemNameText.gameObject.SetActive(true);
+            scrollItemCommonItem.E_ItemNameText.gameObject.SetActive(true);
         }
 
         public static void OnInitUI(this DlgShouJiSelect self, int shouiId, Action updateRedDotAction)
@@ -105,9 +105,9 @@ namespace ET.Client
                         continue;
                     }
 
-                    if (item.ES_CommonItem.E_XuanZhongImage.gameObject.activeSelf)
+                    if (item.E_XuanZhongImage.gameObject.activeSelf)
                     {
-                        ids.Add(item.ES_CommonItem.Baginfo.BagInfoID);
+                        ids.Add(item.Baginfo.BagInfoID);
                     }
                 }
             }
@@ -126,10 +126,10 @@ namespace ET.Client
                         continue;
                     }
 
-                    if (item.ES_CommonItem.Baginfo.BagInfoID == bagInfo.BagInfoID)
+                    if (item.Baginfo.BagInfoID == bagInfo.BagInfoID)
                     {
-                        bool selected = item.ES_CommonItem.E_XuanZhongImage.gameObject.activeSelf;
-                        item.ES_CommonItem.E_XuanZhongImage.gameObject.SetActive(!selected);
+                        bool selected = item.E_XuanZhongImage.gameObject.activeSelf;
+                        item.E_XuanZhongImage.gameObject.SetActive(!selected);
                     }
                 }
             }

@@ -95,9 +95,9 @@ namespace ET.Client
 
             scrollItemCommonItem.Refresh(self.ShowBagInfos[index], ItemOperateEnum.HuishouBag);
 
-            scrollItemCommonItem.ES_CommonItem.PointerDownHandler = (binfo, pdata) => { self.OnPointerDown(binfo, pdata).Coroutine(); };
-            scrollItemCommonItem.ES_CommonItem.PointerUpHandler = (binfo, pdata) => { self.OnPointerUp(binfo, pdata); };
-            scrollItemCommonItem.ES_CommonItem.SetEventTrigger(true);
+            scrollItemCommonItem.PointerDownHandler = (binfo, pdata) => { self.OnPointerDown(binfo, pdata).Coroutine(); };
+            scrollItemCommonItem.PointerUpHandler = (binfo, pdata) => { self.OnPointerUp(binfo, pdata); };
+            scrollItemCommonItem.SetEventTrigger(true);
         }
 
         public static void OnUpdateItemList(this DlgJiaYuanPetFeed self)
@@ -233,7 +233,7 @@ namespace ET.Client
                         continue;
                     }
 
-                    ItemInfo bagInfo = item.ES_CommonItem.Baginfo;
+                    ItemInfo bagInfo = item.Baginfo;
                     if (bagInfo == null)
                     {
                         continue;
@@ -249,7 +249,7 @@ namespace ET.Client
                         }
                     }
 
-                    item.ES_CommonItem.E_XuanZhongImage.gameObject.SetActive(have);
+                    item.E_XuanZhongImage.gameObject.SetActive(have);
                 }
             }
         }

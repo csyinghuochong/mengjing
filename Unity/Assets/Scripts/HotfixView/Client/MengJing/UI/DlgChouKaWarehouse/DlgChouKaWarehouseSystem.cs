@@ -53,7 +53,7 @@ namespace ET.Client
                 Scroll_Item_CommonItem scrollItemCommonItem = self.ScrollItemHouseItems[i];
                 if (scrollItemCommonItem.uiTransform != null)
                 {
-                    scrollItemCommonItem.UpdateSelectStatus(bagInfo);
+                    scrollItemCommonItem.SetSelected(bagInfo);
                 }
             }
         }
@@ -70,7 +70,7 @@ namespace ET.Client
                 Scroll_Item_CommonItem scrollItemCommonItem = self.ScrollItemHouseItems[i];
                 if (scrollItemCommonItem.uiTransform != null)
                 {
-                    scrollItemCommonItem.UpdateSelectStatus(bagInfo);
+                    scrollItemCommonItem.SetSelected(bagInfo);
                 }
             }
         }
