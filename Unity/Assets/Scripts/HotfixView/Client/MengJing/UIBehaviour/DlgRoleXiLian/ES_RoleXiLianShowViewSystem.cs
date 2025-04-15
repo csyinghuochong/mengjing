@@ -134,22 +134,28 @@ namespace ET.Client
                     self.AddUIScrollItems(ref self.ScrollItemCommonItems, self.ShowBagInfos.Count);
                     self.E_EquipItemsLoopVerticalScrollRect.SetVisible(true, self.ShowBagInfos.Count);
 
-                    if (self.XilianBagInfo != null)
-                    {
-                        self.OnSelectBagItem(self.XilianBagInfo);
-                    }
-                    else if (self.ShowBagInfos.Count > 0)
-                    {
-                        Scroll_Item_CommonItem scrollItemCommonItem = self.ScrollItemCommonItems[0];
-                        if (scrollItemCommonItem.uiTransform != null)
-                        {
-                            scrollItemCommonItem.OnClickUIItem();
-                        }
-                    }
+                    // if (self.XilianBagInfo != null)
+                    // {
+                    //     self.OnSelectBagItem(self.XilianBagInfo);
+                    // }
+                    // else if (self.ShowBagInfos.Count > 0)
+                    // {
+                    //     Scroll_Item_CommonItem scrollItemCommonItem = self.ScrollItemCommonItems[0];
+                    //     if (scrollItemCommonItem.uiTransform != null)
+                    //     {
+                    //         scrollItemCommonItem.OnClickUIItem();
+                    //     }
+                    // }
 
                     break;
             }
 
+            if (self.CurrentItemType != index)
+            {
+                self.ResetEquipCombatChange(self.XilianBagInfo);
+                self.OnUpdateXinLian();
+            }
+            
             self.CurrentItemType = index;
         }
 
@@ -173,13 +179,11 @@ namespace ET.Client
             Scroll_Item_CommonItem scrollItemCommonItem = self.ScrollItemCommonItems[index].BindTrans(transform);
             scrollItemCommonItem.Refresh(self.ShowBagInfos[index], ItemOperateEnum.ItemXiLian, self.OnSelectBagItem);
             scrollItemCommonItem.E_ItemDragEventTrigger.gameObject.SetActive(false);
-            self.OnSelectBagItem(self.XilianBagInfo);
+            self.SetBagItemSelect(self.XilianBagInfo);
         }
 
-        private static void OnSelectBagItem(this ES_RoleXiLianShow self, ItemInfo bagInfo)
+        private static void SetBagItemSelect(this ES_RoleXiLianShow self, ItemInfo bagInfo)
         {
-            self.XilianBagInfo = bagInfo;
-
             if (self.ScrollItemCommonItems != null)
             {
                 foreach (Scroll_Item_CommonItem item in self.ScrollItemCommonItems.Values)
@@ -193,6 +197,15 @@ namespace ET.Client
                 }
             }
 
+        }
+        
+        private static void OnSelectBagItem(this ES_RoleXiLianShow self, ItemInfo bagInfo)
+        {
+            self.XilianBagInfo = bagInfo;
+
+            self.SetBagItemSelect(bagInfo);
+
+            self.ResetEquipCombatChange(bagInfo);
             self.OnUpdateXinLian();
         }
 
@@ -213,6 +226,7 @@ namespace ET.Client
                 }
             }
 
+            self.ResetEquipCombatChange(bagInfo);
             self.OnUpdateXinLian();
         }
 
@@ -923,11 +937,6 @@ namespace ET.Client
             {
                 return;
             }
-            
-            if (!self.EquipCombatChangeDic.ContainsKey(bagInfo.BagInfoID))
-            {
-                self.EquipCombatChangeDic.Add(bagInfo.BagInfoID, (bagInfo, 0));
-            }
 
             self.UpdateAttribute(bagInfo);
             
@@ -1063,6 +1072,26 @@ namespace ET.Client
             // #endif
         }
 
+        private static void ResetEquipCombatChange(this ES_RoleXiLianShow self, ItemInfo bagInfo)
+        {
+            if (bagInfo == null)
+            {
+                return;
+            }
+            
+            if (!self.EquipCombatChangeDic.ContainsKey(bagInfo.BagInfoID))
+            {
+                self.EquipCombatChangeDic.Add(bagInfo.BagInfoID, (bagInfo, 0));
+            }
+            else
+            {
+                (ItemInfo, long) info = self.EquipCombatChangeDic[bagInfo.BagInfoID];
+                self.EquipCombatChangeDic[bagInfo.BagInfoID] = (info.Item1, 0);
+                
+                // self.EquipCombatChangeDic.Add(bagInfo.BagInfoID, (bagInfo, 0));// 属性变化也重置
+            }
+        }
+        
         public static void UpdateEquipCombatChange(this ES_RoleXiLianShow self, ItemInfo oldItemInfo, long changeCombat)
         {
             // CommonHelp.DeepCopy<ItemInfo>(itemInfo)
