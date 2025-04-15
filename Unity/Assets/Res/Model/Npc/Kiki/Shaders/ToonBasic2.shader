@@ -1,4 +1,4 @@
-Shader "Toon/Basic" {
+Shader "Toon/Basic2" {
 	Properties {
 		_Color ("Main Color", Color) = (.5,.5,.5,1)
 		_MainTex ("Base (RGB)", 2D) = "white" {}

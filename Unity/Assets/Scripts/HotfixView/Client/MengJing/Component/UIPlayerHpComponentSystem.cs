@@ -281,15 +281,17 @@ namespace ET.Client
 
             Vector3 vector3_zuoqi = new Vector3(30f, 200f, 0f);  //坐骑状态
             Vector3 vector3_normal = new Vector3(30f, 120f, 0f); //非坐骑状态
+            
+            HeadBarUI HeadBarUI_1 = self.UIPlayerHpText.GetComponent<HeadBarUI>();
+            HeadBarUI_1.enabled = horseRide <= 0;
+            HeadBarUI HeadBarUI_2 = self.GameObject.GetComponent<HeadBarUI>();
+            HeadBarUI_2.enabled =  horseRide <= 0;
             if (horseRide > 0)
             {
                 ZuoQiShowConfig zuoQiShowConfig = ZuoQiShowConfigCategory.Instance.Get(horseRide);
                 vector3_zuoqi.y += (float)zuoQiShowConfig.NameShowUp;
-            }
-            
-            self.GameObject.transform.localPosition = horseRide > 0 ? vector3_zuoqi : vector3_normal;
-            if (unit.MainHero)
-            {
+                
+                self.GameObject.transform.localPosition = horseRide > 0 ? vector3_zuoqi : vector3_normal;
                 self.UIPlayerHpText.transform.localPosition = horseRide > 0 ? vector3_zuoqi : vector3_normal;
             }
         }

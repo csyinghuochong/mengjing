@@ -1,4 +1,4 @@
-Shader "Toon/BasicOutline"
+Shader "Toon/BasicOutline2"
 {
     Properties
     {

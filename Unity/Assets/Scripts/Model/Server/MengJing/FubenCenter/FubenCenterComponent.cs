@@ -35,7 +35,8 @@ namespace ET.Server
         
         public Dictionary<int, ActorId> FubenActorIdList { get; set; } = new Dictionary<int, ActorId>();
         public Dictionary<int, long> YeWaiFubenList { get; set; } = new Dictionary<int, long>();
-      
+        
+        /// 战场1025 角斗场1031  喜从天降1055   变身比赛1058 恶魔比赛1059
         /// <summary>
         /// 奔跑大赛
         /// </summary>

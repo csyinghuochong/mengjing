@@ -138,31 +138,75 @@ namespace ET.Server
              Console.WriteLine($"OnActivityClose: {functionId}");
         }
 
-        public static BattleInfo GetFunctionFubenId(this FubenCenterComponent self, int functionId, long unitId)
+        public static int GetFunctionId(this FubenCenterComponent self,int sceneId)
+        {
+            int functionId = 0;
+
+            if (sceneId == 3000001 || sceneId == 3000002)
+            {
+                functionId = 1025; //战场
+            }
+
+            if (sceneId == 6000001)
+            {
+                functionId = 1031;  //角斗场
+            }
+            if (sceneId == 8000001)
+            {
+                functionId = 1055;  //喜从天降
+            }
+            if (sceneId == 6000002)
+            {
+                functionId = 1058;  //变身比赛
+            }
+            if (sceneId == 6000003)
+            {
+                functionId = 1059;  //恶魔比赛
+            }
+
+            return functionId;
+        }
+        
+        public static BattleInfo GetBattleFuben(this FubenCenterComponent self, int functionId, long unitId)
         {
             List<BattleInfo> battleInfos = null;
             int playerLimit = 20;
             if (functionId == 1031)
             {
+                if(!self.ArenaOpen)
+                {
+                    return null;
+                }
                 battleInfos = self.ArenaInfos;
                 playerLimit = 1000000;
             }
 
             if (functionId == 1055)
             {
+                if(!self.HappyOpen)
+                {
+                    return null;
+                }
                 battleInfos = self.HappyInfos;
             }
 
             if (functionId == 1058)
             {
+                if(!self.RunRaceOpen)
+                {
+                    return null;
+                }
                 battleInfos = self.RunRaceInfos;
             }
 
             if (functionId == 1059)
             {
+                if(!self.DemonOpen)
+                {
+                    return null;
+                }
                 battleInfos = self.DemonInfos;
             }
-
             if (battleInfos == null)
             {
                 return null;

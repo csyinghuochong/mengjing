@@ -28,26 +28,11 @@ namespace ET.Server
                     return;
                 }
 
-                int functionId = 0;
-                if (request.SceneId == 8000001)
-                {
-                    functionId = 1055;
-                }
-                if (request.SceneId == 6000001)
-                {
-                    functionId = 1031;
-                }
-                if (request.SceneId == 6000002)
-                {
-                    functionId = 1058;
-                }
-                if (request.SceneId == 6000003)
-                {
-                    functionId = 1059;
-                }
-                BattleInfo battleInfo = scene.GetComponent<FubenCenterComponent>().GetFunctionFubenId(functionId, request.UnitId);
-                response.FubenInstanceId = battleInfo.FubenInstanceId;
-                response.FubenActorId = battleInfo.ActorId;
+                FubenCenterComponent fubenCenterComponent = scene.GetComponent<FubenCenterComponent>();
+                int functionId = fubenCenterComponent.GetFunctionId(request.SceneId);
+                BattleInfo battleInfo = fubenCenterComponent.GetBattleFuben(functionId, request.UnitId);
+                response.FubenInstanceId = battleInfo != null ? battleInfo.FubenInstanceId : 0;
+                response.FubenActorId =  battleInfo!=null ? battleInfo.ActorId: default;
                 response.Message = "0";
             }
             
