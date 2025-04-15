@@ -71,8 +71,8 @@ namespace ET.Client
                 self.View.EG_ZiJinSetRectTransform.gameObject.SetActive(Enum.GetName(typeof(WindowID), uiComponent.OpenUIList[0])
                         .Contains("JiaYuan"));
                 self.View.EG_JiaZuSetRectTransform.gameObject.SetActive(Enum.GetName(typeof(WindowID), uiComponent.OpenUIList[0]).Contains("Union"));
-                self.View.EG_WeiJingSetRectTransform.gameObject.SetActive(
-                    Enum.GetName(typeof(WindowID), uiComponent.OpenUIList[0]).Contains("PaiMai"));
+                //self.View.EG_WeiJingSetRectTransform.gameObject.SetActive(
+                //    Enum.GetName(typeof(WindowID), uiComponent.OpenUIList[0]).Contains("PaiMai"));
             }
         }
 
