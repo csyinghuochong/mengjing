@@ -22,7 +22,7 @@ namespace ET.Client
             switch (npcType)
             {
                 case 1:
-                    self.E_TextFubenNameText.text = ItemViewHelp.ShowDuiHuanPet(fubenId);
+                    self.E_TextFubenNameText.text = "兑换神兽";//ItemViewHelp.ShowDuiHuanPet(fubenId);
                     break;
                 case 2:
                     self.E_TextFubenNameText.text = SceneConfigCategory.Instance.Get(fubenId).Name;
