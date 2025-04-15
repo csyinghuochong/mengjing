@@ -55,9 +55,15 @@ namespace ET.Client
             bagInfoNew.ItemID = paiMaiSellConfig.ItemID;
             self.ES_CommonItem.UpdateItem(bagInfoNew, ItemOperateEnum.None);
             self.ES_CommonItem.E_ItemNumText.gameObject.SetActive(false);
+            self.ES_CommonItem.E_ItemQualityImage.gameObject.SetActive(false);
 
             self.E_Lab_PriceText.text = shopItemInfo.Price.ToString();
 
+            ItemConfig itemConfig = ItemConfigCategory.Instance.Get(paiMaiSellConfig.ItemID);
+            string qualityiconStr = FunctionUI.BigItemQualiytoPath(itemConfig.ItemQuality);
+            string path1 = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemQualityIcon, qualityiconStr);
+            self.E_Quality_Image.sprite =   self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path1);
+            
             string des = "";
             using (zstring.Block())
             {

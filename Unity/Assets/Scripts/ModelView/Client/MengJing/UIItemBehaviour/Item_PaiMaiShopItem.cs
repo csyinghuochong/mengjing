@@ -161,7 +161,31 @@ namespace ET.Client
      			}
      		}
      	}
-
+		
+		public Image E_Quality_Image
+		{
+			get
+			{
+				if (this.uiTransform == null)
+				{
+					Log.Error("uiTransform is null.");
+					return null;
+				}
+				if (this.isCacheNode)
+				{
+					if( this.m_E_Quality_Image == null )
+					{
+						this.m_E_Quality_Image = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_Quality_Image");
+					}
+					return this.m_E_Quality_Image;
+				}
+				else
+				{
+					return UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_Quality_Image");
+				}
+			}
+		}
+		
 		public Text E_Lab_TipsText
      	{
      		get
@@ -194,6 +218,7 @@ namespace ET.Client
 			this.m_es_commonitem = null;
 			this.m_E_Lab_PriceText = null;
 			this.m_E_Lab_TipsText = null;
+			this.m_E_Quality_Image = null;
 			this.uiTransform = null;
 			this.DataId = 0;
 		}
@@ -204,6 +229,7 @@ namespace ET.Client
 		private EntityRef<ES_CommonItem> m_es_commonitem = null;
 		private Text m_E_Lab_PriceText = null;
 		private Text m_E_Lab_TipsText = null;
+		private Image m_E_Quality_Image = null;
 		public Transform uiTransform = null;
 	}
 }
