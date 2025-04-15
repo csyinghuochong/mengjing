@@ -32,7 +32,7 @@ namespace ET.Client
                 GameObject itemGo = UnityEngine.Object.Instantiate(self.UIRoleXiLianTenItem);
                 CommonViewHelper.SetParent(itemGo, self.View.EG_ItemListNodeRectTransform.gameObject);
                 itemGo.SetActive(true);
-                self.AddChild<UIRoleXiLianTenItem, GameObject>(itemGo).OnInitUI(bagInfoTemp, itemXiLians[i]);
+                self.AddChild<UIRoleXiLianTenItem, GameObject>(itemGo).OnInitUI(bagInfo, bagInfoTemp, itemXiLians[i]);
             }
         }
 

@@ -15,7 +15,8 @@ namespace ET.Client
         public Text E_BattleAdd;
 
         public ItemXiLianResult ItemXiLianResult;
-        private EntityRef<ItemInfo> bagInfo;
-        public ItemInfo BagInfo { get => this.bagInfo; set => this.bagInfo = value; }
+
+        public ItemInfo OldItemInfo { get; set; }
+        public ItemInfo ItemInfo { get; set; }
     }
 }

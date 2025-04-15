@@ -25,12 +25,13 @@ namespace ET.Client
             self.E_BattleAdd = rc.Get<GameObject>("E_BattleAdd").GetComponent<Text>();
         }
 
-        public static void OnInitUI(this UIRoleXiLianTenItem self, ItemInfo bagInfo, ItemXiLianResult index)
+        public static void OnInitUI(this UIRoleXiLianTenItem self, ItemInfo oldItemInfo, ItemInfo itemInfo, ItemXiLianResult index)
         {
-            self.BagInfo = bagInfo;
+            self.OldItemInfo = oldItemInfo;
+            self.ItemInfo = itemInfo;
             self.ItemXiLianResult = index;
             BagComponentC bagComponent = self.Root().GetComponent<BagComponentC>();
-            ItemViewHelp.ShowBaseAttribute(bagComponent.GetEquipList(), bagInfo, self.Obj_EquipPropertyText, self.EquipBaseSetList);
+            ItemViewHelp.ShowBaseAttribute(bagComponent.GetEquipList(), itemInfo, self.Obj_EquipPropertyText, self.EquipBaseSetList);
 
             self.E_BattleAdd.text = $"预计战力增长:{index.ChangeCombat}";
             self.E_CombatDown.gameObject.SetActive(index.ChangeCombat < 0);
@@ -39,13 +40,13 @@ namespace ET.Client
 
         public static async ETTask OnButtonSelect(this UIRoleXiLianTenItem self)
         {
-            int error = await BagClientNetHelper.RquestItemXiLianSelect(self.Root(), self.BagInfo.BagInfoID, self.ItemXiLianResult);
+            int error = await BagClientNetHelper.RquestItemXiLianSelect(self.Root(), self.ItemInfo.BagInfoID, self.ItemXiLianResult);
             if (error != ErrorCode.ERR_Success)
             {
                 return;
             }
 
-            self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgRoleXiLian>().OnXiLianReturn(self.BagInfo.BagInfoID, self.ItemXiLianResult.ChangeCombat);
+            self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgRoleXiLian>().OnXiLianReturn(self.OldItemInfo, self.ItemXiLianResult.ChangeCombat);
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_RoleXiLianTen);
         }
     }

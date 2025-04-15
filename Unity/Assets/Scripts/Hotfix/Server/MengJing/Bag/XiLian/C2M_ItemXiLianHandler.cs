@@ -97,9 +97,23 @@ namespace ET.Server
                     unit.GetComponent<SkillSetComponentS>().OnTakeOffEquip(itemLocType, bagInfo, bagInfo.BagInfoID);
                 }
 
+                ItemInfo bagInfoOld = CommonHelp.DeepCopy<ItemInfo>(bagInfo);
+                Function_Fight.UnitUpdateProperty_Base(unit, false, false, bagInfoOld);
+                
                 if (request.Times == 1)
                 {
                     ItemXiLianResult itemXiLian = response.ItemXiLianResults[0];
+                    
+                    ItemInfo bagInfoCopy = CommonHelp.DeepCopy<ItemInfo>(bagInfo);
+                    
+                    bagInfoCopy.XiLianHideProLists = itemXiLian.XiLianHideProLists;              //基础属性洗炼
+                    bagInfoCopy.HideSkillLists = itemXiLian.HideSkillLists;                      //隐藏技能
+                    bagInfoCopy.XiLianHideTeShuProLists = itemXiLian.XiLianHideTeShuProLists;    //特殊属性洗炼
+                    
+                    Function_Fight.UnitUpdateProperty_Base(unit, false, false, bagInfoCopy);
+                    
+                    response.ItemXiLianResults[0].ChangeCombat = bagInfoCopy.BagInfoID - bagInfoOld.BagInfoID;
+                    
                     bagInfo.XiLianHideProLists = itemXiLian.XiLianHideProLists;              //基础属性洗炼
                     bagInfo.HideSkillLists = itemXiLian.HideSkillLists;                      //隐藏技能
                     bagInfo.XiLianHideTeShuProLists = itemXiLian.XiLianHideTeShuProLists;    //特殊属性洗炼
@@ -114,22 +128,18 @@ namespace ET.Server
                 {
                     unit.GetComponent<SkillSetComponentS>().OnWearEquip(bagInfo);
                 }
-
-                ItemInfo  bagInfoOld = CommonHelp.DeepCopy<ItemInfo>(bagInfo);
-                    
-                Function_Fight.UnitUpdateProperty_Base( unit, false, false, bagInfoOld );
                 
                 for (int i = 0; i < response.ItemXiLianResults.Count; i++)
                 {
                     ItemXiLianResult itemXiLianResult = response.ItemXiLianResults[i];
-                    
-                    ItemInfo  bagInfoCopy = CommonHelp.DeepCopy<ItemInfo>(bagInfo);
+
+                    ItemInfo bagInfoCopy = CommonHelp.DeepCopy<ItemInfo>(bagInfo);
                     
                     bagInfoCopy.XiLianHideProLists = itemXiLianResult.XiLianHideProLists;              //基础属性洗炼
                     bagInfoCopy.HideSkillLists = itemXiLianResult.HideSkillLists;                      //隐藏技能
                     bagInfoCopy.XiLianHideTeShuProLists = itemXiLianResult.XiLianHideTeShuProLists;    //特殊属性洗炼
-                    
-                    Function_Fight.UnitUpdateProperty_Base( unit, false, false, bagInfoCopy );
+
+                    Function_Fight.UnitUpdateProperty_Base(unit, false, false, bagInfoCopy);
 
                     response.ItemXiLianResults[i].ChangeCombat = bagInfoCopy.BagInfoID - bagInfoOld.BagInfoID;
                     //Console.WriteLine($"oldcombat:  {bagInfoOld.BagInfoID}   bagInfocopy:{bagInfoCopy.BagInfoID}");
