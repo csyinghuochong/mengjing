@@ -226,6 +226,12 @@ namespace ET.Client
                 }
 
                 GMHelp.SendGmCommand(self.Root(), text);
+                
+                if (text == "#hightest" || text == "#middletest")
+                {
+                    await self.Root().GetComponent<TimerComponent>().WaitFrameAsync();
+                    await UserInfoNetHelper.RequestUserInfoInit(self.Root());
+                }
             }
             else
             {

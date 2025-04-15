@@ -51,6 +51,94 @@ namespace ET.Server
                     return;
                 }
                 
+                if (message.GMMsg == "#hightest")
+                {
+                    // 提升等级
+                    int level = 70 - unit.GetComponent<UserInfoComponentS>().UserInfo.Lv;
+                    unit.GetComponent<UserInfoComponentS>().UpdateRoleData(UserDataType.Lv, level.ToString());
+                    
+                    // 添加道具
+                    string items = "1;100000000@3;100000000@1030001;10";
+                    List<RewardItem> rewardItems = new List<RewardItem>();
+                    foreach (string str in items.Split('@'))
+                    {
+                        string[] itemInfo = str.Split(';');
+                        int itemId = int.Parse(itemInfo[0]);
+                        int itemNumber = int.Parse(itemInfo[1]);
+                        rewardItems.Add(new RewardItem() { ItemID = itemId, ItemNum = itemNumber });
+                    }
+                    unit.GetComponent<BagComponentS>().OnAddItemData(rewardItems, string.Empty, $"{ItemGetWay.GM}_{TimeHelper.ServerNow()}", true, true);
+                    
+                    // 开启所有仓库页
+                    unit.GetComponent<NumericComponentS>().ApplyValue(NumericType.CangKuNumber, 4);
+                    
+                    // 开启拾光收集
+                    foreach (ShouJiItemConfig config in ShouJiItemConfigCategory.Instance.GetAll().Values)
+                    {
+                        if (config.StartType == 1)
+                        {
+                            unit.GetComponent<ShoujiComponentS>().OnGetItem(config.ItemID);
+                        }
+
+                        if (config.StartType == 2)
+                        {
+                            unit.GetComponent<ShoujiComponentS>().OnShouJiTreasure(config.Id, config.AcitveNum);
+                        }
+                    }
+                    
+                    // 坐骑
+                    foreach (ZuoQiShowConfig config in ZuoQiShowConfigCategory.Instance.GetAll().Values)
+                    {
+                        unit.GetComponent<UserInfoComponentS>().OnHorseActive(config.Id, true);
+                    }
+
+                    return;
+                }
+                
+                if (message.GMMsg == "#middletest")
+                {
+                    // 提升等级
+                    int level = 40 - unit.GetComponent<UserInfoComponentS>().UserInfo.Lv;
+                    unit.GetComponent<UserInfoComponentS>().UpdateRoleData(UserDataType.Lv, level.ToString());
+                    
+                    // 添加道具
+                    string items = "1;100000000@3;100000000@1030001;1";
+                    List<RewardItem> rewardItems = new List<RewardItem>();
+                    foreach (string str in items.Split('@'))
+                    {
+                        string[] itemInfo = str.Split(';');
+                        int itemId = int.Parse(itemInfo[0]);
+                        int itemNumber = int.Parse(itemInfo[1]);
+                        rewardItems.Add(new RewardItem() { ItemID = itemId, ItemNum = itemNumber });
+                    }
+                    unit.GetComponent<BagComponentS>().OnAddItemData(rewardItems, string.Empty, $"{ItemGetWay.GM}_{TimeHelper.ServerNow()}", true, true);
+                    
+                    // 开启所有仓库页
+                    unit.GetComponent<NumericComponentS>().ApplyValue(NumericType.CangKuNumber, 4);
+                    
+                    // 开启拾光收集
+                    foreach (ShouJiItemConfig config in ShouJiItemConfigCategory.Instance.GetAll().Values)
+                    {
+                        if (config.StartType == 1)
+                        {
+                            unit.GetComponent<ShoujiComponentS>().OnGetItem(config.ItemID);
+                        }
+
+                        if (config.StartType == 2)
+                        {
+                            unit.GetComponent<ShoujiComponentS>().OnShouJiTreasure(config.Id, config.AcitveNum);
+                        }
+                    }
+                    
+                    // 坐骑
+                    foreach (ZuoQiShowConfig config in ZuoQiShowConfigCategory.Instance.GetAll().Values)
+                    {
+                        unit.GetComponent<UserInfoComponentS>().OnHorseActive(config.Id, true);
+                    }
+
+                    return;
+                }
+                
                 switch (int.Parse(commands[0]))
                 {
                     case 1: //新增道具1#12000003#200 【添加道具/道具id/道具数量】

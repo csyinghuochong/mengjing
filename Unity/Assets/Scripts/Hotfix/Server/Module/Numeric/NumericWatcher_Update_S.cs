@@ -94,22 +94,22 @@ namespace ET.Server
     {
 	    public void Run(Unit unit, NumbericChange args)
         {
-            int no1_horse = 10009;
-            if (args.NewValue == 1) //排行第一
-            {
-	            unit.GetComponent<UserInfoComponentS>().OnHorseActive(no1_horse, true);
-            }
-            else
-            {
-	            unit.GetComponent<UserInfoComponentS>().OnHorseActive(no1_horse, false);
-	            NumericComponentS numericComponent = unit.GetComponent<NumericComponentS>();
-	            if (numericComponent.GetAsInt(NumericType.HorseFightID) == no1_horse
-	                || numericComponent.GetAsInt(NumericType.HorseRide) == no1_horse)
-	            {
-		            numericComponent.ApplyValue(NumericType.HorseFightID, 0);
-		            numericComponent.ApplyValue(NumericType.HorseRide, 0);
-	            }
-            }
+            // int no1_horse = 10009;
+            // if (args.NewValue == 1) //排行第一
+            // {
+	           //  unit.GetComponent<UserInfoComponentS>().OnHorseActive(no1_horse, true);
+            // }
+            // else
+            // {
+	           //  unit.GetComponent<UserInfoComponentS>().OnHorseActive(no1_horse, false);
+	           //  NumericComponentS numericComponent = unit.GetComponent<NumericComponentS>();
+	           //  if (numericComponent.GetAsInt(NumericType.HorseFightID) == no1_horse
+	           //      || numericComponent.GetAsInt(NumericType.HorseRide) == no1_horse)
+	           //  {
+		          //   numericComponent.ApplyValue(NumericType.HorseFightID, 0);
+		          //   numericComponent.ApplyValue(NumericType.HorseRide, 0);
+	           //  }
+            // }
         }
     }
 
@@ -118,21 +118,21 @@ namespace ET.Server
 	{
 		public void Run(Unit unit, NumbericChange args)
 		{
-			int no1_horse = 10004;
-			if (args.NewValue == 1) //排行第一
-			{
-				unit.GetComponent<UserInfoComponentS>().OnHorseActive(no1_horse, true);
-			}
-			else
-			{
-				unit.GetComponent<UserInfoComponentS>().OnHorseActive(no1_horse, false);
-				NumericComponentS numericComponent = unit.GetComponent<NumericComponentS>();
-				if (numericComponent.GetAsInt(NumericType.HorseFightID) == no1_horse)
-				{
-					numericComponent.ApplyValue(NumericType.HorseFightID, 0);
-					numericComponent.ApplyValue(NumericType.HorseRide, 0);
-				}
-			}
+			// int no1_horse = 10004;
+			// if (args.NewValue == 1) //排行第一
+			// {
+			// 	unit.GetComponent<UserInfoComponentS>().OnHorseActive(no1_horse, true);
+			// }
+			// else
+			// {
+			// 	unit.GetComponent<UserInfoComponentS>().OnHorseActive(no1_horse, false);
+			// 	NumericComponentS numericComponent = unit.GetComponent<NumericComponentS>();
+			// 	if (numericComponent.GetAsInt(NumericType.HorseFightID) == no1_horse)
+			// 	{
+			// 		numericComponent.ApplyValue(NumericType.HorseFightID, 0);
+			// 		numericComponent.ApplyValue(NumericType.HorseRide, 0);
+			// 	}
+			// }
 		}
 	}
 
