@@ -10,7 +10,7 @@ namespace ET.Client
         public static void RegisterUIEvent(this DlgTreasureOpen self)
         {
             self.View.E_ButtonStopButton.AddListenerAsync(self.OnButtonStop);
-            self.View.E_ButtonOpenButton.AddListener(self.OnButtonOpen);
+            self.View.E_ButtonOpenButton.AddListener(() => { self.OnButtonOpen().Coroutine(); });
             self.View.E_ButtonCloseButton.AddListener(self.OnButtonClose);
             self.View.E_ButtonDiButton.AddListener(self.OnButtonClose);
             self.View.E_BagItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnBagItemsRefresh);
@@ -83,12 +83,13 @@ namespace ET.Client
             int dungeonid = int.Parse(bagInfo.ItemPar.Split('@')[0]);
 
             int baotutype = 1;
-            if (bagInfo.ItemID == 10010039)
+            
+            if (itemConfig.ItemQuality == 4)
             {
                 baotutype = 1;
             }
 
-            if (bagInfo.ItemID == 10010040)
+            if (itemConfig.ItemQuality == 5)
             {
                 baotutype = 2;
             }
@@ -127,7 +128,7 @@ namespace ET.Client
             self.View.E_BagItemsLoopVerticalScrollRect.SetVisible(true, self.RewardShowItems.Count);
 
             //开始触发
-            self.OnButtonOpen();
+            self.OnButtonOpen().Coroutine();
         }
 
         public static async ETTask OnStartTurn(this DlgTreasureOpen self)
@@ -233,7 +234,7 @@ namespace ET.Client
             self.OnButtonClose();
         }
 
-        public static void OnButtonOpen(this DlgTreasureOpen self)
+        public static async ETTask OnButtonOpen(this DlgTreasureOpen self)
         {
             BagComponentC bagComponent = self.Root().GetComponent<BagComponentC>();
             if (bagComponent.GetBagLeftCell(ItemLocType.ItemLocBag) < 1)
@@ -242,18 +243,28 @@ namespace ET.Client
                 return;
             }
 
-            if (self.BagInfo.ItemID == 10010039)
-            {
-                BagClientNetHelper.RequestUseItem(self.Root(), self.BagInfo).Coroutine();
-                self.ShotTip();
-                self.OnButtonClose();
-                return;
-            }
-
-            if (self.BagInfo.ItemID == 10010040)
+            ItemConfig itemConfig = ItemConfigCategory.Instance.Get(self.BagInfo.ItemID);
+            
+            if (itemConfig.ItemQuality == 4)
             {
                 self.OnStartTurn().Coroutine();
-                BagClientNetHelper.RequestUseItem(self.Root(), self.BagInfo).Coroutine();
+
+                self.Root().GetComponent<BagComponentC>().RealAddItem--;
+                await BagClientNetHelper.RequestUseItem(self.Root(), self.BagInfo);
+                self.Root().GetComponent<BagComponentC>().RealAddItem++;
+                
+                // BagClientNetHelper.RequestUseItem(self.Root(), self.BagInfo).Coroutine();
+                // self.ShotTip();
+                // self.OnButtonClose();
+            }
+
+            if (itemConfig.ItemQuality == 5)
+            {
+                self.OnStartTurn().Coroutine();
+                
+                self.Root().GetComponent<BagComponentC>().RealAddItem--;
+                await BagClientNetHelper.RequestUseItem(self.Root(), self.BagInfo);
+                self.Root().GetComponent<BagComponentC>().RealAddItem++;
             }
         }
     }
