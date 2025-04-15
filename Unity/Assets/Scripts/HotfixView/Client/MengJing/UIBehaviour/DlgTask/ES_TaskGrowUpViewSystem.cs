@@ -44,15 +44,15 @@ namespace ET.Client
               Log.Debug($"OnFunctionSetBtn: {index}");
               self.SelectIndex = index;
               self.UpdateTask(index);
-              self.UpdateReward();
+              self.UpdateReward(index);
         }
 
-        private static void UpdateReward(this ES_TaskGrowUp self)
+        private static void UpdateReward(this ES_TaskGrowUp self, int index)
         {
-            List<int> skillids = ConfigData.TaskGrowUpRewardConfig.Values.ToList(); 
-            self.ES_CommonSkillItem_0.OnUpdateUI(skillids[0]);
-            self.ES_CommonSkillItem_1.OnUpdateUI(skillids[1]);
-            self.ES_CommonSkillItem_2.OnUpdateUI(skillids[2]);
+            List<int> skillids = ConfigData.TaskGrowUpRewardConfig.Values.ToList();
+            self.ES_CommonSkillItem_0.OnUpdateUI(skillids[3 * index + 0]);
+            self.ES_CommonSkillItem_1.OnUpdateUI(skillids[3 * index + 1]);
+            self.ES_CommonSkillItem_2.OnUpdateUI(skillids[3 * index + 2]);
             self.ES_CommonSkillItem_0.SetSelectAction(self.OnBeginDragHandler);
             self.ES_CommonSkillItem_1.SetSelectAction(self.OnBeginDragHandler);
             self.ES_CommonSkillItem_2.SetSelectAction(self.OnBeginDragHandler);
@@ -60,25 +60,25 @@ namespace ET.Client
             List<int> keyids = ConfigData.TaskGrowUpRewardConfig.Keys.ToList();
             int completeNum = self.CompeletTaskId - ConfigData.TaskGrowUpInitId;
             completeNum = Mathf.Max(0, completeNum);
-            if (completeNum < keyids[0] )
+            if (completeNum < keyids[3 * index + 0] )
             {
                 self.ES_CommonSkillItem_0.SetImageGray(true);
             }
-            if (completeNum < keyids[1] )
+            if (completeNum < keyids[3 * index + 1] )
             {
                 self.ES_CommonSkillItem_1.SetImageGray(true);
             }
-            if (completeNum < keyids[2] )
+            if (completeNum < keyids[3 * index + 2] )
             {
                 self.ES_CommonSkillItem_2.SetImageGray(true);
             }
 
             using (zstring.Block())
             {
-                self.E_TextProgress.text = zstring.Format("{0}/{1}", completeNum, keyids[2]);
+                self.E_TextProgress.text = zstring.Format("{0}/{1}", completeNum, keyids[3 * index + 2]);
             }
 
-            self.E_Img_LodingValue.fillAmount = (float)completeNum / (float)keyids[2];  
+            self.E_Img_LodingValue.fillAmount = (float)completeNum / (float)keyids[3 * index + 2];  
         }
 
         private static void OnBeginDragHandler(this ES_TaskGrowUp self, int skillid)
@@ -430,7 +430,7 @@ namespace ET.Client
 
             await TaskClientNetHelper.RequestCommitTask(self.Root(), self.TaskPro.taskID, 0);
             self.OnRecvReward(self.SelectIndex);
-            self.UpdateReward();
+            self.UpdateReward(self.SelectIndex);
         }
 
         public static async ETTask OnGiveBtnButton(this ES_TaskGrowUp self)
