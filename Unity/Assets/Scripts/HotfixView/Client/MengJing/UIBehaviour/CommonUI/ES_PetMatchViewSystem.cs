@@ -155,6 +155,11 @@ namespace ET.Client
             
 			BattleMessageComponent battleMessageComponent = self.Root().GetComponent<BattleMessageComponent>();
 			long lastTime = battleMessageComponent.SoloPiPeiStartTime;
+			if (TimeHelper.ServerNow() - lastTime < TimeHelper.Second * 10)
+			{
+				return;
+			}
+
 			battleMessageComponent.SoloPiPeiStartTime = TimeHelper.ServerNow();
 
 			await PetMatchNetHelper.RequestPetMatch(self.Root());
