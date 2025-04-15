@@ -147,6 +147,12 @@ namespace ET.Client
 
 		private static async ETTask OnRefreshButton(this ES_PetMatch self)
 		{
+			if (!FunctionHelp.IsInTime(1074))
+			{
+				FlyTipComponent.Instance.ShowFlyTip("不在活动时间段内！");
+				return;
+			}
+            
 			BattleMessageComponent battleMessageComponent = self.Root().GetComponent<BattleMessageComponent>();
 			long lastTime = battleMessageComponent.SoloPiPeiStartTime;
 			battleMessageComponent.SoloPiPeiStartTime = TimeHelper.ServerNow();

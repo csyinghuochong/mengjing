@@ -21,12 +21,11 @@ namespace ET.Server
             }
 
             NumericComponentS numericComponentS = unit.GetComponent<NumericComponentS>();
-            soloPlayerInfo.Score = numericComponentS.GetAsLong(NumericType.PetMatchScore);
             
             M2PetMatch_MatchRequest M2S_SoloMatchRequest = M2PetMatch_MatchRequest.Create();
             M2S_SoloMatchRequest.SoloPlayerInfo = soloPlayerInfo;
             PetMatch2M_MatchResponse d2GGetUnit = (PetMatch2M_MatchResponse)await unit.Root().GetComponent<MessageSender>().Call(soloServerId,M2S_SoloMatchRequest);
-
+            response.Error = d2GGetUnit.Error;
             ServerLogHelper.LogWarning("发送竞技场匹配地图消息" + soloPlayerInfo.UnitId, true);
             await ETTask.CompletedTask;
         }
