@@ -101,7 +101,7 @@ namespace ET.Client
             int needNumber = int.Parse(activityConfig.Par_2);
             float value = rechargeNum * 1f / needNumber;
             value = Mathf.Clamp01(value);
-            self.E_ImageProgressImage.transform.localScale = new Vector3(value, 1f, 1f);
+            self.E_ImageProgressImage.fillAmount = value;
             using (zstring.Block())
             {
                 self.E_Text_ProgressText.text = zstring.Format("{0}/{1}", rechargeNum, needNumber);

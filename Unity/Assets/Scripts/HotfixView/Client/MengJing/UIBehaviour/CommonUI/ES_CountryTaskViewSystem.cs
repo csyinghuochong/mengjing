@@ -192,7 +192,7 @@ namespace ET.Client
             long haveHuoyue = self.Root().GetComponent<TaskComponentC>().GetHuoYueDu();
             int totalHuoyue = HuoYueRewardConfigCategory.Instance.Get(4).NeedPoint;
             self.E_Text_DayHuoYueText.text = haveHuoyue.ToString();
-            self.E_Image_progressvalueImage.transform.localScale = new Vector3(haveHuoyue * 1f / totalHuoyue, 1f, 1f);
+            self.E_Image_progressvalueImage.fillAmount = haveHuoyue * 1f / totalHuoyue;
         }
 
         public static void UpdateHuoYueReward(this ES_CountryTask self)
