@@ -32,19 +32,19 @@ namespace ET.Client
     {
         public void Run(Unit unit, NumbericChange args)
         {
-            int no1_horse = 10009;
-
-            if (args.Defend.MainHero)
-            {
-                if (args.NewValue == 1) //排行第一
-                {
-                    args.Defend.Root().GetComponent<UserInfoComponentC>().OnHorseActive(no1_horse, true);
-                }
-                else
-                {
-                    args.Defend.Root().GetComponent<UserInfoComponentC>().OnHorseActive(no1_horse, false);
-                }
-            }
+            // int no1_horse = 10009;
+            //
+            // if (args.Defend.MainHero)
+            // {
+            //     if (args.NewValue == 1) //排行第一
+            //     {
+            //         args.Defend.Root().GetComponent<UserInfoComponentC>().OnHorseActive(no1_horse, true);
+            //     }
+            //     else
+            //     {
+            //         args.Defend.Root().GetComponent<UserInfoComponentC>().OnHorseActive(no1_horse, false);
+            //     }
+            // }
         }
     }
 
@@ -53,19 +53,19 @@ namespace ET.Client
     {
         public void Run(Unit unit, NumbericChange args)
         {
-            int no1_horse = 10004;
-
-            if (args.Defend.MainHero)
-            {
-                if (args.NewValue == 1) //排行第一
-                {
-                    args.Defend.Root().GetComponent<UserInfoComponentC>().OnHorseActive(no1_horse, true);
-                }
-                else
-                {
-                    args.Defend.Root().GetComponent<UserInfoComponentC>().OnHorseActive(no1_horse, false);
-                }
-            }
+            // int no1_horse = 10004;
+            //
+            // if (args.Defend.MainHero)
+            // {
+            //     if (args.NewValue == 1) //排行第一
+            //     {
+            //         args.Defend.Root().GetComponent<UserInfoComponentC>().OnHorseActive(no1_horse, true);
+            //     }
+            //     else
+            //     {
+            //         args.Defend.Root().GetComponent<UserInfoComponentC>().OnHorseActive(no1_horse, false);
+            //     }
+            // }
         }
     }
 

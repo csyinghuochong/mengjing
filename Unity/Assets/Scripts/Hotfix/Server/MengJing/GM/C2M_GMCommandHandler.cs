@@ -71,6 +71,7 @@ namespace ET.Server
                     
                     // 开启所有仓库页
                     unit.GetComponent<NumericComponentS>().ApplyValue(NumericType.CangKuNumber, 4);
+                    unit.GetComponent<NumericComponentS>().ApplyValue(NumericType.JianYuanCangKu, 4);
                     
                     // 开启拾光收集
                     foreach (ShouJiItemConfig config in ShouJiItemConfigCategory.Instance.GetAll().Values)
@@ -115,6 +116,7 @@ namespace ET.Server
                     
                     // 开启所有仓库页
                     unit.GetComponent<NumericComponentS>().ApplyValue(NumericType.CangKuNumber, 4);
+                    unit.GetComponent<NumericComponentS>().ApplyValue(NumericType.JianYuanCangKu, 4);
                     
                     // 开启拾光收集
                     foreach (ShouJiItemConfig config in ShouJiItemConfigCategory.Instance.GetAll().Values)

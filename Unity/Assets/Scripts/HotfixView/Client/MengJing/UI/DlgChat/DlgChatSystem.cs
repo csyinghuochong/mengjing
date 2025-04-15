@@ -229,7 +229,6 @@ namespace ET.Client
                 
                 if (text == "#hightest" || text == "#middletest")
                 {
-                    await self.Root().GetComponent<TimerComponent>().WaitFrameAsync();
                     await UserInfoNetHelper.RequestUserInfoInit(self.Root());
                 }
             }
