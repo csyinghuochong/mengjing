@@ -137,6 +137,12 @@ namespace ET.Server
                 UnitComponent unitComponent = self.Scene().GetComponent<UnitComponent>();
                 for (int i = 0; i < rewardist.Count; i++)
                 {
+                    if (!ItemConfigCategory.Instance.Contain(rewardist[i].ItemID))
+                    {
+                        rewardist[i].ItemID = 1;
+                        rewardist[i].ItemNum = 1;
+                    }
+
                     Unit dropitem = unitComponent.AddChildWithId<Unit, int>(IdGenerater.Instance.GenerateId(), 1);
                     unitComponent.Add(dropitem);
                     dropitem.AddComponent<UnitInfoComponent>();

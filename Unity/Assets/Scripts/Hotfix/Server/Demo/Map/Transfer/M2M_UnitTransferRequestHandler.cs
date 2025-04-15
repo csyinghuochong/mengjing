@@ -248,6 +248,7 @@ namespace ET.Server
                         unit.Position = HappyData.PositionList[randomPosition];
                     }
                     unit.Scene().GetComponent<HappyDungeonComponent>().NoticeRefreshTime(unit);
+                    aoivalue = 40;
                     break;
                 case MapTypeEnum.Battle:
                     //int todayCamp = numericComponent.GetAsInt(NumericType.BattleTodayCamp);
