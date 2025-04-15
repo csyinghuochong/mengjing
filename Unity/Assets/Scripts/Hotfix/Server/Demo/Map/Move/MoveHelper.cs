@@ -34,7 +34,6 @@ namespace ET.Server
             m2CPathfindingResult.SpeedRate = speedRate;
             MapMessageHelper.Broadcast(unit, m2CPathfindingResult);
 
-           
             float speed = unit.GetComponent<NumericComponentS>().GetAsFloat(NumericType.Now_Speed);
             speed *= (speedRate * 0.01f);
             bool ret = await moveComponent.MoveToAsync(m2CPathfindingResult.Points, speed);
