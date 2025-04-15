@@ -147,7 +147,10 @@ namespace ET.Client
                     continue;
                 }
 
-                buffHandler.BuffState = BuffState.Finished;
+                if (buffHandler.BuffData.BuffId == buffId)
+                {
+                    buffHandler.BuffState = BuffState.Finished;
+                }
             }
         }
 

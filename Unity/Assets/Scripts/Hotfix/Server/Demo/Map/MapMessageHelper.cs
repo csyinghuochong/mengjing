@@ -69,9 +69,7 @@ namespace ET.Server
             switch (unit.Type)
             {
                 case UnitType.Player:
-                    //携带的buff
-                    // unitInfo.Buffs = unit.GetComponent<BuffManagerComponentS>().GetMessageBuff();
-                    // unitInfo.Skills = unit.GetComponent<SkillManagerComponentS>().GetMessageSkill();
+                    
                     //设置数据
                     UserInfoComponentS userInfoComponent = unit.GetComponent<UserInfoComponentS>();
                     unitInfo.UnitName = userInfoComponent.UserInfo.Name;
@@ -80,6 +78,9 @@ namespace ET.Server
                             : userInfoComponent.UserInfo.UnionName;
                     unitInfo.DemonName = unitInfoComponent.DemonName;
                     unitInfo.FashionEquipList = unit.GetComponent<BagComponentS>().FashionEquipList;
+                    //携带的buff
+                    unitInfo.Buffs = unit.GetComponent<BuffManagerComponentS>().GetMessageBuff();
+                    unitInfo.Skills = unit.GetComponent<SkillManagerComponentS>().GetMessageSkill();
                     break;
                 case UnitType.JingLing:
                     unitInfo.MasterName = unitInfoComponent.MasterName;

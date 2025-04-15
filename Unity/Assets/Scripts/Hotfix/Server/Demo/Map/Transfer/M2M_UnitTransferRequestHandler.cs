@@ -56,6 +56,7 @@ namespace ET.Server
             }
 
             int aoivalue = 9;
+            M2C_CreateMyUnit m2CCreateUnits =  M2C_CreateMyUnit.Create();;
             switch (request.SceneType)
             {
                 case (int)MapTypeEnum.PetMing:
@@ -116,6 +117,12 @@ namespace ET.Server
                         petMeleeDungeonComponent.SetPlayer(unit);
                         aoivalue = 40;
                     }
+                    // 通知客户端创建My Unit
+                    m2CCreateUnits.Unit = MapMessageHelper.CreateUnitInfo(unit);
+                    MapMessageHelper.SendToClient(unit, m2CCreateUnits);
+                    // 加入aoi
+                    unit.AddComponent<AOIEntity, int, float3>(aoivalue * 1000, unit.Position);
+
                     break;
                 case  MapTypeEnum.LocalDungeon:
                     DungeonConfig dungeonConfig = DungeonConfigCategory.Instance.Get(request.SceneId);
@@ -129,16 +136,34 @@ namespace ET.Server
                     {
                         unit.Position = new float3(dungeonConfig.BornPosLeft[0] * 0.01f, dungeonConfig.BornPosLeft[1] * 0.01f, dungeonConfig.BornPosLeft[2] * 0.01f);
                     }
+                    // 通知客户端创建My Unit
+                    m2CCreateUnits.Unit = MapMessageHelper.CreateUnitInfo(unit);
+                    MapMessageHelper.SendToClient(unit, m2CCreateUnits);
+                    // 加入aoi
+                    unit.AddComponent<AOIEntity, int, float3>(aoivalue * 1000, unit.Position);
+
                     unit.AddComponent<PathfindingComponent, int>(dungeonConfig.MapID);
                     scene.GetComponent<LocalDungeonComponent>().MainUnit = unit;
                     scene.GetComponent<LocalDungeonComponent>().GenerateFuben(request.SceneId);
                     break;
                 case MapTypeEnum.CellDungeon:
+                    // 通知客户端创建My Unit
+                    m2CCreateUnits.Unit = MapMessageHelper.CreateUnitInfo(unit);
+                    MapMessageHelper.SendToClient(unit, m2CCreateUnits);
+                    // 加入aoi
+                    unit.AddComponent<AOIEntity, int, float3>(aoivalue * 1000, unit.Position);
+
                     CellDungeonComponentS fubenComponentS = scene.GetComponent<CellDungeonComponentS>();
                     //起始格子
                     fubenComponentS.OnEnterFirstCell(unit, request);
                     break;
                 case MapTypeEnum.DragonDungeon:
+                    // 通知客户端创建My Unit
+                    m2CCreateUnits.Unit = MapMessageHelper.CreateUnitInfo(unit);
+                    MapMessageHelper.SendToClient(unit, m2CCreateUnits);
+                    // 加入aoi
+                    unit.AddComponent<AOIEntity, int, float3>(aoivalue * 1000, unit.Position);
+
                     DragonDungeonComponentS dragonDungeonComponentS  =scene.GetComponent<DragonDungeonComponentS>();
                     dragonDungeonComponentS.OnEnterFirstCell(unit, request);
                     break;
@@ -155,6 +180,13 @@ namespace ET.Server
                     sceneConfig = SceneConfigCategory.Instance.Get(request.SceneId);
                     unit.Position = new float3(sceneConfig.InitPos[0] * 0.01f, sceneConfig.InitPos[1] * 0.01f, sceneConfig.InitPos[2] * 0.01f);
                     unit.Rotation = quaternion.identity;
+                    
+                    // 通知客户端创建My Unit
+                    m2CCreateUnits.Unit = MapMessageHelper.CreateUnitInfo(unit);
+                    MapMessageHelper.SendToClient(unit, m2CCreateUnits);
+                    // 加入aoi
+                    unit.AddComponent<AOIEntity, int, float3>(aoivalue * 1000, unit.Position);
+
                     if ( request.SceneType == MapTypeEnum.TeamDungeon)
                     {
                         TeamDungeonComponent teamDungeonComponent = unit.Scene().GetComponent<TeamDungeonComponent>();
@@ -196,6 +228,12 @@ namespace ET.Server
                     unit.Position = new float3(pos_x, pos_y, pos_z);
                     unit.Rotation = quaternion.identity;
 
+                    // 通知客户端创建My Unit
+                    m2CCreateUnits.Unit = MapMessageHelper.CreateUnitInfo(unit);
+                    MapMessageHelper.SendToClient(unit, m2CCreateUnits);
+                    // 加入aoi
+                    unit.AddComponent<AOIEntity, int, float3>(aoivalue * 1000, unit.Position);
+
                     //Game.Scene.GetComponent<RecastPathComponent>().Update(scene.GetComponent<MapComponent>().NavMeshId);
                     int towerarrived = unit.GetComponent<NumericComponentS>().GetAsInt(NumericType.SealTowerArrived);
                     int towerfinished = unit.GetComponent<NumericComponentS>().GetAsInt(NumericType.SealTowerFinished);
@@ -219,12 +257,24 @@ namespace ET.Server
                     }
 
                     unit.Rotation = quaternion.identity;
+                    // 通知客户端创建My Unit
+                    m2CCreateUnits.Unit = MapMessageHelper.CreateUnitInfo(unit);
+                    MapMessageHelper.SendToClient(unit, m2CCreateUnits);
+                    // 加入aoi
+                    unit.AddComponent<AOIEntity, int, float3>(aoivalue * 1000, unit.Position);
+
                     break;
                 case MapTypeEnum.RunRace:
                     unit.AddComponent<PathfindingComponent, int>(scene.GetComponent<MapComponent>().NavMeshId);
                     sceneConfig = SceneConfigCategory.Instance.Get(request.SceneId);
                     unit.Position = new float3(sceneConfig.InitPos[0] * 0.01f + RandomHelper.RandomNumberFloat(-1f, 1f), sceneConfig.InitPos[1] * 0.01f, sceneConfig.InitPos[2] * 0.01f + RandomHelper.RandomNumberFloat(-1f, 1f));
                     unit.Rotation = quaternion.identity;
+
+                    // 通知客户端创建My Unit
+                    m2CCreateUnits.Unit = MapMessageHelper.CreateUnitInfo(unit);
+                    MapMessageHelper.SendToClient(unit, m2CCreateUnits);
+                    // 加入aoi
+                    unit.AddComponent<AOIEntity, int, float3>(aoivalue * 1000, unit.Position);
 
                     unit.GetComponent<NumericComponentS>().ApplyValue(NumericType.HorseRide, 0, false);
                     int runracemonster = ConfigData.RunRaceMonsterList[RandomHelper.RandomNumber(0, ConfigData.RunRaceMonsterList.Count)];
@@ -247,8 +297,14 @@ namespace ET.Server
                         numericComponent.ApplyValue(NumericType.HappyCellIndex, randomPosition + 1, false);
                         unit.Position = HappyData.PositionList[randomPosition];
                     }
-                    unit.Scene().GetComponent<HappyDungeonComponent>().NoticeRefreshTime(unit);
                     aoivalue = 40;
+                    // 通知客户端创建My Unit
+                    m2CCreateUnits.Unit = MapMessageHelper.CreateUnitInfo(unit);
+                    MapMessageHelper.SendToClient(unit, m2CCreateUnits);
+                    // 加入aoi
+                    unit.AddComponent<AOIEntity, int, float3>(aoivalue * 1000, unit.Position);
+
+                    unit.Scene().GetComponent<HappyDungeonComponent>().NoticeRefreshTime(unit);
                     break;
                 case MapTypeEnum.Battle:
                     //int todayCamp = numericComponent.GetAsInt(NumericType.BattleTodayCamp);
@@ -260,6 +316,12 @@ namespace ET.Server
                     int startIndex = todayCamp == 1 ? 0 : 3;
                     unit.Position = new float3(sceneConfig.InitPos[startIndex+0] * 0.01f, sceneConfig.InitPos[startIndex + 1] * 0.01f, sceneConfig.InitPos[startIndex + 2] * 0.01f);
                     unit.Rotation = quaternion.identity;
+                    // 通知客户端创建My Unit
+                    m2CCreateUnits.Unit = MapMessageHelper.CreateUnitInfo(unit);
+                    MapMessageHelper.SendToClient(unit, m2CCreateUnits);
+                    // 加入aoi
+                    unit.AddComponent<AOIEntity, int, float3>(aoivalue * 1000, unit.Position);
+
                     break;
                 case MapTypeEnum.MainCityScene:
                     float last_x = numericComponent.GetAsFloat(NumericType.MainCity_X);
@@ -274,21 +336,18 @@ namespace ET.Server
                     {
                         unit.Position = new float3(last_x, last_y, last_z);
                     }
+                    // 通知客户端创建My Unit
+                    m2CCreateUnits.Unit = MapMessageHelper.CreateUnitInfo(unit);
+                    MapMessageHelper.SendToClient(unit, m2CCreateUnits);
+                    // 加入aoi
+                    unit.AddComponent<AOIEntity, int, float3>(aoivalue * 1000, unit.Position);
 
                     unit.AddComponent<PathfindingComponent, int>(101);
                     unit.GetComponent<HeroDataComponentS>().OnReturn();
                     break;
             }
-            
+          
             TransferHelper.AfterTransfer(unit, request.SceneType);
-            
-            // 通知客户端创建My Unit
-            M2C_CreateMyUnit m2CCreateUnits = M2C_CreateMyUnit.Create();
-            m2CCreateUnits.Unit = MapMessageHelper.CreateUnitInfo(unit);
-            MapMessageHelper.SendToClient(unit, m2CCreateUnits);
-
-            // 加入aoi
-            unit.AddComponent<AOIEntity, int, float3>(aoivalue * 1000, unit.Position);
             
             if (request.SceneType != MapTypeEnum.RunRace)
             {
@@ -298,7 +357,7 @@ namespace ET.Server
                 unit.OnUpdateHorseRide(0);
                 unit.TriggerTeamBuff(request.SceneType);
             }
-
+            
             // 解锁location，可以接收发给Unit的消息
             await scene.Root().GetComponent<LocationProxyComponent>().UnLock(LocationType.Unit, unit.Id, request.OldActorId, unit.GetActorId());
         }
