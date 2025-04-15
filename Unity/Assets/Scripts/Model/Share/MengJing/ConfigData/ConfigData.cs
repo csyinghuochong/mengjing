@@ -1954,7 +1954,7 @@ namespace ET
         };
         
         /// <summary>
-        /// 成长任务奖励配置, KeyId.完成数量.  value=skillid
+        /// 成长任务奖励配置, KeyId.完成数量.  value=skillid  
         /// </summary>
         [StaticField]
         public static Dictionary<int,int> TaskGrowUpRewardConfig = new Dictionary<int, int>()   

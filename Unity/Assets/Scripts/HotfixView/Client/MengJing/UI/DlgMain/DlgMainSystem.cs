@@ -2359,7 +2359,7 @@ namespace ET.Client
         public static void InitShow(this DlgMain self)
         {
             self.UpdateShowRoleExp();
-
+            self.View.ES_MainBuff.InitMainHero();
             // Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
             // self.ShowUIStall(unit.GetComponent<NumericComponent>().GetAsLong((int)NumericType.Now_Stall));
             // self.OnTianQiChange(self.ZoneScene().GetComponent<AccountInfoComponent>().TianQiValue);

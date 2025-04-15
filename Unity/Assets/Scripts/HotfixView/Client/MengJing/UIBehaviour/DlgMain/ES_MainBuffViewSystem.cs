@@ -34,14 +34,6 @@ namespace ET.Client
             ReferenceCollector rc = transform.GetComponent<ReferenceCollector>();
             self.UIMainBuffItem = rc.Get<GameObject>("UIMainBuffItem");
             self.UIMainBuffItem.SetActive(false);
-            
-            
-            Unit main = UnitHelper.GetMyUnitFromClientScene(self.Root());
-            BuffManagerComponentC buffManagerComponentC = main.GetComponent<BuffManagerComponentC>();
-            for (int i = 0;i < buffManagerComponentC.m_Buffs.Count; i++)
-            {
-                self.OnAddBuff(buffManagerComponentC.m_Buffs[i]);
-            }
         }
 
         [EntitySystem]
@@ -49,6 +41,16 @@ namespace ET.Client
         {
             self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
             self.DestroyWidget();
+        }
+
+        public static void InitMainHero(this ES_MainBuff self)
+        {
+            Unit main = UnitHelper.GetMyUnitFromClientScene(self.Root());
+            BuffManagerComponentC buffManagerComponentC = main.GetComponent<BuffManagerComponentC>();
+            for (int i = 0;i < buffManagerComponentC.m_Buffs.Count; i++)
+            {
+                self.OnAddBuff(buffManagerComponentC.m_Buffs[i]);
+            }
         }
 
         public static void OnUpdate(this ES_MainBuff self)
