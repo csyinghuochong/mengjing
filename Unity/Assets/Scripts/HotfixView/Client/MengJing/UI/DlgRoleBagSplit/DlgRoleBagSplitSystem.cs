@@ -20,7 +20,9 @@ namespace ET.Client
         {
             self.BagInfo = bagInfo;
             self.Num = 1;
+            // self.View.ES_CommonItem.UseTextColor = true;
             self.View.ES_CommonItem.UpdateItem(bagInfo, ItemOperateEnum.None);
+            self.View.ES_CommonItem.E_ItemNameText.gameObject.SetActive(true);
             self.View.E_InputFieldInputField.text = self.Num.ToString();
         }
 
