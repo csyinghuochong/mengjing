@@ -24,11 +24,11 @@ namespace ET.Client
             self.E_SelectedImage.gameObject.SetActive(false);
 
             self.PetTuJianConfigId = petTuJianConfigId;
-            JingLingConfig petTuJianConfig = JingLingConfigCategory.Instance.Get(petTuJianConfigId);
-            string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.PetHeadIcon, petTuJianConfig.Icon.ToString());
+            PetConfig petTuJianConfig = PetConfigCategory.Instance.Get(petTuJianConfigId);
+            string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.PetHeadIcon, petTuJianConfig.HeadIcon.ToString());
             Sprite sprite = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
             self.E_IconImage.sprite = sprite;
-            self.E_NameText.text = petTuJianConfig.Name;
+            self.E_NameText.text = petTuJianConfig.PetName;
         }
 
         private static void OnTouch(this Scroll_Item_SelectAssistPetItem self)
