@@ -374,43 +374,44 @@ namespace ET.Client
 
         private static bool ExcuteKillMonsterID(Scene root, TaskPro taskPro, TaskConfig taskConfig)
         {
-            // int monsterId = taskConfig.Target[0];
-            // int fubenId = SceneConfigHelper.GetFubenByMonster(monsterId);
-            // fubenId = taskPro.FubenId > 0 ? taskPro.FubenId : fubenId;
-            //
-            //
-            // MapComponent mapComponent = domainscene.GetComponent<MapComponent>();
-            // if (mapComponent.SceneTypeEnum != SceneTypeEnum.LocalDungeon)
-            // {
-            //     if (fubenId == 0)
-            //     {
-            //         return false;
-            //     }
-            //     FloatTipManager.Instance.ShowFloatTip($"请前往 {DungeonConfigCategory.Instance.Get(fubenId).ChapterName}");
-            //     return false;
-            // }
-            // if (mapComponent.SceneId != fubenId)
-            // {
-            //     if (GeToOtherFuben(domainscene, fubenId, mapComponent.SceneId))
-            //     {
-            //         return true;
-            //     }
-            //
-            //     fubenId = mapComponent.SceneId;
-            // }
-            // int wave = taskPro.FubenId > 0 ? taskPro.WaveId : -1;
-            // string[] position = SceneConfigHelper.GetPostionMonster(fubenId, monsterId, wave);
-            // if (position == null)
-            // {
-            //     FloatTipManager.Instance.ShowFloatTip("请手动前往");
-            //     return false;
-            // }
-            //
-            // Unit unit = UnitHelper.GetMyUnitFromZoneScene(domainscene);
-            // Vector3 target = new Vector3(float.Parse(position[0]), float.Parse(position[1]), float.Parse(position[2]));
-            // Vector3 dir = unit.Position - target;
-            // Vector3 ttt = target + dir.normalized * 1f;
-            // unit.MoveToAsync2(ttt).Coroutine();
+            int monsterId = taskConfig.Target[0];
+            int fubenId = SceneConfigHelper.GetFubenByMonster(monsterId);
+            fubenId = taskPro.FubenId > 0 ? taskPro.FubenId : fubenId;
+            
+            
+            MapComponent mapComponent = root.GetComponent<MapComponent>();
+            if (mapComponent.MapType != MapTypeEnum.LocalDungeon)
+            {
+                if (fubenId == 0)
+                {
+                    return false;
+                }
+                FlyTipComponent.Instance.ShowFlyTip($"请前往 {DungeonConfigCategory.Instance.Get(fubenId).ChapterName}");
+                return false;
+            }
+            if (mapComponent.SceneId != fubenId)
+            {
+                if (GeToOtherFuben(root, fubenId, mapComponent.SceneId))
+                {
+                    return true;
+                }
+            
+                fubenId = mapComponent.SceneId;
+            }
+            int wave = taskPro.FubenId > 0 ? taskPro.WaveId : -1;
+            string[] position = SceneConfigHelper.GetPostionMonster(fubenId, monsterId, wave);
+            if (position == null)
+            {
+                FlyTipComponent.Instance.ShowFlyTip("请手动前往");
+                return false;
+            }
+            
+            Unit unit = UnitHelper.GetMyUnitFromClientScene(root);
+            Vector3 target = new Vector3(float.Parse(position[0]), float.Parse(position[1]), float.Parse(position[2]));
+            Vector3 unitPos = unit.Position;
+            Vector3 dir = unitPos - target;
+            Vector3 ttt = target + dir.normalized * 1f;
+            unit.MoveToAsync(ttt).Coroutine();
             return true;
         }
 

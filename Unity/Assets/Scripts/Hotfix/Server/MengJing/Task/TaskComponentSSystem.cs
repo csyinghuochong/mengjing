@@ -654,6 +654,14 @@ namespace ET.Server
                     }
                     break;
                 case TaskTypeEnum.Treasure:
+                    for (int i = self.RoleTaskList.Count - 1; i >= 0; i--)
+                    {
+                        if (self.RoleTaskList[i].taskID == taskid)
+                        {
+                            self.RoleTaskList.RemoveAt(i);
+                        }
+                    }
+                    
                     int treasureTask = numericComponent.GetAsInt(NumericType.TreasureTask);
                     numericComponent.ApplyValue(NumericType.TreasureTask, treasureTask + 1, true);
                     break;
