@@ -111,7 +111,7 @@ namespace ET.Client
                 ES_PaiMaiDuiHuan es = this.m_es_paimaiduihuan;
                 if (es == null)
                 {
-	                string path = "Assets/Bundles/UI/Common/ES_PaiMaiHuan.prefab";
+	                string path = "Assets/Bundles/UI/Common/ES_PaiMaiDuiHuan.prefab";
                     GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
                     GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
                     go.SetActive(true);
