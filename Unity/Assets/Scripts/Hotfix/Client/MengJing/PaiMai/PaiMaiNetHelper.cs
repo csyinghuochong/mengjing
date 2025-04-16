@@ -90,16 +90,7 @@ namespace ET.Client
 
             return response;
         }
-
-        public static async ETTask<R2C_DBServerInfoResponse> DBServerInfo(Scene root)
-        {
-            C2R_DBServerInfoRequest request = C2R_DBServerInfoRequest.Create();
-
-            R2C_DBServerInfoResponse response = (R2C_DBServerInfoResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
-
-            return response;
-        }
-
+        
         public static async ETTask<M2C_PaiMaiSellResponse> PaiMaiSell(Scene root, PaiMaiItemInfo paiMaiItemInfo)
         {
             C2M_PaiMaiSellRequest request = C2M_PaiMaiSellRequest.Create();
@@ -110,6 +101,15 @@ namespace ET.Client
             return response;
         }
 
+        public static async ETTask<R2C_DBServerInfoResponse> DBServerInfo(Scene root)
+        {
+            C2R_DBServerInfoRequest request = C2R_DBServerInfoRequest.Create();
+
+            R2C_DBServerInfoResponse response = (R2C_DBServerInfoResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+
+            return response;
+        }
+        
         public static async ETTask<P2C_PaiMaiAuctionRecordResponse> PaiMaiAuctionRecord(Scene root)
         {
             C2P_PaiMaiAuctionRecordRequest request = C2P_PaiMaiAuctionRecordRequest.Create();
