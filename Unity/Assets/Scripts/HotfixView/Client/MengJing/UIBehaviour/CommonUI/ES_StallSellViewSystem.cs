@@ -76,7 +76,8 @@ namespace ET.Client
 			}
 
 			self.E_Stall_NameInputField.GetComponent<InputField>().text = name;
-			self.UpdateSellItemUILIist( self.E_ItemTypeSetToggleGroup.GetCurrentIndex() );
+			//self.UpdateSellItemUILIist( self.E_ItemTypeSetToggleGroup.GetCurrentIndex() );
+			self.E_ItemTypeSetToggleGroup.OnSelectIndex(0);
 		}
 		
 		public static void OnUpdateUI(this ES_StallSell self)
