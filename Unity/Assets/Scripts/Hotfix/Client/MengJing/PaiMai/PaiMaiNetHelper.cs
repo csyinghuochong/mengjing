@@ -13,6 +13,20 @@ namespace ET.Client
             return response;
         }
 
+        /// <summary>
+        /// 自己的摆摊商品
+        /// </summary>
+        /// <param name="root"></param>
+        /// <returns></returns>
+        public static async ETTask<P2C_StallListResponse> RequestStallList(Scene root)
+        {
+            C2P_StallListRequest request = C2P_StallListRequest.Create();
+            request.UserId = UnitHelper.GetMyUnitId(root);
+            P2C_StallListResponse response = (P2C_StallListResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+
+            return response;
+        }
+        
         public static async ETTask<int> PaiMaiShop(Scene root, int paiMaiId, int buyNum)
         {
             C2M_PaiMaiShopRequest request = C2M_PaiMaiShopRequest.Create();

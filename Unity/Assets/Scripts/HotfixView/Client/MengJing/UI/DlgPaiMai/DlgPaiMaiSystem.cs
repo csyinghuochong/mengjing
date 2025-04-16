@@ -36,6 +36,8 @@ namespace ET.Client
                     self.View.ES_PaiMaiDuiHuan.uiTransform.gameObject.SetActive(true);
                     break;
                 case 4:
+                    self.View.ES_StallSell.uiTransform.gameObject.SetActive(true);
+                    self.View.ES_StallSell.OnUpdateUI();
                     break;
             }
         }

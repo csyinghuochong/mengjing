@@ -18,6 +18,14 @@ namespace ET.Client
 		{
 			self.DestroyWidget();
 		}
+
+		public static async ETTask OnUpdateUI(this ES_StallSell self)
+		{
+			await PaiMaiNetHelper.RequestStallList(self.Root());
+
+		}
+		
+		
 	}
 
 

@@ -123,6 +123,26 @@ namespace ET.Client
                 return this.m_es_paimaiduihuan;
             }
         }
+  
+        public ES_StallSell ES_StallSell
+        {
+	        get
+	        {
+		        ES_StallSell es = this.m_es_StallSell;
+		        if (es == null)
+		        {
+			        string path = "Assets/Bundles/UI/Common/ES_StallSell.prefab";
+			        GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
+			        GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
+			        go.SetActive(true);
+			        this.AssetList.Add(path);
+			        this.m_es_StallSell = this.AddChild<ES_StallSell, Transform>(go.transform);
+			        go.SetActive(false);
+		        }
+              
+		        return this.m_es_StallSell;
+	        }
+        }
 
 		public void DestroyWidget()
 		{
@@ -132,6 +152,7 @@ namespace ET.Client
 			this.m_es_paimaibuy = null;
 			this.m_es_paimaisell = null;
 			this.m_es_paimaiduihuan = null;
+			this.m_es_StallSell = null;
 			this.uiTransform = null;
 			
 			ResourcesLoaderComponent resourcesLoaderComponent = this.Root().GetComponent<ResourcesLoaderComponent>();
@@ -149,6 +170,7 @@ namespace ET.Client
 		private EntityRef<ES_PaiMaiBuy> m_es_paimaibuy = null;
 		private EntityRef<ES_PaiMaiSell> m_es_paimaisell = null;
 		private EntityRef<ES_PaiMaiDuiHuan> m_es_paimaiduihuan = null;
+		private EntityRef<ES_StallSell> m_es_StallSell = null;
 		public Transform uiTransform = null;
 	}
 }
