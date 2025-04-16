@@ -10,9 +10,7 @@ namespace ET.Client
 	{
 		public int CurrentHouse { get; set; }
 		public bool UseTextColor { get; set; }
-		
-		private EntityRef<ItemInfo> baginfo;
-		public ItemInfo Baginfo { get => this.baginfo; set => this.baginfo = value; }
+		public ItemInfo Baginfo { get; set; }
 		public string ItemNum { get; set; }
 		public int ItemID { get; set; }
 		public bool ShowTip { get; set; }

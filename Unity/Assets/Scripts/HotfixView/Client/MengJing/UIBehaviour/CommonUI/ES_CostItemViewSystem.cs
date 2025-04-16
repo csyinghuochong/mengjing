@@ -36,13 +36,10 @@ namespace ET.Client
             self.E_ItemNumText.color = (itemNum < bagComponent.GetItemNumber(itemId)) ? Color.green : Color.red;
             string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemIcon, itemConfig.Icon);
             Sprite sp = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
-
             self.E_ItemIconImage.sprite = sp;
 
-            string qualityiconStr = FunctionUI.ItemQualiytoPath(itemConfig.ItemQuality);
-            string path2 = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemQualityIcon, qualityiconStr);
+            string path2 = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemQualityIcon, FunctionUI.ItemQualiytoPath(itemConfig.ItemQuality));
             Sprite sp2 = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path2);
-
             self.E_ItemQualityImage.sprite = sp2;
         }
     }
