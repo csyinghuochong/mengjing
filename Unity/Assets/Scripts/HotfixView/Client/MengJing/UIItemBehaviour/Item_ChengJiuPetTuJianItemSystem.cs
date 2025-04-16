@@ -21,7 +21,7 @@ namespace ET.Client
         {
             self.E_ClickButton.AddListener(() => { self.GetParent<ES_ChengJiuPetTuJian>().OnUpdateUI(self.JingLingId); });
 
-            PetTuJianConfig jingLingConfig = PetTuJianConfigCategory.Instance.Get(jid);
+            JingLingConfig jingLingConfig = JingLingConfigCategory.Instance.Get(jid);
             self.JingLingId = jid;
             self.E_NameText.text = jingLingConfig.Name;
             self.ES_ModelShow.ShowOtherModel($"Pet/{jingLingConfig.Assets}").Coroutine();

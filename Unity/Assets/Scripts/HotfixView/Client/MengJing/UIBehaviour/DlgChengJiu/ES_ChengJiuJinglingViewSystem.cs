@@ -54,6 +54,11 @@ namespace ET.Client
             self.ShowJingLing.Clear();
             foreach (JingLingConfig jingLingConfig in JingLingConfigCategory.Instance.GetAll().Values)
             {
+                if (jingLingConfig.GetWay !=2)
+                {
+                    continue;
+                }
+
                 if (self.E_ItemTypeSetToggleGroup.GetCurrentIndex() == 0)
                 {
                     self.ShowJingLing.Add(jingLingConfig);
@@ -185,18 +190,11 @@ namespace ET.Client
             ChengJiuComponentC chengJiuComponent = self.Root().GetComponent<ChengJiuComponentC>();
             JingLingInfo jingLingInfo = chengJiuComponent.JingLingList[self.JingLingId];
 
-            int num = 0;
-            foreach (JingLingInfo lingInfo in chengJiuComponent.JingLingList.Values)
-            {
-                if (lingInfo.IsActive == 1)
-                {
-                    num++;
-                }
-            }
-
+            int num = chengJiuComponent.GetActiveJingLing(2).Count;
+            
             using (zstring.Block())
             {
-                self.E_TotalProgressText.text = zstring.Format("总进度：{0}/{1}", num, chengJiuComponent.JingLingList.Count);
+                self.E_TotalProgressText.text = zstring.Format("总进度：{0}/{1}", num, PetHelper.GetJingLingByGetWay(2).Count);
             }
 
             using (zstring.Block())

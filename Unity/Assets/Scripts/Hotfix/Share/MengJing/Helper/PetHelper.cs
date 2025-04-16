@@ -402,6 +402,22 @@ namespace ET
             return false;
         }
 
+        public static List<JingLingConfig> GetJingLingByGetWay(int getWay)
+        {
+            List<JingLingConfig> jingLingConfigs = new List<JingLingConfig>();
+            foreach (JingLingConfig jingLingConfig in JingLingConfigCategory.Instance.GetAll().Values)
+            {
+                if (jingLingConfig.GetWay != getWay)
+                {
+                    continue;
+                }
+                jingLingConfigs.Add(jingLingConfig);
+            }
+
+            return jingLingConfigs;
+        }
+
+
         public static void CheckPetPosition(List<long> petTeamList, List<long> petMingPosition)
         {
             ///移除

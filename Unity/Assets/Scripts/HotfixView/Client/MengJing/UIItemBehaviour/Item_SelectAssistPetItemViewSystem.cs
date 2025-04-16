@@ -24,7 +24,7 @@ namespace ET.Client
             self.E_SelectedImage.gameObject.SetActive(false);
 
             self.PetTuJianConfigId = petTuJianConfigId;
-            PetTuJianConfig petTuJianConfig = PetTuJianConfigCategory.Instance.Get(petTuJianConfigId);
+            JingLingConfig petTuJianConfig = JingLingConfigCategory.Instance.Get(petTuJianConfigId);
             string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.PetHeadIcon, petTuJianConfig.Icon.ToString());
             Sprite sprite = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
             self.E_IconImage.sprite = sprite;

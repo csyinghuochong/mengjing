@@ -369,14 +369,14 @@ namespace ET.Server
         public static RolePetInfo GenerateNewPetByPetTuJianConfigId(this PetComponentS self, int petTuJianConfigId)
         {
             Unit unit = self.GetParent<Unit>();
-            PetTuJianConfig petConfig = PetTuJianConfigCategory.Instance.Get(petTuJianConfigId);
+            PetConfig petConfig = PetConfigCategory.Instance.Get(petTuJianConfigId);
             RolePetInfo newpet = RolePetInfo.Create();
             newpet.Id = IdGenerater.Instance.GenerateId() + RandomHelper.RandomNumber(0, 100);
             newpet.PetStatus = 0;
             newpet.ConfigId = petConfig.Id;
             newpet.PetLv = 1;
             newpet.PetExp = 0;
-            newpet.PetName = petConfig.Name;
+            newpet.PetName = petConfig.PetName;
             newpet.BabyType = 0;
             newpet.SkinId = 0;
             newpet.PetHeXinList = new List<long>() { 0, 0, 0 };
@@ -449,8 +449,8 @@ namespace ET.Server
             petMeleeInfo_0.MainPetList.Add( self.RolePetInfos[4].Id );
             petMeleeInfo_0.MainPetList.Add( self.RolePetInfos[5].Id );
 
-            petMeleeInfo_0.AssistPetList.Add( PetTuJianConfigCategory.Instance.GetAll().Values.ToList()[0].Id);
-            petMeleeInfo_0.AssistPetList.Add( PetTuJianConfigCategory.Instance.GetAll().Values.ToList()[1].Id);
+            Unit unit = self.GetParent<Unit>();
+            petMeleeInfo_0.AssistPetList.AddRange( unit.GetComponent<ChengJiuComponentS>().PetTuJianActives );
 
             List<PetMagicCardConfig>  allmageic = PetMagicCardConfigCategory.Instance.GetAll().Values.ToList();
             petMeleeInfo_0.MagicList.Add(allmageic[0].Id);

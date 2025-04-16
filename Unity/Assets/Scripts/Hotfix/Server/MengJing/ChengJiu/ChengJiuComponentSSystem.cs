@@ -52,13 +52,13 @@ namespace ET.Server
 
             for (int i = 0; i < self.PetTuJianActives.Count; i++)
             {
-                if (!PetTuJianConfigCategory.Instance.Contain(self.PetTuJianActives[i]))
-                {
-                    continue;
-                }
-
-                PetTuJianConfig jinglingCof = PetTuJianConfigCategory.Instance.Get(self.PetTuJianActives[i]);
-                NumericHelp.GetProList(jinglingCof.AddProperty, proList);
+                // if (!PetTuJianConfigCategory.Instance.Contain(self.PetTuJianActives[i]))
+                // {
+                //     continue;
+                // }
+                //
+                // PetTuJianConfig jinglingCof = PetTuJianConfigCategory.Instance.Get(self.PetTuJianActives[i]);
+                // NumericHelp.GetProList(jinglingCof.AddProperty, proList);
             }
 
             
@@ -80,16 +80,6 @@ namespace ET.Server
                 JingLingInfo jingLingInfo = JingLingInfo.Create();
                 jingLingInfo.JingLingID = JingLingConfig.Key;
                 self.JingLingList.Add( jingLingInfo );
-            }
-
-            PetComponentS petComponent = self.GetParent<Unit>().GetComponent<PetComponentS>();
-            Dictionary<int, PetTuJianConfig> pettujianlist = PetTuJianConfigCategory.Instance.GetAll();
-            foreach (var pettujian in pettujianlist)
-            {
-                if (petComponent.HavePetByConfigId(pettujian.Key))
-                {
-                    self.OnPetTuJianActive(pettujian.Key, false);
-                }
             }
         }
 

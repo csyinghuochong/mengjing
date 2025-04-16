@@ -9,7 +9,7 @@ namespace ET.Client
 	public  class ES_ChengJiuPetTuJian : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy,IUILogic
 	{
 		public int JingLingId;
-		public List<PetTuJianConfig> ShowJingLing = new();
+		public List<JingLingConfig> ShowJingLing = new();
 		public Dictionary<int, EntityRef<Scroll_Item_ChengJiuPetTuJianItem>> ScrollItemChengJiuJinglingItems;
 		
 		public UnityEngine.RectTransform EG_LeftRectTransform

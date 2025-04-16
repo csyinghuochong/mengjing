@@ -226,6 +226,7 @@ namespace ET.Client
 
             self.AddUIScrollItems(ref self.ScrollItemCommonItems, self.ShowBagInfos.Count);
             self.E_BagItemsLoopVerticalScrollRect.SetVisible(true, self.ShowBagInfos.Count);
+            await ETTask.CompletedTask;
 		}
 		
 		 public static void OnPaiBuyShangJia(this ES_StallSell self, PaiMaiItemInfo paiMaiItemInfo)

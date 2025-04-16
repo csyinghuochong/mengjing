@@ -52,8 +52,13 @@ namespace ET.Client
         public static void RefreshChengJiuJinglingItems(this ES_ChengJiuPetTuJian self)
         {
             self.ShowJingLing.Clear();
-            foreach (PetTuJianConfig jingLingConfig in PetTuJianConfigCategory.Instance.GetAll().Values)
+            foreach (JingLingConfig jingLingConfig in JingLingConfigCategory.Instance.GetAll().Values)
             {
+                if (jingLingConfig.GetWay !=1)
+                {
+                    continue;
+                }
+
                 if (self.E_ItemTypeSetToggleGroup.GetCurrentIndex() == 0)
                 {
                     self.ShowJingLing.Add(jingLingConfig);
@@ -103,7 +108,7 @@ namespace ET.Client
                 item.E_SelectedImage.gameObject.SetActive(self.JingLingId == item.JingLingId);
             }
 
-            PetTuJianConfig jingLingConfig = PetTuJianConfigCategory.Instance.Get(self.JingLingId);
+            JingLingConfig jingLingConfig = JingLingConfigCategory.Instance.Get(self.JingLingId);
             
             // self.ES_ModelShow.ShowOtherModel("JingLing/" + jingLingConfig.Assets).Coroutine();
             self.ES_ModelShow.ShowOtherModel($"Pet/{jingLingConfig.Assets}").Coroutine();
@@ -124,12 +129,11 @@ namespace ET.Client
 
             ChengJiuComponentC chengJiuComponent = self.Root().GetComponent<ChengJiuComponentC>();
 
-            int num = chengJiuComponent.PetTuJianActives.Count;
-            
-            
+            int num = chengJiuComponent.GetActiveJingLing(1).Count;
+
             using (zstring.Block())
             {
-                self.E_TotalProgressText.text = zstring.Format("总进度：{0}/{1}", num, PetTuJianConfigCategory.Instance.GetAll().Count);
+                self.E_TotalProgressText.text = zstring.Format("总进度：{0}/{1}", num, PetHelper.GetJingLingByGetWay(1).Count);
             }
 
             int progress = chengJiuComponent.PetTuJianActives.Contains(jingLingId) ? 1 : 0;

@@ -78,7 +78,7 @@ namespace ET.Client
                 }
                 case (int)PetMeleeCarType.AssistPet:
                 {
-                    PetTuJianConfig petTuJianConfig = PetTuJianConfigCategory.Instance.Get(self.PetMeleeCardInfo.ConfigId);
+                    JingLingConfig petTuJianConfig = JingLingConfigCategory.Instance.Get(self.PetMeleeCardInfo.ConfigId);
 
                     self.E_IconImage.sprite = self.Root().GetComponent<ResourcesLoaderComponent>()
                             .LoadAssetSync<Sprite>(ABPathHelper.GetAtlasPath_2(ABAtlasTypes.PetHeadIcon, petTuJianConfig.Icon.ToString()));
@@ -86,8 +86,8 @@ namespace ET.Client
                             .LoadAssetSync<Sprite>(ABPathHelper.GetAtlasPath_2(ABAtlasTypes.OtherIcon, "Image_163"));
                     self.E_BackImage.sprite = self.Root().GetComponent<ResourcesLoaderComponent>()
                             .LoadAssetSync<Sprite>(ABPathHelper.GetAtlasPath_2(ABAtlasTypes.OtherIcon, "Image_157"));
-                    self.E_Cost_ActiveText.text = petTuJianConfig.Cost.ToString();
-                    self.E_Cost_InactiveText.text = petTuJianConfig.Cost.ToString();
+                    self.E_Cost_ActiveText.text = GlobalValueConfigCategory.Instance.Get(121).Value;
+                    self.E_Cost_InactiveText.text = GlobalValueConfigCategory.Instance.Get(121).Value;
                     self.E_TypeText.text = "辅战卡";
                     self.E_NameText.text = petTuJianConfig.Name;
 

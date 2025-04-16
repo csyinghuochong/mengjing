@@ -113,8 +113,8 @@ namespace ET.Client
                 if (i < self.PetMeleeInfo.AssistPetList.Count)
                 {
                     int petTuJianConfigId = self.PetMeleeInfo.AssistPetList[i];
-                    PetTuJianConfig petTuJianConfig = PetTuJianConfigCategory.Instance.Get(petTuJianConfigId);
-                    string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.PetHeadIcon, petTuJianConfig.Icon.ToString());
+                    PetConfig petTuJianConfig = PetConfigCategory.Instance.Get(petTuJianConfigId);
+                    string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.PetHeadIcon, petTuJianConfig.HeadIcon.ToString());
                     Sprite sprite = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
                     go.transform.Find("mask/Icon").gameObject.SetActive(true);
                     go.transform.Find("mask/Icon").GetComponent<Image>().sprite = sprite;
@@ -319,7 +319,7 @@ namespace ET.Client
             self.ShowAssistPets.Clear();
             foreach (int id in self.Root().GetComponent<ChengJiuComponentC>().PetTuJianActives)
             {
-                if (PetTuJianConfigCategory.Instance.Contain(id))
+                if (JingLingConfigCategory.Instance.Contain(id))
                 {
                     self.ShowAssistPets.Add(id);
                 }

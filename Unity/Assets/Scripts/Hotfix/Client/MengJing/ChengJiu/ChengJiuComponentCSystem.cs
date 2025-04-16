@@ -25,6 +25,20 @@ namespace ET.Client
             }
         }
 
+        public static List<JingLingInfo> GetActiveJingLing(this ChengJiuComponentC self, int getway)
+        {
+            List<JingLingInfo> jingLingInfos = new List<JingLingInfo>();
+            foreach (JingLingInfo jingLingInfo in self.JingLingList.Values)
+            {
+                if (JingLingConfigCategory.Instance.Get(jingLingInfo.JingLingID).GetWay == getway)
+                {
+                    jingLingInfos.Add(jingLingInfo);
+                }
+            }
+
+            return jingLingInfos;
+        }
+
         public static int GetFightJingLing(this ChengJiuComponentC self)
         {
             foreach (JingLingInfo jingLingInfo in self.JingLingList.Values)
