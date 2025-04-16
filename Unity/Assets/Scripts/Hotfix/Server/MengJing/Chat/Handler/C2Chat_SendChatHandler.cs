@@ -112,11 +112,11 @@
                         else
                         {
                             //存入到离线消息
-                            DBFriendInfo dBFriendInfo = await UnitCacheHelper.GetComponentCache<DBFriendInfo>(chatInfoUnit.Root(), request.ChatInfo.ParamId);
+                            DBFriendInfo dBFriendInfo = await UnitCacheHelper.GetComponent<DBFriendInfo>(chatInfoUnit.Root(), request.ChatInfo.ParamId);
                             if (dBFriendInfo != null && dBFriendInfo.FriendChats.Count < 10)
                             {
                                 dBFriendInfo.FriendChats.Add(request.ChatInfo);
-                                UnitCacheHelper.SaveComponentCache(chatInfoUnit.Root(),  dBFriendInfo).Coroutine();
+                                UnitCacheHelper.SaveComponent(chatInfoUnit.Root(),dBFriendInfo.Id,  dBFriendInfo).Coroutine();
                             }
                         }
 

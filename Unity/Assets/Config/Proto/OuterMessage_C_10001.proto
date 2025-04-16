@@ -4691,24 +4691,6 @@ message M2C_PaiMaiAuctionPriceResponse // ILocationResponse
 	string Message = 92;
 }
 
-//ResponseType M2C_PaiMaiBuyResponse
-message C2M_PaiMaiBuyRequest // ILocationRequest
-{
-	int32 RpcId = 90;
-	int64 ActorId = 93;
-
-	PaiMaiItemInfo PaiMaiItemInfo = 1;
-	int32 BuyNum = 2;
-	int32 IsRecharge = 3;
-}
-
-message M2C_PaiMaiBuyResponse // ILocationResponse
-{
-	int32 RpcId = 90;
-	int32 Error = 91;
-	string Message = 92;
-}
-
 //ResponseType M2C_PaiMaiBuyNewResponse
 message C2M_PaiMaiBuyNewRequest // ILocationRequest
 {

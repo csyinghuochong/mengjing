@@ -17,7 +17,7 @@
                 int openDay = ServerHelper.GetServeOpenDay( scene.Zone());
                 dBUnionInfo.MysteryItemInfos = MysteryShopHelper.InitUnionMysteryItemInfos(openDay); 
                 dBUnionInfo.MysteryFreshTime = TimeHelper.ServerNow();
-                UnitCacheHelper.SaveComponentCache(scene.Root(), dBUnionInfo).Coroutine();
+                UnitCacheHelper.SaveComponent(scene.Root(),dBUnionInfo.Id , dBUnionInfo).Coroutine();
             }
 
             response.MysteryItemInfos .AddRange(dBUnionInfo.MysteryItemInfos); 

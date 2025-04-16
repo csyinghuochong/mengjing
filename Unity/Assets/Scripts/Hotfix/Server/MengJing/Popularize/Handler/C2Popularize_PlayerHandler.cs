@@ -10,7 +10,7 @@ namespace ET.Server
             Log.Warning($"C2Popularize_PlayerRequest:{request.ActorId}");
             using (await  scene.Root().GetComponent<CoroutineLockComponent>().Wait(CoroutineLockType.Popularize, request.ActorId))
             {
-                DBPopularizeInfo dBPopularizeInfo = await UnitCacheHelper.GetComponentCache<DBPopularizeInfo>(scene.Root(), request.ActorId);
+                DBPopularizeInfo dBPopularizeInfo = await UnitCacheHelper.GetComponent<DBPopularizeInfo>(scene.Root(), request.ActorId);
                 if (dBPopularizeInfo == null)
                 {
                     return;

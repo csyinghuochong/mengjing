@@ -35,7 +35,7 @@ namespace ET.Server
             {
                 response.Error = ErrorCode.ERR_ItemNotEnoughError;
             }
-            UnitCacheHelper.SaveComponentCache(scene.Root(), dBUnionInfo).Coroutine();
+            UnitCacheHelper.SaveComponent(scene.Root(), dBUnionInfo.Id, dBUnionInfo).Coroutine();
 
             await ETTask.CompletedTask;
         }

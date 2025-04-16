@@ -33,7 +33,7 @@
             }
             response.JingXuanList .AddRange( dBUnionInfo.UnionInfo.JingXuanList);
             response.JingXuanEndTime = dBUnionInfo.UnionInfo.JingXuanEndTime;
-            UnitCacheHelper.SaveComponentCache(scene.Root(), dBUnionInfo).Coroutine();
+            UnitCacheHelper.SaveComponent(scene.Root(), dBUnionInfo.Id, dBUnionInfo).Coroutine();
             await ETTask.CompletedTask;
         }
     }

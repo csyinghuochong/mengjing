@@ -41,7 +41,7 @@ namespace ET.Server
             UnionPlayerInfo.PlayerName = unionInfoCache.Name;
             UnionPlayerInfo.UserID = request.UserID;
             unionInfo.UnionInfo.UnionPlayerList.Add(UnionPlayerInfo);
-            UnitCacheHelper.SaveComponentCache(scene.Root(), unionInfo).Coroutine();
+            UnitCacheHelper.SaveComponent(scene.Root(),unionInfo.Id, unionInfo).Coroutine();
             response.UnionId = unionId;
             
             unionInfo.Dispose();

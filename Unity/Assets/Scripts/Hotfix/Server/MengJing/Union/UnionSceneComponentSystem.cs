@@ -65,7 +65,7 @@ namespace ET.Server
             if (dBServerInfo == null)
             {
                 dBServerInfo = self.AddChildWithId<DBUnionManager>((long)self.Zone());
-                UnitCacheHelper.SaveComponentCache( self.Root(), dBServerInfo ).Coroutine();
+                UnitCacheHelper.SaveComponent( self.Root(), dBServerInfo.Id, dBServerInfo ).Coroutine();
             }
 
             self.DBUnionManager = dBServerInfo;
@@ -169,7 +169,7 @@ namespace ET.Server
                 }
             }
 
-            UnitCacheHelper.SaveComponentCache(self.Root(), dBUnionInfo).Coroutine();
+            UnitCacheHelper.SaveComponent(self.Root(), dBUnionInfo.Id, dBUnionInfo).Coroutine();
             return ErrorCode.ERR_Success;
         }
 
@@ -181,7 +181,7 @@ namespace ET.Server
 
         public static void SaveDB(this UnionSceneComponent self)
         {
-            UnitCacheHelper.SaveComponentCache(self.Root(), self.DBUnionManager).Coroutine();
+            UnitCacheHelper.SaveComponent(self.Root(), self.DBUnionManager.Id, self.DBUnionManager).Coroutine();
         }
     }
 }

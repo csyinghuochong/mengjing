@@ -77,7 +77,7 @@ namespace ET.Server
                         DonationRecord.Time = TimeHelper.ServerNow();
                         DonationRecord.UnitId = request.UnitId;
                         dBUnionInfo.UnionInfo.DonationRecords.Add( DonationRecord);
-                        await  UnitCacheHelper.SaveComponentCache(scene.Root(),  dBUnionInfo);
+                        await  UnitCacheHelper.SaveComponent(scene.Root(), dBUnionInfo.Id, dBUnionInfo);
                         break;
                     case 4: //钻石捐献
                         dBUnionInfo.UnionInfo.Level = Math.Max(dBUnionInfo.UnionInfo.Level, 1);

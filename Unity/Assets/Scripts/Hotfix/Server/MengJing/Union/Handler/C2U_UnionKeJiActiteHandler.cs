@@ -35,7 +35,7 @@
             dBUnionInfo.UnionInfo.KeJiActitePos = request.Position;
             dBUnionInfo.UnionInfo.KeJiActiteTime = TimeHelper.ServerNow();
             response.UnionInfo = dBUnionInfo.UnionInfo;
-            UnitCacheHelper.SaveComponentCache(scene.Root(), dBUnionInfo).Coroutine(); ;
+            UnitCacheHelper.SaveComponent(scene.Root(), dBUnionInfo.Id, dBUnionInfo).Coroutine(); ;
         }
     }
 }

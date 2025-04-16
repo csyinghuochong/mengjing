@@ -28,7 +28,7 @@
             dBUnionInfo.UnionInfo.LeaderId  = request.NewLeader;
             unionPlayerInfo_new.Position    = 1;
             unionPlayerInfo_self.Position   = 0;
-            UnitCacheHelper.SaveComponentCache(scene.Root(),  dBUnionInfo).Coroutine();
+            UnitCacheHelper.SaveComponent(scene.Root(), dBUnionInfo.Id, dBUnionInfo).Coroutine();
 
            
             BroadCastHelper.NoticeUnionLeader(scene.Root(), request.NewLeader, 1).Coroutine();

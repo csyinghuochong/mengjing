@@ -270,7 +270,7 @@ namespace ET.Server
                     continue;
                 }
 
-                DBFriendInfo dBFriendInfo = await UnitCacheHelper.GetComponentCache<DBFriendInfo>(self.Root(), unit.Id);
+                DBFriendInfo dBFriendInfo = await UnitCacheHelper.GetComponent<DBFriendInfo>(self.Root(), unit.Id);
                 if (dBFriendInfo == null)
                 {
                     continue;

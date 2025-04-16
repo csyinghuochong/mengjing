@@ -1489,25 +1489,6 @@ message P2M_PaiMaiAuctionPriceResponse // IResponse
 	int32 Error = 92;
 }
 
-//ResponseType P2M_PaiMaiBuyResponse
-message M2P_PaiMaiBuyRequest // IRequest
-{
-	int32 RpcId = 90;
-	int64 ActorId = 93;
-	PaiMaiItemInfo PaiMaiItemInfo = 1;
-	int64 Gold = 2;
-	int32 BuyNum = 3;
-	int64 UnitId = 4;
-}
-
-message P2M_PaiMaiBuyResponse // IResponse
-{
-	int32 RpcId = 90;
-	int32 Error = 91;
-	string Message = 92;
-	PaiMaiItemInfo PaiMaiItemInfo = 1;
-}
-
 //ResponseType P2M_PaiMaiBuyNewResponse
 message M2P_PaiMaiBuyNewRequest // IRequest
 {

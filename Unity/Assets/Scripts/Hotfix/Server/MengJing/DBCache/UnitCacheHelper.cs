@@ -76,6 +76,13 @@ namespace ET.Server
             Other2UnitCache_GetComponent other2UnitCacheGetComponent = Other2UnitCache_GetComponent.Create();
             other2UnitCacheGetComponent.UnitId = unitId;
             other2UnitCacheGetComponent.Component = typeof(T).FullName;
+            
+            bool iscache = typeof(T) == typeof(IUnitCache);
+            if (!iscache)
+            {
+                Log.Error($"GetComponentCacheError： {typeof(T).FullName}");
+            }
+            
             UnitCache2Other_GetComponent d2GGetUnit = (UnitCache2Other_GetComponent)await root.GetComponent<MessageSender>().Call(dbCacheId,
                 other2UnitCacheGetComponent);
 
@@ -95,6 +102,12 @@ namespace ET.Server
             addOrUpdateUnit.UnitId = entity.Id;
             addOrUpdateUnit.EntityTypes.Add(entity.GetType().FullName);
             addOrUpdateUnit.EntityBytes.Add(entity.ToBson());
+            
+            bool iscache = entity.GetType() == typeof(IUnitCache);
+            if (!iscache)
+            {
+                Log.Error($"SaveComponentCacheError： {entity.GetType().FullName}");
+            }
 
             StartSceneConfig startSceneConfig = StartSceneConfigCategory.Instance.GetUnitCacheConfig(zone);
             await root.GetComponent<MessageSender>().Call(startSceneConfig.ActorId, addOrUpdateUnit);
@@ -112,6 +125,13 @@ namespace ET.Server
             int zone = root.Zone();
             DBManagerComponent dbManagerComponent = root.GetComponent<DBManagerComponent>();
             DBComponent dbComponent = dbManagerComponent.GetZoneDB(zone);
+            
+            bool iscache = typeof(T) == typeof(IUnitCache);
+            if (iscache)
+            {
+                Log.Error($"GetComponentError： {typeof(T).FullName}");
+            }
+            
             List<T> resulets = await dbComponent.Query<T>(root.Zone(), d => d.Id == unitId);
             if (resulets == null || resulets.Count == 0)
             {
@@ -124,6 +144,12 @@ namespace ET.Server
         public static async ETTask SaveComponent(Scene root, long unitId, Entity entity)
         {
             int zone = root.Zone();
+            
+            bool iscache = entity.GetType() == typeof(IUnitCache);
+            if (iscache)
+            {
+                Log.Error($"GetComponentError： {entity.GetType().FullName}");
+            }
             DBManagerComponent dbManagerComponent = root.GetComponent<DBManagerComponent>();
             DBComponent dbComponent = dbManagerComponent.GetZoneDB(zone);
             await dbComponent.Save(root.Zone(), entity);
