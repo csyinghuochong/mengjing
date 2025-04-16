@@ -56,6 +56,7 @@ namespace ET.Client
             self.ES_CommonItem.UpdateItem(bagInfoNew, ItemOperateEnum.None);
             self.ES_CommonItem.E_ItemNumText.gameObject.SetActive(false);
             self.ES_CommonItem.E_ItemQualityImage.gameObject.SetActive(false);
+            self.ES_CommonItem.E_ItemNameText.gameObject.SetActive(true);
 
             self.E_Lab_PriceText.text = shopItemInfo.Price.ToString();
 
