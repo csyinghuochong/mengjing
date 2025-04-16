@@ -92,7 +92,8 @@ namespace ET.Server
                     {
                         unit.GetComponent<UserInfoComponentS>().OnHorseActive(config.Id, true);
                     }
-
+                    unit.GetComponent<ChengJiuComponentS>().OpenAllJingLing();
+                    unit.GetComponent<ChengJiuComponentS>().OpenAllPetTuJian();
                     return;
                 }
                 
@@ -137,7 +138,15 @@ namespace ET.Server
                     {
                         unit.GetComponent<UserInfoComponentS>().OnHorseActive(config.Id, true);
                     }
+                    unit.GetComponent<ChengJiuComponentS>().OpenAllJingLing();
+                    unit.GetComponent<ChengJiuComponentS>().OpenAllPetTuJian();
+                    return;
+                }
 
+                if (message.GMMsg == "#alljingling")
+                {
+                    unit.GetComponent<ChengJiuComponentS>().OpenAllJingLing();
+                    unit.GetComponent<ChengJiuComponentS>().OpenAllPetTuJian();
                     return;
                 }
                 

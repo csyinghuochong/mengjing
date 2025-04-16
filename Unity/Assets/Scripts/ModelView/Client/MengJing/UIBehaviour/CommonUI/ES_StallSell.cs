@@ -1,12 +1,28 @@
 ﻿
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections.Generic;
+using UnityEngine;
+
 namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class ES_StallSell : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy 
+	public  class ES_StallSell : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy ,IUILogic
 	{
+		
+		public Dictionary<int, EntityRef<Scroll_Item_CommonItem>> ScrollItemCommonItems;
+		public List<ItemInfo> ShowBagInfos { get; set; } = new();
+		public Dictionary<int, EntityRef<Scroll_Item_PaiMaiSellItem>> ScrollItemPaiMaiSellItems;
+		public List<PaiMaiItemInfo> ShowPaiMaiItemInfos = new();
+		public int CurrentItemType;
+		
+		public List<PaiMaiItemInfo> PaiMaiItemInfos = new();
+		public long PaiMaiItemInfoId;
+		private EntityRef<ItemInfo> bagInfo;
+		public ItemInfo BagInfo { get => this.bagInfo; set => this.bagInfo = value; }
+		public bool IsHoldDown;
+		
 		public UnityEngine.UI.InputField E_Stall_NameInputField
      	{
      		get

@@ -349,6 +349,23 @@ namespace ET.Client
      			return this.m_E_Lab_TuijianText;
      		}
      	}
+		
+		public UnityEngine.UI.Button E_ImageButton
+		{
+			get
+			{
+				if (this.uiTransform == null)
+				{
+					Log.Error("uiTransform is null.");
+					return null;
+				}
+				if( this.m_E_ImageButton == null )
+				{
+					this.m_E_ImageButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_ImageButton");
+				}
+				return this.m_E_ImageButton;
+			}
+		}
 
 		public void DestroyWidget()
 		{
@@ -372,6 +389,7 @@ namespace ET.Client
 			this.m_E_Text_PriceText = null;
 			this.m_E_Lab_NameText = null;
 			this.m_E_Lab_TuijianText = null;
+			this.m_E_ImageButton = null;
 			this.uiTransform = null;
 		}
 
@@ -395,6 +413,7 @@ namespace ET.Client
 		private UnityEngine.UI.Text m_E_Text_PriceText = null;
 		private UnityEngine.UI.Text m_E_Lab_NameText = null;
 		private UnityEngine.UI.Text m_E_Lab_TuijianText = null;
+		private UnityEngine.UI.Button m_E_ImageButton = null;
 		public Transform uiTransform = null;
 	}
 }

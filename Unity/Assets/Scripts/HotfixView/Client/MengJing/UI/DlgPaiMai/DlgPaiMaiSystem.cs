@@ -4,6 +4,7 @@ namespace ET.Client
     [FriendOf(typeof(ES_PaiMaiBuy))]
     [FriendOf(typeof(ES_PaiMaiSell))]
     [FriendOf(typeof(ES_PaiMaiDuiHuan))]
+    [FriendOf(typeof(ES_StallSell))]
     [FriendOf(typeof(DlgPaiMai))]
     public static class DlgPaiMaiSystem
     {

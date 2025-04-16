@@ -13,6 +13,15 @@ namespace ET.Client
             return response;
         }
 
+        public static async ETTask<M2C_StallXiaJiaResponse> RequestStallXiaJia(Scene root, long itemid)
+        {
+            C2M_StallXiaJiaRequest c2MStallXiaJiaRequest = C2M_StallXiaJiaRequest.Create();
+            c2MStallXiaJiaRequest.PaiMaiItemInfoId = itemid;
+            M2C_StallXiaJiaResponse m2CStallXiaJiaResponse =
+                    (M2C_StallXiaJiaResponse) await root.GetComponent<ClientSenderCompnent>().Call(c2MStallXiaJiaRequest);
+            return m2CStallXiaJiaResponse;
+        }
+
         /// <summary>
         /// 自己的摆摊商品
         /// </summary>
@@ -24,6 +33,29 @@ namespace ET.Client
             request.UserId = UnitHelper.GetMyUnitId(root);
             P2C_StallListResponse response = (P2C_StallListResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
 
+            return response;
+        }
+
+        public static async ETTask<M2C_StallOperationResponse> RequestStallOperation(Scene root, int StallType, string Value)
+        {
+            C2M_StallOperationRequest c2M_StallOperationRequest = C2M_StallOperationRequest.Create();
+            c2M_StallOperationRequest.StallType = StallType;
+            c2M_StallOperationRequest.Value = Value;
+            
+            M2C_StallOperationResponse response = (M2C_StallOperationResponse)await root.GetComponent<ClientSenderCompnent>().Call(c2M_StallOperationRequest);
+            return response;
+        }
+
+        /// <summary>
+        /// 上架摆摊商品
+        /// </summary>
+        /// <param name="root"></param>
+        /// <returns></returns>
+        public static async ETTask<M2C_StallSellResponse> RequestStallSell(Scene root, PaiMaiItemInfo paiMaiItemInfo)
+        {
+            C2M_StallSellRequest request = C2M_StallSellRequest.Create();
+            request.PaiMaiItemInfo = paiMaiItemInfo;
+            M2C_StallSellResponse response = (M2C_StallSellResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
             return response;
         }
         

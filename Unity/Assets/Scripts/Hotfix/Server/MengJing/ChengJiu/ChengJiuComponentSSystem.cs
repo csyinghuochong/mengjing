@@ -280,6 +280,23 @@ namespace ET.Server
             return null;
         }
 
+        public static void OpenAllJingLing(this ChengJiuComponentS self)
+        {
+            for (int i = 0; i < self.JingLingList.Count; i++)
+            {
+                JingLingInfo jingLingInfo = self.JingLingList[i];
+              
+                if (jingLingInfo.IsActive != 0)
+                {
+                    return;
+                }
+              
+                JingLingConfig jingLingConfig = JingLingConfigCategory.Instance.Get(jingLingInfo.JingLingID);
+                jingLingInfo.Progess = jingLingConfig.NeedPoint;
+                jingLingInfo.IsActive = 1;
+            }
+        }
+
         public static void OnActiveJingLing(this ChengJiuComponentS self, int jid)
         {
             for (int i = 0; i < self.JingLingList.Count; i++)
@@ -345,6 +362,15 @@ namespace ET.Server
                     return;
                 }
             }
+        }
+
+        public static void OpenAllPetTuJian(this ChengJiuComponentS self)
+        {
+             Dictionary<int, PetConfig> allpet = PetConfigCategory.Instance.GetAll();
+             foreach (PetConfig petconfig in allpet.Values)
+             {
+                 self.OnPetTuJianActive( petconfig.Id, false );
+             }
         }
 
         public static void OnPetTuJianActive(this ChengJiuComponentS self, int petId, bool notice)

@@ -509,6 +509,27 @@ namespace ET.Client
             return true;
         }
 
+        public static List<Unit> GetUnitListByDis(Scene scene, float3 pos, int unitType, float maxdis)
+        {
+            List<Unit> list = new List<Unit>();
+            List<EntityRef<Unit>> allunits  = scene.GetComponent<UnitComponent>().GetAll();
+        
+            for (int i = 0; i < allunits.Count; i++)
+            {
+                Unit unit = allunits[i];
+                if (unit.Type != unitType)
+                {
+                    continue;
+                }
+        
+                if (math.distance(pos, unit.Position) > maxdis)
+                {
+                    continue;
+                }
+                list.Add(unit);
+            }
+            return list;
+        }
         
         public static bool IsHaveBoss(Scene scene, float3 vector3, float dis)
         {

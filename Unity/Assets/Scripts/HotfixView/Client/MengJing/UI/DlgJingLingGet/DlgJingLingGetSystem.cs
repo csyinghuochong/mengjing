@@ -36,8 +36,7 @@ namespace ET.Client
             self.View.ES_ModelShow.SetCameraPosition(new Vector3(0f, 40, 250f));
             self.View.ES_ModelShow.Camera.fieldOfView = 35;
             JingLingConfig petSkinConfig = JingLingConfigCategory.Instance.Get(jinglingid);
-            // self.View.ES_ModelShow.ShowOtherModel("JingLing/" + petSkinConfig.Assets).Coroutine();
-            self.View.ES_ModelShow.ShowOtherModel("JingLing/" + 70001001).Coroutine();
+            self.View.ES_ModelShow.ShowOtherModel("JingLing/" + petSkinConfig.Assets).Coroutine();
             self.View.E_TextSkinNameText.text = petSkinConfig.Name;
             self.View.E_TextDesText.text = petSkinConfig.Des;
         }

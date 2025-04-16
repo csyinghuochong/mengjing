@@ -5,11 +5,6 @@
     {
         protected override async ETTask Run(Unit unit, C2M_StallSellRequest request, M2C_StallSellResponse response)
         {
-            if (unit.Zone() != 3)
-            {
-                return;
-            }
-
             using (await unit.Root().GetComponent<CoroutineLockComponent>().Wait(CoroutineLockType.Sell, unit.Id))
             {
                 if (request.PaiMaiItemInfo.BagInfo.ItemNum <= 0)
