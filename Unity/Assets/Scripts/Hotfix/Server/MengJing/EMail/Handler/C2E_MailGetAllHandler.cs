@@ -6,7 +6,7 @@
     {
         protected override async ETTask Run(Scene scene, C2E_GetAllMailRequest request, E2C_GetAllMailResponse response )
         {
-            DBMailInfo dBMailInfo = await UnitCacheHelper.GetComponentCache<DBMailInfo>(scene.Root(), request.ActorId);
+            DBMailInfo dBMailInfo = await UnitCacheHelper.GetComponent<DBMailInfo>(scene.Root(), request.ActorId);
             if (dBMailInfo != null)
             {
                 for(int i = 0; i < dBMailInfo.MailInfoList.Count; i++)

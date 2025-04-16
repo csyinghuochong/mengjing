@@ -91,6 +91,22 @@ namespace ET.Client
             return response;
         }
         
+        public static async ETTask<M2C_PaiMaiBuyNewResponse> PaiMaiBuyNew(Scene root, PaiMaiItemInfo paiMaiItemInfo, int buyNum, int isRecharge)
+        {
+            C2M_PaiMaiBuyNewRequest request = C2M_PaiMaiBuyNewRequest.Create();
+
+            request.PaiMaiItemInfoId = paiMaiItemInfo.Id;
+            request.Price = paiMaiItemInfo.Price;
+            request.ItemNum = paiMaiItemInfo.BagInfo.ItemNum;
+            request.ItemId = paiMaiItemInfo.BagInfo.ItemID;
+            request.BuyNum = buyNum;
+            request.IsRecharge = isRecharge;
+            
+            M2C_PaiMaiBuyNewResponse response = (M2C_PaiMaiBuyNewResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+        
+            return response;
+        }
+        
         public static async ETTask<M2C_PaiMaiSellResponse> PaiMaiSell(Scene root, PaiMaiItemInfo paiMaiItemInfo)
         {
             C2M_PaiMaiSellRequest request = C2M_PaiMaiSellRequest.Create();

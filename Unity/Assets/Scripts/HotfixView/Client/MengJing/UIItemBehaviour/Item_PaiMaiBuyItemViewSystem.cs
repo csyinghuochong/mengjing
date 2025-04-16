@@ -33,27 +33,25 @@
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
             NumericComponentC numericComponent = unit.GetComponent<NumericComponentC>();
 
-            M2C_PaiMaiBuyResponse response =
-                    await PaiMaiNetHelper.PaiMaiBuy(self.Root(), self.PaiMaiItemInfo, 0, numericComponent.GetAsInt(NumericType.RechargeNumber));
+            M2C_PaiMaiBuyNewResponse response = await PaiMaiNetHelper.PaiMaiBuyNew(self.Root(), self.PaiMaiItemInfo, 1, numericComponent.GetAsInt(NumericType.RechargeNumber));
             if (instanceId != self.InstanceId)
             {
                 return;
             }
-
             if (response.Error == 0)
             {
                 if (self.uiTransform.gameObject != null)
                 {
                     self.uiTransform.gameObject.SetActive(false);
                 }
-
+            
                 ItemConfig itemConfig = ItemConfigCategory.Instance.Get(self.PaiMaiItemInfo.BagInfo.ItemID);
                 self.GetParent<ES_PaiMaiBuy>().RemoveItem(itemConfig.ItemType, self.PaiMaiItemInfo);
             }
-            else
-            {
-                FlyTipComponent.Instance.ShowFlyTip("道具已经被买走了！");
-            }
+            // else
+            // {
+            //     FlyTipComponent.Instance.ShowFlyTip("道具已经被买走了！");
+            // }
         }
 
         public static async ETTask OnClickButtonBuy(this Scroll_Item_PaiMaiBuyItem self)

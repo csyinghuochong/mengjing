@@ -624,7 +624,7 @@ namespace ET.Server
                     {
                         Log.Info("拍卖行系统购买 概率:" + buyPro + "出售价格:" + paiMaiItem.Price * costNum + "玩家名称:" + paiMaiItem.PlayerName + "出售道具:" +
                             paiMaiItem.BagInfo.ItemID + "出售单价:" + paiMaiItem.Price + "道具拥有数量:" + paiMaiItem.BagInfo.ItemNum);
-                        MailHelp.SendPaiMaiEmail(self.Root(), paiMaiItem, costNum, 0);
+                        MailHelp.SendPaiMaiEmail(self.Root(), paiMaiItem.BagInfo, paiMaiItem.Price,  costNum, 0);
                         
                         paiMaiItem.BagInfo.ItemNum -= costNum;
                         if (paiMaiItem.BagInfo.ItemNum <= 0)

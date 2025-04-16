@@ -1508,6 +1508,35 @@ message P2M_PaiMaiBuyResponse // IResponse
 	PaiMaiItemInfo PaiMaiItemInfo = 1;
 }
 
+//ResponseType P2M_PaiMaiBuyNewResponse
+message M2P_PaiMaiBuyNewRequest // IRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	
+	int64 Gold = 2;
+	int32 BuyNum = 3;
+	int64 UnitId = 4;
+
+	int64 PaiMaiItemInfoId = 6;
+	int32 ItemId = 7;
+	int32 ItemNum = 8;
+	int32  Price = 9;
+}
+
+message P2M_PaiMaiBuyNewResponse // IResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+
+	ItemInfoProto ItemInfo = 1;
+	string PlayerName = 2;
+	string Account = 3;
+	int32 UserId = 4;
+}
+
+
 //ResponseType M2P_PaiMaiBuyInfoResponse
 message P2M_PaiMaiBuyInfoRequest // IRequest
 {

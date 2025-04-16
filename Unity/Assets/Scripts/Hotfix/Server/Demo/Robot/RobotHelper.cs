@@ -1538,7 +1538,7 @@ namespace ET.Client
 
             int index = RandomHelper.RandomNumber(0, response.PaiMaiItemInfos.Count);
 
-            await PaiMaiNetHelper.PaiMaiBuy(root, response.PaiMaiItemInfos[index], 0,
+            await PaiMaiNetHelper.PaiMaiBuyNew(root, response.PaiMaiItemInfos[index], 0,
                 UnitHelper.GetMyUnitFromClientScene(root).GetComponent<NumericComponentC>().GetAsInt(NumericType.RechargeNumber));
         }
 

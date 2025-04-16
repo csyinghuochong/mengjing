@@ -69,13 +69,12 @@ namespace ET.Client
                 return;
             }
 
-            M2C_PaiMaiBuyResponse response = await PaiMaiNetHelper.PaiMaiBuy(self.Root(), self.PaiMaiItemInfo, self.BuyNum, 0);
-
+            M2C_PaiMaiBuyNewResponse response = await PaiMaiNetHelper.PaiMaiBuyNew(self.Root(), self.PaiMaiItemInfo, self.BuyNum, 0);
             if (response.Error != ErrorCode.ERR_Success)
             {
                 return;
             }
-
+            
             self.BuyAction?.Invoke(self.BuyNum);
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_PaiMaiBuyTip);
         }

@@ -63,7 +63,7 @@ namespace ET.Server
                         .OnAddItemData(p2MStallBuyResponse.PaiMaiItemInfo.BagInfo, $"{ItemGetWay.StallBuy}_{TimeHelper.ServerNow()}");
 
                 //给出售者邮件发送金币
-                MailHelp.SendPaiMaiEmail(unit.Root(), p2MStallBuyResponse.PaiMaiItemInfo, p2MStallBuyResponse.PaiMaiItemInfo.BagInfo.ItemNum, unit.Id);
+                ///MailHelp.SendPaiMaiEmail(unit.Root(), p2MStallBuyResponse.PaiMaiItemInfo, p2MStallBuyResponse.PaiMaiItemInfo.BagInfo.ItemNum, unit.Id);
 
                 Log.Warning(
                     $"摆摊购买: {unit.Id} 购买 {p2MStallBuyResponse.PaiMaiItemInfo.UserId} 道具ID：{p2MStallBuyResponse.PaiMaiItemInfo.BagInfo.ItemNum} 花费：{needGold} ");
