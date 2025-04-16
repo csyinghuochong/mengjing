@@ -224,5 +224,6 @@ namespace ET.Client
 		WindowID_PetMatch,
 		WindowID_PetMatchReward,
 		WindowID_PetMatchRankShow,
+		WindowID_StallSellPrice,
 	}
 }
