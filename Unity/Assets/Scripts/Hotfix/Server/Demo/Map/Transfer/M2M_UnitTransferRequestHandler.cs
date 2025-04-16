@@ -147,25 +147,29 @@ namespace ET.Server
                     scene.GetComponent<LocalDungeonComponent>().GenerateFuben(request.SceneId);
                     break;
                 case MapTypeEnum.CellDungeon:
-                    // 通知客户端创建My Unit
-                    m2CCreateUnits.Unit = MapMessageHelper.CreateUnitInfo(unit);
-                    MapMessageHelper.SendToClient(unit, m2CCreateUnits);
-                    // 加入aoi
-                    unit.AddComponent<AOIEntity, int, float3>(aoivalue * 1000, unit.Position);
-
+                    
                     CellDungeonComponentS fubenComponentS = scene.GetComponent<CellDungeonComponentS>();
                     //起始格子
                     fubenComponentS.OnEnterFirstCell(unit, request);
-                    break;
-                case MapTypeEnum.DragonDungeon:
+                    
                     // 通知客户端创建My Unit
                     m2CCreateUnits.Unit = MapMessageHelper.CreateUnitInfo(unit);
                     MapMessageHelper.SendToClient(unit, m2CCreateUnits);
                     // 加入aoi
                     unit.AddComponent<AOIEntity, int, float3>(aoivalue * 1000, unit.Position);
 
+                    break;
+                case MapTypeEnum.DragonDungeon:
+                  
                     DragonDungeonComponentS dragonDungeonComponentS  =scene.GetComponent<DragonDungeonComponentS>();
                     dragonDungeonComponentS.OnEnterFirstCell(unit, request);
+                    
+                    // 通知客户端创建My Unit
+                    m2CCreateUnits.Unit = MapMessageHelper.CreateUnitInfo(unit);
+                    MapMessageHelper.SendToClient(unit, m2CCreateUnits);
+                    // 加入aoi
+                    unit.AddComponent<AOIEntity, int, float3>(aoivalue * 1000, unit.Position);
+
                     break;
                 case MapTypeEnum.JiaYuan:
                 case MapTypeEnum.Union:
