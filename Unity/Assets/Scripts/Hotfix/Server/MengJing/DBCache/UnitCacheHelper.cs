@@ -77,7 +77,7 @@ namespace ET.Server
             other2UnitCacheGetComponent.UnitId = unitId;
             other2UnitCacheGetComponent.Component = typeof(T).FullName;
             
-            bool iscache = typeof(T) == typeof(IUnitCache);
+            bool iscache =  typeof(IUnitCache).IsAssignableFrom(typeof(T));
             if (!iscache)
             {
                 Log.Error($"GetComponentCacheError： {typeof(T).FullName}");
@@ -103,7 +103,7 @@ namespace ET.Server
             addOrUpdateUnit.EntityTypes.Add(entity.GetType().FullName);
             addOrUpdateUnit.EntityBytes.Add(entity.ToBson());
             
-            bool iscache = entity.GetType() == typeof(IUnitCache);
+            bool iscache = typeof(IUnitCache).IsAssignableFrom(entity.GetType());
             if (!iscache)
             {
                 Log.Error($"SaveComponentCacheError： {entity.GetType().FullName}");
@@ -126,7 +126,7 @@ namespace ET.Server
             DBManagerComponent dbManagerComponent = root.GetComponent<DBManagerComponent>();
             DBComponent dbComponent = dbManagerComponent.GetZoneDB(zone);
             
-            bool iscache = typeof(T) == typeof(IUnitCache);
+            bool iscache = typeof(IUnitCache).IsAssignableFrom(typeof(T));
             if (iscache)
             {
                 Log.Error($"GetComponentError： {typeof(T).FullName}");
@@ -145,7 +145,7 @@ namespace ET.Server
         {
             int zone = root.Zone();
             
-            bool iscache = entity.GetType() == typeof(IUnitCache);
+            bool iscache =typeof(IUnitCache).IsAssignableFrom(entity.GetType());
             if (iscache)
             {
                 Log.Error($"GetComponentError： {entity.GetType().FullName}");

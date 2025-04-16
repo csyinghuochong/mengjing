@@ -44,7 +44,7 @@ namespace ET.Server
         public static async ETTask OnSoloBegin(this PetMatchSceneComponent self)
         {
             //通知机器人
-    
+            self.PetMatchOpen = true;
             if (ServerHelper.GetServeOpenDay(self.Zone()) > 0)
             {
                 self.G2RobotMessage(NoticeType.PetMatchOpen).Coroutine();
@@ -175,7 +175,7 @@ namespace ET.Server
         public static async ETTask OnSoloOver(this PetMatchSceneComponent self)
         {
             Log.Warning($"OnSoloOver: {self.Zone()}");
-            
+            self.PetMatchOpen = true;
             self.RecordSoloRank().Coroutine();
             self.SendPetReward().Coroutine();
             
