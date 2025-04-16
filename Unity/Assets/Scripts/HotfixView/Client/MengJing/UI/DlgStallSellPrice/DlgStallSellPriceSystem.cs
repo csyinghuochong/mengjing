@@ -19,8 +19,8 @@ namespace ET.Client
 		  self.View.E_Btn_CostButton.AddListener(self.OnCostPrice);
 		  self.View.E_Btn_AddButton.AddListener(self.OnAddPrice);
 		  self.View.E_PriceInputFieldInputField.onValueChanged.AddListener( (string value) => { self.OnChange(value); } );
-		  self.View.E_Btn_CostButton.GetComponent<EventTrigger>().RegisterEvent(EventTriggerType.PointerDown, (pdata) => { self.PointerDown_Btn_CostNum(pdata as PointerEventData).Coroutine(); });
-		  self.View.E_Btn_CostButton.GetComponent<EventTrigger>().RegisterEvent(EventTriggerType.PointerUp, (pdata) => { self.PointerUp_Btn_CostNum(pdata as PointerEventData); });
+		  self.View.E_Btn_CostNumButton.GetComponent<EventTrigger>().RegisterEvent(EventTriggerType.PointerDown, (pdata) => { self.PointerDown_Btn_CostNum(pdata as PointerEventData).Coroutine(); });
+		  self.View.E_Btn_CostNumButton.GetComponent<EventTrigger>().RegisterEvent(EventTriggerType.PointerUp, (pdata) => { self.PointerUp_Btn_CostNum(pdata as PointerEventData); });
             
 		  self.View.E_Btn_AddNumButton.GetComponent<EventTrigger>().RegisterEvent(EventTriggerType.PointerDown, (pdata) => { self.PointerDown_Btn_AddNum(pdata as PointerEventData).Coroutine(); });
 		   self.View.E_Btn_AddNumButton.GetComponent<EventTrigger>().RegisterEvent(EventTriggerType.PointerUp, (pdata) => { self.PointerUp_Btn_AddNum(pdata as PointerEventData); });
@@ -86,7 +86,8 @@ namespace ET.Client
 		
 		public static void OnImageButton(this DlgStallSellPrice self)
 		{
-			self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_PaiMaiSellPrice);
+			Log.Debug($"OnImageButtonOnImageButton");
+			self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_StallSellPrice);
 		}
 
 		public static async ETTask OnBtn_ChuShou(this DlgStallSellPrice self)
@@ -136,11 +137,9 @@ namespace ET.Client
 				dlgPaiMai.View.ES_StallSell?.OnPaiBuyShangJia(m2CStallSellResponse.PaiMaiItemInfo);
 			}
 
-			self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_PaiMaiSellPrice);
+			self.OnImageButton();
 		}
 		
-		
-
 		public static void InitPriceUI(this DlgStallSellPrice self, ItemInfo bagInfo)
 		 {
 		     self.BagInfo = bagInfo;

@@ -24,7 +24,6 @@ namespace ET.Client
             PetTuJianConfig jingLingConfig = PetTuJianConfigCategory.Instance.Get(jid);
             self.JingLingId = jid;
             self.E_NameText.text = jingLingConfig.Name;
-            
             self.ES_ModelShow.ShowOtherModel($"Pet/{jingLingConfig.Assets}").Coroutine();
             self.ES_ModelShow.SetCameraPosition(new Vector3(0f, 40f, 200f));
             // self.ES_ModelShow.SetRootPosition(new Vector2(jingLingConfig.Id % 10 * 1000, 0));
