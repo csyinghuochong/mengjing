@@ -1,6 +1,6 @@
 namespace ET.Server
 {
-    [MessageHandler(SceneType.Map)]
+    [MessageLocationHandler(SceneType.Map)]
     [FriendOf(typeof(TaskComponentS))]
     public class C2M_TaskGetRequestHandler : MessageLocationHandler<Unit, C2M_TaskGetRequest, M2C_TaskGetResponse>
     {

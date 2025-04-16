@@ -4,7 +4,7 @@ using Unity.Mathematics;
 
 namespace ET.Server
 {
-    [MessageHandler(SceneType.Map)]
+    [MessageLocationHandler(SceneType.Map)]
     public class C2M_PaiMaiBuyHandler : MessageLocationHandler<Unit, C2M_PaiMaiBuyRequest, M2C_PaiMaiBuyResponse>
     {
         //拍卖行购买道具
@@ -17,32 +17,7 @@ namespace ET.Server
                 response.Error = ErrorCode.ERR_BagIsFull;
                 return;
             }
-
-            if (unit.Id == 2268423382062137344 && unit.Zone() == 32)
-            {
-                List<long> removeIds = new List<long>();    
-                MapComponent mapComponent = unit.Scene().GetComponent<MapComponent>();
-
-                if (mapComponent.MapType == MapTypeEnum.BaoZang)
-                {
-                    List<Unit> monsterid = UnitHelper.GetUnitList(unit.Scene(), UnitType.Monster);
-                    for (int i = 0; i < monsterid.Count; i++)
-                    {
-                        NumericComponentS numericComponent = monsterid[i].GetComponent<NumericComponentS>();
-
-                        if (numericComponent.GetAsInt(NumericType.Now_Dead) == 1
-                            && (monsterid[i].ConfigId == 70005012 || monsterid[i].ConfigId == 70005013))
-                        {
-                            removeIds.Add(monsterid[i].Id);
-                        }
-                    }
-                }
-                for (int i = 0; i < removeIds.Count; i++)
-                {
-                    unit.GetParent<UnitComponent>().Remove(removeIds[i]);
-                }
-            }
-
+            
             PaiMaiItemInfo paiMaiItemInfo = request.PaiMaiItemInfo;
             if (request.PaiMaiItemInfo == null || request.PaiMaiItemInfo.BagInfo == null)
             {

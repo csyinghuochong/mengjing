@@ -3,7 +3,7 @@ using System.Collections.Generic;
 namespace ET.Server
 {
 
-    [MessageHandler(SceneType.Map)]
+    [MessageLocationHandler(SceneType.Map)]
     [FriendOf(typeof(TaskComponentS))]
     public class C2M_SkillCmdHandler : MessageLocationHandler<Unit, C2M_SkillCmd, M2C_SkillCmd>
     {

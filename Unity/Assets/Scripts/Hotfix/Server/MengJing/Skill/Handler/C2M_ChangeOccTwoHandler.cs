@@ -1,7 +1,7 @@
 namespace ET.Server
 {
 
-    [MessageHandler(SceneType.Map)]
+    [MessageLocationHandler(SceneType.Map)]
     [FriendOf(typeof(SkillSetComponentS))]
     public class C2M_ChangeOccTwoHandler : MessageLocationHandler<Unit, C2M_ChangeOccTwoRequest, M2C_ChangeOccTwoResponse>
     {

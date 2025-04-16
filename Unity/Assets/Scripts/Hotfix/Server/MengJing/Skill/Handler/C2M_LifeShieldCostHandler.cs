@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace ET.Server
 {
-    [MessageHandler(SceneType.Map)]
+    [MessageLocationHandler(SceneType.Map)]
     [FriendOf(typeof(TaskComponentS))]
     public class C2M_LifeShieldCostHandler : MessageLocationHandler<Unit, C2M_LifeShieldCostRequest, M2C_LifeShieldCostResponse>
     {

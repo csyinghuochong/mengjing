@@ -1,6 +1,6 @@
 namespace ET.Server
 {
-    [MessageHandler(SceneType.Map)]
+    [MessageLocationHandler(SceneType.Map)]
     [FriendOf(typeof(TaskComponentS))]
     public class C2M_TaskGiveUpHandler : MessageLocationHandler<Unit, C2M_TaskGiveUpRequest, M2C_TaskGiveUpResponse>
     {
