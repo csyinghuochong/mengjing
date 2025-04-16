@@ -319,10 +319,7 @@ namespace ET.Client
             self.ShowAssistPets.Clear();
             foreach (int id in self.Root().GetComponent<ChengJiuComponentC>().PetTuJianActives)
             {
-                if (JingLingConfigCategory.Instance.Contain(id))
-                {
-                    self.ShowAssistPets.Add(id);
-                }
+                self.ShowAssistPets.Add(id);
             }
 
             self.SelectAssistPets.Clear();
