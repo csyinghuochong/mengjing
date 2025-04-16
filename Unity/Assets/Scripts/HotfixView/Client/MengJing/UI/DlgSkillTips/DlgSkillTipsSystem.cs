@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace ET.Client
 {
@@ -62,6 +63,13 @@ namespace ET.Client
                 self.View.E_Lab_SkillTypeText.text = LanguageComponent.Instance.LoadLocalization("类型：主动技能");
             }
 
+            LayoutRebuilder.ForceRebuildLayoutImmediate(self.View.E_Lab_SkillDesText.GetComponent<RectTransform>());
+            float textHeight = self.View.E_Lab_SkillDesText.GetComponent<RectTransform>().rect.height;
+            
+            // 调整面板的高度
+            self.View.E_BGImage.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, 250f + textHeight);
+            
+            // 调整面板的位置
             if (vector3.x > Screen.width * -0.5 + 500)
             {
                 self.View.EG_PositionNodeRectTransform.transform.localPosition = vector3 + new Vector3(-50f, 50f, 0f);
