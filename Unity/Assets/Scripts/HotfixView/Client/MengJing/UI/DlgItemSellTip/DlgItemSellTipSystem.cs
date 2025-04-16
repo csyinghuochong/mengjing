@@ -26,9 +26,14 @@ namespace ET.Client
             self.View.E_NumInputField.text = self.Num.ToString();
 
             ItemConfig itemConfig = ItemConfigCategory.Instance.Get(self.BagInfo.ItemID);
+
+            // self.View.ES_CommonItem.UseTextColor = true;
+            self.View.ES_CommonItem.UpdateItem(bagInfo, ItemOperateEnum.None);
+            self.View.ES_CommonItem.E_ItemNumText.gameObject.SetActive(false);
+            self.View.ES_CommonItem.E_ItemNameText.gameObject.SetActive(true);
+            
             ItemConfig sellTypeItemConfig = ItemConfigCategory.Instance.Get(itemConfig.SellMoneyType);
-            self.View.E_MoneyImage.sprite = self.Root().GetComponent<ResourcesLoaderComponent>()
-                    .LoadAssetSync<Sprite>(ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemIcon, sellTypeItemConfig.Icon));
+            self.View.E_MoneyImage.sprite = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemIcon, sellTypeItemConfig.Icon));
             self.ChangeTotalPrices();
         }
 
