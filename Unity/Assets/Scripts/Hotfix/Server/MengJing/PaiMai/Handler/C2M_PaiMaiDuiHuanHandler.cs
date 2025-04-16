@@ -32,7 +32,7 @@
             {
                 unit.GetComponent<UserInfoComponentS>().UpdateRoleMoneySub(UserDataType.Diamond, (diamond * -1).ToString(), true, ItemGetWay.DuiHuan);
                 unit.GetComponent<UserInfoComponentS>().UpdateRoleMoneyAdd(UserDataType.Gold, (diamond * d2GGetUnit.ServerInfo.ExChangeGold).ToString(), true, ItemGetWay.DuiHuan);
-                unit.GetComponent<UserInfoComponentS>().UpdateRoleMoneyAdd(UserDataType.WeiJingGold,( (int)(diamond / 100) ).ToString(), true, ItemGetWay.DuiHuan);
+                //unit.GetComponent<UserInfoComponentS>().UpdateRoleMoneyAdd(UserDataType.WeiJingGold,( (int)(diamond / 100) ).ToString(), true, ItemGetWay.DuiHuan);
                 unit.GetComponent<TaskComponentS>().TriggerTaskEvent(TaskTargetType.DuiHuanGold_15, 0, (int)(diamond / 100));
             }
             else 
