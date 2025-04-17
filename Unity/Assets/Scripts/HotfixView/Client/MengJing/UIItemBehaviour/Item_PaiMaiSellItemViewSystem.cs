@@ -30,7 +30,7 @@ namespace ET.Client
             self.PaiMaiItemInfo = paiMaiItemInfo;
 
             ItemInfo bagInfo = new ItemInfo();
-            bagInfo.ItemID = paiMaiItemInfo.BagInfo.ItemID;
+            bagInfo.FromMessage(paiMaiItemInfo.BagInfo);
             self.ES_CommonItem.UpdateItem(bagInfo, ItemOperateEnum.None);
             self.ES_CommonItem.E_ItemNumText.text = paiMaiItemInfo.BagInfo.ItemNum.ToString();
             self.E_TextPriceText.text = (self.PaiMaiItemInfo.Price * paiMaiItemInfo.BagInfo.ItemNum).ToString();

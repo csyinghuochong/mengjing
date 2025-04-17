@@ -61,7 +61,7 @@ namespace ET.Client
 
 		public static async ETTask RequestSelfPaiMaiList(this ES_StallSell self)
 		{
-			P2C_StallListResponse p2CStallListResponse =  await PaiMaiNetHelper.RequestStallList(self.Root());
+			P2C_StallListResponse p2CStallListResponse =  await PaiMaiNetHelper.RequestStallList(self.Root(), UnitHelper.GetMyUnitId(self.Root()));
 			if (p2CStallListResponse == null || self.IsDisposed)
 			{
 				return;

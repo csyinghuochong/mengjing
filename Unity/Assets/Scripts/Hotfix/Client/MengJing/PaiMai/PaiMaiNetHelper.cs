@@ -27,10 +27,10 @@ namespace ET.Client
         /// </summary>
         /// <param name="root"></param>
         /// <returns></returns>
-        public static async ETTask<P2C_StallListResponse> RequestStallList(Scene root)
+        public static async ETTask<P2C_StallListResponse> RequestStallList(Scene root, long unitid)
         {
             C2P_StallListRequest request = C2P_StallListRequest.Create();
-            request.UserId = UnitHelper.GetMyUnitId(root);
+            request.UserId = unitid;
             P2C_StallListResponse response = (P2C_StallListResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
 
             return response;
