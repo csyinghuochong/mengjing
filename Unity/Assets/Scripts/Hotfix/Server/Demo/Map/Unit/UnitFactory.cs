@@ -112,8 +112,8 @@ namespace ET.Server
            
             MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(monsterID);
             
-             
-            if (monsterConfig.MonsterSonType == MonsterSonTypeEnum.Type_58 && createMonsterInfo.SkillId == 0) //奇遇宠物
+            int SkinId = createMonsterInfo.SkinId;
+            if (monsterConfig.MonsterSonType == MonsterSonTypeEnum.Type_58 && SkinId ==0) //奇遇宠物
             {
                 int itemid = monsterConfig.Parameter[1];
 
@@ -133,7 +133,7 @@ namespace ET.Server
 
                 List<int> weight = new List<int>(petConfig.SkinPro);
                 int index = RandomHelper.RandomByWeight(weight);
-                createMonsterInfo.SkillId = petConfig.Skin[index];
+                SkinId = petConfig.Skin[index];
             }
 
             
@@ -155,7 +155,7 @@ namespace ET.Server
             numericComponent.ApplyValue(NumericType.TeamId, master != null ? master.GetTeamId() : 0, false);
             numericComponent.ApplyValue(NumericType.AttackMode, master != null ? master.GetAttackMode() : 0, false);
             numericComponent.ApplyValue(NumericType.UnionId_0, master != null ? master.GetUnionId() : 0, false);
-            numericComponent.ApplyValue(NumericType.PetSkin, createMonsterInfo.SkinId, false);
+            numericComponent.ApplyValue(NumericType.PetSkin, SkinId, false);
             numericComponent.ApplyValue(NumericType.EnergySkillId, createMonsterInfo.SkillId, false);
             numericComponent.ApplyValue(NumericType.BaByType, createMonsterInfo.BaByType, false);
             unit.SetBornPosition(unit.Position, false);
