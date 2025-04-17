@@ -94,7 +94,7 @@ namespace ET.Client
         public static void UpdateAnimator(this AnimatorComponent self, GameObject gameObject)
         {
             Animator[] animator = gameObject.GetComponentsInChildren<Animator>();
-            if (animator == null)
+            if (animator == null || animator.Length == 0)
             {
                 return;
             }
