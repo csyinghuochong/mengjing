@@ -63,6 +63,10 @@ namespace ET
             for (int i = 0; i < dayrefresh.Length; i++)
             {
                 string[] itemInfo = dayrefresh[i].Split(';');
+                if (itemInfo.Length < 2)
+                {
+                    continue;
+                }
                 int monsterId = int.Parse(itemInfo[0]);
                 float gaiLv = float.Parse(itemInfo[1]);
                 int total = int.Parse(itemInfo[2]);
