@@ -409,11 +409,16 @@ namespace ET.Client
             }
 
             Unit unit = self.Root().CurrentScene().GetComponent<UnitComponent>().Get(unitid);
-            // if (unit.Type == UnitType.Stall)
-            // {
-            //     UI uI = await UIHelper.Create(self.ZoneScene(), UIType.UIPaiMaiStall);
-            //     uI.GetComponent<UIPaiMaiStallComponent>().OnUpdateUI(unit);
-            // }
+            if (unit == null)
+            {
+                return;
+            }
+
+            if (unit.Type == UnitType.Stall)
+            {
+                UI uI = await UIHelper.Create(self.ZoneScene(), UIType.UIPaiMaiStall);
+                uI.GetComponent<UIPaiMaiStallComponent>().OnUpdateUI(unit);
+            }
 
             if (unit.Type == UnitType.Player)
             {
