@@ -474,34 +474,10 @@ namespace ET.Server
 					{
 						int tempmonsterid = (int) randomMonsterList[kk].Value;
 						MonsterConfig tempmonsterConfig = MonsterConfigCategory.Instance.Get(tempmonsterid);
-
-						int skinId = 0;
-						if (tempmonsterConfig.MonsterSonType == MonsterSonTypeEnum.Type_58) //奇遇宠物
-						{
-							int itemid = tempmonsterConfig.Parameter[1];
-
-							if (!ItemConfigCategory.Instance.Contain(itemid))
-							{
-								Console.WriteLine($" itemid==null {itemid}");
-							}
-
-							ItemConfig itemConfig = ItemConfigCategory.Instance.Get(itemid);
-							int petId = int.Parse(itemConfig.ItemUsePar);
-
-							if (!PetConfigCategory.Instance.Contain(petId))
-							{
-								Console.WriteLine($" petId==null {petId}");
-							}
-							PetConfig petConfig = PetConfigCategory.Instance.Get(petId);
-
-							List<int> weight = new List<int>(petConfig.SkinPro);
-							int index = RandomHelper.RandomByWeight(weight);
-							skinId = petConfig.Skin[index];
-						}
-
+						
 						float3 vector3 = new float3(float.Parse(position[0]), float.Parse(position[1]), float.Parse(position[2]));
 						Unit unitmonster = UnitFactory.CreateMonster(scene, tempmonsterid, vector3,
-							new CreateMonsterInfo() { Camp = tempmonsterConfig.MonsterCamp, SkinId = skinId });
+							new CreateMonsterInfo() { Camp = tempmonsterConfig.MonsterCamp, SkinId = 0 });
 
 						haveotherMonster = true;
 					}
