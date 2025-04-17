@@ -149,7 +149,7 @@ namespace ET.Client
 			PopupTipHelp.OpenPopupTip(self.Root(), "摊位提示", "是否收起自己的摊位?\n 支持下线,摊位可以离线显示6小时!",
 				() =>
 				{
-					PaiMaiNetHelper.RequestStallOperation(self.Root(), 1, string.Empty).Coroutine();
+					PaiMaiNetHelper.RequestStallOperation(self.Root(), 0, string.Empty).Coroutine();
 					//界面存在就销毁界面
 					//UIHelper.Remove(self.DomainScene(), UIType.UIPaiMaiStall);
 					//弹出提示

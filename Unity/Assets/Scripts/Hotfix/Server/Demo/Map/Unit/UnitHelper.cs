@@ -245,7 +245,8 @@ namespace ET.Server
             }
 
             if (self.Type == UnitType.Pet || self.Type == UnitType.Monster
-                || self.Type == UnitType.JingLing || self.Type == UnitType.Pasture)
+                || self.Type == UnitType.JingLing || self.Type == UnitType.Pasture
+                || self.Type == UnitType.Stall)
             {
                 return self.GetComponent<NumericComponentS>().GetAsLong(NumericType.MasterId);
             }

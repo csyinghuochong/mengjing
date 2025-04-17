@@ -416,9 +416,8 @@ namespace ET.Client
 
             if (unit.Type == UnitType.Stall)
             {
-                //UI uI = await UIHelper.Create(self.ZoneScene(), UIType.UIPaiMaiStall);
-                //uI.GetComponent<UIPaiMaiStallComponent>().OnUpdateUI(unit);
-                
+                self.Root().GetComponent<UIComponent>().ShowWindow(WindowID.WindowID_PaiMaiStall);
+                self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgPaiMaiStall>().OnUpdateUI(unit);
             }
 
             if (unit.Type == UnitType.Player)
