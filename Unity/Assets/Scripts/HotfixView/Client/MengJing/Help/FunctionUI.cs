@@ -115,6 +115,7 @@ namespace ET.Client
                 "UIJueXing" => WindowID.WindowID_JueXing,
                 "UIBattleRecruit" => WindowID.WindowID_BattleRecruit,
                 "UIUnion" => WindowID.WindowID_Union,
+                "DlgPetEquipMake" => WindowID.WindowID_PetEquipMake,
                 _ => WindowID.WindowID_Invaild
             };
         }
