@@ -32,7 +32,6 @@ namespace ET.Client
         [EntitySystem]
         private static void Destroy(this ES_ModelShow self)
         {
-            self.RemoveModel();
             self.DestroyWidget();
         }
 
@@ -96,6 +95,8 @@ namespace ET.Client
             }
 
             self.Model.Clear();
+            
+            CommonViewHelper.DestoryChild(self.ModelParent.gameObject);
         }
 
         public static void ChangeWeapon(this ES_ModelShow self, ItemInfo bagInfo, int occ)

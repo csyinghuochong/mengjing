@@ -74,7 +74,10 @@ namespace ET.Client
             self.AddUIScrollItems(ref self.ScrollItemChengJiuJinglingItems, self.ShowJingLing.Count);
             self.E_ChengJiuJinglingItemsLoopVerticalScrollRect.SetVisible(true, self.ShowJingLing.Count);
 
-            self.OnUpdateUI(self.ShowJingLing[0].Id);
+            if (self.ShowJingLing.Count > 0)
+            {
+                self.OnUpdateUI(self.ShowJingLing[0].Id);
+            }
         }
 
         private static async ETTask OnButtonActivate(this ES_ChengJiuJingling self)
