@@ -505,6 +505,9 @@ namespace ET.Client
             self.View.E_RoseTaskButton.AddListener(self.OnRoseTaskButton);
             self.View.E_MainTeamItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnMainTeamItemsRefresh);
             self.View.E_RoseTeamButton.AddListener(self.OnRoseTeamButton);
+            
+            self.View.E_ButtonStallCancel.AddListener(self.OnButtonStallCancel);
+            self.View.E_ButtonStallOpen.AddListenerAsync(self.OnButtonStallOpen);
 
             self.View.E_MainChatItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnMainChatItemsRefresh);
 
@@ -1017,6 +1020,29 @@ namespace ET.Client
             self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_Team).Coroutine();
         }
 
+        public static async ETTask OnButtonStallOpen(this DlgMain self)
+        {
+            //UI uI = await UIHelper.Create(self.DomainScene(), UIType.UIPaiMaiStall);
+
+            //Unit unit = UnitHelper.GetMyUnitFromZoneScene(self.ZoneScene());
+            //Unit stall = unit.GetParent<UnitComponent>().Get(unit.GetComponent<NumericComponent>().GetAsLong(NumericType.Now_Stall));
+            //uI.GetComponent<UIPaiMaiStallComponent>().OnUpdateUI(stall);
+            await ETTask.CompletedTask;
+        }
+
+        public static void OnButtonStallCancel(this DlgMain self)
+        {
+            PopupTipHelp.OpenPopupTip(self.Root(), "摊位提示", "是否收起自己的摊位?\n 支持下线,摊位可以离线显示6小时!",
+                () =>
+                {
+                    PaiMaiNetHelper.RequestStallOperation(self.Root(), 1, string.Empty).Coroutine();
+                    //界面存在就销毁界面
+                    //UIHelper.Remove(self.DomainScene(), UIType.UIPaiMaiStall);
+                    //弹出提示
+                    FlyTipComponent.Instance.ShowFlyTip("摊位已收起!");
+                }).Coroutine();
+        }
+        
         public static void OnUpdateTeamDamage(this DlgMain self, M2C_SyncMiJingDamage message)
         {
             for (int i = 0; i < message.DamageList.Count; i++)
@@ -2463,7 +2489,7 @@ namespace ET.Client
 
         public static void ShowUIStall(this DlgMain self, long stallId)
         {
-            //self.View.EG_UIStall.SetActive(stallId > 0);
+            self.View.EG_UIStall.gameObject.SetActive(stallId > 0);
         }
 
         public static void OnZeroClockUpdate(this DlgMain self)

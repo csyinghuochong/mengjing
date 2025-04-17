@@ -352,6 +352,7 @@ namespace ET.Server
             }
           
             TransferHelper.AfterTransfer(unit, request.SceneType);
+            TransferHelper.RemoveStall(unit);
             
             if (request.SceneType != MapTypeEnum.RunRace)
             {

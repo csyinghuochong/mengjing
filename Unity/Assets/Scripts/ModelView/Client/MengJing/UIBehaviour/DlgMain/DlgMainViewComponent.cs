@@ -2649,7 +2649,57 @@ namespace ET.Client
      			return this.m_es_mainpetfight_2;
      		}
      	}
+		
+		public UnityEngine.Transform EG_UIStall
+		{
+			get
+			{
+				if (this.uiTransform == null)
+				{
+					Log.Error("uiTransform is null.");
+					return null;
+				}
+				if( this.m_EG_UIStall == null )
+				{
+					this.m_EG_UIStall = UIFindHelper.FindDeepChild<UnityEngine.Transform>(this.uiTransform.gameObject,"EG_UIStall");
+				}
+				return this.m_EG_UIStall;
+			}
+		}		
 
+		public UnityEngine.UI.Button E_ButtonStallCancel
+		{
+			get
+			{
+				if (this.uiTransform == null)
+				{
+					Log.Error("uiTransform is null.");
+					return null;
+				}
+				if( this.m_E_ButtonStallCancel == null )
+				{
+					this.m_E_ButtonStallCancel = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"EG_UIStall/E_ButtonStallCancel");
+				}
+				return this.m_E_ButtonStallCancel;
+			}
+		}		
+		
+		public UnityEngine.UI.Button E_ButtonStallOpen
+		{
+			get
+			{
+				if (this.uiTransform == null)
+				{
+					Log.Error("uiTransform is null.");
+					return null;
+				}
+				if( this.m_E_ButtonStallOpen == null )
+				{
+					this.m_E_ButtonStallOpen = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"EG_UIStall/E_ButtonStallOpen");
+				}
+				return this.m_E_ButtonStallOpen;
+			}
+		}		
 		public Text E_TextPetSwitch
 		{
 			get
@@ -2825,6 +2875,9 @@ namespace ET.Client
 			this.m_E_Btn_CellDungeonButton= null;
 			this.m_E_Btn_PetMelee = null;
 			this.m_E_TextPetSwitch = null;
+			this.m_EG_UIStall = null;
+			this.m_E_ButtonStallCancel = null;
+			this.m_E_ButtonStallOpen = null;
 			this.uiTransform = null;
 		}
 
@@ -2982,6 +3035,9 @@ namespace ET.Client
 		private EntityRef<ES_MainPetFight> m_es_mainpetfight_1 = null;
 		private EntityRef<ES_MainPetFight> m_es_mainpetfight_2 = null;
 		private UnityEngine.UI.Text m_E_TextPetSwitch = null;
+		private UnityEngine.Transform m_EG_UIStall = null;
+		private UnityEngine.UI.Button m_E_ButtonStallCancel = null;
+		private UnityEngine.UI.Button m_E_ButtonStallOpen = null;
 		public Transform uiTransform = null;
 	}
 }
