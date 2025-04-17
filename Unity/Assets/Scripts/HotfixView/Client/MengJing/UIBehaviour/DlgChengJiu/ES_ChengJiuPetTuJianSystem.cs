@@ -17,8 +17,8 @@ namespace ET.Client
             self.E_ItemTypeSetToggleGroup.AddListener(self.OnItemTypeSet);
             self.E_ChengJiuJinglingItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnChengJiuJinglingItemsRefresh);
             self.E_ActivateButton.AddListener(self.OnButtonActivate);
-            self.E_UseButton.AddListener(self.OnButtonUse);
-            self.E_ShouHuiButton.AddListener(self.OnButtonUse);
+            self.E_UseButton.AddListenerAsync(self.OnButtonUse);
+            self.E_ShouHuiButton.AddListenerAsync(self.OnButtonUse);
 
             self.E_ItemTypeSetToggleGroup.OnSelectIndex(0);
         }
@@ -82,7 +82,7 @@ namespace ET.Client
             Log.Debug($"OnButtonActivate");
         }
 
-        private static  void  OnButtonUse(this ES_ChengJiuPetTuJian self)
+        private static async ETTask OnButtonUse(this ES_ChengJiuPetTuJian self)
         {
             ChengJiuComponentC chengJiuComponent = self.Root().GetComponent<ChengJiuComponentC>();
             JingLingInfo jingLingInfo = chengJiuComponent.JingLingList[self.JingLingId];
@@ -91,7 +91,16 @@ namespace ET.Client
                 FlyTipComponent.Instance.ShowFlyTip("未激活此精灵！");
                 return;
             }
+            
+            int error = await JingLingNetHelper.RequestJingLingUse(self.Root(), self.JingLingId, 1);
+            if (error != 0)
+            {
+                return;
+            }
+            
             self.OnUpdateUI(self.JingLingId);
+            
+            EventSystem.Instance.Publish(self.Root(), new JingLingButton());
         }
 
         public static void OnUpdateUI(this ES_ChengJiuPetTuJian self, int jingLingId)
@@ -139,18 +148,22 @@ namespace ET.Client
             int progress = chengJiuComponent.PetTuJianActives.Contains(jingLingId) ? 1 : 0;
             using (zstring.Block())
             {
-                self.E_ProgressTxtText.text = zstring.Format("{0}/{1}", progress, jingLingConfig.NeedPoint);
+                // self.E_ProgressTxtText.text = zstring.Format("{0}/{1}", progress, jingLingConfig.NeedPoint);
+                self.E_ProgressTxtText.text = zstring.Format("{0}/{1}", progress, 1);
             }
 
-            self.E_ProgressImgImage.fillAmount =progress * 1f / jingLingConfig.NeedPoint;
+            // self.E_ProgressImgImage.fillAmount =progress * 1f / jingLingConfig.NeedPoint;
+            self.E_ProgressImgImage.fillAmount = progress * 1f / 1;
             self.E_UnactivateText.gameObject.SetActive(true);
             if (progress == 1)
             {
                 self.E_UnactivateText.text = "已激活";
                 
+                bool current = chengJiuComponent.GetFightJingLing() == self.JingLingId;
+                self.E_UnactivateText.gameObject.SetActive(false);
                 self.E_ActivateButton.gameObject.SetActive(false);
-                self.E_UseButton.gameObject.SetActive(false);
-                self.E_ShouHuiButton.gameObject.SetActive(false);
+                self.E_UseButton.gameObject.SetActive(!current);
+                self.E_ShouHuiButton.gameObject.SetActive(current);
             }
             else
             {
