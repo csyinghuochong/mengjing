@@ -226,5 +226,6 @@ namespace ET.Client
 		WindowID_PetMatchRankShow,
 		WindowID_StallSellPrice,
 		WindowID_PaiMaiStall,
+		WindowID_PetEquipMake,
 	}
 }
