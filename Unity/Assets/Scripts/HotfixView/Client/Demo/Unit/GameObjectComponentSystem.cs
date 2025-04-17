@@ -272,8 +272,7 @@ namespace ET.Client
                     break;
                 case UnitType.JingLing:
                     JingLingConfig jingLing = JingLingConfigCategory.Instance.Get(unit.ConfigId);
-                    // path = ABPathHelper.GetUnitPath("JingLing/" + jingLing.Assets);
-                    self.UnitAssetsPath = ABPathHelper.GetUnitPath("JingLing/" + 70001001);
+                    self.UnitAssetsPath = ABPathHelper.GetUnitPath("JingLing/" + jingLing.Assets);
                     break;
                 case UnitType.Plant:
                     self.OnUpdatePlan();
