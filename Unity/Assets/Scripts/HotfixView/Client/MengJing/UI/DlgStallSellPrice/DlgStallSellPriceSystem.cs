@@ -161,6 +161,10 @@ namespace ET.Client
 		     self.View.E_Lab_TuijianText.text = self.oldPrice.ToString();
 		     self.View.E_Text_PriceText.text = self.SellNum.ToString();
 		     
+		     self.View.ES_CommonItem.UpdateItem(bagInfo, ItemOperateEnum.None);
+		     self.View.ES_CommonItem.HideItemName();
+		     self.View.ES_CommonItem.HideItemNumber();
+		     
 		     //初始化显示
 		     self.priceProNum = 1;
 		     self.OnCostPrice();
