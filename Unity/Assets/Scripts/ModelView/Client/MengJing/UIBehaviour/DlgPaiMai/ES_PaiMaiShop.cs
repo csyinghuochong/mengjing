@@ -12,7 +12,7 @@ namespace ET.Client
 		public int PaiMaiSellId;
 		public int BuyNum;
 		public List<int> ShowPaiMaiIds = new();
-		public List<EntityRef<UIPaiMaiShopTypeComponent>> TypeItemUIList = new();
+		public UITypeViewComponent UITypeViewComponent { get; set; }
 		public Dictionary<int, EntityRef<Scroll_Item_PaiMaiShopItem>> ScrollItemPaiMaiShopItems;
 		public Dictionary<long, PaiMaiShopItemInfo> PaiMaiShopItemInfos { get; set; } = new();
 		public GameObject UIPaiMaiShopType;

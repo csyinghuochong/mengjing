@@ -20,10 +20,6 @@ namespace ET.Client
             self.E_Btn_BuyNum_jian10Button.AddListener(() => { self.OnClickChangeBuyNum(-10); });
             self.E_PaiMaiShopItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnPaiMaiShopItemsRefresh);
 
-            ReferenceCollector rc = self.uiTransform.GetComponent<ReferenceCollector>();
-            self.UIPaiMaiShopType = rc.Get<GameObject>("UIPaiMaiShopType");
-            self.UIPaiMaiShopType.SetActive(false);
-
             self.RequestPaiMaiShopData().Coroutine();
         }
 
@@ -33,7 +29,7 @@ namespace ET.Client
             self.DestroyWidget();
         }
 
-        public static async ETTask RequestPaiMaiShopData(this ES_PaiMaiShop self)
+        private static async ETTask RequestPaiMaiShopData(this ES_PaiMaiShop self)
         {
             long instanceId = self.InstanceId;
 
@@ -51,34 +47,48 @@ namespace ET.Client
 
             DlgPaiMai dlgPaiMai = self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgPaiMai>();
             dlgPaiMai.PaiMaiShopItemInfos = self.PaiMaiShopItemInfos;
+            
+            self.UITypeViewComponent = self.AddChild<UITypeViewComponent, GameObject>(self.EG_TypeListNodeRectTransform.gameObject);
+            self.UITypeViewComponent.TypeButtonItemAsset = ABPathHelper.GetUGUIPath("Common/UIPaiMaiShopTypeItem");
+            self.UITypeViewComponent.TypeButtonAsset = ABPathHelper.GetUGUIPath("Common/UIPaiMaiShopType");
+            self.UITypeViewComponent.ClickTypeItemHandler = (itemType, itemSubType) => { self.OnClickTypeItem(itemType, itemSubType); };
 
-            self.InitPaiMaiType();
+            self.UITypeViewComponent.TypeButtonInfos = self.InitTypeButtonInfos();
+            self.UITypeViewComponent.OnInitUI().Coroutine();
         }
 
-        public static void InitPaiMaiType(this ES_PaiMaiShop self)
+        public static List<TypeButtonInfo> InitTypeButtonInfos(this ES_PaiMaiShop self)
         {
-            long instanceid = self.InstanceId;
-            if (instanceid != self.InstanceId)
+            TypeButtonInfo typeButtonInfo = new();
+            List<TypeButtonInfo> typeButtonInfos = new List<TypeButtonInfo>();
+            typeButtonInfo = new TypeButtonInfo();
+            foreach (int key in PaiMaiHelper.GetChaptersByType(PaiMaiTypeEnum.CaiLiao))
             {
-                return;
+                typeButtonInfo.typeButtonItems.Add(new TypeButtonItem() { SubTypeId = key, ItemName = PaiMaiData.PaiMaiIndexText[key] });
             }
+            typeButtonInfo.TypeId = (int)PaiMaiTypeEnum.CaiLiao;
+            typeButtonInfo.TypeName = PaiMaiData.PaiMaiTypeText[(int)PaiMaiTypeEnum.CaiLiao];
+            typeButtonInfos.Add(typeButtonInfo);
 
-            for (int i = (int)PaiMaiTypeEnum.CaiLiao; i < (int)PaiMaiTypeEnum.Number; i++)
+            typeButtonInfo = new TypeButtonInfo();
+            foreach (int key in PaiMaiHelper.GetChaptersByType(PaiMaiTypeEnum.CostItem))
             {
-                GameObject go = UnityEngine.Object.Instantiate(self.UIPaiMaiShopType);
-                go.SetActive(true);
-                CommonViewHelper.SetParent(go, self.EG_TypeListNodeRectTransform.gameObject);
-
-                UIPaiMaiShopTypeComponent itemComponent = self.AddChild<UIPaiMaiShopTypeComponent, GameObject>(go);
-                itemComponent.OnUpdateData(i);
-                itemComponent.SetClickTypeHandler((int typeid) => { self.OnClickType(typeid); });
-                itemComponent.SetClickTypeItemHandler((int typeid, int chapterId) => { self.OnClickTypeItem(typeid, chapterId); });
-
-                self.TypeItemUIList.Add(itemComponent);
+                typeButtonInfo.typeButtonItems.Add(new TypeButtonItem() { SubTypeId = key, ItemName = PaiMaiData.PaiMaiIndexText[key] });
             }
+            typeButtonInfo.TypeId = (int)PaiMaiTypeEnum.CostItem;
+            typeButtonInfo.TypeName = PaiMaiData.PaiMaiTypeText[(int)PaiMaiTypeEnum.CostItem];
+            typeButtonInfos.Add(typeButtonInfo);
+            
+            typeButtonInfo = new TypeButtonInfo();
+            foreach (int key in PaiMaiHelper.GetChaptersByType(PaiMaiTypeEnum.PetItem))
+            {
+                typeButtonInfo.typeButtonItems.Add(new TypeButtonItem() { SubTypeId = key, ItemName = PaiMaiData.PaiMaiIndexText[key] });
+            }
+            typeButtonInfo.TypeId = (int)PaiMaiTypeEnum.PetItem;
+            typeButtonInfo.TypeName = PaiMaiData.PaiMaiTypeText[(int)PaiMaiTypeEnum.PetItem];
+            typeButtonInfos.Add(typeButtonInfo);
 
-            UIPaiMaiShopTypeComponent uiPaiMaiShopTypeComponent = self.TypeItemUIList[0];
-            uiPaiMaiShopTypeComponent.OnClickTypeButton();
+            return typeButtonInfos;
         }
 
         public static async ETTask OnBtn_BuyItemButton(this ES_PaiMaiShop self)
@@ -108,16 +118,6 @@ namespace ET.Client
             }
 
             await PaiMaiNetHelper.PaiMaiShop(self.Root(), self.PaiMaiSellId, self.BuyNum);
-        }
-
-        public static void OnClickType(this ES_PaiMaiShop self, int typeid)
-        {
-            self.PaiMaiTypeId = typeid;
-            for (int i = 0; i < self.TypeItemUIList.Count; i++)
-            {
-                UIPaiMaiShopTypeComponent uIChengJiuTypeComponent = self.TypeItemUIList[i];
-                uIChengJiuTypeComponent.SetSelected(typeid).Coroutine();
-            }
         }
 
         public static void OnClickTypeItem(this ES_PaiMaiShop self, int typeid, int chapterId)
