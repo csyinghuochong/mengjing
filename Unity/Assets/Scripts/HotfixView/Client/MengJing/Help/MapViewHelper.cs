@@ -50,6 +50,17 @@ namespace ET.Client
             }
         }
 
+        public static void OnUnitStallUpdate(this Unit self, long stallType)
+        {
+            if (stallType > 0)
+            {
+                self.EnterHide();
+            }
+            else
+            {
+                self.ExitHide();
+            }
+        }
         
         public static void EnterHide(this Unit self)
         {

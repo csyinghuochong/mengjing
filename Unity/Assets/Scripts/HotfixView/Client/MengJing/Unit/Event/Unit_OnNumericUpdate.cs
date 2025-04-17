@@ -37,7 +37,7 @@
                     break;
                 case NumericType.Now_Stall:
                     int stallType = args.Defend.GetComponent<NumericComponentC>().GetAsInt(NumericType.Now_Stall);
-                    args.Defend.GetComponent<GameObjectComponent>().OnUnitStallUpdate(stallType);
+                    args.Defend.OnUnitStallUpdate(stallType);
                     if (args.Defend.MainHero)
                     {
                         root.GetComponent<UIComponent>().GetDlgLogic<DlgMain>().ShowUIStall(stallType);

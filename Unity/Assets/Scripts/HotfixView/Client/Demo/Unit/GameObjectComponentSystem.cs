@@ -589,7 +589,7 @@ namespace ET.Client
                     if (cardtransform == 0 && runmonsterId == 0)
                     {
                         unit.AddComponent<ChangeEquipComponent>().InitWeapon(fashionids, unit.ConfigId, weaponid);
-                        self.OnUnitStallUpdate(numericComponent.GetAsLong(NumericType.Now_Stall));
+                        unit.OnUnitStallUpdate(numericComponent.GetAsLong(NumericType.Now_Stall));
                     }
                     if (unit.MainHero && cardtransform > 0)
                     {
@@ -1213,17 +1213,6 @@ namespace ET.Client
                 unit.RemoveComponent<MonsterActRangeComponent>();   
             }
         }
-
-        public static void OnUnitStallUpdate(this GameObjectComponent self, long stallType)
-        {
-            if (stallType > 0)
-            {
-                self.GetParent<Unit>().EnterHide();
-            }
-            else
-            {
-                self.GetParent<Unit>().ExitHide();
-            }
-        }
+        
     }
 }
