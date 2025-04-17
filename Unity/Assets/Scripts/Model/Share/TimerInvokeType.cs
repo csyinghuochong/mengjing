@@ -117,5 +117,6 @@
         public const int PetMeleeCardTimer = 375;
         public const int UIUnionOrderTimer = 376;
         public const int PickItemTimer = 377;
+        public const int PetEquipMakeCDTimer = 378;
     }
 }

@@ -31,6 +31,7 @@
 
 		public void BeforeUnload(UIBaseWindow uiBaseWindow)
 		{
+			uiBaseWindow.GetComponent<DlgPetEquipMake>().BeforeUnload(); 
 		}
 
 	}

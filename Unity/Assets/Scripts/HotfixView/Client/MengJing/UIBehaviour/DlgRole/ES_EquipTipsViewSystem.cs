@@ -110,8 +110,8 @@ namespace ET.Client
                     textEquipTypeSon = LanguageComponent.Instance.LoadLocalization("生肖");
                 }
 
-                self.E_EquipTypeText.text = zstring.Format("{0}:{1}", LanguageComponent.Instance.LoadLocalization("部位"), textEquipType);
-                self.E_EquipTypeSonText.text = zstring.Format("{0}:{1}", LanguageComponent.Instance.LoadLocalization("类型"), textEquipTypeSon);
+                self.E_EquipTypeText.text = zstring.Format("{0}:{1}", LanguageComponent.Instance.LoadLocalization("部位"), string.IsNullOrEmpty(textEquipType) ? "-" : textEquipType);
+                self.E_EquipTypeSonText.text = zstring.Format("{0}:{1}", LanguageComponent.Instance.LoadLocalization("类型"), string.IsNullOrEmpty(textEquipType) ? "-" : textEquipType);
 
                 int occTwo = self.Root().GetComponent<UserInfoComponentC>().UserInfo.OccTwo;
                 if (occTwo != 0)
