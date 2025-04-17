@@ -109,8 +109,35 @@ namespace ET.Server
             {
                 createMonsterInfo.MasterID = master.GetMasterId();
             }
-
+           
             MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(monsterID);
+            
+             
+            if (monsterConfig.MonsterSonType == MonsterSonTypeEnum.Type_58 && createMonsterInfo.SkillId == 0) //奇遇宠物
+            {
+                int itemid = monsterConfig.Parameter[1];
+
+                if (!ItemConfigCategory.Instance.Contain(itemid))
+                {
+                    Console.WriteLine($" itemid==null {itemid}");
+                }
+
+                ItemConfig itemConfig = ItemConfigCategory.Instance.Get(itemid);
+                int petId = int.Parse(itemConfig.ItemUsePar);
+
+                if (!PetConfigCategory.Instance.Contain(petId))
+                {
+                    Console.WriteLine($" petId==null {petId}");
+                }
+                PetConfig petConfig = PetConfigCategory.Instance.Get(petId);
+
+                List<int> weight = new List<int>(petConfig.SkinPro);
+                int index = RandomHelper.RandomByWeight(weight);
+                createMonsterInfo.SkillId = petConfig.Skin[index];
+            }
+
+            
+            
             MapComponent mapComponent = scene.GetComponent<MapComponent>();
 
             long unitid = createMonsterInfo.UnitId > 0 ? createMonsterInfo.UnitId : IdGenerater.Instance.GenerateId();
