@@ -36,7 +36,8 @@
                     root.GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_WearWeapon).Coroutine();
                     break;
                 case NumericType.Now_Stall:
-                    int stallType = args.Defend.GetComponent<NumericComponentC>().GetAsInt(NumericType.Now_Stall);
+                    long stallType = args.Defend.GetComponent<NumericComponentC>().GetAsLong(NumericType.Now_Stall);
+                    Log.Debug($"NumericType.Now_Stall: {args.Defend.Id}  {stallType}");
                     args.Defend.OnUnitStallUpdate(stallType);
                     if (args.Defend.MainHero)
                     {

@@ -243,15 +243,17 @@ namespace ET.Server
             {
                 return self.Id;
             }
+            
+            return self.GetComponent<NumericComponentS>().GetAsLong(NumericType.MasterId);
 
-            if (self.Type == UnitType.Pet || self.Type == UnitType.Monster
-                || self.Type == UnitType.JingLing || self.Type == UnitType.Pasture
-                || self.Type == UnitType.Stall)
-            {
-                return self.GetComponent<NumericComponentS>().GetAsLong(NumericType.MasterId);
-            }
-
-            return 0;
+            // if (self.Type == UnitType.Pet || self.Type == UnitType.Monster
+            //     || self.Type == UnitType.JingLing || self.Type == UnitType.Pasture
+            //     || self.Type == UnitType.Stall)
+            // {
+            //     return self.GetComponent<NumericComponentS>().GetAsLong(NumericType.MasterId);
+            // }
+            //
+            // return 0;
         }
 
         public static bool IsMasterOrPet(this Unit self, Unit defend, PetComponentS petComponent)

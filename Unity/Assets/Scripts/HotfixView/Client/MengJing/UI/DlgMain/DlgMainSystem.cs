@@ -1027,7 +1027,9 @@ namespace ET.Client
             //Unit stall = unit.GetParent<UnitComponent>().Get(unit.GetComponent<NumericComponent>().GetAsLong(NumericType.Now_Stall));
             //uI.GetComponent<UIPaiMaiStallComponent>().OnUpdateUI(stall);
             self.Root().GetComponent<UIComponent>().ShowWindow(WindowID.WindowID_PaiMaiStall);
-            self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgPaiMaiStall>().OnUpdateUI(UnitHelper.GetMyUnitFromClientScene(self.Root()));
+            Unit main = UnitHelper.GetMyUnitFromClientScene(self.Root());
+            Unit stall = main.GetParent<UnitComponent>().Get(main.GetComponent<NumericComponentC>().GetAsLong(NumericType.Now_Stall));
+            self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgPaiMaiStall>().OnUpdateUI(stall);
             await ETTask.CompletedTask;
         }
 
