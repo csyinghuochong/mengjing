@@ -79,7 +79,7 @@ namespace ET.Client
 
             loopScrollRect.gameObject.SetActive(isVisible);
             loopScrollRect.totalCount = count;
-            loopScrollRect.RefillCells(startItem);
+            loopScrollRect.RefillCells(startItem > count ? count : startItem);
 
             if (!reStart)
             {
