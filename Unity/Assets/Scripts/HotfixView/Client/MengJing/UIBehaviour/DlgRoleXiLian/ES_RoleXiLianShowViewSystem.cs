@@ -919,14 +919,14 @@ namespace ET.Client
 
         public static void ShowProgressBar(this ES_RoleXiLianShow self, float now, float max, GameObject proItem)
         {
-            float ziZhi_HpProp = Mathf.Clamp(now / max, 0f, 1f);
-            proItem.transform.Find("E_ImageExpValue").GetComponent<Image>().fillAmount = ziZhi_HpProp;
+            float fillAmount = Mathf.Clamp(now / max, 0f, 1f);
+            proItem.transform.Find("E_ImageExpValue").GetComponent<Image>().fillAmount = fillAmount;
 
-            // float showImage_56 = 0.1f;
-            // RectTransform imageRectTransform = proItem.transform.Find("Image_56").GetComponent<RectTransform>();
-            // Vector2 last = imageRectTransform.localPosition;
-            // imageRectTransform.gameObject.SetActive(ziZhi_HpProp >= showImage_56);
-            // imageRectTransform.localPosition = new Vector2(285 - 409 * (1f - ziZhi_HpProp), last.y);
+            RectTransform imageExpRight = proItem.transform.Find("E_ImageExpValue/ImageExpRight").GetComponent<RectTransform>();
+            imageExpRight.gameObject.SetActive(fillAmount > 0.05f);
+            Vector2 highlightPos = imageExpRight.localPosition;
+            highlightPos.x = proItem.transform.Find("E_ImageExpValue").GetComponent<RectTransform>().sizeDelta.x * fillAmount - 0f;
+            imageExpRight.localPosition = highlightPos;
         }
 
         private static void OnUpdateXinLian(this ES_RoleXiLianShow self)
