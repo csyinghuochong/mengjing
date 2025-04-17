@@ -129,6 +129,7 @@ namespace ET.Client
         //5.神器类型
         //6.附魔类型
         //8.家园类型
+        //9.宠物装备
         public static void CheckMakeType(this DlgMakeLearn self)
         {
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
