@@ -29,7 +29,8 @@ namespace ET.Client
             // self.ES_ModelShow.SetRootPosition(new Vector2(jingLingConfig.Id % 10 * 1000, 0));
             self.ES_ModelShow.SetModelParentRotation(Quaternion.Euler(0f, -45f, 0f));
             
-            self.E_ActivatedText.text = active ? "已激活" : "未激活";
+            // self.E_ActivatedText.text = active ? "已激活" : "未激活";
+            self.E_ActivatedText.gameObject.SetActive(active);
             CommonViewHelper.SetRawImageGray(self.Root(), self.ES_ModelShow.E_RenderRawImage.gameObject, !active);
 
             self.E_SelectedImage.gameObject.SetActive(false);
