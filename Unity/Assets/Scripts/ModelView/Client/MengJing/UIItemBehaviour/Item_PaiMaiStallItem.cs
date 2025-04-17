@@ -1,11 +1,15 @@
-﻿
+﻿using System;
 using UnityEngine;
 using UnityEngine.UI;
 namespace ET.Client
 {
 	[EnableMethod]
-	public  class Scroll_Item_PaiMaiStallItem : Entity,IAwake,IDestroy,IUIScrollItem<Scroll_Item_PaiMaiStallItem> 
+	public  class Scroll_Item_PaiMaiStallItem : Entity,IAwake,IDestroy,IUIScrollItem<Scroll_Item_PaiMaiStallItem>
 	{
+
+		public Action<PaiMaiItemInfo> ClickHandler;
+		public PaiMaiItemInfo PaiMaiItemInfo;
+        
 		public long DataId {get;set;}
 		private bool isCacheNode = false;
 		public void SetCacheMode(bool isCache)

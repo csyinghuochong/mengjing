@@ -1023,10 +1023,11 @@ namespace ET.Client
         public static async ETTask OnButtonStallOpen(this DlgMain self)
         {
             //UI uI = await UIHelper.Create(self.DomainScene(), UIType.UIPaiMaiStall);
-
             //Unit unit = UnitHelper.GetMyUnitFromZoneScene(self.ZoneScene());
             //Unit stall = unit.GetParent<UnitComponent>().Get(unit.GetComponent<NumericComponent>().GetAsLong(NumericType.Now_Stall));
             //uI.GetComponent<UIPaiMaiStallComponent>().OnUpdateUI(stall);
+            self.Root().GetComponent<UIComponent>().ShowWindow(WindowID.WindowID_PaiMaiStall);
+            self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgPaiMaiStall>().OnUpdateUI(UnitHelper.GetMyUnitFromClientScene(self.Root()));
             await ETTask.CompletedTask;
         }
 

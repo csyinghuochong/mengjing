@@ -63,6 +63,11 @@ namespace ET
             for (int i = 0; i < dayrefresh.Length; i++)
             {
                 string[] itemInfo = dayrefresh[i].Split(';');
+                if (itemInfo.Length < 2)
+                {
+                    continue;
+                }
+
                 int monsterId = int.Parse(itemInfo[0]);
                 float gaiLv = float.Parse(itemInfo[1]);
                 int total = int.Parse(itemInfo[2]);
@@ -77,6 +82,8 @@ namespace ET
             string[] jinglingfresh = this.Get(80).Value.Split('@');
             for (int i = 0; i < jinglingfresh.Length; i++)
             {
+                //0.003;2;100,80006001&100,80006002&100,80006003&80,80006004&80,80006005&80,80006006&60,80006007&60,80006008&40,80006009&40,80006010
+                
                 string[] itemInfo = jinglingfresh[i].Split(';');
                 float gaiLv = float.Parse(itemInfo[0]);
                 int total = int.Parse(itemInfo[1]);
