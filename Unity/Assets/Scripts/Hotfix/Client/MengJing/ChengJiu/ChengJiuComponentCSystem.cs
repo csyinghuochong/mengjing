@@ -38,6 +38,20 @@ namespace ET.Client
 
             return jingLingInfos;
         }
+        
+        public static bool IsActiveJingLing(this ChengJiuComponentC self, int jingling)
+        {
+            List<JingLingInfo> jingLingInfos = new List<JingLingInfo>();
+            foreach (JingLingInfo jingLingInfo in self.JingLingList.Values)
+            {
+                if (jingLingInfo.JingLingID == jingling)
+                {
+                    return jingLingInfo.IsActive == 1;
+                }
+            }
+
+            return false;
+        }
 
         public static int GetFightJingLing(this ChengJiuComponentC self)
         {

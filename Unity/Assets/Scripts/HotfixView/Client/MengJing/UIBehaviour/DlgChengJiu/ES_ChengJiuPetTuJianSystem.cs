@@ -46,7 +46,7 @@ namespace ET.Client
 
             Scroll_Item_ChengJiuPetTuJianItem scrollItemChengJiuJinglingItem = self.ScrollItemChengJiuJinglingItems[index].BindTrans(transform);
             ChengJiuComponentC chengJiuComponent = self.Root().GetComponent<ChengJiuComponentC>();
-            scrollItemChengJiuJinglingItem.OnInitUI(self.ShowJingLing[index].Id, chengJiuComponent.PetTuJianActives.Contains(self.ShowJingLing[index].Id));
+            scrollItemChengJiuJinglingItem.OnInitUI(self.ShowJingLing[index].Id, chengJiuComponent.IsActiveJingLing(self.ShowJingLing[index].Id));
         }
 
         public static void RefreshChengJiuJinglingItems(this ES_ChengJiuPetTuJian self)
