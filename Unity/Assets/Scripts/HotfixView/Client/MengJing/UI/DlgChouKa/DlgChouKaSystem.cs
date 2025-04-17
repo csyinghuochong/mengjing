@@ -185,7 +185,7 @@ namespace ET.Client
             int totalTimes = numericComponent.GetAsInt(NumericType.ChouKa);
             using (zstring.Block())
             {
-                self.View.E_Text_TotalNumberText.text = zstring.Format("次数：{0}", totalTimes);
+                self.View.E_Text_TotalNumberText.text = zstring.Format("次数：{0}/{1}", totalTimes, GlobalValueConfigCategory.Instance.Get(122).Value2);
             }
         }
 

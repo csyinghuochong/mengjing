@@ -18,6 +18,16 @@ namespace ET.Server
                 return;
             }
 
+            NumericComponentS numericComponent = unit.GetComponent<NumericComponentS>();
+
+            int nowNum = numericComponent.GetAsInt(NumericType.PetExploreNumber);
+            int maxNum = GlobalValueConfigCategory.Instance.Get(123).Value2;
+            if (nowNum + request.ChouKaType > maxNum)
+            {
+                response.Error = ErrorCode.ERR_TimesIsNot;
+                return;
+            }
+            
             int dropId = 0;
             int exlporeNumber = unit.GetComponent<NumericComponentS>().GetAsInt(NumericType.PetExploreNumber);
             string[] set = GlobalValueConfigCategory.Instance.Get(107).Value.Split(';');

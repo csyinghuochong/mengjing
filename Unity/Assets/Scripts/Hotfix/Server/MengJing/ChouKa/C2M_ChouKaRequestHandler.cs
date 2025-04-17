@@ -32,6 +32,14 @@ namespace ET.Server
 
             NumericComponentS numericComponent = unit.GetComponent<NumericComponentS>();
 
+            int nowNum = numericComponent.GetAsInt(NumericType.ChouKa);
+            int maxNum = GlobalValueConfigCategory.Instance.Get(122).Value2;
+            if (nowNum + request.ChouKaType > maxNum)
+            {
+                response.Error = ErrorCode.ERR_TimesIsNot;
+                return;
+            }
+
             bool mianfei = false;
             long cdTime = long.Parse(GlobalValueConfigCategory.Instance.Get(request.ChouKaType == 1 ? 35:36).Value) * 1000;
             
