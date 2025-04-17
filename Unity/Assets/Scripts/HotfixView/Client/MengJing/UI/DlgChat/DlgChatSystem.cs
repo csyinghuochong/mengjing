@@ -230,6 +230,7 @@ namespace ET.Client
                 if (text == "#hightest" || text == "#middletest")
                 {
                     await UserInfoNetHelper.RequestUserInfoInit(self.Root());
+                    await ChengJiuNetHelper.GetChengJiuList(self.Root());
                 }
             }
             else
