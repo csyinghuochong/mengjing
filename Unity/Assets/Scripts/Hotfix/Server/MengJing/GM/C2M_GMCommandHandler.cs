@@ -176,7 +176,7 @@ namespace ET.Server
                         for (int c = 0; c < number; c++)
                         {
                             await unit.Root().GetComponent<TimerComponent>().WaitAsync(1);
-                            float3 vector3 = new float3(posX + RandomHelper.RandomNumberFloat(-2, 2), posY, posZ + RandomHelper.RandomNumberFloat(-2, 2));
+                            float3 vector3 = new float3(posX + RandomHelper.RandomNumberFloat(-1, 1), posY, posZ + RandomHelper.RandomNumberFloat(-1, 1));
                             Unit monster = UnitFactory.CreateMonster(unit.Scene(), monsterId, vector3, new CreateMonsterInfo()
                             { 
                                 Camp = CampEnum.CampMonster1
