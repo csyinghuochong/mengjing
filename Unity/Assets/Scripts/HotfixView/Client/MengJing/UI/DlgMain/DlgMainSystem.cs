@@ -2463,7 +2463,7 @@ namespace ET.Client
 
         public static void ShowUIStall(this DlgMain self, long stallId)
         {
-            // self.View.EG_UIStall.SetActive(stallId > 0);
+            //self.View.EG_UIStall.SetActive(stallId > 0);
         }
 
         public static void OnZeroClockUpdate(this DlgMain self)

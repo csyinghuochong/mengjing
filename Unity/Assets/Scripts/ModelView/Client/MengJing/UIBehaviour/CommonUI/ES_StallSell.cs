@@ -2,13 +2,12 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class ES_StallSell : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy ,IUILogic
+	public  class ES_StallSell : Entity,ET.IAwake<Transform>,IDestroy ,IUILogic
 	{
 		
 		public Dictionary<int, EntityRef<Scroll_Item_CommonItem>> ScrollItemCommonItems;
