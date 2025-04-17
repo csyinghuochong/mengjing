@@ -94,7 +94,17 @@ namespace ET.Client
                 return;
             }
 
-            await PaiMaiNetHelper.PaiMaiDuiHuan(self.Root(), diamondsNumber);
+            int error = await PaiMaiNetHelper.PaiMaiDuiHuan(self.Root(), diamondsNumber);
+
+            if (error != ErrorCode.ERR_Success)
+            {
+                return;
+            }
+
+            using (zstring.Block())
+            {
+                FlyTipComponent.Instance.ShowFlyTipDi(zstring.Format("获得{0}金币", self.E_DuiHuan_GoldText.text));
+            }
         }
     }
 }
