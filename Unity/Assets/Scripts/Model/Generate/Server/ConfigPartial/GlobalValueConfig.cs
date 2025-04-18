@@ -44,6 +44,15 @@ namespace ET
         public List<DayJingLing> DayJingLingList = new List<DayJingLing>();
 
         public Dictionary<int, int> ZhuaPuItem = new Dictionary<int, int>();
+        
+        
+        //宝宝刷新概率
+        public float BabyRefreshChance = 0.3f;
+
+        public float BabyBianYiRefreshChance = 0.2f;
+        //每日最多刷新宝宝数量
+        public int BabyRefreshMaxNum = 100000000;
+
 
         public override void EndInit()
         {
@@ -58,6 +67,9 @@ namespace ET
             AccountBagMax = this.Get(115).Value2;
             GemStoreInitCapacity = this.Get(118).Value2; 
             GemStoreMaxCapacity = this.Get(118).Value2; 
+            BabyRefreshChance = float.Parse(this.Get(124).Value);
+            BabyBianYiRefreshChance = float.Parse(this.Get(125).Value);
+            BabyRefreshMaxNum = int.Parse(this.Get(126).Value);
 
             string[] dayrefresh = this.Get(79).Value.Split('@');
             for (int i = 0; i < dayrefresh.Length; i++)

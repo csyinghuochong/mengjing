@@ -1978,16 +1978,6 @@ namespace ET
 
         #region 宠物抓捕配置
         [StaticField]
-        //宝宝刷新概率
-        public static float BabyRefreshChance = 0.3f;
-        //变异宝宝刷新概率
-        [StaticField]
-        public static float BabyBianYiRefreshChance = 0.2f;
-        [StaticField]
-        //每日最多刷新宝宝数量
-        public static int BabyRefreshMaxNum = 100000000;
-        
-        [StaticField]
         public static int ZhuaBuQiItemId = 90000016;
         #endregion
         
