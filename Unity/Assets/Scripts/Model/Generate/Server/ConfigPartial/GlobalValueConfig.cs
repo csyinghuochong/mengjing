@@ -61,7 +61,7 @@ namespace ET
         /// <summary>
         /// 捐选随机获得道具
         /// </summary>
-        public  string CommonSeasonDonateGetItem = "10025005;1@10025005;1@10025005;1@10025005;1@10025005;1";
+        public  int CommonSeasonDonateGetItem = 601800041;
 
 
 
@@ -88,7 +88,7 @@ namespace ET
             }
             
             CommonSeasonDonateItemId = int.Parse(this.Get(128).Value);
-            CommonSeasonDonateGetItem = this.Get(129).Value;
+            //CommonSeasonDonateGetItem = this.Get(129).Value;
 
 
             string[] dayrefresh = this.Get(79).Value.Split('@');

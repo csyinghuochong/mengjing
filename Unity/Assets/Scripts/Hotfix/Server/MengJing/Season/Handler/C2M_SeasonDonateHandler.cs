@@ -1,3 +1,6 @@
+using System;
+using System.Collections.Generic;
+
 namespace ET.Server
 {
 
@@ -39,9 +42,14 @@ namespace ET.Server
                 
                 bagComponentS.OnCostItemData($"{GlobalValueConfigCategory.Instance.CommonSeasonDonateItemId};1", ItemLocType.ItemLocBag);
 
-                string[] itemlist = GlobalValueConfigCategory.Instance.CommonSeasonDonateGetItem.Split('@');
-                string getiteminfo = itemlist[ RandomHelper.RandomNumber(0, itemlist.Length) ];
-                bagComponentS.OnAddItemData(getiteminfo, $"{ItemGetWay.Activity}_{TimeHelper.ServerNow()}");
+               // string[] itemlist = 
+               // string getiteminfo = itemlist[ RandomHelper.RandomNumber(0, itemlist.Length) ];
+               
+               int dropid = GlobalValueConfigCategory.Instance.CommonSeasonDonateGetItem;
+               List<RewardItem> droplist = new List<RewardItem>();
+               DropHelper.DropIDToDropItem_2(dropid, droplist);
+               
+                bagComponentS.OnAddItemData(droplist, String.Empty,   $"{ItemGetWay.Activity}_{TimeHelper.ServerNow()}");
 
                 NumericComponentS numericComponentS = unit.GetComponent<NumericComponentS>();
                 numericComponentS.ApplyChange(NumericType.CommonSeasonDonateTimes, 1);

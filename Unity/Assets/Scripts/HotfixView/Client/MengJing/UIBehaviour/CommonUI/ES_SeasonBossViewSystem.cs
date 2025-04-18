@@ -1,6 +1,8 @@
-﻿
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
-using UnityEngine.UI;
+
 namespace ET.Client
 {
 	[EntitySystemOf(typeof(ES_SeasonBoss))]
@@ -48,7 +50,16 @@ namespace ET.Client
 			rate = Mathf.Min(1f, rate);
 			self.E_Img_LodingValueImage.fillAmount = rate;
 			
-			self.ES_RewardList.Refresh(GlobalValueConfigCategory.Instance.CommonSeasonDonateGetItem,1f,false);
+			
+			List<RewardItem> droplist = new List<RewardItem>();
+			droplist = DropHelper.DropIDToShowItem(GlobalValueConfigCategory.Instance.CommonSeasonDonateGetItem, 1);
+			string itemList = "";
+			for (int i = 0; i < droplist.Count; i++)
+			{
+				itemList += droplist[i].ItemID + ";" + 1 + "@";
+			}
+			
+			self.ES_RewardList.Refresh(droplist,1f,false);
 
 			Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
 			NumericComponentC numericComponentC = unit.GetComponent<NumericComponentC>();
