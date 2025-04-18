@@ -58,7 +58,16 @@ namespace ET.Client
             M2C_StallSellResponse response = (M2C_StallSellResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
             return response;
         }
-        
+
+        public static async ETTask<M2C_StallBuyResponse> RequestStallBuy(Scene root, PaiMaiItemInfo paiMaiItemInfo)
+        {
+            C2M_StallBuyRequest request = C2M_StallBuyRequest.Create();
+            request.PaiMaiItemInfo = paiMaiItemInfo;
+            M2C_StallBuyResponse response = (M2C_StallBuyResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+
+            return response;
+        }
+
         public static async ETTask<int> PaiMaiShop(Scene root, int paiMaiId, int buyNum)
         {
             C2M_PaiMaiShopRequest request = C2M_PaiMaiShopRequest.Create();

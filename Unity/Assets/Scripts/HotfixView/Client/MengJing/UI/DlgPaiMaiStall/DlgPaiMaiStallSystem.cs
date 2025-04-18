@@ -133,8 +133,8 @@ namespace ET.Client
 		
 		public static async ETTask OnBtn_BuyItem(this DlgPaiMaiStall self)
 		{
-			//UI uI = await UIHelper.Create(self.DomainScene(), UIType.UIPaiMaiStallBuy);
-			//uI.GetComponent<UIPaiMaiStallBuyComponent>().OnUpdateUI(self.PaiMaiItemInfo);
+			await self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_PaiMaiStallBuy);
+			self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgPaiMaiStallBuy>().OnUpdateUI(self.PaiMaiItemInfo);
 			await ETTask.CompletedTask;
 		}
 		

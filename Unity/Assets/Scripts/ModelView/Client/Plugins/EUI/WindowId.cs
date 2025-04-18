@@ -227,5 +227,6 @@ namespace ET.Client
 		WindowID_StallSellPrice,
 		WindowID_PaiMaiStall,
 		WindowID_PetEquipMake,
+		WindowID_PaiMaiStallBuy,
 	}
 }
