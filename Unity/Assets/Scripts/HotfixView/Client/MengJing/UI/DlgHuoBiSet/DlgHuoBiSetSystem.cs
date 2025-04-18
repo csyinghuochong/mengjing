@@ -124,6 +124,16 @@ namespace ET.Client
                 WindowID.WindowID_ChengJiu => "Title_ChengJiu",
                 WindowID.WindowID_PetBar => "Title_Pet",
                 WindowID.WindowID_ShouJi => "Title_Skill",
+
+                WindowID.WindowID_MakeLearn => "Title_Make",
+                WindowID.WindowID_GemMake => "Title_Make",
+                WindowID.WindowID_RoleXiLian => "Title_Make",
+                WindowID.WindowID_ShenQiMake => "Title_Make",
+                WindowID.WindowID_PetEquipMake => "Title_Make",
+                WindowID.WindowID_Rank => "Title_Rose",
+                WindowID.WindowID_Warehouse => "Title_Rose",
+                WindowID.WindowID_Mail => "Title_Rose",
+
                 _ => "Default"
             };
             
@@ -157,6 +167,7 @@ namespace ET.Client
                 WindowID.WindowID_Activity=>"游戏活动",
                 WindowID.WindowID_Country=>"游戏活跃",
                 WindowID.WindowID_Recharge=>"游戏商城",
+                WindowID.WindowID_PetEquipMake=>"宠装制造",
                 _ => ""
             };
 
