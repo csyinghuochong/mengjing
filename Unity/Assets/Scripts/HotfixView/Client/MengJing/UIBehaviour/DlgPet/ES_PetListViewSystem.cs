@@ -1021,8 +1021,8 @@ namespace ET.Client
                 //BabyType = 0 道具获得
                 //BabyType = 1 抓捕宝宝获得 2  抓捕变异获取 3 抓捕普通野怪获得
                 
-                self.EG_PetTip_YeSheng.gameObject.SetActive(self.LastSelectItem.BabyType == 0);
-                self.EG_PetTip_BaoBao.gameObject.SetActive(self.LastSelectItem.BabyType == 1 || self.LastSelectItem.BabyType == 3);
+                self.EG_PetTip_YeSheng.gameObject.SetActive(self.LastSelectItem.BabyType == 3);
+                self.EG_PetTip_BaoBao.gameObject.SetActive(self.LastSelectItem.BabyType == 1 || self.LastSelectItem.BabyType == 0);
                 self.EG_PetTip_BianYi.gameObject.SetActive(self.LastSelectItem.BabyType == 2);
 
                 self.E_InputFieldNameInputField.text = rolePetInfo.PetName + (self.LastSelectItem.BabyType > 1 ? "(宝宝)": String.Empty );
