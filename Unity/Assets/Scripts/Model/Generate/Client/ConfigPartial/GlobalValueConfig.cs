@@ -51,6 +51,8 @@ namespace ET
         public float BabyBianYiRefreshChance = 0.2f;
         //每日最多刷新宝宝数量
         public int BabyRefreshMaxNum = 100000000;
+        
+        public int ZhuaByGaiLvInit = 2000;
 
 
         public override void EndInit()
@@ -69,6 +71,8 @@ namespace ET
             BabyRefreshChance = float.Parse(this.Get(124).Value);
             BabyBianYiRefreshChance = float.Parse(this.Get(125).Value);
             BabyRefreshMaxNum = int.Parse(this.Get(126).Value);
+            ZhuaByGaiLvInit = int.Parse(this.Get(127).Value);
+            
             
             string[] dayrefresh = this.Get(79).Value.Split('@');
             for (int i = 0; i < dayrefresh.Length; i++)

@@ -24,11 +24,7 @@ namespace ET.Server
             }
             
             NumericComponentS zhuabuNumeric = unitzhuabu.GetComponent<NumericComponentS>();
-            if (zhuabuNumeric.GetAsInt(NumericType.ZhuaBuTime) >= 1)
-            {
-                response.Error = ErrorCode.ERR_ZhuaBuTimeLimit;
-                return;
-            }
+
 
             MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(unitzhuabu.ConfigId);
             if(!PetHelper.IsHaveQiYuPetId( monsterConfig.QiYuPetId) )
@@ -42,8 +38,7 @@ namespace ET.Server
                 return;
             }
             
-            zhuabuNumeric.ApplyValue(NumericType.ZhuaBuTime, 1, false);
-           
+      
             //2000102
             C2M_SkillCmd cmd = C2M_SkillCmd.Create();
             cmd.SkillID = 80000202;

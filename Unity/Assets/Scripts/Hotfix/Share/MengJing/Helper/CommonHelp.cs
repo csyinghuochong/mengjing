@@ -502,11 +502,8 @@ namespace  ET
                     return 60801551;
                 }
             }
-
-
-
+            
             return 0;
-
         }
 
         public static int GetZhuPuType2_GaiLv(int monsterid, int itemid, int jiacheng)
@@ -516,7 +513,7 @@ namespace  ET
                 return 0;
             }
 
-            int gailv = 2000; 
+            int gailv = GlobalValueConfigCategory.Instance.ZhuaByGaiLvInit; 
             if (itemid > 0)
             {
                 int add = int.Parse(ItemConfigCategory.Instance.Get(itemid).ItemUsePar);
