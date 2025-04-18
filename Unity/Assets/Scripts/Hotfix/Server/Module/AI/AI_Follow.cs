@@ -79,38 +79,15 @@ namespace ET.Server
         public override async ETTask Execute(AIComponent aiComponent, AIConfig aiConfig, ETCancellationToken cancellationToken)
         {
             Unit unit = aiComponent.GetParent<Unit>();
-            long masterid = unit.GetComponent<NumericComponentS>().GetAsLong(NumericType.MasterId);
+            NumericComponentS numericComponentS = unit.GetComponent<NumericComponentS>();
+            long masterid =numericComponentS.GetAsLong(NumericType.MasterId);
             Unit master = unit.GetParent<UnitComponent>().Get(masterid);
-            /*
-            while (true)
-            {
-                float distacne = Vector3.Distance(unit.Position, master.Position);
-                if (distacne > 6f)
-                {
-                    Vector3 nextTarget = GetFollowPosition(unit, master);
-                    unit.GetComponent<NumericComponent>().Set(NumericType.Now_Speed, 60000);
-                    unit.FindPathMoveToAsync(nextTarget, cancellationToken, false).Coroutine();
-                }
-
-                else if (distacne > 1.1f)
-                {
-                    Vector3 nextTarget = GetFollowPosition(unit, master);
-                    unit.GetComponent<NumericComponent>().Set(NumericType.Now_Speed, 30000);
-                    unit.FindPathMoveToAsync(nextTarget, cancellationToken, false).Coroutine();
-                }
-
-                bool timeRet = await TimerComponent.Instance.WaitAsync(100, cancellationToken);
-                if (!timeRet)
-                {
-                    return;
-                }
-            }
-            */
-            long oldSpeed = unit.GetComponent<NumericComponentS>().GetAsLong(NumericType.Base_Speed_Base);
+           
+            long oldSpeed =numericComponentS.GetAsLong(NumericType.Base_Speed_Base);
             
             long masterspeed = master.GetComponent<NumericComponentS>().GetAsLong(NumericType.Now_Speed);
-            unit.GetComponent<NumericComponentS>().ApplyValue(NumericType.Base_Speed_Base, masterspeed);
-            
+            numericComponentS.ApplyValue(NumericType.Base_Speed_Base, masterspeed);
+
             while (true)
             {
                 int speedProp = 100;

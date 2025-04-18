@@ -296,6 +296,48 @@ namespace ET.Server
             return unit;
         }
 
+           public static Unit CreateJingLing(Unit master, int jinglingId)
+        {
+            Scene scene = master.Scene();
+            Unit unit = scene.GetComponent<UnitComponent>().AddChildWithId<Unit, int>(IdGenerater.Instance.GenerateId(), jinglingId);
+            scene.GetComponent<UnitComponent>().Add(unit);
+            unit.AddComponent<ObjectWait>();
+            NumericComponentS numericComponent = unit.AddComponent<NumericComponentS>();
+            UnitInfoComponent unitInfoComponent = unit.AddComponent<UnitInfoComponent>();
+            unit.AddComponent<MoveComponent>();
+            unit.AddComponent<SkillManagerComponentS>();
+            unit.AddComponent<PathfindingComponent, int>(scene.GetComponent<MapComponent>().NavMeshId);
+            unit.AddComponent<AttackRecordComponent>();
+            unitInfoComponent.MasterName = master.GetComponent<UserInfoComponentS>().GetName();
+            unitInfoComponent.UnitName = JingLingConfigCategory.Instance.Get(jinglingId).Name;
+
+            unit.ConfigId = jinglingId;
+            unit.AddComponent<StateComponentS>(); //添加状态组件
+            unit.AddComponent<BuffManagerComponentS>(); //添加
+            unit.Position = new float3(master.Position.x + RandomHelper.RandFloat01() * 1f, master.Position.y,
+                master.Position.z + RandomHelper.RandFloat01() * 1f);
+            unit.Type = UnitType.JingLing;
+
+            AIComponent aIComponent = unit.AddComponent<AIComponent, int>(10); //AI行为树序号
+            aIComponent.InitJingLing(jinglingId);
+            aIComponent.Begin();
+            
+            //添加其他组件
+            unit.AddComponent<HeroDataComponentS>().InitJingLing(master, jinglingId, false);
+            numericComponent.ApplyValue(NumericType.MasterId, master.Id, false);
+            numericComponent.ApplyValue(NumericType.BattleCamp, master.GetBattleCamp(), false);
+            numericComponent.ApplyValue(NumericType.AttackMode, master != null ? master.GetAttackMode() : 0, false);
+            numericComponent.ApplyValue(NumericType.TeamId, master.GetTeamId(), false);
+            numericComponent.ApplyValue(NumericType.UnionId_0, master.GetUnionId(), false);
+            numericComponent.ApplyValue(NumericType.Base_Speed_Base, master.GetComponent<NumericComponentS>().GetAsLong(NumericType.Base_Speed_Base), false);
+
+
+            unit.AddComponent<AOIEntity, int, float3>(9 * 1000, unit.Position);
+            unit.AddComponent<SkillPassiveComponent>().UpdateJingLingSkill(jinglingId);
+            unit.GetComponent<SkillPassiveComponent>().Begin();
+            return unit;
+        }
+        
         public static Unit CreatePet(Unit master, RolePetInfo petinfo)
         {
             Scene scene = master.Scene();
@@ -436,48 +478,7 @@ namespace ET.Server
             unit.AddComponent<AOIEntity, int, float3>(1 * 1000, unit.Position);
             return unit;
         }
-
-        public static Unit CreateJingLing(Unit master, int jinglingId)
-        {
-            Scene scene = master.Root();
-            Unit unit = scene.GetComponent<UnitComponent>().AddChildWithId<Unit, int>(IdGenerater.Instance.GenerateId(), jinglingId);
-            scene.GetComponent<UnitComponent>().Add(unit);
-            unit.AddComponent<ObjectWait>();
-            NumericComponentS numericComponent = unit.AddComponent<NumericComponentS>();
-            UnitInfoComponent unitInfoComponent = unit.AddComponent<UnitInfoComponent>();
-            unit.AddComponent<MoveComponent>();
-            unit.AddComponent<SkillManagerComponentS>();
-            unit.AddComponent<PathfindingComponent, int>(scene.GetComponent<MapComponent>().NavMeshId);
-            unit.AddComponent<AttackRecordComponent>();
-            unitInfoComponent.MasterName = master.GetComponent<UserInfoComponentS>().GetName();
-            unitInfoComponent.UnitName = JingLingConfigCategory.Instance.Get(jinglingId).Name;
-
-            unit.ConfigId = jinglingId;
-            unit.AddComponent<StateComponentS>(); //添加状态组件
-            unit.AddComponent<BuffManagerComponentS>(); //添加
-            unit.Position = new float3(master.Position.x + RandomHelper.RandFloat01() * 1f, master.Position.y,
-                master.Position.z + RandomHelper.RandFloat01() * 1f);
-            unit.Type = UnitType.JingLing;
-
-            AIComponent aIComponent = unit.AddComponent<AIComponent, int>(10); //AI行为树序号
-            aIComponent.InitJingLing(jinglingId);
-            aIComponent.Begin();
-
-            //添加其他组件
-            unit.AddComponent<HeroDataComponentS>().InitJingLing(master, jinglingId, false);
-            numericComponent.ApplyValue(NumericType.MasterId, master.Id, false);
-            numericComponent.ApplyValue(NumericType.BattleCamp, master.GetBattleCamp(), false);
-            numericComponent.ApplyValue(NumericType.AttackMode, master != null ? master.GetAttackMode() : 0, false);
-            numericComponent.ApplyValue(NumericType.TeamId, master.GetTeamId(), false);
-            numericComponent.ApplyValue(NumericType.UnionId_0, master.GetUnionId(), false);
-            //numericComponent.Set(NumericType.Base_Speed_Base, 50000, false);
-
-            unit.AddComponent<AOIEntity, int, float3>(9 * 1000, unit.Position);
-            unit.AddComponent<SkillPassiveComponent>().UpdateJingLingSkill(jinglingId);
-            unit.GetComponent<SkillPassiveComponent>().Begin();
-            return unit;
-        }
-
+        
         public static Unit CreateStall(Scene scene, Unit master)
         {
             Unit unit = scene.GetComponent<UnitComponent>().AddChildWithId<Unit, int>(IdGenerater.Instance.GenerateId(), 1);
