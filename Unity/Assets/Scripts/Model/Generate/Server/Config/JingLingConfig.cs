@@ -103,6 +103,8 @@ namespace ET
 		public int FunctionType { get; set; }
 		/// <summary>功能参数</summary>
 		public string FunctionValue { get; set; }
+		/// <summary>怪物显示的位置</summary>
+		public string ModelShowPosi { get; set; }
 
 	}
 }

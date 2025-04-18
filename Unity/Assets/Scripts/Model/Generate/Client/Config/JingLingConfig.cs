@@ -105,6 +105,8 @@ namespace ET
 		public string FunctionValue { get; set; }
 		/// <summary>自动拾取</summary>
 		public int AutoPick { get; set; }
+		/// <summary>怪物显示的位置</summary>
+		public string ModelShowPosi { get; set; }
 
 	}
 }
