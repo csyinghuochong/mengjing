@@ -22,8 +22,6 @@ namespace ET.Client
                 (pdata) => { self.PointerDown_Btn_AddNum(pdata as PointerEventData).Coroutine(); });
             self.View.E_Btn_AddNumEventTrigger.RegisterEvent(EventTriggerType.PointerUp,
                 (pdata) => { self.PointerUp_Btn_AddNum(pdata as PointerEventData); });
-            self.View.E_Btn_AddNumButton.AddListener(self.OnBtn_AddNumButton);
-            self.View.E_Btn_CostNumButton.AddListener(self.OnBtn_CostNumButton);
         }
 
         public static void ShowWindow(this DlgPaiMaiSellPrice self, Entity contextData = null)
@@ -232,12 +230,6 @@ namespace ET.Client
         public static void OnChange(this DlgPaiMaiSellPrice self, string str)
         {
             self.nowPrice = int.Parse(str);
-        }
-        public static void OnBtn_AddNumButton(this DlgPaiMaiSellPrice self)
-        {
-        }
-        public static void OnBtn_CostNumButton(this DlgPaiMaiSellPrice self)
-        {
         }
     }
 }
