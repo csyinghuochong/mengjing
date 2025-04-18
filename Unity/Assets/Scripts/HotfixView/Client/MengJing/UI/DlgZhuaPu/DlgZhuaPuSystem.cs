@@ -158,6 +158,7 @@ namespace ET.Client
             MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(unitmonster.ConfigId);
             self.MonsterId = unitmonster.ConfigId;
             self.MonsterUnitid = unitmonster.Id;
+            self.BabyType = unitmonster.GetComponent<NumericComponentC>().GetAsInt(NumericType.BaByType);
             float size = RandomHelper.RandFloat01();
             self.View.E_Img_PosImage.transform.localPosition = new Vector3(size * 300f, 0f, 0f);
             self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
@@ -189,7 +190,7 @@ namespace ET.Client
                 return;
             }
 
-            int gailv = CommonHelp.GetZhuPuType2_GaiLv(self.MonsterId, self.ItemId, 1);
+            int gailv = CommonHelp.GetZhuPuType2_GaiLv(self.MonsterId,self.BabyType , self.ItemId, 1);
             using (zstring.Block())
             {
                 self.View.E_TextGaiLvText.text = zstring.Format("抓捕成功率： {0}%", gailv * 0.01f);

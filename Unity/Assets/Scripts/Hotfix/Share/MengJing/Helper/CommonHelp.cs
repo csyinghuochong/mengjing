@@ -506,14 +506,14 @@ namespace  ET
             return 0;
         }
 
-        public static int GetZhuPuType2_GaiLv(int monsterid, int itemid, int jiacheng)
+        public static int GetZhuPuType2_GaiLv(int monsterid, int babytype, int itemid, int jiacheng)
         {
             if (monsterid == 0)
             {
                 return 0;
             }
 
-            int gailv = GlobalValueConfigCategory.Instance.ZhuaByGaiLvInit; 
+            int gailv = GlobalValueConfigCategory.Instance.ZhuaByGaiLvInit[babytype]; 
             if (itemid > 0)
             {
                 int add = int.Parse(ItemConfigCategory.Instance.Get(itemid).ItemUsePar);

@@ -54,13 +54,13 @@ namespace ET.Server
             // 捕捉成功，
             // 捕捉失败怪物死亡（就是隐藏 并播放特效）
             // 捕捉失败怪物逃跑（怪物随机出现在当前地图的任意一个位置）
-            
-             int gailv = CommonHelp.GetZhuPuType2_GaiLv(unitzhuabu.ConfigId, request.ItemId, int.Parse(request.OperateType));
+            int babyType = zhuabuNumeric.GetAsInt(NumericType.BaByType);
+             int gailv = CommonHelp.GetZhuPuType2_GaiLv(unitzhuabu.ConfigId,babyType, request.ItemId, int.Parse(request.OperateType));
              if (RandomHelper.RandFloat01() <= gailv * 0.0001f)
              {
                  response.Message = String.Empty;
                 
-                 int babyType = zhuabuNumeric.GetAsInt(NumericType.BaByType);
+                 
                  ///此处普通怪物类型0  生成宠物的时候转换为 3 以作区分。。。
                  unit.GetComponent<PetComponentS>().OnAddPet(ItemGetWay.PickItem,  PetHelper.GetQiYuPetId(monsterConfig.QiYuPetId, babyType), 0, 0, babyType == 0? 3: babyType, monsterConfig.Lv);
                  unit.GetParent<UnitComponent>().Remove(request.JingLingId);

@@ -53,7 +53,7 @@ namespace ET
         //每日最多刷新宝宝数量
         public int BabyRefreshMaxNum = 100000000;
 
-        public int ZhuaByGaiLvInit = 2000;
+        public List<int> ZhuaByGaiLvInit = new List<int>();
 
 
         public override void EndInit()
@@ -72,7 +72,12 @@ namespace ET
             BabyRefreshChance = float.Parse(this.Get(124).Value);
             BabyBianYiRefreshChance = float.Parse(this.Get(125).Value);
             BabyRefreshMaxNum = int.Parse(this.Get(126).Value);
-            ZhuaByGaiLvInit = int.Parse(this.Get(127).Value);
+            string[] zhubugialv = this.Get(127).Value.Split(";");
+            for (int i = 0; i < zhubugialv.Length; i++)
+            {
+                this.ZhuaByGaiLvInit.Add( int.Parse(zhubugialv[i]) );
+            }
+
 
             string[] dayrefresh = this.Get(79).Value.Split('@');
             for (int i = 0; i < dayrefresh.Length; i++)

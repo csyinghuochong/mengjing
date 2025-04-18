@@ -17,6 +17,7 @@ namespace ET.Client
         public int MonsterId;
         public long MonsterUnitid;
         public int ZhuaBuType = 0; //1旧的抓捕   2新的抓捕
+        public int BabyType;
 
         public List<EntityRef<ItemInfo>> ShowBagInfos { get; set; } = new();
         public Dictionary<int, EntityRef<Scroll_Item_CommonItem>> ScrollItemCommonItems;
