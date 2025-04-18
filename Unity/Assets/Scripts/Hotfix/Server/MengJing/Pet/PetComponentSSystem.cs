@@ -734,8 +734,12 @@ namespace ET.Server
                 m2C_RolePetUpdate.GetWay = getWay;
                 MapMessageHelper.SendToClient(self.GetParent<Unit>(), m2C_RolePetUpdate);
             }
+
+            if (babyType == 0)
+            {
+                unit.GetComponent<ChengJiuComponentS>().OnPetTuJianActive(newpet.ConfigId, true);
+            }
             
-            unit.GetComponent<ChengJiuComponentS>().OnPetTuJianActive(newpet.ConfigId, true);
             unit.GetComponent<ChengJiuComponentS>().OnGetPet(newpet);
             unit.GetComponent<TaskComponentS>().OnGetPet(newpet);
             
