@@ -88,7 +88,7 @@ namespace ET
             }
             
             CommonSeasonDonateItemId = int.Parse(this.Get(128).Value);
-            //CommonSeasonDonateGetItem = this.Get(129).Value;
+            CommonSeasonDonateGetItem = int.Parse(this.Get(129).Value);
 
 
             string[] dayrefresh = this.Get(79).Value.Split('@');
