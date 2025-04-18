@@ -212,7 +212,6 @@ namespace ET.Client
                         {
                             //GameObject gameObject = GameObject.Instantiate(master.GetComponent<GameObjectComponent>().GameObject);
                             //self.OnLoadGameObject(gameObject, self.InstanceId);
-                        
                         }
                         else if (monsterCof.MonsterSonType == MonsterSonTypeEnum.Type_58)
                         {
@@ -681,12 +680,12 @@ namespace ET.Client
                     {
                         self.OnAddCollider(go);
                         unit.AddComponent<HeroTransformComponent>(true); //获取角色绑点组件
-                        unit.AddComponent<UISceneItemComponent>(true).OnInitEnergyTableUI(); //血条UI组件
+                        unit.AddComponent<UISceneItemComponent>(true).OnInitUI(); //血条UI组件
                     }
                     else if (monsterCof.MonsterSonType == MonsterSonTypeEnum.Type_58 || monsterCof.MonsterSonType == MonsterSonTypeEnum.Type_59)
                     {
                         self.OnAddCollider(go);
-                        unit.AddComponent<UISceneItemComponent>(true); //血条UI组件
+                        unit.AddComponent<UISceneItemComponent>(true).OnInitUI(); //血条UI组件
                         LayerHelp.ChangeLayer(go.transform, LayerEnum.Monster);
 
                         if (monsterCof.MonsterSonType == MonsterSonTypeEnum.Type_58)
@@ -703,13 +702,13 @@ namespace ET.Client
                     }
                     else if (unit.IsChest() || monsterCof.MonsterSonType == MonsterSonTypeEnum.Type_60)
                     {
-                        unit.AddComponent<UISceneItemComponent>(true); //血条UI组件
+                        unit.AddComponent<UISceneItemComponent>(true).OnInitUI(); //血条UI组件
                         LayerHelp.ChangeLayer(go.transform, LayerEnum.Box);
                     }
                     else if (monsterCof.MonsterSonType == MonsterSonTypeEnum.Type_61)
                     {
                         self.OnAddCollider(go);
-                        unit.AddComponent<UISceneItemComponent>(true); //血条UI组件
+                        unit.AddComponent<UISceneItemComponent>(true).OnInitUI(); //血条UI组件
                         LayerHelp.ChangeLayer(go.transform, LayerEnum.Monster);
                     }
                     else if (monsterCof.MonsterType != MonsterTypeEnum.SceneItem)

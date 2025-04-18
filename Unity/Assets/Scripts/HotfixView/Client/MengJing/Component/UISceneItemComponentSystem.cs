@@ -54,23 +54,73 @@ namespace ET.Client
             self.HeadBarUI.HeadPos = self.UIPosition;
             self.HeadBarUI.HeadBar = self.GameObject;
             self.GameObject.transform.SetAsFirstSibling();
-
-            NumericComponentC numericComponent = self.GetParent<Unit>().GetComponent<NumericComponentC>();
-            int energySkillId = numericComponent.GetAsInt(NumericType.EnergySkillId);
-            SkillConfig skillConfig = SkillConfigCategory.Instance.Get(energySkillId);
-            self.GameObject.Get<GameObject>("Lal_Name").GetComponent<Text>().text = skillConfig.SkillName;
-            self.GameObject.Get<GameObject>("Lal_Desc").GetComponent<Text>().text = skillConfig.SkillDescribe;
+            Unit unit = self.GetParent<Unit>();
+            MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(unit.ConfigId);
+             switch (monsterConfig.MonsterSonType)
+             {
+                 case 52:
+                     NumericComponentC numericComponent = self.GetParent<Unit>().GetComponent<NumericComponentC>();
+                     int energySkillId = numericComponent.GetAsInt(NumericType.EnergySkillId);
+                     SkillConfig skillConfig = SkillConfigCategory.Instance.Get(energySkillId);
+                     self.GameObject.Get<GameObject>("Lal_Name").GetComponent<Text>().text = skillConfig.SkillName;
+                     self.GameObject.Get<GameObject>("Lal_Desc").GetComponent<Text>().text = skillConfig.SkillDescribe;
+                     break;
+                 case 54:
+                 case 55:
+                 case 56:
+                 case 57:
+                 case 60:
+                     self.GameObject.Get<GameObject>("Lal_Name").GetComponent<Text>().text = monsterConfig.MonsterName;
+                     break;
+                 case 58:
+                     self.GameObject.Get<GameObject>("Lal_Name").GetComponent<Text>().text = monsterConfig.MonsterName;
+                     self.GameObject.Get<GameObject>("Lal_Desc").GetComponent<Text>().text = CommonViewHelper.ZhuaPuProToStr(monsterConfig.Parameter[1]);
+                     self.GameObject.Get<GameObject>("Lal_Name").GetComponent<Text>().color = new Color(184f / 255f, 255f / 255f, 66f / 255f);
+                     break;
+                 case 59:
+                     self.GameObject.Get<GameObject>("Lal_Name").GetComponent<Text>().text = monsterConfig.MonsterName;
+                     self.GameObject.Get<GameObject>("Lal_Desc").GetComponent<Text>().text = CommonViewHelper.ZhuaPuProToStr(monsterConfig.Parameter[1]);
+                     self.GameObject.Get<GameObject>("Lal_Name").GetComponent<Text>().color = new Color(255f / 255f, 199f / 255f, 66f / 255f);
+                     break;
+                 case 61:
+                     self.GameObject.Get<GameObject>("Lal_Name").GetComponent<Text>().text = monsterConfig.MonsterName;
+                     self.GameObject.Get<GameObject>("Lal_Desc").GetComponent<Text>().text = string.Empty;
+                     break;
+                 default:
+                     break;
+             }
         }
 
-        public static  void OnInitEnergyTableUI(this UISceneItemComponent self)
-        {
-            string path = ABPathHelper.GetUGUIPath("Blood/UISceneItem");
-            self.HeadBarPath = path;
-            Unit myUnit =self.GetParent<Unit>();
-            self.UIPosition = myUnit.GetComponent<HeroTransformComponent>().GetTranform(PosType.Head);
-             // GameObject prefab = await ResourcesComponent.Instance.LoadAssetAsync<GameObject>(path);
-            //self.GameObject = UnityEngine.Object.Instantiate(prefab, GlobalComponent.Instance.Unit, true);
-            self.Root().GetComponent<GameObjectLoadComponent>().AddLoadQueue( self.HeadBarPath, self.InstanceId,true, self.OnLoadGameObject);
-        }
+         public static  void OnInitUI(this UISceneItemComponent self)
+         {
+             Unit unit = self.GetParent<Unit>();
+             int configId = unit.ConfigId;
+             MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(configId);
+
+             //51 场景怪 有AI 不显示名称
+             //52 能量台子 无AI
+             //54 场景怪 有AI 显示名称
+             //55 宝箱类 无AI
+             var path = "";
+             if (monsterConfig.MonsterSonType == 52)
+             {
+                 path = ABPathHelper.GetUGUIPath("Blood/UISceneItem");
+                 //self.UIPosition = unit.GetComponent<GameObjectComponent>().GameObject.transform.Find("UIPosition");
+                 self.UIPosition = unit.GetComponent<HeroTransformComponent>().GetTranform(PosType.Head);
+             }
+             else if (monsterConfig.MonsterSonType == 54 || monsterConfig.MonsterSonType == 60 || unit.IsChest())
+             {
+                 path = ABPathHelper.GetUGUIPath("Blood/UISceneItem");
+                 self.UIPosition = unit.GetComponent<GameObjectComponent>().GameObject.transform.Find("UIPosition");
+             }
+             else if (monsterConfig.MonsterSonType == 58 || monsterConfig.MonsterSonType == 59 || monsterConfig.MonsterSonType == 61)
+             {
+                 path = ABPathHelper.GetUGUIPath("Blood/UISceneItem");
+                 self.UIPosition = unit.GetComponent<GameObjectComponent>().GameObject.transform.Find("RoleBoneSet/Head");
+             }
+
+             self.HeadBarPath = path;
+             self.Root().GetComponent<GameObjectLoadComponent>().AddLoadQueue( self.HeadBarPath, self.InstanceId,true, self.OnLoadGameObject);
+         }
     }
 }

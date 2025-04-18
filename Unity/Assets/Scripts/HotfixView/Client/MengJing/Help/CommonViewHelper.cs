@@ -24,6 +24,32 @@ namespace ET.Client
             return  string.Empty;
         }
 
+          public static string ZhuaPuProToStr(int par)
+          {
+              float pro = (float)par / 10000f;
+              string str = "抓捕难度:";
+              if (pro <= 0.05f) {
+                  str += "万里挑一";
+              }
+              if (pro > 0.05f && pro <= 0.1f)
+              {
+                  str += "千载难逢";
+              }
+              if (pro > 0.1f && pro <= 0.2f)
+              {
+                  str += "百不一遇";
+              }
+              if (pro > 0.2f && pro <= 0.3f)
+              {
+                  str += "一般";
+              }
+              if (pro > 0.3f)
+              {
+                  str += "容易";
+              }
+              return str;
+          }
+        
         /// <summary>
         /// 打印机效果
         /// </summary>
