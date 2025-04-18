@@ -145,8 +145,7 @@ namespace ET.Client
                 self.E_TotalProgressText.text = zstring.Format("总进度：{0}/{1}", num, PetHelper.GetJingLingByGetWay(1).Count);
             }
 
-         
-            
+
             int progress = chengJiuComponent.IsActiveJingLing(jingLingId) ? 1 : 0;
             using (zstring.Block())
             {

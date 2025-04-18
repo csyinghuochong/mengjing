@@ -331,7 +331,15 @@ namespace ET.Client
                     {
                         int babyType =  numericComponentC.GetAsInt(NumericType.BaByType);
                         string addname = CommonViewHelper.GetMonsterShowName(babyType);
-                        
+                        if (babyType == 1)
+                        {
+                            colorstr =  "<color=#A1FF36>" ;
+                        }
+                        if (babyType == 2)
+                        {
+                            colorstr =  "<color=#FF75F1>";
+                        }
+
                         if (!string.IsNullOrEmpty(addname))
                         {
                             self.Lal_Name.GetComponent<Text>().text = zstring.Format("{0}{1}{2}</color>", colorstr, monsterCof.MonsterName, addname);
