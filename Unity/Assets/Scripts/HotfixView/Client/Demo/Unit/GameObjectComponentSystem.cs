@@ -257,7 +257,6 @@ namespace ET.Client
                     int npcId = unit.ConfigId;
                     NpcConfig config = NpcConfigCategory.Instance.Get(npcId);
                     self.UnitAssetsPath = ABPathHelper.GetUnitPath("Npc/" + config.Asset);
-                    ;
                     break;
                 case UnitType.DropItem:
                     DropComponentC dropComponent = unit.GetComponent<DropComponentC>();
