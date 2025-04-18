@@ -393,7 +393,7 @@ namespace ET.Server
 		/// <returns></returns>
 		public static int GetBabyType(int sceneType, int babyNumber, MonsterConfig monsterConfig)
 		{
-			if (babyNumber >= ConfigData.BabyRefreshMaxNum)
+			if (babyNumber >= GlobalValueConfigCategory.Instance.BabyRefreshMaxNum)
 			{
 				return 0;	
 			}
@@ -409,11 +409,11 @@ namespace ET.Server
 			}
 
 			float rvalue = RandomHelper.RandFloat01();
-			if (rvalue< ConfigData.BabyBianYiRefreshChance)
+			if (rvalue< GlobalValueConfigCategory.Instance.BabyBianYiRefreshChance)
 			{
 				return 2;
 			}
-			if (rvalue < ConfigData.BabyRefreshChance)
+			if (rvalue < GlobalValueConfigCategory.Instance.BabyRefreshChance)
 			{
 				return 1;
 			}
