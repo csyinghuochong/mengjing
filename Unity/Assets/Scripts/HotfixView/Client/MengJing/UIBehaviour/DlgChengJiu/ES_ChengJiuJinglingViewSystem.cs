@@ -151,9 +151,26 @@ namespace ET.Client
             JingLingConfig jingLingConfig = JingLingConfigCategory.Instance.Get(self.JingLingId);
             
             self.ES_ModelShow.ShowOtherModel("JingLing/" + jingLingConfig.Assets).Coroutine();
-            self.ES_ModelShow.SetCameraPosition(new Vector3(0f, 40f, 200f));
-            // self.ES_ModelShow.SetRootPosition(new Vector2(jingLingConfig.Id % 10 * 1000, 0));
-            self.ES_ModelShow.SetModelParentRotation(Quaternion.Euler(0f, -45f, 0f));
+           
+            
+            string[] strs = null;
+            if (!CommonHelp.IfNull(jingLingConfig.ModelShowPosi))
+            {
+                strs = jingLingConfig.ModelShowPosi.Split(',');
+            }
+            if (strs != null && strs.Length >= 5)
+            {
+                self.ES_ModelShow.Camera.fieldOfView = float.Parse(strs[3]);
+                self.ES_ModelShow.SetCameraPosition(new Vector3(float.Parse(strs[0]), float.Parse(strs[1]), float.Parse(strs[2])));
+                self.ES_ModelShow.RotationY = float.Parse(strs[4]); 
+            }
+            else
+            {
+                self.ES_ModelShow.SetCameraPosition(new Vector3(0f, 40f, 200f));
+                // self.ES_ModelShow.SetRootPosition(new Vector2(jingLingConfig.Id % 10 * 1000, 0));
+                self.ES_ModelShow.SetModelParentRotation(Quaternion.Euler(0f, -45f, 0f));
+            }
+
 
             self.E_NameText.text = jingLingConfig.Name;
             using (zstring.Block())
