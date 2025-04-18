@@ -30,10 +30,6 @@ namespace ET.Client
             eventTrigger.RegisterEvent(EventTriggerType.PointerUp, (pdata) => { self.PointerUp(pdata as PointerEventData); });
             eventTrigger.RegisterEvent(EventTriggerType.Cancel, (pdata) => { self.OnCancel(pdata as PointerEventData); });
 
-            Scene scene = self.Scene();
-            Scene root = self.Root();
-            Scene fibir = self.Fiber().Root;
-
             self.LockTargetComponent = self.Scene().GetComponent<LockTargetComponent>();
             self.SkillIndicatorComponent = self.Scene().GetComponent<SkillIndicatorComponent>();
         }
