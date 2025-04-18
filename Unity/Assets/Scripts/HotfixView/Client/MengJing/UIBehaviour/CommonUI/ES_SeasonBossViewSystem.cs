@@ -48,7 +48,7 @@ namespace ET.Client
 			rate = Mathf.Min(1f, rate);
 			self.E_Img_LodingValueImage.fillAmount = rate;
 			
-			self.ES_RewardList.Refresh(ConfigData.CommonSeasonDonateGetItem,1f,false);
+			self.ES_RewardList.Refresh(GlobalValueConfigCategory.Instance.CommonSeasonDonateGetItem,1f,false);
 
 			Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
 			NumericComponentC numericComponentC = unit.GetComponent<NumericComponentC>();
@@ -90,7 +90,7 @@ namespace ET.Client
 				self.E_SeasonDonateTimes.text = zstring.Format("当前您已捐献{0}次", numericComponentC.GetAsInt(NumericType.CommonSeasonDonateTimes));
 			}
 
-			self.ES_CostItem.UpdateItem( ConfigData.CommonSeasonDonateItemId, 1 );
+			self.ES_CostItem.UpdateItem( GlobalValueConfigCategory.Instance.CommonSeasonDonateItemId, 1 );
 			
 			self.LastSeasonBossLevel = bosslv;
 		}
