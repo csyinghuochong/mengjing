@@ -339,7 +339,7 @@ namespace ET.Server
             newpet.ConfigId = petConfig.Id;
             newpet.PetExp = 0;
             newpet.PetName = petConfig.PetName;
-            newpet.BabyType = babytype;
+            newpet.BabyType = babytype;  //1 
             newpet.SkinId = skinId != 0 ? skinId : petConfig.Skin[0];
             newpet.PetHeXinList = new List<long>() { 0, 0, 0 };
 

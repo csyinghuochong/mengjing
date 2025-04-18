@@ -1568,6 +1568,74 @@ namespace ET.Client
      			return this.m_EG_GameObject2RectTransform;
      		}
      	}
+		
+		public Transform EG_PetTip_YeSheng
+		{
+			get
+			{
+				if (this.uiTransform == null)
+				{
+					Log.Error("uiTransform is null.");
+					return null;
+				}
+				if( this.m_EG_PetTip_YeSheng == null )
+				{
+					this.m_EG_PetTip_YeSheng = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_PetTip_YeSheng");
+				}
+				return this.m_EG_PetTip_YeSheng;
+			}
+		}
+
+		public Transform EG_PetTip_BaoBao
+		{
+			get
+			{
+				if (this.uiTransform == null)
+				{
+					Log.Error("uiTransform is null.");
+					return null;
+				}
+				if( this.m_EG_PetTip_BaoBao == null )
+				{
+					this.m_EG_PetTip_BaoBao = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_PetTip_BaoBao");
+				}
+				return this.m_EG_PetTip_BaoBao;
+			}
+		}
+
+		public Transform EG_PetTip_BianYi
+		{
+			get
+			{
+				if (this.uiTransform == null)
+				{
+					Log.Error("uiTransform is null.");
+					return null;
+				}
+				if( this.m_EG_PetTip_BianYi == null )
+				{
+					this.m_EG_PetTip_BianYi = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_PetTip_BianYi");
+				}
+				return this.m_EG_PetTip_BianYi;
+			}
+		}
+
+		public Transform EG_PetTip_ShenShou
+		{
+			get
+			{
+				if (this.uiTransform == null)
+				{
+					Log.Error("uiTransform is null.");
+					return null;
+				}
+				if( this.m_EG_PetTip_ShenShou == null )
+				{
+					this.m_EG_PetTip_ShenShou = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_PetTip_ShenShou");
+				}
+				return this.m_EG_PetTip_ShenShou;
+			}
+		}
 
 		    public Transform UITransform
          {
@@ -1672,6 +1740,10 @@ namespace ET.Client
 			this.m_E_PetHeXinSuitButton = null;
 			this.m_E_PetHeXinSuitImage = null;
 			this.m_E_Text_Lv = null;
+			this.m_EG_PetTip_YeSheng = null;
+			this.m_EG_PetTip_BaoBao = null;
+			this.m_EG_PetTip_BianYi = null;
+			this.m_EG_PetTip_ShenShou = null;
 			this.m_EG_GameObject2RectTransform = null;
 			this.uiTransform = null;
 		}
@@ -1765,6 +1837,10 @@ namespace ET.Client
 		private Image m_E_JiBanImage = null;
 		private Button m_E_PetHeXinSuitButton = null;
 		private Image m_E_PetHeXinSuitImage = null;
+		private Transform m_EG_PetTip_YeSheng = null;
+		private Transform m_EG_PetTip_BaoBao = null;
+		private Transform m_EG_PetTip_BianYi = null;
+		private Transform m_EG_PetTip_ShenShou = null;
 		private RectTransform m_EG_GameObject2RectTransform = null;
 		public Transform uiTransform = null;
 	}

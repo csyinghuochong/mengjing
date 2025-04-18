@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -458,7 +459,7 @@ namespace ET.Client
             }
 
             self.uiTransform.Find("PetShowDi").gameObject.SetActive(self.ShowRolePetInfos.Count > 0);
-            self.uiTransform.Find("PetTip").gameObject.SetActive(self.ShowRolePetInfos.Count > 0);
+            //self.uiTransform.Find("PetTip").gameObject.SetActive(self.ShowRolePetInfos.Count > 0);
         }
 
         private static int NextPetNumber(this ES_PetList self)
@@ -954,11 +955,10 @@ namespace ET.Client
 
         private static void OnUpdatePetInfo(this ES_PetList self, RolePetInfo rolePetInfo)
         {
-            self.E_InputFieldNameInputField.text = rolePetInfo.PetName;
             self.E_Btn_XiuXiButton.gameObject.SetActive(rolePetInfo.PetStatus == 1);
             self.E_Btn_ChuZhanButton.gameObject.SetActive(rolePetInfo.PetStatus == 0);
             self.E_Text_Lv.text = rolePetInfo.PetLv.ToString();
-
+            
             self.UpdateAttribute(rolePetInfo);
             self.UpdateExpAndLv(rolePetInfo);
             self.UpdatePetZizhi(rolePetInfo);
@@ -999,11 +999,33 @@ namespace ET.Client
             }
 
             PetConfig petConfig = PetConfigCategory.Instance.Get(self.LastSelectItem.ConfigId);
-            if (petConfig.PetType == 2)
+            // if (petConfig.PetType == 2)
+            // {
+            //     CommonViewHelper.SetImageGray(self.Root(), self.E_ImageJinHuaImage.gameObject, false);
+            //     self.E_JinHuaReddotImage.gameObject.SetActive(false);
+            //     self.E_Lab_JinHuaText.text = "已进化";
+            // }
+            
+            self.EG_PetTip_YeSheng.gameObject.SetActive(false);
+            self.EG_PetTip_BaoBao.gameObject.SetActive(false);
+            self.EG_PetTip_BianYi.gameObject.SetActive(false);
+            self.EG_PetTip_ShenShou.gameObject.SetActive(false);
+           
+            if (petConfig.PetType >= 1)
             {
-                CommonViewHelper.SetImageGray(self.Root(), self.E_ImageJinHuaImage.gameObject, false);
-                self.E_JinHuaReddotImage.gameObject.SetActive(false);
-                self.E_Lab_JinHuaText.text = "已进化";
+                 self.EG_PetTip_ShenShou.gameObject.SetActive(true);
+                 self.E_InputFieldNameInputField.text = rolePetInfo.PetName;
+            }
+            else
+            {
+                //BabyType = 0 道具获得
+                //BabyType = 1 抓捕宝宝获得 2  抓捕变异获取 3 抓捕普通野怪获得
+                
+                self.EG_PetTip_YeSheng.gameObject.SetActive(self.LastSelectItem.BabyType == 0);
+                self.EG_PetTip_BaoBao.gameObject.SetActive(self.LastSelectItem.BabyType == 1 || self.LastSelectItem.BabyType == 3);
+                self.EG_PetTip_BianYi.gameObject.SetActive(self.LastSelectItem.BabyType == 2);
+
+                self.E_InputFieldNameInputField.text = rolePetInfo.PetName + (self.LastSelectItem.BabyType > 1 ? "(宝宝)": String.Empty );
             }
         }
 
