@@ -1,13 +1,13 @@
-﻿using UnityEngine;
+﻿
+using UnityEngine;
 using UnityEngine.UI;
-
 namespace ET.Client
 {
 	[ComponentOf(typeof(DlgCreateRole))]
 	[EnableMethod]
 	public  class DlgCreateRoleViewComponent : Entity,IAwake,IDestroy 
 	{
-		public Button E_CloseButton
+		public UnityEngine.UI.Button E_CloseButton
      	{
      		get
      		{
@@ -18,13 +18,13 @@ namespace ET.Client
      			}
      			if( this.m_E_CloseButton == null )
      			{
-		    		this.m_E_CloseButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_Close");
+		    		this.m_E_CloseButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_Close");
      			}
      			return this.m_E_CloseButton;
      		}
      	}
 
-		public Image E_CloseImage
+		public UnityEngine.UI.Image E_CloseImage
      	{
      		get
      		{
@@ -35,13 +35,13 @@ namespace ET.Client
      			}
      			if( this.m_E_CloseImage == null )
      			{
-		    		this.m_E_CloseImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_Close");
+		    		this.m_E_CloseImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Close");
      			}
      			return this.m_E_CloseImage;
      		}
      	}
 
-		public RectTransform EG_OccShow_ZhanShiRectTransform
+		public UnityEngine.RectTransform EG_OccShow_ZhanShiRectTransform
      	{
      		get
      		{
@@ -52,13 +52,13 @@ namespace ET.Client
      			}
      			if( this.m_EG_OccShow_ZhanShiRectTransform == null )
      			{
-		    		this.m_EG_OccShow_ZhanShiRectTransform = UIFindHelper.FindDeepChild<RectTransform>(this.uiTransform.gameObject,"EG_OccShow_ZhanShi");
+		    		this.m_EG_OccShow_ZhanShiRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_OccShow_ZhanShi");
      			}
      			return this.m_EG_OccShow_ZhanShiRectTransform;
      		}
      	}
 
-		public RectTransform EG_OccShow_FaShiRectTransform
+		public UnityEngine.RectTransform EG_OccShow_FaShiRectTransform
      	{
      		get
      		{
@@ -69,13 +69,13 @@ namespace ET.Client
      			}
      			if( this.m_EG_OccShow_FaShiRectTransform == null )
      			{
-		    		this.m_EG_OccShow_FaShiRectTransform = UIFindHelper.FindDeepChild<RectTransform>(this.uiTransform.gameObject,"EG_OccShow_FaShi");
+		    		this.m_EG_OccShow_FaShiRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_OccShow_FaShi");
      			}
      			return this.m_EG_OccShow_FaShiRectTransform;
      		}
      	}
 
-		public RectTransform EG_OccShow_LieRenRectTransform
+		public UnityEngine.RectTransform EG_OccShow_LieRenRectTransform
      	{
      		get
      		{
@@ -86,7 +86,7 @@ namespace ET.Client
      			}
      			if( this.m_EG_OccShow_LieRenRectTransform == null )
      			{
-		    		this.m_EG_OccShow_LieRenRectTransform = UIFindHelper.FindDeepChild<RectTransform>(this.uiTransform.gameObject,"EG_OccShow_LieRen");
+		    		this.m_EG_OccShow_LieRenRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_OccShow_LieRen");
      			}
      			return this.m_EG_OccShow_LieRenRectTransform;
      		}
@@ -101,8 +101,9 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-		        ES_ModelShow es = this.m_es_modelshow;
+     			ES_ModelShow es = this.m_es_modelshow;
      			if( es == null )
+
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"ES_ModelShow");
 		    	   this.m_es_modelshow = this.AddChild<ES_ModelShow,Transform>(subTrans);
@@ -111,7 +112,7 @@ namespace ET.Client
      		}
      	}
 
-		public InputField E_CreateRoleNameInputField
+		public UnityEngine.UI.InputField E_CreateRoleNameInputField
      	{
      		get
      		{
@@ -122,13 +123,13 @@ namespace ET.Client
      			}
      			if( this.m_E_CreateRoleNameInputField == null )
      			{
-		    		this.m_E_CreateRoleNameInputField = UIFindHelper.FindDeepChild<InputField>(this.uiTransform.gameObject,"E_CreateRoleName");
+		    		this.m_E_CreateRoleNameInputField = UIFindHelper.FindDeepChild<UnityEngine.UI.InputField>(this.uiTransform.gameObject,"E_CreateRoleName");
      			}
      			return this.m_E_CreateRoleNameInputField;
      		}
      	}
 
-		public Image E_CreateRoleNameImage
+		public UnityEngine.UI.Image E_CreateRoleNameImage
      	{
      		get
      		{
@@ -139,13 +140,13 @@ namespace ET.Client
      			}
      			if( this.m_E_CreateRoleNameImage == null )
      			{
-		    		this.m_E_CreateRoleNameImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_CreateRoleName");
+		    		this.m_E_CreateRoleNameImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_CreateRoleName");
      			}
      			return this.m_E_CreateRoleNameImage;
      		}
      	}
 
-		public ToggleGroup E_FunctionSetBtnToggleGroup
+		public UnityEngine.UI.ToggleGroup E_FunctionSetBtnToggleGroup
      	{
      		get
      		{
@@ -156,13 +157,13 @@ namespace ET.Client
      			}
      			if( this.m_E_FunctionSetBtnToggleGroup == null )
      			{
-		    		this.m_E_FunctionSetBtnToggleGroup = UIFindHelper.FindDeepChild<ToggleGroup>(this.uiTransform.gameObject,"E_FunctionSetBtn");
+		    		this.m_E_FunctionSetBtnToggleGroup = UIFindHelper.FindDeepChild<UnityEngine.UI.ToggleGroup>(this.uiTransform.gameObject,"E_FunctionSetBtn");
      			}
      			return this.m_E_FunctionSetBtnToggleGroup;
      		}
      	}
 
-		public Image E_Icon_1_1Image
+		public UnityEngine.UI.Image E_Icon_1_1Image
      	{
      		get
      		{
@@ -173,13 +174,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Icon_1_1Image == null )
      			{
-		    		this.m_E_Icon_1_1Image = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_FunctionSetBtn/Type_0/Background/XuanZhong/E_Icon_1_1");
+		    		this.m_E_Icon_1_1Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_FunctionSetBtn/Type_0/Background/XuanZhong/E_Icon_1_1");
      			}
      			return this.m_E_Icon_1_1Image;
      		}
      	}
 
-		public Image E_Icon_1_2Image
+		public UnityEngine.UI.Image E_Icon_1_2Image
      	{
      		get
      		{
@@ -190,13 +191,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Icon_1_2Image == null )
      			{
-		    		this.m_E_Icon_1_2Image = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_FunctionSetBtn/Type_0/Background/WeiXuanZhong/E_Icon_1_2");
+		    		this.m_E_Icon_1_2Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_FunctionSetBtn/Type_0/Background/WeiXuanZhong/E_Icon_1_2");
      			}
      			return this.m_E_Icon_1_2Image;
      		}
      	}
 
-		public Image E_Icon_2_1Image
+		public UnityEngine.UI.Image E_Icon_2_1Image
      	{
      		get
      		{
@@ -207,13 +208,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Icon_2_1Image == null )
      			{
-		    		this.m_E_Icon_2_1Image = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_FunctionSetBtn/Type_1/Background/XuanZhong/E_Icon_2_1");
+		    		this.m_E_Icon_2_1Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_FunctionSetBtn/Type_1/Background/XuanZhong/E_Icon_2_1");
      			}
      			return this.m_E_Icon_2_1Image;
      		}
      	}
 
-		public Image E_Icon_2_2Image
+		public UnityEngine.UI.Image E_Icon_2_2Image
      	{
      		get
      		{
@@ -224,13 +225,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Icon_2_2Image == null )
      			{
-		    		this.m_E_Icon_2_2Image = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_FunctionSetBtn/Type_1/Background/WeiXuanZhong/E_Icon_2_2");
+		    		this.m_E_Icon_2_2Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_FunctionSetBtn/Type_1/Background/WeiXuanZhong/E_Icon_2_2");
      			}
      			return this.m_E_Icon_2_2Image;
      		}
      	}
 
-		public Image E_Icon_3_1Image
+		public UnityEngine.UI.Image E_Icon_3_1Image
      	{
      		get
      		{
@@ -241,13 +242,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Icon_3_1Image == null )
      			{
-		    		this.m_E_Icon_3_1Image = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_FunctionSetBtn/Type_2/Background/XuanZhong/E_Icon_3_1");
+		    		this.m_E_Icon_3_1Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_FunctionSetBtn/Type_2/Background/XuanZhong/E_Icon_3_1");
      			}
      			return this.m_E_Icon_3_1Image;
      		}
      	}
 
-		public Image E_Icon_3_2Image
+		public UnityEngine.UI.Image E_Icon_3_2Image
      	{
      		get
      		{
@@ -258,13 +259,30 @@ namespace ET.Client
      			}
      			if( this.m_E_Icon_3_2Image == null )
      			{
-		    		this.m_E_Icon_3_2Image = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_FunctionSetBtn/Type_2/Background/WeiXuanZhong/E_Icon_3_2");
+		    		this.m_E_Icon_3_2Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_FunctionSetBtn/Type_2/Background/WeiXuanZhong/E_Icon_3_2");
      			}
      			return this.m_E_Icon_3_2Image;
      		}
      	}
 
-		public Button E_CreateRoleButton
+		public UnityEngine.RectTransform EG_SkillListNodeRectTransform
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_EG_SkillListNodeRectTransform == null )
+     			{
+		    		this.m_EG_SkillListNodeRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"ScrollView1/Viewport/EG_SkillListNode");
+     			}
+     			return this.m_EG_SkillListNodeRectTransform;
+     		}
+     	}
+
+		public UnityEngine.UI.Button E_CreateRoleButton
      	{
      		get
      		{
@@ -275,13 +293,13 @@ namespace ET.Client
      			}
      			if( this.m_E_CreateRoleButton == null )
      			{
-		    		this.m_E_CreateRoleButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_CreateRole");
+		    		this.m_E_CreateRoleButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_CreateRole");
      			}
      			return this.m_E_CreateRoleButton;
      		}
      	}
 
-		public Image E_CreateRoleImage
+		public UnityEngine.UI.Image E_CreateRoleImage
      	{
      		get
      		{
@@ -292,13 +310,13 @@ namespace ET.Client
      			}
      			if( this.m_E_CreateRoleImage == null )
      			{
-		    		this.m_E_CreateRoleImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_CreateRole");
+		    		this.m_E_CreateRoleImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_CreateRole");
      			}
      			return this.m_E_CreateRoleImage;
      		}
      	}
 
-		public Button E_RandomNameButton
+		public UnityEngine.UI.Button E_RandomNameButton
      	{
      		get
      		{
@@ -309,13 +327,13 @@ namespace ET.Client
      			}
      			if( this.m_E_RandomNameButton == null )
      			{
-		    		this.m_E_RandomNameButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_RandomName");
+		    		this.m_E_RandomNameButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_RandomName");
      			}
      			return this.m_E_RandomNameButton;
      		}
      	}
 
-		public Image E_RandomNameImage
+		public UnityEngine.UI.Image E_RandomNameImage
      	{
      		get
      		{
@@ -326,7 +344,7 @@ namespace ET.Client
      			}
      			if( this.m_E_RandomNameImage == null )
      			{
-		    		this.m_E_RandomNameImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_RandomName");
+		    		this.m_E_RandomNameImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_RandomName");
      			}
      			return this.m_E_RandomNameImage;
      		}
@@ -349,6 +367,7 @@ namespace ET.Client
 			this.m_E_Icon_2_2Image = null;
 			this.m_E_Icon_3_1Image = null;
 			this.m_E_Icon_3_2Image = null;
+			this.m_EG_SkillListNodeRectTransform = null;
 			this.m_E_CreateRoleButton = null;
 			this.m_E_CreateRoleImage = null;
 			this.m_E_RandomNameButton = null;
@@ -356,25 +375,26 @@ namespace ET.Client
 			this.uiTransform = null;
 		}
 
-		private Button m_E_CloseButton = null;
-		private Image m_E_CloseImage = null;
-		private RectTransform m_EG_OccShow_ZhanShiRectTransform = null;
-		private RectTransform m_EG_OccShow_FaShiRectTransform = null;
-		private RectTransform m_EG_OccShow_LieRenRectTransform = null;
+		private UnityEngine.UI.Button m_E_CloseButton = null;
+		private UnityEngine.UI.Image m_E_CloseImage = null;
+		private UnityEngine.RectTransform m_EG_OccShow_ZhanShiRectTransform = null;
+		private UnityEngine.RectTransform m_EG_OccShow_FaShiRectTransform = null;
+		private UnityEngine.RectTransform m_EG_OccShow_LieRenRectTransform = null;
 		private EntityRef<ES_ModelShow> m_es_modelshow = null;
-		private InputField m_E_CreateRoleNameInputField = null;
-		private Image m_E_CreateRoleNameImage = null;
-		private ToggleGroup m_E_FunctionSetBtnToggleGroup = null;
-		private Image m_E_Icon_1_1Image = null;
-		private Image m_E_Icon_1_2Image = null;
-		private Image m_E_Icon_2_1Image = null;
-		private Image m_E_Icon_2_2Image = null;
-		private Image m_E_Icon_3_1Image = null;
-		private Image m_E_Icon_3_2Image = null;
-		private Button m_E_CreateRoleButton = null;
-		private Image m_E_CreateRoleImage = null;
-		private Button m_E_RandomNameButton = null;
-		private Image m_E_RandomNameImage = null;
+		private UnityEngine.UI.InputField m_E_CreateRoleNameInputField = null;
+		private UnityEngine.UI.Image m_E_CreateRoleNameImage = null;
+		private UnityEngine.UI.ToggleGroup m_E_FunctionSetBtnToggleGroup = null;
+		private UnityEngine.UI.Image m_E_Icon_1_1Image = null;
+		private UnityEngine.UI.Image m_E_Icon_1_2Image = null;
+		private UnityEngine.UI.Image m_E_Icon_2_1Image = null;
+		private UnityEngine.UI.Image m_E_Icon_2_2Image = null;
+		private UnityEngine.UI.Image m_E_Icon_3_1Image = null;
+		private UnityEngine.UI.Image m_E_Icon_3_2Image = null;
+		private UnityEngine.RectTransform m_EG_SkillListNodeRectTransform = null;
+		private UnityEngine.UI.Button m_E_CreateRoleButton = null;
+		private UnityEngine.UI.Image m_E_CreateRoleImage = null;
+		private UnityEngine.UI.Button m_E_RandomNameButton = null;
+		private UnityEngine.UI.Image m_E_RandomNameImage = null;
 		public Transform uiTransform = null;
 	}
 }

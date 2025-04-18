@@ -3,8 +3,9 @@ using UnityEngine;
 
 namespace ET.Client
 {
-    [FriendOf(typeof (DlgCreateRole))]
-    [FriendOf(typeof (PlayerInfoComponent))]
+    [FriendOf(typeof(Scroll_Item_CreateRoleSkillItem))]
+    [FriendOf(typeof(DlgCreateRole))]
+    [FriendOf(typeof(PlayerInfoComponent))]
     public static class DlgCreateRoleSystem
     {
         public static void RegisterUIEvent(this DlgCreateRole self)
@@ -14,7 +15,7 @@ namespace ET.Client
             self.View.E_RandomNameButton.AddListener(self.OnRandomNameButton);
             self.View.E_FunctionSetBtnToggleGroup.AddListener(self.OnFunctionSetBtn);
             self.View.E_CreateRoleNameInputField.onValueChanged.AddListener((string text) => { self.CheckSensitiveWords(); });
-            
+
             ResourcesLoaderComponent resourcesLoaderComponent = self.Root().GetComponent<ResourcesLoaderComponent>();
             self.View.E_Icon_1_1Image.sprite =
                     resourcesLoaderComponent.LoadAssetSync<Sprite>(ABPathHelper.GetAtlasPath_2(ABAtlasTypes.PlayerIcon, "1"));
@@ -117,6 +118,36 @@ namespace ET.Client
             self.Occ = index + 1;
             self.View.ES_ModelShow.SetCameraPosition(new Vector3(0f, 70f, 150f));
             self.View.ES_ModelShow.ShowPlayerModel(new ItemInfo(), self.Occ, 0, new List<int>());
+
+            OccupationConfig occupationConfig = OccupationConfigCategory.Instance.Get(self.Occ);
+
+            ResourcesLoaderComponent resourcesLoaderComponent = self.Root().GetComponent<ResourcesLoaderComponent>();
+            for (int i = 0; i < occupationConfig.InitSkillID.Length; i++)
+            {
+                if (!self.ScrollItemCreateRoleSkillItems.ContainsKey(i))
+                {
+                    Scroll_Item_CreateRoleSkillItem item = self.AddChild<Scroll_Item_CreateRoleSkillItem>();
+                    string path = "Assets/Bundles/UI/Item/Item_CreateRoleSkillItem.prefab";
+
+                    GameObject prefab = resourcesLoaderComponent.LoadAssetSync<GameObject>(path);
+                    GameObject go = UnityEngine.Object.Instantiate(prefab, self.View.EG_SkillListNodeRectTransform);
+                    item.BindTrans(go.transform);
+                    self.ScrollItemCreateRoleSkillItems.Add(i, item);
+                }
+
+                Scroll_Item_CreateRoleSkillItem scrollItemCreateRoleSkillItem = self.ScrollItemCreateRoleSkillItems[i];
+                scrollItemCreateRoleSkillItem.uiTransform.gameObject.SetActive(true);
+                scrollItemCreateRoleSkillItem.OnUpdateUI(occupationConfig.InitSkillID[i]);
+            }
+
+            if (self.ScrollItemCreateRoleSkillItems.Count > occupationConfig.InitSkillID.Length)
+            {
+                for (int i = occupationConfig.InitSkillID.Length; i < self.ScrollItemCreateRoleSkillItems.Count; i++)
+                {
+                    Scroll_Item_CreateRoleSkillItem scrollItemCreateRoleSkillItem = self.ScrollItemCreateRoleSkillItems[i];
+                    scrollItemCreateRoleSkillItem.uiTransform.gameObject.SetActive(false);
+                }
+            }
         }
 
         private static void OnCloseButton(this DlgCreateRole self)

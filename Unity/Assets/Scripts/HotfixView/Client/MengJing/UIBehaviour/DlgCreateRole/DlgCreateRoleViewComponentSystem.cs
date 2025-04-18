@@ -1,7 +1,10 @@
-﻿namespace ET.Client
+﻿
+using UnityEngine;
+using UnityEngine.UI;
+namespace ET.Client
 {
 	[EntitySystemOf(typeof(DlgCreateRoleViewComponent))]
-	[FriendOfAttribute(typeof(DlgCreateRoleViewComponent))]
+	[FriendOfAttribute(typeof(ET.Client.DlgCreateRoleViewComponent))]
 	public static partial class DlgCreateRoleViewComponentSystem
 	{
 		[EntitySystem]
