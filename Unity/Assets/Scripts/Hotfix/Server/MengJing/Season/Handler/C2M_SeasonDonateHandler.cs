@@ -17,7 +17,7 @@ namespace ET.Server
                     return;
                 }
 
-                if (bagComponentS.GetItemNumber(ConfigData.CommonSeasonDonateItemId) < 1)
+                if (bagComponentS.GetItemNumber(GlobalValueConfigCategory.Instance.CommonSeasonDonateItemId) < 1)
                 {
                     response.Error = ErrorCode.ERR_ItemNotEnoughError;
                     return;
@@ -37,9 +37,9 @@ namespace ET.Server
                     return;
                 }
                 
-                bagComponentS.OnCostItemData($"{ConfigData.CommonSeasonDonateItemId};1", ItemLocType.ItemLocBag);
+                bagComponentS.OnCostItemData($"{GlobalValueConfigCategory.Instance.CommonSeasonDonateItemId};1", ItemLocType.ItemLocBag);
 
-                string[] itemlist = ConfigData.CommonSeasonDonateGetItem.Split('@');
+                string[] itemlist = GlobalValueConfigCategory.Instance.CommonSeasonDonateGetItem.Split('@');
                 string getiteminfo = itemlist[ RandomHelper.RandomNumber(0, itemlist.Length) ];
                 bagComponentS.OnAddItemData(getiteminfo, $"{ItemGetWay.Activity}_{TimeHelper.ServerNow()}");
 

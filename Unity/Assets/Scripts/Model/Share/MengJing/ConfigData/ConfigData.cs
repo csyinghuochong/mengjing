@@ -1124,14 +1124,6 @@ namespace ET
             new KeyValuePairInt(){ KeyId = 90000051, Value = 100},
         };
         
-        //赛季捐选道具ID.
-        public const int CommonSeasonDonateItemId = 10024009;
-
-        /// <summary>
-        /// 捐选随机获得道具
-        /// </summary>
-        public const string CommonSeasonDonateGetItem = "10025005;1@10025005;1@10025005;1@10025005;1@10025005;1";
-
         /// <summary>
         /// 赛季捐选奖励
         /// </summary>

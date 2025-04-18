@@ -53,8 +53,15 @@ namespace ET
         public int BabyRefreshMaxNum = 100000000;
         
         public List<int> ZhuaByGaiLvInit = new List<int>();
+        
+        //赛季捐选道具ID.
+        public  int CommonSeasonDonateItemId = 10024009;
 
-
+        /// <summary>
+        /// 捐选随机获得道具
+        /// </summary>
+        public  string CommonSeasonDonateGetItem = "10025005;1@10025005;1@10025005;1@10025005;1@10025005;1";
+        
         public override void EndInit()
         {
             DayMonsterList.Clear();
@@ -76,7 +83,8 @@ namespace ET
             {
                 this.ZhuaByGaiLvInit.Add( int.Parse(zhubugialv[i]) );
             }
-
+            CommonSeasonDonateItemId = int.Parse(this.Get(128).Value);
+            CommonSeasonDonateGetItem = this.Get(129).Value;
 
             string[] dayrefresh = this.Get(79).Value.Split('@');
             for (int i = 0; i < dayrefresh.Length; i++)
