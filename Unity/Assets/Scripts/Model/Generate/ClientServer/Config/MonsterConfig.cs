@@ -166,7 +166,7 @@ namespace ET
 		/// <summary>怪物显示的位置</summary>
 		public string ModelShowPosi { get; set; }
 		/// <summary>奇遇宠物id</summary>
-		public int QiYuPetId { get; set; }
+		public int[] QiYuPetId { get; set; }
 
 	}
 }

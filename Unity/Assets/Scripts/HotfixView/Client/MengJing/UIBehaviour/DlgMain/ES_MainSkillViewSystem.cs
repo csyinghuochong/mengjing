@@ -580,7 +580,7 @@ namespace ET.Client
             }
             else
             {
-                if (monsterConfig.QiYuPetId == 0)
+                if ( !PetHelper.IsHaveQiYuPetId(monsterConfig.QiYuPetId) )
                 {
                     return 0;
                 }

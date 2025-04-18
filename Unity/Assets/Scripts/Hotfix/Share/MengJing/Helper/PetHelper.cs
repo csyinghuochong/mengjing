@@ -417,6 +417,46 @@ namespace ET
             return jingLingConfigs;
         }
 
+        public static bool IsHaveQiYuPetId(int[] petids)
+        {
+            if (petids == null || petids.Length == 0)
+                return false;
+
+            for (int i = 0; i < petids.Length; i++)
+            {
+                if (petids[i] > 0)
+                {
+                    return true;
+                }
+            }
+
+            return true;
+        }
+        
+        //（0普通 1  宝宝 ） （ 2 变异宝宝）
+        public static int GetQiYuPetId(int[] petids, int babytype)
+        {
+            if (!IsHaveQiYuPetId(petids))
+            {
+                return 0;
+            }
+
+            if (babytype < 0 || babytype > 2)
+            {
+                return 0;
+            }
+            
+            if(babytype == 0 || babytype == 1)
+            {
+                return petids[0];
+            }
+            if(babytype == 2)
+            {
+                return petids[petids.Length >= 2 ? 1 : 0];
+            }
+
+            return 0;
+        }
 
         public static void CheckPetPosition(List<long> petTeamList, List<long> petMingPosition)
         {

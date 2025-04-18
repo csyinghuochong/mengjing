@@ -387,7 +387,7 @@ namespace ET.Server
 		}
 
 		/// <summary>
-		/// 宝宝类型  0普通 1  宝宝  2 变异宝宝  3普通怪物
+		/// 宝宝类型  0普通 1  宝宝  2 变异宝宝  3普通怪物[生成宠物的时候用到]
 		/// </summary>
 		/// <param name="monsterId"></param>
 		/// <returns></returns>

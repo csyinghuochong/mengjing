@@ -31,7 +31,7 @@ namespace ET.Server
             }
 
             MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(unitzhuabu.ConfigId);
-            if(monsterConfig.QiYuPetId == 0)
+            if(!PetHelper.IsHaveQiYuPetId( monsterConfig.QiYuPetId) )
             {
                 return;
             }
@@ -64,10 +64,10 @@ namespace ET.Server
              if (RandomHelper.RandFloat01() <= gailv * 0.0001f)
              {
                  response.Message = String.Empty;
-                 
+                
                  int babyType = zhuabuNumeric.GetAsInt(NumericType.BaByType);
-                 ///此处普通怪物类型0 转换为 3 。。。
-                 unit.GetComponent<PetComponentS>().OnAddPet(ItemGetWay.PickItem, monsterConfig.QiYuPetId, 0, 0, babyType == 0? 3: babyType, monsterConfig.Lv);
+                 ///此处普通怪物类型0  生成宠物的时候转换为 3 以作区分。。。
+                 unit.GetComponent<PetComponentS>().OnAddPet(ItemGetWay.PickItem,  PetHelper.GetQiYuPetId(monsterConfig.QiYuPetId, babyType), 0, 0, babyType == 0? 3: babyType, monsterConfig.Lv);
                  unit.GetParent<UnitComponent>().Remove(request.JingLingId);
              }
             else

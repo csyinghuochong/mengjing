@@ -147,9 +147,24 @@ namespace ET.Client
             {
                 return;
             }
-
+            NumericComponentC numericComponentC = unit.GetComponent<NumericComponentC>();
+            int babyType =  numericComponentC.GetAsInt(NumericType.BaByType);
+            string addname = CommonViewHelper.GetMonsterShowName(babyType);
             self.EG_MonsterNodeRectTransform.gameObject.SetActive(true);
-            self.E_Lab_MonsterNameText.text = monsterConfig.MonsterName;
+            
+            if (!string.IsNullOrEmpty(addname))
+            {
+                using (zstring.Block())
+                {
+                  self.E_Lab_MonsterNameText.text = zstring.Format("{0}{1}", monsterConfig.MonsterName, addname);
+                }
+
+            }
+            else
+            {
+                self.E_Lab_MonsterNameText.text = monsterConfig.MonsterName;
+            }
+            
             MapComponent mapComponent = self.Root().GetComponent<MapComponent>();
             if (mapComponent.MapType == (int)MapTypeEnum.Tower)
             {

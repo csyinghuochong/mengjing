@@ -164,7 +164,7 @@ namespace ET
 		/// <summary>是否带走buff</summary>
 		public int RemoveBuff { get; set; }
 		/// <summary>奇遇宠物id</summary>
-		public int QiYuPetId { get; set; }
+		public int[] QiYuPetId { get; set; }
 
 	}
 }
