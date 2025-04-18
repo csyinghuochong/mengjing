@@ -34,7 +34,7 @@ namespace ET.Client
         public static void OnInitUI(this DlgJingLingGet self, int jinglingid)
         {
             self.View.ES_ModelShow.SetCameraPosition(new Vector3(0f, 40, 250f));
-            self.View.ES_ModelShow.Camera.fieldOfView = 35;
+            self.View.ES_ModelShow.Camera.fieldOfView = 60;
             JingLingConfig petSkinConfig = JingLingConfigCategory.Instance.Get(jinglingid);
             self.View.ES_ModelShow.ShowOtherModel("JingLing/" + petSkinConfig.Assets).Coroutine();
             self.View.E_TextSkinNameText.text = petSkinConfig.Name;
