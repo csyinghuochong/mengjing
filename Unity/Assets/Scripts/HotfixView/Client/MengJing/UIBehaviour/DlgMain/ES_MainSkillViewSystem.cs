@@ -504,12 +504,13 @@ namespace ET.Client
             }
             if (zhuabutype == 1)
             {
-                UIComponent uiComponent = self.Root().GetComponent<UIComponent>();
-                uiComponent.CurrentNpcId = target.ConfigId;
-                uiComponent.CurrentNpcUI = WindowID.WindowID_ZhuaPu;
                 self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgMain>().View.ES_JoystickMove.uiTransform.gameObject.SetActive(false);
-                MJCameraComponent cameraComponent = self.Root().CurrentScene().GetComponent<MJCameraComponent>();
-                cameraComponent.SetBuildEnter(target, CameraBuildType.Type_0, () => { self.OnBuildEnter().Coroutine(); });
+                // UIComponent uiComponent = self.Root().GetComponent<UIComponent>();
+                // uiComponent.CurrentNpcId = target.ConfigId;
+                // uiComponent.CurrentNpcUI = WindowID.WindowID_ZhuaPu;
+                //MJCameraComponent cameraComponent = self.Root().CurrentScene().GetComponent<MJCameraComponent>();
+                //cameraComponent.SetBuildEnter(target, CameraBuildType.Type_0, () => { self.OnBuildEnter().Coroutine(); });
+                self.OnBuildEnter().Coroutine();
             }
             if (zhuabutype == 2)
             {
