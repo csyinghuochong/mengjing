@@ -211,11 +211,14 @@ namespace ET.Client
             {
                 self.E_PiLaoTextText.text = zstring.Format("{0}/{1}", userInfoComponentC.UserInfo.PiLao, maxPiLao);
             }
-
-            self.E_BaoShiDuImgImage.fillAmount = (float)userInfoComponentC.UserInfo.BaoShiDu / CommonHelp.GetMaxBaoShiDu();
+            
+            NumericComponentC numericComponent = unit.GetComponent<NumericComponentC>();
+            int skillNumber = 1 + numericComponent.GetAsInt(NumericType.MakeType_2) > 0 ? 1 : 0;
+            
+            self.E_BaoShiDuImgImage.fillAmount = (float)userInfoComponentC.UserInfo.Vitality / unit.GetMaxHuoLi(skillNumber);
             using (zstring.Block())
             {
-                self.E_BaoShiDuTextText.text = zstring.Format("{0}/{1}", userInfoComponentC.UserInfo.BaoShiDu, CommonHelp.GetMaxBaoShiDu());
+                self.E_BaoShiDuTextText.text = zstring.Format("{0}/{1}", userInfoComponentC.UserInfo.Vitality, unit.GetMaxHuoLi(skillNumber));
             }
 
             if (self.PropertyType == 0)
