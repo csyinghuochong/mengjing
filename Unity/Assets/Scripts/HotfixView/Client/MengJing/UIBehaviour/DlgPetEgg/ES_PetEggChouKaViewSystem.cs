@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace ET.Client
@@ -37,7 +38,17 @@ namespace ET.Client
 
         public static void UpdateReward(this ES_PetEggChouKa self)
         {
-            self.ES_RewardList.Refresh(ConfigData.PetChouKaRewardItemShow, 0.8f);
+            int dropId = int.Parse(GlobalValueConfigCategory.Instance.Get(40).Value.Split('@')[1]);
+
+            List<RewardItem> droplist = new List<RewardItem>();
+            droplist = DropHelper.DropIDToShowItem(dropId, 1);
+            string itemList = "";
+            for (int i = 0; i < droplist.Count; i++)
+            {
+                itemList += droplist[i].ItemID + ";" + 1 + "@";
+            }
+
+            self.ES_RewardList.Refresh(droplist, 0.8f);
         }
 
         public static void OnBtn_RolePetBagButton(this ES_PetEggChouKa self)
