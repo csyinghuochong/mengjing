@@ -888,16 +888,20 @@ namespace ET.Client
         public static void OnBtn_TargetButton(this ES_MainSkill self)
         {
             LockTargetComponent lockTargetComponent = self.Root().GetComponent<LockTargetComponent>();
-            if (Time.time - self.LastLockTime > 5)
-            {
-                lockTargetComponent.LastLockId = 0;
-                lockTargetComponent.LockTargetUnit();
-                self.LastLockTime = Time.time;
-            }
-            else
-            {
-                lockTargetComponent.LockTargetUnit(true);
-            }
+            lockTargetComponent.LastLockId = 0;
+            lockTargetComponent.ChangeTargetUnit();
+            self.LastLockTime = Time.time;
+            
+            // if (Time.time - self.LastLockTime > 1)
+            // {
+            //     lockTargetComponent.LastLockId = 0;
+            //     lockTargetComponent.LockTargetUnit(true);
+            //     self.LastLockTime = Time.time;
+            // }
+            // else
+            // {
+            //     lockTargetComponent.LockTargetUnit(true);
+            // }
         }
 
         public static void ShowCancelButton(this ES_MainSkill self, bool show)
