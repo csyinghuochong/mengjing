@@ -109,7 +109,7 @@ namespace ET.Client
             TakeCardConfig takeCardConfig = TakeCardConfigCategory.Instance.Get(self.TakeCardId);
             string dropShow = takeCardConfig.DropShow;
             List<RewardItem> droplist = new List<RewardItem>();
-            droplist = DropHelper.DropIDToShowItem(takeCardConfig.DropID, 5);
+            droplist = DropHelper.DropIDToShowItem(takeCardConfig.DropID, 1);
             string itemList = "";
             for (int i = 0; i < droplist.Count; i++)
             {

@@ -509,7 +509,9 @@ namespace ET.Client
                  uiComponent.CurrentNpcId = target.ConfigId;
                  uiComponent.CurrentNpcUI = WindowID.WindowID_ZhuaPu;
                 MJCameraComponent cameraComponent = self.Root().CurrentScene().GetComponent<MJCameraComponent>();
+                
                 cameraComponent.SetBuildEnter(target, CameraBuildType.Type_0, () => { self.OnBuildEnter().Coroutine(); });
+                cameraComponent.NoHideIds = new List<long>() { target.Id  };
             }
             if (zhuabutype == 2)
             {

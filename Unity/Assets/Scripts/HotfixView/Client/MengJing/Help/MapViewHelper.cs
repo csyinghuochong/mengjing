@@ -103,13 +103,12 @@ namespace ET.Client
 
         }
 
-        public static void ShowOtherUnit(Scene root, bool show)
+        public static void ShowOtherUnit(Scene root, bool show, List<long> nohideids)
         {
             List<EntityRef<Unit>> units = root.CurrentScene().GetComponent<UnitComponent>().GetAll();
             for (int i = 0; i < units.Count; i++)
             {
                 Unit uu = units[i];
-               
 
                 if (uu.MainHero)
                 {
@@ -122,6 +121,11 @@ namespace ET.Client
                 }
                 else
                 {
+                    if (nohideids.Contains(uu.Id))
+                    {
+                        continue;
+                    }
+
                     uu.EnterHide();
                 }
             }

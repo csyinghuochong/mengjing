@@ -120,7 +120,8 @@ namespace ET.Client
             {
                 self.OnBuildEnter();
                 self.OnBuildEnter = null;
-                MapViewHelper.ShowOtherUnit(self.Root(), false);
+                MapViewHelper.ShowOtherUnit(self.Root(), false, self.NoHideIds);
+                self.NoHideIds.Clear();
             }
 
             if (self.BuildUnit == null)
@@ -328,7 +329,7 @@ namespace ET.Client
             Vector3 unitPos = unit.Position;
             self.OldCameraDirection = self.MainCamera.transform.position - unitPos;
             self.OnBuildEnter = action;
-
+            self.NoHideIds.Clear();
             // UnitHelper.GetMyUnitFromClientScene(self.Root()).GetComponent<UIPlayerHpComponent>()?.ShowHearBar(false);
             // self.Root().GetComponent<GlobalComponent>().BloodRoot.gameObject.SetActive(false);
         }
@@ -340,8 +341,7 @@ namespace ET.Client
             self.CameraMoveType = CameraMoveType.BuildExit;
             self.OldCameraPostion = self.MainCamera.transform.localPosition;
             self.TargetPosition = unit.Position + self.OffsetPosition;
-
-            MapViewHelper.ShowOtherUnit(self.Root(), true);
+            MapViewHelper.ShowOtherUnit(self.Root(), true, null);
         }
 
         public static void OnEnterScene(this MJCameraComponent self, int sceneTypeEnum)

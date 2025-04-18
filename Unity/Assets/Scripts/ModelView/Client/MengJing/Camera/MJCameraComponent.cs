@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
 
@@ -113,5 +114,7 @@ namespace ET.Client
         public float3 BuildUnitPos { get; set; }
 
         public Action OnBuildEnter { get; set; }
+
+        public List<long> NoHideIds { get; set; } = new();
     }
 }
