@@ -38,7 +38,7 @@ namespace ET.Client
             JingLingConfig petSkinConfig = JingLingConfigCategory.Instance.Get(jinglingid);
             self.View.ES_ModelShow.ShowOtherModel("JingLing/" + petSkinConfig.Assets).Coroutine();
             self.View.E_TextSkinNameText.text = petSkinConfig.Name;
-            self.View.E_TextDesText.text = petSkinConfig.Des;
+            self.View.E_TextDesText.text = petSkinConfig.ProDes;
         }
     }
 }
