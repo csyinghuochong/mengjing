@@ -1104,7 +1104,7 @@ namespace ET
             new KeyValuePairLong(){ KeyId = 4, Value = 1738339200001, Value2 = 1753977600000 },
         };
 
-        public const int SeasonBossId = 90000051;
+        public const int SeasonBossId = 820001;
 
         /// <summary>
         /// 赛季BOSS  bossid->exp  默认O级
@@ -1112,16 +1112,16 @@ namespace ET
         [StaticField]
         public static List<KeyValuePairInt> CommonSeasonBossList = new List<KeyValuePairInt>()
         {
-            new KeyValuePairInt(){ KeyId = 90000051, Value = 10},
-            new KeyValuePairInt(){ KeyId = 90000051, Value = 20},
-            new KeyValuePairInt(){ KeyId = 90000051, Value = 30},
-            new KeyValuePairInt(){ KeyId = 90000051, Value = 40},
-            new KeyValuePairInt(){ KeyId = 90000051, Value = 50},
-            new KeyValuePairInt(){ KeyId = 90000051, Value = 60},
-            new KeyValuePairInt(){ KeyId = 90000051, Value = 70},
-            new KeyValuePairInt(){ KeyId = 90000051, Value = 80},
-            new KeyValuePairInt(){ KeyId = 90000051, Value = 90},
-            new KeyValuePairInt(){ KeyId = 90000051, Value = 100},
+            new KeyValuePairInt(){ KeyId = 820001, Value = 10},
+            new KeyValuePairInt(){ KeyId = 820001, Value = 20},
+            new KeyValuePairInt(){ KeyId = 820001, Value = 30},
+            new KeyValuePairInt(){ KeyId = 820001, Value = 40},
+            new KeyValuePairInt(){ KeyId = 820001, Value = 50},
+            new KeyValuePairInt(){ KeyId = 820001, Value = 60},
+            new KeyValuePairInt(){ KeyId = 820001, Value = 70},
+            new KeyValuePairInt(){ KeyId = 820001, Value = 80},
+            new KeyValuePairInt(){ KeyId = 820001, Value = 90},
+            new KeyValuePairInt(){ KeyId = 820001, Value = 100},
         };
         
         /// <summary>
