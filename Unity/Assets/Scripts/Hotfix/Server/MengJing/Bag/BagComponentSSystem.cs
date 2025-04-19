@@ -1398,17 +1398,17 @@ namespace ET.Server
                     }
 
                     //刷新传承属性
-                    if (itemCof.ItemType == ItemTypeEnum.Equipment && itemCof.EquipType != 101
-                        && itemCof.ItemQuality >= 5 && itemCof.UseLv >= 60)
-                    {
-                        int occ = unit.GetComponent<UserInfoComponentS>().GetOcc();
-                        int occTwo = unit.GetComponent<UserInfoComponentS>().GetOccTwo();
-                        int skillid = XiLianHelper.XiLianChuanChengJianDing(itemCof, occ, occTwo);
-                        if (skillid != 0)
-                        {
-                            useBagInfo.InheritSkills.Add(skillid);
-                        }
-                    }
+                    // if (itemCof.ItemType == ItemTypeEnum.Equipment && itemCof.EquipType != 101
+                    //     && itemCof.ItemQuality >= 5 && itemCof.UseLv >= 60)
+                    // {
+                    //     int occ = unit.GetComponent<UserInfoComponentS>().GetOcc();
+                    //     int occTwo = unit.GetComponent<UserInfoComponentS>().GetOccTwo();
+                    //     int skillid = XiLianHelper.XiLianChuanChengJianDing(itemCof, occ, occTwo);
+                    //     if (skillid != 0)
+                    //     {
+                    //         useBagInfo.InheritSkills.Add(skillid);
+                    //     }
+                    // }
 
                     // 振幅卷轴
                     if (itemCof.ItemType == ItemTypeEnum.Consume && itemCof.ItemSubType == 17)
