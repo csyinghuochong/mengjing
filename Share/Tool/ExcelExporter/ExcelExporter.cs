@@ -450,7 +450,7 @@ namespace ET
                     stringBuilder.Append($"{t.GetMessage()}\n");
                 }
 
-                throw new Exception($"动态编译失败:\n{stringBuilder}");
+                throw new Exception($"<color=#FF0000>动态编译失败:\n{stringBuilder}</color>");
             }
 
             memSteam.Seek(0, SeekOrigin.Begin);
@@ -673,7 +673,7 @@ namespace ET
                         {
                             if (!int.TryParse(s, out int result))
                             {
-                                throw new Exception(hint + "报错内容(int[])： " + value);
+                                throw new Exception("<color=#FF0000>" + hint + "报错内容(int[])： " + value + "</color>");
                             }
                         }
                     }
@@ -689,7 +689,7 @@ namespace ET
                         {
                             if (!long.TryParse(s, out long result))
                             {
-                                throw new Exception(hint + "报错内容(long[])： " + value);
+                                throw new Exception("<color=#FF0000>" + hint  + "报错内容(long[])： " + value + "</color>");
                             }
                         }
                     }
@@ -705,7 +705,7 @@ namespace ET
                         {
                             if (!float.TryParse(s, out float result))
                             {
-                                throw new Exception(hint + "报错内容(float[])： " + value);
+                                throw new Exception("<color=#FF0000>" + hint  + "报错内容(float[])： " + value + "</color>");
                             }
                         }
                     }
@@ -721,7 +721,7 @@ namespace ET
                         {
                             if (!double.TryParse(s, out double result))
                             {
-                                throw new Exception(hint + "报错内容(double[])： " + value);
+                                throw new Exception("<color=#FF0000>" + hint  + "报错内容(double[])： " + value + "</color>");
                             }
                         }
                     }
@@ -742,7 +742,7 @@ namespace ET
 
                     if (!int.TryParse(value, out int result))
                     {
-                        throw new Exception(hint + "报错内容(int)： " + value);
+                        throw new Exception("<color=#FF0000>" + hint  + "报错内容(int)： " + value + "</color>");
                     }
 
                     return value;
@@ -757,7 +757,7 @@ namespace ET
 
                     if (!long.TryParse(value, out long result))
                     {
-                        throw new Exception(hint + "报错内容(long)： " + value);
+                        throw new Exception("<color=#FF0000>" + hint  + "报错内容(long)： " + value + "</color>");
                     }
 
                     return value;
@@ -772,7 +772,7 @@ namespace ET
 
                     if (!float.TryParse(value, out float result))
                     {
-                        throw new Exception(hint + "报错内容(float)： " + value);
+                        throw new Exception("<color=#FF0000>" + hint  + "报错内容(float)： " + value + "</color>");
                     }
 
                     return value;
@@ -787,7 +787,7 @@ namespace ET
 
                     if (!double.TryParse(value, out double result))
                     {
-                        throw new Exception(hint + "报错内容(double)： " + value);
+                        throw new Exception("<color=#FF0000>" + hint  + "报错内容(double)： " + value + "</color>");
                     }
 
                     return value;
@@ -802,7 +802,7 @@ namespace ET
                     value = value.Replace("\"", "\\\"");
                     return $"\"{value}\"";
                 default:
-                    throw new Exception($"不支持此类型: {type}");
+                    throw new Exception($"<color=#FF0000>不支持此类型: {type}</color>");
             }
         }
 
@@ -840,7 +840,7 @@ namespace ET
                 }
                 catch (Exception e)
                 {
-                    throw new Exception($"json : {jsonPath} error", e);
+                    throw new Exception($"<color=#FF0000>json : {jsonPath} error</color>", e);
                 }
             }
 
