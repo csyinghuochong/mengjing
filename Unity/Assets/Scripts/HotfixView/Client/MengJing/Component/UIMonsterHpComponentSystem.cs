@@ -380,6 +380,8 @@ namespace ET.Client
                 rc.Get<GameObject>("Dead").SetActive(false);
                 rc.Get<GameObject>("ReviveTime").SetActive(false);
                 rc.Get<GameObject>("Lal_Lv").SetActive(true);
+                rc.Get<GameObject>("ReviveTime").transform.localPosition = new Vector3(0f, 66f, 0f);
+                rc.Get<GameObject>("Lal_Name").transform.localPosition = new Vector3(0f, 28f, 0f);
             }
 
             self.UpdateBlood();
@@ -405,6 +407,8 @@ namespace ET.Client
                 rc.Get<GameObject>("Dead").SetActive(true);
                 rc.Get<GameObject>("ReviveTime").SetActive(true);
                 rc.Get<GameObject>("Lal_Lv").SetActive(false);
+                rc.Get<GameObject>("ReviveTime").transform.localPosition = new Vector3(0f, 200f, 0f);
+                rc.Get<GameObject>("Lal_Name").transform.localPosition = new Vector3(0f, 150f, 0f);
                 self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
                 self.Timer = self.Root().GetComponent<TimerComponent>().NewRepeatedTimer(1000, TimerInvokeType.UIUnitReviveTime, self);
                 self.OnTimer();     
@@ -472,7 +476,7 @@ namespace ET.Client
             using (zstring.Block())
             {
                 string showStr = zstring.Format("{0}时{1}分{2}秒", hour, min, sec);
-                reviveTime.GetComponent<Text>().text = zstring.Format("{0} 刷新剩余时间:{1}", monsterConfig.MonsterName, showStr);
+                reviveTime.GetComponent<Text>().text = zstring.Format("刷新剩余时间:{0}",  showStr);
             }
         }
 
