@@ -188,7 +188,7 @@ namespace ET.Client
                     long masterId = unit.GetComponent<NumericComponentC>().GetAsLong(NumericType.MasterId);
                     Unit master = unit.GetParent<UnitComponent>().Get(masterId);
                     numericComponent = unit.GetComponent<NumericComponentC>();
-                    
+                    self.UnitAssetsPath = string.Empty;
                     int nowdead = numericComponent.GetAsInt(NumericType.Now_Dead);
                     if (nowdead == 1)
                     {
@@ -1148,7 +1148,7 @@ namespace ET.Client
 
         public static void OnRevive(this GameObjectComponent self)
         {
-           
+            
             self.OnTranferHandler(0, true);
             
             self.LoadGameObject();

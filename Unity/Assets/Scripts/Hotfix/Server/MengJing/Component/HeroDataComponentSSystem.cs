@@ -492,11 +492,11 @@ namespace ET.Server
              Unit unit = self.GetParent<Unit>();
              NumericComponentS numericComponent  = unit.GetComponent<NumericComponentS>();
              long max_hp = numericComponent.GetAsLong(NumericType.Now_MaxHp);
-
+             
+             numericComponent.ApplyValue(NumericType.ReviveTime, 0);
              numericComponent.ApplyValue(NumericType.Now_Dead, 0);
              numericComponent.ApplyValue(NumericType.Now_Hp, max_hp);
-             numericComponent.ApplyValue(NumericType.ReviveTime, 0);
-             
+
              unit.Position = unit.GetBornPostion();
              unit.GetComponent<AIComponent>()?.Begin();
              unit.GetComponent<SkillPassiveComponent>()?.Begin();

@@ -6,7 +6,7 @@
         protected override async ETTask Run(Scene root, UnitRevive args)
         {
             Unit unit = args.Unit;
-            unit.GetComponent<FsmComponent>()?.ChangeState(FsmStateEnum.FsmIdleState);
+            
             switch (unit.Type)
             {
                 case UnitType.Player:
@@ -25,6 +25,8 @@
             {
                 root.GetComponent<UIComponent>().GetDlgLogic<DlgMain>().OnSelfRevive();
             }
+            
+            unit.GetComponent<FsmComponent>()?.ChangeState(FsmStateEnum.FsmIdleState);
             await ETTask.CompletedTask;
         }
     }
