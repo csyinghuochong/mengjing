@@ -33,7 +33,7 @@ namespace ET.Client
 		public static void RegisterUIEvent(this DlgSingleHappyMain self)
 		{
 			
-			self.View.E_ButtonMove_1Button.AddListener( self.OnuttonMove_1Button );
+			self.View.E_ButtonMove_1Button.AddListenerAsync( self.OnuttonMove_1Button );
 			self.View.E_ButtonMove_2Button.AddListener( self.OnuttonMove_2Button );
 			self.View.E_ButtonMove_3Button.AddListener( self.OnuttonMove_3Button );
 			self.View.E_ButtonExplain.AddListener( self.OnButtonExplain );
@@ -113,7 +113,7 @@ namespace ET.Client
 		}
 
 
-		private static void  OnuttonMove_1Button(this DlgSingleHappyMain self)
+		private static async  ETTask OnuttonMove_1Button(this DlgSingleHappyMain self)
 		{
 			Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
 			NumericComponentC numericComponentS = unit.GetComponent<NumericComponentC>();
@@ -133,8 +133,37 @@ namespace ET.Client
 				return;
 			}
 
-			ActivityNetHelper.SingleHappyOperateRequest( self.Root(),1 ).Coroutine();
+		 	await ActivityNetHelper.SingleHappyOperateRequest( self.Root(),1 );
+		    if (self.IsDisposed)
+		    {
+			    return;
+		    }
+		    self.ShowTimes();
+		    self.OnButtonPick();
 		}
+		
+		public static void OnButtonPick(this DlgSingleHappyMain self)
+		{
+			if (self.Root().GetComponent<BagComponentC>().GetBagLeftCell(ItemLocType.ItemLocBag) <= 0)
+			{
+				HintHelp.ShowErrorHint(self.Root(), ErrorCode.ERR_BagIsFull);
+				return;
+			}
+
+			Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
+			int cellindex = unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.SingleHappyCellIndex);
+
+			List<Unit> units = MapHelper.GetCanShiQuByCell(self.Root(), cellindex);
+			if (units.Count > 0)
+			{
+				self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgMain>().View.ES_MainSkill.RequestShiQu(units).Coroutine();
+
+				//播放音效
+				CommonViewHelper.PlayUIMusic("10004");
+				return;
+			}
+		}
+
 		
 		private static  void OnuttonMove_2Button(this DlgSingleHappyMain self)
 		{
