@@ -71,6 +71,7 @@ namespace ET
         public const int PetMelee = 27;      //宠物乱斗
         public const int DragonDungeon = 28;  //龙与地下城副本模式
         public const int PetMatch = 29;      //宠物匹配
+        public const int SingleHappy = 30;   //喜从天降 单人模式
     }
 
     public static class SceneSubTypeEnum
