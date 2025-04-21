@@ -79,6 +79,11 @@ namespace ET.Server
                 List<RewardItem> rewardist = new List<RewardItem>();
                 DropHelper.DropIDToDropItem(dropid, rewardist);
 
+                if (rewardist.Count == 0)
+                {
+                    rewardist.Add( new RewardItem(){ItemID = 1, ItemNum = 10} );
+                }
+
                 if (rewardist.Count > 100)
                 {
                     rewardist = rewardist.GetRange(0, 1);
