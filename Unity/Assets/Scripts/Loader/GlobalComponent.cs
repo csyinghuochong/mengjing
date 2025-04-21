@@ -24,7 +24,6 @@ namespace ET
             self.UICamera = GameObject.Find("/Global/UICamera").transform;
             self.GlobalConfig = Resources.Load<GlobalConfig>("GlobalConfig");
 
-            GameObject uiRoot = GameObject.Find("/Global/UI");
             self.BloodPlayer = new GameObject("BloodPlayer");
             self.BloodPlayer.AddComponent<RectTransform>();
             SetParent(self.BloodPlayer, self.BloodRoot.gameObject);
@@ -46,6 +45,23 @@ namespace ET
             SetParent(self.BloodText_Layer2, self.BloodText);
         }
 
+        [EntitySystem]
+        public static void Destroy(this GlobalComponent self)
+        {
+            GameObject.Destroy(  self.BloodPlayer );
+            GameObject.Destroy(  self.BloodMonster );
+            GameObject.Destroy(  self.BloodText );
+            GameObject.Destroy(  self.BloodText_Layer0 );
+            GameObject.Destroy(  self.BloodText_Layer1 );
+            GameObject.Destroy(  self.BloodText_Layer2 );
+            self.BloodPlayer  = null;
+            self.BloodMonster= null;
+            self.BloodText = null;
+            self.BloodText_Layer0 = null;
+            self.BloodText_Layer1 = null;
+            self.BloodText_Layer2 = null;
+        }
+
         public static void SetParent(GameObject son, GameObject parent)
         {
             if (son == null || parent == null)
@@ -57,7 +73,7 @@ namespace ET
     }
 
     [ComponentOf(typeof(Scene))]
-    public class GlobalComponent : Entity, IAwake
+    public class GlobalComponent : Entity, IAwake, IDestroy
     {
         [StaticField]
         public static GlobalComponent Instance { get; set; }

@@ -42,7 +42,7 @@ public class NpcLocal : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (this.Target == null)
+        if (this.Target == null || this.Blood == null)
         {
             return;
         }
