@@ -19,7 +19,21 @@ namespace ET.Client
             self.E_Btn_HuoDong_XiaoGuiButton.AddListener(self.OnBtn_HuoDong_XiaoGuiButton);
             
             int openDay = TimeHelper.GetServeOpenDay( self.Root().GetComponent<PlayerInfoComponent>().ServerItem.ServerOpenTime);
-            self.EG_UICountryTaskItem_0RectTransform.gameObject.SetActive(openDay <= 7);
+            self.EG_UICountryTaskItem_0RectTransform.gameObject.SetActive(openDay <= 7 && false);
+
+            Transform transTaskListNodeform =  self.UITransform.Find("Right/ScrollView_1/Viewport/TaskListNode");
+            transTaskListNodeform.Find("UICountryTaskItem_1").gameObject.SetActive(false);
+            transTaskListNodeform.Find("UICountryTaskItem_2").gameObject.SetActive(FuntionConfigCategory.Instance.Get(1023).IfOpen =="0");
+            transTaskListNodeform.Find("UICountryTaskItem_3").gameObject.SetActive(FuntionConfigCategory.Instance.Get(1031).IfOpen =="0");
+            transTaskListNodeform.Find("UICountryTaskItem_4").gameObject.SetActive(FuntionConfigCategory.Instance.Get(1060).IfOpen =="0");
+            transTaskListNodeform.Find("UICountryTaskItem_5").gameObject.SetActive(FuntionConfigCategory.Instance.Get(1057).IfOpen =="0");
+            transTaskListNodeform.Find("UICountryTaskItem_6").gameObject.SetActive(FuntionConfigCategory.Instance.Get(1025).IfOpen =="0");
+            transTaskListNodeform.Find("UICountryTaskItem_7").gameObject.SetActive(FuntionConfigCategory.Instance.Get(1061).IfOpen =="0");
+            transTaskListNodeform.Find("UICountryTaskItem_8").gameObject.SetActive(FuntionConfigCategory.Instance.Get(1052).IfOpen =="0");
+            transTaskListNodeform.Find("UICountryTaskItem_9").gameObject.SetActive(FuntionConfigCategory.Instance.Get(1055).IfOpen =="0");
+            transTaskListNodeform.Find("UICountryTaskItem_10").gameObject.SetActive(FuntionConfigCategory.Instance.Get(1043).IfOpen =="0");
+            transTaskListNodeform.Find("UICountryTaskItem_11").gameObject.SetActive(FuntionConfigCategory.Instance.Get(1045).IfOpen =="0");
+            transTaskListNodeform.Find("UICountryTaskItem_12").gameObject.SetActive(FuntionConfigCategory.Instance.Get(1058).IfOpen =="0");
         }
 
         [EntitySystem]

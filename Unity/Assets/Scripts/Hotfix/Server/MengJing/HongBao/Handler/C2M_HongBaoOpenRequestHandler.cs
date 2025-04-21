@@ -6,6 +6,14 @@ namespace ET.Server
     {
         protected override async ETTask Run(Unit unit, C2M_HongBaoOpenRequest request, M2C_HongBaoOpenResponse response)
         {
+
+            if (FuntionConfigCategory.Instance.Get(1023).IfOpen !="0")
+            {
+                response.Error = ErrorCode.ERR_ModifyData;
+
+                return;
+            }
+
             if (unit.GetComponent<UserInfoComponentS>().UserInfo.Lv < 12)
             {
                 response.Error = ErrorCode.ERR_HongBaoLevel;
