@@ -211,7 +211,7 @@ namespace ET.Client
             if (TaskConfigCategory.Instance.Contain(taskid) && TaskConfigCategory.Instance.Get(taskid).TaskType == TaskTypeEnum.Treasure)
             {
                 // 任务公告板
-                List<int> tasList = scene.GetComponent<TaskComponentC>().GetOpenTaskIds(1008);
+                List<int> tasList = scene.GetComponent<TaskComponentC>().GetOpenTaskIds(1024);
                 foreach (int id in tasList)
                 {
                     TaskConfig taskConfig = TaskConfigCategory.Instance.Get(id);
