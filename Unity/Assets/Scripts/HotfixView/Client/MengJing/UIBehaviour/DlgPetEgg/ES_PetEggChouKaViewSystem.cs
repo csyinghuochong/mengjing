@@ -73,7 +73,7 @@ namespace ET.Client
             int totalTimes = numericComponent.GetAsInt(NumericType.PetExploreNumber);
             using (zstring.Block())
             {
-                self.E_Text_TotalNumberText.text = zstring.Format("次数：{0}/{1}", totalTimes, GlobalValueConfigCategory.Instance.Get(123).Value2);
+                self.E_Text_TotalNumberText.text = zstring.Format("次数：{0}/{1}", totalTimes, int.Parse(GlobalValueConfigCategory.Instance.Get(123).Value));
             }
 
             self.E_Text_PetExploreLucklyText.text = numericComponent.GetAsInt(NumericType.PetExploreLuckly).ToString();
@@ -134,7 +134,7 @@ namespace ET.Client
                 return;
             }
 
-            if (self.Root().GetComponent<PetComponentC>().RolePetBag.Count >= GlobalValueConfigCategory.Instance.Get(119).Value2)
+            if (self.Root().GetComponent<PetComponentC>().RolePetBag.Count >= int.Parse(GlobalValueConfigCategory.Instance.Get(119).Value))
             {
                 FlyTipComponent.Instance.ShowFlyTip("请及时清理探索宠物仓库！");
                 return;

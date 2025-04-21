@@ -26,7 +26,7 @@ namespace ET.Client
 
         public static void UpdateInfo(this ES_DragonDungeonShop self)
         {
-            int shopid = GlobalValueConfigCategory.Instance.Get(76).Value2;
+            int shopid = int.Parse(GlobalValueConfigCategory.Instance.Get(76).Value);
             self.E_ItemNumText.text = self.Root().GetComponent<BagComponentC>().GetItemNumber(StoreSellConfigCategory.Instance.Get(shopid).SellType).ToString();
             int playLv = self.Root().GetComponent<UserInfoComponentC>().UserInfo.Lv;
             

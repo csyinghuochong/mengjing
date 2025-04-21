@@ -199,7 +199,7 @@ namespace ET.Client
 				FlyTipComponent.Instance.ShowFlyTip("此道具不能上架！");
 				return;
 			}
-			if (self.PaiMaiItemInfos.Count >= GlobalValueConfigCategory.Instance.Get(50).Value2)
+			if (self.PaiMaiItemInfos.Count >= int.Parse(GlobalValueConfigCategory.Instance.Get(50).Value))
 			{
 				FlyTipComponent.Instance.ShowFlyTip("已经达到最大上架数量！");
 				return;
@@ -307,7 +307,7 @@ namespace ET.Client
 			
 			self.AddUIScrollItems(ref self.ScrollItemPaiMaiSellItems, self.ShowPaiMaiItemInfos.Count);
 			self.E_PaiMaiSellItemsLoopVerticalScrollRect.SetVisible(true, self.ShowPaiMaiItemInfos.Count);
-			int maxNum = GlobalValueConfigCategory.Instance.Get(50).Value2;
+			int maxNum =int.Parse(GlobalValueConfigCategory.Instance.Get(50).Value);
 			using (zstring.Block())
 			{
 				self.E_ShangJiaNumberText.text = zstring.Format("已上架:{0}/{1}", self.PaiMaiItemInfos.Count, maxNum);

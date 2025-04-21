@@ -39,7 +39,7 @@ namespace ET.Client
 
         public static void UpdateInfo(this ES_TowerShop self)
         {
-            int shopid = GlobalValueConfigCategory.Instance.Get(64).Value2;
+            int shopid = int.Parse(GlobalValueConfigCategory.Instance.Get(64).Value);
             int playLv = self.Root().GetComponent<UserInfoComponentC>().UserInfo.Lv;
             using (zstring.Block())
             {

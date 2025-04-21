@@ -212,7 +212,7 @@ namespace ET.Client
         public static async ETTask BeginCountdown(this DlgPetMain self)
         {
             long instanceId = self.InstanceId;
-            int cdTime = GlobalValueConfigCategory.Instance.Get(60).Value2;
+            int cdTime = int.Parse(GlobalValueConfigCategory.Instance.Get(60).Value);
 
             if (self.EnemyNumber == 0)
             {

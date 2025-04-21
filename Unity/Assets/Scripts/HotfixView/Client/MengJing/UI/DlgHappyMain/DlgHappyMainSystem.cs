@@ -131,11 +131,11 @@ namespace ET.Client
             {
                 //金币消耗
                 GlobalValueConfig globalValueConfig1 = GlobalValueConfigCategory.Instance.Get(94);
-                self.View.E_TextTip_2Text.text = zstring.Format("金币消耗:{0}", globalValueConfig1.Value2);
+                self.View.E_TextTip_2Text.text = zstring.Format("金币消耗:{0}", int.Parse(globalValueConfig1.Value));
 
                 //钻石消耗
                 GlobalValueConfig globalValueConfig2 = GlobalValueConfigCategory.Instance.Get(95);
-                self.View.E_TextTip_3Text.text = zstring.Format("钻石消耗:{0}", globalValueConfig2.Value2);
+                self.View.E_TextTip_3Text.text = zstring.Format("钻石消耗:{0}", int.Parse(globalValueConfig2.Value));
             }
         }
 
@@ -178,7 +178,7 @@ namespace ET.Client
             if (moveType == 2)
             {
                 GlobalValueConfig globalValueConfig = GlobalValueConfigCategory.Instance.Get(94);
-                if (userInfoComponent.UserInfo.Gold < globalValueConfig.Value2)
+                if (userInfoComponent.UserInfo.Gold <int.Parse( globalValueConfig.Value))
                 {
                     HintHelp.ShowErrorHint(self.Root(), ErrorCode.ERR_GoldNotEnoughError);
                     return;
@@ -186,7 +186,7 @@ namespace ET.Client
 
                 using (zstring.Block())
                 {
-                    PopupTipHelp.OpenPopupTip(self.Root(), "喜从天降", zstring.Format("是否消耗{0}金币?", globalValueConfig.Value2), async () =>
+                    PopupTipHelp.OpenPopupTip(self.Root(), "喜从天降", zstring.Format("是否消耗{0}金币?",int.Parse( globalValueConfig.Value)), async () =>
                     {
                         long instanceId = self.InstanceId;
                         int error = await ActivityNetHelper.HappyMoveRequest(self.Root(), moveType);
@@ -210,7 +210,7 @@ namespace ET.Client
             if (moveType == 3)
             {
                 GlobalValueConfig globalValueConfig = GlobalValueConfigCategory.Instance.Get(95);
-                if (userInfoComponent.UserInfo.Diamond < globalValueConfig.Value2)
+                if (userInfoComponent.UserInfo.Diamond < int.Parse(globalValueConfig.Value))
                 {
                     HintHelp.ShowErrorHint(self.Root(), ErrorCode.ERR_DiamondNotEnoughError);
                     return;
@@ -218,7 +218,7 @@ namespace ET.Client
 
                 using (zstring.Block())
                 {
-                    PopupTipHelp.OpenPopupTip(self.Root(), "喜从天降", zstring.Format("是否消耗{0}钻石?", globalValueConfig.Value2), async () =>
+                    PopupTipHelp.OpenPopupTip(self.Root(), "喜从天降", zstring.Format("是否消耗{0}钻石?", int.Parse(globalValueConfig.Value)), async () =>
                     {
                         long instanceId = self.InstanceId;
                         int error = await ActivityNetHelper.HappyMoveRequest(self.Root(), moveType);
