@@ -248,7 +248,7 @@ namespace ET.Client
         public static async ETTask AutoPickItem(this UIDropComponent self)
         {
             MapComponent mapComponent = self.Root().GetComponent<MapComponent>();
-            if (mapComponent.MapType == MapTypeEnum.Happy)
+            if (mapComponent.MapType == MapTypeEnum.Happy || mapComponent.MapType == MapTypeEnum.SingleHappy)
             {
                 return;
             }

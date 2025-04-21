@@ -2012,6 +2012,11 @@ namespace ET.Client
                     self.View.ES_MainSkill.uiTransform.gameObject.SetActive(false);
                     self.View.ES_JoystickMove.uiTransform.gameObject.SetActive(false);
                     break;
+                case MapTypeEnum.SingleHappy:
+                    self.View.EG_HomeButtonRectTransform.gameObject.SetActive(false);
+                    self.View.ES_MainSkill.uiTransform.gameObject.SetActive(false);
+                    self.View.ES_JoystickMove.uiTransform.gameObject.SetActive(false);
+                    break;
                 case MapTypeEnum.RunRace:
                     self.View.EG_HomeButtonRectTransform.gameObject.SetActive(false);
                     self.View.ES_MainSkill.uiTransform.gameObject.SetActive(true);

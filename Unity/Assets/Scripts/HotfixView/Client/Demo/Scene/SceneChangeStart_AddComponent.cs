@@ -47,6 +47,9 @@ namespace ET.Client
                     case MapTypeEnum.Happy:
                         root.GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_HappyMain);
                         break;
+                    case MapTypeEnum.SingleHappy:
+                        root.GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_SingleHappyMain);
+                        break;
                     case MapTypeEnum.Battle:
                         root.GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_BattleMain);
                         break;

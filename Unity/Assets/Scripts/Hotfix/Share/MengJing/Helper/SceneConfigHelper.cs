@@ -66,7 +66,8 @@ namespace ET
                 || sceneTypeEnum == MapTypeEnum.SealTower
                 || sceneTypeEnum == MapTypeEnum.PetMing
                 || sceneTypeEnum == MapTypeEnum.SeasonTower
-                || sceneTypeEnum == MapTypeEnum.PetMelee;
+                || sceneTypeEnum == MapTypeEnum.PetMelee
+                || sceneTypeEnum == MapTypeEnum.SingleHappy;
         }
 
 
@@ -80,7 +81,8 @@ namespace ET
                 && sceneType != MapTypeEnum.Happy
                 && sceneType != MapTypeEnum.RunRace
                 && sceneType != MapTypeEnum.Demon
-                && sceneType != MapTypeEnum.SeasonTower;
+                && sceneType != MapTypeEnum.SeasonTower
+                && sceneType != MapTypeEnum.SingleHappy;
         }
 
         public static bool ShowLeftButton(int sceneType)
@@ -89,7 +91,8 @@ namespace ET
                 && sceneType != MapTypeEnum.MiJing
                 && sceneType != MapTypeEnum.Happy
                 && sceneType != MapTypeEnum.RunRace
-                && sceneType != MapTypeEnum.Demon;
+                && sceneType != MapTypeEnum.Demon
+                && sceneType != MapTypeEnum.SingleHappy;
         }
 
         public static bool UseSceneConfig(int sceneType)

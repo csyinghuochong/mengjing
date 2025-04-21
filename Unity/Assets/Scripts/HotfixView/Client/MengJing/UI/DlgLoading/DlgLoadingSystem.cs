@@ -333,6 +333,10 @@ namespace ET.Client
                     self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_HappyMain).Coroutine();
                     dlgMain.View.uiTransform.localScale = Vector3.one;
                     break;
+                case MapTypeEnum.SingleHappy:
+                    self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_SingleHappyMain).Coroutine();
+                    dlgMain.View.uiTransform.localScale = Vector3.one;
+                    break;
                 case MapTypeEnum.Battle:
                     self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_BattleMain).Coroutine();
                     dlgMain.View.uiTransform.localScale = Vector3.one;
