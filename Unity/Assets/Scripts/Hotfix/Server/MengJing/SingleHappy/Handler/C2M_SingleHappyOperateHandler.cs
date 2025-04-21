@@ -56,32 +56,35 @@ namespace ET.Server
                 unit.GetComponent<NumericComponentS>().ApplyValue(NumericType.SingleBuyTimes, buyTimes + 1);
             }
 
-            for (int r = 10; r > 0; r--)
+            if (request.OperatateType == 1)
             {
-                int newCell = RandomHelper.RandomNumber(0, HappyData.PositionList.Count);
-
-                bool haveorange = false;
-                List<Unit> droplist = UnitHelper.GetUnitList(unit.Scene(), UnitType.DropItem);
-                for (int i = 0; i < droplist.Count; i++)
+                for (int r = 10; r > 0; r--)
                 {
-                    int itemid = droplist[i].GetComponent<NumericComponentS>().GetAsInt(NumericType.DropItemId);
-                    if (ItemConfigCategory.Instance.Get(itemid).ItemQuality >= 5)
+                    int newCell = RandomHelper.RandomNumber(0, HappyData.PositionList.Count);
+
+                    bool haveorange = false;
+                    List<Unit> droplist = UnitHelper.GetUnitList(unit.Scene(), UnitType.DropItem);
+                    for (int i = 0; i < droplist.Count; i++)
                     {
-                        haveorange = true;
-                        break;
+                        int itemid = droplist[i].GetComponent<NumericComponentS>().GetAsInt(NumericType.DropItemId);
+                        if (ItemConfigCategory.Instance.Get(itemid).ItemQuality >= 5)
+                        {
+                            haveorange = true;
+                            break;
+                        }
                     }
-                }
 
-                //遇到橙色道具真实随机率 30%在当前橙色格子
-                if (haveorange && r > 1 && RandomHelper.RandFloat01() > 0.3f)
-                {
-                    continue;
-                }
+                    //遇到橙色道具真实随机率 30%在当前橙色格子
+                    if (haveorange && r > 1 && RandomHelper.RandFloat01() > 0.3f)
+                    {
+                        continue;
+                    }
 
-                unit.GetComponent<NumericComponentS>().ApplyValue(NumericType.SingleHappyCellIndex, newCell + 1);
-                float3 vector3 = HappyData.PositionList[newCell];
-                unit.Position = vector3;
-                break;
+                    unit.GetComponent<NumericComponentS>().ApplyValue(NumericType.SingleHappyCellIndex, newCell + 1);
+                    float3 vector3 = HappyData.PositionList[newCell];
+                    unit.Position = vector3;
+                    break;
+                }
             }
 
             unit.Stop(-2);

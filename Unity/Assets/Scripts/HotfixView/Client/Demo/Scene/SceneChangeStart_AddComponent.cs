@@ -21,6 +21,8 @@ namespace ET.Client
                     uiComponent.CloseWindow(WindowID.WindowID_MapBig);
                     dlgMain.BeforeEnterScene(args.LastSceneType);
                 }
+                
+                Log.Debug($"SceneChangeStart:  {args.LastSceneType}");
 
                 switch (args.LastSceneType)
                 {

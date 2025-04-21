@@ -69,7 +69,7 @@ namespace ET.Client
 	            }
 	            if( this.m_E_TextTip_4Text == null )
 	            {
-	                this.m_E_TextTip_4Text = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Bottom/E_TextTip_4Text");
+	                this.m_E_TextTip_4Text = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Bottom/E_TextTip_4");
 	            }
 	            return this.m_E_TextTip_4Text;
 	        }

@@ -957,7 +957,7 @@ namespace  ET
         public static int GetHappyRecoverTimes(long serverTime, int extendTimes)
         {
             DateTime dateTime = TimeInfo.Instance.ToDateTime(serverTime);
-            return math.max(dateTime.Hour, extendTimes);
+            return math.min(dateTime.Hour, extendTimes);
         }
         
         //宠物守护

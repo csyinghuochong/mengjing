@@ -35,7 +35,7 @@ namespace ET.Client
 			
 			self.View.E_ButtonMove_1Button.AddListener( self.OnuttonMove_1Button );
 			self.View.E_ButtonMove_2Button.AddListener( self.OnuttonMove_2Button );
-			self.View.E_ButtonMove_3Button.AddListenerAsync( self.OnuttonMove_3Button );
+			self.View.E_ButtonMove_3Button.AddListener( self.OnuttonMove_3Button );
 			self.View.E_ButtonExplain.AddListener( self.OnButtonExplain );
 
 
@@ -145,10 +145,14 @@ namespace ET.Client
 				FlyTipComponent.Instance.ShowFlyTip("钻石不足!");
 				return;
 			}
-			ActivityNetHelper.SingleHappyOperateRequest( self.Root(),2 ).Coroutine();
+			PopupTipHelp.OpenPopupTip(self.Root(), "系统提示", $"是否花费{globalValueConfig.Value}钻石刷新奖励？", () =>
+			{
+				ActivityNetHelper.SingleHappyOperateRequest( self.Root(),2 ).Coroutine();
+			}, null).Coroutine();
+			
 		}
 
-		private static async ETTask OnuttonMove_3Button(this DlgSingleHappyMain self)
+		private static  void OnuttonMove_3Button(this DlgSingleHappyMain self)
 		{
 			GlobalValueConfig globalValueConfig = GlobalValueConfigCategory.Instance.Get(133);
 			UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
@@ -158,13 +162,24 @@ namespace ET.Client
 				return;
 			}
 
+			
+			PopupTipHelp.OpenPopupTip(self.Root(), "系统提示", $"是否花费{globalValueConfig.Value}钻石刷新奖励？", () =>
+			{
+				self.SingleHappyRequestBuyTimes().Coroutine();
+			}, null).Coroutine();
+		}
+
+		private static async ETTask SingleHappyRequestBuyTimes(this DlgSingleHappyMain self)
+		{
 			M2C_SingleHappyOperateResponse response = await ActivityNetHelper.SingleHappyOperateRequest( self.Root(),3);
 			if (response == null || self.IsDisposed)
 			{
 				return;
 			}
+
+			self.ShowTimes();
 		}
-        
+
 		private static void OnButtonExplain(this DlgSingleHappyMain self)
 		{
 			PopupTipHelp.OpenPopupTip_2(self.Root(), "系统提示",
