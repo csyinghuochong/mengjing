@@ -36,7 +36,7 @@ namespace ET.Server
             self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
         }
 
-        public static int GetDropId(this HappyDungeonComponent self, int openDay)
+        public static int GetHappyDropId(this HappyDungeonComponent self, int openDay)
         {
             string dropinfo = GlobalValueConfigCategory.Instance.Get(96).Value;
             string[] dropList = dropinfo.Split('@');
@@ -110,7 +110,7 @@ namespace ET.Server
             }
 
             int openDay = ServerHelper.GetServeOpenDay( self.Zone());
-            int dropid = self.GetDropId(openDay);
+            int dropid = self.GetHappyDropId(openDay, 96);
 
             for (int p = 0; p < HappyData.PositionList.Count; p++)
             {

@@ -20,9 +20,9 @@ namespace ET.Server
         {
         }
 
-        public static int GetDropId(this SingleHappyDungeonComponent self, int openDay)
+        public static int GetDropId(this SingleHappyDungeonComponent self, int openDay, int gid)
         {
-            string dropinfo = GlobalValueConfigCategory.Instance.Get(96).Value;
+            string dropinfo = GlobalValueConfigCategory.Instance.Get(gid).Value;
             string[] dropList = dropinfo.Split('@');
 
             for (int i = dropList.Length - 1; i >= 0; i--)
@@ -54,7 +54,7 @@ namespace ET.Server
             }
 
             int openDay = ServerHelper.GetServeOpenDay( self.Zone());
-            int dropid = self.GetDropId(openDay);
+            int dropid = self.GetDropId(openDay, 134);
 
             for (int p = 0; p < HappyData.PositionList.Count; p++)
             {

@@ -95,7 +95,7 @@ namespace ET.Client
         public static void OnOpenSlotButton(this ES_PetEggList self)
         {
             PetComponentC petComponent = self.Root().GetComponent<PetComponentC>();
-            string[] costItemsList = GlobalValueConfigCategory.Instance.Get(134).Value.Split('@');
+            string[] costItemsList = GlobalValueConfigCategory.Instance.Get(135).Value.Split('@');
             string[] costItems = costItemsList[petComponent.RolePetEggUnlockedSlotsCount].Split(';');
             string itemName = ItemConfigCategory.Instance.Get(int.Parse(costItems[0])).ItemName;
             string itemNum = costItems[1];

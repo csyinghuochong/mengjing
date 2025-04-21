@@ -163,7 +163,7 @@ namespace ET.Client
                 {
                     Unit unit = UnitHelper.GetMyUnitFromClientScene(root);
                     int treasureTask = unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.TreasureTask);
-                    if (treasureTask >= int.Parse(GlobalValueConfigCategory.Instance.Get(135).Value))
+                    if (treasureTask >= int.Parse(GlobalValueConfigCategory.Instance.Get(136).Value))
                     {
                         continue;
                     }
