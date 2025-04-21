@@ -147,7 +147,7 @@ namespace ET.Server
                     unitComponent.Add(dropitem);
                     dropitem.AddComponent<UnitInfoComponent>();
                     dropitem.Type = UnitType.DropItem;
-                    DropComponentS dropComponent = dropitem.AddComponent<DropComponentS>();
+                    dropitem.AddComponent<DropComponentS>();
                     NumericComponentS numericComponentS = dropitem.AddComponent<NumericComponentS>();
                     numericComponentS.ApplyValue(NumericType.DropItemId, rewardist[i].ItemID, false);
                     numericComponentS.ApplyValue(NumericType.DropItemNum, rewardist[i].ItemNum, false);

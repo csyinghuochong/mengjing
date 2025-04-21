@@ -72,6 +72,10 @@ namespace ET.Server
 
                 List<RewardItem> rewardist = new List<RewardItem>();
                 DropHelper.DropIDToDropItem(dropid, rewardist);
+                
+                rewardist.Clear();
+                rewardist.Add( new RewardItem(){ ItemID = 1, ItemNum = 10} );
+                
                 if (rewardist.Count > 100)
                 {
                     Log.Error($"rewardist.Count > 100:   {dropid}");
@@ -91,6 +95,7 @@ namespace ET.Server
                     unitComponent.Add(dropitem);
                     dropitem.AddComponent<UnitInfoComponent>();
                     dropitem.Type = UnitType.DropItem;
+                    dropitem.AddComponent<DropComponentS>();
                     NumericComponentS numericComponentS = dropitem.AddComponent<NumericComponentS>();
                     numericComponentS.ApplyValue(NumericType.DropItemId, rewardist[i].ItemID, false);
                     numericComponentS.ApplyValue(NumericType.DropItemNum, rewardist[i].ItemNum, false);
@@ -116,6 +121,7 @@ namespace ET.Server
                 unitComponent.Add(dropitem);
                 dropitem.AddComponent<UnitInfoComponent>();
                 dropitem.Type = UnitType.DropItem;
+                dropitem.AddComponent<DropComponentS>();
                 NumericComponentS numericComponentS = dropitem.AddComponent<NumericComponentS>();
                 numericComponentS.ApplyValue(NumericType.DropItemId, keyValuePairLong4.Value, false);
                 numericComponentS.ApplyValue(NumericType.DropItemNum, keyValuePairLong4.Value2, false);
