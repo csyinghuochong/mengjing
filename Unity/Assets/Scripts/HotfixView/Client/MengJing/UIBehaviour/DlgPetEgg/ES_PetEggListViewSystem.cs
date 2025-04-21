@@ -91,10 +91,41 @@ namespace ET.Client
 
             self.OnUpdateUI();
         }
+
+        public static void OnOpenSlotButton(this ES_PetEggList self)
+        {
+            PetComponentC petComponent = self.Root().GetComponent<PetComponentC>();
+            string[] costItemsList = GlobalValueConfigCategory.Instance.Get(130).Value.Split('@');
+            string[] costItems = costItemsList[petComponent.RolePetEggUnlockedSlotsCount].Split(';');
+            string itemName = ItemConfigCategory.Instance.Get(int.Parse(costItems[0])).ItemName;
+            string itemNum = costItems[1];
+            using (zstring.Block())
+            {
+                string tip = zstring.Format("开启新的位置需要{0}{1}，是否继续？", itemNum, itemName);
+                using (zstring.Block())
+                {
+                    PopupTipHelp.OpenPopupTip(self.Root(), "提示", tip, async () =>
+                    {
+                        int error = await PetNetHelper.RequestPetEggOpenSlot(self.Root());
+                        if (error != ErrorCode.ERR_Success)
+                        {
+                            return;
+                        }
+
+                        self.OnUpdateUI();
+
+                    }, null).Coroutine();
+                }
+            }
+        }
         
         public static void ShowPetEggSelectList(this ES_PetEggList self, int index)
         {
             self.EG_PetEggSelectRootRectTransform.gameObject.SetActive(true);
+            // Camera uiCamera = self.Root().GetComponent<GlobalComponent>().UICamera.GetComponent<Camera>();
+            // Vector2 localPoint;
+            // RectTransformUtility.ScreenPointToLocalPointInRectangle(self.EG_PetEggSelectRootRectTransform, Input.mousePosition, uiCamera, out localPoint);
+            // self.E_PetEggSelectPanelImage.rectTransform.localPosition = localPoint;
             
             Dictionary<int, int> itemDic = new Dictionary<int, int>();
             List<ItemInfo> bagInfos = self.Root().GetComponent<BagComponentC>().GetBagList();

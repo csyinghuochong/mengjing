@@ -125,6 +125,11 @@ namespace ET.Server
                 self.PetCangKuOpen.Add(0);  
             }
 
+            if (self.RolePetEggUnlockedSlotsCount == 0)
+            {
+                // 默认开启一个
+                self.RolePetEggUnlockedSlotsCount = 1;
+            }
             if (self.RolePetEggs.Count < 4)
             {
                 for (int i = self.RolePetEggs.Count; i < 4; i++)

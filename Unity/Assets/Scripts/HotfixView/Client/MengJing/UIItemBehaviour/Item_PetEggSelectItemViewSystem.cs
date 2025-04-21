@@ -33,6 +33,8 @@ namespace ET.Client
             self.E_ItemIconImage.overrideSprite =
                     resourcesLoaderComponent.LoadAssetSync<Sprite>(ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemIcon, itemConfig.Icon));
 
+            self.E_ItemNameText.text = itemConfig.ItemName;
+            
             using (zstring.Block())
             {
                 self.E_ItemNumText.text = zstring.Format("数量:{0}", num);

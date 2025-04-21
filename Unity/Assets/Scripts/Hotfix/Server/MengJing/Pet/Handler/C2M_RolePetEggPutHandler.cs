@@ -7,6 +7,19 @@
         protected override async ETTask Run(Unit unit, C2M_RolePetEggPut request, M2C_RolePetEggPut response)
         {
             PetComponentS petComponent = unit.GetComponent<PetComponentS>();
+
+            if (request.Index < 0 || request.Index >= petComponent.RolePetEggs.Count)
+            {
+                response.Error = ErrorCode.ERR_ModifyData;
+                return;
+            }
+
+            if (request.Index + 1 > petComponent.RolePetEggUnlockedSlotsCount)
+            {
+                response.Error = ErrorCode.ERR_ModifyData;
+                return;
+            }
+            
             KeyValuePairLong rolePetEgg = petComponent.RolePetEggs[request.Index];
             if (rolePetEgg.KeyId != 0)
             {

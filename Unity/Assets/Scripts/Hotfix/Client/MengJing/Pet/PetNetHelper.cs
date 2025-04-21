@@ -311,6 +311,23 @@ namespace ET.Client
             return response.Error;
         }
 
+        public static async ETTask<int> RequestPetEggOpenSlot(Scene root)
+        {
+            C2M_RolePetEggOpenSlot request = C2M_RolePetEggOpenSlot.Create();
+
+            M2C_RolePetEggOpenSlot response = await root.GetComponent<ClientSenderCompnent>().Call(request) as M2C_RolePetEggOpenSlot;
+
+            if (response.Error != ErrorCode.ERR_Success)
+            {
+                return response.Error;
+            }
+
+            PetComponentC petComponent = root.GetComponent<PetComponentC>();
+            petComponent.RolePetEggUnlockedSlotsCount++;
+
+            return response.Error;
+        }
+        
         public static async ETTask<int> RequestPetEggPut(Scene root, int index, long bagInfoID)
         {
             C2M_RolePetEggPut request = C2M_RolePetEggPut.Create();

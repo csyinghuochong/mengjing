@@ -38,6 +38,7 @@ namespace ET.Client
             self.E_ButtonGetButton.gameObject.SetActive(false);
             self.E_ButtonFuHuaButton.gameObject.SetActive(false);
 
+            self.E_OpenSlotButton.AddListener(self.OnOpenSlotButton);
             self.E_ShowPetEggListButton.AddListener(self.OnShowPetEggListButton);
             self.E_ButtonOpenButton.AddListener(self.OnButtonOpenButton);
             self.E_ButtonGetButton.AddListener(self.OnButtonGetButton);
@@ -51,6 +52,11 @@ namespace ET.Client
             self.DestroyWidget();
         }
 
+        private static void OnOpenSlotButton(this ES_PetEggListItem self)
+        {
+            self.GetParent<ES_PetEggList>().OnOpenSlotButton();
+        }
+        
         private static void OnShowPetEggListButton(this ES_PetEggListItem self)
         {
             self.GetParent<ES_PetEggList>().ShowPetEggSelectList(self.Index);
@@ -118,15 +124,20 @@ namespace ET.Client
         {
             self.Index = index;
             self.RolePetEgg = rolePetEgg;
-            self.EG_Node1RectTransform.gameObject.SetActive(rolePetEgg != null && rolePetEgg.KeyId > 0);
-            self.EG_Node0RectTransform.gameObject.SetActive(!self.EG_Node1RectTransform.gameObject.activeSelf);
+
+            self.EG_Node0RectTransform.gameObject.SetActive(self.Index + 1 > self.Root().GetComponent<PetComponentC>().RolePetEggUnlockedSlotsCount);
+            self.EG_Node2RectTransform.gameObject.SetActive(rolePetEgg != null && rolePetEgg.KeyId > 0);
+            self.EG_Node1RectTransform.gameObject.SetActive(!self.EG_Node0RectTransform.gameObject.activeSelf && !self.EG_Node2RectTransform.gameObject.activeSelf);
             self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
-            if (self.EG_Node0RectTransform.gameObject.activeSelf)
+            if (!self.EG_Node2RectTransform.gameObject.activeSelf)
             {
                 return;
             }
 
             ItemConfig itemConfig = ItemConfigCategory.Instance.Get((int)rolePetEgg.KeyId);
+
+            self.E_Text_NameText.text = itemConfig.ItemName;
+            
             string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemIcon, itemConfig.Icon);
             Sprite sp = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
             self.E_PetEggIconImage.sprite = sp;

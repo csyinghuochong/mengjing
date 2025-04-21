@@ -35,7 +35,10 @@ namespace ET.Server
         public List<int> PetMeleeFubeRewardIds { get; set; } = new(); //宠物乱斗 领取的星星数量奖励Id
 
         public List<RolePetInfo> RolePetInfos  { get; set; }= new List<RolePetInfo>(); 
+        
+        public int RolePetEggUnlockedSlotsCount { get; set; }
         public List<KeyValuePairLong> RolePetEggs { get; set; }= new List<KeyValuePairLong>(); 
+        
         public List<PetFubenInfo> PetFubenInfos{ get; set; }= new List<PetFubenInfo>(); 
         public List<KeyValuePair> PetSkinList { get; set; }= new List<KeyValuePair>(); 
 

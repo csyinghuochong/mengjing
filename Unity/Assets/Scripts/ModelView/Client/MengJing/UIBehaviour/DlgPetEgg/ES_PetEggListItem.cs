@@ -1,5 +1,4 @@
 ﻿
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 namespace ET.Client
@@ -29,7 +28,7 @@ namespace ET.Client
      		}
      	}
 
-		public UnityEngine.UI.Button E_ShowPetEggListButton
+		public UnityEngine.UI.Button E_OpenSlotButton
      	{
      		get
      		{
@@ -38,15 +37,15 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_E_ShowPetEggListButton == null )
+     			if( this.m_E_OpenSlotButton == null )
      			{
-		    		this.m_E_ShowPetEggListButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"EG_Node0/E_ShowPetEggList");
+		    		this.m_E_OpenSlotButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"EG_Node0/E_OpenSlot");
      			}
-     			return this.m_E_ShowPetEggListButton;
+     			return this.m_E_OpenSlotButton;
      		}
      	}
 
-		public UnityEngine.UI.Image E_ShowPetEggListImage
+		public UnityEngine.UI.Image E_OpenSlotImage
      	{
      		get
      		{
@@ -55,11 +54,11 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_E_ShowPetEggListImage == null )
+     			if( this.m_E_OpenSlotImage == null )
      			{
-		    		this.m_E_ShowPetEggListImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_Node0/E_ShowPetEggList");
+		    		this.m_E_OpenSlotImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_Node0/E_OpenSlot");
      			}
-     			return this.m_E_ShowPetEggListImage;
+     			return this.m_E_OpenSlotImage;
      		}
      	}
 
@@ -80,6 +79,57 @@ namespace ET.Client
      		}
      	}
 
+		public UnityEngine.UI.Button E_ShowPetEggListButton
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_ShowPetEggListButton == null )
+     			{
+		    		this.m_E_ShowPetEggListButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"EG_Node1/E_ShowPetEggList");
+     			}
+     			return this.m_E_ShowPetEggListButton;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_ShowPetEggListImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_ShowPetEggListImage == null )
+     			{
+		    		this.m_E_ShowPetEggListImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_Node1/E_ShowPetEggList");
+     			}
+     			return this.m_E_ShowPetEggListImage;
+     		}
+     	}
+
+		public UnityEngine.RectTransform EG_Node2RectTransform
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_EG_Node2RectTransform == null )
+     			{
+		    		this.m_EG_Node2RectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_Node2");
+     			}
+     			return this.m_EG_Node2RectTransform;
+     		}
+     	}
+
 		public UnityEngine.UI.Image E_PetEggIconImage
      	{
      		get
@@ -91,7 +141,7 @@ namespace ET.Client
      			}
      			if( this.m_E_PetEggIconImage == null )
      			{
-		    		this.m_E_PetEggIconImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_Node1/E_PetEggIcon");
+		    		this.m_E_PetEggIconImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_Node2/E_PetEggIcon");
      			}
      			return this.m_E_PetEggIconImage;
      		}
@@ -108,7 +158,7 @@ namespace ET.Client
      			}
      			if( this.m_E_ButtonOpenButton == null )
      			{
-		    		this.m_E_ButtonOpenButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"EG_Node1/E_ButtonOpen");
+		    		this.m_E_ButtonOpenButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"EG_Node2/E_ButtonOpen");
      			}
      			return this.m_E_ButtonOpenButton;
      		}
@@ -125,7 +175,7 @@ namespace ET.Client
      			}
      			if( this.m_E_ButtonOpenImage == null )
      			{
-		    		this.m_E_ButtonOpenImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_Node1/E_ButtonOpen");
+		    		this.m_E_ButtonOpenImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_Node2/E_ButtonOpen");
      			}
      			return this.m_E_ButtonOpenImage;
      		}
@@ -142,7 +192,7 @@ namespace ET.Client
      			}
      			if( this.m_E_ButtonFuHuaButton == null )
      			{
-		    		this.m_E_ButtonFuHuaButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"EG_Node1/E_ButtonFuHua");
+		    		this.m_E_ButtonFuHuaButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"EG_Node2/E_ButtonFuHua");
      			}
      			return this.m_E_ButtonFuHuaButton;
      		}
@@ -159,7 +209,7 @@ namespace ET.Client
      			}
      			if( this.m_E_ButtonFuHuaImage == null )
      			{
-		    		this.m_E_ButtonFuHuaImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_Node1/E_ButtonFuHua");
+		    		this.m_E_ButtonFuHuaImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_Node2/E_ButtonFuHua");
      			}
      			return this.m_E_ButtonFuHuaImage;
      		}
@@ -176,7 +226,7 @@ namespace ET.Client
      			}
      			if( this.m_E_ButtonGetButton == null )
      			{
-		    		this.m_E_ButtonGetButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"EG_Node1/E_ButtonGet");
+		    		this.m_E_ButtonGetButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"EG_Node2/E_ButtonGet");
      			}
      			return this.m_E_ButtonGetButton;
      		}
@@ -193,7 +243,7 @@ namespace ET.Client
      			}
      			if( this.m_E_ButtonGetImage == null )
      			{
-		    		this.m_E_ButtonGetImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_Node1/E_ButtonGet");
+		    		this.m_E_ButtonGetImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_Node2/E_ButtonGet");
      			}
      			return this.m_E_ButtonGetImage;
      		}
@@ -210,7 +260,7 @@ namespace ET.Client
      			}
      			if( this.m_E_Text_TimeText == null )
      			{
-		    		this.m_E_Text_TimeText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"EG_Node1/E_Text_Time");
+		    		this.m_E_Text_TimeText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"EG_Node2/E_Text_Time");
      			}
      			return this.m_E_Text_TimeText;
      		}
@@ -227,7 +277,7 @@ namespace ET.Client
      			}
      			if( this.m_E_Text_NameText == null )
      			{
-		    		this.m_E_Text_NameText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"EG_Node1/E_Text_Name");
+		    		this.m_E_Text_NameText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"EG_Node2/E_Text_Name");
      			}
      			return this.m_E_Text_NameText;
      		}
@@ -248,9 +298,12 @@ namespace ET.Client
 		public void DestroyWidget()
 		{
 			this.m_EG_Node0RectTransform = null;
+			this.m_E_OpenSlotButton = null;
+			this.m_E_OpenSlotImage = null;
+			this.m_EG_Node1RectTransform = null;
 			this.m_E_ShowPetEggListButton = null;
 			this.m_E_ShowPetEggListImage = null;
-			this.m_EG_Node1RectTransform = null;
+			this.m_EG_Node2RectTransform = null;
 			this.m_E_PetEggIconImage = null;
 			this.m_E_ButtonOpenButton = null;
 			this.m_E_ButtonOpenImage = null;
@@ -264,9 +317,12 @@ namespace ET.Client
 		}
 
 		private UnityEngine.RectTransform m_EG_Node0RectTransform = null;
+		private UnityEngine.UI.Button m_E_OpenSlotButton = null;
+		private UnityEngine.UI.Image m_E_OpenSlotImage = null;
+		private UnityEngine.RectTransform m_EG_Node1RectTransform = null;
 		private UnityEngine.UI.Button m_E_ShowPetEggListButton = null;
 		private UnityEngine.UI.Image m_E_ShowPetEggListImage = null;
-		private UnityEngine.RectTransform m_EG_Node1RectTransform = null;
+		private UnityEngine.RectTransform m_EG_Node2RectTransform = null;
 		private UnityEngine.UI.Image m_E_PetEggIconImage = null;
 		private UnityEngine.UI.Button m_E_ButtonOpenButton = null;
 		private UnityEngine.UI.Image m_E_ButtonOpenImage = null;

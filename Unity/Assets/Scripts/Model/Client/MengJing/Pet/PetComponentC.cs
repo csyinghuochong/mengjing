@@ -41,7 +41,10 @@ namespace ET.Client
         public List<int> PetCangKuOpen { get; set; } = new();
 
         public List<RolePetInfo> RolePetInfos { get; set; } = new();
-        public List<KeyValuePairLong> RolePetEggs { get; set; } = new(4);
+        
+        public int RolePetEggUnlockedSlotsCount { get; set; }
+        public List<KeyValuePairLong> RolePetEggs { get; set; } = new();
+
         public List<PetFubenInfo> PetFubenInfos { get; set; } = new();
         public List<KeyValuePair> PetSkinList { get; set; } = new();
 

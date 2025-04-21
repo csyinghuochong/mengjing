@@ -21,6 +21,7 @@ namespace ET.Client
         {
             self.RolePetInfos = m2C_RolePetList.RolePetInfos;
             self.TeamPetList = m2C_RolePetList.TeamPetList;
+            self.RolePetEggUnlockedSlotsCount = m2C_RolePetList.RolePetEggUnlockedSlotsCount;
             self.RolePetEggs = m2C_RolePetList.RolePetEggs;
             self.PetFormations = m2C_RolePetList.PetFormations;
             self.PetFubenInfos = m2C_RolePetList.PetFubenInfos;

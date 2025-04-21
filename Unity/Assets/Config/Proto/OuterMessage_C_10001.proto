@@ -2549,6 +2549,7 @@ message M2C_RolePetList // ILocationResponse
 	repeated int PetMeleeFubeRewardIds = 24;
 	repeated KeyValuePairInt PetEchoList = 25;
 	repeated int PetZhuangJiaList = 26;
+	int32 RolePetEggUnlockedSlotsCount = 27;
 }
 
 
@@ -3136,6 +3137,20 @@ message M2C_PetZhuangJiaUpResponse // ILocationResponse
 	int32 RpcId = 90;
 	int32 Error = 91;
 	string Message = 92;
+}
+
+//ResponseType M2C_RolePetEggOpenSlot
+//宠物蛋开启新的孵化位置
+message C2M_RolePetEggOpenSlot // ILocationRequest
+{
+	int32 RpcId = 90;
+}
+
+message M2C_RolePetEggOpenSlot // ILocationResponse
+{
+	int32 RpcId = 90;
+	string Message = 91;
+	int32 Error = 92;
 }
 
 //ResponseType M2C_RolePetEggHatch
