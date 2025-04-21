@@ -35,27 +35,7 @@ namespace ET.Server
         {
             self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
         }
-
-        public static int GetHappyDropId(this HappyDungeonComponent self, int openDay)
-        {
-            string dropinfo = GlobalValueConfigCategory.Instance.Get(96).Value;
-            string[] dropList = dropinfo.Split('@');
-
-            for (int i = dropList.Length - 1; i >= 0; i--)
-            {
-                string[] dropitem = dropList[i].Split(';');
-                int day = int.Parse(dropitem[0]);
-                int dropid = int.Parse((dropitem[1]));
-
-                if (openDay >= day)
-                {
-                    return dropid;
-                }
-            }
-
-            return int.Parse(dropList[0].Split(';')[1]);
-        }
-
+        
         public static void OnHappyBegin(this HappyDungeonComponent self)
         {
             self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
@@ -110,7 +90,7 @@ namespace ET.Server
             }
 
             int openDay = ServerHelper.GetServeOpenDay( self.Zone());
-            int dropid = self.GetHappyDropId(openDay, 96);
+            int dropid =  CommonHelperS.GetHappyDropId(openDay, 96);
 
             for (int p = 0; p < HappyData.PositionList.Count; p++)
             {

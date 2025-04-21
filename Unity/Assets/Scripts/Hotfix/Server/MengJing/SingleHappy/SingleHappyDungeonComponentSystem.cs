@@ -54,7 +54,7 @@ namespace ET.Server
             }
 
             int openDay = ServerHelper.GetServeOpenDay( self.Zone());
-            int dropid = self.GetDropId(openDay, 134);
+            int dropid = CommonHelperS.GetHappyDropId(openDay, 134);
 
             for (int p = 0; p < HappyData.PositionList.Count; p++)
             {
