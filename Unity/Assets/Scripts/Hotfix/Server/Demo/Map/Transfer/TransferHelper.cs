@@ -865,7 +865,9 @@ namespace ET.Server
                 || sceneType == MapTypeEnum.PetMelee
                 || sceneType == MapTypeEnum.PetMatch
                 || sceneType == MapTypeEnum.RunRace
-                || sceneType == MapTypeEnum.Demon)
+                || sceneType == MapTypeEnum.Demon
+                || sceneType == MapTypeEnum.Happy
+                || sceneType == MapTypeEnum.SingleHappy)
             {
                 return;
             }
