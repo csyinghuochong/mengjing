@@ -310,6 +310,28 @@ namespace ET.Server
 
                     unit.Scene().GetComponent<HappyDungeonComponent>().NoticeRefreshTime(unit);
                     break;
+                case MapTypeEnum.SingleHappy:
+                    unit.AddComponent<PathfindingComponent, int>(scene.GetComponent<MapComponent>().NavMeshId);
+                    happcellIndex = numericComponent.GetAsInt(NumericType.SingleHappyCellIndex);
+                    if (happcellIndex > 0)
+                    {
+                        unit.Position = HappyData.PositionList[happcellIndex - 1];
+                    }
+                    else
+                    {
+                        int randomPosition = RandomHelper.RandomNumber(0, HappyData.PositionList.Count);
+                        numericComponent.ApplyValue(NumericType.SingleHappyCellIndex, randomPosition + 1, false);
+                        unit.Position = HappyData.PositionList[randomPosition];
+                    }
+                    aoivalue = 40;
+                    // 通知客户端创建My Unit
+                    m2CCreateUnits.Unit = MapMessageHelper.CreateUnitInfo(unit);
+                    MapMessageHelper.SendToClient(unit, m2CCreateUnits);
+                    // 加入aoi
+                    unit.AddComponent<AOIEntity, int, float3>(aoivalue * 1000, unit.Position);
+
+                    unit.Scene().GetComponent<SingleHappyDungeonComponent>().NoticeRefreshTime(unit);
+                    break;
                 case MapTypeEnum.Battle:
                     //int todayCamp = numericComponent.GetAsInt(NumericType.BattleTodayCamp);
                     //todayCamp = todayCamp > 0 ? todayCamp : int.Parse(request.ParamInfo);

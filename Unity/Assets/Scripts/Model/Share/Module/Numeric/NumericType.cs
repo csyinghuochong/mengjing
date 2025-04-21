@@ -207,6 +207,8 @@
         public const int BabyRefreshTime = 4011;                                    //宝宝刷新次数
         public const int BaByType = 4012;
         public const int CommonSeasonDonateTimes = 4014;
+        public const int SingleHappyCellIndex = 4015;                                           //格子位置，
+        public const int SingleHappyMoveTime = 4016;                                          //上次免费移动的时间
         
         public const int Max = 10000;
 

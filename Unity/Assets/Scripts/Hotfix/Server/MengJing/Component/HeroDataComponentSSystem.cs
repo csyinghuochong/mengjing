@@ -305,6 +305,9 @@ namespace ET.Server
              self.HeroDataApplyValue(NumericType.PetHeXinExploreNumber, 0, ks);
              self.HeroDataApplyValue(NumericType.ItemXiLianNumber, 0, ks);
              
+             self.HeroDataApplyValue(NumericType.SingleHappyCellIndex, 0, ks);
+             self.HeroDataApplyValue(NumericType.SingleHappyMoveTime, 0, ks);
+             
              int lirun =  (int)(numericComponent.GetAsInt(NumericType.InvestTotal) * 0.25f);
              self.HeroDataApplyValue(NumericType.InvestTotal, numericComponent.GetAsInt(NumericType.InvestTotal) + lirun, ks);
              

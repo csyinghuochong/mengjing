@@ -4,15 +4,15 @@ using Unity.Mathematics;
 
 namespace ET.Server
 {
-    [EntitySystemOf(typeof (HappyDungeonComponent))]
-    [FriendOf(typeof (HappyDungeonComponent))]
-    public static partial class HappyDungeonComponentSystem
+    [EntitySystemOf(typeof (SingleHappyDungeonComponent))]
+    [FriendOf(typeof (SingleHappyDungeonComponent))]
+    public static partial class SingleHappyDungeonComponentSystem
     {
         
-        [Invoke(TimerInvokeType.HappyDungeonTimer)]
-        public class HappyDungeonTimer: ATimer<HappyDungeonComponent>
+        [Invoke(TimerInvokeType.SingleHappyDungeonTimer)]
+        public class SingleHappyDungeonTimer: ATimer<SingleHappyDungeonComponent>
         {
-            protected override void Run(HappyDungeonComponent self)
+            protected override void Run(SingleHappyDungeonComponent self)
             {
                 try
                 {
@@ -26,17 +26,17 @@ namespace ET.Server
         }
         
         [EntitySystem]
-        private static void Awake(this HappyDungeonComponent self)
+        private static void Awake(this SingleHappyDungeonComponent self)
         {
         }
 
         [EntitySystem]
-        private static void Destroy(this HappyDungeonComponent self)
+        private static void Destroy(this SingleHappyDungeonComponent self)
         {
             self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
         }
 
-        public static int GetDropId(this HappyDungeonComponent self, int openDay)
+        public static int GetDropId(this SingleHappyDungeonComponent self, int openDay)
         {
             string dropinfo = GlobalValueConfigCategory.Instance.Get(96).Value;
             string[] dropList = dropinfo.Split('@');
@@ -56,7 +56,7 @@ namespace ET.Server
             return int.Parse(dropList[0].Split(';')[1]);
         }
 
-        public static void OnHappyBegin(this HappyDungeonComponent self)
+        public static void OnHappyBegin(this SingleHappyDungeonComponent self)
         {
             self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
 
@@ -66,7 +66,7 @@ namespace ET.Server
             self.OnTimer();
         }
 
-        public static async ETTask OnHappyOver(this HappyDungeonComponent self)
+        public static async ETTask OnHappyOver(this SingleHappyDungeonComponent self)
         {
             self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
             Scene fubnescene = self.Scene();
@@ -96,7 +96,7 @@ namespace ET.Server
             fubnescene.Dispose();
         }
 
-        public static void OnTimer(this HappyDungeonComponent self)
+        public static void OnTimer(this SingleHappyDungeonComponent self)
         {
             List<int> dropcells = new List<int>();
             List<Unit> droplist = UnitHelper.GetUnitList(self.Scene(), UnitType.DropItem);
@@ -166,7 +166,7 @@ namespace ET.Server
             MapMessageHelper.SendToClient(unitlist, self.M2C_HappyInfoResult);
         }
 
-        public static void NoticeRefreshTime(this HappyDungeonComponent self, Unit unit)
+        public static void NoticeRefreshTime(this SingleHappyDungeonComponent self, Unit unit)
         {
             MapMessageHelper.SendToClient(unit, self.M2C_HappyInfoResult);
         }
