@@ -81,8 +81,7 @@ namespace ET.Server
 
                 if (rewardist.Count > 100)
                 {
-                    rewardist.Clear();
-                    rewardist.Add( new RewardItem(){ ItemID = 1, ItemNum = 10} );
+                    rewardist = rewardist.GetRange(0, 1);
                 }
                 
                 if (rewardist.Count > 100)
