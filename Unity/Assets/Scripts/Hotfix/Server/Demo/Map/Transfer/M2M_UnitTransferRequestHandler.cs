@@ -311,8 +311,12 @@ namespace ET.Server
                     unit.Scene().GetComponent<HappyDungeonComponent>().NoticeRefreshTime(unit);
                     break;
                 case MapTypeEnum.SingleHappy:
+                    sceneConfig = SceneConfigCategory.Instance.Get(request.SceneId);
+                    scene.GetComponent<MapComponent>().NavMeshId = sceneConfig.MapID;
                     unit.AddComponent<PathfindingComponent, int>(scene.GetComponent<MapComponent>().NavMeshId);
                     happcellIndex = numericComponent.GetAsInt(NumericType.SingleHappyCellIndex);
+
+                    happcellIndex = 0;
                     if (happcellIndex > 0)
                     {
                         unit.Position = HappyData.PositionList[happcellIndex - 1];

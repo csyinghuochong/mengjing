@@ -486,7 +486,7 @@ namespace ET.Server
                         fubenInstanceId = IdGenerater.Instance.GenerateInstanceId();
                         fubnescene = GateMapFactory.Create(unit.Root(), fubenid, fubenInstanceId, "SingleHappy" + fubenid.ToString());
                         fubnescene.AddComponent<SingleHappyDungeonComponent>();
-                        fubnescene.GetComponent<MapComponent>().SetMapInfo((int)MapTypeEnum.PetMing, request.SceneId, 0);
+                        fubnescene.GetComponent<MapComponent>().SetMapInfo((int)MapTypeEnum.SingleHappy, request.SceneId, 0);
                         BeforeTransfer(unit, MapTypeEnum.MainCityScene);
                         await Transfer(unit, fubnescene.GetActorId(), (int)MapTypeEnum.SingleHappy, request.SceneId, request.Difficulty, "0");
                         NoticeFubenCenter(fubnescene, 1).Coroutine();
