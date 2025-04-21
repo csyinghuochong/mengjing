@@ -156,5 +156,8 @@ namespace ET.Server
         
         //今日拍卖花费金币
         public long PaiMaiCostGoldToday { get; set; }
+
+
+        public List<KeyValuePairLong4> SingleHappyDropList { get; set; } = new List<KeyValuePairLong4>();
     }
 }

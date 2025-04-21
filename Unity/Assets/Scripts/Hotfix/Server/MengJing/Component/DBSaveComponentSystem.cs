@@ -131,7 +131,7 @@ namespace ET.Server
             NumericComponentS numericComponent = unit.GetComponent<NumericComponentS>();
             numericComponent.ApplyValue(NumericType.LastLoginTime, TimeHelper.ServerNow(), false);
             self.PlayerState = PlayerState.None;
-            TransferHelper.BeforeTransfer(unit);
+            TransferHelper.BeforeTransfer(unit,sceneTypeEnum);
             unit.GetParent<UnitComponent>().Remove(unit.Id);
             TransferHelper.OnPlayerDisconnect(scene, unit.Id);
         }

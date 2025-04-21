@@ -100,10 +100,58 @@ namespace ET.Server
                     float3 vector3 = HappyData.PositionList[p];
                     dropitem.Position = vector3;
                     dropitem.AddComponent<AOIEntity, int, float3>(2 * 1000, dropitem.Position);
-                    
                 }
             }
-            
         }
+
+        public static void OnRestore(this SingleHappyDungeonComponent self, Unit player)
+        {
+            UnitComponent unitComponent = self.Scene().GetComponent<UnitComponent>();
+            List<KeyValuePairLong4> SingleHappyDropList = player.GetComponent<DataCollationComponent>().SingleHappyDropList;
+            for (int i = 0; i < SingleHappyDropList.Count; i++)
+            {
+                KeyValuePairLong4 keyValuePairLong4 = SingleHappyDropList[i];
+                
+                Unit dropitem = unitComponent.AddChildWithId<Unit, int>(keyValuePairLong4.KeyId, 1);
+                unitComponent.Add(dropitem);
+                dropitem.AddComponent<UnitInfoComponent>();
+                dropitem.Type = UnitType.DropItem;
+                NumericComponentS numericComponentS = dropitem.AddComponent<NumericComponentS>();
+                numericComponentS.ApplyValue(NumericType.DropItemId, keyValuePairLong4.Value, false);
+                numericComponentS.ApplyValue(NumericType.DropItemNum, keyValuePairLong4.Value2, false);
+                numericComponentS.ApplyValue(NumericType.CellIndex,  keyValuePairLong4.Value3, false);
+                numericComponentS.ApplyValue(NumericType.DropType, 0, false);
+
+                float3 vector3 = HappyData.PositionList[(int)(keyValuePairLong4.Value3) - 1];
+                dropitem.Position = vector3;
+                dropitem.AddComponent<AOIEntity, int, float3>(2 * 1000, dropitem.Position);
+            }
+        }
+
+        public static void OnSave(this SingleHappyDungeonComponent self)
+        {
+            List<Unit> playerlist = UnitHelper.GetUnitList(self.Scene(), UnitType.Player);
+            if (playerlist.Count == 0)
+            {
+                return;
+            }
+
+            List<KeyValuePairLong4> SingleHappyDropList = new List<KeyValuePairLong4>();
+            List<Unit> droplist = UnitHelper.GetUnitList(self.Scene(), UnitType.DropItem);
+            for (int i = 0; i < droplist.Count; i++)
+            {
+                Unit dropitem = droplist[i];
+                NumericComponentS numericComponentS = dropitem.AddComponent<NumericComponentS>();
+                KeyValuePairLong4 keyValuePairLong4 = new KeyValuePairLong4();
+                keyValuePairLong4.KeyId = dropitem.Id;
+                keyValuePairLong4.Value = numericComponentS.GetAsInt(NumericType.DropItemId);
+                keyValuePairLong4.Value2 = numericComponentS.GetAsInt(NumericType.DropItemNum);
+                keyValuePairLong4.Value3 = numericComponentS.GetAsInt(NumericType.CellIndex);
+                SingleHappyDropList.Add(keyValuePairLong4);
+            }
+
+            playerlist[0].GetComponent<DataCollationComponent>().SingleHappyDropList = SingleHappyDropList;
+        }
+        
     }
 }

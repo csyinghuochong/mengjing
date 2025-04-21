@@ -316,6 +316,7 @@ namespace ET.Server
                     if (happcellIndex > 0)
                     {
                         unit.Position = HappyData.PositionList[happcellIndex - 1];
+                        unit.Scene().GetComponent<SingleHappyDungeonComponent>().OnRestore(unit);
                     }
                     else
                     {

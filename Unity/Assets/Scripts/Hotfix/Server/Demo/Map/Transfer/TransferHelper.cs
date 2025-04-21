@@ -64,7 +64,7 @@ namespace ET.Server
                         Scene fubnescene = GateMapFactory.Create(unit.Root(), fubenid, fubenInstanceId, "PetFuben" + fubenid.ToString());
                         fubnescene.AddComponent<PetDungeonComponent>();
                         fubnescene.GetComponent<MapComponent>().SetMapInfo((int)MapTypeEnum.PetDungeon, request.SceneId, int.Parse(request.paramInfo));
-                        BeforeTransfer(unit);
+                        BeforeTransfer(unit,sceneTypeEnum);
                         await Transfer(unit, fubnescene.GetActorId(), (int)MapTypeEnum.PetDungeon, request.SceneId, FubenDifficulty.None, request.paramInfo);
                         NoticeFubenCenter(fubnescene, 1).Coroutine();
                         if (SceneConfigHelper.IsSingleFuben(sceneTypeEnum))
@@ -82,8 +82,8 @@ namespace ET.Server
                         fubnescene = GateMapFactory.Create(unit.Root(), fubenid, fubenInstanceId, "PetMelee" + fubenid.ToString());
                         fubnescene.GetComponent<MapComponent>().SetMapInfo((int)MapTypeEnum.PetMelee, request.SceneId, int.Parse(request.paramInfo));
                         fubnescene.AddComponent<YeWaiRefreshComponent>();
-                        PetMeleeDungeonComponent petMeleeDungeonComponent = fubnescene.AddComponent<PetMeleeDungeonComponent>();
-                        BeforeTransfer(unit);
+                        fubnescene.AddComponent<PetMeleeDungeonComponent>();
+                        BeforeTransfer(unit,sceneTypeEnum);
                         await Transfer(unit, fubnescene.GetActorId(), (int)MapTypeEnum.PetMelee, request.SceneId, FubenDifficulty.None, request.paramInfo);
                         
                         NoticeFubenCenter(fubnescene, 1).Coroutine();
@@ -114,7 +114,7 @@ namespace ET.Server
                         oldscene = unit.Scene();
                         MapComponent  mapComponent = oldscene.GetComponent<MapComponent>();
                         sceneTypeEnum = mapComponent.MapType;
-                        BeforeTransfer(unit);
+                        BeforeTransfer(unit,sceneTypeEnum);
                         await Transfer(unit, enterResponse.FubenActorId, MapTypeEnum.PetMatch, request.SceneId, 0, "0");
                         if (SceneConfigHelper.IsSingleFuben(sceneTypeEnum))
                         {
@@ -135,7 +135,7 @@ namespace ET.Server
                             CellDungeonComponentS cellDungeonComponentS = fubnescene.AddComponent<CellDungeonComponentS>();
                             cellDungeonComponentS.InitFubenCell(request.SceneId);
                             cellDungeonComponentS.InitFirstCell();
-                            BeforeTransfer(unit);
+                            BeforeTransfer(unit,sceneTypeEnum);
                             await Transfer(unit, fubnescene.GetActorId(), (int)MapTypeEnum.CellDungeon, request.SceneId, request.Difficulty, request.paramInfo);
                             NoticeFubenCenter(fubnescene, 1).Coroutine();
                             if (SceneConfigHelper.IsSingleFuben(sceneTypeEnum))
@@ -190,7 +190,7 @@ namespace ET.Server
                         mapComponent = fubnescene.GetComponent<MapComponent>();
                         mapComponent.SetMapInfo((int)MapTypeEnum.TrialDungeon, request.SceneId, int.Parse(request.paramInfo));
                         mapComponent.NavMeshId = SceneConfigCategory.Instance.Get(request.SceneId).MapID;
-                        BeforeTransfer(unit);
+                        BeforeTransfer(unit, MapTypeEnum.MainCityScene);
                         await Transfer(unit, fubnescene.GetActorId(), (int)MapTypeEnum.TrialDungeon, request.SceneId, FubenDifficulty.None, request.paramInfo);
                         NoticeFubenCenter(fubnescene, 1).Coroutine();
                         break;
@@ -217,7 +217,7 @@ namespace ET.Server
                         mapComponent = fubnescene.GetComponent<MapComponent>();
                         mapComponent.SetMapInfo((int)MapTypeEnum.SeasonTower, request.SceneId, int.Parse(request.paramInfo));
                         mapComponent.NavMeshId = SceneConfigCategory.Instance.Get(request.SceneId).MapID;
-                        BeforeTransfer(unit);
+                        BeforeTransfer(unit, MapTypeEnum.MainCityScene);
                         await Transfer(unit, fubnescene.GetActorId(), (int)MapTypeEnum.SeasonTower, request.SceneId, FubenDifficulty.None, request.paramInfo);
                         NoticeFubenCenter(fubnescene, 1).Coroutine();
                         break;
@@ -236,7 +236,7 @@ namespace ET.Server
                         mapComponent = fubnescene.GetComponent<MapComponent>();
                         mapComponent.SetMapInfo((int)MapTypeEnum.SealTower, request.SceneId, int.Parse(request.paramInfo));
                         mapComponent.NavMeshId = SceneConfigCategory.Instance.Get(request.SceneId).MapID;
-                        BeforeTransfer(unit);
+                        BeforeTransfer(unit, MapTypeEnum.MainCityScene);
                         await Transfer(unit, fubnescene.GetActorId(), (int)MapTypeEnum.SealTower, request.SceneId, FubenDifficulty.None, request.paramInfo);
                         NoticeFubenCenter(fubnescene, 1).Coroutine();
                         break;
@@ -249,7 +249,7 @@ namespace ET.Server
                         mapComponent = fubnescene.GetComponent<MapComponent>();
                         mapComponent.SetMapInfo((int)MapTypeEnum.RandomTower, request.SceneId, 0);
                         mapComponent.NavMeshId = SceneConfigCategory.Instance.Get(request.SceneId).MapID;
-                        BeforeTransfer(unit);
+                        BeforeTransfer(unit, MapTypeEnum.MainCityScene);
                         await Transfer(unit, fubnescene.GetActorId(), (int)MapTypeEnum.RandomTower, request.SceneId, 0, "0");
                         NoticeFubenCenter(fubnescene, 1).Coroutine();
                         break;
@@ -265,7 +265,7 @@ namespace ET.Server
                         M2U_UnionEnterRequest.SceneId = request.SceneId;
                         F2M_UnionEnterResponse responseUnionEnter = (F2M_UnionEnterResponse)await unit.Root().GetComponent<MessageSender>().Call(
                         mapInstanceId, M2U_UnionEnterRequest);
-                        BeforeTransfer(unit);
+                        BeforeTransfer(unit, MapTypeEnum.MainCityScene);
                         await Transfer(unit, responseUnionEnter.FubenActorId, (int)MapTypeEnum.Union, request.SceneId, request.Difficulty, "0");
                         break;
                     case (int)MapTypeEnum.JiaYuan:
@@ -285,7 +285,7 @@ namespace ET.Server
                         M2J_JiaYuanEnterRequest.SceneId = request.SceneId;
                         F2M_JiaYuanEnterResponse j2M_JianYuanEnterResponse = (F2M_JiaYuanEnterResponse)await unit.Root().GetComponent<MessageSender>().Call(
                         mapInstanceId, M2J_JiaYuanEnterRequest);
-                        BeforeTransfer(unit);
+                        BeforeTransfer(unit, MapTypeEnum.MainCityScene);
                         await Transfer(unit, j2M_JianYuanEnterResponse.FubenActorId, (int)MapTypeEnum.JiaYuan, request.SceneId, request.Difficulty, "0");
                         // if (oldScene == SceneTypeEnum.JiaYuan) //派发事件处理
                         // {
@@ -302,7 +302,7 @@ namespace ET.Server
                         mapComponent = fubnescene.GetComponent<MapComponent>();
                         mapComponent.SetMapInfo((int)MapTypeEnum.Tower, request.SceneId, 0);
                         mapComponent.NavMeshId = SceneConfigCategory.Instance.Get(request.SceneId).MapID;
-                        BeforeTransfer(unit);
+                        BeforeTransfer(unit, MapTypeEnum.MainCityScene);
                         await Transfer(unit, fubnescene.GetActorId(), (int)MapTypeEnum.Tower, request.SceneId, request.Difficulty, "0");
                         NoticeFubenCenter(fubnescene, 1).Coroutine();
                         break;
@@ -321,7 +321,7 @@ namespace ET.Server
                             //Game.Scene.GetComponent<RecastPathComponent>().Update(fubnescene.GetComponent<MapComponent>().NavMeshId);
                         }
                         fubenInstanceId = fubnescene.InstanceId;
-                        BeforeTransfer(unit);
+                        BeforeTransfer(unit, MapTypeEnum.MainCityScene);;
                         await Transfer(unit, fubnescene.GetActorId(), (int)MapTypeEnum.OneChallenge, request.SceneId, request.Difficulty, "0");
                         if (newdungeon)
                         {
@@ -344,7 +344,7 @@ namespace ET.Server
                         petMingDungeon.Position = int.Parse(praminfos[0]);
                         petMingDungeon.TeamId = int.Parse(praminfos[1]);
                         fubnescene.GetComponent<MapComponent>().SetMapInfo((int)MapTypeEnum.PetMing, request.SceneId, 0);
-                        BeforeTransfer(unit);
+                        BeforeTransfer(unit, MapTypeEnum.MainCityScene);
                         await Transfer(unit, fubnescene.GetActorId(), (int)MapTypeEnum.PetMing, request.SceneId, request.Difficulty, praminfos[0]);
                         NoticeFubenCenter(fubnescene, 1).Coroutine();
                         break;
@@ -356,7 +356,7 @@ namespace ET.Server
                         fubnescene = GateMapFactory.Create(unit.Root(), fubenid, fubenInstanceId, "Fuben" + fubenid.ToString());
                         fubnescene.AddComponent<PetTianTiDungeonComponent>().EnemyId = enemyId;
                         fubnescene.GetComponent<MapComponent>().SetMapInfo((int)MapTypeEnum.PetTianTi, request.SceneId, 0);
-                        BeforeTransfer(unit);
+                        BeforeTransfer(unit, MapTypeEnum.MainCityScene);
                         await Transfer(unit, fubnescene.GetActorId(), (int)MapTypeEnum.PetTianTi, request.SceneId, 0, "0");
                         NoticeFubenCenter(fubnescene, 1).Coroutine();
                         break;
@@ -409,7 +409,7 @@ namespace ET.Server
                         {
                             return ErrorCode.ERR_MapLimit;
                         }
-                        BeforeTransfer(unit);
+                        BeforeTransfer(unit, MapTypeEnum.MainCityScene);
                         await Transfer(unit, f2M_YeWaiSceneIdResponse.FubenActorId, sceneConfig.MapType, request.SceneId, 0, "0");
                         break;
                     case MapTypeEnum.RunRace:
@@ -424,7 +424,7 @@ namespace ET.Server
                             return ErrorCode.ERR_AlreadyFinish;
                         }
                         sceneConfig = SceneConfigCategory.Instance.Get(request.SceneId);
-                        BeforeTransfer(unit);
+                        BeforeTransfer(unit, MapTypeEnum.MainCityScene);
                         await Transfer(unit, f2M_YeWaiSceneIdResponse.FubenActorId, sceneConfig.MapType, request.SceneId, 0, "0");
                         break;
                     case MapTypeEnum.Solo:
@@ -448,7 +448,7 @@ namespace ET.Server
                         oldscene = unit.Scene();
                         mapComponent = oldscene.GetComponent<MapComponent>();
                         sceneTypeEnum = mapComponent.MapType;
-                        BeforeTransfer(unit);
+                        BeforeTransfer(unit, sceneTypeEnum);
                         await Transfer(unit, d2GGetUnit.FubenActorId, MapTypeEnum.Solo, request.SceneId, 0, "0");
                         if (SceneConfigHelper.IsSingleFuben(sceneTypeEnum))
                         {
@@ -478,7 +478,7 @@ namespace ET.Server
                         {
                             return ErrorCode.ERR_AlreadyFinish;
                         }
-                        BeforeTransfer(unit);
+                        BeforeTransfer(unit, MapTypeEnum.MainCityScene);
                         await Transfer(unit, responseUnionEnter.FubenActorId, MapTypeEnum.UnionRace, request.SceneId, 0, "0");
                         break;
                     case MapTypeEnum.SingleHappy:
@@ -487,7 +487,7 @@ namespace ET.Server
                         fubnescene = GateMapFactory.Create(unit.Root(), fubenid, fubenInstanceId, "SingleHappy" + fubenid.ToString());
                         fubnescene.AddComponent<SingleHappyDungeonComponent>();
                         fubnescene.GetComponent<MapComponent>().SetMapInfo((int)MapTypeEnum.PetMing, request.SceneId, 0);
-                        BeforeTransfer(unit);
+                        BeforeTransfer(unit, MapTypeEnum.MainCityScene);
                         await Transfer(unit, fubnescene.GetActorId(), (int)MapTypeEnum.SingleHappy, request.SceneId, request.Difficulty, "0");
                         NoticeFubenCenter(fubnescene, 1).Coroutine();
                         break;
@@ -501,7 +501,7 @@ namespace ET.Server
                         {
                             return ErrorCode.ERR_AlreadyFinish;
                         }
-                        BeforeTransfer(unit);
+                        BeforeTransfer(unit, MapTypeEnum.MainCityScene);
                         await Transfer(unit, f2M_YeWaiSceneIdResponse.FubenActorId, (int)MapTypeEnum.Happy, request.SceneId, FubenDifficulty.Normal, f2M_YeWaiSceneIdResponse.Position.ToString());
                         break;
                     case MapTypeEnum.Battle:
@@ -515,7 +515,7 @@ namespace ET.Server
                             return ErrorCode.ERR_AlreadyFinish;
                         }
 
-                        BeforeTransfer(unit);
+                        BeforeTransfer(unit, MapTypeEnum.MainCityScene);
                         await Transfer(unit, f2M_YeWaiSceneIdResponse.FubenActorId, (int)MapTypeEnum.Battle, request.SceneId, FubenDifficulty.Normal, f2M_YeWaiSceneIdResponse.Camp.ToString());
                         break;
                     case MapTypeEnum.Arena:
@@ -536,7 +536,7 @@ namespace ET.Server
                         {
                             return ErrorCode.ERR_AlreadyFinish;
                         }
-                        BeforeTransfer(unit);
+                        BeforeTransfer(unit, MapTypeEnum.MainCityScene);
                         await Transfer(unit, f2M_YeWaiSceneIdResponse.FubenActorId, (int)MapTypeEnum.Arena, request.SceneId, FubenDifficulty.Normal, "0");
                         break;
                     case (int)MapTypeEnum.TeamDungeon:
@@ -561,7 +561,7 @@ namespace ET.Server
                         {
                             return ErrorCode.ERR_TransferFailError;
                         }
-                        BeforeTransfer(unit);
+                        BeforeTransfer(unit,sceneTypeEnum);
 
                         await Transfer(unit, createUnit.FubenActorId, request.SceneType, createUnit.FubenId, createUnit.FubenType, "0");
                         if (SceneConfigHelper.IsSingleFuben(sceneTypeEnum))
@@ -614,7 +614,7 @@ namespace ET.Server
             mapComponent.NavMeshId = DungeonConfigCategory.Instance.Get(sceneId).MapID;
 
             NoticeFubenCenter(fubnescene, 1).Coroutine();
-            BeforeTransfer(unit);
+            BeforeTransfer(unit, oldscene.GetComponent<MapComponent>().MapType);
             await Transfer(unit, fubnescene.GetActorId(), (int)MapTypeEnum.LocalDungeon, sceneId, difficulty, transferId.ToString());
 
             //移除旧scene
@@ -649,7 +649,7 @@ namespace ET.Server
             ActorId mapInstanceId = UnitCacheHelper.MainCityServerId(unit.Zone());
             long userId = unit.Id;
             Scene scene = unit.Scene();
-            BeforeTransfer(unit);
+            BeforeTransfer(unit,mapComponent.MapType);
             await Transfer(unit, mapInstanceId, (int)MapTypeEnum.MainCityScene, CommonHelp.MainCityID(), 0, "0");
             //动态删除副本
             OnFubenToMain(scene, userId);
@@ -713,6 +713,7 @@ namespace ET.Server
                 scene.Dispose();
                 return;
             }
+            
             switch (sceneTypeEnum)
             {
                 case MapTypeEnum.TeamDungeon:
@@ -750,7 +751,6 @@ namespace ET.Server
         public static void OnPlayerDisconnect(Scene scene, long userId)
         {
             int sceneTypeEnum = scene.GetComponent<MapComponent>().MapType;
-
             if (SceneConfigHelper.IsSingleFuben(sceneTypeEnum))
             {
                 //动态删除副本
@@ -758,7 +758,6 @@ namespace ET.Server
                 scene.Dispose();
                 return;
             }
-
             switch (sceneTypeEnum)
             {
                 case MapTypeEnum.TeamDungeon:
@@ -794,11 +793,16 @@ namespace ET.Server
             // }
         }
 
-        public static void BeforeTransfer(Unit unit)
+        public static void BeforeTransfer(Unit unit, int sceneType)
         {
             //删除unit,让其它进程发送过来的消息找不到actor，重发
             //Game.EventSystem.Remove(unitId);
             // 删除Mailbox,让发给Unit的ActorLocation消息重发
+
+            if (sceneType == MapTypeEnum.SingleHappy)
+            {
+                unit.Scene().GetComponent<SingleHappyDungeonComponent>()?.OnSave();
+            }
             unit.RemoveComponent<MailBoxComponent>();
             unit.GetComponent<SkillPassiveComponent>()?.Stop();
             unit.GetComponent<BuffManagerComponentS>().OnTransfer();
