@@ -58,6 +58,23 @@ namespace ET.Client
      		}
      	}
 
+		public UnityEngine.UI.Text E_TextTip_4Text
+	    {
+	        get
+	        {
+	            if (this.uiTransform == null)
+	            {
+	                Log.Error("uiTransform is null.");
+	                return null;
+	            }
+	            if( this.m_E_TextTip_4Text == null )
+	            {
+	                this.m_E_TextTip_4Text = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Bottom/E_TextTip_4Text");
+	            }
+	            return this.m_E_TextTip_4Text;
+	        }
+	    }
+
 		public UnityEngine.UI.Button E_ButtonMove_1Button
      	{
      		get
@@ -182,6 +199,7 @@ namespace ET.Client
 			this.m_E_TextTip_1Text = null;
 			this.m_E_TextTip_2Text = null;
 			this.m_E_TextTip_3Text = null;
+			this.m_E_TextTip_4Text = null;
 			this.m_E_ButtonMove_1Button = null;
 			this.m_E_ButtonMove_1Image = null;
 			this.m_E_ButtonMove_2Button = null;
@@ -195,6 +213,7 @@ namespace ET.Client
 		private UnityEngine.UI.Text m_E_TextTip_1Text = null;
 		private UnityEngine.UI.Text m_E_TextTip_2Text = null;
 		private UnityEngine.UI.Text m_E_TextTip_3Text = null;
+		private UnityEngine.UI.Text m_E_TextTip_4Text = null;
 		private UnityEngine.UI.Button m_E_ButtonMove_1Button = null;
 		private UnityEngine.UI.Image m_E_ButtonMove_1Image = null;
 		private UnityEngine.UI.Button m_E_ButtonMove_2Button = null;

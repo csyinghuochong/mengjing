@@ -4,9 +4,11 @@
 	public  class DlgSingleHappyMain :Entity,IAwake,IUILogic
 	{
 
-		public DlgSingleHappyMainViewComponent View { get => this.GetComponent<DlgSingleHappyMainViewComponent>();} 
+		public DlgSingleHappyMainViewComponent View { get => this.GetComponent<DlgSingleHappyMainViewComponent>();}
 
-		 
+		public long Timer;
+
+		public long RecoverTime;
 
 	}
 }

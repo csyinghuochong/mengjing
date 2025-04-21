@@ -208,7 +208,9 @@
         public const int BaByType = 4012;
         public const int CommonSeasonDonateTimes = 4014;
         public const int SingleHappyCellIndex = 4015;                                           //格子位置，
-        public const int SingleHappyMoveTime = 4016;                                          //上次免费移动的时间
+        public const int SingleHappyMoveTimes = 4016;                                          //单人喜从天降移动的次数
+        public const int SingleBuyTimes = 4017;  
+
         
         public const int Max = 10000;
 

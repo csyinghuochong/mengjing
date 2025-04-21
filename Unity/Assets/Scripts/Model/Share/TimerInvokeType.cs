@@ -118,5 +118,6 @@
         public const int UIUnionOrderTimer = 376;
         public const int PickItemTimer = 377;
         public const int PetEquipMakeCDTimer = 378;
+        public const int UISingleHappyMoveTimer = 379;
     }
 }

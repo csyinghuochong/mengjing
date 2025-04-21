@@ -9,40 +9,51 @@ namespace ET.Server
         protected override async ETTask Run(Unit unit, C2M_SingleHappyOperateRequest request, M2C_SingleHappyOperateResponse response)
         {
             UserInfoComponentS userInfoComponent = unit.GetComponent<UserInfoComponentS>();
+            NumericComponentS numericComponentS = unit.GetComponent<NumericComponentS>();
+
+            int mianfeitimes = int.Parse(GlobalValueConfigCategory.Instance.Get(130).Value);
+            int extendTimes =  int.Parse(GlobalValueConfigCategory.Instance.Get(131).Value);
+            int buyTimes = numericComponentS.GetAsInt(NumericType.SingleBuyTimes);
+
+            int moveTimes = numericComponentS.GetAsInt(NumericType.SingleHappyMoveTimes);
+            int recoverTimes = CommonHelp.GetHappyRecoverTimes(TimeHelper.ServerNow(), extendTimes);
+
+            int canmoveTimes = mianfeitimes + recoverTimes + buyTimes - moveTimes;
             
             ////1免费移动 2刷新奖励 3购买次数
             if (request.OperatateType == 1)
             {
                 //非免费时间则返回
-                long happmoveTime = unit.GetComponent<NumericComponentS>().GetAsLong(NumericType.HappyMoveTime);
-                if (TimeHelper.ServerNow()  < happmoveTime)
+                if (canmoveTimes <= 0)
                 {
                     response.Error = ErrorCode.ERR_HappyMove_CD;
                     return;
                 }
 
-                long mianfeicd = int.Parse(GlobalValueConfigCategory.Instance.Get(93).Value) * 1000;
-                unit.GetComponent<NumericComponentS>().ApplyValue(NumericType.HappyMoveTime, TimeHelper.ServerNow() + mianfeicd);
+                unit.GetComponent<NumericComponentS>().ApplyValue(NumericType.SingleHappyMoveTimes, moveTimes + 1);
             }
             if (request.OperatateType == 2)
             {
-                GlobalValueConfig globalValueConfig = GlobalValueConfigCategory.Instance.Get(94);
-                if (userInfoComponent.UserInfo.Gold < int.Parse(globalValueConfig.Value))
+                GlobalValueConfig globalValueConfig = GlobalValueConfigCategory.Instance.Get(132);
+                if (userInfoComponent.UserInfo.Diamond < int.Parse(globalValueConfig.Value))
                 {
                     response.Error = ErrorCode.ERR_GoldNotEnoughError;
                     return;
                 }
-                userInfoComponent.UpdateRoleMoneySub( UserDataType.Gold, (int.Parse(globalValueConfig.Value) * -1).ToString(), true, ItemGetWay.HappyMove);
+                userInfoComponent.UpdateRoleMoneySub( UserDataType.Diamond, (int.Parse(globalValueConfig.Value) * -1).ToString(), true, ItemGetWay.HappyMove);
+                
+                unit.Scene().GetComponent<SingleHappyDungeonComponent>()?.OnTimer();
             }
             if (request.OperatateType  == 3)
             {
-                GlobalValueConfig globalValueConfig = GlobalValueConfigCategory.Instance.Get(95);
+                GlobalValueConfig globalValueConfig = GlobalValueConfigCategory.Instance.Get(133);
                 if (userInfoComponent.UserInfo.Diamond < int.Parse(globalValueConfig.Value))
                 {
                     response.Error = ErrorCode.ERR_DiamondNotEnoughError;
                     return;
                 }
                 userInfoComponent.UpdateRoleMoneySub(UserDataType.Diamond, (int.Parse(globalValueConfig.Value)* -1).ToString(), true, ItemGetWay.HappyMove);
+                unit.GetComponent<NumericComponentS>().ApplyValue(NumericType.SingleBuyTimes, buyTimes + 1);
             }
 
             for (int r = 10; r > 0; r--)
@@ -67,14 +78,13 @@ namespace ET.Server
                     continue;
                 }
 
-                unit.GetComponent<NumericComponentS>().ApplyValue(NumericType.HappyCellIndex, newCell + 1);
+                unit.GetComponent<NumericComponentS>().ApplyValue(NumericType.SingleHappyCellIndex, newCell + 1);
                 float3 vector3 = HappyData.PositionList[newCell];
                 unit.Position = vector3;
                 break;
             }
 
             unit.Stop(-2);
-
             await ETTask.CompletedTask;
         }
     }

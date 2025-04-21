@@ -4,6 +4,7 @@ using System.Reflection;
 using System.IO;
 using System.Linq;
 using ET.Client;
+using Unity.Mathematics;
 
 namespace  ET
 { 
@@ -931,6 +932,32 @@ namespace  ET
 
             // 在指定位置插入新列表
             mainList.InsertRange(insertIndex, newList);
+        }
+        
+        public static int GetHappyDropId( int openDay, int gid)
+        {
+            string dropinfo = GlobalValueConfigCategory.Instance.Get(gid).Value;
+            string[] dropList = dropinfo.Split('@');
+
+            for (int i = dropList.Length - 1; i >= 0; i--)
+            {
+                string[] dropitem = dropList[i].Split(';');
+                int day = int.Parse(dropitem[0]);
+                int dropid = int.Parse((dropitem[1]));
+
+                if (openDay >= day)
+                {
+                    return dropid;
+                }
+            }
+
+            return int.Parse(dropList[0].Split(';')[1]);
+        }
+        
+        public static int GetHappyRecoverTimes(long serverTime, int extendTimes)
+        {
+            DateTime dateTime = TimeInfo.Instance.ToDateTime(serverTime);
+            return math.max(dateTime.Hour, extendTimes);
         }
         
         //宠物守护

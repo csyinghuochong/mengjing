@@ -431,6 +431,15 @@ namespace ET.Client
             M2C_HappyMoveResponse response = (M2C_HappyMoveResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
             return response.Error;
         }
+        
+        public static async ETTask<M2C_SingleHappyOperateResponse> SingleHappyOperateRequest(Scene root, int operatateType)
+        {
+            C2M_SingleHappyOperateRequest request = C2M_SingleHappyOperateRequest.Create();
+            request.OperatateType = operatateType;
+
+            M2C_SingleHappyOperateResponse response = (M2C_SingleHappyOperateResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            return response;
+        }
 
         public static async ETTask<R2C_RankRunRaceResponse> RankRunRaceRequest(Scene root)
         {
