@@ -32,7 +32,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 224438795553994780}
-  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
@@ -152,7 +151,6 @@ RectTransform:
   - {fileID: 1060779329089425187}
   - {fileID: 827712638643112287}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -176,7 +174,9 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 0
+  m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
@@ -245,7 +245,6 @@ RectTransform:
   m_Children:
   - {fileID: 5054657830484590065}
   m_Father: {fileID: 3480610165040998129}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -369,7 +368,6 @@ RectTransform:
   - {fileID: 3616876066785248206}
   - {fileID: 3222955208213900327}
   m_Father: {fileID: 9059069132897779799}
-  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -489,7 +487,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 547653593408805043}
-  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -565,7 +562,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7275541160682587921}
-  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -614,6 +610,81 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Toggle
+--- !u!1 &165592306597897180
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 37426861677179248}
+  - component: {fileID: 3140569819688996337}
+  - component: {fileID: 3026299182181232556}
+  m_Layer: 5
+  m_Name: Image (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &37426861677179248
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 165592306597897180}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7812584638847377973}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 420}
+  m_SizeDelta: {x: 1400, y: 14}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &3140569819688996337
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 165592306597897180}
+  m_CullTransparentMesh: 1
+--- !u!114 &3026299182181232556
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 165592306597897180}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: ab578a5bdcf21974987dbf730abc39ea, type: 3}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &319359046063984745
 GameObject:
   m_ObjectHideFlags: 0
@@ -645,7 +716,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6027714500518698712}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -667,7 +737,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 319359046063984745}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
@@ -681,11 +751,11 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 40
+    m_Font: {fileID: 12800000, guid: 4e783a2b04b82dc4d90d0f3a579dc8be, type: 3}
+    m_FontSize: 32
     m_FontStyle: 2
     m_BestFit: 0
-    m_MinSize: 4
+    m_MinSize: 3
     m_MaxSize: 81
     m_Alignment: 3
     m_AlignByGeometry: 0
@@ -693,7 +763,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Enter text...
+  m_Text: "\u8BF7\u8F93\u5165\u8D26\u6237..."
 --- !u!1 &341155333420644442
 GameObject:
   m_ObjectHideFlags: 0
@@ -727,12 +797,11 @@ RectTransform:
   m_Children:
   - {fileID: 7012294111084240651}
   m_Father: {fileID: 1069705408210111869}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -17, y: -17}
+  m_SizeDelta: {x: -17, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &5772098438558791683
 CanvasRenderer:
@@ -821,7 +890,6 @@ RectTransform:
   - {fileID: 2407198159127696210}
   - {fileID: 1587506386797471111}
   m_Father: {fileID: 9059069132897779799}
-  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -955,7 +1023,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 224438795553994780}
-  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
@@ -1007,7 +1074,6 @@ RectTransform:
   - {fileID: 1147198891767576733}
   - {fileID: 7355312578737876338}
   m_Father: {fileID: 224438795553994780}
-  m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1044,7 +1110,6 @@ RectTransform:
   m_Children:
   - {fileID: 224532636050568724}
   m_Father: {fileID: 1981663911038768671}
-  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1082,7 +1147,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3344704700480624081}
-  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1145,7 +1209,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2805925454398170076
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1160,12 +1224,11 @@ RectTransform:
   m_Children:
   - {fileID: 6514547999276776523}
   m_Father: {fileID: 5469731263333687456}
-  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 20, y: -17}
+  m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 1, y: 1}
 --- !u!222 &565803619689970106
 CanvasRenderer:
@@ -1287,7 +1350,6 @@ RectTransform:
   m_Children:
   - {fileID: 1435244310239482624}
   m_Father: {fileID: 7897553463219840184}
-  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1408,7 +1470,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4281372491941065547}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -1472,6 +1533,81 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
   m_EffectDistance: {x: 1, y: -1}
   m_UseGraphicAlpha: 1
+--- !u!1 &575151759701061201
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6036988263134636572}
+  - component: {fileID: 6069184086724649141}
+  - component: {fileID: 3675608955934030313}
+  m_Layer: 5
+  m_Name: Image
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &6036988263134636572
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 575151759701061201}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7812584638847377973}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &6069184086724649141
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 575151759701061201}
+  m_CullTransparentMesh: 1
+--- !u!114 &3675608955934030313
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 575151759701061201}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.8627451}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 07e979c6cf025e3489040f17e1037572, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &589993215626342743
 GameObject:
   m_ObjectHideFlags: 0
@@ -1504,7 +1640,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5738545253706343176}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -1600,7 +1735,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 9059069132897779799}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1695,7 +1829,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1343110798777630229}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1772,7 +1905,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 827712638643112287}
-  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1893,7 +2025,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 827712637839379490}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
@@ -1990,7 +2121,6 @@ RectTransform:
   m_Children:
   - {fileID: 827712637839379490}
   m_Father: {fileID: 827712638643112287}
-  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2098,7 +2228,6 @@ RectTransform:
   m_Children:
   - {fileID: 827712637654537288}
   m_Father: {fileID: 827712637769492190}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -2187,7 +2316,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 827712638643112287}
-  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2267,7 +2395,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 827712638643112287}
-  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2346,7 +2473,6 @@ RectTransform:
   - {fileID: 827712637769492190}
   - {fileID: 827712637562771133}
   m_Father: {fileID: 224438795553994780}
-  m_RootOrder: 23
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -2385,7 +2511,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 827712638643112287}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -2506,7 +2631,6 @@ RectTransform:
   - {fileID: 8074794171493881727}
   - {fileID: 8172932619689020480}
   m_Father: {fileID: 224438795553994780}
-  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2531,7 +2655,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &82070228726000726
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2546,7 +2670,6 @@ RectTransform:
   m_Children:
   - {fileID: 7749518662514083364}
   m_Father: {fileID: 1069705408210111869}
-  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
@@ -2672,7 +2795,6 @@ RectTransform:
   - {fileID: 1343110798777630229}
   - {fileID: 2419632047559632508}
   m_Father: {fileID: 3445379262555475241}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2759,7 +2881,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4442231523292592643}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2854,7 +2975,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 69396276404537821}
-  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2935,12 +3055,11 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 686904275979583285}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -0.00012207031, y: 0}
-  m_SizeDelta: {x: 1400, y: 8183.999}
+  m_SizeDelta: {x: 1400, y: 6695}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1399064586647755772
 CanvasRenderer:
@@ -2971,7 +3090,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: a2742f41e77bb7a41a449afbafdc3f6f, type: 3}
+    m_Font: {fileID: 12800000, guid: 4e783a2b04b82dc4d90d0f3a579dc8be, type: 3}
     m_FontSize: 24
     m_FontStyle: 0
     m_BestFit: 0
@@ -2992,7 +3111,7 @@ MonoBehaviour:
     \u5176\u4E2D\uFF0C\u4E3A\u63D0\u4F9B\u5BA2\u6237\u670D\u52A1\u7684\u76EE\u7684\uFF0C\u6211\u4EEC\u5C06\u4F1A\u5C06\u60A8\u7684\u521B\u5EFA\u7684\u7528\u6237\u540D\u548C\u865A\u62DF\u8D22\u4EA7\u76F8\u5173\u4FE1\u606F\uFF08\u4EC5\u9650\u4EA4\u6613\u8BB0\u5F55\u3001\u865A\u62DF\u8D27\u5E01\u3001\u865A\u62DF\u4EA4\u6613\uFF09\u5206\u4EAB\u7ED9\u63D0\u4F9B\u5BA2\u6237\u670D\u52A1\u7684\u6388\u6743\u5408\u4F5C\u4F19\u4F34\u3002\u63D0\u4F9B\u5BA2\u6237\u670D\u52A1\u7684\u6388\u6743\u5408\u4F5C\u4F19\u4F34\u5C06\u4EC5\u4EC5\u4E3A\u63D0\u4F9B\u5BA2\u6237\u670D\u52A1\u7684\u76EE\u7684\u4F7F\u7528\u4E0A\u8FF0\u4FE1\u606F\u3002\r\n5\u3001\u4E0E\u7528\u6237\u589E\u503C\u670D\u52A1\u63D0\u4F9B\u65B9\u5171\u4EAB\uFF1A\u60A8\u7684\u8D26\u53F7\u5728\u7B26\u5408\u7279\u5B9A\u6761\u4EF6\u65F6\uFF0C\u53EF\u80FD\u88AB\u9080\u8BF7\u52A0\u5165\u7B2C\u4E09\u65B9\u63D0\u4F9B\u7684\u7528\u6237\u589E\u503C\u670D\u52A1\u3002\u7528\u6237\u589E\u503C\u670D\u52A1\u5373\uFF0C\u6839\u636E\u60A8\u4F7F\u7528\u670D\u52A1\u7684\u60C5\u51B5\uFF0C\u60A8\u53EF\u80FD\u83B7\u5F97\u4E0D\u540C\u7684\u4F1A\u5458\u7B49\u7EA7\uFF0C\u5E76\u4EAB\u53D7\u4E0D\u540C\u7684\u989D\u5916\u798F\u5229\u3002\u60A8\u65E0\u9700\u4E3A\u8FD9\u4E9B\u989D\u5916\u798F\u5229\u652F\u4ED8\u4EFB\u4F55\u989D\u5916\u8D39\u7528\u3002\u5F53\u60A8\u6536\u5230\u9080\u8BF7\u65F6\uFF0C\u60A8\u53EF\u4EE5\u62D2\u7EDD\u63A5\u53D7\u4E0A\u8FF0\u589E\u503C\u670D\u52A1\u3002\u5982\u679C\u60A8\u9009\u62E9\u63A5\u53D7\u9080\u8BF7\uFF0C\u60A8\u540C\u610F\u6211\u4EEC\u5C06\u60A8\u521B\u5EFA\u7684\u7528\u6237\u540D\u548C\u865A\u62DF\u8D22\u4EA7\u76F8\u5173\u4FE1\u606F\uFF08\u4EC5\u9650\u4EA4\u6613\u8BB0\u5F55\u3001\u865A\u62DF\u8D27\u5E01\u3001\u865A\u62DF\u4EA4\u6613\uFF09\u5206\u4EAB\u7ED9\u7528\u6237\u589E\u503C\u670D\u52A1\u63D0\u4F9B\u65B9\u3002\u7528\u6237\u589E\u503C\u670D\u52A1\u63D0\u4F9B\u65B9\u4EC5\u4EC5\u4E3A\u786E\u8BA4\u60A8\u7684\u4F1A\u5458\u7B49\u7EA7\uFF0C\u4EE5\u53CA\u5411\u60A8\u53D1\u653E\u798F\u5229\u7684\u76EE\u7684\u4F7F\u7528\u4E0A\u8FF0\u4FE1\u606F\u3002\r\n\uFF08\u4E8C\uFF09\u8F6C\u8BA9\_\r\n\u6211\u4EEC\u4E0D\u4F1A\u5C06\u60A8\u7684\u4E2A\u4EBA\u4FE1\u606F\u8F6C\u8BA9\u7ED9\u4EFB\u4F55\u516C\u53F8\u3001\u7EC4\u7EC7\u548C\u4E2A\u4EBA\uFF0C\u4F46\u4EE5\u4E0B\u60C5\u51B5\u9664\u5916\uFF1A\r\n1\u3001\u5728\u83B7\u53D6\u660E\u786E\u540C\u610F\u7684\u60C5\u51B5\u4E0B\u8F6C\u8BA9\uFF1A\u83B7\u5F97\u60A8\u7684\u660E\u786E\u540C\u610F\u540E\uFF0C\u6211\u4EEC\u4F1A\u5411\u5176\u4ED6\u65B9\u8F6C\u8BA9\u60A8\u7684\u4E2A\u4EBA\u4FE1\u606F\uFF1B\r\n2\u3001\u5728\u6D89\u53CA\u5408\u5E76\u3001\u6536\u8D2D\u6216\u7834\u4EA7\u6E05\u7B97\u65F6\uFF0C\u5982\u6D89\u53CA\u4E2A\u4EBA\u4FE1\u606F\u8F6C\u8BA9\uFF0C\u6211\u4EEC\u5C06\u901A\u8FC7\u63A8\u9001\u901A\u77E5\u3001\u516C\u544A\u6216\u5176\u4ED6\u65B9\u5F0F\u53E6\u884C\u544A\u77E5\u60A8\u76F8\u5173\u60C5\u5F62\uFF0C\u6309\u7167\u6CD5\u5F8B\u6CD5\u89C4\u6240\u8981\u6C42\u7684\u6807\u51C6\u7EE7\u7EED\u4FDD\u62A4\u6216\u8981\u6C42\u65B0\u7684\u7BA1\u7406\u8005\u6309\u7167\u672C\u653F\u7B56\u7EE7\u7EED\u4FDD\u62A4\u60A8\u7684\u4E2A\u4EBA\u4FE1\u606F\u3002\r\n3\u3001\u90E8\u5206\u573A\u666F\u4E0B\uFF0C\u60A8\u53EF\u4EE5\u4F7F\u7528\u76F8\u540C\u7684\u8D26\u53F7\u53CA\u5BC6\u7801\u5728\u5176\u4ED6\u7B2C\u4E09\u65B9\u5E73\u53F0\u767B\u5F55\u3001\u4F7F\u7528\uFF0C\u4EE5\u83B7\u5F97\u66F4\u597D\u7684\u6E38\u620F\u4F53\u9A8C\u3002\u4E3A\u63D0\u4F9B\u6B64\u9879\u670D\u52A1\uFF0C\u6211\u4EEC\u53EF\u80FD\u9700\u8981\u5411\u7B2C\u4E09\u65B9\u4F20\u9001\u60A8\u7684\u4E2A\u4EBA\u4FE1\u606F\u53CA\u6E38\u620F\u4FE1\u606F\uFF0C\u6211\u4EEC\u5C06\u6309\u7167\u6CD5\u5F8B\u6CD5\u89C4\u6240\u8981\u6C42\u7684\u6807\u51C6\u7EE7\u7EED\u4FDD\u62A4\u6216\u8981\u6C42\u65B0\u7684\u7BA1\u7406\u8005\u6309\u7167\u672C\u653F\u7B56\u7EE7\u7EED\u4FDD\u62A4\u60A8\u7684\u4E2A\u4EBA\u4FE1\u606F\u3002\r\n\uFF08\u4E09\uFF09\u516C\u5F00\u62AB\u9732\_\r\n\u6211\u4EEC\u4EC5\u4F1A\u5728\u4EE5\u4E0B\u60C5\u51B5\u4E0B\uFF0C\u516C\u5F00\u62AB\u9732\u60A8\u7684\u4E2A\u4EBA\u4FE1\u606F\uFF1A\r\n1\u3001\u83B7\u5F97\u60A8\u660E\u786E\u540C\u610F\u540E\uFF1B\r\n2\u3001\u4E0E\u56FD\u5BB6\u5B89\u5168\u3001\u56FD\u9632\u5B89\u5168\u6709\u5173\u7684\uFF1B\r\n3\u3001\u4E0E\u516C\u5171\u5B89\u5168\u3001\u516C\u5171\u536B\u751F\u3001\u91CD\u5927\u516C\u5171\u5229\u76CA\u6709\u5173\u7684\uFF1B\r\n4\u3001\u4E0E\u72AF\u7F6A\u4FA6\u67E5\u3001\u8D77\u8BC9\u3001\u5BA1\u5224\u548C\u5224\u51B3\u6267\u884C\u7B49\u6709\u5173\u7684\uFF1B\r\n5\u3001\u51FA\u4E8E\u7EF4\u62A4\u4FE1\u606F\u4E3B\u4F53\u6216\u5176\u4ED6\u4E2A\u4EBA\u7684\u751F\u547D\u3001\u8D22\u4EA7\u7B49\u91CD\u5927\u5408\u6CD5\u6743\u76CA\u4F46\u53C8\u5F88\u96BE\u5F97\u5230\u60A8\u672C\u4EBA\u540C\u610F\u7684\uFF1B\r\n6\u3001\u6240\u6536\u96C6\u7684\u4FE1\u606F\u662F\u60A8\u81EA\u884C\u5411\u793E\u4F1A\u516C\u4F17\u516C\u5F00\u7684\uFF1B\r\n7\u3001\u4ECE\u5408\u6CD5\u516C\u5F00\u62AB\u9732\u7684\u4FE1\u606F\u4E2D\u6536\u96C6\u4FE1\u606F\u7684\uFF0C\u5982\u5408\u6CD5\u7684\u65B0\u95FB\u62A5\u9053\u3001\u653F\u5E9C\u4FE1\u606F\u516C\u5F00\u7B49\u6E20\u9053\uFF1B\r\n8\u3001\u6839\u636E\u60A8\u7684\u8981\u6C42\u7B7E\u8BA2\u5408\u540C\u6240\u5FC5\u9700\u7684\uFF1B\r\n9\u3001\u7528\u4E8E\u7EF4\u62A4\u6211\u4EEC\u670D\u52A1\u7684\u5B89\u5168\u7A33\u5B9A\u8FD0\u884C\u6240\u5FC5\u9700\u7684\uFF0C\u4F8B\u5982\u53D1\u73B0\u3001\u5904\u7F6E\u4EA7\u54C1\u6216\u670D\u52A1\u7684\u6545\u969C\uFF1B\r\n10\u3001\u4E3A\u5408\u6CD5\u7684\u65B0\u95FB\u62A5\u9053\u6240\u5FC5\u9700\u7684\uFF1B\r\n11\u3001\u5B66\u672F\u7814\u7A76\u673A\u6784\u57FA\u4E8E\u516C\u5171\u5229\u76CA\u5F00\u5C55\u7EDF\u8BA1\u6216\u5B66\u672F\u7814\u7A76\u6240\u5FC5\u8981\uFF0C\u4E14\u5BF9\u5916\u63D0\u4F9B\u5B66\u672F\u7814\u7A76\u6216\u63CF\u8FF0\u7684\u7ED3\u679C\u65F6\uFF0C\u5BF9\u7ED3\u679C\u4E2D\u6240\u5305\u542B\u7684\u4FE1\u606F\u8FDB\u884C\u53BB\u6807\u8BC6\u5316\u5904\u7406\u7684\uFF1B\r\n12\u3001\u6CD5\u5F8B\u6CD5\u89C4\u89C4\u5B9A\u7684\u5176\u4ED6\u60C5\u5F62\u3002\r\n\u56DB\u3001\u6211\u4EEC\u5982\u4F55\u4FDD\u62A4\u60A8\u7684\u4E2A\u4EBA\u4FE1\u606F\_\r\n\uFF08\u4E00\uFF09\u6211\u4EEC\u4F1A\u91C7\u53D6\u4E00\u5207\u5408\u7406\u53EF\u884C\u7684\u63AA\u65BD\uFF0C\u4FDD\u62A4\u60A8\u7684\u4E2A\u4EBA\u4FE1\u606F\u3002\u4F8B\u5982\uFF0C\u6211\u4EEC\u4F7F\u7528SSL/hash\u5BF9\u60A8\u7684\u6570\u636E\u8FDB\u884C\u52A0\u5BC6\u4FDD\u62A4\uFF1B\u5982\u6211\u4EEC\u4E0E\u7B2C\u4E09\u65B9\u5206\u4EAB\u60A8\u7684\u4FE1\u606F\uFF0C\u6211\u4EEC\u5C06\u4F1A\u91C7\u7528\u52A0\u5BC6\u3001\u8131\u654F\u53CA\u5176\u4ED6\u53BB\u6807\u8BC6\u5316\u5904\u7406\u7B49\u624B\u6BB5\u4FDD\u969C\u60A8\u7684\u4FE1\u606F\u5B89\u5168\u3002\r\n\uFF08\u4E8C\uFF09\u6211\u4EEC\u4E3A\u4FDD\u62A4\u4FE1\u606F\u91C7\u53D6\u7684\u5176\u4ED6\u5B89\u5168\u63AA\u65BD\r\n\u6211\u4EEC\u901A\u8FC7\u5EFA\u7ACB\u6570\u636E\u5206\u7C7B\u5206\u7EA7\u5236\u5EA6\u3001\u6570\u636E\u5B89\u5168\u7BA1\u7406\u89C4\u8303\u3001\u6570\u636E\u5B89\u5168\u5F00\u53D1\u89C4\u8303\u6765\u7BA1\u7406\u89C4\u8303\u4FE1\u606F\u7684\u5B58\u50A8\u548C\u4F7F\u7528\u3002\r\n\u6211\u4EEC\u901A\u8FC7\u4FE1\u606F\u63A5\u89E6\u8005\u4FDD\u5BC6\u534F\u8BAE\u3001\u76D1\u63A7\u548C\u5BA1\u8BA1\u673A\u5236\u6765\u5BF9\u6570\u636E\u8FDB\u884C\u5168\u9762\u5B89\u5168\u63A7\u5236\u3002\r\n\uFF08\u4E09\uFF09\u6211\u4EEC\u4EC5\u5141\u8BB8\u6709\u5FC5\u8981\u77E5\u6653\u8FD9\u4E9B\u4FE1\u606F\u7684\u6211\u4EEC\u5DE5\u4F5C\u4EBA\u5458\u3001\u5408\u4F5C\u4F19\u4F34\u8BBF\u95EE\u60A8\u7684\u4FE1\u606F\uFF0C\u540C\u65F6\u8981\u6C42\u53EF\u80FD\u63A5\u89E6\u5230\u60A8\u7684\u4FE1\u606F\u7684\u6240\u6709\u4EBA\u5458\u5C65\u884C\u76F8\u5E94\u7684\u4FDD\u5BC6\u4E49\u52A1\u3002\u5982\u679C\u672A\u80FD\u5C65\u884C\u8FD9\u4E9B\u4E49\u52A1\uFF0C\u53EF\u80FD\u4F1A\u88AB\u8FFD\u7A76\u6CD5\u5F8B\u8D23\u4EFB\u6216\u88AB\u4E2D\u6B62\u4E0E\u6211\u4EEC\u7684\u5408\u4F5C\u5173\u7CFB\u3002\r\n\uFF08\u56DB\uFF09\u6211\u4EEC\u4F1A\u91C7\u53D6\u4E00\u5207\u5408\u7406\u53EF\u884C\u7684\u63AA\u65BD\uFF0C\u786E\u4FDD\u672A\u6536\u96C6\u65E0\u5173\u7684\u4E2A\u4EBA\u4FE1\u606F\u3002\u6211\u4EEC\u53EA\u4F1A\u5728\u60A8\u7B2C\u4E00\u6B21\u4F7F\u7528\u6211\u4EEC\u7684\u4EA7\u54C1\u6216\u670D\u52A1\u65F6\uFF0C\u540C\u610F\u6211\u4EEC\u7684\u4EA7\u54C1\u6216\u670D\u52A1\u6536\u96C6\u4E2A\u4EBA\u4FE1\u606F\u4E4B\u540E\uFF0C\u6CE8\u9500\u8D26\u53F7\u4E4B\u524D\u4FDD\u7559\u60A8\u7684\u4E2A\u4EBA\u4FE1\u606F\uFF0C\u9664\u975E\u6CD5\u5F8B\u6CD5\u89C4\u660E\u786E\u8981\u6C42\u6211\u4EEC\u4FDD\u7559\u66F4\u957F\u7684\u671F\u9650\u3002\r\n\uFF08\u4E94\uFF09\u4E92\u8054\u7F51\u5E76\u975E\u7EDD\u5BF9\u5B89\u5168\u7684\u73AF\u5883\uFF0C\u800C\u4E14\u7535\u5B50\u90AE\u4EF6\u3001\u5373\u65F6\u901A\u8BAF\u3001\u53CA\u4E0E\u5176\u4ED6\u6211\u4EEC\u7528\u6237\u7684\u4EA4\u6D41\u65B9\u5F0F\u5E76\u672A\u52A0\u5BC6\uFF0C\u9664\u975E\u6211\u4EEC\u660E\u786E\u8981\u6C42\uFF0C\u6211\u4EEC\u5F3A\u70C8\u5EFA\u8BAE\u60A8\u4E0D\u8981\u901A\u8FC7\u6B64\u7C7B\u65B9\u5F0F\u53D1\u9001\u4E2A\u4EBA\u4FE1\u606F\u3002\u8BF7\u4F7F\u7528\u590D\u6742\u5BC6\u7801\uFF0C\u534F\u52A9\u6211\u4EEC\u4FDD\u8BC1\u60A8\u7684\u8D26\u53F7\u5B89\u5168\u3002\u5982\u679C\u6211\u4EEC\u660E\u786E\u8981\u6C42\u60A8\u5728\u63D0\u4EA4\u7279\u5B9A\u670D\u52A1\u9700\u6C42\u65F6\uFF0C\u4F7F\u7528\u7535\u5B50\u90AE\u4EF6\u7B49\u65B9\u5F0F\u53D1\u9001\u4E2A\u4EBA\u4FE1\u606F\uFF0C\u6211\u4EEC\u5C06\u6309\u7167\u672C\u9690\u79C1\u653F\u7B56\u7684\u8981\u6C42\uFF0C\u91C7\u53D6\u5408\u7406\u53EF\u884C\u7684\u63AA\u65BD\uFF0C\u4FDD\u62A4\u60A8\u53D1\u9001\u7684\u4E2A\u4EBA\u4FE1\u606F\u3002\_\r\n\uFF08\u516D\uFF09\u4E92\u8054\u7F51\u73AF\u5883\u5E76\u975E\u767E\u5206\u4E4B\u767E\u5B89\u5168\uFF0C\u6211\u4EEC\u5C06\u5C3D\u529B\u786E\u4FDD\u6216\u62C5\u4FDD\u60A8\u53D1\u9001\u7ED9\u6211\u4EEC\u7684\u4EFB\u4F55\u4FE1\u606F\u7684\u5B89\u5168\u6027\u3002\u5982\u679C\u6211\u4EEC\u7684\u7269\u7406\u3001\u6280\u672F\u3001\u6216\u7BA1\u7406\u9632\u62A4\u8BBE\u65BD\u906D\u5230\u7834\u574F\uFF0C\u5BFC\u81F4\u4FE1\u606F\u88AB\u975E\u6388\u6743\u8BBF\u95EE\u3001\u516C\u5F00\u62AB\u9732\u3001\u7BE1\u6539\u3001\u6216\u6BC1\u574F\uFF0C\u5BFC\u81F4\u60A8\u7684\u5408\u6CD5\u6743\u76CA\u53D7\u635F\uFF0C\u6211\u4EEC\u5C06\u627F\u62C5\u76F8\u5E94\u7684\u6CD5\u5F8B\u8D23\u4EFB\u3002\r\n\uFF08\u4E03\uFF09\u5728\u4E0D\u5E78\u53D1\u751F\u4E2A\u4EBA\u4FE1\u606F\u5B89\u5168\u4E8B\u4EF6\u540E\uFF0C\u6211\u4EEC\u5C06\u91C7\u53D6\u5FC5\u8981\u63AA\u65BD\u4EE5\u963B\u6B62\u5B89\u5168\u4E8B\u4EF6\u6269\u5927\uFF0C\u5E76\u4EE5\u63A8\u9001\u901A\u77E5\u3001\u516C\u544A\u7B49\u5F62\u5F0F\u544A\u77E5\u60A8\u3002\r\n\u4E94\u3001\u60A8\u7684\u6743\u5229\_\r\n\u6309\u7167\u4E2D\u56FD\u76F8\u5173\u7684\u6CD5\u5F8B\u3001\u6CD5\u89C4\u3001\u6807\u51C6\uFF0C\u4EE5\u53CA\u5176\u4ED6\u56FD\u5BB6\u3001\u5730\u533A\u7684\u901A\u884C\u505A\u6CD5\uFF0C\u6211\u4EEC\u4FDD\u969C\u60A8\u5BF9\u81EA\u5DF1\u7684\u4E2A\u4EBA\u4FE1\u606F\u884C\u4F7F\u4EE5\u4E0B\u6743\u5229\uFF1A\r\n\uFF08\u4E00\uFF09\u8BBF\u95EE\u60A8\u7684\u4E2A\u4EBA\u4FE1\u606F\r\n\u60A8\u6709\u6743\u8BBF\u95EE\u60A8\u7684\u4E2A\u4EBA\u4FE1\u606F\uFF0C\u6CD5\u5F8B\u6CD5\u89C4\u89C4\u5B9A\u7684\u4F8B\u5916\u60C5\u51B5\u9664\u5916\u3002\r\n\uFF08\u4E8C\uFF09\u63A7\u5236\u60A8\u7684\u4E2A\u4EBA\u4FE1\u606F\r\n\u60A8\u53EF\u968F\u65F6\u67E5\u8BE2\u5E76\u7BA1\u7406\u60A8\u8D26\u53F7\u4E0B\u7684\u4E2A\u4EBA\u4FE1\u606F\uFF0C\u8D26\u53F7\u540D\u79F0\u662F\u60A8\u91CD\u8981\u7684\u7F51\u7EDC\u8EAB\u4EFD\u6807\u8BC6\uFF0C\u51FA\u4E8E\u5B89\u5168\u6027\u548C\u8EAB\u4EFD\u8BC6\u522B\u7684\u8003\u8651\uFF0C\u5728\u6CE8\u518C\u4E4B\u540E\u65E0\u6CD5\u53D8\u66F4\u3002\r\n\uFF08\u4E09\uFF09\u5220\u9664\u60A8\u7684\u4E2A\u4EBA\u4FE1\u606F\r\n\u6211\u4EEC\u5C06\u6309\u7167\u672C\u653F\u7B56\u6240\u8FF0\uFF0C\u4EC5\u4E3A\u5B9E\u73B0\u6211\u4EEC\u4EA7\u54C1\u6216\u670D\u52A1\u7684\u529F\u80FD\uFF0C\u6536\u96C6\u3001\u4F7F\u7528\u60A8\u7684\u4FE1\u606F\u3002\u5982\u60A8\u53D1\u73B0\u6211\u4EEC\u8FDD\u53CD\u6CD5\u5F8B\u3001\u884C\u653F\u6CD5\u89C4\u7684\u89C4\u5B9A\u6216\u8005\u53CC\u65B9\u7684\u7EA6\u5B9A\u6536\u96C6\u3001\u4F7F\u7528\u60A8\u7684\u4E2A\u4EBA\u4FE1\u606F\uFF0C\u6216\u8005\u60A8\u901A\u8FC7\u6CE8\u9500\u8D26\u53F7\u505C\u6B62\u4F7F\u7528\u6211\u4EEC\u7684\u4EA7\u54C1\u6216\u670D\u52A1\uFF0C\u60A8\u53EF\u4EE5\u8981\u6C42\u6211\u4EEC\u5220\u9664\u3002\u5982\u60A8\u53D1\u73B0\u6211\u4EEC\u6536\u96C6\u3001\u5B58\u50A8\u7684\u60A8\u7684\u4E2A\u4EBA\u4FE1\u606F\u6709\u9519\u8BEF\u7684\uFF0C\u60A8\u4E5F\u53EF\u4EE5\u8981\u6C42\u6211\u4EEC\u66F4\u6B63\u3002\u8BF7\u901A\u8FC7\u672C\u653F\u7B56\u5217\u660E\u7684\u8054\u7CFB\u65B9\u5F0F\u4E0E\u6211\u4EEC\u8054\u7CFB\u3002\u4E3A\u514D\u6B67\u4E49\uFF0C\u201C\u5220\u9664\u201D\u5305\u62EC\u5BF9\u60A8\u7684\u4E2A\u4EBA\u4FE1\u606F\u8FDB\u884C\u533F\u540D\u5316\u5904\u7406\u6216\u4E0D\u53EF\u64A4\u9500\u5730\u6C38\u4E45\u53D6\u6D88\u6211\u4EEC\u5168\u90E8\u5458\u5DE5\u548C\u6211\u4EEC\u6388\u6743\u7684\u5168\u90E8\u7B2C\u4E09\u65B9\uFF08\u5982\u6709\uFF09\u5BF9\u60A8\u4E2A\u4EBA\u4FE1\u606F\u7684\u8BBF\u95EE\u6743\u9650\u3002\r\n\uFF08\u56DB\uFF09\u6539\u53D8\u60A8\u6388\u6743\u540C\u610F\u7684\u8303\u56F4\r\n\u6BCF\u4E2A\u4E1A\u52A1\u529F\u80FD\u9700\u8981\u4E00\u4E9B\u57FA\u672C\u7684\u4E2A\u4EBA\u4FE1\u606F\u624D\u80FD\u5F97\u4EE5\u5B8C\u6210\uFF08\u89C1\u672C\u653F\u7B56\u7B2C\u4E00\u6B3E\uFF09\u3002\u60A8\u53EF\u4EE5\u5728\u4F7F\u7528\u6211\u4EEC\u670D\u52A1\u7684\u8FC7\u7A0B\u4E2D\uFF0C\u8BBF\u95EE\u3001\u4FEE\u6539\u548C\u5220\u9664\u60A8\u63D0\u4F9B\u7684\u6CE8\u518C\u4FE1\u606F\u548C\u5176\u4ED6\u4E2A\u4EBA\u4FE1\u606F\u3002\u60A8\u8BBF\u95EE\u3001\u4FEE\u6539\u548C\u5220\u9664\u4E2A\u4EBA\u4FE1\u606F\u7684\u8303\u56F4\u548C\u65B9\u5F0F\u5C06\u53D6\u51B3\u4E8E\u60A8\u4F7F\u7528\u7684\u5177\u4F53\u670D\u52A1\u53CA\u79FB\u52A8\u8BBE\u5907\u7684\u8BBE\u7F6E\u3002\u4F8B\u5982\uFF0C\u82E5\u60A8\u5728\u4F7F\u7528\u5730\u7406\u4F4D\u7F6E\u76F8\u5173\u670D\u52A1\u65F6\uFF0C\u5E0C\u671B\u505C\u6B62\u5206\u4EAB\u60A8\u7684\u5730\u7406\u4F4D\u7F6E\u4FE1\u606F\uFF0C\u60A8\u53EF\u901A\u8FC7\u79FB\u52A8\u8BBE\u5907\u7684\u5173\u95ED\u5B9A\u4F4D\u529F\u80FD\u3001\u8F6F\u786C\u4EF6\u670D\u52A1\u5546\u53CA\u901A\u8BAF\u670D\u52A1\u63D0\u4F9B\u5546\u7684\u5173\u95ED\u65B9\u5F0F\u505C\u6B62\u5206\u4EAB\u3002\r\n\u8BF7\u60A8\u77E5\u6089\uFF0C\u4E0B\u5217\u4E2A\u4EBA\u4FE1\u606F\u7CFB\u6211\u4EEC\u4EA7\u54C1\u548C\u670D\u52A1\u6240\u9700\u7684\u57FA\u672C\u4FE1\u606F\u3002\u5982\u679C\u60A8\u4E0D\u6CE8\u9500\u8D26\u53F7\uFF0C\u90A3\u4E48\u4EE5\u4E0B\u4FE1\u606F\u60A8\u4E0D\u80FD\u5355\u72EC\u8981\u6C42\u5220\u9664\uFF0C\u5982\u679C\u4FE1\u606F\u6709\u8BEF\u6216\u8005\u53D1\u751F\u53D8\u66F4\uFF0C\u60A8\u53EF\u4EE5\u8981\u6C42\u4FEE\u6539\u3002\u5982\u679C\u60A8\u575A\u6301\u8981\u6C42\u5220\u9664\u4E0B\u5217\u4FE1\u606F\uFF0C\u60A8\u53EF\u4EE5\u6CE8\u9500\u8D26\u53F7\u3002\r\n\uFF081\uFF09\u5B8C\u6210\u521B\u5EFA\u8D26\u53F7\u6240\u586B\u5199\u7684\u4FE1\u606F\u3002\u5305\u62EC\uFF1A\u60A8\u7684\u59D3\u540D\u3001\u624B\u673A\u53F7\u7801\u3001\u8EAB\u4EFD\u8BC1\u53F7\u7801\u3001\u521B\u5EFA\u7684\u7528\u6237\u540D\u3002\u5982\u679C\u60A8\u662F\u513F\u7AE5\uFF0C\u8FD8\u5305\u62EC\u60A8\u7684\u76D1\u62A4\u4EBA\u6CE8\u518C\u4FE1\u606F\uFF0C\u5305\u62EC\u76D1\u62A4\u4EBA\u59D3\u540D\u3001\u8054\u7CFB\u65B9\u5F0F\u3001\u8EAB\u4EFD\u8BC1\u53F7\u7801\u548C\u76D1\u62A4\u5173\u7CFB\u8BC1\u660E\u3002\u56E0\u4E3A\u8FD9\u4E9B\u4FE1\u606F\u662F\u6211\u4EEC\u5224\u65AD\u60A8\u8EAB\u4EFD\u7684\u57FA\u672C\u4F9D\u636E\u3002\u8FD9\u90E8\u5206\u4FE1\u606F\u4E2D\u9664\u8054\u7CFB\u65B9\u5F0F\u5916\u4E0D\u5141\u8BB8\u4FEE\u6539\uFF08\u76D1\u62A4\u5173\u7CFB\u53D1\u751F\u53D8\u5316\u9664\u5916\uFF09\u3002\u5982\u679C\u9700\u8981\u4FEE\u6539\u513F\u7AE5\u8D26\u53F7\u4FE1\u606F\u4E2D\u7684\u76D1\u62A4\u4EBA\u8054\u7CFB\u65B9\u5F0F\uFF0C\u5FC5\u987B\u76D1\u62A4\u4EBA\u63D0\u4EA4\u7533\u8BF7\uFF0C\u5E76\u91CD\u65B0\u9A8C\u8BC1\u6CE8\u518C\u4FE1\u606F\uFF08\u63D0\u4F9B\u76D1\u62A4\u4EBA\u7684\u8EAB\u4EFD\u8BC1\u626B\u63CF\u4EF6\u548C\u76D1\u62A4\u5173\u7CFB\u8BC1\u660E\u626B\u63CF\u4EF6\uFF09\u3002\u5982\u679C\u76D1\u62A4\u5173\u7CFB\u53D1\u751F\u53D8\u5316\uFF0C\u53D8\u5316\u540E\u7684\u76D1\u62A4\u4EBA\u5E94\u63D0\u4F9B\u6CE8\u518C\u4FE1\u606F\uFF0C\u5305\u62EC\u76D1\u62A4\u4EBA\u59D3\u540D\u3001\u8054\u7CFB\u65B9\u5F0F\u3001\u8EAB\u4EFD\u8BC1\u53F7\u7801\u548C\u65B0\u7684\u76D1\u62A4\u5173\u7CFB\u8BC1\u660E\u3002\r\n\uFF082\uFF09\u5728\u4EA4\u6613\u8FC7\u7A0B\u4E2D\u6536\u96C6\u60A8\u7684\u865A\u62DF\u8D22\u4EA7\u76F8\u5173\u4FE1\u606F\uFF08\u4EC5\u9650\u4EA4\u6613\u8BB0\u5F55\u3001\u865A\u62DF\u8D27\u5E01\u3001\u865A\u62DF\u4EA4\u6613\u3001\u6E38\u620F\u7C7B\u5151\u6362\u7801\u7B49\uFF09\u3002\u56E0\u4E3A\u8FD9\u4E9B\u4FE1\u606F\u53EF\u80FD\u5728\u540E\u7EED\u670D\u52A1\u4EA7\u751F\u4E89\u8BAE\u65F6\u5224\u65AD\u8D23\u4EFB\u7684\u57FA\u672C\u4F9D\u636E\u3002\r\n\uFF083\uFF09\u5F53\u60A8\u4F7F\u7528\u6211\u4EEC\u7684\u5BA2\u6237\u670D\u52A1\u65F6\uFF0C\u6211\u4EEC\u4FDD\u5B58\u60A8\u7684\u901A\u4FE1/\u901A\u8BDD\u8BB0\u5F55\u548C\u5185\u5BB9\u6216\u60A8\u7559\u4E0B\u7684\u8054\u7CFB\u65B9\u5F0F\u3002\u56E0\u4E3A\u8FD9\u4E9B\u4FE1\u606F\u662F\u6211\u4EEC\u5411\u60A8\u63D0\u4F9B\u67D0\u4E9B\u7279\u5B9A\u5BA2\u6237\u670D\u52A1\u7684\u57FA\u672C\u8BC1\u636E\u548C\u540E\u7EED\u7EE7\u7EED\u63D0\u4F9B\u670D\u52A1\u7684\u5FC5\u8981\u4FE1\u606F\u3002\r\n\u53E6\u5916\uFF0C\u8BBE\u5907\u8BC6\u522B\u7801\u57FA\u4E8E\u5B89\u5168\u9632\u8303\u3001\u7528\u6237\u6807\u8BC6\uFF0C\u6211\u4EEC\u5728\u4F60\u540C\u610F\u7684\u60C5\u51B5\u4E0B\u5C06\u8BBE\u5907\u8BC6\u522B\u7801\u76F8\u5173\u4FE1\u606F\uFF0C\u56E0\u6B64\u5373\u4F7F\u60A8\u8981\u6C42\u5220\u9664\u8BE5\u7B49\u4FE1\u606F\uFF0C\u5982\u679C\u60A8\u63D0\u51FA\u8981\u6C42\u5E76\u518D\u6B21\u540C\u610F\u540E\uFF0C\u7EE7\u7EED\u4F7F\u7528\u6211\u4EEC\u7684\u4EA7\u54C1\u6216\u670D\u52A1\uFF0C\u6211\u4EEC\u4E5F\u4F1A\u518D\u6B21\u6536\u96C6\u4E0A\u8FF0\u4FE1\u606F\u3002\r\n\uFF08\u4E94\uFF09\u8D26\u53F7\u6CE8\u9500\_\r\n\u8D26\u53F7\u6CE8\u9500\u8BF7\u60A8\u6309\u4EE5\u4E0B\u6D41\u7A0B\u64CD\u4F5C\r\n\uFF081\uFF09\u8BF7\u63D0\u4F9B\u9700\u8981\u6CE8\u9500\u8D26\u53F7\u7684\u51C6\u786E\u4FE1\u606F\uFF1B\r\n\uFF082\uFF09\u8BF7\u63D0\u4F9B\u5E10\u53F7\u6240\u7ED1\u5B9A\u7684\u8EAB\u4EFD\u4FE1\u606F\uFF1B\r\n\uFF083\uFF09\u5BA1\u6838\u901A\u8FC7\u540E\u9700\u60A8\u7B7E\u7F72\u300A\u8D26\u53F7\u6CE8\u9500\u7533\u8BF7\u4E66\u300B\u786E\u8BA4\u5B8C\u6BD5\u540E\u518D\u8FDB\u884C\u64CD\u4F5C\u6CE8\u9500\u8D26\u53F7\uFF0C\u4E14\u6CE8\u9500\u540E\u5C06\u65E0\u6CD5\u6062\u590D\u8D26\u53F7\u6216\u66F4\u6362\u8D26\u53F7\u3002\u8BF7\u51C6\u786E\u586B\u5199\u53CA\u786E\u8BA4\u63D0\u4EA4\u7684\u4FE1\u606F\u5185\u5BB9\uFF0C\u6211\u4EEC\u9700\u8981\u6838\u5B9E\u6CE8\u9500\u8D26\u53F7\u7684\u76F8\u5173\u8D44\u6599\u4FE1\u606F\uFF0C\u5982\u60A8\u63D0\u4F9B\u4FE1\u606F\u4E0D\u5168\u5C06\u5F71\u54CD\u60A8\u7684\u6CE8\u9500\u3002\r\n\u3010\u63D0\u4EA4\u7533\u8BF7\u6A21\u677F\u3011\uFF1A\r\n1\u3001\u90AE\u4EF6\u6807\u9898\uFF1A\u6211\u4EEC\u8D26\u53F7\u6CE8\u9500-XXX(\u8D26\u53F7)\r\n2\u3001\u90AE\u4EF6\u5185\u5BB9\uFF1A\u6240\u5728\u6E38\u620F\uFF1B\u8D26\u53F7\uFF1B\u89D2\u8272\u540D\uFF1B\u670D\u52A1\u5668\uFF1B\u7ED1\u5B9A\u624B\u673A\u53F7\uFF1B\u5BC6\u4FDD\u90AE\u7BB1\uFF1B\u5BC6\u4FDD\u95EE\u9898\uFF1B\u5145\u503C\u8BB0\u5F55\u622A\u56FE\uFF1B\u6CE8\u518C\u5730\u70B9\uFF1B\u5E38\u7528\u767B\u5F55\u5730\u70B9\uFF1B\u5E10\u53F7\u6240\u7ED1\u5B9A\u7684\u8EAB\u4EFD\u4FE1\u606F\u3002\r\n\uFF08\u516D\uFF09\u54CD\u5E94\u60A8\u7684\u4E0A\u8FF0\u8BF7\u6C42\r\n\u4E3A\u4FDD\u969C\u5B89\u5168\uFF0C\u60A8\u53EF\u80FD\u9700\u8981\u63D0\u4F9B\u4E66\u9762\u8BF7\u6C42\uFF0C\u6216\u4EE5\u5176\u4ED6\u65B9\u5F0F\u8BC1\u660E\u60A8\u7684\u8EAB\u4EFD\u3002\u6211\u4EEC\u53EF\u80FD\u4F1A\u5148\u8981\u6C42\u60A8\u9A8C\u8BC1\u81EA\u5DF1\u7684\u8EAB\u4EFD\uFF0C\u7136\u540E\u518D\u5904\u7406\u60A8\u7684\u8BF7\u6C42\u3002\u6211\u4EEC\u5C06\u5728\u5341\u4E94\u4E2A\u5DE5\u4F5C\u65E5\u5185\u4F5C\u51FA\u7B54\u590D\u3002\u5982\u60A8\u4E0D\u6EE1\u610F\uFF0C\u53EF\u4EE5\u8054\u7CFB\u6211\u4EEC\u5BA2\u670D\u6216\u4F9D\u300A\u7528\u6237\u6CE8\u518C\u670D\u52A1\u534F\u8BAE\u300B\u7EA6\u5B9A\u65B9\u5F0F\u5904\u7406\u3002\r\n\u5BF9\u4E8E\u60A8\u5408\u7406\u7684\u8BF7\u6C42\uFF0C\u6211\u4EEC\u539F\u5219\u4E0A\u4E0D\u6536\u53D6\u8D39\u7528\uFF0C\u4F46\u5BF9\u591A\u6B21\u91CD\u590D\u3001\u8D85\u51FA\u5408\u7406\u9650\u5EA6\u7684\u8BF7\u6C42\uFF0C\u6211\u4EEC\u5C06\u89C6\u60C5\u6536\u53D6\u4E00\u5B9A\u6210\u672C\u8D39\u7528\u3002\u5BF9\u4E8E\u90A3\u4E9B\u65E0\u7AEF\u91CD\u590D\u3001\u9700\u8981\u8FC7\u591A\u6280\u672F\u624B\u6BB5\uFF08\u4F8B\u5982\uFF0C\u9700\u8981\u5F00\u53D1\u65B0\u7CFB\u7EDF\u6216\u4ECE\u6839\u672C\u4E0A\u6539\u53D8\u73B0\u884C\u60EF\u4F8B\uFF09\u3001\u7ED9\u4ED6\u4EBA\u5408\u6CD5\u6743\u76CA\u5E26\u6765\u98CE\u9669\u6216\u8005\u975E\u5E38\u4E0D\u5207\u5B9E\u9645\uFF08\u4F8B\u5982\uFF0C\u6D89\u53CA\u5907\u4EFD\u78C1\u5E26\u4E0A\u5B58\u653E\u7684\u4FE1\u606F\uFF09\u7684\u8BF7\u6C42\uFF0C\u6211\u4EEC\u53EF\u80FD\u4F1A\u4E88\u4EE5\u62D2\u7EDD\u3002\r\n\u5728\u4EE5\u4E0B\u60C5\u5F62\u4E2D\uFF0C\u6309\u7167\u6CD5\u5F8B\u6CD5\u89C4\u8981\u6C42\uFF0C\u6211\u4EEC\u5C06\u65E0\u6CD5\u54CD\u5E94\u60A8\u7684\u8BF7\u6C42\uFF1A\r\n1\u3001\u4E0E\u56FD\u5BB6\u5B89\u5168\u3001\u56FD\u9632\u5B89\u5168\u76F4\u63A5\u76F8\u5173\u7684\uFF1B\r\n2\u3001\u4E0E\u516C\u5171\u5B89\u5168\u3001\u516C\u5171\u536B\u751F\u3001\u91CD\u5927\u516C\u5171\u5229\u76CA\u76F4\u63A5\u76F8\u5173\u7684\uFF1B\r\n3\u3001\u4E0E\u72AF\u7F6A\u4FA6\u67E5\u3001\u8D77\u8BC9\u3001\u5BA1\u5224\u548C\u5224\u51B3\u6267\u884C\u7B49\u76F4\u63A5\u76F8\u5173\u7684\uFF1B\r\n4\u3001\u6709\u5145\u5206\u8BC1\u636E\u8868\u660E\u60A8\u5B58\u5728\u4E3B\u89C2\u6076\u610F\u6216\u6EE5\u7528\u6743\u5229\u7684\uFF1B\r\n5\u3001\u54CD\u5E94\u60A8\u7684\u8BF7\u6C42\u5C06\u5BFC\u81F4\u60A8\u6216\u5176\u4ED6\u4E2A\u4EBA\u3001\u7EC4\u7EC7\u7684\u5408\u6CD5\u6743\u76CA\u53D7\u5230\u4E25\u91CD\u635F\u5BB3\u7684\uFF1B\r\n6\u3001\u6D89\u53CA\u5546\u4E1A\u79D8\u5BC6\u7684\uFF1B\r\n7\u3001\u5176\u4ED6\u6211\u4EEC\u6709\u5408\u7406\u7406\u7531\u62D2\u7EDD\u7684\u60C5\u5F62\u3002\r\n\u516D\u3001\u6211\u4EEC\u5982\u4F55\u5904\u7406\u672A\u6210\u5E74\u4EBA\u7684\u4E2A\u4EBA\u4FE1\u606F\_\r\n\u6211\u4EEC\u7684\u4EA7\u54C1\u3001\u7F51\u7AD9\u548C\u670D\u52A1\u4E3B\u8981\u9762\u5411\u6210\u4EBA\u3002\u6211\u4EEC\u9075\u4ECE\u56FD\u5BB6\u653F\u7B56\uFF0C\u5982\u679C\u6CA1\u6709\u7236\u6BCD\u6216\u76D1\u62A4\u4EBA\u7684\u540C\u610F\uFF0C\u672A\u6210\u5E74\u4EBA/\u513F\u7AE5\u4E0D\u5F97\u521B\u5EFA\u81EA\u5DF1\u7684\u7528\u6237\u8D26\u53F7\u3002\u5BF9\u4E8E\u7ECF\u7236\u6BCD\u6216\u76D1\u62A4\u4EBA\u540C\u610F\u800C\u6536\u96C6\u672A\u6210\u5E74\u4EBA/\u513F\u7AE5\u4E2A\u4EBA\u4FE1\u606F\u7684\u60C5\u51B5\uFF0C\u6211\u4EEC\u53EA\u4F1A\u5728\u53D7\u5230\u6CD5\u5F8B\u7684\u5141\u8BB8\u3001\u7236\u6BCD\u6216\u76D1\u62A4\u4EBA\u660E\u786E\u540C\u610F\u6216\u8005\u4FDD\u62A4\u672A\u6210\u5E74\u4EBA/\u513F\u7AE5\u6240\u5FC5\u8981\u7684\u60C5\u51B5\u4E0B\u4F7F\u7528\u6216\u516C\u5F00\u62AB\u9732\u6B64\u4FE1\u606F\u3002\u6211\u4EEC\u5728\u6536\u96C6\u548C\u5904\u7406\u4E0D\u6EE114\u5468\u5C81\u7684\u513F\u7AE5\u7684\u4E2A\u4EBA\u4FE1\u606F\u65F6\uFF0C\u8FD8\u5C06\u9075\u5B88\u300A\u6211\u4EEC\u9690\u79C1\u653F\u7B56\uFF08\u513F\u7AE5\u9002\u7528\uFF09\u300B\u3002\r\n\u4E03\u3001\u60A8\u7684\u4E2A\u4EBA\u4FE1\u606F\u5982\u4F55\u5728\u5168\u7403\u8303\u56F4\u8F6C\u79FB\_\r\n\u539F\u5219\u4E0A\uFF0C\u6211\u4EEC\u5728\u4E2D\u534E\u4EBA\u6C11\u5171\u548C\u56FD\u5883\u5185\u6536\u96C6\u548C\u4EA7\u751F\u7684\u4E2A\u4EBA\u4FE1\u606F\uFF0C\u5C06\u5B58\u50A8\u5728\u4E2D\u534E\u4EBA\u6C11\u5171\u548C\u56FD\u5883\u5185\u3002\r\n\u6211\u4EEC\u53EF\u80FD\u901A\u8FC7\u904D\u5E03\u5168\u7403\u7684\u8D44\u6E90\u548C\u670D\u52A1\u5668\u63D0\u4F9B\u4EA7\u54C1\u6216\u670D\u52A1\uFF0C\u8FD9\u610F\u5473\u7740\uFF0C\u5728\u83B7\u5F97\u60A8\u7684\u6388\u6743\u540C\u610F\u540E\uFF0C\u60A8\u7684\u4E2A\u4EBA\u4FE1\u606F\u53EF\u80FD\u4F1A\u88AB\u8F6C\u79FB\u5230\u60A8\u4F7F\u7528\u4EA7\u54C1\u6216\u670D\u52A1\u6240\u5728\u56FD\u5BB6/\u5730\u533A\u7684\u5883\u5916\u7BA1\u8F96\u533A\uFF0C\u6216\u8005\u53D7\u5230\u6765\u81EA\u8FD9\u4E9B\u7BA1\u8F96\u533A\u7684\u8BBF\u95EE\u3002\r\n\u5883\u5916\u7BA1\u8F96\u533A\u53EF\u80FD\u6709\u4E0D\u540C\u7684\u4E2A\u4EBA\u4FE1\u606F\u4FDD\u62A4\u6CD5\uFF0C\u6211\u4EEC\u5C06\u5BF9\u4FE1\u606F\u8FDB\u884C\u52A0\u5BC6\u4F20\u8F93\uFF0C\u5E76\u5C3D\u5546\u4E1A\u4E0A\u5408\u7406\u52AA\u529B\u7763\u4FC3\u7B2C\u4E09\u65B9\u5728\u4F7F\u7528\u60A8\u7684\u4E2A\u4EBA\u4FE1\u606F\u65F6\u9075\u5B88\u5176\u9002\u7528\u7684\u6CD5\u5F8B\u6CD5\u89C4\u53CA\u534F\u8BAE\u7EA6\u5B9A\u7684\u4FDD\u5BC6\u548C\u5B89\u5168\u63AA\u65BD\u3002\r\n\u516B\u3001\u672C\u653F\u7B56\u53EF\u80FD\u53D8\u66F4\_\r\n\u672A\u7ECF\u60A8\u660E\u786E\u540C\u610F\uFF0C\u6211\u4EEC\u4E0D\u4F1A\u524A\u51CF\u60A8\u6309\u7167\u672C\u9690\u79C1\u653F\u7B56\u6240\u5E94\u4EAB\u6709\u7684\u6743\u5229\u3002\u6211\u4EEC\u4F1A\u5728\u672C\u9875\u9762\u4E0A\u53D1\u5E03\u5BF9\u672C\u653F\u7B56\u6240\u505A\u7684\u4EFB\u4F55\u53D8\u66F4\u3002\r\n\u5BF9\u4E8E\u91CD\u5927\u53D8\u66F4\uFF0C\u6211\u4EEC\u8FD8\u4F1A\u63D0\u4F9B\u66F4\u4E3A\u663E\u8457\u7684\u901A\u77E5\uFF0C\u5982\u60A8\u4E0D\u540C\u610F\u53D8\u66F4\u540E\u7684\u5185\u5BB9\uFF0C\u60A8\u53EF\u4EE5\u9009\u62E9\u505C\u6B62\u4F7F\u7528\u6211\u4EEC\u7684\u670D\u52A1\uFF1B\u5982\u60A8\u4ECD\u7136\u7EE7\u7EED\u4F7F\u7528\u6211\u4EEC\u670D\u52A1\u7684\uFF0C\u5373\u8868\u793A\u540C\u610F\u53D7\u7ECF\u4FEE\u8BA2\u7684\u672C\u300A\u9690\u79C1\u653F\u7B56\u300B\u7684\u7EA6\u675F\u3002\_\r\n\u4E5D\u3001\u72EC\u7ACB\u7B2C\u4E09\u65B9\_\r\n\u6211\u4EEC\u7684\u4EA7\u54C1\u6216\u670D\u52A1\u53EF\u80FD\u63A5\u5165\u7B2C\u4E09\u65B9\u63D2\u4EF6\u3001\u94FE\u63A5\u5230\u7B2C\u4E09\u65B9\u7F51\u7AD9\u6216\u8005\u5141\u8BB8\u60A8\u5C06\u6211\u4EEC\u4EA7\u54C1\u6216\u670D\u52A1\u7684\u90E8\u5206\u5185\u5BB9\u5206\u4EAB\u5230\u7B2C\u4E09\u65B9\u7F51\u7AD9\u6216\u8005\u5E94\u7528\uFF08\u4E0A\u8FF0\u7B2C\u4E09\u65B9\u7EDF\u79F0\u201C\u72EC\u7ACB\u7B2C\u4E09\u65B9\u201D\uFF09\u3002\u4E0D\u540C\u4E8E\u524D\u6587\u60A8\u4F7F\u7528\u7B2C\u4E09\u65B9\u8D26\u53F7\u767B\u5F55\u6211\u4EEC\u7684\u4EA7\u54C1\u6216\u670D\u52A1\u7684\u60C5\u51B5\uFF0C\u672C\u6761\u6B3E\u60C5\u5F62\u4E0B\u6211\u4EEC\u5C06\u4E0D\u4F1A\u548C\u72EC\u7ACB\u7B2C\u4E09\u65B9\u5206\u4EAB\u60A8\u63D0\u4F9B\u7ED9\u6211\u4EEC\u7684\u4E2A\u4EBA\u4FE1\u606F\uFF0C\u4F46\u662F\u72EC\u7ACB\u7B2C\u4E09\u65B9\u53EF\u80FD\u5355\u72EC\u6536\u96C6\u3001\u4F7F\u7528\u3001\u50A8\u5B58\u548C\u5206\u4EAB\u60A8\u7684\u4E2A\u4EBA\u4FE1\u606F\u3002\u8BF7\u60A8\u77E5\u6089\uFF0C\u8BE5\u7B49\u60C5\u5F62\u4E0B\u72EC\u7ACB\u7B2C\u4E09\u65B9\u5BF9\u60A8\u7684\u4E2A\u4EBA\u4FE1\u606F\u7684\u5355\u72EC\u6536\u96C6\u3001\u4F7F\u7528\u3001\u50A8\u5B58\u548C\u5206\u4EAB\u884C\u4E3A\u5C06\u9002\u7528\u8BE5\u72EC\u7ACB\u7B2C\u4E09\u65B9\u81EA\u5DF1\u7684\u9690\u79C1\u653F\u7B56\u800C\u4E0D\u662F\u672C\u9690\u79C1\u653F\u7B56\u3002\u8BF7\u60A8\u4ED4\u7EC6\u9605\u8BFB\u8BE5\u7B49\u9690\u79C1\u653F\u7B56\uFF0C\u5982\u679C\u60A8\u5BF9\u5176\u5B58\u5728\u7591\u95EE\uFF0C\u60A8\u53EF\u4EE5\u9009\u62E9\u4E0D\u4F7F\u7528\u72EC\u7ACB\u7B2C\u4E09\u65B9\u63D0\u4F9B\u7684\u670D\u52A1\u6216\u8005\u529F\u80FD\u3002\u6211\u4EEC\u5C06\u4E0D\u4F1A\u4E3A\u72EC\u7ACB\u7B2C\u4E09\u65B9\u5BF9\u60A8\u7684\u4E2A\u4EBA\u6570\u636E\u6536\u96C6\u3001\u4F7F\u7528\u3001\u50A8\u5B58\u548C\u5206\u4EAB\u884C\u4E3A\u53CA\u5176\u540E\u679C\u627F\u62C5\u4EFB\u4F55\u8D23\u4EFB\u3002\r\n\u6211\u4EEC\u63A5\u5165\u7684\u72EC\u7ACB\u7B2C\u4E09\u65B9\u5217\u8868\uFF0C\u4EE5\u53CA\u72EC\u7ACB\u7B2C\u4E09\u65B9\u6536\u96C6\u7684\u4FE1\u606F\u3001\u5F00\u542F\u7684\u6743\u9650\u548C\u76F8\u5173\u7684\u76EE\u7684\uFF0C\u8BF7\u70B9\u51FB\u6B64\u5904\u3002\r\n\r\n\u7B2C\u4E09\u65B9SDK\u540D\u79F0\uFF1ATap
     SDK\r\n\u5E94\u7528\u573A\u666F\uFF1A\u6E38\u620F\u767B\u5F55\u3001\u6570\u636E\u5206\u6790\u3001\u5B9E\u65F6\u8BED\u97F3\u3001\u9632\u6C89\u8FF7\u3001\u5185\u5D4C\u52A8\u6001\u3001\u6E38\u620F\u597D\u53CB\u3001\u6B63\u7248\u9A8C\u8BC1\u3002\r\n\u53EF\u80FD\u6536\u96C6\u7684\u4E2A\u4EBA\u4FE1\u606F\u7684\u7C7B\u578B\uFF1A\u8BFB\u5199\u5B58\u50A8\u6743\u9650\u3001\u8BFB\u53D6\u7535\u8BDD\u72B6\u6001\u3001IMSI\u3001\u7F51\u7EDC\u8BBE\u5907\u5236\u9020\u5546\u3001android
     ID\u3001bssid \u8BBE\u5907\u5E94\u7528\u5217\u8868\u3001WiFi \u4FE1\u606F\u3001\u8BBE\u5907\u7248\u672C\u3001\u624B\u673A\u6837\u5F0F\u3001\u7CFB\u7EDF\u7248\u672C\u3001\u4EFB\u52A1\u5217\u8868\u3001\u5F55\u97F3\u3001\u4F20\u611F\u5668\u4FE1\u606F\r\n\u7B2C\u4E09\u65B9SDK\u63D0\u4F9B\u65B9\uFF1A\u6613\u73A9\uFF08\u4E0A\u6D77\uFF09\u7F51\u7EDC\u79D1\u6280\u6709\u9650\u516C\u53F8\r\n\u9690\u79C1\u653F\u7B56\u94FE\u63A5\uFF1A
-    https://developer.taptap.com/docs/sdk/start/agreement/\r\n\r\n\u5341\u3001\u5982\u4F55\u8054\u7CFB\u6211\u4EEC\_\r\n\u5982\u679C\u60A8\u5BF9\u672C\u9690\u79C1\u653F\u7B56\u6709\u4EFB\u4F55\u7591\u95EE\u3001\u610F\u89C1\u6216\u5EFA\u8BAE\uFF0C\u6216\u8005\u5E0C\u671B\u884C\u4F7F\u60A8\u5728\u672C\u9690\u79C1\u653F\u7B56\u4E2D\u4EAB\u6709\u7684\u6743\u5229\uFF0C\u6216\u8005\u60A8\u53D1\u73B0\u6211\u4EEC\u7684\u4EA7\u54C1\u6216\u670D\u52A1\u4E2D\uFF0C\u5B58\u5728\u4E2A\u4EBA\u4FE1\u606F\u5B89\u5168\u6F0F\u6D1E\u6216\u9690\u60A3\uFF0C\u60A8\u53EF\u4EE5\u53D1\u9001\u90AE\u4EF6\u81F3ythehan@163.com\u548C\u6211\u4EEC\u8054\u7CFB\u3002\_\r\n\u6211\u4EEC\u627F\u8BFA\u5728\u60A8\u8054\u7CFB\u6211\u4EEC\u4E4B\u65E5\u8D77\u768415\u4E2A\u5DE5\u4F5C\u65E5\u5185\u5C31\u60A8\u63D0\u51FA\u7684\u7591\u95EE\u3001\u610F\u89C1\u3001\u5EFA\u8BAE\u6216\u6295\u8BC9\u4E3E\u62A5\u4F5C\u51FA\u76F8\u5E94\u7684\u53CD\u9988\u3002"
+    https://developer.taptap.com/docs/sdk/start/agreement/\r\n\r\n\u5341\u3001\u5982\u4F55\u8054\u7CFB\u6211\u4EEC\_\r\n\u5982\u679C\u60A8\u5BF9\u672C\u9690\u79C1\u653F\u7B56\u6709\u4EFB\u4F55\u7591\u95EE\u3001\u610F\u89C1\u6216\u5EFA\u8BAE\uFF0C\u6216\u8005\u5E0C\u671B\u884C\u4F7F\u60A8\u5728\u672C\u9690\u79C1\u653F\u7B56\u4E2D\u4EAB\u6709\u7684\u6743\u5229\uFF0C\u6216\u8005\u60A8\u53D1\u73B0\u6211\u4EEC\u7684\u4EA7\u54C1\u6216\u670D\u52A1\u4E2D\uFF0C\u5B58\u5728\u4E2A\u4EBA\u4FE1\u606F\u5B89\u5168\u6F0F\u6D1E\u6216\u9690\u60A3\uFF0C\u60A8\u53EF\u4EE5\u53D1\u9001\u90AE\u4EF6\u81F3136087482@qq.com\u548C\u6211\u4EEC\u8054\u7CFB\u3002\_\r\n\u6211\u4EEC\u627F\u8BFA\u5728\u60A8\u8054\u7CFB\u6211\u4EEC\u4E4B\u65E5\u8D77\u768415\u4E2A\u5DE5\u4F5C\u65E5\u5185\u5C31\u60A8\u63D0\u51FA\u7684\u7591\u95EE\u3001\u610F\u89C1\u3001\u5EFA\u8BAE\u6216\u6295\u8BC9\u4E3E\u62A5\u4F5C\u51FA\u76F8\u5E94\u7684\u53CD\u9988\u3002"
 --- !u!114 &673960635671707967
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3038,7 +3157,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6010405399014481780}
-  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -3117,7 +3235,6 @@ RectTransform:
   - {fileID: 2848434756624425983}
   - {fileID: 590314869525626238}
   m_Father: {fileID: 5522764994178267987}
-  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -3263,7 +3380,6 @@ RectTransform:
   - {fileID: 1681041034418166554}
   - {fileID: 1781371493449954503}
   m_Father: {fileID: 1981663911038768671}
-  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -3301,7 +3417,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3252416804963581254}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -3381,7 +3496,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6514547999276776523}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -3457,7 +3571,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3344704700480624081}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -3535,7 +3648,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7706018964223077922}
-  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -3571,7 +3683,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: a2742f41e77bb7a41a449afbafdc3f6f, type: 3}
+    m_Font: {fileID: 12800000, guid: 4e783a2b04b82dc4d90d0f3a579dc8be, type: 3}
     m_FontSize: 26
     m_FontStyle: 0
     m_BestFit: 0
@@ -3675,7 +3787,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 9059069132897779799}
-  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -3770,7 +3881,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1159563999371112589}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -3852,7 +3962,6 @@ RectTransform:
   m_Children:
   - {fileID: 7501897574326977313}
   m_Father: {fileID: 69396276404537821}
-  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -3987,7 +4096,6 @@ RectTransform:
   - {fileID: 3480610165040998129}
   - {fileID: 69396276404537821}
   m_Father: {fileID: 224438795553994780}
-  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -4026,7 +4134,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1661744189795096922}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -4121,7 +4228,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8936040992667265376}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -4203,7 +4309,6 @@ RectTransform:
   m_Children:
   - {fileID: 1528295380157790652}
   m_Father: {fileID: 224438795553994780}
-  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
@@ -4324,7 +4429,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3445379262555475241}
-  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -4422,7 +4526,6 @@ RectTransform:
   m_Children:
   - {fileID: 5196833754929631546}
   m_Father: {fileID: 3344704700480624081}
-  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -4544,7 +4647,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7449108359509397987
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4559,12 +4662,11 @@ RectTransform:
   m_Children:
   - {fileID: 7983908868894928051}
   m_Father: {fileID: 5469731263333687456}
-  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -17, y: 20}
+  m_SizeDelta: {x: 0, y: 20}
   m_Pivot: {x: 0, y: 0}
 --- !u!222 &6598542662107460468
 CanvasRenderer:
@@ -4684,7 +4786,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3541257498241637888}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -4765,7 +4866,6 @@ RectTransform:
   m_Children:
   - {fileID: 4016846663269727525}
   m_Father: {fileID: 224438795553994780}
-  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
@@ -4840,7 +4940,6 @@ RectTransform:
   m_Children:
   - {fileID: 7005376949313590936}
   m_Father: {fileID: 7449108359509397987}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -4879,7 +4978,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 69396276404537821}
-  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -4915,7 +5013,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: a2742f41e77bb7a41a449afbafdc3f6f, type: 3}
+    m_Font: {fileID: 12800000, guid: 4e783a2b04b82dc4d90d0f3a579dc8be, type: 3}
     m_FontSize: 36
     m_FontStyle: 0
     m_BestFit: 0
@@ -4977,7 +5075,6 @@ RectTransform:
   - {fileID: 5306828403941371015}
   - {fileID: 6738486096472058785}
   m_Father: {fileID: 2494250341773238609}
-  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -5015,7 +5112,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4394046998210641461}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -5091,7 +5187,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7983908868894928051}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -5169,12 +5264,11 @@ RectTransform:
   m_Children:
   - {fileID: 1805802684324844766}
   m_Father: {fileID: 5469731263333687456}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -17, y: -17}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &6672034793420034937
 CanvasRenderer:
@@ -5261,7 +5355,6 @@ RectTransform:
   - {fileID: 7242775303506111389}
   - {fileID: 1173836612082400059}
   m_Father: {fileID: 2923896078698678677}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -5369,7 +5462,7 @@ MonoBehaviour:
   m_CaretColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   m_CustomCaretColor: 0
   m_SelectionColor: {r: 0.65882355, g: 0.80784315, b: 1, a: 0.7529412}
-  m_Text: 
+  m_Text: 123123
   m_CaretBlinkRate: 0.85
   m_CaretWidth: 1
   m_ReadOnly: 0
@@ -5406,7 +5499,6 @@ RectTransform:
   m_Children:
   - {fileID: 3943150574455825971}
   m_Father: {fileID: 224438795553994780}
-  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
@@ -5483,7 +5575,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 224438795553994780}
-  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -5519,7 +5610,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: a2742f41e77bb7a41a449afbafdc3f6f, type: 3}
+    m_Font: {fileID: 12800000, guid: 4e783a2b04b82dc4d90d0f3a579dc8be, type: 3}
     m_FontSize: 26
     m_FontStyle: 1
     m_BestFit: 0
@@ -5580,7 +5671,6 @@ RectTransform:
   m_Children:
   - {fileID: 7521403436989310874}
   m_Father: {fileID: 224438795553994780}
-  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
@@ -5703,7 +5793,6 @@ RectTransform:
   - {fileID: 9112418223239225232}
   - {fileID: 2431396059959171880}
   m_Father: {fileID: 8319525880450112331}
-  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -5848,7 +5937,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2239049801848809935}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -5943,7 +6031,6 @@ RectTransform:
   - {fileID: 8319525880450112331}
   - {fileID: 5522764994178267987}
   m_Father: {fileID: 224438795553994780}
-  m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -5985,7 +6072,6 @@ RectTransform:
   - {fileID: 5114698590771802171}
   - {fileID: 4589288141721989095}
   m_Father: {fileID: 1981663911038768671}
-  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -6027,7 +6113,6 @@ RectTransform:
   - {fileID: 7449108359509397987}
   - {fileID: 2805925454398170076}
   m_Father: {fileID: 1060779329089425187}
-  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -6132,7 +6217,6 @@ RectTransform:
   m_Children:
   - {fileID: 1415761119245287655}
   m_Father: {fileID: 2805925454398170076}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -6172,7 +6256,6 @@ RectTransform:
   m_Children:
   - {fileID: 8640731192871568114}
   m_Father: {fileID: 224438795553994780}
-  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
@@ -6293,7 +6376,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1981663911038768671}
-  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -6383,7 +6465,6 @@ RectTransform:
   m_Children:
   - {fileID: 6189324652835977182}
   m_Father: {fileID: 224438795553994780}
-  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
@@ -6460,7 +6541,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2131607088384120058}
-  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -6556,7 +6636,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3456719641963115236}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -6592,7 +6671,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: a2742f41e77bb7a41a449afbafdc3f6f, type: 3}
+    m_Font: {fileID: 12800000, guid: 4e783a2b04b82dc4d90d0f3a579dc8be, type: 3}
     m_FontSize: 36
     m_FontStyle: 0
     m_BestFit: 0
@@ -6652,7 +6731,6 @@ RectTransform:
   - {fileID: 1380099522265469060}
   - {fileID: 8835469062625372772}
   m_Father: {fileID: 224438795553994780}
-  m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -6690,7 +6768,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2131607088384120058}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -6772,7 +6849,6 @@ RectTransform:
   - {fileID: 3445379262555475241}
   - {fileID: 3888167022414634021}
   m_Father: {fileID: 224438795553994780}
-  m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -6852,7 +6928,6 @@ RectTransform:
   - {fileID: 82070228726000726}
   - {fileID: 4852577470100359723}
   m_Father: {fileID: 7812584638847377973}
-  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -6874,7 +6949,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4157336060736191401}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
@@ -6958,7 +7033,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5522764994178267987}
-  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -7035,7 +7109,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5656587922422293035}
-  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -7130,7 +7203,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8739800459136038033}
-  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -7210,7 +7282,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5522764994178267987}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -7266,6 +7337,7 @@ GameObject:
   - component: {fileID: 1173836612082400059}
   - component: {fileID: 3008960074077751400}
   - component: {fileID: 307878325958783780}
+  - component: {fileID: 6550017535597775601}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -7286,7 +7358,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6027714500518698712}
-  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -7314,7 +7385,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -7322,7 +7393,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: 4e783a2b04b82dc4d90d0f3a579dc8be, type: 3}
     m_FontSize: 40
     m_FontStyle: 0
     m_BestFit: 0
@@ -7334,7 +7405,22 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 
+  m_Text: 123123
+--- !u!114 &6550017535597775601
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4620926768485033672}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_EffectDistance: {x: 1, y: -1}
+  m_UseGraphicAlpha: 1
 --- !u!1 &4754428650566972631
 GameObject:
   m_ObjectHideFlags: 0
@@ -7366,7 +7452,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3252416804963581254}
-  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -7447,12 +7532,11 @@ RectTransform:
   m_Children:
   - {fileID: 7123120048503146051}
   m_Father: {fileID: 3824539109351936966}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: -0}
-  m_SizeDelta: {x: 0, y: -700}
+  m_SizeDelta: {x: 0, y: -717}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1708005271680904768
 MonoBehaviour:
@@ -7529,7 +7613,6 @@ RectTransform:
   - {fileID: 3420696640260503379}
   - {fileID: 1191770925805172341}
   m_Father: {fileID: 9059069132897779799}
-  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -7649,7 +7732,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 547653593408805043}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -7730,7 +7812,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 224438795553994780}
-  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
@@ -7850,7 +7931,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 69396276404537821}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -7928,7 +8008,6 @@ RectTransform:
   m_Children:
   - {fileID: 5368814771070135148}
   m_Father: {fileID: 224438795553994780}
-  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
@@ -8048,7 +8127,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4728207396846581762}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -8128,7 +8206,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 224532636050568724}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -8208,7 +8285,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3344704700480624081}
-  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -8285,7 +8361,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6010405399014481780}
-  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -8381,7 +8456,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5522764994178267987}
-  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -8477,7 +8551,6 @@ RectTransform:
   - {fileID: 6402693128707605561}
   - {fileID: 7148958612105399646}
   m_Father: {fileID: 7706018964223077922}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -8565,7 +8638,6 @@ RectTransform:
   m_Children:
   - {fileID: 5222461125794438601}
   m_Father: {fileID: 8319525880450112331}
-  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -8686,7 +8758,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4589288141721989095}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -8783,7 +8854,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7706018964223077922}
-  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -8819,7 +8889,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: a2742f41e77bb7a41a449afbafdc3f6f, type: 3}
+    m_Font: {fileID: 12800000, guid: 4e783a2b04b82dc4d90d0f3a579dc8be, type: 3}
     m_FontSize: 26
     m_FontStyle: 0
     m_BestFit: 0
@@ -8923,7 +8993,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7706018964223077922}
-  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -8959,7 +9028,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: a2742f41e77bb7a41a449afbafdc3f6f, type: 3}
+    m_Font: {fileID: 12800000, guid: 4e783a2b04b82dc4d90d0f3a579dc8be, type: 3}
     m_FontSize: 26
     m_FontStyle: 0
     m_BestFit: 0
@@ -9020,7 +9089,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8521693940050964217}
-  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -9245,6 +9313,7 @@ ParticleSystem:
         atime6: 0
         atime7: 0
         m_Mode: 0
+        m_ColorSpace: -1
         m_NumColorKeys: 2
         m_NumAlphaKeys: 2
       minGradient:
@@ -9274,6 +9343,7 @@ ParticleSystem:
         atime6: 0
         atime7: 0
         m_Mode: 0
+        m_ColorSpace: -1
         m_NumColorKeys: 2
         m_NumAlphaKeys: 2
     startSize:
@@ -9595,6 +9665,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     randomizeRotationDirection: 0
+    gravitySource: 0
     maxNumParticles: 1000
     customEmitterVelocity: {x: 0, y: 0, z: 0}
     size3D: 0
@@ -10324,6 +10395,7 @@ ParticleSystem:
         atime6: 0
         atime7: 0
         m_Mode: 0
+        m_ColorSpace: -1
         m_NumColorKeys: 2
         m_NumAlphaKeys: 3
       minGradient:
@@ -10353,6 +10425,7 @@ ParticleSystem:
         atime6: 0
         atime7: 0
         m_Mode: 0
+        m_ColorSpace: -1
         m_NumColorKeys: 2
         m_NumAlphaKeys: 2
   UVModule:
@@ -12573,6 +12646,7 @@ ParticleSystem:
         atime6: 0
         atime7: 0
         m_Mode: 0
+        m_ColorSpace: -1
         m_NumColorKeys: 2
         m_NumAlphaKeys: 2
       minGradient:
@@ -12602,6 +12676,7 @@ ParticleSystem:
         atime6: 0
         atime7: 0
         m_Mode: 0
+        m_ColorSpace: -1
         m_NumColorKeys: 2
         m_NumAlphaKeys: 2
     range: {x: 0, y: 1}
@@ -12991,6 +13066,7 @@ ParticleSystem:
         m_RotationOrder: 4
     minVertexDistance: 0.2
     textureMode: 0
+    textureScale: {x: 1, y: 1}
     ribbonCount: 1
     shadowBias: 0.5
     worldSpace: 0
@@ -13033,6 +13109,7 @@ ParticleSystem:
         atime6: 0
         atime7: 0
         m_Mode: 0
+        m_ColorSpace: -1
         m_NumColorKeys: 2
         m_NumAlphaKeys: 2
       minGradient:
@@ -13062,6 +13139,7 @@ ParticleSystem:
         atime6: 0
         atime7: 0
         m_Mode: 0
+        m_ColorSpace: -1
         m_NumColorKeys: 2
         m_NumAlphaKeys: 2
     widthOverTrail:
@@ -13149,6 +13227,7 @@ ParticleSystem:
         atime6: 0
         atime7: 0
         m_Mode: 0
+        m_ColorSpace: -1
         m_NumColorKeys: 2
         m_NumAlphaKeys: 2
       minGradient:
@@ -13178,6 +13257,7 @@ ParticleSystem:
         atime6: 0
         atime7: 0
         m_Mode: 0
+        m_ColorSpace: -1
         m_NumColorKeys: 2
         m_NumAlphaKeys: 2
   CustomDataModule:
@@ -13216,6 +13296,7 @@ ParticleSystem:
         atime6: 0
         atime7: 0
         m_Mode: 0
+        m_ColorSpace: -1
         m_NumColorKeys: 2
         m_NumAlphaKeys: 2
       minGradient:
@@ -13245,6 +13326,7 @@ ParticleSystem:
         atime6: 0
         atime7: 0
         m_Mode: 0
+        m_ColorSpace: -1
         m_NumColorKeys: 2
         m_NumAlphaKeys: 2
     colorLabel0: Color
@@ -13498,6 +13580,7 @@ ParticleSystem:
         atime6: 0
         atime7: 0
         m_Mode: 0
+        m_ColorSpace: -1
         m_NumColorKeys: 2
         m_NumAlphaKeys: 2
       minGradient:
@@ -13527,6 +13610,7 @@ ParticleSystem:
         atime6: 0
         atime7: 0
         m_Mode: 0
+        m_ColorSpace: -1
         m_NumColorKeys: 2
         m_NumAlphaKeys: 2
     colorLabel1: Color
@@ -13802,13 +13886,15 @@ ParticleSystemRenderer:
   m_RenderAlignment: 0
   m_Pivot: {x: 0, y: 0, z: 0}
   m_Flip: {x: 0, y: 0, z: 0}
-  m_UseCustomVertexStreams: 0
   m_EnableGPUInstancing: 1
   m_ApplyActiveColorSpace: 1
   m_AllowRoll: 1
   m_FreeformStretching: 0
   m_RotateWithStretchDirection: 1
+  m_UseCustomVertexStreams: 0
   m_VertexStreams: 00010304
+  m_UseCustomTrailVertexStreams: 0
+  m_TrailVertexStreams: 00010304
   m_Mesh: {fileID: 0}
   m_Mesh1: {fileID: 0}
   m_Mesh2: {fileID: 0}
@@ -13880,7 +13966,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8319525880450112331}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -13975,7 +14060,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5656587922422293035}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -14050,7 +14134,6 @@ RectTransform:
   m_Children:
   - {fileID: 5114848423199978267}
   m_Father: {fileID: 4852577470100359723}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -14088,7 +14171,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 9059069132897779799}
-  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -14164,7 +14246,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7881056761483481983}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -14186,7 +14267,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6794963140286983205}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
@@ -14200,11 +14281,11 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 40
+    m_Font: {fileID: 12800000, guid: 4e783a2b04b82dc4d90d0f3a579dc8be, type: 3}
+    m_FontSize: 32
     m_FontStyle: 2
     m_BestFit: 0
-    m_MinSize: 4
+    m_MinSize: 3
     m_MaxSize: 81
     m_Alignment: 3
     m_AlignByGeometry: 0
@@ -14212,7 +14293,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Enter text...
+  m_Text: "\u8BF7\u8F93\u5165\u5BC6\u7801..."
 --- !u!1 &6812786328788876790
 GameObject:
   m_ObjectHideFlags: 0
@@ -14244,7 +14325,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5675155716726326859}
-  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -14325,7 +14405,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7897553463219840184}
-  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -14422,7 +14501,6 @@ RectTransform:
   m_Children:
   - {fileID: 4503611755921630918}
   m_Father: {fileID: 7897553463219840184}
-  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -14543,7 +14621,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1981663911038768671}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -14768,6 +14845,7 @@ ParticleSystem:
         atime6: 0
         atime7: 0
         m_Mode: 0
+        m_ColorSpace: -1
         m_NumColorKeys: 2
         m_NumAlphaKeys: 2
       minGradient:
@@ -14797,6 +14875,7 @@ ParticleSystem:
         atime6: 0
         atime7: 0
         m_Mode: 0
+        m_ColorSpace: -1
         m_NumColorKeys: 2
         m_NumAlphaKeys: 2
     startSize:
@@ -15118,6 +15197,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     randomizeRotationDirection: 0
+    gravitySource: 0
     maxNumParticles: 1000
     customEmitterVelocity: {x: 0, y: 0, z: 0}
     size3D: 0
@@ -15847,6 +15927,7 @@ ParticleSystem:
         atime6: 0
         atime7: 0
         m_Mode: 0
+        m_ColorSpace: -1
         m_NumColorKeys: 2
         m_NumAlphaKeys: 3
       minGradient:
@@ -15876,6 +15957,7 @@ ParticleSystem:
         atime6: 0
         atime7: 0
         m_Mode: 0
+        m_ColorSpace: -1
         m_NumColorKeys: 3
         m_NumAlphaKeys: 4
   UVModule:
@@ -18096,6 +18178,7 @@ ParticleSystem:
         atime6: 0
         atime7: 0
         m_Mode: 0
+        m_ColorSpace: -1
         m_NumColorKeys: 2
         m_NumAlphaKeys: 2
       minGradient:
@@ -18125,6 +18208,7 @@ ParticleSystem:
         atime6: 0
         atime7: 0
         m_Mode: 0
+        m_ColorSpace: -1
         m_NumColorKeys: 2
         m_NumAlphaKeys: 2
     range: {x: 0, y: 1}
@@ -18514,6 +18598,7 @@ ParticleSystem:
         m_RotationOrder: 4
     minVertexDistance: 0.2
     textureMode: 0
+    textureScale: {x: 1, y: 1}
     ribbonCount: 1
     shadowBias: 0.5
     worldSpace: 0
@@ -18556,6 +18641,7 @@ ParticleSystem:
         atime6: 0
         atime7: 0
         m_Mode: 0
+        m_ColorSpace: -1
         m_NumColorKeys: 2
         m_NumAlphaKeys: 2
       minGradient:
@@ -18585,6 +18671,7 @@ ParticleSystem:
         atime6: 0
         atime7: 0
         m_Mode: 0
+        m_ColorSpace: -1
         m_NumColorKeys: 2
         m_NumAlphaKeys: 2
     widthOverTrail:
@@ -18672,6 +18759,7 @@ ParticleSystem:
         atime6: 0
         atime7: 0
         m_Mode: 0
+        m_ColorSpace: -1
         m_NumColorKeys: 2
         m_NumAlphaKeys: 2
       minGradient:
@@ -18701,6 +18789,7 @@ ParticleSystem:
         atime6: 0
         atime7: 0
         m_Mode: 0
+        m_ColorSpace: -1
         m_NumColorKeys: 2
         m_NumAlphaKeys: 2
   CustomDataModule:
@@ -18739,6 +18828,7 @@ ParticleSystem:
         atime6: 0
         atime7: 0
         m_Mode: 0
+        m_ColorSpace: -1
         m_NumColorKeys: 2
         m_NumAlphaKeys: 2
       minGradient:
@@ -18768,6 +18858,7 @@ ParticleSystem:
         atime6: 0
         atime7: 0
         m_Mode: 0
+        m_ColorSpace: -1
         m_NumColorKeys: 2
         m_NumAlphaKeys: 2
     colorLabel0: Color
@@ -19021,6 +19112,7 @@ ParticleSystem:
         atime6: 0
         atime7: 0
         m_Mode: 0
+        m_ColorSpace: -1
         m_NumColorKeys: 2
         m_NumAlphaKeys: 2
       minGradient:
@@ -19050,6 +19142,7 @@ ParticleSystem:
         atime6: 0
         atime7: 0
         m_Mode: 0
+        m_ColorSpace: -1
         m_NumColorKeys: 2
         m_NumAlphaKeys: 2
     colorLabel1: Color
@@ -19325,13 +19418,15 @@ ParticleSystemRenderer:
   m_RenderAlignment: 0
   m_Pivot: {x: 0, y: 0, z: 0}
   m_Flip: {x: 0, y: 0, z: 0}
-  m_UseCustomVertexStreams: 0
   m_EnableGPUInstancing: 1
   m_ApplyActiveColorSpace: 1
   m_AllowRoll: 1
   m_FreeformStretching: 0
   m_RotateWithStretchDirection: 1
+  m_UseCustomVertexStreams: 0
   m_VertexStreams: 00010304
+  m_UseCustomTrailVertexStreams: 0
+  m_TrailVertexStreams: 00010304
   m_Mesh: {fileID: 0}
   m_Mesh1: {fileID: 0}
   m_Mesh2: {fileID: 0}
@@ -19382,7 +19477,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8521693940050964217}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -19607,6 +19701,7 @@ ParticleSystem:
         atime6: 0
         atime7: 0
         m_Mode: 0
+        m_ColorSpace: -1
         m_NumColorKeys: 2
         m_NumAlphaKeys: 2
       minGradient:
@@ -19636,6 +19731,7 @@ ParticleSystem:
         atime6: 0
         atime7: 0
         m_Mode: 0
+        m_ColorSpace: -1
         m_NumColorKeys: 2
         m_NumAlphaKeys: 2
     startSize:
@@ -19957,6 +20053,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     randomizeRotationDirection: 0
+    gravitySource: 0
     maxNumParticles: 1000
     customEmitterVelocity: {x: 0, y: 0, z: 0}
     size3D: 0
@@ -20686,6 +20783,7 @@ ParticleSystem:
         atime6: 0
         atime7: 0
         m_Mode: 0
+        m_ColorSpace: -1
         m_NumColorKeys: 2
         m_NumAlphaKeys: 3
       minGradient:
@@ -20715,6 +20813,7 @@ ParticleSystem:
         atime6: 0
         atime7: 0
         m_Mode: 0
+        m_ColorSpace: -1
         m_NumColorKeys: 2
         m_NumAlphaKeys: 5
   UVModule:
@@ -22935,6 +23034,7 @@ ParticleSystem:
         atime6: 0
         atime7: 0
         m_Mode: 0
+        m_ColorSpace: -1
         m_NumColorKeys: 2
         m_NumAlphaKeys: 2
       minGradient:
@@ -22964,6 +23064,7 @@ ParticleSystem:
         atime6: 0
         atime7: 0
         m_Mode: 0
+        m_ColorSpace: -1
         m_NumColorKeys: 2
         m_NumAlphaKeys: 2
     range: {x: 0, y: 1}
@@ -23353,6 +23454,7 @@ ParticleSystem:
         m_RotationOrder: 4
     minVertexDistance: 0.2
     textureMode: 0
+    textureScale: {x: 1, y: 1}
     ribbonCount: 1
     shadowBias: 0.5
     worldSpace: 0
@@ -23395,6 +23497,7 @@ ParticleSystem:
         atime6: 0
         atime7: 0
         m_Mode: 0
+        m_ColorSpace: -1
         m_NumColorKeys: 2
         m_NumAlphaKeys: 2
       minGradient:
@@ -23424,6 +23527,7 @@ ParticleSystem:
         atime6: 0
         atime7: 0
         m_Mode: 0
+        m_ColorSpace: -1
         m_NumColorKeys: 2
         m_NumAlphaKeys: 2
     widthOverTrail:
@@ -23511,6 +23615,7 @@ ParticleSystem:
         atime6: 0
         atime7: 0
         m_Mode: 0
+        m_ColorSpace: -1
         m_NumColorKeys: 2
         m_NumAlphaKeys: 2
       minGradient:
@@ -23540,6 +23645,7 @@ ParticleSystem:
         atime6: 0
         atime7: 0
         m_Mode: 0
+        m_ColorSpace: -1
         m_NumColorKeys: 2
         m_NumAlphaKeys: 2
   CustomDataModule:
@@ -23578,6 +23684,7 @@ ParticleSystem:
         atime6: 0
         atime7: 0
         m_Mode: 0
+        m_ColorSpace: -1
         m_NumColorKeys: 2
         m_NumAlphaKeys: 2
       minGradient:
@@ -23607,6 +23714,7 @@ ParticleSystem:
         atime6: 0
         atime7: 0
         m_Mode: 0
+        m_ColorSpace: -1
         m_NumColorKeys: 2
         m_NumAlphaKeys: 2
     colorLabel0: Color
@@ -23860,6 +23968,7 @@ ParticleSystem:
         atime6: 0
         atime7: 0
         m_Mode: 0
+        m_ColorSpace: -1
         m_NumColorKeys: 2
         m_NumAlphaKeys: 2
       minGradient:
@@ -23889,6 +23998,7 @@ ParticleSystem:
         atime6: 0
         atime7: 0
         m_Mode: 0
+        m_ColorSpace: -1
         m_NumColorKeys: 2
         m_NumAlphaKeys: 2
     colorLabel1: Color
@@ -24164,13 +24274,15 @@ ParticleSystemRenderer:
   m_RenderAlignment: 0
   m_Pivot: {x: 0, y: 0, z: 0}
   m_Flip: {x: 0, y: 0, z: 0}
-  m_UseCustomVertexStreams: 0
   m_EnableGPUInstancing: 1
   m_ApplyActiveColorSpace: 1
   m_AllowRoll: 1
   m_FreeformStretching: 0
   m_RotateWithStretchDirection: 1
+  m_UseCustomVertexStreams: 0
   m_VertexStreams: 00010304
+  m_UseCustomTrailVertexStreams: 0
+  m_TrailVertexStreams: 00010304
   m_Mesh: {fileID: 0}
   m_Mesh1: {fileID: 0}
   m_Mesh2: {fileID: 0}
@@ -24242,7 +24354,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5656587922422293035}
-  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -24332,7 +24443,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1060779329089425187}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -24455,7 +24565,6 @@ RectTransform:
   - {fileID: 6861998987868046257}
   - {fileID: 2269326726984378934}
   m_Father: {fileID: 2923896078698678677}
-  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -24563,7 +24672,7 @@ MonoBehaviour:
   m_CaretColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   m_CustomCaretColor: 0
   m_SelectionColor: {r: 0.65882355, g: 0.80784315, b: 1, a: 0.7529412}
-  m_Text: 
+  m_Text: 123123
   m_CaretBlinkRate: 0.85
   m_CaretWidth: 1
   m_ReadOnly: 0
@@ -24596,10 +24705,12 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 6036988263134636572}
+  - {fileID: 37426861677179248}
+  - {fileID: 6416619098509732719}
   - {fileID: 4221323508191268971}
   - {fileID: 1069705408210111869}
   m_Father: {fileID: 224438795553994780}
-  m_RootOrder: 21
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -24637,7 +24748,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3891210693084338522}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -24718,7 +24828,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 547653593408805043}
-  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -24815,7 +24924,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8521693940050964217}
-  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -25040,6 +25148,7 @@ ParticleSystem:
         atime6: 0
         atime7: 0
         m_Mode: 0
+        m_ColorSpace: -1
         m_NumColorKeys: 2
         m_NumAlphaKeys: 2
       minGradient:
@@ -25069,6 +25178,7 @@ ParticleSystem:
         atime6: 0
         atime7: 0
         m_Mode: 0
+        m_ColorSpace: -1
         m_NumColorKeys: 2
         m_NumAlphaKeys: 2
     startSize:
@@ -25390,6 +25500,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     randomizeRotationDirection: 0
+    gravitySource: 0
     maxNumParticles: 1000
     customEmitterVelocity: {x: 0, y: 0, z: 0}
     size3D: 0
@@ -26119,6 +26230,7 @@ ParticleSystem:
         atime6: 0
         atime7: 0
         m_Mode: 0
+        m_ColorSpace: -1
         m_NumColorKeys: 2
         m_NumAlphaKeys: 3
       minGradient:
@@ -26148,6 +26260,7 @@ ParticleSystem:
         atime6: 0
         atime7: 0
         m_Mode: 0
+        m_ColorSpace: -1
         m_NumColorKeys: 2
         m_NumAlphaKeys: 2
   UVModule:
@@ -28368,6 +28481,7 @@ ParticleSystem:
         atime6: 0
         atime7: 0
         m_Mode: 0
+        m_ColorSpace: -1
         m_NumColorKeys: 2
         m_NumAlphaKeys: 2
       minGradient:
@@ -28397,6 +28511,7 @@ ParticleSystem:
         atime6: 0
         atime7: 0
         m_Mode: 0
+        m_ColorSpace: -1
         m_NumColorKeys: 2
         m_NumAlphaKeys: 2
     range: {x: 0, y: 1}
@@ -28786,6 +28901,7 @@ ParticleSystem:
         m_RotationOrder: 4
     minVertexDistance: 0.2
     textureMode: 0
+    textureScale: {x: 1, y: 1}
     ribbonCount: 1
     shadowBias: 0.5
     worldSpace: 0
@@ -28828,6 +28944,7 @@ ParticleSystem:
         atime6: 0
         atime7: 0
         m_Mode: 0
+        m_ColorSpace: -1
         m_NumColorKeys: 2
         m_NumAlphaKeys: 2
       minGradient:
@@ -28857,6 +28974,7 @@ ParticleSystem:
         atime6: 0
         atime7: 0
         m_Mode: 0
+        m_ColorSpace: -1
         m_NumColorKeys: 2
         m_NumAlphaKeys: 2
     widthOverTrail:
@@ -28944,6 +29062,7 @@ ParticleSystem:
         atime6: 0
         atime7: 0
         m_Mode: 0
+        m_ColorSpace: -1
         m_NumColorKeys: 2
         m_NumAlphaKeys: 2
       minGradient:
@@ -28973,6 +29092,7 @@ ParticleSystem:
         atime6: 0
         atime7: 0
         m_Mode: 0
+        m_ColorSpace: -1
         m_NumColorKeys: 2
         m_NumAlphaKeys: 2
   CustomDataModule:
@@ -29011,6 +29131,7 @@ ParticleSystem:
         atime6: 0
         atime7: 0
         m_Mode: 0
+        m_ColorSpace: -1
         m_NumColorKeys: 2
         m_NumAlphaKeys: 2
       minGradient:
@@ -29040,6 +29161,7 @@ ParticleSystem:
         atime6: 0
         atime7: 0
         m_Mode: 0
+        m_ColorSpace: -1
         m_NumColorKeys: 2
         m_NumAlphaKeys: 2
     colorLabel0: Color
@@ -29293,6 +29415,7 @@ ParticleSystem:
         atime6: 0
         atime7: 0
         m_Mode: 0
+        m_ColorSpace: -1
         m_NumColorKeys: 2
         m_NumAlphaKeys: 2
       minGradient:
@@ -29322,6 +29445,7 @@ ParticleSystem:
         atime6: 0
         atime7: 0
         m_Mode: 0
+        m_ColorSpace: -1
         m_NumColorKeys: 2
         m_NumAlphaKeys: 2
     colorLabel1: Color
@@ -29597,13 +29721,15 @@ ParticleSystemRenderer:
   m_RenderAlignment: 0
   m_Pivot: {x: 0, y: 0, z: 0}
   m_Flip: {x: 0, y: 0, z: 0}
-  m_UseCustomVertexStreams: 0
   m_EnableGPUInstancing: 1
   m_ApplyActiveColorSpace: 1
   m_AllowRoll: 1
   m_FreeformStretching: 0
   m_RotateWithStretchDirection: 1
+  m_UseCustomVertexStreams: 0
   m_VertexStreams: 00010304
+  m_UseCustomTrailVertexStreams: 0
+  m_TrailVertexStreams: 00010304
   m_Mesh: {fileID: 0}
   m_Mesh1: {fileID: 0}
   m_Mesh2: {fileID: 0}
@@ -29676,7 +29802,6 @@ RectTransform:
   - {fileID: 3260091202637723631}
   - {fileID: 4332847461399969387}
   m_Father: {fileID: 3344704700480624081}
-  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -29714,7 +29839,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5675155716726326859}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -29795,7 +29919,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6738486096472058785}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -29890,7 +30013,6 @@ RectTransform:
   - {fileID: 6027714500518698712}
   - {fileID: 7881056761483481983}
   m_Father: {fileID: 224438795553994780}
-  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -29928,7 +30050,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7897553463219840184}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -30006,7 +30127,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3445379262555475241}
-  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -30146,7 +30266,6 @@ RectTransform:
   m_Children:
   - {fileID: 116209113466887834}
   m_Father: {fileID: 8739800459136038033}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
@@ -30224,12 +30343,11 @@ RectTransform:
   m_Children:
   - {fileID: 6434763020521462786}
   m_Father: {fileID: 1069705408210111869}
-  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 20, y: -17}
+  m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 1, y: 1}
 --- !u!222 &4268950445890015609
 CanvasRenderer:
@@ -30313,11 +30431,105 @@ MonoBehaviour:
   m_HandleRect: {fileID: 5114848423199978267}
   m_Direction: 2
   m_Value: 0.5
-  m_Size: 0.0956745
+  m_Size: 0.11949216
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!1 &7815199326667488526
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6416619098509732719}
+  - component: {fileID: 886072341490807251}
+  - component: {fileID: 3253040131452992411}
+  - component: {fileID: 8138192370189453363}
+  m_Layer: 5
+  m_Name: TextButton (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &6416619098509732719
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7815199326667488526}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7812584638847377973}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -8.500122, y: 443}
+  m_SizeDelta: {x: 1400, y: 36}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &886072341490807251
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7815199326667488526}
+  m_CullTransparentMesh: 1
+--- !u!114 &3253040131452992411
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7815199326667488526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: 4e783a2b04b82dc4d90d0f3a579dc8be, type: 3}
+    m_FontSize: 32
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 2
+    m_MaxSize: 40
+    m_Alignment: 1
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: "\u7528\u6237\u534F\u8BAE"
+--- !u!114 &8138192370189453363
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7815199326667488526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_HorizontalFit: 0
+  m_VerticalFit: 2
 --- !u!1 &7850147692569962340
 GameObject:
   m_ObjectHideFlags: 0
@@ -30349,7 +30561,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5306828403941371015}
-  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -30429,7 +30640,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 224438795553994780}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 1}
@@ -30502,7 +30712,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7749518662514083364}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -30578,7 +30787,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4394046998210641461}
-  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -30659,7 +30867,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8923767848757590674}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -30695,7 +30902,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: a2742f41e77bb7a41a449afbafdc3f6f, type: 3}
+    m_Font: {fileID: 12800000, guid: 4e783a2b04b82dc4d90d0f3a579dc8be, type: 3}
     m_FontSize: 36
     m_FontStyle: 0
     m_BestFit: 0
@@ -30755,7 +30962,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6010405399014481780}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -30852,7 +31058,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3445379262555475241}
-  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -30991,7 +31196,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2131607088384120058}
-  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -31072,7 +31276,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7812584638847377973}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -31194,7 +31397,6 @@ RectTransform:
   m_Children:
   - {fileID: 6747464164562943570}
   m_Father: {fileID: 9059069132897779799}
-  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -31314,10 +31516,9 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6434763020521462786}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.45216274}
-  m_AnchorMax: {x: 1, y: 0.54783726}
+  m_AnchorMin: {x: 0, y: 0.4402539}
+  m_AnchorMax: {x: 1, y: 0.5597461}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -31391,7 +31592,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4394046998210641461}
-  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -31487,7 +31687,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 69396276404537821}
-  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -31619,7 +31818,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5306828403941371015}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -31698,7 +31896,6 @@ RectTransform:
   m_Children:
   - {fileID: 6110539765489802129}
   m_Father: {fileID: 82070228726000726}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -31740,7 +31937,6 @@ RectTransform:
   - {fileID: 2504021262024154677}
   - {fileID: 3764351857348542881}
   m_Father: {fileID: 9059069132897779799}
-  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -31860,7 +32056,6 @@ RectTransform:
   - {fileID: 2733079373972115580}
   - {fileID: 5469731263333687456}
   m_Father: {fileID: 224438795553994780}
-  m_RootOrder: 22
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -31899,11 +32094,10 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1805802684324844766}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 11.5, y: 0}
+  m_AnchoredPosition: {x: 20, y: 0}
   m_SizeDelta: {x: 1400, y: 83}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &7430649824924284707
@@ -31979,6 +32173,7 @@ GameObject:
   - component: {fileID: 2269326726984378934}
   - component: {fileID: 8462178470449236329}
   - component: {fileID: 1163011987767440533}
+  - component: {fileID: 7356305346930723281}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -31999,7 +32194,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7881056761483481983}
-  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -32027,7 +32221,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -32035,7 +32229,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: 4e783a2b04b82dc4d90d0f3a579dc8be, type: 3}
     m_FontSize: 40
     m_FontStyle: 0
     m_BestFit: 0
@@ -32047,7 +32241,22 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 
+  m_Text: 123123
+--- !u!114 &7356305346930723281
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8796031228144736168}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_EffectDistance: {x: 1, y: -1}
+  m_UseGraphicAlpha: 1
 --- !u!1 &8841286357282428584
 GameObject:
   m_ObjectHideFlags: 0
@@ -32083,7 +32292,6 @@ RectTransform:
   - {fileID: 6962447925880048539}
   - {fileID: 2239049801848809935}
   m_Father: {fileID: 224438795553994780}
-  m_RootOrder: 20
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -32121,7 +32329,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6402693128707605561}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -32197,7 +32404,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 69396276404537821}
-  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -32274,7 +32480,6 @@ RectTransform:
   m_Children:
   - {fileID: 7662906050235998379}
   m_Father: {fileID: 7275541160682587921}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
@@ -32351,7 +32556,6 @@ RectTransform:
   - {fileID: 5675155716726326859}
   - {fileID: 4281372491941065547}
   m_Father: {fileID: 2494250341773238609}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -32391,7 +32595,6 @@ RectTransform:
   m_Children:
   - {fileID: 1246692119398781368}
   m_Father: {fileID: 5522764994178267987}
-  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -32512,7 +32715,6 @@ RectTransform:
   m_Children:
   - {fileID: 2425883951760428154}
   m_Father: {fileID: 224438795553994780}
-  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
@@ -32589,7 +32791,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7897553463219840184}
-  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -32687,7 +32888,6 @@ RectTransform:
   - {fileID: 8736675109932820500}
   - {fileID: 2740012506546880421}
   m_Father: {fileID: 7897553463219840184}
-  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -32832,7 +33032,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3344704700480624081}
-  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -32928,7 +33127,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6962447925880048539}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
