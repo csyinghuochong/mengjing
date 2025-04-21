@@ -25,6 +25,7 @@ namespace ET.Client
             self.View.E_PetBarButton.AddListener(self.OnPetBar);
             self.View.E_SettingButton.AddListener(self.OnSetting);
             self.View.E_UnionButton.AddListener(self.OnUnion);
+            self.View.E_SingleHappy.AddListenerAsync(self.OnSingleHappy);
 
             ReddotViewComponent redPointComponent = self.Root().GetComponent<ReddotViewComponent>();
             redPointComponent.RegisterReddot(ReddotType.Friend, self.Reddot_Frined);
@@ -119,6 +120,19 @@ namespace ET.Client
         {
             self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_DragonDungeon).Coroutine();
             self.OnClose();
+        }
+
+        private static async ETTask OnSingleHappy(this DlgFunction self)
+        {
+            int sceneId = BattleHelper.GetSceneIdByType(MapTypeEnum.SingleHappy);
+            int errorCode = await  EnterMapHelper.RequestTransfer(self.Root(), MapTypeEnum.SingleHappy, sceneId);
+            if (errorCode == ErrorCode.ERR_Success)
+            {
+                self.OnClose();
+                return;
+            }
+
+            HintHelp.ShowErrorHint(self.Root(), errorCode);
         }
 
         private static void OnPet(this DlgFunction self)

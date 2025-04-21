@@ -168,7 +168,7 @@ namespace ET.Server
 
         public static void NoticeRefreshTime(this SingleHappyDungeonComponent self, Unit unit)
         {
-            MapMessageHelper.SendToClient(unit, self.M2C_HappyInfoResult);
+            //MapMessageHelper.SendToClient(unit, self.M2C_HappyInfoResult);
         }
     }
 }

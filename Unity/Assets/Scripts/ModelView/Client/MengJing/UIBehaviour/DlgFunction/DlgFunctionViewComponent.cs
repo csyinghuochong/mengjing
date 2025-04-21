@@ -364,6 +364,23 @@ namespace ET.Client
 			}
 		}
 
+		public Button E_SingleHappy
+		{
+			get
+			{
+				if (this.uiTransform == null)
+				{
+					Log.Error("uiTransform is null.");
+					return null;
+				}
+				if( this.m_E_SingleHappy == null )
+				{
+					this.m_E_SingleHappy = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Scroll View Left/Viewport/Content/E_SingleHappy");
+				}
+				return this.m_E_SingleHappy;
+			}
+		}
+
 		public UnityEngine.UI.Image E_SettingImage
      	{
      		get
@@ -405,6 +422,7 @@ namespace ET.Client
 			this.m_E_SettingButton = null;
 			this.m_E_SettingImage = null;
 			this.m_E_UnionButton = null;
+			this.m_E_SingleHappy = null;
 			this.uiTransform = null;
 		}
 
@@ -429,7 +447,8 @@ namespace ET.Client
 		private UnityEngine.UI.Image m_E_PetBarImage = null;
 		private UnityEngine.UI.Button m_E_SettingButton = null;
 		private UnityEngine.UI.Image m_E_SettingImage = null;
-		private UnityEngine.UI.Button m_E_UnionButton = null;	
+		private UnityEngine.UI.Button m_E_UnionButton = null;
+		private UnityEngine.UI.Button m_E_SingleHappy = null;
 		public Transform uiTransform = null;
 	}
 }
