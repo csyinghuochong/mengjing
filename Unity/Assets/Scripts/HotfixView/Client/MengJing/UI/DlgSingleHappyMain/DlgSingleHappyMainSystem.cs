@@ -176,11 +176,22 @@ namespace ET.Client
 			}
 			PopupTipHelp.OpenPopupTip(self.Root(), "系统提示", $"是否花费{globalValueConfig.Value}钻石刷新奖励？", () =>
 			{
-				ActivityNetHelper.SingleHappyOperateRequest( self.Root(),2 ).Coroutine();
+				self.SingleHappyRequestRefresh().Coroutine();
 			}, null).Coroutine();
 			
 		}
 
+		private static async ETTask SingleHappyRequestRefresh(this DlgSingleHappyMain self)
+		{
+			M2C_SingleHappyOperateResponse response = await ActivityNetHelper.SingleHappyOperateRequest( self.Root(),2 );
+			if (response == null || self.IsDisposed)
+			{
+				return;
+			}
+
+			self.OnButtonPick();
+		}
+        
 		private static  void OnuttonMove_3Button(this DlgSingleHappyMain self)
 		{
 			GlobalValueConfig globalValueConfig = GlobalValueConfigCategory.Instance.Get(133);
