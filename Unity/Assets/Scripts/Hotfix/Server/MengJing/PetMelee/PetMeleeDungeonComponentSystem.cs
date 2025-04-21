@@ -387,7 +387,7 @@ namespace ET.Server
             }
             else if (useCard.Type == (int)PetMeleeCarType.AssistPet)
             {
-                int cost = GlobalValueConfigCategory.Instance.Get(121).Value2;
+                int cost = int.Parse(GlobalValueConfigCategory.Instance.Get(121).Value);
 
                 if (player.GetComponent<NumericComponentS>().GetAsInt(NumericType.PetMeleeMoLi) < cost)
                 {

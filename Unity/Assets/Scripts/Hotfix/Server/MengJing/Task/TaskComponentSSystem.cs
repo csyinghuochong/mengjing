@@ -504,7 +504,7 @@ namespace ET.Server
             if (taskConfig.TaskType == TaskTypeEnum.Weekly)
             {
                 int weekTaskNumber = numericComponent.GetAsInt(NumericType.WeeklyTaskNumber) + 1;
-                if (weekTaskNumber >= GlobalValueConfigCategory.Instance.Get(109).Value2 + 1)
+                if (weekTaskNumber >= int.Parse(GlobalValueConfigCategory.Instance.Get(109).Value)+ 1)
                 {
                     return ErrorCode.ERR_ModifyData;
                 }
@@ -599,7 +599,7 @@ namespace ET.Server
             {
                 case TaskTypeEnum.Daily:
                     int dailyTaskNumber = numericComponent.GetAsInt(NumericType.DailyTaskNumber) + 1;
-                    if (dailyTaskNumber < GlobalValueConfigCategory.Instance.Get(58).Value2)
+                    if (dailyTaskNumber < int.Parse(GlobalValueConfigCategory.Instance.Get(58).Value))
                     {
                         numericComponent.ApplyValue(NumericType.DailyTaskNumber, dailyTaskNumber, true);
                         numericComponent.ApplyValue(NumericType.DailyTaskID, TaskHelper.GetTaskIdByType(TaskTypeEnum.Daily, roleLv), true);
@@ -615,7 +615,7 @@ namespace ET.Server
                 case TaskTypeEnum.Weekly:
                     int weekTaskNumber = numericComponent.GetAsInt(NumericType.WeeklyTaskNumber) + 1;
 
-                    if (weekTaskNumber < GlobalValueConfigCategory.Instance.Get(109).Value2)
+                    if (weekTaskNumber <int.Parse( GlobalValueConfigCategory.Instance.Get(109).Value))
                     {
                         numericComponent.ApplyValue(NumericType.WeeklyTaskId, TaskHelper.GetTaskIdByType(TaskTypeEnum.Weekly, roleLv), true);
                         numericComponent.ApplyValue(NumericType.WeeklyTaskNumber, weekTaskNumber, true);
@@ -642,7 +642,7 @@ namespace ET.Server
                     break;
                 case TaskTypeEnum.Union:
                     int unionTaskNumber = numericComponent.GetAsInt(NumericType.UnionTaskNumber) + 1;
-                    if (unionTaskNumber < GlobalValueConfigCategory.Instance.Get(108).Value2)
+                    if (unionTaskNumber < int.Parse(GlobalValueConfigCategory.Instance.Get(108).Value))
                     {
                         numericComponent.ApplyValue( NumericType.UnionTaskNumber, unionTaskNumber, true);
                         numericComponent.ApplyValue(NumericType.UnionTaskId, TaskHelper.GetTaskIdByType(TaskTypeEnum.Union, roleLv), true);

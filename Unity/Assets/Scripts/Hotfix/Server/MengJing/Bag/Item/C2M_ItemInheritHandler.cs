@@ -12,7 +12,7 @@ namespace ET.Server
                 response.Error = ErrorCode.ERR_ItemNotExist;
                 return;
             }
-            if (bagInfo.InheritTimes >= GlobalValueConfigCategory.Instance.Get(117).Value2)
+            if (bagInfo.InheritTimes >= int.Parse(GlobalValueConfigCategory.Instance.Get(117).Value))
             {
                 response.Error = ErrorCode.ERR_TimesIsNot;
                 return;

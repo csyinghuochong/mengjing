@@ -450,14 +450,14 @@ namespace ET.Server
             if (mapComponent.MapType == MapTypeEnum.Battle)
             {
                 if (monsterConfig.MonsterSonType != 55 && monsterConfig.MonsterSonType != 56
-                    && monsterNumber >= GlobalValueConfigCategory.Instance.Get(59).Value2)
+                    && monsterNumber >= int.Parse(GlobalValueConfigCategory.Instance.Get(59).Value))
                 {
                     return;
                 }
             }
             else if (mapComponent.MapType == MapTypeEnum.BaoZang)
             {
-                if (monsterNumber >= GlobalValueConfigCategory.Instance.Get(78).Value2)
+                if (monsterNumber >= int.Parse( GlobalValueConfigCategory.Instance.Get(78).Value))
                 {
                     return;
                 }

@@ -33,7 +33,7 @@ namespace ET.Server
             NumericComponentS numericComponent = unit.GetComponent<NumericComponentS>();
 
             int nowNum = numericComponent.GetAsInt(NumericType.ChouKa);
-            int maxNum = GlobalValueConfigCategory.Instance.Get(122).Value2;
+            int maxNum = int.Parse(GlobalValueConfigCategory.Instance.Get(122).Value);
             if (nowNum + request.ChouKaType > maxNum)
             {
                 response.Error = ErrorCode.ERR_TimesIsNot;

@@ -96,7 +96,7 @@ namespace ET.Client
                 self.E_Text_CostValueText.color = Color.green;
             }
 
-            int maxTimes = GlobalValueConfigCategory.Instance.Get(117).Value2;
+            int maxTimes = int.Parse(GlobalValueConfigCategory.Instance.Get(117).Value);
             self.E_ProgressBarImgImage.fillAmount = bagInfo.InheritTimes * 1f / maxTimes;
             using (zstring.Block())
             {
@@ -201,7 +201,7 @@ namespace ET.Client
                 return;
             }
 
-            int maxInheritTimes = GlobalValueConfigCategory.Instance.Get(117).Value2;
+            int maxInheritTimes = int.Parse(GlobalValueConfigCategory.Instance.Get(117).Value);
             if (bagInfo.InheritTimes >= maxInheritTimes)
             {
                 FlyTipComponent.Instance.ShowFlyTip("该装备不可再进行传承鉴定！");

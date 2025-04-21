@@ -68,16 +68,16 @@ namespace ET
         public override void EndInit()
         {
             DayMonsterList.Clear();
-            JianDingFuQulity = this.Get(44).Value2;
+            JianDingFuQulity = int.Parse(this.Get(44).Value);
             FangunSkillId = int.Parse(this.Get(2).Value);
-            BagInitCapacity = this.Get(3).Value2;
-            BagMaxCapacity = BagInitCapacity + this.Get(84).Value2;
-            HourseInitCapacity = this.Get(4).Value2;
-            HourseMaxCapacity = HourseInitCapacity + this.Get(85).Value2;
+            BagInitCapacity =  int.Parse(this.Get(3).Value);
+            BagMaxCapacity = BagInitCapacity +  int.Parse(this.Get(84).Value);
+            HourseInitCapacity =  int.Parse(this.Get(4).Value);
+            HourseMaxCapacity = HourseInitCapacity +  int.Parse(this.Get(85).Value);
             OnLineLimit = int.Parse(this.Get(25).Value);
-            AccountBagMax = this.Get(115).Value2;
-            GemStoreInitCapacity = this.Get(118).Value2; 
-            GemStoreMaxCapacity = this.Get(118).Value2; 
+            AccountBagMax =  int.Parse(this.Get(115).Value);
+            GemStoreInitCapacity =  int.Parse(this.Get(118).Value);
+            GemStoreMaxCapacity =  int.Parse(this.Get(118).Value);
             BabyRefreshChance = float.Parse(this.Get(124).Value);
             BabyBianYiRefreshChance = float.Parse(this.Get(125).Value);
             BabyRefreshMaxNum = int.Parse(this.Get(126).Value);

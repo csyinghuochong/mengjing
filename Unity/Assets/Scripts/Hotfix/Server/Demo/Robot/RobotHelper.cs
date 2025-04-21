@@ -1245,7 +1245,7 @@ namespace ET.Client
 
             random = RandomHelper.RandomNumber(0, equips.Count);
 
-            int maxInheritTimes = GlobalValueConfigCategory.Instance.Get(117).Value2;
+            int maxInheritTimes =int.Parse( GlobalValueConfigCategory.Instance.Get(117).Value);
             if (equips[random].InheritTimes >= maxInheritTimes)
             {
                 // 该装备不可再进行传承鉴定！
@@ -1331,7 +1331,7 @@ namespace ET.Client
                 return;
             }
 
-            if (petComponent.RolePetBag.Count >= GlobalValueConfigCategory.Instance.Get(119).Value2)
+            if (petComponent.RolePetBag.Count >= int.Parse(GlobalValueConfigCategory.Instance.Get(119).Value))
             {
                 // 请及时清理探索宠物仓库！
                 return;
@@ -1569,7 +1569,7 @@ namespace ET.Client
                     continue;
                 }
 
-                if (response.PaiMaiItemInfos.Count >= GlobalValueConfigCategory.Instance.Get(50).Value2)
+                if (response.PaiMaiItemInfos.Count >= int.Parse( GlobalValueConfigCategory.Instance.Get(50).Value))
                 {
                     // 已经达到最大上架数量！
                     continue;

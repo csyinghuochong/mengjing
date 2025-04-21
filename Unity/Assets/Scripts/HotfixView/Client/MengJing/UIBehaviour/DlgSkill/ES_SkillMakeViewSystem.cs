@@ -195,7 +195,7 @@ namespace ET.Client
 
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
             int rechargeNumber = unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.RechargeNumber);
-            int needRecharge = GlobalValueConfigCategory.Instance.Get(113).Value2;
+            int needRecharge = int.Parse(GlobalValueConfigCategory.Instance.Get(113).Value);
             int skillmakePlan_2 = unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.SkillMakePlan2);
             string tip = string.Empty;
             if (plan == 2 && skillmakePlan_2 == 0)

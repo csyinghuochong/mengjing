@@ -7,7 +7,7 @@ namespace ET
         
         public static int CalcuNeedeForAccele(long startTime, long needTime)
         {
-            int g = GlobalValueConfigCategory.Instance.Get(105).Value2;
+            int g = int.Parse(GlobalValueConfigCategory.Instance.Get(105).Value);
             long passTime = (TimeHelper.ServerNow() - startTime) / 1000;
             long remainTime = needTime - passTime;
             if (remainTime <= 0)

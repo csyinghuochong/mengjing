@@ -26,7 +26,7 @@ namespace ET.Server
             //满级经验兑换效验等级
             GlobalValueConfig globalCof = GlobalValueConfigCategory.Instance.Get(41);
             if (request.OperateType == 2) {
-                if (userInfo.Lv < globalCof.Value2) {
+                if (userInfo.Lv < int.Parse(globalCof.Value)) {
                     response.Error = ErrorCode.ERR_ExpNoEnough;
                     return;
                 }

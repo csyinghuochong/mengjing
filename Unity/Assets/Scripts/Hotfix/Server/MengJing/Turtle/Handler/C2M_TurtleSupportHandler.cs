@@ -10,7 +10,7 @@
             {
                 UserInfoComponentS userInfoComponent = unit.GetComponent<UserInfoComponentS>();
                
-                long costgold = GlobalValueConfigCategory.Instance.Get(98).Value2;
+                long costgold = int.Parse(GlobalValueConfigCategory.Instance.Get(98).Value);
                 if (userInfoComponent.UserInfo.Gold < costgold)
                 {
                     response.Error = ErrorCode.ERR_GoldNotEnoughError;

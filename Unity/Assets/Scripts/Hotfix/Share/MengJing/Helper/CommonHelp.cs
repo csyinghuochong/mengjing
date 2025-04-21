@@ -51,7 +51,7 @@ namespace  ET
 
         public static int MaxShuLianDu()
         {
-            return GlobalValueConfigCategory.Instance.Get(45).Value2;
+            return int.Parse(GlobalValueConfigCategory.Instance.Get(45).Value);
         }
 
         public static int GetMaxBaoShiDu()
@@ -215,7 +215,7 @@ namespace  ET
 
         public static int MainCityID()
         {
-            return GlobalValueConfigCategory.Instance.Get(47).Value2;
+            return int.Parse(GlobalValueConfigCategory.Instance.Get(47).Value);
         }
 
         /// <summary>

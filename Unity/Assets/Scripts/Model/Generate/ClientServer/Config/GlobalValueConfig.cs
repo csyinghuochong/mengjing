@@ -63,8 +63,6 @@ namespace ET
 		public int Id { get; set; }
 		/// <summary>值</summary>
 		public string Value { get; set; }
-		/// <summary>值2</summary>
-		public int Value2 { get; set; }
 
 	}
 }

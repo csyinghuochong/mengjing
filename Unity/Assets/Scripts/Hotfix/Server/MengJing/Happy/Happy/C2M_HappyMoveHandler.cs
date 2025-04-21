@@ -27,28 +27,28 @@ namespace ET.Server
                     return;
                 }
 
-                long mianfeicd = GlobalValueConfigCategory.Instance.Get(93).Value2 * 1000;
+                long mianfeicd = int.Parse(GlobalValueConfigCategory.Instance.Get(93).Value) * 1000;
                 unit.GetComponent<NumericComponentS>().ApplyValue(NumericType.HappyMoveTime, TimeHelper.ServerNow() + mianfeicd);
             }
             if (request.OperatateType == 2)
             {
                 GlobalValueConfig globalValueConfig = GlobalValueConfigCategory.Instance.Get(94);
-                if (userInfoComponent.UserInfo.Gold < globalValueConfig.Value2)
+                if (userInfoComponent.UserInfo.Gold < int.Parse(globalValueConfig.Value))
                 {
                     response.Error = ErrorCode.ERR_GoldNotEnoughError;
                     return;
                 }
-                userInfoComponent.UpdateRoleMoneySub( UserDataType.Gold, (globalValueConfig.Value2 * -1).ToString(), true, ItemGetWay.HappyMove);
+                userInfoComponent.UpdateRoleMoneySub( UserDataType.Gold, (int.Parse(globalValueConfig.Value) * -1).ToString(), true, ItemGetWay.HappyMove);
             }
             if (request.OperatateType  == 3)
             {
                 GlobalValueConfig globalValueConfig = GlobalValueConfigCategory.Instance.Get(95);
-                if (userInfoComponent.UserInfo.Diamond < globalValueConfig.Value2)
+                if (userInfoComponent.UserInfo.Diamond < int.Parse(globalValueConfig.Value))
                 {
                     response.Error = ErrorCode.ERR_DiamondNotEnoughError;
                     return;
                 }
-                userInfoComponent.UpdateRoleMoneySub(UserDataType.Diamond, (globalValueConfig.Value2 * -1).ToString(), true, ItemGetWay.HappyMove);
+                userInfoComponent.UpdateRoleMoneySub(UserDataType.Diamond, (int.Parse(globalValueConfig.Value)* -1).ToString(), true, ItemGetWay.HappyMove);
             }
 
             for (int r = 10; r > 0; r--)

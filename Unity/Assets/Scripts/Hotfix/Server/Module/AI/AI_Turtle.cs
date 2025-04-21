@@ -26,7 +26,7 @@ namespace ET.Server
             Unit unit = aiComponent.GetParent<Unit>();
             List<Unit> units = UnitHelper.GetUnitList( aiComponent.Scene(), unit.Position, UnitType.Player, 3f );
 
-            int dropid = GlobalValueConfigCategory.Instance.Get(99).Value2;
+            int dropid = int.Parse(GlobalValueConfigCategory.Instance.Get(99).Value);
 
             List<string> rewardName = new List<string>();   
             for (int i = 0; i < units.Count; i++)
