@@ -142,7 +142,7 @@ namespace ET.Server
         {
             int functionId = 0;
 
-            if (sceneId == 3000001 || sceneId == 3000002)
+            if (sceneId == 1200001 || sceneId == 1200002)
             {
                 functionId = 1025; //战场
             }

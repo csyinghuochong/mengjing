@@ -13,7 +13,7 @@ namespace ET.Server
                 response.FubenActorId = scene.GetComponent<FubenCenterComponent>().FubenActorIdList[request.SceneId];
                 response.Message = scene.GetComponent<FubenCenterComponent>().GetScenePlayer(response.FubenInstanceId).ToString();
             }
-            else if (request.SceneId == 3000001 || request.SceneId == 3000002)  //战场
+            else if (request.SceneId == 1200001 || request.SceneId == 1200002)  //战场
             {
                 (int, BattleInfo) iteminfo = scene.GetComponent<FubenCenterComponent>().GetBattleInstanceId(request.UnitId, request.SceneId);
                 response.FubenInstanceId = iteminfo.Item2.FubenInstanceId;
