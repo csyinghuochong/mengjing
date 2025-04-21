@@ -228,5 +228,6 @@ namespace ET.Client
 		WindowID_PaiMaiStall,
 		WindowID_PetEquipMake,
 		WindowID_PaiMaiStallBuy,
+		WindowID_PetEggSelect,
 	}
 }

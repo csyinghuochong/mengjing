@@ -124,13 +124,15 @@ namespace ET.Server
             {
                 self.PetCangKuOpen.Add(0);  
             }
-            if (self.RolePetEggs.Count == 0)
+
+            if (self.RolePetEggs.Count < 4)
             {
-                for (int i = 0; i < 3; i++)
+                for (int i = self.RolePetEggs.Count; i < 4; i++)
                 {
                     self.RolePetEggs.Add(new KeyValuePairLong());
                 }
             }
+
             if (self.PetFormations.Count != 9)
             {
                 self.PetFormations.Clear();
