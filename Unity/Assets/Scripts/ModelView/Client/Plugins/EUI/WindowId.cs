@@ -229,5 +229,6 @@ namespace ET.Client
 		WindowID_PetEquipMake,
 		WindowID_PaiMaiStallBuy,
 		WindowID_PetEggSelect,
+		WindowID_SingleHappyMain,
 	}
 }
