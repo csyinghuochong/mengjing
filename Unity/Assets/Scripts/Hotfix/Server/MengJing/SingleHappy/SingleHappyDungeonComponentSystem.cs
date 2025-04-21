@@ -147,7 +147,7 @@ namespace ET.Server
             for (int i = 0; i < droplist.Count; i++)
             {
                 Unit dropitem = droplist[i];
-                NumericComponentS numericComponentS = dropitem.AddComponent<NumericComponentS>();
+                NumericComponentS numericComponentS = dropitem.GetComponent<NumericComponentS>();
                 KeyValuePairLong4 keyValuePairLong4 = new KeyValuePairLong4();
                 keyValuePairLong4.KeyId = dropitem.Id;
                 keyValuePairLong4.Value = numericComponentS.GetAsInt(NumericType.DropItemId);
