@@ -1,10 +1,12 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace ET.Client
 {
+    [FriendOf(typeof(Scroll_Item_PetEggSelectItem))]
     [FriendOf(typeof(Scroll_Item_CommonItem))]
     [FriendOf(typeof(ES_PetEggListItem))]
     [EntitySystemOf(typeof(ES_PetEggList))]
@@ -15,69 +17,49 @@ namespace ET.Client
         private static void Awake(this ES_PetEggList self, Transform transform)
         {
             self.uiTransform = transform;
-            self.E_BagItemsLoopHorizontalScrollRect.AddItemRefreshListener(self.OnBagItemsRefresh);
-            self.PetList.Add(self.ES_PetEggListItem_0);
-            self.PetList.Add(self.ES_PetEggListItem_1);
-            self.PetList.Add(self.ES_PetEggListItem_2);
-            foreach (ES_PetEggListItem item in self.PetList)
-            {
-                item.BeginDragHandler = (binfo, pdata) => { self.PetEggBeginDrag(binfo, pdata); };
-                item.DragingHandler = (binfo, pdata) => { self.PetEggDraging(binfo, pdata); };
-                item.EndDragHandler = (binfo, pdata) => { self.PetEggEndDrag(binfo, pdata); };
-            }
 
-            self.EG_IconItemDargRectTransform.gameObject.SetActive(false);
+            self.PetList.Add(self.ES_PetEggListItem);
+            self.PetList.Add(self.AddChild<ES_PetEggListItem, Transform>(UnityEngine.Object.Instantiate(self.ES_PetEggListItem.uiTransform.gameObject, self.EG_PetNodeListRectTransform).transform));
+            self.PetList.Add(self.AddChild<ES_PetEggListItem, Transform>(UnityEngine.Object.Instantiate(self.ES_PetEggListItem.uiTransform.gameObject, self.EG_PetNodeListRectTransform).transform));
+            self.PetList.Add(self.AddChild<ES_PetEggListItem, Transform>(UnityEngine.Object.Instantiate(self.ES_PetEggListItem.uiTransform.gameObject, self.EG_PetNodeListRectTransform).transform));
+
+            self.E_Btn_ClosePetEggSelectButton.AddListener(() => { self.EG_PetEggSelectRootRectTransform.gameObject.SetActive(false); });
+            
+            self.EG_PetEggSelectRootRectTransform.gameObject.SetActive(false);
         }
 
         [EntitySystem]
         private static void Destroy(this ES_PetEggList self)
         {
+            ResourcesLoaderComponent resourcesLoaderComponent = self.Root().GetComponent<ResourcesLoaderComponent>();
+            for (int i = 0; i < self.AssetList.Count; i++)
+            {
+                resourcesLoaderComponent.UnLoadAsset(self.AssetList[i]);
+            }
+
+            self.AssetList.Clear();
+            self.AssetList = null;
+            
             self.DestroyWidget();
         }
 
         public static void OnUpdateUI(this ES_PetEggList self)
         {
-            self.UpdateEggItemUI();
-            self.UpdatePetEggUI();
-        }
-
-        private static void OnBagItemsRefresh(this ES_PetEggList self, Transform transform, int index)
-        {
-            foreach (Scroll_Item_CommonItem item in self.ScrollItemCommonItems.Values)
-            {
-                if (item.uiTransform == transform)
-                {
-                    item.uiTransform = null;
-                }
-            }
-            
-            Scroll_Item_CommonItem scrollItemCommonItem = self.ScrollItemCommonItems[index].BindTrans(transform);
-            scrollItemCommonItem.Refresh(self.ShowBagInfos[index], ItemOperateEnum.SkillSet);
-            scrollItemCommonItem.SetEventTrigger(true);
-            scrollItemCommonItem.BeginDragHandler = (binfo, pdata) => { self.BeginDrag(binfo, pdata); };
-            scrollItemCommonItem.DragingHandler = (binfo, pdata) => { self.Draging(binfo, pdata); };
-            scrollItemCommonItem.EndDragHandler = (binfo, pdata) => { self.EndDrag(binfo, pdata); };
-        }
-
-        public static void UpdateEggItemUI(this ES_PetEggList self)
-        {
-            self.ShowBagInfos.Clear();
+            int eggNum = 0;
             List<ItemInfo> bagInfos = self.Root().GetComponent<BagComponentC>().GetBagList();
             for (int i = 0; i < bagInfos.Count; i++)
             {
                 ItemConfig itemConfig = ItemConfigCategory.Instance.Get(bagInfos[i].ItemID);
                 if (itemConfig.ItemSubType == 102 && itemConfig.ItemType == 1)
                 {
-                    self.ShowBagInfos.Add(bagInfos[i]);
+                    eggNum++;
                 }
             }
-
-            self.AddUIScrollItems(ref self.ScrollItemCommonItems, self.ShowBagInfos.Count);
-            self.E_BagItemsLoopHorizontalScrollRect.SetVisible(true, self.ShowBagInfos.Count);
-        }
-
-        public static void UpdatePetEggUI(this ES_PetEggList self)
-        {
+            using (zstring.Block())
+            {
+                self.E_PetEggNumText.text = zstring.Format("{0}个", eggNum);
+            }
+            
             PetComponentC petComponent = self.Root().GetComponent<PetComponentC>();
             for (int i = 0; i < self.PetList.Count; i++)
             {
@@ -86,93 +68,116 @@ namespace ET.Client
             }
         }
 
-        public static void BeginDrag(this ES_PetEggList self, ItemInfo binfo, PointerEventData pdata)
+        public static async ETTask PetEggItemSelect(this ES_PetEggList self, int index, int itemConfigId)
         {
-            self.EG_IconItemDargRectTransform.gameObject.SetActive(true);
-            ItemConfig itemConfig = ItemConfigCategory.Instance.Get(binfo.ItemID);
-            GameObject icon = self.EG_IconItemDargRectTransform.Find("ImageIcon").gameObject;
-            string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemIcon, itemConfig.Icon);
-            Sprite sp = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
-
-            icon.GetComponent<Image>().sprite = sp;
-            CommonViewHelper.SetParent(self.EG_IconItemDargRectTransform.gameObject, self.uiTransform.parent.parent.gameObject);
-        }
-
-        public static void Draging(this ES_PetEggList self, ItemInfo binfo, PointerEventData pdata)
-        {
-            Vector2 localPoint;
-            RectTransform canvas = self.uiTransform.parent.parent.GetComponent<RectTransform>();
-            Camera uiCamera = self.Root().GetComponent<GlobalComponent>().UICamera.GetComponent<Camera>();
-            RectTransformUtility.ScreenPointToLocalPointInRectangle(canvas, pdata.position, uiCamera, out localPoint);
-
-            self.EG_IconItemDargRectTransform.localPosition = new Vector3(localPoint.x, localPoint.y, 0f);
-        }
-
-        public static async ETTask RequestHatch(this ES_PetEggList self, int index, ItemInfo bagInfo)
-        {
-            ES_PetEggListItem esPetEggListItem = self.PetList[index];
-            KeyValuePairLong oldEgg = esPetEggListItem.RolePetEgg;
-            if (oldEgg != null && oldEgg.KeyId > 0)
+            self.EG_PetEggSelectRootRectTransform.gameObject.SetActive(false);
+            
+            List<ItemInfo> bagInfos = self.Root().GetComponent<BagComponentC>().GetBagList();
+            long bagInfoID = 0;
+            for (int i = 0; i < bagInfos.Count; i++)
             {
-                return;
+                if (bagInfos[i].ItemID == itemConfigId)
+                {
+                    bagInfoID = bagInfos[i].BagInfoID;
+                    break;
+                }
             }
-
-            int error = await PetNetHelper.RequestPetEggPut(self.Root(), index, bagInfo.BagInfoID);
+            
+            int error = await PetNetHelper.RequestPetEggPut(self.Root(), index, bagInfoID);
             if (error != ErrorCode.ERR_Success)
             {
                 return;
             }
 
-            self.UpdateEggItemUI();
-            self.UpdatePetEggUI();
+            self.OnUpdateUI();
         }
-
-        public static void EndDrag(this ES_PetEggList self, ItemInfo binfo, PointerEventData pdata)
+        
+        public static void ShowPetEggSelectList(this ES_PetEggList self, int index)
         {
-            RectTransform canvas = self.uiTransform.parent.parent.GetComponent<RectTransform>();
-            GraphicRaycaster gr = canvas.GetComponent<GraphicRaycaster>();
-            List<RaycastResult> results = new List<RaycastResult>();
-            gr.Raycast(pdata, results);
-
-            for (int i = 0; i < results.Count; i++)
+            self.EG_PetEggSelectRootRectTransform.gameObject.SetActive(true);
+            
+            Dictionary<int, int> itemDic = new Dictionary<int, int>();
+            List<ItemInfo> bagInfos = self.Root().GetComponent<BagComponentC>().GetBagList();
+            for (int i = 0; i < bagInfos.Count; i++)
             {
-                string name = results[i].gameObject.name;
-                if (!name.Contains("ES_PetEggListItem"))
+                ItemConfig itemConfig = ItemConfigCategory.Instance.Get(bagInfos[i].ItemID);
+                if (itemConfig.ItemSubType == 102 && itemConfig.ItemType == 1)
                 {
-                    continue;
+                    if (itemDic.ContainsKey(itemConfig.Id))
+                    {
+                        itemDic[itemConfig.Id]++;
+                    }
+                    else
+                    {
+                        itemDic[itemConfig.Id] = 1;
+                    }
                 }
-
-                int index = int.Parse(name.Substring(name.Length - 1, 1));
-                self.RequestHatch(index, binfo).Coroutine();
-                break;
             }
 
-            CommonViewHelper.SetParent(self.EG_IconItemDargRectTransform.gameObject, self.uiTransform.gameObject);
-            self.EG_IconItemDargRectTransform.gameObject.SetActive(false);
-        }
+            ResourcesLoaderComponent resourcesLoaderComponent = self.Root().GetComponent<ResourcesLoaderComponent>();
+            List<KeyValuePair<int, int>> itemList = itemDic.ToList();
+            for (int i = 0; i < itemList.Count; i++)
+            {
+                if (!self.ScrollItemPetEggSelectItems.ContainsKey(i))
+                {
+                    Scroll_Item_PetEggSelectItem item = self.AddChild<Scroll_Item_PetEggSelectItem>();
+                    string path = "Assets/Bundles/UI/Item/Item_PetEggSelectItem.prefab";
+                    if (!self.AssetList.Contains(path))
+                    {
+                        self.AssetList.Add(path);
+                    }
 
-        public static void PetEggBeginDrag(this ES_PetEggList self, int binfo, PointerEventData pdata)
+                    GameObject prefab = resourcesLoaderComponent.LoadAssetSync<GameObject>(path);
+                    GameObject go = UnityEngine.Object.Instantiate(prefab, self.E_PetEggSelectItemsScrollRect.transform.Find("Content").gameObject.transform);
+                    item.BindTrans(go.transform);
+                    self.ScrollItemPetEggSelectItems.Add(i, item);
+                }
+
+                Scroll_Item_PetEggSelectItem scrollItemPetEggSelectItem = self.ScrollItemPetEggSelectItems[i];
+                scrollItemPetEggSelectItem.uiTransform.gameObject.SetActive(true);
+                scrollItemPetEggSelectItem.OnInitData(index, itemList[i].Key, itemList[i].Value);
+            }
+
+            if (self.ScrollItemPetEggSelectItems.Count > itemList.Count)
+            {
+                for (int i = itemList.Count; i < self.ScrollItemPetEggSelectItems.Count; i++)
+                {
+                    Scroll_Item_PetEggSelectItem scrollItemPetEggSelectItem = self.ScrollItemPetEggSelectItems[i];
+                    scrollItemPetEggSelectItem.uiTransform.gameObject.SetActive(false);
+                }
+            }
+        }
+        
+        public static void OnButtonOpenButton(this ES_PetEggList self, KeyValuePairLong rolePetEgg, int index)
         {
-            self.EG_IconItemDargRectTransform.gameObject.SetActive(true);
-            self.EG_IconItemDargRectTransform.localScale = Vector3.one * 2f;
+            UserInfo userInfo = self.Root().GetComponent<UserInfoComponentC>().UserInfo;
             PetComponentC petComponent = self.Root().GetComponent<PetComponentC>();
-            ItemConfig itemConfig = ItemConfigCategory.Instance.Get((int)petComponent.RolePetEggs[binfo].KeyId);
-            GameObject icon = self.EG_IconItemDargRectTransform.Find("ImageIcon").gameObject;
-            string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemIcon, itemConfig.Icon);
-            Sprite sp = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
+            int petexpendNumber = UnitHelper.GetMyUnitFromClientScene(self.Root()).GetComponent<NumericComponentC>().GetAsInt(NumericType.PetExtendNumber);
+            int maxNum = PetHelper.GetPetMaxNumber(userInfo.Lv, petexpendNumber);
+            if (maxNum <= PetHelper.GetCangKuPetNum(petComponent.RolePetInfos))
+            {
+                FlyTipComponent.Instance.ShowFlyTip("已达到最大宠物数量");
+                return;
+            }
 
-            icon.GetComponent<Image>().sprite = sp;
-            CommonViewHelper.SetParent(self.EG_IconItemDargRectTransform.gameObject, self.uiTransform.parent.parent.gameObject);
+            int costValue = CommonHelp.ReturnPetOpenTimeDiamond((int)rolePetEgg.KeyId, rolePetEgg.Value);
+            using (zstring.Block())
+            {
+                PopupTipHelp.OpenPopupTip(self.Root(), "开启宠物蛋", zstring.Format("开启需要花费 {0}钻石", costValue),
+                    () => { self.OnButtonGetButton(index).Coroutine(); }).Coroutine();
+            }
         }
 
-        public static void PetEggDraging(this ES_PetEggList self, int binfo, PointerEventData pdata)
+        public static async ETTask OnButtonFuHuaButton(this ES_PetEggList self, int index)
         {
-            Vector2 localPoint;
-            RectTransform canvas = self.EG_IconItemDargRectTransform.parent.GetComponent<RectTransform>();
-            Camera uiCamera = self.Root().GetComponent<GlobalComponent>().UICamera.GetComponent<Camera>();
-            RectTransformUtility.ScreenPointToLocalPointInRectangle(canvas, pdata.position, uiCamera, out localPoint);
+            int error = await PetNetHelper.RequestPetEggHatch(self.Root(), index);
 
-            self.EG_IconItemDargRectTransform.localPosition = new Vector3(localPoint.x, localPoint.y, 0f);
+            if (error != ErrorCode.ERR_Success)
+            {
+                return;
+            }
+
+            self.OnUpdateUI();
         }
 
         public static async ETTask RequestXieXia(this ES_PetEggList self, int binfo)
@@ -189,31 +194,45 @@ namespace ET.Client
                 return;
             }
 
-            self.UpdateEggItemUI();
-            self.UpdatePetEggUI();
+            self.OnUpdateUI();
         }
 
-        public static void PetEggEndDrag(this ES_PetEggList self, int binfo, PointerEventData pdata)
+        public static async ETTask OnButtonGetButton(this ES_PetEggList self, int index)
         {
-            RectTransform canvas = self.EG_IconItemDargRectTransform.parent.GetComponent<RectTransform>();
-            GraphicRaycaster gr = canvas.GetComponent<GraphicRaycaster>();
-            List<RaycastResult> results = new List<RaycastResult>();
-            gr.Raycast(pdata, results);
-
-            for (int i = 0; i < results.Count; i++)
+            UserInfo userInfo = self.Root().GetComponent<UserInfoComponentC>().UserInfo;
+            int maxNum = PetHelper.GetPetMaxNumber(self.Root().GetComponent<UserInfoComponentC>().UserInfo.Lv, userInfo.Lv);
+            PetComponentC petComponent = self.Root().GetComponent<PetComponentC>();
+            if (maxNum <= PetHelper.GetBagPetNum(petComponent.RolePetInfos))
             {
-                string name = results[i].gameObject.name;
-                if (!name.Contains("RolePetEggUIItem"))
-                {
-                    continue;
-                }
-
-                self.RequestXieXia(binfo).Coroutine();
-                break;
+                FlyTipComponent.Instance.ShowFlyTip("已达到最大宠物数量");
+                return;
             }
 
-            CommonViewHelper.SetParent(self.EG_IconItemDargRectTransform.gameObject, self.UITransform.gameObject);
-            self.EG_IconItemDargRectTransform.gameObject.SetActive(false);
+            KeyValuePairLong rolePetEgg = petComponent.RolePetEggs[index];
+            if (rolePetEgg.KeyId == 0)
+            {
+                return;
+            }
+
+            int needCost = 0;
+            if (TimeHelper.ServerNow() < rolePetEgg.Value)
+            {
+                needCost = CommonHelp.ReturnPetOpenTimeDiamond((int)rolePetEgg.KeyId, rolePetEgg.Value);
+            }
+
+            if (userInfo.Diamond < needCost)
+            {
+                FlyTipComponent.Instance.ShowFlyTip("钻石不足！");
+                return;
+            }
+
+            int error = await PetNetHelper.RequestPetEggOpen(self.Root(), index);
+            if (error != ErrorCode.ERR_Success)
+            {
+                return;
+            }
+
+            self.OnUpdateUI();
         }
     }
 }

@@ -39,11 +39,6 @@ namespace ET.Client
             }
         }
 
-        public static void OnRolePetEggOpen(this DlgPetEgg self)
-        {
-            self.View.ES_PetEggList.UpdatePetEggUI();
-        }
-
         public static void OnUpdateLuckly(this DlgPetEgg self)
         {
             self.View.ES_PetEggChouKa.OnUpdateInfo();

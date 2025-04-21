@@ -1,18 +1,35 @@
-﻿using System.Collections.Generic;
+﻿
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
 namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class ES_PetEggList : Entity,IAwake<Transform>,IDestroy,IUILogic
+	public  class ES_PetEggList : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy 
 	{
+		public Dictionary<int, EntityRef<Scroll_Item_PetEggSelectItem>> ScrollItemPetEggSelectItems = new();
 		public List<EntityRef<ES_PetEggListItem>> PetList = new();
-		public Dictionary<int, EntityRef<Scroll_Item_CommonItem>> ScrollItemCommonItems;
-		public List<ItemInfo> ShowBagInfos { get; set; } = new();
+		public List<string> AssetList { get; set; } = new();
+		
+		public UnityEngine.UI.Text E_PetEggNumText
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_PetEggNumText == null )
+     			{
+		    		this.m_E_PetEggNumText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_PetEggNum");
+     			}
+     			return this.m_E_PetEggNumText;
+     		}
+     	}
 
-		public RectTransform EG_PetNodeListRectTransform
+		public UnityEngine.RectTransform EG_PetNodeListRectTransform
      	{
      		get
      		{
@@ -23,13 +40,13 @@ namespace ET.Client
      			}
      			if( this.m_EG_PetNodeListRectTransform == null )
      			{
-		    		this.m_EG_PetNodeListRectTransform = UIFindHelper.FindDeepChild<RectTransform>(this.uiTransform.gameObject,"EG_PetNodeList");
+		    		this.m_EG_PetNodeListRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_PetNodeList");
      			}
      			return this.m_EG_PetNodeListRectTransform;
      		}
      	}
 
-		public ES_PetEggListItem ES_PetEggListItem_0
+		public ES_PetEggListItem ES_PetEggListItem
      	{
      		get
      		{
@@ -38,17 +55,18 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-		        ES_PetEggListItem es = this.m_es_petegglistitem_0;
-     			if( es ==null)
+     			ES_PetEggListItem es = this.m_es_petegglistitem;
+     			if( es == null )
+
      			{
-		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_PetNodeList/ES_PetEggListItem_0");
-		    	   this.m_es_petegglistitem_0 = this.AddChild<ES_PetEggListItem,Transform>(subTrans);
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_PetNodeList/ES_PetEggListItem");
+		    	   this.m_es_petegglistitem = this.AddChild<ES_PetEggListItem,Transform>(subTrans);
      			}
-     			return this.m_es_petegglistitem_0;
+     			return this.m_es_petegglistitem;
      		}
      	}
 
-		public ES_PetEggListItem ES_PetEggListItem_1
+		public UnityEngine.RectTransform EG_PetEggSelectRootRectTransform
      	{
      		get
      		{
@@ -57,17 +75,15 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-		        ES_PetEggListItem es = this.m_es_petegglistitem_1;
-     			if( es ==null )
+     			if( this.m_EG_PetEggSelectRootRectTransform == null )
      			{
-		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_PetNodeList/ES_PetEggListItem_1");
-		    	   this.m_es_petegglistitem_1 = this.AddChild<ES_PetEggListItem,Transform>(subTrans);
+		    		this.m_EG_PetEggSelectRootRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_PetEggSelectRoot");
      			}
-     			return this.m_es_petegglistitem_1;
+     			return this.m_EG_PetEggSelectRootRectTransform;
      		}
      	}
 
-		public ES_PetEggListItem ES_PetEggListItem_2
+		public UnityEngine.UI.Button E_Btn_ClosePetEggSelectButton
      	{
      		get
      		{
@@ -76,18 +92,15 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-
-		        ES_PetEggListItem es = this.m_es_petegglistitem_2;
-     			if( es ==null )
+     			if( this.m_E_Btn_ClosePetEggSelectButton == null )
      			{
-		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_PetNodeList/ES_PetEggListItem_2");
-		    	   this.m_es_petegglistitem_2 = this.AddChild<ES_PetEggListItem,Transform>(subTrans);
+		    		this.m_E_Btn_ClosePetEggSelectButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"EG_PetEggSelectRoot/E_Btn_ClosePetEggSelect");
      			}
-     			return this.m_es_petegglistitem_2;
+     			return this.m_E_Btn_ClosePetEggSelectButton;
      		}
      	}
 
-		public RectTransform EG_IconItemDargRectTransform
+		public UnityEngine.UI.Image E_Btn_ClosePetEggSelectImage
      	{
      		get
      		{
@@ -96,15 +109,15 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_EG_IconItemDargRectTransform == null )
+     			if( this.m_E_Btn_ClosePetEggSelectImage == null )
      			{
-		    		this.m_EG_IconItemDargRectTransform = UIFindHelper.FindDeepChild<RectTransform>(this.uiTransform.gameObject,"ShowSet/EG_IconItemDarg");
+		    		this.m_E_Btn_ClosePetEggSelectImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_PetEggSelectRoot/E_Btn_ClosePetEggSelect");
      			}
-     			return this.m_EG_IconItemDargRectTransform;
+     			return this.m_E_Btn_ClosePetEggSelectImage;
      		}
      	}
 
-		public LoopHorizontalScrollRect E_BagItemsLoopHorizontalScrollRect
+		public UnityEngine.UI.Image E_PetEggSelectPanelImage
      	{
      		get
      		{
@@ -113,15 +126,15 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_E_BagItemsLoopHorizontalScrollRect == null )
+     			if( this.m_E_PetEggSelectPanelImage == null )
      			{
-		    		this.m_E_BagItemsLoopHorizontalScrollRect = UIFindHelper.FindDeepChild<LoopHorizontalScrollRect>(this.uiTransform.gameObject,"ShowSet/E_BagItems");
+		    		this.m_E_PetEggSelectPanelImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_PetEggSelectRoot/E_PetEggSelectPanel");
      			}
-     			return this.m_E_BagItemsLoopHorizontalScrollRect;
+     			return this.m_E_PetEggSelectPanelImage;
      		}
      	}
 
-		public Text E_TextTipText
+		public UnityEngine.UI.ScrollRect E_PetEggSelectItemsScrollRect
      	{
      		get
      		{
@@ -130,11 +143,28 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_E_TextTipText == null )
+     			if( this.m_E_PetEggSelectItemsScrollRect == null )
      			{
-		    		this.m_E_TextTipText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"ShowSet/E_TextTip");
+		    		this.m_E_PetEggSelectItemsScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.ScrollRect>(this.uiTransform.gameObject,"EG_PetEggSelectRoot/E_PetEggSelectPanel/E_PetEggSelectItems");
      			}
-     			return this.m_E_TextTipText;
+     			return this.m_E_PetEggSelectItemsScrollRect;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_PetEggSelectItemsImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_PetEggSelectItemsImage == null )
+     			{
+		    		this.m_E_PetEggSelectItemsImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_PetEggSelectRoot/E_PetEggSelectPanel/E_PetEggSelectItems");
+     			}
+     			return this.m_E_PetEggSelectItemsImage;
      		}
      	}
 
@@ -152,23 +182,27 @@ namespace ET.Client
 
 		public void DestroyWidget()
 		{
+			this.m_E_PetEggNumText = null;
 			this.m_EG_PetNodeListRectTransform = null;
-			this.m_es_petegglistitem_0 = null;
-			this.m_es_petegglistitem_1 = null;
-			this.m_es_petegglistitem_2 = null;
-			this.m_EG_IconItemDargRectTransform = null;
-			this.m_E_BagItemsLoopHorizontalScrollRect = null;
-			this.m_E_TextTipText = null;
+			this.m_es_petegglistitem = null;
+			this.m_EG_PetEggSelectRootRectTransform = null;
+			this.m_E_Btn_ClosePetEggSelectButton = null;
+			this.m_E_Btn_ClosePetEggSelectImage = null;
+			this.m_E_PetEggSelectPanelImage = null;
+			this.m_E_PetEggSelectItemsScrollRect = null;
+			this.m_E_PetEggSelectItemsImage = null;
 			this.uiTransform = null;
 		}
 
-		private RectTransform m_EG_PetNodeListRectTransform = null;
-		private EntityRef<ES_PetEggListItem> m_es_petegglistitem_0 = null;
-		private EntityRef<ES_PetEggListItem> m_es_petegglistitem_1 = null;
-		private EntityRef<ES_PetEggListItem> m_es_petegglistitem_2 = null;
-		private RectTransform m_EG_IconItemDargRectTransform = null;
-		private LoopHorizontalScrollRect m_E_BagItemsLoopHorizontalScrollRect = null;
-		private Text m_E_TextTipText = null;
+		private UnityEngine.UI.Text m_E_PetEggNumText = null;
+		private UnityEngine.RectTransform m_EG_PetNodeListRectTransform = null;
+		private EntityRef<ES_PetEggListItem> m_es_petegglistitem = null;
+		private UnityEngine.RectTransform m_EG_PetEggSelectRootRectTransform = null;
+		private UnityEngine.UI.Button m_E_Btn_ClosePetEggSelectButton = null;
+		private UnityEngine.UI.Image m_E_Btn_ClosePetEggSelectImage = null;
+		private UnityEngine.UI.Image m_E_PetEggSelectPanelImage = null;
+		private UnityEngine.UI.ScrollRect m_E_PetEggSelectItemsScrollRect = null;
+		private UnityEngine.UI.Image m_E_PetEggSelectItemsImage = null;
 		public Transform uiTransform = null;
 	}
 }
