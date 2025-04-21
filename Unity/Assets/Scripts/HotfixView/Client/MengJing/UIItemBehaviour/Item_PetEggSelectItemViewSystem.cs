@@ -22,7 +22,7 @@ namespace ET.Client
         {
             self.Index = index;
             self.ItemConfigId = itemConfigId;
-            self.E_ImageDiButtonButton.AddListener(self.OnClickPetItem);
+            self.E_Btn_UseButton.AddListener(self.OnClickPetItem);
 
             ResourcesLoaderComponent resourcesLoaderComponent = self.Root().GetComponent<ResourcesLoaderComponent>();
             ItemConfig itemConfig = ItemConfigCategory.Instance.Get(itemConfigId);

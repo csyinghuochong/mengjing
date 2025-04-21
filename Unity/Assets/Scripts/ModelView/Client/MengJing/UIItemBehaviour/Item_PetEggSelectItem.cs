@@ -215,54 +215,6 @@ namespace ET.Client
      		}
      	}
 
-		public UnityEngine.UI.Button E_ImageDiButtonButton
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if (this.isCacheNode)
-     			{
-     				if( this.m_E_ImageDiButtonButton == null )
-     				{
-		    			this.m_E_ImageDiButtonButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_ImageDiButton");
-     				}
-     				return this.m_E_ImageDiButtonButton;
-     			}
-     			else
-     			{
-		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_ImageDiButton");
-     			}
-     		}
-     	}
-
-		public UnityEngine.UI.Image E_ImageDiButtonImage
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if (this.isCacheNode)
-     			{
-     				if( this.m_E_ImageDiButtonImage == null )
-     				{
-		    			this.m_E_ImageDiButtonImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_ImageDiButton");
-     				}
-     				return this.m_E_ImageDiButtonImage;
-     			}
-     			else
-     			{
-		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_ImageDiButton");
-     			}
-     		}
-     	}
-
 		public void DestroyWidget()
 		{
 			this.m_E_ImageDiImage = null;
@@ -273,8 +225,6 @@ namespace ET.Client
 			this.m_E_ItemNumText = null;
 			this.m_E_Btn_UseButton = null;
 			this.m_E_Btn_UseImage = null;
-			this.m_E_ImageDiButtonButton = null;
-			this.m_E_ImageDiButtonImage = null;
 			this.uiTransform = null;
 			this.DataId = 0;
 		}
@@ -287,8 +237,6 @@ namespace ET.Client
 		private UnityEngine.UI.Text m_E_ItemNumText = null;
 		private UnityEngine.UI.Button m_E_Btn_UseButton = null;
 		private UnityEngine.UI.Image m_E_Btn_UseImage = null;
-		private UnityEngine.UI.Button m_E_ImageDiButtonButton = null;
-		private UnityEngine.UI.Image m_E_ImageDiButtonImage = null;
 		public Transform uiTransform = null;
 	}
 }
