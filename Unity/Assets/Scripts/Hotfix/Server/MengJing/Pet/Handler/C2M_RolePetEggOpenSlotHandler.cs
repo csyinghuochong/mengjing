@@ -11,7 +11,7 @@
                 return;
             }
 
-            string[] costItemsList = GlobalValueConfigCategory.Instance.Get(130).Value.Split('@');
+            string[] costItemsList = GlobalValueConfigCategory.Instance.Get(134).Value.Split('@');
             string costItems = costItemsList[petComponent.RolePetEggUnlockedSlotsCount];
             if (!unit.GetComponent<BagComponentS>().OnCostItemData(costItems))
             {
