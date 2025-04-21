@@ -48,7 +48,6 @@
         public const int ResourcesLoaderTimer = 240;
         public const int DragonChuansongTimer = 241;
         public const int CellChuansongTimer = 242;
-        public const int SingleHappyDungeonTimer = 243;
         
         public const int RoomUpdate = 301;
         public const int JoystickTimer = 302;

@@ -319,9 +319,10 @@ namespace ET.Server
                     }
                     else
                     {
-                        int randomPosition = RandomHelper.RandomNumber(0, HappyData.PositionList.Count);
+                        int randomPosition = 40;
                         numericComponent.ApplyValue(NumericType.SingleHappyCellIndex, randomPosition + 1, false);
                         unit.Position = HappyData.PositionList[randomPosition];
+                        unit.Scene().GetComponent<SingleHappyDungeonComponent>().OnTimer();
                     }
                     aoivalue = 40;
                     // 通知客户端创建My Unit
@@ -329,8 +330,6 @@ namespace ET.Server
                     MapMessageHelper.SendToClient(unit, m2CCreateUnits);
                     // 加入aoi
                     unit.AddComponent<AOIEntity, int, float3>(aoivalue * 1000, unit.Position);
-
-                    unit.Scene().GetComponent<SingleHappyDungeonComponent>().NoticeRefreshTime(unit);
                     break;
                 case MapTypeEnum.Battle:
                     //int todayCamp = numericComponent.GetAsInt(NumericType.BattleTodayCamp);

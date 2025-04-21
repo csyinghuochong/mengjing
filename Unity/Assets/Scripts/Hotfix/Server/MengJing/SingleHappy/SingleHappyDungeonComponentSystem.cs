@@ -9,21 +9,6 @@ namespace ET.Server
     public static partial class SingleHappyDungeonComponentSystem
     {
         
-        [Invoke(TimerInvokeType.SingleHappyDungeonTimer)]
-        public class SingleHappyDungeonTimer: ATimer<SingleHappyDungeonComponent>
-        {
-            protected override void Run(SingleHappyDungeonComponent self)
-            {
-                try
-                {
-                    self.OnTimer();
-                }
-                catch (Exception e)
-                {
-                    Log.Error($"move timer error: {self.Id}\n{e}");
-                }
-            }
-        }
         
         [EntitySystem]
         private static void Awake(this SingleHappyDungeonComponent self)
@@ -33,7 +18,6 @@ namespace ET.Server
         [EntitySystem]
         private static void Destroy(this SingleHappyDungeonComponent self)
         {
-            self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
         }
 
         public static int GetDropId(this SingleHappyDungeonComponent self, int openDay)
@@ -55,47 +39,7 @@ namespace ET.Server
 
             return int.Parse(dropList[0].Split(';')[1]);
         }
-
-        public static void OnHappyBegin(this SingleHappyDungeonComponent self)
-        {
-            self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
-
-            self.Timer = self.Root().GetComponent<TimerComponent>().NewRepeatedTimer(HappyData.ItemFreshTime, TimerInvokeType.HappyDungeonTimer, self);
-
-            //先刷新一次
-            self.OnTimer();
-        }
-
-        public static async ETTask OnHappyOver(this SingleHappyDungeonComponent self)
-        {
-            self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
-            Scene fubnescene = self.Scene();
-            C2M_TransferMap actor_Transfer = C2M_TransferMap.Create();
-            actor_Transfer.SceneType = MapTypeEnum.MainCityScene;
-
-            await self.Root().GetComponent<TimerComponent>().WaitAsync(TimeHelper.Minute);
-            List<EntityRef<Unit>> units = fubnescene.GetComponent<UnitComponent>().GetAll();
-            for (int i = 0; i < units.Count; i++)
-            {
-                Unit unit = units[i];
-                if (unit.Type != UnitType.Player)
-                {
-                    continue;
-                }
-
-                if (unit.IsDisposed || unit.IsRobot())
-                {
-                    continue;
-                }
-
-                await TransferHelper.TransferUnit(units[i], actor_Transfer);
-            }
-
-            await self.Root().GetComponent<TimerComponent>().WaitAsync(RandomHelper.RandomNumber(10000, 20000));
-            TransferHelper.NoticeFubenCenter(fubnescene, 2).Coroutine();
-            fubnescene.Dispose();
-        }
-
+        
         public static void OnTimer(this SingleHappyDungeonComponent self)
         {
             List<int> dropcells = new List<int>();
@@ -147,7 +91,6 @@ namespace ET.Server
                     unitComponent.Add(dropitem);
                     dropitem.AddComponent<UnitInfoComponent>();
                     dropitem.Type = UnitType.DropItem;
-                    DropComponentS dropComponent = dropitem.AddComponent<DropComponentS>();
                     NumericComponentS numericComponentS = dropitem.AddComponent<NumericComponentS>();
                     numericComponentS.ApplyValue(NumericType.DropItemId, rewardist[i].ItemID, false);
                     numericComponentS.ApplyValue(NumericType.DropItemNum, rewardist[i].ItemNum, false);
@@ -160,15 +103,7 @@ namespace ET.Server
                     
                 }
             }
-
-            List<Unit> unitlist = UnitHelper.GetUnitList(self.Scene(), UnitType.Player);
-            self.M2C_HappyInfoResult.NextRefreshTime = TimeHelper.ServerNow() + HappyData.ItemFreshTime;
-            MapMessageHelper.SendToClient(unitlist, self.M2C_HappyInfoResult);
-        }
-
-        public static void NoticeRefreshTime(this SingleHappyDungeonComponent self, Unit unit)
-        {
-            //MapMessageHelper.SendToClient(unit, self.M2C_HappyInfoResult);
+            
         }
     }
 }

@@ -128,6 +128,7 @@ namespace ET.Client
             int errorCode = await  EnterMapHelper.RequestTransfer(self.Root(), MapTypeEnum.SingleHappy, sceneId);
             if (errorCode == ErrorCode.ERR_Success)
             {
+                self.ExitCamera = false;
                 self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_Function, false);
                 return;
             }
