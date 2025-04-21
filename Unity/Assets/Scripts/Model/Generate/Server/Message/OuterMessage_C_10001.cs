@@ -33978,6 +33978,77 @@ namespace ET
         }
     }
 
+    // 喜从天降刷新
+    [MemoryPackable]
+    [Message(OuterMessage.C2M_SingleHappyOperateRequest)]
+    [ResponseType(nameof(M2C_SingleHappyOperateResponse))]
+    public partial class C2M_SingleHappyOperateRequest : MessageObject, ILocationRequest
+    {
+        public static C2M_SingleHappyOperateRequest Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(C2M_SingleHappyOperateRequest), isFromPool) as C2M_SingleHappyOperateRequest;
+        }
+
+        [MemoryPackOrder(89)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(92)]
+        public long ActorId { get; set; }
+
+        /// <summary>
+        /// 1免费移动 2刷新奖励 3购买次数
+        /// </summary>
+        [MemoryPackOrder(0)]
+        public int OperatateType { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.ActorId = default;
+            this.OperatateType = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
+    [Message(OuterMessage.M2C_SingleHappyOperateResponse)]
+    public partial class M2C_SingleHappyOperateResponse : MessageObject, ILocationResponse
+    {
+        public static M2C_SingleHappyOperateResponse Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(M2C_SingleHappyOperateResponse), isFromPool) as M2C_SingleHappyOperateResponse;
+        }
+
+        [MemoryPackOrder(89)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(90)]
+        public int Error { get; set; }
+
+        [MemoryPackOrder(91)]
+        public string Message { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.Error = default;
+            this.Message = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
     public static class OuterMessage
     {
         public const ushort HttpGetRouterResponse = 10002;
@@ -34881,5 +34952,7 @@ namespace ET
         public const ushort M2C_PetMatchResult = 10900;
         public const ushort C2PetMatch_RankListRequest = 10901;
         public const ushort PetMatch2C_RankListResponse = 10902;
+        public const ushort C2M_SingleHappyOperateRequest = 10903;
+        public const ushort M2C_SingleHappyOperateResponse = 10904;
     }
 }

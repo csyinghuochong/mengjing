@@ -143,6 +143,23 @@ namespace ET.Client
      		}
      	}
 
+		public UnityEngine.UI.Button E_ButtonExplain
+		{
+			get
+			{
+				if (this.uiTransform == null)
+				{
+					Log.Error("uiTransform is null.");
+					return null;
+				}
+				if( this.m_E_ButtonExplain == null )
+				{
+					this.m_E_ButtonExplain = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Bottom/E_ButtonExplain");
+				}
+				return this.m_E_ButtonExplain;
+			}
+		}
+
 		public UnityEngine.UI.Image E_ButtonMove_3Image
      	{
      		get
@@ -171,6 +188,7 @@ namespace ET.Client
 			this.m_E_ButtonMove_2Image = null;
 			this.m_E_ButtonMove_3Button = null;
 			this.m_E_ButtonMove_3Image = null;
+			this.m_E_ButtonExplain = null;
 			this.uiTransform = null;
 		}
 
@@ -183,6 +201,7 @@ namespace ET.Client
 		private UnityEngine.UI.Image m_E_ButtonMove_2Image = null;
 		private UnityEngine.UI.Button m_E_ButtonMove_3Button = null;
 		private UnityEngine.UI.Image m_E_ButtonMove_3Image = null;
+		private UnityEngine.UI.Button m_E_ButtonExplain = null;
 		public Transform uiTransform = null;
 	}
 }

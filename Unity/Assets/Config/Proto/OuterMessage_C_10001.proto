@@ -4640,7 +4640,6 @@ message M2C_UpdateMailInfo // IMessage
 	repeated MailInfo MailInfos = 1;
 }
 
-
 //喜从天降刷新
 //ResponseType M2C_HappyMoveResponse
 message C2M_HappyMoveRequest // ILocationRequest
@@ -7800,4 +7799,21 @@ message PetMatch2C_RankListResponse // IPetMatchActorResponse
 	int32 WinTime = 2;
 	int32 FailTime = 3;
 	repeated PetMatchPlayerInfo PetMatchPlayerInfoList = 4;
+}
+
+//喜从天降刷新
+//ResponseType M2C_SingleHappyOperateResponse
+message C2M_SingleHappyOperateRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+
+	int32 OperatateType = 1; //1免费移动 2刷新奖励 3购买次数
+}
+
+message M2C_SingleHappyOperateResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
 }
