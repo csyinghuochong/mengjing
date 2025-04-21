@@ -125,7 +125,21 @@ namespace ET.Client
             self.Index = index;
             self.RolePetEgg = rolePetEgg;
 
-            self.EG_Node0RectTransform.gameObject.SetActive(self.Index + 1 > self.Root().GetComponent<PetComponentC>().RolePetEggUnlockedSlotsCount);
+            if (self.Index + 1 > self.Root().GetComponent<PetComponentC>().RolePetEggUnlockedSlotsCount)
+            {
+                self.EG_Node0RectTransform.gameObject.SetActive(true);
+                PetComponentC petComponent = self.Root().GetComponent<PetComponentC>();
+                string[] costItemsList = GlobalValueConfigCategory.Instance.Get(135).Value.Split('@');
+                string[] costItems = costItemsList[petComponent.RolePetEggUnlockedSlotsCount].Split(';');
+                string itemName = ItemConfigCategory.Instance.Get(int.Parse(costItems[0])).ItemName;
+                string itemNum = costItems[1];
+                self.E_Text_OpenSlotValueText.text = itemNum;
+            }
+            else
+            {
+                self.EG_Node0RectTransform.gameObject.SetActive(false);
+            }
+            
             self.EG_Node2RectTransform.gameObject.SetActive(rolePetEgg != null && rolePetEgg.KeyId > 0);
             self.EG_Node1RectTransform.gameObject.SetActive(!self.EG_Node0RectTransform.gameObject.activeSelf && !self.EG_Node2RectTransform.gameObject.activeSelf);
             self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);

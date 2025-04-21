@@ -208,23 +208,23 @@ namespace ET.Client
         {
             int taskid = args.TaskConfigId;
             // 完成藏宝图任务后自动接取藏宝图任务
-            if (TaskConfigCategory.Instance.Contain(taskid) && TaskConfigCategory.Instance.Get(taskid).TaskType == TaskTypeEnum.Treasure)
-            {
-                // 任务公告板
-                List<int> tasList = scene.GetComponent<TaskComponentC>().GetOpenTaskIds(1024);
-                foreach (int id in tasList)
-                {
-                    TaskConfig taskConfig = TaskConfigCategory.Instance.Get(id);
-                    if (taskConfig.TaskType == TaskTypeEnum.Treasure)
-                    {
-                        TaskClientNetHelper.RequestGetTask(scene, taskConfig.Id).Coroutine();
-                        break;
-                    }
-                }
-            }
-
-            await scene.GetComponent<TimerComponent>().WaitAsync(200);
-            scene.GetComponent<GuideComponent>().OnTrigger(GuideTriggerType.CommitTask, taskid.ToString());
+            // if (TaskConfigCategory.Instance.Contain(taskid) && TaskConfigCategory.Instance.Get(taskid).TaskType == TaskTypeEnum.Treasure)
+            // {
+            //     // 任务公告板
+            //     List<int> tasList = scene.GetComponent<TaskComponentC>().GetOpenTaskIds(1024);
+            //     foreach (int id in tasList)
+            //     {
+            //         TaskConfig taskConfig = TaskConfigCategory.Instance.Get(id);
+            //         if (taskConfig.TaskType == TaskTypeEnum.Treasure)
+            //         {
+            //             TaskClientNetHelper.RequestGetTask(scene, taskConfig.Id).Coroutine();
+            //             break;
+            //         }
+            //     }
+            // }
+            //
+            // await scene.GetComponent<TimerComponent>().WaitAsync(200);
+            // scene.GetComponent<GuideComponent>().OnTrigger(GuideTriggerType.CommitTask, taskid.ToString());
             
             await ETTask.CompletedTask;
         }

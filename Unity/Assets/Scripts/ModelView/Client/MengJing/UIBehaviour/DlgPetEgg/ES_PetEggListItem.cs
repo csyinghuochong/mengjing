@@ -28,6 +28,23 @@ namespace ET.Client
      		}
      	}
 
+		public UnityEngine.UI.Text E_Text_OpenSlotValueText
+		{
+			get
+			{
+				if (this.uiTransform == null)
+				{
+					Log.Error("uiTransform is null.");
+					return null;
+				}
+				if( this.m_E_Text_OpenSlotValueText == null )
+				{
+					this.m_E_Text_OpenSlotValueText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"EG_Node0/E_Text_OpenSlotValue");
+				}
+				return this.m_E_Text_OpenSlotValueText;
+			}
+		}
+		
 		public UnityEngine.UI.Button E_OpenSlotButton
      	{
      		get
@@ -298,6 +315,7 @@ namespace ET.Client
 		public void DestroyWidget()
 		{
 			this.m_EG_Node0RectTransform = null;
+			this.m_E_Text_OpenSlotValueText = null;
 			this.m_E_OpenSlotButton = null;
 			this.m_E_OpenSlotImage = null;
 			this.m_EG_Node1RectTransform = null;
@@ -317,6 +335,7 @@ namespace ET.Client
 		}
 
 		private UnityEngine.RectTransform m_EG_Node0RectTransform = null;
+		private UnityEngine.UI.Text m_E_Text_OpenSlotValueText = null;
 		private UnityEngine.UI.Button m_E_OpenSlotButton = null;
 		private UnityEngine.UI.Image m_E_OpenSlotImage = null;
 		private UnityEngine.RectTransform m_EG_Node1RectTransform = null;
