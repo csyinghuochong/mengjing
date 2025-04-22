@@ -494,6 +494,10 @@ namespace ET
                 string[] itemInfo = needList[i].Split(';');
                 int itemId = int.Parse(itemInfo[0]);
                 int itemNum = int.Parse(itemInfo[1]);
+                if (itemNum == 0)
+                {
+                    continue;
+                }
                 costItems.Add(new RewardItem() { ItemID = itemId, ItemNum = itemNum });
             }
 

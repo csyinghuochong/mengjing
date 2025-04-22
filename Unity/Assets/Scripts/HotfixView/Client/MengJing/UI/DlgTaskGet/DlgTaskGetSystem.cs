@@ -67,10 +67,10 @@ namespace ET.Client
         public static void OnTaskGet(this DlgTaskGet self)
         {
             bool update = self.UpdataTask();
-            if (!update)
-            {
-                self.OnImg_buttonButton();
-            }
+            // if (!update)
+            // {
+            //     self.OnImg_buttonButton();
+            // }
         }
 
         public static void OnImg_buttonButton(this DlgTaskGet self)
