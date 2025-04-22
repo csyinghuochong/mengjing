@@ -7,7 +7,7 @@ namespace ET.Server
     {
         protected override async ETTask Run(Unit unit, C2M_PetEggChouKaRequest request, M2C_PetEggChouKaResponse response)
         {
-           if (unit.GetComponent<BagComponentS>().GetBagLeftCell(ItemLocType.ItemLocBag) < request.ChouKaType)
+           if (unit.GetComponent<BagComponentS>().GetBagLeftCell(ItemLocType.ItemLocBag) < request.ChouKaType + 1)
             {
                 response.Error = ErrorCode.ERR_BagIsFull;
                 return;
@@ -75,11 +75,20 @@ namespace ET.Server
                 unit.GetComponent<NumericComponentS>().ApplyChange(NumericType.PetExploreLuckly, RandomHelper.RandomNumber(5,16));
             }
             int exploreLuck = unit.GetComponent<NumericComponentS>().GetAsInt(NumericType.PetExploreLuckly);
+            
             List <RewardItem> rewardItems = new List<RewardItem>();
             for (int i = 0; i < request.ChouKaType; i++)
             {
                 DropHelper.DropIDToDropItem_2(dropId, rewardItems);
             }
+            
+            if (exploreLuck >= 100)
+            {
+                rewardItems.Add( new RewardItem(){ ItemID =1000035, ItemNum  = 1} );
+                unit.GetComponent<NumericComponentS>().ApplyValue(NumericType.PetExploreLuckly, 0);
+                exploreLuck = 0;
+            }
+            
             unit.GetComponent<BagComponentS>().OnAddItemData(rewardItems, string.Empty, $"{ItemGetWay.PetExplore}_{TimeHelper.ServerNow()}_{exploreLuck}");
             response.RewardList = rewardItems;
             await ETTask.CompletedTask;
