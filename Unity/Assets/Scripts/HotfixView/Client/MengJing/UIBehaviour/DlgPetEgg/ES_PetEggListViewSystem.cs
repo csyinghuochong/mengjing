@@ -92,11 +92,10 @@ namespace ET.Client
             self.OnUpdateUI();
         }
 
-        public static void OnOpenSlotButton(this ES_PetEggList self)
+        public static void OnOpenSlotButton(this ES_PetEggList self, int index)
         {
-            PetComponentC petComponent = self.Root().GetComponent<PetComponentC>();
             string[] costItemsList = GlobalValueConfigCategory.Instance.Get(135).Value.Split('@');
-            string[] costItems = costItemsList[petComponent.RolePetEggUnlockedSlotsCount].Split(';');
+            string[] costItems = costItemsList[index].Split(';');
             string itemName = ItemConfigCategory.Instance.Get(int.Parse(costItems[0])).ItemName;
             string itemNum = costItems[1];
             using (zstring.Block())
@@ -106,7 +105,7 @@ namespace ET.Client
                 {
                     PopupTipHelp.OpenPopupTip(self.Root(), "提示", tip, async () =>
                     {
-                        int error = await PetNetHelper.RequestPetEggOpenSlot(self.Root());
+                        int error = await PetNetHelper.RequestPetEggOpenSlot(self.Root(), index);
                         if (error != ErrorCode.ERR_Success)
                         {
                             return;
@@ -179,7 +178,7 @@ namespace ET.Client
             }
         }
         
-        public static void OnButtonOpenButton(this ES_PetEggList self, KeyValuePairLong rolePetEgg, int index)
+        public static void OnButtonOpenButton(this ES_PetEggList self, KeyValuePairLong4 rolePetEgg, int index)
         {
             UserInfo userInfo = self.Root().GetComponent<UserInfoComponentC>().UserInfo;
             PetComponentC petComponent = self.Root().GetComponent<PetComponentC>();
@@ -239,7 +238,7 @@ namespace ET.Client
                 return;
             }
 
-            KeyValuePairLong rolePetEgg = petComponent.RolePetEggs[index];
+            KeyValuePairLong4 rolePetEgg = petComponent.RolePetEggs[index];
             if (rolePetEgg.KeyId == 0)
             {
                 return;

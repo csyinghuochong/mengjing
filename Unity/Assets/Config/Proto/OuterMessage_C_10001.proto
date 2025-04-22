@@ -2526,7 +2526,7 @@ message M2C_RolePetList // ILocationResponse
 	int32 Error = 92;
 	repeated RolePetInfo RolePetInfos = 1;
 	repeated int64 TeamPetList = 2;
-	repeated KeyValuePairLong RolePetEggs = 3;		//正在孵化的宠物蛋
+	repeated KeyValuePairLong4 RolePetEggs = 3;		//正在孵化的宠物蛋
 	repeated int64 PetFormations = 4;
 	repeated PetFubenInfo PetFubenInfos = 5;
 	repeated KeyValuePair PetSkinList = 6;
@@ -2549,7 +2549,6 @@ message M2C_RolePetList // ILocationResponse
 	repeated int PetMeleeFubeRewardIds = 24;
 	repeated KeyValuePairInt PetEchoList = 25;
 	repeated int PetZhuangJiaList = 26;
-	int32 RolePetEggUnlockedSlotsCount = 27;
 }
 
 
@@ -3144,6 +3143,7 @@ message M2C_PetZhuangJiaUpResponse // ILocationResponse
 message C2M_RolePetEggOpenSlot // ILocationRequest
 {
 	int32 RpcId = 90;
+	int32 Index = 1;
 }
 
 message M2C_RolePetEggOpenSlot // ILocationResponse
@@ -3167,7 +3167,7 @@ message M2C_RolePetEggHatch // ILocationResponse
 	int32 RpcId = 90;
 	string Message = 91;
 	int32 Error = 92;
-	KeyValuePairLong RolePetEgg = 2;
+	KeyValuePairLong4 RolePetEgg = 2;
 }
 
 
@@ -3200,7 +3200,7 @@ message M2C_RolePetEggPutOut // ILocationResponse
 	int32 RpcId = 90;
 	string Message = 91;
 	int32 Error = 92;
-	KeyValuePairLong RolePetEgg = 1;
+	KeyValuePairLong4 RolePetEgg = 1;
 }
 
 //ResponseType M2C_RolePetHeXin
@@ -3335,7 +3335,7 @@ message M2C_RolePetEggPut // ILocationResponse
 	int32 RpcId = 90;
 	string Message = 91;
 	int32 Error = 92;
-	KeyValuePairLong RolePetEgg = 1;
+	KeyValuePairLong4 RolePetEgg = 1;
 }
 
 message BattleSummonInfo

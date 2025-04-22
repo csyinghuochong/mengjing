@@ -7,7 +7,7 @@ namespace ET.Client
 	[EnableMethod]
 	public  class ES_PetEggListItem : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy 
 	{
-		public KeyValuePairLong RolePetEgg;
+		public KeyValuePairLong4 RolePetEgg;
 		public long Timer;
 		public int Index;
 		

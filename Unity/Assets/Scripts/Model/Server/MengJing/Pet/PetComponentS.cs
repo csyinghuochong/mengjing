@@ -1,8 +1,9 @@
 using System.Collections.Generic;
+using MongoDB.Bson.Serialization.Attributes;
 
 namespace ET.Server
 {
-    
+    [BsonIgnoreExtraElements]
     [ComponentOf(typeof(Unit))]
     public class PetComponentS : Entity, IAwake, ITransfer, IUnitCache
     {
@@ -36,8 +37,7 @@ namespace ET.Server
 
         public List<RolePetInfo> RolePetInfos  { get; set; }= new List<RolePetInfo>(); 
         
-        public int RolePetEggUnlockedSlotsCount { get; set; }
-        public List<KeyValuePairLong> RolePetEggs { get; set; }= new List<KeyValuePairLong>(); 
+        public List<KeyValuePairLong4> RolePetEggs { get; set; }= new List<KeyValuePairLong4>(); 
         
         public List<PetFubenInfo> PetFubenInfos{ get; set; }= new List<PetFubenInfo>(); 
         public List<KeyValuePair> PetSkinList { get; set; }= new List<KeyValuePair>(); 

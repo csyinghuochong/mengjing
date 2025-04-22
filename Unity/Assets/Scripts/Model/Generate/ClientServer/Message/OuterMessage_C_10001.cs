@@ -10968,7 +10968,7 @@ namespace ET
         /// 正在孵化的宠物蛋
         /// </summary>
         [MemoryPackOrder(2)]
-        public List<KeyValuePairLong> RolePetEggs { get; set; } = new();
+        public List<KeyValuePairLong4> RolePetEggs { get; set; } = new();
 
         [MemoryPackOrder(3)]
         public List<long> PetFormations { get; set; } = new();
@@ -11042,9 +11042,6 @@ namespace ET
         [MemoryPackOrder(25)]
         public List<int> PetZhuangJiaList { get; set; } = new();
 
-        [MemoryPackOrder(26)]
-        public int RolePetEggUnlockedSlotsCount { get; set; }
-
         public override void Dispose()
         {
             if (!this.IsFromPool)
@@ -11080,7 +11077,6 @@ namespace ET
             this.PetMeleeFubeRewardIds.Clear();
             this.PetEchoList.Clear();
             this.PetZhuangJiaList.Clear();
-            this.RolePetEggUnlockedSlotsCount = default;
 
             ObjectPool.Instance.Recycle(this);
         }
@@ -13666,6 +13662,9 @@ namespace ET
         [MemoryPackOrder(89)]
         public int RpcId { get; set; }
 
+        [MemoryPackOrder(0)]
+        public int Index { get; set; }
+
         public override void Dispose()
         {
             if (!this.IsFromPool)
@@ -13674,6 +13673,7 @@ namespace ET
             }
 
             this.RpcId = default;
+            this.Index = default;
 
             ObjectPool.Instance.Recycle(this);
         }
@@ -13766,7 +13766,7 @@ namespace ET
         public int Error { get; set; }
 
         [MemoryPackOrder(1)]
-        public KeyValuePairLong RolePetEgg { get; set; }
+        public KeyValuePairLong4 RolePetEgg { get; set; }
 
         public override void Dispose()
         {
@@ -13902,7 +13902,7 @@ namespace ET
         public int Error { get; set; }
 
         [MemoryPackOrder(0)]
-        public KeyValuePairLong RolePetEgg { get; set; }
+        public KeyValuePairLong4 RolePetEgg { get; set; }
 
         public override void Dispose()
         {
@@ -14477,7 +14477,7 @@ namespace ET
         public int Error { get; set; }
 
         [MemoryPackOrder(0)]
-        public KeyValuePairLong RolePetEgg { get; set; }
+        public KeyValuePairLong4 RolePetEgg { get; set; }
 
         public override void Dispose()
         {

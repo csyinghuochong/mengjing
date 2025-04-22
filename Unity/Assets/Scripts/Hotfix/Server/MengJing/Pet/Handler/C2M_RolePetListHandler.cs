@@ -14,7 +14,6 @@
             response.PetMingList.AddRange(petComponent.PetMingList);
             response.PetMingPosition.AddRange(petComponent.PetMingPosition);
             response.PetCangKuOpen.AddRange(petComponent.PetCangKuOpen);
-            response.RolePetEggUnlockedSlotsCount = petComponent.RolePetEggUnlockedSlotsCount;
             response.RolePetEggs.AddRange(petComponent.RolePetEggs);
             response.PetFubenInfos.AddRange(petComponent.PetFubenInfos);
             response.PetSkinList.AddRange(petComponent.PetSkinList);

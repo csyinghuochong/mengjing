@@ -14,13 +14,13 @@
                 return;
             }
 
-            if (request.Index + 1 > petComponent.RolePetEggUnlockedSlotsCount)
+            if (petComponent.RolePetEggs[request.Index].Value3 == 0)
             {
                 response.Error = ErrorCode.ERR_ModifyData;
                 return;
             }
             
-            KeyValuePairLong rolePetEgg = petComponent.RolePetEggs[request.Index];
+            KeyValuePairLong4 rolePetEgg = petComponent.RolePetEggs[request.Index];
             if (rolePetEgg.KeyId != 0)
             {
                 return;
