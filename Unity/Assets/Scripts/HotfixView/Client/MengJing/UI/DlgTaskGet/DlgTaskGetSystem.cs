@@ -431,7 +431,7 @@ namespace ET.Client
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
             NumericComponentC numericComponent = unit.GetComponent<NumericComponentC>();
             TaskComponentC taskComponent = self.Root().GetComponent<TaskComponentC>();
-            if (npcId == 20000024) //任务使者：赛利
+            if (npcId == 1008) //主城任务公告面板
             {
                 int weeklyTask = numericComponent.GetAsInt(NumericType.WeeklyTaskId);
                 if (weeklyTask > 0 && taskComponent.GetTaskTypeList(TaskTypeEnum.Weekly).Count == 0)
@@ -446,7 +446,7 @@ namespace ET.Client
                 }
             }
 
-            if (npcId == 20000102) //家族任务
+            if (npcId == 2002) //家族任务
             {
                 int unionTaskId = numericComponent.GetAsInt(NumericType.UnionTaskId);
                 if (unionTaskId > 0 && taskComponent.GetTaskById(unionTaskId) == null)

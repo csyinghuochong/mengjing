@@ -61,7 +61,7 @@ namespace ET.Client
 			NumericComponentC numericComponentS = unit.GetComponent<NumericComponentC>();
 			
 			long remainTimes = numericComponentS.GetAsLong(NumericType.SingleHappyRemainTimes);
-			
+			Log.Debug($"ShowTimes....remainTimes:  {remainTimes}");
 			self.View.E_TextTip_4Text.text = $"{remainTimes}/{GlobalValueConfigCategory.Instance.SingleHappyInitTimes}";
 		}
 
