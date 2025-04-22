@@ -954,12 +954,6 @@ namespace  ET
             return int.Parse(dropList[0].Split(';')[1]);
         }
         
-        public static int GetHappyRecoverTimes(long serverTime, int extendTimes)
-        {
-            DateTime dateTime = TimeInfo.Instance.ToDateTime(serverTime);
-            return math.min(dateTime.Hour, extendTimes);
-        }
-        
         //宠物守护
         public static float GetPetShouHuPro(int mainValue, int fightValue)
         {

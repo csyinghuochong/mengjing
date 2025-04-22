@@ -59,40 +59,41 @@ namespace ET.Client
 		{
 			Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
 			NumericComponentC numericComponentS = unit.GetComponent<NumericComponentC>();
-
-			int mianfeitimes = int.Parse(GlobalValueConfigCategory.Instance.Get(130).Value);
-			int extendTimes =  int.Parse(GlobalValueConfigCategory.Instance.Get(131).Value);
-			int buyTimes = numericComponentS.GetAsInt(NumericType.SingleBuyTimes);
-
-			int moveTimes = numericComponentS.GetAsInt(NumericType.SingleHappyMoveTimes);
-			int recoverTimes = CommonHelp.GetHappyRecoverTimes(TimeHelper.ServerNow(), extendTimes);
-
-			//int canmoveTimes = mianfeitimes + recoverTimes + buyTimes - moveTimes;
-			self.View.E_TextTip_4Text.text = $"{moveTimes}/{mianfeitimes + buyTimes + recoverTimes }";
+			
+			long remainTimes = numericComponentS.GetAsLong(NumericType.SingleHappyRemainTimes);
+			
+			self.View.E_TextTip_4Text.text = $"{remainTimes}/{GlobalValueConfigCategory.Instance.SingleHappyInitTimes}";
 		}
-		
+
+		public static void UpdateCD(this DlgSingleHappyMain self)
+		{
+			self.ShowCD();
+		}
+
 		private static void ShowCD(this DlgSingleHappyMain self)
 		{
 			self.View.E_TextTip_1Text.text = string.Empty;
 			self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
             
-			int extendTimes =  int.Parse(GlobalValueConfigCategory.Instance.Get(131).Value);
+			Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
+			NumericComponentC numericComponentS = unit.GetComponent<NumericComponentC>();
+			int initTimes = GlobalValueConfigCategory.Instance.SingleHappyInitTimes;
+			int remainTimes = numericComponentS.GetAsInt(NumericType.SingleHappyRemainTimes);
 			
-			int recoverTimes = CommonHelp.GetHappyRecoverTimes(TimeHelper.ServerNow(), extendTimes);
-
-			if (extendTimes <= recoverTimes)
+            Log.Debug($"remainTimes:  {initTimes}  {remainTimes}");
+            
+			if (initTimes <= remainTimes)
 			{
 				return;
 			}
 
-			DateTime dateTime = TimeInfo.Instance.ToDateTime(TimeHelper.ServerNow());
-			if (dateTime.Hour >= extendTimes)
-			{
-				return;
-			}
+			long recoverTime = GlobalValueConfigCategory.Instance.SingleHappyrecoverTime;
+			long lastmoveTime =  numericComponentS.GetAsLong(NumericType.SingleHappyLastMoveTime);
 
-			int leftSeond = (60 - dateTime.Minute) * 60 + dateTime.Second;
-			self.RecoverTime = TimeHelper.ServerNow() + leftSeond * TimeHelper.Second;
+			self.RecoverTime = lastmoveTime + recoverTime;  
+			
+			Log.Debug($"self.RecoverTime:  {self.RecoverTime}  {TimeHelper.ServerNow()}   {lastmoveTime}");
+			
 			self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
 			self.Timer = self.Root().GetComponent<TimerComponent>().NewRepeatedTimer(1000, TimerInvokeType.UISingleHappyMoveTimer, self);
 
@@ -108,26 +109,18 @@ namespace ET.Client
 			}
 			else
 			{
-				self.ShowCD();
+				self.View.E_TextTip_1Text.text = string.Empty;
+				self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
 			}
 		}
-
-
+		
 		private static async  ETTask OnuttonMove_1Button(this DlgSingleHappyMain self)
 		{
 			Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
 			NumericComponentC numericComponentS = unit.GetComponent<NumericComponentC>();
 
-			int mianfeitimes = int.Parse(GlobalValueConfigCategory.Instance.Get(130).Value);
-			int extendTimes =  int.Parse(GlobalValueConfigCategory.Instance.Get(131).Value);
-			int buyTimes = numericComponentS.GetAsInt(NumericType.SingleBuyTimes);
-
-			int moveTimes = numericComponentS.GetAsInt(NumericType.SingleHappyMoveTimes);
-			int recoverTimes = CommonHelp.GetHappyRecoverTimes(TimeHelper.ServerNow(), extendTimes);
-
-			int canmoveTimes = mianfeitimes + recoverTimes + buyTimes - moveTimes;
-
-			if (canmoveTimes <= 0)
+			int remainTimes = numericComponentS.GetAsInt(NumericType.SingleHappyRemainTimes);
+			if (remainTimes <= 0)
 			{
 				FlyTipComponent.Instance.ShowFlyTip("当前没有免费的次数！");
 				return;
@@ -202,8 +195,22 @@ namespace ET.Client
 				FlyTipComponent.Instance.ShowFlyTip("钻石不足!");
 				return;
 			}
+			Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
+			NumericComponentC numericComponentC = unit.GetComponent<NumericComponentC>();
+			int remainTimes = numericComponentC.GetAsInt(NumericType.SingleHappyRemainTimes);
+			if (remainTimes + GlobalValueConfigCategory.Instance.SingleHappyBuyAdd > GlobalValueConfigCategory.Instance.SingleHappyInitTimes)
+			{
+				FlyTipComponent.Instance.ShowFlyTip("次数溢出，建议少于5次再购买!");
+				return;
+			}
 
-			
+			int buyTimes = numericComponentC.GetAsInt(NumericType.SingleBuyTimes);
+			if (buyTimes >= GlobalValueConfigCategory.Instance.SingleHappyBuyMax)
+			{
+				FlyTipComponent.Instance.ShowFlyTip("购买次数不足!");
+				return;
+			}
+
 			PopupTipHelp.OpenPopupTip(self.Root(), "系统提示", $"是否花费{buyCost}钻石增加{buyadd}次？", () =>
 			{
 				self.SingleHappyRequestBuyTimes().Coroutine();

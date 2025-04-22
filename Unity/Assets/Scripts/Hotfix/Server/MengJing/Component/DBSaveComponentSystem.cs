@@ -156,6 +156,7 @@ namespace ET.Server
             Unit unit =  self.GetParent<Unit>(); 
             unit.GetComponent<UserInfoComponentS>().Check(1);
             unit.GetComponent<TaskComponentS>().Check(1);
+            unit.GetComponent<HeroDataComponentS>().Check(1);
             
             self.DBInterval++;
             if (self.DBInterval >= 600)

@@ -62,6 +62,8 @@ namespace ET
         /// </summary>
         public  int CommonSeasonDonateGetItem = 601800041;
         
+        public int SingleHappyInitTimes = 0;
+        public long SingleHappyrecoverTime = 0;
         public int SingleHappyBuyCost = 0;
         public int SingleHappyBuyAdd = 0;
         public int SingleHappyBuyMax = 0;
@@ -91,6 +93,8 @@ namespace ET
             CommonSeasonDonateItemId = int.Parse(this.Get(128).Value);
             CommonSeasonDonateGetItem = int.Parse(this.Get(129).Value);
 
+            SingleHappyInitTimes = int.Parse(this.Get(130).Value);
+            SingleHappyrecoverTime = long.Parse(this.Get(131).Value) * TimeHelper.Minute;
             string[] singlehappybuy = this.Get(133).Value.Split(";");
             SingleHappyBuyCost = int.Parse(singlehappybuy[0]);
             SingleHappyBuyAdd = int.Parse(singlehappybuy[1]);

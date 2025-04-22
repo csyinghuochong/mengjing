@@ -10,27 +10,28 @@ namespace ET.Server
         {
             UserInfoComponentS userInfoComponent = unit.GetComponent<UserInfoComponentS>();
             NumericComponentS numericComponentS = unit.GetComponent<NumericComponentS>();
-
-            int mianfeitimes = int.Parse(GlobalValueConfigCategory.Instance.Get(130).Value);
-            int extendTimes =  int.Parse(GlobalValueConfigCategory.Instance.Get(131).Value);
+            
+            int remainTimes = numericComponentS.GetAsInt(NumericType.SingleHappyRemainTimes);
             int buyTimes = numericComponentS.GetAsInt(NumericType.SingleBuyTimes);
-
-            int moveTimes = numericComponentS.GetAsInt(NumericType.SingleHappyMoveTimes);
-            int recoverTimes = CommonHelp.GetHappyRecoverTimes(TimeHelper.ServerNow(), extendTimes);
-
-            int canmoveTimes = mianfeitimes + recoverTimes + buyTimes - moveTimes;
             
             ////1免费移动 2刷新奖励 3购买次数
             if (request.OperatateType == 1)
             {
                 //非免费时间则返回
-                if (canmoveTimes <= 0)
+                if (remainTimes <= 0)
                 {
                     response.Error = ErrorCode.ERR_HappyMove_CD;
                     return;
                 }
 
-                unit.GetComponent<NumericComponentS>().ApplyValue(NumericType.SingleHappyMoveTimes, moveTimes + 1);
+                numericComponentS.ApplyValue(NumericType.SingleHappyRemainTimes, remainTimes - 1);
+                
+                //正在恢复中则不覆盖恢复时间
+                long lastmoveTime = numericComponentS.GetAsLong(NumericType.SingleHappyLastMoveTime);
+                if (TimeHelper.ServerNow() - lastmoveTime > GlobalValueConfigCategory.Instance.SingleHappyrecoverTime)
+                {
+                    numericComponentS.ApplyValue(NumericType.SingleHappyLastMoveTime, TimeHelper.ServerNow());
+                }
             }
             if (request.OperatateType == 2)
             {
@@ -46,14 +47,21 @@ namespace ET.Server
             }
             if (request.OperatateType  == 3)
             {
+                if (buyTimes >= GlobalValueConfigCategory.Instance.SingleHappyBuyMax)
+                {
+                    response.Error = ErrorCode.ERR_TimesIsNot;
+                    return;
+                }
+                
                 int buycost = GlobalValueConfigCategory.Instance.SingleHappyBuyCost;
+                int buyadd = GlobalValueConfigCategory.Instance.SingleHappyBuyAdd;
                 if (userInfoComponent.UserInfo.Diamond < buycost)
                 {
                     response.Error = ErrorCode.ERR_DiamondNotEnoughError;
                     return;
                 }
                 userInfoComponent.UpdateRoleMoneySub(UserDataType.Diamond, (buycost* -1).ToString(), true, ItemGetWay.HappyMove);
-                unit.GetComponent<NumericComponentS>().ApplyValue(NumericType.SingleBuyTimes, buyTimes + 1);
+                unit.GetComponent<NumericComponentS>().ApplyValue(NumericType.SingleBuyTimes, buyTimes + buyadd);
             }
 
             if (request.OperatateType == 1)

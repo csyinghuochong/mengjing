@@ -141,6 +141,7 @@ namespace ET.Server
             else
             {
                 Log.Debug($"OnZeroClockUpdate [数据初始化]: {unit.Id}");
+                unit.GetComponent<HeroDataComponentS>().OnInit();
                 unit.GetComponent<TaskComponentS>().OnZeroClockUpdate(false);
             }
             

@@ -102,6 +102,34 @@ namespace ET.Server
              }
          }
 
+         public static void Check(this HeroDataComponentS self,  int second)
+         {
+             Unit unit = self.GetParent<Unit>();
+             NumericComponentS numericComponentS = unit.GetComponent<NumericComponentS>();
+
+             int initTimes = GlobalValueConfigCategory.Instance.SingleHappyInitTimes;
+             int remainTimes = numericComponentS.GetAsInt(NumericType.SingleHappyRemainTimes);
+             if (initTimes <= remainTimes)
+             {
+                 return;
+             }
+
+             long lastmoveTime =  numericComponentS.GetAsLong(NumericType.SingleHappyLastMoveTime);
+             long passTime = TimeHelper.ServerNow() - lastmoveTime;
+
+             long addTimes = passTime / GlobalValueConfigCategory.Instance.SingleHappyrecoverTime;
+
+             if (addTimes <= 0)
+             {
+                 return;
+             }
+
+             long leftTime = passTime % GlobalValueConfigCategory.Instance.SingleHappyrecoverTime;
+             lastmoveTime += leftTime;
+             numericComponentS.ApplyValue(NumericType.SingleHappyRemainTimes, math.min(addTimes + remainTimes,initTimes ));
+             numericComponentS.ApplyValue(NumericType.SingleHappyLastMoveTime, lastmoveTime);
+         }
+
          public static void OnLogin(this HeroDataComponentS self, int robotId)
          {
              Unit unit = self.GetParent<Unit>();
@@ -239,6 +267,14 @@ namespace ET.Server
              keylist.Add(ntype);
          }
 
+         public static void OnInit(this HeroDataComponentS self)
+         {
+             Unit unit = self.GetParent<Unit>();
+             int inittimes = GlobalValueConfigCategory.Instance.SingleHappyInitTimes;
+             NumericComponentS numericComponent = unit.GetComponent<NumericComponentS>();
+                          numericComponent.ApplyValue(NumericType.SingleHappyRemainTimes, inittimes, false);
+         }
+
          /// <summary>
          /// 重置。隔天登录或者零点刷新
          /// </summary>
@@ -306,7 +342,8 @@ namespace ET.Server
              self.HeroDataApplyValue(NumericType.ItemXiLianNumber, 0, ks);
              
              self.HeroDataApplyValue(NumericType.SingleHappyCellIndex, 0, ks);
-             self.HeroDataApplyValue(NumericType.SingleHappyMoveTimes, 0, ks);
+             int inittimes = GlobalValueConfigCategory.Instance.SingleHappyInitTimes;
+             self.HeroDataApplyValue(NumericType.SingleHappyRemainTimes, inittimes, ks);
              
              int lirun =  (int)(numericComponent.GetAsInt(NumericType.InvestTotal) * 0.25f);
              self.HeroDataApplyValue(NumericType.InvestTotal, numericComponent.GetAsInt(NumericType.InvestTotal) + lirun, ks);
