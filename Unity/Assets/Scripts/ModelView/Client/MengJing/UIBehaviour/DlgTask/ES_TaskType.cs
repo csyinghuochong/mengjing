@@ -9,10 +9,11 @@ namespace ET.Client
 	public  class ES_TaskType : Entity,IAwake<Transform>,IDestroy,IUILogic
 	{
 		public float Height;
-		public Dictionary<int, EntityRef<Scroll_Item_TaskTypeItem>> ScrollItemTaskTypeItems;
+		public Dictionary<int, EntityRef<Scroll_Item_TaskTypeItem>> ScrollItemTaskTypeItems = new();
 		public List<TaskPro> ShowTaskPros = new();
 		public bool IsExpand { get; set; }
 		public int TaskType;
+		public List<string> AssetList { get; set; } = new();
 		
 		public Image E_Bg1Image
      	{
@@ -116,7 +117,7 @@ namespace ET.Client
      		}
      	}
 
-		public LoopVerticalScrollRect E_TaskTypeItemsLoopVerticalScrollRect
+		public RectTransform EG_TaskTypeItemsRectTransform
      	{
      		get
      		{
@@ -125,11 +126,11 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_E_TaskTypeItemsLoopVerticalScrollRect == null )
+     			if( this.m_E_TaskTypeItemsRectTransform == null )
      			{
-		    		this.m_E_TaskTypeItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<LoopVerticalScrollRect>(this.uiTransform.gameObject,"E_TaskTypeItems");
+		    		this.m_E_TaskTypeItemsRectTransform = UIFindHelper.FindDeepChild<RectTransform>(this.uiTransform.gameObject,"EG_TaskTypeItems");
      			}
-     			return this.m_E_TaskTypeItemsLoopVerticalScrollRect;
+     			return this.m_E_TaskTypeItemsRectTransform;
      		}
      	}
 
@@ -153,7 +154,7 @@ namespace ET.Client
 			this.m_E_TaskTypeName2Text = null;
 			this.m_E_SelectButton = null;
 			this.m_E_SelectImage = null;
-			this.m_E_TaskTypeItemsLoopVerticalScrollRect = null;
+			this.m_E_TaskTypeItemsRectTransform = null;
 			this.uiTransform = null;
 		}
 
@@ -163,7 +164,7 @@ namespace ET.Client
 		private Text m_E_TaskTypeName2Text = null;
 		private Button m_E_SelectButton = null;
 		private Image m_E_SelectImage = null;
-		private LoopVerticalScrollRect m_E_TaskTypeItemsLoopVerticalScrollRect = null;
+		private RectTransform m_E_TaskTypeItemsRectTransform = null;
 		public Transform uiTransform = null;
 	}
 }

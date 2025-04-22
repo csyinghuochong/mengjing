@@ -20,13 +20,20 @@ namespace ET.Client
             self.E_Bg2Image.gameObject.SetActive(false);
             self.E_TaskTypeName1Text.gameObject.SetActive(true);
             self.E_TaskTypeName2Text.gameObject.SetActive(false);
-
-            self.E_TaskTypeItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnTaskTypeItemsRefresh);
         }
 
         [EntitySystem]
         private static void Destroy(this ES_TaskType self)
         {
+            ResourcesLoaderComponent resourcesLoaderComponent = self.Root().GetComponent<ResourcesLoaderComponent>();
+            for (int i = 0; i < self.AssetList.Count; i++)
+            {
+                resourcesLoaderComponent.UnLoadAsset(self.AssetList[i]);
+            }
+
+            self.AssetList.Clear();
+            self.AssetList = null;
+            
             self.DestroyWidget();
         }
 
@@ -81,34 +88,20 @@ namespace ET.Client
             self.E_Bg2Image.gameObject.SetActive(false);
             self.E_TaskTypeName1Text.gameObject.SetActive(true);
             self.E_TaskTypeName2Text.gameObject.SetActive(false);
+            self.EG_TaskTypeItemsRectTransform.gameObject.SetActive(false);
             self.uiTransform.GetComponent<RectTransform>().sizeDelta = new Vector2(710, self.Height);
-            self.E_TaskTypeItemsLoopVerticalScrollRect.transform.GetComponent<RectTransform>().sizeDelta = new Vector2(710, 1f);
+
             // 刷新一下父物体
             LayoutRebuilder.ForceRebuildLayoutImmediate(self.uiTransform.parent.GetComponent<RectTransform>());
         }
 
-        private static void OnTaskTypeItemsRefresh(this ES_TaskType self, Transform transform, int index)
+        private static void UpdateHighlight(this ES_TaskType self, int taskId)
         {
             foreach (Scroll_Item_TaskTypeItem item in self.ScrollItemTaskTypeItems.Values)
             {
-                if (item.uiTransform == transform)
+                if (item.uiTransform != null)
                 {
-                    item.uiTransform = null;
-                }
-            }
-            
-            Scroll_Item_TaskTypeItem scrollItemTaskTypeItem = self.ScrollItemTaskTypeItems[index].BindTrans(transform);
-            scrollItemTaskTypeItem.Refresh(self.ShowTaskPros[index], self.UpdateHighlight);
-        }
-
-        private static void UpdateHighlight(this ES_TaskType self, int taskId)
-        {
-            for (int i = 0; i < self.ScrollItemTaskTypeItems.Keys.Count - 1; i++)
-            {
-                Scroll_Item_TaskTypeItem scrollItemTaskTypeItem = self.ScrollItemTaskTypeItems[i];
-                if (scrollItemTaskTypeItem.uiTransform != null)
-                {
-                    scrollItemTaskTypeItem.UpdateHighlight(taskId);
+                    item.UpdateHighlight(taskId);
                 }
             }
         }
@@ -130,14 +123,43 @@ namespace ET.Client
                 self.ShowTaskPros.AddRange(taskComponentC.GetTaskTypeList(TaskTypeEnum.Ring));
                 self.ShowTaskPros.AddRange(taskComponentC.GetTaskTypeList(TaskTypeEnum.Weekly));
             }
+            
+            self.EG_TaskTypeItemsRectTransform.gameObject.SetActive(true);
+            ResourcesLoaderComponent resourcesLoaderComponent = self.Root().GetComponent<ResourcesLoaderComponent>();
+            for (int i = 0; i < self.ShowTaskPros.Count; i++)
+            {
+                if (!self.ScrollItemTaskTypeItems.ContainsKey(i))
+                {
+                    Scroll_Item_TaskTypeItem item = self.AddChild<Scroll_Item_TaskTypeItem>();
+                    string path = "Assets/Bundles/UI/Item/Item_TaskTypeItem.prefab";
+                    if (!self.AssetList.Contains(path))
+                    {
+                        self.AssetList.Add(path);
+                    }
 
-            self.AddUIScrollItems(ref self.ScrollItemTaskTypeItems, self.ShowTaskPros.Count);
-            self.E_TaskTypeItemsLoopVerticalScrollRect.SetVisible(true, self.ShowTaskPros.Count);
+                    GameObject prefab = resourcesLoaderComponent.LoadAssetSync<GameObject>(path);
+                    GameObject go = UnityEngine.Object.Instantiate(prefab, self.EG_TaskTypeItemsRectTransform);
+                    item.BindTrans(go.transform);
+                    self.ScrollItemTaskTypeItems.Add(i, item);
+                }
 
+                Scroll_Item_TaskTypeItem scrollItemTaskTypeItem = self.ScrollItemTaskTypeItems[i];
+                scrollItemTaskTypeItem.uiTransform.gameObject.SetActive(true);
+                scrollItemTaskTypeItem.Refresh(self.ShowTaskPros[i], self.UpdateHighlight);
+            }
+
+            if (self.ScrollItemTaskTypeItems.Count > self.ShowTaskPros.Count)
+            {
+                for (int i = self.ShowTaskPros.Count; i < self.ScrollItemTaskTypeItems.Count; i++)
+                {
+                    Scroll_Item_TaskTypeItem scrollItemTaskTypeItem = self.ScrollItemTaskTypeItems[i];
+                    scrollItemTaskTypeItem.uiTransform.gameObject.SetActive(false);
+                }
+            }
+            
             // 设置高度
             self.uiTransform.GetComponent<RectTransform>().sizeDelta = new Vector2(710, self.Height + 90 * self.ShowTaskPros.Count);
-            self.E_TaskTypeItemsLoopVerticalScrollRect.transform.GetComponent<RectTransform>().sizeDelta =
-                    new Vector2(700, 1f + 90 * self.ShowTaskPros.Count);
+
             // 刷新一下父物体
             LayoutRebuilder.ForceRebuildLayoutImmediate(self.uiTransform.parent.GetComponent<RectTransform>());
         }
