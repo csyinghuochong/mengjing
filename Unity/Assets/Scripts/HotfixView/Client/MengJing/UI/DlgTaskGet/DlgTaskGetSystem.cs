@@ -67,16 +67,16 @@ namespace ET.Client
         public static void OnTaskGet(this DlgTaskGet self)
         {
             bool update = self.UpdataTask();
-            // if (!update)
-            // {
-            //     self.OnImg_buttonButton();
-            // }
+            if (!update)
+            {
+                self.OnImg_buttonButton();
+            }
         }
 
         public static void OnImg_buttonButton(this DlgTaskGet self)
         {
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_Guide);
-            self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_TaskGet);
+            // self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_TaskGet);
         }
 
         public static async ETTask OnButtonExpDuiHuanButton(this DlgTaskGet self)
