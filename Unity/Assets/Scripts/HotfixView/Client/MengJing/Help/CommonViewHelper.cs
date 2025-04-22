@@ -263,6 +263,7 @@ namespace ET.Client
             {
                 effect.toneFilter = ToneFilter.None;
             }
+            effect.SetVerticesDirty();
         }
 
         public static void SetImageGrayAllChild(Scene root, GameObject obj, bool val)
@@ -337,6 +338,7 @@ namespace ET.Client
                     tweener.enabled = false;
                 }
             }
+            effect.SetVerticesDirty();
         }
         
         public static void SetRawImageGray(Scene root, GameObject obj, bool val)
@@ -366,6 +368,7 @@ namespace ET.Client
             {
                 effect.toneFilter = ToneFilter.None;
             }
+            effect.SetVerticesDirty();
         }
 
         public static void CrossFadeAlpha(Transform transform, float alpha, float duration)
