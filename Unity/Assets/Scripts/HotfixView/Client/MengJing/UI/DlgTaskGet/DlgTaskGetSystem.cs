@@ -433,11 +433,11 @@ namespace ET.Client
             TaskComponentC taskComponent = self.Root().GetComponent<TaskComponentC>();
             if (npcId == 1008) //主城任务公告面板
             {
-                int weeklyTask = numericComponent.GetAsInt(NumericType.WeeklyTaskId);
-                if (weeklyTask > 0 && taskComponent.GetTaskTypeList(TaskTypeEnum.Weekly).Count == 0)
-                {
-                    addTaskids.Add(weeklyTask);
-                }
+                // int weeklyTask = numericComponent.GetAsInt(NumericType.WeeklyTaskId);
+                // if (weeklyTask > 0 && taskComponent.GetTaskTypeList(TaskTypeEnum.Weekly).Count == 0)
+                // {
+                //     addTaskids.Add(weeklyTask);
+                // }
 
                 int dailyTaskId = numericComponent.GetAsInt(NumericType.DailyTaskID);
                 if (dailyTaskId > 0 && taskComponent.GetTaskById(dailyTaskId) == null)
