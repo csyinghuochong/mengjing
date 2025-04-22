@@ -202,6 +202,7 @@ namespace ET.Client
                 effect.outline = 1;
                 effect.outlineColor = new Color(181 / 255f, 250 / 255f, 130 / 255f, 255 / 255f);
                 effect.outlineWidth = 0.2f;
+                effect.outlineVisibility = Visibility.AlwaysOnTop;
 
                 // 发出微弱的光
                 // effect.glow = 1f;
