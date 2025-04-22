@@ -84,6 +84,7 @@ namespace ET.Server
             
             if (exploreLuck >= 100)
             {
+                rewardItems.RemoveAt(rewardItems.Count - 1);
                 rewardItems.Add( new RewardItem(){ ItemID =1000035, ItemNum  = 1} );
                 unit.GetComponent<NumericComponentS>().ApplyValue(NumericType.PetExploreLuckly, 0);
                 exploreLuck = 0;
