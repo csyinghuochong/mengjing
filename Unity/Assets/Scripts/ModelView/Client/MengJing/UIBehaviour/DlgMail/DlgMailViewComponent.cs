@@ -230,6 +230,18 @@ namespace ET.Client
      			return this.m_E_ButtonGetImage;
      		}
      	}
+		
+		public Transform UITransform
+		{
+			get
+			{
+				return this.uiTransform;
+			}
+			set
+			{
+				this.uiTransform = value;
+			}
+		}
 
 		public void DestroyWidget()
 		{

@@ -77,11 +77,14 @@ namespace ET.Client
             if (mailComponent.SelectMail == null)
             {
                 self.View.EG_MailContentRectTransform.gameObject.SetActive(false);
+                self.View.UITransform.Find("Left").gameObject.SetActive(false);
                 self.View.E_NoMailText.gameObject.SetActive(true);
+                
                 return;
             }
 
             self.View.EG_MailContentRectTransform.gameObject.SetActive(true);
+            self.View.UITransform.Find("Left").gameObject.SetActive(true);
             self.View.E_NoMailText.gameObject.SetActive(false);
 
             if (self.ScrollItemMailItems != null)
@@ -140,6 +143,7 @@ namespace ET.Client
             if (mailInfos.Count == 0)
             {
                 mailComponent.SelectMail = null;
+                self.View.UITransform.Find("Left").gameObject.SetActive(false);
                 self.View.EG_MailContentRectTransform.gameObject.SetActive(false);
                 self.View.E_NoMailText.gameObject.SetActive(true);
 
@@ -148,6 +152,7 @@ namespace ET.Client
                 return;
             }
 
+            self.View.UITransform.Find("Left").gameObject.SetActive(true);
             self.View.EG_MailContentRectTransform.gameObject.SetActive(true);
             self.View.E_NoMailText.gameObject.SetActive(false);
 
