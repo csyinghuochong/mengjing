@@ -131,6 +131,10 @@ namespace ET.Client
             self.E_Text_Attribute1Text.text = self.GetAttributeDesc(shouJiConfig.ProList1_Type, shouJiConfig.ProList1_Value);
             self.E_Text_Attribute2Text.text = self.GetAttributeDesc(shouJiConfig.ProList2_Type, shouJiConfig.ProList2_Value);
             self.E_Text_Attribute3Text.text = self.GetAttributeDesc(shouJiConfig.ProList3_Type, shouJiConfig.ProList3_Value);
+            
+            CommonViewHelper.SetImageGray(self.Root(), self.Button_Close[0], starNum < shouJiConfig.ProList1_StartNum);
+            CommonViewHelper.SetImageGray(self.Root(), self.Button_Close[1], starNum < shouJiConfig.ProList2_StartNum);
+            CommonViewHelper.SetImageGray(self.Root(), self.Button_Close[2], starNum < shouJiConfig.ProList3_StartNum);
         }
 
         private static string GetAttributeDesc(this ES_ShouJiTreasure self, int[] type, long[] value)

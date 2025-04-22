@@ -20,7 +20,7 @@ namespace ET.Client
             self.UpdateToggleGroupInfo();
 
             self.Button_Open = new GameObject[3];
-            self.Button_Open[2] = self.E_Img_Chest_2_OpenImage.gameObject;
+            self.Button_Open[2] = self.E_Img_Chest_3_OpenImage.gameObject;
             self.Button_Open[1] = self.E_Img_Chest_2_OpenImage.gameObject;
             self.Button_Open[0] = self.E_Img_Chest_1_OpenImage.gameObject;
 
@@ -213,6 +213,16 @@ namespace ET.Client
             self.E_Text_Attribute1Text.text = ItemViewHelp.GetAttributeDesc(shoujiComponent.GetChapterPro(shouJiConfig.Id, 1));
             self.E_Text_Attribute2Text.text = ItemViewHelp.GetAttributeDesc(shoujiComponent.GetChapterPro(shouJiConfig.Id, 2));
             self.E_Text_Attribute3Text.text = ItemViewHelp.GetAttributeDesc(shoujiComponent.GetChapterPro(shouJiConfig.Id, 3));
+
+            // ShouJiChapterInfo shouJiChapterInfo = shoujiComponent.GetShouJiChapterInfo(self.ChapterId);
+            // if (shouJiChapterInfo == null)
+            // {
+            //     return;
+            // }
+            //
+            // CommonViewHelper.SetImageGray(self.Root(), self.Button_Close[0], shouJiChapterInfo.StarNum < shouJiConfig.ProList1_StartNum);
+            // CommonViewHelper.SetImageGray(self.Root(), self.Button_Close[1], shouJiChapterInfo.StarNum < shouJiConfig.ProList2_StartNum);
+            // CommonViewHelper.SetImageGray(self.Root(), self.Button_Close[2], shouJiChapterInfo.StarNum < shouJiConfig.ProList3_StartNum);
         }
     }
 }
