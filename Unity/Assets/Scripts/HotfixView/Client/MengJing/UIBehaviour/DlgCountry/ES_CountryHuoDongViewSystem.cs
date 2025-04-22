@@ -19,7 +19,7 @@ namespace ET.Client
             self.E_Btn_HuoDong_XiaoGuiButton.AddListener(self.OnBtn_HuoDong_XiaoGuiButton);
             
             int openDay = TimeHelper.GetServeOpenDay( self.Root().GetComponent<PlayerInfoComponent>().ServerItem.ServerOpenTime);
-            self.EG_UICountryTaskItem_0RectTransform.gameObject.SetActive(openDay <= 7 && false);
+            self.EG_UICountryTaskItem_0RectTransform.gameObject.SetActive(openDay <= 7 );
 
             Transform transTaskListNodeform =  self.UITransform.Find("Right/ScrollView_1/Viewport/TaskListNode");
             transTaskListNodeform.Find("UICountryTaskItem_1").gameObject.SetActive(false);

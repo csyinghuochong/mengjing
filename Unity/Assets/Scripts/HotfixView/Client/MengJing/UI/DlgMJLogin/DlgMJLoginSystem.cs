@@ -10,8 +10,8 @@ namespace ET.Client
             self.View.E_LoginButton.AddListenerAsync(self.OnLoginButton);
             self.View.E_SelectBtnButton.AddListener(self.OnSelectBtnButton);
 
-            self.View.E_TextButton_1Button.AddListener(() => { self.View.EG_YinSiXieYiRectTransform.gameObject.SetActive(true); });
-            self.View.E_TextButton_2Button.AddListener(() => { self.View.EG_YongHuXieYiRectTransform.gameObject.SetActive(true); });
+            self.View.E_TextButton_1Button.AddListener(() => { self.View.EG_YongHuXieYiRectTransform.gameObject.SetActive(true);  });
+            self.View.E_TextButton_2Button.AddListener(() => { self.View.EG_YinSiXieYiRectTransform.gameObject.SetActive(true); });
             self.View.E_YinSiXieYiCloseButton.AddListener(() => { self.View.EG_YinSiXieYiRectTransform.gameObject.SetActive(false); });
             self.View.E_YongHuXieYiCloseButton.AddListener(() => { self.View.EG_YongHuXieYiRectTransform.gameObject.SetActive(false); });
             
