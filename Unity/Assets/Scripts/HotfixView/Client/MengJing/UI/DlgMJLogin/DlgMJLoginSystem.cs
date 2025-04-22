@@ -1,4 +1,6 @@
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.UIElements;
 
 namespace ET.Client
 {
@@ -23,7 +25,7 @@ namespace ET.Client
 
             self.View.E_TextYinSiText.gameObject.SetActive(false);
             UILoginHelper.ShowTextList(self.View.E_TextYinSiText.gameObject, GlobalHelp.GetPlatform());
-
+          
             self.RequestServerList().Coroutine();
 
             // if (string.IsNullOrEmpty(PlayerPrefsHelp.GetString("UIYinSi0627")))
@@ -63,7 +65,6 @@ namespace ET.Client
             }
 
             self.OnSelectServer(serverItem);
-
             //如果之前登陆过游戏，记录一下服务器id. serverItem = ServerHelper.GetServerItem(oldid);
         }
 
