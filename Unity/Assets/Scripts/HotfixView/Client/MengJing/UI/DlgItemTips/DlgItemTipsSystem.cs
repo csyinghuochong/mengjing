@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -122,11 +123,8 @@ namespace ET.Client
             {
                 using (zstring.Block())
                 {
-                    using (zstring.Block())
-                    {
-                        self.View.E_ItemDesText.GetComponent<Text>().text =
-                                zstring.Format("{0}\n\n鉴定符品质:{1}\n品质越高,鉴定出极品的概率越高。\n鉴定符品质与制造者技巧值相关。", itemDes, bagInfo.ItemPar);
-                    }
+                    string itempar = string.IsNullOrEmpty(bagInfo.ItemPar) ? " " : $"鉴定符品质:{bagInfo.ItemPar}"; 
+                    self.View.E_ItemDesText.GetComponent<Text>().text =zstring.Format("{0}\n\n{1}\n品质越高,鉴定出极品的概率越高。\n鉴定符品质与制造者技巧值相关。", itemDes, itempar);
                 }
             }
 
