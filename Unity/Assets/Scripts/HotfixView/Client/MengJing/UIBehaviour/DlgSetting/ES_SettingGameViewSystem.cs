@@ -310,9 +310,9 @@ namespace ET.Client
             PlayerPrefsHelp.SetFloat(PlayerPrefsHelp.OffsetPostion_Y, PlayerPrefsHelp.OffsetPostion_Y_Default);
             PlayerPrefsHelp.SetFloat(PlayerPrefsHelp.OffsetPostion_Z, PlayerPrefsHelp.OffsetPostion_Z_Default);
 
-            self.EG_LenDepthSetRectTransform.GetComponentInChildren<Slider>().SetValueWithoutNotify(0.4f);
-            self.EG_CameraHorizontalOffsetRectTransform.GetComponentInChildren<Slider>().SetValueWithoutNotify(0.5f);
-            self.EG_CameraVerticalOffsetRectTransform.GetComponentInChildren<Slider>().SetValueWithoutNotify(0.5f);
+            self.EG_LenDepthSetRectTransform.GetComponentInChildren<Slider>().SetValueWithoutNotify((PlayerPrefsHelp.LenDepth_Default - 0.1f) / 2);
+            self.EG_CameraHorizontalOffsetRectTransform.GetComponentInChildren<Slider>().SetValueWithoutNotify((PlayerPrefsHelp.CameraHorizontalOffset_Default + 4) / 8);
+            self.EG_CameraVerticalOffsetRectTransform.GetComponentInChildren<Slider>().SetValueWithoutNotify((PlayerPrefsHelp.CameraVerticalOffset_Default + 4) / 8);
             
             self.EG_RotaAngleSetRectTransform.Find("On").gameObject.SetActive(false);
             self.EG_RotaAngleSetRectTransform.Find("Off").gameObject.SetActive(true);
