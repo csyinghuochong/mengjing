@@ -76,7 +76,7 @@ namespace ET.Client
         public static void OnImg_buttonButton(this DlgTaskGet self)
         {
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_Guide);
-            // self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_TaskGet);
+            self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_TaskGet);
         }
 
         public static async ETTask OnButtonExpDuiHuanButton(this DlgTaskGet self)
@@ -654,6 +654,10 @@ namespace ET.Client
 
         public static void OnButtonReturnButton(this DlgTaskGet self)
         {
+            if (self.IsDisposed)
+            {
+                return;
+            }
             self.View.E_ButtonReturnButton.gameObject.SetActive(false);  
             self.View.E_TaskGetItemsLoopVerticalScrollRect.gameObject.SetActive(true);
             self.View.EG_TaskDesc.gameObject.SetActive(false);
