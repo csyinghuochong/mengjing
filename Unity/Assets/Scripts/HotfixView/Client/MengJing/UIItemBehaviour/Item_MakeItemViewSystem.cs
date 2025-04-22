@@ -42,7 +42,7 @@ namespace ET.Client
             self.E_ImageQualityImage.sprite = sp2;
 
             self.E_Lab_PetNameText.text = itemconfig.ItemName;
-            self.E_Lab_PetNameText.color = FunctionUI.QualityReturnColorDi(itemconfig.ItemQuality);
+            self.E_Lab_PetNameText.color = FunctionUI.QualityReturnColor(itemconfig.ItemQuality);
         }
 
         public static void SetClickAction(this Scroll_Item_MakeItem self, Action<int> action)
