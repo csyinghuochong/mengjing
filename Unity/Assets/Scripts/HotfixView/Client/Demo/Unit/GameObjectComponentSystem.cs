@@ -579,7 +579,11 @@ namespace ET.Client
                     unit.AddComponent<UIPlayerHpComponent>();
                     unit.GetComponent<BuffManagerComponentC>()?.InitBuff();
                     unit.GetComponent<SkillManagerComponentC>()?.InitSkill();
-                    self.OnUpdateHorse();
+
+                    if (SceneConfigHelper.IsCanRideHorse(mapComponent.MapType))
+                    {
+                        self.OnUpdateHorse();
+                    }
 
                     int cardtransform = numericComponent.GetAsInt(NumericType.CardTransform);
                     int runmonsterId = numericComponent.GetAsInt(NumericType.RunRaceTransform); 

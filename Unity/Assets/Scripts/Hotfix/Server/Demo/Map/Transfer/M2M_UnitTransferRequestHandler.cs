@@ -378,8 +378,7 @@ namespace ET.Server
           
             TransferHelper.AfterTransfer(unit, request.SceneType);
             TransferHelper.RemoveStall(unit);
-            
-            if (request.SceneType != MapTypeEnum.RunRace)
+            if (SceneConfigHelper.IsCanRideHorse(request.SceneType))
             {
                 unit.GetComponent<BuffManagerComponentS>().InitBuff(request.SceneType);
                 unit.GetComponent<SkillPassiveComponent>().Reset();
@@ -387,7 +386,7 @@ namespace ET.Server
                 unit.OnUpdateHorseRide(0);
                 unit.TriggerTeamBuff(request.SceneType);
             }
-            
+
             // 解锁location，可以接收发给Unit的消息
             await scene.Root().GetComponent<LocationProxyComponent>().UnLock(LocationType.Unit, unit.Id, request.OldActorId, unit.GetActorId());
         }

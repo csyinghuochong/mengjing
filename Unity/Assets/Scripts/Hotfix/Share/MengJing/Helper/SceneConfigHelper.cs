@@ -49,6 +49,13 @@ namespace ET
             return sceneList;
         }
 
+        public static bool IsCanRideHorse(int sceneTypeEnum)
+        {
+            return (sceneTypeEnum != MapTypeEnum.RunRace
+                && sceneTypeEnum != MapTypeEnum.Happy
+                && sceneTypeEnum != MapTypeEnum.SingleHappy);
+        }
+
         /// <summary>
         /// 单人副本
         /// </summary>
