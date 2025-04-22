@@ -23,8 +23,6 @@ namespace ET.Server
                     response.Error = ErrorCode.ERR_HappyMove_CD;
                     return;
                 }
-
-                numericComponentS.ApplyValue(NumericType.SingleHappyRemainTimes, remainTimes - 1);
                 
                 //正在恢复中则不覆盖恢复时间
                 long lastmoveTime = numericComponentS.GetAsLong(NumericType.SingleHappyLastMoveTime);
@@ -32,6 +30,8 @@ namespace ET.Server
                 {
                     numericComponentS.ApplyValue(NumericType.SingleHappyLastMoveTime, TimeHelper.ServerNow());
                 }
+                
+                numericComponentS.ApplyValue(NumericType.SingleHappyRemainTimes, remainTimes - 1);
             }
             if (request.OperatateType == 2)
             {
