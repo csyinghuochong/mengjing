@@ -62,7 +62,6 @@ namespace ET.Client
             self.AssetList.Clear();
             self.AssetList = null;
             self.DestroyWidget();
-            self.DestroyWidget();
         }
 
         public static void OnInitTypeList(this ES_ShouJiTreasure self)

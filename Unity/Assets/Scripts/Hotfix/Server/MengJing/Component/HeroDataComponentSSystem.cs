@@ -344,6 +344,7 @@ namespace ET.Server
              self.HeroDataApplyValue(NumericType.SingleHappyCellIndex, 0, ks);
              int inittimes = GlobalValueConfigCategory.Instance.SingleHappyInitTimes;
              self.HeroDataApplyValue(NumericType.SingleHappyRemainTimes, inittimes, ks);
+             self.HeroDataApplyValue(NumericType.SingleBuyTimes, 0, ks);
              
              int lirun =  (int)(numericComponent.GetAsInt(NumericType.InvestTotal) * 0.25f);
              self.HeroDataApplyValue(NumericType.InvestTotal, numericComponent.GetAsInt(NumericType.InvestTotal) + lirun, ks);
