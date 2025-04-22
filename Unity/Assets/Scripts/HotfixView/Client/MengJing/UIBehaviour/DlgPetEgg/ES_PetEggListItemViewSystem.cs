@@ -54,7 +54,7 @@ namespace ET.Client
 
         private static void OnOpenSlotButton(this ES_PetEggListItem self)
         {
-            self.GetParent<ES_PetEggList>().OnOpenSlotButton();
+            self.GetParent<ES_PetEggList>().OnOpenSlotButton(self.Index);
         }
         
         private static void OnShowPetEggListButton(this ES_PetEggListItem self)
@@ -120,17 +120,16 @@ namespace ET.Client
             self.E_ButtonGetButton.gameObject.SetActive(true);
         }
 
-        public static void OnUpdateUI(this ES_PetEggListItem self, KeyValuePairLong rolePetEgg, int index)
+        public static void OnUpdateUI(this ES_PetEggListItem self, KeyValuePairLong4 rolePetEgg, int index)
         {
             self.Index = index;
             self.RolePetEgg = rolePetEgg;
 
-            if (self.Index + 1 > self.Root().GetComponent<PetComponentC>().RolePetEggUnlockedSlotsCount)
+            if (rolePetEgg.Value3 == 0)
             {
                 self.EG_Node0RectTransform.gameObject.SetActive(true);
-                PetComponentC petComponent = self.Root().GetComponent<PetComponentC>();
                 string[] costItemsList = GlobalValueConfigCategory.Instance.Get(135).Value.Split('@');
-                string[] costItems = costItemsList[petComponent.RolePetEggUnlockedSlotsCount].Split(';');
+                string[] costItems = costItemsList[index].Split(';');
                 string itemName = ItemConfigCategory.Instance.Get(int.Parse(costItems[0])).ItemName;
                 string itemNum = costItems[1];
                 self.E_Text_OpenSlotValueText.text = itemNum;

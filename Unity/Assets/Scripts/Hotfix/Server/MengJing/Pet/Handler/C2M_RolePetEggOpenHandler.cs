@@ -9,7 +9,7 @@ namespace ET.Server
         protected override async ETTask Run(Unit unit, C2M_RolePetEggOpen request, M2C_RolePetEggOpen response)
         {
             PetComponentS petComponent = unit.GetComponent<PetComponentS>();
-            KeyValuePairLong rolePetEgg = petComponent.RolePetEggs[request.Index];
+            KeyValuePairLong4 rolePetEgg = petComponent.RolePetEggs[request.Index];
             if (rolePetEgg.KeyId == 0)
             {
                 return;
