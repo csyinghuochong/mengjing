@@ -86,7 +86,7 @@ namespace ET.Client
             { ErrorCode.ERR_WarehouseIsFull, "仓库已满" },
             { ErrorCode.ERR_CreateRoleName, "角色名非法!" },
             { ErrorCode.ERR_RoleNameRepeat, "角色名重复!" },
-            { ErrorCode.ERR_ShuLianDuNotEnough, "当前制造需求熟练度不足!" },
+            { ErrorCode.ERR_ShuLianDuNotEnough, "当前制造需求技巧值不足!" },
             { ErrorCode.ERR_EquipType, "装备穿戴类型不符!" },
             { ErrorCode.ERR_GemNoError, "宝石一旦镶嵌无法卸载!" },
             { ErrorCode.ERR_GemShiShiNumFull, "史诗宝石最多可镶嵌4个!" },

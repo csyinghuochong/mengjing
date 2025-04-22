@@ -345,7 +345,7 @@ namespace ET.Client
             {
                 using (zstring.Block())
                 {
-                    self.E_Lab_ShuLianShowText.text = zstring.Format("熟练度:{0}-{1}点 上限:{2}点", equipMakeConfig.ProficiencyValue[0],
+                    self.E_Lab_ShuLianShowText.text = zstring.Format("技巧值:{0}-{1}点 上限:{2}点", equipMakeConfig.ProficiencyValue[0],
                         equipMakeConfig.ProficiencyValue[1], equipMakeConfig.ProficiencyMax);
                 }
             }

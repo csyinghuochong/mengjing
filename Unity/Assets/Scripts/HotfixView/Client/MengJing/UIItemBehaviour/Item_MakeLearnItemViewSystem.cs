@@ -51,7 +51,7 @@ namespace ET.Client
             // int nowShuLianDu = unit.GetComponent<NumericComponentC>().GetAsInt(shulianduNumeric);
             using (zstring.Block())
             {
-                self.E_Label_NeedProficiencyValueText.text = zstring.Format("熟练度:{0}", equipMakeConfig.NeedProficiencyValue);
+                self.E_Label_NeedProficiencyValueText.text = zstring.Format("技巧值:{0}", equipMakeConfig.NeedProficiencyValue);
             }
             
             ItemConfig itemConfig = ItemConfigCategory.Instance.Get(equipMakeConfig.MakeItemID);

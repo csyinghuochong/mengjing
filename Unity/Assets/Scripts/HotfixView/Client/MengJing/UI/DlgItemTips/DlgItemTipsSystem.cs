@@ -125,7 +125,7 @@ namespace ET.Client
                     using (zstring.Block())
                     {
                         self.View.E_ItemDesText.GetComponent<Text>().text =
-                                zstring.Format("{0}\n\n鉴定符品质:{1}\n品质越高,鉴定出极品的概率越高。\n鉴定符品质与制造者熟练度相关。", itemDes, bagInfo.ItemPar);
+                                zstring.Format("{0}\n\n鉴定符品质:{1}\n品质越高,鉴定出极品的概率越高。\n鉴定符品质与制造者技巧值相关。", itemDes, bagInfo.ItemPar);
                     }
                 }
             }
