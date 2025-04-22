@@ -61,7 +61,8 @@ namespace ET.Server
                     return;
                 }
                 userInfoComponent.UpdateRoleMoneySub(UserDataType.Diamond, (buycost* -1).ToString(), true, ItemGetWay.HappyMove);
-                unit.GetComponent<NumericComponentS>().ApplyValue(NumericType.SingleBuyTimes, buyTimes + buyadd);
+                numericComponentS.ApplyValue(NumericType.SingleBuyTimes, buyTimes + buyadd);
+                numericComponentS.ApplyValue(NumericType.SingleHappyRemainTimes, remainTimes + buyadd);
             }
 
             if (request.OperatateType == 1)
