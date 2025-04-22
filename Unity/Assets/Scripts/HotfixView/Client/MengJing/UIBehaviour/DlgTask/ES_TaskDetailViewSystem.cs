@@ -44,16 +44,6 @@ namespace ET.Client
         }
     }
 
-    [Event(SceneType.Demo)]
-    public class TaskTypeItemClick_RefreshTaskInfo : AEvent<Scene, TaskTypeItemClick>
-    {
-        protected override async ETTask Run(Scene scene, TaskTypeItemClick args)
-        {
-            scene.GetComponent<UIComponent>().GetDlgLogic<DlgTask>()?.View.ES_TaskDetail.RefreshTaskInfo(args.TaskPro);
-            await ETTask.CompletedTask;
-        }
-    }
-
     [FriendOf(typeof(ES_TaskType))]
     [FriendOf(typeof(UserInfoComponentC))]
     [EntitySystemOf(typeof(ES_TaskDetail))]

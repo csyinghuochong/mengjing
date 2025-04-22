@@ -70,14 +70,18 @@ namespace ET.Client
             self.Refresh();
 
             // 默认选第一个
-            if (self.ScrollItemTaskTypeItems.Values.Count > 0)
+            if (self.ShowTaskPros.Count > 0)
             {
-                Scroll_Item_TaskTypeItem scrollItemTaskTypeItem = self.ScrollItemTaskTypeItems.Values.ToList()[0];
-                if (scrollItemTaskTypeItem.uiTransform != null)
-                {
-                    ExecuteEvents.Execute(scrollItemTaskTypeItem.E_ClickButton.gameObject,
-                        new PointerEventData(UnityEngine.EventSystems.EventSystem.current), ExecuteEvents.pointerClickHandler);
-                }
+                Scroll_Item_TaskTypeItem scrollItemTaskTypeItem = self.ScrollItemTaskTypeItems[0];
+                scrollItemTaskTypeItem.OnClick();
+
+                // // 模拟点击按钮
+                // ExecuteEvents.Execute(scrollItemTaskTypeItem.E_ClickButton.gameObject,
+                //     new PointerEventData(UnityEngine.EventSystems.EventSystem.current), ExecuteEvents.pointerClickHandler);
+            }
+            else
+            {
+                self.GetParent<ES_TaskDetail>().RefreshTaskInfo(null);
             }
         }
 
@@ -95,7 +99,7 @@ namespace ET.Client
             LayoutRebuilder.ForceRebuildLayoutImmediate(self.uiTransform.parent.GetComponent<RectTransform>());
         }
 
-        private static void UpdateHighlight(this ES_TaskType self, int taskId)
+        public static void UpdateHighlight(this ES_TaskType self, int taskId)
         {
             foreach (Scroll_Item_TaskTypeItem item in self.ScrollItemTaskTypeItems.Values)
             {
@@ -145,7 +149,7 @@ namespace ET.Client
 
                 Scroll_Item_TaskTypeItem scrollItemTaskTypeItem = self.ScrollItemTaskTypeItems[i];
                 scrollItemTaskTypeItem.uiTransform.gameObject.SetActive(true);
-                scrollItemTaskTypeItem.Refresh(self.ShowTaskPros[i], self.UpdateHighlight);
+                scrollItemTaskTypeItem.Refresh(self.ShowTaskPros[i]);
             }
 
             if (self.ScrollItemTaskTypeItems.Count > self.ShowTaskPros.Count)

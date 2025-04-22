@@ -246,5 +246,21 @@ namespace ET
             }
             return open;
         }
+
+        public static int CheckTreasure(int taskConfigId, int nowNum, int playerLv)
+        {
+            TaskConfig taskConfig = TaskConfigCategory.Instance.Get(taskConfigId);
+            if (nowNum >= int.Parse(GlobalValueConfigCategory.Instance.Get(136).Value))
+            {
+                return ErrorCode.ERR_TaskLimited;
+            }
+
+            if (taskConfig.TaskLv > playerLv || taskConfig.TaskMaxLv < playerLv)
+            {
+                return ErrorCode.ERR_Error;
+            }
+
+            return ErrorCode.ERR_Success;
+        }
     }
 }

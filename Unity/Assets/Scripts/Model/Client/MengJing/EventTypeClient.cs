@@ -23,11 +23,6 @@ namespace ET.Client
         public string Str;
     }
 
-    public struct TaskTypeItemClick
-    {
-        public TaskPro TaskPro;
-    }
-
     public struct ReddotChange
     {
         public int ReddotType;

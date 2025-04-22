@@ -64,12 +64,30 @@ namespace ET.Server
                 }
                 response.TaskPro = taskComponent.OnGetDailyTask(unionTaskId);
             }
-            else if (taskConfig.TaskType == TaskTypeEnum.Treasure
-                || taskConfig.TaskType == TaskTypeEnum.Ring)
+            else if (taskConfig.TaskType == TaskTypeEnum.Treasure)
+            {
+                int treasureTask = unit.GetComponent<NumericComponentS>().GetAsInt(NumericType.TreasureTask);
+                int errorCode = FunctionHelp.CheckTreasure(taskConfig.Id, treasureTask, unit.GetComponent<UserInfoComponentS>().UserInfo.Lv);
+                if (errorCode != ErrorCode.ERR_Success)
+                {
+                    response.Error = errorCode;
+                    return;
+                }
+                
+                if (unit.GetComponent<TaskComponentS>().GetTaskList(taskConfig.TaskType).Count > 1)
+                {
+                    response.Error = ErrorCode.ERR_TaskNoComplete;
+                    return;
+                }
+                (TaskPro taskPro, int error) = unit.GetComponent<TaskComponentS>().OnAcceptedTask(request.TaskId);
+                response.Error = error;
+                response.TaskPro = taskPro;
+            }
+            else if (taskConfig.TaskType == TaskTypeEnum.Ring)
             {
                 if (unit.GetComponent<TaskComponentS>().GetTaskList(taskConfig.TaskType).Count > 1)
                 {
-                    response.Error = ErrorCode.ERR_ModifyData;
+                    response.Error = ErrorCode.ERR_TaskNoComplete;
                     return;
                 }
                 (TaskPro taskPro, int error) = unit.GetComponent<TaskComponentS>().OnAcceptedTask(request.TaskId);
