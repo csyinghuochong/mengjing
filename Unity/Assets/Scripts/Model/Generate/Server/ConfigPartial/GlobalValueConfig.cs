@@ -64,6 +64,9 @@ namespace ET
         public  int CommonSeasonDonateGetItem = 601800041;
 
 
+        public int SingleHappyBuyCost = 0;
+        public int SingleHappyBuyAdd = 0;
+        public int SingleHappyBuyMax = 0;
 
         public override void EndInit()
         {
@@ -90,7 +93,11 @@ namespace ET
             CommonSeasonDonateItemId = int.Parse(this.Get(128).Value);
             CommonSeasonDonateGetItem = int.Parse(this.Get(129).Value);
 
-
+            string[] singlehappybuy = this.Get(133).Value.Split(";");
+            SingleHappyBuyCost = int.Parse(singlehappybuy[0]);
+            SingleHappyBuyAdd = int.Parse(singlehappybuy[1]);
+            SingleHappyBuyMax = int.Parse(singlehappybuy[2]);
+            
             string[] dayrefresh = this.Get(79).Value.Split('@');
             for (int i = 0; i < dayrefresh.Length; i++)
             {

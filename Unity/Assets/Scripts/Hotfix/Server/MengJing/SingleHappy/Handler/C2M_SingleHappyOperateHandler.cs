@@ -46,13 +46,13 @@ namespace ET.Server
             }
             if (request.OperatateType  == 3)
             {
-                GlobalValueConfig globalValueConfig = GlobalValueConfigCategory.Instance.Get(133);
-                if (userInfoComponent.UserInfo.Diamond < int.Parse(globalValueConfig.Value))
+                int buycost = GlobalValueConfigCategory.Instance.SingleHappyBuyCost;
+                if (userInfoComponent.UserInfo.Diamond < buycost)
                 {
                     response.Error = ErrorCode.ERR_DiamondNotEnoughError;
                     return;
                 }
-                userInfoComponent.UpdateRoleMoneySub(UserDataType.Diamond, (int.Parse(globalValueConfig.Value)* -1).ToString(), true, ItemGetWay.HappyMove);
+                userInfoComponent.UpdateRoleMoneySub(UserDataType.Diamond, (buycost* -1).ToString(), true, ItemGetWay.HappyMove);
                 unit.GetComponent<NumericComponentS>().ApplyValue(NumericType.SingleBuyTimes, buyTimes + 1);
             }
 
