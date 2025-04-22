@@ -40,6 +40,7 @@ namespace ET.Client
             {
                 self.EG_StarListRectTransform.GetChild(i).gameObject.SetActive(quility > i);
             }
+            self.E_TextNameText.color = FunctionUI.QualityReturnColor(quility);
         }
 
         private static bool IsHaveZuoQi(this Scroll_Item_ZuoQiShowItem self, int zuoqiId)

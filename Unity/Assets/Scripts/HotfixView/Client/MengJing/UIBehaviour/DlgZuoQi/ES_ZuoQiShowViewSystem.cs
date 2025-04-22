@@ -105,6 +105,7 @@ namespace ET.Client
             self.E_YesText.gameObject.SetActive(have);
             self.E_NoText.gameObject.SetActive(!have);
             self.E_ButtonFightButton.gameObject.SetActive(have);
+            self.E_TextNameText.color = FunctionUI.QualityReturnColor(zuoQiConfig.Quality);
 
             foreach (Scroll_Item_ZuoQiShowItem item in self.ScrollItemZuoQiShowItems.Values)
             {
