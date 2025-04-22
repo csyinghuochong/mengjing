@@ -80,7 +80,7 @@ namespace ET.Client
 			
 			int recoverTimes = CommonHelp.GetHappyRecoverTimes(TimeHelper.ServerNow(), extendTimes);
 
-			if (recoverTimes < recoverTimes)
+			if (extendTimes <= recoverTimes)
 			{
 				return;
 			}
