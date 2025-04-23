@@ -6,13 +6,14 @@ namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class ES_ActivitySingIn : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy,IUILogic
+	public  class ES_ActivitySingIn : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy 
 	{
 		public int SingInActivityType;
 		public int LeiJiSingInActivityType;
 		public int CurDay;
 		public List<ActivityConfig> ShowActivityConfigs = new();
-		public Dictionary<int, EntityRef<Scroll_Item_ActivitySingInItem>> ScrollItemActivitySingInItems;
+		public Dictionary<int, EntityRef<Scroll_Item_ActivitySingInItem>> ScrollItemActivitySingInItems = new();
+		public List<string> AssetList { get; set; } = new();
 		
 		public UnityEngine.UI.ToggleGroup E_TypeSetToggleGroup
      	{
@@ -218,7 +219,7 @@ namespace ET.Client
      		}
      	}
 
-		public UnityEngine.UI.LoopVerticalScrollRect E_ActivitySingInItemsLoopVerticalScrollRect
+		public UnityEngine.UI.ScrollRect E_ActivitySingInItemsScrollRect
      	{
      		get
      		{
@@ -227,11 +228,28 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_E_ActivitySingInItemsLoopVerticalScrollRect == null )
+     			if( this.m_E_ActivitySingInItemsScrollRect == null )
      			{
-		    		this.m_E_ActivitySingInItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.LoopVerticalScrollRect>(this.uiTransform.gameObject,"EG_PanelRoot/E_ActivitySingInItems");
+		    		this.m_E_ActivitySingInItemsScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.ScrollRect>(this.uiTransform.gameObject,"EG_PanelRoot/E_ActivitySingInItems");
      			}
-     			return this.m_E_ActivitySingInItemsLoopVerticalScrollRect;
+     			return this.m_E_ActivitySingInItemsScrollRect;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_ActivitySingInItemsImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_ActivitySingInItemsImage == null )
+     			{
+		    		this.m_E_ActivitySingInItemsImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_PanelRoot/E_ActivitySingInItems");
+     			}
+     			return this.m_E_ActivitySingInItemsImage;
      		}
      	}
 
@@ -261,7 +279,8 @@ namespace ET.Client
 			this.m_E_Reward3EventTrigger = null;
 			this.m_E_Reward4Image = null;
 			this.m_E_Reward4EventTrigger = null;
-			this.m_E_ActivitySingInItemsLoopVerticalScrollRect = null;
+			this.m_E_ActivitySingInItemsScrollRect = null;
+			this.m_E_ActivitySingInItemsImage = null;
 			this.uiTransform = null;
 		}
 
@@ -277,7 +296,8 @@ namespace ET.Client
 		private UnityEngine.EventSystems.EventTrigger m_E_Reward3EventTrigger = null;
 		private UnityEngine.UI.Image m_E_Reward4Image = null;
 		private UnityEngine.EventSystems.EventTrigger m_E_Reward4EventTrigger = null;
-		private UnityEngine.UI.LoopVerticalScrollRect m_E_ActivitySingInItemsLoopVerticalScrollRect = null;
+		private UnityEngine.UI.ScrollRect m_E_ActivitySingInItemsScrollRect = null;
+		private UnityEngine.UI.Image m_E_ActivitySingInItemsImage = null;
 		public Transform uiTransform = null;
 	}
 }

@@ -18,7 +18,6 @@ namespace ET.Client
         {
             self.uiTransform = transform;
 
-            self.E_ActivitySingInItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnActivitySingInItemsRefresh);
             self.E_TypeSetToggleGroup.AddListener(self.OnTypeSet);
 
             self.E_TypeSetToggleGroup.OnSelectIndex(0);
@@ -27,6 +26,15 @@ namespace ET.Client
         [EntitySystem]
         private static void Destroy(this ES_ActivitySingIn self)
         {
+            ResourcesLoaderComponent resourcesLoaderComponent = self.Root().GetComponent<ResourcesLoaderComponent>();
+            for (int i = 0; i < self.AssetList.Count; i++)
+            {
+                resourcesLoaderComponent.UnLoadAsset(self.AssetList[i]);
+            }
+
+            self.AssetList.Clear();
+            self.AssetList = null;
+            
             self.DestroyWidget();
         }
 
@@ -70,8 +78,39 @@ namespace ET.Client
 
             self.CurDay = curDay;
 
-            self.AddUIScrollItems(ref self.ScrollItemActivitySingInItems, self.ShowActivityConfigs.Count);
-            self.E_ActivitySingInItemsLoopVerticalScrollRect.SetVisible(true, self.ShowActivityConfigs.Count);
+            
+            ResourcesLoaderComponent resourcesLoaderComponent = self.Root().GetComponent<ResourcesLoaderComponent>();
+            for (int i = 0; i < self.ShowActivityConfigs.Count; i++)
+            {
+                if (!self.ScrollItemActivitySingInItems.ContainsKey(i))
+                {
+                    Scroll_Item_ActivitySingInItem item = self.AddChild<Scroll_Item_ActivitySingInItem>();
+                    string path = "Assets/Bundles/UI/Item/Item_ActivitySingInItem.prefab";
+                    if (!self.AssetList.Contains(path))
+                    {
+                        self.AssetList.Add(path);
+                    }
+
+                    GameObject prefab = resourcesLoaderComponent.LoadAssetSync<GameObject>(path);
+                    GameObject go = UnityEngine.Object.Instantiate(prefab, self.E_ActivitySingInItemsScrollRect.transform.Find("Content").gameObject.transform);
+                    item.BindTrans(go.transform);
+                    self.ScrollItemActivitySingInItems.Add(i, item);
+                }
+
+                Scroll_Item_ActivitySingInItem scrollItemActivitySingInItem = self.ScrollItemActivitySingInItems[i];
+                scrollItemActivitySingInItem.uiTransform.gameObject.SetActive(true);
+                scrollItemActivitySingInItem.OnUpdateUI(self.ShowActivityConfigs[i], (activityId) => { self.OnClickSignItem(activityId).Coroutine(); });
+                scrollItemActivitySingInItem.SetSignState(self.CurDay);
+            }
+
+            if (self.ScrollItemActivitySingInItems.Count > self.ShowActivityConfigs.Count)
+            {
+                for (int i = self.ShowActivityConfigs.Count; i < self.ScrollItemActivitySingInItems.Count; i++)
+                {
+                    Scroll_Item_ActivitySingInItem scrollItemActivitySingInItem = self.ScrollItemActivitySingInItems[i];
+                    scrollItemActivitySingInItem.uiTransform.gameObject.SetActive(false);
+                }
+            }
 
             List<ActivityConfig> list = ActivityConfigCategory.Instance.GetByType(self.LeiJiSingInActivityType);
             self.E_Reward1EventTrigger.triggers.Clear();
@@ -82,7 +121,6 @@ namespace ET.Client
             self.E_Reward3EventTrigger.RegisterEvent(EventTriggerType.PointerUp, (pdata) => { self.EndDrag(list[2].Id, pdata as PointerEventData).Coroutine(); });
             self.E_Reward4EventTrigger.triggers.Clear();
             self.E_Reward4EventTrigger.RegisterEvent(EventTriggerType.PointerUp, (pdata) => { self.EndDrag(list[3].Id, pdata as PointerEventData).Coroutine(); });
-            ResourcesLoaderComponent resourcesLoaderComponent = self.Root().GetComponent<ResourcesLoaderComponent>();
             using (zstring.Block())
             {
                 string[] itemInfo = list[0].Par_2.Split(';');
@@ -107,21 +145,6 @@ namespace ET.Client
             }
 
             self.UpdateProgress();
-        }
-
-        private static void OnActivitySingInItemsRefresh(this ES_ActivitySingIn self, Transform transform, int index)
-        {
-            foreach (Scroll_Item_ActivitySingInItem item in self.ScrollItemActivitySingInItems.Values)
-            {
-                if (item.uiTransform == transform)
-                {
-                    item.uiTransform = null;
-                }
-            }
-
-            Scroll_Item_ActivitySingInItem scrollItemActivitySingInItem = self.ScrollItemActivitySingInItems[index].BindTrans(transform);
-            scrollItemActivitySingInItem.OnUpdateUI(self.ShowActivityConfigs[index], (activityId) => { self.OnClickSignItem(activityId).Coroutine(); });
-            scrollItemActivitySingInItem.SetSignState(self.CurDay);
         }
 
         private static async ETTask OnClickSignItem(this ES_ActivitySingIn self, int activityId)
