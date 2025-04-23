@@ -10,7 +10,7 @@ namespace ET.Client
         public static void RegisterUIEvent(this DlgTreasureOpen self)
         {
             self.View.E_ButtonStopButton.AddListenerAsync(self.OnButtonStop);
-            self.View.E_ButtonOpenButton.AddListener(() => { self.OnButtonOpen().Coroutine(); });
+            self.View.E_ButtonOpenButton.AddListener(self.OnButtonOpen);
             self.View.E_ButtonCloseButton.AddListener(self.OnButtonClose);
             self.View.E_ButtonDiButton.AddListener(self.OnButtonClose);
             self.View.E_BagItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnBagItemsRefresh);
@@ -20,6 +20,8 @@ namespace ET.Client
             self.CurrentIndex = 0;
             self.Interval = 100;
             self.View.E_ImageSelectImage.gameObject.SetActive(false);
+            self.View.E_ButtonOpenButton.gameObject.SetActive(false);
+            self.View.E_ButtonStopButton.gameObject.SetActive(false);
         }
 
         public static void ShowWindow(this DlgTreasureOpen self, Entity contextData = null)
@@ -28,7 +30,7 @@ namespace ET.Client
 
         public static void OnButtonClose(this DlgTreasureOpen self)
         {
-            if (self.ifStop == true)
+            if (self.ifStop)
             {
                 self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_TreasureOpen);
             }
@@ -128,7 +130,7 @@ namespace ET.Client
             self.View.E_BagItemsLoopVerticalScrollRect.SetVisible(true, self.RewardShowItems.Count);
 
             //开始触发
-            self.OnButtonOpen().Coroutine();
+            self.OnButtonOpen();
         }
 
         public static async ETTask OnStartTurn(this DlgTreasureOpen self)
@@ -221,8 +223,14 @@ namespace ET.Client
                     return;
                 }
             }
-
-            self.ShotTip();
+            
+            self.Root().GetComponent<BagComponentC>().RealAddItem--;
+            M2C_ItemOperateResponse response = await BagClientNetHelper.RequestUseItem(self.Root(), self.BagInfo);
+            self.Root().GetComponent<BagComponentC>().RealAddItem++;
+            if (response.Error == ErrorCode.ERR_Success)
+            {
+                 self.ShotTip();
+            }
 
             await self.Root().GetComponent<TimerComponent>().WaitAsync(3000);
             //Log.Debug($" self.Interval:  {self.Interval}   {moveNumber}");
@@ -234,7 +242,7 @@ namespace ET.Client
             self.OnButtonClose();
         }
 
-        public static async ETTask OnButtonOpen(this DlgTreasureOpen self)
+        public static void OnButtonOpen(this DlgTreasureOpen self)
         {
             BagComponentC bagComponent = self.Root().GetComponent<BagComponentC>();
             if (bagComponent.GetBagLeftCell(ItemLocType.ItemLocBag) < 1)
@@ -243,29 +251,8 @@ namespace ET.Client
                 return;
             }
 
-            ItemConfig itemConfig = ItemConfigCategory.Instance.Get(self.BagInfo.ItemID);
-            
-            if (itemConfig.ItemQuality == 4)
-            {
-                self.OnStartTurn().Coroutine();
-
-                self.Root().GetComponent<BagComponentC>().RealAddItem--;
-                await BagClientNetHelper.RequestUseItem(self.Root(), self.BagInfo);
-                self.Root().GetComponent<BagComponentC>().RealAddItem++;
-                
-                // BagClientNetHelper.RequestUseItem(self.Root(), self.BagInfo).Coroutine();
-                // self.ShotTip();
-                // self.OnButtonClose();
-            }
-
-            if (itemConfig.ItemQuality == 5)
-            {
-                self.OnStartTurn().Coroutine();
-                
-                self.Root().GetComponent<BagComponentC>().RealAddItem--;
-                await BagClientNetHelper.RequestUseItem(self.Root(), self.BagInfo);
-                self.Root().GetComponent<BagComponentC>().RealAddItem++;
-            }
+            self.OnStartTurn().Coroutine();
+            self.View.E_ButtonStopButton.gameObject.SetActive(true);
         }
     }
 }
