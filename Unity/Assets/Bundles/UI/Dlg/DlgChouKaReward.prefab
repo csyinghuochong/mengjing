@@ -876,8 +876,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1923977878077496640}
-  - component: {fileID: 2414222178715567359}
-  - component: {fileID: 5420148231085135587}
+  - component: {fileID: 7408784220702879777}
+  - component: {fileID: 707039516242986867}
+  - component: {fileID: 4948493877728333173}
+  - component: {fileID: 1980680744977055948}
   m_Layer: 5
   m_Name: E_ChouKaRewardItems
   m_TagString: Untagged
@@ -905,7 +907,7 @@ RectTransform:
   m_AnchoredPosition: {x: -1.25, y: -1}
   m_SizeDelta: {x: 1165.5, y: 600}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &2414222178715567359
+--- !u!114 &7408784220702879777
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -914,14 +916,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 7723134643043807199}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce71017a2903f7c4c9a699e438d0b897, type: 3}
+  m_Script: {fileID: 11500000, guid: 1aa08ab6e0800fa44ae55d278d1423e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefabSource:
-    prefabName: Item_ChouKaRewardItem
-    poolSize: 5
-  totalCount: 0
-  reverseDirection: 0
   m_Content: {fileID: 1119342333812687216}
   m_Horizontal: 0
   m_Vertical: 1
@@ -940,7 +937,15 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &5420148231085135587
+--- !u!222 &707039516242986867
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7723134643043807199}
+  m_CullTransparentMesh: 1
+--- !u!114 &4948493877728333173
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -949,11 +954,44 @@ MonoBehaviour:
   m_GameObject: {fileID: 7723134643043807199}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3312d7739989d2b4e91e6319e9a96d76, type: 3}
+  m_Script: {fileID: 11500000, guid: 97c5baedf43702d43b13d36138ae0905, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Padding: {x: 0, y: 0, z: 0, w: 0}
-  m_Softness: {x: 0, y: 0}
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+  mAtlasInfo: {fileID: 0}
+  mSpriteName: 
+  mMaskable: 0
+  mRaycastTarget: 0
+--- !u!114 &1980680744977055948
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7723134643043807199}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31a19414c41e5ae4aae2af33fee712f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ShowMaskGraphic: 0
 --- !u!1 &9092905563445698474
 GameObject:
   m_ObjectHideFlags: 0

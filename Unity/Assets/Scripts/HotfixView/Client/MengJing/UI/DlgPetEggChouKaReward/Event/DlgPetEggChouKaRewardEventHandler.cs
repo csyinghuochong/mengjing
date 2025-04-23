@@ -7,7 +7,7 @@
 
 		public void OnInitWindowCoreData(UIBaseWindow uiBaseWindow)
 		{
-		  uiBaseWindow.windowType = UIWindowType.Normal; 
+		  uiBaseWindow.windowType = UIWindowType.PopUp; 
 		}
 
 		public void OnInitComponent(UIBaseWindow uiBaseWindow)
@@ -31,6 +31,7 @@
 
 		public void BeforeUnload(UIBaseWindow uiBaseWindow)
 		{
+			uiBaseWindow.GetComponent<DlgPetEggChouKaReward>().BeforeUnload();
 		}
 
 	}

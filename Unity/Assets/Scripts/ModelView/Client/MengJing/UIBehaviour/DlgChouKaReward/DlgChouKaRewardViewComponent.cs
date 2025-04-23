@@ -1,13 +1,13 @@
-﻿using UnityEngine;
+﻿
+using UnityEngine;
 using UnityEngine.UI;
-
 namespace ET.Client
 {
 	[ComponentOf(typeof(DlgChouKaReward))]
 	[EnableMethod]
 	public  class DlgChouKaRewardViewComponent : Entity,IAwake,IDestroy 
 	{
-		public Text E_TextTitleText
+		public UnityEngine.UI.Text E_TextTitleText
      	{
      		get
      		{
@@ -18,13 +18,13 @@ namespace ET.Client
      			}
      			if( this.m_E_TextTitleText == null )
      			{
-		    		this.m_E_TextTitleText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_TextTitle");
+		    		this.m_E_TextTitleText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_TextTitle");
      			}
      			return this.m_E_TextTitleText;
      		}
      	}
 
-		public Button E_Btn_CloseButton
+		public UnityEngine.UI.Button E_Btn_CloseButton
      	{
      		get
      		{
@@ -35,13 +35,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Btn_CloseButton == null )
      			{
-		    		this.m_E_Btn_CloseButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_Btn_Close");
+		    		this.m_E_Btn_CloseButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_Btn_Close");
      			}
      			return this.m_E_Btn_CloseButton;
      		}
      	}
 
-		public Image E_Btn_CloseImage
+		public UnityEngine.UI.Image E_Btn_CloseImage
      	{
      		get
      		{
@@ -52,13 +52,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Btn_CloseImage == null )
      			{
-		    		this.m_E_Btn_CloseImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_Btn_Close");
+		    		this.m_E_Btn_CloseImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Btn_Close");
      			}
      			return this.m_E_Btn_CloseImage;
      		}
      	}
 
-		public LoopVerticalScrollRect E_ChouKaRewardItemsLoopVerticalScrollRect
+		public UnityEngine.UI.ScrollRect E_ChouKaRewardItemsScrollRect
      	{
      		get
      		{
@@ -67,11 +67,28 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_E_ChouKaRewardItemsLoopVerticalScrollRect == null )
+     			if( this.m_E_ChouKaRewardItemsScrollRect == null )
      			{
-		    		this.m_E_ChouKaRewardItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<LoopVerticalScrollRect>(this.uiTransform.gameObject,"E_ChouKaRewardItems");
+		    		this.m_E_ChouKaRewardItemsScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.ScrollRect>(this.uiTransform.gameObject,"E_ChouKaRewardItems");
      			}
-     			return this.m_E_ChouKaRewardItemsLoopVerticalScrollRect;
+     			return this.m_E_ChouKaRewardItemsScrollRect;
+     		}
+     	}
+
+		public UIImage E_ChouKaRewardItemsUIImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_ChouKaRewardItemsUIImage == null )
+     			{
+		    		this.m_E_ChouKaRewardItemsUIImage = UIFindHelper.FindDeepChild<UIImage>(this.uiTransform.gameObject,"E_ChouKaRewardItems");
+     			}
+     			return this.m_E_ChouKaRewardItemsUIImage;
      		}
      	}
 
@@ -80,14 +97,16 @@ namespace ET.Client
 			this.m_E_TextTitleText = null;
 			this.m_E_Btn_CloseButton = null;
 			this.m_E_Btn_CloseImage = null;
-			this.m_E_ChouKaRewardItemsLoopVerticalScrollRect = null;
+			this.m_E_ChouKaRewardItemsScrollRect = null;
+			this.m_E_ChouKaRewardItemsUIImage = null;
 			this.uiTransform = null;
 		}
 
-		private Text m_E_TextTitleText = null;
-		private Button m_E_Btn_CloseButton = null;
-		private Image m_E_Btn_CloseImage = null;
-		private LoopVerticalScrollRect m_E_ChouKaRewardItemsLoopVerticalScrollRect = null;
+		private UnityEngine.UI.Text m_E_TextTitleText = null;
+		private UnityEngine.UI.Button m_E_Btn_CloseButton = null;
+		private UnityEngine.UI.Image m_E_Btn_CloseImage = null;
+		private UnityEngine.UI.ScrollRect m_E_ChouKaRewardItemsScrollRect = null;
+		private UIImage m_E_ChouKaRewardItemsUIImage = null;
 		public Transform uiTransform = null;
 	}
 }

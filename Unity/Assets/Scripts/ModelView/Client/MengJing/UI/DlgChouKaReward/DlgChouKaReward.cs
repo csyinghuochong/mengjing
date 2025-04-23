@@ -11,6 +11,7 @@ namespace ET.Client
         }
 
         public List<TakeCardRewardConfig> TakeCardRewardConfigs;
-        public Dictionary<int, EntityRef<Scroll_Item_ChouKaRewardItem>> ScrollItemChouKaRewardItems;
+        public Dictionary<int, EntityRef<Scroll_Item_ChouKaRewardItem>> ScrollItemChouKaRewardItems = new();
+        public List<string> AssetList { get; set; } = new();
     }
 }

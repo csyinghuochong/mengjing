@@ -10,7 +10,8 @@ namespace ET.Client
             get => this.GetComponent<DlgPetEggChouKaRewardViewComponent>();
         }
 
-        public Dictionary<int, EntityRef<Scroll_Item_PetEggChouKaRewardItem>> ScrollItemPetEggChouKaRewardItems;
+        public Dictionary<int, EntityRef<Scroll_Item_PetEggChouKaRewardItem>> ScrollItemPetEggChouKaRewardItems = new();
         public List<int> ShowInfo = new();
+        public List<string> AssetList { get; set; } = new();
     }
 }
