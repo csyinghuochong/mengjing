@@ -21,7 +21,7 @@ namespace ET.Server
         {
         }
 
-        public static List<int> GetDropId(this SingleHappyDungeonComponent self, int level)
+        public static int GetDropId(this SingleHappyDungeonComponent self, int level)
         {
             // 提取键并排序
             List<int> sortedKeys = new List<int>(GlobalValueConfigCategory.Instance.SingleHappyDrops.Keys);
@@ -36,7 +36,7 @@ namespace ET.Server
                 }
             }
             
-            return new List<int>();
+            return 0;
         }
         
         public static void OnTimer(this SingleHappyDungeonComponent self, Unit unit)
@@ -53,7 +53,7 @@ namespace ET.Server
             }
             
             int level = unit.GetComponent<UserInfoComponentS>().UserInfo.Lv;
-            List<int> dropids = self.GetDropId(level);
+            int dropids  = self.GetDropId(level);
 
             for (int p = 0; p < HappyData.PositionList.Count; p++)
             {
@@ -76,11 +76,7 @@ namespace ET.Server
                 }
 
                 List<RewardItem> rewardist = new List<RewardItem>();
-
-                foreach (int dropid in dropids)
-                {
-                    DropHelper.DropIDToDropItem(dropid, rewardist);
-                }
+                DropHelper.DropIDToDropItem(dropids, rewardist);
                 
                 if (rewardist.Count == 0)
                 {

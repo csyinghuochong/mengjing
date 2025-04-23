@@ -70,7 +70,7 @@ namespace ET
         public int SingleHappyBuyAdd = 0;
         public int SingleHappyBuyMax = 0;
 
-        public Dictionary<int, List<int>> SingleHappyDrops = new Dictionary<int, List<int>>();
+        public Dictionary<int, int> SingleHappyDrops = new Dictionary<int,int>();
 
         public override void EndInit()
         {
@@ -112,13 +112,9 @@ namespace ET
             {
                 string[] dropitem = dropList[i].Split(';');
                 int level = int.Parse(dropitem[0]);
-                string[] dropidss = dropitem[1].Split(',');
+                int dropid = int.Parse(dropitem[1]);
     
-                SingleHappyDrops.Add(level, new List<int>());
-                for (int drop = 0; drop <dropidss.Length; drop++ )
-                {
-                    SingleHappyDrops[level].Add( int.Parse(dropidss[drop]) );
-                }
+                SingleHappyDrops.Add(level, dropid);
             }
             
             string[] dayrefresh = this.Get(79).Value.Split('@');
