@@ -123,6 +123,26 @@ namespace ET.Client
                 return this.m_es_pethexinchouka;
             }
         }
+        
+        public ES_PetChouKa ES_PetChouKa
+        {
+	        get
+	        {
+		        ES_PetChouKa es = this.m_es_petchouka;
+		        if (es == null)
+		        {
+			        string path = "Assets/Bundles/UI/Common/ES_PetChouKa.prefab";
+			        GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
+			        GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
+			        go.SetActive(true);
+			        this.AssetList.Add(path);
+			        this.m_es_petchouka = this.AddChild<ES_PetChouKa, Transform>(go.transform);
+			        go.SetActive(false);
+		        }
+
+		        return this.m_es_petchouka;
+	        }
+        }
 		
 		public void DestroyWidget()
 		{
@@ -132,6 +152,7 @@ namespace ET.Client
 			this.m_es_peteggduihuan = null;
 			this.m_es_peteggchouka = null;
 			this.m_es_pethexinchouka = null;
+			this.m_es_petchouka = null;
 			this.uiTransform = null;
 			
 			ResourcesLoaderComponent resourcesLoaderComponent = this.Root().GetComponent<ResourcesLoaderComponent>();
@@ -149,6 +170,7 @@ namespace ET.Client
 		private EntityRef<ES_PetEggDuiHuan> m_es_peteggduihuan = null;
 		private EntityRef<ES_PetEggChouKa> m_es_peteggchouka = null;
 		private EntityRef<ES_PetHeXinChouKa> m_es_pethexinchouka = null;
+		private EntityRef<ES_PetChouKa> m_es_petchouka = null;
 		public Transform uiTransform = null;
 	}
 }
