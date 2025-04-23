@@ -326,7 +326,7 @@ namespace ET.Server
                         int randomPosition = 40;
                         numericComponent.ApplyValue(NumericType.SingleHappyCellIndex, randomPosition + 1, false);
                         unit.Position = HappyData.PositionList[randomPosition];
-                        unit.Scene().GetComponent<SingleHappyDungeonComponent>().OnTimer();
+                        unit.Scene().GetComponent<SingleHappyDungeonComponent>().OnTimer(unit);
                     }
                     aoivalue = 40;
                     // 通知客户端创建My Unit

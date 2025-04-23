@@ -70,6 +70,8 @@ namespace ET
         public int SingleHappyBuyAdd = 0;
         public int SingleHappyBuyMax = 0;
 
+        public Dictionary<int, List<int>> SingleHappyDrops = new Dictionary<int, List<int>>();
+
         public override void EndInit()
         {
             DayMonsterList.Clear();
@@ -101,6 +103,23 @@ namespace ET
             SingleHappyBuyCost = int.Parse(singlehappybuy[0]);
             SingleHappyBuyAdd = int.Parse(singlehappybuy[1]);
             SingleHappyBuyMax = int.Parse(singlehappybuy[2]);
+            
+            //1;61201001,61200001@19;61202001,61200001@30;61203001,61200001@40;61204001,61200001@50;61205001,61200001
+            string dropinfo = this.Get(134).Value;
+            string[] dropList = dropinfo.Split('@');
+
+            for (int i = dropList.Length - 1; i >= 0; i--)
+            {
+                string[] dropitem = dropList[i].Split(';');
+                int level = int.Parse(dropitem[0]);
+                string[] dropidss = dropitem[1].Split(',');
+    
+                SingleHappyDrops.Add(level, new List<int>());
+                for (int drop = 0; drop <dropidss.Length; drop++ )
+                {
+                    SingleHappyDrops[level].Add( int.Parse(dropidss[drop]) );
+                }
+            }
             
             string[] dayrefresh = this.Get(79).Value.Split('@');
             for (int i = 0; i < dayrefresh.Length; i++)

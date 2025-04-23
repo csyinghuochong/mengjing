@@ -36,7 +36,7 @@ namespace ET.Server
                 }
                 userInfoComponent.UpdateRoleMoneySub( UserDataType.Diamond, (int.Parse(globalValueConfig.Value) * -1).ToString(), true, ItemGetWay.HappyMove);
                 
-                unit.Scene().GetComponent<SingleHappyDungeonComponent>()?.OnTimer();
+                unit.Scene().GetComponent<SingleHappyDungeonComponent>()?.OnTimer(unit);
             }
             if (request.OperatateType  == 3)
             {

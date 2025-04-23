@@ -88,7 +88,7 @@ namespace ET.Server
                 }
 
                 int itemNum = (int)(cengNum / 5f);
-                mainunit.GetComponent<BagComponentS>().OnAddItemData("10000148;" + itemNum, $"{ItemGetWay.TiaoZhan}_{TimeHelper.ServerNow()}");
+                mainunit.GetComponent<BagComponentS>().OnAddItemData("1000030;" + itemNum, $"{ItemGetWay.TiaoZhan}_{TimeHelper.ServerNow()}");
             }
 
             Log.Warning($"挑战奖励:  {mainunit.Id}  {way}");

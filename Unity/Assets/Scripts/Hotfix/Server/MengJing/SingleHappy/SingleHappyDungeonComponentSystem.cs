@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.Mathematics;
 
 namespace ET.Server
@@ -20,27 +21,25 @@ namespace ET.Server
         {
         }
 
-        public static int GetDropId(this SingleHappyDungeonComponent self, int openDay, int gid)
+        public static List<int> GetDropId(this SingleHappyDungeonComponent self, int level)
         {
-            string dropinfo = GlobalValueConfigCategory.Instance.Get(gid).Value;
-            string[] dropList = dropinfo.Split('@');
-
-            for (int i = dropList.Length - 1; i >= 0; i--)
+            // 提取键并排序
+            List<int> sortedKeys = new List<int>(GlobalValueConfigCategory.Instance.SingleHappyDrops.Keys);
+            sortedKeys = sortedKeys.OrderByDescending(num => num).ToList();
+            
+            // 按排序后的键访问值
+            foreach (int key in sortedKeys)
             {
-                string[] dropitem = dropList[i].Split(';');
-                int day = int.Parse(dropitem[0]);
-                int dropid = int.Parse((dropitem[1]));
-
-                if (openDay >= day)
+                if (level >= key)
                 {
-                    return dropid;
+                    return GlobalValueConfigCategory.Instance.SingleHappyDrops[key];
                 }
             }
-
-            return int.Parse(dropList[0].Split(';')[1]);
+            
+            return new List<int>();
         }
         
-        public static void OnTimer(this SingleHappyDungeonComponent self)
+        public static void OnTimer(this SingleHappyDungeonComponent self, Unit unit)
         {
             List<int> dropcells = new List<int>();
             List<Unit> droplist = UnitHelper.GetUnitList(self.Scene(), UnitType.DropItem);
@@ -52,9 +51,9 @@ namespace ET.Server
                     dropcells.Add(dropindex);
                 }
             }
-
-            int openDay = ServerHelper.GetServeOpenDay( self.Zone());
-            int dropid = CommonHelp.GetHappyDropId(openDay, 134);
+            
+            int level = unit.GetComponent<UserInfoComponentS>().UserInfo.Lv;
+            List<int> dropids = self.GetDropId(level);
 
             for (int p = 0; p < HappyData.PositionList.Count; p++)
             {
@@ -77,8 +76,12 @@ namespace ET.Server
                 }
 
                 List<RewardItem> rewardist = new List<RewardItem>();
-                DropHelper.DropIDToDropItem(dropid, rewardist);
 
+                foreach (int dropid in dropids)
+                {
+                    DropHelper.DropIDToDropItem(dropid, rewardist);
+                }
+                
                 if (rewardist.Count == 0)
                 {
                     rewardist.Add( new RewardItem(){ItemID = 1, ItemNum = 10} );
@@ -91,7 +94,7 @@ namespace ET.Server
                 
                 if (rewardist.Count > 100)
                 {
-                    Log.Error($"rewardist.Count > 100:   {dropid}");
+                    Log.Error($"rewardist.Count > 100:   {droplist[0]}");
                     break;
                 }
 
