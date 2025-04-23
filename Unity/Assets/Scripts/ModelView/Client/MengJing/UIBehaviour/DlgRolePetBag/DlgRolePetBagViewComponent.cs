@@ -1,13 +1,30 @@
-﻿using UnityEngine;
+﻿
+using UnityEngine;
 using UnityEngine.UI;
-
 namespace ET.Client
 {
 	[ComponentOf(typeof(DlgRolePetBag))]
 	[EnableMethod]
 	public  class DlgRolePetBagViewComponent : Entity,IAwake,IDestroy 
 	{
-		public Button E_Btn_CloseButton
+		public UnityEngine.UI.Text E_TextTitleText
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_TextTitleText == null )
+     			{
+		    		this.m_E_TextTitleText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_TextTitle");
+     			}
+     			return this.m_E_TextTitleText;
+     		}
+     	}
+
+		public UnityEngine.UI.Button E_Btn_CloseButton
      	{
      		get
      		{
@@ -18,13 +35,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Btn_CloseButton == null )
      			{
-		    		this.m_E_Btn_CloseButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_Btn_Close");
+		    		this.m_E_Btn_CloseButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_Btn_Close");
      			}
      			return this.m_E_Btn_CloseButton;
      		}
      	}
 
-		public Image E_Btn_CloseImage
+		public UnityEngine.UI.Image E_Btn_CloseImage
      	{
      		get
      		{
@@ -35,13 +52,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Btn_CloseImage == null )
      			{
-		    		this.m_E_Btn_CloseImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_Btn_Close");
+		    		this.m_E_Btn_CloseImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Btn_Close");
      			}
      			return this.m_E_Btn_CloseImage;
      		}
      	}
 
-		public LoopVerticalScrollRect E_RolePetBagItemsLoopVerticalScrollRect
+		public UnityEngine.UI.ScrollRect E_RolePetBagItemsScrollRect
      	{
      		get
      		{
@@ -50,15 +67,32 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_E_RolePetBagItemsLoopVerticalScrollRect == null )
+     			if( this.m_E_RolePetBagItemsScrollRect == null )
      			{
-		    		this.m_E_RolePetBagItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<LoopVerticalScrollRect>(this.uiTransform.gameObject,"E_RolePetBagItems");
+		    		this.m_E_RolePetBagItemsScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.ScrollRect>(this.uiTransform.gameObject,"E_RolePetBagItems");
      			}
-     			return this.m_E_RolePetBagItemsLoopVerticalScrollRect;
+     			return this.m_E_RolePetBagItemsScrollRect;
      		}
      	}
 
-		public RectTransform EG_PetZiZhiItem1RectTransform
+		public UnityEngine.UI.Image E_RolePetBagItemsImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_RolePetBagItemsImage == null )
+     			{
+		    		this.m_E_RolePetBagItemsImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_RolePetBagItems");
+     			}
+     			return this.m_E_RolePetBagItemsImage;
+     		}
+     	}
+
+		public UnityEngine.RectTransform EG_PetZiZhiItem1RectTransform
      	{
      		get
      		{
@@ -69,13 +103,13 @@ namespace ET.Client
      			}
      			if( this.m_EG_PetZiZhiItem1RectTransform == null )
      			{
-		    		this.m_EG_PetZiZhiItem1RectTransform = UIFindHelper.FindDeepChild<RectTransform>(this.uiTransform.gameObject,"EG_PetZiZhiItem1");
+		    		this.m_EG_PetZiZhiItem1RectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_PetZiZhiItem1");
      			}
      			return this.m_EG_PetZiZhiItem1RectTransform;
      		}
      	}
 
-		public RectTransform EG_PetZiZhiItem2RectTransform
+		public UnityEngine.RectTransform EG_PetZiZhiItem2RectTransform
      	{
      		get
      		{
@@ -86,13 +120,13 @@ namespace ET.Client
      			}
      			if( this.m_EG_PetZiZhiItem2RectTransform == null )
      			{
-		    		this.m_EG_PetZiZhiItem2RectTransform = UIFindHelper.FindDeepChild<RectTransform>(this.uiTransform.gameObject,"EG_PetZiZhiItem2");
+		    		this.m_EG_PetZiZhiItem2RectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_PetZiZhiItem2");
      			}
      			return this.m_EG_PetZiZhiItem2RectTransform;
      		}
      	}
 
-		public RectTransform EG_PetZiZhiItem3RectTransform
+		public UnityEngine.RectTransform EG_PetZiZhiItem3RectTransform
      	{
      		get
      		{
@@ -103,13 +137,13 @@ namespace ET.Client
      			}
      			if( this.m_EG_PetZiZhiItem3RectTransform == null )
      			{
-		    		this.m_EG_PetZiZhiItem3RectTransform = UIFindHelper.FindDeepChild<RectTransform>(this.uiTransform.gameObject,"EG_PetZiZhiItem3");
+		    		this.m_EG_PetZiZhiItem3RectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_PetZiZhiItem3");
      			}
      			return this.m_EG_PetZiZhiItem3RectTransform;
      		}
      	}
 
-		public RectTransform EG_PetZiZhiItem4RectTransform
+		public UnityEngine.RectTransform EG_PetZiZhiItem4RectTransform
      	{
      		get
      		{
@@ -120,13 +154,13 @@ namespace ET.Client
      			}
      			if( this.m_EG_PetZiZhiItem4RectTransform == null )
      			{
-		    		this.m_EG_PetZiZhiItem4RectTransform = UIFindHelper.FindDeepChild<RectTransform>(this.uiTransform.gameObject,"EG_PetZiZhiItem4");
+		    		this.m_EG_PetZiZhiItem4RectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_PetZiZhiItem4");
      			}
      			return this.m_EG_PetZiZhiItem4RectTransform;
      		}
      	}
 
-		public RectTransform EG_PetZiZhiItem5RectTransform
+		public UnityEngine.RectTransform EG_PetZiZhiItem5RectTransform
      	{
      		get
      		{
@@ -137,13 +171,13 @@ namespace ET.Client
      			}
      			if( this.m_EG_PetZiZhiItem5RectTransform == null )
      			{
-		    		this.m_EG_PetZiZhiItem5RectTransform = UIFindHelper.FindDeepChild<RectTransform>(this.uiTransform.gameObject,"EG_PetZiZhiItem5");
+		    		this.m_EG_PetZiZhiItem5RectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_PetZiZhiItem5");
      			}
      			return this.m_EG_PetZiZhiItem5RectTransform;
      		}
      	}
 
-		public RectTransform EG_PetZiZhiItem6RectTransform
+		public UnityEngine.RectTransform EG_PetZiZhiItem6RectTransform
      	{
      		get
      		{
@@ -154,13 +188,13 @@ namespace ET.Client
      			}
      			if( this.m_EG_PetZiZhiItem6RectTransform == null )
      			{
-		    		this.m_EG_PetZiZhiItem6RectTransform = UIFindHelper.FindDeepChild<RectTransform>(this.uiTransform.gameObject,"EG_PetZiZhiItem6");
+		    		this.m_EG_PetZiZhiItem6RectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_PetZiZhiItem6");
      			}
      			return this.m_EG_PetZiZhiItem6RectTransform;
      		}
      	}
 
-		public LoopVerticalScrollRect E_CommonSkillItemsLoopVerticalScrollRect
+		public UnityEngine.UI.LoopVerticalScrollRect E_CommonSkillItemsLoopVerticalScrollRect
      	{
      		get
      		{
@@ -171,13 +205,13 @@ namespace ET.Client
      			}
      			if( this.m_E_CommonSkillItemsLoopVerticalScrollRect == null )
      			{
-		    		this.m_E_CommonSkillItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<LoopVerticalScrollRect>(this.uiTransform.gameObject,"E_CommonSkillItems");
+		    		this.m_E_CommonSkillItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.LoopVerticalScrollRect>(this.uiTransform.gameObject,"E_CommonSkillItems");
      			}
      			return this.m_E_CommonSkillItemsLoopVerticalScrollRect;
      		}
      	}
 
-		public Button E_FenjieBtnButton
+		public UnityEngine.UI.Button E_FenjieBtnButton
      	{
      		get
      		{
@@ -188,13 +222,13 @@ namespace ET.Client
      			}
      			if( this.m_E_FenjieBtnButton == null )
      			{
-		    		this.m_E_FenjieBtnButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_FenjieBtn");
+		    		this.m_E_FenjieBtnButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_FenjieBtn");
      			}
      			return this.m_E_FenjieBtnButton;
      		}
      	}
 
-		public Image E_FenjieBtnImage
+		public UnityEngine.UI.Image E_FenjieBtnImage
      	{
      		get
      		{
@@ -205,13 +239,13 @@ namespace ET.Client
      			}
      			if( this.m_E_FenjieBtnImage == null )
      			{
-		    		this.m_E_FenjieBtnImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_FenjieBtn");
+		    		this.m_E_FenjieBtnImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_FenjieBtn");
      			}
      			return this.m_E_FenjieBtnImage;
      		}
      	}
 
-		public Button E_TakeOutBagBtnButton
+		public UnityEngine.UI.Button E_TakeOutBagBtnButton
      	{
      		get
      		{
@@ -222,13 +256,13 @@ namespace ET.Client
      			}
      			if( this.m_E_TakeOutBagBtnButton == null )
      			{
-		    		this.m_E_TakeOutBagBtnButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_TakeOutBagBtn");
+		    		this.m_E_TakeOutBagBtnButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_TakeOutBagBtn");
      			}
      			return this.m_E_TakeOutBagBtnButton;
      		}
      	}
 
-		public Image E_TakeOutBagBtnImage
+		public UnityEngine.UI.Image E_TakeOutBagBtnImage
      	{
      		get
      		{
@@ -239,13 +273,13 @@ namespace ET.Client
      			}
      			if( this.m_E_TakeOutBagBtnImage == null )
      			{
-		    		this.m_E_TakeOutBagBtnImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_TakeOutBagBtn");
+		    		this.m_E_TakeOutBagBtnImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_TakeOutBagBtn");
      			}
      			return this.m_E_TakeOutBagBtnImage;
      		}
      	}
 
-		public Text E_TextNumberText
+		public UnityEngine.UI.Text E_TextNumberText
      	{
      		get
      		{
@@ -256,7 +290,7 @@ namespace ET.Client
      			}
      			if( this.m_E_TextNumberText == null )
      			{
-		    		this.m_E_TextNumberText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_TextNumber");
+		    		this.m_E_TextNumberText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_TextNumber");
      			}
      			return this.m_E_TextNumberText;
      		}
@@ -264,9 +298,11 @@ namespace ET.Client
 
 		public void DestroyWidget()
 		{
+			this.m_E_TextTitleText = null;
 			this.m_E_Btn_CloseButton = null;
 			this.m_E_Btn_CloseImage = null;
-			this.m_E_RolePetBagItemsLoopVerticalScrollRect = null;
+			this.m_E_RolePetBagItemsScrollRect = null;
+			this.m_E_RolePetBagItemsImage = null;
 			this.m_EG_PetZiZhiItem1RectTransform = null;
 			this.m_EG_PetZiZhiItem2RectTransform = null;
 			this.m_EG_PetZiZhiItem3RectTransform = null;
@@ -282,21 +318,23 @@ namespace ET.Client
 			this.uiTransform = null;
 		}
 
-		private Button m_E_Btn_CloseButton = null;
-		private Image m_E_Btn_CloseImage = null;
-		private LoopVerticalScrollRect m_E_RolePetBagItemsLoopVerticalScrollRect = null;
-		private RectTransform m_EG_PetZiZhiItem1RectTransform = null;
-		private RectTransform m_EG_PetZiZhiItem2RectTransform = null;
-		private RectTransform m_EG_PetZiZhiItem3RectTransform = null;
-		private RectTransform m_EG_PetZiZhiItem4RectTransform = null;
-		private RectTransform m_EG_PetZiZhiItem5RectTransform = null;
-		private RectTransform m_EG_PetZiZhiItem6RectTransform = null;
-		private LoopVerticalScrollRect m_E_CommonSkillItemsLoopVerticalScrollRect = null;
-		private Button m_E_FenjieBtnButton = null;
-		private Image m_E_FenjieBtnImage = null;
-		private Button m_E_TakeOutBagBtnButton = null;
-		private Image m_E_TakeOutBagBtnImage = null;
-		private Text m_E_TextNumberText = null;
+		private UnityEngine.UI.Text m_E_TextTitleText = null;
+		private UnityEngine.UI.Button m_E_Btn_CloseButton = null;
+		private UnityEngine.UI.Image m_E_Btn_CloseImage = null;
+		private UnityEngine.UI.ScrollRect m_E_RolePetBagItemsScrollRect = null;
+		private UnityEngine.UI.Image m_E_RolePetBagItemsImage = null;
+		private UnityEngine.RectTransform m_EG_PetZiZhiItem1RectTransform = null;
+		private UnityEngine.RectTransform m_EG_PetZiZhiItem2RectTransform = null;
+		private UnityEngine.RectTransform m_EG_PetZiZhiItem3RectTransform = null;
+		private UnityEngine.RectTransform m_EG_PetZiZhiItem4RectTransform = null;
+		private UnityEngine.RectTransform m_EG_PetZiZhiItem5RectTransform = null;
+		private UnityEngine.RectTransform m_EG_PetZiZhiItem6RectTransform = null;
+		private UnityEngine.UI.LoopVerticalScrollRect m_E_CommonSkillItemsLoopVerticalScrollRect = null;
+		private UnityEngine.UI.Button m_E_FenjieBtnButton = null;
+		private UnityEngine.UI.Image m_E_FenjieBtnImage = null;
+		private UnityEngine.UI.Button m_E_TakeOutBagBtnButton = null;
+		private UnityEngine.UI.Image m_E_TakeOutBagBtnImage = null;
+		private UnityEngine.UI.Text m_E_TextNumberText = null;
 		public Transform uiTransform = null;
 	}
 }

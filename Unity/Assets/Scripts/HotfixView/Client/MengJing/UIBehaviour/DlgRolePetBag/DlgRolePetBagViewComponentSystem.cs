@@ -1,7 +1,10 @@
-﻿namespace ET.Client
+﻿
+using UnityEngine;
+using UnityEngine.UI;
+namespace ET.Client
 {
 	[EntitySystemOf(typeof(DlgRolePetBagViewComponent))]
-	[FriendOfAttribute(typeof(DlgRolePetBagViewComponent))]
+	[FriendOfAttribute(typeof(ET.Client.DlgRolePetBagViewComponent))]
 	public static partial class DlgRolePetBagViewComponentSystem
 	{
 		[EntitySystem]
