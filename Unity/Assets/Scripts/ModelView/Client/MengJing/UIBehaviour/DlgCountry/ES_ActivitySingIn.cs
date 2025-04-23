@@ -6,49 +6,13 @@ namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class ES_ActivitySingIn : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy 
+	public  class ES_ActivitySingIn : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy,IUILogic
 	{
-		public List<string> AssetList = new();
-		
-		public ES_ActivitySingInFree ES_ActivitySingInFree
-		{
-			get
-			{
-				ES_ActivitySingInFree es = this.m_es_activitySingInFree;
-				if (es == null)
-				{
-					string path = "Assets/Bundles/UI/Common/ES_ActivitySingInFree.prefab";
-					GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
-					GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_PanelRootRectTransform);
-					go.SetActive(true);
-					this.AssetList.Add(path);
-					this.m_es_activitySingInFree = this.AddChild<ES_ActivitySingInFree, Transform>(go.transform);
-					go.SetActive(false);
-				}
-
-				return this.m_es_activitySingInFree;
-			}
-		}
-		
-		public ES_ActivitySingInVIP ES_ActivitySingInVip
-		{
-			get
-			{
-				ES_ActivitySingInVIP es = this.m_es_activitySingInPaid;
-				if (es == null)
-				{
-					string path = "Assets/Bundles/UI/Common/ES_ActivitySingInVIP.prefab";
-					GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
-					GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_PanelRootRectTransform);
-					go.SetActive(true);
-					this.AssetList.Add(path);
-					this.m_es_activitySingInPaid = this.AddChild<ES_ActivitySingInVIP, Transform>(go.transform);
-					go.SetActive(false);
-				}
-
-				return this.m_es_activitySingInPaid;
-			}
-		}
+		public int SingInActivityType;
+		public int LeiJiSingInActivityType;
+		public int CurDay;
+		public List<ActivityConfig> ShowActivityConfigs = new();
+		public Dictionary<int, EntityRef<Scroll_Item_ActivitySingInItem>> ScrollItemActivitySingInItems;
 		
 		public UnityEngine.UI.ToggleGroup E_TypeSetToggleGroup
      	{
@@ -84,6 +48,193 @@ namespace ET.Client
      		}
      	}
 
+		public UnityEngine.UI.Text E_AlreadySingInDayText
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_AlreadySingInDayText == null )
+     			{
+		    		this.m_E_AlreadySingInDayText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"EG_PanelRoot/E_AlreadySingInDay");
+     			}
+     			return this.m_E_AlreadySingInDayText;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_RewardProgressImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_RewardProgressImage == null )
+     			{
+		    		this.m_E_RewardProgressImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_PanelRoot/RewardSet/E_RewardProgress");
+     			}
+     			return this.m_E_RewardProgressImage;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_Reward1Image
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Reward1Image == null )
+     			{
+		    		this.m_E_Reward1Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_PanelRoot/RewardSet/E_Reward1");
+     			}
+     			return this.m_E_Reward1Image;
+     		}
+     	}
+
+		public UnityEngine.EventSystems.EventTrigger E_Reward1EventTrigger
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Reward1EventTrigger == null )
+     			{
+		    		this.m_E_Reward1EventTrigger = UIFindHelper.FindDeepChild<UnityEngine.EventSystems.EventTrigger>(this.uiTransform.gameObject,"EG_PanelRoot/RewardSet/E_Reward1");
+     			}
+     			return this.m_E_Reward1EventTrigger;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_Reward2Image
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Reward2Image == null )
+     			{
+		    		this.m_E_Reward2Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_PanelRoot/RewardSet/E_Reward2");
+     			}
+     			return this.m_E_Reward2Image;
+     		}
+     	}
+
+		public UnityEngine.EventSystems.EventTrigger E_Reward2EventTrigger
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Reward2EventTrigger == null )
+     			{
+		    		this.m_E_Reward2EventTrigger = UIFindHelper.FindDeepChild<UnityEngine.EventSystems.EventTrigger>(this.uiTransform.gameObject,"EG_PanelRoot/RewardSet/E_Reward2");
+     			}
+     			return this.m_E_Reward2EventTrigger;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_Reward3Image
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Reward3Image == null )
+     			{
+		    		this.m_E_Reward3Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_PanelRoot/RewardSet/E_Reward3");
+     			}
+     			return this.m_E_Reward3Image;
+     		}
+     	}
+
+		public UnityEngine.EventSystems.EventTrigger E_Reward3EventTrigger
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Reward3EventTrigger == null )
+     			{
+		    		this.m_E_Reward3EventTrigger = UIFindHelper.FindDeepChild<UnityEngine.EventSystems.EventTrigger>(this.uiTransform.gameObject,"EG_PanelRoot/RewardSet/E_Reward3");
+     			}
+     			return this.m_E_Reward3EventTrigger;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_Reward4Image
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Reward4Image == null )
+     			{
+		    		this.m_E_Reward4Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_PanelRoot/RewardSet/E_Reward4");
+     			}
+     			return this.m_E_Reward4Image;
+     		}
+     	}
+
+		public UnityEngine.EventSystems.EventTrigger E_Reward4EventTrigger
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Reward4EventTrigger == null )
+     			{
+		    		this.m_E_Reward4EventTrigger = UIFindHelper.FindDeepChild<UnityEngine.EventSystems.EventTrigger>(this.uiTransform.gameObject,"EG_PanelRoot/RewardSet/E_Reward4");
+     			}
+     			return this.m_E_Reward4EventTrigger;
+     		}
+     	}
+
+		public UnityEngine.UI.LoopVerticalScrollRect E_ActivitySingInItemsLoopVerticalScrollRect
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_ActivitySingInItemsLoopVerticalScrollRect == null )
+     			{
+		    		this.m_E_ActivitySingInItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.LoopVerticalScrollRect>(this.uiTransform.gameObject,"EG_PanelRoot/E_ActivitySingInItems");
+     			}
+     			return this.m_E_ActivitySingInItemsLoopVerticalScrollRect;
+     		}
+     	}
+
 		    public Transform UITransform
          {
      	    get
@@ -98,25 +249,35 @@ namespace ET.Client
 
 		public void DestroyWidget()
 		{
-			this.m_es_activitySingInFree = null;
-			this.m_es_activitySingInPaid = null;
 			this.m_E_TypeSetToggleGroup = null;
 			this.m_EG_PanelRootRectTransform = null;
+			this.m_E_AlreadySingInDayText = null;
+			this.m_E_RewardProgressImage = null;
+			this.m_E_Reward1Image = null;
+			this.m_E_Reward1EventTrigger = null;
+			this.m_E_Reward2Image = null;
+			this.m_E_Reward2EventTrigger = null;
+			this.m_E_Reward3Image = null;
+			this.m_E_Reward3EventTrigger = null;
+			this.m_E_Reward4Image = null;
+			this.m_E_Reward4EventTrigger = null;
+			this.m_E_ActivitySingInItemsLoopVerticalScrollRect = null;
 			this.uiTransform = null;
-			
-			ResourcesLoaderComponent resourcesLoaderComponent = this.Root().GetComponent<ResourcesLoaderComponent>();
-			for (int i = 0; i < this.AssetList.Count; i++)
-			{
-				resourcesLoaderComponent.UnLoadAsset(this.AssetList[i]);
-			}
-			this.AssetList.Clear();
-			this.AssetList = null;
 		}
 
-		private EntityRef<ES_ActivitySingInFree> m_es_activitySingInFree = null;
-		private EntityRef<ES_ActivitySingInVIP> m_es_activitySingInPaid = null;
 		private UnityEngine.UI.ToggleGroup m_E_TypeSetToggleGroup = null;
 		private UnityEngine.RectTransform m_EG_PanelRootRectTransform = null;
+		private UnityEngine.UI.Text m_E_AlreadySingInDayText = null;
+		private UnityEngine.UI.Image m_E_RewardProgressImage = null;
+		private UnityEngine.UI.Image m_E_Reward1Image = null;
+		private UnityEngine.EventSystems.EventTrigger m_E_Reward1EventTrigger = null;
+		private UnityEngine.UI.Image m_E_Reward2Image = null;
+		private UnityEngine.EventSystems.EventTrigger m_E_Reward2EventTrigger = null;
+		private UnityEngine.UI.Image m_E_Reward3Image = null;
+		private UnityEngine.EventSystems.EventTrigger m_E_Reward3EventTrigger = null;
+		private UnityEngine.UI.Image m_E_Reward4Image = null;
+		private UnityEngine.EventSystems.EventTrigger m_E_Reward4EventTrigger = null;
+		private UnityEngine.UI.LoopVerticalScrollRect m_E_ActivitySingInItemsLoopVerticalScrollRect = null;
 		public Transform uiTransform = null;
 	}
 }
