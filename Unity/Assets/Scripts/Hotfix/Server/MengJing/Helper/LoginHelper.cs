@@ -136,6 +136,7 @@ namespace ET.Server
                     }
                     
                     unit.GetComponent<JiaYuanComponentS>().OnLoginCheck(hour_1, hour_2);
+                    unit.GetComponent<HeroDataComponentS>().OnLoginCheck(currentTime - lastLoginTime);
                 }
             }
             else

@@ -102,6 +102,23 @@ namespace ET.Server
              }
          }
 
+         public static void OnLoginCheck(this HeroDataComponentS self, long passTime)
+         {
+             Unit unit = self.GetParent<Unit>();
+             NumericComponentS numericComponentS = unit.GetComponent<NumericComponentS>();
+
+             int initTimes = GlobalValueConfigCategory.Instance.SingleHappyInitTimes;
+             int remainTimes = numericComponentS.GetAsInt(NumericType.SingleHappyRemainTimes);
+             if (initTimes <= remainTimes)
+             {
+                 return;
+             }
+
+             long addTimes = passTime / GlobalValueConfigCategory.Instance.SingleHappyrecoverTime;
+             addTimes = math.min(addTimes, initTimes - addTimes);
+             numericComponentS.ApplyValue(NumericType.SingleHappyRemainTimes, remainTimes + addTimes, false);
+         }
+         
          public static void CheckSingeHappy(this HeroDataComponentS self)
          {
              Unit unit = self.GetParent<Unit>();

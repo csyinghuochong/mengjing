@@ -290,6 +290,7 @@
                     scene.Root().GetComponent<UIComponent>().GetDlgLogic<DlgPetMeleeMain>()?.UpdatePetMeleeMoRPS();
                     break;
                 case NumericType.SingleHappyRemainTimes:
+                    Log.Debug($"NumericType.SingleHappyRemainTimes:  {args.NewValue}");
                     scene.Root().GetComponent<UIComponent>().GetDlgLogic<DlgSingleHappyMain>()?.ShowTimes();
                     break;
                 case NumericType.Now_Hp:

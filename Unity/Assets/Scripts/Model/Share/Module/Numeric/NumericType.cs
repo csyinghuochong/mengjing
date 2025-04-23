@@ -209,9 +209,7 @@
         public const int CommonSeasonDonateTimes = 4014;
         public const int SingleHappyCellIndex = 4015;                                           //格子位置，
         public const int SingleBuyTimes = 4016;  
-        public const int SingleHappyRemainTimes = 4017;                                          //单人喜从天降剩余的次数
-        public const int SingleHappyLastMoveTime = 4018;                                       //单人喜从天降上次移动次数
-
+        public const int SingleHappyRemainTimes = 4017;                                          //单人喜从天降剩余的次数//单人喜从天降上次移动次数
         
         public const int Max = 10000;
 
