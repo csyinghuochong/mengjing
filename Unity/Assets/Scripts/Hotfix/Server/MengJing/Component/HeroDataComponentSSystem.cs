@@ -109,7 +109,7 @@ namespace ET.Server
 
              int initTimes = GlobalValueConfigCategory.Instance.SingleHappyInitTimes;
              int remainTimes = numericComponentS.GetAsInt(NumericType.SingleHappyRemainTimes);
-             if (remainTimes < initTimes)
+             if (initTimes <= remainTimes)
              {
                  return;
              }
