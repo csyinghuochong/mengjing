@@ -55,7 +55,7 @@ namespace ET.Client
 		{
 		}
 
-		private static void ShowTimes(this DlgSingleHappyMain self)
+		public static void ShowTimes(this DlgSingleHappyMain self)
 		{
 			Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
 			NumericComponentC numericComponentS = unit.GetComponent<NumericComponentC>();
