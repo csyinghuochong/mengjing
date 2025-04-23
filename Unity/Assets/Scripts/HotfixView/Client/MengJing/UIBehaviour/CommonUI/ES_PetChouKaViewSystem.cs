@@ -56,6 +56,11 @@ namespace ET.Client
 
         private static void OnInitUI(this ES_PetChouKa self)
         {
+            string[] itemInfo = ConfigData.PetChouKaCost.Split(';');
+            ItemConfig itemConfig = ItemConfigCategory.Instance.Get(int.Parse(itemInfo[0]));
+            self.E_OpenCostItemIconImage.overrideSprite = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemIcon, itemConfig.Icon));
+            self.E_OpenCostNumText.text = itemInfo[1];
+            
             self.RewardShowItems.Clear();
             string[] itemList = ConfigData.PetChouKaRewardList.Split('@');
             foreach (string s in itemList)
@@ -147,6 +152,7 @@ namespace ET.Client
 
             await PetNetHelper.RequestPetChouKaEnd(self.Root());
 
+            self.OnStopTurn = false;
             self.E_ButtonOpenButton.gameObject.SetActive(true);
             self.E_ButtonStopButton.gameObject.SetActive(false);
         }
