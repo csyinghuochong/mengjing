@@ -15,7 +15,7 @@ namespace ET
             //单人喜从天降次数恢复
             if (message.FunctionId == 1076)
             {
-                
+                unit.GetComponent<HeroDataComponentS>().CheckSingeHappy();
             }
 
             //恢复体力

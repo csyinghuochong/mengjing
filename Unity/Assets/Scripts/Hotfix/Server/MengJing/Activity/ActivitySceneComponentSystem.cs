@@ -54,8 +54,10 @@ namespace ET.Server
             self.MapIdList.Add(UnitCacheHelper.GetUnionServerId(self.Zone()));
             self.MapIdList.Add(UnitCacheHelper.GetSoloServerId(self.Zone()));
             self.MapIdList.Add(UnitCacheHelper.GetDbCacheId(self.Zone()));
+            
             self.InitDayActivity().Coroutine();
             self.InitFunctionButton().Coroutine();
+            self.UpdateLastSingleHappyTime();
         }
 
         [EntitySystem]
@@ -65,7 +67,8 @@ namespace ET.Server
 
         public static void OnCheck(this ActivitySceneComponent self)
         {
-            DateTime dateTime = TimeHelper.DateTimeNow();
+            long serverTime = TimeHelper.ServerNow();
+            DateTime dateTime = TimeInfo.Instance.ToDateTime(serverTime);
 
             if (self.DBDayActivityInfo.CommonSeasonOpenTime == 0)
             {
@@ -78,9 +81,13 @@ namespace ET.Server
                 self.CheckSeasonBoss();
                 self.NoticeActivityUpdate_Hour(dateTime).Coroutine();
             }
-            
-            
 
+            if (serverTime >= self.NextSingleHappyTime)
+            {
+                self.UpdateLastSingleHappyTime();
+                self.NoticeActivityUpdate_SingleHappy().Coroutine();
+            }
+            
             self.CheckIndex++;
             if (self.CheckIndex >=  600)
             { 
@@ -88,6 +95,16 @@ namespace ET.Server
                 self.SaveDB();
                 self.CheckIndex = 0;
             }
+        }
+
+        private static void UpdateLastSingleHappyTime(this ActivitySceneComponent self)
+        {
+            DateTime dateTime = TimeInfo.Instance.ToDateTime(TimeHelper.ServerNow());
+            long cursecond = (dateTime.Hour * 3600 + dateTime.Minute * 60 + dateTime.Second) * TimeHelper.Second;
+            long singlerecover = GlobalValueConfigCategory.Instance.SingleHappyrecoverTime;
+            //计算下个月恢复时间点
+            long leftTime = singlerecover - cursecond % singlerecover;
+            self.NextSingleHappyTime = TimeHelper.ServerNow() + leftTime;
         }
 
         private static void CheckSeasonBoss(this ActivitySceneComponent self)
@@ -100,6 +117,21 @@ namespace ET.Server
                 self.DBDayActivityInfo.CommonSeasonBossExp = 0;
                 self.DBDayActivityInfo.CommonSeasonBossLevel = 0;
             }
+        }
+
+        private static async ETTask NoticeActivityUpdate_SingleHappy(this ActivitySceneComponent self)
+        {
+            List<ActorId> actorIds = UnitCacheHelper.GetGateServerId(self.Zone());
+            for (int i = 0; i < actorIds.Count; i++)
+            {
+                A2A_ActivityUpdateRequest A2A_ActivityUpdateRequest = A2A_ActivityUpdateRequest.Create();
+                A2A_ActivityUpdateRequest.Hour = 0;
+                A2A_ActivityUpdateRequest.FunctionId = 1076;
+                A2A_ActivityUpdateResponse m2m_TrasferUnitResponse =
+                        (A2A_ActivityUpdateResponse)await self.Root().GetComponent<MessageSender>()
+                                .Call(actorIds[i], A2A_ActivityUpdateRequest);
+            }
+           
         }
 
         private static async ETTask NoticeActivityUpdate_Hour(this ActivitySceneComponent self, DateTime dateTime)

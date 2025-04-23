@@ -102,32 +102,19 @@ namespace ET.Server
              }
          }
 
-         public static void Check(this HeroDataComponentS self,  int second)
+         public static void CheckSingeHappy(this HeroDataComponentS self)
          {
              Unit unit = self.GetParent<Unit>();
              NumericComponentS numericComponentS = unit.GetComponent<NumericComponentS>();
 
              int initTimes = GlobalValueConfigCategory.Instance.SingleHappyInitTimes;
              int remainTimes = numericComponentS.GetAsInt(NumericType.SingleHappyRemainTimes);
-             if (initTimes <= remainTimes)
+             if (remainTimes < initTimes)
              {
                  return;
              }
 
-             long lastmoveTime =  numericComponentS.GetAsLong(NumericType.SingleHappyLastMoveTime);
-             long passTime = TimeHelper.ServerNow() - lastmoveTime;
-
-             long addTimes = passTime / GlobalValueConfigCategory.Instance.SingleHappyrecoverTime;
-
-             if (addTimes <= 0)
-             {
-                 return;
-             }
-
-             long leftTime = passTime % GlobalValueConfigCategory.Instance.SingleHappyrecoverTime;
-             lastmoveTime += leftTime;
-             numericComponentS.ApplyValue(NumericType.SingleHappyRemainTimes, math.min(addTimes + remainTimes,initTimes ));
-             numericComponentS.ApplyValue(NumericType.SingleHappyLastMoveTime, lastmoveTime);
+             numericComponentS.ApplyValue(NumericType.SingleHappyRemainTimes, remainTimes + 1);
          }
 
          public static void OnLogin(this HeroDataComponentS self, int robotId)

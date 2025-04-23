@@ -18,7 +18,7 @@ namespace ET.Server
         //map进程ID，用来给进程广播消息，以后可能需要拆分出去
         public List<ActorId> MapIdList = new List<ActorId>();
         
-        public long LastSingleHappyTime = 0;
+        public long NextSingleHappyTime = 0;
 
         public DBDayActivityInfo DBDayActivityInfo { get; set; }
 

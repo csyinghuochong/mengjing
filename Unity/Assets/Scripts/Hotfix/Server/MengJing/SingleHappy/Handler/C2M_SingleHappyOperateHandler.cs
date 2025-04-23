@@ -24,13 +24,6 @@ namespace ET.Server
                     return;
                 }
                 
-                //正在恢复中则不覆盖恢复时间
-                long lastmoveTime = numericComponentS.GetAsLong(NumericType.SingleHappyLastMoveTime);
-                if (TimeHelper.ServerNow() - lastmoveTime > GlobalValueConfigCategory.Instance.SingleHappyrecoverTime)
-                {
-                    numericComponentS.ApplyValue(NumericType.SingleHappyLastMoveTime, TimeHelper.ServerNow());
-                }
-                
                 numericComponentS.ApplyValue(NumericType.SingleHappyRemainTimes, remainTimes - 1);
             }
             if (request.OperatateType == 2)
