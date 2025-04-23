@@ -4573,7 +4573,13 @@ namespace ET
         public long ActorId { get; set; }
 
         [MemoryPackOrder(0)]
-        public int ActivityType { get; set; }
+        public int Hour { get; set; }
+
+        [MemoryPackOrder(2)]
+        public int FunctionId { get; set; }
+
+        [MemoryPackOrder(3)]
+        public int FunctionType { get; set; }
 
         public override void Dispose()
         {
@@ -4584,7 +4590,9 @@ namespace ET
 
             this.RpcId = default;
             this.ActorId = default;
-            this.ActivityType = default;
+            this.Hour = default;
+            this.FunctionId = default;
+            this.FunctionType = default;
 
             ObjectPool.Instance.Recycle(this);
         }

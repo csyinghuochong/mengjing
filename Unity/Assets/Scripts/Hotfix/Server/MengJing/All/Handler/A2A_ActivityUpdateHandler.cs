@@ -21,7 +21,9 @@ namespace ET.Server
                     }
                     EntityRef<Player>[] players = scene.GetComponent<PlayerComponent>().GetAll();
                     G2M_ActivityUpdate g2MActivityUpdate = G2M_ActivityUpdate.Create();
-                    g2MActivityUpdate.ActivityType = hour;
+                    g2MActivityUpdate.Hour = hour;
+                    g2MActivityUpdate.FunctionId = request.FunctionId;
+                    g2MActivityUpdate.FunctionType = request.FunctionType;
                     for (int i = 0; i < players.Length; i++)
                     {
                         Player player = players[i];
@@ -33,13 +35,13 @@ namespace ET.Server
                         scene.Root().GetComponent<MessageLocationSenderComponent>().Get( LocationType.Unit).Send(player.UnitId, g2MActivityUpdate);
                     }
 
-                    if (request.Hour >= 20 && scene.Zone() == 3)
+                    if (request.FunctionId == 0 && request.Hour >= 20 && scene.Zone() == 3)
                     {
                         Console.WriteLine("gongzuoshi3 0");
                         EventSystem.Instance.Publish(scene.Root(), new GMCommonRequest() { Context = "gongzuoshi3 0" });
                     }
 
-                    if (request.Hour == 23 && scene.Zone() == 3)
+                    if (request.FunctionId == 0 && request.Hour == 23 && scene.Zone() == 3)
                     {
                         //打印所有拍卖大于特定值
                         string command = "paimai2 0 50000000";
@@ -53,7 +55,7 @@ namespace ET.Server
                         string filePath_2 = "../Logs/WJ_Chat.txt";
                         ServerLogHelper.WriteLogList(new List<string>() { "" }, filePath_2, false);
                     }
-                    if (request.Hour == 10 && scene.Zone() == 3)
+                    if (request.FunctionId == 0 && request.Hour == 10 && scene.Zone() == 3)
                     {
                         //打印拍卖
                     }

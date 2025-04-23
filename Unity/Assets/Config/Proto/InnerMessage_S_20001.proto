@@ -1058,7 +1058,9 @@ message G2M_ActivityUpdate // IMessage
 {
 	int32 RpcId = 90;
 	int64 ActorId = 93;
-	int32 ActivityType = 1;
+	int32 Hour = 1;
+	int32 FunctionId = 3;
+	int32 FunctionType = 4;
 }
 
 //广播
