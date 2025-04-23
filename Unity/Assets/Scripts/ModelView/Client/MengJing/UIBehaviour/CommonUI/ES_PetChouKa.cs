@@ -17,24 +17,6 @@ namespace ET.Client
 		public bool OnStopTurn;
 		public bool ifStop;
 		
-		
-		public UnityEngine.UI.Image E_ButtonDiImage
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_ButtonDiImage == null )
-     			{
-		    		this.m_E_ButtonDiImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_ButtonDi");
-     			}
-     			return this.m_E_ButtonDiImage;
-     		}
-     	}
-
 		public UnityEngine.UI.LoopVerticalScrollRect E_BagItemsLoopVerticalScrollRect
      	{
      		get
@@ -137,6 +119,40 @@ namespace ET.Client
      		}
      	}
 
+		public UnityEngine.UI.Text E_OpenCostNumText
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_OpenCostNumText == null )
+     			{
+		    		this.m_E_OpenCostNumText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_OpenCostNum");
+     			}
+     			return this.m_E_OpenCostNumText;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_OpenCostItemIconImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_OpenCostItemIconImage == null )
+     			{
+		    		this.m_E_OpenCostItemIconImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_OpenCostItemIcon");
+     			}
+     			return this.m_E_OpenCostItemIconImage;
+     		}
+     	}
+
 		    public Transform UITransform
          {
      	    get
@@ -151,23 +167,25 @@ namespace ET.Client
 
 		public void DestroyWidget()
 		{
-			this.m_E_ButtonDiImage = null;
 			this.m_E_BagItemsLoopVerticalScrollRect = null;
 			this.m_E_ButtonStopButton = null;
 			this.m_E_ButtonStopImage = null;
 			this.m_E_ButtonOpenButton = null;
 			this.m_E_ButtonOpenImage = null;
 			this.m_E_ImageSelectImage = null;
+			this.m_E_OpenCostNumText = null;
+			this.m_E_OpenCostItemIconImage = null;
 			this.uiTransform = null;
 		}
-		
-		private UnityEngine.UI.Image m_E_ButtonDiImage = null;
+
 		private UnityEngine.UI.LoopVerticalScrollRect m_E_BagItemsLoopVerticalScrollRect = null;
 		private UnityEngine.UI.Button m_E_ButtonStopButton = null;
 		private UnityEngine.UI.Image m_E_ButtonStopImage = null;
 		private UnityEngine.UI.Button m_E_ButtonOpenButton = null;
 		private UnityEngine.UI.Image m_E_ButtonOpenImage = null;
 		private UnityEngine.UI.Image m_E_ImageSelectImage = null;
+		private UnityEngine.UI.Text m_E_OpenCostNumText = null;
+		private UnityEngine.UI.Image m_E_OpenCostItemIconImage = null;
 		public Transform uiTransform = null;
 	}
 }
