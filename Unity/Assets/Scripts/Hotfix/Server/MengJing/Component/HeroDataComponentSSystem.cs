@@ -48,6 +48,12 @@ namespace ET.Server
              {
                  numericComponent.ApplyValue(NumericType.HorseRide, numericComponent.GetAsInt(NumericType.HorseFightID), false);
              }
+
+             if (numericComponent.GetAsInt(NumericType.Now_Hp) == 0)
+             {
+                 numericComponent.ApplyValue(NumericType.HorseRide, numericComponent.GetAsInt(NumericType.Now_MaxHp), false);
+             }
+
              if (numericComponent.GetAsInt(NumericType.UnionXiuLian_0) == 0)
              {
                  Dictionary<int, List<UnionQiangHuaConfig>> keyValuePairs = UnionQiangHuaConfigCategory.Instance.UnionQiangHuaList;
