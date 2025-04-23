@@ -78,6 +78,8 @@ namespace ET.Server
                 self.CheckSeasonBoss();
                 self.NoticeActivityUpdate_Hour(dateTime).Coroutine();
             }
+            
+            
 
             self.CheckIndex++;
             if (self.CheckIndex >=  600)
@@ -112,7 +114,6 @@ namespace ET.Server
             {
                 A2A_ActivityUpdateRequest A2A_ActivityUpdateRequest = A2A_ActivityUpdateRequest.Create();
                 A2A_ActivityUpdateRequest.Hour = hour;
-                A2A_ActivityUpdateRequest.OpenDay = openServerDay;
                 A2A_ActivityUpdateResponse m2m_TrasferUnitResponse =
                         (A2A_ActivityUpdateResponse)await self.Root().GetComponent<MessageSender>()
                                 .Call(self.MapIdList[i], A2A_ActivityUpdateRequest);

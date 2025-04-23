@@ -1043,7 +1043,6 @@ message A2A_ActivityUpdateRequest // IRequest
 	int32 RpcId = 90;
 	int64 ActorId = 93;
 	int32 Hour = 1;
-	int32 OpenDay  = 2;
 	int32 FunctionId = 3;
 	int32 FunctionType = 4;
 }

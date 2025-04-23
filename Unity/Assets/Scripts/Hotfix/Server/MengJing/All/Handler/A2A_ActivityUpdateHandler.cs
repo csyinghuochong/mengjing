@@ -167,6 +167,7 @@ namespace ET.Server
                     if (hour == 0)
                     {
                         //Log.Console($"FubenCenter定时刷新: {scene.DomainZone()} {hour}");
+                        int openServerDay = ServerHelper.GetServeOpenDay(scene.Zone());
                         ServerLogHelper.LogWarning($"FubenCenter定时刷新: {scene.Zone()} {hour}", true);
                         FubenCenterComponent fubenCenter = scene.GetComponent<FubenCenterComponent>();
                         foreach (var item in fubenCenter.Children)
@@ -177,7 +178,7 @@ namespace ET.Server
                                 //Log.Error($"FubenCenter定时刷新Error: {scene.Zone()} {item.Key} {item.Value}");
                                 continue;   
                             }
-                            fubenScene.GetComponent<YeWaiRefreshComponent>()?.OnZeroClockUpdate(request.OpenDay);
+                            fubenScene.GetComponent<YeWaiRefreshComponent>()?.OnZeroClockUpdate(openServerDay);
                         }
                     }
                     if (request.FunctionId > 0 && request.FunctionType == 1)

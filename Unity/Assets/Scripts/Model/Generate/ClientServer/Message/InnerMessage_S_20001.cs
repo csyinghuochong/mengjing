@@ -4501,9 +4501,6 @@ namespace ET
         [MemoryPackOrder(0)]
         public int Hour { get; set; }
 
-        [MemoryPackOrder(1)]
-        public int OpenDay { get; set; }
-
         [MemoryPackOrder(2)]
         public int FunctionId { get; set; }
 
@@ -4520,7 +4517,6 @@ namespace ET
             this.RpcId = default;
             this.ActorId = default;
             this.Hour = default;
-            this.OpenDay = default;
             this.FunctionId = default;
             this.FunctionType = default;
 
