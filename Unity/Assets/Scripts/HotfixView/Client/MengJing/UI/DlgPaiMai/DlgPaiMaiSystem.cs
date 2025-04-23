@@ -15,7 +15,15 @@ namespace ET.Client
 
         public static void ShowWindow(this DlgPaiMai self, Entity contextData = null)
         {
-            self.View.E_FunctionSetBtnToggleGroup.OnSelectIndex(0);
+            int index = 0;
+            if (contextData!= null && contextData is ShowWindowData)
+            {
+                ShowWindowData showWindowData = (ShowWindowData)contextData;
+                index = showWindowData.ParamInfoInt;
+            }
+
+            self.View.E_FunctionSetBtnToggleGroup.OnSelectIndex(index);
+            contextData = null;
         }
 
         private static void OnFunctionSetBtn(this DlgPaiMai self, int index)

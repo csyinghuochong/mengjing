@@ -34,19 +34,21 @@ namespace ET.Client
         {
         }
 
-        private static void OnAddGoldButton(this DlgHuoBiSet self)
+        private static  void OnAddGoldButton(this DlgHuoBiSet self)
         {
             if (self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgRecharge>() != null)
             {
                 return;
             }
 
-            self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_Recharge).Coroutine();
+            ShowWindowData showWindowData = new ShowWindowData();
+            showWindowData.ParamInfoInt = 3;
+            self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_PaiMai, showWindowData).Coroutine();
         }
 
         private static void OnAddZuanShiButton(this DlgHuoBiSet self)
         {
-            if (self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgPaiMai>() != null)
+            if (self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgRecharge>() != null)
             {
                 return;
             }

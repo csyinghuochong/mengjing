@@ -1,4 +1,6 @@
-﻿namespace ET.Client
+﻿using System;
+
+namespace ET.Client
 {
     
     public enum UIWindowType
@@ -12,6 +14,6 @@
     
     public class ShowWindowData : Entity
     {
-   
+        public int ParamInfoInt { get; set; } = 0;
     }
 }
