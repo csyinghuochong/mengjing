@@ -64,36 +64,11 @@ namespace ET.Client
 			Log.Debug($"ShowTimes....remainTimes:  {remainTimes}");
 			self.View.E_TextTip_4Text.text = $"{remainTimes}/{GlobalValueConfigCategory.Instance.SingleHappyInitTimes}";
 		}
-
-		public static void UpdateCD(this DlgSingleHappyMain self)
-		{
-			self.ShowCD();
-		}
+		
 
 		private static void ShowCD(this DlgSingleHappyMain self)
 		{
 			self.View.E_TextTip_1Text.text = string.Empty;
-			self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
-            
-			Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
-			NumericComponentC numericComponentS = unit.GetComponent<NumericComponentC>();
-			int initTimes = GlobalValueConfigCategory.Instance.SingleHappyInitTimes;
-			int remainTimes = numericComponentS.GetAsInt(NumericType.SingleHappyRemainTimes);
-			
-            Log.Debug($"remainTimes:  {initTimes}  {remainTimes}");
-            
-			if (initTimes <= remainTimes)
-			{
-				return;
-			}
-
-			long recoverTime = GlobalValueConfigCategory.Instance.SingleHappyrecoverTime;
-			long lastmoveTime =  numericComponentS.GetAsLong(NumericType.SingleHappyLastMoveTime);
-
-			self.RecoverTime = lastmoveTime + recoverTime;  
-			
-			Log.Debug($"self.RecoverTime:  {self.RecoverTime}  {TimeHelper.ServerNow()}   {lastmoveTime}");
-			
 			self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
 			self.Timer = self.Root().GetComponent<TimerComponent>().NewRepeatedTimer(1000, TimerInvokeType.UISingleHappyMoveTimer, self);
 
@@ -102,16 +77,13 @@ namespace ET.Client
 
 		public static void SingleHappyTimer(this DlgSingleHappyMain self)
 		{
-			long leftTimer = self.RecoverTime - TimeHelper.ServerNow();
-			if (leftTimer > 0)
-			{
-				self.View.E_TextTip_1Text.text = TimeHelper.FormatSecondsToTime(leftTimer);
-			}
-			else
-			{
-				self.View.E_TextTip_1Text.text = string.Empty;
-				self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
-			}
+			DateTime dateTime = TimeInfo.Instance.ToDateTime(TimeHelper.ServerNow());
+			long cursecond = (dateTime.Hour * 3600 + dateTime.Minute * 60 + dateTime.Second) * TimeHelper.Second;
+			long singlerecover = GlobalValueConfigCategory.Instance.SingleHappyrecoverTime;
+			//计算下个恢复时间点
+			long leftTime = singlerecover - cursecond % singlerecover;
+			
+			self.View.E_TextTip_1Text.text = TimeHelper.FormatSecondsToTime(leftTime);
 		}
 		
 		private static async  ETTask OnuttonMove_1Button(this DlgSingleHappyMain self)

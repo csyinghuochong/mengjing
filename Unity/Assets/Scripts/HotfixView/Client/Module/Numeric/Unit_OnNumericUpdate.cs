@@ -290,7 +290,7 @@
                     scene.Root().GetComponent<UIComponent>().GetDlgLogic<DlgPetMeleeMain>()?.UpdatePetMeleeMoRPS();
                     break;
                 case NumericType.SingleHappyRemainTimes:
-                    scene.Root().GetComponent<UIComponent>().GetDlgLogic<DlgSingleHappyMain>()?.UpdateCD();
+                    
                     break;
                 case NumericType.Now_Hp:
                 case NumericType.Now_MaxHp:

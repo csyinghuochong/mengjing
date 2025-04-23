@@ -102,7 +102,7 @@ namespace ET.Server
             DateTime dateTime = TimeInfo.Instance.ToDateTime(TimeHelper.ServerNow());
             long cursecond = (dateTime.Hour * 3600 + dateTime.Minute * 60 + dateTime.Second) * TimeHelper.Second;
             long singlerecover = GlobalValueConfigCategory.Instance.SingleHappyrecoverTime;
-            //计算下个月恢复时间点
+            //计算下个恢复时间点
             long leftTime = singlerecover - cursecond % singlerecover;
             self.NextSingleHappyTime = TimeHelper.ServerNow() + leftTime;
         }
