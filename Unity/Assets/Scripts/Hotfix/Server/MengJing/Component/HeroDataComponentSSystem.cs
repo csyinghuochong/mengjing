@@ -114,7 +114,7 @@ namespace ET.Server
                  return;
              }
 
-             long addTimes = passTime / GlobalValueConfigCategory.Instance.SingleHappyrecoverTime;
+             int addTimes = (int)(passTime * 1f/ GlobalValueConfigCategory.Instance.SingleHappyrecoverTime);
              addTimes = math.min(addTimes, initTimes - addTimes);
              numericComponentS.ApplyValue(NumericType.SingleHappyRemainTimes, remainTimes + addTimes, false);
          }
