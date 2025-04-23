@@ -1060,7 +1060,14 @@ namespace ET
             { ItemGetWay.ActivityChouKa, "抽卡" },
             { ItemGetWay.ActivityConsume, "消耗钻石" },
             { ItemGetWay.ActivityHongBao, "充值红包" },
-            { ItemGetWay.PetExplore, "宠物探索" },
+            { ItemGetWay.SingleRecharge, "宠物探索" },
+            { ItemGetWay.ItemXiLian, "道具洗练" },
+            { ItemGetWay.ActivityNewYear, "新年活动" },
+            { ItemGetWay.PetMeleeReward, "宠物战斗奖励" },
+            { ItemGetWay.UnionWish, "公会许愿" },
+            { ItemGetWay.UnionOrder, "公会订单" },
+            { ItemGetWay.TakeOutBag, "背包拿出" },
+
             { ItemGetWay.Activity, "活动" },
         };
 

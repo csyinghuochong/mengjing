@@ -1123,6 +1123,8 @@ namespace ET.Server
                     continue;
                 }
 
+                ServerLogHelper.GetItemInfo( self.Id, itemID, rewardItems[i].ItemNum, getType );
+                
                 int leftNum = rewardItems[i].ItemNum;
                 int userDataType = ItemHelper.GetItemToUserDataType(itemID);
                 if (userDataType == UserDataType.Gold && rewardItems[i].ItemNum > 1000000)

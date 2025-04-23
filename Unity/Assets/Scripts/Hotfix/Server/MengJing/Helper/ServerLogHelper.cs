@@ -327,6 +327,17 @@ namespace ET.Server
             WriteLogList(new List<string>() { log }, filePath);
         }
 
+        //self.Id, itemID, rewardItems[i].ItemNum, getType
+        public static void GetItemInfo(long unitid, int itmeid, int itemnum, int getway)
+        {
+            string getwaystr = ItemHelper.ItemGetWayName(getway);
+            ItemConfig itemConfig = ItemConfigCategory.Instance.Get(itmeid);
+            string loginfo = $"玩家:{unitid}  获得道具:{itmeid} {(itemConfig.ItemName)}  数量:{itemnum} ";
+
+            loginfo =  TimeHelper.DateTimeNow().ToString() + " " + loginfo;
+            string filePath = "../Logs/WJ_GetItem.txt";
+            WriteLogList(new List<string>() { loginfo }, filePath);
+        }
 
         /// <summary>
         /// 今日拍卖金币大于一亿 和   充值 100 并且 金币大于5亿
