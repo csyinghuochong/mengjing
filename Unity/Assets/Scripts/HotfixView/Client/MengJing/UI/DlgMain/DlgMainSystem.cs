@@ -460,7 +460,7 @@ namespace ET.Client
 
             self.View.E_Button_RunRaceButton.AddListener(self.OnButton_RunRaceButton);
             self.View.E_Button_HappyButton.AddListener(self.OnButton_HappyButton);
-            self.View.E_Button_HappyButton.gameObject.SetActive(true);
+            self.View.E_Button_HappyButton.gameObject.SetActive(false);
             self.View.E_Button_HuntButton.AddListener(self.OnButton_HuntButton);
             self.View.E_Button_SoloButton.AddListener(self.OnButton_SoloButton);
             self.View.E_Btn_BattleButton.AddListener(self.OnBtn_BattleButton);
