@@ -1,6 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.UIElements;
+using System.Collections.Generic;
 
 namespace ET.Client
 {
@@ -40,14 +40,43 @@ namespace ET.Client
         {
         }
         
-        
+        private static void CheckServerList(this DlgMJLogin self, List<ServerItem> serverItems, int versionMode)
+        {
+            for (int i = serverItems.Count - 1; i >= 0; i--)
+            {
+                if (versionMode == VersionMode.BanHao)
+                {
+                    if (!CommonHelp.IsBanHaoZone(serverItems[i].ServerId))
+                    {
+                        serverItems.RemoveAt(i);
+                        continue;
+                    }
+                }
+                if (versionMode == VersionMode.Beta)
+                {
+                    if (CommonHelp.IsBanHaoZone(serverItems[i].ServerId))
+                    {
+                        serverItems.RemoveAt(i);
+                    }
+                }
+                // string[] serverdomain = serverItems[i].ServerIp.Split(':');
+                // if (!serverdomain[0].Contains("127")
+                //     && !serverdomain[0].Contains("192")
+                //     && !serverdomain[0].Contains("39"))
+                // {
+                //     IPAddress[] xxc = Dns.GetHostEntry(serverdomain[0]).AddressList;
+                //     serverItems[i].ServerIp = $"{xxc[0]}:{serverdomain[1]}";
+                // }
+            }
+        }
 
         public static async ETTask RequestServerList(this DlgMJLogin self)
         {
             //获取服务器列表
             R2C_ServerList r2CServerList = await LoginHelper.GetServerList(self.Root(), GlobalHelp.GetVersionMode());
-            ServerItem serverItem = r2CServerList.ServerItems[r2CServerList.ServerItems.Count - 1];
+            self.CheckServerList(r2CServerList.ServerItems, GlobalHelp.GetVersionMode());
             
+            ServerItem serverItem = r2CServerList.ServerItems[r2CServerList.ServerItems.Count - 1];
             PlayerInfoComponent playerInfoComponent = self.Root().GetComponent<PlayerInfoComponent>();
             playerInfoComponent.ServerItem = serverItem;
             playerInfoComponent.AllServerList = r2CServerList.ServerItems;

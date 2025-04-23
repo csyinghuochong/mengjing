@@ -7,7 +7,6 @@ namespace ET.Client
     {
         public static async ETTask<R2C_ServerList> GetServerList(Scene root, int versionMode)
         {
-            await ETTask.CompletedTask;
             root.RemoveComponent<ClientSenderCompnent>();
             ClientSenderCompnent clientSenderCompnent = root.AddComponent<ClientSenderCompnent>();
             return await clientSenderCompnent.GetServerList(versionMode);
