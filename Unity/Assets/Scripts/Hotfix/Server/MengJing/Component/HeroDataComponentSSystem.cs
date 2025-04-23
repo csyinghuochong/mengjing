@@ -49,11 +49,12 @@ namespace ET.Server
                  numericComponent.ApplyValue(NumericType.HorseRide, numericComponent.GetAsInt(NumericType.HorseFightID), false);
              }
 
-             if (numericComponent.GetAsInt(NumericType.Now_Hp) <= 0)
+             if (numericComponent.GetAsInt(NumericType.Now_Hp) <= 0 || numericComponent.GetAsInt(NumericType.Now_Dead) == 1)
              {
                  numericComponent.ApplyValue(NumericType.Now_Hp, numericComponent.GetAsInt(NumericType.Now_MaxHp), false);
+                 numericComponent.ApplyValue(NumericType.Now_Dead, 0, false);
              }
-
+             
              if (numericComponent.GetAsInt(NumericType.UnionXiuLian_0) == 0)
              {
                  Dictionary<int, List<UnionQiangHuaConfig>> keyValuePairs = UnionQiangHuaConfigCategory.Instance.UnionQiangHuaList;
