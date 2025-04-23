@@ -332,7 +332,7 @@ namespace ET.Server
         {
             string getwaystr = ItemHelper.ItemGetWayName(getway);
             ItemConfig itemConfig = ItemConfigCategory.Instance.Get(itmeid);
-            string loginfo = $"玩家:{unitid}  获得道具:{itmeid} {(itemConfig.ItemName)}  数量:{itemnum} ";
+            string loginfo = $"玩家:{unitid}  获得道具:{itmeid} ({itemConfig.ItemName})  数量:{itemnum} ";
 
             loginfo =  TimeHelper.DateTimeNow().ToString() + " " + loginfo;
             string filePath = "../Logs/WJ_GetItem.txt";
