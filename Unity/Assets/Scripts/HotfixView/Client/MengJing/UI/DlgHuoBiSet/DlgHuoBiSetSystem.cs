@@ -36,10 +36,10 @@ namespace ET.Client
 
         private static  void OnAddGoldButton(this DlgHuoBiSet self)
         {
-            if (self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgRecharge>() != null)
-            {
-                return;
-            }
+            // if (self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgRecharge>() != null)
+            // {
+            //     return;
+            // }
 
             ShowWindowData showWindowData = new ShowWindowData();
             showWindowData.ParamInfoInt = 3;
