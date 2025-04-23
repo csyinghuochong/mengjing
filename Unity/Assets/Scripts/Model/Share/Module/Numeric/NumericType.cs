@@ -193,6 +193,7 @@
         public const int PetFightIndex = 3197;
         public const int PetMeleeMoLi = 3198; //宠物乱斗 魔力
         public const int PetMeleeDungeonId = 3199; // 宠物乱斗 过关MapId 
+        public const int PetChouKaRewardIndex = 3200; // 宠物抽奖奖品
         public const int DropItemId = 4000;
         public const int DropItemNum = 4001;
         public const int DropType = 4002; //0 公共掉落    1私人掉落

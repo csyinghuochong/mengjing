@@ -1,5 +1,6 @@
 namespace ET.Client
 {
+    [FriendOf(typeof(ES_PetChouKa))]
     [FriendOf(typeof(ES_PetEggList))]
     [FriendOf(typeof(ES_PetEggDuiHuan))]
     [FriendOf(typeof(ES_PetEggChouKa))]
@@ -35,6 +36,9 @@ namespace ET.Client
                     break;
                 case 3:
                     self.View.ES_PetHeXinChouKa.uiTransform.gameObject.SetActive(true);
+                    break;
+                case 4:
+                    self.View.ES_PetChouKa.uiTransform.gameObject.SetActive(true);
                     break;
             }
         }

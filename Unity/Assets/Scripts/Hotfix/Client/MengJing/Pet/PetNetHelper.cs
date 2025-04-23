@@ -422,6 +422,24 @@ namespace ET.Client
 
             return response;
         }
+        
+        public static async ETTask<int> RequestPetChouKaStart(Scene root)
+        {
+            C2M_PetChouKaStartRequest request = C2M_PetChouKaStartRequest.Create();
+
+            M2C_PetChouKaStartResponse response = (M2C_PetChouKaStartResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+
+            return response.Error;
+        }
+        
+        public static async ETTask<int> RequestPetChouKaEnd(Scene root)
+        {
+            C2M_PetChouKaEndRequest request = C2M_PetChouKaEndRequest.Create();
+
+            M2C_PetChouKaEndResponse response = (M2C_PetChouKaEndResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+
+            return response.Error;
+        }
 
         public static async ETTask<M2C_PetHeXinChouKaResponse> RequestPetHeXinChouKa(Scene root, int chouKaType)
         {

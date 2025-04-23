@@ -1,7 +1,7 @@
 ﻿namespace ET.Server
 {
 
-    [MessageHandler(SceneType.Map)]
+    [MessageLocationHandler(SceneType.Map)]
     public class C2M_ActivityInfoHandler : MessageLocationHandler<Unit, C2M_ActivityInfoRequest, M2C_ActivityInfoResponse>
     {
 

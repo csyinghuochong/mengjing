@@ -192,11 +192,12 @@ namespace ET.Client
 		private static async ETTask SingleHappyRequestBuyTimes(this DlgSingleHappyMain self)
 		{
 			M2C_SingleHappyOperateResponse response = await ActivityNetHelper.SingleHappyOperateRequest( self.Root(),3);
-			if (response == null || self.IsDisposed)
+			if (response == null || self.IsDisposed || response.Error!= ErrorCode.ERR_Success)
 			{
 				return;
 			}
 
+			FlyTipComponent.Instance.ShowFlyTip("购买次数成功!");
 			self.ShowTimes();
 		}
 
