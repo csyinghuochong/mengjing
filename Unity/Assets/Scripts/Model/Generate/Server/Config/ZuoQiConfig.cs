@@ -69,7 +69,7 @@ namespace ET
 		public int NextID { get; set; }
 		/// <summary>阶段名称</summary>
 		public string JieName { get; set; }
-		/// <summary>等级</summary>
+		/// <summary>品质</summary>
 		public int Lv { get; set; }
 		/// <summary>升级需要</summary>
 		public int UpNeedLv { get; set; }
