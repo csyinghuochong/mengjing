@@ -227,11 +227,11 @@ namespace ET.Client
                     || commands[1].Contains("zhongji")
                    )
                 {
-                    GMHelp.SendGmCommands(self.Root(), text);
+                    GMNetHelp.SendGmCommands(self.Root(), text);
                     return;
                 }
 
-                GMHelp.SendGmCommand(self.Root(), text);
+                GMNetHelp.SendGmCommand(self.Root(), text);
                 
                 if (text == "#hightest" || text == "#middletest")
                 {
