@@ -483,6 +483,7 @@ namespace ET.Client
             self.View.E_Button_RechargeRewardButton.AddListener(self.OnButton_RechargeRewardButton);
             self.View.E_Button_WelfareButton.AddListener(self.OnButton_WelfareButton);
             self.View.E_Btn_GMButton.AddListener(self.OnBtn_GMButton);
+            self.View.E_Btn_GMButton.gameObject.SetActive( self.Root().GetComponent<PlayerInfoComponent>().Account == "18319670288" );
             self.View.E_Btn_RankButton.AddListener(self.OnBtn_RankButton);
             self.View.E_Button_WorldLvButton.AddListener(self.OnButton_WorldLvButton);
             self.View.E_Btn_PaiMaiHangButton.AddListener(self.OnBtn_PaiMaiHangButton);
