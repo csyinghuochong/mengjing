@@ -47,7 +47,7 @@ namespace ET.Client
             self.E_OpenCostItemIconImage.overrideSprite = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemIcon, itemConfig.Icon));
             self.E_OpenCostNumText.text = itemInfo[1];
 
-            self.RewardShowItems = DropHelper.DropIDToShowItem(int.Parse(GlobalValueConfigCategory.Instance.Get(138).Value), 1);
+            self.RewardShowItems = DropHelper.DropIDToShowItem_2(int.Parse(GlobalValueConfigCategory.Instance.Get(138).Value));
 
             ResourcesLoaderComponent resourcesLoaderComponent = self.Root().GetComponent<ResourcesLoaderComponent>();
             for (int i = 0; i < self.RewardShowItems.Count; i++)
