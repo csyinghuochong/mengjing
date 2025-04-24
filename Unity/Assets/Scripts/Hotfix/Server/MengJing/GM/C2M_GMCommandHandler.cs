@@ -67,7 +67,7 @@ namespace ET.Server
                         int itemNumber = int.Parse(itemInfo[1]);
                         rewardItems.Add(new RewardItem() { ItemID = itemId, ItemNum = itemNumber });
                     }
-                    unit.GetComponent<BagComponentS>().OnAddItemData(rewardItems, string.Empty, $"{ItemGetWay.GM}_{TimeHelper.ServerNow()}", true, true);
+                    bool restut = unit.GetComponent<BagComponentS>().OnAddItemData(rewardItems, string.Empty, $"{ItemGetWay.GM}_{TimeHelper.ServerNow()}", true, true);
                     
                     // 开启所有仓库页
                     unit.GetComponent<NumericComponentS>().ApplyValue(NumericType.CangKuNumber, 4);

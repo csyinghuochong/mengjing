@@ -95,8 +95,14 @@ namespace ET.Client
 
             PlayerInfoComponent playerInfoComponent = self.Root().GetComponent<PlayerInfoComponent>();
 
+            bool gm = ET.GMHelp.IsGmAccount(playerInfoComponent.Account);
+            if(CommonHelp.IsBanHaoZone( playerInfoComponent.ServerItem.ServerId ))
+            {
+                gm = true;
+            }
+
             bool mask = false;
-            if (!ET.GMHelp.IsGmAccount(playerInfoComponent.Account))
+            if (!gm)
             {
                 // 替换敏感词
                 mask = MaskWordHelper.Instance.IsContainSensitiveWords(text);

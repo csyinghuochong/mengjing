@@ -1083,11 +1083,11 @@ namespace ET.Server
                 ItemPileSum = itemCof.ItemPileSum;
                 if (ItemPileSum == 1)
                 {
-                    needCellNumber += rewardItems[i].ItemNum;
+                    needCellNumber +=  ( gm?1 :rewardItems[i].ItemNum);
                 }
                 else
                 {
-                    needCellNumber += self.GetRealNeedCell(rewardItems[i], UseLocType);
+                    needCellNumber +=  ( gm?1 : self.GetRealNeedCell(rewardItems[i], UseLocType) );
                 }
             }
 
@@ -1165,7 +1165,7 @@ namespace ET.Server
                     Log.Warning($"[获取道具]leftNum >= 99  {unit.Id} {getType} {itemID} {rewardItems[i].ItemNum}");
                 }
 
-                int maxPileSum = (gm && itemCof.ItemPileSum > 1) ? 1000000 : itemCof.ItemPileSum;
+                int maxPileSum = (gm && itemCof.ItemPileSum > 1) ? 10000000 : itemCof.ItemPileSum;
                 int itemLockType = ItemLocType.ItemLocBag;
                 List<ItemInfo> itemlist = null;
                 if (itemCof.ItemType == ItemTypeEnum.Equipment)
