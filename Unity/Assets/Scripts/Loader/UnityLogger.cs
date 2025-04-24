@@ -5,23 +5,45 @@ namespace ET
 {
     public class UnityLogger: ILog
     {
+        
+        private const int TraceLevel = 1;
+        private const int DebugLevel = 2;
+        private const int InfoLevel = 3;
+        private const int WarningLevel = 4;
+        
         public void Trace(string msg)
         {
+            if (Options.Instance.LogLevel > TraceLevel)
+            {
+                return;
+            }
             UnityEngine.Debug.Log(msg);
         }
 
         public void Debug(string msg)
         {
+            if (Options.Instance.LogLevel > DebugLevel)
+            {
+                return;
+            }
             UnityEngine.Debug.Log(msg);
         }
 
         public void Info(string msg)
         {
+            if (Options.Instance.LogLevel > InfoLevel)
+            {
+                return;
+            }
             UnityEngine.Debug.Log(msg);
         }
 
         public void Warning(string msg)
         {
+            if (Options.Instance.LogLevel > WarningLevel)
+            {
+                return;
+            }
             UnityEngine.Debug.LogWarning(msg);
         }
 
