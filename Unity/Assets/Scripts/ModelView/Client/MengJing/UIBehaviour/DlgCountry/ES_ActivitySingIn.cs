@@ -8,6 +8,9 @@ namespace ET.Client
 	[EnableMethod]
 	public  class ES_ActivitySingIn : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy 
 	{
+		public long Time = 250;
+		public long ClickTime;
+		public bool IsClick;
 		public int SingInActivityType;
 		public int LeiJiSingInActivityType;
 		public int CurDay;

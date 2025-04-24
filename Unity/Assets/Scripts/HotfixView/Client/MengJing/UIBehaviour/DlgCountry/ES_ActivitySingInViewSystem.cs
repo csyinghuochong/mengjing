@@ -114,13 +114,17 @@ namespace ET.Client
 
             List<ActivityConfig> list = ActivityConfigCategory.Instance.GetByType(self.LeiJiSingInActivityType);
             self.E_Reward1EventTrigger.triggers.Clear();
-            self.E_Reward1EventTrigger.RegisterEvent(EventTriggerType.PointerUp, (pdata) => { self.EndDrag(list[0].Id, pdata as PointerEventData).Coroutine(); });
+            self.E_Reward1EventTrigger.RegisterEvent(EventTriggerType.PointerDown, (pdata) => { self.OnPointerDown(list[0].Id, pdata as PointerEventData); });
+            self.E_Reward1EventTrigger.RegisterEvent(EventTriggerType.PointerUp, (pdata) => { self.OnPointerUp(list[0].Id, pdata as PointerEventData).Coroutine(); });
             self.E_Reward2EventTrigger.triggers.Clear();
-            self.E_Reward2EventTrigger.RegisterEvent(EventTriggerType.PointerUp, (pdata) => { self.EndDrag(list[1].Id, pdata as PointerEventData).Coroutine(); });
+            self.E_Reward2EventTrigger.RegisterEvent(EventTriggerType.PointerDown, (pdata) => { self.OnPointerDown(list[1].Id, pdata as PointerEventData); });
+            self.E_Reward2EventTrigger.RegisterEvent(EventTriggerType.PointerUp, (pdata) => { self.OnPointerUp(list[1].Id, pdata as PointerEventData).Coroutine(); });
             self.E_Reward3EventTrigger.triggers.Clear();
-            self.E_Reward3EventTrigger.RegisterEvent(EventTriggerType.PointerUp, (pdata) => { self.EndDrag(list[2].Id, pdata as PointerEventData).Coroutine(); });
+            self.E_Reward3EventTrigger.RegisterEvent(EventTriggerType.PointerDown, (pdata) => { self.OnPointerDown(list[2].Id, pdata as PointerEventData); });
+            self.E_Reward3EventTrigger.RegisterEvent(EventTriggerType.PointerUp, (pdata) => { self.OnPointerUp(list[2].Id, pdata as PointerEventData).Coroutine(); });
             self.E_Reward4EventTrigger.triggers.Clear();
-            self.E_Reward4EventTrigger.RegisterEvent(EventTriggerType.PointerUp, (pdata) => { self.EndDrag(list[3].Id, pdata as PointerEventData).Coroutine(); });
+            self.E_Reward4EventTrigger.RegisterEvent(EventTriggerType.PointerDown, (pdata) => { self.OnPointerDown(list[3].Id, pdata as PointerEventData); });
+            self.E_Reward4EventTrigger.RegisterEvent(EventTriggerType.PointerUp, (pdata) => { self.OnPointerUp(list[3].Id, pdata as PointerEventData).Coroutine(); });
             using (zstring.Block())
             {
                 string[] itemInfo = list[0].Par_2.Split(';');
@@ -220,31 +224,71 @@ namespace ET.Client
             self.UpdateProgress();
         }
 
-        private static async ETTask EndDrag(this ES_ActivitySingIn self, int activityId, PointerEventData pdata)
+        private static async ETTask ShowTip(this ES_ActivitySingIn self, int activityId)
         {
-            ActivityComponentC activityComponent = self.Root().GetComponent<ActivityComponentC>();
             ActivityConfig activityConfig = ActivityConfigCategory.Instance.Get(activityId);
-
-            if (activityComponent.ActivityReceiveIds.Contains(activityId))
-            {
-                FlyTipComponent.Instance.ShowFlyTip("已领取");
-                return;
-            }
-
-            int TotalSignNumber = self.LeiJiSingInActivityType == ActivityEnum.Type_26 ? activityComponent.TotalSignNumber : activityComponent.TotalSignNumber_VIP;
-            if (TotalSignNumber < int.Parse(activityConfig.Par_1))
-            {
-                FlyTipComponent.Instance.ShowFlyTip("未达到领取条件");
-                return;
-            }
-
-            M2C_ActivityReceiveResponse response = await ActivityNetHelper.ActivityReceive(self.Root(), self.LeiJiSingInActivityType, activityId);
-            if (response == null || response.Error != ErrorCode.ERR_Success)
+            
+            long instanceId = self.InstanceId;
+            await self.Root().GetComponent<TimerComponent>().WaitAsync(self.Time);
+            if (self.IsDisposed || self.InstanceId != instanceId || self.IsClick)
             {
                 return;
             }
+            
+            string[] itemInfo = activityConfig.Par_2.Split(';');
+            int itemId = int.Parse(itemInfo[0]);    
+            int itemNum = int.Parse(itemInfo[1]);
+            EventSystem.Instance.Publish(self.Root(),
+                new ShowItemTips()
+                {
+                    BagInfo = new ItemInfo() { ItemID = itemId, ItemNum = itemNum },
+                    ItemOperateEnum = ItemOperateEnum.None,
+                    InputPoint = Input.mousePosition,
+                    Occ = self.Root().GetComponent<UserInfoComponentC>().UserInfo.Occ,
+                    EquipList = new List<ItemInfo>(),
+                    CurrentHouse = -1
+                });
 
-            self.UpdateProgress();
+            self.IsClick = true;
+        }
+        
+        private static void OnPointerDown(this ES_ActivitySingIn self, int activityId, PointerEventData pdata)
+        {
+            self.ClickTime = TimeHelper.ServerNow();
+            self.IsClick = false;
+            self.ShowTip(activityId).Coroutine();
+        }
+
+        private static async ETTask OnPointerUp(this ES_ActivitySingIn self, int activityId, PointerEventData pdata)
+        {
+            if (TimeHelper.ServerNow() - self.ClickTime <= self.Time && !self.IsClick)
+            {
+                self.IsClick = true;
+                ActivityComponentC activityComponent = self.Root().GetComponent<ActivityComponentC>();
+                ActivityConfig activityConfig = ActivityConfigCategory.Instance.Get(activityId);
+
+                if (activityComponent.ActivityReceiveIds.Contains(activityId))
+                {
+                    FlyTipComponent.Instance.ShowFlyTip("已领取");
+                    return;
+                }
+
+                int TotalSignNumber = self.LeiJiSingInActivityType == ActivityEnum.Type_26 ? activityComponent.TotalSignNumber : activityComponent.TotalSignNumber_VIP;
+                if (TotalSignNumber < int.Parse(activityConfig.Par_1))
+                {
+                    FlyTipComponent.Instance.ShowFlyTip("未达到领取条件");
+                    return;
+                }
+
+                M2C_ActivityReceiveResponse response = await ActivityNetHelper.ActivityReceive(self.Root(), self.LeiJiSingInActivityType, activityId);
+                if (response == null || response.Error != ErrorCode.ERR_Success)
+                {
+                    return;
+                }
+
+                self.UpdateProgress();
+            }
+            self.IsClick = true;
         }
 
         private static void UpdateProgress(this ES_ActivitySingIn self)

@@ -8,6 +8,12 @@ namespace ET.Client
 	[EnableMethod]
 	public  class Scroll_Item_ActivitySingInItem : Entity,IAwake,IDestroy,IUIScrollItem<Scroll_Item_ActivitySingInItem>
 	{
+		public ItemInfo ItemInfo { get; set; }
+		public long Time = 250;
+		public Transform ScrollRect;
+		public long ClickTime;
+		public bool IsDrag;
+		public bool IsClick;
 		public Action<int> ClickHandler;
 		public ActivityConfig ActivityConfig;
 		
@@ -168,30 +174,6 @@ namespace ET.Client
      		}
      	}
 
-		public UnityEngine.UI.Button E_ItemButtonButton
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if (this.isCacheNode)
-     			{
-     				if( this.m_E_ItemButtonButton == null )
-     				{
-		    			this.m_E_ItemButtonButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_ItemButton");
-     				}
-     				return this.m_E_ItemButtonButton;
-     			}
-     			else
-     			{
-		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_ItemButton");
-     			}
-     		}
-     	}
-
 		public UnityEngine.UI.Image E_ItemButtonImage
      	{
      		get
@@ -216,6 +198,30 @@ namespace ET.Client
      		}
      	}
 
+		public UnityEngine.EventSystems.EventTrigger E_ItemButtonEventTrigger
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if (this.isCacheNode)
+     			{
+     				if( this.m_E_ItemButtonEventTrigger == null )
+     				{
+		    			this.m_E_ItemButtonEventTrigger = UIFindHelper.FindDeepChild<UnityEngine.EventSystems.EventTrigger>(this.uiTransform.gameObject,"E_ItemButton");
+     				}
+     				return this.m_E_ItemButtonEventTrigger;
+     			}
+     			else
+     			{
+		    		return UIFindHelper.FindDeepChild<UnityEngine.EventSystems.EventTrigger>(this.uiTransform.gameObject,"E_ItemButton");
+     			}
+     		}
+     	}
+
 		public void DestroyWidget()
 		{
 			this.m_E_LightImage = null;
@@ -224,8 +230,8 @@ namespace ET.Client
 			this.m_E_XuanZhongImage = null;
 			this.m_E_DayText = null;
 			this.m_E_LingQuImage = null;
-			this.m_E_ItemButtonButton = null;
 			this.m_E_ItemButtonImage = null;
+			this.m_E_ItemButtonEventTrigger = null;
 			this.uiTransform = null;
 			this.DataId = 0;
 		}
@@ -236,8 +242,8 @@ namespace ET.Client
 		private UnityEngine.UI.Image m_E_XuanZhongImage = null;
 		private UnityEngine.UI.Text m_E_DayText = null;
 		private UnityEngine.UI.Image m_E_LingQuImage = null;
-		private UnityEngine.UI.Button m_E_ItemButtonButton = null;
 		private UnityEngine.UI.Image m_E_ItemButtonImage = null;
+		private UnityEngine.EventSystems.EventTrigger m_E_ItemButtonEventTrigger = null;
 		public Transform uiTransform = null;
 	}
 }
