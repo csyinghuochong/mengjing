@@ -7,6 +7,35 @@ namespace ET.Client
     public class SceneChecker4 : EditorWindow
     {
         
+        [MenuItem("Custom/统计场景顶点数")]
+        static void CalculateVertices()
+        {
+            int totalVertices = 0;
+            var renderers = FindObjectsOfType<Renderer>(true); // 包含隐藏对象
+
+            foreach (var renderer in renderers)
+            {
+                if (renderer is MeshRenderer meshRenderer)
+                {
+                    var meshFilter = meshRenderer.GetComponent<MeshFilter>();
+                    if (meshFilter != null && meshFilter.sharedMesh != null)
+                    {
+                        totalVertices += meshFilter.sharedMesh.vertexCount;
+                    }
+                }
+                else if (renderer is SkinnedMeshRenderer skinnedMeshRenderer)
+                {
+                    if (skinnedMeshRenderer.sharedMesh != null)
+                    {
+                        totalVertices += skinnedMeshRenderer.sharedMesh.vertexCount;
+                    }
+                }
+            }
+
+            EditorUtility.DisplayDialog("顶点统计", 
+                $"场景顶点总数: {totalVertices}", "确定");
+        }
+ 
         [MenuItem("Custom/获取全部Shader路径")]
         static void FindAllShaders()
         {
