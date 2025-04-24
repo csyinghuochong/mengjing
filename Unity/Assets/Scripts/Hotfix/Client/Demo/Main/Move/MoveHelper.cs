@@ -20,12 +20,12 @@ namespace ET.Client
         }
 
         // 可以多次调用，多次调用的话会取消上一次的协程
-        public static async ETTask<int> MoveToAsync(this Unit unit, float3 targetPos, ETCancellationToken cancellationToken = null)
+        public static async ETTask<int> MoveToAsync(this Unit unit, float3 targetPos, ETCancellationToken cancellationToken = null, bool yangan = true)
         {
             C2M_PathfindingRequest msg = C2M_PathfindingRequest.Create();
             msg.Position = targetPos;
             unit.Root().GetComponent<ClientSenderCompnent>().Send(msg);
-
+            unit.GetComponent<MoveComponent>().YaoganMove = yangan;
             ObjectWait objectWait = unit.GetComponent<ObjectWait>();
 
             // 要取消上一次的移动协程

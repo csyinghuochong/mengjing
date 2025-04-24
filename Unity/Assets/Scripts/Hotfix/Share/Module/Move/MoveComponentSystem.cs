@@ -319,7 +319,7 @@ namespace ET
             {
                 return;
             }
-            if (!unit.MainHero || self.YaoganMove)
+            if (!unit.MainHero ||  self.YaoganMove)
             {
                 return;
             }

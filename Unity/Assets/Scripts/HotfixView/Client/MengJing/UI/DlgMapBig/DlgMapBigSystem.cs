@@ -528,7 +528,7 @@ namespace ET.Client
             }
             else
             {
-                unit.MoveToAsync(self.BossList[configid]).Coroutine();
+                unit.MoveToAsync(self.BossList[configid], null, false).Coroutine();
             }
         }
 

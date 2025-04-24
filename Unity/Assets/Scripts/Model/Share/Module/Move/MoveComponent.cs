@@ -81,7 +81,19 @@ namespace ET
         
         //0 摇杆移动 1点击移动
         public bool MoveWait;
-        public bool YaoganMove;
+        private bool yaoganmove = false;
+        public bool YaoganMove
+        {
+            get
+            {
+                return this.yaoganmove;
+            }
+            set
+            {
+                this.yaoganmove = value;
+            }
+        }
+
         public float3 TargetPosition;
     }
 }
