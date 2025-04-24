@@ -2,7 +2,7 @@
 
 namespace ET.Client
 {
-    public static partial class GMHelp
+    public static partial class GMNetHelp
     {
         public static void ExcurteGmList(Scene scene, List<string> gms)
         {
