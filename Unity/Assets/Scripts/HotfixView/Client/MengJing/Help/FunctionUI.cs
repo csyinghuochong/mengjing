@@ -310,18 +310,15 @@ namespace ET.Client
             {
                 return weizhi + 1;
             }
-
-            if (weizhi == 4 || weizhi == 5 || weizhi == 6)
+            else if (weizhi >= 4 && weizhi < 4 + ConfigData.EquipShiPingMax)
             {
                 return 5;
             }
-
-            if (weizhi > 6)
+            else
             {
-                return weizhi - 1;
+                return weizhi - (ConfigData.EquipShiPingMax - 2);
             }
-
-            return weizhi;
+            
         }
     }
 }

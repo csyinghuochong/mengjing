@@ -641,10 +641,10 @@ namespace ET.Server
 
                 //获取之前的位置是否有装备
                 ItemInfo beforeequip = null;
-                if (weizhi == (int) ItemSubTypeEnum.Shiping && !CommonHelp.IsBanHaoZone(unit.Zone()))
+                if (weizhi == (int) ItemSubTypeEnum.Shiping)  // && !CommonHelp.IsBanHaoZone(unit.Zone()))
                 {
                     List<ItemInfo> equipList = bagComponent.GetEquipListByWeizhi(ItemLocType.ItemLocEquip, weizhi);
-                    beforeequip = equipList.Count < 3? null : equipList[0];
+                    beforeequip = equipList.Count < ConfigData.EquipShiPingMax? null : equipList[0];
                 }
                 else
                 {

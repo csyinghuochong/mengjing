@@ -224,6 +224,26 @@ namespace ET.Client
      			return this.m_es_equipitemshiping3_1;
      		}
      	}
+		
+		public ES_EquipItem ES_EquipItemShiping4_1
+		{
+			get
+			{
+				if (this.uiTransform == null)
+				{
+					Log.Error("uiTransform is null.");
+					return null;
+				}
+
+				ES_EquipItem es = this.m_es_equipitemshiping4_1;
+				if( es ==null )
+				{
+					Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"ES_EquipItemShiping4_1");
+					this.m_es_equipitemshiping4_1 = this.AddChild<ES_EquipItem,Transform>(subTrans);
+				}
+				return this.m_es_equipitemshiping4_1;
+			}
+		}
 
 		public ES_EquipItem ES_EquipItemXiezi_1
      	{
@@ -395,6 +415,7 @@ namespace ET.Client
 			this.m_es_equipitemshiping1_1 = null;
 			this.m_es_equipitemshiping2_1 = null;
 			this.m_es_equipitemshiping3_1 = null;
+			this.m_es_equipitemshiping4_1 = null;
 			this.m_es_equipitemxiezi_1 = null;
 			this.m_es_equipitemkuzi_1 = null;
 			this.m_es_equipitemyaodai_1 = null;
@@ -417,6 +438,7 @@ namespace ET.Client
 		private EntityRef<ES_EquipItem> m_es_equipitemshiping1_1 = null;
 		private EntityRef<ES_EquipItem> m_es_equipitemshiping2_1 = null;
 		private EntityRef<ES_EquipItem> m_es_equipitemshiping3_1 = null;
+		private EntityRef<ES_EquipItem> m_es_equipitemshiping4_1 = null;
 		private EntityRef<ES_EquipItem> m_es_equipitemxiezi_1 = null;
 		private EntityRef<ES_EquipItem> m_es_equipitemkuzi_1 = null;
 		private EntityRef<ES_EquipItem> m_es_equipitemyaodai_1 = null;

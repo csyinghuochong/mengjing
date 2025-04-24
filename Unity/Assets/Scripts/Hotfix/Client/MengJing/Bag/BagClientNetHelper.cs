@@ -150,7 +150,7 @@ namespace ET.Client
             //     return;
             // }
 
-            //猎人单独处理
+            //猎人装备武器单独协议处理
             int occ = root.GetComponent<UserInfoComponentC>().UserInfo.Occ;
             if (occ == 3 && itemCof.ItemSubType == (int)ItemSubTypeEnum.Wuqi)
             {

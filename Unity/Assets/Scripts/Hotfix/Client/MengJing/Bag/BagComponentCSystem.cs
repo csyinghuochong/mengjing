@@ -522,7 +522,7 @@ namespace ET.Client
                 if (weizhi == (int)ItemSubTypeEnum.Shiping)
                 {
                     List<ItemInfo> equipList = self.GetEquipListByWeizhi(weizhi);
-                    beforeequip = equipList.Count < 3 ? null : equipList[0];
+                    beforeequip = equipList.Count < ConfigData.EquipShiPingMax ? null : equipList[0];
                 }
                 else
                 {

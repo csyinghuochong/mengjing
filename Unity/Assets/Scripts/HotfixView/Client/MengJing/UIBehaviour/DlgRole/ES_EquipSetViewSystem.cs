@@ -22,6 +22,7 @@ namespace ET.Client
             self.ESEquipItems_1.Add(self.ES_EquipItemShiping1_1);
             self.ESEquipItems_1.Add(self.ES_EquipItemShiping2_1);
             self.ESEquipItems_1.Add(self.ES_EquipItemShiping3_1);
+            self.ESEquipItems_1.Add(self.ES_EquipItemShiping4_1);
             self.ESEquipItems_1.Add(self.ES_EquipItemXiezi_1);
             self.ESEquipItems_1.Add(self.ES_EquipItemKuzi_1);
             self.ESEquipItems_1.Add(self.ES_EquipItemYaodai_1);
@@ -145,7 +146,7 @@ namespace ET.Client
 
                 if (itemConfig.ItemSubType > (int)ItemSubTypeEnum.Shiping)
                 {
-                    ES_EquipItem esEquipItem = self.ESEquipItems_1[itemConfig.ItemSubType + 1];
+                    ES_EquipItem esEquipItem = self.ESEquipItems_1[itemConfig.ItemSubType + (ConfigData.EquipShiPingMax - 2)];
                     esEquipItem.Refresh(equiplist[i], occ, itemOperateEnum, equiplist);
                 }
             }

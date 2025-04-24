@@ -1,6 +1,6 @@
 namespace ET.Server
 {
-
+    //猎人装备武器单独协议处理
     [MessageLocationHandler(SceneType.Map)]
     [FriendOf(typeof (UserInfoComponentS))]
     [FriendOf(typeof (BagComponentS))]

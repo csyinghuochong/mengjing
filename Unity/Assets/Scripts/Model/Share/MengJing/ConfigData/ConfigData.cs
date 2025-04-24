@@ -24,6 +24,8 @@ namespace ET
 
         public const int PetMianShangBuff = 97020003;
 
+        public const int EquipShiPingMax = 4;
+
         /// <summary>
         /// 深渊道具ID 
         /// </summary>
