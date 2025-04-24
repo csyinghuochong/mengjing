@@ -6,9 +6,9 @@ namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class ES_PetChouKa : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy,IUILogic
+	public  class ES_PetChouKa : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy
 	{
-		public Dictionary<int, EntityRef<Scroll_Item_CommonItem>> ScrollItemCommonItems;
+		public Dictionary<int, EntityRef<Scroll_Item_PetChouKaItem>> ScrollItemPetChouKaItems = new();
 		public List<int> RewardShowItems = new();
 
 		public long Interval = 0; //匀速
@@ -16,8 +16,9 @@ namespace ET.Client
 		public int CurrentIndex = 0;
 		public bool OnStopTurn;
 		public bool ifStop;
+		public List<string> AssetList { get; set; } = new();
 		
-		public UnityEngine.UI.LoopVerticalScrollRect E_BagItemsLoopVerticalScrollRect
+		public UnityEngine.UI.ScrollRect E_BagItemsScrollRect
      	{
      		get
      		{
@@ -26,11 +27,28 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_E_BagItemsLoopVerticalScrollRect == null )
+     			if( this.m_E_BagItemsScrollRect == null )
      			{
-		    		this.m_E_BagItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.LoopVerticalScrollRect>(this.uiTransform.gameObject,"E_BagItems");
+		    		this.m_E_BagItemsScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.ScrollRect>(this.uiTransform.gameObject,"E_BagItems");
      			}
-     			return this.m_E_BagItemsLoopVerticalScrollRect;
+     			return this.m_E_BagItemsScrollRect;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_BagItemsImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_BagItemsImage == null )
+     			{
+		    		this.m_E_BagItemsImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_BagItems");
+     			}
+     			return this.m_E_BagItemsImage;
      		}
      	}
 
@@ -167,7 +185,8 @@ namespace ET.Client
 
 		public void DestroyWidget()
 		{
-			this.m_E_BagItemsLoopVerticalScrollRect = null;
+			this.m_E_BagItemsScrollRect = null;
+			this.m_E_BagItemsImage = null;
 			this.m_E_ButtonStopButton = null;
 			this.m_E_ButtonStopImage = null;
 			this.m_E_ButtonOpenButton = null;
@@ -178,7 +197,8 @@ namespace ET.Client
 			this.uiTransform = null;
 		}
 
-		private UnityEngine.UI.LoopVerticalScrollRect m_E_BagItemsLoopVerticalScrollRect = null;
+		private UnityEngine.UI.ScrollRect m_E_BagItemsScrollRect = null;
+		private UnityEngine.UI.Image m_E_BagItemsImage = null;
 		private UnityEngine.UI.Button m_E_ButtonStopButton = null;
 		private UnityEngine.UI.Image m_E_ButtonStopImage = null;
 		private UnityEngine.UI.Button m_E_ButtonOpenButton = null;

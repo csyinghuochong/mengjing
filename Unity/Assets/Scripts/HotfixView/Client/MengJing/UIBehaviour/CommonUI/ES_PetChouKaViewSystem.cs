@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
-    [FriendOf(typeof(Scroll_Item_CommonItem))]
+    [FriendOf(typeof(Scroll_Item_PetChouKaItem))]
     [EntitySystemOf(typeof(ES_PetChouKa))]
     [FriendOf(typeof(ES_PetChouKa))]
     public static partial class ES_PetChouKaSystem
@@ -16,12 +16,8 @@ namespace ET.Client
             
             self.E_ButtonStopButton.AddListener(() => { self.OnButtonStop().Coroutine(); });
             self.E_ButtonOpenButton.AddListener(() => { self.OnButtonOpen().Coroutine(); });
-            self.E_BagItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnBagItemsRefresh);
             
             self.OnStopTurn = false;
-            self.TargetIndex = 0;
-            self.CurrentIndex = 0;
-            self.Interval = 100;
             self.E_ImageSelectImage.gameObject.SetActive(false);
             self.E_ButtonOpenButton.gameObject.SetActive(true);
             self.E_ButtonStopButton.gameObject.SetActive(false);
@@ -32,25 +28,16 @@ namespace ET.Client
         [EntitySystem]
         private static void Destroy(this ES_PetChouKa self)
         {
-            self.DestroyWidget();
-        }
-
-        private static void OnBagItemsRefresh(this ES_PetChouKa self, Transform transform, int index)
-        {
-            foreach (Scroll_Item_CommonItem item in self.ScrollItemCommonItems.Values)
+            ResourcesLoaderComponent resourcesLoaderComponent = self.Root().GetComponent<ResourcesLoaderComponent>();
+            for (int i = 0; i < self.AssetList.Count; i++)
             {
-                if (item.uiTransform == transform)
-                {
-                    item.uiTransform = null;
-                }
+                resourcesLoaderComponent.UnLoadAsset(self.AssetList[i]);
             }
+
+            self.AssetList.Clear();
+            self.AssetList = null;
             
-            Scroll_Item_CommonItem scrollItemCommonItem = self.ScrollItemCommonItems[index].BindTrans(transform);
-            ItemInfo bagInfo = new ItemInfo();
-            bagInfo.ItemID = self.RewardShowItems[index];
-            bagInfo.ItemNum = 1;
-            scrollItemCommonItem.Refresh(bagInfo, ItemOperateEnum.None);
-            scrollItemCommonItem.E_ItemNumText.gameObject.SetActive(false);
+            self.DestroyWidget();
         }
 
         private static void OnInitUI(this ES_PetChouKa self)
@@ -59,7 +46,7 @@ namespace ET.Client
             ItemConfig itemConfig = ItemConfigCategory.Instance.Get(int.Parse(itemInfo[0]));
             self.E_OpenCostItemIconImage.overrideSprite = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemIcon, itemConfig.Icon));
             self.E_OpenCostNumText.text = itemInfo[1];
-            
+
             self.RewardShowItems.Clear();
             List<RewardItem> droplist = DropHelper.DropIDToShowItem(int.Parse(GlobalValueConfigCategory.Instance.Get(138).Value), 1);
             foreach (RewardItem rewardItem in droplist)
@@ -67,26 +54,60 @@ namespace ET.Client
                 self.RewardShowItems.Add(rewardItem.ItemID);
             }
 
-            self.AddUIScrollItems(ref self.ScrollItemCommonItems, self.RewardShowItems.Count);
-            self.E_BagItemsLoopVerticalScrollRect.SetVisible(true, self.RewardShowItems.Count);
+            ResourcesLoaderComponent resourcesLoaderComponent = self.Root().GetComponent<ResourcesLoaderComponent>();
+            for (int i = 0; i < self.RewardShowItems.Count; i++)
+            {
+                if (!self.ScrollItemPetChouKaItems.ContainsKey(i))
+                {
+                    Scroll_Item_PetChouKaItem item = self.AddChild<Scroll_Item_PetChouKaItem>();
+                    string path = "Assets/Bundles/UI/Item/Item_PetChouKaItem.prefab";
+                    if (!self.AssetList.Contains(path))
+                    {
+                        self.AssetList.Add(path);
+                    }
+
+                    GameObject prefab = resourcesLoaderComponent.LoadAssetSync<GameObject>(path);
+                    GameObject go = UnityEngine.Object.Instantiate(prefab, self.E_BagItemsScrollRect.transform.Find("Content").gameObject.transform);
+                    item.BindTrans(go.transform);
+                    self.ScrollItemPetChouKaItems.Add(i, item);
+                }
+
+                Scroll_Item_PetChouKaItem scrollItemPetChouKaItem = self.ScrollItemPetChouKaItems[i];
+                scrollItemPetChouKaItem.uiTransform.gameObject.SetActive(true);
+                ItemInfo bagInfo = new ItemInfo();
+                bagInfo.ItemID = self.RewardShowItems[i];
+                bagInfo.ItemNum = 1;
+                scrollItemPetChouKaItem.Refresh(bagInfo);
+            }
+
+            if (self.ScrollItemPetChouKaItems.Count > self.RewardShowItems.Count)
+            {
+                for (int i = self.RewardShowItems.Count; i < self.ScrollItemPetChouKaItems.Count; i++)
+                {
+                    Scroll_Item_PetChouKaItem scrollItemPetChouKaItem = self.ScrollItemPetChouKaItems[i];
+                    scrollItemPetChouKaItem.uiTransform.gameObject.SetActive(false);
+                }
+            }
         }
 
         public static async ETTask OnStartTurn(this ES_PetChouKa self)
         {
             long instanceId = self.InstanceId;
+            self.Interval = 100;
+            self.TargetIndex = 0;
             self.CurrentIndex = 0;
 
             while (!self.OnStopTurn)
             {
                 self.E_ImageSelectImage.gameObject.SetActive(true);
-                Scroll_Item_CommonItem item = self.ScrollItemCommonItems[self.CurrentIndex];
+                Scroll_Item_PetChouKaItem item = self.ScrollItemPetChouKaItems[self.CurrentIndex];
                 if (item.uiTransform != null)
                 {
                     CommonViewHelper.SetParent(self.E_ImageSelectImage.gameObject, item.uiTransform.gameObject);
                 }
 
                 self.CurrentIndex++;
-                if (self.CurrentIndex == self.ScrollItemCommonItems.Count)
+                if (self.CurrentIndex == self.ScrollItemPetChouKaItems.Count)
                 {
                     self.CurrentIndex = 0;
                 }
@@ -109,9 +130,9 @@ namespace ET.Client
             self.E_ButtonStopButton.gameObject.SetActive(false);
             self.OnStopTurn = true;
             int targetItem = UnitHelper.GetMyUnitFromClientScene(self.Root()).GetComponent<NumericComponentC>().GetAsInt(NumericType.PetChouKaRewardItemId);
-            for (int i = 0; i < self.ScrollItemCommonItems.Count; i++)
+            for (int i = 0; i < self.ScrollItemPetChouKaItems.Count; i++)
             {
-                Scroll_Item_CommonItem item = self.ScrollItemCommonItems[i];
+                Scroll_Item_PetChouKaItem item = self.ScrollItemPetChouKaItems[i];
                 if (item.uiTransform != null)
                 {
                     if (item.Baginfo.ItemID == targetItem)
@@ -129,7 +150,7 @@ namespace ET.Client
             }
             else
             {
-                moveNumber = self.TargetIndex + self.ScrollItemCommonItems.Count - self.CurrentIndex;
+                moveNumber = self.TargetIndex + self.ScrollItemPetChouKaItems.Count - self.CurrentIndex;
             }
 
             long instanceId = self.InstanceId;
@@ -141,14 +162,14 @@ namespace ET.Client
                 }
 
                 self.E_ImageSelectImage.gameObject.SetActive(true);
-                Scroll_Item_CommonItem item = self.ScrollItemCommonItems[self.CurrentIndex];
+                Scroll_Item_PetChouKaItem item = self.ScrollItemPetChouKaItems[self.CurrentIndex];
                 if (item.uiTransform != null)
                 {
                     CommonViewHelper.SetParent(self.E_ImageSelectImage.gameObject, item.uiTransform.gameObject);
                 }
 
                 self.CurrentIndex++;
-                if (self.CurrentIndex == self.ScrollItemCommonItems.Count)
+                if (self.CurrentIndex == self.ScrollItemPetChouKaItems.Count)
                 {
                     self.CurrentIndex = 0;
                 }
