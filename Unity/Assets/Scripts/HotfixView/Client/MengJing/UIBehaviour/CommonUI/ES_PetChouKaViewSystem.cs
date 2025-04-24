@@ -14,13 +14,10 @@ namespace ET.Client
         {
             self.uiTransform = transform;
             
-            self.E_ButtonStopButton.AddListener(() => { self.OnButtonStop().Coroutine(); });
             self.E_ButtonOpenButton.AddListener(() => { self.OnButtonOpen().Coroutine(); });
             
             self.OnStopTurn = false;
             self.E_ImageSelectImage.gameObject.SetActive(false);
-            self.E_ButtonOpenButton.gameObject.SetActive(true);
-            self.E_ButtonStopButton.gameObject.SetActive(false);
             
             self.OnInitUI();
         }
@@ -101,6 +98,7 @@ namespace ET.Client
             self.TargetIndex = 0;
             self.CurrentIndex = 0;
 
+            int circle = 0;
             while (!self.OnStopTurn)
             {
                 self.E_ImageSelectImage.gameObject.SetActive(true);
@@ -113,7 +111,14 @@ namespace ET.Client
                 self.CurrentIndex++;
                 if (self.CurrentIndex == self.ScrollItemPetChouKaItems.Count)
                 {
+                    circle++;
                     self.CurrentIndex = 0;
+                }
+
+                // 开始默认转2圈
+                if (circle >= 2)
+                {
+                    self.OnButtonStop().Coroutine();
                 }
 
                 await self.Root().GetComponent<TimerComponent>().WaitAsync(self.Interval);
@@ -130,8 +135,7 @@ namespace ET.Client
             {
                 return;
             }
-
-            self.E_ButtonStopButton.gameObject.SetActive(false);
+            
             self.OnStopTurn = true;
             NumericComponentC numericComponent = UnitHelper.GetMyUnitFromClientScene(self.Root()).GetComponent<NumericComponentC>();
             int targetItem = numericComponent.GetAsInt(NumericType.PetChouKaRewardItemId);
@@ -198,8 +202,7 @@ namespace ET.Client
             }
 
             self.OnStopTurn = false;
-            self.E_ButtonOpenButton.gameObject.SetActive(true);
-            self.E_ButtonStopButton.gameObject.SetActive(false);
+            self.E_ButtonOpenButton.interactable = true;
         }
 
         public static void ShotTip(this ES_PetChouKa self, int itemId, int itemNum)
@@ -221,9 +224,8 @@ namespace ET.Client
             }
             
             self.UpdateCostItemNum();
-            
-            self.E_ButtonOpenButton.gameObject.SetActive(false);
-            self.E_ButtonStopButton.gameObject.SetActive(true);
+
+            self.E_ButtonOpenButton.interactable = false;
             
             self.OnStartTurn().Coroutine();
         }

@@ -52,23 +52,6 @@ namespace ET.Client
      		}
      	}
 
-		public UnityEngine.UI.Button E_ButtonStopButton
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_ButtonStopButton == null )
-     			{
-		    		this.m_E_ButtonStopButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_ButtonStop");
-     			}
-     			return this.m_E_ButtonStopButton;
-     		}
-     	}
-
 		public UnityEngine.UI.Image E_ButtonStopImage
      	{
      		get
@@ -187,7 +170,6 @@ namespace ET.Client
 		{
 			this.m_E_BagItemsScrollRect = null;
 			this.m_E_BagItemsImage = null;
-			this.m_E_ButtonStopButton = null;
 			this.m_E_ButtonStopImage = null;
 			this.m_E_ButtonOpenButton = null;
 			this.m_E_ButtonOpenImage = null;
@@ -199,7 +181,6 @@ namespace ET.Client
 
 		private UnityEngine.UI.ScrollRect m_E_BagItemsScrollRect = null;
 		private UnityEngine.UI.Image m_E_BagItemsImage = null;
-		private UnityEngine.UI.Button m_E_ButtonStopButton = null;
 		private UnityEngine.UI.Image m_E_ButtonStopImage = null;
 		private UnityEngine.UI.Button m_E_ButtonOpenButton = null;
 		private UnityEngine.UI.Image m_E_ButtonOpenImage = null;
