@@ -1,4 +1,6 @@
-﻿namespace ET.Server
+﻿using System.Collections.Generic;
+
+namespace ET.Server
 {
     [MessageLocationHandler(SceneType.Map)]
     public class C2M_PetChouKaStartHandler: MessageLocationHandler<Unit, C2M_PetChouKaStartRequest, M2C_PetChouKaStartResponse>
@@ -12,18 +14,17 @@
             }
 
             NumericComponentS numericComponent = unit.GetComponent<NumericComponentS>();
-            if (numericComponent.GetAsInt(NumericType.PetChouKaRewardIndex) == 0)
+            if (numericComponent.GetAsInt(NumericType.PetChouKaRewardItemId) == 0)
             {
-                if (!unit.GetComponent<BagComponentS>().OnCostItemData(ConfigData.PetChouKaCost))
+                if (!unit.GetComponent<BagComponentS>().OnCostItemData(GlobalValueConfigCategory.Instance.Get(137).Value))
                 {
                     response.Error = ErrorCode.ERR_ItemNotEnoughError;
                     return;
                 }
 
-                int count = ConfigData.PetChouKaRewardList.Split('@').Length;
-                int index = RandomHelper.ReturnRamdomValue_Int(1, count);
-                
-                numericComponent.ApplyValue(NumericType.PetChouKaRewardIndex, index);
+                List<RewardItem> droplist = new List<RewardItem>();
+                DropHelper.DropIDToDropItem_2(int.Parse(GlobalValueConfigCategory.Instance.Get(138).Value), droplist);
+                numericComponent.ApplyValue(NumericType.PetChouKaRewardItemId, droplist[0].ItemID);
             }
 
             await ETTask.CompletedTask;

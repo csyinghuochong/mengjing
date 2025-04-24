@@ -1,4 +1,6 @@
-﻿namespace ET.Server
+﻿using System.Collections.Generic;
+
+namespace ET.Server
 {
     [MessageLocationHandler(SceneType.Map)]
     public class C2M_PetChouKaEndHandler: MessageLocationHandler<Unit, C2M_PetChouKaEndRequest, M2C_PetChouKaEndResponse>
@@ -12,12 +14,13 @@
             }
             
             NumericComponentS numericComponent = unit.GetComponent<NumericComponentS>();
-            if (numericComponent.GetAsInt(NumericType.PetChouKaRewardIndex) != 0)
+            if (numericComponent.GetAsInt(NumericType.PetChouKaRewardItemId) != 0)
             {
-                string reward = ConfigData.PetChouKaRewardList.Split('@')[numericComponent.GetAsInt(NumericType.PetChouKaRewardIndex) - 1];
+                List<RewardItem> reward = new List<RewardItem>();
+                reward.Add(new RewardItem() { ItemID = numericComponent.GetAsInt(NumericType.PetChouKaRewardItemId), ItemNum = 1 });
 
-                unit.GetComponent<BagComponentS>().OnAddItemData(reward, $"{ItemGetWay.PetExplore}_{TimeHelper.ServerNow()}");
-                numericComponent.ApplyValue(NumericType.PetChouKaRewardIndex, 0);
+                unit.GetComponent<BagComponentS>().OnAddItemData(reward, string.Empty, $"{ItemGetWay.PetExplore}_{TimeHelper.ServerNow()}");
+                numericComponent.ApplyValue(NumericType.PetChouKaRewardItemId, 0);
             }
             
             await ETTask.CompletedTask;

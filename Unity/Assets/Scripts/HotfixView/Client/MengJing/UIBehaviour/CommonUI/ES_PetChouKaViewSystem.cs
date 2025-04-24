@@ -46,26 +46,25 @@ namespace ET.Client
             }
             
             Scroll_Item_CommonItem scrollItemCommonItem = self.ScrollItemCommonItems[index].BindTrans(transform);
-            string[] itemInfo = self.RewardShowItems[index].Split(';');
             ItemInfo bagInfo = new ItemInfo();
-            bagInfo.ItemID = int.Parse(itemInfo[0]);
-            bagInfo.ItemNum = int.Parse(itemInfo[1]);
+            bagInfo.ItemID = self.RewardShowItems[index];
+            bagInfo.ItemNum = 1;
             scrollItemCommonItem.Refresh(bagInfo, ItemOperateEnum.None);
-            scrollItemCommonItem.E_ItemNumText.gameObject.SetActive(true);
+            scrollItemCommonItem.E_ItemNumText.gameObject.SetActive(false);
         }
 
         private static void OnInitUI(this ES_PetChouKa self)
         {
-            string[] itemInfo = ConfigData.PetChouKaCost.Split(';');
+            string[] itemInfo = GlobalValueConfigCategory.Instance.Get(137).Value.Split(';');
             ItemConfig itemConfig = ItemConfigCategory.Instance.Get(int.Parse(itemInfo[0]));
             self.E_OpenCostItemIconImage.overrideSprite = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemIcon, itemConfig.Icon));
             self.E_OpenCostNumText.text = itemInfo[1];
             
             self.RewardShowItems.Clear();
-            string[] itemList = ConfigData.PetChouKaRewardList.Split('@');
-            foreach (string s in itemList)
+            List<RewardItem> droplist = DropHelper.DropIDToShowItem(int.Parse(GlobalValueConfigCategory.Instance.Get(138).Value), 1);
+            foreach (RewardItem rewardItem in droplist)
             {
-                self.RewardShowItems.Add(s);
+                self.RewardShowItems.Add(rewardItem.ItemID);
             }
 
             self.AddUIScrollItems(ref self.ScrollItemCommonItems, self.RewardShowItems.Count);
@@ -109,7 +108,19 @@ namespace ET.Client
 
             self.E_ButtonStopButton.gameObject.SetActive(false);
             self.OnStopTurn = true;
-            self.TargetIndex = UnitHelper.GetMyUnitFromClientScene(self.Root()).GetComponent<NumericComponentC>().GetAsInt(NumericType.PetChouKaRewardIndex) - 1;
+            int targetItem = UnitHelper.GetMyUnitFromClientScene(self.Root()).GetComponent<NumericComponentC>().GetAsInt(NumericType.PetChouKaRewardItemId);
+            for (int i = 0; i < self.ScrollItemCommonItems.Count; i++)
+            {
+                Scroll_Item_CommonItem item = self.ScrollItemCommonItems[i];
+                if (item.uiTransform != null)
+                {
+                    if (item.Baginfo.ItemID == targetItem)
+                    {
+                        self.TargetIndex = i;
+                        break;
+                    }
+                }
+            };
 
             int moveNumber = 0;
             if (self.TargetIndex > self.CurrentIndex)
