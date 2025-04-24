@@ -9,7 +9,7 @@ namespace ET.Client
 	public  class ES_PetChouKa : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy
 	{
 		public Dictionary<int, EntityRef<Scroll_Item_PetChouKaItem>> ScrollItemPetChouKaItems = new();
-		public List<int> RewardShowItems = new();
+		public List<RewardItem> RewardShowItems = new();
 
 		public long Interval = 0; //匀速
 		public int TargetIndex = 0;

@@ -47,12 +47,7 @@ namespace ET.Client
             self.E_OpenCostItemIconImage.overrideSprite = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemIcon, itemConfig.Icon));
             self.E_OpenCostNumText.text = itemInfo[1];
 
-            self.RewardShowItems.Clear();
-            List<RewardItem> droplist = DropHelper.DropIDToShowItem(int.Parse(GlobalValueConfigCategory.Instance.Get(138).Value), 1);
-            foreach (RewardItem rewardItem in droplist)
-            {
-                self.RewardShowItems.Add(rewardItem.ItemID);
-            }
+            self.RewardShowItems = DropHelper.DropIDToShowItem(int.Parse(GlobalValueConfigCategory.Instance.Get(138).Value), 1);
 
             ResourcesLoaderComponent resourcesLoaderComponent = self.Root().GetComponent<ResourcesLoaderComponent>();
             for (int i = 0; i < self.RewardShowItems.Count; i++)
@@ -75,8 +70,8 @@ namespace ET.Client
                 Scroll_Item_PetChouKaItem scrollItemPetChouKaItem = self.ScrollItemPetChouKaItems[i];
                 scrollItemPetChouKaItem.uiTransform.gameObject.SetActive(true);
                 ItemInfo bagInfo = new ItemInfo();
-                bagInfo.ItemID = self.RewardShowItems[i];
-                bagInfo.ItemNum = 1;
+                bagInfo.ItemID = self.RewardShowItems[i].ItemID;
+                bagInfo.ItemNum = self.RewardShowItems[i].ItemNum;
                 scrollItemPetChouKaItem.Refresh(bagInfo);
             }
 
