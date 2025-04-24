@@ -19,9 +19,19 @@
 
 		public static async ETTask OnRealName_Btn(this DlgRealName self)
 		{
-			string name = "余传建";
-			string idcard = "41152419930913205X";
-			
+			string name = self.View.E_InputFieldNameInputField.text;
+			string idcard =  self.View.E_InputFieldIDCardInputField.text;
+
+			if (string.IsNullOrEmpty(name) || string.IsNullOrEmpty(idcard))
+			{
+				return;
+			}
+
+			if (name.Length >100 || idcard.Length > 100)
+			{
+				return;
+			}
+
 			int errorCode = await LoginHelper.RealName(self.Root(), name, idcard);
             
 			//实名认证成功再登陆。
