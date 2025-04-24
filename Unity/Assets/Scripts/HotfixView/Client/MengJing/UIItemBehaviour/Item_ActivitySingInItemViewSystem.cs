@@ -81,7 +81,12 @@ namespace ET.Client
             self.ClickTime = TimeHelper.ServerNow();
             self.IsDrag = false;
             self.IsClick = false;
-            self.ShowTip().Coroutine();
+
+            ActivityComponentC activityComponent = self.Root().GetComponent<ActivityComponentC>();
+            if (!activityComponent.ActivityReceiveIds.Contains(self.ActivityConfig.Id))
+            {
+                self.ShowTip().Coroutine();
+            }
         }
         
         private static void OnBeginDrag(this Scroll_Item_ActivitySingInItem self, PointerEventData pdata)

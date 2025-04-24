@@ -256,7 +256,12 @@ namespace ET.Client
         {
             self.ClickTime = TimeHelper.ServerNow();
             self.IsClick = false;
-            self.ShowTip(activityId).Coroutine();
+            
+            ActivityComponentC activityComponent = self.Root().GetComponent<ActivityComponentC>();
+            if (!activityComponent.ActivityReceiveIds.Contains(activityId))
+            {
+                self.ShowTip(activityId).Coroutine();
+            }
         }
 
         private static async ETTask OnPointerUp(this ES_ActivitySingIn self, int activityId, PointerEventData pdata)
