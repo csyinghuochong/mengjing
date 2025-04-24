@@ -50,7 +50,7 @@ namespace ET.Server
             }
 
             //万能鉴定符固定为60
-            if (bagInf0.ItemID == 11200000)
+            if (bagInf0.ItemID == 1140000)
             {
                 bagInf0.ItemPar = "100";
                 return;
