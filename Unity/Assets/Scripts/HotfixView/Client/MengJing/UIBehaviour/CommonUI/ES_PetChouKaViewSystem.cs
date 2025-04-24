@@ -40,12 +40,21 @@ namespace ET.Client
             self.DestroyWidget();
         }
 
-        private static void OnInitUI(this ES_PetChouKa self)
+        private static void UpdateCostItemNum(this ES_PetChouKa self)
         {
             string[] itemInfo = GlobalValueConfigCategory.Instance.Get(137).Value.Split(';');
             ItemConfig itemConfig = ItemConfigCategory.Instance.Get(int.Parse(itemInfo[0]));
-            self.E_OpenCostItemIconImage.overrideSprite = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemIcon, itemConfig.Icon));
-            self.E_OpenCostNumText.text = itemInfo[1];
+            self.E_OpenCostItemIconImage.overrideSprite = self.Root().GetComponent<ResourcesLoaderComponent>()
+                    .LoadAssetSync<Sprite>(ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemIcon, itemConfig.Icon));
+            int costNum = int.Parse(itemInfo[1]);
+            long haveNum = self.Root().GetComponent<BagComponentC>().GetItemNumber(int.Parse(itemInfo[0]));
+            self.E_OpenCostNumText.text = $"{haveNum}/{costNum}";
+            self.E_OpenCostNumText.color = costNum < haveNum ? new Color(166f / 255f, 255f / 255f, 28f / 255f) : new Color(255f / 255f, 135f / 255f, 81f / 255f);
+        }
+
+        private static void OnInitUI(this ES_PetChouKa self)
+        {
+            self.UpdateCostItemNum();
 
             self.RewardShowItems = DropHelper.DropIDToShowItem_2(int.Parse(GlobalValueConfigCategory.Instance.Get(138).Value));
 
@@ -210,6 +219,8 @@ namespace ET.Client
             {
                 return;
             }
+            
+            self.UpdateCostItemNum();
             
             self.E_ButtonOpenButton.gameObject.SetActive(false);
             self.E_ButtonStopButton.gameObject.SetActive(true);
