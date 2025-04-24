@@ -21,6 +21,7 @@ namespace ET.Server
 
                 unit.GetComponent<BagComponentS>().OnAddItemData(reward, string.Empty, $"{ItemGetWay.PetExplore}_{TimeHelper.ServerNow()}");
                 numericComponent.ApplyValue(NumericType.PetChouKaRewardItemId, 0);
+                numericComponent.ApplyValue(NumericType.PetChouKaRewardItemNum, 0);
             }
             
             await ETTask.CompletedTask;

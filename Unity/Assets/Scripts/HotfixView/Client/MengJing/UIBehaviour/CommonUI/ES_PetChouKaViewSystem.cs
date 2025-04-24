@@ -129,7 +129,8 @@ namespace ET.Client
 
             self.E_ButtonStopButton.gameObject.SetActive(false);
             self.OnStopTurn = true;
-            int targetItem = UnitHelper.GetMyUnitFromClientScene(self.Root()).GetComponent<NumericComponentC>().GetAsInt(NumericType.PetChouKaRewardItemId);
+            NumericComponentC numericComponent = UnitHelper.GetMyUnitFromClientScene(self.Root()).GetComponent<NumericComponentC>();
+            int targetItem = numericComponent.GetAsInt(NumericType.PetChouKaRewardItemId);
             for (int i = 0; i < self.ScrollItemPetChouKaItems.Count; i++)
             {
                 Scroll_Item_PetChouKaItem item = self.ScrollItemPetChouKaItems[i];
@@ -182,11 +183,28 @@ namespace ET.Client
                 }
             }
 
-            await PetNetHelper.RequestPetChouKaEnd(self.Root());
+            int itemId = numericComponent.GetAsInt(NumericType.PetChouKaRewardItemId);
+            int itemNum = numericComponent.GetAsInt(NumericType.PetChouKaRewardItemNum);
+            self.Root().GetComponent<BagComponentC>().RealAddItem--;
+            int error =await PetNetHelper.RequestPetChouKaEnd(self.Root());
+            self.Root().GetComponent<BagComponentC>().RealAddItem++;
+            if (error == ErrorCode.ERR_Success)
+            {
+                self.ShotTip(itemId, itemNum);
+            }
 
             self.OnStopTurn = false;
             self.E_ButtonOpenButton.gameObject.SetActive(true);
             self.E_ButtonStopButton.gameObject.SetActive(false);
+        }
+
+        public static void ShotTip(this ES_PetChouKa self, int itemId, int itemNum)
+        {
+            ItemConfig itemConfig = ItemConfigCategory.Instance.Get(itemId);
+            using (zstring.Block())
+            {
+                FlyTipComponent.Instance.ShowFlyTip(zstring.Format("获得物品 {0} x{1}", itemConfig.ItemName, itemNum));
+            }
         }
 
         private static async ETTask OnButtonOpen(this ES_PetChouKa self)
