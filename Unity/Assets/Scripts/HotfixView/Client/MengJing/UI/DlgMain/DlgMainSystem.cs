@@ -196,6 +196,7 @@ namespace ET.Client
     {
         protected override async ETTask Run(Scene scene, TaskGet args)
         {
+            scene.GetComponent<GuideComponent>().OnTrigger(GuideTriggerType.AcceptTask, args.TaskConfigId.ToString());
             scene.GetComponent<UIComponent>().GetDlgLogic<DlgMain>()?.OnRecvTaskUpdate();
             await ETTask.CompletedTask;
         }
@@ -223,8 +224,8 @@ namespace ET.Client
             //     }
             // }
             //
-            // await scene.GetComponent<TimerComponent>().WaitAsync(200);
-            // scene.GetComponent<GuideComponent>().OnTrigger(GuideTriggerType.CommitTask, taskid.ToString());
+            await scene.GetComponent<TimerComponent>().WaitAsync(200);
+            scene.GetComponent<GuideComponent>().OnTrigger(GuideTriggerType.CommitTask, taskid.ToString());
             
             await ETTask.CompletedTask;
         }
@@ -536,6 +537,14 @@ namespace ET.Client
             //初始化基础属性
             self.InitShow();
             self.OnSettingUpdate();
+            
+            UserInfo userInfo = self.Root().GetComponent<UserInfoComponentC>().UserInfo;
+            int guideid = PlayerPrefsHelp.GetInt($"{PlayerPrefsHelp.LastGuide}_{userInfo.UserId}");
+            if (userInfo.Lv == 1 || guideid > 0)
+            {
+                self.Root().GetComponent<GuideComponent>().SetGuideId(guideid);
+            }
+            self.ShowGuide().Coroutine();
 
             self.AfterEnterScene(MapTypeEnum.MainCityScene);
 
@@ -612,6 +621,12 @@ namespace ET.Client
 
         public static void ShowWindow(this DlgMain self, Entity contextData = null)
         {
+        }
+
+        public static async ETTask ShowGuide(this DlgMain self)
+        {
+            await self.Root().GetComponent<TimerComponent>().WaitAsync(10);
+            self.Root().GetComponent<GuideComponent>().OnTrigger(GuideTriggerType.OpenUI, "UIMain");
         }
 
         public static void BeforeUnload(this DlgMain self)

@@ -276,7 +276,7 @@ namespace ET.Client
                 return;
             }
 
-            self.Root().GetComponent<GuideComponent>().OnTrigger(GuideTriggerType.OpenUI, "Main/Task/UITaskGet");
+            self.Root().GetComponent<GuideComponent>().OnTrigger(GuideTriggerType.OpenUI, "UITaskGet");
         }
 
         public static void OnButtonWeeklyCommit(this DlgTaskGet self)

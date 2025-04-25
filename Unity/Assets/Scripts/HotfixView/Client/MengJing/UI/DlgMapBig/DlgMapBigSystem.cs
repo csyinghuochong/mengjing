@@ -116,7 +116,7 @@ namespace ET.Client
             }
 
             camera.enabled = false;
-            self.Root().GetComponent<GuideComponent>().OnTrigger(GuideTriggerType.OpenUI, "Main/MiniMap/UIMapBig");
+            self.Root().GetComponent<GuideComponent>().OnTrigger(GuideTriggerType.OpenUI, "UIMapBig");
         }
 
         public static void ShowStallArea(this DlgMapBig self)

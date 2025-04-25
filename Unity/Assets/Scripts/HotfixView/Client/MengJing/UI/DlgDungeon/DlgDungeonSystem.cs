@@ -87,7 +87,7 @@ namespace ET.Client
             }
 
             await self.Root().GetComponent<TimerComponent>().WaitAsync(10);
-            self.Root().GetComponent<GuideComponent>().OnTrigger(GuideTriggerType.OpenUI, "Dungeon/UIDungeon");
+            self.Root().GetComponent<GuideComponent>().OnTrigger(GuideTriggerType.OpenUI, "UIDungeon");
         }
 
         private static void OnBossRefreshTimeItemsRefresh(this DlgDungeon self, Transform transform, int index)

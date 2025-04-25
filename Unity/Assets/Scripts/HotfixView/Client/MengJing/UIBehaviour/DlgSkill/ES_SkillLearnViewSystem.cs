@@ -21,6 +21,8 @@ namespace ET.Client
             self.E_SkillLearnButton.AddListener(self.OnSkillLearn);
 
             self.E_BtnItemTypeSetToggleGroup.OnSelectIndex(0);
+            
+            self.ShowGuide().Coroutine();
         }
 
         [EntitySystem]
@@ -29,6 +31,12 @@ namespace ET.Client
             self.DestroyWidget();
         }
 
+        public static async ETTask ShowGuide(this ES_SkillLearn self)
+        {
+            await self.Root().GetComponent<TimerComponent>().WaitFrameAsync();
+            self.Root().GetComponent<GuideComponent>().OnTrigger(GuideTriggerType.OpenUI, "UISkill");
+        }
+        
         private static void OnSkillLearn(this ES_SkillLearn self)
         {
             UserInfo userInfo = self.Root().GetComponent<UserInfoComponentC>().UserInfo;

@@ -60,6 +60,8 @@ namespace ET.Client
 
             ReddotViewComponent redPointComponent = self.Root().GetComponent<ReddotViewComponent>();
             redPointComponent.RegisterReddot(ReddotType.RolePoint, self.Reddot_RolePoint);
+            
+            self.ShowGuide().Coroutine();
         }
 
         [EntitySystem]
@@ -71,6 +73,12 @@ namespace ET.Client
             self.DestroyWidget();
         }
 
+        public static async ETTask ShowGuide(this ES_RoleProperty self)
+        {
+            await self.Root().GetComponent<TimerComponent>().WaitAsync(10);
+            self.Root().GetComponent<GuideComponent>().OnTrigger(GuideTriggerType.OpenUI, "UIRoleProperty");
+        }
+        
         public static void Reddot_RolePoint(this ES_RoleProperty self, int num)
         {
             self.E_AddPointButton.transform.Find("Reddot").gameObject.SetActive(num > 0);

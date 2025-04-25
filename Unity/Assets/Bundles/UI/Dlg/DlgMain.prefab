@@ -21422,6 +21422,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data:
+  - key: AdventureBtn
+    gameObject: {fileID: 3055922816583290258}
+  - key: UIMainTask
+    gameObject: {fileID: 7495866334651781678}
   - key: Btn_RoseEquip
     gameObject: {fileID: 3055922815508021030}
   - key: Btn_MyJiaYuan
@@ -21432,8 +21436,6 @@ MonoBehaviour:
     gameObject: {fileID: 3055922817126278615}
   - key: Btn_ChengJiu
     gameObject: {fileID: 3055922815399829635}
-  - key: AdventureBtn
-    gameObject: {fileID: 3055922816583290258}
   - key: NewJoystick
     gameObject: {fileID: 3055922815870568341}
   - key: Btn_Pet
@@ -21476,8 +21478,6 @@ MonoBehaviour:
     gameObject: {fileID: 3580066117079506654}
   - key: FunctionSetBtn
     gameObject: {fileID: 8307964891688270642}
-  - key: UIMainTask
-    gameObject: {fileID: 7495866334651781678}
   - key: UIMainTeam
     gameObject: {fileID: 1183878491558543840}
   - key: TeamDungeonBtn
@@ -52985,10 +52985,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data:
+  - key: TaskShowList
+    gameObject: {fileID: 4361630109175697213}
   - key: Btn_RoseTask
     gameObject: {fileID: 3373240724049992204}
-  - key: TaskShowList
-    gameObject: {fileID: 0}
   - key: UIMainTaskItem
     gameObject: {fileID: 0}
 --- !u!1 &7517974249850324022

@@ -87,10 +87,18 @@ namespace ET.Client
 
             ReddotComponentC reddotComponent = self.Root().GetComponent<ReddotComponentC>();
             reddotComponent.UpdateReddont(ReddotType.RolePoint);
+            
+            self.ShowGuide().Coroutine();
         }
 
         public static void ShowWindow(this DlgRole self, Entity contextData = null)
         {
+        }
+
+        public static async ETTask ShowGuide(this DlgRole self)
+        {
+            await self.Root().GetComponent<TimerComponent>().WaitAsync(10);
+            self.Root().GetComponent<GuideComponent>().OnTrigger(GuideTriggerType.OpenUI, "UIRole");
         }
 
         public static void BeforeUnload(this DlgRole self)
