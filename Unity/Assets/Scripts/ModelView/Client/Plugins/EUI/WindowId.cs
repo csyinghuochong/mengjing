@@ -230,5 +230,6 @@ namespace ET.Client
 		WindowID_PaiMaiStallBuy,
 		WindowID_PetEggSelect,
 		WindowID_SingleHappyMain,
+		WindowID_ProLucklyExplain,
 	}
 }

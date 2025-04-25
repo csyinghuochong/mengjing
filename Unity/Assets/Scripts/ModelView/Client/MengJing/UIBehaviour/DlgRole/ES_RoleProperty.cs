@@ -30,7 +30,7 @@ namespace ET.Client
 		public int PointRemain;
 		public bool IsHoldDown;
 		
-		public RectTransform EG_AttributeNodeRectTransform
+		public UnityEngine.RectTransform EG_AttributeNodeRectTransform
      	{
      		get
      		{
@@ -132,6 +132,23 @@ namespace ET.Client
      		}
      	}
 
+		public UnityEngine.UI.Image E_RolePropertyBaseItemsImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_RolePropertyBaseItemsImage == null )
+     			{
+		    		this.m_E_RolePropertyBaseItemsImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Right/EG_AttributeNode/E_RolePropertyBaseItems");
+     			}
+     			return this.m_E_RolePropertyBaseItemsImage;
+     		}
+     	}
+
 		public UnityEngine.UI.LoopVerticalScrollRect E_RolePropertyBaseItemsLoopVerticalScrollRect
      	{
      		get
@@ -149,6 +166,23 @@ namespace ET.Client
      		}
      	}
 
+		public UnityEngine.UI.Image E_RolePropertyTeShuItemsImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_RolePropertyTeShuItemsImage == null )
+     			{
+		    		this.m_E_RolePropertyTeShuItemsImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Right/EG_AttributeNode/E_RolePropertyTeShuItems");
+     			}
+     			return this.m_E_RolePropertyTeShuItemsImage;
+     		}
+     	}
+
 		public UnityEngine.UI.LoopVerticalScrollRect E_RolePropertyTeShuItemsLoopVerticalScrollRect
      	{
      		get
@@ -163,6 +197,40 @@ namespace ET.Client
 		    		this.m_E_RolePropertyTeShuItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.LoopVerticalScrollRect>(this.uiTransform.gameObject,"Right/EG_AttributeNode/E_RolePropertyTeShuItems");
      			}
      			return this.m_E_RolePropertyTeShuItemsLoopVerticalScrollRect;
+     		}
+     	}
+
+		public UnityEngine.UI.Button E_LuckExplainButton
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_LuckExplainButton == null )
+     			{
+		    		this.m_E_LuckExplainButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Right/EG_AttributeNode/E_LuckExplain");
+     			}
+     			return this.m_E_LuckExplainButton;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_LuckExplainImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_LuckExplainImage == null )
+     			{
+		    		this.m_E_LuckExplainImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Right/EG_AttributeNode/E_LuckExplain");
+     			}
+     			return this.m_E_LuckExplainImage;
      		}
      	}
 
@@ -951,8 +1019,12 @@ namespace ET.Client
 			this.m_E_BaoShiDuImgImage = null;
 			this.m_E_BaoShiDuTextText = null;
 			this.m_E_BtnItemTypeSetToggleGroup = null;
+			this.m_E_RolePropertyBaseItemsImage = null;
 			this.m_E_RolePropertyBaseItemsLoopVerticalScrollRect = null;
+			this.m_E_RolePropertyTeShuItemsImage = null;
 			this.m_E_RolePropertyTeShuItemsLoopVerticalScrollRect = null;
+			this.m_E_LuckExplainButton = null;
+			this.m_E_LuckExplainImage = null;
 			this.m_E_AddPointButton = null;
 			this.m_E_AddPointImage = null;
 			this.m_EG_RoleAddPointRectTransform = null;
@@ -1007,8 +1079,12 @@ namespace ET.Client
 		private UnityEngine.UI.Image m_E_BaoShiDuImgImage = null;
 		private UnityEngine.UI.Text m_E_BaoShiDuTextText = null;
 		private UnityEngine.UI.ToggleGroup m_E_BtnItemTypeSetToggleGroup = null;
+		private UnityEngine.UI.Image m_E_RolePropertyBaseItemsImage = null;
 		private UnityEngine.UI.LoopVerticalScrollRect m_E_RolePropertyBaseItemsLoopVerticalScrollRect = null;
+		private UnityEngine.UI.Image m_E_RolePropertyTeShuItemsImage = null;
 		private UnityEngine.UI.LoopVerticalScrollRect m_E_RolePropertyTeShuItemsLoopVerticalScrollRect = null;
+		private UnityEngine.UI.Button m_E_LuckExplainButton = null;
+		private UnityEngine.UI.Image m_E_LuckExplainImage = null;
 		private UnityEngine.UI.Button m_E_AddPointButton = null;
 		private UnityEngine.UI.Image m_E_AddPointImage = null;
 		private UnityEngine.RectTransform m_EG_RoleAddPointRectTransform = null;

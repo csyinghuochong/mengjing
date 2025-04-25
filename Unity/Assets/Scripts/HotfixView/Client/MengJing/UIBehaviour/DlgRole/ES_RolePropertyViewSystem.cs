@@ -45,6 +45,7 @@ namespace ET.Client
             self.E_Cost_MingJieEventTrigger.RegisterEvent(EventTriggerType.PointerDown, (pdata) => { self.PointerDown_CostNum(4).Coroutine(); });
             self.E_Cost_MingJieEventTrigger.RegisterEvent(EventTriggerType.PointerUp, (pdata) => { self.PointerUp(); });
 
+            self.E_LuckExplainButton.AddListener(self.OnLuckExplainButton);
             self.E_CloseAddPointButton.AddListener(self.OnCloseAddPointButton);
             self.E_AddPointConfirmButton.AddListenerAsync(self.OnAddPointConfirmButton);
             self.E_RecommendAddPointButton.AddListener(self.OnRecommendAddPointButton);
@@ -343,6 +344,11 @@ namespace ET.Client
             self.E_ShengYuNumText.text = self.PointRemain.ToString();
         }
 
+        private static void OnLuckExplainButton(this ES_RoleProperty self)
+        {
+            self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_ProLucklyExplain).Coroutine();
+        }
+        
         private static void OnCloseAddPointButton(this ES_RoleProperty self)
         {
             self.EG_AttributeNodeRectTransform.gameObject.SetActive(true);
