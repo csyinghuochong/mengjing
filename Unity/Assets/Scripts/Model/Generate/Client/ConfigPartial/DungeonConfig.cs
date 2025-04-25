@@ -15,6 +15,15 @@ namespace ET
             {
                 int dungeonid = functionConfig.Id;
 
+                if (functionConfig.NpcList != null)
+                {
+                    ConfigData.FubenToNpcList[dungeonid] =new List<int>(functionConfig.NpcList);
+                }
+                else
+                {
+                    ConfigData.FubenToNpcList[dungeonid] = new List<int>();
+                }
+                
                 if (!string.IsNullOrEmpty(functionConfig.AutoPath))
                 {
                     string[] autoPathList = functionConfig.AutoPath.Split(';');
