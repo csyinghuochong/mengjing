@@ -63,7 +63,7 @@ namespace ET.Client
             }
             
             Scroll_Item_CommonItem scrollItemCommonItem = self.ScrollItemCommonItems[index].BindTrans(transform);
-            scrollItemCommonItem.Refresh(self.ShowBagInfos[index], ItemOperateEnum.Bag, self.OnSelectItem);
+            scrollItemCommonItem.Refresh(self.ShowBagInfos[index], ItemOperateEnum.None, self.OnSelectItem);
         }
 
         private static void OnSelectItem(this DlgAppraisalSelect self, ItemInfo bagInfo)
@@ -72,6 +72,7 @@ namespace ET.Client
             self.BagInfo_Appri = bagInfo;
             self.View.ES_CommonItem_2.UpdateItem(bagInfo, ItemOperateEnum.None);
             self.View.ES_CommonItem_2.uiTransform.gameObject.SetActive(true);
+            self.View.ES_CommonItem_2.E_ItemNumText.gameObject.SetActive(false);
             using (zstring.Block())
             {
                 self.View.E_JianDingQualityText.text = zstring.Format("品质:{0}", bagInfo.ItemPar);
@@ -149,7 +150,7 @@ namespace ET.Client
             //鉴定符
             for (int i = 0; i < bagInfos.Count; i++)
             {
-                if (bagInfos[i].ItemID != self.AppraisalItemConfigId && bagInfos[i].ItemID != 1140003)
+                if (bagInfos[i].ItemID != self.AppraisalItemConfigId && bagInfos[i].ItemID != 1140000)
                 {
                     continue;
                 }
