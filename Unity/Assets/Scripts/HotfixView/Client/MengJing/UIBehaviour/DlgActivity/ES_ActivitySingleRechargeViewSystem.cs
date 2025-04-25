@@ -5,8 +5,8 @@ using UnityEngine;
 namespace ET.Client
 {
     [FriendOf(typeof(Scroll_Item_ActivitySingleRechargeItem))]
-    [EntitySystemOf(typeof (ES_ActivitySingleRecharge))]
-    [FriendOfAttribute(typeof (ES_ActivitySingleRecharge))]
+    [EntitySystemOf(typeof(ES_ActivitySingleRecharge))]
+    [FriendOfAttribute(typeof(ES_ActivitySingleRecharge))]
     public static partial class ES_ActivitySingleRechargeSystem
     {
         [EntitySystem]
@@ -14,35 +14,22 @@ namespace ET.Client
         {
             self.uiTransform = transform;
 
-            self.E_ActivitySingleRechargeItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnActivitySingleRechargeItemsRefresh);
-
-            self.GetInfo();
+            self.InitInfo();
         }
 
         [EntitySystem]
         private static void Destroy(this ES_ActivitySingleRecharge self)
         {
-            self.DestroyWidget();
-        }
-
-        public static void GetInfo(this ES_ActivitySingleRecharge self)
-        {
-            self.InitInfo();
-        }
-
-        private static void OnActivitySingleRechargeItemsRefresh(this ES_ActivitySingleRecharge self, Transform transform, int index)
-        {
-            foreach (Scroll_Item_ActivitySingleRechargeItem item in self.ScrollItemActivitySingleRechargeItems.Values)
+            ResourcesLoaderComponent resourcesLoaderComponent = self.Root().GetComponent<ResourcesLoaderComponent>();
+            for (int i = 0; i < self.AssetList.Count; i++)
             {
-                if (item.uiTransform == transform)
-                {
-                    item.uiTransform = null;
-                }
+                resourcesLoaderComponent.UnLoadAsset(self.AssetList[i]);
             }
-            
-            Scroll_Item_ActivitySingleRechargeItem scrollItemActivitySingleRechargeItem =
-                    self.ScrollItemActivitySingleRechargeItems[index].BindTrans(transform);
-            scrollItemActivitySingleRechargeItem.OnUpdateData(self.ShowItem[index]);
+
+            self.AssetList.Clear();
+            self.AssetList = null;
+
+            self.DestroyWidget();
         }
 
         public static void InitInfo(this ES_ActivitySingleRecharge self)
@@ -59,8 +46,37 @@ namespace ET.Client
                 self.ShowItem.Add(activityConfigs[i]);
             }
 
-            self.AddUIScrollItems(ref self.ScrollItemActivitySingleRechargeItems, self.ShowItem.Count);
-            self.E_ActivitySingleRechargeItemsLoopVerticalScrollRect.SetVisible(true, self.ShowItem.Count);
+            ResourcesLoaderComponent resourcesLoaderComponent = self.Root().GetComponent<ResourcesLoaderComponent>();
+            for (int i = 0; i < self.ShowItem.Count; i++)
+            {
+                if (!self.ScrollItemActivitySingleRechargeItems.ContainsKey(i))
+                {
+                    Scroll_Item_ActivitySingleRechargeItem item = self.AddChild<Scroll_Item_ActivitySingleRechargeItem>();
+                    string path = "Assets/Bundles/UI/Item/Item_ActivitySingleRechargeItem.prefab";
+                    if (!self.AssetList.Contains(path))
+                    {
+                        self.AssetList.Add(path);
+                    }
+
+                    GameObject prefab = resourcesLoaderComponent.LoadAssetSync<GameObject>(path);
+                    GameObject go = UnityEngine.Object.Instantiate(prefab, self.E_ActivitySingleRechargeItemsScrollRect.transform.Find("Content").gameObject.transform);
+                    item.BindTrans(go.transform);
+                    self.ScrollItemActivitySingleRechargeItems.Add(i, item);
+                }
+
+                Scroll_Item_ActivitySingleRechargeItem scrollItemActivitySingleRechargeItem = self.ScrollItemActivitySingleRechargeItems[i];
+                scrollItemActivitySingleRechargeItem.uiTransform.gameObject.SetActive(true);
+                scrollItemActivitySingleRechargeItem.OnUpdateData(self.ShowItem[i]);
+            }
+
+            if (self.ScrollItemActivitySingleRechargeItems.Count > self.ShowItem.Count)
+            {
+                for (int i = self.ShowItem.Count; i < self.ScrollItemActivitySingleRechargeItems.Count; i++)
+                {
+                    Scroll_Item_ActivitySingleRechargeItem scrollItemActivitySingleRechargeItem = self.ScrollItemActivitySingleRechargeItems[i];
+                    scrollItemActivitySingleRechargeItem.uiTransform.gameObject.SetActive(false);
+                }
+            }
         }
     }
 }

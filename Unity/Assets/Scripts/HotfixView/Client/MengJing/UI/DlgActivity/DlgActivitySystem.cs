@@ -29,6 +29,10 @@ namespace ET.Client
         public static void Reddot_SingleRecharge(this DlgActivity self, int num)
         {
             self.View.E_Type_4Toggle.transform.Find("Reddot").gameObject.SetActive(num > 0);
+            if (num > 0)
+            {
+                self.View.ES_ActivitySingleRecharge.InitInfo();
+            }
         }
 
         private static void OnFunctionSetBtn(this DlgActivity self, int index)

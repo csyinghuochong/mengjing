@@ -1,18 +1,18 @@
-﻿using System.Collections.Generic;
+﻿
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
 namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class ES_ActivitySingleRecharge : Entity,IAwake<Transform>,IDestroy,IUILogic
+	public  class ES_ActivitySingleRecharge : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy 
 	{
 		public List<ActivityConfig> ShowItem = new();
-		public Dictionary<int, EntityRef<Scroll_Item_ActivitySingleRechargeItem>> ScrollItemActivitySingleRechargeItems;
+		public Dictionary<int, EntityRef<Scroll_Item_ActivitySingleRechargeItem>> ScrollItemActivitySingleRechargeItems = new();
+		public List<string> AssetList { get; set; } = new();
 		
-        
-		public LoopVerticalScrollRect E_ActivitySingleRechargeItemsLoopVerticalScrollRect
+		public UnityEngine.UI.ScrollRect E_ActivitySingleRechargeItemsScrollRect
      	{
      		get
      		{
@@ -21,11 +21,28 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_E_ActivitySingleRechargeItemsLoopVerticalScrollRect == null )
+     			if( this.m_E_ActivitySingleRechargeItemsScrollRect == null )
      			{
-		    		this.m_E_ActivitySingleRechargeItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<LoopVerticalScrollRect>(this.uiTransform.gameObject,"E_ActivitySingleRechargeItems");
+		    		this.m_E_ActivitySingleRechargeItemsScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.ScrollRect>(this.uiTransform.gameObject,"E_ActivitySingleRechargeItems");
      			}
-     			return this.m_E_ActivitySingleRechargeItemsLoopVerticalScrollRect;
+     			return this.m_E_ActivitySingleRechargeItemsScrollRect;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_ActivitySingleRechargeItemsImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_ActivitySingleRechargeItemsImage == null )
+     			{
+		    		this.m_E_ActivitySingleRechargeItemsImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_ActivitySingleRechargeItems");
+     			}
+     			return this.m_E_ActivitySingleRechargeItemsImage;
      		}
      	}
 
@@ -43,11 +60,13 @@ namespace ET.Client
 
 		public void DestroyWidget()
 		{
-			this.m_E_ActivitySingleRechargeItemsLoopVerticalScrollRect = null;
+			this.m_E_ActivitySingleRechargeItemsScrollRect = null;
+			this.m_E_ActivitySingleRechargeItemsImage = null;
 			this.uiTransform = null;
 		}
 
-		private LoopVerticalScrollRect m_E_ActivitySingleRechargeItemsLoopVerticalScrollRect = null;
+		private UnityEngine.UI.ScrollRect m_E_ActivitySingleRechargeItemsScrollRect = null;
+		private UnityEngine.UI.Image m_E_ActivitySingleRechargeItemsImage = null;
 		public Transform uiTransform = null;
 	}
 }
