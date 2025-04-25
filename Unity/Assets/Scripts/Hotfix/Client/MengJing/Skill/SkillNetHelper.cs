@@ -137,6 +137,9 @@ namespace ET.Client
 
             M2C_MakeResetResponse response = (M2C_MakeResetResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
 
+            root.GetComponent<UserInfoComponentC>().UserInfo.MakeList.Clear();
+            root.GetComponent<UserInfoComponentC>().UserInfo.MakeList = response.MakeList;
+            
             return response.Error;
         }
 

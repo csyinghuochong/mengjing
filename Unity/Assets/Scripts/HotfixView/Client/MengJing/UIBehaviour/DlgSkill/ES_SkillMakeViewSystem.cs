@@ -160,6 +160,7 @@ namespace ET.Client
 
                 await SkillNetHelper.MakeSelect(self.Root(), makeId, self.Plan == -1 ? 1 : self.Plan);
 
+                self.MakeId = 0;
                 self.OnUpdateMakeType();
                 self.UpdateShuLianDu();
                 
@@ -327,10 +328,9 @@ namespace ET.Client
         {
             EquipMakeConfig equipMakeConfig = EquipMakeConfigCategory.Instance.Get(self.MakeId);
 
-            ItemInfo bagInfo = new ItemInfo();
-            bagInfo.ItemID = equipMakeConfig.MakeItemID;
-            self.ES_CommonItem_0.UpdateItem(bagInfo, ItemOperateEnum.None);
-            self.ES_CommonItem_0.E_ItemNumText.gameObject.SetActive(false);
+            ItemConfig itemConfig = ItemConfigCategory.Instance.Get(equipMakeConfig.MakeItemID);
+            ResourcesLoaderComponent resourcesLoaderComponent = self.Root().GetComponent<ResourcesLoaderComponent>();
+            self.E_MakeItemIconImage.sprite = resourcesLoaderComponent.LoadAssetSync<Sprite>(ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemIcon, itemConfig.Icon));
 
             string needItems = equipMakeConfig.NeedItems;
             string[] itemsList = needItems.Split('@');
@@ -356,7 +356,7 @@ namespace ET.Client
 
             //self.TextVitality.GetComponent<Text>().text = self.ZoneScene().GetComponent<UserInfoComponent>().UserInfo.Vitality.ToString();
             //显示消耗活力
-            self.E_Lab_HuoLiText.text = equipMakeConfig.CostVitality.ToString();
+            self.E_Lab_HuoLiText.text = $"活力:{equipMakeConfig.CostVitality}点";
             using (zstring.Block())
             {
                 self.E_Text_CurrentText.text = zstring.Format("当前活力:  {0}", self.Root().GetComponent<UserInfoComponentC>().UserInfo.Vitality);
@@ -531,10 +531,9 @@ namespace ET.Client
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
             int makeType = unit.GetComponent<NumericComponentC>().GetAsInt(plan == 1 ? NumericType.MakeType_1 : NumericType.MakeType_2);
 
-            ItemInfo bagInfo = new ItemInfo();
-            bagInfo.ItemID = XiLianHelper.ReturnMeltingItem(makeType);
-            self.ES_CommonItem.UpdateItem(bagInfo, ItemOperateEnum.None);
-            self.ES_CommonItem.E_ItemNumText.gameObject.SetActive(false);
+            ItemConfig itemConfig = ItemConfigCategory.Instance.Get(XiLianHelper.ReturnMeltingItem(makeType));
+            ResourcesLoaderComponent resourcesLoaderComponent = self.Root().GetComponent<ResourcesLoaderComponent>();
+            self.E_MakeItemIconImage.sprite = resourcesLoaderComponent.LoadAssetSync<Sprite>(ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemIcon, itemConfig.Icon));
         }
 
         public static void OnUpdateUI(this ES_SkillMake self)

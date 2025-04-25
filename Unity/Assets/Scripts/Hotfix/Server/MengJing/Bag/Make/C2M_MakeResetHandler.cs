@@ -8,12 +8,12 @@
             int makeTypeNumeric = request.Plan == 1? NumericType.MakeType_1 : NumericType.MakeType_2;
             int shulianduNumeric = request.Plan == 1? NumericType.MakeShuLianDu_1 : NumericType.MakeShuLianDu_2;
             int oldMakeType = unit.GetComponent<NumericComponentS>().GetAsInt(makeTypeNumeric);
-            // unit.GetComponent<UserInfoComponentS>().ClearMakeListByType(oldMakeType);
+            unit.GetComponent<UserInfoComponentS>().ClearMakeListByType(oldMakeType);
             // unit.GetComponent<UserInfoComponentS>().UserInfo.MakeList.AddRange(MakeHelper.GetInitMakeList(request.MakeType));
             unit.GetComponent<NumericComponentS>().ApplyValue(makeTypeNumeric, 0);
             unit.GetComponent<NumericComponentS>().ApplyValue(shulianduNumeric, 0);
-            // unit.GetComponent<ChengJiuComponentS>().OnSkillShuLianDu(0);
-            // response.MakeList = unit.GetComponent<UserInfoComponentS>().UserInfo.MakeList;
+            unit.GetComponent<ChengJiuComponentS>().OnSkillShuLianDu(0);
+            response.MakeList = unit.GetComponent<UserInfoComponentS>().UserInfo.MakeList;
 
             await ETTask.CompletedTask;
         }

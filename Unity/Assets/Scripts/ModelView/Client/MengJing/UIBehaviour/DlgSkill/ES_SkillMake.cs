@@ -92,26 +92,6 @@ namespace ET.Client
      		}
      	}
 
-		public ES_CommonItem ES_CommonItem
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-
-		        ES_CommonItem es = this.m_es_commonitem;
-     			if( es == null  )
-     			{
-		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_Right/EG_MakeINeedNode/ES_CommonItem");
-		    	   this.m_es_commonitem = this.AddChild<ES_CommonItem,Transform>(subTrans);
-     			}
-     			return this.m_es_commonitem;
-     		}
-     	}
-
 		public LoopVerticalScrollRect E_MakeNeedItemsLoopVerticalScrollRect
      	{
      		get
@@ -162,6 +142,23 @@ namespace ET.Client
      			return this.m_E_Btn_MakeImage;
      		}
      	}
+		
+		public Image E_MakeItemIconImage
+		{
+			get
+			{
+				if (this.uiTransform == null)
+				{
+					Log.Error("uiTransform is null.");
+					return null;
+				}
+				if( this.m_E_MakeItemIconImage == null )
+				{
+					this.m_E_MakeItemIconImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"EG_Right/EG_MakeINeedNode/E_MakeItemIcon");
+				}
+				return this.m_E_MakeItemIconImage;
+			}
+		}
 
 		public Text E_Lab_MakeNameText
      	{
@@ -794,10 +791,10 @@ namespace ET.Client
 			this.m_E_Text_CurrentText = null;
 			this.m_E_Lab_HuoLiText = null;
 			this.m_EG_MakeINeedNodeRectTransform = null;
-			this.m_es_commonitem = null;
 			this.m_E_MakeNeedItemsLoopVerticalScrollRect = null;
 			this.m_E_Btn_MakeButton = null;
 			this.m_E_Btn_MakeImage = null;
+			this.m_E_MakeItemIconImage = null;
 			this.m_E_Lab_MakeNameText = null;
 			this.m_E_Lab_MakeNumText = null;
 			this.m_E_Lab_MakeCDTimeText = null;
@@ -840,10 +837,10 @@ namespace ET.Client
 		private Text m_E_Text_CurrentText = null;
 		private Text m_E_Lab_HuoLiText = null;
 		private RectTransform m_EG_MakeINeedNodeRectTransform = null;
-		private EntityRef<ES_CommonItem> m_es_commonitem = null;
 		private LoopVerticalScrollRect m_E_MakeNeedItemsLoopVerticalScrollRect = null;
 		private Button m_E_Btn_MakeButton = null;
 		private Image m_E_Btn_MakeImage = null;
+		private Image m_E_MakeItemIconImage = null;
 		private Text m_E_Lab_MakeNameText = null;
 		private Text m_E_Lab_MakeNumText = null;
 		private Text m_E_Lab_MakeCDTimeText = null;

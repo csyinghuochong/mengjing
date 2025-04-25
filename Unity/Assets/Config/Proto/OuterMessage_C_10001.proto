@@ -3740,6 +3740,7 @@ message M2C_MakeResetResponse // ILocationResponse
 	int32 RpcId = 90;
 	int32 Error = 91;
 	string Message = 92;
+	repeated int MakeList = 1;
 }
 
 //ResponseType M2C_MakeEquipResponse

@@ -16284,6 +16284,9 @@ namespace ET
         [MemoryPackOrder(91)]
         public string Message { get; set; }
 
+        [MemoryPackOrder(0)]
+        public List<int> MakeList { get; set; } = new();
+
         public override void Dispose()
         {
             if (!this.IsFromPool)
@@ -16294,6 +16297,7 @@ namespace ET
             this.RpcId = default;
             this.Error = default;
             this.Message = default;
+            this.MakeList.Clear();
 
             ObjectPool.Instance.Recycle(this);
         }
