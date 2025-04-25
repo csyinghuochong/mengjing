@@ -170,18 +170,11 @@ namespace ET.Client
             string rewardStr = taskConfig.RewardItem;
             if (CommonHelp.IfNull(rewardStr))
             {
-                using (zstring.Block())
-                {
-                    rewardStr = zstring.Format("1;{0}@2;{1}", taskCoin, taskExp);
-                }
+                rewardStr = $"1;{taskCoin}@2;{taskExp}";
             }
             else
             {
-                using (zstring.Block())
-                {
-                    rewardStr = zstring.Format("1;{0}@2;{1}", taskCoin, taskExp);
-                    rewardStr += rewardStr;
-                }
+                rewardStr += $"@1;{taskCoin}@2;{taskExp}";
             }
 
             // 跑环任务显示对应的环数奖励
