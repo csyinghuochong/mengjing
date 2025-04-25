@@ -214,9 +214,17 @@ namespace ET.Client
                         fubenname = DungeonConfigCategory.Instance.Get(fubenId).ChapterName;
                     }
 
-                    using (zstring.Block())
+                    MapComponent mapComponent = root.GetComponent<MapComponent>();
+                    if (mapComponent.MapType == MapTypeEnum.MainCityScene)
                     {
-                        flyTipComponent.ShowFlyTip((zstring)"请前往" + fubenname);
+                        flyTipComponent.ShowFlyTip("请点击右下角探险按钮进入地图");
+                    }
+                    else
+                    {
+                        using (zstring.Block())
+                        {
+                            flyTipComponent.ShowFlyTip((zstring)"请前往" + fubenname);
+                        }
                     }
 
                     return true;
