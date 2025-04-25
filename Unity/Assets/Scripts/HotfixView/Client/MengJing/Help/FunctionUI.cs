@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.UI;
 using Vector3 = System.Numerics.Vector3;
 
@@ -72,52 +73,15 @@ namespace ET.Client
 
         public static WindowID GetUIPath(string uitype)
         {
-            return uitype switch
+            string type = "WindowID_" + uitype.Substring(2);
+            if (Enum.TryParse(type, out WindowID windowID))
             {
-                "UITaskGet" => WindowID.WindowID_TaskGet,
-                "UIWarehouse" => WindowID.WindowID_Warehouse,
-                "UIMail" => WindowID.WindowID_Mail,
-                "UIRoleXiLian" => WindowID.WindowID_RoleXiLian,
-                "UIStore" => WindowID.WindowID_Store,
-                "UIMystery" => WindowID.WindowID_Mystery,
-                "UIPetEgg" => WindowID.WindowID_PetEgg,
-                "UIChouKa" => WindowID.WindowID_ChouKa,
-                "UIRank" => WindowID.WindowID_Rank,
-                "UIMakeLearn" => WindowID.WindowID_MakeLearn,
-                "UIOccTwo" => WindowID.WindowID_OccTwo,
-                "UIPaiMai" => WindowID.WindowID_PaiMai,
-                "UIGemMake" => WindowID.WindowID_GemMake,
-                "UIShenQiMake" => WindowID.WindowID_ShenQiMake,
-                "UIShouJi" => WindowID.WindowID_ShouJi,
-                "UITowerDungeon" => WindowID.WindowID_Tower,
-                "UITrial" => WindowID.WindowID_Trial,
-                "UIZuoQi" => WindowID.WindowID_ZuoQi,
-                "UIProtect" => WindowID.WindowID_Protect,
-                "UITowerOfSeal" => WindowID.WindowID_TowerOfSeal,
-                "UIJiaYuanBag" => WindowID.WindowID_JiaYuanBag,
-                "UIJiaYuanChouKa" => WindowID.WindowID_JiaYuanChouKa,
-                "UIJiaYuanDaShi" => WindowID.WindowID_JiaYuanDaShi,
-                "UIJiaYuanFood" => WindowID.WindowID_JiaYuanFood,
-                "UIUIJiaYuanMystery" => WindowID.WindowID_JiaYuanMystery,
-                "UIJiaYuanPasture" => WindowID.WindowID_JiaYuanPasture,
-                "UIJiaYuanPet" => WindowID.WindowID_JiaYuanPet,
-                "UIJiaYuanRecord" => WindowID.WindowID_JiaYuanRecord,
-                "UIJiaYuanTreasureMapStorage" => WindowID.WindowID_JiaYuanTreasureMapStorage,
-                "UIJiaYuanUpLv" => WindowID.WindowID_JiaYuanUpLv,
-                "UIJiaYuanWarehouse" => WindowID.WindowID_JiaYuanWarehouse,
-                "UIUnionDonation" => WindowID.WindowID_UnionDonation,
-                "UIUnionKeJi" => WindowID.WindowID_UnionKeJi,
-                "UIUnionMystery" => WindowID.WindowID_UnionMystery,
-                "UIFriend" => WindowID.WindowID_Friend,
-                "UIUnionXiuLian" => WindowID.WindowID_UnionXiuLian,
-                "UITurtle" => WindowID.WindowID_Turtle,
-                "UIEquipmentIncrease" => WindowID.WindowID_EquipmentIncrease,
-                "UIJueXing" => WindowID.WindowID_JueXing,
-                "UIBattleRecruit" => WindowID.WindowID_BattleRecruit,
-                "UIUnion" => WindowID.WindowID_Union,
-                "DlgPetEquipMake" => WindowID.WindowID_PetEquipMake,
-                _ => WindowID.WindowID_Invaild
-            };
+                return windowID;
+            }
+            else
+            {
+                return WindowID.WindowID_Invaild;
+            }
         }
 
         public static Color QualityReturnColorDi(int ItenQuality)
