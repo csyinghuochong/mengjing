@@ -1,7 +1,9 @@
+using System;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using System.IO;
+using System.Linq;
 
 namespace ET.Client
 {
@@ -14,7 +16,7 @@ namespace ET.Client
             int totalVertices = 0;
             var renderers = FindObjectsOfType<Renderer>(true); // 包含隐藏对象
 
-            Dictionary<string, int> bigname = new Dictionary<string, int>();
+            List<KeyValuePair> bigname = new List<KeyValuePair>();
             
             foreach (var renderer in renderers)
             {
@@ -23,15 +25,20 @@ namespace ET.Client
                     var meshFilter = meshRenderer.GetComponent<MeshFilter>();
                     if (meshFilter != null && meshFilter.sharedMesh != null)
                     {
-                        if (meshFilter.sharedMesh.vertexCount > 3000)
+                        if (meshFilter.sharedMesh.vertexCount > 2000)
                         {
                             //Log.Debug($"统计场景顶点数:  vertexCount: {meshFilter.sharedMesh.vertexCount}   {renderer.gameObject.name}");
-                            if (!bigname.ContainsKey(renderer.gameObject.name))
-                            {
-                                bigname.Add(renderer.gameObject.name, 0);
-                            }
 
-                            bigname[renderer.gameObject.name]++;
+
+                            KeyValuePair keyValuePair = bigname.FirstOrDefault(p => p.Value2.Equals(renderer.gameObject.name));
+                            if (keyValuePair == null || keyValuePair.Value2 == String.Empty)
+                            {
+                                bigname.Add( new KeyValuePair(){ KeyId = 1, Value = meshFilter.sharedMesh.vertexCount.ToString(), Value2 = renderer.gameObject.name } );
+                            }
+                            else
+                            {
+                                keyValuePair.KeyId++;
+                            }
                         }
 
                         totalVertices += meshFilter.sharedMesh.vertexCount;
@@ -41,15 +48,18 @@ namespace ET.Client
                 {
                     if (skinnedMeshRenderer.sharedMesh != null)
                     {
-                        if (skinnedMeshRenderer.sharedMesh.vertexCount > 3000)
+                        if (skinnedMeshRenderer.sharedMesh.vertexCount > 2000)
                         {
                             //Log.Debug($"统计场景顶点数:  vertexCount: {skinnedMeshRenderer.sharedMesh.vertexCount}  {renderer.gameObject.name}");
-                            if (!bigname.ContainsKey(renderer.gameObject.name))
+                            KeyValuePair keyValuePair = bigname.FirstOrDefault(p => p.Value2.Equals(renderer.gameObject.name));
+                            if (keyValuePair == null || keyValuePair.Value2 == String.Empty)
                             {
-                                bigname.Add(renderer.gameObject.name, 0);
+                                bigname.Add( new KeyValuePair(){ KeyId = 1, Value = skinnedMeshRenderer.sharedMesh.vertexCount.ToString(), Value2 = renderer.gameObject.name } );
                             }
-
-                            bigname[renderer.gameObject.name]++;
+                            else
+                            {
+                                keyValuePair.KeyId++;
+                            }
                         }
                         
                         totalVertices += skinnedMeshRenderer.sharedMesh.vertexCount;
@@ -57,9 +67,10 @@ namespace ET.Client
                 }
             }
 
-            foreach (var VARIABLE in bigname)
+            var biglist  = bigname.OrderByDescending(p => p.KeyId);
+            foreach (var VARIABLE in biglist)
             {
-                Log.Debug($"统计场景顶点数>5000:{VARIABLE.Key}  {VARIABLE.Value}");
+                Log.Debug($"统计场景顶点数>5000:  {VARIABLE.Value2}  数量:{VARIABLE.KeyId}  顶点：{VARIABLE.Value}");
             }
 
             EditorUtility.DisplayDialog("顶点统计", 
