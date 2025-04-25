@@ -31,7 +31,7 @@ namespace ET
         /// </summary>
         public const int ShenYuanCostId = 1000031;
      
-        public const int QiangHuaLuckyCostId = 90000015;
+        public const int QiangHuaLuckyCostId = 1000037;
 
         public const int TaskGrowUpInitId = 82000000;
         
