@@ -40,10 +40,13 @@ namespace ET.Client
 
         public static void ShowWindow(this DlgTaskGet self, Entity contextData = null)
         {
+            self.Root().GetComponent<UIComponent>().HideWindow(WindowID.WindowID_Main);
         }
         
         public static void BeforeUnload(this DlgTaskGet self)
         {
+            self.Root().GetComponent<UIComponent>().ShowWindow(WindowID.WindowID_Main);
+            
             ResourcesLoaderComponent resourcesLoaderComponent = self.Root().GetComponent<ResourcesLoaderComponent>();
             for (int i = 0; i < self.AssetList.Count; i++)
             {
