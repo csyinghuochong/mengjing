@@ -17,6 +17,8 @@ namespace ET.Client
             var renderers = FindObjectsOfType<Renderer>(true); // 包含隐藏对象
 
             List<KeyValuePair> bigname = new List<KeyValuePair>();
+
+            int vertextdebug = 2000;
             
             foreach (var renderer in renderers)
             {
@@ -25,7 +27,7 @@ namespace ET.Client
                     var meshFilter = meshRenderer.GetComponent<MeshFilter>();
                     if (meshFilter != null && meshFilter.sharedMesh != null)
                     {
-                        if (meshFilter.sharedMesh.vertexCount > 2000)
+                        if (meshFilter.sharedMesh.vertexCount > vertextdebug)
                         {
                             //Log.Debug($"统计场景顶点数:  vertexCount: {meshFilter.sharedMesh.vertexCount}   {renderer.gameObject.name}");
 
@@ -48,7 +50,7 @@ namespace ET.Client
                 {
                     if (skinnedMeshRenderer.sharedMesh != null)
                     {
-                        if (skinnedMeshRenderer.sharedMesh.vertexCount > 2000)
+                        if (skinnedMeshRenderer.sharedMesh.vertexCount > vertextdebug)
                         {
                             //Log.Debug($"统计场景顶点数:  vertexCount: {skinnedMeshRenderer.sharedMesh.vertexCount}  {renderer.gameObject.name}");
                             KeyValuePair keyValuePair = bigname.FirstOrDefault(p => p.Value2.Equals(renderer.gameObject.name));
@@ -70,7 +72,11 @@ namespace ET.Client
             var biglist  = bigname.OrderByDescending(p => p.KeyId);
             foreach (var VARIABLE in biglist)
             {
-                Log.Debug($"统计场景顶点数>5000:  {VARIABLE.Value2}  数量:{VARIABLE.KeyId}  顶点：{VARIABLE.Value}");
+                if ((int.Parse(VARIABLE.Value)>2000 && VARIABLE.KeyId >= 50) 
+                    ||  (int.Parse(VARIABLE.Value)>5000 &&   VARIABLE.KeyId >= 10))
+                {
+                    Log.Debug($"统计场景顶点数>5000:  {VARIABLE.Value2}  数量:{VARIABLE.KeyId}  顶点：{VARIABLE.Value}");
+                }
             }
 
             EditorUtility.DisplayDialog("顶点统计", 
