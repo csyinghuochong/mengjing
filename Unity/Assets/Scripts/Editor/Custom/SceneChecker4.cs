@@ -78,7 +78,7 @@ namespace ET.Client
                     ||  (int.Parse(VARIABLE.Value)>5000 &&   VARIABLE.KeyId >= 5)
                     ||  (int.Parse(VARIABLE.Value)>10000 &&   VARIABLE.KeyId >= 2))
                 {
-                    Log.Error($"统计场景顶点数>5000:  {VARIABLE.Value2}  数量:{VARIABLE.KeyId}  顶点：{VARIABLE.Value}");
+                    Log.Error($"统计场景顶点数>5000:  {VARIABLE.Value2}  数量:{VARIABLE.KeyId}  顶点：{VARIABLE.Value}   总顶点数：{VARIABLE.KeyId * int.Parse(VARIABLE.Value)}");
                 }
             }
 
