@@ -79,7 +79,7 @@ namespace ET.Client
          /// <summary>
         /// prefab文件尽量放在AdditiveHide/pool节点下面，不要嵌套。。
         /// </summary>
-        //[MenuItem("ET/NavMesh/导出场景生成配置文件")]
+        [MenuItem("ET/NavMesh/导出场景生成配置文件")]
         static void ExportScene()
     {
         string rootname = "pool";
@@ -261,7 +261,7 @@ namespace ET.Client
     }
 
         
-        //[MenuItem("ET/NavMesh/导入场景修改后要导出")]
+        [MenuItem("ET/NavMesh/导入场景修改后要导出")]
         static void ImportScene()
     {
         //TextAsset v = Resources.Load<GlobalConfig><TextAsset>($"Assets/Bundles/MapConfig/1.bytes");
