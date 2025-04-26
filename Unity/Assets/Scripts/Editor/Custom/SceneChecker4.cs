@@ -18,7 +18,7 @@ namespace ET.Client
 
             List<KeyValuePair> bigname = new List<KeyValuePair>();
 
-            int vertextdebug = 2000;
+            int vertextdebug = 100;
             
             foreach (var renderer in renderers)
             {
@@ -72,10 +72,13 @@ namespace ET.Client
             var biglist  = bigname.OrderByDescending(p => p.KeyId);
             foreach (var VARIABLE in biglist)
             {
-                if ((int.Parse(VARIABLE.Value)>2000 && VARIABLE.KeyId >= 50) 
-                    ||  (int.Parse(VARIABLE.Value)>5000 &&   VARIABLE.KeyId >= 10))
+                if ((int.Parse(VARIABLE.Value)>100 && VARIABLE.KeyId >= 1000) 
+                    || (int.Parse(VARIABLE.Value)>1000 && VARIABLE.KeyId >= 30) 
+                    ||  (int.Parse(VARIABLE.Value)>2000 && VARIABLE.KeyId >= 15) 
+                    ||  (int.Parse(VARIABLE.Value)>5000 &&   VARIABLE.KeyId >= 5)
+                    ||  (int.Parse(VARIABLE.Value)>10000 &&   VARIABLE.KeyId >= 2))
                 {
-                    Log.Debug($"统计场景顶点数>5000:  {VARIABLE.Value2}  数量:{VARIABLE.KeyId}  顶点：{VARIABLE.Value}");
+                    Log.Error($"统计场景顶点数>5000:  {VARIABLE.Value2}  数量:{VARIABLE.KeyId}  顶点：{VARIABLE.Value}");
                 }
             }
 
