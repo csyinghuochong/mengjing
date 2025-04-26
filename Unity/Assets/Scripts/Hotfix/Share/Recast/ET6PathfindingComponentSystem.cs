@@ -41,13 +41,13 @@ namespace ET
             self.EndPos[2] = target.z;
             //Log.Debug($"start find path: {self.GetParent<Unit>().Id}");
             //int n = Recast.RecastFind(self.NavMesh, PathfindingComponent.extents2, self.StartPos, self.EndPos, self.Result);
-            int n = Recast.RecastFind(self.NavMesh,  new float[3]{15,10,15}, self.StartPos, self.EndPos, self.Result);
-           
-            for (int i = 0; i < n; ++i)
-            {
-                int index = i * 3;
-                result.Add(new float3(-self.Result[index], self.Result[index + 1], self.Result[index + 2]));
-            }
+            // int n = Recast.RecastFind(self.NavMesh,  new float[3]{15,10,15}, self.StartPos, self.EndPos, self.Result);
+            //
+            // for (int i = 0; i < n; ++i)
+            // {
+            //     int index = i * 3;
+            //     result.Add(new float3(-self.Result[index], self.Result[index + 1], self.Result[index + 2]));
+            // }
             //Log.Debug($"finish find path: {self.GetParent<Unit>().Id} {result.ListToString()}");
         }
 

@@ -65,7 +65,7 @@ namespace ET.Client
         
                 //.meta
                 string[] pathlist = prefabpath.Split('/');
-                string destinationFile = Application.dataPath + "/Bundles/Unit/Scene" + pathlist[pathlist.Length - 1];
+                string destinationFile = Application.dataPath + "/Bundles/Unit/Scene/" + pathlist[pathlist.Length - 1];
         
                 bool moveret = FileHelper.MoveFile(prefabpath, destinationFile);
                 FileHelper.MoveFile(prefabpath + ".meta", destinationFile + ".meta");
