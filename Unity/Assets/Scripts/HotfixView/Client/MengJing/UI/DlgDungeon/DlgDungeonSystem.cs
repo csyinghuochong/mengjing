@@ -86,8 +86,8 @@ namespace ET.Client
                 self.View.E_DungeonItemsLoopVerticalScrollRect.verticalNormalizedPosition = 0f;
             }
 
-            await self.Root().GetComponent<TimerComponent>().WaitAsync(10);
-            self.Root().GetComponent<GuideComponent>().OnTrigger(GuideTriggerType.OpenUI, "UIDungeon");
+            // await self.Root().GetComponent<TimerComponent>().WaitAsync(10);
+            // self.Root().GetComponent<GuideComponent>().OnTrigger(GuideTriggerType.OpenUI, "UIDungeon");
         }
 
         private static void OnBossRefreshTimeItemsRefresh(this DlgDungeon self, Transform transform, int index)

@@ -92,6 +92,7 @@ namespace ET.Client
 
         public static void ShowWindow(this DlgDungeonMap self, Entity contextData = null)
         {
+            self.ShowGuide().Coroutine();
         }
 
         public static void BeforeUnload(this DlgDungeonMap self)
@@ -99,6 +100,12 @@ namespace ET.Client
             self.View.EG_MapPanelRectTransform.DOKill();
             self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
             self.Root().GetComponent<UIComponent>().ShowWindow(WindowID.WindowID_Main);
+        }
+
+        public static async ETTask ShowGuide(this DlgDungeonMap self)
+        {
+            await self.Root().GetComponent<TimerComponent>().WaitAsync(10);
+            self.Root().GetComponent<GuideComponent>().OnTrigger(GuideTriggerType.OpenUI, "UIDungeonMap");
         }
         
         private static async ETTask OnBoosRefresh(this DlgDungeonMap self)
@@ -441,6 +448,8 @@ namespace ET.Client
                 self.View.E_BossRefreshButton.gameObject.SetActive(true);
                 self.View.E_BossRefreshCloseButton.gameObject.SetActive(false);
                 self.View.E_DungeonMapLevelItemsLoopVerticalScrollRect.gameObject.SetActive(false);
+                
+                self.ShowGuide().Coroutine();
             };
         }
 
