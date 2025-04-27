@@ -259,6 +259,10 @@ namespace ET.Client
             self.View.E_Button_UnionAiderButton.gameObject.SetActive(menuList.Contains(MenuOperation.UnionAider));
             self.View.E_Button_UnionElderButton.gameObject.SetActive(menuList.Contains(MenuOperation.UnionElde));
             self.View.E_Button_UnionDismissButton.gameObject.SetActive(menuList.Contains(MenuOperation.UnionDismiss));
+            
+            self.View.E_Button_OneChallengeButton.gameObject.SetActive(false); 
+            self.View.E_Button_ServerBlackButton.gameObject.SetActive(false);
+            self.View.E_Button_JinYanButton.gameObject.SetActive(false);
 
             self.OnUpdatePos();
             self.OnUpdateDi();
