@@ -8,6 +8,12 @@
             UserInfoComponentS userInfoComponentS = unit.GetComponent<UserInfoComponentS>();
             SkillSetComponentS skillSetComponentS = unit.GetComponent<SkillSetComponentS>();
 
+            if (!unit.GetComponent<BagComponentS>().OnCostItemData(GlobalValueConfigCategory.Instance.Get(139).Value))
+            {
+                response.Error = ErrorCode.ERR_ItemNotEnoughError;
+                return;
+            }
+
             skillSetComponentS.TianFuReSet();
 
             await ETTask.CompletedTask;
