@@ -50,10 +50,6 @@ LODGroup:
   m_AnimateCrossFading: 1
   m_LastLODIsBillboard: 0
   m_LODs:
-  - screenRelativeHeight: 0.7024339
-    fadeTransitionWidth: 0
-    renderers:
-    - renderer: {fileID: 2236090296032357837}
   - screenRelativeHeight: 0.30339953
     fadeTransitionWidth: 0
     renderers:
@@ -126,7 +122,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4986936631596423600}
-  m_Mesh: {fileID: -1633821710574564935, guid: eaee47316e390224889a67f7d392ee23, type: 3}
+  m_Mesh: {fileID: 0}
 --- !u!23 &2236090296032357837
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -146,10 +142,7 @@ MeshRenderer:
   m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: 972cf3c00852d374fa2ca472a3e8e001, type: 2}
-  - {fileID: 2100000, guid: 6bf111e0826dcfa4d90ade6b46d131a1, type: 2}
-  - {fileID: 2100000, guid: 4a82d04f3e8be3248aeec2e418b7616e, type: 2}
+  m_Materials: []
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
