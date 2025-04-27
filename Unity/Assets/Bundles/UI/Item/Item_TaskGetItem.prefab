@@ -213,12 +213,12 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 3069187938859546469}
   - {fileID: 8719739676394042240}
   - {fileID: 2525155028730154576}
   - {fileID: 983457659325032616}
   - {fileID: 4851743440031995723}
   - {fileID: 6721945682231979702}
+  - {fileID: 3069187938859546469}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -247,6 +247,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data:
+  - key: E_ImageButton
+    gameObject: {fileID: 1523109542478445253}
   - key: ImageButton
     gameObject: {fileID: 1523109542478445253}
   - key: TextTaskName

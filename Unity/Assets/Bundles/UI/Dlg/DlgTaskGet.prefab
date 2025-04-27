@@ -307,9 +307,6 @@ RectTransform:
   - {fileID: 22456126}
   - {fileID: 8327148430335920476}
   - {fileID: 5317203948483856976}
-  - {fileID: 348480487921730098}
-  - {fileID: 2169669820532190421}
-  - {fileID: 9072859891282946023}
   - {fileID: 334407509950849226}
   - {fileID: 1970432602329761358}
   - {fileID: 7871541176046694096}
@@ -318,6 +315,9 @@ RectTransform:
   - {fileID: 3230518925750802871}
   - {fileID: 9027789709664209399}
   - {fileID: 1868692091145404565}
+  - {fileID: 348480487921730098}
+  - {fileID: 2169669820532190421}
+  - {fileID: 9072859891282946023}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -338,6 +338,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data:
+  - key: Content
+    gameObject: {fileID: 5073134920988622518}
+  - key: E_BtnCommitTask1
+    gameObject: {fileID: 5387498572828598429}
+  - key: E_ButtonGet
+    gameObject: {fileID: 3425681920686448438}
   - key: Img_button
     gameObject: {fileID: 2342530574813137812}
   - key: Lab_NpcName
@@ -348,10 +354,6 @@ MonoBehaviour:
     gameObject: {fileID: 0}
   - key: TaskListNode
     gameObject: {fileID: 0}
-  - key: ButtonGet
-    gameObject: {fileID: 3425681920686448438}
-  - key: E_BtnCommitTask1
-    gameObject: {fileID: 5387498572828598429}
   - key: Btn_EnergyDuihuan
     gameObject: {fileID: 6909697782614978657}
   - key: Lab_MoNnengHint

@@ -264,8 +264,6 @@ namespace ET.Client
                     self.UpdataTask();
                     break;
             }
-
-            self.ShowGuide().Coroutine();
         }
 
         public static async ETTask ShowGuide(this DlgTaskGet self)
@@ -544,6 +542,7 @@ namespace ET.Client
                 }
             }
 
+            self.ShowGuide().Coroutine();
             // self.AddUIScrollItems(ref self.ScrollItemTaskGetItems, self.ShowTaskId.Count);
             // self.View.E_TaskGetItemsLoopVerticalScrollRect.SetVisible(true, self.ShowTaskId.Count);
 
@@ -639,6 +638,8 @@ namespace ET.Client
             
             self.View.E_ButtonReturnButton.gameObject.SetActive(true);  
             self.View.E_TaskGetItemsLoopVerticalScrollRect.gameObject.SetActive(false);
+            
+            self.ShowGuide().Coroutine();
         }
         
         private static void OnBagItemsRefresh(this DlgTaskGet self, Transform transform, int index)
@@ -663,6 +664,7 @@ namespace ET.Client
             }
             self.View.E_ButtonReturnButton.gameObject.SetActive(false);  
             self.View.E_TaskGetItemsLoopVerticalScrollRect.gameObject.SetActive(true);
+            self.UpdataTask();
             self.View.EG_TaskDesc.gameObject.SetActive(false);
             self.View.E_BtnCommitTask1Button.gameObject.SetActive(false);
             self.View.E_ButtonGetButton.gameObject.SetActive(false);
