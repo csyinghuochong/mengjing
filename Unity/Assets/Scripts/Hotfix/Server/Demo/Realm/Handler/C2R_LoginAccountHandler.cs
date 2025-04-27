@@ -125,7 +125,7 @@ namespace ET.Server
                     }
                     
                     //防沉迷相关
-                    if (centerAccountInfo.PlayerInfo.RealName == 0)
+                    if (centerAccountInfo.PlayerInfo.RealName == 0 && request.CheckRealName)
                     {
                         response.Error = ErrorCode.ERR_NotRealName;
                         response.AccountId = centerAccountInfo.Id;

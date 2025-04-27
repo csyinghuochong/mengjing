@@ -108,7 +108,75 @@ namespace ET.Client
      			return this.m_E_RealName_BtnImage;
      		}
      	}
+		
+		public Transform EG_FangChenMiTip
+        {
+            get
+            {
+             	if (this.uiTransform == null)
+             	{
+             		Log.Error("uiTransform is null.");
+             		return null;
+             	}
+             	if( this.m_EG_FangChenMiTip == null )
+             	{
+        		    this.m_EG_FangChenMiTip = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_FangChenMiTip");
+             	}
+             	return this.m_EG_FangChenMiTip;
+            }
+        }
 
+		public Button E_Btn_ReadOk
+		{
+			get
+			{
+				if (this.uiTransform == null)
+				{
+					Log.Error("uiTransform is null.");
+					return null;
+				}
+				if( this.m_E_Btn_ReadOk == null )
+				{
+					this.m_E_Btn_ReadOk = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"EG_FangChenMiTip/E_Btn_ReadOk");
+				}
+				return this.m_E_Btn_ReadOk;
+			}
+		}
+
+		public Button E_Btn_Close
+        {
+        	get
+        	{
+        		if (this.uiTransform == null)
+        		{
+        			Log.Error("uiTransform is null.");
+        			return null;
+        		}
+        		if( this.m_E_Btn_Close == null )
+        		{
+        			this.m_E_Btn_Close = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"FangChenMiSet/E_Btn_Close");
+        		}
+        		return this.m_E_Btn_Close;
+        	}
+        }
+
+		public Button E_Btn_FangChenMiTip
+        {
+        	get
+        	{
+        		if (this.uiTransform == null)
+        		{
+        			Log.Error("uiTransform is null.");
+        			return null;
+        		}
+        		if( this.m_E_Btn_FangChenMiTip == null )
+        		{
+        			this.m_E_Btn_FangChenMiTip = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"FangChenMiSet/E_Btn_FangChenMiTip");
+        		}
+        		return this.m_E_Btn_FangChenMiTip;
+        	}
+        }
+		
 		public void DestroyWidget()
 		{
 			this.m_E_InputFieldNameInputField = null;
@@ -117,6 +185,10 @@ namespace ET.Client
 			this.m_E_InputFieldIDCardImage = null;
 			this.m_E_RealName_BtnButton = null;
 			this.m_E_RealName_BtnImage = null;
+			this.m_EG_FangChenMiTip = null;
+			this.m_E_Btn_ReadOk = null;
+			this.m_E_Btn_Close = null;
+			this.m_E_Btn_FangChenMiTip = null;
 			this.uiTransform = null;
 		}
 
@@ -126,6 +198,10 @@ namespace ET.Client
 		private Image m_E_InputFieldIDCardImage = null;
 		private Button m_E_RealName_BtnButton = null;
 		private Image m_E_RealName_BtnImage = null;
+		private Transform m_EG_FangChenMiTip = null;
+		private Button m_E_Btn_ReadOk = null;
+		private Button m_E_Btn_Close = null;
+		private Button m_E_Btn_FangChenMiTip = null;
 		public Transform uiTransform = null;
 	}
 }

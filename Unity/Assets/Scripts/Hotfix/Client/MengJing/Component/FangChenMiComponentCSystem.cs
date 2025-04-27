@@ -28,7 +28,7 @@ namespace ET.Client
 
             EventSystem.Instance.Publish(self.Root(), new ReturnLogin());
         }
-
+        
         public static async ETTask OnLogin(this FangChenMiComponentC self)
         {
             DateTime dateTime = TimeHelper.DateTimeNow();

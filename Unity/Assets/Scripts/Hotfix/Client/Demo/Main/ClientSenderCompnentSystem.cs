@@ -67,6 +67,11 @@ namespace ET.Client
             main2NetClientRealName.VersionMode = versionmode;
 
             NetClient2Main_RealName netClient2MainRealName = await self.Root().GetComponent<ProcessInnerSender>().Call(self.netClientActorId, main2NetClientRealName) as NetClient2Main_RealName;
+            if (netClient2MainRealName.Error == ErrorCode.ERR_Success && netClient2MainRealName.PlayerInfo != null)
+            {
+                playerInfoComponent.PlayerInfo = netClient2MainRealName.PlayerInfo;
+            }
+
             return netClient2MainRealName;
         }
 
@@ -83,6 +88,7 @@ namespace ET.Client
             main2NetClientLogin.Relink       = relink;
             main2NetClientLogin.ServerId     = playerInfoComponent.ServerItem.ServerId;
             main2NetClientLogin.VersionMode  = versionmode;
+            main2NetClientLogin.CheckRealName = playerInfoComponent.CheckRealName;
             NetClient2Main_Login response = await self.Root().GetComponent<ProcessInnerSender>().Call(self.netClientActorId, main2NetClientLogin) as NetClient2Main_Login;
             
             playerInfoComponent.Token = response.Token;

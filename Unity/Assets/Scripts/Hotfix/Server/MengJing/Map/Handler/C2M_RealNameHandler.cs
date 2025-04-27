@@ -1,33 +1,22 @@
 using System;
-using System.Collections.Generic;
 
 namespace ET.Server
 {
-    
-    [MessageSessionHandler(SceneType.Realm)]
-    public class C2R_RealNameHandler : MessageSessionHandler<C2R_RealNameRequest, R2C_RealNameResponse>
+    [MessageLocationHandler(SceneType.Map)]
+    public class C2M_RealNameHandler: MessageLocationHandler<Unit, C2M_RealNameRequest, M2C_RealNameResponse>
     {
-        protected override async ETTask Run(Session session, C2R_RealNameRequest request, R2C_RealNameResponse response)
+        protected override async ETTask Run(Unit unit,  C2M_RealNameRequest request, M2C_RealNameResponse response)
         {
-            //session.RemoveComponent<SessionAcceptTimeoutComponent>();  5秒后自动销毁
-            int zone = session.Root().Zone();
+            
             if (request.AccountId == 0 ||  string.IsNullOrEmpty(request.IdCardNO) || string.IsNullOrEmpty(request.Name))
             {
                 response.Error = ErrorCode.ERR_RealNameFail;
                 return;
             }
 
-            long instanceid = session.InstanceId;
-            using (await session.Root().GetComponent<CoroutineLockComponent>().Wait(CoroutineLockType.LoginAccount, request.AccountId))
-            {
-                if (instanceid != session.InstanceId)
-                {
-                    response.Error = ErrorCode.ERR_RealNameFail;
-                    return;
-                }
-
-                DBCenterAccountInfo dbCenterAccountInfo =
-                        (DBCenterAccountInfo)await UnitCacheHelper.GetComponent<DBCenterAccountInfo>(session.Root(), request.AccountId);
+            int dbzone = 1000;
+              DBCenterAccountInfo dbCenterAccountInfo =
+                        (DBCenterAccountInfo)await UnitCacheHelper.GetComponent<DBCenterAccountInfo>(unit.Root(), request.AccountId, dbzone);
                 if (dbCenterAccountInfo == null)
                 {
                     response.Error = ErrorCode.ERR_RealNameFail;
@@ -75,11 +64,11 @@ namespace ET.Server
                     dbCenterAccountInfo.PlayerInfo.IdCardNo = request.IdCardNO;
                     dbCenterAccountInfo.PlayerInfo.RealName = 1;
                     response.PlayerInfo = dbCenterAccountInfo.PlayerInfo;
-                    await  UnitCacheHelper.SaveComponent(session.Root(), dbCenterAccountInfo.Id, dbCenterAccountInfo);
+                    await  UnitCacheHelper.SaveComponent(unit.Root(), dbCenterAccountInfo.Id, dbCenterAccountInfo, dbzone);
                 }
-            }
-
+                
             await ETTask.CompletedTask;
         }
     }
 }
+

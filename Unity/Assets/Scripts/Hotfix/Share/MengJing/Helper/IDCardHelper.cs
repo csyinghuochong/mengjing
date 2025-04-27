@@ -12,9 +12,10 @@ namespace ET
                 return age_type;
             }
 
+            //未认证的暂定为18岁  进入游戏再认证
             if (string.IsNullOrEmpty(identityCard))
             {
-                return 0;
+                return 18;
             }
             else
             {

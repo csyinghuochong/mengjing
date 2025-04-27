@@ -32,6 +32,7 @@ message Main2NetClient_Login // IRequest
 	int32 ServerId = 5;
 	int32 Relink = 6;
 	int32 VersionMode = 7;
+	bool CheckRealName = 8;
 }
 
 message NetClient2Main_Login // IResponse
@@ -69,6 +70,7 @@ message NetClient2Main_RealName // IResponse
 	string Message = 3;
 
 	int32 ErrorCode = 4;		//实名认证返回
+	PlayerInfo PlayerInfo = 11;
 }
 
 //ResponseType NetClient2Main_LoginGame

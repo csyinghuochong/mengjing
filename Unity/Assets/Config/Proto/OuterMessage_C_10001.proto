@@ -346,6 +346,7 @@ message C2R_LoginAccount // ISessionRequest
 	int32 Relink = 6;
 	int32 age_type = 7;
 	int32  ServerId = 8;
+	bool CheckRealName = 9;
 }
 
 message R2C_LoginAccount // ISessionResponse
@@ -379,6 +380,26 @@ message R2C_RealNameResponse // ISessionResponse
 	int32 Error = 91;
 	string Message = 92;
 	int32 ErrorCode = 1;		//实名认证返回
+	PlayerInfo PlayerInfo = 11;
+}
+
+//ResponseType M2C_RealNameResponse
+message C2M_RealNameRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	string Name = 1;		//姓名
+	string IdCardNO = 2;		//身份证号码
+	int32 AiType = 3;			//1认证 2查询 3上报
+	int64 AccountId	 = 4;	// 帐号Id
+}
+
+message M2C_RealNameResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+	int32 ErrorCode = 1;		//实名认证返回
+	PlayerInfo PlayerInfo = 11;
 }
 
 message RechargeInfo

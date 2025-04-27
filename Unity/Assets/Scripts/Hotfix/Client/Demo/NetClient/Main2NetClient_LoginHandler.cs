@@ -31,6 +31,7 @@ namespace ET.Client
             c2RLoginAccount.Password = password;
             c2RLoginAccount.ServerId = request.ServerId;
             c2RLoginAccount.Relink = request.Relink;
+            c2RLoginAccount.CheckRealName = request.CheckRealName;
             R2C_LoginAccount r2CLoginAccount = (R2C_LoginAccount)await session.Call(c2RLoginAccount);
             if (r2CLoginAccount.Error == ErrorCode.ERR_Success)
             {

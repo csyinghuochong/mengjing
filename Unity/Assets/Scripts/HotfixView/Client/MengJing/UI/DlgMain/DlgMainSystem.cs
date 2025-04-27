@@ -562,6 +562,12 @@ namespace ET.Client
                 self.SetFenBianLv2();
             }
 
+            PlayerInfoComponent playerInfoComponent = self.Root().GetComponent<PlayerInfoComponent>();
+            if (playerInfoComponent.PlayerInfo.RealName == 0 || string.IsNullOrEmpty(playerInfoComponent.PlayerInfo.IdCardNo))
+            {
+                self.Root().GetComponent<UIComponent>().ShowWindow(WindowID.WindowID_RealName);
+                self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgRealName>().OnMainScene();
+            }
             // if (PlayerPrefsHelp.GetInt(PlayerPrefsHelp.LastFrame) == 0)
             // {
             //     self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_SettingFrame).Coroutine();

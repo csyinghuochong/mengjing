@@ -20,6 +20,28 @@ namespace ET.Client
             NetClient2Main_RealName netClient2MainRealName =   (NetClient2Main_RealName ) await clientSenderCompnent.RealNameAsync(playerInfoComponent.AccountId, name, idcard, playerInfoComponent.VersionMode);
             return netClient2MainRealName.Error;
         }
+        
+        /// <summary>
+        /// 进入游戏后
+        /// </summary>
+        /// <param name="root"></param>
+        /// <param name="name"></param>
+        /// <param name="idcard"></param>
+        /// <returns></returns>
+        public static async ETTask<int> RealName_2(Scene root, string name, string idcard)
+        {
+            C2M_RealNameRequest request = C2M_RealNameRequest.Create();
+            PlayerInfoComponent playerInfoComponent = root.GetComponent<PlayerInfoComponent>();
+            request.Name = name;
+            request.IdCardNO = idcard;
+            request.AccountId = playerInfoComponent.AccountId;
+            M2C_RealNameResponse response =  (M2C_RealNameResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            if (response.Error == ErrorCode.ERR_Success && response.PlayerInfo != null)
+            {
+                playerInfoComponent.PlayerInfo = response.PlayerInfo;
+           }
+            return response.Error;
+        }
 
         public static async ETTask<int> Login(Scene root, string account, string password, int reLink, int versionmode)
         {

@@ -46,5 +46,7 @@ namespace ET.Client
         public string PopUpInfo = string.Empty;
 
         public int DisconnectType { get; set; }= 0;
+
+        public bool CheckRealName { get; set; } = true;
     }
 }

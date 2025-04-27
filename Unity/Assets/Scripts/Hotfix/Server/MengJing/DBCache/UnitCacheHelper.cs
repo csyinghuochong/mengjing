@@ -120,6 +120,34 @@ namespace ET.Server
         /// <param name="unitId"></param>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
+        public static async ETTask<T> GetComponent<T>(Scene root, long unitId, int zone) where T : Entity
+        {
+            DBManagerComponent dbManagerComponent = root.GetComponent<DBManagerComponent>();
+            DBComponent dbComponent = dbManagerComponent.GetZoneDB(zone);
+            
+            bool iscache = typeof(IUnitCache).IsAssignableFrom(typeof(T));
+            if (iscache)
+            {
+                Log.Error($"GetComponentError： {typeof(T).FullName}");
+            }
+            
+            List<T> resulets = await dbComponent.Query<T>(root.Zone(), d => d.Id == unitId);
+            if (resulets == null || resulets.Count == 0)
+            {
+                return null;
+            }
+
+            return resulets[0];
+        }
+        
+        
+        /// <summary>
+        /// 保存非玩家组件缓存
+        /// </summary>
+        /// <param name="root"></param>
+        /// <param name="unitId"></param>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
         public static async ETTask<T> GetComponent<T>(Scene root, long unitId) where T : Entity
         {
             int zone = root.Zone();
@@ -141,6 +169,18 @@ namespace ET.Server
             return resulets[0];
         }
 
+        public static async ETTask SaveComponent(Scene root, long unitId, Entity entity, int zone)
+        {
+            bool iscache =typeof(IUnitCache).IsAssignableFrom(entity.GetType());
+            if (iscache)
+            {
+                Log.Error($"GetComponentError： {entity.GetType().FullName}");
+            }
+            DBManagerComponent dbManagerComponent = root.GetComponent<DBManagerComponent>();
+            DBComponent dbComponent = dbManagerComponent.GetZoneDB(zone);
+            await dbComponent.Save(root.Zone(), entity);
+        }
+        
         public static async ETTask SaveComponent(Scene root, long unitId, Entity entity)
         {
             int zone = root.Zone();

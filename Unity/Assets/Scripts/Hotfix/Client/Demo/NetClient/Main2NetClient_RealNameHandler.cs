@@ -44,6 +44,7 @@ namespace ET.Client
             //     
             // }
 
+            response.PlayerInfo =  realNameResponse.PlayerInfo;
             response.Error = realNameResponse.Error;
             
             session?.Dispose();

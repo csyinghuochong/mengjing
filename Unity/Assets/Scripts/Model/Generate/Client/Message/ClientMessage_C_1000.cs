@@ -117,6 +117,9 @@ namespace ET
         [MemoryPackOrder(6)]
         public int VersionMode { get; set; }
 
+        [MemoryPackOrder(7)]
+        public bool CheckRealName { get; set; }
+
         public override void Dispose()
         {
             if (!this.IsFromPool)
@@ -131,6 +134,7 @@ namespace ET
             this.ServerId = default;
             this.Relink = default;
             this.VersionMode = default;
+            this.CheckRealName = default;
 
             ObjectPool.Instance.Recycle(this);
         }
@@ -283,6 +287,9 @@ namespace ET
         [MemoryPackOrder(3)]
         public int ErrorCode { get; set; }
 
+        [MemoryPackOrder(10)]
+        public PlayerInfo PlayerInfo { get; set; }
+
         public override void Dispose()
         {
             if (!this.IsFromPool)
@@ -294,6 +301,7 @@ namespace ET
             this.Error = default;
             this.Message = default;
             this.ErrorCode = default;
+            this.PlayerInfo = default;
 
             ObjectPool.Instance.Recycle(this);
         }

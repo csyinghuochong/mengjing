@@ -3959,7 +3959,7 @@ namespace ET
     }
 
     /// <summary>
-    /// 转让会长成功后通知玩家
+    /// 转让族长成功后通知玩家
     /// </summary>
     [MemoryPackable]
     [Message(InnerMessage.U2M_UnionTransferResult)]
@@ -4024,7 +4024,7 @@ namespace ET
         }
     }
 
-    // 转让会长请求
+    // 转让族长请求
     [MemoryPackable]
     [Message(InnerMessage.M2U_UnionTransferRequest)]
     [ResponseType(nameof(U2M_UnionTransferResponse))]
