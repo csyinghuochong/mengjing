@@ -38,7 +38,23 @@ namespace ET.Server
             
             return 0;
         }
-        
+
+        public static int GetEmptyCellNumber(this SingleHappyDungeonComponent self)
+        {
+            List<int> dropcells = new List<int>();
+            List<Unit> droplist = UnitHelper.GetUnitList(self.Scene(), UnitType.DropItem);
+            for (int i = 0; i < droplist.Count; i++)
+            {
+                int dropindex = droplist[i].GetComponent<NumericComponentS>().GetAsInt(NumericType.CellIndex);
+                if (!dropcells.Contains(dropindex))
+                {
+                    dropcells.Add(dropindex);
+                }
+            }
+
+            return HappyData.PositionList.Count - dropcells.Count;
+        }
+
         public static void OnTimer(this SingleHappyDungeonComponent self, Unit unit)
         {
             List<int> dropcells = new List<int>();

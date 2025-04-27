@@ -55,6 +55,7 @@ namespace ET
         public const int ERR_TalentNotActivePreId = 200040;
         public const int ERR_TalentPointNot = 200041;
         public const int ERR_LevelMax = 200042;
+        public const int ERR_SingleHappy_Fresh = 200043;
 
         //登录
         public const int ERR_AccountAlreadyRegister = 200101;                       //表示账号已经被注册

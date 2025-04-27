@@ -28,6 +28,18 @@ namespace ET.Server
             }
             if (request.OperatateType == 2)
             {
+                SingleHappyDungeonComponent singleHappyDungeonComponent = unit.Scene().GetComponent<SingleHappyDungeonComponent>();
+                if (singleHappyDungeonComponent == null)
+                {
+                    return;
+                }
+
+                if (singleHappyDungeonComponent.GetEmptyCellNumber() < 10)
+                {
+                    response.Error = ErrorCode.ERR_SingleHappy_Fresh;
+                    return;
+                }
+
                 GlobalValueConfig globalValueConfig = GlobalValueConfigCategory.Instance.Get(132);
                 if (userInfoComponent.UserInfo.Diamond < int.Parse(globalValueConfig.Value))
                 {
@@ -36,7 +48,7 @@ namespace ET.Server
                 }
                 userInfoComponent.UpdateRoleMoneySub( UserDataType.Diamond, (int.Parse(globalValueConfig.Value) * -1).ToString(), true, ItemGetWay.HappyMove);
                 
-                unit.Scene().GetComponent<SingleHappyDungeonComponent>()?.OnTimer(unit);
+                singleHappyDungeonComponent.OnTimer(unit);
             }
             if (request.OperatateType  == 3)
             {
