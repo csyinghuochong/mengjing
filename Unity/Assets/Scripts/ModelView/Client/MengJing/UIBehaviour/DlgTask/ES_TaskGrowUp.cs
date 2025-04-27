@@ -12,9 +12,10 @@ namespace ET.Client
 		public int CompeletTaskId;
 		public int SelectIndex;
 		public List<int> ShowTaskConfigIds = new();
-		public Dictionary<int, EntityRef<Scroll_Item_TaskGrowUpItem>> ScrollItemTaskGrowUpItems;
+		public Dictionary<int, EntityRef<Scroll_Item_TaskGrowUpItem>> ScrollItemTaskGrowUpItems = new();
+		public List<string> AssetList { get; set; } = new();
 		
-		public LoopVerticalScrollRect E_TaskGrowUpItemsLoopVerticalScrollRect
+		public ScrollRect E_TaskGrowUpItemsScrollRect
      	{
      		get
      		{
@@ -23,11 +24,11 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_E_TaskGrowUpItemsLoopVerticalScrollRect == null )
+     			if( this.m_E_TaskGrowUpItemsScrollRect == null )
      			{
-		    		this.m_E_TaskGrowUpItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<LoopVerticalScrollRect>(this.uiTransform.gameObject,"E_TaskGrowUpItems");
+		    		this.m_E_TaskGrowUpItemsScrollRect = UIFindHelper.FindDeepChild<ScrollRect>(this.uiTransform.gameObject,"E_TaskGrowUpItems");
      			}
-     			return this.m_E_TaskGrowUpItemsLoopVerticalScrollRect;
+     			return this.m_E_TaskGrowUpItemsScrollRect;
      		}
      	}
 
@@ -314,7 +315,7 @@ namespace ET.Client
 
 		public void DestroyWidget()
 		{
-			this.m_E_TaskGrowUpItemsLoopVerticalScrollRect = null;
+			this.m_E_TaskGrowUpItemsScrollRect = null;
 			this.m_E_FunctionSetBtnToggleGroup = null;	
 			this.m_E_TaskNameTextText = null;
 			this.m_E_ProgressTextText = null;
@@ -334,7 +335,7 @@ namespace ET.Client
 			this.uiTransform = null;
 		}
 
-		private LoopVerticalScrollRect m_E_TaskGrowUpItemsLoopVerticalScrollRect = null;
+		private ScrollRect m_E_TaskGrowUpItemsScrollRect = null;
 		private UnityEngine.UI.ToggleGroup m_E_FunctionSetBtnToggleGroup = null;
 		private Text m_E_TaskNameTextText = null;
 		private Text m_E_ProgressTextText = null;

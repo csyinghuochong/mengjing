@@ -14,7 +14,6 @@ namespace ET.Client
         {
             self.uiTransform = transform;
 
-            self.E_TaskGrowUpItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnTaskGrowUpItemsRefresh);
             self.E_GetBtnButton.AddListenerAsync(self.OnGetBtnButton);
             self.E_GiveBtnButton.AddListenerAsync(self.OnGiveBtnButton);
             self.E_FunctionSetBtnToggleGroup.AddListener(self.OnFunctionSetBtn);
@@ -36,6 +35,16 @@ namespace ET.Client
         [EntitySystem]
         private static void Destroy(this ES_TaskGrowUp self)
         {
+            ResourcesLoaderComponent resourcesLoaderComponent = self.Root().GetComponent<ResourcesLoaderComponent>();
+            for (int i = 0; i < self.AssetList.Count; i++)
+            {
+                resourcesLoaderComponent.UnLoadAsset(self.AssetList[i]);
+            }
+
+            self.AssetList.Clear();
+            self.AssetList = null;
+
+            
             self.DestroyWidget();
         }
 
@@ -118,55 +127,6 @@ namespace ET.Client
             Log.Debug($"keyid:  {keyid}  skillid: {skillid}");
         }
 
-        private static void OnTaskGrowUpItemsRefresh(this ES_TaskGrowUp self, Transform transform, int index)
-        {
-            foreach (Scroll_Item_TaskGrowUpItem item in self.ScrollItemTaskGrowUpItems.Values)
-            {
-                if (item.uiTransform == transform)
-                {
-                    item.uiTransform = null;
-                }
-            }
-            
-            Scroll_Item_TaskGrowUpItem scrollItemTaskGrowUpItem = self.ScrollItemTaskGrowUpItems[index].BindTrans(transform);
-            int i = index % 4;
-            Vector3 posi = Vector3.zero;
-            int dre = 1;
-            if (i == 0)
-            {
-                posi = new Vector3(-250, 0, 0);
-                dre = 1;
-            }
-            else if (i == 1)
-            {
-                posi = new Vector3(0, 0, 0);
-                dre = 1;
-            }
-            else if (i == 2)
-            {
-                posi = new Vector3(250, 0, 0);
-                dre = -1;
-            }
-            else if (i == 3)
-            {
-                posi = new Vector3(0, 0, 0);
-                dre = -1;
-            }
-
-           
-            if (dre == 1)
-            {
-              
-            }
-            else
-            {
-                
-            }
-
-            scrollItemTaskGrowUpItem.OnUpdateData(self.ShowTaskConfigIds[index]);
-            scrollItemTaskGrowUpItem.SetCurId( self.TaskPro.taskID );
-        }
-
         public static void UpdateTask(this ES_TaskGrowUp self, int page)
         {
             if(page < 0)
@@ -230,25 +190,43 @@ namespace ET.Client
                 }
             }
             
-            RectTransform Content = self.E_TaskGrowUpItemsLoopVerticalScrollRect.transform.Find("Content").GetComponent<RectTransform>();
-            Content.anchoredPosition = Vector3.zero;
-            Content.gameObject.SetActive(false);
-            Content.gameObject.SetActive(true); 
-            
-            self.AddUIScrollItems(ref self.ScrollItemTaskGrowUpItems, self.ShowTaskConfigIds.Count);
-            self.E_TaskGrowUpItemsLoopVerticalScrollRect.SetVisible(true, self.ShowTaskConfigIds.Count);
+            ResourcesLoaderComponent resourcesLoaderComponent = self.Root().GetComponent<ResourcesLoaderComponent>();
+            for (int i = 0; i < self.ShowTaskConfigIds.Count; i++)
+            {
+                if (!self.ScrollItemTaskGrowUpItems.ContainsKey(i))
+                {
+                    Scroll_Item_TaskGrowUpItem item = self.AddChild<Scroll_Item_TaskGrowUpItem>();
+                    string path = "Assets/Bundles/UI/Item/Item_TaskGrowUpItem.prefab";
+                    if (!self.AssetList.Contains(path))
+                    {
+                        self.AssetList.Add(path);
+                    }
+
+                    GameObject prefab = resourcesLoaderComponent.LoadAssetSync<GameObject>(path);
+                    GameObject go = UnityEngine.Object.Instantiate(prefab, self.E_TaskGrowUpItemsScrollRect.transform.Find("Content").gameObject.transform);
+                    item.BindTrans(go.transform);
+                    self.ScrollItemTaskGrowUpItems.Add(i, item);
+                }
+
+                Scroll_Item_TaskGrowUpItem scrollItemTaskGrowUpItem = self.ScrollItemTaskGrowUpItems[i];
+                scrollItemTaskGrowUpItem.uiTransform.gameObject.SetActive(true);
+                scrollItemTaskGrowUpItem.OnUpdateData(self.ShowTaskConfigIds[i]);
+                scrollItemTaskGrowUpItem.SetCurId(self.TaskPro.taskID);
+            }
+
+            if (self.ScrollItemTaskGrowUpItems.Count > self.ShowTaskConfigIds.Count)
+            {
+                for (int i = self.ShowTaskConfigIds.Count; i < self.ScrollItemTaskGrowUpItems.Count; i++)
+                {
+                    Scroll_Item_TaskGrowUpItem scrollItemTaskGrowUpItem = self.ScrollItemTaskGrowUpItems[i];
+                    scrollItemTaskGrowUpItem.uiTransform.gameObject.SetActive(false);
+                }
+            }
 
             self.UpdateInfo(self.TaskPro.taskID);
-
-            // 滑动到对应位置
-           
-            //Vector3 vector3 = self.E_TaskGrowUpItemsLoopVerticalScrollRect.transform.Find("Content").GetComponent<RectTransform>().localPosition;
-            //vector3.y = index * 160;
-            //self.E_TaskGrowUpItemsLoopVerticalScrollRect.transform.Find("Content").GetComponent<RectTransform>().localPosition = vector3;
         }
 
-        
-         public static void OnRecvReward(this ES_TaskGrowUp self, int page)
+        public static void OnRecvReward(this ES_TaskGrowUp self, int page)
         {
             if(page < 0)
             {
