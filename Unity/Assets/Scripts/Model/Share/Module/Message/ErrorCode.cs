@@ -243,7 +243,7 @@ namespace ET
         public const int ERR_UnionXiuLianMax = 301004;
         public const int ERR_Union_PeopleMax = 301005;                              //家族人数上限
         public const int ERR_Union_NotLeader = 301006;
-        public const int ERR_Union_NotRemove = 301007;                              //族长不能解算家族
+        public const int ERR_Union_NotRemove = 301007;                              //会长不能解算家族
         public const int ERR_Union_NoPlayer = 301008;
         public const int ERR_Union_NoLimits = 301009;
         public const int ERR_PlayerHaveUnion = 301010;

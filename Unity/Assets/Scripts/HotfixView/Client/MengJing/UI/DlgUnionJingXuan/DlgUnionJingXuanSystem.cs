@@ -25,7 +25,7 @@ namespace ET.Client
 
         public static void OnButtonCancelButton(this DlgUnionJingXuan self)
         {
-            PopupTipHelp.OpenPopupTip(self.Root(), "取消申请", "是否确认取消申请族长?", () => { self.OnButtonConfirmButton(0).Coroutine(); }, null).Coroutine();
+            PopupTipHelp.OpenPopupTip(self.Root(), "取消申请", "是否确认取消申请会长?", () => { self.OnButtonConfirmButton(0).Coroutine(); }, null).Coroutine();
         }
 
         public static async ETTask OnButtonConfirmButton(this DlgUnionJingXuan self, int operateType)

@@ -1798,12 +1798,7 @@ namespace ET
             new float3(-7.5f, 0f, -35.39f - 0.5f),
             new float3(-7.5f, 0f, -37.58f - 0.5f),
         };
-
-        [StaticField]
-        public static Dictionary<int, string> UnionPosition = new Dictionary<int, string>
-        {
-            { 0, "族员" }, { 1, "族长" }, { 2, "副族长" }, { 3, "长老" },
-        };
+        
 
         /// <summary>
         /// 0 无日志 1 info  2debug  3 waring 4 error
@@ -1998,7 +1993,7 @@ namespace ET
         public static int UnionWishGetDiamondCost = 300;
         
         /// <summary>
-        /// 不同的职位对应的奖励礼包    1族长 2副族长 3长老 0其他
+        /// 不同的职位对应的奖励礼包    1会长 2副会长 3长老 0其他
         /// </summary>
         [StaticField]
         public static Dictionary<int, string> UnionWishRewardForPosition = new Dictionary<int, string>()
@@ -2010,7 +2005,7 @@ namespace ET
         };
         
         /// <summary>
-        /// 族长祝福
+        /// 会长祝福
         /// </summary>
         [StaticField]
         public static int UnionWishSendDiamondCost = 100000;

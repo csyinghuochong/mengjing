@@ -3547,7 +3547,7 @@ namespace ET
         public int PlayerLevel { get; set; }
 
         /// <summary>
-        /// /1族长 2副族长
+        /// /1会长 2副会长
         /// </summary>
         [MemoryPackOrder(2)]
         public int Position { get; set; }
@@ -17167,7 +17167,7 @@ namespace ET
         }
     }
 
-    // 转让族长
+    // 转让会长
     [MemoryPackable]
     [Message(OuterMessage.C2M_UnionTransferRequest)]
     [ResponseType(nameof(M2C_UnionTransferResponse))]

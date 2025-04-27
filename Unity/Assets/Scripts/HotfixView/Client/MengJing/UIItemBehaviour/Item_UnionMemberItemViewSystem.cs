@@ -33,7 +33,7 @@ namespace ET.Client
             int elderNumber = 0;
             for (int i = 0; i < self.UnionInfo.UnionPlayerList.Count; i++)
             {
-                if (self.UnionInfo.UnionPlayerList[i].Position == 2) //副族长
+                if (self.UnionInfo.UnionPlayerList[i].Position == 2) //副会长
                 {
                     aiderNumber++;
                 }
@@ -57,7 +57,7 @@ namespace ET.Client
                     }
                 }
 
-                if (mainPlayerInfo.Position == 1) //族长可以任命副族长和长老
+                if (mainPlayerInfo.Position == 1) //会长可以任命副会长和长老
                 {
                     if (aiderNumber < 1 && (self.CurPlayerInfo.Position == 0 || self.CurPlayerInfo.Position > 2)
                         && self.CurPlayerInfo.Position != 2)
@@ -66,7 +66,7 @@ namespace ET.Client
                     }
                 }
 
-                if (mainPlayerInfo.Position == 1 || mainPlayerInfo.Position == 2) //副族长可以任命长老
+                if (mainPlayerInfo.Position == 1 || mainPlayerInfo.Position == 2) //副会长可以任命长老
                 {
                     if (elderNumber < 2 && (self.CurPlayerInfo.Position == 0 || self.CurPlayerInfo.Position > mainPlayerInfo.Position)
                         && self.CurPlayerInfo.Position != 3)

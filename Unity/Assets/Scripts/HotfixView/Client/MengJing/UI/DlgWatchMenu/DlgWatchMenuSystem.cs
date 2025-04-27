@@ -160,7 +160,7 @@ namespace ET.Client
 
         public static void OnButton_UnionTransfer(this DlgWatchMenu self)
         {
-            PopupTipHelp.OpenPopupTip(self.Root(), "转移族长", "是否转移族长？", () => { self.RequestUnionTransfer().Coroutine(); }, null).Coroutine();
+            PopupTipHelp.OpenPopupTip(self.Root(), "转移会长", "是否转移会长？", () => { self.RequestUnionTransfer().Coroutine(); }, null).Coroutine();
         }
 
         public static async ETTask RequestUnionTransfer(this DlgWatchMenu self)
@@ -337,8 +337,8 @@ namespace ET.Client
                 case MenuEnumType.Chat:
                     PlayerInfoComponent accountInfoInfoComponent = self.Root().GetComponent<PlayerInfoComponent>();
                     MapComponent mapComponent = self.Root().GetComponent<MapComponent>();
-                    self.View.E_Button_OneChallengeButton.gameObject.SetActive(mapComponent.MapType == MapTypeEnum.MainCityScene);
-                    self.View.E_Button_ServerBlackButton.gameObject.SetActive(GMData.GmAccount.Contains(accountInfoInfoComponent.Account));
+                    self.View.E_Button_OneChallengeButton.gameObject.SetActive(false); ///mapComponent.MapType == MapTypeEnum.MainCityScene);
+                    self.View.E_Button_ServerBlackButton.gameObject.SetActive(false);
                     self.View.E_Button_JinYanButton.gameObject.SetActive(jinyan);
                     break;
                 case MenuEnumType.Team:

@@ -314,7 +314,7 @@ namespace ET.Client
                 //判断自身是否有家族进行显示
                 if (firstUnionName == 1 && infoComponent.UnionName.Length > 0)
                 {
-                    string text1 = numericComponent.GetAsInt(NumericType.UnionLeader) == 1 ? "族长" : "成员";
+                    string text1 = numericComponent.GetAsInt(NumericType.UnionLeader) == 1 ? "会长" : "成员";
                     unionname = zstring.Format("{0}{1}", infoComponent.UnionName, text1);
 
                     if (numericComponent.GetAsInt(NumericType.UnionRaceWin) == 1 && !string.IsNullOrEmpty(unionname))

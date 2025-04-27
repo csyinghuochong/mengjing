@@ -19,7 +19,7 @@ namespace ET.Server
 
                 List<long> allonlines = await UnitCacheHelper.GetOnLineUnits(scene.Root(), scene.Zone());
 
-                ///1族长 2副族长  ///3长老
+                ///1会长 2副会长  ///3长老
                 for (int i = dBUnionInfo.UnionInfo.UnionPlayerList.Count - 1; i >= 0; i--)
                 {
                     UnionPlayerInfo unionPlayerInfo = dBUnionInfo.UnionInfo.UnionPlayerList[i];
@@ -94,7 +94,7 @@ namespace ET.Server
                     }
                 }
                 
-                ///判断族长离线时间
+                ///判断会长离线时间
                 NumericComponentS numericComponent =
                         await UnitCacheHelper.GetComponentCache<NumericComponentS>(scene.Root(), dBUnionInfo.UnionInfo.LeaderId);
 
@@ -107,8 +107,8 @@ namespace ET.Server
                 ///判断竞选是否结束
                 if (dBUnionInfo.UnionInfo.JingXuanEndTime != 0 && timeNow >= dBUnionInfo.UnionInfo.JingXuanEndTime)
                 {
-                    ///分配新族长
-                    Log.Console("分配新族长！！");
+                    ///分配新会长
+                    Log.Console("分配新会长！！");
                     List<UnionPlayerInfo> jingxuanPlayers = new List<UnionPlayerInfo>();
                     for (int i = dBUnionInfo.UnionInfo.UnionPlayerList.Count - 1; i >= 0; i--)
                     {
@@ -160,7 +160,7 @@ namespace ET.Server
                             dBUnionInfo.UnionInfo.LeaderName = unionPlayerInfo_new.PlayerName;
                             BroadCastHelper.NoticeUnionLeader(scene.Root(), newLeaderId, 1).Coroutine();
 
-                            //通知旧族长
+                            //通知旧会长
                             BroadCastHelper.NoticeUnionLeader(scene.Root(), oldLeaderid, 0).Coroutine();
                         }
                     }

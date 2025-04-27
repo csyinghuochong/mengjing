@@ -26,7 +26,7 @@
         public const int Born_Z = 3021;
         public const int TowerId = 3022;
         public const int MasterId = 3023;                                          //主人ID
-        public const int UnionLeader = 3025;                                        //家族族长
+        public const int UnionLeader = 3025;                                        //家族会长
         public const int LastLoginTime = 3026;
         public const int Ling_DiLv = 3027;
         public const int Ling_DiExp = 3028;

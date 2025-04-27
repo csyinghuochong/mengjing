@@ -40,7 +40,7 @@
                             response.Error = ErrorCode.ERR_Union_NoPlayer;
                             return;
                         }
-                        ///1族长 2副族长  ///3长老
+                        ///1会长 2副会长  ///3长老
                         if (unionPlayerInfo_1.Position == 0 || (unionPlayerInfo_1.Position >= position && position != 0 ))
                         {
                             response.Error = ErrorCode.ERR_Union_NoLimits;
