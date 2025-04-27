@@ -428,7 +428,15 @@ namespace ET.Client
                 return;
             }
 
-            await TaskClientNetHelper.RequestCommitTask(self.Root(), self.TaskPro.taskID, 0);
+            int error = await TaskClientNetHelper.RequestCommitTask(self.Root(), self.TaskPro.taskID, 0);
+            if (error != ErrorCode.ERR_Success)
+            {
+                return;
+            }
+            
+            self.E_GetBtnButton.gameObject.SetActive(false);
+            self.E_GiveBtnButton.gameObject.SetActive(false);
+            self.E_AcvityedImgImage.gameObject.SetActive(true);
             self.OnRecvReward(self.SelectIndex);
             self.UpdateReward(self.SelectIndex);
         }
