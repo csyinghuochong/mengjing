@@ -211,7 +211,7 @@ namespace ET.Client
         {
             string unionName = self.E_InputFieldNameInputField.text;
             bool mask = MaskWordHelper.Instance.IsContainSensitiveWords(unionName);
-            if (mask || !StringHelper.IsSpecialChar(unionName))
+            if (mask)
             {
                 FlyTipComponent.Instance.ShowFlyTip("家族名字有特殊字符！");
                 return;
