@@ -84,7 +84,7 @@ namespace ET.Client
 			else
 			{
 				int errorCode = await LoginHelper.RealName(self.Root(), name, idcard);
-            
+					FlyTipComponent.Instance.ShowFlyTip("实名认证失败！");
 				//实名认证成功再登陆。
 				if (errorCode != ErrorCode.ERR_Success)
 				{
