@@ -211,7 +211,7 @@ namespace ET.Client
         {
             string unionName = self.E_InputFieldNameInputField.text;
             bool mask = MaskWordHelper.Instance.IsContainSensitiveWords(unionName);
-            if (mask)
+            if (mask || unionName.Contains("*"))
             {
                 FlyTipComponent.Instance.ShowFlyTip("家族名字不能包含特殊字符！");
                 return;
@@ -225,7 +225,7 @@ namespace ET.Client
 
              string purpose = self.E_InputFieldPurposeInputField.text;
              mask = MaskWordHelper.Instance.IsContainSensitiveWords(purpose);
-             if (mask)
+             if (mask|| purpose.Contains("*"))
              {
                  FlyTipComponent.Instance.ShowFlyTip("宣言不能包含特殊字符！");
                  return;
