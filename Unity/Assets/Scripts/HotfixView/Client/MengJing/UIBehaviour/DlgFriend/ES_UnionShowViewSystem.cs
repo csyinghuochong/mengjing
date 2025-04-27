@@ -213,7 +213,7 @@ namespace ET.Client
             bool mask = MaskWordHelper.Instance.IsContainSensitiveWords(unionName);
             if (mask)
             {
-                FlyTipComponent.Instance.ShowFlyTip("家族名字有特殊字符！");
+                FlyTipComponent.Instance.ShowFlyTip("家族名字不能包含特殊字符！");
                 return;
             }
 
@@ -227,15 +227,9 @@ namespace ET.Client
              mask = MaskWordHelper.Instance.IsContainSensitiveWords(purpose);
              if (mask)
              {
-                 FlyTipComponent.Instance.ShowFlyTip("宣言有特殊字符！");
+                 FlyTipComponent.Instance.ShowFlyTip("宣言不能包含特殊字符！");
                  return;
              }
-             if (!StringHelper.IsSpecialChar(purpose) || purpose.Length >= 200)
-             {
-                 FlyTipComponent.Instance.ShowFlyTip("请重新输入！");
-                 return;
-             }
-            
              if (purpose.Length >= 200)
              {
                  FlyTipComponent.Instance.ShowFlyTip("宣言内容过长！");
