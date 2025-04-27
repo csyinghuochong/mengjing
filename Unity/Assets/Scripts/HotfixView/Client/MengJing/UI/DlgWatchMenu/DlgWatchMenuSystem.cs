@@ -339,7 +339,7 @@ namespace ET.Client
                     MapComponent mapComponent = self.Root().GetComponent<MapComponent>();
                     self.View.E_Button_OneChallengeButton.gameObject.SetActive(false); ///mapComponent.MapType == MapTypeEnum.MainCityScene);
                     self.View.E_Button_ServerBlackButton.gameObject.SetActive(false);
-                    self.View.E_Button_JinYanButton.gameObject.SetActive(jinyan);
+                    self.View.E_Button_JinYanButton.gameObject.SetActive(false);///jinyan);
                     break;
                 case MenuEnumType.Team:
                     break;
