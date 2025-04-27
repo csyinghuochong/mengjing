@@ -10,7 +10,7 @@ namespace ET.Client
     public class SceneChecker4 : EditorWindow
     {
         
-        [MenuItem("Custom/统计场景顶点数")]
+        [MenuItem("Tools/检测场景顶点数")]
         static void CalculateVertices()
         {
             int totalVertices = 0;
