@@ -75,6 +75,23 @@ namespace ET.Client
      		}
      	}
 
+		public Image E_HuoLiImage
+		{
+			get
+			{
+				if (this.uiTransform == null)
+				{
+					Log.Error("uiTransform is null.");
+					return null;
+				}
+				if( this.m_E_HuoLiImage == null )
+				{
+					this.m_E_HuoLiImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"EG_Right/E_HuoLi");
+				}
+				return this.m_E_HuoLiImage;
+			}
+		}
+		
 		public RectTransform EG_MakeINeedNodeRectTransform
      	{
      		get
@@ -790,6 +807,7 @@ namespace ET.Client
 			this.m_EG_RightRectTransform = null;
 			this.m_E_Text_CurrentText = null;
 			this.m_E_Lab_HuoLiText = null;
+			this.m_E_HuoLiImage = null;
 			this.m_EG_MakeINeedNodeRectTransform = null;
 			this.m_E_MakeNeedItemsLoopVerticalScrollRect = null;
 			this.m_E_Btn_MakeButton = null;
@@ -836,6 +854,7 @@ namespace ET.Client
 		private RectTransform m_EG_RightRectTransform = null;
 		private Text m_E_Text_CurrentText = null;
 		private Text m_E_Lab_HuoLiText = null;
+		private Image m_E_HuoLiImage = null;
 		private RectTransform m_EG_MakeINeedNodeRectTransform = null;
 		private LoopVerticalScrollRect m_E_MakeNeedItemsLoopVerticalScrollRect = null;
 		private Button m_E_Btn_MakeButton = null;

@@ -355,6 +355,7 @@ namespace ET.Client
             }
 
             //self.TextVitality.GetComponent<Text>().text = self.ZoneScene().GetComponent<UserInfoComponent>().UserInfo.Vitality.ToString();
+            self.E_HuoLiImage.sprite = resourcesLoaderComponent.LoadAssetSync<Sprite>(ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemIcon, ItemConfigCategory.Instance.Get(4).Icon));
             //显示消耗活力
             self.E_Lab_HuoLiText.text = $"活力:{equipMakeConfig.CostVitality}点";
             using (zstring.Block())
