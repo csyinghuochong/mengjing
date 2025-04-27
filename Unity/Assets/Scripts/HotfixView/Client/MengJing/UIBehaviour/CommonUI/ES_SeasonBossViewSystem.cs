@@ -89,7 +89,7 @@ namespace ET.Client
 					self.ES_ModelShow.ShowOtherModel(zstring.Format("Monster/{0}", monsterConfig.MonsterModelID)).Coroutine();
 				}
 
-				self.E_SeasonExperienceTextText.text = zstring.Format("赛季经验:{0}/{1}", bossexp, keyValuePairInt.Value);
+				self.E_SeasonExperienceTextText.text = zstring.Format("{0}/{1}", bossexp, keyValuePairInt.Value);
 
 				if (bosslv >= ConfigData.CommonSeasonBossList.Count - 1 && bossexp >=keyValuePairInt.Value )
 				{
