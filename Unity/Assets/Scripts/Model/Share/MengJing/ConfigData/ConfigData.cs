@@ -33,7 +33,7 @@ namespace ET
      
         public const int QiangHuaLuckyCostId = 1000037;
 
-        public const int TaskGrowUpInitId = 82000000;
+        public const int TaskGrowUpInitId = 820000;
         
         /// <summary>
         /// 小飞鞋
