@@ -10,7 +10,9 @@ namespace ET.Client
     {
         public static void RegisterUIEvent(this DlgDragonDungeonCreate self)
         {
-            self.View.E_Button_XieZhuButton.AddListener(() => { self.OnButton_Create(TeamFubenType.XieZhu).Coroutine(); });
+            // self.View.E_Button_XieZhuButton.AddListener(() => { self.OnButton_Create(TeamFubenType.XieZhu).Coroutine(); });
+            self.View.E_Button_XieZhuButton.gameObject.SetActive(false);
+            
             self.View.E_Button_CreateButton.AddListener(() => { self.OnButton_Create(TeamFubenType.Normal).Coroutine(); });
             self.View.E_ShenYuanButtonButton.AddListener(() => { self.OnShenYuanMode(); });
             self.View.E_CloseButtonButton.AddListener(self.OnCloseButtonButton);
@@ -52,7 +54,7 @@ namespace ET.Client
 
             self.OnClickButton(self.ButtonList[0]);
 
-            self.View.E_Button_XieZhuButton.gameObject.SetActive(true);
+            // self.View.E_Button_XieZhuButton.gameObject.SetActive(true);
             self.View.EG_ShenYuanRectTransform.gameObject.SetActive(true);
             self.View.E_CloseButtonButton.AddListener(() =>
             {
