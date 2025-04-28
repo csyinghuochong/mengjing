@@ -183,7 +183,7 @@ namespace ET.Client
      		}
      	}
 
-		public UnityEngine.UI.LoopVerticalScrollRect E_MainTaskItemsLoopVerticalScrollRect
+		public UnityEngine.UI.ScrollRect E_MainTaskItemsLoopVerticalScrollRect
      	{
      		get
      		{
@@ -194,7 +194,7 @@ namespace ET.Client
      			}
      			if( this.m_E_MainTaskItemsLoopVerticalScrollRect == null )
      			{
-		    		this.m_E_MainTaskItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.LoopVerticalScrollRect>(this.uiTransform.gameObject,"EG_PhoneLeft/EG_MainTask/E_MainTaskItems");
+		    		this.m_E_MainTaskItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.ScrollRect>(this.uiTransform.gameObject,"EG_PhoneLeft/EG_MainTask/E_MainTaskItems");
      			}
      			return this.m_E_MainTaskItemsLoopVerticalScrollRect;
      		}
@@ -251,7 +251,7 @@ namespace ET.Client
      		}
      	}
 
-		public UnityEngine.UI.LoopVerticalScrollRect E_MainTeamItemsLoopVerticalScrollRect
+		public UnityEngine.UI.ScrollRect E_MainTeamItemsLoopVerticalScrollRect
      	{
      		get
      		{
@@ -262,7 +262,7 @@ namespace ET.Client
      			}
      			if( this.m_E_MainTeamItemsLoopVerticalScrollRect == null )
      			{
-		    		this.m_E_MainTeamItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.LoopVerticalScrollRect>(this.uiTransform.gameObject,"EG_PhoneLeft/EG_MainTeam/E_MainTeamItems");
+		    		this.m_E_MainTeamItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.ScrollRect>(this.uiTransform.gameObject,"EG_PhoneLeft/EG_MainTeam/E_MainTeamItems");
      			}
      			return this.m_E_MainTeamItemsLoopVerticalScrollRect;
      		}
@@ -410,7 +410,7 @@ namespace ET.Client
      		}
      	}
 
-		public UnityEngine.UI.LoopVerticalScrollRect E_MainChatItemsLoopVerticalScrollRect
+		public UnityEngine.UI.ScrollRect E_MainChatItemsLoopVerticalScrollRect
      	{
      		get
      		{
@@ -421,7 +421,7 @@ namespace ET.Client
      			}
      			if( this.m_E_MainChatItemsLoopVerticalScrollRect == null )
      			{
-		    		this.m_E_MainChatItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.LoopVerticalScrollRect>(this.uiTransform.gameObject,"EG_MainChat/E_MainChatItems");
+		    		this.m_E_MainChatItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.ScrollRect>(this.uiTransform.gameObject,"EG_MainChat/E_MainChatItems");
      			}
      			return this.m_E_MainChatItemsLoopVerticalScrollRect;
      		}
@@ -2891,11 +2891,11 @@ namespace ET.Client
 		private UnityEngine.RectTransform m_EG_MainTaskRectTransform = null;
 		private UnityEngine.UI.Button m_E_RoseTaskButton = null;
 		private UnityEngine.UI.Image m_E_RoseTaskImage = null;
-		private UnityEngine.UI.LoopVerticalScrollRect m_E_MainTaskItemsLoopVerticalScrollRect = null;
+		private UnityEngine.UI.ScrollRect m_E_MainTaskItemsLoopVerticalScrollRect = null;
 		private UnityEngine.UI.ToggleGroup m_E_LeftTypeSetToggleGroup = null;
 		private UnityEngine.UI.Toggle m_E_Team_Type_1Toggle = null;
 		private UnityEngine.RectTransform m_EG_MainTeamRectTransform = null;
-		private UnityEngine.UI.LoopVerticalScrollRect m_E_MainTeamItemsLoopVerticalScrollRect = null;
+		private UnityEngine.UI.ScrollRect m_E_MainTeamItemsLoopVerticalScrollRect = null;
 		private UnityEngine.UI.Button m_E_RoseTeamButton = null;
 		private UnityEngine.UI.Image m_E_RoseTeamImage = null;
 		private UnityEngine.RectTransform m_EG_LeftSetRectTransform = null;
@@ -2904,7 +2904,7 @@ namespace ET.Client
 		private UnityEngine.UI.Button m_E_OpenChatButton = null;
 		private UnityEngine.UI.Image m_E_OpenChatImage = null;
 		private UnityEngine.RectTransform m_EG_MainChatRectTransform = null;
-		private UnityEngine.UI.LoopVerticalScrollRect m_E_MainChatItemsLoopVerticalScrollRect = null;
+		private UnityEngine.UI.ScrollRect m_E_MainChatItemsLoopVerticalScrollRect = null;
 		private UnityEngine.RectTransform m_EG_RoseExpRectTransform = null;
 		private UnityEngine.UI.Image m_E_ExpProImage = null;
 		private UnityEngine.UI.Text m_E_ExpValueText = null;

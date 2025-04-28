@@ -503,15 +503,11 @@ namespace ET.Client
             self.View.E_Btn_StopGuaJiButton.AddListener(self.OnBtn_StopGuaJiButton);
 
             self.View.E_LeftTypeSetToggleGroup.AddListener(self.OnLeftTypeSet);
-            self.View.E_MainTaskItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnMainTaskItemsRefresh);
             self.View.E_RoseTaskButton.AddListener(self.OnRoseTaskButton);
-            self.View.E_MainTeamItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnMainTeamItemsRefresh);
             self.View.E_RoseTeamButton.AddListener(self.OnRoseTeamButton);
             
             self.View.E_ButtonStallCancel.AddListener(self.OnButtonStallCancel);
             self.View.E_ButtonStallOpen.AddListenerAsync(self.OnButtonStallOpen);
-
-            self.View.E_MainChatItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnMainChatItemsRefresh);
 
             self.LockTargetComponent = self.Root().GetComponent<LockTargetComponent>();
             self.SkillIndicatorComponent = self.Root().GetComponent<SkillIndicatorComponent>();
@@ -544,7 +540,6 @@ namespace ET.Client
             {
                 self.Root().GetComponent<GuideComponent>().SetGuideId(guideid);
             }
-            self.ShowGuide().Coroutine();
 
             self.AfterEnterScene(MapTypeEnum.MainCityScene);
 
@@ -627,16 +622,27 @@ namespace ET.Client
 
         public static void ShowWindow(this DlgMain self, Entity contextData = null)
         {
+            self.ShowGuide().Coroutine();
         }
 
         public static async ETTask ShowGuide(this DlgMain self)
         {
             await self.Root().GetComponent<TimerComponent>().WaitAsync(10);
             self.Root().GetComponent<GuideComponent>().OnTrigger(GuideTriggerType.OpenUI, "UIMain");
+            self.Root().GetComponent<GuideComponent>().OnTrigger(GuideTriggerType.AcceptTask, "0");
         }
 
         public static void BeforeUnload(this DlgMain self)
         {
+            ResourcesLoaderComponent resourcesLoaderComponent = self.Root().GetComponent<ResourcesLoaderComponent>();
+            for (int i = 0; i < self.AssetList.Count; i++)
+            {
+                resourcesLoaderComponent.UnLoadAsset(self.AssetList[i]);
+            }
+
+            self.AssetList.Clear();
+            self.AssetList = null;
+            
             ReddotViewComponent redPointComponent = self.Root().GetComponent<ReddotViewComponent>();
             redPointComponent.UnRegisterReddot(ReddotType.Friend, self.Reddot_Frined);
             redPointComponent.UnRegisterReddot(ReddotType.Team, self.Reddot_Team);
@@ -935,20 +941,6 @@ namespace ET.Client
             }
         }
 
-        private static void OnMainTaskItemsRefresh(this DlgMain self, Transform transform, int index)
-        {
-            foreach (Scroll_Item_MainTask item in self.ScrollItemMainTasks.Values)
-            {
-                if (item.uiTransform == transform)
-                {
-                    item.uiTransform = null;
-                }
-            }
-            
-            Scroll_Item_MainTask scrollItemMainTask = self.ScrollItemMainTasks[index].BindTrans(transform);
-            scrollItemMainTask.Refresh(self.ShowTaskPros[index]);
-        }
-
         public static void RefreshMainTaskItems(this DlgMain self)
         {
             self.ShowTaskPros.Clear();
@@ -964,8 +956,37 @@ namespace ET.Client
 
             self.View.E_RoseTaskButton.gameObject.SetActive(self.ShowTaskPros.Count == 0);
 
-            self.AddUIScrollItems(ref self.ScrollItemMainTasks, self.ShowTaskPros.Count);
-            self.View.E_MainTaskItemsLoopVerticalScrollRect.SetVisible(true, self.ShowTaskPros.Count);
+            ResourcesLoaderComponent resourcesLoaderComponent = self.Root().GetComponent<ResourcesLoaderComponent>();
+            for (int i = 0; i < self.ShowTaskPros.Count; i++)
+            {
+                if (!self.ScrollItemMainTasks.ContainsKey(i))
+                {
+                    Scroll_Item_MainTask item = self.AddChild<Scroll_Item_MainTask>();
+                    string path = "Assets/Bundles/UI/Item/Item_MainTask.prefab";
+                    if (!self.AssetList.Contains(path))
+                    {
+                        self.AssetList.Add(path);
+                    }
+
+                    GameObject prefab = resourcesLoaderComponent.LoadAssetSync<GameObject>(path);
+                    GameObject go = UnityEngine.Object.Instantiate(prefab, self.View.E_MainTaskItemsLoopVerticalScrollRect.transform.Find("Content").gameObject.transform);
+                    item.BindTrans(go.transform);
+                    self.ScrollItemMainTasks.Add(i, item);
+                }
+
+                Scroll_Item_MainTask scrollItemMainTask = self.ScrollItemMainTasks[i];
+                scrollItemMainTask.uiTransform.gameObject.SetActive(true);
+                scrollItemMainTask.Refresh(self.ShowTaskPros[i]);
+            }
+
+            if (self.ScrollItemMainTasks.Count > self.ShowTaskPros.Count)
+            {
+                for (int i = self.ShowTaskPros.Count; i < self.ScrollItemMainTasks.Count; i++)
+                {
+                    Scroll_Item_MainTask scrollItemMainTask = self.ScrollItemMainTasks[i];
+                    scrollItemMainTask.uiTransform.gameObject.SetActive(false);
+                }
+            }
         }
 
         private static void OnRoseTaskButton(this DlgMain self)
@@ -1014,20 +1035,6 @@ namespace ET.Client
             }
 
             flyTipComponent.ShowFlyTip(fubenName);
-        }
-
-        private static void OnMainTeamItemsRefresh(this DlgMain self, Transform transform, int index)
-        {
-            foreach (Scroll_Item_MainTeamItem item in self.ScrollItemMainTeamItems.Values)
-            {
-                if (item.uiTransform == transform)
-                {
-                    item.uiTransform = null;
-                }
-            }
-            
-            Scroll_Item_MainTeamItem scrollItemMainTeamItem = self.ScrollItemMainTeamItems[index].BindTrans(transform);
-            scrollItemMainTeamItem.OnUpdateItem(self.ShowTeamInfo.PlayerList[index]);
         }
 
         private static void OnRoseTeamButton(this DlgMain self)
@@ -1115,13 +1122,39 @@ namespace ET.Client
 
             if (self.ShowTeamInfo == null)
             {
-                self.AddUIScrollItems(ref self.ScrollItemMainTeamItems, 0);
-                self.View.E_MainTeamItemsLoopVerticalScrollRect.SetVisible(true, 0);
+                self.ShowTeamInfo = TeamInfo.Create();
             }
-            else
+            
+            ResourcesLoaderComponent resourcesLoaderComponent = self.Root().GetComponent<ResourcesLoaderComponent>();
+            for (int i = 0; i < self.ShowTeamInfo.PlayerList.Count; i++)
             {
-                self.AddUIScrollItems(ref self.ScrollItemMainTeamItems, self.ShowTeamInfo.PlayerList.Count);
-                self.View.E_MainTeamItemsLoopVerticalScrollRect.SetVisible(true, self.ShowTeamInfo.PlayerList.Count);
+                if (!self.ScrollItemMainTeamItems.ContainsKey(i))
+                {
+                    Scroll_Item_MainTeamItem item = self.AddChild<Scroll_Item_MainTeamItem>();
+                    string path = "Assets/Bundles/UI/Item/Item_MainTeamItem.prefab";
+                    if (!self.AssetList.Contains(path))
+                    {
+                        self.AssetList.Add(path);
+                    }
+
+                    GameObject prefab = resourcesLoaderComponent.LoadAssetSync<GameObject>(path);
+                    GameObject go = UnityEngine.Object.Instantiate(prefab, self.View.E_MainTeamItemsLoopVerticalScrollRect.transform.Find("Content").gameObject.transform);
+                    item.BindTrans(go.transform);
+                    self.ScrollItemMainTeamItems.Add(i, item);
+                }
+
+                Scroll_Item_MainTeamItem scrollItemMainTeamItem = self.ScrollItemMainTeamItems[i];
+                scrollItemMainTeamItem.uiTransform.gameObject.SetActive(true);
+                scrollItemMainTeamItem.OnUpdateItem(self.ShowTeamInfo.PlayerList[i]);
+            }
+
+            if (self.ScrollItemMainTeamItems.Count > self.ShowTeamInfo.PlayerList.Count)
+            {
+                for (int i = self.ShowTeamInfo.PlayerList.Count; i < self.ScrollItemMainTeamItems.Count; i++)
+                {
+                    Scroll_Item_MainTeamItem scrollItemMainTeamItem = self.ScrollItemMainTeamItems[i];
+                    scrollItemMainTeamItem.uiTransform.gameObject.SetActive(false);
+                }
             }
         }
 
@@ -1283,19 +1316,43 @@ namespace ET.Client
             self.RefreshMainChatItems();
         }
 
-        private static void OnMainChatItemsRefresh(this DlgMain self, Transform transform, int index)
-        {
-            Scroll_Item_MainChatItem scrollItemMainChatItem = self.ScrollItemMainChatItems[index].BindTrans(transform);
-            scrollItemMainChatItem.Refresh(self.ShowChatInfos[index]);
-        }
-
         private static void RefreshMainChatItems(this DlgMain self)
         {
             ChatComponent chatComponent = self.Root().GetComponent<ChatComponent>();
             self.ShowChatInfos.Insert(0, chatComponent.LastChatInfo);
+            
+            ResourcesLoaderComponent resourcesLoaderComponent = self.Root().GetComponent<ResourcesLoaderComponent>();
+            for (int i = 0; i < self.ShowChatInfos.Count; i++)
+            {
+                if (!self.ScrollItemMainChatItems.ContainsKey(i))
+                {
+                    Scroll_Item_MainChatItem item = self.AddChild<Scroll_Item_MainChatItem>();
+                    string path = "Assets/Bundles/UI/Item/Item_MainChatItem.prefab";
+                    if (!self.AssetList.Contains(path))
+                    {
+                        self.AssetList.Add(path);
+                    }
 
-            self.AddUIScrollItems(ref self.ScrollItemMainChatItems, self.ShowChatInfos.Count);
-            self.View.E_MainChatItemsLoopVerticalScrollRect.SetVisible(true, self.ShowChatInfos.Count);
+                    GameObject prefab = resourcesLoaderComponent.LoadAssetSync<GameObject>(path);
+                    GameObject go = UnityEngine.Object.Instantiate(prefab, self.View.E_MainChatItemsLoopVerticalScrollRect.transform.Find("Content").gameObject.transform);
+                    item.BindTrans(go.transform);
+                    self.ScrollItemMainChatItems.Add(i, item);
+                }
+
+                Scroll_Item_MainChatItem scrollItemMainChatItem = self.ScrollItemMainChatItems[i];
+                scrollItemMainChatItem.uiTransform.gameObject.SetActive(true);
+                scrollItemMainChatItem.Refresh(self.ShowChatInfos[i]);
+            }
+
+            if (self.ScrollItemMainChatItems.Count > self.ShowChatInfos.Count)
+            {
+                for (int i = self.ShowChatInfos.Count; i < self.ScrollItemMainChatItems.Count; i++)
+                {
+                    Scroll_Item_MainChatItem scrollItemMainChatItem = self.ScrollItemMainChatItems[i];
+                    scrollItemMainChatItem.uiTransform.gameObject.SetActive(false);
+                }
+            }
+
             self.UpdatePosition().Coroutine();
         }
 

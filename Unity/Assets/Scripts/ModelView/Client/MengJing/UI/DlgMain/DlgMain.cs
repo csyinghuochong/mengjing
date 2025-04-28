@@ -26,12 +26,14 @@ namespace ET.Client
         public Unit MainUnit { get => this.unit; set => this.unit = value; }
 
         public List<TaskPro> ShowTaskPros = new();
-        public Dictionary<int, EntityRef<Scroll_Item_MainTask>> ScrollItemMainTasks;
+        public Dictionary<int, EntityRef<Scroll_Item_MainTask>> ScrollItemMainTasks = new();
         public TeamInfo ShowTeamInfo;
-        public Dictionary<int, EntityRef<Scroll_Item_MainTeamItem>> ScrollItemMainTeamItems;
+        public Dictionary<int, EntityRef<Scroll_Item_MainTeamItem>> ScrollItemMainTeamItems = new();
 
         public List<ChatInfo> ShowChatInfos = new();
-        public Dictionary<int, EntityRef<Scroll_Item_MainChatItem>> ScrollItemMainChatItems;
+        public Dictionary<int, EntityRef<Scroll_Item_MainChatItem>> ScrollItemMainChatItems = new();
+        
+        public List<string> AssetList { get; set; } = new();
 
         public GameObject TianQiEffectObj;
         public string TianQiEffectPath;

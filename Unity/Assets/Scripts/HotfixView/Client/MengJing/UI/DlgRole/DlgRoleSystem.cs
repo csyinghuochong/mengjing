@@ -91,6 +91,7 @@ namespace ET.Client
 
         public static void ShowWindow(this DlgRole self, Entity contextData = null)
         {
+            self.ShowGuide().Coroutine();
         }
         
         public static void BeforeUnload(this DlgRole self)
@@ -104,6 +105,12 @@ namespace ET.Client
             redPointComponent.UnRegisterReddot(ReddotType.RolePoint, self.Reddot_RolePoint);
         }
 
+        public static async ETTask ShowGuide(this DlgRole self)
+        {
+            await self.Root().GetComponent<TimerComponent>().WaitAsync(10);
+            self.Root().GetComponent<GuideComponent>().OnTrigger(GuideTriggerType.OpenUI, "UIRole");
+        }
+        
         public static void Reddot_RolePoint(this DlgRole self, int num)
         {
             self.View.E_Type_PropertyToggle.transform.Find("Reddot").gameObject.SetActive(num > 0);

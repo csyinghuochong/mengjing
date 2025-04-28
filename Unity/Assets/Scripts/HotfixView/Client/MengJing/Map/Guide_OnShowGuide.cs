@@ -74,22 +74,40 @@ namespace ET.Client
                     dlgGuide.SetPosition(gameObject);
                     uiComponent.GuideUISet = FunctionUI.GetUIPath(guideConfig.ActionTarget);
 
-                    void OnClickGuide()
+                    void OnButtonClickGuide()
                     {
                         uiComponent.CloseWindow(WindowID.WindowID_Guide);
-                        gameObject.GetComponent<Button>().onClick.RemoveListener(OnClickGuide);
+                        gameObject.GetComponent<Button>().onClick.RemoveListener(OnButtonClickGuide);
                         scene.GetComponent<GuideComponent>().OnNext(args.GroupId);
 
                         UserInfo userInfo = scene.GetComponent<UserInfoComponentC>().UserInfo;
                         PlayerPrefsHelp.SetInt($"{PlayerPrefsHelp.LastGuide}_{userInfo.UserId}", args.GuideId);
                     }
 
-                    if (gameObject.GetComponent<Button>() == null)
+                    if (gameObject.GetComponent<Button>() != null)
                     {
-                        gameObject.AddComponent<Button>();
+                        gameObject.GetComponent<Button>().onClick.AddListener(OnButtonClickGuide);
                     }
 
-                    gameObject.GetComponent<Button>().onClick.AddListener(OnClickGuide);
+                    
+                    void OnToggleClickGuide(bool isOn)
+                    {
+                        if (isOn)
+                        {
+                            uiComponent.CloseWindow(WindowID.WindowID_Guide);
+                            gameObject.GetComponent<Toggle>().onValueChanged.RemoveListener(OnToggleClickGuide);
+                            scene.GetComponent<GuideComponent>().OnNext(args.GroupId);
+
+                            UserInfo userInfo = scene.GetComponent<UserInfoComponentC>().UserInfo;
+                            PlayerPrefsHelp.SetInt($"{PlayerPrefsHelp.LastGuide}_{userInfo.UserId}", args.GuideId);
+                        }
+                    }
+                    
+                    if (gameObject.GetComponent<Toggle>() != null)
+                    {
+                        gameObject.GetComponent<Toggle>().onValueChanged.AddListener(OnToggleClickGuide);
+                    }
+                    
                     break;
                 case GuideActionType.NpcTalk:
 
