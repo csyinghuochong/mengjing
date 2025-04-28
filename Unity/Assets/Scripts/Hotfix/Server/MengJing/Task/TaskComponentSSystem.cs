@@ -1090,6 +1090,14 @@ namespace ET.Server
         {
             bool updateTask = false;
 
+            for (int i =  self.RoleTaskList.Count - 1; i >= 0; i--)
+            {
+                 if(!TaskConfigCategory.Instance.Contain(self.RoleTaskList[i].taskID))
+                 {
+                     self.RoleTaskList.RemoveAt(i);
+                 }
+            }
+
             List<TaskPro> taskProlist = new List<TaskPro>();
             for (int i = 0; i < self.RoleTaskList.Count; i++)
             {
