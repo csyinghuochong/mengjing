@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.Mathematics;
 
 namespace ET.Server
@@ -94,6 +95,11 @@ namespace ET.Server
                     }
                     unit.GetComponent<ChengJiuComponentS>().OpenAllJingLing();
                     unit.GetComponent<ChengJiuComponentS>().OpenAllPetTuJian();
+                    
+                    // 赛季等级
+                    List<SeasonLevelConfig> seasonLevelConfigs = SeasonLevelConfigCategory.Instance.GetAll().Values.ToList();
+                    unit.GetComponent<UserInfoComponentS>().UserInfo.SeasonLevel = seasonLevelConfigs[^1].Id;
+                    
                     return;
                 }
                 
