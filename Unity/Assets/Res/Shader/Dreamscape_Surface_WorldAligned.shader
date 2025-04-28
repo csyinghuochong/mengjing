@@ -21,7 +21,7 @@ Shader "Polyart/Dreamscape Surface World Aligned"
 		#include "UnityStandardUtils.cginc"
 		#pragma target 3.0
 		#pragma multi_compile_instancing
-		#include "Assets/Visual Design Cafe/Nature Shaders/Common/Nodes/Integrations/Nature Renderer.cginc"
+		//#include "Assets/Visual Design Cafe/Nature Shaders/Common/Nodes/Integrations/Nature Renderer.cginc"
 		#pragma instancing_options procedural:SetupNatureRenderer
 		#pragma surface surf Standard keepalpha addshadow fullforwardshadows vertex:vertexDataFunc 
 		struct Input
@@ -34,6 +34,7 @@ Shader "Polyart/Dreamscape Surface World Aligned"
 			float vertexToFrag29_g15;
 			float vertexToFrag31_g15;
 		};
+
 
 		uniform sampler2D _NormalTexture;
 		uniform float _Tiling;

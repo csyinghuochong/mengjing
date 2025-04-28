@@ -1,8 +1,9 @@
 Shader "Diffuse_Linear" {
-Properties {
-	_Color ("Main Color", Color) = (1,1,1,1)
-	_MainTex ("Base (RGB)", 2D) = "white" {}
-}
+	Properties{
+		_Color ("Main Color", Color) = (1,1,1,1)
+		_MainTex ("Base (RGB)", 2D) = "white" {}
+	}
+	
 SubShader {
 	Tags { "RenderType"="Opaque" }
 	LOD 200
@@ -20,7 +21,7 @@ struct Input {
 	float4 viewSpacePos;
 };
 
-uniform half4 unity_FogColor;
+//uniform half4 unity_FogColor;
 uniform half4 unity_FogStart;
 uniform half4 unity_FogEnd;
 

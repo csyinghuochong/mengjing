@@ -109,6 +109,7 @@ namespace ET.Client
                     if (!file.Contains(@"Assets\Res\Shader") 
                         && !file.Contains(@"Amazing Assets")
                         && !file.Contains(@"HighlightPlus")
+                        && !file.Contains(@"UnityChanShader")
                         && !file.Contains(@"SoftMask"))
                     {
                         string prefabpath = file;

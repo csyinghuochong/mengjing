@@ -14,7 +14,8 @@ Shader "UnityChan/Clothing"
 		_EnvMapSampler ("Environment Map", 2D) = "" {} 
 		_NormalMapSampler ("Normal Map", 2D) = "" {} 
 	}
-
+	
+	
 	SubShader
 	{
 		Tags
