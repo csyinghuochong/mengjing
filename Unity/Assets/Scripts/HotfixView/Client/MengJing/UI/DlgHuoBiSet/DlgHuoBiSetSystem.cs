@@ -167,9 +167,14 @@ namespace ET.Client
                 WindowID.WindowID_PetEgg=>"宠物探索",
                 WindowID.WindowID_Season=>"赛季系统",
                 WindowID.WindowID_Activity=>"游戏活动",
-                WindowID.WindowID_Country=>"游戏活跃",
+                WindowID.WindowID_Country=>"每日活跃",
                 WindowID.WindowID_Recharge=>"游戏商城",
                 WindowID.WindowID_PetEquipMake=>"宠装制造",
+                WindowID.WindowID_ZhanQu=>"奖励系统",
+                WindowID.WindowID_Setting=>"游戏设置",
+                WindowID.WindowID_PetMeleeLevel=>"宠物挑战",
+                WindowID.WindowID_DragonDungeon=>"游戏副本",
+                WindowID.WindowID_DragonDungeonCreate=>"创建副本",
                 _ => ""
             };
 

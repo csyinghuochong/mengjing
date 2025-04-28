@@ -861,6 +861,7 @@ GameObject:
   - component: {fileID: 5499323163880652884}
   - component: {fileID: 5501380609144032566}
   - component: {fileID: 5682147567898325628}
+  - component: {fileID: 3846862884769877664}
   m_Layer: 5
   m_Name: Lab_Tips
   m_TagString: Untagged
@@ -908,7 +909,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.8272822, g: 1, b: 0.41037738, a: 1}
+  m_Color: {r: 0.32156864, g: 0.8980393, b: 0.48235297, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -929,6 +930,21 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: "\u5DF2\u6FC0\u6D3B"
+--- !u!114 &3846862884769877664
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5713119417094462806}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0.49056602, g: 0.49056602, b: 0.49056602, a: 0.5}
+  m_EffectDistance: {x: 1, y: -1}
+  m_UseGraphicAlpha: 1
 --- !u!1 &5713761190380056310
 GameObject:
   m_ObjectHideFlags: 0

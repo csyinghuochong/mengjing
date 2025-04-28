@@ -204,7 +204,10 @@ namespace ET.Client
             self.ShowPropertyList_TeShu.Add(self.AddShowProperList(NumericType.Now_MageBossSubPro, "领主魔攻减免", "", 2));
 
             // 抗性属性
-            self.ShowPropertyList_KangXing.Add(self.AddShowProperList(NumericType.Now_MageBossSubPro, "领主魔攻减免", "", 2));
+            self.ShowPropertyList_KangXing.Add(self.AddShowProperList(NumericType.Now_Resistance_Shadow_Pro, "暗影抗性", "", 2));
+            self.ShowPropertyList_KangXing.Add(self.AddShowProperList(NumericType.Now_ResistIcece_Ice_Pro, "冰霜抗性", "", 2));
+            self.ShowPropertyList_KangXing.Add(self.AddShowProperList(NumericType.Now_ResistFirece_Fire_Pro, "火焰抗性", "", 2));
+            self.ShowPropertyList_KangXing.Add(self.AddShowProperList(NumericType.Now_ResistThunderce_Thunder_Pro, "闪电抗性", "", 2));
         }
 
         public static void RefreshRoleProperty(this ES_RoleProperty self)
