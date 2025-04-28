@@ -30,7 +30,7 @@ namespace ET.Client
 
 		private static void OnBtn_Close(this DlgRealName self)
 		{
-			self.Root().GetComponent<PlayerInfoComponent>().CheckRealName = false;
+			//self.Root().GetComponent<PlayerInfoComponent>().CheckRealName = false;
 			self.Root().GetComponent<UIComponent>().CloseWindow( WindowID.WindowID_RealName );
 		}
 
