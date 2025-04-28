@@ -2142,12 +2142,13 @@ namespace ET
         [StaticField]
         public static List<KeyValuePair> PetEchoAttri = new List<KeyValuePair>
         {
-            new KeyValuePair() { KeyId = 200101, Value = "力量之源1", Value2 = "10&1025008;1@1025009;1" }, //暴击
-            new KeyValuePair() { KeyId = 200401, Value = "力量之源2", Value2 = "20&1025008;1@1025009;2" }, //抗暴
-            new KeyValuePair() { KeyId = 200201, Value = "力量之源3", Value2 = "25&1025008;1@1025009;3" }, //命中
-            new KeyValuePair() { KeyId = 200301, Value = "力量之源4", Value2 = "30&1025008;1@1025009;4" }, //闪避
-            new KeyValuePair() { KeyId = 200101, Value = "力量之源5", Value2 = "50&1025008;1@1025009;5" }, //暴击
-            new KeyValuePair() { KeyId = 200401, Value = "力量之源6", Value2 = "60&1025008;1@1025009;6" }, //抗暴
+            new KeyValuePair() { KeyId = 200201, Value = "命中之源", Value2 = "10&1;100000" }, //命中  
+            new KeyValuePair() { KeyId = 202201, Value = "攻击之源", Value2 = "20&1;200000@1000027;20" }, //暴击
+            new KeyValuePair() { KeyId = 200401, Value = "抗暴之源", Value2 = "30&1;300000@1000027;40" }, //抗暴 
+            new KeyValuePair() { KeyId = 202301, Value = "魔法之源", Value2 = "40&1;500000@1000027;60" }, //抗暴
+            new KeyValuePair() { KeyId = 200301, Value = "闪避之源", Value2 = "50&1;700000@1000027;80" }, //闪避
+            new KeyValuePair() { KeyId = 200101, Value = "暴击之源", Value2 = "60&1;1000000@1000027;100" }, //暴击
+
         };
         
         /// <summary>
