@@ -27,23 +27,6 @@ namespace ET.Client
      		}
      	}
 
-		public UnityEngine.UI.Image E_Img_LodingImage
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_Img_LodingImage == null )
-     			{
-		    		this.m_E_Img_LodingImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Img_LodingValue/E_Img_Loding");
-     			}
-     			return this.m_E_Img_LodingImage;
-     		}
-     	}
-
 		public ES_RewardList ES_RewardList
      	{
      		get
@@ -238,7 +221,6 @@ namespace ET.Client
 		public void DestroyWidget()
 		{
 			this.m_E_Img_LodingValueImage = null;
-			this.m_E_Img_LodingImage = null;
 			this.m_es_rewardlist = null;
 			this.m_es_modelshow = null;
 			this.m_E_DonationBtnButton = null;
@@ -253,7 +235,6 @@ namespace ET.Client
 		}
 
 		private UnityEngine.UI.Image m_E_Img_LodingValueImage = null;
-		private UnityEngine.UI.Image m_E_Img_LodingImage = null;
 		private EntityRef<ES_RewardList> m_es_rewardlist = null;
 		private EntityRef<ES_ModelShow> m_es_modelshow = null;
 		private UnityEngine.UI.Button m_E_DonationBtnButton = null;
