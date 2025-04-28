@@ -14,41 +14,41 @@ namespace ET.Client
 
         public static void SetGuideId(this GuideComponent self, int guideid)
         {
-            self.GuideInfoList.Clear();
-
-            List<GuideConfig> guideConfigs = GuideConfigCategory.Instance.GetAll().Values.ToList();
-            for (int i = 0; i < guideConfigs.Count; i++)
-            {
-                if (guideConfigs[i].Id <= guideid)
-                {
-                    continue;
-                }
-
-                int groupid = guideConfigs[i].GroupId;
-                if (self.GuideInfoList.ContainsKey(groupid))
-                {
-                    continue;
-                }
-
-                self.GuideInfoList.Add(groupid, guideConfigs[i].Id);
-            }
+            // self.GuideInfoList.Clear();
+            //
+            // List<GuideConfig> guideConfigs = GuideConfigCategory.Instance.GetAll().Values.ToList();
+            // for (int i = 0; i < guideConfigs.Count; i++)
+            // {
+            //     if (guideConfigs[i].Id <= guideid)
+            //     {
+            //         continue;
+            //     }
+            //
+            //     int groupid = guideConfigs[i].GroupId;
+            //     if (self.GuideInfoList.ContainsKey(groupid))
+            //     {
+            //         continue;
+            //     }
+            //
+            //     self.GuideInfoList.Add(groupid, guideConfigs[i].Id);
+            // }
         }
 
         public static void OnNext(this GuideComponent self, int group)
         {
-            if (!self.GuideInfoList.ContainsKey(group))
-            {
-                return;
-            }
-
-            if (GuideConfigCategory.Instance.Contain(self.GuideInfoList[group] + 1))
-            {
-                self.GuideInfoList[group]++;
-            }
-            else
-            {
-                self.GuideInfoList.Remove(group);
-            }
+            // if (!self.GuideInfoList.ContainsKey(group))
+            // {
+            //     return;
+            // }
+            //
+            // if (GuideConfigCategory.Instance.Contain(self.GuideInfoList[group] + 1))
+            // {
+            //     self.GuideInfoList[group]++;
+            // }
+            // else
+            // {
+            //     self.GuideInfoList.Remove(group);
+            // }
         }
 
         public static void SendUpdateGuide(this GuideComponent self, int guideId)
