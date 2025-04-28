@@ -42,8 +42,16 @@ namespace ET.Client
         public static void ShowWindow(this DlgFunction self, Entity contextData = null)
         {
             self.ExitCamera = true;
+            
+            self.ShowGuide().Coroutine();
         }
 
+        private static async ETTask ShowGuide(this DlgFunction self)
+        {
+            await self.Root().GetComponent<TimerComponent>().WaitAsync(10);
+            self.Root().GetComponent<GuideComponent>().OnTrigger(GuideTriggerType.OpenUI, "UIFunction");
+        }
+        
         public static void BeforeUnload(this DlgFunction self)
         {
             if (self.ExitCamera)
