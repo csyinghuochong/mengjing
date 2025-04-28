@@ -57,39 +57,39 @@ namespace ET.Client
 
         public static void OnTrigger(this GuideComponent self, int triggerType, string triggeParasm)
         {
-            if (self.GuideInfoList.Count == 0)
-            {
-                return;
-            }
-
-            int groupid = 0;
-            int guideid = 0;
-            foreach (var item in self.GuideInfoList)
-            {
-                GuideConfig guideConfig = GuideConfigCategory.Instance.Get(item.Value);
-                //Log.Debug($"GuideComponent_OnTrigger : {guideConfig.Id}  {triggeParasm}");
-                if (triggerType != guideConfig.TrigerType || triggeParasm != guideConfig.TrigerParams)
-                {
-                    continue;
-                }
-
-                groupid = item.Key;
-                guideid = item.Value;
-                break;
-            }
-
-            if (guideid == 20011)
-            {
-                if (self.Root().GetComponent<MapComponent>().SceneId != 10002)
-                {
-                    return;
-                }
-            }
-
-            if (guideid != 0)
-            {
-                EventSystem.Instance.Publish(self.Root(), new ShowGuide() { GroupId = groupid, GuideId = guideid });
-            }
+            // if (self.GuideInfoList.Count == 0)
+            // {
+            //     return;
+            // }
+            //
+            // int groupid = 0;
+            // int guideid = 0;
+            // foreach (var item in self.GuideInfoList)
+            // {
+            //     GuideConfig guideConfig = GuideConfigCategory.Instance.Get(item.Value);
+            //     //Log.Debug($"GuideComponent_OnTrigger : {guideConfig.Id}  {triggeParasm}");
+            //     if (triggerType != guideConfig.TrigerType || triggeParasm != guideConfig.TrigerParams)
+            //     {
+            //         continue;
+            //     }
+            //
+            //     groupid = item.Key;
+            //     guideid = item.Value;
+            //     break;
+            // }
+            //
+            // if (guideid == 20011)
+            // {
+            //     if (self.Root().GetComponent<MapComponent>().SceneId != 10002)
+            //     {
+            //         return;
+            //     }
+            // }
+            //
+            // if (guideid != 0)
+            // {
+            //     EventSystem.Instance.Publish(self.Root(), new ShowGuide() { GroupId = groupid, GuideId = guideid });
+            // }
         }
     }
 }
