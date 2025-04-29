@@ -13,20 +13,20 @@ namespace ET.Client
             if (fangChenMiComponent.GetPlayerAge() < 18)
             {
                 DateTime dateTime = TimeInfo.Instance.ToDateTime(TimeHelper.ServerNow());
-                if (dateTime.Hour !=20 )
-                {
-                    string content = HintHelp.GetErrorHint(ErrorCode.ERR_FangChengMi_Tip1);
-                    content = content.Replace("{0}", "0");
-                    PopupTipHelp.OpenPopupTip_2(scene, "防沉迷提示",
-                        content,
-                        () =>
-                        {
-                            //EventSystem.Instance.Publish(scene.Root(), new ReturnLogin());
-                            DlgMJLogin dlg =  scene.Root().GetComponent<UIComponent>().GetDlgLogic<DlgMJLogin>();
-                            dlg?.HideLoadingView();
-                        }).Coroutine();
-                }
-                else
+                //if (dateTime.Hour !=20 )
+                //{
+                //    string content = HintHelp.GetErrorHint(ErrorCode.ERR_FangChengMi_Tip1);
+                //    content = content.Replace("{0}", "0");
+                //    PopupTipHelp.OpenPopupTip_2(scene, "防沉迷提示",
+                //        content,
+                //        () =>
+                //        {
+                //            //EventSystem.Instance.Publish(scene.Root(), new ReturnLogin());
+                //            DlgMJLogin dlg =  scene.Root().GetComponent<UIComponent>().GetDlgLogic<DlgMJLogin>();
+                //            dlg?.HideLoadingView();
+                //        }).Coroutine();
+                //}
+                //else
                 {
                     string minute = (60 - dateTime.Minute).ToString();
                     string content = HintHelp.GetErrorHint(ErrorCode.ERR_FangChengMi_Tip1);

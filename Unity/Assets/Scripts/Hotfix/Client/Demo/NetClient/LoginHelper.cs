@@ -58,7 +58,9 @@ namespace ET.Client
 
             if (errCode != ErrorCode.ERR_Success)
             {
-                EventSystem.Instance.Publish(root, new CommonPopup() { HintText = $"无法进入游戏: 错误吗{errCode}" });
+                string errstr = string.Empty;
+                ErrorViewData.ErrorHints.TryGetValue(errCode, out errstr);
+                EventSystem.Instance.Publish(root, new CommonPopup() { HintText = $"无法进入游戏: 错误吗{errstr}" });
                 return errCode;
             }
             if (reLink == 0)

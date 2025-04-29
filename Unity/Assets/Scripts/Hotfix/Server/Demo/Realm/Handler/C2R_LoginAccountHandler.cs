@@ -125,7 +125,7 @@ namespace ET.Server
                     }
                     
                     //防沉迷相关
-                    if (centerAccountInfo.PlayerInfo.RealName == 0 && request.CheckRealName)
+                    if (centerAccountInfo.PlayerInfo.RealName == 0)
                     {
                         response.Error = ErrorCode.ERR_NotRealName;
                         response.AccountId = centerAccountInfo.Id;
@@ -134,16 +134,16 @@ namespace ET.Server
                         centerAccountInfo?.Dispose();
                         return;
                     }
-                    // string idCardNo = centerAccountInfo.PlayerInfo.IdCardNo;
-                    // int canLogin = CanLogin(idCardNo, IsHoliday, request.age_type);
-                    // if (canLogin != ErrorCode.ERR_Success)
-                    // {
-                    //     response.Error = canLogin;
-                    //     response.PlayerInfo = centerAccountInfo.PlayerInfo;
-                    //     session.Disconnect().Coroutine();
-                    //     centerAccountInfo?.Dispose();
-                    //     return;
-                    // }
+                    string idCardNo = centerAccountInfo.PlayerInfo.IdCardNo;
+                    int canLogin = CanLogin(idCardNo, IsHoliday, request.age_type);
+                    if (canLogin != ErrorCode.ERR_Success)
+                    {
+                        response.Error = canLogin;
+                        response.PlayerInfo = centerAccountInfo.PlayerInfo;
+                        session.Disconnect().Coroutine();
+                        centerAccountInfo?.Dispose();
+                        return;
+                    }
                     
                     Scene rootScene = session.Root();
                     TokenComponent tokenComponent = rootScene.GetComponent<TokenComponent>();
