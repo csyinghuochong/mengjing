@@ -19,6 +19,7 @@ namespace ET.Client
         public MeshRenderer ModelMesh; //AI材质
         public int Resolution;
         public float LastTime;
+        public GameObject Lab_DropName { get; set; }
         public HeadBarUI HeadBarUI;
         public long Timer;
         public bool IfPlayEffect;

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 22495312}
   - component: {fileID: 5950398635521849545}
   - component: {fileID: 7923262655024553973}
+  - component: {fileID: 4328503012204702658}
   m_Layer: 5
   m_Name: Lab_DropName
   m_TagString: Untagged
@@ -79,6 +80,23 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: 111
+--- !u!114 &4328503012204702658
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 144290}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ef8d6c5c23c92742a35e85c8f2620c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UiCamera: {fileID: 0}
+  MainCamera: {fileID: 0}
+  Offset: {x: 0, y: 0}
+  HeadPos: {fileID: 0}
+  HeadBar: {fileID: 0}
 --- !u!1 &186984
 GameObject:
   m_ObjectHideFlags: 0
@@ -88,6 +106,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 22458922}
+  - component: {fileID: 4942489276675252920}
+  - component: {fileID: 5055329270644373052}
   m_Layer: 5
   m_Name: UIDropItem
   m_TagString: Untagged
@@ -116,6 +136,38 @@ RectTransform:
   m_AnchoredPosition: {x: -416, y: -234}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &4942489276675252920
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 186984}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ef8d6c5c23c92742a35e85c8f2620c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UiCamera: {fileID: 0}
+  MainCamera: {fileID: 0}
+  Offset: {x: 0, y: 0}
+  HeadPos: {fileID: 0}
+  HeadBar: {fileID: 0}
+--- !u!114 &5055329270644373052
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 186984}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 502d8cafd6a5a0447ab1db9a24cdcb10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data:
+  - key: Lab_DropName
+    gameObject: {fileID: 144290}
 --- !u!1 &189054
 GameObject:
   m_ObjectHideFlags: 0

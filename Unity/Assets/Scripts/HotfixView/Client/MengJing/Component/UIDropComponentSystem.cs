@@ -65,13 +65,22 @@ namespace ET.Client
 
             self.HeadBar = go;
             self.HeadBar.SetActive(true);
-            self.HeadBar.transform.SetParent(self.Root().GetComponent<GlobalComponent>().BloodText_Layer0.transform);
+            self.HeadBar.transform.SetParent(GlobalComponent.Instance.BloodMonster.transform);
             self.HeadBar.transform.localScale = Vector3.one;
             if (self.HeadBar.GetComponent<HeadBarUI>() == null)
             {
                 self.HeadBar.AddComponent<HeadBarUI>();
             }
 
+            self.ShowDropInfo();
+            
+            self.Lab_DropName = go.transform.Find("Lab_DropName").gameObject;
+            self.Lab_DropName.transform.SetParent(GlobalComponent.Instance.BloodText_Layer0.transform);
+            self.Lab_DropName.transform.localScale = Vector3.one;
+            HeadBarUI HeadBarUI_1 = self.Lab_DropName.GetComponent<HeadBarUI>();
+            HeadBarUI_1.HeadPos = self.UIPosition;
+            HeadBarUI_1.HeadBar = self.Lab_DropName;
+            
             self.HeadBarUI = self.HeadBar.GetComponent<HeadBarUI>();
             self.HeadBarUI.HeadPos = self.UIPosition;
             self.HeadBarUI.HeadBar = self.HeadBar;
@@ -90,7 +99,6 @@ namespace ET.Client
             self.Timer = self.Root().GetComponent<TimerComponent>().NewFrameTimer(TimerInvokeType.DropUITimer, self);
             self.GeneratePositions();
 
-            self.ShowDropInfo();
             self.LateUpdate();
             self.AutoPickItem().Coroutine();
         }
@@ -346,6 +354,11 @@ namespace ET.Client
 
             if (self.HeadBar != null)
             {
+                if (self.Lab_DropName != null)
+                {
+                    self.Lab_DropName.transform.SetParent(self.HeadBar.transform);
+                }
+                
                 self.HeadBar.SetActive(false);
                 self.Root().GetComponent<GameObjectLoadComponent>().RecoverGameObject(StringBuilderData.UIDropUIPath, self.HeadBar);
                 self.HeadBar = null;
