@@ -60,7 +60,7 @@ namespace ET.Client
             {
                 string errstr = string.Empty;
                 ErrorViewData.ErrorHints.TryGetValue(errCode, out errstr);
-                EventSystem.Instance.Publish(root, new CommonPopup() { HintText = $"无法进入游戏: 错误吗{errstr}" });
+                EventSystem.Instance.Publish(root, new CommonPopup() { HintText = $"无法进入游戏: {errstr}" });
                 return errCode;
             }
             if (reLink == 0)
