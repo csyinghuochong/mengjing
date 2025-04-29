@@ -109,11 +109,17 @@ namespace ET.Client
 
         public static async ETTask OnLoginButton(this DlgMJLogin self)
         {
-            if (self.ServerInfo == null)
+            if (TimeHelper.ServerNow() - self.LastLoginTime < 3000)
             {
                 return;
             }
+            if (self.ServerInfo == null)
+            {
+                self.RequestServerList().Coroutine();
+                return;
+            }
 
+            self.LastLoginTime = TimeHelper.ServerNow();
             PlayerInfoComponent playerInfoComponent = self.Root().GetComponent<PlayerInfoComponent>();
             playerInfoComponent.ServerItem = self.ServerInfo;
             playerInfoComponent.Account = self.View.E_AccountInputField.text;
