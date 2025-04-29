@@ -11,7 +11,8 @@ namespace ET.Client
 		public bool LinShiSkillStatus;
 		public SkillPro SkillPro;
 		public List<SkillPro> ShowLearnSkillPros = new();
-		public Dictionary<int, EntityRef<Scroll_Item_SkillLearnItem>> ScrollItemSkillLearnItems;
+		public Dictionary<int, EntityRef<Scroll_Item_SkillLearnItem>> ScrollItemSkillLearnItems = new();
+		public List<string> AssetList { get; set; } = new();
 		
 		public ToggleGroup E_BtnItemTypeSetToggleGroup
      	{
@@ -217,7 +218,7 @@ namespace ET.Client
      		}
      	}
 
-		public LoopVerticalScrollRect E_SkillLearnItemsLoopVerticalScrollRect
+		public ScrollRect E_SkillLearnItemsLoopVerticalScrollRect
      	{
      		get
      		{
@@ -228,7 +229,7 @@ namespace ET.Client
      			}
      			if( this.m_E_SkillLearnItemsLoopVerticalScrollRect == null )
      			{
-		    		this.m_E_SkillLearnItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<LoopVerticalScrollRect>(this.uiTransform.gameObject,"Left/E_SkillLearnItems");
+		    		this.m_E_SkillLearnItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<ScrollRect>(this.uiTransform.gameObject,"Left/E_SkillLearnItems");
      			}
      			return this.m_E_SkillLearnItemsLoopVerticalScrollRect;
      		}
@@ -330,7 +331,7 @@ namespace ET.Client
 		private Button m_E_SkillLearnButton = null;
 		private Image m_E_SkillLearnImage = null;
 		private Image m_E_SkillLearnItemsImage = null;
-		private LoopVerticalScrollRect m_E_SkillLearnItemsLoopVerticalScrollRect = null;
+		private ScrollRect m_E_SkillLearnItemsLoopVerticalScrollRect = null;
 		private Text m_E_Text_LeftSpText = null;
 		private Button m_E_ButtonResetButton = null;
 		private Image m_E_ButtonResetImage = null;

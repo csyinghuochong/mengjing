@@ -17,7 +17,6 @@ namespace ET.Client
             self.E_ButtonResetButton.AddListener(() => { self.OnButtonReset(1); });
 
             self.E_BtnItemTypeSetToggleGroup.AddListener(self.OnItemTypeSet);
-            self.E_SkillLearnItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnSkillLearnItemsRefresh);
             self.E_SkillLearnButton.AddListener(self.OnSkillLearn);
 
             self.E_BtnItemTypeSetToggleGroup.OnSelectIndex(0);
@@ -28,6 +27,15 @@ namespace ET.Client
         [EntitySystem]
         private static void Destroy(this ES_SkillLearn self)
         {
+            ResourcesLoaderComponent resourcesLoaderComponent = self.Root().GetComponent<ResourcesLoaderComponent>();
+            for (int i = 0; i < self.AssetList.Count; i++)
+            {
+                resourcesLoaderComponent.UnLoadAsset(self.AssetList[i]);
+            }
+
+            self.AssetList.Clear();
+            self.AssetList = null;
+            
             self.DestroyWidget();
         }
 
@@ -117,21 +125,6 @@ namespace ET.Client
             return skilltype == 1 || skilltype == 6;
         }
 
-        private static void OnSkillLearnItemsRefresh(this ES_SkillLearn self, Transform transform, int index)
-        {
-            foreach (Scroll_Item_SkillLearnItem item in self.ScrollItemSkillLearnItems.Values)
-            {
-                if (item.uiTransform == transform)
-                {
-                    item.uiTransform = null;
-                }
-            }
-            
-            Scroll_Item_SkillLearnItem scrollItemSkillLearnItem = self.ScrollItemSkillLearnItems[index].BindTrans(transform);
-            scrollItemSkillLearnItem.SetClickHander((SkillPro skillpro) => { self.OnSelectSkill(skillpro); });
-            scrollItemSkillLearnItem.OnUpdateUI(self.ShowLearnSkillPros[index]);
-        }
-
         private static void OnItemTypeSet(this ES_SkillLearn self, int page)
         {
             self.EG_SkillInfoPanelRectTransform.gameObject.SetActive(false);
@@ -194,8 +187,37 @@ namespace ET.Client
                 self.ShowLearnSkillPros.Add(skillPro);
             }
 
-            self.AddUIScrollItems(ref self.ScrollItemSkillLearnItems, self.ShowLearnSkillPros.Count);
-            self.E_SkillLearnItemsLoopVerticalScrollRect.SetVisible(true, self.ShowLearnSkillPros.Count, reStart: true);
+            ResourcesLoaderComponent resourcesLoaderComponent = self.Root().GetComponent<ResourcesLoaderComponent>();
+            for (int i = 0; i < self.ShowLearnSkillPros.Count; i++)
+            {
+                if (!self.ScrollItemSkillLearnItems.ContainsKey(i))
+                {
+                    Scroll_Item_SkillLearnItem item = self.AddChild<Scroll_Item_SkillLearnItem>();
+                    string path = "Assets/Bundles/UI/Item/Item_SkillLearnItem.prefab";
+                    if (!self.AssetList.Contains(path))
+                    {
+                        self.AssetList.Add(path);
+                    }
+
+                    GameObject prefab = resourcesLoaderComponent.LoadAssetSync<GameObject>(path);
+                    GameObject go = UnityEngine.Object.Instantiate(prefab, self.E_SkillLearnItemsLoopVerticalScrollRect.transform.Find("Content").gameObject.transform);
+                    item.BindTrans(go.transform);
+                    self.ScrollItemSkillLearnItems.Add(i, item);
+                }
+
+                Scroll_Item_SkillLearnItem scrollItemSkillLearnItem = self.ScrollItemSkillLearnItems[i];
+                scrollItemSkillLearnItem.SetClickHander((SkillPro skillpro) => { self.OnSelectSkill(skillpro); });
+                scrollItemSkillLearnItem.OnUpdateUI(self.ShowLearnSkillPros[i]);
+            }
+
+            if (self.ScrollItemSkillLearnItems.Count > self.ShowLearnSkillPros.Count)
+            {
+                for (int i = self.ShowLearnSkillPros.Count; i < self.ScrollItemSkillLearnItems.Count; i++)
+                {
+                    Scroll_Item_SkillLearnItem scrollItemSkillLearnItem = self.ScrollItemSkillLearnItems[i];
+                    scrollItemSkillLearnItem.uiTransform.gameObject.SetActive(false);
+                }
+            }
 
             if (self.ScrollItemSkillLearnItems.Count > 0)
             {
