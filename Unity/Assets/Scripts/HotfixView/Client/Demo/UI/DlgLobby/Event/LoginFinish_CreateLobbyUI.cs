@@ -16,9 +16,10 @@ namespace ET.Client
                 string minute = (60 - dateTime.Minute).ToString();
                 string content = HintHelp.GetErrorHint(ErrorCode.ERR_FangChengMi_Tip1);
                 content = content.Replace("{0}", minute);
-                PopupTipHelp.OpenPopupTip_2(scene, "防沉迷提示",
-                    content,
-                    () => { OnLoginSucess(scene, args).Coroutine(); }).Coroutine();
+                
+                await scene.GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_FangChengMiTip);
+                DlgFangChengMiTip dlgFangChengMiTip = scene.GetComponent<UIComponent>().GetDlgLogic<DlgFangChengMiTip>();
+                dlgFangChengMiTip.InitData("防沉迷提示", content, () => { OnLoginSucess(scene, args).Coroutine(); });
             }
             else
             {

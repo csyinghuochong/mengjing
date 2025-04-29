@@ -231,5 +231,6 @@ namespace ET.Client
 		WindowID_PetEggSelect,
 		WindowID_SingleHappyMain,
 		WindowID_ProLucklyExplain,
+		WindowID_FangChengMiTip,
 	}
 }
