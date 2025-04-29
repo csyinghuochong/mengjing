@@ -94,15 +94,27 @@ namespace ET.Server
         /// <returns></returns>
         private static int[] GetShenMiZhiDiMonster(this YeWaiRefreshComponent self,int openDay)
         {
-            if (openDay >= 15) 
+            if (openDay >= 1) 
             {
-                return new int[] { 20001 };
+                return new int[] { 110101 };
             }
-            if (openDay >= 10)
+            if (openDay >= 2)
             {
-                return new int[] { 20001 };
+                return new int[] { 110201 };
             }
-            return new int[] { 20001 };
+            if (openDay >= 3)
+            {
+                return new int[] { 110301 };
+            }
+            if (openDay >= 5)
+            {
+                return new int[] { 110401 };
+            }
+            if (openDay >= 7)
+            {
+                return new int[] { 110501 };
+            }
+            return new int[] { 110101 };
         }
 
         public static void OnAddRefreshList(this YeWaiRefreshComponent self, Unit unit, long reTime)
