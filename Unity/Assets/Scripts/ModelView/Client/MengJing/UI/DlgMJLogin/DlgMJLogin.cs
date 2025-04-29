@@ -8,5 +8,7 @@ namespace ET.Client
         public DlgMJLoginViewComponent View { get => this.GetComponent<DlgMJLoginViewComponent>(); }
         
         public ServerItem ServerInfo;
+
+        public long LastLoginTime;
     }
 }
