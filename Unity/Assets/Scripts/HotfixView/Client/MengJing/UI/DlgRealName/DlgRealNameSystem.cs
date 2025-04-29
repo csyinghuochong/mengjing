@@ -92,12 +92,15 @@ namespace ET.Client
 					FlyTipComponent.Instance.ShowFlyTip("实名认证失败！");
 					return;
 				}
-				DlgMJLogin dlg =  self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgMJLogin>();
-				dlg.OnLoginButton().Coroutine();
+
+				PopupTipHelp.OpenPopupTip_2(self.Root(), "认证提示", "实名认证成功!", () =>
+				{
+					DlgMJLogin dlg =  self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgMJLogin>();
+					dlg.OnLoginButton().Coroutine();
+					
+					self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_RealName);
+				}).Coroutine();
 			}
-
-			self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_RealName);
 		}
-
 	}
 }
