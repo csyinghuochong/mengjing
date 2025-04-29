@@ -12,7 +12,7 @@ namespace ET.Client
             FangChenMiComponentC fangChenMiComponent = scene.GetComponent<FangChenMiComponentC>();
             if (fangChenMiComponent.GetPlayerAge() < 18)
             {
-                DateTime dateTime = TimeHelper.DateTimeNow();
+                DateTime dateTime = TimeInfo.Instance.ToDateTime(TimeHelper.ServerNow());
                 if (dateTime.Hour !=20 )
                 {
                     string content = HintHelp.GetErrorHint(ErrorCode.ERR_FangChengMi_Tip1);
