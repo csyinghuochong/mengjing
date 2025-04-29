@@ -46,10 +46,10 @@ namespace ET.Client
         public static void OnMainHeroMove(this LockTargetComponent self)
         {
             Unit haveBoss = null;
-            Unit main = self.GetMainUnit();
             MapComponent mapComponent = self.Root().GetComponent<MapComponent>();
             if (mapComponent.MapType != MapTypeEnum.MainCityScene)
             {
+                Unit main = self.GetMainUnit();
                 List<EntityRef<Unit>> allUnit = main.GetParent<UnitComponent>().GetAll();
                 for (int i = 0; i < allUnit.Count; i++)
                 {
