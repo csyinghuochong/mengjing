@@ -94,15 +94,17 @@ namespace ET.Server
             }
 
             List<int> allskill = new List<int>();
-            for (int i = 0; i < skillSetComponent.SkillList.Count; i++)
+            for (int i = skillSetComponent.SkillList.Count - 1; i >= 0; i--)
             {
-                if (allskill.Contains(skillSetComponent.SkillList[i].SkillID))
+                int baseskill = SkillConfigCategory.Instance.GetInitSkill(skillSetComponent.SkillList[i].SkillID);
+                if (allskill.Contains(baseskill))
                 {
                     Console.WriteLine($"重复技能ID: {skillSetComponent.SkillList[i].SkillID}");
+                    skillSetComponent.SkillList.RemoveAt(i);
                 }
                 else
                 {
-                    allskill.Add(skillSetComponent.SkillList[i].SkillID);
+                    allskill.Add(baseskill);
                 }
             }
 
