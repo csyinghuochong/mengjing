@@ -259,7 +259,7 @@ namespace ET.Server
 				case 5:
 				case 6:
 					//固定时间刷新  YeWaiRefreshComponent
-					//scene.GetComponent<YeWaiRefreshComponent>().CreateMonsterByPos_2(monsterPosition.Id);
+					scene.GetComponent<YeWaiRefreshComponent>().CreateMonsterByPos_2(monsterPosition.Id);
 					break;
 				case 7:
 					// 类型3：  30,60 30s后开始刷新     每60s刷一轮

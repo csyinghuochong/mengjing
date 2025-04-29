@@ -69,19 +69,40 @@ namespace ET.Server
                     continue;
                 }
 
+                int[] monsterPosid = FuntionConfig.CreateMonsterPosi;
                 if (functionId == 1060)
                 {
-                    Log.Warning($"活动-世界领主: {FuntionConfig.CreateMonsterPosi[0]}");
+                    Log.Warning($"活动-世界领主: {monsterPosid[0]}");
+                    monsterPosid = self.GetShenMiZhiDiMonster(openDay);
                 }
 
                 if (functionId == 1061)
                 {
-                    Log.Warning($"活动-宝藏之地: {FuntionConfig.CreateMonsterPosi[0]}");
+                    Log.Warning($"活动-宝藏之地: {monsterPosid[0]}");
                 }
 
-                FubenHelp.CreateMonsterList(self.Scene(), FuntionConfig.CreateMonsterPosi);
+                FubenHelp.CreateMonsterList(self.Scene(), monsterPosid);
             }
             
+        }
+
+        /// <summary>
+        /// 神秘之地的刷怪配置
+        /// </summary>
+        /// <param name="self"></param>
+        /// <param name="openDay"></param>
+        /// <returns></returns>
+        private static int[] GetShenMiZhiDiMonster(this YeWaiRefreshComponent self,int openDay)
+        {
+            if (openDay >= 15) 
+            {
+                return new int[] { 20001 };
+            }
+            if (openDay >= 10)
+            {
+                return new int[] { 20001 };
+            }
+            return new int[] { 20001 };
         }
 
         public static void OnAddRefreshList(this YeWaiRefreshComponent self, Unit unit, long reTime)
