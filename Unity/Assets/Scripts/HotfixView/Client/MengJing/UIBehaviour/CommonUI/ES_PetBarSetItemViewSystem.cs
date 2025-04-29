@@ -30,7 +30,8 @@ namespace ET.Client
                 PetSkinConfig petSkinConfig = PetSkinConfigCategory.Instance.Get(rolePetInfo.SkinId);
                 string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.PetHeadIcon, petSkinConfig.IconID.ToString());
                 Sprite sp = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
-                self.E_PetBarSetIconImage.color = new Color(1, 1, 1, 1);
+                self.E_PetBarSetIconImage.gameObject.SetActive(true);
+                self.E_LockImage.gameObject.SetActive(false);
                 self.E_PetBarSetIconImage.sprite = sp;
                 using (zstring.Block())
                 {
@@ -39,8 +40,8 @@ namespace ET.Client
             }
             else
             {
-                self.E_PetBarSetIconImage.color = new Color(1, 1, 1, 0);
-                self.E_PetBarSetIconImage.sprite = null;
+                self.E_PetBarSetIconImage.gameObject.SetActive(false);
+                self.E_LockImage.gameObject.SetActive(true);
                 self.E_LvText.text = "等级:0";
             }
 
