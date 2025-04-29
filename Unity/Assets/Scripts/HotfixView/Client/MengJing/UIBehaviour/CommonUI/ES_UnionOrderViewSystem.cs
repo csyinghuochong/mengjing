@@ -116,6 +116,7 @@ namespace ET.Client
 			TaskConfig taskConfig = TaskConfigCategory.Instance.Get(taskPro.taskID);
 			BagComponentC bagComponentC = self.Root().GetComponent<BagComponentC>();	
 			
+			self.ES_CommonItem.UseTextColor = true;
 			if (taskConfig.TargetType == TaskTargetType.ItemID_Number_2)
 			{
 				ItemInfo itemInfo = new ItemInfo();
