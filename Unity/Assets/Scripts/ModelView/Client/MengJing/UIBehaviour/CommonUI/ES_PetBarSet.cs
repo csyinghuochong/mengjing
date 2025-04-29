@@ -12,12 +12,13 @@ namespace ET.Client
 		public int PetBarIndex = 1;
 		public int SkillType;
 		public int SkillIndex;
-		public Dictionary<int, EntityRef<Scroll_Item_PetbarSetSkillItem>> ScrollItemPetbarSetSkillItems;
+		public Dictionary<int, EntityRef<Scroll_Item_PetbarSetSkillItem>> ScrollItemPetbarSetSkillItems = new();
 		public List<int> ShowSKillIds = new();
 		public List<int> ActivatedSKillIds = new();
-		
-		public Dictionary<int, EntityRef<Scroll_Item_PetbarSetPetItem>> ScrollItemPetbarSetPetItems;
+
+		public Dictionary<int, EntityRef<Scroll_Item_PetbarSetPetItem>> ScrollItemPetbarSetPetItems = new();
 		public List<RolePetInfo> ShowRolePetInfos = new();
+		public List<string> AssetList { get; set; } = new();
 		
 		public UnityEngine.UI.ToggleGroup E_PlanSetToggleGroup
      	{
@@ -147,7 +148,7 @@ namespace ET.Client
      		}
      	}
 
-		public UnityEngine.UI.LoopVerticalScrollRect E_PetbarSetPetItemsLoopVerticalScrollRect
+		public UnityEngine.UI.ScrollRect E_PetbarSetPetItemsLoopVerticalScrollRect
      	{
      		get
      		{
@@ -158,7 +159,7 @@ namespace ET.Client
      			}
      			if( this.m_E_PetbarSetPetItemsLoopVerticalScrollRect == null )
      			{
-		    		this.m_E_PetbarSetPetItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.LoopVerticalScrollRect>(this.uiTransform.gameObject,"Right/EG_PetPanel/E_PetbarSetPetItems");
+		    		this.m_E_PetbarSetPetItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.ScrollRect>(this.uiTransform.gameObject,"Right/EG_PetPanel/E_PetbarSetPetItems");
      			}
      			return this.m_E_PetbarSetPetItemsLoopVerticalScrollRect;
      		}
@@ -215,7 +216,7 @@ namespace ET.Client
      		}
      	}
 
-		public UnityEngine.UI.LoopVerticalScrollRect E_PetbarSetSkillItemsLoopVerticalScrollRect
+		public UnityEngine.UI.ScrollRect E_PetbarSetSkillItemsLoopVerticalScrollRect
      	{
      		get
      		{
@@ -226,7 +227,7 @@ namespace ET.Client
      			}
      			if( this.m_E_PetbarSetSkillItemsLoopVerticalScrollRect == null )
      			{
-		    		this.m_E_PetbarSetSkillItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.LoopVerticalScrollRect>(this.uiTransform.gameObject,"Right/EG_SkillPanel/E_PetbarSetSkillItems");
+		    		this.m_E_PetbarSetSkillItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.ScrollRect>(this.uiTransform.gameObject,"Right/EG_SkillPanel/E_PetbarSetSkillItems");
      			}
      			return this.m_E_PetbarSetSkillItemsLoopVerticalScrollRect;
      		}
@@ -376,11 +377,11 @@ namespace ET.Client
 		private UnityEngine.RectTransform m_EG_PetPanelRectTransform = null;
 		private UnityEngine.UI.ToggleGroup m_E_PetTypeSetToggleGroup = null;
 		private UnityEngine.UI.Image m_E_PetbarSetPetItemsImage = null;
-		private UnityEngine.UI.LoopVerticalScrollRect m_E_PetbarSetPetItemsLoopVerticalScrollRect = null;
+		private UnityEngine.UI.ScrollRect m_E_PetbarSetPetItemsLoopVerticalScrollRect = null;
 		private UnityEngine.RectTransform m_EG_SkillPanelRectTransform = null;
 		private UnityEngine.UI.ToggleGroup m_E_SkillTypeSetToggleGroup = null;
 		private UnityEngine.UI.Image m_E_PetbarSetSkillItemsImage = null;
-		private UnityEngine.UI.LoopVerticalScrollRect m_E_PetbarSetSkillItemsLoopVerticalScrollRect = null;
+		private UnityEngine.UI.ScrollRect m_E_PetbarSetSkillItemsLoopVerticalScrollRect = null;
 		private UnityEngine.UI.Button m_E_ConfirmButton = null;
 		private UnityEngine.UI.Image m_E_ConfirmImage = null;
 		private UnityEngine.UI.Button m_E_ReSetButton = null;

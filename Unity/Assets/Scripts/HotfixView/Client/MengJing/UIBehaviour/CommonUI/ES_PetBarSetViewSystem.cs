@@ -31,10 +31,8 @@ namespace ET.Client
             self.E_PlanSetToggleGroup.AddListener((index) => { self.OnPlanSet(index).Coroutine(); });
             self.E_PetTypeSetToggleGroup.AddListener(self.OnPetTypeSet);
             self.E_SkillTypeSetToggleGroup.AddListener(self.OnSkillTypeSet);
-            self.E_PetbarSetPetItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnPetBarSetItemsRefresh);
             // self.E_ConfirmButton.AddListenerAsync(self.OnConfirm);
             self.E_ReSetButton.AddListener(self.OnReSet);
-            self.E_PetbarSetSkillItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnPetBarSetSkillsRefresh);
 
             self.ES_PetBarSetItem_1.E_PetBarSetIconButton.AddListener(() => self.OnClickPetIcon(1));
             self.ES_PetBarSetItem_1.E_LockButton.AddListener(() => self.OnClickPetIcon(1));
@@ -65,6 +63,15 @@ namespace ET.Client
         [EntitySystem]
         private static void Destroy(this ES_PetBarSet self)
         {
+            ResourcesLoaderComponent resourcesLoaderComponent = self.Root().GetComponent<ResourcesLoaderComponent>();
+            for (int i = 0; i < self.AssetList.Count; i++)
+            {
+                resourcesLoaderComponent.UnLoadAsset(self.AssetList[i]);
+            }
+
+            self.AssetList.Clear();
+            self.AssetList = null;
+
             self.DestroyWidget();
         }
 
@@ -184,37 +191,53 @@ namespace ET.Client
                 }
             }
 
-            self.AddUIScrollItems(ref self.ScrollItemPetbarSetPetItems, self.ShowRolePetInfos.Count);
-            self.E_PetbarSetPetItemsLoopVerticalScrollRect.SetVisible(true, self.ShowRolePetInfos.Count);
-            self.OnUpdateSelectedPetItem();
-        }
-
-        private static void OnPetBarSetItemsRefresh(this ES_PetBarSet self, Transform transform, int index)
-        {
-            foreach (Scroll_Item_PetbarSetPetItem item in self.ScrollItemPetbarSetPetItems.Values)
+            ResourcesLoaderComponent resourcesLoaderComponent = self.Root().GetComponent<ResourcesLoaderComponent>();
+            for (int i = 0; i < self.ShowRolePetInfos.Count; i++)
             {
-                if (item.uiTransform == transform)
+                if (!self.ScrollItemPetbarSetPetItems.ContainsKey(i))
                 {
-                    item.uiTransform = null;
+                    Scroll_Item_PetbarSetPetItem item = self.AddChild<Scroll_Item_PetbarSetPetItem>();
+                    string path = "Assets/Bundles/UI/Item/Item_PetbarSetPetItem.prefab";
+                    if (!self.AssetList.Contains(path))
+                    {
+                        self.AssetList.Add(path);
+                    }
+
+                    GameObject prefab = resourcesLoaderComponent.LoadAssetSync<GameObject>(path);
+                    GameObject go = UnityEngine.Object.Instantiate(prefab, self.E_PetbarSetPetItemsLoopVerticalScrollRect.transform.Find("Content").gameObject.transform);
+                    item.BindTrans(go.transform);
+                    self.ScrollItemPetbarSetPetItems.Add(i, item);
                 }
+
+                Scroll_Item_PetbarSetPetItem scrollItemPetbarSetPetItem = self.ScrollItemPetbarSetPetItems[i];
+                scrollItemPetbarSetPetItem.uiTransform.gameObject.SetActive(true);
+                scrollItemPetbarSetPetItem.E_TouchEventTrigger.gameObject.SetActive(false);
+                scrollItemPetbarSetPetItem.E_TouchEventTrigger.triggers.Clear();
+                scrollItemPetbarSetPetItem.E_TouchEventTrigger.RegisterEvent(EventTriggerType.PointerDown,
+                    (pdata) => { self.OnPetItemPointerDown(pdata as PointerEventData); });
+                int i1 = i;
+                scrollItemPetbarSetPetItem.E_TouchEventTrigger.RegisterEvent(EventTriggerType.BeginDrag,
+                    (pdata) => { self.OnPetItemBeginDrag(pdata as PointerEventData, i1); });
+                scrollItemPetbarSetPetItem.E_TouchEventTrigger.RegisterEvent(EventTriggerType.Drag,
+                    (pdata) => { self.OnPetItemDraging(pdata as PointerEventData); });
+                scrollItemPetbarSetPetItem.E_TouchEventTrigger.RegisterEvent(EventTriggerType.PointerUp,
+                    (pdata) => { self.OnPetItemPointerUp(pdata as PointerEventData, i1); });
+                scrollItemPetbarSetPetItem.E_TouchEventTrigger.RegisterEvent(EventTriggerType.EndDrag,
+                    (pdata) => { self.OnPetItemEndDrag(pdata as PointerEventData, i1); });
+                scrollItemPetbarSetPetItem.E_TouchEventTrigger.gameObject.SetActive(true);
+                scrollItemPetbarSetPetItem.OnInitUI(self.ShowRolePetInfos[i]);
             }
 
-            Scroll_Item_PetbarSetPetItem scrollItemPetbarSetPetItem = self.ScrollItemPetbarSetPetItems[index].BindTrans(transform);
-
-            scrollItemPetbarSetPetItem.E_TouchEventTrigger.gameObject.SetActive(false);
-            scrollItemPetbarSetPetItem.E_TouchEventTrigger.triggers.Clear();
-            scrollItemPetbarSetPetItem.E_TouchEventTrigger.RegisterEvent(EventTriggerType.PointerDown,
-                (pdata) => { self.OnPetItemPointerDown(pdata as PointerEventData); });
-            scrollItemPetbarSetPetItem.E_TouchEventTrigger.RegisterEvent(EventTriggerType.BeginDrag,
-                (pdata) => { self.OnPetItemBeginDrag(pdata as PointerEventData, index); });
-            scrollItemPetbarSetPetItem.E_TouchEventTrigger.RegisterEvent(EventTriggerType.Drag,
-                (pdata) => { self.OnPetItemDraging(pdata as PointerEventData); });
-            scrollItemPetbarSetPetItem.E_TouchEventTrigger.RegisterEvent(EventTriggerType.PointerUp,
-                (pdata) => { self.OnPetItemPointerUp(pdata as PointerEventData, index); });
-            scrollItemPetbarSetPetItem.E_TouchEventTrigger.RegisterEvent(EventTriggerType.EndDrag,
-                (pdata) => { self.OnPetItemEndDrag(pdata as PointerEventData, index); });
-            scrollItemPetbarSetPetItem.E_TouchEventTrigger.gameObject.SetActive(true);
-            scrollItemPetbarSetPetItem.OnInitUI(self.ShowRolePetInfos[index]);
+            if (self.ScrollItemPetbarSetPetItems.Count > self.ShowRolePetInfos.Count)
+            {
+                for (int i = self.ShowRolePetInfos.Count; i < self.ScrollItemPetbarSetPetItems.Count; i++)
+                {
+                    Scroll_Item_PetbarSetPetItem scrollItemPetbarSetPetItem = self.ScrollItemPetbarSetPetItems[i];
+                    scrollItemPetbarSetPetItem.uiTransform.gameObject.SetActive(false);
+                }
+            }
+            
+            self.OnUpdateSelectedPetItem();
         }
 
         private static void OnUpdateSelectedPetItem(this ES_PetBarSet self)
@@ -365,8 +388,88 @@ namespace ET.Client
                 }
             }
 
-            self.AddUIScrollItems(ref self.ScrollItemPetbarSetSkillItems, self.ShowSKillIds.Count);
-            self.E_PetbarSetSkillItemsLoopVerticalScrollRect.SetVisible(true, self.ShowSKillIds.Count);
+            ResourcesLoaderComponent resourcesLoaderComponent = self.Root().GetComponent<ResourcesLoaderComponent>();
+            for (int i = 0; i < self.ShowSKillIds.Count; i++)
+            {
+                if (!self.ScrollItemPetbarSetSkillItems.ContainsKey(i))
+                {
+                    Scroll_Item_PetbarSetSkillItem item = self.AddChild<Scroll_Item_PetbarSetSkillItem>();
+                    string path = "Assets/Bundles/UI/Item/Item_PetbarSetSkillItem.prefab";
+                    if (!self.AssetList.Contains(path))
+                    {
+                        self.AssetList.Add(path);
+                    }
+
+                    GameObject prefab = resourcesLoaderComponent.LoadAssetSync<GameObject>(path);
+                    GameObject go = UnityEngine.Object.Instantiate(prefab,
+                        self.E_PetbarSetSkillItemsLoopVerticalScrollRect.transform.Find("Content").gameObject.transform);
+                    item.BindTrans(go.transform);
+                    self.ScrollItemPetbarSetSkillItems.Add(i, item);
+                }
+
+                Scroll_Item_PetbarSetSkillItem scrollItemPetbarSetSkillItem = self.ScrollItemPetbarSetSkillItems[i];
+                scrollItemPetbarSetSkillItem.uiTransform.gameObject.SetActive(true);
+                int skillId = self.ShowSKillIds[i];
+                SkillConfig skillConfig = SkillConfigCategory.Instance.Get(skillId);
+                string path1 = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.RoleSkillIcon, skillConfig.SkillIcon);
+                Sprite sp = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path1);
+                scrollItemPetbarSetSkillItem.E_XuanZhongImage.gameObject.SetActive(false);
+                scrollItemPetbarSetSkillItem.E_IconImage.sprite = sp;
+                scrollItemPetbarSetSkillItem.E_NameText.text = skillConfig.SkillName;
+                bool activated = self.ActivatedSKillIds.Contains(skillId);
+                CommonViewHelper.SetImageGray(self.Root(), scrollItemPetbarSetSkillItem.E_IconImage.gameObject, !activated);
+                if (activated)
+                {
+                    scrollItemPetbarSetSkillItem.E_LvText.gameObject.SetActive(false);
+                }
+                else
+                {
+                    scrollItemPetbarSetSkillItem.E_LvText.gameObject.SetActive(true);
+                    int lv = 0;
+                    foreach (PetBarConfig petBarConfig in PetBarConfigCategory.Instance.GetAll().Values)
+                    {
+                        if (petBarConfig.ActiveSkills.Contains(skillId))
+                        {
+                            lv = petBarConfig.Level;
+                            break;
+                        }
+                    }
+
+                    using (zstring.Block())
+                    {
+                        scrollItemPetbarSetSkillItem.E_LvText.text = zstring.Format("{0}级激活", lv);
+                    }
+                }
+
+                // 被动技能不能拖
+                bool canDrag = !(!activated || skillConfig.SkillType == (int)SkillTypeEnum.PassiveSkill ||
+                    skillConfig.SkillType == (int)SkillTypeEnum.PassiveAddProSkill ||
+                    skillConfig.SkillType == (int)SkillTypeEnum.PassiveAddProSkillNoFight);
+
+                int i1 = i;
+                scrollItemPetbarSetSkillItem.E_IconEventTrigger.gameObject.SetActive(false);
+                scrollItemPetbarSetSkillItem.E_IconEventTrigger.triggers.Clear();
+                scrollItemPetbarSetSkillItem.E_IconEventTrigger.RegisterEvent(EventTriggerType.PointerDown,
+                    (pdata) => { self.OnSkillItemPointerDown(pdata as PointerEventData, skillId); });
+                scrollItemPetbarSetSkillItem.E_IconEventTrigger.RegisterEvent(EventTriggerType.BeginDrag,
+                    (pdata) => { self.OnSkillItemBeginDrag(pdata as PointerEventData, i1, canDrag); });
+                scrollItemPetbarSetSkillItem.E_IconEventTrigger.RegisterEvent(EventTriggerType.Drag,
+                    (pdata) => { self.OnSkillItemDraging(pdata as PointerEventData, canDrag); });
+                scrollItemPetbarSetSkillItem.E_IconEventTrigger.RegisterEvent(EventTriggerType.PointerUp,
+                    (pdata) => { self.OnSkillItemPointerUp(pdata as PointerEventData); });
+                scrollItemPetbarSetSkillItem.E_IconEventTrigger.RegisterEvent(EventTriggerType.EndDrag,
+                    (pdata) => { self.OnSkillItemEndDrag(pdata as PointerEventData, skillId, canDrag); });
+                scrollItemPetbarSetSkillItem.E_IconEventTrigger.gameObject.SetActive(true);
+            }
+
+            if (self.ScrollItemPetbarSetSkillItems.Count > self.ShowSKillIds.Count)
+            {
+                for (int i = self.ShowSKillIds.Count; i < self.ScrollItemPetbarSetSkillItems.Count; i++)
+                {
+                    Scroll_Item_PetbarSetSkillItem scrollItemPetbarSetSkillItem = self.ScrollItemPetbarSetSkillItems[i];
+                    scrollItemPetbarSetSkillItem.uiTransform.gameObject.SetActive(false);
+                }
+            }
         }
 
         private static void OnClickSkill(this ES_PetBarSet self, int petIndex, int skillType, int skillIndex)
@@ -384,70 +487,7 @@ namespace ET.Client
 
             self.E_SkillTypeSetToggleGroup.OnSelectIndex(0);
         }
-
-        private static void OnPetBarSetSkillsRefresh(this ES_PetBarSet self, Transform transform, int index)
-        {
-            foreach (Scroll_Item_PetbarSetSkillItem item in self.ScrollItemPetbarSetSkillItems.Values)
-            {
-                if (item.uiTransform == transform)
-                {
-                    item.uiTransform = null;
-                }
-            }
-
-            Scroll_Item_PetbarSetSkillItem scrollItemPetbarSetSkillItem = self.ScrollItemPetbarSetSkillItems[index].BindTrans(transform);
-            int skillId = self.ShowSKillIds[index];
-            SkillConfig skillConfig = SkillConfigCategory.Instance.Get(skillId);
-            string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.RoleSkillIcon, skillConfig.SkillIcon);
-            Sprite sp = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
-            scrollItemPetbarSetSkillItem.E_XuanZhongImage.gameObject.SetActive(false);
-            scrollItemPetbarSetSkillItem.E_IconImage.sprite = sp;
-            scrollItemPetbarSetSkillItem.E_NameText.text = skillConfig.SkillName;
-            bool activated = self.ActivatedSKillIds.Contains(skillId);
-            CommonViewHelper.SetImageGray(self.Root(), scrollItemPetbarSetSkillItem.E_IconImage.gameObject, !activated);
-            if (activated)
-            {
-                scrollItemPetbarSetSkillItem.E_LvText.gameObject.SetActive(false);
-            }
-            else
-            {
-                scrollItemPetbarSetSkillItem.E_LvText.gameObject.SetActive(true);
-                int lv = 0;
-                foreach (PetBarConfig petBarConfig in PetBarConfigCategory.Instance.GetAll().Values)
-                {
-                    if (petBarConfig.ActiveSkills.Contains(skillId))
-                    {
-                        lv = petBarConfig.Level;
-                        break;
-                    }
-                }
-
-                using (zstring.Block())
-                {
-                    scrollItemPetbarSetSkillItem.E_LvText.text = zstring.Format("{0}级激活", lv);
-                }
-            }
-
-            // 被动技能不能拖
-            bool canDrag = !(!activated || skillConfig.SkillType == (int)SkillTypeEnum.PassiveSkill ||
-                skillConfig.SkillType == (int)SkillTypeEnum.PassiveAddProSkill ||
-                skillConfig.SkillType == (int)SkillTypeEnum.PassiveAddProSkillNoFight);
-
-            scrollItemPetbarSetSkillItem.E_IconEventTrigger.gameObject.SetActive(false);
-            scrollItemPetbarSetSkillItem.E_IconEventTrigger.triggers.Clear();
-            scrollItemPetbarSetSkillItem.E_IconEventTrigger.RegisterEvent(EventTriggerType.PointerDown,
-                (pdata) => { self.OnSkillItemPointerDown(pdata as PointerEventData, skillId); });
-            scrollItemPetbarSetSkillItem.E_IconEventTrigger.RegisterEvent(EventTriggerType.BeginDrag,
-                (pdata) => { self.OnSkillItemBeginDrag(pdata as PointerEventData, index, canDrag); });
-            scrollItemPetbarSetSkillItem.E_IconEventTrigger.RegisterEvent(EventTriggerType.Drag,
-                (pdata) => { self.OnSkillItemDraging(pdata as PointerEventData, canDrag); });
-            scrollItemPetbarSetSkillItem.E_IconEventTrigger.RegisterEvent(EventTriggerType.PointerUp,
-                (pdata) => { self.OnSkillItemPointerUp(pdata as PointerEventData); });
-            scrollItemPetbarSetSkillItem.E_IconEventTrigger.RegisterEvent(EventTriggerType.EndDrag,
-                (pdata) => { self.OnSkillItemEndDrag(pdata as PointerEventData, skillId, canDrag); });
-            scrollItemPetbarSetSkillItem.E_IconEventTrigger.gameObject.SetActive(true);
-        }
-
+        
         private static void OnSkillItemPointerDown(this ES_PetBarSet self, PointerEventData pdata, int skillId)
         {
             self.Root().GetComponent<UIComponent>().ShowWindow(WindowID.WindowID_SkillTips);

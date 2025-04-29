@@ -9216,10 +9216,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6056864527783351863}
-  - component: {fileID: 759313530330125700}
-  - component: {fileID: 2783282189505187818}
+  - component: {fileID: 4301821343214837924}
   - component: {fileID: 12400664998951718}
   - component: {fileID: 3813376815030394559}
+  - component: {fileID: 3343104631965418526}
   m_Layer: 5
   m_Name: E_PetbarSetSkillItems
   m_TagString: Untagged
@@ -9247,7 +9247,7 @@ RectTransform:
   m_AnchoredPosition: {x: -360, y: 24}
   m_SizeDelta: {x: 744.1448, y: 696.14}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &759313530330125700
+--- !u!114 &4301821343214837924
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -9256,14 +9256,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 7628144624203645318}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce71017a2903f7c4c9a699e438d0b897, type: 3}
+  m_Script: {fileID: 11500000, guid: 1aa08ab6e0800fa44ae55d278d1423e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefabSource:
-    prefabName: Item_PetbarSetSkillItem
-    poolSize: 5
-  totalCount: 0
-  reverseDirection: 0
   m_Content: {fileID: 769929693772220378}
   m_Horizontal: 0
   m_Vertical: 1
@@ -9282,20 +9277,6 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &2783282189505187818
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7628144624203645318}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3312d7739989d2b4e91e6319e9a96d76, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Padding: {x: 0, y: 0, z: 0, w: 0}
-  m_Softness: {x: 0, y: 0}
 --- !u!222 &12400664998951718
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -9317,7 +9298,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -9334,6 +9315,19 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &3343104631965418526
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7628144624203645318}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31a19414c41e5ae4aae2af33fee712f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ShowMaskGraphic: 0
 --- !u!1 &7667715416157161464
 GameObject:
   m_ObjectHideFlags: 0
@@ -10314,10 +10308,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 914544759243588275}
-  - component: {fileID: 540692991834587665}
-  - component: {fileID: 5368760985988039954}
+  - component: {fileID: 6238805654547196236}
   - component: {fileID: 6180973048576842922}
   - component: {fileID: 3725685422351915159}
+  - component: {fileID: 2230682853208163525}
   m_Layer: 5
   m_Name: E_PetbarSetPetItems
   m_TagString: Untagged
@@ -10345,7 +10339,7 @@ RectTransform:
   m_AnchoredPosition: {x: -352, y: 24}
   m_SizeDelta: {x: 700, y: 696.14}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &540692991834587665
+--- !u!114 &6238805654547196236
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -10354,14 +10348,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 8457883009203724006}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce71017a2903f7c4c9a699e438d0b897, type: 3}
+  m_Script: {fileID: 11500000, guid: 1aa08ab6e0800fa44ae55d278d1423e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefabSource:
-    prefabName: Item_PetbarSetPetItem
-    poolSize: 5
-  totalCount: 0
-  reverseDirection: 0
   m_Content: {fileID: 3782223706671761508}
   m_Horizontal: 0
   m_Vertical: 1
@@ -10380,20 +10369,6 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &5368760985988039954
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8457883009203724006}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3312d7739989d2b4e91e6319e9a96d76, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Padding: {x: 0, y: 0, z: 0, w: 0}
-  m_Softness: {x: 0, y: 0}
 --- !u!222 &6180973048576842922
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -10415,7 +10390,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -10432,6 +10407,19 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &2230682853208163525
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8457883009203724006}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31a19414c41e5ae4aae2af33fee712f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ShowMaskGraphic: 0
 --- !u!1 &8464028132035808336
 GameObject:
   m_ObjectHideFlags: 0

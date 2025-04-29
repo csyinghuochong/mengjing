@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 namespace ET.Client
 {
+	[ChildOf]
 	[EnableMethod]
 	public  class Scroll_Item_PetbarSetSkillItem : Entity,IAwake,IDestroy,IUIScrollItem<Scroll_Item_PetbarSetSkillItem> 
 	{
