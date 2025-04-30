@@ -345,9 +345,60 @@ namespace ET.Client
      			}
      			return this.m_E_YongHuXieYiCloseImage;
      		}
-     	}
+        }
 
-		public Text E_TextYinSiText
+        public Button E_buttonAgeTip
+        {
+            get
+            {
+                if (this.uiTransform == null)
+                {
+                    Log.Error("uiTransform is null.");
+                    return null;
+                }
+                if (this.m_E_buttonAgeTip == null)
+                {
+                    this.m_E_buttonAgeTip = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject, "E_buttonAgeTip");
+                }
+                return this.m_E_buttonAgeTip;
+            }
+        }
+
+        public Transform EG_UIAgeTip
+        {
+            get
+            {
+                if (this.uiTransform == null)
+                {
+                    Log.Error("uiTransform is null.");
+                    return null;
+                }
+                if (this.m_EG_UIAgeTip == null)
+                {
+                    this.m_EG_UIAgeTip = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject, "EG_UIAgeTip");
+                }
+                return this.m_EG_UIAgeTip;
+            }
+        }
+
+        public Button E_AgeTipClose
+        {
+            get
+            {
+                if (this.uiTransform == null)
+                {
+                    Log.Error("uiTransform is null.");
+                    return null;
+                }
+                if (this.m_E_AgeTipClose == null)
+                {
+                    this.m_E_AgeTipClose = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject, "EG_UIAgeTip/E_AgeTipClose");
+                }
+                return this.m_E_AgeTipClose;
+            }
+        }
+
+        public Text E_TextYinSiText
      	{
      		get
      		{
@@ -387,6 +438,9 @@ namespace ET.Client
 			this.m_E_YongHuXieYiCloseButton = null;
 			this.m_E_YongHuXieYiCloseImage = null;
 			this.m_E_TextYinSiText = null;
+            this.m_E_buttonAgeTip = null;
+            this.m_EG_UIAgeTip = null;
+            this.m_E_AgeTipClose = null;
 			this.uiTransform = null;
 		}
 
@@ -411,6 +465,9 @@ namespace ET.Client
 		private Button m_E_YongHuXieYiCloseButton = null;
 		private Image m_E_YongHuXieYiCloseImage = null;
 		private Text m_E_TextYinSiText = null;
-		public Transform uiTransform = null;
+        private Button m_E_buttonAgeTip = null;
+        private Transform m_EG_UIAgeTip = null;
+        private Button m_E_AgeTipClose = null;
+        public Transform uiTransform = null;
 	}
 }
