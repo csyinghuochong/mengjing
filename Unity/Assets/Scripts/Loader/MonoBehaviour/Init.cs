@@ -12,6 +12,7 @@ namespace ET
 	{
 		public bool EditorMode;
 		public int VersionMode = ET.VersionMode.Alpha;
+		private EPlayMode ePlayMode;
 		
 		private void Start()
 		{
@@ -44,7 +45,7 @@ namespace ET
 			World.Instance.AddSingleton<FiberManager>();
 			
 			GlobalConfig globalConfig = Resources.Load<GlobalConfig>("GlobalConfig");
-			EPlayMode ePlayMode = globalConfig.EPlayMode;
+			ePlayMode = globalConfig.EPlayMode;
 			
 #if UNITY_EDITOR
 			ePlayMode = globalConfig.EPlayMode;
@@ -57,7 +58,12 @@ namespace ET
 			
 			// 游戏管理器
 			GameManager.Instance.Behaviour = this;
-			GameObject.Find("Global/UI/PopUpRoot/PatchWindow").gameObject.SetActive(true);
+			//OnStartGame();
+		}
+		
+		public void OnStartGame()
+		{
+			TogglePatchWindow(true);
 			// 开始补丁更新流程
 			StartCoroutine(StartUpdate(ePlayMode));
 		}

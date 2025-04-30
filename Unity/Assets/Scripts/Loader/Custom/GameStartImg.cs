@@ -1,4 +1,7 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using System.Collections.Generic;
+using ET;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class GameStartImg : MonoBehaviour
@@ -26,10 +29,40 @@ public class GameStartImg : MonoBehaviour
         nowShowImgNum = 0;
         PassTime = 0f;
         Obj_StartImg[nowShowImgNum].SetActive(true);
-	}
+        UnityEngine.Debug.Log($"00000000000: {this.transform.name}");
+        CrossFadeAlpha(this.transform, 0f, 3f);
+    }
 	
-	// Update is called once per frame
-	void Update () {
+    void  CrossFadeAlpha(Transform transform, float alpha, float duration)
+    {
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            Transform child = transform.GetChild(i);
+            // if (child.GetComponent<Text>() != null)
+            // {
+            //     UnityEngine.Debug.Log($"11111111111111111111: {child.name}");
+            //     child.GetComponent<Text>().CrossFadeAlpha(alpha, duration, false);
+            // }
+
+            if (child.GetComponent<Image>() != null)
+            {
+                child.GetComponent<Image>().CrossFadeAlpha(alpha, duration, false);
+            }
+        }
+    }
+
+    void Update()
+    {
+        PassTime += Time.deltaTime; 
+        if (PassTime >= 3f)
+        { 
+            gameObject.SetActive(false);    
+            GameObject.Find("Global").GetComponent<Init>().OnStartGame();
+        }
+    }
+
+    // Update is called once per frame
+	void Update_OLD () {
         PassTime += Time.deltaTime; 
         if (PassTime >= 5f)
         { 
@@ -80,7 +113,8 @@ public class GameStartImg : MonoBehaviour
         }
 
         //渐变消失
-        if (startShowStatus) {
+        if (startShowStatus) 
+        {
 
             startShowTimeSum = startShowTimeSum + Time.deltaTime;
             float touMingImgValue = startShowTimeSum / 1;
@@ -130,12 +164,12 @@ public class GameStartImg : MonoBehaviour
         }
 	}
 
-    public void click() {
-        Debug.Log("点击取消!" + Time.time);
-        if (Time.time >= 5f)
-        {
-            Destroy(this.gameObject);
-        }
-    }
+    // public void click() {
+    //     Debug.Log("点击取消!" + Time.time);
+    //     if (Time.time >= 5f)
+    //     {
+    //         Destroy(this.gameObject);
+    //     }
+    // }
 
 }

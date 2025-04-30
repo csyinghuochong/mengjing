@@ -381,7 +381,7 @@ namespace ET.Client
                     child.GetComponent<Text>().CrossFadeAlpha(alpha, duration, false);
                 }
 
-                if (transform.GetComponent<Image>() != null)
+                if (child.GetComponent<Image>() != null)
                 {
                     child.GetComponent<Image>().CrossFadeAlpha(alpha, duration, false);
                 }
