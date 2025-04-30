@@ -19,6 +19,7 @@ namespace ET.Client
 
             self.View.E_buttonAgeTip.AddListener(() => { self.View.EG_UIAgeTip.gameObject.SetActive(true); });
             self.View.E_AgeTipClose.AddListener(() => { self.View.EG_UIAgeTip.gameObject.SetActive(false); });
+            self.View.E_AgeTipClose_2.AddListener(() => { self.View.EG_UIAgeTip.gameObject.SetActive(false); });
 
             Application.targetFrameRate = 60;
             GameObject.Find("Global").GetComponent<Init>().TogglePatchWindow(false);

@@ -398,6 +398,23 @@ namespace ET.Client
             }
         }
 
+        public Button E_AgeTipClose_2
+        {
+            get
+            {
+                if (this.uiTransform == null)
+                {
+                    Log.Error("uiTransform is null.");
+                    return null;
+                }
+                if (this.m_E_AgeTipClose_2 == null)
+                {
+                    this.m_E_AgeTipClose_2 = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject, "EG_UIAgeTip/E_AgeTipClose_2");
+                }
+                return this.m_E_AgeTipClose_2;
+            }
+        }
+
         public Text E_TextYinSiText
      	{
      		get
@@ -441,7 +458,8 @@ namespace ET.Client
             this.m_E_buttonAgeTip = null;
             this.m_EG_UIAgeTip = null;
             this.m_E_AgeTipClose = null;
-			this.uiTransform = null;
+            this.m_E_AgeTipClose_2 = null;
+            this.uiTransform = null;
 		}
 
 		private Button m_E_TextButton_1Button = null;
@@ -468,6 +486,7 @@ namespace ET.Client
         private Button m_E_buttonAgeTip = null;
         private Transform m_EG_UIAgeTip = null;
         private Button m_E_AgeTipClose = null;
+        private Button m_E_AgeTipClose_2 = null;
         public Transform uiTransform = null;
 	}
 }
