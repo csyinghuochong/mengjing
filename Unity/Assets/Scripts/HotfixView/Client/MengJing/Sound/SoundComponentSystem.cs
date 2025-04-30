@@ -257,7 +257,7 @@ namespace ET.Client
 
             for (int i = 0; i < self.m_soundclips.Count; i++)
             {
-                GameObject.Destroy(self.m_soundclips[i]);
+                GameObject.DestroyImmediate(self.m_soundclips[i]);
             }
 
             self.m_soundclips.Clear();

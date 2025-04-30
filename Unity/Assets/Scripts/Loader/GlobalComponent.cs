@@ -48,12 +48,12 @@ namespace ET
         [EntitySystem]
         public static void Destroy(this GlobalComponent self)
         {
-            GameObject.Destroy(  self.BloodPlayer );
-            GameObject.Destroy(  self.BloodMonster );
-            GameObject.Destroy(  self.BloodText );
-            GameObject.Destroy(  self.BloodText_Layer0 );
-            GameObject.Destroy(  self.BloodText_Layer1 );
-            GameObject.Destroy(  self.BloodText_Layer2 );
+            GameObject.DestroyImmediate(  self.BloodPlayer );
+            GameObject.DestroyImmediate(  self.BloodMonster );
+            GameObject.DestroyImmediate(  self.BloodText );
+            GameObject.DestroyImmediate(  self.BloodText_Layer0 );
+            GameObject.DestroyImmediate(  self.BloodText_Layer1 );
+            GameObject.DestroyImmediate(  self.BloodText_Layer2 );
             self.BloodPlayer  = null;
             self.BloodMonster= null;
             self.BloodText = null;
