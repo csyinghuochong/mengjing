@@ -26,6 +26,7 @@ public class GameStartImg : MonoBehaviour
 
     private int Stage = 0;
     
+    //黑屏时间
     private float BlackTime = 3f;
     //渐变时间
     private float FadeTime = 3f;
