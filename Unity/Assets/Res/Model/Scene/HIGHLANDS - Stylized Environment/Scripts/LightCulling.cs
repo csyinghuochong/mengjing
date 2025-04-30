@@ -15,6 +15,11 @@ namespace Highlands
         private void Awake() 
         {
             _light = GetComponent<Light>();
+            if (_light == null)
+            {
+                return;
+            }
+
             if (_light.shadows == LightShadows.Soft || _light.shadows == LightShadows.Hard)
             {
                 shadowsOn = true;

@@ -25,12 +25,15 @@ public class GameStartImg : MonoBehaviour
     private float PassTime;
 
 
+    //渐变时间
+    private float FadeTime = 3f;
+    
 	void Start () {
         nowShowImgNum = 0;
         PassTime = 0f;
         Obj_StartImg[nowShowImgNum].SetActive(true);
         UnityEngine.Debug.Log($"00000000000: {this.transform.name}");
-        CrossFadeAlpha(this.transform, 0f, 3f);
+        CrossFadeAlpha(this.transform, 0f, FadeTime);
     }
 	
     void  CrossFadeAlpha(Transform transform, float alpha, float duration)
@@ -54,7 +57,7 @@ public class GameStartImg : MonoBehaviour
     void Update()
     {
         PassTime += Time.deltaTime; 
-        if (PassTime >= 3f)
+        if (PassTime >= FadeTime)
         { 
             gameObject.SetActive(false);    
             GameObject.Find("Global").GetComponent<Init>().OnStartGame();
