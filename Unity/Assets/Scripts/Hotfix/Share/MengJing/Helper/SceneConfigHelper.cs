@@ -216,7 +216,16 @@ namespace ET
                 while (posid != 0)
                 {
                     MonsterPositionConfig monsterPosition = MonsterPositionConfigCategory.Instance.Get(posid);
+
+                    if (posid == monsterPosition.NextID)
+                    {
+                        Log.Error($"posid == monsterPosition.NextID:  {posid}");
+                        break;
+                    }
+
+
                     //1;157.69,29.24,49.88;41005001;1
+
                     posid = monsterPosition.NextID;
 
                     string monsterinfo = string.Empty;
