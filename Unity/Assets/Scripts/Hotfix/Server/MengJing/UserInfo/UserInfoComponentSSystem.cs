@@ -80,7 +80,7 @@ namespace ET.Server
             userInfo.MakeList.AddRange(CommonHelp.StringArrToIntList(GlobalValueConfigCategory.Instance.Get(18).Value.Split(';')));
             userInfo.CreateTime = TimeHelper.ServerNow();
             userInfo.RobotId = createRoleInfo.RobotId;
-
+            userInfo.SeasonLevel = 1;
             if (createRoleInfo.RobotId > 0)
             {
                 int robotId = createRoleInfo.RobotId;
@@ -95,7 +95,6 @@ namespace ET.Server
             {
                 userInfo.Lv = 1;
                 userInfo.Gold = 0;
-                userInfo.SeasonLevel = 1;
                 userInfo.Occ = createRoleInfo.PlayerOcc;
                 userInfo.Name = createRoleInfo.PlayerName;
             }

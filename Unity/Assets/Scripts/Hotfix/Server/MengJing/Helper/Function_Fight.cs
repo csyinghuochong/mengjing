@@ -1681,6 +1681,10 @@ namespace ET.Server
                 }
             }
 
+            if (userInfo.SeasonLevel == 0)
+            {
+                userInfo.SeasonLevel = 1;
+            }
             SeasonLevelConfig seasonLevelConfig = SeasonLevelConfigCategory.Instance.Get(userInfo.SeasonLevel);
             if (!CommonHelp.IfNull(seasonLevelConfig.PripertySet))
             {
