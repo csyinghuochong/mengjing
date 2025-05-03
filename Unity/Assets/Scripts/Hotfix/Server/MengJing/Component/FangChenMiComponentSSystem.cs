@@ -10,7 +10,7 @@ namespace ET.Server
         [EntitySystem]
         private static void Awake(this FangChenMiComponentS self)
         {
-
+            self.CheckHoliday().Coroutine();
         }
         
         public static async ETTask CheckHoliday(this FangChenMiComponentS self)

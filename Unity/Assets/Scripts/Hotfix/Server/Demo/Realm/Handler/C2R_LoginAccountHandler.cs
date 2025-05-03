@@ -114,8 +114,8 @@ namespace ET.Server
                     }
 
                     FangChenMiComponentS fangChenMiComponentS = session.Root().GetComponent<FangChenMiComponentS>();
-                    bool IsHoliday = fangChenMiComponentS.IsHoliday;;
-                    bool StopServer = fangChenMiComponentS.IsHoliday;;
+                    bool IsHoliday = fangChenMiComponentS.IsHoliday;
+                    bool StopServer = fangChenMiComponentS.StopServer;
                     if (StopServer && !GMHelp.IsGmAccount(request.Account))
                     {
                         response.Error = ErrorCode.ERR_StopServer;
