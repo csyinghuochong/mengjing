@@ -1747,7 +1747,7 @@ RectTransform:
   m_GameObject: {fileID: 606314407074663694}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.31, y: 0.32, z: 0.32}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3850386719665452384}
@@ -16975,7 +16975,7 @@ RectTransform:
   m_GameObject: {fileID: 6500000845252354398}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.32, y: 0.32, z: 0.32}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4334865291056089323}
@@ -21758,7 +21758,7 @@ RectTransform:
   m_GameObject: {fileID: 8474419835178783588}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.32, y: 0.32, z: 0.32}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3412055422689858335}
@@ -21768,7 +21768,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -529, y: -351}
-  m_SizeDelta: {x: 604.16, y: 291.2}
+  m_SizeDelta: {x: 1888, y: 910}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7908943333199436001
 CanvasRenderer:
@@ -23974,7 +23974,7 @@ PrefabInstance:
     - target: {fileID: 550511495995151991, guid: d968fee0f2299c0488bda0e039a6176a,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 550511495995151991, guid: d968fee0f2299c0488bda0e039a6176a,
         type: 3}
@@ -24049,7 +24049,7 @@ PrefabInstance:
     - target: {fileID: 8276218894614128076, guid: d968fee0f2299c0488bda0e039a6176a,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8276218894614128076, guid: d968fee0f2299c0488bda0e039a6176a,
         type: 3}
@@ -24069,7 +24069,7 @@ PrefabInstance:
     - target: {fileID: 8867426934256957745, guid: d968fee0f2299c0488bda0e039a6176a,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8867426934256957745, guid: d968fee0f2299c0488bda0e039a6176a,
         type: 3}
