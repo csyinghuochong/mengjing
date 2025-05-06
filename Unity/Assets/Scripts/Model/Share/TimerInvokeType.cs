@@ -119,5 +119,6 @@
         public const int PickItemTimer = 377;
         public const int PetEquipMakeCDTimer = 378;
         public const int UISingleHappyMoveTimer = 379;
+        public const int UIGuideTimer = 380;
     }
 }

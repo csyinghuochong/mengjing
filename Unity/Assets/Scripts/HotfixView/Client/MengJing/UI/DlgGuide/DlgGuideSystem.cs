@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace ET.Client
 {
@@ -6,6 +7,22 @@ namespace ET.Client
     [FriendOf(typeof(DlgGuide))]
     public static class DlgGuideSystem
     {
+        [Invoke(TimerInvokeType.UIGuideTimer)]
+        public class UIGuideTimer : ATimer<DlgGuide>
+        {
+            protected override void Run(DlgGuide self)
+            {
+                try
+                {
+                    self.OnUpdate();
+                }
+                catch (Exception e)
+                {
+                    Log.Error(e.ToString());
+                }
+            }
+        }
+
         public static void RegisterUIEvent(this DlgGuide self)
         {
             self.View.EG_PositionSetRectTransform.gameObject.SetActive(false);
@@ -15,9 +32,14 @@ namespace ET.Client
         {
         }
 
-        public static void SetPosition(this DlgGuide self, GameObject gameObject)
+        public static void BeforeUnload(this DlgGuide self)
         {
-            CommonViewHelper.SetParent(self.View.uiTransform.gameObject, gameObject);
+            self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
+        }
+
+        public static void SetPosition(this DlgGuide self, GameObject target)
+        {
+            self.Target = target;
 
             if (self.GuideConfig != null)
             {
@@ -28,6 +50,27 @@ namespace ET.Client
             {
                 self.View.E_ShowLabSetImage.gameObject.SetActive(false);
             }
+
+            self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
+            self.Timer = self.Root().GetComponent<TimerComponent>().NewFrameTimer(TimerInvokeType.UIGuideTimer, self);
+        }
+
+        public static void OnUpdate(this DlgGuide self)
+        {
+            if (self.Target == null)
+            {
+                return;
+            }
+
+            RectTransform guideRect = self.View.EG_TipRootRectTransform;
+            RectTransform targetRect = self.Target.GetComponent<RectTransform>();
+
+            Vector2 localPoint;
+            RectTransformUtility.ScreenPointToLocalPointInRectangle(guideRect.parent as RectTransform,
+                targetRect.position,
+                null,
+                out localPoint);
+            guideRect.anchoredPosition = localPoint;
         }
     }
 }
