@@ -82,6 +82,7 @@ namespace ET.Client
         [MenuItem("ET/NavMesh/导出场景生成配置文件")]
         static void ExportScene()
     {
+
         string rootname = "pool";
         GameObject gameObjectpool = GameObject.Find($"AdditiveHide/{rootname}"); // 获取当前GameObject的Transform
         if (gameObjectpool == null)
@@ -125,16 +126,16 @@ namespace ET.Client
             }
 
             string parentname = gameObject.transform.parent.name;
-            // if (prefabname.Equals(parentname))
-            // {
-            //     parentname = gameObject.transform.parent.parent.name;
-            // }
+            if (prefabname.Equals(parentname))
+            {
+                parentname = gameObject.transform.parent.parent.name;
+            }
 
-            // if (!parentname.Equals(rootname) && !parentname.Equals(prefabname))
-            // {
-            //     Log.Warning($"{gameObject.name}:  未处理，可能是嵌套Prefab");
-            //     continue;
-            // }
+            if (!parentname.Equals(rootname) && !parentname.Equals(prefabname))
+            {
+                Log.Warning($"{gameObject.name}:  未处理，可能是嵌套Prefab");
+                continue;
+            }
 
             // 确保传入的GameObject是一个Prefab实例
             string prefabpath = PrefabUtility.GetPrefabAssetPathOfNearestInstanceRoot(gameObject);
@@ -186,7 +187,7 @@ namespace ET.Client
         mapObjectConfig.Id = 1;
         mapObjectConfig.MapConfig = allobjectinfo;
 
-        string destinationPath = $"H:\\GitMengJing\\Unity\\Assets\\Bundles\\MapConfig\\{EditorSceneManager.GetActiveScene().name}.bytes";
+        string destinationPath = $"{Application.dataPath}\\Bundles\\MapConfig\\{EditorSceneManager.GetActiveScene().name}.bytes";
         // 将二进制数据写入.bytes文件
         File.WriteAllBytes(destinationPath, mapObjectConfig.ToBson());
 
@@ -266,7 +267,7 @@ namespace ET.Client
     {
         //TextAsset v = Resources.Load<GlobalConfig><TextAsset>($"Assets/Bundles/MapConfig/1.bytes");
         //H:\GitMengJing\Unity\Assets\Bundles\MapConfig
-        byte[] bytes = File.ReadAllBytes($"H:/GitMengJing/Unity/Assets/Bundles/MapConfig/{EditorSceneManager.GetActiveScene().name}.bytes");
+        byte[] bytes = File.ReadAllBytes($"{Application.dataPath}/Bundles/MapConfig/{EditorSceneManager.GetActiveScene().name}.bytes");
 
         if (bytes == null)
         {
