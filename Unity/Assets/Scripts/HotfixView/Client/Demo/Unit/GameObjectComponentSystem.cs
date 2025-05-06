@@ -649,11 +649,11 @@ namespace ET.Client
                     go.transform.rotation = unit.Rotation;
                     go.transform.name = unit.Id.ToString();
                     MonsterConfig monsterCof = MonsterConfigCategory.Instance.Get(unit.ConfigId);
+                    unit.AddComponent<EffectViewComponent>(true); //添加特效组建
                     if (monsterCof.AI != 0)
                     {
                         LayerHelp.ChangeLayer(go.transform, LayerEnum.Monster);
                         self.OnAddCollider(go);
-                        unit.AddComponent<EffectViewComponent>(true); //添加特效组建
 
                         if (SettingData.AnimController == 0)
                         {
