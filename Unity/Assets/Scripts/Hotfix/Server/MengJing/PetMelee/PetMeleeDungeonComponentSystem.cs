@@ -303,7 +303,7 @@ namespace ET.Server
                 return;
             }
 
-            if (self.PetMeleeCardInHand.Count >= ConfigData.PetMeleeCarInHandNum)
+            if (self.PetMeleeCardInHand[player.Id].Count >= ConfigData.PetMeleeCarInHandNum)
             {
                 self.PetMeleeCardPool[player.Id].Add(cardInfo);
                 return;
