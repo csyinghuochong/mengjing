@@ -166,7 +166,7 @@ namespace ET.Client
             switch (sceneTypeEnum)
             {
                 case MapTypeEnum.LoginScene:
-                    music = "Login";
+                    music = "LoginBack";
                     break;
                 case MapTypeEnum.MainCityScene:
                     music = "MainCity";
