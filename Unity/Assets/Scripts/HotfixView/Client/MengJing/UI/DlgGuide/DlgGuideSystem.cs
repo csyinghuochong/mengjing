@@ -70,7 +70,15 @@ namespace ET.Client
                 targetRect.position,
                 null,
                 out localPoint);
-            guideRect.anchoredPosition = localPoint;
+
+            Vector2 offset = Vector2.zero;
+            if (self.GuideConfig.Offset.Length == 2)
+            {
+                offset.x = self.GuideConfig.Offset[0];
+                offset.y = self.GuideConfig.Offset[1];
+            }
+
+            guideRect.anchoredPosition = localPoint + offset;
         }
     }
 }

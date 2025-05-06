@@ -83,6 +83,8 @@ namespace ET
 		public string Text { get; set; }
 		/// <summary>文本位置[相对于按钮]</summary>
 		public int TextPosition { get; set; }
+		/// <summary>偏移</summary>
+		public int[] Offset { get; set; }
 
 	}
 }
