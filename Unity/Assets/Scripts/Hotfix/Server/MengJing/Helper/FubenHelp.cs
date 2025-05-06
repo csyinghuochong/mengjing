@@ -290,7 +290,7 @@ namespace ET.Server
 			MonsterPositionConfig monsterPosition = MonsterPositionConfigCategory.Instance.Get(monsterPos);
 			for (int i = 0; i < monsterPosition.MonsterID.Length; i++)
 			{
-				CreateMonsterById( scene,  monsterPosition, monsterPosition.MonsterID[i], monsterPosition.CreateNum[i] );
+				CreateMonsterById( scene,  monsterPosition, monsterPosition.MonsterID[i], monsterPosition.CreateNum[0] );
 			}
 			return monsterPosition.NextID;
 		}
