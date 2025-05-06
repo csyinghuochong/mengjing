@@ -72,7 +72,7 @@ namespace ET.Client
             var biglist  = bigname.OrderByDescending(p => p.KeyId);
             foreach (var VARIABLE in biglist)
             {
-                if ((int.Parse(VARIABLE.Value)>100 && VARIABLE.KeyId >= 1000) 
+                if ((int.Parse(VARIABLE.Value)>100 && VARIABLE.KeyId >= 200) 
                     || (int.Parse(VARIABLE.Value)>1000 && VARIABLE.KeyId >= 30) 
                     ||  (int.Parse(VARIABLE.Value)>2000 && VARIABLE.KeyId >= 15) 
                     ||  (int.Parse(VARIABLE.Value)>5000 &&   VARIABLE.KeyId >= 5)
