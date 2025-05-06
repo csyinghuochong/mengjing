@@ -8,7 +8,6 @@
 [10007, {"_t":"GuideConfig","_id":10007,"GroupId":0,"NextID":0,"Save":1,"TrigerType":1,"TrigerParams":"UITaskGet","ActionType":1,"ActionTarget":"UITaskGet","ActionParams":"Content;0@E_ImageButton","Force":0,"Text":"选择任务","TextPosition":0,"Offset":[]}],
 [10008, {"_t":"GuideConfig","_id":10008,"GroupId":0,"NextID":0,"Save":1,"TrigerType":1,"TrigerParams":"UITaskGet","ActionType":1,"ActionTarget":"UITaskGet","ActionParams":"E_ButtonGet","Force":0,"Text":"点击接取任务","TextPosition":0,"Offset":[]}],
 [10009, {"_t":"GuideConfig","_id":10009,"GroupId":0,"NextID":0,"Save":1,"TrigerType":3,"TrigerParams":"0","ActionType":1,"ActionTarget":"UIMain","ActionParams":"MainTaskContent;0@E_Click","Force":0,"Text":"点击前往任务","TextPosition":0,"Offset":[]}],
-[10010, {"_t":"GuideConfig","_id":10010,"GroupId":0,"NextID":0,"Save":1,"TrigerType":5,"TrigerParams":"0","ActionType":1,"ActionTarget":"UIMain","ActionParams":"E_Btn_ShiQu","Force":0,"Text":"点击拾取掉落道具","TextPosition":0,"Offset":[]}],
 [20010, {"_t":"GuideConfig","_id":20010,"GroupId":2,"NextID":0,"Save":1,"TrigerType":3,"TrigerParams":"30010014","ActionType":1,"ActionTarget":"UIMain","ActionParams":"UIMapMini@MiniMapButton","Force":0,"Text":"点击去往矿洞二层","TextPosition":0,"Offset":[]}],
 [20011, {"_t":"GuideConfig","_id":20011,"GroupId":2,"NextID":0,"Save":1,"TrigerType":1,"TrigerParams":"UIMapBig","ActionType":1,"ActionTarget":"UIMapBig","ActionParams":"MapNameSet;10@Image","Force":0,"Text":"点击去往矿洞二层","TextPosition":0,"Offset":[]}],
 [30001, {"_t":"GuideConfig","_id":30001,"GroupId":3,"NextID":0,"Save":1,"TrigerType":6,"TrigerParams":"0","ActionType":1,"ActionTarget":"UISkill","ActionParams":"Type_1","Force":0,"Text":"技能设置","TextPosition":0,"Offset":[]}],
@@ -18,4 +17,5 @@
 [50001, {"_t":"GuideConfig","_id":50001,"GroupId":5,"NextID":0,"Save":1,"TrigerType":7,"TrigerParams":"3","ActionType":1,"ActionTarget":"UIMain","ActionParams":"E_Shrink","Force":0,"Text":"学习技能","TextPosition":0,"Offset":[]}],
 [50002, {"_t":"GuideConfig","_id":50002,"GroupId":5,"NextID":0,"Save":1,"TrigerType":1,"TrigerParams":"UIFunction","ActionType":1,"ActionTarget":"UIFunction","ActionParams":"E_RoseSkill","Force":0,"Text":"学习技能","TextPosition":0,"Offset":[]}],
 [50003, {"_t":"GuideConfig","_id":50003,"GroupId":5,"NextID":0,"Save":1,"TrigerType":1,"TrigerParams":"UISkill","ActionType":1,"ActionTarget":"UISkill","ActionParams":"EG_SubViewNode;0@E_SkillLearn","Force":0,"Text":"学习技能","TextPosition":0,"Offset":[]}],
+[60001, {"_t":"GuideConfig","_id":60001,"GroupId":6,"NextID":0,"Save":1,"TrigerType":5,"TrigerParams":"0","ActionType":1,"ActionTarget":"UIMain","ActionParams":"E_Btn_ShiQu","Force":0,"Text":"点击拾取掉落道具","TextPosition":0,"Offset":[]}],
 ]}

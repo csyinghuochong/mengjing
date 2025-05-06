@@ -270,7 +270,7 @@ namespace ET.Client
             }
 
             float distance = PositionHelper.Distance2D(UnitHelper.GetMyUnitFromClientScene(self.Root()).Position, self.MyUnit.Position);
-            if (distance < 3f)
+            if (distance < ConfigData.DefaultShiquRange)
             {
                 self.Root().GetComponent<GuideComponent>().OnTrigger(GuideTriggerType.DropItem, "0");
             }

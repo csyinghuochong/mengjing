@@ -22,7 +22,7 @@ namespace ET.Client
 
             self.E_Btn_TargetButton.AddListener(self.OnBtn_TargetButton);
 
-            self.E_Btn_ShiQuButton.AddListener(() => { self.OnShiquItem(6f); });
+            self.E_Btn_ShiQuButton.AddListener(() => { self.OnShiquItem(ConfigData.DefaultShiquRange); });
 
             self.E_Btn_NpcDuiHuaButton.AddListener(self.OnBtn_NpcDuiHuaButton);
 

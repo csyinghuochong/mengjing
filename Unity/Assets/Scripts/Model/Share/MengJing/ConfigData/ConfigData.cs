@@ -6,6 +6,7 @@ namespace ET
 {
     public static class ConfigData
     {
+        public const float DefaultShiquRange = 6f;
 
         [StaticField]
         public static long LastRemoveTime = 0;
