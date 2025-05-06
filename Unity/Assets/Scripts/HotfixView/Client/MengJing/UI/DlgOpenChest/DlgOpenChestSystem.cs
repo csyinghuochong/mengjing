@@ -30,7 +30,7 @@ namespace ET.Client
         public static void OnOpenBtnButton(this DlgOpenChest self)
         {
             self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgMain>().View.ES_OpenBox.OnOpenBox(self.Box);
-            self.Room().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_OpenChest);
+            self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_OpenChest);
         }
     }
 }

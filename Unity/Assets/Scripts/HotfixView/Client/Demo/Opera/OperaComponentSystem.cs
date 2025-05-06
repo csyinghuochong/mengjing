@@ -359,20 +359,23 @@ namespace ET.Client
                 return;
             }
 
+            UIComponent uiComponent = self.Root().GetComponent<UIComponent>();
             if (box.ConfigId == 83000101 || box.ConfigId == 83000102)
             {
-                self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgJiaYuanMenu>().OnUpdateRubsh(box);
+                await uiComponent.ShowWindowAsync(WindowID.WindowID_JiaYuanMenu);
+                uiComponent.GetDlgLogic<DlgJiaYuanMenu>().OnUpdateRubsh(box);
                 return;
             }
 
             MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(box.ConfigId);
             if (monsterConfig.Parameter != null && monsterConfig.Parameter.Length > 0 && monsterConfig.Parameter[0] > 0)
             {
-                self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgOpenChest>().UpdateInfo(box);
+                await uiComponent.ShowWindowAsync(WindowID.WindowID_OpenChest);
+                uiComponent.GetDlgLogic<DlgOpenChest>().UpdateInfo(box);
             }
             else
             {
-                self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgMain>().View.ES_OpenBox.OnOpenBox(box);
+                uiComponent.GetDlgLogic<DlgMain>().View.ES_OpenBox.OnOpenBox(box);
             }
 
             await ETTask.CompletedTask;
