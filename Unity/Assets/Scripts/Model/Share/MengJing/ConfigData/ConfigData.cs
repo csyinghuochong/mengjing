@@ -13,9 +13,17 @@ namespace ET
 
         [StaticField]
         public static object SyncObject = new object();
+
+        
+        // 需要服务器热重载改变的为static,  不需要热重载改变的为const/......
         
         /// <summary>
-        /// 需要服务器热重载改变的为static,  不需要热重载改变的为const/......
+        /// 变成宠物持续时间，时间结束后变回英雄
+        /// </summary>
+        public const long PetSwichEndCD = 600;
+        
+        /// <summary>
+        /// 变身宠物切换CD
         /// </summary>
         public const long PetSwichCD1 = 10;
 

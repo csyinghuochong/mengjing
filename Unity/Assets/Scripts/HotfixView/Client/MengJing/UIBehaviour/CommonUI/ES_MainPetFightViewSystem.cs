@@ -92,7 +92,7 @@ namespace ET.Client
                 return;
             }
 
-            self.E_PetHPImage.fillAmount = (60f - leftTime) * ConfigData.PetSwichCD2;
+            self.E_PetHPImage.fillAmount = (ConfigData.PetSwichCD1 - leftTime) * ConfigData.PetSwichCD2;
         }
 
         private static void ResetSwitchCD(this ES_MainPetFight self)
