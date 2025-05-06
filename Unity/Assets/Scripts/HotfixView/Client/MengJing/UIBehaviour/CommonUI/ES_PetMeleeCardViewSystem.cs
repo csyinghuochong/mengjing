@@ -78,10 +78,10 @@ namespace ET.Client
                 }
                 case (int)PetMeleeCarType.AssistPet:
                 {
-                    JingLingConfig petTuJianConfig = JingLingConfigCategory.Instance.Get(self.PetMeleeCardInfo.ConfigId);
+                    PetConfig petTuJianConfig = PetConfigCategory.Instance.Get(self.PetMeleeCardInfo.ConfigId);
 
                     self.E_IconImage.sprite = self.Root().GetComponent<ResourcesLoaderComponent>()
-                            .LoadAssetSync<Sprite>(ABPathHelper.GetAtlasPath_2(ABAtlasTypes.PetHeadIcon, petTuJianConfig.Icon.ToString()));
+                            .LoadAssetSync<Sprite>(ABPathHelper.GetAtlasPath_2(ABAtlasTypes.PetHeadIcon, petTuJianConfig.HeadIcon.ToString()));
                     self.E_Icon2Image.sprite = self.Root().GetComponent<ResourcesLoaderComponent>()
                             .LoadAssetSync<Sprite>(ABPathHelper.GetAtlasPath_2(ABAtlasTypes.OtherIcon, "Image_163"));
                     self.E_BackImage.sprite = self.Root().GetComponent<ResourcesLoaderComponent>()
@@ -89,9 +89,9 @@ namespace ET.Client
                     self.E_Cost_ActiveText.text = GlobalValueConfigCategory.Instance.Get(121).Value;
                     self.E_Cost_InactiveText.text = GlobalValueConfigCategory.Instance.Get(121).Value;
                     self.E_TypeText.text = "辅战卡";
-                    self.E_NameText.text = petTuJianConfig.Name;
+                    self.E_NameText.text = petTuJianConfig.PetName;
 
-                    self.UnitAssetsPath = ABPathHelper.GetUnitPath("Pet/" + petTuJianConfig.Assets);
+                    self.UnitAssetsPath = ABPathHelper.GetUnitPath("Pet/" + petTuJianConfig.PetModel);
 
                     break;
                 }
