@@ -573,7 +573,7 @@ namespace ET.Client
             //     CommonViewHelper.TargetFrameRate(oldValue == "1" ? 60 : 30);
             // }
 
-            self.Root().GetComponent<FangChenMiComponentC>().OnLogin();
+            self.Root().GetComponent<FangChenMiComponentC>().OnLogin().Coroutine();
 
             string attackmode = userInfoComponent.GetGameSettingValue(GameSettingEnum.AttackTarget);
             self.Root().GetComponent<LockTargetComponent>().AttackTarget = int.Parse(attackmode);
