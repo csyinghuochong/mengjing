@@ -1449,8 +1449,8 @@ namespace ET.Client
 
                 self.View.ES_MainSkill.OnEnterScene(unit, petId);
                 self.View.ES_MainSkill.OnPetFightSwitch(petId);
-                self.View.E_TextPetSwitch.text = "10";
-                self.MainPetSwitchEndTime = TimeHelper.ServerNow() + TimeHelper.Second * 10;
+                self.View.E_TextPetSwitch.text = ConfigData.PetSwichCD1.ToString();
+                self.MainPetSwitchEndTime = TimeHelper.ServerNow() + TimeHelper.Second * ConfigData.PetSwichCD1;
                 self.MainPetSwitchTimer = root.GetComponent<TimerComponent>().NewRepeatedTimer(1000, TimerInvokeType.MainPetSwitchTimer, self);
             }
             else

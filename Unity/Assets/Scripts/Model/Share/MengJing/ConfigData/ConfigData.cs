@@ -17,7 +17,7 @@ namespace ET
         /// <summary>
         /// 需要服务器热重载改变的为static,  不需要热重载改变的为const/......
         /// </summary>
-        public const long PetSwichCD1 = 60;
+        public const long PetSwichCD1 = 10;
 
         public const float PetSwichCD2 = 1f / PetSwichCD1;
 
