@@ -28,7 +28,7 @@ namespace ET.Client
 		{
 			long instanceid = self.InstanceId;
 			M2C_SeasonDonateResponse infoResponse = await ActivityNetHelper.SeasonDonateRequest(self.Root());
-			if (instanceid != self.InstanceId || infoResponse == null)
+			if (instanceid != self.InstanceId || infoResponse == null || infoResponse.Error != ErrorCode.ERR_Success)
 			{
 				return;
 			}
@@ -44,7 +44,7 @@ namespace ET.Client
 
 		private static void UpdateBossInfo(this ES_SeasonBoss self, int bosslv, int bossexp)
 		{
-			KeyValuePairInt keyValuePairInt =	ConfigData.CommonSeasonBossList[bosslv];
+			KeyValuePairInt keyValuePairInt = ConfigData.CommonSeasonBossList[bosslv];
 
 			float rate = (bossexp * 1f / keyValuePairInt.Value);
 			rate = Mathf.Min(1f, rate);

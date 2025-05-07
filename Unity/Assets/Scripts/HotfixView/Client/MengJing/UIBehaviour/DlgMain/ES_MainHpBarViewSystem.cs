@@ -422,7 +422,7 @@ namespace ET.Client
                 self.OnUpdateBelongID(unit.Id, unit.GetComponent<NumericComponentC>().GetAsLong(NumericType.BossBelongID));
 
                 //掉落类型为3,名字上移
-                if (monsterConfig.DropType == 3)
+                if (monsterConfig.DropType == 3 && self.E_Lab_OwnerText.text != string.Empty)
                 {
                     self.E_Lab_BossNameText.transform.localPosition = new Vector3(self.E_Lab_BossNameText.transform.localPosition.x, 385,
                         self.E_Lab_BossNameText.transform.localPosition.z);
