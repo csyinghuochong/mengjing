@@ -202,7 +202,7 @@ namespace ET.Server
         public void Run(Unit unit, NumbericChange args)
         {
             float speed = args.Defend.GetComponent<NumericComponentS>().GetAsFloat(NumericType.Now_Speed);
-            args.Defend.GetComponent<MoveComponent>().ChangeSpeed(speed);
+            args.Defend.GetComponent<MoveComponent>()?.ChangeSpeed(speed);
         }
     }
 }
