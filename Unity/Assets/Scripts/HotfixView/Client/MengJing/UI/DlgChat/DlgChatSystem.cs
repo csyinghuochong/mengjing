@@ -244,6 +244,11 @@ namespace ET.Client
                 await ChatNetHelper.RequestSendChat(self.Root(), itemType, text);
             }
 
+            if (self.IsDisposed)
+            {
+                return;
+            }
+
             self.View.E_ChatInputField.GetComponent<InputField>().text = "";
         }
 
