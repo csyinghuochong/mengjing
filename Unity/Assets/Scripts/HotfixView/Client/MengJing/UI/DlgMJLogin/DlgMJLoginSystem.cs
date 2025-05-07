@@ -78,8 +78,12 @@ namespace ET.Client
         {
             //获取服务器列表
             R2C_ServerList r2CServerList = await LoginHelper.GetServerList(self.Root(), GlobalHelp.GetVersionMode());
+            if (r2CServerList == null || r2CServerList.ServerItems.Count == 0)
+            {
+                return;
+            }
+
             self.CheckServerList(r2CServerList.ServerItems, GlobalHelp.GetVersionMode());
-            
             ServerItem serverItem = r2CServerList.ServerItems[r2CServerList.ServerItems.Count - 1];
             PlayerInfoComponent playerInfoComponent = self.Root().GetComponent<PlayerInfoComponent>();
             playerInfoComponent.ServerItem = serverItem;
