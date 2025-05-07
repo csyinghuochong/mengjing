@@ -18,6 +18,8 @@ namespace ET.Client
 
 		public Dictionary<int, EntityRef<Scroll_Item_PetbarSetPetItem>> ScrollItemPetbarSetPetItems = new();
 		public List<RolePetInfo> ShowRolePetInfos = new();
+		public Dictionary<int, EntityRef<Scroll_Item_PetBarSetPetSelectItem>> ScrollItemPetbarSetPetSelectItems = new();
+		
 		public List<string> AssetList { get; set; } = new();
 		
 		public UnityEngine.UI.ToggleGroup E_PlanSetToggleGroup
@@ -131,6 +133,23 @@ namespace ET.Client
      		}
      	}
 
+		public UnityEngine.UI.ScrollRect E_PetbarSetPetItemsScrollRect
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_PetbarSetPetItemsScrollRect == null )
+     			{
+		    		this.m_E_PetbarSetPetItemsScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.ScrollRect>(this.uiTransform.gameObject,"Right/EG_PetPanel/E_PetbarSetPetItems");
+     			}
+     			return this.m_E_PetbarSetPetItemsScrollRect;
+     		}
+     	}
+
 		public UnityEngine.UI.Image E_PetbarSetPetItemsImage
      	{
      		get
@@ -145,23 +164,6 @@ namespace ET.Client
 		    		this.m_E_PetbarSetPetItemsImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Right/EG_PetPanel/E_PetbarSetPetItems");
      			}
      			return this.m_E_PetbarSetPetItemsImage;
-     		}
-     	}
-
-		public UnityEngine.UI.ScrollRect E_PetbarSetPetItemsLoopVerticalScrollRect
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_PetbarSetPetItemsLoopVerticalScrollRect == null )
-     			{
-		    		this.m_E_PetbarSetPetItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.ScrollRect>(this.uiTransform.gameObject,"Right/EG_PetPanel/E_PetbarSetPetItems");
-     			}
-     			return this.m_E_PetbarSetPetItemsLoopVerticalScrollRect;
      		}
      	}
 
@@ -199,6 +201,23 @@ namespace ET.Client
      		}
      	}
 
+		public UnityEngine.UI.ScrollRect E_PetbarSetSkillItemsScrollRect
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_PetbarSetSkillItemsScrollRect == null )
+     			{
+		    		this.m_E_PetbarSetSkillItemsScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.ScrollRect>(this.uiTransform.gameObject,"Right/EG_SkillPanel/E_PetbarSetSkillItems");
+     			}
+     			return this.m_E_PetbarSetSkillItemsScrollRect;
+     		}
+     	}
+
 		public UnityEngine.UI.Image E_PetbarSetSkillItemsImage
      	{
      		get
@@ -213,23 +232,6 @@ namespace ET.Client
 		    		this.m_E_PetbarSetSkillItemsImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Right/EG_SkillPanel/E_PetbarSetSkillItems");
      			}
      			return this.m_E_PetbarSetSkillItemsImage;
-     		}
-     	}
-
-		public UnityEngine.UI.ScrollRect E_PetbarSetSkillItemsLoopVerticalScrollRect
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_PetbarSetSkillItemsLoopVerticalScrollRect == null )
-     			{
-		    		this.m_E_PetbarSetSkillItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.ScrollRect>(this.uiTransform.gameObject,"Right/EG_SkillPanel/E_PetbarSetSkillItems");
-     			}
-     			return this.m_E_PetbarSetSkillItemsLoopVerticalScrollRect;
      		}
      	}
 
@@ -335,6 +337,91 @@ namespace ET.Client
      		}
      	}
 
+		public UnityEngine.RectTransform EG_PetSelectPanelRectTransform
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_EG_PetSelectPanelRectTransform == null )
+     			{
+		    		this.m_EG_PetSelectPanelRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_PetSelectPanel");
+     			}
+     			return this.m_EG_PetSelectPanelRectTransform;
+     		}
+     	}
+
+		public UnityEngine.UI.Button E_Btn_PetSelectCloseButton
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Btn_PetSelectCloseButton == null )
+     			{
+		    		this.m_E_Btn_PetSelectCloseButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"EG_PetSelectPanel/E_Btn_PetSelectClose");
+     			}
+     			return this.m_E_Btn_PetSelectCloseButton;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_Btn_PetSelectCloseImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Btn_PetSelectCloseImage == null )
+     			{
+		    		this.m_E_Btn_PetSelectCloseImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_PetSelectPanel/E_Btn_PetSelectClose");
+     			}
+     			return this.m_E_Btn_PetSelectCloseImage;
+     		}
+     	}
+
+		public UnityEngine.UI.ScrollRect E_PetBarSetPetSelectItemsScrollRect
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_PetBarSetPetSelectItemsScrollRect == null )
+     			{
+		    		this.m_E_PetBarSetPetSelectItemsScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.ScrollRect>(this.uiTransform.gameObject,"EG_PetSelectPanel/E_PetBarSetPetSelectItems");
+     			}
+     			return this.m_E_PetBarSetPetSelectItemsScrollRect;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_PetBarSetPetSelectItemsImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_PetBarSetPetSelectItemsImage == null )
+     			{
+		    		this.m_E_PetBarSetPetSelectItemsImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_PetSelectPanel/E_PetBarSetPetSelectItems");
+     			}
+     			return this.m_E_PetBarSetPetSelectItemsImage;
+     		}
+     	}
+
 		    public Transform UITransform
          {
      	    get
@@ -355,18 +442,23 @@ namespace ET.Client
 			this.m_es_petbarsetitem_3 = null;
 			this.m_EG_PetPanelRectTransform = null;
 			this.m_E_PetTypeSetToggleGroup = null;
+			this.m_E_PetbarSetPetItemsScrollRect = null;
 			this.m_E_PetbarSetPetItemsImage = null;
-			this.m_E_PetbarSetPetItemsLoopVerticalScrollRect = null;
 			this.m_EG_SkillPanelRectTransform = null;
 			this.m_E_SkillTypeSetToggleGroup = null;
+			this.m_E_PetbarSetSkillItemsScrollRect = null;
 			this.m_E_PetbarSetSkillItemsImage = null;
-			this.m_E_PetbarSetSkillItemsLoopVerticalScrollRect = null;
 			this.m_E_ConfirmButton = null;
 			this.m_E_ConfirmImage = null;
 			this.m_E_ReSetButton = null;
 			this.m_E_ReSetImage = null;
 			this.m_EG_PetIconRectTransform = null;
 			this.m_EG_SkillIconRectTransform = null;
+			this.m_EG_PetSelectPanelRectTransform = null;
+			this.m_E_Btn_PetSelectCloseButton = null;
+			this.m_E_Btn_PetSelectCloseImage = null;
+			this.m_E_PetBarSetPetSelectItemsScrollRect = null;
+			this.m_E_PetBarSetPetSelectItemsImage = null;
 			this.uiTransform = null;
 		}
 
@@ -376,18 +468,23 @@ namespace ET.Client
 		private EntityRef<ES_PetBarSetItem> m_es_petbarsetitem_3 = null;
 		private UnityEngine.RectTransform m_EG_PetPanelRectTransform = null;
 		private UnityEngine.UI.ToggleGroup m_E_PetTypeSetToggleGroup = null;
+		private UnityEngine.UI.ScrollRect m_E_PetbarSetPetItemsScrollRect = null;
 		private UnityEngine.UI.Image m_E_PetbarSetPetItemsImage = null;
-		private UnityEngine.UI.ScrollRect m_E_PetbarSetPetItemsLoopVerticalScrollRect = null;
 		private UnityEngine.RectTransform m_EG_SkillPanelRectTransform = null;
 		private UnityEngine.UI.ToggleGroup m_E_SkillTypeSetToggleGroup = null;
+		private UnityEngine.UI.ScrollRect m_E_PetbarSetSkillItemsScrollRect = null;
 		private UnityEngine.UI.Image m_E_PetbarSetSkillItemsImage = null;
-		private UnityEngine.UI.ScrollRect m_E_PetbarSetSkillItemsLoopVerticalScrollRect = null;
 		private UnityEngine.UI.Button m_E_ConfirmButton = null;
 		private UnityEngine.UI.Image m_E_ConfirmImage = null;
 		private UnityEngine.UI.Button m_E_ReSetButton = null;
 		private UnityEngine.UI.Image m_E_ReSetImage = null;
 		private UnityEngine.RectTransform m_EG_PetIconRectTransform = null;
 		private UnityEngine.RectTransform m_EG_SkillIconRectTransform = null;
+		private UnityEngine.RectTransform m_EG_PetSelectPanelRectTransform = null;
+		private UnityEngine.UI.Button m_E_Btn_PetSelectCloseButton = null;
+		private UnityEngine.UI.Image m_E_Btn_PetSelectCloseImage = null;
+		private UnityEngine.UI.ScrollRect m_E_PetBarSetPetSelectItemsScrollRect = null;
+		private UnityEngine.UI.Image m_E_PetBarSetPetSelectItemsImage = null;
 		public Transform uiTransform = null;
 	}
 }

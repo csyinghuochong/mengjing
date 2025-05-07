@@ -16,6 +16,7 @@ namespace ET.Client
         }
     }
 
+    [FriendOf(typeof(Scroll_Item_PetBarSetPetSelectItem))]
     [FriendOf(typeof(Scroll_Item_PetbarSetSkillItem))]
     [FriendOf(typeof(Scroll_Item_PetbarSetPetItem))]
     [FriendOf(typeof(ES_PetBarSetItem))]
@@ -36,19 +37,19 @@ namespace ET.Client
 
             self.ES_PetBarSetItem_1.E_PetBarSetIconButton.AddListener(() => self.OnClickPetIcon(1));
             self.ES_PetBarSetItem_1.E_LockButton.AddListener(() => self.OnClickPetIcon(1));
-            self.ES_PetBarSetItem_1.E_TouchButton.AddListener(() => self.OnClickPetIcon(1));
+            self.ES_PetBarSetItem_1.E_TouchButton.AddListener(() => self.OnClickSet(1));
             self.ES_PetBarSetItem_1.E_AppearSkillButton.AddListener(() => self.OnClickSkill(1, 0, 0));
             self.ES_PetBarSetItem_1.E_ActiveSkill_0Button.AddListener(() => self.OnClickSkill(1, 1, 0));
 
             self.ES_PetBarSetItem_2.E_PetBarSetIconButton.AddListener(() => self.OnClickPetIcon(2));
             self.ES_PetBarSetItem_2.E_LockButton.AddListener(() => self.OnClickPetIcon(2));
-            self.ES_PetBarSetItem_2.E_TouchButton.AddListener(() => self.OnClickPetIcon(2));
+            self.ES_PetBarSetItem_2.E_TouchButton.AddListener(() => self.OnClickSet(2));
             self.ES_PetBarSetItem_2.E_AppearSkillButton.AddListener(() => self.OnClickSkill(2, 0, 0));
             self.ES_PetBarSetItem_2.E_ActiveSkill_0Button.AddListener(() => self.OnClickSkill(2, 1, 0));
 
             self.ES_PetBarSetItem_3.E_PetBarSetIconButton.AddListener(() => self.OnClickPetIcon(3));
             self.ES_PetBarSetItem_3.E_LockButton.AddListener(() => self.OnClickPetIcon(3));
-            self.ES_PetBarSetItem_3.E_TouchButton.AddListener(() => self.OnClickPetIcon(3));
+            self.ES_PetBarSetItem_3.E_TouchButton.AddListener(() => self.OnClickSet(3));
             self.ES_PetBarSetItem_3.E_AppearSkillButton.AddListener(() => self.OnClickSkill(3, 0, 0));
             self.ES_PetBarSetItem_3.E_ActiveSkill_0Button.AddListener(() => self.OnClickSkill(3, 1, 0));
 
@@ -56,6 +57,8 @@ namespace ET.Client
             self.EG_SkillPanelRectTransform.gameObject.SetActive(false);
             self.EG_PetIconRectTransform.gameObject.SetActive(false);
             self.EG_SkillIconRectTransform.gameObject.SetActive(false);
+            self.EG_PetSelectPanelRectTransform.gameObject.SetActive(false);
+            self.E_Btn_PetSelectCloseButton.AddListener(() => { self.EG_PetSelectPanelRectTransform.gameObject.SetActive(false); });
 
             self.E_PlanSetToggleGroup.OnSelectIndex(self.Root().GetComponent<PetComponentC>().PetFightPlan);
         }
@@ -113,17 +116,17 @@ namespace ET.Client
             }
 
             self.InitInfo();
-            RolePetInfo rolePetInfo = petComponentC.GetPetInfoByID(self.PetFightList[0].PetId);
-            if (rolePetInfo != null)
-            {
-                self.OnClickSkill(1, 0, 0);
-            }
-            else
-            {
-                self.OnClickPetIcon(1);
-            }
-            
-            self.OnUpdateSelectedPetItem();
+            // RolePetInfo rolePetInfo = petComponentC.GetPetInfoByID(self.PetFightList[0].PetId);
+            // if (rolePetInfo != null)
+            // {
+            //     self.OnClickSkill(1, 0, 0);
+            // }
+            // else
+            // {
+            //     self.OnClickPetIcon(1);
+            // }
+            //
+            // self.OnUpdateSelectedPetItem();
         }
 
         private static async ETTask OnConfirm(this ES_PetBarSet self)
@@ -157,20 +160,103 @@ namespace ET.Client
             self.ES_PetBarSetItem_3.OnInit(self.PetFightList[2]);
         }
 
+        private static void OnClickSet(this ES_PetBarSet self, int petIndex)
+        {
+            self.PetBarIndex = petIndex;
+            self.EG_PetPanelRectTransform.gameObject.SetActive(false);
+            self.EG_SkillPanelRectTransform.gameObject.SetActive(false);
+
+            self.ES_PetBarSetItem_1.E_HighlightImage.gameObject.SetActive(petIndex == 1);
+            self.ES_PetBarSetItem_2.E_HighlightImage.gameObject.SetActive(petIndex == 2);
+            self.ES_PetBarSetItem_3.E_HighlightImage.gameObject.SetActive(petIndex == 3);
+        }
+        
         private static void OnClickPetIcon(this ES_PetBarSet self, int petIndex)
         {
             self.PetBarIndex = petIndex;
-            self.EG_PetPanelRectTransform.gameObject.SetActive(true);
+            self.EG_PetPanelRectTransform.gameObject.SetActive(false);
             self.EG_SkillPanelRectTransform.gameObject.SetActive(false);
 
             self.ES_PetBarSetItem_1.E_HighlightImage.gameObject.SetActive(petIndex == 1);
             self.ES_PetBarSetItem_2.E_HighlightImage.gameObject.SetActive(petIndex == 2);
             self.ES_PetBarSetItem_3.E_HighlightImage.gameObject.SetActive(petIndex == 3);
 
-            self.E_PetTypeSetToggleGroup.OnSelectIndex(0);
-            self.OnUpdateSelectedPetItem();
+            // self.E_PetTypeSetToggleGroup.OnSelectIndex(0);
+            // self.OnUpdateSelectedPetItem();
+            
+            self.EG_PetSelectPanelRectTransform.gameObject.SetActive(true);
+            List<RolePetInfo> rolePetInfos = self.Root().GetComponent<PetComponentC>().RolePetInfos;
+            self.ShowRolePetInfos.Clear();
+            for (int i = 0; i < rolePetInfos.Count; i++)
+            {
+                bool have = false;
+                foreach (PetBarInfo petBarInfo in self.PetFightList)
+                {
+                    if (petBarInfo.PetId == rolePetInfos[i].Id)
+                    {
+                        have = true;
+                        break;
+                    }
+                }
+
+                if (have)
+                {
+                    continue;
+                }
+                
+                self.ShowRolePetInfos.Add(rolePetInfos[i]);
+            }
+
+            ResourcesLoaderComponent resourcesLoaderComponent = self.Root().GetComponent<ResourcesLoaderComponent>();
+            for (int i = 0; i < self.ShowRolePetInfos.Count; i++)
+            {
+                if (!self.ScrollItemPetbarSetPetSelectItems.ContainsKey(i))
+                {
+                    Scroll_Item_PetBarSetPetSelectItem item = self.AddChild<Scroll_Item_PetBarSetPetSelectItem>();
+                    string path = "Assets/Bundles/UI/Item/Item_PetBarSetPetSelectItem.prefab";
+                    if (!self.AssetList.Contains(path))
+                    {
+                        self.AssetList.Add(path);
+                    }
+
+                    GameObject prefab = resourcesLoaderComponent.LoadAssetSync<GameObject>(path);
+                    GameObject go = UnityEngine.Object.Instantiate(prefab, self.E_PetBarSetPetSelectItemsScrollRect.transform.Find("Content").gameObject.transform);
+                    item.BindTrans(go.transform);
+                    self.ScrollItemPetbarSetPetSelectItems.Add(i, item);
+                }
+
+                Scroll_Item_PetBarSetPetSelectItem scrollItemPetbarSetPetSelectItem = self.ScrollItemPetbarSetPetSelectItems[i];
+                scrollItemPetbarSetPetSelectItem.uiTransform.gameObject.SetActive(true);
+                scrollItemPetbarSetPetSelectItem.OnSelectPet = self.OnSelectPet;
+                scrollItemPetbarSetPetSelectItem.OnInitData(self.ShowRolePetInfos[i]);
+            }
+
+            if (self.ScrollItemPetbarSetPetSelectItems.Count > self.ShowRolePetInfos.Count)
+            {
+                for (int i = self.ShowRolePetInfos.Count; i < self.ScrollItemPetbarSetPetSelectItems.Count; i++)
+                {
+                    Scroll_Item_PetBarSetPetSelectItem scrollItemPetbarSetPetSelectItem = self.ScrollItemPetbarSetPetSelectItems[i];
+                    scrollItemPetbarSetPetSelectItem.uiTransform.gameObject.SetActive(false);
+                }
+            }
         }
 
+        private static void OnSelectPet(this ES_PetBarSet self, long petId)
+        {
+            for (int j = 0; j < self.PetFightList.Count; j++)
+            {
+                if (self.PetFightList[j].PetId == petId)
+                {
+                    self.PetFightList[j].PetId = 0;
+                }
+            }
+
+            self.PetFightList[self.PetBarIndex - 1].PetId = petId;
+            self.OnConfirm().Coroutine();
+            self.InitInfo();
+            self.EG_PetSelectPanelRectTransform.gameObject.SetActive(false);
+        }
+        
         private static void OnPetTypeSet(this ES_PetBarSet self, int index)
         {
             List<RolePetInfo> rolePetInfos = self.Root().GetComponent<PetComponentC>().RolePetInfos;
@@ -204,7 +290,7 @@ namespace ET.Client
                     }
 
                     GameObject prefab = resourcesLoaderComponent.LoadAssetSync<GameObject>(path);
-                    GameObject go = UnityEngine.Object.Instantiate(prefab, self.E_PetbarSetPetItemsLoopVerticalScrollRect.transform.Find("Content").gameObject.transform);
+                    GameObject go = UnityEngine.Object.Instantiate(prefab, self.E_PetbarSetPetItemsScrollRect.transform.Find("Content").gameObject.transform);
                     item.BindTrans(go.transform);
                     self.ScrollItemPetbarSetPetItems.Add(i, item);
                 }
@@ -401,8 +487,7 @@ namespace ET.Client
                     }
 
                     GameObject prefab = resourcesLoaderComponent.LoadAssetSync<GameObject>(path);
-                    GameObject go = UnityEngine.Object.Instantiate(prefab,
-                        self.E_PetbarSetSkillItemsLoopVerticalScrollRect.transform.Find("Content").gameObject.transform);
+                    GameObject go = UnityEngine.Object.Instantiate(prefab, self.E_PetbarSetSkillItemsScrollRect.transform.Find("Content").gameObject.transform);
                     item.BindTrans(go.transform);
                     self.ScrollItemPetbarSetSkillItems.Add(i, item);
                 }
