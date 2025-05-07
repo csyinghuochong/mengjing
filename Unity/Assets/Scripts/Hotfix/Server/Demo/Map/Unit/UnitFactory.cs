@@ -201,18 +201,18 @@ namespace ET.Server
                 unit.AddComponent<StateComponentS>();
                 unit.AddComponent<BuffManagerComponentS>();
             }
-            
+            unit.AddComponent<MoveComponent>();
+            unit.AddComponent<StateComponentS>(); //添加状态组件
             if (monsterConfig.AI != 0)
             {
                 int ai = createMonsterInfo.AI > 0 ? createMonsterInfo.AI : monsterConfig.AI;
                 unit.AI = ai;
                 unit.AddComponent<ObjectWait>();
-                unit.AddComponent<MoveComponent>();
                 unit.AddComponent<SkillManagerComponentS>();
                 SkillPassiveComponent skillPassiveComponent = unit.AddComponent<SkillPassiveComponent>();
                 unit.AddComponent<PathfindingComponent, int>(scene.GetComponent<MapComponent>().NavMeshId);
                 //添加其他组件
-                unit.AddComponent<StateComponentS>(); //添加状态组件
+               
                 unit.AddComponent<BuffManagerComponentS>(); //添加Buff管理器
                 skillPassiveComponent.UpdateMonsterPassiveSkill();
                 numericComponent.ApplyValue(NumericType.MasterId, createMonsterInfo.MasterID, false);
