@@ -706,6 +706,7 @@ namespace ET.Client
                     }
                     else if (unit.IsChest() || monsterCof.MonsterSonType == MonsterSonTypeEnum.Type_60)
                     {
+                        self.OnAddCollider(go);
                         unit.AddComponent<UISceneItemComponent>(true).OnInitUI(); //血条UI组件
                         LayerHelp.ChangeLayer(go.transform, LayerEnum.Box);
                     }

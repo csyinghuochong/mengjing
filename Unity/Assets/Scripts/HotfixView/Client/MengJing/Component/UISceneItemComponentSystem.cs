@@ -102,18 +102,18 @@ namespace ET.Client
              //54 场景怪 有AI 显示名称
              //55 宝箱类 无AI
              var path = "";
-             if (monsterConfig.MonsterSonType == 52)
+             if (monsterConfig.MonsterSonType == MonsterSonTypeEnum.Type_52)
              {
                  path = ABPathHelper.GetUGUIPath("Blood/UISceneItem");
                  //self.UIPosition = unit.GetComponent<GameObjectComponent>().GameObject.transform.Find("UIPosition");
                  self.UIPosition = unit.GetComponent<HeroTransformComponent>().GetTranform(PosType.Head);
              }
-             else if (monsterConfig.MonsterSonType == 54 || monsterConfig.MonsterSonType == 60 || unit.IsChest())
+             else if (monsterConfig.MonsterSonType == MonsterSonTypeEnum.Type_54 || monsterConfig.MonsterSonType == MonsterSonTypeEnum.Type_60)
              {
                  path = ABPathHelper.GetUGUIPath("Blood/UISceneItem");
                  self.UIPosition = unit.GetComponent<GameObjectComponent>().GameObject.transform.Find("UIPosition");
              }
-             else if (monsterConfig.MonsterSonType == 58 || monsterConfig.MonsterSonType == 59 || monsterConfig.MonsterSonType == 61)
+             else if (unit.IsChest() || monsterConfig.MonsterSonType == MonsterSonTypeEnum.Type_58 || monsterConfig.MonsterSonType == MonsterSonTypeEnum.Type_59 || monsterConfig.MonsterSonType == MonsterSonTypeEnum.Type_61)
              {
                  path = ABPathHelper.GetUGUIPath("Blood/UISceneItem");
                  self.UIPosition = unit.GetComponent<GameObjectComponent>().GameObject.transform.Find("RoleBoneSet/Head");
