@@ -835,11 +835,18 @@ namespace ET.Server
             }
             if (bekill.Type == UnitType.Monster)
             {
+                MapComponent mapComponent = self.Scene().GetComponent<MapComponent>();
+                if (mapComponent.MapType == MapTypeEnum.PetMelee || mapComponent.MapType == MapTypeEnum.PetMatch)
+                {
+                    return;
+                }
+                
                 int unitconfigId = bekill.ConfigId;
                 MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(unitconfigId);
                 bool isBoss = monsterConfig.MonsterType == (int)MonsterTypeEnum.Boss;
-                MapComponent mapComponent = self.Scene().GetComponent<MapComponent>();
+                
                 int fubenDifficulty = FubenDifficulty.None;
+
                 if (mapComponent.MapType == (int)MapTypeEnum.CellDungeon)
                 {
                     //fubenDifficulty = DomainScene.GetComponent<CellDungeonComponent>().FubenDifficulty;
