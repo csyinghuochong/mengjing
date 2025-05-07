@@ -8,8 +8,8 @@ namespace ET.Client
         public DlgGuideViewComponent View { get => this.GetComponent<DlgGuideViewComponent>(); }
 
         public GuideConfig GuideConfig { get; set; }
-        
-        public GameObject Target { get; set; }
+
+        public GameObject Target;
         public long Timer;
     }
 }

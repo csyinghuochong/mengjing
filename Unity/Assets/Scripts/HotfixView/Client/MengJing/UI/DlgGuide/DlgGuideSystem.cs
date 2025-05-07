@@ -37,9 +37,10 @@ namespace ET.Client
             self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
         }
 
-        public static void SetPosition(this DlgGuide self, GameObject target)
+        public static void SetPosition(this DlgGuide self, GameObject target, GuideConfig guideConfig)
         {
             self.Target = target;
+            self.GuideConfig = guideConfig;
 
             if (self.GuideConfig != null)
             {
@@ -55,12 +56,21 @@ namespace ET.Client
             self.Timer = self.Root().GetComponent<TimerComponent>().NewFrameTimer(TimerInvokeType.UIGuideTimer, self);
         }
 
-        public static void OnUpdate(this DlgGuide self)
+        private static void OnUpdate(this DlgGuide self)
         {
             if (self.Target == null)
             {
+                self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_Guide);
                 return;
             }
+
+            if (self.Target.activeInHierarchy == false)
+            {
+                self.View.EG_TipRootRectTransform.gameObject.SetActive(false);
+                return;
+            }
+            
+            self.View.EG_TipRootRectTransform.gameObject.SetActive(true);
 
             RectTransform guideRect = self.View.EG_TipRootRectTransform;
             RectTransform targetRect = self.Target.GetComponent<RectTransform>();

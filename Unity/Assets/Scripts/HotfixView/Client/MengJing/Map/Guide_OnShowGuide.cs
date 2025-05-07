@@ -70,8 +70,7 @@ namespace ET.Client
 
                     await uiComponent.ShowWindowAsync(WindowID.WindowID_Guide);
                     DlgGuide dlgGuide = uiComponent.GetDlgLogic<DlgGuide>();
-                    dlgGuide.GuideConfig = guideConfig;
-                    dlgGuide.SetPosition(gameObject);
+                    dlgGuide.SetPosition(gameObject, guideConfig);
                     uiComponent.GuideUISet = FunctionUI.GetUIPath(guideConfig.ActionTarget);
 
                     void OnButtonClickGuide()
