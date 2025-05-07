@@ -191,29 +191,25 @@ namespace ET.Server
                     heroDataComponent.InitMonsterInfo(monsterConfig, createMonsterInfo);
                 }
             }
-
             // 暂时这样，后面可能会给基地加AI
             if (monsterConfig.MonsterSonType == MonsterSonTypeEnum.Type_62)
             {
                 heroDataComponent.InitMonsterInfo(monsterConfig, createMonsterInfo);
-                unit.AddComponent<SkillManagerComponentS>();
-                unit.AddComponent<SkillPassiveComponent>();
-                unit.AddComponent<StateComponentS>();
-                unit.AddComponent<BuffManagerComponentS>();
             }
+
             unit.AddComponent<MoveComponent>();
             unit.AddComponent<StateComponentS>(); //添加状态组件
+            unit.AddComponent<SkillManagerComponentS>();
+            unit.AddComponent<SkillPassiveComponent>();
+            unit.AddComponent<BuffManagerComponentS>();
             if (monsterConfig.AI != 0)
             {
                 int ai = createMonsterInfo.AI > 0 ? createMonsterInfo.AI : monsterConfig.AI;
                 unit.AI = ai;
                 unit.AddComponent<ObjectWait>();
-                unit.AddComponent<SkillManagerComponentS>();
-                SkillPassiveComponent skillPassiveComponent = unit.AddComponent<SkillPassiveComponent>();
+                SkillPassiveComponent skillPassiveComponent = unit.GetComponent<SkillPassiveComponent>();
                 unit.AddComponent<PathfindingComponent, int>(scene.GetComponent<MapComponent>().NavMeshId);
-                //添加其他组件
-               
-                unit.AddComponent<BuffManagerComponentS>(); //添加Buff管理器
+
                 skillPassiveComponent.UpdateMonsterPassiveSkill();
                 numericComponent.ApplyValue(NumericType.MasterId, createMonsterInfo.MasterID, false);
                 AIComponent aIComponent = unit.AddComponent<AIComponent, int>(ai);
