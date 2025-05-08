@@ -20,7 +20,7 @@ public class RenderScaleController : MonoBehaviour
 
     public void ChangeRenderPassEvent(bool value)
     {
-        highlightPlusRenderPassFeature.renderPassEvent = value ? RenderPassEvent.BeforeRendering : RenderPassEvent.AfterRenderingTransparents;
+        highlightPlusRenderPassFeature.renderPassEvent = value ? RenderPassEvent.BeforeRenderingShadows : RenderPassEvent.AfterRenderingTransparents;
     }
 
     void Start()
