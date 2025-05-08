@@ -143,7 +143,11 @@ namespace ET.Client
  
             // 打印当前场景的名称
             Debug.Log("当前场景的名称是: " +  SceneManager.GetActiveScene().name);
-            
+
+            bool changerender = SceneManager.GetActiveScene().name == "40001";
+            ////临时解决方案！！！！
+            GameObject.Find("Global").GetComponent<RenderScaleController>().ChangeRenderPassEvent(changerender);
+
             //动态生成场景
             if (SettingData.UseSceneAOI)
             {
