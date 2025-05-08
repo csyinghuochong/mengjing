@@ -123,11 +123,6 @@ namespace ET.Client
                     break;
                 }
             }
-
-            if (!string.IsNullOrEmpty(self.UnitAssetsPath))
-            {
-                self.Root().GetComponent<GameObjectLoadComponent>().AddLoadQueue(self.UnitAssetsPath, self.InstanceId,true, self.OnLoadGameObject);
-            }
         }
 
         public static void UpdateCostText(this ES_PetMeleeCard self, int cost)
@@ -201,6 +196,11 @@ namespace ET.Client
 
         private static void BeginDrag(this ES_PetMeleeCard self, PointerEventData pdata)
         {
+            if (!string.IsNullOrEmpty(self.UnitAssetsPath) && self.UnitGameObject == null)
+            {
+                self.Root().GetComponent<GameObjectLoadComponent>().AddLoadQueue(self.UnitAssetsPath, self.InstanceId, true, self.OnLoadGameObject);
+            }
+            
             switch (self.PetMeleeCardInfo.Type)
             {
                 case (int)PetMeleeCarType.MainPet:
@@ -547,6 +547,12 @@ namespace ET.Client
 
         private static void EndDrag(this ES_PetMeleeCard self, PointerEventData pdata)
         {
+            if (!string.IsNullOrEmpty(self.UnitAssetsPath) && self.UnitGameObject != null)
+            {
+                self.Root().GetComponent<GameObjectLoadComponent>().RecoverGameObject(self.UnitAssetsPath, self.UnitGameObject);
+                self.UnitGameObject = null;
+            }
+            
             switch (self.PetMeleeCardInfo.Type)
             {
                 case (int)PetMeleeCarType.MainPet:
@@ -582,11 +588,6 @@ namespace ET.Client
             GameObject CellIndicator = GridCanvas.transform.Find("Cell Indicator").gameObject;
             BackgroundImage.SetActive(false);
             CellIndicator.SetActive(false);
-
-            if (self.UnitGameObject != null)
-            {
-                self.UnitGameObject.gameObject.SetActive(false);
-            }
 
             DlgPetMeleeMain dlgPetMeleeMain = self.GetParent<DlgPetMeleeMain>();
 
