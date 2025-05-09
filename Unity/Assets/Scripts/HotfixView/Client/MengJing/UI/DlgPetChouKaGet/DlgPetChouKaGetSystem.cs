@@ -128,13 +128,13 @@ namespace ET.Client
 
         private static void UpdateAttribute(this DlgPetChouKaGet self, RolePetInfo rolePetInfo, RolePetInfo oldPetInfo = null)
         {
-            for (int i = 0; i < self.View.EG_ImageStarListRectTransform.transform.childCount; i++)
-            {
-                if (rolePetInfo.Star > i)
-                {
-                    self.StartShowImg(self.View.EG_ImageStarListRectTransform.transform.GetChild(i).gameObject);
-                }
-            }
+            // for (int i = 0; i < self.View.EG_ImageStarListRectTransform.transform.childCount; i++)
+            // {
+            //     if (rolePetInfo.Star > i)
+            //     {
+            //         self.StartShowImg(self.View.EG_ImageStarListRectTransform.transform.GetChild(i).gameObject);
+            //     }
+            // }
 
             PetConfig petConfig = PetConfigCategory.Instance.Get(rolePetInfo.ConfigId);
 
