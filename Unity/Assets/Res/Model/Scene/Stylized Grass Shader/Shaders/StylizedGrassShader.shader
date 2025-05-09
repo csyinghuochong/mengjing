@@ -3,7 +3,6 @@
 //Stylized Grass Shader
 //Staggart Creations (http://staggart.xyz)
 //Copyright protected under Unity Asset Store EULA
-
 Shader "Universal Render Pipeline/Nature/Stylized Grass"
 {
 	Properties
@@ -303,7 +302,6 @@ Shader "Universal Render Pipeline/Nature/Stylized Grass"
 			#include "Libraries/Common.hlsl"
 			#include "Libraries/Color.hlsl"
 			#include "Libraries/Lighting.hlsl"
-
 			#include "LightingPass.hlsl"
 			ENDHLSL
 		}
