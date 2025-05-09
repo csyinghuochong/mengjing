@@ -338,7 +338,7 @@ namespace ET.Server
 				}
 			}
 
-			for (int i = 0; i < monsters.Length; i++)
+            for (int i = 0; i < monsters.Length; i++)
 			{
 				if (CommonHelp.IfNull(monsters[i]))
 				{
@@ -348,6 +348,12 @@ namespace ET.Server
 				string[] mondels = monsters[i].Split(';');
 				int monsterid = int.Parse(mondels[2]);
 				MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(monsterid);
+
+				if (monsterConfig.MonsterType == MonsterTypeEnum.SceneItem && monsterConfig.MonsterSonType == 55)
+				{
+                    continue;
+                }
+
 				if (monsterConfig.MonsterType != MonsterTypeEnum.Normal && monsterConfig.MonsterSonType != 55)
 				{
 					continue;
