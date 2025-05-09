@@ -354,10 +354,10 @@ namespace ET.Server
                     continue;
                 }
 
-				if (monsterConfig.MonsterType != MonsterTypeEnum.Normal && monsterConfig.MonsterSonType != 55)
-				{
-					continue;
-				}
+				//if (monsterConfig.MonsterType != MonsterTypeEnum.Normal && monsterConfig.MonsterSonType != 55)
+				//{
+				//	continue;
+				//}
 
 				if (numericComponent.GetAsInt(NumericType.JingLingRefreshTime) >= 30)
 				{
