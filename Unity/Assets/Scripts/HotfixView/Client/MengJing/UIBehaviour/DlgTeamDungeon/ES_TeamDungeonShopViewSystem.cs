@@ -97,7 +97,7 @@ namespace ET.Client
                 return;
             }
 
-            int shopSellid = int.Parse(GlobalValueConfigCategory.Instance.Get(76).Value);
+            int shopSellid = GlobalValueConfigCategory.Instance.TeamDungeonShopId;
             int playLv = self.Root().GetComponent<UserInfoComponentC>().UserInfo.Lv;
             while (shopSellid != 0)
             {

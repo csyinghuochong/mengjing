@@ -10,7 +10,7 @@
             {
                 UserInfoComponentS userInfoComponent = unit.GetComponent<UserInfoComponentS>();
                
-                long costgold = int.Parse(GlobalValueConfigCategory.Instance.Get(98).Value);
+                long costgold = GlobalValueConfigCategory.Instance.TurtleSupportCost;
                 if (userInfoComponent.UserInfo.Gold < costgold)
                 {
                     response.Error = ErrorCode.ERR_GoldNotEnoughError;

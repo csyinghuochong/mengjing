@@ -124,7 +124,7 @@ namespace ET.Server
                 int curShuLian = unit.GetComponent<NumericComponentS>().GetAsInt(shulianduNumeric);
                 int addShuLian = RandomHelper.RandomNumber(equipMakeConfig.ProficiencyValue[0], equipMakeConfig.ProficiencyValue[1]);
                 curShuLian += addShuLian;
-                curShuLian = Math.Min(CommonHelp.MaxShuLianDu(), curShuLian);
+                curShuLian = Math.Min(GlobalValueConfigCategory.Instance.MaxShuLianDu, curShuLian);
                 unit.GetComponent<NumericComponentS>().ApplyValue(shulianduNumeric, curShuLian);
                 unit.GetComponent<ChengJiuComponentS>().OnSkillShuLianDu(curShuLian);
             }

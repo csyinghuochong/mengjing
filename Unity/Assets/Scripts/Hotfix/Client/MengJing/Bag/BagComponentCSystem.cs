@@ -453,12 +453,10 @@ namespace ET.Client
         {
             if (houseId == ItemLocType.ItemLocBag)
             {
-                return self.BagAddCellNumber[0] + GlobalValueConfigCategory.Instance.BagInitCapacity +
-                        int.Parse(GlobalValueConfigCategory.Instance.Get(84).Value);
+                return self.BagAddCellNumber[0] + GlobalValueConfigCategory.Instance.BagInitCapacity + GlobalValueConfigCategory.Instance.BuyBagCellMaxNum;
             }
 
-            return self.BagAddCellNumber[houseId] + GlobalValueConfigCategory.Instance.HourseInitCapacity +
-                    int.Parse(GlobalValueConfigCategory.Instance.Get(85).Value);
+            return self.BagAddCellNumber[houseId] + GlobalValueConfigCategory.Instance.HourseInitCapacity + GlobalValueConfigCategory.Instance.BuyHourseCellMaxNum;
         }
 
         public static List<ItemInfo> GetCanJianDing(this BagComponentC self)

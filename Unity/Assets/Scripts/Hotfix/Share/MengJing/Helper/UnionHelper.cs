@@ -7,7 +7,7 @@ namespace ET
         
         public static int CalcuNeedeForAccele(long startTime, long needTime)
         {
-            int g = int.Parse(GlobalValueConfigCategory.Instance.Get(105).Value);
+            int g = GlobalValueConfigCategory.Instance.AcceleKeJiCostDiamond;
             long passTime = (TimeHelper.ServerNow() - startTime) / 1000;
             long remainTime = needTime - passTime;
             if (remainTime <= 0)

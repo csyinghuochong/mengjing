@@ -53,7 +53,7 @@ namespace ET.Client
         {
             self.UpdateCostItemNum();
 
-            self.RewardShowItems = DropHelper.DropIDToShowItem_2(int.Parse(GlobalValueConfigCategory.Instance.Get(138).Value));
+            self.RewardShowItems = DropHelper.DropIDToShowItem_2(GlobalValueConfigCategory.Instance.PetChouKaDropId);
 
             ResourcesLoaderComponent resourcesLoaderComponent = self.Root().GetComponent<ResourcesLoaderComponent>();
             for (int i = 0; i < self.RewardShowItems.Count; i++)

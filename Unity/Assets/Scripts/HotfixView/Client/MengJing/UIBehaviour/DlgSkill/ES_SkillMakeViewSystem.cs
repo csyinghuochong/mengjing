@@ -196,7 +196,7 @@ namespace ET.Client
 
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
             int rechargeNumber = unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.RechargeNumber);
-            int needRecharge = int.Parse(GlobalValueConfigCategory.Instance.Get(113).Value);
+            int needRecharge = GlobalValueConfigCategory.Instance.OpenSkillMakeSlotCost;
             int skillmakePlan_2 = unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.SkillMakePlan2);
             string tip = string.Empty;
             if (plan == 2 && skillmakePlan_2 == 0)
@@ -312,7 +312,7 @@ namespace ET.Client
         public static void UpdateShuLianDu(this ES_SkillMake self)
         {
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
-            int maxValue = CommonHelp.MaxShuLianDu();
+            int maxValue = GlobalValueConfigCategory.Instance.MaxShuLianDu;
             int shulianduNumeric = self.Plan == 1 ? NumericType.MakeShuLianDu_1 : NumericType.MakeShuLianDu_2;
             int curValue = unit.GetComponent<NumericComponentC>().GetAsInt(shulianduNumeric);
 

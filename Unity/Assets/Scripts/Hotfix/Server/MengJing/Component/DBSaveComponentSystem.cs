@@ -118,7 +118,7 @@ namespace ET.Server
             int sceneTypeEnum = scene.GetComponent<MapComponent>().MapType;
             if (sceneTypeEnum == MapTypeEnum.MainCityScene)
             {
-                unit.RecordPostion(sceneTypeEnum, CommonHelp.MainCityID());
+                unit.RecordPostion(sceneTypeEnum, GlobalValueConfigCategory.Instance.MainCityID);
             }
            
             unit.GetComponent<EnergyComponentS>().OnDisconnect();

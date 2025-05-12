@@ -25,7 +25,7 @@
 
             unit.GetComponent<UserInfoComponentS>().UpdateRoleMoneySub(UserDataType.Diamond, (cost * -1).ToString(), true, ItemGetWay.CostItem);
 
-            long addPilao = int.Parse(GlobalValueConfigCategory.Instance.Get(26).Value) - int.Parse(GlobalValueConfigCategory.Instance.Get(10).Value);
+            long addPilao = GlobalValueConfigCategory.Instance.MaxPiLaoYuKaUser - GlobalValueConfigCategory.Instance.MaxPiLao;
             unit.GetComponent<UserInfoComponentS>().UpdateRoleData(UserDataType.PiLao, addPilao.ToString());
             //Log.Warning($"[增加疲劳] {unit.DomainZone()}  {unit.Id}   {0}  {addPilao}");
             await ETTask.CompletedTask;

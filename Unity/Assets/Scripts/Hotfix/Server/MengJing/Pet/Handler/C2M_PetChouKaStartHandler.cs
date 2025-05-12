@@ -23,7 +23,7 @@ namespace ET.Server
                 }
 
                 List<RewardItem> droplist = new List<RewardItem>();
-                DropHelper.DropIDToDropItem_2(int.Parse(GlobalValueConfigCategory.Instance.Get(138).Value), droplist);
+                DropHelper.DropIDToDropItem_2(GlobalValueConfigCategory.Instance.PetChouKaDropId, droplist);
                 numericComponent.ApplyValue(NumericType.PetChouKaRewardItemId, droplist[0].ItemID);
                 numericComponent.ApplyValue(NumericType.PetChouKaRewardItemNum, droplist[0].ItemNum);
             }

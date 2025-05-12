@@ -30,7 +30,7 @@ namespace ET.Server
                 }
                 */
                 UserInfo userInfo = unit.GetComponent<UserInfoComponentS>().UserInfo;
-                int needDimanond = int.Parse(GlobalValueConfigCategory.Instance.Get(17).Value);
+                int needDimanond = GlobalValueConfigCategory.Instance.RolePetChouKa_2;
                 if (userInfo.Diamond < needDimanond)
                 {
                     response.Error = ErrorCode.ERR_DiamondNotEnoughError;

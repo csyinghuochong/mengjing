@@ -83,7 +83,7 @@ namespace ET.Client
 
         public static void RequestQuitFuben(Scene zoneScene)
         {
-            RequestTransfer(zoneScene, (int)MapTypeEnum.MainCityScene, CommonHelp.MainCityID()).Coroutine();
+            RequestTransfer(zoneScene, (int)MapTypeEnum.MainCityScene, GlobalValueConfigCategory.Instance.MainCityID).Coroutine();
         }
 
         public static async ETTask<int> RequestFlyToPosition(Scene root, int unitType, int configid)

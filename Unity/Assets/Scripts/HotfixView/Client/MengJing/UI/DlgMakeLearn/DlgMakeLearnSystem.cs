@@ -78,7 +78,7 @@ namespace ET.Client
         public static void UpdateShuLianDu(this DlgMakeLearn self)
         {
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
-            int maxValue = CommonHelp.MaxShuLianDu();
+            int maxValue = GlobalValueConfigCategory.Instance.MaxShuLianDu;
 
             int shulianduNumeric = self.Plan == 1 ? NumericType.MakeShuLianDu_1 : NumericType.MakeShuLianDu_2;
             int curValue = unit.GetComponent<NumericComponentC>().GetAsInt(shulianduNumeric);
@@ -97,7 +97,7 @@ namespace ET.Client
             int makeType = unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.MakeType_1);
             if (makeType != 0)
             {
-                int cost = int.Parse(GlobalValueConfigCategory.Instance.Get(46).Value);
+                int cost = GlobalValueConfigCategory.Instance.MakeResetCost;
                 PopupTipHelp.OpenPopupTip(self.Root(), "技能重置",
                     "重置后自身学习的生活技能将全部遗忘,请谨慎选择!", () => { self.RequestMakeSelect(makeId).Coroutine(); }, null).Coroutine();
                 return;

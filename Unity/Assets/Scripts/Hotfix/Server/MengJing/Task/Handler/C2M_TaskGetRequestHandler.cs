@@ -23,7 +23,7 @@ namespace ET.Server
                 }
 
                 //获取当前任务是否已达上限
-                if (unit.GetComponent<NumericComponentS>().GetAsInt(NumericType.DailyTaskNumber) >=  int.Parse(GlobalValueConfigCategory.Instance.Get(58).Value) )
+                if (unit.GetComponent<NumericComponentS>().GetAsInt(NumericType.DailyTaskNumber) >= GlobalValueConfigCategory.Instance.MaxDailyTaskLimit)
                 {
                     response.Error = ErrorCode.ERR_ShangJinNumFull;
                     return;
@@ -49,7 +49,7 @@ namespace ET.Server
 
                 //获取当前任务是否已达上限
                 int uniontask = unit.GetComponent<NumericComponentS>().GetAsInt(NumericType.UnionTaskNumber);
-                if (uniontask >= int.Parse(GlobalValueConfigCategory.Instance.Get(108).Value))
+                if (uniontask >= GlobalValueConfigCategory.Instance.UnionTaskLimit)
                 {
                     response.Error = ErrorCode.ERR_TaskLimited;
                     return;

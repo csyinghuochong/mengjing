@@ -176,10 +176,10 @@ namespace ET.Client
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
             if (dungeonType == TeamFubenType.XieZhu && sceneConfig.EnterLv <= userInfo.Lv - 10)
             {
-                int totalTimes = int.Parse(GlobalValueConfigCategory.Instance.Get(19).Value);
+                int totalTimes = GlobalValueConfigCategory.Instance.MaxTeamDungeonsPerDay;
                 int times = unit.GetTeamDungeonTimes();
 
-                int totalTimes_2 = int.Parse(GlobalValueConfigCategory.Instance.Get(74).Value);
+                int totalTimes_2 = GlobalValueConfigCategory.Instance.MaxDailyXieZhuFubens;
                 int times_2 = unit.GetTeamDungeonXieZhu();
 
                 if (totalTimes - times > 0 && totalTimes_2 - times_2 <= 0)

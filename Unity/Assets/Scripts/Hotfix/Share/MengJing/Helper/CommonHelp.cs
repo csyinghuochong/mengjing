@@ -50,10 +50,7 @@ namespace  ET
         
         public const bool AccountOldLogic = true;
 
-        public static int MaxShuLianDu()
-        {
-            return int.Parse(GlobalValueConfigCategory.Instance.Get(45).Value);
-        }
+
 
         public static int GetMaxBaoShiDu()
         {
@@ -214,10 +211,7 @@ namespace  ET
         //public static List<int> PetMagicSkill = new List<int>(2) { 80001003, 80002003 };
 
 
-        public static int MainCityID()
-        {
-            return int.Parse(GlobalValueConfigCategory.Instance.Get(47).Value);
-        }
+
 
         /// <summary>
         /// 经验加成
