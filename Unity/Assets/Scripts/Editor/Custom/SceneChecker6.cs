@@ -173,6 +173,45 @@ namespace ET.Client
             UnityEngine.Debug.Log("KCheckFontReferences: End");
         }
         
+        
+        // [MenuItem("Asset / ), false, 1]
+        [MenuItem("Assets/Custom/Check References Assets", false, 1)] //路径
+        public static void KCheckAssetsReferences()
+        {
+            string fontPath = AssetDatabase.GetAssetPath(Selection.activeInstanceID);
+
+            string[] assetPath = fontPath.Split('/');
+            string fontAssetName = assetPath[assetPath.Length - 1];
+            if (fontAssetName.Contains("."))
+            {
+                fontAssetName = fontAssetName.Split('.')[0];
+            }
+
+            UnityEngine.Debug.Log("KCheckFontReferences: Begin");
+
+            List<string> fileList = new List<string>(new List<string>(Directory.GetFiles("Assets", "*.*", SearchOption.AllDirectories)));
+            //fileList.AddRange(GetFile(sSceneCheckPath, fileList));
+            
+            for (int i = 0; i < fileList.Count; i++)
+            {
+                string itemPath = fileList[i];
+                if (itemPath.Contains(".meta"))
+                {
+                    continue;
+                }
+                
+                string[] dependPathList = AssetDatabase.GetDependencies(new string[] { itemPath });
+                foreach (string path in dependPathList)
+                {
+                    if (path == fontPath)
+                    {
+                        UnityEngine.Debug.Log($"以下文件有引用： {itemPath} ");
+                    }
+                }
+            }
+            UnityEngine.Debug.Log("KCheckFontReferences: End");
+        }
+
     
         [MenuItem("Assets/Custom/Check References Bundler UI", false, 1)] //路径
         public static void KCheckBundleUIReferences()
@@ -248,5 +287,5 @@ namespace ET.Client
 
             UnityEngine.Debug.Log("KCheckFontReferences: End");
         }
-        }
+    }
 }
