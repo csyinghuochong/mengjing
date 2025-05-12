@@ -20,7 +20,7 @@
                 || fubenType == TeamFubenType.ShenYuan
                 || (fubenType == TeamFubenType.XieZhu && !leader))
             {
-                int totalTimes = int.Parse(GlobalValueConfigCategory.Instance.Get(19).Value);
+                int totalTimes = GlobalValueConfigCategory.Instance.MaxTeamDungeonsPerDay;
                 int times = unit.GetTeamDungeonTimes();
                 if (totalTimes - times <= 0)
                 {
@@ -29,10 +29,10 @@
             }
             else
             {
-                int totalTimes = int.Parse(GlobalValueConfigCategory.Instance.Get(19).Value);
+                int totalTimes = GlobalValueConfigCategory.Instance.MaxTeamDungeonsPerDay;
                 int times = unit.GetTeamDungeonTimes();
 
-                int totalTimes_2 = int.Parse(GlobalValueConfigCategory.Instance.Get(74).Value);
+                int totalTimes_2 = GlobalValueConfigCategory.Instance.MaxDailyXieZhuFubens;
                 int times_2 = unit.GetTeamDungeonXieZhu();
 
                 if (totalTimes - times <= 0 && totalTimes_2 - times_2 <= 0)

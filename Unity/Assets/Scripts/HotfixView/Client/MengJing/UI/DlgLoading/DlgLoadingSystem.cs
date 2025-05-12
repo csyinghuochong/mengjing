@@ -207,7 +207,7 @@ namespace ET.Client
         public static List<string> GetRoleSkillEffect(this DlgLoading self)
         {
             List<string> effects = new List<string>();
-            int fangunSkill = int.Parse(GlobalValueConfigCategory.Instance.Get(2).Value);
+            int fangunSkill = GlobalValueConfigCategory.Instance.FangunSkillId;
             SkillSetComponentC skillSetComponent = self.Root().GetComponent<SkillSetComponentC>();
             List<SkillPro> allskills = new List<SkillPro>();
             allskills.AddRange(skillSetComponent.SkillList);

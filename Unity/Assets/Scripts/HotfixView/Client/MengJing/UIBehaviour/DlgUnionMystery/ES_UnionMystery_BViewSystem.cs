@@ -87,7 +87,7 @@ namespace ET.Client
 
         public static void OnInitUI(this ES_UnionMystery_B self)
         {
-            int shopSellid =  int.Parse(GlobalValueConfigCategory.Instance.Get(106).Value);
+            int shopSellid =  GlobalValueConfigCategory.Instance.UnionMystery_BId;
             int playLv = self.Root().GetComponent<UserInfoComponentC>().UserInfo.Lv;
             self.ShowStoreSellConfigs.Clear();
             while (shopSellid != 0)

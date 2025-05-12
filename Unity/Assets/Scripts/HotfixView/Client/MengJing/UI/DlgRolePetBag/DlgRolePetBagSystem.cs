@@ -171,7 +171,7 @@ namespace ET.Client
             using (zstring.Block())
             {
                 self.View.E_TextNumberText.text =
-                        zstring.Format("宠物数量： {0}/{1}", rolePetInfos.Count, int.Parse(GlobalValueConfigCategory.Instance.Get(119).Value));
+                        zstring.Format("宠物数量： {0}/{1}", rolePetInfos.Count, GlobalValueConfigCategory.Instance.RolePetBagNum);
             }
         }
 

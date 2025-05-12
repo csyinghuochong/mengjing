@@ -1331,7 +1331,7 @@ namespace ET.Client
                 return;
             }
 
-            if (petComponent.RolePetBag.Count >= int.Parse(GlobalValueConfigCategory.Instance.Get(119).Value))
+            if (petComponent.RolePetBag.Count >= GlobalValueConfigCategory.Instance.RolePetBagNum)
             {
                 // 请及时清理探索宠物仓库！
                 return;

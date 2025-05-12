@@ -650,7 +650,7 @@ namespace ET.Server
             long userId = unit.Id;
             Scene scene = unit.Scene();
             BeforeTransfer(unit,mapComponent.MapType);
-            await Transfer(unit, mapInstanceId, (int)MapTypeEnum.MainCityScene, CommonHelp.MainCityID(), 0, "0");
+            await Transfer(unit, mapInstanceId, (int)MapTypeEnum.MainCityScene, GlobalValueConfigCategory.Instance.MainCityID, 0, "0");
             //动态删除副本
             OnFubenToMain(scene, userId);
         }
@@ -688,7 +688,7 @@ namespace ET.Server
         {
             RemovePetAndJingLing(unit);
             
-            SceneConfig sceneConfig = SceneConfigCategory.Instance.Get(CommonHelp.MainCityID());
+            SceneConfig sceneConfig = SceneConfigCategory.Instance.Get(GlobalValueConfigCategory.Instance.MainCityID);
             unit.Position = new float3(sceneConfig.InitPos[0] * 0.01f, sceneConfig.InitPos[1] * 0.01f, sceneConfig.InitPos[2] * 0.01f);
             unit.Stop(-2);
             

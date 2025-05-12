@@ -120,10 +120,10 @@ namespace ET
             //开启双职业活力恢复增强
             if (skillNumber >= 2)
             {
-                return (int)(int.Parse(GlobalValueConfigCategory.Instance.Get(72).Value) * 1.5f);
+                return (int)(GlobalValueConfigCategory.Instance.MaxHuoLi * 1.5f);
             }
 
-            return int.Parse(GlobalValueConfigCategory.Instance.Get(72).Value);
+            return GlobalValueConfigCategory.Instance.MaxHuoLi;
         }
 
         public static long GetAttributeValue(RolePetInfo rolePetInfo, int numericType)

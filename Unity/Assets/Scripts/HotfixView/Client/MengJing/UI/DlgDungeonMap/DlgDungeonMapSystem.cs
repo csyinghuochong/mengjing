@@ -250,7 +250,7 @@ namespace ET.Client
             {
                 PopupTipHelp.OpenPopupTip(self.Root(), "系统提示", "是否返回主城出生点？", () =>
                 {
-                    EnterMapHelper.RequestTransfer( self.Root(), MapTypeEnum.MainCityScene, CommonHelp.MainCityID(), 0, "0"  ).Coroutine();
+                    EnterMapHelper.RequestTransfer( self.Root(), MapTypeEnum.MainCityScene, GlobalValueConfigCategory.Instance.MainCityID, 0, "0"  ).Coroutine();
                 
                     UIComponent uiComponent = self.Root().GetComponent<UIComponent>();
                     uiComponent.CloseWindow(WindowID.WindowID_DungeonMap);

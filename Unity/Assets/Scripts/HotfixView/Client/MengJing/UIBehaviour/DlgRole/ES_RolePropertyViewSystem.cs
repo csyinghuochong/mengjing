@@ -216,8 +216,7 @@ namespace ET.Client
             NumericComponentC numericComponentC = unit.GetComponent<NumericComponentC>();
             UserInfoComponentC userInfoComponentC = self.Root().GetComponent<UserInfoComponentC>();
 
-            int maxPiLao = int.Parse(GlobalValueConfigCategory.Instance.Get(numericComponentC.GetAsInt(NumericType.YueKaRemainTimes) > 0 ? 26 : 10)
-                    .Value);
+            int maxPiLao = numericComponentC.GetAsInt(NumericType.YueKaRemainTimes) > 0 ? GlobalValueConfigCategory.Instance.MaxPiLaoYuKaUser : GlobalValueConfigCategory.Instance.MaxPiLao;
             self.E_PiLaoImgImage.fillAmount = (float)userInfoComponentC.UserInfo.PiLao / maxPiLao;
             using (zstring.Block())
             {

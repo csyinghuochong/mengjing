@@ -39,7 +39,7 @@ namespace ET.Client
 
         public static void UpdateInfo(this ES_SeasonStore self)
         {
-            int shopid =  int.Parse(GlobalValueConfigCategory.Instance.Get(103).Value);
+            int shopid =  GlobalValueConfigCategory.Instance.SeasonStoreId;
             self.E_GoldNumTextText.text = self.Root().GetComponent<BagComponentC>().GetItemNumber(StoreSellConfigCategory.Instance.Get(shopid).SellType).ToString();
             int playLv = self.Root().GetComponent<UserInfoComponentC>().UserInfo.Lv;
             

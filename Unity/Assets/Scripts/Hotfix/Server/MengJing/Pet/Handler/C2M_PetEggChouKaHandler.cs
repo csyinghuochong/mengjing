@@ -21,7 +21,7 @@ namespace ET.Server
             NumericComponentS numericComponent = unit.GetComponent<NumericComponentS>();
 
             int nowNum = numericComponent.GetAsInt(NumericType.PetExploreNumber);
-            int maxNum = int.Parse(GlobalValueConfigCategory.Instance.Get(123).Value);
+            int maxNum = GlobalValueConfigCategory.Instance.PetEggChouKaLimit;
             if (nowNum + request.ChouKaType > maxNum)
             {
                 response.Error = ErrorCode.ERR_TimesIsNot;

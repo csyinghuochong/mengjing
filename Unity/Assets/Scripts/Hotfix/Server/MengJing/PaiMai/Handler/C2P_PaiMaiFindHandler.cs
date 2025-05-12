@@ -41,7 +41,7 @@ namespace ET.Server
                 return;
             }
 
-            int pagenum = int.Parse(GlobalValueConfigCategory.Instance.Get(104).Value); //每页的数量
+            int pagenum = GlobalValueConfigCategory.Instance.PaiMaiPageNum; //每页的数量
             ItemConfig itemConfig = ItemConfigCategory.Instance.Get(paiMaiItemInfo.BagInfo.ItemID);
             for (int i = 0; i < PaiMaiItemInfo.Count; i++)
             {

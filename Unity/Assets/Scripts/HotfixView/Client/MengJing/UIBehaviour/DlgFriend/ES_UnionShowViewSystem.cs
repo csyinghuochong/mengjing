@@ -244,8 +244,8 @@ namespace ET.Client
              }
 
             UserInfo userInfo = self.Root().GetComponent<UserInfoComponentC>().UserInfo;
-            int needLevel = int.Parse(GlobalValueConfigCategory.Instance.Get(21).Value);
-            int needDiamond = int.Parse(GlobalValueConfigCategory.Instance.Get(22).Value);
+            int needLevel = GlobalValueConfigCategory.Instance.UnionCreateNeedLv;
+            int needDiamond = GlobalValueConfigCategory.Instance.UnionCreateNeedDiamond;
             if (userInfo.Lv < needLevel)
             {
                 FlyTipComponent.Instance.ShowFlyTip("等级不足！");

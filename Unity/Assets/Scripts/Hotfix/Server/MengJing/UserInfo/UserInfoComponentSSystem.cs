@@ -75,8 +75,8 @@ namespace ET.Server
             userInfo.AccInfoID = accountId;
             userInfo.Name = createRoleInfo.PlayerName;
             userInfo.ServerMailIdCur = -1;
-            userInfo.PiLao = int.Parse(GlobalValueConfigCategory.Instance.Get(10).Value); //初始化疲劳
-            userInfo.Vitality = int.Parse(GlobalValueConfigCategory.Instance.Get(10).Value);
+            userInfo.PiLao = GlobalValueConfigCategory.Instance.MaxPiLao; //初始化疲劳
+            userInfo.Vitality = GlobalValueConfigCategory.Instance.MaxPiLao;
             userInfo.MakeList.AddRange(CommonHelp.StringArrToIntList(GlobalValueConfigCategory.Instance.Get(18).Value.Split(';')));
             userInfo.CreateTime = TimeHelper.ServerNow();
             userInfo.RobotId = createRoleInfo.RobotId;
@@ -446,8 +446,7 @@ namespace ET.Server
                         return;
                     }
 
-                    int maxValue = unit.IsYueKaStates() ? int.Parse(GlobalValueConfigCategory.Instance.Get(26).Value)
-                            : int.Parse(GlobalValueConfigCategory.Instance.Get(10).Value);
+                    int maxValue = unit.IsYueKaStates() ? GlobalValueConfigCategory.Instance.MaxPiLaoYuKaUser : GlobalValueConfigCategory.Instance.MaxPiLao;
                     long newValue = long.Parse(value) + self.UserInfo.PiLao;
                     newValue = Math.Min(Math.Max(0, newValue), maxValue);
                     self.UserInfo.PiLao = newValue;
@@ -674,7 +673,7 @@ namespace ET.Server
 
         public static int GetMaxPiLao(this Unit self)
         {
-            return int.Parse(GlobalValueConfigCategory.Instance.Get(self.IsYueKaStates() ? 26 : 10).Value);
+            return self.IsYueKaStates() ? GlobalValueConfigCategory.Instance.MaxPiLaoYuKaUser : GlobalValueConfigCategory.Instance.MaxPiLao;
         }
 
         public static bool IsYueKaStates(this Unit self)

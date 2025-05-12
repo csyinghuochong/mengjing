@@ -27,7 +27,7 @@ namespace ET.Server
                     return;
                 }
 
-                long mianfeicd = int.Parse(GlobalValueConfigCategory.Instance.Get(93).Value) * 1000;
+                long mianfeicd = GlobalValueConfigCategory.Instance.HappyMoveFreeRefreshTime * 1000;
                 unit.GetComponent<NumericComponentS>().ApplyValue(NumericType.HappyMoveTime, TimeHelper.ServerNow() + mianfeicd);
             }
             if (request.OperatateType == 2)

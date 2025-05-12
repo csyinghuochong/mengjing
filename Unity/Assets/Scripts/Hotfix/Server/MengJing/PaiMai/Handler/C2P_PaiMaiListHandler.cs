@@ -34,7 +34,7 @@ namespace ET.Server
 
                 // 拿到指定页数的物品
                 int page = request.Page;
-                int pagenum = int.Parse(GlobalValueConfigCategory.Instance.Get(104).Value); //每页的数量
+                int pagenum = GlobalValueConfigCategory.Instance.PaiMaiPageNum; //每页的数量
 
                 int maxpage = paimaiListShow.Count / pagenum;
                 int extra = (paimaiListShow.Count % pagenum) > 0? 1 : 0;

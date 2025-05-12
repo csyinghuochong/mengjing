@@ -68,7 +68,7 @@ namespace ET.Client
             self.AddUIScrollItems(ref self.ScrollItemTeamDungeonItems, self.ShowTeamInfos.Count);
             self.E_TeamDungeonItemsLoopVerticalScrollRect.SetVisible(true, self.ShowTeamInfos.Count);
 
-            int totalTimes = int.Parse(GlobalValueConfigCategory.Instance.Get(19).Value);
+            int totalTimes = GlobalValueConfigCategory.Instance.MaxTeamDungeonsPerDay;
             int times = UnitHelper.GetMyUnitFromClientScene(self.Root()).GetTeamDungeonTimes();
             self.E_Text_LeftTimeText.gameObject.SetActive(true);
             using (zstring.Block())
@@ -76,7 +76,7 @@ namespace ET.Client
                 self.E_Text_LeftTimeText.text = zstring.Format("副本次数：{0}/{1}", totalTimes - times, totalTimes);
             }
 
-            totalTimes = int.Parse(GlobalValueConfigCategory.Instance.Get(74).Value);
+            totalTimes = GlobalValueConfigCategory.Instance.MaxDailyXieZhuFubens;
             times = UnitHelper.GetMyUnitFromClientScene(self.Root()).GetTeamDungeonXieZhu();
             using (zstring.Block())
             {

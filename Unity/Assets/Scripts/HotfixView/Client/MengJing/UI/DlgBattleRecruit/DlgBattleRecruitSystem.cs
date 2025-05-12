@@ -95,7 +95,7 @@ namespace ET.Client
             using (zstring.Block())
             {
                 self.View.E_CurrentNumberTextText.text = zstring.Format("当前召唤人口:{0}/{1}", BattleHelper.GetSummonNumber(response.BattleSummonList),
-                    int.Parse(GlobalValueConfigCategory.Instance.Get(91).Value));
+                    GlobalValueConfigCategory.Instance.BattlefieldSummonLimit);
             }
 
             // 开启定时刷新
@@ -145,7 +145,7 @@ namespace ET.Client
             // 判断人口是否足够
             int cursummonnumber = BattleHelper.GetSummonNumber(self.BattleSummonInfos);
             BattleSummonConfig battleSummonConfig = BattleSummonConfigCategory.Instance.Get(battleSummonConfigId);
-            if (cursummonnumber + battleSummonConfig.MonsterNumber > int.Parse(GlobalValueConfigCategory.Instance.Get(91).Value))
+            if (cursummonnumber + battleSummonConfig.MonsterNumber > GlobalValueConfigCategory.Instance.BattlefieldSummonLimit)
             {
                 FlyTipComponent.Instance.ShowFlyTip("人口不足！");
                 return;
@@ -172,7 +172,7 @@ namespace ET.Client
             using (zstring.Block())
             {
                 self.View.E_CurrentNumberTextText.text = zstring.Format("当前召唤人口:{0}/{1}", BattleHelper.GetSummonNumber(response.BattleSummonList),
-                    int.Parse(GlobalValueConfigCategory.Instance.Get(91).Value));
+                    GlobalValueConfigCategory.Instance.BattlefieldSummonLimit);
             }
 
             for (int i = 0; i < response.BattleSummonList.Count; i++)

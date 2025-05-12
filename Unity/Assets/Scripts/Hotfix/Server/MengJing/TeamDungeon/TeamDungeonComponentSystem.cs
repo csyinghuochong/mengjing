@@ -37,7 +37,7 @@ namespace ET.Server
                 if (fubenType == TeamFubenType.XieZhu && unit.Id == self.TeamId)
                 {
                     int times_2 = unit.GetTeamDungeonXieZhu();
-                    int totalTimes_2 = int.Parse(GlobalValueConfigCategory.Instance.Get(74).Value);
+                    int totalTimes_2 = GlobalValueConfigCategory.Instance.MaxDailyXieZhuFubens;
                     if (totalTimes_2 > times_2)
                     {
                         unit.GetComponent<NumericComponentS>().ApplyValue(NumericType.TeamDungeonXieZhu, unit.GetTeamDungeonXieZhu() + 1);
@@ -313,14 +313,14 @@ namespace ET.Server
                 if (leader != null && self.FubenType == TeamFubenType.XieZhu)
                 {
                     //协助副本掉落
-                    int dropId = int.Parse(GlobalValueConfigCategory.Instance.Get(75).Value);
+                    int dropId = GlobalValueConfigCategory.Instance.XieZhuFubenDropId;
                     UnitFactory.CreateDropItems(leader, unit, 1, dropId, "1");
                 }
 
                 if (self.FubenType == TeamFubenType.ShenYuan)
                 {
                     //深渊副本掉落
-                    int dropId = int.Parse(GlobalValueConfigCategory.Instance.Get(77).Value);
+                    int dropId = GlobalValueConfigCategory.Instance.ShenYuanFubenDropId;
                     UnitFactory.CreateDropItems(null, unit, 0, dropId, "1");
                 }
 
