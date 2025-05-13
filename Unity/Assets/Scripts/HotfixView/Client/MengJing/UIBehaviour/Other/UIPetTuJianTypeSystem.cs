@@ -68,7 +68,7 @@ namespace ET.Client
                         showChapter.Add(petConfig.Id);
                     }
 
-                    if (self.ChengJiuType == 1 && petConfig.PetType != 0)
+                    if (self.ChengJiuType == 1 && petConfig.PetType == 1)
                     {
                         showChapter.Add(petConfig.Id);
                     }
