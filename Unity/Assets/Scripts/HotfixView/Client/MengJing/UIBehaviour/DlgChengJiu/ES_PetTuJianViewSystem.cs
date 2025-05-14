@@ -61,15 +61,24 @@ namespace ET.Client
                 self.UIPetTuJianTypes.Add(uiChengJiuShowType);
             }
 
-            UIPetTuJianType ui = self.UIPetTuJianTypes[0];
-            ui.OnImageButton();
+            foreach (UIPetTuJianType ui in self.UIPetTuJianTypes)
+            {
+                ui.OnImageButton();
+            }
+            
+            UIPetTuJianType uiq = self.UIPetTuJianTypes[0];
+            uiq.SelectFirst();
         }
 
         public static void OnType(this ES_PetTuJian self, int type)
         {
             foreach (UIPetTuJianType uiChengJiuShowType in self.UIPetTuJianTypes)
             {
-                uiChengJiuShowType.SetSelected(type);
+                if (uiChengJiuShowType.ChengJiuType == type)
+                {
+                    uiChengJiuShowType.SetSelected(type);
+                    break;
+                }
             }
 
             LayoutRebuilder.ForceRebuildLayoutImmediate(self.LeftContent.GetComponent<RectTransform>());
@@ -77,6 +86,14 @@ namespace ET.Client
 
         public static void OnClickPetHandler(this ES_PetTuJian self, int petid)
         {
+            foreach (UIPetTuJianType ui in self.UIPetTuJianTypes)
+            {
+                foreach (UIPetTuJianItem item in ui.UIPetTuJianItems)
+                {
+                    item.SetSelected(petid);
+                }
+            }
+            
             self.UpdatePetZizhi(petid);
             self.UpdateSkillList(petid);
             // self.UpdatePetSkinList(petid);

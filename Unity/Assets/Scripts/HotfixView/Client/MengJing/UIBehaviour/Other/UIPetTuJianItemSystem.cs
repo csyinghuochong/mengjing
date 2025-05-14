@@ -49,6 +49,8 @@ namespace ET.Client
             CommonViewHelper.SetImageGray(self.Root(), self.E_Image_ItemIcon.gameObject, !isActivate);
             self.E_Label_Active.SetActive(isActivate);
             self.E_Label_InActive.SetActive(!isActivate);
+
+            self.E_Image_XuanZhong.gameObject.SetActive(false);
         }
 
         public static void OnIma_Di(this UIPetTuJianItem self)

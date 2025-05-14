@@ -39,11 +39,6 @@ namespace ET.Client
 
         public static void OnChapter(this UIPetTuJianType self, int chapter)
         {
-            foreach (UIPetTuJianItem item in self.UIPetTuJianItems)
-            {
-                item.SetSelected(chapter);
-            }
-
             self.OnChapterAction?.Invoke(chapter);
         }
 
@@ -101,13 +96,16 @@ namespace ET.Client
                     UIPetTuJianItem ui = self.UIPetTuJianItems[i];
                     ui.GameObject.SetActive(false);
                 }
+            }
+        }
 
-                // 默认点第一个
-                if (self.UIPetTuJianItems.Count > 0)
-                {
-                    UIPetTuJianItem ui = self.UIPetTuJianItems[0];
-                    ui.OnIma_Di();
-                }
+        public static void SelectFirst(this UIPetTuJianType self)
+        {
+            // 默认点第一个
+            if (self.UIPetTuJianItems.Count > 0)
+            {
+                UIPetTuJianItem ui = self.UIPetTuJianItems[0];
+                ui.OnIma_Di();
             }
         }
     }
