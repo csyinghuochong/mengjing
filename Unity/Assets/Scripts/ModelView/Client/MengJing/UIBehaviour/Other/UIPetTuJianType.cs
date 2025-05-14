@@ -12,9 +12,9 @@ namespace ET.Client
         public GameObject ImageButton;
         public GameObject TaskTypeName;
 
-        public int ChengJiuType;
+        public int ChengJiuType { get; set; }
         public Action<int> OnTypeAction;
         public Action<int> OnChapterAction;
-        public List<EntityRef<UIPetTuJianItem>> UIPetTuJianItems = new();
+        public List<EntityRef<UIPetTuJianItem>> UIPetTuJianItems { get; set; } = new();
     }
 }
