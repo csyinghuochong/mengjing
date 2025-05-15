@@ -1,6 +1,6 @@
 // Made with Amplify Shader Editor v1.9.2.2
 // Available at the Unity Asset Store - http://u3d.as/y3X 
-Shader "Raygeas/Suntail Water"
+Shader "Raygeas/High Suntail Water"
 {
 	Properties
 	{

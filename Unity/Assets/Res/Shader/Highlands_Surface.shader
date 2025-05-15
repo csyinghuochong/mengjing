@@ -1,6 +1,6 @@
 // Made with Amplify Shader Editor v1.9.2.2
 // Available at the Unity Asset Store - http://u3d.as/y3X 
-Shader "Raygeas/Suntail Surface"
+Shader "Raygeas/High Suntail Surface"
 {
 	Properties
 	{
@@ -63,8 +63,6 @@ Shader "Raygeas/Suntail Surface"
 	{
 		LOD 0
 
-		
-
 		Tags { "RenderPipeline"="UniversalPipeline" "RenderType"="Opaque" "Queue"="AlphaTest" "UniversalMaterialType"="Lit" }
 
 		Cull [_CullMode]
@@ -73,7 +71,6 @@ Shader "Raygeas/Suntail Surface"
 		Offset 0 , 0
 		AlphaToMask Off
 
-		
 
 		HLSLINCLUDE
 		#pragma target 3.5

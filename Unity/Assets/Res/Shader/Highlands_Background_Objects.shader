@@ -1,6 +1,6 @@
 // Made with Amplify Shader Editor v1.9.2.2
 // Available at the Unity Asset Store - http://u3d.as/y3X 
-Shader "Raygeas/Background Objects"
+Shader "Raygeas/High Background Objects"
 {
 	Properties
 	{
