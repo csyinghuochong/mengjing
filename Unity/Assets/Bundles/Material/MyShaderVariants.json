@@ -1,6 +1,6 @@
 {
     "ShaderTotalCount": 156,
-    "VariantTotalCount": 294,
+    "VariantTotalCount": 300,
     "ShaderVariantInfos": [
         {
             "AssetPath": "Resources/unity_builtin_extra",
@@ -51,7 +51,7 @@
                 {
                     "PassType": 8,
                     "Keywords": [
-                        "SHADOWS_DEPTH"
+                        ""
                     ]
                 }
             ]
@@ -1255,7 +1255,7 @@
             ]
         },
         {
-            "AssetPath": "Assets/Res/Model/Scene/Suntail Village/Shaders/Suntail_Surface.shader",
+            "AssetPath": "Assets/Res/Shader/Suntail_Surface.shader",
             "ShaderName": "Raygeas/Suntail Surface",
             "ShaderVariantElements": [
                 {
@@ -1291,7 +1291,7 @@
             ]
         },
         {
-            "AssetPath": "Assets/Res/Model/Scene/Suntail Village/Shaders/Suntail_Foliage.shader",
+            "AssetPath": "Assets/Res/Shader/Suntail_Foliage.shader",
             "ShaderName": "Raygeas/Suntail Foliage",
             "ShaderVariantElements": [
                 {
@@ -1377,7 +1377,7 @@
             ]
         },
         {
-            "AssetPath": "Assets/Res/Model/Scene/Suntail Village/Shaders/Suntail_Water.shader",
+            "AssetPath": "Assets/Res/Shader/Suntail_Water.shader",
             "ShaderName": "Raygeas/Suntail Water",
             "ShaderVariantElements": [
                 {
@@ -1575,7 +1575,7 @@
         },
         {
             "AssetPath": "Assets/Res/Shader/Highlands_Surface.shader",
-            "ShaderName": "Raygeas/Suntail Surface",
+            "ShaderName": "Raygeas/High Suntail Surface",
             "ShaderVariantElements": [
                 {
                     "PassType": 8,
@@ -1645,7 +1645,7 @@
         },
         {
             "AssetPath": "Assets/Res/Shader/Highlands_Foliage.shader",
-            "ShaderName": "Raygeas/Suntail Foliage",
+            "ShaderName": "Raygeas/High Suntail Foliage",
             "ShaderVariantElements": [
                 {
                     "PassType": 8,
@@ -1916,6 +1916,12 @@
             "AssetPath": "Assets/Res/Effect/Kyeoms_FX/Shaders/Kyeoms_ParticleDissolve&Offset.shadergraph",
             "ShaderName": "Kyeoms/Kyeoms_ParticleDissolve&Offset",
             "ShaderVariantElements": [
+                {
+                    "PassType": 0,
+                    "Keywords": [
+                        "_SURFACE_TYPE_TRANSPARENT"
+                    ]
+                },
                 {
                     "PassType": 8,
                     "Keywords": [
@@ -2678,6 +2684,31 @@
                     "Keywords": [
                         ""
                     ]
+                },
+                {
+                    "PassType": 13,
+                    "Keywords": [
+                        "_DISABLEEROSION_ON"
+                    ]
+                },
+                {
+                    "PassType": 13,
+                    "Keywords": [
+                        "_USEALPHAOVERRIDE_ON"
+                    ]
+                },
+                {
+                    "PassType": 13,
+                    "Keywords": [
+                        "_USEALPHAOVERRIDE_ON",
+                        "_USERAMP_ON"
+                    ]
+                },
+                {
+                    "PassType": 13,
+                    "Keywords": [
+                        "_USERAMP_ON"
+                    ]
                 }
             ]
         },
@@ -2929,6 +2960,13 @@
                     "PassType": 8,
                     "Keywords": [
                         ""
+                    ]
+                },
+                {
+                    "PassType": 13,
+                    "Keywords": [
+                        "_ADDITIONAL_LIGHTS",
+                        "_MAIN_LIGHT_SHADOWS"
                     ]
                 }
             ]

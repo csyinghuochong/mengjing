@@ -28,7 +28,7 @@ ShaderVariantCollection:
   - first: {fileID: 50, guid: 0000000000000000f000000000000000, type: 0}
     second:
       variants:
-      - keywords: SHADOWS_DEPTH
+      - keywords: 
         passType: 8
   - first: {fileID: 103, guid: 0000000000000000f000000000000000, type: 0}
     second:
@@ -697,6 +697,8 @@ ShaderVariantCollection:
       type: 3}
     second:
       variants:
+      - keywords: _SURFACE_TYPE_TRANSPARENT
+        passType: 0
       - keywords: 
         passType: 8
   - first: {fileID: -6465566751694194690, guid: 0a62ce06f13f3b44fa3cda31f7bc45d3,
@@ -1006,6 +1008,14 @@ ShaderVariantCollection:
       variants:
       - keywords: 
         passType: 13
+      - keywords: _DISABLEEROSION_ON
+        passType: 13
+      - keywords: _USEALPHAOVERRIDE_ON
+        passType: 13
+      - keywords: _USEALPHAOVERRIDE_ON _USERAMP_ON
+        passType: 13
+      - keywords: _USERAMP_ON
+        passType: 13
   - first: {fileID: -6465566751694194690, guid: 00191177e5fd5c4468ad546ce87ef329,
       type: 3}
     second:
@@ -1111,6 +1121,8 @@ ShaderVariantCollection:
       variants:
       - keywords: 
         passType: 8
+      - keywords: _ADDITIONAL_LIGHTS _MAIN_LIGHT_SHADOWS
+        passType: 13
   - first: {fileID: 4800000, guid: f95962d30424ec147aebde5342cd5c7b, type: 3}
     second:
       variants:
