@@ -1,6 +1,6 @@
 {
-    "ShaderTotalCount": 113,
-    "VariantTotalCount": 245,
+    "ShaderTotalCount": 156,
+    "VariantTotalCount": 294,
     "ShaderVariantInfos": [
         {
             "AssetPath": "Resources/unity_builtin_extra",
@@ -40,6 +40,18 @@
                     "PassType": 8,
                     "Keywords": [
                         "INSTANCING_ON"
+                    ]
+                }
+            ]
+        },
+        {
+            "AssetPath": "Resources/unity_builtin_extra",
+            "ShaderName": "Legacy Shaders/Transparent/Cutout/VertexLit",
+            "ShaderVariantElements": [
+                {
+                    "PassType": 8,
+                    "Keywords": [
+                        "SHADOWS_DEPTH"
                     ]
                 }
             ]
@@ -107,6 +119,18 @@
         {
             "AssetPath": "Resources/unity_builtin_extra",
             "ShaderName": "Legacy Shaders/Particles/Alpha Blended",
+            "ShaderVariantElements": [
+                {
+                    "PassType": 0,
+                    "Keywords": [
+                        ""
+                    ]
+                }
+            ]
+        },
+        {
+            "AssetPath": "Resources/unity_builtin_extra",
+            "ShaderName": "Legacy Shaders/Particles/Alpha Blended Premultiply",
             "ShaderVariantElements": [
                 {
                     "PassType": 0,
@@ -314,6 +338,18 @@
         },
         {
             "AssetPath": "Resources/unity_builtin_extra",
+            "ShaderName": "Unlit/Transparent",
+            "ShaderVariantElements": [
+                {
+                    "PassType": 0,
+                    "Keywords": [
+                        ""
+                    ]
+                }
+            ]
+        },
+        {
+            "AssetPath": "Resources/unity_builtin_extra",
             "ShaderName": "Unlit/Transparent Cutout",
             "ShaderVariantElements": [
                 {
@@ -409,6 +445,7 @@
                 {
                     "PassType": 13,
                     "Keywords": [
+                        "EVALUATE_SH_VERTEX",
                         "_ADDITIONAL_LIGHTS",
                         "_ADDITIONAL_LIGHT_SHADOWS",
                         "_ALPHAPREMULTIPLY_ON",
@@ -419,6 +456,7 @@
                 {
                     "PassType": 13,
                     "Keywords": [
+                        "EVALUATE_SH_VERTEX",
                         "_ADDITIONAL_LIGHTS",
                         "_ADDITIONAL_LIGHT_SHADOWS",
                         "_ALPHATEST_ON",
@@ -430,6 +468,7 @@
                 {
                     "PassType": 13,
                     "Keywords": [
+                        "EVALUATE_SH_VERTEX",
                         "_ADDITIONAL_LIGHTS",
                         "_ADDITIONAL_LIGHT_SHADOWS",
                         "_EMISSION",
@@ -440,6 +479,7 @@
                 {
                     "PassType": 13,
                     "Keywords": [
+                        "EVALUATE_SH_VERTEX",
                         "_ADDITIONAL_LIGHTS",
                         "_ADDITIONAL_LIGHT_SHADOWS",
                         "_EMISSION",
@@ -449,6 +489,7 @@
                 {
                     "PassType": 13,
                     "Keywords": [
+                        "EVALUATE_SH_VERTEX",
                         "_ADDITIONAL_LIGHTS",
                         "_ADDITIONAL_LIGHT_SHADOWS",
                         "_EMISSION",
@@ -459,6 +500,7 @@
                 {
                     "PassType": 13,
                     "Keywords": [
+                        "EVALUATE_SH_VERTEX",
                         "_ADDITIONAL_LIGHTS",
                         "_ADDITIONAL_LIGHT_SHADOWS",
                         "_MAIN_LIGHT_SHADOWS"
@@ -467,6 +509,7 @@
                 {
                     "PassType": 13,
                     "Keywords": [
+                        "EVALUATE_SH_VERTEX",
                         "_ADDITIONAL_LIGHTS",
                         "_ADDITIONAL_LIGHT_SHADOWS",
                         "_MAIN_LIGHT_SHADOWS",
@@ -478,6 +521,7 @@
                 {
                     "PassType": 13,
                     "Keywords": [
+                        "EVALUATE_SH_VERTEX",
                         "_ADDITIONAL_LIGHTS",
                         "_ADDITIONAL_LIGHT_SHADOWS",
                         "_MAIN_LIGHT_SHADOWS",
@@ -489,6 +533,7 @@
                 {
                     "PassType": 13,
                     "Keywords": [
+                        "EVALUATE_SH_VERTEX",
                         "_ADDITIONAL_LIGHTS",
                         "_ADDITIONAL_LIGHT_SHADOWS",
                         "_MAIN_LIGHT_SHADOWS",
@@ -498,6 +543,7 @@
                 {
                     "PassType": 13,
                     "Keywords": [
+                        "EVALUATE_SH_VERTEX",
                         "_ADDITIONAL_LIGHTS",
                         "_ADDITIONAL_LIGHT_SHADOWS",
                         "_MAIN_LIGHT_SHADOWS",
@@ -508,6 +554,7 @@
                 {
                     "PassType": 13,
                     "Keywords": [
+                        "EVALUATE_SH_VERTEX",
                         "_ADDITIONAL_LIGHTS",
                         "_ADDITIONAL_LIGHT_SHADOWS",
                         "_MAIN_LIGHT_SHADOWS",
@@ -548,6 +595,18 @@
                 {
                     "PassType": 13,
                     "Keywords": [
+                        "EVALUATE_SH_VERTEX",
+                        "_ADDITIONAL_LIGHTS",
+                        "_ADDITIONAL_LIGHT_SHADOWS",
+                        "_ALPHAPREMULTIPLY_ON",
+                        "_MAIN_LIGHT_SHADOWS",
+                        "_SURFACE_TYPE_TRANSPARENT"
+                    ]
+                },
+                {
+                    "PassType": 13,
+                    "Keywords": [
+                        "EVALUATE_SH_VERTEX",
                         "_ADDITIONAL_LIGHTS",
                         "_ADDITIONAL_LIGHT_SHADOWS",
                         "_ALPHATEST_ON",
@@ -560,6 +619,7 @@
                 {
                     "PassType": 13,
                     "Keywords": [
+                        "EVALUATE_SH_VERTEX",
                         "_ADDITIONAL_LIGHTS",
                         "_ADDITIONAL_LIGHT_SHADOWS",
                         "_ALPHATEST_ON",
@@ -572,6 +632,7 @@
                 {
                     "PassType": 13,
                     "Keywords": [
+                        "EVALUATE_SH_VERTEX",
                         "_ADDITIONAL_LIGHTS",
                         "_ADDITIONAL_LIGHT_SHADOWS",
                         "_EMISSION",
@@ -581,6 +642,7 @@
                 {
                     "PassType": 13,
                     "Keywords": [
+                        "EVALUATE_SH_VERTEX",
                         "_ADDITIONAL_LIGHTS",
                         "_ADDITIONAL_LIGHT_SHADOWS",
                         "_GLOSSINESS_FROM_BASE_ALPHA",
@@ -591,6 +653,7 @@
                 {
                     "PassType": 13,
                     "Keywords": [
+                        "EVALUATE_SH_VERTEX",
                         "_ADDITIONAL_LIGHTS",
                         "_ADDITIONAL_LIGHT_SHADOWS",
                         "_MAIN_LIGHT_SHADOWS"
@@ -616,6 +679,14 @@
                         "_EMISSION",
                         "_FADING_ON",
                         "_SOFTPARTICLES_ON",
+                        "_SURFACE_TYPE_TRANSPARENT"
+                    ]
+                },
+                {
+                    "PassType": 0,
+                    "Keywords": [
+                        "_COLORADDSUBDIFF_ON",
+                        "_EMISSION",
                         "_SURFACE_TYPE_TRANSPARENT"
                     ]
                 },
@@ -666,22 +737,20 @@
                 {
                     "PassType": 13,
                     "Keywords": [
+                        "EVALUATE_SH_VERTEX",
+                        "_ADDITIONAL_LIGHTS",
+                        "_ADDITIONAL_LIGHT_SHADOWS",
+                        "_MAIN_LIGHT_SHADOWS"
+                    ]
+                },
+                {
+                    "PassType": 13,
+                    "Keywords": [
+                        "EVALUATE_SH_VERTEX",
                         "_ADDITIONAL_LIGHTS",
                         "_ADDITIONAL_LIGHT_SHADOWS",
                         "_MAIN_LIGHT_SHADOWS",
                         "_TERRAIN_INSTANCED_PERPIXEL_NORMAL"
-                    ]
-                }
-            ]
-        },
-        {
-            "AssetPath": "Packages/com.unity.render-pipelines.universal/Shaders/2D/Sprite-Unlit-Default.shader",
-            "ShaderName": "Universal Render Pipeline/2D/Sprite-Unlit-Default",
-            "ShaderVariantElements": [
-                {
-                    "PassType": 13,
-                    "Keywords": [
-                        ""
                     ]
                 }
             ]
@@ -693,6 +762,7 @@
                 {
                     "PassType": 13,
                     "Keywords": [
+                        "EVALUATE_SH_VERTEX",
                         "_ADDITIONAL_LIGHTS",
                         "_ADDITIONAL_LIGHT_SHADOWS",
                         "_EMISSION",
@@ -753,6 +823,18 @@
             ]
         },
         {
+            "AssetPath": "Assets/Res/Shader/Particle Alpha Blend1.shader",
+            "ShaderName": "Particles/Alpha Blended_game",
+            "ShaderVariantElements": [
+                {
+                    "PassType": 0,
+                    "Keywords": [
+                        ""
+                    ]
+                }
+            ]
+        },
+        {
             "AssetPath": "Assets/Mono/GameDemo/ArtResource/Shaders/Mobile-Particle-Add-Top.shader",
             "ShaderName": "Mobile/Particles/AdditiveTop",
             "ShaderVariantElements": [
@@ -765,7 +847,7 @@
             ]
         },
         {
-            "AssetPath": "Assets/Mono/GameDemo/ArtResource/Shaders/Particle-Add-Top.shader",
+            "AssetPath": "Assets/Res/Shader/Particle-Add-Top.shader",
             "ShaderName": "Particles/AdditiveTop",
             "ShaderVariantElements": [
                 {
@@ -777,20 +859,8 @@
             ]
         },
         {
-            "AssetPath": "Assets/Res/Shader/Particle Alpha Blend DetachAlpha Top.shader",
-            "ShaderName": "Particles/Alpha Blended DetachAlpha Top",
-            "ShaderVariantElements": [
-                {
-                    "PassType": 0,
-                    "Keywords": [
-                        ""
-                    ]
-                }
-            ]
-        },
-        {
-            "AssetPath": "Assets/Res/Shader/Particle Alpha Blend1.shader",
-            "ShaderName": "Particles/Alpha Blended_game",
+            "AssetPath": "Assets/Mono/GameDemo/ArtResource/Shaders/Mobile-Particle-Alpha-DetachAlpha-Top.shader",
+            "ShaderName": "Mobile/Particles/AlphaBlendedDetachAlphaTop",
             "ShaderVariantElements": [
                 {
                     "PassType": 0,
@@ -813,18 +883,6 @@
             ]
         },
         {
-            "AssetPath": "Assets/Res/Shader/Mobile-Particle-Add-DetachAlpha-Top.shader",
-            "ShaderName": "Mobile/Particles/Additive DetachAlpha Top",
-            "ShaderVariantElements": [
-                {
-                    "PassType": 0,
-                    "Keywords": [
-                        ""
-                    ]
-                }
-            ]
-        },
-        {
             "AssetPath": "Assets/Res/Shader/Particle Add Top.shader",
             "ShaderName": "Particles/Additive Top",
             "ShaderVariantElements": [
@@ -837,8 +895,8 @@
             ]
         },
         {
-            "AssetPath": "Assets/Res/Shader/ToonBasic.shader",
-            "ShaderName": "Toon/Basic",
+            "AssetPath": "Assets/Res/Shader/Particle Alpha Blend DetachAlpha Top.shader",
+            "ShaderName": "Particles/Alpha Blended DetachAlpha Top",
             "ShaderVariantElements": [
                 {
                     "PassType": 0,
@@ -849,8 +907,80 @@
             ]
         },
         {
-            "AssetPath": "Assets/Res/Shader/ToonBasicOutline.shader",
-            "ShaderName": "Toon/BasicOutline",
+            "AssetPath": "Assets/Res/Shader/Mobile-Particle-Add-DetachAlpha-Top.shader",
+            "ShaderName": "Mobile/Particles/Additive DetachAlpha Top",
+            "ShaderVariantElements": [
+                {
+                    "PassType": 0,
+                    "Keywords": [
+                        ""
+                    ]
+                }
+            ]
+        },
+        {
+            "AssetPath": "Assets/Res/Effect/Hovl Studio/HovlResources/Shaders/Add_CenterGlow.shader",
+            "ShaderName": "Hovl/Particles/Add_CenterGlow",
+            "ShaderVariantElements": [
+                {
+                    "PassType": 0,
+                    "Keywords": [
+                        ""
+                    ]
+                }
+            ]
+        },
+        {
+            "AssetPath": "Assets/Res/Effect/Hovl Studio/HovlResources/Shaders/Blend_CenterGlow.shader",
+            "ShaderName": "Hovl/Particles/Blend_CenterGlow",
+            "ShaderVariantElements": [
+                {
+                    "PassType": 0,
+                    "Keywords": [
+                        ""
+                    ]
+                }
+            ]
+        },
+        {
+            "AssetPath": "Assets/Res/Shader/Blend_TwoSides.shader",
+            "ShaderName": "Hovl/Particles/Blend_TwoSides_URP",
+            "ShaderVariantElements": [
+                {
+                    "PassType": 13,
+                    "Keywords": [
+                        ""
+                    ]
+                }
+            ]
+        },
+        {
+            "AssetPath": "Assets/Res/Shader/Lightning.shader",
+            "ShaderName": "Hovl/Particles/Lightning",
+            "ShaderVariantElements": [
+                {
+                    "PassType": 0,
+                    "Keywords": [
+                        ""
+                    ]
+                }
+            ]
+        },
+        {
+            "AssetPath": "Assets/Res/Shader/Add_Fresnel.shader",
+            "ShaderName": "Hovl/Particles/Add_Fresnel",
+            "ShaderVariantElements": [
+                {
+                    "PassType": 0,
+                    "Keywords": [
+                        ""
+                    ]
+                }
+            ]
+        },
+        {
+            "AssetPath": "Assets/Res/Shader/ToonBasicOutline2.shader",
+            "ShaderName": "Toon/BasicOutline2",
             "ShaderVariantElements": [
                 {
                     "PassType": 8,
@@ -885,6 +1015,18 @@
             ]
         },
         {
+            "AssetPath": "Assets/Res/Shader/ToonBasic.shader",
+            "ShaderName": "Toon/Basic",
+            "ShaderVariantElements": [
+                {
+                    "PassType": 0,
+                    "Keywords": [
+                        ""
+                    ]
+                }
+            ]
+        },
+        {
             "AssetPath": "Assets/Res/Shader/OutlineMask.shader",
             "ShaderName": "Custom/Outline Mask",
             "ShaderVariantElements": [
@@ -914,6 +1056,18 @@
             "ShaderVariantElements": [
                 {
                     "PassType": 13,
+                    "Keywords": [
+                        ""
+                    ]
+                }
+            ]
+        },
+        {
+            "AssetPath": "Assets/Res/Shader/ParticleCook-Transparent-AlphaBlend-Diffuse-Z.shader",
+            "ShaderName": "ParticleCook/Transparent/AlphaBlend/Diffuse-Z",
+            "ShaderVariantElements": [
+                {
+                    "PassType": 0,
                     "Keywords": [
                         ""
                     ]
@@ -975,6 +1129,16 @@
                     "PassType": 8,
                     "Keywords": [
                         "_SCALEMAP"
+                    ]
+                },
+                {
+                    "PassType": 13,
+                    "Keywords": [
+                        "_ADDITIONAL_LIGHTS",
+                        "_ADDITIONAL_LIGHT_SHADOWS",
+                        "_ADVANCED_LIGHTING",
+                        "_ENVIRONMENTREFLECTIONS_OFF",
+                        "_MAIN_LIGHT_SHADOWS"
                     ]
                 },
                 {
@@ -1227,7 +1391,7 @@
             ]
         },
         {
-            "AssetPath": "Assets/Res/Model/Scene/Polyart/PolyartStudio/SharedResources/Shaders/Deprecated/Dreamscape_Surface.shader",
+            "AssetPath": "Assets/Res/Shader/Dreamscape_Surface.shader",
             "ShaderName": "Polyart/Dreamscape Surface",
             "ShaderVariantElements": [
                 {
@@ -1253,7 +1417,7 @@
             ]
         },
         {
-            "AssetPath": "Assets/Res/Model/Scene/Polyart/PolyartStudio/SharedResources/Shaders/Deprecated/Dreamscape_Water_River.shader",
+            "AssetPath": "Assets/Res/Shader/Dreamscape_Water_River.shader",
             "ShaderName": "Polyart/Dreamscape Water River",
             "ShaderVariantElements": [
                 {
@@ -1273,7 +1437,7 @@
             ]
         },
         {
-            "AssetPath": "Assets/Res/Model/Scene/Polyart/PolyartStudio/SharedResources/Shaders/Deprecated/Dreamscape_Surface_Coverage.shader",
+            "AssetPath": "Assets/Res/Shader/Dreamscape_Surface_Coverage.shader",
             "ShaderName": "Polyart/Dreamscape Surface Coverage",
             "ShaderVariantElements": [
                 {
@@ -1310,7 +1474,7 @@
             ]
         },
         {
-            "AssetPath": "Assets/Res/Model/Scene/AZURE Nature/Shaders/AN_Surface.shader",
+            "AssetPath": "Assets/Res/Shader/AN_Surface.shader",
             "ShaderName": "Raygeas/AZURE Surface",
             "ShaderVariantElements": [
                 {
@@ -1358,7 +1522,7 @@
             ]
         },
         {
-            "AssetPath": "Assets/Res/Model/Scene/AZURE Nature/Shaders/AN_Vegetation.shader",
+            "AssetPath": "Assets/Res/Shader/AN_Vegetation.shader",
             "ShaderName": "Raygeas/AZURE Vegetation",
             "ShaderVariantElements": [
                 {
@@ -1390,7 +1554,7 @@
             ]
         },
         {
-            "AssetPath": "Assets/Res/Model/Scene/Polyart/PolyartStudio/SharedResources/Shaders/Water/PA_Water_Lake.shader",
+            "AssetPath": "Assets/Res/Shader/PA_Water_Lake.shader",
             "ShaderName": "Polyart/Dreamscape/URP/Water Lake",
             "ShaderVariantElements": [
                 {
@@ -1410,7 +1574,7 @@
             ]
         },
         {
-            "AssetPath": "Assets/Res/Model/Scene/HIGHLANDS - Stylized Environment/Shaders/Highlands_Surface.shader",
+            "AssetPath": "Assets/Res/Shader/Highlands_Surface.shader",
             "ShaderName": "Raygeas/Suntail Surface",
             "ShaderVariantElements": [
                 {
@@ -1452,7 +1616,7 @@
             ]
         },
         {
-            "AssetPath": "Assets/Res/Model/Scene/BK/Pure_Common/Shaders/BK_Grass.shader",
+            "AssetPath": "Assets/Res/Shader/BK_Grass.shader",
             "ShaderName": "BK/Grass",
             "ShaderVariantElements": [
                 {
@@ -1480,7 +1644,7 @@
             ]
         },
         {
-            "AssetPath": "Assets/Res/Model/Scene/HIGHLANDS - Stylized Environment/Shaders/Highlands_Foliage.shader",
+            "AssetPath": "Assets/Res/Shader/Highlands_Foliage.shader",
             "ShaderName": "Raygeas/Suntail Foliage",
             "ShaderVariantElements": [
                 {
@@ -1503,7 +1667,7 @@
             ]
         },
         {
-            "AssetPath": "Assets/Res/Model/Scene/Polyart/PolyartStudio/SharedResources/Shaders/Deprecated/Dreamscape_WaterfallFoam_Volumetric.shader",
+            "AssetPath": "Assets/Res/Shader/Dreamscape_WaterfallFoam_Volumetric.shader",
             "ShaderName": "Polyart/Dreamscape Waterfall Foam Volumetric",
             "ShaderVariantElements": [
                 {
@@ -1521,7 +1685,7 @@
             ]
         },
         {
-            "AssetPath": "Assets/Res/Model/Scene/Polyart/PolyartStudio/SharedResources/Shaders/Deprecated/Dreamscape_WaterfallFoam.shader",
+            "AssetPath": "Assets/Res/Shader/Dreamscape_WaterfallFoam.shader",
             "ShaderName": "Polyart/Dreamscape Waterfall Foam",
             "ShaderVariantElements": [
                 {
@@ -1539,7 +1703,7 @@
             ]
         },
         {
-            "AssetPath": "Assets/Res/Model/Scene/Polyart/PolyartStudio/SharedResources/Shaders/Deprecated/Dreamscape_Waterfall.shader",
+            "AssetPath": "Assets/Res/Shader/Dreamscape_Waterfall.shader",
             "ShaderName": "Polyart/Dreamscape Waterfall",
             "ShaderVariantElements": [
                 {
@@ -1559,7 +1723,7 @@
             ]
         },
         {
-            "AssetPath": "Assets/Res/Model/Scene/Polyart/PolyartStudio/SharedResources/Shaders/Props/PA_SurfaceORM.shader",
+            "AssetPath": "Assets/Res/Shader/PA_SurfaceORM.shader",
             "ShaderName": "Polyart/Dreamscape/URP/Surface",
             "ShaderVariantElements": [
                 {
@@ -1580,13 +1744,19 @@
             ]
         },
         {
-            "AssetPath": "Assets/Res/Model/Scene/Polyart/PolyartStudio/SharedResources/Shaders/Foliage/PA_FoliageBillboard.shader",
+            "AssetPath": "Assets/Res/Shader/PA_FoliageBillboard.shader",
             "ShaderName": "Polyart/Dreamscape/URP/Foliage BIllboard ",
             "ShaderVariantElements": [
                 {
                     "PassType": 8,
                     "Keywords": [
                         ""
+                    ]
+                },
+                {
+                    "PassType": 8,
+                    "Keywords": [
+                        "INSTANCING_ON"
                     ]
                 },
                 {
@@ -1600,7 +1770,7 @@
             ]
         },
         {
-            "AssetPath": "Assets/Res/Model/Scene/Polyart/PolyartStudio/SharedResources/Shaders/Water/PA_Water_River.shader",
+            "AssetPath": "Assets/Res/Shader/PA_Water_River.shader",
             "ShaderName": "Polyart/Dreamscape/URP/Water River",
             "ShaderVariantElements": [
                 {
@@ -1620,7 +1790,7 @@
             ]
         },
         {
-            "AssetPath": "Assets/Res/Model/Scene/Polyart/PolyartStudio/SharedResources/Shaders/Foliage/PA_TreeWind.shader",
+            "AssetPath": "Assets/Res/Shader/PA_TreeWind.shader",
             "ShaderName": "Polyart/Dreamscape/URP/Tree Wind",
             "ShaderVariantElements": [
                 {
@@ -1716,6 +1886,7 @@
                 {
                     "PassType": 13,
                     "Keywords": [
+                        "EVALUATE_SH_VERTEX",
                         "_ADDITIONAL_LIGHTS",
                         "_ADDITIONAL_LIGHT_SHADOWS",
                         "_MAIN_LIGHT_SHADOWS"
@@ -1745,12 +1916,6 @@
             "AssetPath": "Assets/Res/Effect/Kyeoms_FX/Shaders/Kyeoms_ParticleDissolve&Offset.shadergraph",
             "ShaderName": "Kyeoms/Kyeoms_ParticleDissolve&Offset",
             "ShaderVariantElements": [
-                {
-                    "PassType": 0,
-                    "Keywords": [
-                        "_SURFACE_TYPE_TRANSPARENT"
-                    ]
-                },
                 {
                     "PassType": 8,
                     "Keywords": [
@@ -1807,6 +1972,18 @@
                 },
                 {
                     "PassType": 8,
+                    "Keywords": [
+                        ""
+                    ]
+                }
+            ]
+        },
+        {
+            "AssetPath": "Assets/Res/Shader/Fx_explosion_apb.shader",
+            "ShaderName": "VFX_Klaus/fx_explosion_apb",
+            "ShaderVariantElements": [
+                {
+                    "PassType": 0,
                     "Keywords": [
                         ""
                     ]
@@ -1886,7 +2063,19 @@
             ]
         },
         {
-            "AssetPath": "Assets/Res/Effect/FXIFIED/common/Shaders/RimLight.shader",
+            "AssetPath": "Assets/Res/Shader/Fx_explosion_add.shader",
+            "ShaderName": "VFX_Klaus/fx_explosion_add",
+            "ShaderVariantElements": [
+                {
+                    "PassType": 0,
+                    "Keywords": [
+                        ""
+                    ]
+                }
+            ]
+        },
+        {
+            "AssetPath": "Assets/Res/Shader/RimLight.shader",
             "ShaderName": "FXIFIED/RimLight",
             "ShaderVariantElements": [
                 {
@@ -1904,7 +2093,7 @@
             ]
         },
         {
-            "AssetPath": "Assets/Res/Effect/EffectResSet/Effect/E3D-RenderCore/Shader/ShaderB/E3DEffect-C2-Add-Glow.shader",
+            "AssetPath": "Assets/Res/Shader/E3DEffect-C2-Add-Glow.shader",
             "ShaderName": "E3DEffect/C2/Add-Glow",
             "ShaderVariantElements": [
                 {
@@ -1916,8 +2105,44 @@
             ]
         },
         {
-            "AssetPath": "Assets/Res/Effect/EffectResSet/Effect/E3D-RenderCore/Shader/ShaderB/E3DEffect-C2-Blend-Glow.shader",
+            "AssetPath": "Assets/Res/Shader/E3DEffect-C2-Blend-Glow.shader",
             "ShaderName": "E3DEffect/C2/Blended-Glow",
+            "ShaderVariantElements": [
+                {
+                    "PassType": 0,
+                    "Keywords": [
+                        ""
+                    ]
+                }
+            ]
+        },
+        {
+            "AssetPath": "Assets/Res/Shader/E3DVFX-3T-UV-VC-Add.shader",
+            "ShaderName": "E3D/Effect/E3DVFX-3T-UV-VC-Add",
+            "ShaderVariantElements": [
+                {
+                    "PassType": 13,
+                    "Keywords": [
+                        ""
+                    ]
+                }
+            ]
+        },
+        {
+            "AssetPath": "Assets/Res/Shader/E3D_EF_31_ADD_Top.shader",
+            "ShaderName": "E3D/EffectEN/ADD_Top",
+            "ShaderVariantElements": [
+                {
+                    "PassType": 0,
+                    "Keywords": [
+                        ""
+                    ]
+                }
+            ]
+        },
+        {
+            "AssetPath": "Assets/Res/Shader/ProjectorLight.shader",
+            "ShaderName": "Projector/Light",
             "ShaderVariantElements": [
                 {
                     "PassType": 0,
@@ -1940,20 +2165,8 @@
             ]
         },
         {
-            "AssetPath": "Assets/Mono/GameDemo/ArtResource/Shaders/Particle-AddSmooth-DetachAlpha-Top.shader",
+            "AssetPath": "Assets/Res/Shader/Particle-AddSmooth-DetachAlpha-Top.shader",
             "ShaderName": "Particles/Additive(Soft)DetachAlphaTop",
-            "ShaderVariantElements": [
-                {
-                    "PassType": 0,
-                    "Keywords": [
-                        ""
-                    ]
-                }
-            ]
-        },
-        {
-            "AssetPath": "Assets/Res/Effect/MonsterAckRange/ProjectorLight.shader",
-            "ShaderName": "Projector/Light",
             "ShaderVariantElements": [
                 {
                     "PassType": 0,
@@ -1976,7 +2189,7 @@
             ]
         },
         {
-            "AssetPath": "Assets/Res/Materialize&Dissolve/URP/Shaders/AxisDissolveMetallic.shader",
+            "AssetPath": "Assets/Res/Shader/AxisDissolveMetallic.shader",
             "ShaderName": "AxisDissolveMetallic",
             "ShaderVariantElements": [
                 {
@@ -2002,7 +2215,7 @@
             ]
         },
         {
-            "AssetPath": "Assets/Res/Effect/MonsterAckRange/Particle Add.shader",
+            "AssetPath": "Assets/Res/Shader/Particle Add.shader",
             "ShaderName": "Particles/Additive",
             "ShaderVariantElements": [
                 {
@@ -2031,30 +2244,6 @@
             "ShaderVariantElements": [
                 {
                     "PassType": 0,
-                    "Keywords": [
-                        ""
-                    ]
-                }
-            ]
-        },
-        {
-            "AssetPath": "Assets/Res/Shader/ToonBasicNormal.shader",
-            "ShaderName": "Toon/BasicNormal",
-            "ShaderVariantElements": [
-                {
-                    "PassType": 8,
-                    "Keywords": [
-                        ""
-                    ]
-                },
-                {
-                    "PassType": 13,
-                    "Keywords": [
-                        ""
-                    ]
-                },
-                {
-                    "PassType": 14,
                     "Keywords": [
                         ""
                     ]
@@ -2092,6 +2281,98 @@
             ]
         },
         {
+            "AssetPath": "Assets/Res/Shader/ToonBasicNormal.shader",
+            "ShaderName": "Toon/BasicNormal",
+            "ShaderVariantElements": [
+                {
+                    "PassType": 8,
+                    "Keywords": [
+                        ""
+                    ]
+                },
+                {
+                    "PassType": 13,
+                    "Keywords": [
+                        ""
+                    ]
+                },
+                {
+                    "PassType": 14,
+                    "Keywords": [
+                        ""
+                    ]
+                }
+            ]
+        },
+        {
+            "AssetPath": "Assets/Res/Shader/TFD_CustomToonVegetation.shader",
+            "ShaderName": "Toon/TFD_CustomToonVegetation",
+            "ShaderVariantElements": [
+                {
+                    "PassType": 8,
+                    "Keywords": [
+                        ""
+                    ]
+                },
+                {
+                    "PassType": 13,
+                    "Keywords": [
+                        "_ADDITIONAL_LIGHTS",
+                        "_ADDITIONAL_LIGHT_SHADOWS",
+                        "_MAIN_LIGHT_SHADOWS"
+                    ]
+                }
+            ]
+        },
+        {
+            "AssetPath": "Assets/Res/Shader/TFD_ToonWater.shader",
+            "ShaderName": "Toon/TFD_ToonWater",
+            "ShaderVariantElements": [
+                {
+                    "PassType": 13,
+                    "Keywords": [
+                        "EVALUATE_SH_VERTEX",
+                        "_ADDITIONAL_LIGHTS",
+                        "_ADDITIONAL_LIGHT_SHADOWS",
+                        "_MAIN_LIGHT_SHADOWS",
+                        "_RECEIVE_SHADOWS_OFF"
+                    ]
+                }
+            ]
+        },
+        {
+            "AssetPath": "Assets/Res/Shader/TFD_ToonFire.shader",
+            "ShaderName": "Toon/TFD_ToonFire",
+            "ShaderVariantElements": [
+                {
+                    "PassType": 13,
+                    "Keywords": [
+                        ""
+                    ]
+                }
+            ]
+        },
+        {
+            "AssetPath": "Assets/Res/Shader/TFD_CustomToon.shader",
+            "ShaderName": "Toon/TFD_CustomToon",
+            "ShaderVariantElements": [
+                {
+                    "PassType": 8,
+                    "Keywords": [
+                        ""
+                    ]
+                },
+                {
+                    "PassType": 13,
+                    "Keywords": [
+                        "_ADDITIONAL_LIGHTS",
+                        "_ADDITIONAL_LIGHT_SHADOWS",
+                        "_MAIN_LIGHT_SHADOWS"
+                    ]
+                }
+            ]
+        },
+        {
             "AssetPath": "Assets/Res/Model/Scene/LostTemple-BuiltInRP/Fx/Basewater_Shader.shadergraph",
             "ShaderName": "Shader Graphs/Basewater_Shader",
             "ShaderVariantElements": [
@@ -2122,73 +2403,7 @@
                 {
                     "PassType": 13,
                     "Keywords": [
-                        "_ADDITIONAL_LIGHTS",
-                        "_ADDITIONAL_LIGHT_SHADOWS",
-                        "_MAIN_LIGHT_SHADOWS"
-                    ]
-                }
-            ]
-        },
-        {
-            "AssetPath": "Assets/Res/Models/Toon Deserted Temples/Shaders/TFD_CustomToonVegetation.shader",
-            "ShaderName": "Toon/TFD_CustomToonVegetation",
-            "ShaderVariantElements": [
-                {
-                    "PassType": 8,
-                    "Keywords": [
-                        ""
-                    ]
-                },
-                {
-                    "PassType": 13,
-                    "Keywords": [
-                        "_ADDITIONAL_LIGHTS",
-                        "_ADDITIONAL_LIGHT_SHADOWS",
-                        "_MAIN_LIGHT_SHADOWS"
-                    ]
-                }
-            ]
-        },
-        {
-            "AssetPath": "Assets/Res/Models/Toon Deserted Temples/Shaders/TFD_ToonWater.shader",
-            "ShaderName": "Toon/TFD_ToonWater",
-            "ShaderVariantElements": [
-                {
-                    "PassType": 13,
-                    "Keywords": [
-                        "_ADDITIONAL_LIGHTS",
-                        "_ADDITIONAL_LIGHT_SHADOWS",
-                        "_MAIN_LIGHT_SHADOWS",
-                        "_RECEIVE_SHADOWS_OFF"
-                    ]
-                }
-            ]
-        },
-        {
-            "AssetPath": "Assets/Res/Models/Toon Deserted Temples/Shaders/TFD_ToonFire.shader",
-            "ShaderName": "Toon/TFD_ToonFire",
-            "ShaderVariantElements": [
-                {
-                    "PassType": 13,
-                    "Keywords": [
-                        ""
-                    ]
-                }
-            ]
-        },
-        {
-            "AssetPath": "Assets/Res/Models/Toon Deserted Temples/Shaders/TFD_CustomToon.shader",
-            "ShaderName": "Toon/TFD_CustomToon",
-            "ShaderVariantElements": [
-                {
-                    "PassType": 8,
-                    "Keywords": [
-                        ""
-                    ]
-                },
-                {
-                    "PassType": 13,
-                    "Keywords": [
+                        "EVALUATE_SH_VERTEX",
                         "_ADDITIONAL_LIGHTS",
                         "_ADDITIONAL_LIGHT_SHADOWS",
                         "_MAIN_LIGHT_SHADOWS"
@@ -2209,6 +2424,7 @@
                 {
                     "PassType": 13,
                     "Keywords": [
+                        "EVALUATE_SH_VERTEX",
                         "_ADDITIONAL_LIGHTS",
                         "_ADDITIONAL_LIGHT_SHADOWS",
                         "_MAIN_LIGHT_SHADOWS"
@@ -2229,6 +2445,7 @@
                 {
                     "PassType": 13,
                     "Keywords": [
+                        "EVALUATE_SH_VERTEX",
                         "_ADDITIONAL_LIGHTS",
                         "_ADDITIONAL_LIGHT_SHADOWS",
                         "_MAIN_LIGHT_SHADOWS"
@@ -2249,6 +2466,7 @@
                 {
                     "PassType": 13,
                     "Keywords": [
+                        "EVALUATE_SH_VERTEX",
                         "_ADDITIONAL_LIGHTS",
                         "_ADDITIONAL_LIGHT_SHADOWS",
                         "_MAIN_LIGHT_SHADOWS"
@@ -2269,6 +2487,7 @@
                 {
                     "PassType": 13,
                     "Keywords": [
+                        "EVALUATE_SH_VERTEX",
                         "_ADDITIONAL_LIGHTS",
                         "_ADDITIONAL_LIGHT_SHADOWS",
                         "_ALPHATEST_ON",
@@ -2290,6 +2509,7 @@
                 {
                     "PassType": 13,
                     "Keywords": [
+                        "EVALUATE_SH_VERTEX",
                         "_ADDITIONAL_LIGHTS",
                         "_ADDITIONAL_LIGHT_SHADOWS",
                         "_MAIN_LIGHT_SHADOWS"
@@ -2310,6 +2530,7 @@
                 {
                     "PassType": 13,
                     "Keywords": [
+                        "EVALUATE_SH_VERTEX",
                         "_ADDITIONAL_LIGHTS",
                         "_ADDITIONAL_LIGHT_SHADOWS",
                         "_MAIN_LIGHT_SHADOWS"
@@ -2330,6 +2551,7 @@
                 {
                     "PassType": 13,
                     "Keywords": [
+                        "EVALUATE_SH_VERTEX",
                         "_ADDITIONAL_LIGHTS",
                         "_ADDITIONAL_LIGHT_SHADOWS",
                         "_ALPHATEST_ON",
@@ -2351,6 +2573,7 @@
                 {
                     "PassType": 13,
                     "Keywords": [
+                        "EVALUATE_SH_VERTEX",
                         "_ADDITIONAL_LIGHTS",
                         "_ADDITIONAL_LIGHT_SHADOWS",
                         "_MAIN_LIGHT_SHADOWS"
@@ -2371,6 +2594,7 @@
                 {
                     "PassType": 13,
                     "Keywords": [
+                        "EVALUATE_SH_VERTEX",
                         "_ADDITIONAL_LIGHTS",
                         "_ADDITIONAL_LIGHT_SHADOWS",
                         "_ALPHATEST_ON",
@@ -2380,7 +2604,7 @@
             ]
         },
         {
-            "AssetPath": "Assets/Res/Model/Scene/TriForge Assets/Fantasy Forest Environment/Shaders/TreeWind2.shader",
+            "AssetPath": "Assets/Res/Shader/TreeWind2.shader",
             "ShaderName": "TriForge/Fantasy Forest/TreeWind2",
             "ShaderVariantElements": [
                 {
@@ -2406,7 +2630,7 @@
             ]
         },
         {
-            "AssetPath": "Assets/Res/Model/Scene/TriForge Assets/Fantasy Forest Environment/Shaders/FFTreeBillboard.shader",
+            "AssetPath": "Assets/Res/Shader/FFTreeBillboard.shader",
             "ShaderName": "TriForge/Fantasy Forest/Tree Billboard",
             "ShaderVariantElements": [
                 {
@@ -2432,7 +2656,7 @@
             ]
         },
         {
-            "AssetPath": "Assets/Res/Model/Scene/TriForge Assets/Fantasy Forest Environment/Shaders/Water.shader",
+            "AssetPath": "Assets/Res/Shader/Water.shader",
             "ShaderName": "TriForge/Fantasy Forest/SimpleWater",
             "ShaderVariantElements": [
                 {
@@ -2440,6 +2664,378 @@
                     "Keywords": [
                         "_ADDITIONAL_LIGHTS",
                         "_ADDITIONAL_LIGHT_SHADOWS",
+                        "_MAIN_LIGHT_SHADOWS"
+                    ]
+                }
+            ]
+        },
+        {
+            "AssetPath": "Assets/Res/Shader/UberFX.shader",
+            "ShaderName": "Piloto Studio/UberFX",
+            "ShaderVariantElements": [
+                {
+                    "PassType": 13,
+                    "Keywords": [
+                        ""
+                    ]
+                }
+            ]
+        },
+        {
+            "AssetPath": "Assets/Res/Effect/Hovl Studio/HSFiles/Shaders/Shader Graph/HS_Blend_CG.shadergraph",
+            "ShaderName": "Shader Graphs/HS_Blend_CG",
+            "ShaderVariantElements": [
+                {
+                    "PassType": 0,
+                    "Keywords": [
+                        "_SURFACE_TYPE_TRANSPARENT"
+                    ]
+                },
+                {
+                    "PassType": 8,
+                    "Keywords": [
+                        ""
+                    ]
+                }
+            ]
+        },
+        {
+            "AssetPath": "Assets/Res/Shader/DissolveNoise.shader",
+            "ShaderName": "Hovl/Particles/DissolveNoise",
+            "ShaderVariantElements": [
+                {
+                    "PassType": 0,
+                    "Keywords": [
+                        ""
+                    ]
+                }
+            ]
+        },
+        {
+            "AssetPath": "Assets/Res/Shader/AddTrail.shader",
+            "ShaderName": "Hovl/Particles/AddTrail",
+            "ShaderVariantElements": [
+                {
+                    "PassType": 0,
+                    "Keywords": [
+                        ""
+                    ]
+                }
+            ]
+        },
+        {
+            "AssetPath": "Assets/Res/Shader/UberShader_Additive.shader",
+            "ShaderName": "Nokdef/Additive Uber Shader",
+            "ShaderVariantElements": [
+                {
+                    "PassType": 13,
+                    "Keywords": [
+                        ""
+                    ]
+                }
+            ]
+        },
+        {
+            "AssetPath": "Assets/Res/Shader/UberShader_Alpha.shader",
+            "ShaderName": "Nokdef/Alpha Uber Shader",
+            "ShaderVariantElements": [
+                {
+                    "PassType": 13,
+                    "Keywords": [
+                        ""
+                    ]
+                },
+                {
+                    "PassType": 13,
+                    "Keywords": [
+                        "_USESOFTALPHA_ON"
+                    ]
+                }
+            ]
+        },
+        {
+            "AssetPath": "Assets/Res/Effect/Hovl Studio/HovlResources/Shaders/Distortion.shader",
+            "ShaderName": "Hovl/Particles/Distortion",
+            "ShaderVariantElements": [
+                {
+                    "PassType": 13,
+                    "Keywords": [
+                        ""
+                    ]
+                }
+            ]
+        },
+        {
+            "AssetPath": "Assets/Res/Shader/E3DEffect-C1-Add.shader",
+            "ShaderName": "E3DEffect/C1/Add",
+            "ShaderVariantElements": [
+                {
+                    "PassType": 0,
+                    "Keywords": [
+                        ""
+                    ]
+                }
+            ]
+        },
+        {
+            "AssetPath": "Assets/Res/Shader/E3D_EF_31_ADD_Top2.shader",
+            "ShaderName": "E3D/EffectEN/ADD_Top2",
+            "ShaderVariantElements": [
+                {
+                    "PassType": 13,
+                    "Keywords": [
+                        ""
+                    ]
+                }
+            ]
+        },
+        {
+            "AssetPath": "Assets/Res/Shader/Mobile-Particle-Add-DetachAlpha.shader",
+            "ShaderName": "Mobile/Particles/Additive-DetachAlpha",
+            "ShaderVariantElements": [
+                {
+                    "PassType": 0,
+                    "Keywords": [
+                        ""
+                    ]
+                }
+            ]
+        },
+        {
+            "AssetPath": "Assets/Res/Shader/E3DEffect-C2-Blend.shader",
+            "ShaderName": "E3DEffect/C2/Blended",
+            "ShaderVariantElements": [
+                {
+                    "PassType": 0,
+                    "Keywords": [
+                        ""
+                    ]
+                }
+            ]
+        },
+        {
+            "AssetPath": "Assets/Res/Shader/E3DEffect-C2-Add-Mask3.shader",
+            "ShaderName": "E3DEffect/C2/Add-Mask3",
+            "ShaderVariantElements": [
+                {
+                    "PassType": 13,
+                    "Keywords": [
+                        ""
+                    ]
+                }
+            ]
+        },
+        {
+            "AssetPath": "Assets/Res/Shader/ParticleCook-Transparent-Additive-Diffuse.shader",
+            "ShaderName": "ParticleCook/Transparent/Additive/Diffuse",
+            "ShaderVariantElements": [
+                {
+                    "PassType": 0,
+                    "Keywords": [
+                        ""
+                    ]
+                }
+            ]
+        },
+        {
+            "AssetPath": "Assets/Res/Shader/E3DEffect-C1-Add-Disslove.shader",
+            "ShaderName": "E3DEffect/C1/Add-Dissolve",
+            "ShaderVariantElements": [
+                {
+                    "PassType": 0,
+                    "Keywords": [
+                        ""
+                    ]
+                }
+            ]
+        },
+        {
+            "AssetPath": "Assets/Res/Shader/Ice.shader",
+            "ShaderName": "Hovl/Particles/Ice",
+            "ShaderVariantElements": [
+                {
+                    "PassType": 13,
+                    "Keywords": [
+                        ""
+                    ]
+                }
+            ]
+        },
+        {
+            "AssetPath": "Assets/Res/Shader/E3DEffect-C2-Add-Mask.shader",
+            "ShaderName": "E3DEffect/C2/Add-Mask",
+            "ShaderVariantElements": [
+                {
+                    "PassType": 0,
+                    "Keywords": [
+                        ""
+                    ]
+                }
+            ]
+        },
+        {
+            "AssetPath": "Assets/Res/Shader/E3DEffect-C2-Add-Tex-WithAlpha.shader",
+            "ShaderName": "E3DEffect/C2/Add-Tex-WithAlpha",
+            "ShaderVariantElements": [
+                {
+                    "PassType": 0,
+                    "Keywords": [
+                        ""
+                    ]
+                }
+            ]
+        },
+        {
+            "AssetPath": "Assets/Res/Shader/E3DEffect-C0-Falloff.shader",
+            "ShaderName": "E3DEffect/C0/Falloff",
+            "ShaderVariantElements": [
+                {
+                    "PassType": 13,
+                    "Keywords": [
+                        ""
+                    ]
+                }
+            ]
+        },
+        {
+            "AssetPath": "Assets/Res/Shader/E3DEffect-C1-AirWave.shader",
+            "ShaderName": "E3DEffect/C1/AirWave",
+            "ShaderVariantElements": [
+                {
+                    "PassType": 13,
+                    "Keywords": [
+                        ""
+                    ]
+                }
+            ]
+        },
+        {
+            "AssetPath": "Assets/Res/Shader/AlphaBlendedMobile_Scroll01.shader",
+            "ShaderName": "GAP/AlphaBlendedMobileDistortionScroll",
+            "ShaderVariantElements": [
+                {
+                    "PassType": 13,
+                    "Keywords": [
+                        ""
+                    ]
+                }
+            ]
+        },
+        {
+            "AssetPath": "Assets/Res/Shader/E3DEffect-C2-Add-HardEdge.shader",
+            "ShaderName": "E3DEffect/C2/Add-HardEdge",
+            "ShaderVariantElements": [
+                {
+                    "PassType": 8,
+                    "Keywords": [
+                        ""
+                    ]
+                }
+            ]
+        },
+        {
+            "AssetPath": "Assets/Res/Shader/E3DEffect-C2-HardEdge-Opaque.shader",
+            "ShaderName": "E3DEffect/C2/HardEdge-Opaque-URP",
+            "ShaderVariantElements": [
+                {
+                    "PassType": 13,
+                    "Keywords": [
+                        ""
+                    ]
+                }
+            ]
+        },
+        {
+            "AssetPath": "Assets/Res/Shader/Additive_EdgeSoft.shader",
+            "ShaderName": "GAP/Additive_EdgeSoft",
+            "ShaderVariantElements": [
+                {
+                    "PassType": 13,
+                    "Keywords": [
+                        ""
+                    ]
+                }
+            ]
+        },
+        {
+            "AssetPath": "Assets/Res/Effect/SkillBaseAct/ErbGameArt/Sword slash FX/Shaders/Slash.shader",
+            "ShaderName": "ERB/Particles/Slash",
+            "ShaderVariantElements": [
+                {
+                    "PassType": 0,
+                    "Keywords": [
+                        ""
+                    ]
+                }
+            ]
+        },
+        {
+            "AssetPath": "Assets/Res/Shader/SM_TransparentRim.shader",
+            "ShaderName": "ShurikenMagic/TransparentRimURP",
+            "ShaderVariantElements": [
+                {
+                    "PassType": 13,
+                    "Keywords": [
+                        ""
+                    ]
+                }
+            ]
+        },
+        {
+            "AssetPath": "Assets/Res/Shader/ParticleCook-Transparent-AlphaBlend-Diffuse.shader",
+            "ShaderName": "ParticleCook/Transparent/AlphaBlend/Diffuse",
+            "ShaderVariantElements": [
+                {
+                    "PassType": 0,
+                    "Keywords": [
+                        ""
+                    ]
+                }
+            ]
+        },
+        {
+            "AssetPath": "Assets/Res/Shader/E3D-distortion.shader",
+            "ShaderName": "E3DEffect/heat-distortion",
+            "ShaderVariantElements": [
+                {
+                    "PassType": 13,
+                    "Keywords": [
+                        ""
+                    ]
+                }
+            ]
+        },
+        {
+            "AssetPath": "Assets/Res/Shader/AdditiveMobile_Scroll01.shader",
+            "ShaderName": "GAP/AdditiveMobileDistortionScroll",
+            "ShaderVariantElements": [
+                {
+                    "PassType": 13,
+                    "Keywords": [
+                        ""
+                    ]
+                }
+            ]
+        },
+        {
+            "AssetPath": "Assets/Res/Shader/Particle-Add-DetachAlpha.shader",
+            "ShaderName": "Particles/AdditiveDetachAlpha",
+            "ShaderVariantElements": [
+                {
+                    "PassType": 0,
+                    "Keywords": [
+                        ""
+                    ]
+                }
+            ]
+        },
+        {
+            "AssetPath": "Assets/Res/Shader/ToonBasicURPShadow.shader",
+            "ShaderName": "Toon/BasicURPShadow",
+            "ShaderVariantElements": [
+                {
+                    "PassType": 13,
+                    "Keywords": [
                         "_MAIN_LIGHT_SHADOWS"
                     ]
                 }

@@ -111,6 +111,7 @@ namespace ET.Client
                         && !file.Contains(@"HighlightPlus")
                         && !file.Contains(@"UnityChanShader")
                         && !file.Contains(@"StylizedGrassShader")
+                        && !file.Contains(@"Suntail Village")
                         && !file.Contains(@"SoftMask"))
                     {
                         string prefabpath = file;
