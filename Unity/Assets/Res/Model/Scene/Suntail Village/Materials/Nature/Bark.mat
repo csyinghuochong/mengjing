@@ -8,13 +8,15 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Bark
-  m_Shader: {fileID: 4800000, guid: b50955928b87e714ab31f7fe9003b849, type: 3}
+  m_Shader: {fileID: 4800000, guid: 9c453302c6300e64996a20b6e6d61178, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
+  - _BLENDNORMALS_ON
+  - _COVERAGESMOOTHNESSSOURCE_SMOOTHNESS_R
+  - _OVERLAYMETHOD_WORLD_NORMAL
   - _SMOOTHNESSSOURCE_METALLIC_ALPHA
   m_InvalidKeywords:
-  - _BLENDNORMALS_ON
   - _COVERAGEOVERLAYMETHOD_VERTEX_POSITION
   - _COVERAGEOVERLAYTYPE_VERTEX_POSITION
   m_LightmapFlags: 4
@@ -44,6 +46,10 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _CoverageNormal:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _CoverageSmoothnessTexture:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -136,12 +142,15 @@ Material:
     - _CoverageContrast: 0.1
     - _CoverageFade: -0.08
     - _CoverageLevel: -1.31
+    - _CoverageNormalScale: 1
     - _CoverageOffset: -2.98
     - _CoverageOverlayMethod: 1
     - _CoverageOverlayType: 1
     - _CoverageSmoothness: 0.2
+    - _CoverageSmoothnessSource: 0
     - _CoverageThickness: 0
     - _CoverageThicknessLevel: 0
+    - _Coverageon: 0
     - _CullMode: 2
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
@@ -155,10 +164,12 @@ Material:
     - _Glossiness: 0.3
     - _GlossyReflections: 1
     - _InvertCoverageMask: 0
+    - _MaskContrast: 0
     - _Metallic: 0
     - _Mode: 0
     - _NormalScale: 2
     - _OcclusionStrength: 1
+    - _OverlayMethod: 0
     - _Parallax: 0.02
     - _QueueControl: 0
     - _QueueOffset: 0

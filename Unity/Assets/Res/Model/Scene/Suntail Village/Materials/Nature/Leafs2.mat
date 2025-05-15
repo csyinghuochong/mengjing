@@ -8,11 +8,14 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Leafs
-  m_Shader: {fileID: 4800000, guid: 1d10d370c3f169448b4d855d9b93645f, type: 3}
+  m_Shader: {fileID: 4800000, guid: c723bf599da5bf2418887cb5d81e4600, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
   - _COLOR2ENABLE_ON
   - _ENABLEWIND_ON
   - _SECONDCOLOROVERLAYTYPE_WORLD_POSITION
+  - _SMOOTHNESSSOURCE_SMOOTHNESS_R
   m_InvalidKeywords:
   - _COLOR2OVERLAYTYPE_VERTEX_POSITION_BASED
   - _SNOWOVERLAYTYPE_WORLD_NORMAL_BASED
@@ -24,6 +27,7 @@ Material:
   m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
+  m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -124,6 +128,7 @@ Material:
     - _BumpScale: 1
     - _Color2Enable: 1
     - _Color3Enable: 0
+    - _CullMode: 0
     - _Cutoff: 0.5
     - _Cutofff: 0.35
     - _DetailNormalMapScale: 1
@@ -145,8 +150,10 @@ Material:
     - _GlossyReflections: 1
     - _IndirectLightInt: 2.6
     - _Keyword0: 1
+    - _LockbyVcoordinates: 0
     - _Metallic: 0
     - _Mode: 0
+    - _NormalScale: 1
     - _OcclusionStrength: 1
     - _Parallax: 0.02
     - _Power1: -1.21
@@ -162,6 +169,7 @@ Material:
     - _Smoot: 1
     - _Smoothness: 0.3
     - _SmoothnessInt: 0
+    - _SmoothnessSource: 0
     - _SmoothnessTextureChannel: 0
     - _Soothness: 0
     - _SpecularHighlights: 1
@@ -173,6 +181,7 @@ Material:
     - _TransScattering: 1
     - _TransShadow: 0.205
     - _TransStrength: 2
+    - _Translucency: 0
     - _TranslucencyInt: 15
     - _TranslucencyOffset: -0.5
     - _UVBigWavesScale: 0.25

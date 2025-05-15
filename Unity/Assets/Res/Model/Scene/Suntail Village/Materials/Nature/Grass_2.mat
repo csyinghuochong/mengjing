@@ -8,13 +8,17 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Grass_2
-  m_Shader: {fileID: 4800000, guid: 1d10d370c3f169448b4d855d9b93645f, type: 3}
+  m_Shader: {fileID: 4800000, guid: c723bf599da5bf2418887cb5d81e4600, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
-  - _ANCHORTHEFOLIAGEBASE_ON
   - _COLOR2ENABLE_ON
   - _ENABLEWIND_ON
-  - _SECONDCOLOROVERLAYTYPE_UV_BASED
+  - _SECONDCOLOROVERLAYTYPE_VERTEX_POSITION
+  - _SMOOTHNESSSOURCE_SMOOTHNESS_R
   m_InvalidKeywords:
+  - _ANCHORTHEFOLIAGEBASE_ON
+  - _SECONDCOLOROVERLAYTYPE_UV_BASED
   - _UVWIND_ON
   - _VISUALWINDENABLE_ON
   m_LightmapFlags: 4
@@ -23,6 +27,7 @@ Material:
   m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
+  m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -59,6 +64,10 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Normal:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -101,6 +110,7 @@ Material:
     - _Bias1: 0
     - _BumpScale: 1
     - _Color2Enable: 1
+    - _CullMode: 0
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _DirectLightInt: 1
@@ -116,8 +126,10 @@ Material:
     - _Glossiness: 0.5
     - _GlossyReflections: 1
     - _IndirectLightInt: 1
+    - _LockbyVcoordinates: 0
     - _Metallic: 0
     - _Mode: 0
+    - _NormalScale: 1
     - _OcclusionStrength: 1
     - _Parallax: 0.02
     - _Power1: 0
@@ -131,10 +143,12 @@ Material:
     - _Shininess: 0.1
     - _Smoot: 0
     - _Smoothness: 0.3
+    - _SmoothnessSource: 0
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _Tiling: 1
+    - _Translucency: 0
     - _TranslucencyInt: 0
     - _UVSec: 0
     - _WindForce: 0.425

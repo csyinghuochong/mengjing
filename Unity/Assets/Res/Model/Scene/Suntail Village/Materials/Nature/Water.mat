@@ -8,8 +8,11 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Water
-  m_Shader: {fileID: 4800000, guid: 35e513c05d70d5b4e923d7bd37975b36, type: 3}
-  m_ValidKeywords: []
+  m_Shader: {fileID: 4800000, guid: 8c86f3036b200484c983bff01148a0db, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords:
+  - _ENABLEFOAM_ON
   m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -17,6 +20,7 @@ Material:
   m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
+  m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -77,31 +81,40 @@ Material:
     - _AlphaCutoff: 0.5
     - _BumpScale: 1
     - _CoastOpacity: 0.4
+    - _CoastalBlending: 1
     - _Cutoff: 0.5
     - _DepthDistance: 1.7
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
+    - _EnableFoam: 1
     - _EnvironmentReflections: 1
     - _Float0: 0.3
     - _FoamContrast: 0.7
     - _FoamDensity: 0.5
     - _FoamDistance: 0.5
+    - _FoamOpacity: 0
+    - _FoamTiling: 50
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
     - _Metallic: 0.3
     - _Mode: 0
+    - _NormalIntensity: 1
     - _OcclusionStrength: 1
     - _Opacity: 1
     - _Parallax: 0.02
     - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
+    - _RefractionFactor: 0.5
     - _RefractionScale: 0.2
     - _Smoothness: 0.91
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
+    - _Tiling: 0.15
+    - _Transparency: 0
+    - _TransparencyFade: 0
     - _UVSec: 0
     - _WavesNormalIntensity: 0.3
     - _WavesSpeed: 0.5
@@ -113,4 +126,5 @@ Material:
     - _Color1: {r: 0.3434941, g: 0.6981015, b: 0.7830188, a: 0}
     - _Color2: {r: 0.05490196, g: 0.45894897, b: 0.5764706, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _WaterColor: {r: 0.27058816, g: 0.4823529, b: 0.5372549, a: 0}
   m_BuildTextureStacks: []
