@@ -230,7 +230,7 @@ namespace ET.Client
                  FlyTipComponent.Instance.ShowFlyTip("宣言不能包含特殊字符！");
                  return;
              }
-             if (purpose.Length >= 200)
+             if (purpose.Length >= 500)
              {
                  FlyTipComponent.Instance.ShowFlyTip("宣言内容过长！");
                  return;
