@@ -367,7 +367,12 @@ namespace ET.Client
             }
             if (errorCode!= ErrorCode.ERR_Success)
             {
-                  HintHelp.ShowErrorHint(unit.Root(), errorCode);
+                if (errorCode == ErrorCode.ERR_CanNotMove_NetWait 
+                    || errorCode == ErrorCode.ERR_CanNotMove_Rigidity)
+                {
+                    return ;
+                }
+                HintHelp.ShowErrorHint(unit.Root(), errorCode);
                   return;
             }
 
