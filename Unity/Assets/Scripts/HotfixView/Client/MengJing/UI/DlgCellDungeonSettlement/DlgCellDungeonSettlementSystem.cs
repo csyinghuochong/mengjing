@@ -42,18 +42,18 @@ namespace ET.Client
             self.View.E_Star_3_liangImage.gameObject.SetActive(false);
             self.View.EG_SelectEffectSetRectTransform.gameObject.SetActive(false);
 
-            self.View.ES_SettlementReward1.SetClickHandler((int index) => { self.OnClickRewardItem(index).Coroutine(); }, 0);
-            self.View.ES_SettlementReward2.SetClickHandler((int index) => { self.OnClickRewardItem(index).Coroutine(); }, 1);
-            self.View.ES_SettlementReward3.SetClickHandler((int index) => { self.OnClickRewardItem(index).Coroutine(); }, 2);
-            self.View.ES_SettlementReward4.SetClickHandler((int index) => { self.OnClickRewardItem(index).Coroutine(); }, 3);
-            self.View.ES_SettlementReward5.SetClickHandler((int index) => { self.OnClickRewardItem(index).Coroutine(); }, 4);
-            self.View.ES_SettlementReward6.SetClickHandler((int index) => { self.OnClickRewardItem(index).Coroutine(); }, 5);
-            self.RewardUIList.Add(self.View.ES_SettlementReward1);
-            self.RewardUIList.Add(self.View.ES_SettlementReward2);
-            self.RewardUIList.Add(self.View.ES_SettlementReward3);
-            self.RewardUIList.Add(self.View.ES_SettlementReward4);
-            self.RewardUIList.Add(self.View.ES_SettlementReward5);
-            self.RewardUIList.Add(self.View.ES_SettlementReward6);
+            self.View.ES_SettlementReward_1.SetClickHandler((int index) => { self.OnClickRewardItem(index).Coroutine(); }, 0);
+            self.View.ES_SettlementReward_2.SetClickHandler((int index) => { self.OnClickRewardItem(index).Coroutine(); }, 1);
+            self.View.ES_SettlementReward_3.SetClickHandler((int index) => { self.OnClickRewardItem(index).Coroutine(); }, 2);
+            self.View.ES_SettlementReward_4.SetClickHandler((int index) => { self.OnClickRewardItem(index).Coroutine(); }, 3);
+            self.View.ES_SettlementReward_5.SetClickHandler((int index) => { self.OnClickRewardItem(index).Coroutine(); }, 4);
+            self.View.ES_SettlementReward_6.SetClickHandler((int index) => { self.OnClickRewardItem(index).Coroutine(); }, 5);
+            self.RewardUIList.Add(self.View.ES_SettlementReward_1);
+            self.RewardUIList.Add(self.View.ES_SettlementReward_2);
+            self.RewardUIList.Add(self.View.ES_SettlementReward_3);
+            self.RewardUIList.Add(self.View.ES_SettlementReward_4);
+            self.RewardUIList.Add(self.View.ES_SettlementReward_5);
+            self.RewardUIList.Add(self.View.ES_SettlementReward_6);
 
             self.View.E_Button_continueButton.AddListener(self.OnButtonContinue);
             self.View.E_Button_exitButton.AddListener(self.OnExitButton);

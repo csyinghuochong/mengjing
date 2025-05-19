@@ -41,8 +41,8 @@ namespace ET.Client
             self.View.uiTransform.SetParent(self.UIMain.transform);
             self.View.uiTransform.SetSiblingIndex(0);
             
-            self.View.EG_Top.transform.SetParent(self.UIMain.transform);
-            self.View.EG_Top.transform.SetAsLastSibling();
+            self.View.EG_TopRectTransform.SetParent(self.UIMain.transform);
+            self.View.EG_TopRectTransform.SetAsLastSibling();
 
             self.SkillPositionList.Clear();
             ReferenceCollector rc = self.UIMain.GetComponent<ReferenceCollector>();
@@ -196,7 +196,7 @@ namespace ET.Client
         {
             self.View.uiTransform.gameObject.SetActive(isActive);
             self.View.E_SkillPositionSetImage.gameObject.SetActive(isActive);
-            self.View.EG_Top.gameObject.SetActive(isActive);
+            self.View.EG_TopRectTransform.gameObject.SetActive(isActive);
         }
 
         public static void HideEventTrigger(this DlgButtonPositionSet self)

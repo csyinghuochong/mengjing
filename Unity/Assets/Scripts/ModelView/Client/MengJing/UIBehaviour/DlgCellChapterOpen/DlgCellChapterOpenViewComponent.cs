@@ -18,7 +18,7 @@ namespace ET.Client
      			}
      			if( this.m_E_ImageDiImage == null )
      			{
-		    		this.m_E_ImageDiImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_ImageDi");
+		    		this.m_E_ImageDiImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Center/E_ImageDi");
      			}
      			return this.m_E_ImageDiImage;
      		}
@@ -35,7 +35,7 @@ namespace ET.Client
      			}
      			if( this.m_EG_PostionSetRectTransform == null )
      			{
-		    		this.m_EG_PostionSetRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_PostionSet");
+		    		this.m_EG_PostionSetRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"Center/EG_PostionSet");
      			}
      			return this.m_EG_PostionSetRectTransform;
      		}
@@ -52,7 +52,7 @@ namespace ET.Client
      			}
      			if( this.m_E_Lab_ChapterNameText == null )
      			{
-		    		this.m_E_Lab_ChapterNameText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"EG_PostionSet/E_Lab_ChapterName");
+		    		this.m_E_Lab_ChapterNameText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Center/EG_PostionSet/E_Lab_ChapterName");
      			}
      			return this.m_E_Lab_ChapterNameText;
      		}

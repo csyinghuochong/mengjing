@@ -18,7 +18,7 @@ namespace ET.Client
      			}
      			if( this.m_EG_PostionSetRectTransform == null )
      			{
-		    		this.m_EG_PostionSetRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_PostionSet");
+		    		this.m_EG_PostionSetRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"Center/EG_PostionSet");
      			}
      			return this.m_EG_PostionSetRectTransform;
      		}
@@ -35,7 +35,7 @@ namespace ET.Client
      			}
      			if( this.m_EG_NanDu_1RectTransform == null )
      			{
-		    		this.m_EG_NanDu_1RectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_PostionSet/EG_NanDu_1");
+		    		this.m_EG_NanDu_1RectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"Center/EG_PostionSet/EG_NanDu_1");
      			}
      			return this.m_EG_NanDu_1RectTransform;
      		}
@@ -52,7 +52,7 @@ namespace ET.Client
      			}
      			if( this.m_EG_NanDu_2RectTransform == null )
      			{
-		    		this.m_EG_NanDu_2RectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_PostionSet/EG_NanDu_2");
+		    		this.m_EG_NanDu_2RectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"Center/EG_PostionSet/EG_NanDu_2");
      			}
      			return this.m_EG_NanDu_2RectTransform;
      		}
@@ -69,7 +69,7 @@ namespace ET.Client
      			}
      			if( this.m_EG_NanDu_3RectTransform == null )
      			{
-		    		this.m_EG_NanDu_3RectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_PostionSet/EG_NanDu_3");
+		    		this.m_EG_NanDu_3RectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"Center/EG_PostionSet/EG_NanDu_3");
      			}
      			return this.m_EG_NanDu_3RectTransform;
      		}
@@ -86,7 +86,7 @@ namespace ET.Client
      			}
      			if( this.m_E_Lab_ChapterNameText == null )
      			{
-		    		this.m_E_Lab_ChapterNameText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"EG_PostionSet/E_Lab_ChapterName");
+		    		this.m_E_Lab_ChapterNameText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Center/EG_PostionSet/E_Lab_ChapterName");
      			}
      			return this.m_E_Lab_ChapterNameText;
      		}
@@ -103,7 +103,7 @@ namespace ET.Client
      			}
      			if( this.m_EG_JingYingGuanKaShowSetRectTransform == null )
      			{
-		    		this.m_EG_JingYingGuanKaShowSetRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_PostionSet/EG_JingYingGuanKaShowSet");
+		    		this.m_EG_JingYingGuanKaShowSetRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"Center/EG_PostionSet/EG_JingYingGuanKaShowSet");
      			}
      			return this.m_EG_JingYingGuanKaShowSetRectTransform;
      		}

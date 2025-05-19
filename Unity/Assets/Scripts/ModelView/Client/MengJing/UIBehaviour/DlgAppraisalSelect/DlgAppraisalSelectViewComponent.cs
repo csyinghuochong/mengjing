@@ -1,13 +1,13 @@
-﻿using UnityEngine;
+﻿
+using UnityEngine;
 using UnityEngine.UI;
-
 namespace ET.Client
 {
 	[ComponentOf(typeof(DlgAppraisalSelect))]
 	[EnableMethod]
 	public  class DlgAppraisalSelectViewComponent : Entity,IAwake,IDestroy 
 	{
-		public Button E_CloseButton
+		public UnityEngine.UI.Button E_CloseButton
      	{
      		get
      		{
@@ -18,13 +18,13 @@ namespace ET.Client
      			}
      			if( this.m_E_CloseButton == null )
      			{
-		    		this.m_E_CloseButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_Close");
+		    		this.m_E_CloseButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_Close");
      			}
      			return this.m_E_CloseButton;
      		}
      	}
 
-		public Image E_CloseImage
+		public UnityEngine.UI.Image E_CloseImage
      	{
      		get
      		{
@@ -35,13 +35,13 @@ namespace ET.Client
      			}
      			if( this.m_E_CloseImage == null )
      			{
-		    		this.m_E_CloseImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_Close");
+		    		this.m_E_CloseImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Close");
      			}
      			return this.m_E_CloseImage;
      		}
      	}
 
-		public RectTransform EG_JianDingSetRectTransform
+		public UnityEngine.RectTransform EG_JianDingSetRectTransform
      	{
      		get
      		{
@@ -52,13 +52,13 @@ namespace ET.Client
      			}
      			if( this.m_EG_JianDingSetRectTransform == null )
      			{
-		    		this.m_EG_JianDingSetRectTransform = UIFindHelper.FindDeepChild<RectTransform>(this.uiTransform.gameObject,"EG_JianDingSet");
+		    		this.m_EG_JianDingSetRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"Center/EG_JianDingSet");
      			}
      			return this.m_EG_JianDingSetRectTransform;
      		}
      	}
 
-		public Text E_JianDingQualityText
+		public UnityEngine.UI.Text E_JianDingQualityText
      	{
      		get
      		{
@@ -69,13 +69,13 @@ namespace ET.Client
      			}
      			if( this.m_E_JianDingQualityText == null )
      			{
-		    		this.m_E_JianDingQualityText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"EG_JianDingSet/E_JianDingQuality");
+		    		this.m_E_JianDingQualityText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Center/EG_JianDingSet/E_JianDingQuality");
      			}
      			return this.m_E_JianDingQualityText;
      		}
      	}
 
-		public Text E_JianDingShowText
+		public UnityEngine.UI.Text E_JianDingShowText
      	{
      		get
      		{
@@ -86,13 +86,13 @@ namespace ET.Client
      			}
      			if( this.m_E_JianDingShowText == null )
      			{
-		    		this.m_E_JianDingShowText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"EG_JianDingSet/E_JianDingShow");
+		    		this.m_E_JianDingShowText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Center/EG_JianDingSet/E_JianDingShow");
      			}
      			return this.m_E_JianDingShowText;
      		}
      	}
 
-		public Text E_JianDingShowProText
+		public UnityEngine.UI.Text E_JianDingShowProText
      	{
      		get
      		{
@@ -103,7 +103,7 @@ namespace ET.Client
      			}
      			if( this.m_E_JianDingShowProText == null )
      			{
-		    		this.m_E_JianDingShowProText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"EG_JianDingSet/E_JianDingShowPro");
+		    		this.m_E_JianDingShowProText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Center/EG_JianDingSet/E_JianDingShowPro");
      			}
      			return this.m_E_JianDingShowProText;
      		}
@@ -118,10 +118,11 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-		        ES_CommonItem es = this.m_es_commonitem_1;
-     			if( es ==null )
+     			ES_CommonItem es = this.m_es_commonitem_1;
+     			if( es == null )
+
      			{
-		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"ES_CommonItem_1");
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"Center/ES_CommonItem_1");
 		    	   this.m_es_commonitem_1 = this.AddChild<ES_CommonItem,Transform>(subTrans);
      			}
      			return this.m_es_commonitem_1;
@@ -137,17 +138,18 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-		        ES_CommonItem es = this.m_es_commonitem_2;
-     			if( es ==null )
+     			ES_CommonItem es = this.m_es_commonitem_2;
+     			if( es == null )
+
      			{
-		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"ES_CommonItem_2");
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"Center/ES_CommonItem_2");
 		    	   this.m_es_commonitem_2 = this.AddChild<ES_CommonItem,Transform>(subTrans);
      			}
      			return this.m_es_commonitem_2;
      		}
      	}
 
-		public Image E_CommonItemsImage
+		public UnityEngine.UI.Image E_CommonItemsImage
      	{
      		get
      		{
@@ -158,13 +160,13 @@ namespace ET.Client
      			}
      			if( this.m_E_CommonItemsImage == null )
      			{
-		    		this.m_E_CommonItemsImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_CommonItems");
+		    		this.m_E_CommonItemsImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Center/E_CommonItems");
      			}
      			return this.m_E_CommonItemsImage;
      		}
      	}
 
-		public LoopVerticalScrollRect E_CommonItemsLoopVerticalScrollRect
+		public UnityEngine.UI.LoopVerticalScrollRect E_CommonItemsLoopVerticalScrollRect
      	{
      		get
      		{
@@ -175,13 +177,13 @@ namespace ET.Client
      			}
      			if( this.m_E_CommonItemsLoopVerticalScrollRect == null )
      			{
-		    		this.m_E_CommonItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<LoopVerticalScrollRect>(this.uiTransform.gameObject,"E_CommonItems");
+		    		this.m_E_CommonItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.LoopVerticalScrollRect>(this.uiTransform.gameObject,"Center/E_CommonItems");
      			}
      			return this.m_E_CommonItemsLoopVerticalScrollRect;
      		}
      	}
 
-		public Button E_CoinButton
+		public UnityEngine.UI.Button E_CoinButton
      	{
      		get
      		{
@@ -192,13 +194,13 @@ namespace ET.Client
      			}
      			if( this.m_E_CoinButton == null )
      			{
-		    		this.m_E_CoinButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_Coin");
+		    		this.m_E_CoinButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Center/E_Coin");
      			}
      			return this.m_E_CoinButton;
      		}
      	}
 
-		public Image E_CoinImage
+		public UnityEngine.UI.Image E_CoinImage
      	{
      		get
      		{
@@ -209,13 +211,13 @@ namespace ET.Client
      			}
      			if( this.m_E_CoinImage == null )
      			{
-		    		this.m_E_CoinImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_Coin");
+		    		this.m_E_CoinImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Center/E_Coin");
      			}
      			return this.m_E_CoinImage;
      		}
      	}
 
-		public Button E_ItemButton
+		public UnityEngine.UI.Button E_ItemButton
      	{
      		get
      		{
@@ -226,13 +228,13 @@ namespace ET.Client
      			}
      			if( this.m_E_ItemButton == null )
      			{
-		    		this.m_E_ItemButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_Item");
+		    		this.m_E_ItemButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Center/E_Item");
      			}
      			return this.m_E_ItemButton;
      		}
      	}
 
-		public Image E_ItemImage
+		public UnityEngine.UI.Image E_ItemImage
      	{
      		get
      		{
@@ -243,13 +245,13 @@ namespace ET.Client
      			}
      			if( this.m_E_ItemImage == null )
      			{
-		    		this.m_E_ItemImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_Item");
+		    		this.m_E_ItemImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Center/E_Item");
      			}
      			return this.m_E_ItemImage;
      		}
      	}
 
-		public Text E_EquipLevelText
+		public UnityEngine.UI.Text E_EquipLevelText
      	{
      		get
      		{
@@ -260,13 +262,13 @@ namespace ET.Client
      			}
      			if( this.m_E_EquipLevelText == null )
      			{
-		    		this.m_E_EquipLevelText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_EquipLevel");
+		    		this.m_E_EquipLevelText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Center/E_EquipLevel");
      			}
      			return this.m_E_EquipLevelText;
      		}
      	}
 
-		public Text E_Tip_1Text
+		public UnityEngine.UI.Text E_Tip_1Text
      	{
      		get
      		{
@@ -277,13 +279,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Tip_1Text == null )
      			{
-		    		this.m_E_Tip_1Text = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_Tip_1");
+		    		this.m_E_Tip_1Text = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Center/E_Tip_1");
      			}
      			return this.m_E_Tip_1Text;
      		}
      	}
 
-		public Text E_CoinNumText
+		public UnityEngine.UI.Text E_CoinNumText
      	{
      		get
      		{
@@ -294,7 +296,7 @@ namespace ET.Client
      			}
      			if( this.m_E_CoinNumText == null )
      			{
-		    		this.m_E_CoinNumText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_CoinNum");
+		    		this.m_E_CoinNumText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Center/E_CoinNum");
      			}
      			return this.m_E_CoinNumText;
      		}
@@ -322,23 +324,23 @@ namespace ET.Client
 			this.uiTransform = null;
 		}
 
-		private Button m_E_CloseButton = null;
-		private Image m_E_CloseImage = null;
-		private RectTransform m_EG_JianDingSetRectTransform = null;
-		private Text m_E_JianDingQualityText = null;
-		private Text m_E_JianDingShowText = null;
-		private Text m_E_JianDingShowProText = null;
+		private UnityEngine.UI.Button m_E_CloseButton = null;
+		private UnityEngine.UI.Image m_E_CloseImage = null;
+		private UnityEngine.RectTransform m_EG_JianDingSetRectTransform = null;
+		private UnityEngine.UI.Text m_E_JianDingQualityText = null;
+		private UnityEngine.UI.Text m_E_JianDingShowText = null;
+		private UnityEngine.UI.Text m_E_JianDingShowProText = null;
 		private EntityRef<ES_CommonItem> m_es_commonitem_1 = null;
 		private EntityRef<ES_CommonItem> m_es_commonitem_2 = null;
-		private Image m_E_CommonItemsImage = null;
-		private LoopVerticalScrollRect m_E_CommonItemsLoopVerticalScrollRect = null;
-		private Button m_E_CoinButton = null;
-		private Image m_E_CoinImage = null;
-		private Button m_E_ItemButton = null;
-		private Image m_E_ItemImage = null;
-		private Text m_E_EquipLevelText = null;
-		private Text m_E_Tip_1Text = null;
-		private Text m_E_CoinNumText = null;
+		private UnityEngine.UI.Image m_E_CommonItemsImage = null;
+		private UnityEngine.UI.LoopVerticalScrollRect m_E_CommonItemsLoopVerticalScrollRect = null;
+		private UnityEngine.UI.Button m_E_CoinButton = null;
+		private UnityEngine.UI.Image m_E_CoinImage = null;
+		private UnityEngine.UI.Button m_E_ItemButton = null;
+		private UnityEngine.UI.Image m_E_ItemImage = null;
+		private UnityEngine.UI.Text m_E_EquipLevelText = null;
+		private UnityEngine.UI.Text m_E_Tip_1Text = null;
+		private UnityEngine.UI.Text m_E_CoinNumText = null;
 		public Transform uiTransform = null;
 	}
 }

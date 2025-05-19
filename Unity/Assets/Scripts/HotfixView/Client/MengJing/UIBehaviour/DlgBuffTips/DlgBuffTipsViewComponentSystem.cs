@@ -1,7 +1,10 @@
-﻿namespace ET.Client
+﻿
+using UnityEngine;
+using UnityEngine.UI;
+namespace ET.Client
 {
 	[EntitySystemOf(typeof(DlgBuffTipsViewComponent))]
-	[FriendOfAttribute(typeof(DlgBuffTipsViewComponent))]
+	[FriendOfAttribute(typeof(ET.Client.DlgBuffTipsViewComponent))]
 	public static partial class DlgBuffTipsViewComponentSystem
 	{
 		[EntitySystem]

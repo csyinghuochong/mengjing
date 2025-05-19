@@ -124,14 +124,14 @@ namespace ET.Client
                     switch (damageValueInfo.UnitType)
                     {
                         case UnitType.Monster:
-                            self.View.E_Text_Damage_Record_0.text = zstring.Format("被击杀怪物:{0}",  MonsterConfigCategory.Instance.Get(damageValueInfo.ConfigId).MonsterName);
+                            self.View.E_Text_Damage_Record_0Text.text = zstring.Format("被击杀怪物:{0}",  MonsterConfigCategory.Instance.Get(damageValueInfo.ConfigId).MonsterName);
                             break;  
                         default:
-                            self.View.E_Text_Damage_Record_0.text = zstring.Format("被击杀玩家:{0}", damageValueInfo.UnitName);
+                            self.View.E_Text_Damage_Record_0Text.text = zstring.Format("被击杀玩家:{0}", damageValueInfo.UnitName);
                             break;
                     }
-                    self.View.E_Text_Damage_Record_1.text = zstring.Format("最后一击技能:{0}", SkillConfigCategory.Instance.Get(damageValueInfo.SkillId).SkillName);
-                    self.View.E_Text_Damage_Record_2.text = zstring.Format("最后一击伤害:{0}",  damageValueInfo.DamageValue);
+                    self.View.E_Text_Damage_Record_1Text.text = zstring.Format("最后一击技能:{0}", SkillConfigCategory.Instance.Get(damageValueInfo.SkillId).SkillName);
+                    self.View.E_Text_Damage_Record_2Text.text = zstring.Format("最后一击伤害:{0}",  damageValueInfo.DamageValue);
                 }
             }
             self.M2C_DamageValueListResponse = damageValueListResponse; 

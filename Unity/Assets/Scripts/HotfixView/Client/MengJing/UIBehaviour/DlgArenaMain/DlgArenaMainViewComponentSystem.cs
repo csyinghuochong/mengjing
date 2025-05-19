@@ -1,7 +1,10 @@
-﻿namespace ET.Client
+﻿
+using UnityEngine;
+using UnityEngine.UI;
+namespace ET.Client
 {
 	[EntitySystemOf(typeof(DlgArenaMainViewComponent))]
-	[FriendOfAttribute(typeof(DlgArenaMainViewComponent))]
+	[FriendOfAttribute(typeof(ET.Client.DlgArenaMainViewComponent))]
 	public static partial class DlgArenaMainViewComponentSystem
 	{
 		[EntitySystem]

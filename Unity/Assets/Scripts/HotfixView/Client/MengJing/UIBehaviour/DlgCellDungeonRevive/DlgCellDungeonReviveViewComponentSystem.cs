@@ -1,7 +1,10 @@
-﻿namespace ET.Client
+﻿
+using UnityEngine;
+using UnityEngine.UI;
+namespace ET.Client
 {
 	[EntitySystemOf(typeof(DlgCellDungeonReviveViewComponent))]
-	[FriendOfAttribute(typeof(DlgCellDungeonReviveViewComponent))]
+	[FriendOfAttribute(typeof(ET.Client.DlgCellDungeonReviveViewComponent))]
 	public static partial class DlgCellDungeonReviveViewComponentSystem
 	{
 		[EntitySystem]
