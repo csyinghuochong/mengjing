@@ -489,7 +489,7 @@ namespace ET.Client
             self.View.E_Button_WorldLvButton.AddListener(self.OnButton_WorldLvButton);
             self.View.E_Btn_PaiMaiHangButton.AddListener(self.OnBtn_PaiMaiHangButton);
             self.View.E_Btn_CellDungeonButton.AddListener(self.OnBtn_CellDungeon);
-            self.View.E_Btn_PetMelee.AddListener(self.OnBtn_PetMelee);
+            self.View.E_Btn_PetMeleeButton.AddListener(self.OnBtn_PetMelee);
 
             self.View.EG_Btn_KillMonsterRewardRectTransform.GetComponent<ReferenceCollector>().Get<GameObject>("Image_ItemButton")
                     .GetComponent<Button>().AddListenerAsync(self.OnBtn_KillMonsterReward);
@@ -506,8 +506,8 @@ namespace ET.Client
             self.View.E_RoseTaskButton.AddListener(self.OnRoseTaskButton);
             self.View.E_RoseTeamButton.AddListener(self.OnRoseTeamButton);
             
-            self.View.E_ButtonStallCancel.AddListener(self.OnButtonStallCancel);
-            self.View.E_ButtonStallOpen.AddListenerAsync(self.OnButtonStallOpen);
+            self.View.E_ButtonStallCancelButton.AddListener(self.OnButtonStallCancel);
+            self.View.E_ButtonStallOpenButton.AddListenerAsync(self.OnButtonStallOpen);
 
             self.LockTargetComponent = self.Root().GetComponent<LockTargetComponent>();
             self.SkillIndicatorComponent = self.Root().GetComponent<SkillIndicatorComponent>();
@@ -776,7 +776,8 @@ namespace ET.Client
             MapComponent mapComponent = self.Root().GetComponent<MapComponent>();
             int sceneType = mapComponent.MapType;
             self.View.EG_PhoneLeftRectTransform.gameObject.SetActive(show);
-            self.View.EG_LeftSetRectTransform.gameObject.SetActive(show);
+            self.View.ES_MainBuff.uiTransform.gameObject.SetActive(show);
+            self.View.ES_MainHpBar.uiTransform.gameObject.SetActive(show);
             self.View.EG_RightBottomSetRectTransform.gameObject.SetActive(show);
             self.View.EG_RightSetRectTransform.gameObject.SetActive(show);
             if (show)
@@ -971,7 +972,7 @@ namespace ET.Client
                     }
 
                     GameObject prefab = resourcesLoaderComponent.LoadAssetSync<GameObject>(path);
-                    GameObject go = UnityEngine.Object.Instantiate(prefab, self.View.E_MainTaskItemsLoopVerticalScrollRect.transform.Find("Content").gameObject.transform);
+                    GameObject go = UnityEngine.Object.Instantiate(prefab, self.View.E_MainTaskItemsScrollRect.transform.Find("Content").gameObject.transform);
                     item.BindTrans(go.transform);
                     self.ScrollItemMainTasks.Add(i, item);
                 }
@@ -1140,7 +1141,7 @@ namespace ET.Client
                     }
 
                     GameObject prefab = resourcesLoaderComponent.LoadAssetSync<GameObject>(path);
-                    GameObject go = UnityEngine.Object.Instantiate(prefab, self.View.E_MainTeamItemsLoopVerticalScrollRect.transform.Find("Content").gameObject.transform);
+                    GameObject go = UnityEngine.Object.Instantiate(prefab, self.View.E_MainTeamItemsScrollRect.transform.Find("Content").gameObject.transform);
                     item.BindTrans(go.transform);
                     self.ScrollItemMainTeamItems.Add(i, item);
                 }
@@ -1301,7 +1302,8 @@ namespace ET.Client
 
             //self.View.E_ExpProImage.fillAmount = (float)userInfo.Exp / (float)ExpConfigCategory.Instance.Get(userInfo.Lv).UpExp;
             float ratevalue = (float)userInfo.Exp / (float)ExpConfigCategory.Instance.Get(userInfo.Lv).UpExp;
-            self.View.E_ExpProImage.transform.localScale = new Vector3(ratevalue, 1f, 1f);
+            // self.View.E_ExpProImage.transform.localScale = new Vector3(ratevalue, 1f, 1f);
+            self.View.E_ExpProImage.fillAmount = ratevalue;
         }
 
         #endregion
@@ -1336,7 +1338,7 @@ namespace ET.Client
                     }
 
                     GameObject prefab = resourcesLoaderComponent.LoadAssetSync<GameObject>(path);
-                    GameObject go = UnityEngine.Object.Instantiate(prefab, self.View.E_MainChatItemsLoopVerticalScrollRect.transform.Find("Content").gameObject.transform);
+                    GameObject go = UnityEngine.Object.Instantiate(prefab, self.View.E_MainChatItemsScrollRect.transform.Find("Content").gameObject.transform);
                     item.BindTrans(go.transform);
                     self.ScrollItemMainChatItems.Add(i, item);
                 }
@@ -1390,7 +1392,7 @@ namespace ET.Client
             }
 
             // 无效。。。
-            self.View.E_MainChatItemsLoopVerticalScrollRect.verticalNormalizedPosition = 0f;
+            self.View.E_MainChatItemsScrollRect.verticalNormalizedPosition = 0f;
         }
 
         #endregion
@@ -1420,7 +1422,7 @@ namespace ET.Client
             if (leftTime <= 0)
             {
                 // 先切换回英雄
-                self.View.E_TextPetSwitch.text = string.Empty;
+                self.View.E_TextPetSwitchText.text = string.Empty;
                 self.Root().GetComponent<TimerComponent>().Remove(ref self.MainPetSwitchTimer);
                 PetNetHelper.RequestPetFightSwitch(self.Root(), 0).Coroutine();
             }
@@ -1428,7 +1430,7 @@ namespace ET.Client
             {
                 using (zstring.Block())
                 {
-                    self.View.E_TextPetSwitch.text = zstring.Format("{0}", leftTime);
+                    self.View.E_TextPetSwitchText.text = zstring.Format("{0}", leftTime);
                 }
             }
         }
@@ -1449,7 +1451,7 @@ namespace ET.Client
 
                 self.View.ES_MainSkill.OnEnterScene(unit, petId);
                 self.View.ES_MainSkill.OnPetFightSwitch(petId);
-                self.View.E_TextPetSwitch.text = ConfigData.PetSwichEndCD.ToString();
+                self.View.E_TextPetSwitchText.text = ConfigData.PetSwichEndCD.ToString();
                 self.MainPetSwitchEndTime = TimeHelper.ServerNow() + TimeHelper.Second * ConfigData.PetSwichEndCD;
                 self.MainPetSwitchTimer = root.GetComponent<TimerComponent>().NewRepeatedTimer(1000, TimerInvokeType.MainPetSwitchTimer, self);
             }
@@ -1458,7 +1460,7 @@ namespace ET.Client
                 // FlyTipComponent.Instance.ShowFlyTip("切换成英雄");
                 self.View.ES_MainSkill.OnEnterScene(unit, 0);
                 self.View.ES_MainSkill.OnPetFightSwitch(0);
-                self.View.E_TextPetSwitch.text = string.Empty;
+                self.View.E_TextPetSwitchText.text = string.Empty;
                 self.MainPetSwitchEndTime = 0;
             }
 
@@ -2082,7 +2084,7 @@ namespace ET.Client
                     self.View.ES_MainHpBar.EG_BossNodeRectTransform.gameObject.SetActive(false);
                     self.View.EG_HomeButtonRectTransform.gameObject.SetActive(true);
                     self.View.ES_MainSkill.uiTransform.gameObject.SetActive(false);
-                    self.View.E_MainTaskItemsLoopVerticalScrollRect.gameObject.SetActive(true);
+                    self.View.E_MainTaskItemsScrollRect.gameObject.SetActive(true);
                     self.View.EG_PhoneLeftRectTransform.gameObject.SetActive(true);
                     self.View.ES_JoystickMove.uiTransform.gameObject.SetActive(true);
                     self.View.E_OpenChatButton.gameObject.SetActive(true);
@@ -2578,7 +2580,7 @@ namespace ET.Client
 
         public static void ShowUIStall(this DlgMain self, long stallId)
         {
-            self.View.EG_UIStall.gameObject.SetActive(stallId > 0);
+            self.View.EG_UIStallRectTransform.gameObject.SetActive(stallId > 0);
         }
 
         public static void OnZeroClockUpdate(this DlgMain self)
