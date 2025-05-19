@@ -1,3 +1,4 @@
+using ET.Client;
 using System;
 using System.Collections.Generic;
 using Unity.Mathematics;
@@ -483,7 +484,7 @@ namespace ET.Server
                 targetIdList.Add(targetId);
             }
 
-            int targetAngle = 0; 
+            int targetAngle = (int)MathHelper.QuaternionToEulerAngle_Y(unit.Rotation);
             Unit target = unit.GetParent<UnitComponent>().Get(targetId);
             if (target != null && target.Id != targetId)
             {
