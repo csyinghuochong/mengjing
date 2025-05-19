@@ -579,7 +579,9 @@ namespace ET.Server
 
                   self.Skills.Add(handlerList[i] );
               }
-              if (zhudong && ConfigData.NOPassiveSkill.Contains(weaponSkillConfig.Id)  && !SkillHelp.IsChongJiSkill(weaponSkillConfig.GameObjectName))
+
+
+                if (zhudong && !ConfigData.NOPassiveSkill.Contains(weaponSkillConfig.Id)  && !SkillHelp.IsChongJiSkill(weaponSkillConfig.GameObjectName))
               {
                   SkillPassiveComponent skillPassiveComponent = unit.GetComponent<SkillPassiveComponent>();
                   if (skillPassiveComponent == null)
