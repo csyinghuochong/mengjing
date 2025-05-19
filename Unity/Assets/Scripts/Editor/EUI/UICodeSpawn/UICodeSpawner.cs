@@ -696,12 +696,27 @@ public partial class UICodeSpawner
 				if (pair.Key.StartsWith(CommonUIPrefix))
 				{
 					var subUIClassPrefab = PrefabUtility.GetCorrespondingObjectFromOriginalSource(widget);
-					if (subUIClassPrefab==null)
+					if (subUIClassPrefab == null)
 					{
-						Debug.LogError($"公共UI找不到所属的Prefab! {pair.Key}");
-						return;
+						// Debug.LogError($"公共UI找不到所属的Prefab! {pair.Key}");
+						// return;
+						string[] parts = pair.Key.Split('_');
+						string type = "";
+						if (parts.Length >= 2)
+						{
+							type = parts[0] + "_" + parts[1];
+						}
+						else
+						{
+							type = pair.Key;
+						}
+						GetSubUIBaseWindowCode(ref strBuilder, pair.Key, strPath, type);
 					}
-					GetSubUIBaseWindowCode(ref strBuilder, pair.Key,strPath,subUIClassPrefab.name);
+					else
+					{
+						GetSubUIBaseWindowCode(ref strBuilder, pair.Key, strPath, subUIClassPrefab.name);
+					}
+					
 					continue;
 				}
 				string widgetName = widget.name + strClassType.Split('.').ToList().Last();
@@ -757,16 +772,30 @@ public partial class UICodeSpawner
 			    Component widget = info;
 			    string strClassType = widget.GetType().ToString();
 
-			    if ( pair.Key.StartsWith(CommonUIPrefix))
+			    if (pair.Key.StartsWith(CommonUIPrefix))
 			    {
 				    var subUIClassPrefab = PrefabUtility.GetCorrespondingObjectFromOriginalSource(widget);
-				    if (subUIClassPrefab==null)
+				    if (subUIClassPrefab == null)
 				    {
-					    Debug.LogError($"公共UI找不到所属的Prefab! {pair.Key}");
-					    return;
+					    // Debug.LogError($"公共UI找不到所属的Prefab! {pair.Key}");
+					    // return;
+					    string[] parts = pair.Key.Split('_');
+					    string type = "";
+					    if (parts.Length >= 2)
+					    {
+						    type = parts[0] + "_" + parts[1];
+					    }
+					    else
+					    {
+						    type = pair.Key;
+					    }
+					    strBuilder.AppendFormat("\t\tprivate EntityRef<{0}> m_{1} = null;\r\n", type, pair.Key.ToLower());
 				    }
-				    string subUIClassType = subUIClassPrefab.name;
-				    strBuilder.AppendFormat("\t\tprivate EntityRef<{0}> m_{1} = null;\r\n", subUIClassType, pair.Key.ToLower());
+				    else
+				    {
+					    strBuilder.AppendFormat("\t\tprivate EntityRef<{0}> m_{1} = null;\r\n", subUIClassPrefab.name, pair.Key.ToLower());
+				    }
+				    
 				    continue;
 			    }
 
