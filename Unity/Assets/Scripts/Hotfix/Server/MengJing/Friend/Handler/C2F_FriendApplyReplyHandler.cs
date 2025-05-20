@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 namespace  ET.Server
@@ -21,6 +22,11 @@ namespace  ET.Server
             
             dBFriendInfo.ApplyList.Remove(request.FriendID);
 
+            if (request.FriendID == 0)
+            {
+                Console.WriteLine("C2F_FriendApplyReplyHandler   request.FriendID == 0");
+            }
+
             if (request.ReplyCode == 1) //同意
             {
                 if (!dBFriendInfo.FriendList.Contains(request.FriendID))
@@ -39,6 +45,10 @@ namespace  ET.Server
                     await dbComponent.Save(scene.Zone(), dBFriendInfo_2);
                 }
             }
+
+            dBFriendInfo.FriendList.RemoveAll(item => item == 0);
+            dBFriendInfo.ApplyList.RemoveAll(item => item == 0);
+            dBFriendInfo.Blacklist.RemoveAll(item => item == 0);
             await dbComponent.Save(scene.Zone(), dBFriendInfo);
             await ETTask.CompletedTask;
         }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 namespace  ET.Server
@@ -19,9 +20,21 @@ namespace  ET.Server
 
             DBFriendInfo dBFriendInfo = dbFriendInfos[0];
 
+            Console.WriteLine($"C2F_FriendInfoHandler.dBFriendInfo111");
+
             List<long> allonline = await UnitCacheHelper.GetOnLineUnits(scene.Root(), scene.Zone());
-            
+
+            Console.WriteLine($"C2F_FriendInfoHandler.allonline:  {allonline.Count}");
+
+            dBFriendInfo.FriendList.RemoveAll(item => item == 0);
+            dBFriendInfo.ApplyList.RemoveAll(item => item == 0);
+            dBFriendInfo.Blacklist.RemoveAll(item => item == 0);
+            await dbComponent.Save(scene.Zone(), dBFriendInfo);
+
             response.FriendList = await GetFriendInfos( scene.Root(), dBFriendInfo.FriendList, allonline);
+
+            Console.WriteLine($"C2F_FriendInfoHandler. response.FriendList:  {response.FriendList.Count}");
+
             response.ApplyList = await GetFriendInfos( scene.Root(),dBFriendInfo.ApplyList, allonline);
             response.Blacklist = await GetFriendInfos( scene.Root(),dBFriendInfo.Blacklist, allonline);
             
@@ -62,14 +75,32 @@ namespace  ET.Server
             
             await ETTask.CompletedTask;
         }
-        
+
         public static async ETTask<List<FriendInfo>> GetFriendInfos(Scene root, List<long> friends, List<long> onlines)
         {
-            List<FriendInfo> friendInfos = new List < FriendInfo >();
+            List<FriendInfo> friendInfos = new List<FriendInfo>();
             for (int i = 0; i < friends.Count; i++)
             {
                 long friendId = friends[i];
                 UserInfoComponentS userInfoComponent = await UnitCacheHelper.GetComponentCache<UserInfoComponentS>(root, friendId);
+
+
+                if (userInfoComponent == null)
+                {
+                    Console.WriteLine($"userInfoComponent == nul:  {friendId}");
+                    continue;
+                }
+                if (userInfoComponent.ChildrenDB == null )
+                {
+                    Console.WriteLine($"userInfoComponent.ChildrenDB == nul:  {friendId}");
+                    continue;
+                }
+                if ( userInfoComponent.ChildrenDB.Count < 1)
+                {
+                    Console.WriteLine($"userInfoComponent.ChildrenDB.Count < 1:  {friendId}");
+                    continue;
+                }
+
                 UserInfo unionInfoCache = userInfoComponent.ChildrenDB[0] as UserInfo;
                 if (userInfoComponent == null)
                 {

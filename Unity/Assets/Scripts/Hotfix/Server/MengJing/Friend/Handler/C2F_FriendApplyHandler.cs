@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 namespace  ET.Server
@@ -17,7 +18,9 @@ namespace  ET.Server
             }
 
             DBFriendInfo dBFriendInfo = dbFriendInfos[0];
-           
+
+            Console.WriteLine($"C2F_FriendApplyHandler   request.FriendInfo.UserId == {request.FriendInfo.UserId}");
+
             if (dBFriendInfo.FriendList.Contains(request.FriendInfo.UserId))
             {
                 return;
