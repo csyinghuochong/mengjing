@@ -586,7 +586,7 @@ namespace ET.Server
                   SkillPassiveComponent skillPassiveComponent = unit.GetComponent<SkillPassiveComponent>();
                   if (skillPassiveComponent == null)
                   {
-                      Log.Debug($"skillPassiveComponent == null: {unit.Type}");
+                      Log.Error($"skillPassiveComponent == null: {unit.Type}");
                   }
                   if (weaponSkillConfig.SkillActType == 0)
                   {
