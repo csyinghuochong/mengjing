@@ -349,17 +349,20 @@ namespace ET.Server
 				int monsterid = int.Parse(mondels[2]);
 				MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(monsterid);
 
-				if (monsterConfig.MonsterType == MonsterTypeEnum.SceneItem && monsterConfig.MonsterSonType == 55)
+                if (monsterConfig.MonsterType == MonsterTypeEnum.Boss)
+                {
+                    continue;
+                }
+                if (monsterConfig.MonsterType == MonsterTypeEnum.SceneItem && monsterConfig.MonsterSonType == 55)
 				{
                     continue;
                 }
+                //if (monsterConfig.MonsterType != MonsterTypeEnum.Normal && monsterConfig.MonsterSonType != 55)
+                //{
+                //	continue;
+                //}
 
-				//if (monsterConfig.MonsterType != MonsterTypeEnum.Normal && monsterConfig.MonsterSonType != 55)
-				//{
-				//	continue;
-				//}
-
-				if (numericComponent.GetAsInt(NumericType.JingLingRefreshTime) >= 30)
+                if (numericComponent.GetAsInt(NumericType.JingLingRefreshTime) >= 30)
 				{
 					break;
 				}

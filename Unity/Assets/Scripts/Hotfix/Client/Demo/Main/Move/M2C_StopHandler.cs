@@ -67,7 +67,7 @@ namespace ET.Client
                 MoveComponent moveComponent = unit.GetComponent<MoveComponent>();
                 moveComponent.SkillStop(unit, skillConfig).Coroutine();
                 moveComponent.Stop(message.Error == 0);
-                if (math.distance(unit.Position , message.Position) > 0.5f)
+                if (!unit.MainHero && math.distance(unit.Position , message.Position) > 0.5f)
                 {
                     unit.Position = message.Position;
                 }
