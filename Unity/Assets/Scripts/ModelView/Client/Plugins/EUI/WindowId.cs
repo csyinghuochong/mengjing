@@ -232,5 +232,7 @@ namespace ET.Client
 		WindowID_SingleHappyMain,
 		WindowID_ProLucklyExplain,
 		WindowID_FangChengMiTip,
+		WindowID_DragonDungeonPrepare,
+		WindowID_DragonDungeonSettlement,
 	}
 }

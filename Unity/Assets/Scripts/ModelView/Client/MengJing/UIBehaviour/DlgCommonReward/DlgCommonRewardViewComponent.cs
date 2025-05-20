@@ -1,13 +1,13 @@
-﻿using UnityEngine;
+﻿
+using UnityEngine;
 using UnityEngine.UI;
-
 namespace ET.Client
 {
 	[ComponentOf(typeof(DlgCommonReward))]
 	[EnableMethod]
 	public  class DlgCommonRewardViewComponent : Entity,IAwake,IDestroy 
 	{
-		public Button E_ImageButtonButton
+		public UnityEngine.UI.Button E_ImageButtonButton
      	{
      		get
      		{
@@ -18,13 +18,13 @@ namespace ET.Client
      			}
      			if( this.m_E_ImageButtonButton == null )
      			{
-		    		this.m_E_ImageButtonButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_ImageButton");
+		    		this.m_E_ImageButtonButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_ImageButton");
      			}
      			return this.m_E_ImageButtonButton;
      		}
      	}
 
-		public Image E_ImageButtonImage
+		public UnityEngine.UI.Image E_ImageButtonImage
      	{
      		get
      		{
@@ -35,7 +35,7 @@ namespace ET.Client
      			}
      			if( this.m_E_ImageButtonImage == null )
      			{
-		    		this.m_E_ImageButtonImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_ImageButton");
+		    		this.m_E_ImageButtonImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_ImageButton");
      			}
      			return this.m_E_ImageButtonImage;
      		}
@@ -50,10 +50,11 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-		        ES_RewardList es = this.m_es_rewardlist;
-     			if( es ==null )
+     			ES_RewardList es = this.m_es_rewardlist;
+     			if( es == null )
+
      			{
-		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"ES_RewardList");
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"Center/ES_RewardList");
 		    	   this.m_es_rewardlist = this.AddChild<ES_RewardList,Transform>(subTrans);
      			}
      			return this.m_es_rewardlist;
@@ -68,8 +69,8 @@ namespace ET.Client
 			this.uiTransform = null;
 		}
 
-		private Button m_E_ImageButtonButton = null;
-		private Image m_E_ImageButtonImage = null;
+		private UnityEngine.UI.Button m_E_ImageButtonButton = null;
+		private UnityEngine.UI.Image m_E_ImageButtonImage = null;
 		private EntityRef<ES_RewardList> m_es_rewardlist = null;
 		public Transform uiTransform = null;
 	}

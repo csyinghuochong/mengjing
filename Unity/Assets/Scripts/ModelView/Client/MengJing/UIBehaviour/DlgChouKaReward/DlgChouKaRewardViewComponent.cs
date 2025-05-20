@@ -18,7 +18,7 @@ namespace ET.Client
      			}
      			if( this.m_E_TextTitleText == null )
      			{
-		    		this.m_E_TextTitleText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_TextTitle");
+		    		this.m_E_TextTitleText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Center/E_TextTitle");
      			}
      			return this.m_E_TextTitleText;
      		}
@@ -35,7 +35,7 @@ namespace ET.Client
      			}
      			if( this.m_E_Btn_CloseButton == null )
      			{
-		    		this.m_E_Btn_CloseButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_Btn_Close");
+		    		this.m_E_Btn_CloseButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Center/E_Btn_Close");
      			}
      			return this.m_E_Btn_CloseButton;
      		}
@@ -52,7 +52,7 @@ namespace ET.Client
      			}
      			if( this.m_E_Btn_CloseImage == null )
      			{
-		    		this.m_E_Btn_CloseImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Btn_Close");
+		    		this.m_E_Btn_CloseImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Center/E_Btn_Close");
      			}
      			return this.m_E_Btn_CloseImage;
      		}
@@ -69,7 +69,7 @@ namespace ET.Client
      			}
      			if( this.m_E_ChouKaRewardItemsScrollRect == null )
      			{
-		    		this.m_E_ChouKaRewardItemsScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.ScrollRect>(this.uiTransform.gameObject,"E_ChouKaRewardItems");
+		    		this.m_E_ChouKaRewardItemsScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.ScrollRect>(this.uiTransform.gameObject,"Center/E_ChouKaRewardItems");
      			}
      			return this.m_E_ChouKaRewardItemsScrollRect;
      		}
@@ -86,7 +86,7 @@ namespace ET.Client
      			}
      			if( this.m_E_ChouKaRewardItemsUIImage == null )
      			{
-		    		this.m_E_ChouKaRewardItemsUIImage = UIFindHelper.FindDeepChild<UIImage>(this.uiTransform.gameObject,"E_ChouKaRewardItems");
+		    		this.m_E_ChouKaRewardItemsUIImage = UIFindHelper.FindDeepChild<UIImage>(this.uiTransform.gameObject,"Center/E_ChouKaRewardItems");
      			}
      			return this.m_E_ChouKaRewardItemsUIImage;
      		}
