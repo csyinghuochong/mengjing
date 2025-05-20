@@ -38,25 +38,6 @@ namespace  ET.Server
             response.ApplyList = await GetFriendInfos( scene.Root(),dBFriendInfo.ApplyList, allonline);
             response.Blacklist = await GetFriendInfos( scene.Root(),dBFriendInfo.Blacklist, allonline);
             
-            FriendInfo friendInfo = FriendInfo.Create();
-            friendInfo.UserId = 0;
-            friendInfo.PlayerLevel = 0;
-            friendInfo.OnLineTime = 0;
-            friendInfo.Occ = 1;
-            friendInfo.PlayerName = "暂无好友";
-            if (response.FriendList.Count == 0)
-            {
-                response.FriendList.Add(friendInfo);
-            }
-            if (response.ApplyList.Count == 0)
-            {
-                response.ApplyList.Add(friendInfo);
-            }
-            if (response.Blacklist.Count == 0)
-            {
-                response.Blacklist.Add(friendInfo);
-            }
-
             ListComponent<long> friendids = ListComponent<long>.Create();
             for (int k = 0; k < response.FriendList.Count; k++)
             {

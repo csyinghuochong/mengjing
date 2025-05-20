@@ -110,15 +110,16 @@ public class PatchWindow : MonoBehaviour
             float sizeMB = msg.TotalSizeBytes / 1048576f;
             sizeMB = Mathf.Clamp(sizeMB, 0.1f, float.MaxValue);
             string totalSizeMB = sizeMB.ToString("f1");
-            ShowMessageBox($"发现需要更新的资源, 资源数量 {msg.TotalCount} 资源大小 {totalSizeMB}MB", callback);
+            ShowMessageBox($"发现需要更新的资源, 资源数量 {msg.TotalCount} 资源大小 {totalSizeMB}兆", callback);
         }
         else if (message is PatchEventDefine.DownloadProgressUpdate)
         {
             var msg = message as PatchEventDefine.DownloadProgressUpdate;
-            _slider.value = (float)msg.CurrentDownloadCount / msg.TotalDownloadCount;
+            //_slider.value = (float)msg.CurrentDownloadCount / msg.TotalDownloadCount;
             string currentSizeMB = (msg.CurrentDownloadSizeBytes / 1048576f).ToString("f1");
             string totalSizeMB = (msg.TotalDownloadSizeBytes / 1048576f).ToString("f1");
-            _tips.text = $"{msg.CurrentDownloadCount}/{msg.TotalDownloadCount} {currentSizeMB}MB/{totalSizeMB}MB";
+            _slider.value = (float)msg.CurrentDownloadSizeBytes / msg.TotalDownloadSizeBytes;
+            _tips.text = $"{msg.CurrentDownloadCount}/{msg.TotalDownloadCount} {currentSizeMB}兆/{totalSizeMB}兆";
         }
         else if (message is PatchEventDefine.PackageVersionUpdateFailed)
         {
