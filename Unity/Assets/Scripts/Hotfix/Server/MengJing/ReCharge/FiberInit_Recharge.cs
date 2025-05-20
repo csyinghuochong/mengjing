@@ -11,7 +11,12 @@ namespace ET.Server
             root.AddComponent<CoroutineLockComponent>();
             root.AddComponent<ProcessInnerSender>();
             root.AddComponent<MessageSender>();
-
+            
+            //root.AddComponent<ReChargeWXComponent>();
+            root.AddComponent<ReChargeQDComponent>();
+            //root.AddComponent<ReChargeAliComponent>();
+            //root.AddComponent<ReChargeIOSComponent>();
+            //root.AddComponent<ReChargeTikTokComponent>();
             await ETTask.CompletedTask;
         }
     }
