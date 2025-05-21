@@ -53,7 +53,7 @@ namespace ET
 #else
 			ePlayMode = EPlayMode.HostPlayMode;
 #endif
-			YooAssets.SetDownloadSystemBreakpointResumeFileSize(5  * 1024);
+			YooAssets.SetDownloadSystemBreakpointResumeFileSize(5 * 1024 * 1024);
 			await World.Instance.AddSingleton<ResourcesComponent>().CreatePackageAsync("DefaultPackage",ePlayMode, true);
 			
 			// 游戏管理器
