@@ -34,8 +34,8 @@ namespace ET
 				.WithNotParsed(error => throw new Exception($"命令行格式错误! {error}"))
 				.WithParsed((o)=>World.Instance.AddSingleton(o));
 			Options.Instance.StartConfig = $"StartConfig/Localhost";
-            
-			Options.Instance.Develop = VersionMode == ET.VersionMode.Beta ?0 : 1;
+
+			Options.Instance.Develop =  VersionMode == ET.VersionMode.Beta ?0 : 1;
 			Options.Instance.LogLevel = VersionMode == ET.VersionMode.Beta ?6 : 1;// 打印Debug Message消耗较大，可根据需要改为 3
 			
 			World.Instance.AddSingleton<Logger>().Log = new UnityLogger();
@@ -53,7 +53,7 @@ namespace ET
 #else
 			ePlayMode = EPlayMode.HostPlayMode;
 #endif
-
+			YooAssets.SetDownloadSystemBreakpointResumeFileSize(5  * 1024);
 			await World.Instance.AddSingleton<ResourcesComponent>().CreatePackageAsync("DefaultPackage",ePlayMode, true);
 			
 			// 游戏管理器
