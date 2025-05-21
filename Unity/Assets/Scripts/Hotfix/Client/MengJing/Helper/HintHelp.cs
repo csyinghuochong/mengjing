@@ -20,6 +20,11 @@
             {
                 return;
             }
+            if (code == ErrorCode.ERR_CanNotMove_NetWait 
+                || code == ErrorCode.ERR_CanNotMove_Rigidity)
+            {
+                return ;
+            }
 
             string hintStr = code.ToString();
             ErrorViewData.ErrorHints.TryGetValue(code, out hintStr);
