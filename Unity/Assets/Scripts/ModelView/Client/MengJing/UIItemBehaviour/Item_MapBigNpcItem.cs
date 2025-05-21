@@ -72,7 +72,55 @@ namespace ET.Client
 				}
 			}
 		}
+		
+		public Image E_ImageDi_npc
+		{
+			get
+			{
+				if (this.uiTransform == null)
+				{
+					Log.Error("uiTransform is null.");
+					return null;
+				}
+				if (this.isCacheNode)
+				{
+					if( this.m_E_ImageDi_npc == null )
+					{
+						this.m_E_ImageDi_npc = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_ImageDi_npc");
+					}
+					return this.m_E_ImageDi_npc;
+				}
+				else
+				{
+					return UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_ImageDi_npc");
+				}
+			}
+		}
 
+		public Image E_ImageDi_boss
+		{
+			get
+			{
+				if (this.uiTransform == null)
+				{
+					Log.Error("uiTransform is null.");
+					return null;
+				}
+				if (this.isCacheNode)
+				{
+					if( this.m_E_ImageDi_boss == null )
+					{
+						this.m_E_ImageDi_boss = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_ImageDi_boss");
+					}
+					return this.m_E_ImageDi_boss;
+				}
+				else
+				{
+					return UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_ImageDi_boss");
+				}
+			}
+		}
+		
 		public Image E_ImageDiImage
      	{
      		get
@@ -127,6 +175,8 @@ namespace ET.Client
 			this.m_E_ImageDiImage = null;
 			this.m_E_TextNameText = null;
 			this.m_E_FlyToButton = null;
+			this.m_E_ImageDi_npc = null;
+			this.m_E_ImageDi_boss = null;
 			this.uiTransform = null;
 			this.DataId = 0;
 		}
@@ -134,6 +184,8 @@ namespace ET.Client
 		private Button m_E_ImageDiButton = null;
 		private Button m_E_FlyToButton = null;	
 		private Image m_E_ImageDiImage = null;
+		private Image m_E_ImageDi_npc = null;
+		private Image m_E_ImageDi_boss = null;
 		private Text m_E_TextNameText = null;
 		public Transform uiTransform = null;
 	}

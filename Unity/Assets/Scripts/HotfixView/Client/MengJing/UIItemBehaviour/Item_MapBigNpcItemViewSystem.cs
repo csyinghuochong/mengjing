@@ -40,14 +40,17 @@ namespace ET.Client
             self.ConfigId = npcId;
             self.ClickHandler = action;
             self.UnitType = unittype;
-
+            self.E_ImageDi_npc.gameObject.SetActive(false);
+            self.E_ImageDi_boss.gameObject.SetActive(false);
             if (unittype == UnitType.Npc)
             {
                 self.E_TextNameText.text = NpcConfigCategory.Instance.Get(npcId).Name;
+                self.E_ImageDi_npc.gameObject.SetActive(true);
             }
             else
             {
                 self.E_TextNameText.text = MonsterConfigCategory.Instance.Get(npcId).MonsterName;
+                self.E_ImageDi_boss.gameObject.SetActive(true);
             }
         }
     }
