@@ -52,7 +52,7 @@ namespace ET.Client
      			}
      			if( this.m_E_RankRewardItemsImage == null )
      			{
-		    		this.m_E_RankRewardItemsImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_RankRewardItems");
+		    		this.m_E_RankRewardItemsImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Center/E_RankRewardItems");
      			}
      			return this.m_E_RankRewardItemsImage;
      		}
@@ -69,7 +69,7 @@ namespace ET.Client
      			}
      			if( this.m_E_RankRewardItemsLoopVerticalScrollRect == null )
      			{
-		    		this.m_E_RankRewardItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.LoopVerticalScrollRect>(this.uiTransform.gameObject,"E_RankRewardItems");
+		    		this.m_E_RankRewardItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.LoopVerticalScrollRect>(this.uiTransform.gameObject,"Center/E_RankRewardItems");
      			}
      			return this.m_E_RankRewardItemsLoopVerticalScrollRect;
      		}

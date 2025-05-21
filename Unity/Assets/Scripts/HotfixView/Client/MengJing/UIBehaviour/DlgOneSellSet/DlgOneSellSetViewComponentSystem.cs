@@ -1,7 +1,10 @@
-﻿namespace ET.Client
+﻿
+using UnityEngine;
+using UnityEngine.UI;
+namespace ET.Client
 {
 	[EntitySystemOf(typeof(DlgOneSellSetViewComponent))]
-	[FriendOfAttribute(typeof(DlgOneSellSetViewComponent))]
+	[FriendOfAttribute(typeof(ET.Client.DlgOneSellSetViewComponent))]
 	public static partial class DlgOneSellSetViewComponentSystem
 	{
 		[EntitySystem]

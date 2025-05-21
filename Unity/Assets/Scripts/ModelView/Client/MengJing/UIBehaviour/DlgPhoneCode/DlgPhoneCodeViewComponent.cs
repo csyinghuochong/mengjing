@@ -1,13 +1,13 @@
-﻿using UnityEngine;
+﻿
+using UnityEngine;
 using UnityEngine.UI;
-
 namespace ET.Client
 {
 	[ComponentOf(typeof(DlgPhoneCode))]
 	[EnableMethod]
 	public  class DlgPhoneCodeViewComponent : Entity,IAwake,IDestroy 
 	{
-		public Button E_ImageCloseButton
+		public UnityEngine.UI.Button E_ImageCloseButton
      	{
      		get
      		{
@@ -18,13 +18,13 @@ namespace ET.Client
      			}
      			if( this.m_E_ImageCloseButton == null )
      			{
-		    		this.m_E_ImageCloseButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_ImageClose");
+		    		this.m_E_ImageCloseButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Center/E_ImageClose");
      			}
      			return this.m_E_ImageCloseButton;
      		}
      	}
 
-		public Image E_ImageCloseImage
+		public UnityEngine.UI.Image E_ImageCloseImage
      	{
      		get
      		{
@@ -35,13 +35,13 @@ namespace ET.Client
      			}
      			if( this.m_E_ImageCloseImage == null )
      			{
-		    		this.m_E_ImageCloseImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_ImageClose");
+		    		this.m_E_ImageCloseImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Center/E_ImageClose");
      			}
      			return this.m_E_ImageCloseImage;
      		}
      	}
 
-		public RectTransform EG_SendYanzhengRectTransform
+		public UnityEngine.RectTransform EG_SendYanzhengRectTransform
      	{
      		get
      		{
@@ -52,13 +52,13 @@ namespace ET.Client
      			}
      			if( this.m_EG_SendYanzhengRectTransform == null )
      			{
-		    		this.m_EG_SendYanzhengRectTransform = UIFindHelper.FindDeepChild<RectTransform>(this.uiTransform.gameObject,"EG_SendYanzheng");
+		    		this.m_EG_SendYanzhengRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"Center/EG_SendYanzheng");
      			}
      			return this.m_EG_SendYanzhengRectTransform;
      		}
      	}
 
-		public InputField E_PhoneNumberInputField
+		public UnityEngine.UI.InputField E_PhoneNumberInputField
      	{
      		get
      		{
@@ -69,13 +69,13 @@ namespace ET.Client
      			}
      			if( this.m_E_PhoneNumberInputField == null )
      			{
-		    		this.m_E_PhoneNumberInputField = UIFindHelper.FindDeepChild<InputField>(this.uiTransform.gameObject,"EG_SendYanzheng/E_PhoneNumber");
+		    		this.m_E_PhoneNumberInputField = UIFindHelper.FindDeepChild<UnityEngine.UI.InputField>(this.uiTransform.gameObject,"Center/EG_SendYanzheng/E_PhoneNumber");
      			}
      			return this.m_E_PhoneNumberInputField;
      		}
      	}
 
-		public Image E_PhoneNumberImage
+		public UnityEngine.UI.Image E_PhoneNumberImage
      	{
      		get
      		{
@@ -86,13 +86,13 @@ namespace ET.Client
      			}
      			if( this.m_E_PhoneNumberImage == null )
      			{
-		    		this.m_E_PhoneNumberImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"EG_SendYanzheng/E_PhoneNumber");
+		    		this.m_E_PhoneNumberImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Center/EG_SendYanzheng/E_PhoneNumber");
      			}
      			return this.m_E_PhoneNumberImage;
      		}
      	}
 
-		public Button E_ButtonGetCodeButton
+		public UnityEngine.UI.Button E_ButtonGetCodeButton
      	{
      		get
      		{
@@ -103,13 +103,13 @@ namespace ET.Client
      			}
      			if( this.m_E_ButtonGetCodeButton == null )
      			{
-		    		this.m_E_ButtonGetCodeButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"EG_SendYanzheng/E_ButtonGetCode");
+		    		this.m_E_ButtonGetCodeButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Center/EG_SendYanzheng/E_ButtonGetCode");
      			}
      			return this.m_E_ButtonGetCodeButton;
      		}
      	}
 
-		public Image E_ButtonGetCodeImage
+		public UnityEngine.UI.Image E_ButtonGetCodeImage
      	{
      		get
      		{
@@ -120,13 +120,13 @@ namespace ET.Client
      			}
      			if( this.m_E_ButtonGetCodeImage == null )
      			{
-		    		this.m_E_ButtonGetCodeImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"EG_SendYanzheng/E_ButtonGetCode");
+		    		this.m_E_ButtonGetCodeImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Center/EG_SendYanzheng/E_ButtonGetCode");
      			}
      			return this.m_E_ButtonGetCodeImage;
      		}
      	}
 
-		public RectTransform EG_YanZhengRectTransform
+		public UnityEngine.RectTransform EG_YanZhengRectTransform
      	{
      		get
      		{
@@ -137,13 +137,13 @@ namespace ET.Client
      			}
      			if( this.m_EG_YanZhengRectTransform == null )
      			{
-		    		this.m_EG_YanZhengRectTransform = UIFindHelper.FindDeepChild<RectTransform>(this.uiTransform.gameObject,"EG_YanZheng");
+		    		this.m_EG_YanZhengRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"Center/EG_YanZheng");
      			}
      			return this.m_EG_YanZhengRectTransform;
      		}
      	}
 
-		public Text E_TextYanzhengText
+		public UnityEngine.UI.Text E_TextYanzhengText
      	{
      		get
      		{
@@ -154,13 +154,13 @@ namespace ET.Client
      			}
      			if( this.m_E_TextYanzhengText == null )
      			{
-		    		this.m_E_TextYanzhengText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"EG_YanZheng/E_TextYanzheng");
+		    		this.m_E_TextYanzhengText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Center/EG_YanZheng/E_TextYanzheng");
      			}
      			return this.m_E_TextYanzhengText;
      		}
      	}
 
-		public InputField E_TextPhoneCodeInputField
+		public UnityEngine.UI.InputField E_TextPhoneCodeInputField
      	{
      		get
      		{
@@ -171,13 +171,13 @@ namespace ET.Client
      			}
      			if( this.m_E_TextPhoneCodeInputField == null )
      			{
-		    		this.m_E_TextPhoneCodeInputField = UIFindHelper.FindDeepChild<InputField>(this.uiTransform.gameObject,"EG_YanZheng/E_TextPhoneCode");
+		    		this.m_E_TextPhoneCodeInputField = UIFindHelper.FindDeepChild<UnityEngine.UI.InputField>(this.uiTransform.gameObject,"Center/EG_YanZheng/E_TextPhoneCode");
      			}
      			return this.m_E_TextPhoneCodeInputField;
      		}
      	}
 
-		public Image E_TextPhoneCodeImage
+		public UnityEngine.UI.Image E_TextPhoneCodeImage
      	{
      		get
      		{
@@ -188,13 +188,13 @@ namespace ET.Client
      			}
      			if( this.m_E_TextPhoneCodeImage == null )
      			{
-		    		this.m_E_TextPhoneCodeImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"EG_YanZheng/E_TextPhoneCode");
+		    		this.m_E_TextPhoneCodeImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Center/EG_YanZheng/E_TextPhoneCode");
      			}
      			return this.m_E_TextPhoneCodeImage;
      		}
      	}
 
-		public Button E_ButtonCommitCodeButton
+		public UnityEngine.UI.Button E_ButtonCommitCodeButton
      	{
      		get
      		{
@@ -205,13 +205,13 @@ namespace ET.Client
      			}
      			if( this.m_E_ButtonCommitCodeButton == null )
      			{
-		    		this.m_E_ButtonCommitCodeButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"EG_YanZheng/E_ButtonCommitCode");
+		    		this.m_E_ButtonCommitCodeButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Center/EG_YanZheng/E_ButtonCommitCode");
      			}
      			return this.m_E_ButtonCommitCodeButton;
      		}
      	}
 
-		public Image E_ButtonCommitCodeImage
+		public UnityEngine.UI.Image E_ButtonCommitCodeImage
      	{
      		get
      		{
@@ -222,7 +222,7 @@ namespace ET.Client
      			}
      			if( this.m_E_ButtonCommitCodeImage == null )
      			{
-		    		this.m_E_ButtonCommitCodeImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"EG_YanZheng/E_ButtonCommitCode");
+		    		this.m_E_ButtonCommitCodeImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Center/EG_YanZheng/E_ButtonCommitCode");
      			}
      			return this.m_E_ButtonCommitCodeImage;
      		}
@@ -246,19 +246,19 @@ namespace ET.Client
 			this.uiTransform = null;
 		}
 
-		private Button m_E_ImageCloseButton = null;
-		private Image m_E_ImageCloseImage = null;
-		private RectTransform m_EG_SendYanzhengRectTransform = null;
-		private InputField m_E_PhoneNumberInputField = null;
-		private Image m_E_PhoneNumberImage = null;
-		private Button m_E_ButtonGetCodeButton = null;
-		private Image m_E_ButtonGetCodeImage = null;
-		private RectTransform m_EG_YanZhengRectTransform = null;
-		private Text m_E_TextYanzhengText = null;
-		private InputField m_E_TextPhoneCodeInputField = null;
-		private Image m_E_TextPhoneCodeImage = null;
-		private Button m_E_ButtonCommitCodeButton = null;
-		private Image m_E_ButtonCommitCodeImage = null;
+		private UnityEngine.UI.Button m_E_ImageCloseButton = null;
+		private UnityEngine.UI.Image m_E_ImageCloseImage = null;
+		private UnityEngine.RectTransform m_EG_SendYanzhengRectTransform = null;
+		private UnityEngine.UI.InputField m_E_PhoneNumberInputField = null;
+		private UnityEngine.UI.Image m_E_PhoneNumberImage = null;
+		private UnityEngine.UI.Button m_E_ButtonGetCodeButton = null;
+		private UnityEngine.UI.Image m_E_ButtonGetCodeImage = null;
+		private UnityEngine.RectTransform m_EG_YanZhengRectTransform = null;
+		private UnityEngine.UI.Text m_E_TextYanzhengText = null;
+		private UnityEngine.UI.InputField m_E_TextPhoneCodeInputField = null;
+		private UnityEngine.UI.Image m_E_TextPhoneCodeImage = null;
+		private UnityEngine.UI.Button m_E_ButtonCommitCodeButton = null;
+		private UnityEngine.UI.Image m_E_ButtonCommitCodeImage = null;
 		public Transform uiTransform = null;
 	}
 }

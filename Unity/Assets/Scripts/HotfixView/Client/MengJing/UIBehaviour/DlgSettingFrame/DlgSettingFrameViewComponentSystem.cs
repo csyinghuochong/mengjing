@@ -1,7 +1,10 @@
-﻿namespace ET.Client
+﻿
+using UnityEngine;
+using UnityEngine.UI;
+namespace ET.Client
 {
 	[EntitySystemOf(typeof(DlgSettingFrameViewComponent))]
-	[FriendOfAttribute(typeof(DlgSettingFrameViewComponent))]
+	[FriendOfAttribute(typeof(ET.Client.DlgSettingFrameViewComponent))]
 	public static partial class DlgSettingFrameViewComponentSystem
 	{
 		[EntitySystem]

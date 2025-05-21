@@ -288,7 +288,7 @@ namespace ET.Client
             targetPosition.x += dungeonSectionConfig.Offset[0];
             targetPosition.y += dungeonSectionConfig.Offset[1];
             
-            self.View.E_MapPanelDiButton.gameObject.SetActive(false);
+            self.View.E_MapPanelDiButtonButton.gameObject.SetActive(false);
             rectTransform.DOLocalMove(targetPosition, self.Duration).SetEase(Ease.Linear).onComplete = () =>
             {
                 UserInfo userInfo = self.Root().GetComponent<UserInfoComponentC>().UserInfo;
@@ -476,10 +476,10 @@ namespace ET.Client
             Vector3 position = rectTransform.InverseTransformPoint(transform.position);
             position.y += 40;
 
-            self.View.E_SelectEffect.gameObject.SetActive(false);
-            self.View.E_SelectEffect.gameObject.SetActive(true);
+            self.View.EG_SelectEffectRectTransform.gameObject.SetActive(false);
+            self.View.EG_SelectEffectRectTransform.gameObject.SetActive(true);
             CommonViewHelper.SetParent(self.View.E_SelectImage.gameObject, parent_1.gameObject);
-            CommonViewHelper.SetParent(self.View.E_SelectEffect.gameObject, transform.gameObject);
+            CommonViewHelper.SetParent(self.View.EG_SelectEffectRectTransform.gameObject, transform.gameObject);
             //self.View.E_SelectImage.GetComponent<RectTransform>().localPosition = position;
         }
 
@@ -501,7 +501,7 @@ namespace ET.Client
 
             rectTransform.DOLocalMove(Vector3.zero, self.Duration).SetEase(Ease.Linear).onComplete = () =>
             {
-                self.View.E_MapPanelDiButton.gameObject.SetActive(true);
+                self.View.E_MapPanelDiButtonButton.gameObject.SetActive(true);
                 self.EnableBtns(true);
             };
         }

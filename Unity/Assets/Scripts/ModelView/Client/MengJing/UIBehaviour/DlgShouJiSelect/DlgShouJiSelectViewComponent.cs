@@ -1,13 +1,13 @@
-﻿using UnityEngine;
+﻿
+using UnityEngine;
 using UnityEngine.UI;
-
 namespace ET.Client
 {
 	[ComponentOf(typeof(DlgShouJiSelect))]
 	[EnableMethod]
 	public  class DlgShouJiSelectViewComponent : Entity,IAwake,IDestroy 
 	{
-		public Button E_ButtonCloseButton
+		public UnityEngine.UI.Button E_ButtonCloseButton
      	{
      		get
      		{
@@ -18,13 +18,13 @@ namespace ET.Client
      			}
      			if( this.m_E_ButtonCloseButton == null )
      			{
-		    		this.m_E_ButtonCloseButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_ButtonClose");
+		    		this.m_E_ButtonCloseButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_ButtonClose");
      			}
      			return this.m_E_ButtonCloseButton;
      		}
      	}
 
-		public Image E_ButtonCloseImage
+		public UnityEngine.UI.Image E_ButtonCloseImage
      	{
      		get
      		{
@@ -35,13 +35,13 @@ namespace ET.Client
      			}
      			if( this.m_E_ButtonCloseImage == null )
      			{
-		    		this.m_E_ButtonCloseImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_ButtonClose");
+		    		this.m_E_ButtonCloseImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_ButtonClose");
      			}
      			return this.m_E_ButtonCloseImage;
      		}
      	}
 
-		public LoopVerticalScrollRect E_BagItemsLoopVerticalScrollRect
+		public UnityEngine.UI.LoopVerticalScrollRect E_BagItemsLoopVerticalScrollRect
      	{
      		get
      		{
@@ -52,13 +52,13 @@ namespace ET.Client
      			}
      			if( this.m_E_BagItemsLoopVerticalScrollRect == null )
      			{
-		    		this.m_E_BagItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<LoopVerticalScrollRect>(this.uiTransform.gameObject,"E_BagItems");
+		    		this.m_E_BagItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.LoopVerticalScrollRect>(this.uiTransform.gameObject,"Center/E_BagItems");
      			}
      			return this.m_E_BagItemsLoopVerticalScrollRect;
      		}
      	}
 
-		public Button E_ButtonTunShiButton
+		public UnityEngine.UI.Button E_ButtonTunShiButton
      	{
      		get
      		{
@@ -69,13 +69,13 @@ namespace ET.Client
      			}
      			if( this.m_E_ButtonTunShiButton == null )
      			{
-		    		this.m_E_ButtonTunShiButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_ButtonTunShi");
+		    		this.m_E_ButtonTunShiButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Center/E_ButtonTunShi");
      			}
      			return this.m_E_ButtonTunShiButton;
      		}
      	}
 
-		public Image E_ButtonTunShiImage
+		public UnityEngine.UI.Image E_ButtonTunShiImage
      	{
      		get
      		{
@@ -86,7 +86,7 @@ namespace ET.Client
      			}
      			if( this.m_E_ButtonTunShiImage == null )
      			{
-		    		this.m_E_ButtonTunShiImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_ButtonTunShi");
+		    		this.m_E_ButtonTunShiImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Center/E_ButtonTunShi");
      			}
      			return this.m_E_ButtonTunShiImage;
      		}
@@ -102,11 +102,11 @@ namespace ET.Client
 			this.uiTransform = null;
 		}
 
-		private Button m_E_ButtonCloseButton = null;
-		private Image m_E_ButtonCloseImage = null;
-		private LoopVerticalScrollRect m_E_BagItemsLoopVerticalScrollRect = null;
-		private Button m_E_ButtonTunShiButton = null;
-		private Image m_E_ButtonTunShiImage = null;
+		private UnityEngine.UI.Button m_E_ButtonCloseButton = null;
+		private UnityEngine.UI.Image m_E_ButtonCloseImage = null;
+		private UnityEngine.UI.LoopVerticalScrollRect m_E_BagItemsLoopVerticalScrollRect = null;
+		private UnityEngine.UI.Button m_E_ButtonTunShiButton = null;
+		private UnityEngine.UI.Image m_E_ButtonTunShiImage = null;
 		public Transform uiTransform = null;
 	}
 }

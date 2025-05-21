@@ -54,7 +54,7 @@ namespace ET.Client
      			if( es == null )
 
      			{
-		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"ES_CommonItem");
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"Center/ES_CommonItem");
 		    	   this.m_es_commonitem = this.AddChild<ES_CommonItem,Transform>(subTrans);
      			}
      			return this.m_es_commonitem;
@@ -72,7 +72,7 @@ namespace ET.Client
      			}
      			if( this.m_E_Btn_BuyButton == null )
      			{
-		    		this.m_E_Btn_BuyButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_Btn_Buy");
+		    		this.m_E_Btn_BuyButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Center/E_Btn_Buy");
      			}
      			return this.m_E_Btn_BuyButton;
      		}
@@ -89,7 +89,7 @@ namespace ET.Client
      			}
      			if( this.m_E_Btn_BuyImage == null )
      			{
-		    		this.m_E_Btn_BuyImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Btn_Buy");
+		    		this.m_E_Btn_BuyImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Center/E_Btn_Buy");
      			}
      			return this.m_E_Btn_BuyImage;
      		}
@@ -106,7 +106,7 @@ namespace ET.Client
      			}
      			if( this.m_E_Btn_AddNumButton == null )
      			{
-		    		this.m_E_Btn_AddNumButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_Btn_AddNum");
+		    		this.m_E_Btn_AddNumButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Center/E_Btn_AddNum");
      			}
      			return this.m_E_Btn_AddNumButton;
      		}
@@ -123,7 +123,7 @@ namespace ET.Client
      			}
      			if( this.m_E_Btn_AddNumImage == null )
      			{
-		    		this.m_E_Btn_AddNumImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Btn_AddNum");
+		    		this.m_E_Btn_AddNumImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Center/E_Btn_AddNum");
      			}
      			return this.m_E_Btn_AddNumImage;
      		}
@@ -140,7 +140,7 @@ namespace ET.Client
      			}
      			if( this.m_E_Btn_AddNumEventTrigger == null )
      			{
-		    		this.m_E_Btn_AddNumEventTrigger = UIFindHelper.FindDeepChild<UnityEngine.EventSystems.EventTrigger>(this.uiTransform.gameObject,"E_Btn_AddNum");
+		    		this.m_E_Btn_AddNumEventTrigger = UIFindHelper.FindDeepChild<UnityEngine.EventSystems.EventTrigger>(this.uiTransform.gameObject,"Center/E_Btn_AddNum");
      			}
      			return this.m_E_Btn_AddNumEventTrigger;
      		}
@@ -157,7 +157,7 @@ namespace ET.Client
      			}
      			if( this.m_E_Btn_CostNumButton == null )
      			{
-		    		this.m_E_Btn_CostNumButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_Btn_CostNum");
+		    		this.m_E_Btn_CostNumButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Center/E_Btn_CostNum");
      			}
      			return this.m_E_Btn_CostNumButton;
      		}
@@ -174,7 +174,7 @@ namespace ET.Client
      			}
      			if( this.m_E_Btn_CostNumImage == null )
      			{
-		    		this.m_E_Btn_CostNumImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Btn_CostNum");
+		    		this.m_E_Btn_CostNumImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Center/E_Btn_CostNum");
      			}
      			return this.m_E_Btn_CostNumImage;
      		}
@@ -191,7 +191,7 @@ namespace ET.Client
      			}
      			if( this.m_E_Btn_CostNumEventTrigger == null )
      			{
-		    		this.m_E_Btn_CostNumEventTrigger = UIFindHelper.FindDeepChild<UnityEngine.EventSystems.EventTrigger>(this.uiTransform.gameObject,"E_Btn_CostNum");
+		    		this.m_E_Btn_CostNumEventTrigger = UIFindHelper.FindDeepChild<UnityEngine.EventSystems.EventTrigger>(this.uiTransform.gameObject,"Center/E_Btn_CostNum");
      			}
      			return this.m_E_Btn_CostNumEventTrigger;
      		}
@@ -208,7 +208,7 @@ namespace ET.Client
      			}
      			if( this.m_E_Btn_CloseButton == null )
      			{
-		    		this.m_E_Btn_CloseButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_Btn_Close");
+		    		this.m_E_Btn_CloseButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Center/E_Btn_Close");
      			}
      			return this.m_E_Btn_CloseButton;
      		}
@@ -225,7 +225,7 @@ namespace ET.Client
      			}
      			if( this.m_E_Btn_CloseImage == null )
      			{
-		    		this.m_E_Btn_CloseImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Btn_Close");
+		    		this.m_E_Btn_CloseImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Center/E_Btn_Close");
      			}
      			return this.m_E_Btn_CloseImage;
      		}
@@ -242,7 +242,7 @@ namespace ET.Client
      			}
      			if( this.m_E_Btn_CloseEventTrigger == null )
      			{
-		    		this.m_E_Btn_CloseEventTrigger = UIFindHelper.FindDeepChild<UnityEngine.EventSystems.EventTrigger>(this.uiTransform.gameObject,"E_Btn_Close");
+		    		this.m_E_Btn_CloseEventTrigger = UIFindHelper.FindDeepChild<UnityEngine.EventSystems.EventTrigger>(this.uiTransform.gameObject,"Center/E_Btn_Close");
      			}
      			return this.m_E_Btn_CloseEventTrigger;
      		}
@@ -259,7 +259,7 @@ namespace ET.Client
      			}
      			if( this.m_E_Lab_ChuShouPriceText == null )
      			{
-		    		this.m_E_Lab_ChuShouPriceText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_Lab_ChuShouPrice");
+		    		this.m_E_Lab_ChuShouPriceText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Center/E_Lab_ChuShouPrice");
      			}
      			return this.m_E_Lab_ChuShouPriceText;
      		}
@@ -276,7 +276,7 @@ namespace ET.Client
      			}
      			if( this.m_E_Lab_ItemNameText == null )
      			{
-		    		this.m_E_Lab_ItemNameText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_Lab_ItemName");
+		    		this.m_E_Lab_ItemNameText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Center/E_Lab_ItemName");
      			}
      			return this.m_E_Lab_ItemNameText;
      		}
@@ -293,7 +293,7 @@ namespace ET.Client
      			}
      			if( this.m_E_Text_NumberText == null )
      			{
-		    		this.m_E_Text_NumberText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_Text_Number");
+		    		this.m_E_Text_NumberText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Center/E_Text_Number");
      			}
      			return this.m_E_Text_NumberText;
      		}

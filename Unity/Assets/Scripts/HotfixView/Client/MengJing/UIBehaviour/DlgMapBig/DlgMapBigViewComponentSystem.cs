@@ -1,7 +1,10 @@
-﻿namespace ET.Client
+﻿
+using UnityEngine;
+using UnityEngine.UI;
+namespace ET.Client
 {
 	[EntitySystemOf(typeof(DlgMapBigViewComponent))]
-	[FriendOfAttribute(typeof(DlgMapBigViewComponent))]
+	[FriendOfAttribute(typeof(ET.Client.DlgMapBigViewComponent))]
 	public static partial class DlgMapBigViewComponentSystem
 	{
 		[EntitySystem]

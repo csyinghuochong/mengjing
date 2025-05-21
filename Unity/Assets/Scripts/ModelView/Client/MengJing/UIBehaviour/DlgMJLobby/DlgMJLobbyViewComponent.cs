@@ -1,13 +1,13 @@
-﻿using UnityEngine;
+﻿
+using UnityEngine;
 using UnityEngine.UI;
-
 namespace ET.Client
 {
 	[ComponentOf(typeof(DlgMJLobby))]
 	[EnableMethod]
 	public  class DlgMJLobbyViewComponent : Entity,IAwake,IDestroy 
 	{
-		public LoopVerticalScrollRect E_CreateRoleItemsLoopVerticalScrollRect
+		public UnityEngine.UI.LoopVerticalScrollRect E_CreateRoleItemsLoopVerticalScrollRect
      	{
      		get
      		{
@@ -18,13 +18,13 @@ namespace ET.Client
      			}
      			if( this.m_E_CreateRoleItemsLoopVerticalScrollRect == null )
      			{
-		    		this.m_E_CreateRoleItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<LoopVerticalScrollRect>(this.uiTransform.gameObject,"E_CreateRoleItems");
+		    		this.m_E_CreateRoleItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.LoopVerticalScrollRect>(this.uiTransform.gameObject,"Left/E_CreateRoleItems");
      			}
      			return this.m_E_CreateRoleItemsLoopVerticalScrollRect;
      		}
      	}
 
-		public Button E_PrevButton
+		public UnityEngine.UI.Button E_PrevButton
      	{
      		get
      		{
@@ -35,13 +35,13 @@ namespace ET.Client
      			}
      			if( this.m_E_PrevButton == null )
      			{
-		    		this.m_E_PrevButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"RightSet/E_Prev");
+		    		this.m_E_PrevButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Left/RightSet/E_Prev");
      			}
      			return this.m_E_PrevButton;
      		}
      	}
 
-		public Image E_PrevImage
+		public UnityEngine.UI.Image E_PrevImage
      	{
      		get
      		{
@@ -52,13 +52,13 @@ namespace ET.Client
      			}
      			if( this.m_E_PrevImage == null )
      			{
-		    		this.m_E_PrevImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"RightSet/E_Prev");
+		    		this.m_E_PrevImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Left/RightSet/E_Prev");
      			}
      			return this.m_E_PrevImage;
      		}
      	}
 
-		public Button E_NextButton
+		public UnityEngine.UI.Button E_NextButton
      	{
      		get
      		{
@@ -69,13 +69,13 @@ namespace ET.Client
      			}
      			if( this.m_E_NextButton == null )
      			{
-		    		this.m_E_NextButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"RightSet/E_Next");
+		    		this.m_E_NextButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Left/RightSet/E_Next");
      			}
      			return this.m_E_NextButton;
      		}
      	}
 
-		public Image E_NextImage
+		public UnityEngine.UI.Image E_NextImage
      	{
      		get
      		{
@@ -86,13 +86,13 @@ namespace ET.Client
      			}
      			if( this.m_E_NextImage == null )
      			{
-		    		this.m_E_NextImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"RightSet/E_Next");
+		    		this.m_E_NextImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Left/RightSet/E_Next");
      			}
      			return this.m_E_NextImage;
      		}
      	}
 
-		public Button E_EnterMapButton
+		public UnityEngine.UI.Button E_EnterMapButton
      	{
      		get
      		{
@@ -103,13 +103,13 @@ namespace ET.Client
      			}
      			if( this.m_E_EnterMapButton == null )
      			{
-		    		this.m_E_EnterMapButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_EnterMap");
+		    		this.m_E_EnterMapButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Right/E_EnterMap");
      			}
      			return this.m_E_EnterMapButton;
      		}
      	}
 
-		public Image E_EnterMapImage
+		public UnityEngine.UI.Image E_EnterMapImage
      	{
      		get
      		{
@@ -120,13 +120,13 @@ namespace ET.Client
      			}
      			if( this.m_E_EnterMapImage == null )
      			{
-		    		this.m_E_EnterMapImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_EnterMap");
+		    		this.m_E_EnterMapImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Right/E_EnterMap");
      			}
      			return this.m_E_EnterMapImage;
      		}
      	}
 
-		public Button E_DeleteRoleButton
+		public UnityEngine.UI.Button E_DeleteRoleButton
      	{
      		get
      		{
@@ -137,13 +137,13 @@ namespace ET.Client
      			}
      			if( this.m_E_DeleteRoleButton == null )
      			{
-		    		this.m_E_DeleteRoleButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_DeleteRole");
+		    		this.m_E_DeleteRoleButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Right/E_DeleteRole");
      			}
      			return this.m_E_DeleteRoleButton;
      		}
      	}
 
-		public Image E_DeleteRoleImage
+		public UnityEngine.UI.Image E_DeleteRoleImage
      	{
      		get
      		{
@@ -154,13 +154,13 @@ namespace ET.Client
      			}
      			if( this.m_E_DeleteRoleImage == null )
      			{
-		    		this.m_E_DeleteRoleImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_DeleteRole");
+		    		this.m_E_DeleteRoleImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Right/E_DeleteRole");
      			}
      			return this.m_E_DeleteRoleImage;
      		}
      	}
 
-		public Text E_LvText
+		public UnityEngine.UI.Text E_LvText
      	{
      		get
      		{
@@ -171,13 +171,13 @@ namespace ET.Client
      			}
      			if( this.m_E_LvText == null )
      			{
-		    		this.m_E_LvText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_Lv");
+		    		this.m_E_LvText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Center/E_Lv");
      			}
      			return this.m_E_LvText;
      		}
      	}
 
-		public Text E_NameText
+		public UnityEngine.UI.Text E_NameText
      	{
      		get
      		{
@@ -188,7 +188,7 @@ namespace ET.Client
      			}
      			if( this.m_E_NameText == null )
      			{
-		    		this.m_E_NameText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_Name");
+		    		this.m_E_NameText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Center/E_Name");
      			}
      			return this.m_E_NameText;
      		}
@@ -203,11 +203,11 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
+     			ES_ModelShow es = this.m_es_modelshow;
+     			if( es == null )
 
-		        ES_ModelShow es = this.m_es_modelshow;
-     			if( es ==null )
      			{
-		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"ES_ModelShow");
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"Center/ES_ModelShow");
 		    	   this.m_es_modelshow = this.AddChild<ES_ModelShow,Transform>(subTrans);
      			}
      			return this.m_es_modelshow;
@@ -231,17 +231,17 @@ namespace ET.Client
 			this.uiTransform = null;
 		}
 
-		private LoopVerticalScrollRect m_E_CreateRoleItemsLoopVerticalScrollRect = null;
-		private Button m_E_PrevButton = null;
-		private Image m_E_PrevImage = null;
-		private Button m_E_NextButton = null;
-		private Image m_E_NextImage = null;
-		private Button m_E_EnterMapButton = null;
-		private Image m_E_EnterMapImage = null;
-		private Button m_E_DeleteRoleButton = null;
-		private Image m_E_DeleteRoleImage = null;
-		private Text m_E_LvText = null;
-		private Text m_E_NameText = null;
+		private UnityEngine.UI.LoopVerticalScrollRect m_E_CreateRoleItemsLoopVerticalScrollRect = null;
+		private UnityEngine.UI.Button m_E_PrevButton = null;
+		private UnityEngine.UI.Image m_E_PrevImage = null;
+		private UnityEngine.UI.Button m_E_NextButton = null;
+		private UnityEngine.UI.Image m_E_NextImage = null;
+		private UnityEngine.UI.Button m_E_EnterMapButton = null;
+		private UnityEngine.UI.Image m_E_EnterMapImage = null;
+		private UnityEngine.UI.Button m_E_DeleteRoleButton = null;
+		private UnityEngine.UI.Image m_E_DeleteRoleImage = null;
+		private UnityEngine.UI.Text m_E_LvText = null;
+		private UnityEngine.UI.Text m_E_NameText = null;
 		private EntityRef<ES_ModelShow> m_es_modelshow = null;
 		public Transform uiTransform = null;
 	}

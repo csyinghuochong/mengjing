@@ -18,7 +18,7 @@ namespace ET.Client
      			}
      			if( this.m_E_SeasonDonateItemImage == null )
      			{
-		    		this.m_E_SeasonDonateItemImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_SeasonDonateItem");
+		    		this.m_E_SeasonDonateItemImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Center/E_SeasonDonateItem");
      			}
      			return this.m_E_SeasonDonateItemImage;
      		}
@@ -35,7 +35,7 @@ namespace ET.Client
      			}
      			if( this.m_E_SeasonDonateItemLoopVerticalScrollRect == null )
      			{
-		    		this.m_E_SeasonDonateItemLoopVerticalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.LoopVerticalScrollRect>(this.uiTransform.gameObject,"E_SeasonDonateItem");
+		    		this.m_E_SeasonDonateItemLoopVerticalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.LoopVerticalScrollRect>(this.uiTransform.gameObject,"Center/E_SeasonDonateItem");
      			}
      			return this.m_E_SeasonDonateItemLoopVerticalScrollRect;
      		}
@@ -52,7 +52,7 @@ namespace ET.Client
      			}
      			if( this.m_E_ButtonCloseButton == null )
      			{
-		    		this.m_E_ButtonCloseButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_ButtonClose");
+		    		this.m_E_ButtonCloseButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Center/E_ButtonClose");
      			}
      			return this.m_E_ButtonCloseButton;
      		}
@@ -69,7 +69,7 @@ namespace ET.Client
      			}
      			if( this.m_E_ButtonCloseImage == null )
      			{
-		    		this.m_E_ButtonCloseImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_ButtonClose");
+		    		this.m_E_ButtonCloseImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Center/E_ButtonClose");
      			}
      			return this.m_E_ButtonCloseImage;
      		}

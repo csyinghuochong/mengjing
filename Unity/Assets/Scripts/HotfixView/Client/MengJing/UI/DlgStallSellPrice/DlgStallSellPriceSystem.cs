@@ -14,7 +14,7 @@ namespace ET.Client
 		public static void RegisterUIEvent(this DlgStallSellPrice self)
 		{
 		  
-		  self.View.E_ImageButton.AddListener(self.OnImageButton);
+		  self.View.E_ImageButtonButton.AddListener(self.OnImageButton);
 		  self.View.E_Btn_ChuShouButton.AddListenerAsync(self.OnBtn_ChuShou);
 		  self.View.E_Btn_CostButton.AddListener(self.OnCostPrice);
 		  self.View.E_Btn_AddButton.AddListener(self.OnAddPrice);

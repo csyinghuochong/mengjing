@@ -23,7 +23,7 @@ namespace ET.Client
         {
             // self.View.E_TaskGetItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnTaskGetItemsRefresh);
             // self.View.E_TaskFubenItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnTaskFubenItemsRefresh);
-            self.View.E_BagItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnBagItemsRefresh);
+            // self.View.E_BagItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnBagItemsRefresh);
 
             self.View.E_Btn_EnergyDuihuanButton.AddListenerAsync(self.OnBtn_EnergyDuihuanButton);
             self.View.E_ButtonGetButton.AddListenerAsync(self.OnButtonGetButton);
@@ -121,15 +121,15 @@ namespace ET.Client
             self.View.E_Lab_NpcNameText.text = npcConfig.Name;
             self.View.E_BtnCommitTask1Button.gameObject.SetActive(false);
             self.View.E_ButtonGetButton.gameObject.SetActive(false);
-            self.View.E_TaskFubenItemsLoopVerticalScrollRect.gameObject.SetActive(false);
-            self.View.E_TaskGetItemsLoopVerticalScrollRect.gameObject.SetActive(false);
+            self.View.E_TaskFubenItemsScrollRect.gameObject.SetActive(false);
+            self.View.E_TaskGetItemsScrollRect.gameObject.SetActive(false);
             self.View.EG_EnergySkillRectTransform.gameObject.SetActive(false);
             self.View.E_ButtonJieRiRewardImage.gameObject.SetActive(false);
             self.View.E_ButtonExpDuiHuanButton.gameObject.SetActive(false);
             self.View.E_ButtonPetFragmentButton.gameObject.SetActive(false);
             self.View.E_ButtonGiveTaskButton.gameObject.SetActive(false);
             self.View.E_ButtonMysteryButton.gameObject.SetActive(false);
-            self.View.EG_TaskDesc.gameObject.SetActive(false);
+            self.View.EG_TaskDescRectTransform.gameObject.SetActive(false);
             self.View.E_ButtonReturnButton.gameObject.SetActive(false);  
             
             switch (npcConfig.NpcType)
@@ -137,7 +137,7 @@ namespace ET.Client
                 case 1: //神兽兑换
                 case 2: //挑戰之地
                 {
-                    self.View.E_TaskFubenItemsLoopVerticalScrollRect.gameObject.SetActive(true);
+                    self.View.E_TaskFubenItemsScrollRect.gameObject.SetActive(true);
                     if (npcConfig.NpcPar != null)
                     {
                         List<int> fubenList = new List<int>(npcConfig.NpcPar);
@@ -155,8 +155,7 @@ namespace ET.Client
                                 }
 
                                 GameObject prefab = resourcesLoaderComponent.LoadAssetSync<GameObject>(prefabPath);
-                                GameObject gameObject = UnityEngine.Object.Instantiate(prefab,
-                                    self.View.E_TaskFubenItemsLoopVerticalScrollRect.transform.Find("Content").gameObject.transform);
+                                GameObject gameObject = UnityEngine.Object.Instantiate(prefab, self.View.E_TaskFubenItemsScrollRect.transform.Find("Content").gameObject.transform);
                                 item.BindTrans(gameObject.transform);
                                 self.ScrollItemTaskFubenItems.Add(i, item);
                             }
@@ -184,7 +183,7 @@ namespace ET.Client
                 }
                 case 3: //循环任务 周任务 支线任务 藏宝图任务
                     bool update = self.UpdataTask();
-                    self.View.E_TaskGetItemsLoopVerticalScrollRect.gameObject.SetActive(update);
+                    self.View.E_TaskGetItemsScrollRect.gameObject.SetActive(update);
                     break;
                 case 4: //魔能老人
                     int costItemID = int.Parse(ConfigData.EnergySkillCost.Split(';')[0]);
@@ -192,7 +191,7 @@ namespace ET.Client
                     self.View.EG_EnergySkillRectTransform.gameObject.SetActive(true);
                     ItemConfig itemConfig = ItemConfigCategory.Instance.Get(costItemID);
                     string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemIcon, itemConfig.Icon);
-                    self.View.E_EnergySkillImage.sprite = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
+                    self.View.E_EnergySkillImageImage.sprite = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
                     //获取
                     using (zstring.Block())
                     {
@@ -202,7 +201,7 @@ namespace ET.Client
 
                     break;
                 case 5: //补偿大师
-                    self.View.E_TaskFubenItemsLoopVerticalScrollRect.gameObject.SetActive(true);
+                    self.View.E_TaskFubenItemsScrollRect.gameObject.SetActive(true);
                     PlayerInfoComponent accountInfo = self.Root().GetComponent<PlayerInfoComponent>();
                     int buchangNumber = BuChangHelper.ShowNewBuChang(accountInfo.PlayerInfo, accountInfo.CurrentRoleId, accountInfo.ServerItem.ServerId);
                     GameObject go = self.Root().GetComponent<ResourcesLoaderComponent>()
@@ -211,7 +210,7 @@ namespace ET.Client
                     {
                         GameObject goitem = UnityEngine.Object.Instantiate(go);
                         goitem.SetActive(true);
-                        CommonViewHelper.SetParent(goitem, self.View.E_TaskFubenItemsLoopVerticalScrollRect.transform.Find("Content").gameObject);
+                        CommonViewHelper.SetParent(goitem, self.View.E_TaskFubenItemsScrollRect.transform.Find("Content").gameObject);
                         Scroll_Item_TaskFubenItem uIBuChangItem = self.AddChild<Scroll_Item_TaskFubenItem>();
                         uIBuChangItem.uiTransform = goitem.transform;
                         uIBuChangItem.OnInitUI_2((long userid) => { self.OnClickBuChangItem(userid); }, buchangNumber);
@@ -222,7 +221,7 @@ namespace ET.Client
                         {
                             GameObject goitem = UnityEngine.Object.Instantiate(go);
                             goitem.SetActive(true);
-                            CommonViewHelper.SetParent(goitem, self.View.E_TaskFubenItemsLoopVerticalScrollRect.transform.Find("Content").gameObject);
+                            CommonViewHelper.SetParent(goitem, self.View.E_TaskFubenItemsScrollRect.transform.Find("Content").gameObject);
                             Scroll_Item_TaskFubenItem uIBuChangItem = self.AddChild<Scroll_Item_TaskFubenItem>();
                             uIBuChangItem.uiTransform = goitem.transform;
                             uIBuChangItem.OnInitUI((long userid) => { self.OnClickBuChangItem(userid); }, accountInfo.PlayerInfo.DeleteUserList[i]);
@@ -260,7 +259,7 @@ namespace ET.Client
                     self.View.E_ButtonMysteryButton.gameObject.SetActive(true);
                     break;
                 default:
-                    self.View.E_TaskGetItemsLoopVerticalScrollRect.gameObject.SetActive(true);
+                    self.View.E_TaskGetItemsScrollRect.gameObject.SetActive(true);
                     self.UpdataTask();
                     break;
             }
@@ -522,7 +521,7 @@ namespace ET.Client
                     }
 
                     GameObject prefab = resourcesLoaderComponent.LoadAssetSync<GameObject>(path);
-                    GameObject go = UnityEngine.Object.Instantiate(prefab,self.View.E_TaskGetItemsLoopVerticalScrollRect.transform.Find("Content").gameObject.transform);
+                    GameObject go = UnityEngine.Object.Instantiate(prefab,self.View.E_TaskGetItemsScrollRect.transform.Find("Content").gameObject.transform);
                     item.BindTrans(go.transform);
                     self.ScrollItemTaskGetItems.Add(i, item);
                 }
@@ -594,7 +593,7 @@ namespace ET.Client
                 self.View.E_ButtonGiveTaskButton.gameObject.SetActive(false);
                 self.View.E_ButtonGetButton.gameObject.SetActive(!isCompleted);
             }
-            self.View.EG_TaskDesc.gameObject.SetActive(true);
+            self.View.EG_TaskDescRectTransform.gameObject.SetActive(true);
             
             self.CancellationToken?.Cancel();
             self.CancellationToken = new ETCancellationToken();
@@ -633,11 +632,11 @@ namespace ET.Client
             
             //self.View.ES_RewardList.Refresh(rewardItems, showNumber: true, showName: true);
 
-            self.AddUIScrollItems(ref self.ScrollItemTaskRewardItems, rewardItems.Count);
-            self.View.E_BagItemsLoopVerticalScrollRect.SetVisible(true, rewardItems.Count);
+            // self.AddUIScrollItems(ref self.ScrollItemTaskRewardItems, rewardItems.Count);
+            // self.View.E_BagItemsLoopVerticalScrollRect.SetVisible(true, rewardItems.Count);
             
             self.View.E_ButtonReturnButton.gameObject.SetActive(true);  
-            self.View.E_TaskGetItemsLoopVerticalScrollRect.gameObject.SetActive(false);
+            self.View.E_TaskGetItemsScrollRect.gameObject.SetActive(false);
             
             self.ShowGuide().Coroutine();
         }
@@ -663,9 +662,9 @@ namespace ET.Client
                 return;
             }
             self.View.E_ButtonReturnButton.gameObject.SetActive(false);  
-            self.View.E_TaskGetItemsLoopVerticalScrollRect.gameObject.SetActive(true);
+            self.View.E_TaskGetItemsScrollRect.gameObject.SetActive(true);
             self.UpdataTask();
-            self.View.EG_TaskDesc.gameObject.SetActive(false);
+            self.View.EG_TaskDescRectTransform.gameObject.SetActive(false);
             self.View.E_BtnCommitTask1Button.gameObject.SetActive(false);
             self.View.E_ButtonGetButton.gameObject.SetActive(false);
             

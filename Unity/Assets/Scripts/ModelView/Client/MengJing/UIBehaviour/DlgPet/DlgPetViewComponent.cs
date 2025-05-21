@@ -10,23 +10,6 @@ namespace ET.Client
 	{
 		public List<string> AssetList = new();
 		
-		public UnityEngine.UI.ToggleGroup E_FunctionSetBtnToggleGroup
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_FunctionSetBtnToggleGroup == null )
-     			{
-		    		this.m_E_FunctionSetBtnToggleGroup = UIFindHelper.FindDeepChild<UnityEngine.UI.ToggleGroup>(this.uiTransform.gameObject,"E_FunctionSetBtn");
-     			}
-     			return this.m_E_FunctionSetBtnToggleGroup;
-     		}
-     	}
-
 		public UnityEngine.RectTransform EG_SubViewRectTransform
      	{
      		get
@@ -44,7 +27,24 @@ namespace ET.Client
      		}
      	}
 
-        public ES_PetList ES_PetList
+		public UnityEngine.UI.ToggleGroup E_FunctionSetBtnToggleGroup
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_FunctionSetBtnToggleGroup == null )
+     			{
+		    		this.m_E_FunctionSetBtnToggleGroup = UIFindHelper.FindDeepChild<UnityEngine.UI.ToggleGroup>(this.uiTransform.gameObject,"Left/E_FunctionSetBtn");
+     			}
+     			return this.m_E_FunctionSetBtnToggleGroup;
+     		}
+     	}
+
+		        public ES_PetList ES_PetList
         {
             get
             {
@@ -143,9 +143,10 @@ namespace ET.Client
 		        return this.m_es_petezhuangjia;
 	        }
         }
-
+		
 		public void DestroyWidget()
 		{
+			this.m_EG_SubViewRectTransform = null;
 			this.m_E_FunctionSetBtnToggleGroup = null;
 			this.m_EG_SubViewRectTransform = null;
 			this.m_es_petlist = null;
@@ -164,8 +165,8 @@ namespace ET.Client
 			this.AssetList = null;
 		}
 
-		private UnityEngine.UI.ToggleGroup m_E_FunctionSetBtnToggleGroup = null;
 		private UnityEngine.RectTransform m_EG_SubViewRectTransform = null;
+		private UnityEngine.UI.ToggleGroup m_E_FunctionSetBtnToggleGroup = null;
 		private EntityRef<ES_PetList> m_es_petlist = null;
 		private EntityRef<ES_PetHeCheng> m_es_pethecheng = null;
 		private EntityRef<ES_PetXiLian> m_es_petxilian = null;

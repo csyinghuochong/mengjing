@@ -1,7 +1,10 @@
-﻿namespace ET.Client
+﻿
+using UnityEngine;
+using UnityEngine.UI;
+namespace ET.Client
 {
 	[EntitySystemOf(typeof(DlgMJLobbyViewComponent))]
-	[FriendOfAttribute(typeof(DlgMJLobbyViewComponent))]
+	[FriendOfAttribute(typeof(ET.Client.DlgMJLobbyViewComponent))]
 	public static partial class DlgMJLobbyViewComponentSystem
 	{
 		[EntitySystem]

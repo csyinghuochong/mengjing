@@ -8,7 +8,7 @@ namespace ET.Client
     {
         public static void RegisterUIEvent(this DlgStore self)
         {
-            self.View.E_closeButtonButton.AddListener(self.OncloseButtonButton);
+            // self.View.E_closeButtonButton.AddListener(self.OncloseButtonButton);
             self.View.E_StoreItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnStoreItemsRefresh);
             
             self.InitModelShowView();

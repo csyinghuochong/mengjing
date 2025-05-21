@@ -1,13 +1,13 @@
-﻿using UnityEngine;
+﻿
+using UnityEngine;
 using UnityEngine.UI;
-
 namespace ET.Client
 {
 	[ComponentOf(typeof(DlgPopupTip))]
 	[EnableMethod]
 	public  class DlgPopupTipViewComponent : Entity,IAwake,IDestroy 
 	{
-		public Text E_TitleText
+		public UnityEngine.UI.Text E_TitleText
      	{
      		get
      		{
@@ -18,13 +18,13 @@ namespace ET.Client
      			}
      			if( this.m_E_TitleText == null )
      			{
-		    		this.m_E_TitleText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_Title");
+		    		this.m_E_TitleText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Center/E_Title");
      			}
      			return this.m_E_TitleText;
      		}
      	}
 
-		public Text E_ContentText
+		public UnityEngine.UI.Text E_ContentText
      	{
      		get
      		{
@@ -35,13 +35,13 @@ namespace ET.Client
      			}
      			if( this.m_E_ContentText == null )
      			{
-		    		this.m_E_ContentText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_Content");
+		    		this.m_E_ContentText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Center/E_Content");
      			}
      			return this.m_E_ContentText;
      		}
      	}
 
-		public Button E_CloseButton
+		public UnityEngine.UI.Button E_CloseButton
      	{
      		get
      		{
@@ -52,13 +52,13 @@ namespace ET.Client
      			}
      			if( this.m_E_CloseButton == null )
      			{
-		    		this.m_E_CloseButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_Close");
+		    		this.m_E_CloseButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Center/E_Close");
      			}
      			return this.m_E_CloseButton;
      		}
      	}
 
-		public Image E_CloseImage
+		public UnityEngine.UI.Image E_CloseImage
      	{
      		get
      		{
@@ -69,13 +69,13 @@ namespace ET.Client
      			}
      			if( this.m_E_CloseImage == null )
      			{
-		    		this.m_E_CloseImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_Close");
+		    		this.m_E_CloseImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Center/E_Close");
      			}
      			return this.m_E_CloseImage;
      		}
      	}
 
-		public Button E_TrueButton
+		public UnityEngine.UI.Button E_TrueButton
      	{
      		get
      		{
@@ -86,13 +86,13 @@ namespace ET.Client
      			}
      			if( this.m_E_TrueButton == null )
      			{
-		    		this.m_E_TrueButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_True");
+		    		this.m_E_TrueButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Center/E_True");
      			}
      			return this.m_E_TrueButton;
      		}
      	}
 
-		public Image E_TrueImage
+		public UnityEngine.UI.Image E_TrueImage
      	{
      		get
      		{
@@ -103,13 +103,13 @@ namespace ET.Client
      			}
      			if( this.m_E_TrueImage == null )
      			{
-		    		this.m_E_TrueImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_True");
+		    		this.m_E_TrueImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Center/E_True");
      			}
      			return this.m_E_TrueImage;
      		}
      	}
 
-		public Button E_FalseButton
+		public UnityEngine.UI.Button E_FalseButton
      	{
      		get
      		{
@@ -120,13 +120,13 @@ namespace ET.Client
      			}
      			if( this.m_E_FalseButton == null )
      			{
-		    		this.m_E_FalseButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_False");
+		    		this.m_E_FalseButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Center/E_False");
      			}
      			return this.m_E_FalseButton;
      		}
      	}
 
-		public Image E_FalseImage
+		public UnityEngine.UI.Image E_FalseImage
      	{
      		get
      		{
@@ -137,7 +137,7 @@ namespace ET.Client
      			}
      			if( this.m_E_FalseImage == null )
      			{
-		    		this.m_E_FalseImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_False");
+		    		this.m_E_FalseImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Center/E_False");
      			}
      			return this.m_E_FalseImage;
      		}
@@ -156,14 +156,14 @@ namespace ET.Client
 			this.uiTransform = null;
 		}
 
-		private Text m_E_TitleText = null;
-		private Text m_E_ContentText = null;
-		private Button m_E_CloseButton = null;
-		private Image m_E_CloseImage = null;
-		private Button m_E_TrueButton = null;
-		private Image m_E_TrueImage = null;
-		private Button m_E_FalseButton = null;
-		private Image m_E_FalseImage = null;
+		private UnityEngine.UI.Text m_E_TitleText = null;
+		private UnityEngine.UI.Text m_E_ContentText = null;
+		private UnityEngine.UI.Button m_E_CloseButton = null;
+		private UnityEngine.UI.Image m_E_CloseImage = null;
+		private UnityEngine.UI.Button m_E_TrueButton = null;
+		private UnityEngine.UI.Image m_E_TrueImage = null;
+		private UnityEngine.UI.Button m_E_FalseButton = null;
+		private UnityEngine.UI.Image m_E_FalseImage = null;
 		public Transform uiTransform = null;
 	}
 }

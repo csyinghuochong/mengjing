@@ -1,13 +1,13 @@
-﻿using UnityEngine;
+﻿
+using UnityEngine;
 using UnityEngine.UI;
-
 namespace ET.Client
 {
 	[ComponentOf(typeof(DlgStore))]
 	[EnableMethod]
 	public  class DlgStoreViewComponent : Entity,IAwake,IDestroy 
 	{
-		public Button E_closeButtonButton
+		public UnityEngine.UI.ToggleGroup E_FunctionSetBtnToggleGroup
      	{
      		get
      		{
@@ -16,28 +16,11 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_E_closeButtonButton == null )
+     			if( this.m_E_FunctionSetBtnToggleGroup == null )
      			{
-		    		this.m_E_closeButtonButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_closeButton");
+		    		this.m_E_FunctionSetBtnToggleGroup = UIFindHelper.FindDeepChild<UnityEngine.UI.ToggleGroup>(this.uiTransform.gameObject,"Left/E_FunctionSetBtn");
      			}
-     			return this.m_E_closeButtonButton;
-     		}
-     	}
-
-		public Image E_closeButtonImage
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_closeButtonImage == null )
-     			{
-		    		this.m_E_closeButtonImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_closeButton");
-     			}
-     			return this.m_E_closeButtonImage;
+     			return this.m_E_FunctionSetBtnToggleGroup;
      		}
      	}
 
@@ -50,18 +33,35 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
+     			ES_ModelShow es = this.m_es_modelshow;
+     			if( es == null )
 
-		        ES_ModelShow es = this.m_es_modelshow;
-     			if( es==null  )
      			{
-		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"ES_ModelShow");
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"Left/ES_ModelShow");
 		    	   this.m_es_modelshow = this.AddChild<ES_ModelShow,Transform>(subTrans);
      			}
      			return this.m_es_modelshow;
      		}
      	}
 
-		public LoopVerticalScrollRect E_StoreItemsLoopVerticalScrollRect
+		public UnityEngine.UI.Image E_StoreItemsImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_StoreItemsImage == null )
+     			{
+		    		this.m_E_StoreItemsImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Center/E_StoreItems");
+     			}
+     			return this.m_E_StoreItemsImage;
+     		}
+     	}
+
+		public UnityEngine.UI.LoopVerticalScrollRect E_StoreItemsLoopVerticalScrollRect
      	{
      		get
      		{
@@ -72,7 +72,7 @@ namespace ET.Client
      			}
      			if( this.m_E_StoreItemsLoopVerticalScrollRect == null )
      			{
-		    		this.m_E_StoreItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<LoopVerticalScrollRect>(this.uiTransform.gameObject,"E_StoreItems");
+		    		this.m_E_StoreItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.LoopVerticalScrollRect>(this.uiTransform.gameObject,"Center/E_StoreItems");
      			}
      			return this.m_E_StoreItemsLoopVerticalScrollRect;
      		}
@@ -80,17 +80,17 @@ namespace ET.Client
 
 		public void DestroyWidget()
 		{
-			this.m_E_closeButtonButton = null;
-			this.m_E_closeButtonImage = null;
+			this.m_E_FunctionSetBtnToggleGroup = null;
 			this.m_es_modelshow = null;
+			this.m_E_StoreItemsImage = null;
 			this.m_E_StoreItemsLoopVerticalScrollRect = null;
 			this.uiTransform = null;
 		}
 
-		private Button m_E_closeButtonButton = null;
-		private Image m_E_closeButtonImage = null;
+		private UnityEngine.UI.ToggleGroup m_E_FunctionSetBtnToggleGroup = null;
 		private EntityRef<ES_ModelShow> m_es_modelshow = null;
-		private LoopVerticalScrollRect m_E_StoreItemsLoopVerticalScrollRect = null;
+		private UnityEngine.UI.Image m_E_StoreItemsImage = null;
+		private UnityEngine.UI.LoopVerticalScrollRect m_E_StoreItemsLoopVerticalScrollRect = null;
 		public Transform uiTransform = null;
 	}
 }

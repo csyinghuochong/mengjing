@@ -18,7 +18,7 @@ namespace ET.Client
      			}
      			if( this.m_E_CloseButton == null )
      			{
-		    		this.m_E_CloseButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_Close");
+		    		this.m_E_CloseButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Center/E_Close");
      			}
      			return this.m_E_CloseButton;
      		}
@@ -35,7 +35,7 @@ namespace ET.Client
      			}
      			if( this.m_E_CloseImage == null )
      			{
-		    		this.m_E_CloseImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Close");
+		    		this.m_E_CloseImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Center/E_Close");
      			}
      			return this.m_E_CloseImage;
      		}

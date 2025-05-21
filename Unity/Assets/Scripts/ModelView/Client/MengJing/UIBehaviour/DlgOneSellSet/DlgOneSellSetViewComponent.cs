@@ -1,13 +1,13 @@
-﻿using UnityEngine;
+﻿
+using UnityEngine;
 using UnityEngine.UI;
-
 namespace ET.Client
 {
 	[ComponentOf(typeof(DlgOneSellSet))]
 	[EnableMethod]
 	public  class DlgOneSellSetViewComponent : Entity,IAwake,IDestroy 
 	{
-		public RectTransform EG_OneSellSetRectTransform
+		public UnityEngine.RectTransform EG_OneSellSetRectTransform
      	{
      		get
      		{
@@ -18,13 +18,13 @@ namespace ET.Client
      			}
      			if( this.m_EG_OneSellSetRectTransform == null )
      			{
-		    		this.m_EG_OneSellSetRectTransform = UIFindHelper.FindDeepChild<RectTransform>(this.uiTransform.gameObject,"EG_OneSellSet");
+		    		this.m_EG_OneSellSetRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"Center/EG_OneSellSet");
      			}
      			return this.m_EG_OneSellSetRectTransform;
      		}
      	}
 
-		public Button E_Btn_OneSellButton
+		public UnityEngine.UI.Button E_Btn_OneSellButton
      	{
      		get
      		{
@@ -35,13 +35,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Btn_OneSellButton == null )
      			{
-		    		this.m_E_Btn_OneSellButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_Btn_OneSell");
+		    		this.m_E_Btn_OneSellButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Center/E_Btn_OneSell");
      			}
      			return this.m_E_Btn_OneSellButton;
      		}
      	}
 
-		public Image E_Btn_OneSellImage
+		public UnityEngine.UI.Image E_Btn_OneSellImage
      	{
      		get
      		{
@@ -52,13 +52,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Btn_OneSellImage == null )
      			{
-		    		this.m_E_Btn_OneSellImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_Btn_OneSell");
+		    		this.m_E_Btn_OneSellImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Center/E_Btn_OneSell");
      			}
      			return this.m_E_Btn_OneSellImage;
      		}
      	}
 
-		public Button E_Btn_CloseButton
+		public UnityEngine.UI.Button E_Btn_CloseButton
      	{
      		get
      		{
@@ -69,13 +69,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Btn_CloseButton == null )
      			{
-		    		this.m_E_Btn_CloseButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_Btn_Close");
+		    		this.m_E_Btn_CloseButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Center/E_Btn_Close");
      			}
      			return this.m_E_Btn_CloseButton;
      		}
      	}
 
-		public Image E_Btn_CloseImage
+		public UnityEngine.UI.Image E_Btn_CloseImage
      	{
      		get
      		{
@@ -86,7 +86,7 @@ namespace ET.Client
      			}
      			if( this.m_E_Btn_CloseImage == null )
      			{
-		    		this.m_E_Btn_CloseImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_Btn_Close");
+		    		this.m_E_Btn_CloseImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Center/E_Btn_Close");
      			}
      			return this.m_E_Btn_CloseImage;
      		}
@@ -102,11 +102,11 @@ namespace ET.Client
 			this.uiTransform = null;
 		}
 
-		private RectTransform m_EG_OneSellSetRectTransform = null;
-		private Button m_E_Btn_OneSellButton = null;
-		private Image m_E_Btn_OneSellImage = null;
-		private Button m_E_Btn_CloseButton = null;
-		private Image m_E_Btn_CloseImage = null;
+		private UnityEngine.RectTransform m_EG_OneSellSetRectTransform = null;
+		private UnityEngine.UI.Button m_E_Btn_OneSellButton = null;
+		private UnityEngine.UI.Image m_E_Btn_OneSellImage = null;
+		private UnityEngine.UI.Button m_E_Btn_CloseButton = null;
+		private UnityEngine.UI.Image m_E_Btn_CloseImage = null;
 		public Transform uiTransform = null;
 	}
 }

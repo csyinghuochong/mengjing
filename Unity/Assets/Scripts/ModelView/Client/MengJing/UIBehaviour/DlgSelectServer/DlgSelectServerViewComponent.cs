@@ -1,13 +1,13 @@
-﻿using UnityEngine;
+﻿
+using UnityEngine;
 using UnityEngine.UI;
-
 namespace ET.Client
 {
 	[ComponentOf(typeof(DlgSelectServer))]
 	[EnableMethod]
 	public  class DlgSelectServerViewComponent : Entity,IAwake,IDestroy 
 	{
-		public LoopVerticalScrollRect E_SelectServerItem1LoopVerticalScrollRect
+		public UnityEngine.UI.LoopVerticalScrollRect E_SelectServerItem1LoopVerticalScrollRect
      	{
      		get
      		{
@@ -18,13 +18,13 @@ namespace ET.Client
      			}
      			if( this.m_E_SelectServerItem1LoopVerticalScrollRect == null )
      			{
-		    		this.m_E_SelectServerItem1LoopVerticalScrollRect = UIFindHelper.FindDeepChild<LoopVerticalScrollRect>(this.uiTransform.gameObject,"E_SelectServerItem1");
+		    		this.m_E_SelectServerItem1LoopVerticalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.LoopVerticalScrollRect>(this.uiTransform.gameObject,"Center/E_SelectServerItem1");
      			}
      			return this.m_E_SelectServerItem1LoopVerticalScrollRect;
      		}
      	}
 
-		public LoopVerticalScrollRect E_SelectServerItem2LoopVerticalScrollRect
+		public UnityEngine.UI.LoopVerticalScrollRect E_SelectServerItem2LoopVerticalScrollRect
      	{
      		get
      		{
@@ -35,13 +35,13 @@ namespace ET.Client
      			}
      			if( this.m_E_SelectServerItem2LoopVerticalScrollRect == null )
      			{
-		    		this.m_E_SelectServerItem2LoopVerticalScrollRect = UIFindHelper.FindDeepChild<LoopVerticalScrollRect>(this.uiTransform.gameObject,"E_SelectServerItem2");
+		    		this.m_E_SelectServerItem2LoopVerticalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.LoopVerticalScrollRect>(this.uiTransform.gameObject,"Center/E_SelectServerItem2");
      			}
      			return this.m_E_SelectServerItem2LoopVerticalScrollRect;
      		}
      	}
 
-		public Button E_ButtonCloseButton
+		public UnityEngine.UI.Button E_ButtonCloseButton
      	{
      		get
      		{
@@ -52,13 +52,13 @@ namespace ET.Client
      			}
      			if( this.m_E_ButtonCloseButton == null )
      			{
-		    		this.m_E_ButtonCloseButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_ButtonClose");
+		    		this.m_E_ButtonCloseButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Center/E_ButtonClose");
      			}
      			return this.m_E_ButtonCloseButton;
      		}
      	}
 
-		public Image E_ButtonCloseImage
+		public UnityEngine.UI.Image E_ButtonCloseImage
      	{
      		get
      		{
@@ -69,7 +69,7 @@ namespace ET.Client
      			}
      			if( this.m_E_ButtonCloseImage == null )
      			{
-		    		this.m_E_ButtonCloseImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_ButtonClose");
+		    		this.m_E_ButtonCloseImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Center/E_ButtonClose");
      			}
      			return this.m_E_ButtonCloseImage;
      		}
@@ -84,10 +84,10 @@ namespace ET.Client
 			this.uiTransform = null;
 		}
 
-		private LoopVerticalScrollRect m_E_SelectServerItem1LoopVerticalScrollRect = null;
-		private LoopVerticalScrollRect m_E_SelectServerItem2LoopVerticalScrollRect = null;
-		private Button m_E_ButtonCloseButton = null;
-		private Image m_E_ButtonCloseImage = null;
+		private UnityEngine.UI.LoopVerticalScrollRect m_E_SelectServerItem1LoopVerticalScrollRect = null;
+		private UnityEngine.UI.LoopVerticalScrollRect m_E_SelectServerItem2LoopVerticalScrollRect = null;
+		private UnityEngine.UI.Button m_E_ButtonCloseButton = null;
+		private UnityEngine.UI.Image m_E_ButtonCloseImage = null;
 		public Transform uiTransform = null;
 	}
 }

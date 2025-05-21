@@ -1,13 +1,13 @@
-﻿using UnityEngine;
+﻿
+using UnityEngine;
 using UnityEngine.UI;
-
 namespace ET.Client
 {
 	[ComponentOf(typeof(DlgHongBao))]
 	[EnableMethod]
 	public  class DlgHongBaoViewComponent : Entity,IAwake,IDestroy 
 	{
-		public Button E_Button_BackButton
+		public UnityEngine.UI.Button E_Button_BackButton
      	{
      		get
      		{
@@ -18,13 +18,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Button_BackButton == null )
      			{
-		    		this.m_E_Button_BackButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_Button_Back");
+		    		this.m_E_Button_BackButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_Button_Back");
      			}
      			return this.m_E_Button_BackButton;
      		}
      	}
 
-		public Image E_Button_BackImage
+		public UnityEngine.UI.Image E_Button_BackImage
      	{
      		get
      		{
@@ -35,13 +35,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Button_BackImage == null )
      			{
-		    		this.m_E_Button_BackImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_Button_Back");
+		    		this.m_E_Button_BackImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Button_Back");
      			}
      			return this.m_E_Button_BackImage;
      		}
      	}
 
-		public RectTransform EG_JiaGeSetRectTransform
+		public UnityEngine.RectTransform EG_JiaGeSetRectTransform
      	{
      		get
      		{
@@ -52,13 +52,13 @@ namespace ET.Client
      			}
      			if( this.m_EG_JiaGeSetRectTransform == null )
      			{
-		    		this.m_EG_JiaGeSetRectTransform = UIFindHelper.FindDeepChild<RectTransform>(this.uiTransform.gameObject,"EG_JiaGeSet");
+		    		this.m_EG_JiaGeSetRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"Center/EG_JiaGeSet");
      			}
      			return this.m_EG_JiaGeSetRectTransform;
      		}
      	}
 
-		public Text E_Text_AmountText
+		public UnityEngine.UI.Text E_Text_AmountText
      	{
      		get
      		{
@@ -69,13 +69,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Text_AmountText == null )
      			{
-		    		this.m_E_Text_AmountText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"EG_JiaGeSet/E_Text_Amount");
+		    		this.m_E_Text_AmountText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Center/EG_JiaGeSet/E_Text_Amount");
      			}
      			return this.m_E_Text_AmountText;
      		}
      	}
 
-		public Button E_Button_OpenButton
+		public UnityEngine.UI.Button E_Button_OpenButton
      	{
      		get
      		{
@@ -86,13 +86,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Button_OpenButton == null )
      			{
-		    		this.m_E_Button_OpenButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_Button_Open");
+		    		this.m_E_Button_OpenButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Center/E_Button_Open");
      			}
      			return this.m_E_Button_OpenButton;
      		}
      	}
 
-		public Image E_Button_OpenImage
+		public UnityEngine.UI.Image E_Button_OpenImage
      	{
      		get
      		{
@@ -103,7 +103,7 @@ namespace ET.Client
      			}
      			if( this.m_E_Button_OpenImage == null )
      			{
-		    		this.m_E_Button_OpenImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_Button_Open");
+		    		this.m_E_Button_OpenImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Center/E_Button_Open");
      			}
      			return this.m_E_Button_OpenImage;
      		}
@@ -120,12 +120,12 @@ namespace ET.Client
 			this.uiTransform = null;
 		}
 
-		private Button m_E_Button_BackButton = null;
-		private Image m_E_Button_BackImage = null;
-		private RectTransform m_EG_JiaGeSetRectTransform = null;
-		private Text m_E_Text_AmountText = null;
-		private Button m_E_Button_OpenButton = null;
-		private Image m_E_Button_OpenImage = null;
+		private UnityEngine.UI.Button m_E_Button_BackButton = null;
+		private UnityEngine.UI.Image m_E_Button_BackImage = null;
+		private UnityEngine.RectTransform m_EG_JiaGeSetRectTransform = null;
+		private UnityEngine.UI.Text m_E_Text_AmountText = null;
+		private UnityEngine.UI.Button m_E_Button_OpenButton = null;
+		private UnityEngine.UI.Image m_E_Button_OpenImage = null;
 		public Transform uiTransform = null;
 	}
 }

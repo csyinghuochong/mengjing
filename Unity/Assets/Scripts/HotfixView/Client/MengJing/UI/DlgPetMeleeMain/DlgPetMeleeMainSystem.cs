@@ -92,8 +92,8 @@ namespace ET.Client
             Unit unitmain = UnitHelper.GetMyUnitFromClientScene(self.Root());
             self.BattleCamp = unitmain.GetBattleCamp();
 
-            self.View.E_JiFanTowe.text = self.BattleCamp == CampEnum.CampPlayer_1 ? "己方防御塔" : "敌方防御塔";
-            self.View.E_DiRenTowe.text = self.BattleCamp == CampEnum.CampPlayer_1 ? "敌方防御塔" : "己方防御塔";
+            self.View.E_JiFanToweText.text = self.BattleCamp == CampEnum.CampPlayer_1 ? "己方防御塔" : "敌方防御塔";
+            self.View.E_DiRenToweText.text = self.BattleCamp == CampEnum.CampPlayer_1 ? "敌方防御塔" : "己方防御塔";
             
             self.InitCard().Coroutine();
             self.UpdateMoLi();

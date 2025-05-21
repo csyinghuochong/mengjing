@@ -1,7 +1,10 @@
-﻿namespace ET.Client
+﻿
+using UnityEngine;
+using UnityEngine.UI;
+namespace ET.Client
 {
 	[EntitySystemOf(typeof(DlgRoleXiLianNumRewardViewComponent))]
-	[FriendOfAttribute(typeof(DlgRoleXiLianNumRewardViewComponent))]
+	[FriendOfAttribute(typeof(ET.Client.DlgRoleXiLianNumRewardViewComponent))]
 	public static partial class DlgRoleXiLianNumRewardViewComponentSystem
 	{
 		[EntitySystem]

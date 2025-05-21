@@ -52,7 +52,7 @@ namespace ET.Client
      			}
      			if( this.m_EG_SkillDescriptionListNodeRectTransform == null )
      			{
-		    		this.m_EG_SkillDescriptionListNodeRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"Scroll View/Viewport/EG_SkillDescriptionListNode");
+		    		this.m_EG_SkillDescriptionListNodeRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"Center/Scroll View/Viewport/EG_SkillDescriptionListNode");
      			}
      			return this.m_EG_SkillDescriptionListNodeRectTransform;
      		}
@@ -69,7 +69,7 @@ namespace ET.Client
      			}
      			if( this.m_E_SkillDescriptionItemTextText == null )
      			{
-		    		this.m_E_SkillDescriptionItemTextText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Scroll View/Viewport/EG_SkillDescriptionListNode/E_SkillDescriptionItemText");
+		    		this.m_E_SkillDescriptionItemTextText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Center/Scroll View/Viewport/EG_SkillDescriptionListNode/E_SkillDescriptionItemText");
      			}
      			return this.m_E_SkillDescriptionItemTextText;
      		}
@@ -86,7 +86,7 @@ namespace ET.Client
      			}
      			if( this.m_E_BossNameTextText == null )
      			{
-		    		this.m_E_BossNameTextText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_BossNameText");
+		    		this.m_E_BossNameTextText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Center/E_BossNameText");
      			}
      			return this.m_E_BossNameTextText;
      		}

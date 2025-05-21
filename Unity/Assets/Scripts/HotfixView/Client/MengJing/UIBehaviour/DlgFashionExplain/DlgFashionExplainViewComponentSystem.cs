@@ -1,7 +1,10 @@
-﻿namespace ET.Client
+﻿
+using UnityEngine;
+using UnityEngine.UI;
+namespace ET.Client
 {
 	[EntitySystemOf(typeof(DlgFashionExplainViewComponent))]
-	[FriendOfAttribute(typeof(DlgFashionExplainViewComponent))]
+	[FriendOfAttribute(typeof(ET.Client.DlgFashionExplainViewComponent))]
 	public static partial class DlgFashionExplainViewComponentSystem
 	{
 		[EntitySystem]

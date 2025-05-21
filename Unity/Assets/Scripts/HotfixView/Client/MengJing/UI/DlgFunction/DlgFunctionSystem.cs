@@ -25,7 +25,7 @@ namespace ET.Client
             self.View.E_PetBarButton.AddListener(self.OnPetBar);
             self.View.E_SettingButton.AddListener(self.OnSetting);
             self.View.E_UnionButton.AddListener(self.OnUnion);
-            self.View.E_SingleHappy.AddListenerAsync(self.OnSingleHappy);
+            self.View.E_SingleHappyButton.AddListenerAsync(self.OnSingleHappy);
 
             ReddotViewComponent redPointComponent = self.Root().GetComponent<ReddotViewComponent>();
             redPointComponent.RegisterReddot(ReddotType.Friend, self.Reddot_Frined);

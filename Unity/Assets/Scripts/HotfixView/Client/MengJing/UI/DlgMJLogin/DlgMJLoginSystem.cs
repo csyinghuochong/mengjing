@@ -17,9 +17,9 @@ namespace ET.Client
             self.View.E_YinSiXieYiCloseButton.AddListener(() => { self.View.EG_YinSiXieYiRectTransform.gameObject.SetActive(false); });
             self.View.E_YongHuXieYiCloseButton.AddListener(() => { self.View.EG_YongHuXieYiRectTransform.gameObject.SetActive(false); });
 
-            self.View.E_buttonAgeTip.AddListener(() => { self.View.EG_UIAgeTip.gameObject.SetActive(true); });
-            self.View.E_AgeTipClose.AddListener(() => { self.View.EG_UIAgeTip.gameObject.SetActive(false); });
-            self.View.E_AgeTipClose_2.AddListener(() => { self.View.EG_UIAgeTip.gameObject.SetActive(false); });
+            self.View.E_buttonAgeTipButton.AddListener(() => { self.View.EG_UIAgeTipRectTransform.gameObject.SetActive(true); });
+            self.View.E_AgeTipCloseButton.AddListener(() => { self.View.EG_UIAgeTipRectTransform.gameObject.SetActive(false); });
+            self.View.E_AgeTipClose_2Button.AddListener(() => { self.View.EG_UIAgeTipRectTransform.gameObject.SetActive(false); });
 
             Application.targetFrameRate = 60;
             GameObject.Find("Global").GetComponent<Init>().TogglePatchWindow(false);

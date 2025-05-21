@@ -9,23 +9,6 @@ namespace ET.Client
 	public  class DlgTaskViewComponent : Entity,IAwake,IDestroy 
 	{
 		public List<string> AssetList = new();
-		
-		public UnityEngine.UI.ToggleGroup E_FunctionSetBtnToggleGroup
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_FunctionSetBtnToggleGroup == null )
-     			{
-		    		this.m_E_FunctionSetBtnToggleGroup = UIFindHelper.FindDeepChild<UnityEngine.UI.ToggleGroup>(this.uiTransform.gameObject,"E_FunctionSetBtn");
-     			}
-     			return this.m_E_FunctionSetBtnToggleGroup;
-     		}
-     	}
 
 		public UnityEngine.RectTransform EG_SubViewRectTransform
      	{
@@ -43,7 +26,24 @@ namespace ET.Client
      			return this.m_EG_SubViewRectTransform;
      		}
      	}
-		
+
+		public UnityEngine.UI.ToggleGroup E_FunctionSetBtnToggleGroup
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_FunctionSetBtnToggleGroup == null )
+     			{
+		    		this.m_E_FunctionSetBtnToggleGroup = UIFindHelper.FindDeepChild<UnityEngine.UI.ToggleGroup>(this.uiTransform.gameObject,"Left/E_FunctionSetBtn");
+     			}
+     			return this.m_E_FunctionSetBtnToggleGroup;
+     		}
+     	}
+
 		public ES_TaskDetail ES_TaskDetail
 		{
 			get
@@ -103,11 +103,11 @@ namespace ET.Client
 				return this.m_es_taskshop;
 			}
 		}
-
+		
 		public void DestroyWidget()
 		{
-			this.m_E_FunctionSetBtnToggleGroup = null;
 			this.m_EG_SubViewRectTransform = null;
+			this.m_E_FunctionSetBtnToggleGroup = null;
 			this.m_es_taskdetail = null;
 			this.m_es_taskgrowup = null;
 			this.m_es_taskshop = null;
@@ -122,8 +122,8 @@ namespace ET.Client
 			this.AssetList = null;
 		}
 
-		private UnityEngine.UI.ToggleGroup m_E_FunctionSetBtnToggleGroup = null;
 		private UnityEngine.RectTransform m_EG_SubViewRectTransform = null;
+		private UnityEngine.UI.ToggleGroup m_E_FunctionSetBtnToggleGroup = null;
 		private EntityRef<ES_TaskDetail> m_es_taskdetail = null;
 		private EntityRef<ES_TaskGrowUp> m_es_taskgrowup = null;
 		private EntityRef<ES_TaskShop> m_es_taskshop = null;

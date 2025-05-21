@@ -1,13 +1,13 @@
-﻿using UnityEngine;
+﻿
+using UnityEngine;
 using UnityEngine.UI;
-
 namespace ET.Client
 {
 	[ComponentOf(typeof(DlgMJLogin))]
 	[EnableMethod]
 	public  class DlgMJLoginViewComponent : Entity,IAwake,IDestroy 
 	{
-		public Button E_TextButton_1Button
+		public UnityEngine.UI.Button E_TextButton_1Button
      	{
      		get
      		{
@@ -18,13 +18,13 @@ namespace ET.Client
      			}
      			if( this.m_E_TextButton_1Button == null )
      			{
-		    		this.m_E_TextButton_1Button = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"HideNode/YinSiButon/E_TextButton_1");
+		    		this.m_E_TextButton_1Button = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Center/HideNode/YinSiButon/E_TextButton_1");
      			}
      			return this.m_E_TextButton_1Button;
      		}
      	}
 
-		public Text E_TextButton_1Text
+		public UnityEngine.UI.Text E_TextButton_1Text
      	{
      		get
      		{
@@ -35,13 +35,13 @@ namespace ET.Client
      			}
      			if( this.m_E_TextButton_1Text == null )
      			{
-		    		this.m_E_TextButton_1Text = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"HideNode/YinSiButon/E_TextButton_1");
+		    		this.m_E_TextButton_1Text = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Center/HideNode/YinSiButon/E_TextButton_1");
      			}
      			return this.m_E_TextButton_1Text;
      		}
      	}
 
-		public Button E_TextButton_2Button
+		public UnityEngine.UI.Button E_TextButton_2Button
      	{
      		get
      		{
@@ -52,13 +52,13 @@ namespace ET.Client
      			}
      			if( this.m_E_TextButton_2Button == null )
      			{
-		    		this.m_E_TextButton_2Button = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"HideNode/YinSiButon/E_TextButton_2");
+		    		this.m_E_TextButton_2Button = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Center/HideNode/YinSiButon/E_TextButton_2");
      			}
      			return this.m_E_TextButton_2Button;
      		}
      	}
 
-		public Text E_TextButton_2Text
+		public UnityEngine.UI.Text E_TextButton_2Text
      	{
      		get
      		{
@@ -69,13 +69,13 @@ namespace ET.Client
      			}
      			if( this.m_E_TextButton_2Text == null )
      			{
-		    		this.m_E_TextButton_2Text = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"HideNode/YinSiButon/E_TextButton_2");
+		    		this.m_E_TextButton_2Text = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Center/HideNode/YinSiButon/E_TextButton_2");
      			}
      			return this.m_E_TextButton_2Text;
      		}
      	}
 
-		public Button E_LoginButton
+		public UnityEngine.UI.Button E_LoginButton
      	{
      		get
      		{
@@ -86,13 +86,13 @@ namespace ET.Client
      			}
      			if( this.m_E_LoginButton == null )
      			{
-		    		this.m_E_LoginButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"HideNode/BanHanNode/E_Login");
+		    		this.m_E_LoginButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Center/HideNode/BanHanNode/E_Login");
      			}
      			return this.m_E_LoginButton;
      		}
      	}
 
-		public Image E_LoginImage
+		public UnityEngine.UI.Image E_LoginImage
      	{
      		get
      		{
@@ -103,13 +103,13 @@ namespace ET.Client
      			}
      			if( this.m_E_LoginImage == null )
      			{
-		    		this.m_E_LoginImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"HideNode/BanHanNode/E_Login");
+		    		this.m_E_LoginImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Center/HideNode/BanHanNode/E_Login");
      			}
      			return this.m_E_LoginImage;
      		}
      	}
 
-		public Text E_SelectServerNameText
+		public UnityEngine.UI.Text E_SelectServerNameText
      	{
      		get
      		{
@@ -120,13 +120,13 @@ namespace ET.Client
      			}
      			if( this.m_E_SelectServerNameText == null )
      			{
-		    		this.m_E_SelectServerNameText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"HideNode/SelectGameServer/E_SelectServerName");
+		    		this.m_E_SelectServerNameText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Center/HideNode/SelectGameServer/E_SelectServerName");
      			}
      			return this.m_E_SelectServerNameText;
      		}
      	}
 
-		public Button E_SelectBtnButton
+		public UnityEngine.UI.Button E_SelectBtnButton
      	{
      		get
      		{
@@ -137,13 +137,13 @@ namespace ET.Client
      			}
      			if( this.m_E_SelectBtnButton == null )
      			{
-		    		this.m_E_SelectBtnButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"HideNode/SelectGameServer/E_SelectBtn");
+		    		this.m_E_SelectBtnButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Center/HideNode/SelectGameServer/E_SelectBtn");
      			}
      			return this.m_E_SelectBtnButton;
      		}
      	}
 
-		public Image E_SelectBtnImage
+		public UnityEngine.UI.Image E_SelectBtnImage
      	{
      		get
      		{
@@ -154,13 +154,47 @@ namespace ET.Client
      			}
      			if( this.m_E_SelectBtnImage == null )
      			{
-		    		this.m_E_SelectBtnImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"HideNode/SelectGameServer/E_SelectBtn");
+		    		this.m_E_SelectBtnImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Center/HideNode/SelectGameServer/E_SelectBtn");
      			}
      			return this.m_E_SelectBtnImage;
      		}
      	}
 
-		public InputField E_AccountInputField
+		public UnityEngine.UI.Button E_buttonAgeTipButton
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_buttonAgeTipButton == null )
+     			{
+		    		this.m_E_buttonAgeTipButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Center/E_buttonAgeTip");
+     			}
+     			return this.m_E_buttonAgeTipButton;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_buttonAgeTipImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_buttonAgeTipImage == null )
+     			{
+		    		this.m_E_buttonAgeTipImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Center/E_buttonAgeTip");
+     			}
+     			return this.m_E_buttonAgeTipImage;
+     		}
+     	}
+
+		public UnityEngine.UI.InputField E_AccountInputField
      	{
      		get
      		{
@@ -171,13 +205,13 @@ namespace ET.Client
      			}
      			if( this.m_E_AccountInputField == null )
      			{
-		    		this.m_E_AccountInputField = UIFindHelper.FindDeepChild<InputField>(this.uiTransform.gameObject,"Panel/E_Account");
+		    		this.m_E_AccountInputField = UIFindHelper.FindDeepChild<UnityEngine.UI.InputField>(this.uiTransform.gameObject,"Center/Panel/E_Account");
      			}
      			return this.m_E_AccountInputField;
      		}
      	}
 
-		public Image E_AccountImage
+		public UnityEngine.UI.Image E_AccountImage
      	{
      		get
      		{
@@ -188,13 +222,13 @@ namespace ET.Client
      			}
      			if( this.m_E_AccountImage == null )
      			{
-		    		this.m_E_AccountImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"Panel/E_Account");
+		    		this.m_E_AccountImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Center/Panel/E_Account");
      			}
      			return this.m_E_AccountImage;
      		}
      	}
 
-		public InputField E_PasswordInputField
+		public UnityEngine.UI.InputField E_PasswordInputField
      	{
      		get
      		{
@@ -205,13 +239,13 @@ namespace ET.Client
      			}
      			if( this.m_E_PasswordInputField == null )
      			{
-		    		this.m_E_PasswordInputField = UIFindHelper.FindDeepChild<InputField>(this.uiTransform.gameObject,"Panel/E_Password");
+		    		this.m_E_PasswordInputField = UIFindHelper.FindDeepChild<UnityEngine.UI.InputField>(this.uiTransform.gameObject,"Center/Panel/E_Password");
      			}
      			return this.m_E_PasswordInputField;
      		}
      	}
 
-		public Image E_PasswordImage
+		public UnityEngine.UI.Image E_PasswordImage
      	{
      		get
      		{
@@ -222,13 +256,13 @@ namespace ET.Client
      			}
      			if( this.m_E_PasswordImage == null )
      			{
-		    		this.m_E_PasswordImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"Panel/E_Password");
+		    		this.m_E_PasswordImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Center/Panel/E_Password");
      			}
      			return this.m_E_PasswordImage;
      		}
      	}
 
-		public RectTransform EG_LoadingRectTransform
+		public UnityEngine.RectTransform EG_LoadingRectTransform
      	{
      		get
      		{
@@ -239,13 +273,13 @@ namespace ET.Client
      			}
      			if( this.m_EG_LoadingRectTransform == null )
      			{
-		    		this.m_EG_LoadingRectTransform = UIFindHelper.FindDeepChild<RectTransform>(this.uiTransform.gameObject,"EG_Loading");
+		    		this.m_EG_LoadingRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"Center/EG_Loading");
      			}
      			return this.m_EG_LoadingRectTransform;
      		}
      	}
 
-		public RectTransform EG_YinSiXieYiRectTransform
+		public UnityEngine.RectTransform EG_YinSiXieYiRectTransform
      	{
      		get
      		{
@@ -256,13 +290,13 @@ namespace ET.Client
      			}
      			if( this.m_EG_YinSiXieYiRectTransform == null )
      			{
-		    		this.m_EG_YinSiXieYiRectTransform = UIFindHelper.FindDeepChild<RectTransform>(this.uiTransform.gameObject,"EG_YinSiXieYi");
+		    		this.m_EG_YinSiXieYiRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"Center/EG_YinSiXieYi");
      			}
      			return this.m_EG_YinSiXieYiRectTransform;
      		}
      	}
 
-		public Button E_YinSiXieYiCloseButton
+		public UnityEngine.UI.Button E_YinSiXieYiCloseButton
      	{
      		get
      		{
@@ -273,13 +307,13 @@ namespace ET.Client
      			}
      			if( this.m_E_YinSiXieYiCloseButton == null )
      			{
-		    		this.m_E_YinSiXieYiCloseButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"EG_YinSiXieYi/E_YinSiXieYiClose");
+		    		this.m_E_YinSiXieYiCloseButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Center/EG_YinSiXieYi/E_YinSiXieYiClose");
      			}
      			return this.m_E_YinSiXieYiCloseButton;
      		}
      	}
 
-		public Image E_YinSiXieYiCloseImage
+		public UnityEngine.UI.Image E_YinSiXieYiCloseImage
      	{
      		get
      		{
@@ -290,13 +324,13 @@ namespace ET.Client
      			}
      			if( this.m_E_YinSiXieYiCloseImage == null )
      			{
-		    		this.m_E_YinSiXieYiCloseImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"EG_YinSiXieYi/E_YinSiXieYiClose");
+		    		this.m_E_YinSiXieYiCloseImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Center/EG_YinSiXieYi/E_YinSiXieYiClose");
      			}
      			return this.m_E_YinSiXieYiCloseImage;
      		}
      	}
 
-		public RectTransform EG_YongHuXieYiRectTransform
+		public UnityEngine.RectTransform EG_YongHuXieYiRectTransform
      	{
      		get
      		{
@@ -307,13 +341,13 @@ namespace ET.Client
      			}
      			if( this.m_EG_YongHuXieYiRectTransform == null )
      			{
-		    		this.m_EG_YongHuXieYiRectTransform = UIFindHelper.FindDeepChild<RectTransform>(this.uiTransform.gameObject,"EG_YongHuXieYi");
+		    		this.m_EG_YongHuXieYiRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"Center/EG_YongHuXieYi");
      			}
      			return this.m_EG_YongHuXieYiRectTransform;
      		}
      	}
 
-		public Button E_YongHuXieYiCloseButton
+		public UnityEngine.UI.Button E_YongHuXieYiCloseButton
      	{
      		get
      		{
@@ -324,13 +358,13 @@ namespace ET.Client
      			}
      			if( this.m_E_YongHuXieYiCloseButton == null )
      			{
-		    		this.m_E_YongHuXieYiCloseButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"EG_YongHuXieYi/E_YongHuXieYiClose");
+		    		this.m_E_YongHuXieYiCloseButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Center/EG_YongHuXieYi/E_YongHuXieYiClose");
      			}
      			return this.m_E_YongHuXieYiCloseButton;
      		}
      	}
 
-		public Image E_YongHuXieYiCloseImage
+		public UnityEngine.UI.Image E_YongHuXieYiCloseImage
      	{
      		get
      		{
@@ -341,81 +375,13 @@ namespace ET.Client
      			}
      			if( this.m_E_YongHuXieYiCloseImage == null )
      			{
-		    		this.m_E_YongHuXieYiCloseImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"EG_YongHuXieYi/E_YongHuXieYiClose");
+		    		this.m_E_YongHuXieYiCloseImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Center/EG_YongHuXieYi/E_YongHuXieYiClose");
      			}
      			return this.m_E_YongHuXieYiCloseImage;
      		}
-        }
+     	}
 
-        public Button E_buttonAgeTip
-        {
-            get
-            {
-                if (this.uiTransform == null)
-                {
-                    Log.Error("uiTransform is null.");
-                    return null;
-                }
-                if (this.m_E_buttonAgeTip == null)
-                {
-                    this.m_E_buttonAgeTip = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject, "E_buttonAgeTip");
-                }
-                return this.m_E_buttonAgeTip;
-            }
-        }
-
-        public Transform EG_UIAgeTip
-        {
-            get
-            {
-                if (this.uiTransform == null)
-                {
-                    Log.Error("uiTransform is null.");
-                    return null;
-                }
-                if (this.m_EG_UIAgeTip == null)
-                {
-                    this.m_EG_UIAgeTip = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject, "EG_UIAgeTip");
-                }
-                return this.m_EG_UIAgeTip;
-            }
-        }
-
-        public Button E_AgeTipClose
-        {
-            get
-            {
-                if (this.uiTransform == null)
-                {
-                    Log.Error("uiTransform is null.");
-                    return null;
-                }
-                if (this.m_E_AgeTipClose == null)
-                {
-                    this.m_E_AgeTipClose = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject, "EG_UIAgeTip/E_AgeTipClose");
-                }
-                return this.m_E_AgeTipClose;
-            }
-        }
-
-        public Button E_AgeTipClose_2
-        {
-            get
-            {
-                if (this.uiTransform == null)
-                {
-                    Log.Error("uiTransform is null.");
-                    return null;
-                }
-                if (this.m_E_AgeTipClose_2 == null)
-                {
-                    this.m_E_AgeTipClose_2 = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject, "EG_UIAgeTip/E_AgeTipClose_2");
-                }
-                return this.m_E_AgeTipClose_2;
-            }
-        }
-
-        public Text E_TextYinSiText
+		public UnityEngine.UI.Text E_TextYinSiText
      	{
      		get
      		{
@@ -426,9 +392,94 @@ namespace ET.Client
      			}
      			if( this.m_E_TextYinSiText == null )
      			{
-		    		this.m_E_TextYinSiText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"EG_YongHuXieYi/Scroll View/Viewport/ChatContent/E_TextYinSi");
+		    		this.m_E_TextYinSiText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Center/EG_YongHuXieYi/Scroll View/Viewport/ChatContent/E_TextYinSi");
      			}
      			return this.m_E_TextYinSiText;
+     		}
+     	}
+
+		public UnityEngine.RectTransform EG_UIAgeTipRectTransform
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_EG_UIAgeTipRectTransform == null )
+     			{
+		    		this.m_EG_UIAgeTipRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"Center/EG_UIAgeTip");
+     			}
+     			return this.m_EG_UIAgeTipRectTransform;
+     		}
+     	}
+
+		public UnityEngine.UI.Button E_AgeTipCloseButton
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_AgeTipCloseButton == null )
+     			{
+		    		this.m_E_AgeTipCloseButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Center/EG_UIAgeTip/E_AgeTipClose");
+     			}
+     			return this.m_E_AgeTipCloseButton;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_AgeTipCloseImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_AgeTipCloseImage == null )
+     			{
+		    		this.m_E_AgeTipCloseImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Center/EG_UIAgeTip/E_AgeTipClose");
+     			}
+     			return this.m_E_AgeTipCloseImage;
+     		}
+     	}
+
+		public UnityEngine.UI.Button E_AgeTipClose_2Button
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_AgeTipClose_2Button == null )
+     			{
+		    		this.m_E_AgeTipClose_2Button = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Center/EG_UIAgeTip/E_AgeTipClose_2");
+     			}
+     			return this.m_E_AgeTipClose_2Button;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_AgeTipClose_2Image
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_AgeTipClose_2Image == null )
+     			{
+		    		this.m_E_AgeTipClose_2Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Center/EG_UIAgeTip/E_AgeTipClose_2");
+     			}
+     			return this.m_E_AgeTipClose_2Image;
      		}
      	}
 
@@ -443,6 +494,8 @@ namespace ET.Client
 			this.m_E_SelectServerNameText = null;
 			this.m_E_SelectBtnButton = null;
 			this.m_E_SelectBtnImage = null;
+			this.m_E_buttonAgeTipButton = null;
+			this.m_E_buttonAgeTipImage = null;
 			this.m_E_AccountInputField = null;
 			this.m_E_AccountImage = null;
 			this.m_E_PasswordInputField = null;
@@ -455,38 +508,42 @@ namespace ET.Client
 			this.m_E_YongHuXieYiCloseButton = null;
 			this.m_E_YongHuXieYiCloseImage = null;
 			this.m_E_TextYinSiText = null;
-            this.m_E_buttonAgeTip = null;
-            this.m_EG_UIAgeTip = null;
-            this.m_E_AgeTipClose = null;
-            this.m_E_AgeTipClose_2 = null;
-            this.uiTransform = null;
+			this.m_EG_UIAgeTipRectTransform = null;
+			this.m_E_AgeTipCloseButton = null;
+			this.m_E_AgeTipCloseImage = null;
+			this.m_E_AgeTipClose_2Button = null;
+			this.m_E_AgeTipClose_2Image = null;
+			this.uiTransform = null;
 		}
 
-		private Button m_E_TextButton_1Button = null;
-		private Text m_E_TextButton_1Text = null;
-		private Button m_E_TextButton_2Button = null;
-		private Text m_E_TextButton_2Text = null;
-		private Button m_E_LoginButton = null;
-		private Image m_E_LoginImage = null;
-		private Text m_E_SelectServerNameText = null;
-		private Button m_E_SelectBtnButton = null;
-		private Image m_E_SelectBtnImage = null;
-		private InputField m_E_AccountInputField = null;
-		private Image m_E_AccountImage = null;
-		private InputField m_E_PasswordInputField = null;
-		private Image m_E_PasswordImage = null;
-		private RectTransform m_EG_LoadingRectTransform = null;
-		private RectTransform m_EG_YinSiXieYiRectTransform = null;
-		private Button m_E_YinSiXieYiCloseButton = null;
-		private Image m_E_YinSiXieYiCloseImage = null;
-		private RectTransform m_EG_YongHuXieYiRectTransform = null;
-		private Button m_E_YongHuXieYiCloseButton = null;
-		private Image m_E_YongHuXieYiCloseImage = null;
-		private Text m_E_TextYinSiText = null;
-        private Button m_E_buttonAgeTip = null;
-        private Transform m_EG_UIAgeTip = null;
-        private Button m_E_AgeTipClose = null;
-        private Button m_E_AgeTipClose_2 = null;
-        public Transform uiTransform = null;
+		private UnityEngine.UI.Button m_E_TextButton_1Button = null;
+		private UnityEngine.UI.Text m_E_TextButton_1Text = null;
+		private UnityEngine.UI.Button m_E_TextButton_2Button = null;
+		private UnityEngine.UI.Text m_E_TextButton_2Text = null;
+		private UnityEngine.UI.Button m_E_LoginButton = null;
+		private UnityEngine.UI.Image m_E_LoginImage = null;
+		private UnityEngine.UI.Text m_E_SelectServerNameText = null;
+		private UnityEngine.UI.Button m_E_SelectBtnButton = null;
+		private UnityEngine.UI.Image m_E_SelectBtnImage = null;
+		private UnityEngine.UI.Button m_E_buttonAgeTipButton = null;
+		private UnityEngine.UI.Image m_E_buttonAgeTipImage = null;
+		private UnityEngine.UI.InputField m_E_AccountInputField = null;
+		private UnityEngine.UI.Image m_E_AccountImage = null;
+		private UnityEngine.UI.InputField m_E_PasswordInputField = null;
+		private UnityEngine.UI.Image m_E_PasswordImage = null;
+		private UnityEngine.RectTransform m_EG_LoadingRectTransform = null;
+		private UnityEngine.RectTransform m_EG_YinSiXieYiRectTransform = null;
+		private UnityEngine.UI.Button m_E_YinSiXieYiCloseButton = null;
+		private UnityEngine.UI.Image m_E_YinSiXieYiCloseImage = null;
+		private UnityEngine.RectTransform m_EG_YongHuXieYiRectTransform = null;
+		private UnityEngine.UI.Button m_E_YongHuXieYiCloseButton = null;
+		private UnityEngine.UI.Image m_E_YongHuXieYiCloseImage = null;
+		private UnityEngine.UI.Text m_E_TextYinSiText = null;
+		private UnityEngine.RectTransform m_EG_UIAgeTipRectTransform = null;
+		private UnityEngine.UI.Button m_E_AgeTipCloseButton = null;
+		private UnityEngine.UI.Image m_E_AgeTipCloseImage = null;
+		private UnityEngine.UI.Button m_E_AgeTipClose_2Button = null;
+		private UnityEngine.UI.Image m_E_AgeTipClose_2Image = null;
+		public Transform uiTransform = null;
 	}
 }

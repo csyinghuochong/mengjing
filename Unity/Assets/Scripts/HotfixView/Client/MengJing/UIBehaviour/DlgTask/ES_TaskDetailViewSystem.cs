@@ -60,6 +60,9 @@ namespace ET.Client
             GameObject go2 = UnityEngine.Object.Instantiate(self.ES_TaskType_0.uiTransform.gameObject, self.ES_TaskType_0.uiTransform.parent);
             go2.name = "ES_TaskType_2";
 
+            self.ES_TaskType_1 = self.AddChild<ES_TaskType, Transform>(go1.transform);
+            self.ES_TaskType_2 = self.AddChild<ES_TaskType, Transform>(go2.transform);
+            
             self.ES_TaskType_0.InitData(TaskTypeEnum.Main, self.SetExpand);
             self.ES_TaskType_1.InitData(TaskTypeEnum.Branch, self.SetExpand);
             self.ES_TaskType_2.InitData(TaskTypeEnum.Daily, self.SetExpand);
