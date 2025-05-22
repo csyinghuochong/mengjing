@@ -13337,6 +13337,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8698329035926088959}
+  - component: {fileID: 6246663115184131876}
   m_Layer: 5
   m_Name: Right
   m_TagString: Untagged
@@ -13372,11 +13373,27 @@ RectTransform:
   - {fileID: 8634472606111019247}
   m_Father: {fileID: 8911491441933053899}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 0.5}
-  m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -824, y: 275.54245}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 136, y: 275.54245}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &6246663115184131876
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8912189889274219087}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 025f064ebede0924499c79f11e4b373d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveTypeEnum: 1
+  moveDistance: 2000
+  isLoop: 0
+  MoveToTime: 0
 --- !u!1 &8951087218230903861
 GameObject:
   m_ObjectHideFlags: 0

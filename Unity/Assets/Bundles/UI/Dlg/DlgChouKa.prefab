@@ -3023,6 +3023,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5222444086945296638}
+  - component: {fileID: 5281540740042582780}
   m_Layer: 5
   m_Name: Right
   m_TagString: Untagged
@@ -3063,6 +3064,22 @@ RectTransform:
   m_AnchoredPosition: {x: 1430, y: 0}
   m_SizeDelta: {x: 100, y: 1440}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &5281540740042582780
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4434720118632931698}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 025f064ebede0924499c79f11e4b373d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveTypeEnum: 1
+  moveDistance: 2000
+  isLoop: 0
+  MoveToTime: 0
 --- !u!1 &5520628491802414804
 GameObject:
   m_ObjectHideFlags: 0
@@ -3203,6 +3220,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4929950023731653199}
+  - component: {fileID: 195468607806138838}
   m_Layer: 5
   m_Name: Left
   m_TagString: Untagged
@@ -3233,6 +3251,22 @@ RectTransform:
   m_AnchoredPosition: {x: -1480, y: 0}
   m_SizeDelta: {x: 100, y: 1440}
   m_Pivot: {x: 0, y: 0.5}
+--- !u!114 &195468607806138838
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6774671766075600868}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 025f064ebede0924499c79f11e4b373d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveTypeEnum: 1
+  moveDistance: -2000
+  isLoop: 0
+  MoveToTime: 0
 --- !u!1 &7079727934215974117
 GameObject:
   m_ObjectHideFlags: 0

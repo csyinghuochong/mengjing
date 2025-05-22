@@ -161,7 +161,7 @@ GameObject:
   - component: {fileID: 8374026842219351474}
   - component: {fileID: 8891296583438466828}
   m_Layer: 5
-  m_Name: Left
+  m_Name: Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1914,8 +1914,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 8374026842219351474}
   - {fileID: 986862186748100838}
+  - {fileID: 8374026842219351474}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -3002,7 +3002,7 @@ GameObject:
   - component: {fileID: 986862186748100838}
   - component: {fileID: 6177554784465063630}
   m_Layer: 5
-  m_Name: Right
+  m_Name: Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3052,7 +3052,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveTypeEnum: 1
-  moveDistance: 10
+  moveDistance: -2000
   isLoop: 0
   MoveToTime: 0
 --- !u!1 &8922748723231709307

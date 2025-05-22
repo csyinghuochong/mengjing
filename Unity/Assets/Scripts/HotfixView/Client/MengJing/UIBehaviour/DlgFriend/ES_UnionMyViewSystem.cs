@@ -50,7 +50,7 @@ namespace ET.Client
             self.E_Text_EnterUnionButton.AddListener(self.OnText_EnterUnionButton);
             self.E_Text_LevelButton.AddListener(self.OnText_LevelButton);
             self.E_Text_ExpButton.AddListener(self.OnText_ExpButton);
-            self.E_Button_Upgrade.AddListener(self.OnButtonUpgrade);
+            self.E_Button_UpgradeButton.AddListener(self.OnButtonUpgrade);
             
             ReddotViewComponent redPointComponent = self.Root().GetComponent<ReddotViewComponent>();
             redPointComponent.RegisterReddot(ReddotType.UnionApply, self.Reddot_UnionApply);
@@ -187,7 +187,8 @@ namespace ET.Client
                 return;
             }
 
-            self.EG_ShowSetRectTransform.gameObject.SetActive(false);
+            self.EG_LeftRectTransform.gameObject.SetActive(false);
+            self.EG_RightRectTransform.gameObject.SetActive(false);
 
             await self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_UnionApplyList);
             DlgUnionApplyList dlgUnionApplyList = self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgUnionApplyList>();
@@ -199,7 +200,8 @@ namespace ET.Client
         public static void ShowSetShow(this ES_UnionMy self)
         {
             self.UnionInfo = null;
-            self.EG_ShowSetRectTransform.gameObject.SetActive(true);
+            self.EG_LeftRectTransform.gameObject.SetActive(true);
+            self.EG_RightRectTransform.gameObject.SetActive(true);
             self.OnUpdateUI().Coroutine();
         }
 
@@ -270,8 +272,8 @@ namespace ET.Client
             self.E_ButtonApplyListButton.gameObject.SetActive(leader || mainPlayerInfo.Position != 0);
             self.E_ButtonJingXuanButton.gameObject.SetActive(self.UnionInfo.JingXuanEndTime > 0);
 
-            self.E_Button_Upgrade.gameObject.SetActive(leader);
-            self.E_Button_Upgrade.transform.Find("Reddot").gameObject.SetActive(self.UnionInfo.Exp >= unionConfig.Exp && UnionConfigCategory.Instance.Contain(unionlevel + 1));
+            self.E_Button_UpgradeButton.gameObject.SetActive(leader);
+            self.E_Button_UpgradeButton.transform.Find("Reddot").gameObject.SetActive(self.UnionInfo.Exp >= unionConfig.Exp && UnionConfigCategory.Instance.Contain(unionlevel + 1));
         }
 
         public static void UpdateMyUnion(this ES_UnionMy self)

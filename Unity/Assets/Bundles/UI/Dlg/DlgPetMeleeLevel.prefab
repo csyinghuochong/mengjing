@@ -6581,6 +6581,7 @@ GameObject:
   - component: {fileID: 7300983300400738831}
   - component: {fileID: 71669393062495776}
   - component: {fileID: 2128621097363904936}
+  - component: {fileID: 1753942365259694417}
   m_Layer: 5
   m_Name: E_RightBG
   m_TagString: Untagged
@@ -6612,9 +6613,9 @@ RectTransform:
   - {fileID: 2272854513604562065}
   m_Father: {fileID: 17654666246771255}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 0.5}
-  m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -407, y: 38}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 553, y: 38}
   m_SizeDelta: {x: 1200, y: 2000}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &71669393062495776
@@ -6655,6 +6656,22 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &1753942365259694417
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8343512919461766671}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 025f064ebede0924499c79f11e4b373d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveTypeEnum: 1
+  moveDistance: 2000
+  isLoop: 0
+  MoveToTime: 0
 --- !u!1 &8652713497148176229
 GameObject:
   m_ObjectHideFlags: 0
