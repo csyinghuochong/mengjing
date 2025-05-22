@@ -368,7 +368,8 @@ namespace ET.Client
             if (errorCode!= ErrorCode.ERR_Success)
             {
                 if (errorCode == ErrorCode.ERR_CanNotMove_NetWait 
-                    || errorCode == ErrorCode.ERR_CanNotMove_Rigidity)
+                    || errorCode == ErrorCode.ERR_CanNotMove_Rigidity
+                    || errorCode == ErrorCode.ERR_CanNotMove_Speed)
                 {
                     return ;
                 }
