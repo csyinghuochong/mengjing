@@ -41,14 +41,14 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3200675867429039451}
   serializedVersion: 8
-  lengthInSec: 2
+  lengthInSec: 0.5
   simulationSpeed: 1
   stopAction: 0
   cullingMode: 0
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
   emitterVelocityMode: 0
-  looping: 0
+  looping: 1
   prewarm: 0
   playOnAwake: 1
   useUnscaledTime: 0
@@ -751,7 +751,7 @@ ParticleSystem:
     sphericalDirectionAmount: 0
     randomPositionAmount: 0
     radius:
-      value: 1
+      value: 1.2
       mode: 0
       spread: 0
       speed:
@@ -980,7 +980,7 @@ ParticleSystem:
       countCurve:
         serializedVersion: 2
         minMaxState: 0
-        scalar: 1
+        scalar: 2
         minScalar: 30
         maxCurve:
           serializedVersion: 2
@@ -1030,7 +1030,7 @@ ParticleSystem:
           m_PreInfinity: 2
           m_PostInfinity: 2
           m_RotationOrder: 4
-      cycleCount: 1
+      cycleCount: 2
       repeatInterval: 0.01
       probability: 1
   SizeModule:
@@ -4950,14 +4950,14 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5825633850497939420}
   serializedVersion: 8
-  lengthInSec: 2
+  lengthInSec: 1
   simulationSpeed: 1
   stopAction: 0
   cullingMode: 0
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
   emitterVelocityMode: 0
-  looping: 0
+  looping: 1
   prewarm: 0
   playOnAwake: 1
   useUnscaledTime: 0
@@ -5660,7 +5660,7 @@ ParticleSystem:
     sphericalDirectionAmount: 0
     randomPositionAmount: 0
     radius:
-      value: 1.7
+      value: 2
       mode: 0
       spread: 0
       speed:
@@ -14825,11 +14825,28 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1671326770, guid: ed44bba8a0fec7e46ac71c48be2407e9, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1671326773, guid: ed44bba8a0fec7e46ac71c48be2407e9, type: 3}
+      propertyPath: looping
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1938675049, guid: ed44bba8a0fec7e46ac71c48be2407e9, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1938675052, guid: ed44bba8a0fec7e46ac71c48be2407e9, type: 3}
+      propertyPath: looping
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1938675052, guid: ed44bba8a0fec7e46ac71c48be2407e9, type: 3}
+      propertyPath: InitialModule.startSize.scalar
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 2995331489310038436, guid: ed44bba8a0fec7e46ac71c48be2407e9,
+        type: 3}
+      propertyPath: looping
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2995331489310038436, guid: ed44bba8a0fec7e46ac71c48be2407e9,
         type: 3}
@@ -14844,12 +14861,22 @@ PrefabInstance:
     - target: {fileID: 2995331489366091370, guid: ed44bba8a0fec7e46ac71c48be2407e9,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2995331489366091372, guid: ed44bba8a0fec7e46ac71c48be2407e9,
+        type: 3}
+      propertyPath: looping
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2995331489525158860, guid: ed44bba8a0fec7e46ac71c48be2407e9,
         type: 3}
       propertyPath: m_SortingFudge
       value: -2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2995331489525158863, guid: ed44bba8a0fec7e46ac71c48be2407e9,
+        type: 3}
+      propertyPath: looping
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2995331489525158863, guid: ed44bba8a0fec7e46ac71c48be2407e9,
         type: 3}
@@ -14878,8 +14905,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2995331490333690604, guid: ed44bba8a0fec7e46ac71c48be2407e9,
         type: 3}
+      propertyPath: looping
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2995331490333690604, guid: ed44bba8a0fec7e46ac71c48be2407e9,
+        type: 3}
+      propertyPath: lengthInSec
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2995331490333690604, guid: ed44bba8a0fec7e46ac71c48be2407e9,
+        type: 3}
       propertyPath: ShapeModule.radius.value
-      value: 1.7
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2995331490333690604, guid: ed44bba8a0fec7e46ac71c48be2407e9,
         type: 3}
