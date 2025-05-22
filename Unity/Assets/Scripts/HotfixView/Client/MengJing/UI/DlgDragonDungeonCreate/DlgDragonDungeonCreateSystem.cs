@@ -17,7 +17,7 @@ namespace ET.Client
             self.View.E_ShenYuanButtonButton.AddListener(() => { self.OnShenYuanMode(); });
             self.View.E_CloseButtonButton.AddListener(self.OnCloseButtonButton);
             self.View.E_ShenYuanModeImage.gameObject.SetActive(false);
-            self.View.EG_DragondungeonListRectTransform.gameObject.SetActive(false);
+            self.View.EG_DragondungeonItemRectTransform.gameObject.SetActive(false);
             List<CellGenerateConfig> sceneConfig = CellGenerateConfigCategory.Instance.GetAll().Values.ToList();
             PlayerInfoComponent playerInfoComponent = self.Root().GetComponent<PlayerInfoComponent>();
            
@@ -30,7 +30,7 @@ namespace ET.Client
 
 
                 self.FubenIdList.Add(sceneConfig[i].Id);
-                GameObject item = UnityEngine.Object.Instantiate(self.View.EG_DragondungeonListRectTransform.gameObject);
+                GameObject item = UnityEngine.Object.Instantiate(self.View.EG_DragondungeonItemRectTransform.gameObject);
                 CommonViewHelper.SetParent(item, self.View.EG_DragondungeonListRectTransform.gameObject);
                 item.SetActive(true);
                 self.ButtonList.Add(item.transform);
