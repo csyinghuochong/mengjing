@@ -2160,6 +2160,14 @@ namespace ET.Client
                     self.View.E_OpenChatButton.gameObject.SetActive(true);
                     self.View.EG_MainChatRectTransform.gameObject.gameObject.SetActive(true);
                     break;
+                case MapTypeEnum.MiJing:
+                    self.View.EG_HomeButtonRectTransform.gameObject.SetActive(false);
+                    self.View.ES_MainSkill.uiTransform.gameObject.SetActive(true);
+                    self.View.E_OpenChatButton.gameObject.SetActive(true);
+                    self.View.EG_MainChatRectTransform.gameObject.gameObject.SetActive(true);
+                    self.View.EG_MainPetFightsRectTransform.gameObject.SetActive(true);
+                    break;
+                    break;
                 default:
                     self.View.EG_HomeButtonRectTransform.gameObject.SetActive(false);
                     self.View.ES_MainSkill.uiTransform.gameObject.SetActive(true);

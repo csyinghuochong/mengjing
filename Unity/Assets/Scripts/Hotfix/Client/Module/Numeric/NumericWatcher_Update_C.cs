@@ -2,12 +2,12 @@ using System;
 
 namespace ET.Client
 {
-   /// <summary>
-   /// 逻辑
-   /// </summary>
-   ///
-   ///
-   /// 
+    /// <summary>
+    /// 逻辑public class NumericChangeEvent_NotifyWatcher: AEvent<Scene, NumbericChange>
+    /// </summary>
+    ///
+    ///
+    /// 
     [NumericWatcher(SceneType.Current, NumericType.Now_Dead)]
     public class NumericWatcher_Now_Dead : INumericWatcher
     {

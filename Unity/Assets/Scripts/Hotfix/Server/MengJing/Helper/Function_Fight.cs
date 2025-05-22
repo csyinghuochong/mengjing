@@ -1178,7 +1178,7 @@ namespace ET.Server
                 }
                 if (DamgeType == 0)
                 {
-                    Log.Debug("1");
+                    //Log.Debug("1");
                 }
 
 
