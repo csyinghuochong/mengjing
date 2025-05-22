@@ -46,7 +46,7 @@ namespace ET.Client
             {
                 ActivityConfig activityConfig = showConfigs[i];
                 
-                Transform  itemTransform = self.uiTransform.Find($"ActivityLoginItem_{i + 1}");
+                Transform  itemTransform = self.uiTransform.Find($"Right/ActivityLoginItem_{i + 1}");
                     
                 itemTransform.Find("Text_Day").GetComponent<Text>().text = (i + 1).ToString();
 

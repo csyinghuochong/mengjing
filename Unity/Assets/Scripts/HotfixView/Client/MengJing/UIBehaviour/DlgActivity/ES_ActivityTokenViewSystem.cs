@@ -72,8 +72,8 @@ namespace ET.Client
 
             self.E_TextRechargeText.gameObject.SetActive(selfRechage < 298);
             
-            CommonViewHelper.SetImageGrayAllChild( self.Root(),  self.E_Image98.gameObject,  selfRechage < 98);
-            CommonViewHelper.SetImageGrayAllChild( self.Root(),  self.E_Image298.gameObject,  selfRechage < 298);
+            CommonViewHelper.SetImageGrayAllChild( self.Root(),  self.E_Image98Image.gameObject,  selfRechage < 98);
+            CommonViewHelper.SetImageGrayAllChild( self.Root(),  self.E_Image298Image.gameObject,  selfRechage < 298);
         }
     }
 }

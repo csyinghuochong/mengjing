@@ -23,7 +23,7 @@ namespace ET.Client
      			}
      			if( this.m_E_PetEggNumText == null )
      			{
-		    		this.m_E_PetEggNumText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_PetEggNum");
+		    		this.m_E_PetEggNumText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Right/E_PetEggNum");
      			}
      			return this.m_E_PetEggNumText;
      		}
@@ -40,7 +40,7 @@ namespace ET.Client
      			}
      			if( this.m_EG_PetNodeListRectTransform == null )
      			{
-		    		this.m_EG_PetNodeListRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_PetNodeList");
+		    		this.m_EG_PetNodeListRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"Right/EG_PetNodeList");
      			}
      			return this.m_EG_PetNodeListRectTransform;
      		}
@@ -59,7 +59,7 @@ namespace ET.Client
      			if( es == null )
 
      			{
-		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_PetNodeList/ES_PetEggListItem");
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"Right/EG_PetNodeList/ES_PetEggListItem");
 		    	   this.m_es_petegglistitem = this.AddChild<ES_PetEggListItem,Transform>(subTrans);
      			}
      			return this.m_es_petegglistitem;

@@ -24,7 +24,7 @@ namespace ET.Client
      			}
      			if( this.m_E_ItemTypeSetToggleGroup == null )
      			{
-		    		this.m_E_ItemTypeSetToggleGroup = UIFindHelper.FindDeepChild<UnityEngine.UI.ToggleGroup>(this.uiTransform.gameObject,"E_ItemTypeSet");
+		    		this.m_E_ItemTypeSetToggleGroup = UIFindHelper.FindDeepChild<UnityEngine.UI.ToggleGroup>(this.uiTransform.gameObject,"Left/E_ItemTypeSet");
      			}
      			return this.m_E_ItemTypeSetToggleGroup;
      		}
@@ -41,111 +41,9 @@ namespace ET.Client
      			}
      			if( this.m_EG_ZodiacListRectTransform == null )
      			{
-		    		this.m_EG_ZodiacListRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_ZodiacList");
+		    		this.m_EG_ZodiacListRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"Left/EG_ZodiacList");
      			}
      			return this.m_EG_ZodiacListRectTransform;
-     		}
-     	}
-
-		public UnityEngine.UI.Image E_BackImage
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_BackImage == null )
-     			{
-		    		this.m_E_BackImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_ZodiacList/Item_ZodiacItem/E_Back");
-     			}
-     			return this.m_E_BackImage;
-     		}
-     	}
-
-		public UnityEngine.UI.Image E_QualityImage
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_QualityImage == null )
-     			{
-		    		this.m_E_QualityImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_ZodiacList/Item_ZodiacItem/E_Quality");
-     			}
-     			return this.m_E_QualityImage;
-     		}
-     	}
-
-		public UnityEngine.UI.Image E_IconImage
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_IconImage == null )
-     			{
-		    		this.m_E_IconImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_ZodiacList/Item_ZodiacItem/E_Icon");
-     			}
-     			return this.m_E_IconImage;
-     		}
-     	}
-
-		public UnityEngine.UI.Button E_ClickButton
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_ClickButton == null )
-     			{
-		    		this.m_E_ClickButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"EG_ZodiacList/Item_ZodiacItem/E_Click");
-     			}
-     			return this.m_E_ClickButton;
-     		}
-     	}
-
-		public UnityEngine.UI.Image E_ClickImage
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_ClickImage == null )
-     			{
-		    		this.m_E_ClickImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_ZodiacList/Item_ZodiacItem/E_Click");
-     			}
-     			return this.m_E_ClickImage;
-     		}
-     	}
-
-		public UnityEngine.UI.Text E_NameText
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_NameText == null )
-     			{
-		    		this.m_E_NameText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"EG_ZodiacList/Item_ZodiacItem/E_Name");
-     			}
-     			return this.m_E_NameText;
      		}
      	}
 
@@ -160,7 +58,7 @@ namespace ET.Client
      			}
      			if( this.m_EG_EquipSuitPropertyListRectTransform == null )
      			{
-		    		this.m_EG_EquipSuitPropertyListRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_EquipSuitPropertyList");
+		    		this.m_EG_EquipSuitPropertyListRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"Left/EG_EquipSuitPropertyList");
      			}
      			return this.m_EG_EquipSuitPropertyListRectTransform;
      		}
@@ -216,12 +114,6 @@ namespace ET.Client
 		{
 			this.m_E_ItemTypeSetToggleGroup = null;
 			this.m_EG_ZodiacListRectTransform = null;
-			this.m_E_BackImage = null;
-			this.m_E_QualityImage = null;
-			this.m_E_IconImage = null;
-			this.m_E_ClickButton = null;
-			this.m_E_ClickImage = null;
-			this.m_E_NameText = null;
 			this.m_EG_EquipSuitPropertyListRectTransform = null;
 			this.m_E_BagItemsImage = null;
 			this.m_E_BagItemsLoopVerticalScrollRect = null;
@@ -230,12 +122,6 @@ namespace ET.Client
 
 		private UnityEngine.UI.ToggleGroup m_E_ItemTypeSetToggleGroup = null;
 		private UnityEngine.RectTransform m_EG_ZodiacListRectTransform = null;
-		private UnityEngine.UI.Image m_E_BackImage = null;
-		private UnityEngine.UI.Image m_E_QualityImage = null;
-		private UnityEngine.UI.Image m_E_IconImage = null;
-		private UnityEngine.UI.Button m_E_ClickButton = null;
-		private UnityEngine.UI.Image m_E_ClickImage = null;
-		private UnityEngine.UI.Text m_E_NameText = null;
 		private UnityEngine.RectTransform m_EG_EquipSuitPropertyListRectTransform = null;
 		private UnityEngine.UI.Image m_E_BagItemsImage = null;
 		private UnityEngine.UI.LoopVerticalScrollRect m_E_BagItemsLoopVerticalScrollRect = null;

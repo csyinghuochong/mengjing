@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
 namespace ET.Client
 {
 	[ChildOf]
@@ -11,7 +10,7 @@ namespace ET.Client
 		public Dictionary<int, EntityRef<Scroll_Item_SettingTitleItem>> ScrollItemSettingTitleItems;
 		public List<TitleConfig> ShowTitleConfigs = new();
 		
-		public LoopVerticalScrollRect E_SettingTitleItemsLoopVerticalScrollRect
+		public UnityEngine.UI.LoopVerticalScrollRect E_SettingTitleItemsLoopVerticalScrollRect
      	{
      		get
      		{
@@ -22,7 +21,7 @@ namespace ET.Client
      			}
      			if( this.m_E_SettingTitleItemsLoopVerticalScrollRect == null )
      			{
-		    		this.m_E_SettingTitleItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<LoopVerticalScrollRect>(this.uiTransform.gameObject,"E_SettingTitleItems");
+		    		this.m_E_SettingTitleItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.LoopVerticalScrollRect>(this.uiTransform.gameObject,"Right/E_SettingTitleItems");
      			}
      			return this.m_E_SettingTitleItemsLoopVerticalScrollRect;
      		}
@@ -46,7 +45,7 @@ namespace ET.Client
 			this.uiTransform = null;
 		}
 
-		private LoopVerticalScrollRect m_E_SettingTitleItemsLoopVerticalScrollRect = null;
+		private UnityEngine.UI.LoopVerticalScrollRect m_E_SettingTitleItemsLoopVerticalScrollRect = null;
 		public Transform uiTransform = null;
 	}
 }

@@ -1,13 +1,13 @@
-﻿using UnityEngine;
+﻿
+using UnityEngine;
 using UnityEngine.UI;
-
 namespace ET.Client
 {
 	[ComponentOf(typeof(DlgTowerOfSealCost))]
 	[EnableMethod]
 	public  class DlgTowerOfSealCostViewComponent : Entity,IAwake,IDestroy 
 	{
-		public Button E_CloseBtnButton
+		public UnityEngine.UI.Button E_CloseBtnButton
      	{
      		get
      		{
@@ -18,13 +18,13 @@ namespace ET.Client
      			}
      			if( this.m_E_CloseBtnButton == null )
      			{
-		    		this.m_E_CloseBtnButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"CostPanel/E_CloseBtn");
+		    		this.m_E_CloseBtnButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Center/E_CloseBtn");
      			}
      			return this.m_E_CloseBtnButton;
      		}
      	}
 
-		public Image E_CloseBtnImage
+		public UnityEngine.UI.Image E_CloseBtnImage
      	{
      		get
      		{
@@ -35,13 +35,13 @@ namespace ET.Client
      			}
      			if( this.m_E_CloseBtnImage == null )
      			{
-		    		this.m_E_CloseBtnImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"CostPanel/E_CloseBtn");
+		    		this.m_E_CloseBtnImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Center/E_CloseBtn");
      			}
      			return this.m_E_CloseBtnImage;
      		}
      	}
 
-		public Button E_CostDiamondBtnButton
+		public UnityEngine.UI.Button E_CostDiamondBtnButton
      	{
      		get
      		{
@@ -52,13 +52,13 @@ namespace ET.Client
      			}
      			if( this.m_E_CostDiamondBtnButton == null )
      			{
-		    		this.m_E_CostDiamondBtnButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"CostPanel/E_CostDiamondBtn");
+		    		this.m_E_CostDiamondBtnButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Center/E_CostDiamondBtn");
      			}
      			return this.m_E_CostDiamondBtnButton;
      		}
      	}
 
-		public Image E_CostDiamondBtnImage
+		public UnityEngine.UI.Image E_CostDiamondBtnImage
      	{
      		get
      		{
@@ -69,13 +69,13 @@ namespace ET.Client
      			}
      			if( this.m_E_CostDiamondBtnImage == null )
      			{
-		    		this.m_E_CostDiamondBtnImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"CostPanel/E_CostDiamondBtn");
+		    		this.m_E_CostDiamondBtnImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Center/E_CostDiamondBtn");
      			}
      			return this.m_E_CostDiamondBtnImage;
      		}
      	}
 
-		public Button E_CostTicketBtnButton
+		public UnityEngine.UI.Button E_CostTicketBtnButton
      	{
      		get
      		{
@@ -86,13 +86,13 @@ namespace ET.Client
      			}
      			if( this.m_E_CostTicketBtnButton == null )
      			{
-		    		this.m_E_CostTicketBtnButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"CostPanel/E_CostTicketBtn");
+		    		this.m_E_CostTicketBtnButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Center/E_CostTicketBtn");
      			}
      			return this.m_E_CostTicketBtnButton;
      		}
      	}
 
-		public Image E_CostTicketBtnImage
+		public UnityEngine.UI.Image E_CostTicketBtnImage
      	{
      		get
      		{
@@ -103,7 +103,7 @@ namespace ET.Client
      			}
      			if( this.m_E_CostTicketBtnImage == null )
      			{
-		    		this.m_E_CostTicketBtnImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"CostPanel/E_CostTicketBtn");
+		    		this.m_E_CostTicketBtnImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Center/E_CostTicketBtn");
      			}
      			return this.m_E_CostTicketBtnImage;
      		}
@@ -120,12 +120,12 @@ namespace ET.Client
 			this.uiTransform = null;
 		}
 
-		private Button m_E_CloseBtnButton = null;
-		private Image m_E_CloseBtnImage = null;
-		private Button m_E_CostDiamondBtnButton = null;
-		private Image m_E_CostDiamondBtnImage = null;
-		private Button m_E_CostTicketBtnButton = null;
-		private Image m_E_CostTicketBtnImage = null;
+		private UnityEngine.UI.Button m_E_CloseBtnButton = null;
+		private UnityEngine.UI.Image m_E_CloseBtnImage = null;
+		private UnityEngine.UI.Button m_E_CostDiamondBtnButton = null;
+		private UnityEngine.UI.Image m_E_CostDiamondBtnImage = null;
+		private UnityEngine.UI.Button m_E_CostTicketBtnButton = null;
+		private UnityEngine.UI.Image m_E_CostTicketBtnImage = null;
 		public Transform uiTransform = null;
 	}
 }

@@ -29,7 +29,7 @@ namespace ET.Client
      			}
      			if( this.m_E_ItemDi_1Button == null )
      			{
-		    		this.m_E_ItemDi_1Button = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Gem/E_ItemDi_1");
+		    		this.m_E_ItemDi_1Button = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Left/E_ItemDi_1");
      			}
      			return this.m_E_ItemDi_1Button;
      		}
@@ -46,7 +46,7 @@ namespace ET.Client
      			}
      			if( this.m_E_ItemDi_1Image == null )
      			{
-		    		this.m_E_ItemDi_1Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Gem/E_ItemDi_1");
+		    		this.m_E_ItemDi_1Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Left/E_ItemDi_1");
      			}
      			return this.m_E_ItemDi_1Image;
      		}
@@ -63,7 +63,7 @@ namespace ET.Client
      			}
      			if( this.m_E_ItemDi_2Button == null )
      			{
-		    		this.m_E_ItemDi_2Button = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Gem/E_ItemDi_2");
+		    		this.m_E_ItemDi_2Button = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Left/E_ItemDi_2");
      			}
      			return this.m_E_ItemDi_2Button;
      		}
@@ -80,7 +80,7 @@ namespace ET.Client
      			}
      			if( this.m_E_ItemDi_2Image == null )
      			{
-		    		this.m_E_ItemDi_2Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Gem/E_ItemDi_2");
+		    		this.m_E_ItemDi_2Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Left/E_ItemDi_2");
      			}
      			return this.m_E_ItemDi_2Image;
      		}
@@ -97,7 +97,7 @@ namespace ET.Client
      			}
      			if( this.m_E_ItemDi_3Button == null )
      			{
-		    		this.m_E_ItemDi_3Button = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Gem/E_ItemDi_3");
+		    		this.m_E_ItemDi_3Button = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Left/E_ItemDi_3");
      			}
      			return this.m_E_ItemDi_3Button;
      		}
@@ -114,7 +114,7 @@ namespace ET.Client
      			}
      			if( this.m_E_ItemDi_3Image == null )
      			{
-		    		this.m_E_ItemDi_3Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Gem/E_ItemDi_3");
+		    		this.m_E_ItemDi_3Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Left/E_ItemDi_3");
      			}
      			return this.m_E_ItemDi_3Image;
      		}
@@ -131,7 +131,7 @@ namespace ET.Client
      			}
      			if( this.m_E_ItemDi_4Button == null )
      			{
-		    		this.m_E_ItemDi_4Button = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Gem/E_ItemDi_4");
+		    		this.m_E_ItemDi_4Button = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Left/E_ItemDi_4");
      			}
      			return this.m_E_ItemDi_4Button;
      		}
@@ -148,13 +148,13 @@ namespace ET.Client
      			}
      			if( this.m_E_ItemDi_4Image == null )
      			{
-		    		this.m_E_ItemDi_4Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Gem/E_ItemDi_4");
+		    		this.m_E_ItemDi_4Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Left/E_ItemDi_4");
      			}
      			return this.m_E_ItemDi_4Image;
      		}
      	}
 
-				public ES_RoleGemHole ES_RoleGemHole_0
+		public ES_RoleGemHole ES_RoleGemHole_0
      	{
      		get
      		{
@@ -163,11 +163,11 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-
-		        ES_RoleGemHole es = this.m_es_rolegemhole_0;
+     			ES_RoleGemHole es = this.m_es_rolegemhole_0;
      			if( es == null )
+
      			{
-		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"Gem/ES_RoleGemHole_0");
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"Left/ES_RoleGemHole_0");
 		    	   this.m_es_rolegemhole_0 = this.AddChild<ES_RoleGemHole,Transform>(subTrans);
      			}
      			return this.m_es_rolegemhole_0;
@@ -183,10 +183,11 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-		        ES_RoleGemHole es = this.m_es_rolegemhole_1;
+     			ES_RoleGemHole es = this.m_es_rolegemhole_1;
      			if( es == null )
+
      			{
-		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"Gem/ES_RoleGemHole_1");
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"Left/ES_RoleGemHole_1");
 		    	   this.m_es_rolegemhole_1 = this.AddChild<ES_RoleGemHole,Transform>(subTrans);
      			}
      			return this.m_es_rolegemhole_1;
@@ -202,10 +203,11 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-		        ES_RoleGemHole es = this.m_es_rolegemhole_2;
+     			ES_RoleGemHole es = this.m_es_rolegemhole_2;
      			if( es == null )
+
      			{
-		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"Gem/ES_RoleGemHole_2");
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"Left/ES_RoleGemHole_2");
 		    	   this.m_es_rolegemhole_2 = this.AddChild<ES_RoleGemHole,Transform>(subTrans);
      			}
      			return this.m_es_rolegemhole_2;
@@ -221,10 +223,11 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-		        ES_RoleGemHole es = this.m_es_rolegemhole_3;
+     			ES_RoleGemHole es = this.m_es_rolegemhole_3;
      			if( es == null )
+
      			{
-		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"Gem/ES_RoleGemHole_3");
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"Left/ES_RoleGemHole_3");
 		    	   this.m_es_rolegemhole_3 = this.AddChild<ES_RoleGemHole,Transform>(subTrans);
      			}
      			return this.m_es_rolegemhole_3;
@@ -240,17 +243,18 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-		        ES_CommonItem es = this.m_es_commonitem;
+     			ES_CommonItem es = this.m_es_commonitem;
      			if( es == null )
+
      			{
-		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"Gem/ES_CommonItem");
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"Left/ES_CommonItem");
 		    	   this.m_es_commonitem = this.AddChild<ES_CommonItem,Transform>(subTrans);
      			}
      			return this.m_es_commonitem;
      		}
      	}
 
-		public ToggleGroup E_ItemTypeSetToggleGroup
+		public UnityEngine.UI.ToggleGroup E_ItemTypeSetToggleGroup
      	{
      		get
      		{
@@ -261,13 +265,30 @@ namespace ET.Client
      			}
      			if( this.m_E_ItemTypeSetToggleGroup == null )
      			{
-		    		this.m_E_ItemTypeSetToggleGroup = UIFindHelper.FindDeepChild<ToggleGroup>(this.uiTransform.gameObject,"Right/E_ItemTypeSet");
+		    		this.m_E_ItemTypeSetToggleGroup = UIFindHelper.FindDeepChild<UnityEngine.UI.ToggleGroup>(this.uiTransform.gameObject,"Right/E_ItemTypeSet");
      			}
      			return this.m_E_ItemTypeSetToggleGroup;
      		}
      	}
 
-		public LoopVerticalScrollRect E_BagItemsLoopVerticalScrollRect
+		public UnityEngine.UI.Image E_BagItemsImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_BagItemsImage == null )
+     			{
+		    		this.m_E_BagItemsImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Right/E_BagItems");
+     			}
+     			return this.m_E_BagItemsImage;
+     		}
+     	}
+
+		public UnityEngine.UI.LoopVerticalScrollRect E_BagItemsLoopVerticalScrollRect
      	{
      		get
      		{
@@ -278,12 +299,12 @@ namespace ET.Client
      			}
      			if( this.m_E_BagItemsLoopVerticalScrollRect == null )
      			{
-		    		this.m_E_BagItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<LoopVerticalScrollRect>(this.uiTransform.gameObject,"Right/E_BagItems");
+		    		this.m_E_BagItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.LoopVerticalScrollRect>(this.uiTransform.gameObject,"Right/E_BagItems");
      			}
      			return this.m_E_BagItemsLoopVerticalScrollRect;
      		}
      	}
-		
+
 		    public Transform UITransform
          {
      	    get
@@ -312,6 +333,7 @@ namespace ET.Client
 			this.m_es_rolegemhole_3 = null;
 			this.m_es_commonitem = null;
 			this.m_E_ItemTypeSetToggleGroup = null;
+			this.m_E_BagItemsImage = null;
 			this.m_E_BagItemsLoopVerticalScrollRect = null;
 			this.uiTransform = null;
 		}
@@ -329,8 +351,9 @@ namespace ET.Client
 		private EntityRef<ES_RoleGemHole> m_es_rolegemhole_2 = null;
 		private EntityRef<ES_RoleGemHole> m_es_rolegemhole_3 = null;
 		private EntityRef<ES_CommonItem> m_es_commonitem = null;
-		private ToggleGroup m_E_ItemTypeSetToggleGroup = null;
-		private LoopVerticalScrollRect m_E_BagItemsLoopVerticalScrollRect = null;
+		private UnityEngine.UI.ToggleGroup m_E_ItemTypeSetToggleGroup = null;
+		private UnityEngine.UI.Image m_E_BagItemsImage = null;
+		private UnityEngine.UI.LoopVerticalScrollRect m_E_BagItemsLoopVerticalScrollRect = null;
 		public Transform uiTransform = null;
 	}
 }

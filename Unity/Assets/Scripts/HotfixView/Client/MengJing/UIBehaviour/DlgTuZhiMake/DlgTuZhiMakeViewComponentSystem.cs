@@ -1,7 +1,10 @@
-﻿namespace ET.Client
+﻿
+using UnityEngine;
+using UnityEngine.UI;
+namespace ET.Client
 {
 	[EntitySystemOf(typeof(DlgTuZhiMakeViewComponent))]
-	[FriendOfAttribute(typeof(DlgTuZhiMakeViewComponent))]
+	[FriendOfAttribute(typeof(ET.Client.DlgTuZhiMakeViewComponent))]
 	public static partial class DlgTuZhiMakeViewComponentSystem
 	{
 		[EntitySystem]

@@ -12,7 +12,7 @@ namespace ET.Client
         private static void Awake(this ET.Client.ES_DragonDungeonList self, UnityEngine.Transform transform)
         {
             self.uiTransform = transform;
-            self.E_TeamDungeonItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnTeamDungeonItemsRefresh);
+            self.E_DragonDungeonItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnTeamDungeonItemsRefresh);
             self.E_Button_CreateButton.AddListener(self.OnButton_CreateButton);
         }
         [EntitySystem]
@@ -63,7 +63,7 @@ namespace ET.Client
             }
 
             self.AddUIScrollItems(ref self.ScrollItemTeamDungeonItems, self.ShowTeamInfos.Count);
-            self.E_TeamDungeonItemsLoopVerticalScrollRect.SetVisible(true, self.ShowTeamInfos.Count);
+            self.E_DragonDungeonItemsLoopVerticalScrollRect.SetVisible(true, self.ShowTeamInfos.Count);
 
             int totalTimes = GlobalValueConfigCategory.Instance.MaxTeamDungeonsPerDay;
             int times = UnitHelper.GetMyUnitFromClientScene(self.Root()).GetTeamDungeonTimes();

@@ -6,7 +6,7 @@ namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class ES_PetChouKa : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy
+	public  class ES_PetChouKa : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy 
 	{
 		public Dictionary<int, EntityRef<Scroll_Item_PetChouKaItem>> ScrollItemPetChouKaItems = new();
 		public List<RewardItem> RewardShowItems = new();
@@ -29,7 +29,7 @@ namespace ET.Client
      			}
      			if( this.m_E_BagItemsScrollRect == null )
      			{
-		    		this.m_E_BagItemsScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.ScrollRect>(this.uiTransform.gameObject,"E_BagItems");
+		    		this.m_E_BagItemsScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.ScrollRect>(this.uiTransform.gameObject,"Right/E_BagItems");
      			}
      			return this.m_E_BagItemsScrollRect;
      		}
@@ -46,26 +46,9 @@ namespace ET.Client
      			}
      			if( this.m_E_BagItemsImage == null )
      			{
-		    		this.m_E_BagItemsImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_BagItems");
+		    		this.m_E_BagItemsImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Right/E_BagItems");
      			}
      			return this.m_E_BagItemsImage;
-     		}
-     	}
-
-		public UnityEngine.UI.Image E_ButtonStopImage
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_ButtonStopImage == null )
-     			{
-		    		this.m_E_ButtonStopImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_ButtonStop");
-     			}
-     			return this.m_E_ButtonStopImage;
      		}
      	}
 
@@ -80,7 +63,7 @@ namespace ET.Client
      			}
      			if( this.m_E_ButtonOpenButton == null )
      			{
-		    		this.m_E_ButtonOpenButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_ButtonOpen");
+		    		this.m_E_ButtonOpenButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Right/E_ButtonOpen");
      			}
      			return this.m_E_ButtonOpenButton;
      		}
@@ -97,7 +80,7 @@ namespace ET.Client
      			}
      			if( this.m_E_ButtonOpenImage == null )
      			{
-		    		this.m_E_ButtonOpenImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_ButtonOpen");
+		    		this.m_E_ButtonOpenImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Right/E_ButtonOpen");
      			}
      			return this.m_E_ButtonOpenImage;
      		}
@@ -114,26 +97,9 @@ namespace ET.Client
      			}
      			if( this.m_E_ImageSelectImage == null )
      			{
-		    		this.m_E_ImageSelectImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_ImageSelect");
+		    		this.m_E_ImageSelectImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Right/E_ImageSelect");
      			}
      			return this.m_E_ImageSelectImage;
-     		}
-     	}
-
-		public UnityEngine.UI.Text E_OpenCostNumText
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_OpenCostNumText == null )
-     			{
-		    		this.m_E_OpenCostNumText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_OpenCostNum");
-     			}
-     			return this.m_E_OpenCostNumText;
      		}
      	}
 
@@ -148,9 +114,26 @@ namespace ET.Client
      			}
      			if( this.m_E_OpenCostItemIconImage == null )
      			{
-		    		this.m_E_OpenCostItemIconImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_OpenCostItemIcon");
+		    		this.m_E_OpenCostItemIconImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Right/E_OpenCostItemIcon");
      			}
      			return this.m_E_OpenCostItemIconImage;
+     		}
+     	}
+
+		public UnityEngine.UI.Text E_OpenCostNumText
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_OpenCostNumText == null )
+     			{
+		    		this.m_E_OpenCostNumText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Right/E_OpenCostNum");
+     			}
+     			return this.m_E_OpenCostNumText;
      		}
      	}
 
@@ -170,23 +153,21 @@ namespace ET.Client
 		{
 			this.m_E_BagItemsScrollRect = null;
 			this.m_E_BagItemsImage = null;
-			this.m_E_ButtonStopImage = null;
 			this.m_E_ButtonOpenButton = null;
 			this.m_E_ButtonOpenImage = null;
 			this.m_E_ImageSelectImage = null;
-			this.m_E_OpenCostNumText = null;
 			this.m_E_OpenCostItemIconImage = null;
+			this.m_E_OpenCostNumText = null;
 			this.uiTransform = null;
 		}
 
 		private UnityEngine.UI.ScrollRect m_E_BagItemsScrollRect = null;
 		private UnityEngine.UI.Image m_E_BagItemsImage = null;
-		private UnityEngine.UI.Image m_E_ButtonStopImage = null;
 		private UnityEngine.UI.Button m_E_ButtonOpenButton = null;
 		private UnityEngine.UI.Image m_E_ButtonOpenImage = null;
 		private UnityEngine.UI.Image m_E_ImageSelectImage = null;
-		private UnityEngine.UI.Text m_E_OpenCostNumText = null;
 		private UnityEngine.UI.Image m_E_OpenCostItemIconImage = null;
+		private UnityEngine.UI.Text m_E_OpenCostNumText = null;
 		public Transform uiTransform = null;
 	}
 }

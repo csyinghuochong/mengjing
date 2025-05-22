@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
 namespace ET.Client
 {
 	[ChildOf]
@@ -12,8 +11,8 @@ namespace ET.Client
 		public Dictionary<int, EntityRef<Scroll_Item_RankItem>> ScrollItemRankItems;
 		public List<RankingTrialInfo> ShowRankingTrialInfos = new();
 		public int CurrentItemType;
-
-		public RectTransform EG_UISetRectTransform
+		
+		public UnityEngine.RectTransform EG_RightRectTransform
      	{
      		get
      		{
@@ -22,15 +21,15 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_EG_UISetRectTransform == null )
+     			if( this.m_EG_RightRectTransform == null )
      			{
-		    		this.m_EG_UISetRectTransform = UIFindHelper.FindDeepChild<RectTransform>(this.uiTransform.gameObject,"EG_UISet");
+		    		this.m_EG_RightRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_Right");
      			}
-     			return this.m_EG_UISetRectTransform;
+     			return this.m_EG_RightRectTransform;
      		}
      	}
 
-		public LoopVerticalScrollRect E_RankItemsLoopVerticalScrollRect
+		public UnityEngine.UI.LoopVerticalScrollRect E_RankItemsLoopVerticalScrollRect
      	{
      		get
      		{
@@ -41,13 +40,13 @@ namespace ET.Client
      			}
      			if( this.m_E_RankItemsLoopVerticalScrollRect == null )
      			{
-		    		this.m_E_RankItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<LoopVerticalScrollRect>(this.uiTransform.gameObject,"EG_UISet/E_RankItems");
+		    		this.m_E_RankItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.LoopVerticalScrollRect>(this.uiTransform.gameObject,"EG_Right/E_RankItems");
      			}
      			return this.m_E_RankItemsLoopVerticalScrollRect;
      		}
      	}
 
-		public Text E_Text_MyRankText
+		public UnityEngine.UI.Text E_Text_MyRankText
      	{
      		get
      		{
@@ -58,13 +57,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Text_MyRankText == null )
      			{
-		    		this.m_E_Text_MyRankText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"EG_UISet/E_Text_MyRank");
+		    		this.m_E_Text_MyRankText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"EG_Right/E_Text_MyRank");
      			}
      			return this.m_E_Text_MyRankText;
      		}
      	}
 
-		public Text E_Text_RewardTimeText
+		public UnityEngine.UI.Text E_Text_RewardTimeText
      	{
      		get
      		{
@@ -75,13 +74,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Text_RewardTimeText == null )
      			{
-		    		this.m_E_Text_RewardTimeText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"EG_UISet/E_Text_RewardTime");
+		    		this.m_E_Text_RewardTimeText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"EG_Right/E_Text_RewardTime");
      			}
      			return this.m_E_Text_RewardTimeText;
      		}
      	}
 
-		public Button E_Button_RewardButton
+		public UnityEngine.UI.Button E_Button_RewardButton
      	{
      		get
      		{
@@ -92,13 +91,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Button_RewardButton == null )
      			{
-		    		this.m_E_Button_RewardButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"EG_UISet/E_Button_Reward");
+		    		this.m_E_Button_RewardButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"EG_Right/E_Button_Reward");
      			}
      			return this.m_E_Button_RewardButton;
      		}
      	}
 
-		public Image E_Button_RewardImage
+		public UnityEngine.UI.Image E_Button_RewardImage
      	{
      		get
      		{
@@ -109,13 +108,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Button_RewardImage == null )
      			{
-		    		this.m_E_Button_RewardImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"EG_UISet/E_Button_Reward");
+		    		this.m_E_Button_RewardImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_Right/E_Button_Reward");
      			}
      			return this.m_E_Button_RewardImage;
      		}
      	}
 
-		public ToggleGroup E_ItemTypeSetToggleGroup
+		public UnityEngine.UI.ToggleGroup E_ItemTypeSetToggleGroup
      	{
      		get
      		{
@@ -126,13 +125,13 @@ namespace ET.Client
      			}
      			if( this.m_E_ItemTypeSetToggleGroup == null )
      			{
-		    		this.m_E_ItemTypeSetToggleGroup = UIFindHelper.FindDeepChild<ToggleGroup>(this.uiTransform.gameObject,"EG_UISet/E_ItemTypeSet");
+		    		this.m_E_ItemTypeSetToggleGroup = UIFindHelper.FindDeepChild<UnityEngine.UI.ToggleGroup>(this.uiTransform.gameObject,"EG_Right/E_ItemTypeSet");
      			}
      			return this.m_E_ItemTypeSetToggleGroup;
      		}
      	}
 
-		public Image E_HeadIcomImage1Image
+		public UnityEngine.UI.Image E_HeadIcomImage1Image
      	{
      		get
      		{
@@ -143,13 +142,13 @@ namespace ET.Client
      			}
      			if( this.m_E_HeadIcomImage1Image == null )
      			{
-		    		this.m_E_HeadIcomImage1Image = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"EG_UISet/E_ItemTypeSet/Type_0/E_HeadIcomImage1");
+		    		this.m_E_HeadIcomImage1Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_Right/E_ItemTypeSet/Type_0/E_HeadIcomImage1");
      			}
      			return this.m_E_HeadIcomImage1Image;
      		}
      	}
 
-		public Image E_HeadIcomImage2Image
+		public UnityEngine.UI.Image E_HeadIcomImage2Image
      	{
      		get
      		{
@@ -160,13 +159,13 @@ namespace ET.Client
      			}
      			if( this.m_E_HeadIcomImage2Image == null )
      			{
-		    		this.m_E_HeadIcomImage2Image = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"EG_UISet/E_ItemTypeSet/Type_1/E_HeadIcomImage2");
+		    		this.m_E_HeadIcomImage2Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_Right/E_ItemTypeSet/Type_1/E_HeadIcomImage2");
      			}
      			return this.m_E_HeadIcomImage2Image;
      		}
      	}
 
-		public Image E_HeadIcomImage3Image
+		public UnityEngine.UI.Image E_HeadIcomImage3Image
      	{
      		get
      		{
@@ -177,7 +176,7 @@ namespace ET.Client
      			}
      			if( this.m_E_HeadIcomImage3Image == null )
      			{
-		    		this.m_E_HeadIcomImage3Image = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"EG_UISet/E_ItemTypeSet/Type_2/E_HeadIcomImage3");
+		    		this.m_E_HeadIcomImage3Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_Right/E_ItemTypeSet/Type_2/E_HeadIcomImage3");
      			}
      			return this.m_E_HeadIcomImage3Image;
      		}
@@ -197,7 +196,7 @@ namespace ET.Client
 
 		public void DestroyWidget()
 		{
-			this.m_EG_UISetRectTransform = null;
+			this.m_EG_RightRectTransform = null;
 			this.m_E_RankItemsLoopVerticalScrollRect = null;
 			this.m_E_Text_MyRankText = null;
 			this.m_E_Text_RewardTimeText = null;
@@ -210,16 +209,16 @@ namespace ET.Client
 			this.uiTransform = null;
 		}
 
-		private RectTransform m_EG_UISetRectTransform = null;
-		private LoopVerticalScrollRect m_E_RankItemsLoopVerticalScrollRect = null;
-		private Text m_E_Text_MyRankText = null;
-		private Text m_E_Text_RewardTimeText = null;
-		private Button m_E_Button_RewardButton = null;
-		private Image m_E_Button_RewardImage = null;
-		private ToggleGroup m_E_ItemTypeSetToggleGroup = null;
-		private Image m_E_HeadIcomImage1Image = null;
-		private Image m_E_HeadIcomImage2Image = null;
-		private Image m_E_HeadIcomImage3Image = null;
+		private UnityEngine.RectTransform m_EG_RightRectTransform = null;
+		private UnityEngine.UI.LoopVerticalScrollRect m_E_RankItemsLoopVerticalScrollRect = null;
+		private UnityEngine.UI.Text m_E_Text_MyRankText = null;
+		private UnityEngine.UI.Text m_E_Text_RewardTimeText = null;
+		private UnityEngine.UI.Button m_E_Button_RewardButton = null;
+		private UnityEngine.UI.Image m_E_Button_RewardImage = null;
+		private UnityEngine.UI.ToggleGroup m_E_ItemTypeSetToggleGroup = null;
+		private UnityEngine.UI.Image m_E_HeadIcomImage1Image = null;
+		private UnityEngine.UI.Image m_E_HeadIcomImage2Image = null;
+		private UnityEngine.UI.Image m_E_HeadIcomImage3Image = null;
 		public Transform uiTransform = null;
 	}
 }

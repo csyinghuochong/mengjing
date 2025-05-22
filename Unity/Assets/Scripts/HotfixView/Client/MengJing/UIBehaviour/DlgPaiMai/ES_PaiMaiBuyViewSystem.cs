@@ -76,7 +76,7 @@ namespace ET.Client
             {
                 if (self.PaiMaiIteminfos_Now[i].Id == paimaiItemId)
                 {
-                    self.EG_ItemListNodeRectTransform.localPosition = new Vector3(0, i * 124f, 0);
+                    self.E_PaiMaiBuyItemsLoopVerticalScrollRect.transform.Find("Content").localPosition = new Vector3(0, i * 124f, 0);
                     break;
                 }
             }

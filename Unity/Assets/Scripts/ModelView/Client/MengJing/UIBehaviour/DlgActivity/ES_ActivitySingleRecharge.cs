@@ -23,7 +23,7 @@ namespace ET.Client
      			}
      			if( this.m_E_ActivitySingleRechargeItemsScrollRect == null )
      			{
-		    		this.m_E_ActivitySingleRechargeItemsScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.ScrollRect>(this.uiTransform.gameObject,"E_ActivitySingleRechargeItems");
+		    		this.m_E_ActivitySingleRechargeItemsScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.ScrollRect>(this.uiTransform.gameObject,"Center/E_ActivitySingleRechargeItems");
      			}
      			return this.m_E_ActivitySingleRechargeItemsScrollRect;
      		}
@@ -40,7 +40,7 @@ namespace ET.Client
      			}
      			if( this.m_E_ActivitySingleRechargeItemsImage == null )
      			{
-		    		this.m_E_ActivitySingleRechargeItemsImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_ActivitySingleRechargeItems");
+		    		this.m_E_ActivitySingleRechargeItemsImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Center/E_ActivitySingleRechargeItems");
      			}
      			return this.m_E_ActivitySingleRechargeItemsImage;
      		}

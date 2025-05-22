@@ -98,7 +98,7 @@ namespace ET.Client
             using (zstring.Block())
             {
                 self.E_QiangHuaNameText.text = zstring.Format("{0}共鸣 +{1}", qianghuaName, qianghuaLevel);
-                self.E_QiangHuaLevel.text = zstring.Format("{0}级", qianghuaLevel);
+                self.E_QiangHuaLevelText.text = zstring.Format("{0}级", qianghuaLevel);
             }
 
             EquipQiangHuaConfig equipQiangHuaConfig = QiangHuaHelper.GetQiangHuaConfig(subType, qianghuaLevel);
@@ -140,9 +140,9 @@ namespace ET.Client
                 self.E_SuccessAdditionText.text = zstring.Format("附加成功率 {0}%", (int)(addPro * 100));
             }
 
-            self.E_Img_LodingValue.fillAmount = (qianghuaLevel * 1f / maxLevel);
-            self.E_QiangHuaProgress.text = $"{qianghuaLevel}/{maxLevel}";
-            self.E_TextGold.text = equipQiangHuaConfig.CostGold.ToString();
+            self.E_Img_LodingValueImage.fillAmount = (qianghuaLevel * 1f / maxLevel);
+            self.E_QiangHuaProgressText.text = $"{qianghuaLevel}/{maxLevel}";
+            self.E_TextGoldText.text = equipQiangHuaConfig.CostGold.ToString();
 
             // if (bagComponent.GetItemNumber(1) < equipQiangHuaConfig.CostGold)
             // {
@@ -171,7 +171,7 @@ namespace ET.Client
             {
                 costItems += zstring.Format("@1;{0}", equipQiangHuaConfig.CostGold);
 
-                if (self.E_ToggleLucky.isOn)
+                if (self.E_ToggleLuckyToggle.isOn)
                 {
                     costItems += zstring.Format("@{0};1", ConfigData.QiangHuaLuckyCostId);
                 }
@@ -183,7 +183,7 @@ namespace ET.Client
                 return;
             }
 
-            (int, int) respons = await BagClientNetHelper.RequestItemQiangHua(self.Root(), self.ItemSubType, self.E_ToggleLucky.isOn);
+            (int, int) respons = await BagClientNetHelper.RequestItemQiangHua(self.Root(), self.ItemSubType, self.E_ToggleLuckyToggle.isOn);
             if (respons.Item1 != ErrorCode.ERR_Success)
             {
                 return;

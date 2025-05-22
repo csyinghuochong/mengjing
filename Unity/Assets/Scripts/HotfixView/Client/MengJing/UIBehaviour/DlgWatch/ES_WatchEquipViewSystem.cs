@@ -32,22 +32,22 @@ namespace ET.Client
                 itemInfos.Add(itemInfo);
             }
 
-            self.ES_EquipSet1.PlayerLv(m2C_WatchPlayerResponse.Lv);
-            self.ES_EquipSet1.PlayerName(m2C_WatchPlayerResponse.Name);
-            self.ES_EquipSet1.RefreshEquip(itemInfos, new List<ItemInfo>(), m2C_WatchPlayerResponse.Occ, ItemOperateEnum.Watch);
+            self.ES_EquipSet_1.PlayerLv(m2C_WatchPlayerResponse.Lv);
+            self.ES_EquipSet_1.PlayerName(m2C_WatchPlayerResponse.Name);
+            self.ES_EquipSet_1.RefreshEquip(itemInfos, new List<ItemInfo>(), m2C_WatchPlayerResponse.Occ, ItemOperateEnum.Watch);
             ItemInfo bagInfo = ItemHelper.GetEquipByWeizhi(itemInfos, (int)ItemSubTypeEnum.Wuqi);
-            self.ES_EquipSet1.ES_ModelShow.SetCameraPosition(new Vector3(0f, 60f, 150f));
-            self.ES_EquipSet1.ES_ModelShow.ShowPlayerModel(bagInfo, m2C_WatchPlayerResponse.Occ, 0, new List<int>());
+            self.ES_EquipSet_1.ES_ModelShow.SetCameraPosition(new Vector3(0f, 60f, 150f));
+            self.ES_EquipSet_1.ES_ModelShow.ShowPlayerModel(bagInfo, m2C_WatchPlayerResponse.Occ, 0, new List<int>());
 
             UserInfoComponentC userInfoComponentC = self.Root().GetComponent<UserInfoComponentC>();
             BagComponentC bagComponentC = self.Root().GetComponent<BagComponentC>();
             int selfOcc = userInfoComponentC.UserInfo.Occ;
-            self.ES_EquipSet2.PlayerLv(userInfoComponentC.UserInfo.Lv);
-            self.ES_EquipSet2.PlayerName(userInfoComponentC.UserInfo.Name);
-            self.ES_EquipSet2.RefreshEquip(bagComponentC.GetEquipList(), new List<ItemInfo>(), selfOcc, ItemOperateEnum.Watch);
+            self.ES_EquipSet_2.PlayerLv(userInfoComponentC.UserInfo.Lv);
+            self.ES_EquipSet_2.PlayerName(userInfoComponentC.UserInfo.Name);
+            self.ES_EquipSet_2.RefreshEquip(bagComponentC.GetEquipList(), new List<ItemInfo>(), selfOcc, ItemOperateEnum.Watch);
             ItemInfo bagInfo2 = bagComponentC.GetEquipBySubType(ItemLocType.ItemLocEquip, (int)ItemSubTypeEnum.Wuqi);
-            self.ES_EquipSet2.ES_ModelShow.SetCameraPosition(new Vector3(0f, 60f, 150f));
-            self.ES_EquipSet2.ES_ModelShow.ShowPlayerModel(bagInfo2, selfOcc, 0, new List<int>());
+            self.ES_EquipSet_2.ES_ModelShow.SetCameraPosition(new Vector3(0f, 60f, 150f));
+            self.ES_EquipSet_2.ES_ModelShow.ShowPlayerModel(bagInfo2, selfOcc, 0, new List<int>());
         }
     }
 }

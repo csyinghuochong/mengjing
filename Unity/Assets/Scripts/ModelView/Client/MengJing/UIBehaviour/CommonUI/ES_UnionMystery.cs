@@ -21,7 +21,7 @@ namespace ET.Client
      			}
      			if( this.m_E_BtnItemTypeSetToggleGroup == null )
      			{
-		    		this.m_E_BtnItemTypeSetToggleGroup = UIFindHelper.FindDeepChild<UnityEngine.UI.ToggleGroup>(this.uiTransform.gameObject,"E_BtnItemTypeSet");
+		    		this.m_E_BtnItemTypeSetToggleGroup = UIFindHelper.FindDeepChild<UnityEngine.UI.ToggleGroup>(this.uiTransform.gameObject,"Right/E_BtnItemTypeSet");
      			}
      			return this.m_E_BtnItemTypeSetToggleGroup;
      		}
@@ -38,7 +38,7 @@ namespace ET.Client
      			}
      			if( this.m_EG_SubViewNodeRectTransform == null )
      			{
-		    		this.m_EG_SubViewNodeRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_SubViewNode");
+		    		this.m_EG_SubViewNodeRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"Right/EG_SubViewNode");
      			}
      			return this.m_EG_SubViewNodeRectTransform;
      		}

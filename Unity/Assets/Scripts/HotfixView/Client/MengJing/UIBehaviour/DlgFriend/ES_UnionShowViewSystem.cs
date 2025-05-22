@@ -31,7 +31,7 @@ namespace ET.Client
             });
 
             self.E_Btn_CreateButton.AddListenerAsync(self.OnBtn_CreateButton);
-            self.E_ButtonJoin.AddListenerAsync(self.OnButtonJoin);
+            self.E_ButtonJoinButton.AddListenerAsync(self.OnButtonJoin);
 
             self.E_InputFieldPurposeInputField.onValueChanged.AddListener((string text) =>
             {
@@ -91,9 +91,9 @@ namespace ET.Client
             long userid = UnitHelper.GetMyUnitId(self.Root());
             
             self.UnionListItem = unionListItem;
-            self.E_Text_Info.text = unionListItem.UnionPurpose;
-            self.E_Text_Request.text = "等级>=1";    
-            self.E_ButtonJoin.gameObject.SetActive(!unionListItem.ApplyList.Contains(userid));  
+            self.E_Text_InfoText.text = unionListItem.UnionPurpose;
+            self.E_Text_RequestText.text = "等级>=1";    
+            self.E_ButtonJoinButton.gameObject.SetActive(!unionListItem.ApplyList.Contains(userid));  
             
             foreach (Scroll_Item_UnionListItem scrollItemUnionListItem in self.ScrollItemUnionListItems.Values)
             {
@@ -139,7 +139,7 @@ namespace ET.Client
                 return;
             }
             self.UnionListItem.ApplyList.Add(unit.Id);
-            self.E_ButtonJoin.gameObject.SetActive(false);  
+            self.E_ButtonJoinButton.gameObject.SetActive(false);  
             FlyTipComponent.Instance.ShowFlyTip("已申请加入");
         }
         
@@ -183,9 +183,9 @@ namespace ET.Client
         public static void ResetUI(this ES_UnionShow self)
         {
             // self.UnionList = null;
-            self.E_Text_Info.text = string.Empty;
-            self.E_Text_Request.text = string.Empty;    
-            self.E_ButtonJoin.gameObject.SetActive(false);  
+            self.E_Text_InfoText.text = string.Empty;
+            self.E_Text_RequestText.text = string.Empty;    
+            self.E_ButtonJoinButton.gameObject.SetActive(false);  
             self.UnionListItem = null;  
         }
 

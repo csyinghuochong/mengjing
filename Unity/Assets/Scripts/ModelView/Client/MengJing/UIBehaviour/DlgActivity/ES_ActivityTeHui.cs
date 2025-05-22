@@ -6,7 +6,7 @@ namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class ES_ActivityTeHui : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy
+	public  class ES_ActivityTeHui : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy 
 	{
 		public Dictionary<int, EntityRef<Scroll_Item_ActivityTeHuiItem>> ScrollItemActivityTeHuiItems = new();
 		public List<string> AssetList { get; set; } = new();
@@ -22,7 +22,7 @@ namespace ET.Client
      			}
      			if( this.m_E_ActivityTeHuiItemsScrollRect == null )
      			{
-		    		this.m_E_ActivityTeHuiItemsScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.ScrollRect>(this.uiTransform.gameObject,"E_ActivityTeHuiItems");
+		    		this.m_E_ActivityTeHuiItemsScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.ScrollRect>(this.uiTransform.gameObject,"Center/E_ActivityTeHuiItems");
      			}
      			return this.m_E_ActivityTeHuiItemsScrollRect;
      		}
@@ -39,7 +39,7 @@ namespace ET.Client
      			}
      			if( this.m_E_ActivityTeHuiItemsImage == null )
      			{
-		    		this.m_E_ActivityTeHuiItemsImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_ActivityTeHuiItems");
+		    		this.m_E_ActivityTeHuiItemsImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Center/E_ActivityTeHuiItems");
      			}
      			return this.m_E_ActivityTeHuiItemsImage;
      		}

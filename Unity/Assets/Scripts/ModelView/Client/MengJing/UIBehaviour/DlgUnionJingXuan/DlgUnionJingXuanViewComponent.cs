@@ -1,13 +1,13 @@
-﻿using UnityEngine;
+﻿
+using UnityEngine;
 using UnityEngine.UI;
-
 namespace ET.Client
 {
 	[ComponentOf(typeof(DlgUnionJingXuan))]
 	[EnableMethod]
 	public  class DlgUnionJingXuanViewComponent : Entity,IAwake,IDestroy 
 	{
-		public Button E_ImageButtonButton
+		public UnityEngine.UI.Button E_ImageButtonButton
      	{
      		get
      		{
@@ -18,13 +18,13 @@ namespace ET.Client
      			}
      			if( this.m_E_ImageButtonButton == null )
      			{
-		    		this.m_E_ImageButtonButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_ImageButton");
+		    		this.m_E_ImageButtonButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Center/E_ImageButton");
      			}
      			return this.m_E_ImageButtonButton;
      		}
      	}
 
-		public Image E_ImageButtonImage
+		public UnityEngine.UI.Image E_ImageButtonImage
      	{
      		get
      		{
@@ -35,13 +35,13 @@ namespace ET.Client
      			}
      			if( this.m_E_ImageButtonImage == null )
      			{
-		    		this.m_E_ImageButtonImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_ImageButton");
+		    		this.m_E_ImageButtonImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Center/E_ImageButton");
      			}
      			return this.m_E_ImageButtonImage;
      		}
      	}
 
-		public LoopVerticalScrollRect E_JingXuanItemsLoopVerticalScrollRect
+		public UnityEngine.UI.LoopVerticalScrollRect E_JingXuanItemsLoopVerticalScrollRect
      	{
      		get
      		{
@@ -52,13 +52,13 @@ namespace ET.Client
      			}
      			if( this.m_E_JingXuanItemsLoopVerticalScrollRect == null )
      			{
-		    		this.m_E_JingXuanItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<LoopVerticalScrollRect>(this.uiTransform.gameObject,"E_JingXuanItems");
+		    		this.m_E_JingXuanItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.LoopVerticalScrollRect>(this.uiTransform.gameObject,"Left/E_JingXuanItems");
      			}
      			return this.m_E_JingXuanItemsLoopVerticalScrollRect;
      		}
      	}
 
-		public RectTransform EG_ButtonListRectTransform
+		public UnityEngine.RectTransform EG_ButtonListRectTransform
      	{
      		get
      		{
@@ -69,13 +69,13 @@ namespace ET.Client
      			}
      			if( this.m_EG_ButtonListRectTransform == null )
      			{
-		    		this.m_EG_ButtonListRectTransform = UIFindHelper.FindDeepChild<RectTransform>(this.uiTransform.gameObject,"EG_ButtonList");
+		    		this.m_EG_ButtonListRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"Right/EG_ButtonList");
      			}
      			return this.m_EG_ButtonListRectTransform;
      		}
      	}
 
-		public Button E_ButtonCancelButton
+		public UnityEngine.UI.Button E_ButtonCancelButton
      	{
      		get
      		{
@@ -86,13 +86,13 @@ namespace ET.Client
      			}
      			if( this.m_E_ButtonCancelButton == null )
      			{
-		    		this.m_E_ButtonCancelButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"EG_ButtonList/E_ButtonCancel");
+		    		this.m_E_ButtonCancelButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Right/EG_ButtonList/E_ButtonCancel");
      			}
      			return this.m_E_ButtonCancelButton;
      		}
      	}
 
-		public Image E_ButtonCancelImage
+		public UnityEngine.UI.Image E_ButtonCancelImage
      	{
      		get
      		{
@@ -103,13 +103,13 @@ namespace ET.Client
      			}
      			if( this.m_E_ButtonCancelImage == null )
      			{
-		    		this.m_E_ButtonCancelImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"EG_ButtonList/E_ButtonCancel");
+		    		this.m_E_ButtonCancelImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Right/EG_ButtonList/E_ButtonCancel");
      			}
      			return this.m_E_ButtonCancelImage;
      		}
      	}
 
-		public Button E_ButtonConfirmButton
+		public UnityEngine.UI.Button E_ButtonConfirmButton
      	{
      		get
      		{
@@ -120,13 +120,13 @@ namespace ET.Client
      			}
      			if( this.m_E_ButtonConfirmButton == null )
      			{
-		    		this.m_E_ButtonConfirmButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"EG_ButtonList/E_ButtonConfirm");
+		    		this.m_E_ButtonConfirmButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Right/EG_ButtonList/E_ButtonConfirm");
      			}
      			return this.m_E_ButtonConfirmButton;
      		}
      	}
 
-		public Image E_ButtonConfirmImage
+		public UnityEngine.UI.Image E_ButtonConfirmImage
      	{
      		get
      		{
@@ -137,13 +137,13 @@ namespace ET.Client
      			}
      			if( this.m_E_ButtonConfirmImage == null )
      			{
-		    		this.m_E_ButtonConfirmImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"EG_ButtonList/E_ButtonConfirm");
+		    		this.m_E_ButtonConfirmImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Right/EG_ButtonList/E_ButtonConfirm");
      			}
      			return this.m_E_ButtonConfirmImage;
      		}
      	}
 
-		public RectTransform EG_AlreadyJingXuanRectTransform
+		public UnityEngine.RectTransform EG_AlreadyJingXuanRectTransform
      	{
      		get
      		{
@@ -154,7 +154,7 @@ namespace ET.Client
      			}
      			if( this.m_EG_AlreadyJingXuanRectTransform == null )
      			{
-		    		this.m_EG_AlreadyJingXuanRectTransform = UIFindHelper.FindDeepChild<RectTransform>(this.uiTransform.gameObject,"EG_AlreadyJingXuan");
+		    		this.m_EG_AlreadyJingXuanRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"Right/EG_AlreadyJingXuan");
      			}
      			return this.m_EG_AlreadyJingXuanRectTransform;
      		}
@@ -174,15 +174,15 @@ namespace ET.Client
 			this.uiTransform = null;
 		}
 
-		private Button m_E_ImageButtonButton = null;
-		private Image m_E_ImageButtonImage = null;
-		private LoopVerticalScrollRect m_E_JingXuanItemsLoopVerticalScrollRect = null;
-		private RectTransform m_EG_ButtonListRectTransform = null;
-		private Button m_E_ButtonCancelButton = null;
-		private Image m_E_ButtonCancelImage = null;
-		private Button m_E_ButtonConfirmButton = null;
-		private Image m_E_ButtonConfirmImage = null;
-		private RectTransform m_EG_AlreadyJingXuanRectTransform = null;
+		private UnityEngine.UI.Button m_E_ImageButtonButton = null;
+		private UnityEngine.UI.Image m_E_ImageButtonImage = null;
+		private UnityEngine.UI.LoopVerticalScrollRect m_E_JingXuanItemsLoopVerticalScrollRect = null;
+		private UnityEngine.RectTransform m_EG_ButtonListRectTransform = null;
+		private UnityEngine.UI.Button m_E_ButtonCancelButton = null;
+		private UnityEngine.UI.Image m_E_ButtonCancelImage = null;
+		private UnityEngine.UI.Button m_E_ButtonConfirmButton = null;
+		private UnityEngine.UI.Image m_E_ButtonConfirmImage = null;
+		private UnityEngine.RectTransform m_EG_AlreadyJingXuanRectTransform = null;
 		public Transform uiTransform = null;
 	}
 }

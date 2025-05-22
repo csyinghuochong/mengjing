@@ -1,13 +1,13 @@
-﻿using UnityEngine;
+﻿
+using UnityEngine;
 using UnityEngine.UI;
-
 namespace ET.Client
 {
 	[ComponentOf(typeof(DlgUnionApplyList))]
 	[EnableMethod]
 	public  class DlgUnionApplyListViewComponent : Entity,IAwake,IDestroy 
 	{
-		public Button E_ImageButtonButton
+		public UnityEngine.UI.Button E_ImageButtonButton
      	{
      		get
      		{
@@ -18,13 +18,13 @@ namespace ET.Client
      			}
      			if( this.m_E_ImageButtonButton == null )
      			{
-		    		this.m_E_ImageButtonButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_ImageButton");
+		    		this.m_E_ImageButtonButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Center/E_ImageButton");
      			}
      			return this.m_E_ImageButtonButton;
      		}
      	}
 
-		public Image E_ImageButtonImage
+		public UnityEngine.UI.Image E_ImageButtonImage
      	{
      		get
      		{
@@ -35,13 +35,13 @@ namespace ET.Client
      			}
      			if( this.m_E_ImageButtonImage == null )
      			{
-		    		this.m_E_ImageButtonImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_ImageButton");
+		    		this.m_E_ImageButtonImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Center/E_ImageButton");
      			}
      			return this.m_E_ImageButtonImage;
      		}
      	}
 
-		public LoopVerticalScrollRect E_UnionApplyListItemsLoopVerticalScrollRect
+		public UnityEngine.UI.LoopVerticalScrollRect E_UnionApplyListItemsLoopVerticalScrollRect
      	{
      		get
      		{
@@ -52,7 +52,7 @@ namespace ET.Client
      			}
      			if( this.m_E_UnionApplyListItemsLoopVerticalScrollRect == null )
      			{
-		    		this.m_E_UnionApplyListItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<LoopVerticalScrollRect>(this.uiTransform.gameObject,"E_UnionApplyListItems");
+		    		this.m_E_UnionApplyListItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.LoopVerticalScrollRect>(this.uiTransform.gameObject,"Center/E_UnionApplyListItems");
      			}
      			return this.m_E_UnionApplyListItemsLoopVerticalScrollRect;
      		}
@@ -66,9 +66,9 @@ namespace ET.Client
 			this.uiTransform = null;
 		}
 
-		private Button m_E_ImageButtonButton = null;
-		private Image m_E_ImageButtonImage = null;
-		private LoopVerticalScrollRect m_E_UnionApplyListItemsLoopVerticalScrollRect = null;
+		private UnityEngine.UI.Button m_E_ImageButtonButton = null;
+		private UnityEngine.UI.Image m_E_ImageButtonImage = null;
+		private UnityEngine.UI.LoopVerticalScrollRect m_E_UnionApplyListItemsLoopVerticalScrollRect = null;
 		public Transform uiTransform = null;
 	}
 }

@@ -5,10 +5,29 @@ namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class ES_SeasonBoss : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy
+	public  class ES_SeasonBoss : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy 
 	{
-
 		public int LastSeasonBossLevel { get; set; } = -1;
+		
+		public ES_ModelShow ES_ModelShow
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			ES_ModelShow es = this.m_es_modelshow;
+     			if( es == null )
+
+     			{
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"Left/ES_ModelShow");
+		    	   this.m_es_modelshow = this.AddChild<ES_ModelShow,Transform>(subTrans);
+     			}
+     			return this.m_es_modelshow;
+     		}
+     	}
 
 		public UnityEngine.UI.Image E_Img_LodingValueImage
      	{
@@ -21,9 +40,26 @@ namespace ET.Client
      			}
      			if( this.m_E_Img_LodingValueImage == null )
      			{
-		    		this.m_E_Img_LodingValueImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Img_LodingValue");
+		    		this.m_E_Img_LodingValueImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Right/E_Img_LodingValue");
      			}
      			return this.m_E_Img_LodingValueImage;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_Img_LodingImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Img_LodingImage == null )
+     			{
+		    		this.m_E_Img_LodingImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Right/E_Img_LodingValue/E_Img_Loding");
+     			}
+     			return this.m_E_Img_LodingImage;
      		}
      	}
 
@@ -40,30 +76,10 @@ namespace ET.Client
      			if( es == null )
 
      			{
-		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"ES_RewardList");
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"Right/ES_RewardList");
 		    	   this.m_es_rewardlist = this.AddChild<ES_RewardList,Transform>(subTrans);
      			}
      			return this.m_es_rewardlist;
-     		}
-     	}
-
-		public ES_ModelShow ES_ModelShow
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			ES_ModelShow es = this.m_es_modelshow;
-     			if( es == null )
-
-     			{
-		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"ES_ModelShow");
-		    	   this.m_es_modelshow = this.AddChild<ES_ModelShow,Transform>(subTrans);
-     			}
-     			return this.m_es_modelshow;
      		}
      	}
 
@@ -78,7 +94,7 @@ namespace ET.Client
      			}
      			if( this.m_E_DonationBtnButton == null )
      			{
-		    		this.m_E_DonationBtnButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_DonationBtn");
+		    		this.m_E_DonationBtnButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Right/E_DonationBtn");
      			}
      			return this.m_E_DonationBtnButton;
      		}
@@ -95,7 +111,7 @@ namespace ET.Client
      			}
      			if( this.m_E_DonationBtnImage == null )
      			{
-		    		this.m_E_DonationBtnImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_DonationBtn");
+		    		this.m_E_DonationBtnImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Right/E_DonationBtn");
      			}
      			return this.m_E_DonationBtnImage;
      		}
@@ -112,7 +128,7 @@ namespace ET.Client
      			}
      			if( this.m_E_RewardBtnButton == null )
      			{
-		    		this.m_E_RewardBtnButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_RewardBtn");
+		    		this.m_E_RewardBtnButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Right/E_RewardBtn");
      			}
      			return this.m_E_RewardBtnButton;
      		}
@@ -129,7 +145,7 @@ namespace ET.Client
      			}
      			if( this.m_E_RewardBtnImage == null )
      			{
-		    		this.m_E_RewardBtnImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_RewardBtn");
+		    		this.m_E_RewardBtnImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Right/E_RewardBtn");
      			}
      			return this.m_E_RewardBtnImage;
      		}
@@ -148,7 +164,7 @@ namespace ET.Client
      			if( es == null )
 
      			{
-		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"ES_CostItem");
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"Right/ES_CostItem");
 		    	   this.m_es_costitem = this.AddChild<ES_CostItem,Transform>(subTrans);
      			}
      			return this.m_es_costitem;
@@ -166,9 +182,26 @@ namespace ET.Client
      			}
      			if( this.m_E_SeasonExperienceTextText == null )
      			{
-		    		this.m_E_SeasonExperienceTextText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_SeasonExperienceText");
+		    		this.m_E_SeasonExperienceTextText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Right/E_SeasonExperienceText");
      			}
      			return this.m_E_SeasonExperienceTextText;
+     		}
+     	}
+
+		public UnityEngine.UI.Text E_SeasonDonateTimesText
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_SeasonDonateTimesText == null )
+     			{
+		    		this.m_E_SeasonDonateTimesText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Right/E_SeasonDonateTimes");
+     			}
+     			return this.m_E_SeasonDonateTimesText;
      		}
      	}
 
@@ -183,28 +216,11 @@ namespace ET.Client
      			}
      			if( this.m_E_SeasonBossLevelText == null )
      			{
-		    		this.m_E_SeasonBossLevelText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_SeasonBossLevel");
+		    		this.m_E_SeasonBossLevelText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Right/E_SeasonBossLevel");
      			}
      			return this.m_E_SeasonBossLevelText;
      		}
      	}
-
-		public UnityEngine.UI.Text E_SeasonDonateTimes
-		{
-			get
-			{
-				if (this.uiTransform == null)
-				{
-					Log.Error("uiTransform is null.");
-					return null;
-				}
-				if( this.m_E_SeasonDonateTimes == null )
-				{
-					this.m_E_SeasonDonateTimes = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_SeasonDonateTimes");
-				}
-				return this.m_E_SeasonDonateTimes;
-			}
-		}
 
 		    public Transform UITransform
          {
@@ -220,31 +236,33 @@ namespace ET.Client
 
 		public void DestroyWidget()
 		{
-			this.m_E_Img_LodingValueImage = null;
-			this.m_es_rewardlist = null;
 			this.m_es_modelshow = null;
+			this.m_E_Img_LodingValueImage = null;
+			this.m_E_Img_LodingImage = null;
+			this.m_es_rewardlist = null;
 			this.m_E_DonationBtnButton = null;
 			this.m_E_DonationBtnImage = null;
 			this.m_E_RewardBtnButton = null;
 			this.m_E_RewardBtnImage = null;
 			this.m_es_costitem = null;
 			this.m_E_SeasonExperienceTextText = null;
+			this.m_E_SeasonDonateTimesText = null;
 			this.m_E_SeasonBossLevelText = null;
-			this.m_E_SeasonDonateTimes = null;
 			this.uiTransform = null;
 		}
 
-		private UnityEngine.UI.Image m_E_Img_LodingValueImage = null;
-		private EntityRef<ES_RewardList> m_es_rewardlist = null;
 		private EntityRef<ES_ModelShow> m_es_modelshow = null;
+		private UnityEngine.UI.Image m_E_Img_LodingValueImage = null;
+		private UnityEngine.UI.Image m_E_Img_LodingImage = null;
+		private EntityRef<ES_RewardList> m_es_rewardlist = null;
 		private UnityEngine.UI.Button m_E_DonationBtnButton = null;
 		private UnityEngine.UI.Image m_E_DonationBtnImage = null;
 		private UnityEngine.UI.Button m_E_RewardBtnButton = null;
 		private UnityEngine.UI.Image m_E_RewardBtnImage = null;
 		private EntityRef<ES_CostItem> m_es_costitem = null;
 		private UnityEngine.UI.Text m_E_SeasonExperienceTextText = null;
+		private UnityEngine.UI.Text m_E_SeasonDonateTimesText = null;
 		private UnityEngine.UI.Text m_E_SeasonBossLevelText = null;
-		private UnityEngine.UI.Text m_E_SeasonDonateTimes = null;
 		public Transform uiTransform = null;
 	}
 }

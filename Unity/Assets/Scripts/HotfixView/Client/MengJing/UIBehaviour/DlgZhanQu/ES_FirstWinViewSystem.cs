@@ -20,7 +20,7 @@ namespace ET.Client
 
             self.E_Button_FirstWinButton.AddListenerAsync(self.OnButton_FirstWinButton);
             self.E_Button_FirstWinSelfButton.AddListenerAsync(self.OnButton_FirstWinSelfButton);
-            self.E_Button_SkillDes.AddListenerAsync(self.OnButton_ClickSkillDes);
+            self.E_Button_SkillDesButton.AddListenerAsync(self.OnButton_ClickSkillDes);
             
             self.TypeListNode = rc.Get<GameObject>("TypeListNode");
             self.UITypeViewComponent = self.AddChild<UITypeViewComponent, GameObject>(self.TypeListNode);

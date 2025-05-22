@@ -20,7 +20,7 @@ namespace ET.Client
 			self.E_PetEchoSkillItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnPetEchoSkillItemsRefresh);
 			
 			self.E_ButtonOpenButton.AddListenerAsync(self.OnClickOpenButton);
-			self.E_ButtonChange.AddListenerAsync(self.OnClickChangeButton);
+			self.E_ButtonChangeButton.AddListenerAsync(self.OnClickChangeButton);
 			
 			self.EG_Left_1RectTransform.gameObject.SetActive(true);
 			self.EG_Left_2RectTransform.gameObject.SetActive(false);
@@ -176,19 +176,19 @@ namespace ET.Client
            
 			PetComponentC petComponentC = self.Root().GetComponent<PetComponentC>();
 			self.ES_ModelShow.SetShow(false);
-			self.E_Text_Name_Pet.text = string.Empty;	
+			self.E_Text_Name_PetText.text = string.Empty;	
 			if (petComponentC.PetEchoList[self.Index].KeyId == 0)
 			{
 				//未开启
-				self.EG_Opened.gameObject.SetActive(false);
-				self.EG_NoOpen.gameObject.SetActive(true);	
+				self.EG_OpenedRectTransform.gameObject.SetActive(false);
+				self.EG_NoOpenRectTransform.gameObject.SetActive(true);	
 				self.UpdateNoOpenStatus();
             }
 			else
 			{
 				//已开启
-				self.EG_Opened.gameObject.SetActive(true);
-				self.EG_NoOpen.gameObject.SetActive(false);	
+				self.EG_OpenedRectTransform.gameObject.SetActive(true);
+				self.EG_NoOpenRectTransform.gameObject.SetActive(false);	
 				self.UpdateOpenedStatus();
 			}
 			
@@ -254,8 +254,8 @@ namespace ET.Client
 		        return;
 	        }
 	        
-	        self.E_Text_Name_Opened.text = keyValuePair.Value;
-	        self.E_Text_Name_Pet.text = rolePetInfo.PetName;
+	        self.E_Text_Name_OpenedText.text = keyValuePair.Value;
+	        self.E_Text_Name_PetText.text = rolePetInfo.PetName;
 	       
 	        int fightNum = 0;
 	        for (int i = 0; i < petComponent.PetEchoList.Count; i++)
@@ -281,8 +281,8 @@ namespace ET.Client
 	        
 	        using (zstring.Block())
 	        {
-		        self.E_Text_Name_Pet_Comabt.text = zstring.Format("战力：{0}", rolePetInfo.PetPingFen);
-		        self.E_Text_Attribute_Opened.text = zstring.Format("{0}提升+{1}%",pname, (CommonHelp.GetPetShouHuPro(rolePetInfo.PetPingFen, fightNum) * 100).ToString("F2"));
+		        self.E_Text_Name_Pet_ComabtText.text = zstring.Format("战力：{0}", rolePetInfo.PetPingFen);
+		        self.E_Text_Attribute_OpenedText.text = zstring.Format("{0}提升+{1}%",pname, (CommonHelp.GetPetShouHuPro(rolePetInfo.PetPingFen, fightNum) * 100).ToString("F2"));
 	        }
         }
 

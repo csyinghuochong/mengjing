@@ -27,7 +27,7 @@ namespace ET.Client
             self.View.E_CloseButton.AddListener(self.OnCloseButton);
             self.View.E_FunctionSetBtnToggleGroup.AddListener(self.OnFunctionSetBtn);
             self.View.E_SendButton.AddListenerAsync(self.OnSendButton);
-            self.View.E_Button_Close.AddListener(self.OnCloseButton);
+            self.View.E_Button_CloseButton.AddListener(self.OnCloseButton);
             self.View.E_ChatItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnChatItemsRefresh);
 
             ReddotViewComponent redPointComponent = self.Root().GetComponent<ReddotViewComponent>();

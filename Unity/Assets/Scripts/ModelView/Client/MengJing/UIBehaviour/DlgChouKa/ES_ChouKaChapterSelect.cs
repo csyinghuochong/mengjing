@@ -1,16 +1,15 @@
 ﻿using System;
 using UnityEngine;
 using UnityEngine.UI;
-
 namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class ES_ChouKaChapterSelect : Entity,IAwake<Transform>,IDestroy 
+	public  class ES_ChouKaChapterSelect : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy 
 	{
 		public Action<int> ClickHandler;
 		
-		public Button E_Btn_ZhangJie1Button
+		public UnityEngine.UI.Button E_Btn_ZhangJie1Button
      	{
      		get
      		{
@@ -21,13 +20,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Btn_ZhangJie1Button == null )
      			{
-		    		this.m_E_Btn_ZhangJie1Button = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_Btn_ZhangJie1");
+		    		this.m_E_Btn_ZhangJie1Button = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Center/E_Btn_ZhangJie1");
      			}
      			return this.m_E_Btn_ZhangJie1Button;
      		}
      	}
 
-		public Image E_Btn_ZhangJie1Image
+		public UnityEngine.UI.Image E_Btn_ZhangJie1Image
      	{
      		get
      		{
@@ -38,13 +37,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Btn_ZhangJie1Image == null )
      			{
-		    		this.m_E_Btn_ZhangJie1Image = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_Btn_ZhangJie1");
+		    		this.m_E_Btn_ZhangJie1Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Center/E_Btn_ZhangJie1");
      			}
      			return this.m_E_Btn_ZhangJie1Image;
      		}
      	}
 
-		public Button E_Btn_ZhangJie2Button
+		public UnityEngine.UI.Button E_Btn_ZhangJie2Button
      	{
      		get
      		{
@@ -55,13 +54,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Btn_ZhangJie2Button == null )
      			{
-		    		this.m_E_Btn_ZhangJie2Button = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_Btn_ZhangJie2");
+		    		this.m_E_Btn_ZhangJie2Button = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Center/E_Btn_ZhangJie2");
      			}
      			return this.m_E_Btn_ZhangJie2Button;
      		}
      	}
 
-		public Image E_Btn_ZhangJie2Image
+		public UnityEngine.UI.Image E_Btn_ZhangJie2Image
      	{
      		get
      		{
@@ -72,13 +71,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Btn_ZhangJie2Image == null )
      			{
-		    		this.m_E_Btn_ZhangJie2Image = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_Btn_ZhangJie2");
+		    		this.m_E_Btn_ZhangJie2Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Center/E_Btn_ZhangJie2");
      			}
      			return this.m_E_Btn_ZhangJie2Image;
      		}
      	}
 
-		public Button E_Btn_ZhangJie3Button
+		public UnityEngine.UI.Button E_Btn_ZhangJie3Button
      	{
      		get
      		{
@@ -89,13 +88,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Btn_ZhangJie3Button == null )
      			{
-		    		this.m_E_Btn_ZhangJie3Button = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_Btn_ZhangJie3");
+		    		this.m_E_Btn_ZhangJie3Button = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Center/E_Btn_ZhangJie3");
      			}
      			return this.m_E_Btn_ZhangJie3Button;
      		}
      	}
 
-		public Image E_Btn_ZhangJie3Image
+		public UnityEngine.UI.Image E_Btn_ZhangJie3Image
      	{
      		get
      		{
@@ -106,13 +105,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Btn_ZhangJie3Image == null )
      			{
-		    		this.m_E_Btn_ZhangJie3Image = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_Btn_ZhangJie3");
+		    		this.m_E_Btn_ZhangJie3Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Center/E_Btn_ZhangJie3");
      			}
      			return this.m_E_Btn_ZhangJie3Image;
      		}
      	}
 
-		public Button E_Btn_ZhangJie4Button
+		public UnityEngine.UI.Button E_Btn_ZhangJie4Button
      	{
      		get
      		{
@@ -123,13 +122,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Btn_ZhangJie4Button == null )
      			{
-		    		this.m_E_Btn_ZhangJie4Button = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_Btn_ZhangJie4");
+		    		this.m_E_Btn_ZhangJie4Button = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Center/E_Btn_ZhangJie4");
      			}
      			return this.m_E_Btn_ZhangJie4Button;
      		}
      	}
 
-		public Image E_Btn_ZhangJie4Image
+		public UnityEngine.UI.Image E_Btn_ZhangJie4Image
      	{
      		get
      		{
@@ -140,13 +139,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Btn_ZhangJie4Image == null )
      			{
-		    		this.m_E_Btn_ZhangJie4Image = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_Btn_ZhangJie4");
+		    		this.m_E_Btn_ZhangJie4Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Center/E_Btn_ZhangJie4");
      			}
      			return this.m_E_Btn_ZhangJie4Image;
      		}
      	}
 
-		public Button E_Btn_ZhangJie5Button
+		public UnityEngine.UI.Button E_Btn_ZhangJie5Button
      	{
      		get
      		{
@@ -157,13 +156,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Btn_ZhangJie5Button == null )
      			{
-		    		this.m_E_Btn_ZhangJie5Button = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_Btn_ZhangJie5");
+		    		this.m_E_Btn_ZhangJie5Button = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Center/E_Btn_ZhangJie5");
      			}
      			return this.m_E_Btn_ZhangJie5Button;
      		}
      	}
 
-		public Image E_Btn_ZhangJie5Image
+		public UnityEngine.UI.Image E_Btn_ZhangJie5Image
      	{
      		get
      		{
@@ -174,13 +173,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Btn_ZhangJie5Image == null )
      			{
-		    		this.m_E_Btn_ZhangJie5Image = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_Btn_ZhangJie5");
+		    		this.m_E_Btn_ZhangJie5Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Center/E_Btn_ZhangJie5");
      			}
      			return this.m_E_Btn_ZhangJie5Image;
      		}
      	}
 
-		public Button E_Btn_CloseButton
+		public UnityEngine.UI.Button E_Btn_CloseButton
      	{
      		get
      		{
@@ -191,13 +190,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Btn_CloseButton == null )
      			{
-		    		this.m_E_Btn_CloseButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_Btn_Close");
+		    		this.m_E_Btn_CloseButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Center/E_Btn_Close");
      			}
      			return this.m_E_Btn_CloseButton;
      		}
      	}
 
-		public Image E_Btn_CloseImage
+		public UnityEngine.UI.Image E_Btn_CloseImage
      	{
      		get
      		{
@@ -208,7 +207,7 @@ namespace ET.Client
      			}
      			if( this.m_E_Btn_CloseImage == null )
      			{
-		    		this.m_E_Btn_CloseImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_Btn_Close");
+		    		this.m_E_Btn_CloseImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Center/E_Btn_Close");
      			}
      			return this.m_E_Btn_CloseImage;
      		}
@@ -243,18 +242,18 @@ namespace ET.Client
 			this.uiTransform = null;
 		}
 
-		private Button m_E_Btn_ZhangJie1Button = null;
-		private Image m_E_Btn_ZhangJie1Image = null;
-		private Button m_E_Btn_ZhangJie2Button = null;
-		private Image m_E_Btn_ZhangJie2Image = null;
-		private Button m_E_Btn_ZhangJie3Button = null;
-		private Image m_E_Btn_ZhangJie3Image = null;
-		private Button m_E_Btn_ZhangJie4Button = null;
-		private Image m_E_Btn_ZhangJie4Image = null;
-		private Button m_E_Btn_ZhangJie5Button = null;
-		private Image m_E_Btn_ZhangJie5Image = null;
-		private Button m_E_Btn_CloseButton = null;
-		private Image m_E_Btn_CloseImage = null;
+		private UnityEngine.UI.Button m_E_Btn_ZhangJie1Button = null;
+		private UnityEngine.UI.Image m_E_Btn_ZhangJie1Image = null;
+		private UnityEngine.UI.Button m_E_Btn_ZhangJie2Button = null;
+		private UnityEngine.UI.Image m_E_Btn_ZhangJie2Image = null;
+		private UnityEngine.UI.Button m_E_Btn_ZhangJie3Button = null;
+		private UnityEngine.UI.Image m_E_Btn_ZhangJie3Image = null;
+		private UnityEngine.UI.Button m_E_Btn_ZhangJie4Button = null;
+		private UnityEngine.UI.Image m_E_Btn_ZhangJie4Image = null;
+		private UnityEngine.UI.Button m_E_Btn_ZhangJie5Button = null;
+		private UnityEngine.UI.Image m_E_Btn_ZhangJie5Image = null;
+		private UnityEngine.UI.Button m_E_Btn_CloseButton = null;
+		private UnityEngine.UI.Image m_E_Btn_CloseImage = null;
 		public Transform uiTransform = null;
 	}
 }

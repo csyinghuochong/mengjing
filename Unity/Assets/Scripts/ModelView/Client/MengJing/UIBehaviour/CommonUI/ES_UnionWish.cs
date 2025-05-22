@@ -18,7 +18,7 @@ namespace ET.Client
      			}
      			if( this.m_EG_LeaderShowRectTransform == null )
      			{
-		    		this.m_EG_LeaderShowRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_LeaderShow");
+		    		this.m_EG_LeaderShowRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"Right/EG_LeaderShow");
      			}
      			return this.m_EG_LeaderShowRectTransform;
      		}
@@ -37,7 +37,7 @@ namespace ET.Client
      			if( es == null )
 
      			{
-		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_LeaderShow/ES_RewardList");
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"Right/EG_LeaderShow/ES_RewardList");
 		    	   this.m_es_rewardlist = this.AddChild<ES_RewardList,Transform>(subTrans);
      			}
      			return this.m_es_rewardlist;
@@ -55,7 +55,7 @@ namespace ET.Client
      			}
      			if( this.m_E_ButtonSendButton == null )
      			{
-		    		this.m_E_ButtonSendButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"EG_LeaderShow/E_ButtonSend");
+		    		this.m_E_ButtonSendButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Right/EG_LeaderShow/E_ButtonSend");
      			}
      			return this.m_E_ButtonSendButton;
      		}
@@ -72,7 +72,7 @@ namespace ET.Client
      			}
      			if( this.m_E_ButtonSendImage == null )
      			{
-		    		this.m_E_ButtonSendImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_LeaderShow/E_ButtonSend");
+		    		this.m_E_ButtonSendImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Right/EG_LeaderShow/E_ButtonSend");
      			}
      			return this.m_E_ButtonSendImage;
      		}
@@ -89,7 +89,7 @@ namespace ET.Client
      			}
      			if( this.m_E_Text_WishCostText == null )
      			{
-		    		this.m_E_Text_WishCostText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"EG_LeaderShow/E_Text_WishCost");
+		    		this.m_E_Text_WishCostText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Right/EG_LeaderShow/E_Text_WishCost");
      			}
      			return this.m_E_Text_WishCostText;
      		}
@@ -104,54 +104,57 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-		        ES_UnionWishItem es = this.m_es_unionwishitem_1;
+     			ES_UnionWishItem es = this.m_es_unionwishitem_1;
      			if( es == null )
+
      			{
-				    Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"ES_WishItem_1");
-				    this.m_es_unionwishitem_1 = this.AddChild<ES_UnionWishItem,Transform>(subTrans);
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"Right/ES_UnionWishItem_1");
+		    	   this.m_es_unionwishitem_1 = this.AddChild<ES_UnionWishItem,Transform>(subTrans);
      			}
      			return this.m_es_unionwishitem_1;
      		}
      	}
 
 		public ES_UnionWishItem ES_UnionWishItem_2
-		{
-			get
-			{
-				if (this.uiTransform == null)
-				{
-					Log.Error("uiTransform is null.");
-					return null;
-				}
-				ES_UnionWishItem es = this.m_es_unionwishitem_2;
-				if( es == null )
-				{
-					Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"ES_WishItem_2");
-					this.m_es_unionwishitem_2 = this.AddChild<ES_UnionWishItem,Transform>(subTrans);
-				}
-				return this.m_es_unionwishitem_2;
-			}
-		}
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			ES_UnionWishItem es = this.m_es_unionwishitem_2;
+     			if( es == null )
+
+     			{
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"Right/ES_UnionWishItem_2");
+		    	   this.m_es_unionwishitem_2 = this.AddChild<ES_UnionWishItem,Transform>(subTrans);
+     			}
+     			return this.m_es_unionwishitem_2;
+     		}
+     	}
 
 		public ES_UnionWishItem ES_UnionWishItem_3
-		{
-			get
-			{
-				if (this.uiTransform == null)
-				{
-					Log.Error("uiTransform is null.");
-					return null;
-				}
-				ES_UnionWishItem es = this.m_es_unionwishitem_3;
-				if( es == null )
-				{
-					Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"ES_WishItem_3");
-					this.m_es_unionwishitem_3 = this.AddChild<ES_UnionWishItem,Transform>(subTrans);
-				}
-				return this.m_es_unionwishitem_3;
-			}
-		}
-		
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			ES_UnionWishItem es = this.m_es_unionwishitem_3;
+     			if( es == null )
+
+     			{
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"Right/ES_UnionWishItem_3");
+		    	   this.m_es_unionwishitem_3 = this.AddChild<ES_UnionWishItem,Transform>(subTrans);
+     			}
+     			return this.m_es_unionwishitem_3;
+     		}
+     	}
+
 		    public Transform UITransform
          {
      	    get

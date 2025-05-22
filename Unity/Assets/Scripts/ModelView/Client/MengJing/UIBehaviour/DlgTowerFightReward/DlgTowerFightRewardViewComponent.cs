@@ -1,13 +1,13 @@
-﻿using UnityEngine;
+﻿
+using UnityEngine;
 using UnityEngine.UI;
-
 namespace ET.Client
 {
 	[ComponentOf(typeof(DlgTowerFightReward))]
 	[EnableMethod]
 	public  class DlgTowerFightRewardViewComponent : Entity,IAwake,IDestroy 
 	{
-		public Button E_Btn_ReturnButton
+		public UnityEngine.UI.Button E_Btn_ReturnButton
      	{
      		get
      		{
@@ -18,13 +18,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Btn_ReturnButton == null )
      			{
-		    		this.m_E_Btn_ReturnButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_Btn_Return");
+		    		this.m_E_Btn_ReturnButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Center/E_Btn_Return");
      			}
      			return this.m_E_Btn_ReturnButton;
      		}
      	}
 
-		public Image E_Btn_ReturnImage
+		public UnityEngine.UI.Image E_Btn_ReturnImage
      	{
      		get
      		{
@@ -35,7 +35,7 @@ namespace ET.Client
      			}
      			if( this.m_E_Btn_ReturnImage == null )
      			{
-		    		this.m_E_Btn_ReturnImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_Btn_Return");
+		    		this.m_E_Btn_ReturnImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Center/E_Btn_Return");
      			}
      			return this.m_E_Btn_ReturnImage;
      		}
@@ -50,18 +50,18 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-
-		        ES_RewardList es = this.m_es_rewardlist;
+     			ES_RewardList es = this.m_es_rewardlist;
      			if( es == null )
+
      			{
-		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"ES_RewardList");
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"Center/ES_RewardList");
 		    	   this.m_es_rewardlist = this.AddChild<ES_RewardList,Transform>(subTrans);
      			}
      			return this.m_es_rewardlist;
      		}
      	}
 
-		public Text E_Text_ResultText
+		public UnityEngine.UI.Text E_Text_ResultText
      	{
      		get
      		{
@@ -72,7 +72,7 @@ namespace ET.Client
      			}
      			if( this.m_E_Text_ResultText == null )
      			{
-		    		this.m_E_Text_ResultText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_Text_Result");
+		    		this.m_E_Text_ResultText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Center/E_Text_Result");
      			}
      			return this.m_E_Text_ResultText;
      		}
@@ -87,10 +87,10 @@ namespace ET.Client
 			this.uiTransform = null;
 		}
 
-		private Button m_E_Btn_ReturnButton = null;
-		private Image m_E_Btn_ReturnImage = null;
+		private UnityEngine.UI.Button m_E_Btn_ReturnButton = null;
+		private UnityEngine.UI.Image m_E_Btn_ReturnImage = null;
 		private EntityRef<ES_RewardList> m_es_rewardlist = null;
-		private Text m_E_Text_ResultText = null;
+		private UnityEngine.UI.Text m_E_Text_ResultText = null;
 		public Transform uiTransform = null;
 	}
 }

@@ -200,7 +200,7 @@ namespace ET.Client
                     using (zstring.Block())
                     {
                         self.E_ProgressTextText.text = "1/1";
-                        self.E_Img_LodingValue_22.fillAmount = 1;   
+                        self.E_Img_LodingValue_22Image.fillAmount = 1;   
                     }
                 }
                 else
@@ -208,7 +208,7 @@ namespace ET.Client
                     using (zstring.Block())
                     {
                         self.E_ProgressTextText.text = zstring.Format("{0}/{1}",taskConfig.TargetValue[0], taskConfig.TargetValue[0]);
-                        self.E_Img_LodingValue_22.fillAmount = taskConfig.TargetValue[0] * 1f/taskConfig.TargetValue[0] ;
+                        self.E_Img_LodingValue_22Image.fillAmount = taskConfig.TargetValue[0] * 1f/taskConfig.TargetValue[0] ;
                     }
                 }
 
@@ -224,7 +224,7 @@ namespace ET.Client
                     using (zstring.Block())
                     {
                         self.E_ProgressTextText.text = "0/1";
-                        self.E_Img_LodingValue_22.fillAmount = 0f;  
+                        self.E_Img_LodingValue_22Image.fillAmount = 0f;  
                     }
 
                     self.E_GetBtnButton.gameObject.SetActive(false);
@@ -239,7 +239,7 @@ namespace ET.Client
                         using (zstring.Block())
                         {
                             self.E_ProgressTextText.text = "1/1";
-                            self.E_Img_LodingValue_22.fillAmount = 1f;   
+                            self.E_Img_LodingValue_22Image.fillAmount = 1f;   
                         }
 
                         self.E_GetBtnButton.gameObject.SetActive(false);
@@ -250,7 +250,7 @@ namespace ET.Client
                         using (zstring.Block())
                         {
                             self.E_ProgressTextText.text = "0/1";
-                            self.E_Img_LodingValue_22.fillAmount = 0f;   
+                            self.E_Img_LodingValue_22Image.fillAmount = 0f;   
                         }
 
                         self.E_GetBtnButton.gameObject.SetActive(true);
@@ -262,7 +262,7 @@ namespace ET.Client
                     using (zstring.Block())
                     {
                         self.E_ProgressTextText.text = zstring.Format("{0}/{1}",self.TaskPro.taskTargetNum_1, taskConfig.TargetValue[0]);
-                        self.E_Img_LodingValue_22.fillAmount = self.TaskPro.taskTargetNum_1 * 1f/taskConfig.TargetValue[0];   
+                        self.E_Img_LodingValue_22Image.fillAmount = self.TaskPro.taskTargetNum_1 * 1f/taskConfig.TargetValue[0];   
                     }
 
                     self.E_GetBtnButton.gameObject.SetActive(true);
@@ -309,7 +309,7 @@ namespace ET.Client
                     using (zstring.Block())
                     {
                         self.E_ProgressTextText.text = "1/1";
-                        self.E_Img_LodingValue_22.fillAmount = 1;   
+                        self.E_Img_LodingValue_22Image.fillAmount = 1;   
                     }
                 }
                 else
@@ -317,7 +317,7 @@ namespace ET.Client
                     using (zstring.Block())
                     {
                         self.E_ProgressTextText.text = zstring.Format("{0}/{1}",taskConfig.TargetValue[0], taskConfig.TargetValue[0]);
-                        self.E_Img_LodingValue_22.fillAmount = taskConfig.TargetValue[0] * 1f/taskConfig.TargetValue[0] ;   
+                        self.E_Img_LodingValue_22Image.fillAmount = taskConfig.TargetValue[0] * 1f/taskConfig.TargetValue[0] ;   
                     }
                 }
 
@@ -333,7 +333,7 @@ namespace ET.Client
                     using (zstring.Block())
                     {
                         self.E_ProgressTextText.text = "0/1";
-                        self.E_Img_LodingValue_22.fillAmount = 0f;
+                        self.E_Img_LodingValue_22Image.fillAmount = 0f;
                     }
 
                     self.E_GetBtnButton.gameObject.SetActive(false);
@@ -348,7 +348,7 @@ namespace ET.Client
                         using (zstring.Block())
                         {
                             self.E_ProgressTextText.text = "1/1";
-                            self.E_Img_LodingValue_22.fillAmount = 1f;   
+                            self.E_Img_LodingValue_22Image.fillAmount = 1f;   
                         }
 
                         self.E_GetBtnButton.gameObject.SetActive(true);
@@ -359,7 +359,7 @@ namespace ET.Client
                         using (zstring.Block())
                         {
                             self.E_ProgressTextText.text = "0/1";
-                            self.E_Img_LodingValue_22.fillAmount = 0f;
+                            self.E_Img_LodingValue_22Image.fillAmount = 0f;
                         }
 
                         self.E_GetBtnButton.gameObject.SetActive(true);
@@ -371,7 +371,7 @@ namespace ET.Client
                     using (zstring.Block())
                     {
                         self.E_ProgressTextText.text = zstring.Format("{0}/{1}",self.TaskPro.taskTargetNum_1, taskConfig.TargetValue[0]);
-                        self.E_Img_LodingValue_22.fillAmount = self.TaskPro.taskTargetNum_1 * 1f/taskConfig.TargetValue[0];   
+                        self.E_Img_LodingValue_22Image.fillAmount = self.TaskPro.taskTargetNum_1 * 1f/taskConfig.TargetValue[0];   
                     }
 
                     self.E_GetBtnButton.gameObject.SetActive(true);

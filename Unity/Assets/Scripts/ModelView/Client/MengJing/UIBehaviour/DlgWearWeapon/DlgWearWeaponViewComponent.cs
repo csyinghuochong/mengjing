@@ -1,13 +1,13 @@
-﻿using UnityEngine;
+﻿
+using UnityEngine;
 using UnityEngine.UI;
-
 namespace ET.Client
 {
 	[ComponentOf(typeof(DlgWearWeapon))]
 	[EnableMethod]
 	public  class DlgWearWeaponViewComponent : Entity,IAwake,IDestroy 
 	{
-		public Button E_ImgCloseButton
+		public UnityEngine.UI.Button E_ImgCloseButton
      	{
      		get
      		{
@@ -18,13 +18,13 @@ namespace ET.Client
      			}
      			if( this.m_E_ImgCloseButton == null )
      			{
-		    		this.m_E_ImgCloseButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_ImgClose");
+		    		this.m_E_ImgCloseButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Center/E_ImgClose");
      			}
      			return this.m_E_ImgCloseButton;
      		}
      	}
 
-		public Image E_ImgCloseImage
+		public UnityEngine.UI.Image E_ImgCloseImage
      	{
      		get
      		{
@@ -35,7 +35,7 @@ namespace ET.Client
      			}
      			if( this.m_E_ImgCloseImage == null )
      			{
-		    		this.m_E_ImgCloseImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_ImgClose");
+		    		this.m_E_ImgCloseImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Center/E_ImgClose");
      			}
      			return this.m_E_ImgCloseImage;
      		}
@@ -54,14 +54,14 @@ namespace ET.Client
      			if( es == null )
 
      			{
-		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"ES_ModelShow");
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"Center/ES_ModelShow");
 		    	   this.m_es_modelshow = this.AddChild<ES_ModelShow,Transform>(subTrans);
      			}
      			return this.m_es_modelshow;
      		}
      	}
 
-		public Text E_TextTip3Text
+		public UnityEngine.UI.Text E_TextTip3Text
      	{
      		get
      		{
@@ -72,13 +72,13 @@ namespace ET.Client
      			}
      			if( this.m_E_TextTip3Text == null )
      			{
-		    		this.m_E_TextTip3Text = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_TextTip3");
+		    		this.m_E_TextTip3Text = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Center/E_TextTip3");
      			}
      			return this.m_E_TextTip3Text;
      		}
      	}
 
-		public Button E_ButtonCloseButton
+		public UnityEngine.UI.Button E_ButtonCloseButton
      	{
      		get
      		{
@@ -89,13 +89,13 @@ namespace ET.Client
      			}
      			if( this.m_E_ButtonCloseButton == null )
      			{
-		    		this.m_E_ButtonCloseButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_ButtonClose");
+		    		this.m_E_ButtonCloseButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Center/E_ButtonClose");
      			}
      			return this.m_E_ButtonCloseButton;
      		}
      	}
 
-		public Image E_ButtonCloseImage
+		public UnityEngine.UI.Image E_ButtonCloseImage
      	{
      		get
      		{
@@ -106,7 +106,7 @@ namespace ET.Client
      			}
      			if( this.m_E_ButtonCloseImage == null )
      			{
-		    		this.m_E_ButtonCloseImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_ButtonClose");
+		    		this.m_E_ButtonCloseImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Center/E_ButtonClose");
      			}
      			return this.m_E_ButtonCloseImage;
      		}
@@ -123,12 +123,12 @@ namespace ET.Client
 			this.uiTransform = null;
 		}
 
-		private Button m_E_ImgCloseButton = null;
-		private Image m_E_ImgCloseImage = null;
+		private UnityEngine.UI.Button m_E_ImgCloseButton = null;
+		private UnityEngine.UI.Image m_E_ImgCloseImage = null;
 		private EntityRef<ES_ModelShow> m_es_modelshow = null;
-		private Text m_E_TextTip3Text = null;
-		private Button m_E_ButtonCloseButton = null;
-		private Image m_E_ButtonCloseImage = null;
+		private UnityEngine.UI.Text m_E_TextTip3Text = null;
+		private UnityEngine.UI.Button m_E_ButtonCloseButton = null;
+		private UnityEngine.UI.Image m_E_ButtonCloseImage = null;
 		public Transform uiTransform = null;
 	}
 }

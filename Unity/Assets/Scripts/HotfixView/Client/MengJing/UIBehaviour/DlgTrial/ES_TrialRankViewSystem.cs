@@ -99,7 +99,7 @@ namespace ET.Client
 
         public static async ETTask OnButton_RewardButton(this ES_TrialRank self)
         {
-            self.EG_UISetRectTransform.gameObject.SetActive(false);
+            self.EG_RightRectTransform.gameObject.SetActive(false);
             await self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_TrialReward);
             DlgTrialReward dlgTrialReward = self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgTrialReward>();
             dlgTrialReward.OnInitUI();
@@ -108,7 +108,7 @@ namespace ET.Client
 
         public static void OpenShow(this ES_TrialRank self)
         {
-            self.EG_UISetRectTransform.gameObject.SetActive(true);
+            self.EG_RightRectTransform.gameObject.SetActive(true);
         }
 
         public static async ETTask OnUpdateUI(this ES_TrialRank self, int type = 0)

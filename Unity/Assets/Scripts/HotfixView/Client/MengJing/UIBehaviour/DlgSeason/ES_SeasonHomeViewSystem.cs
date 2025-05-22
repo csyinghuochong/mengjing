@@ -40,11 +40,11 @@ namespace ET.Client
             DateTime startTime = TimeInfo.Instance.ToDateTime(seasonOpenTime.Value);
             DateTime endTime = TimeInfo.Instance.ToDateTime(seasonOpenTime.Value2);
 
-            using (zstring.Block())
-            {
-                self.E_SeasonTimeTextText.text = zstring.Format("赛季时间:{0}.{1}.{2}-{3}.{4}.{5}", startTime.Year, startTime.Month, startTime.Day,
-                    endTime.Year, endTime.Month, endTime.Day);
-            }
+            // using (zstring.Block())
+            // {
+            //     self.E_SeasonTimeTextText.text = zstring.Format("赛季时间:{0}.{1}.{2}-{3}.{4}.{5}", startTime.Year, startTime.Month, startTime.Day,
+            //         endTime.Year, endTime.Month, endTime.Day);
+            // }
 
             if (seasonOpenTime.KeyId == 0)
             {

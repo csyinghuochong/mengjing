@@ -1,13 +1,13 @@
-﻿using UnityEngine;
+﻿
+using UnityEngine;
 using UnityEngine.UI;
-
 namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class ES_CountryHuoDong : Entity,IAwake<Transform>,IDestroy 
+	public  class ES_CountryHuoDong : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy 
 	{
-		public RectTransform EG_UICountryTaskItem_0RectTransform
+		public UnityEngine.RectTransform EG_UICountryTaskItem_0RectTransform
      	{
      		get
      		{
@@ -18,13 +18,13 @@ namespace ET.Client
      			}
      			if( this.m_EG_UICountryTaskItem_0RectTransform == null )
      			{
-		    		this.m_EG_UICountryTaskItem_0RectTransform = UIFindHelper.FindDeepChild<RectTransform>(this.uiTransform.gameObject,"Right/ScrollView_1/Viewport/TaskListNode/EG_UICountryTaskItem_0");
+		    		this.m_EG_UICountryTaskItem_0RectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"Center/Right/ScrollView_1/Viewport/TaskListNode/EG_UICountryTaskItem_0");
      			}
      			return this.m_EG_UICountryTaskItem_0RectTransform;
      		}
      	}
 
-		public Button E_Btn_HuoDong_ArenaButton
+		public UnityEngine.UI.Button E_Btn_HuoDong_ArenaButton
      	{
      		get
      		{
@@ -35,13 +35,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Btn_HuoDong_ArenaButton == null )
      			{
-		    		this.m_E_Btn_HuoDong_ArenaButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"Right/ScrollView_1/Viewport/TaskListNode/UICountryTaskItem_3/E_Btn_HuoDong_Arena");
+		    		this.m_E_Btn_HuoDong_ArenaButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Center/Right/ScrollView_1/Viewport/TaskListNode/UICountryTaskItem_3/E_Btn_HuoDong_Arena");
      			}
      			return this.m_E_Btn_HuoDong_ArenaButton;
      		}
      	}
 
-		public Image E_Btn_HuoDong_ArenaImage
+		public UnityEngine.UI.Image E_Btn_HuoDong_ArenaImage
      	{
      		get
      		{
@@ -52,13 +52,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Btn_HuoDong_ArenaImage == null )
      			{
-		    		this.m_E_Btn_HuoDong_ArenaImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"Right/ScrollView_1/Viewport/TaskListNode/UICountryTaskItem_3/E_Btn_HuoDong_Arena");
+		    		this.m_E_Btn_HuoDong_ArenaImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Center/Right/ScrollView_1/Viewport/TaskListNode/UICountryTaskItem_3/E_Btn_HuoDong_Arena");
      			}
      			return this.m_E_Btn_HuoDong_ArenaImage;
      		}
      	}
 
-		public Button E_Btn_HuoDong_ArenaJieShaoButton
+		public UnityEngine.UI.Button E_Btn_HuoDong_ArenaJieShaoButton
      	{
      		get
      		{
@@ -69,13 +69,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Btn_HuoDong_ArenaJieShaoButton == null )
      			{
-		    		this.m_E_Btn_HuoDong_ArenaJieShaoButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"Right/ScrollView_1/Viewport/TaskListNode/UICountryTaskItem_3/E_Btn_HuoDong_ArenaJieShao");
+		    		this.m_E_Btn_HuoDong_ArenaJieShaoButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Center/Right/ScrollView_1/Viewport/TaskListNode/UICountryTaskItem_3/E_Btn_HuoDong_ArenaJieShao");
      			}
      			return this.m_E_Btn_HuoDong_ArenaJieShaoButton;
      		}
      	}
 
-		public Image E_Btn_HuoDong_ArenaJieShaoImage
+		public UnityEngine.UI.Image E_Btn_HuoDong_ArenaJieShaoImage
      	{
      		get
      		{
@@ -86,13 +86,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Btn_HuoDong_ArenaJieShaoImage == null )
      			{
-		    		this.m_E_Btn_HuoDong_ArenaJieShaoImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"Right/ScrollView_1/Viewport/TaskListNode/UICountryTaskItem_3/E_Btn_HuoDong_ArenaJieShao");
+		    		this.m_E_Btn_HuoDong_ArenaJieShaoImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Center/Right/ScrollView_1/Viewport/TaskListNode/UICountryTaskItem_3/E_Btn_HuoDong_ArenaJieShao");
      			}
      			return this.m_E_Btn_HuoDong_ArenaJieShaoImage;
      		}
      	}
 
-		public Button E_Btn_HuoDong_LingzhuButton
+		public UnityEngine.UI.Button E_Btn_HuoDong_LingzhuButton
      	{
      		get
      		{
@@ -103,13 +103,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Btn_HuoDong_LingzhuButton == null )
      			{
-		    		this.m_E_Btn_HuoDong_LingzhuButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"Right/ScrollView_1/Viewport/TaskListNode/UICountryTaskItem_4/E_Btn_HuoDong_Lingzhu");
+		    		this.m_E_Btn_HuoDong_LingzhuButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Center/Right/ScrollView_1/Viewport/TaskListNode/UICountryTaskItem_4/E_Btn_HuoDong_Lingzhu");
      			}
      			return this.m_E_Btn_HuoDong_LingzhuButton;
      		}
      	}
 
-		public Image E_Btn_HuoDong_LingzhuImage
+		public UnityEngine.UI.Image E_Btn_HuoDong_LingzhuImage
      	{
      		get
      		{
@@ -120,13 +120,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Btn_HuoDong_LingzhuImage == null )
      			{
-		    		this.m_E_Btn_HuoDong_LingzhuImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"Right/ScrollView_1/Viewport/TaskListNode/UICountryTaskItem_4/E_Btn_HuoDong_Lingzhu");
+		    		this.m_E_Btn_HuoDong_LingzhuImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Center/Right/ScrollView_1/Viewport/TaskListNode/UICountryTaskItem_4/E_Btn_HuoDong_Lingzhu");
      			}
      			return this.m_E_Btn_HuoDong_LingzhuImage;
      		}
      	}
 
-		public Button E_Btn_HuoDong_LingzhuJieShaoButton
+		public UnityEngine.UI.Button E_Btn_HuoDong_LingzhuJieShaoButton
      	{
      		get
      		{
@@ -137,13 +137,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Btn_HuoDong_LingzhuJieShaoButton == null )
      			{
-		    		this.m_E_Btn_HuoDong_LingzhuJieShaoButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"Right/ScrollView_1/Viewport/TaskListNode/UICountryTaskItem_4/E_Btn_HuoDong_LingzhuJieShao");
+		    		this.m_E_Btn_HuoDong_LingzhuJieShaoButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Center/Right/ScrollView_1/Viewport/TaskListNode/UICountryTaskItem_4/E_Btn_HuoDong_LingzhuJieShao");
      			}
      			return this.m_E_Btn_HuoDong_LingzhuJieShaoButton;
      		}
      	}
 
-		public Image E_Btn_HuoDong_LingzhuJieShaoImage
+		public UnityEngine.UI.Image E_Btn_HuoDong_LingzhuJieShaoImage
      	{
      		get
      		{
@@ -154,13 +154,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Btn_HuoDong_LingzhuJieShaoImage == null )
      			{
-		    		this.m_E_Btn_HuoDong_LingzhuJieShaoImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"Right/ScrollView_1/Viewport/TaskListNode/UICountryTaskItem_4/E_Btn_HuoDong_LingzhuJieShao");
+		    		this.m_E_Btn_HuoDong_LingzhuJieShaoImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Center/Right/ScrollView_1/Viewport/TaskListNode/UICountryTaskItem_4/E_Btn_HuoDong_LingzhuJieShao");
      			}
      			return this.m_E_Btn_HuoDong_LingzhuJieShaoImage;
      		}
      	}
 
-		public Button E_Btn_HuoDong_XiaoGuiButton
+		public UnityEngine.UI.Button E_Btn_HuoDong_XiaoGuiButton
      	{
      		get
      		{
@@ -171,13 +171,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Btn_HuoDong_XiaoGuiButton == null )
      			{
-		    		this.m_E_Btn_HuoDong_XiaoGuiButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"Right/ScrollView_1/Viewport/TaskListNode/UICountryTaskItem_5/E_Btn_HuoDong_XiaoGui");
+		    		this.m_E_Btn_HuoDong_XiaoGuiButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Center/Right/ScrollView_1/Viewport/TaskListNode/UICountryTaskItem_5/E_Btn_HuoDong_XiaoGui");
      			}
      			return this.m_E_Btn_HuoDong_XiaoGuiButton;
      		}
      	}
 
-		public Image E_Btn_HuoDong_XiaoGuiImage
+		public UnityEngine.UI.Image E_Btn_HuoDong_XiaoGuiImage
      	{
      		get
      		{
@@ -188,13 +188,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Btn_HuoDong_XiaoGuiImage == null )
      			{
-		    		this.m_E_Btn_HuoDong_XiaoGuiImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"Right/ScrollView_1/Viewport/TaskListNode/UICountryTaskItem_5/E_Btn_HuoDong_XiaoGui");
+		    		this.m_E_Btn_HuoDong_XiaoGuiImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Center/Right/ScrollView_1/Viewport/TaskListNode/UICountryTaskItem_5/E_Btn_HuoDong_XiaoGui");
      			}
      			return this.m_E_Btn_HuoDong_XiaoGuiImage;
      		}
      	}
 
-		public Button E_Btn_HuoDong_BaozangButton
+		public UnityEngine.UI.Button E_Btn_HuoDong_BaozangButton
      	{
      		get
      		{
@@ -205,13 +205,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Btn_HuoDong_BaozangButton == null )
      			{
-		    		this.m_E_Btn_HuoDong_BaozangButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"Right/ScrollView_1/Viewport/TaskListNode/UICountryTaskItem_7/E_Btn_HuoDong_Baozang");
+		    		this.m_E_Btn_HuoDong_BaozangButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Center/Right/ScrollView_1/Viewport/TaskListNode/UICountryTaskItem_7/E_Btn_HuoDong_Baozang");
      			}
      			return this.m_E_Btn_HuoDong_BaozangButton;
      		}
      	}
 
-		public Image E_Btn_HuoDong_BaozangImage
+		public UnityEngine.UI.Image E_Btn_HuoDong_BaozangImage
      	{
      		get
      		{
@@ -222,7 +222,7 @@ namespace ET.Client
      			}
      			if( this.m_E_Btn_HuoDong_BaozangImage == null )
      			{
-		    		this.m_E_Btn_HuoDong_BaozangImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"Right/ScrollView_1/Viewport/TaskListNode/UICountryTaskItem_7/E_Btn_HuoDong_Baozang");
+		    		this.m_E_Btn_HuoDong_BaozangImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Center/Right/ScrollView_1/Viewport/TaskListNode/UICountryTaskItem_7/E_Btn_HuoDong_Baozang");
      			}
      			return this.m_E_Btn_HuoDong_BaozangImage;
      		}
@@ -258,19 +258,19 @@ namespace ET.Client
 			this.uiTransform = null;
 		}
 
-		private RectTransform m_EG_UICountryTaskItem_0RectTransform = null;
-		private Button m_E_Btn_HuoDong_ArenaButton = null;
-		private Image m_E_Btn_HuoDong_ArenaImage = null;
-		private Button m_E_Btn_HuoDong_ArenaJieShaoButton = null;
-		private Image m_E_Btn_HuoDong_ArenaJieShaoImage = null;
-		private Button m_E_Btn_HuoDong_LingzhuButton = null;
-		private Image m_E_Btn_HuoDong_LingzhuImage = null;
-		private Button m_E_Btn_HuoDong_LingzhuJieShaoButton = null;
-		private Image m_E_Btn_HuoDong_LingzhuJieShaoImage = null;
-		private Button m_E_Btn_HuoDong_XiaoGuiButton = null;
-		private Image m_E_Btn_HuoDong_XiaoGuiImage = null;
-		private Button m_E_Btn_HuoDong_BaozangButton = null;
-		private Image m_E_Btn_HuoDong_BaozangImage = null;
+		private UnityEngine.RectTransform m_EG_UICountryTaskItem_0RectTransform = null;
+		private UnityEngine.UI.Button m_E_Btn_HuoDong_ArenaButton = null;
+		private UnityEngine.UI.Image m_E_Btn_HuoDong_ArenaImage = null;
+		private UnityEngine.UI.Button m_E_Btn_HuoDong_ArenaJieShaoButton = null;
+		private UnityEngine.UI.Image m_E_Btn_HuoDong_ArenaJieShaoImage = null;
+		private UnityEngine.UI.Button m_E_Btn_HuoDong_LingzhuButton = null;
+		private UnityEngine.UI.Image m_E_Btn_HuoDong_LingzhuImage = null;
+		private UnityEngine.UI.Button m_E_Btn_HuoDong_LingzhuJieShaoButton = null;
+		private UnityEngine.UI.Image m_E_Btn_HuoDong_LingzhuJieShaoImage = null;
+		private UnityEngine.UI.Button m_E_Btn_HuoDong_XiaoGuiButton = null;
+		private UnityEngine.UI.Image m_E_Btn_HuoDong_XiaoGuiImage = null;
+		private UnityEngine.UI.Button m_E_Btn_HuoDong_BaozangButton = null;
+		private UnityEngine.UI.Image m_E_Btn_HuoDong_BaozangImage = null;
 		public Transform uiTransform = null;
 	}
 }

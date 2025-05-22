@@ -1,13 +1,13 @@
-﻿using UnityEngine;
+﻿
+using UnityEngine;
 using UnityEngine.UI;
-
 namespace ET.Client
 {
 	[ComponentOf(typeof(DlgWorldLv))]
 	[EnableMethod]
 	public  class DlgWorldLvViewComponent : Entity,IAwake,IDestroy 
 	{
-		public Button E_Btn_CloseButton
+		public UnityEngine.UI.Button E_Btn_CloseButton
      	{
      		get
      		{
@@ -18,13 +18,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Btn_CloseButton == null )
      			{
-		    		this.m_E_Btn_CloseButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_Btn_Close");
+		    		this.m_E_Btn_CloseButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Center/E_Btn_Close");
      			}
      			return this.m_E_Btn_CloseButton;
      		}
      	}
 
-		public Image E_Btn_CloseImage
+		public UnityEngine.UI.Image E_Btn_CloseImage
      	{
      		get
      		{
@@ -35,13 +35,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Btn_CloseImage == null )
      			{
-		    		this.m_E_Btn_CloseImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_Btn_Close");
+		    		this.m_E_Btn_CloseImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Center/E_Btn_Close");
      			}
      			return this.m_E_Btn_CloseImage;
      		}
      	}
 
-		public Button E_ButtonDiHuanButton
+		public UnityEngine.UI.Button E_ButtonDiHuanButton
      	{
      		get
      		{
@@ -52,13 +52,13 @@ namespace ET.Client
      			}
      			if( this.m_E_ButtonDiHuanButton == null )
      			{
-		    		this.m_E_ButtonDiHuanButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_ButtonDiHuan");
+		    		this.m_E_ButtonDiHuanButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Center/E_ButtonDiHuan");
      			}
      			return this.m_E_ButtonDiHuanButton;
      		}
      	}
 
-		public Image E_ButtonDiHuanImage
+		public UnityEngine.UI.Image E_ButtonDiHuanImage
      	{
      		get
      		{
@@ -69,13 +69,13 @@ namespace ET.Client
      			}
      			if( this.m_E_ButtonDiHuanImage == null )
      			{
-		    		this.m_E_ButtonDiHuanImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_ButtonDiHuan");
+		    		this.m_E_ButtonDiHuanImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Center/E_ButtonDiHuan");
      			}
      			return this.m_E_ButtonDiHuanImage;
      		}
      	}
 
-		public Text E_Lab_ExpRateText
+		public UnityEngine.UI.Text E_Lab_ExpRateText
      	{
      		get
      		{
@@ -86,13 +86,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Lab_ExpRateText == null )
      			{
-		    		this.m_E_Lab_ExpRateText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_Lab_ExpRate");
+		    		this.m_E_Lab_ExpRateText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Center/E_Lab_ExpRate");
      			}
      			return this.m_E_Lab_ExpRateText;
      		}
      	}
 
-		public Text E_Lab_ExpAddProText
+		public UnityEngine.UI.Text E_Lab_ExpAddProText
      	{
      		get
      		{
@@ -103,13 +103,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Lab_ExpAddProText == null )
      			{
-		    		this.m_E_Lab_ExpAddProText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_Lab_ExpAddPro");
+		    		this.m_E_Lab_ExpAddProText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Center/E_Lab_ExpAddPro");
      			}
      			return this.m_E_Lab_ExpAddProText;
      		}
      	}
 
-		public Text E_Text_WorldLvText
+		public UnityEngine.UI.Text E_Text_WorldLvText
      	{
      		get
      		{
@@ -120,13 +120,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Text_WorldLvText == null )
      			{
-		    		this.m_E_Text_WorldLvText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_Text_WorldLv");
+		    		this.m_E_Text_WorldLvText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Center/E_Text_WorldLv");
      			}
      			return this.m_E_Text_WorldLvText;
      		}
      	}
 
-		public Text E_Lab_MyLv1Text
+		public UnityEngine.UI.Text E_Lab_MyLv1Text
      	{
      		get
      		{
@@ -137,13 +137,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Lab_MyLv1Text == null )
      			{
-		    		this.m_E_Lab_MyLv1Text = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_Lab_MyLv1");
+		    		this.m_E_Lab_MyLv1Text = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Center/E_Lab_MyLv1");
      			}
      			return this.m_E_Lab_MyLv1Text;
      		}
      	}
 
-		public Text E_Lab_MyLv2Text
+		public UnityEngine.UI.Text E_Lab_MyLv2Text
      	{
      		get
      		{
@@ -154,13 +154,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Lab_MyLv2Text == null )
      			{
-		    		this.m_E_Lab_MyLv2Text = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_Lab_MyLv2");
+		    		this.m_E_Lab_MyLv2Text = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Center/E_Lab_MyLv2");
      			}
      			return this.m_E_Lab_MyLv2Text;
      		}
      	}
 
-		public Text E_Lab_GanDiNameText
+		public UnityEngine.UI.Text E_Lab_GanDiNameText
      	{
      		get
      		{
@@ -171,13 +171,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Lab_GanDiNameText == null )
      			{
-		    		this.m_E_Lab_GanDiNameText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_Lab_GanDiName");
+		    		this.m_E_Lab_GanDiNameText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Center/E_Lab_GanDiName");
      			}
      			return this.m_E_Lab_GanDiNameText;
      		}
      	}
 
-		public Text E_Lab_DuiHuanTimesText
+		public UnityEngine.UI.Text E_Lab_DuiHuanTimesText
      	{
      		get
      		{
@@ -188,7 +188,7 @@ namespace ET.Client
      			}
      			if( this.m_E_Lab_DuiHuanTimesText == null )
      			{
-		    		this.m_E_Lab_DuiHuanTimesText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_Lab_DuiHuanTimes");
+		    		this.m_E_Lab_DuiHuanTimesText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Center/E_Lab_DuiHuanTimes");
      			}
      			return this.m_E_Lab_DuiHuanTimesText;
      		}
@@ -210,17 +210,17 @@ namespace ET.Client
 			this.uiTransform = null;
 		}
 
-		private Button m_E_Btn_CloseButton = null;
-		private Image m_E_Btn_CloseImage = null;
-		private Button m_E_ButtonDiHuanButton = null;
-		private Image m_E_ButtonDiHuanImage = null;
-		private Text m_E_Lab_ExpRateText = null;
-		private Text m_E_Lab_ExpAddProText = null;
-		private Text m_E_Text_WorldLvText = null;
-		private Text m_E_Lab_MyLv1Text = null;
-		private Text m_E_Lab_MyLv2Text = null;
-		private Text m_E_Lab_GanDiNameText = null;
-		private Text m_E_Lab_DuiHuanTimesText = null;
+		private UnityEngine.UI.Button m_E_Btn_CloseButton = null;
+		private UnityEngine.UI.Image m_E_Btn_CloseImage = null;
+		private UnityEngine.UI.Button m_E_ButtonDiHuanButton = null;
+		private UnityEngine.UI.Image m_E_ButtonDiHuanImage = null;
+		private UnityEngine.UI.Text m_E_Lab_ExpRateText = null;
+		private UnityEngine.UI.Text m_E_Lab_ExpAddProText = null;
+		private UnityEngine.UI.Text m_E_Text_WorldLvText = null;
+		private UnityEngine.UI.Text m_E_Lab_MyLv1Text = null;
+		private UnityEngine.UI.Text m_E_Lab_MyLv2Text = null;
+		private UnityEngine.UI.Text m_E_Lab_GanDiNameText = null;
+		private UnityEngine.UI.Text m_E_Lab_DuiHuanTimesText = null;
 		public Transform uiTransform = null;
 	}
 }

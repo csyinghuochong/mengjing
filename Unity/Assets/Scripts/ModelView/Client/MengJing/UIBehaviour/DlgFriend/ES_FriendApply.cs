@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
 namespace ET.Client
 {
 	[ChildOf]
@@ -11,7 +10,7 @@ namespace ET.Client
 		public Dictionary<int, EntityRef<Scroll_Item_FriendApplyItem>> ScrollItemFriendApplyItems;
 		public List<FriendInfo> ShowFriendInfos = new();
 		
-		public LoopVerticalScrollRect E_FriendApplyItemsLoopVerticalScrollRect
+		public UnityEngine.UI.LoopVerticalScrollRect E_FriendApplyItemsLoopVerticalScrollRect
      	{
      		get
      		{
@@ -22,11 +21,23 @@ namespace ET.Client
      			}
      			if( this.m_E_FriendApplyItemsLoopVerticalScrollRect == null )
      			{
-		    		this.m_E_FriendApplyItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<LoopVerticalScrollRect>(this.uiTransform.gameObject,"E_FriendApplyItems");
+		    		this.m_E_FriendApplyItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.LoopVerticalScrollRect>(this.uiTransform.gameObject,"Center/E_FriendApplyItems");
      			}
      			return this.m_E_FriendApplyItemsLoopVerticalScrollRect;
      		}
      	}
+
+		    public Transform UITransform
+         {
+     	    get
+     	    {
+     		    return this.uiTransform;
+     	    }
+     	    set
+     	    {
+     		    this.uiTransform = value;
+     	    }
+         }
 
 		public void DestroyWidget()
 		{
@@ -34,7 +45,7 @@ namespace ET.Client
 			this.uiTransform = null;
 		}
 
-		private LoopVerticalScrollRect m_E_FriendApplyItemsLoopVerticalScrollRect = null;
+		private UnityEngine.UI.LoopVerticalScrollRect m_E_FriendApplyItemsLoopVerticalScrollRect = null;
 		public Transform uiTransform = null;
 	}
 }

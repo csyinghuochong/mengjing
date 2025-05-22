@@ -1,7 +1,10 @@
-﻿namespace ET.Client
+﻿
+using UnityEngine;
+using UnityEngine.UI;
+namespace ET.Client
 {
 	[EntitySystemOf(typeof(DlgTowerFightRewardViewComponent))]
-	[FriendOfAttribute(typeof(DlgTowerFightRewardViewComponent))]
+	[FriendOfAttribute(typeof(ET.Client.DlgTowerFightRewardViewComponent))]
 	public static partial class DlgTowerFightRewardViewComponentSystem
 	{
 		[EntitySystem]

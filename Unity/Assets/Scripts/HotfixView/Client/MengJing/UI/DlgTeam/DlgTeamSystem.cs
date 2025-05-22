@@ -16,13 +16,13 @@ namespace ET.Client
     {
         public static void RegisterUIEvent(this DlgTeam self)
         {
-            self.UITeamNodeList[2] = self.View.ES_TeamItem3.uiTransform.gameObject;
-            self.UITeamNodeList[1] = self.View.ES_TeamItem2.uiTransform.gameObject;
-            self.UITeamNodeList[0] = self.View.ES_TeamItem.uiTransform.gameObject;
+            self.UITeamNodeList[2] = self.View.ES_TeamItem_3.uiTransform.gameObject;
+            self.UITeamNodeList[1] = self.View.ES_TeamItem_2.uiTransform.gameObject;
+            self.UITeamNodeList[0] = self.View.ES_TeamItem_1.uiTransform.gameObject;
 
-            self.TeamUIList.Add(self.View.ES_TeamItem);
-            self.TeamUIList.Add(self.View.ES_TeamItem2);
-            self.TeamUIList.Add(self.View.ES_TeamItem3);
+            self.TeamUIList.Add(self.View.ES_TeamItem_1);
+            self.TeamUIList.Add(self.View.ES_TeamItem_2);
+            self.TeamUIList.Add(self.View.ES_TeamItem_3);
 
             self.View.E_ButtonLeaveButton.AddListener(() => { self.On_ButtonLeave(); });
             self.View.E_ButtonApplyListButton.AddListener(() => { self.On_ButtonApplyList(); });

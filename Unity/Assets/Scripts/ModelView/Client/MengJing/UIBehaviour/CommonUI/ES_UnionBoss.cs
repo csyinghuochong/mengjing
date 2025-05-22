@@ -20,7 +20,7 @@ namespace ET.Client
      			if( es == null )
 
      			{
-		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"ES_ModelShow");
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"Right/ES_ModelShow");
 		    	   this.m_es_modelshow = this.AddChild<ES_ModelShow,Transform>(subTrans);
      			}
      			return this.m_es_modelshow;
@@ -38,7 +38,7 @@ namespace ET.Client
      			}
      			if( this.m_E_DesText == null )
      			{
-		    		this.m_E_DesText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_Des");
+		    		this.m_E_DesText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Right/E_Des");
      			}
      			return this.m_E_DesText;
      		}
@@ -55,7 +55,7 @@ namespace ET.Client
      			}
      			if( this.m_E_EnterButton == null )
      			{
-		    		this.m_E_EnterButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_Enter");
+		    		this.m_E_EnterButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Right/E_Enter");
      			}
      			return this.m_E_EnterButton;
      		}
@@ -72,7 +72,7 @@ namespace ET.Client
      			}
      			if( this.m_E_EnterImage == null )
      			{
-		    		this.m_E_EnterImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Enter");
+		    		this.m_E_EnterImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Right/E_Enter");
      			}
      			return this.m_E_EnterImage;
      		}

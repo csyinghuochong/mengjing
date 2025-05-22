@@ -18,9 +18,9 @@ namespace ET.Client
             self.E_ButtonApplyListButton.AddListener(self.OnButtonApplyListButton);
             self.E_Button_RobotButton.AddListener(() => { self.OnButton_RobotButton().Coroutine(); });
 
-            self.UITeamNodeList[0] = self.ES_TeamItem1.uiTransform.gameObject;
-            self.UITeamNodeList[1] = self.ES_TeamItem2.uiTransform.gameObject;
-            self.UITeamNodeList[2] = self.ES_TeamItem3.uiTransform.gameObject;
+            self.UITeamNodeList[0] = self.ES_TeamItem_1.uiTransform.gameObject;
+            self.UITeamNodeList[1] = self.ES_TeamItem_2.uiTransform.gameObject;
+            self.UITeamNodeList[2] = self.ES_TeamItem_3.uiTransform.gameObject;
 
             self.OnInitUI();
 
@@ -42,9 +42,9 @@ namespace ET.Client
 
         public static void OnInitUI(this ES_DragonDungeonMy self)
         {
-            self.TeamUIList.Add(self.ES_TeamItem1);
-            self.TeamUIList.Add(self.ES_TeamItem2);
-            self.TeamUIList.Add(self.ES_TeamItem3);
+            self.TeamUIList.Add(self.ES_TeamItem_1);
+            self.TeamUIList.Add(self.ES_TeamItem_2);
+            self.TeamUIList.Add(self.ES_TeamItem_3);
         }
 
         public static async ETTask OnButton_RobotButton(this ES_DragonDungeonMy self)

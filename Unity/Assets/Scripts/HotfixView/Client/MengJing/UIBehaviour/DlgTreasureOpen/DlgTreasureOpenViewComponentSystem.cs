@@ -1,7 +1,10 @@
-﻿namespace ET.Client
+﻿
+using UnityEngine;
+using UnityEngine.UI;
+namespace ET.Client
 {
 	[EntitySystemOf(typeof(DlgTreasureOpenViewComponent))]
-	[FriendOfAttribute(typeof(DlgTreasureOpenViewComponent))]
+	[FriendOfAttribute(typeof(ET.Client.DlgTreasureOpenViewComponent))]
 	public static partial class DlgTreasureOpenViewComponentSystem
 	{
 		[EntitySystem]

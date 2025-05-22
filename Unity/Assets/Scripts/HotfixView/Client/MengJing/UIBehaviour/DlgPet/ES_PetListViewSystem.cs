@@ -458,7 +458,7 @@ namespace ET.Client
                 self.E_Text_PetNumberText.text = zstring.Format("{0}/{1}", PetHelper.GetBagPetNum(rolePetInfos), maxNum);
             }
 
-            self.uiTransform.Find("PetShowDi").gameObject.SetActive(self.ShowRolePetInfos.Count > 0);
+            self.uiTransform.Find("EG_Right/PetShowDi").gameObject.SetActive(self.ShowRolePetInfos.Count > 0);
             //self.uiTransform.Find("PetTip").gameObject.SetActive(self.ShowRolePetInfos.Count > 0);
         }
 
@@ -957,7 +957,7 @@ namespace ET.Client
         {
             self.E_Btn_XiuXiButton.gameObject.SetActive(rolePetInfo.PetStatus == 1);
             self.E_Btn_ChuZhanButton.gameObject.SetActive(rolePetInfo.PetStatus == 0);
-            self.E_Text_Lv.text = rolePetInfo.PetLv.ToString();
+            self.E_Text_LvText.text = rolePetInfo.PetLv.ToString();
             
             self.UpdateAttribute(rolePetInfo);
             self.UpdateExpAndLv(rolePetInfo);
@@ -1006,14 +1006,14 @@ namespace ET.Client
             //     self.E_Lab_JinHuaText.text = "已进化";
             // }
             
-            self.EG_PetTip_YeSheng.gameObject.SetActive(false);
-            self.EG_PetTip_BaoBao.gameObject.SetActive(false);
-            self.EG_PetTip_BianYi.gameObject.SetActive(false);
-            self.EG_PetTip_ShenShou.gameObject.SetActive(false);
+            self.EG_PetTip_YeShengRectTransform.gameObject.SetActive(false);
+            self.EG_PetTip_BaoBaoRectTransform.gameObject.SetActive(false);
+            self.EG_PetTip_BianYiRectTransform.gameObject.SetActive(false);
+            self.EG_PetTip_ShenShouRectTransform.gameObject.SetActive(false);
            
             if (petConfig.PetType >= 1)
             {
-                 self.EG_PetTip_ShenShou.gameObject.SetActive(true);
+                 self.EG_PetTip_ShenShouRectTransform.gameObject.SetActive(true);
                  self.E_InputFieldNameInputField.text = rolePetInfo.PetName;
             }
             else
@@ -1021,9 +1021,9 @@ namespace ET.Client
                 //BabyType = 0 道具获得
                 //BabyType = 1 抓捕宝宝获得 2  抓捕变异获取 3 抓捕普通野怪获得
                 
-                self.EG_PetTip_YeSheng.gameObject.SetActive(self.LastSelectItem.BabyType == 3);
-                self.EG_PetTip_BaoBao.gameObject.SetActive(self.LastSelectItem.BabyType == 1 || self.LastSelectItem.BabyType == 0);
-                self.EG_PetTip_BianYi.gameObject.SetActive(self.LastSelectItem.BabyType == 2);
+                self.EG_PetTip_YeShengRectTransform.gameObject.SetActive(self.LastSelectItem.BabyType == 3);
+                self.EG_PetTip_BaoBaoRectTransform.gameObject.SetActive(self.LastSelectItem.BabyType == 1 || self.LastSelectItem.BabyType == 0);
+                self.EG_PetTip_BianYiRectTransform.gameObject.SetActive(self.LastSelectItem.BabyType == 2);
 
                 self.E_InputFieldNameInputField.text = rolePetInfo.PetName + (self.LastSelectItem.BabyType > 1 ? "(宝宝)": String.Empty );
             }

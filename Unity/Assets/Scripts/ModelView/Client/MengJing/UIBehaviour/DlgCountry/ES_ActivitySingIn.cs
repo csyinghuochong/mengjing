@@ -29,7 +29,7 @@ namespace ET.Client
      			}
      			if( this.m_E_TypeSetToggleGroup == null )
      			{
-		    		this.m_E_TypeSetToggleGroup = UIFindHelper.FindDeepChild<UnityEngine.UI.ToggleGroup>(this.uiTransform.gameObject,"E_TypeSet");
+		    		this.m_E_TypeSetToggleGroup = UIFindHelper.FindDeepChild<UnityEngine.UI.ToggleGroup>(this.uiTransform.gameObject,"Center/E_TypeSet");
      			}
      			return this.m_E_TypeSetToggleGroup;
      		}
@@ -46,7 +46,7 @@ namespace ET.Client
      			}
      			if( this.m_EG_PanelRootRectTransform == null )
      			{
-		    		this.m_EG_PanelRootRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_PanelRoot");
+		    		this.m_EG_PanelRootRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"Center/EG_PanelRoot");
      			}
      			return this.m_EG_PanelRootRectTransform;
      		}
@@ -63,7 +63,7 @@ namespace ET.Client
      			}
      			if( this.m_E_AlreadySingInDayText == null )
      			{
-		    		this.m_E_AlreadySingInDayText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"EG_PanelRoot/E_AlreadySingInDay");
+		    		this.m_E_AlreadySingInDayText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Center/EG_PanelRoot/E_AlreadySingInDay");
      			}
      			return this.m_E_AlreadySingInDayText;
      		}
@@ -80,7 +80,7 @@ namespace ET.Client
      			}
      			if( this.m_E_RewardProgressImage == null )
      			{
-		    		this.m_E_RewardProgressImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_PanelRoot/RewardSet/E_RewardProgress");
+		    		this.m_E_RewardProgressImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Center/EG_PanelRoot/RewardSet/E_RewardProgress");
      			}
      			return this.m_E_RewardProgressImage;
      		}
@@ -97,7 +97,7 @@ namespace ET.Client
      			}
      			if( this.m_E_Reward1Image == null )
      			{
-		    		this.m_E_Reward1Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_PanelRoot/RewardSet/E_Reward1");
+		    		this.m_E_Reward1Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Center/EG_PanelRoot/RewardSet/E_Reward1");
      			}
      			return this.m_E_Reward1Image;
      		}
@@ -114,7 +114,7 @@ namespace ET.Client
      			}
      			if( this.m_E_Reward1EventTrigger == null )
      			{
-		    		this.m_E_Reward1EventTrigger = UIFindHelper.FindDeepChild<UnityEngine.EventSystems.EventTrigger>(this.uiTransform.gameObject,"EG_PanelRoot/RewardSet/E_Reward1");
+		    		this.m_E_Reward1EventTrigger = UIFindHelper.FindDeepChild<UnityEngine.EventSystems.EventTrigger>(this.uiTransform.gameObject,"Center/EG_PanelRoot/RewardSet/E_Reward1");
      			}
      			return this.m_E_Reward1EventTrigger;
      		}
@@ -131,7 +131,7 @@ namespace ET.Client
      			}
      			if( this.m_E_Reward2Image == null )
      			{
-		    		this.m_E_Reward2Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_PanelRoot/RewardSet/E_Reward2");
+		    		this.m_E_Reward2Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Center/EG_PanelRoot/RewardSet/E_Reward2");
      			}
      			return this.m_E_Reward2Image;
      		}
@@ -148,7 +148,7 @@ namespace ET.Client
      			}
      			if( this.m_E_Reward2EventTrigger == null )
      			{
-		    		this.m_E_Reward2EventTrigger = UIFindHelper.FindDeepChild<UnityEngine.EventSystems.EventTrigger>(this.uiTransform.gameObject,"EG_PanelRoot/RewardSet/E_Reward2");
+		    		this.m_E_Reward2EventTrigger = UIFindHelper.FindDeepChild<UnityEngine.EventSystems.EventTrigger>(this.uiTransform.gameObject,"Center/EG_PanelRoot/RewardSet/E_Reward2");
      			}
      			return this.m_E_Reward2EventTrigger;
      		}
@@ -165,7 +165,7 @@ namespace ET.Client
      			}
      			if( this.m_E_Reward3Image == null )
      			{
-		    		this.m_E_Reward3Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_PanelRoot/RewardSet/E_Reward3");
+		    		this.m_E_Reward3Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Center/EG_PanelRoot/RewardSet/E_Reward3");
      			}
      			return this.m_E_Reward3Image;
      		}
@@ -182,7 +182,7 @@ namespace ET.Client
      			}
      			if( this.m_E_Reward3EventTrigger == null )
      			{
-		    		this.m_E_Reward3EventTrigger = UIFindHelper.FindDeepChild<UnityEngine.EventSystems.EventTrigger>(this.uiTransform.gameObject,"EG_PanelRoot/RewardSet/E_Reward3");
+		    		this.m_E_Reward3EventTrigger = UIFindHelper.FindDeepChild<UnityEngine.EventSystems.EventTrigger>(this.uiTransform.gameObject,"Center/EG_PanelRoot/RewardSet/E_Reward3");
      			}
      			return this.m_E_Reward3EventTrigger;
      		}
@@ -199,7 +199,7 @@ namespace ET.Client
      			}
      			if( this.m_E_Reward4Image == null )
      			{
-		    		this.m_E_Reward4Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_PanelRoot/RewardSet/E_Reward4");
+		    		this.m_E_Reward4Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Center/EG_PanelRoot/RewardSet/E_Reward4");
      			}
      			return this.m_E_Reward4Image;
      		}
@@ -216,7 +216,7 @@ namespace ET.Client
      			}
      			if( this.m_E_Reward4EventTrigger == null )
      			{
-		    		this.m_E_Reward4EventTrigger = UIFindHelper.FindDeepChild<UnityEngine.EventSystems.EventTrigger>(this.uiTransform.gameObject,"EG_PanelRoot/RewardSet/E_Reward4");
+		    		this.m_E_Reward4EventTrigger = UIFindHelper.FindDeepChild<UnityEngine.EventSystems.EventTrigger>(this.uiTransform.gameObject,"Center/EG_PanelRoot/RewardSet/E_Reward4");
      			}
      			return this.m_E_Reward4EventTrigger;
      		}
@@ -233,7 +233,7 @@ namespace ET.Client
      			}
      			if( this.m_E_ActivitySingInItemsScrollRect == null )
      			{
-		    		this.m_E_ActivitySingInItemsScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.ScrollRect>(this.uiTransform.gameObject,"EG_PanelRoot/E_ActivitySingInItems");
+		    		this.m_E_ActivitySingInItemsScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.ScrollRect>(this.uiTransform.gameObject,"Center/EG_PanelRoot/E_ActivitySingInItems");
      			}
      			return this.m_E_ActivitySingInItemsScrollRect;
      		}
@@ -250,7 +250,7 @@ namespace ET.Client
      			}
      			if( this.m_E_ActivitySingInItemsImage == null )
      			{
-		    		this.m_E_ActivitySingInItemsImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_PanelRoot/E_ActivitySingInItems");
+		    		this.m_E_ActivitySingInItemsImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Center/EG_PanelRoot/E_ActivitySingInItems");
      			}
      			return this.m_E_ActivitySingInItemsImage;
      		}

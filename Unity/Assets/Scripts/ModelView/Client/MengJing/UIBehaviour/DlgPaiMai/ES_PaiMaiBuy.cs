@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
 namespace ET.Client
 {
 	[ChildOf]
@@ -30,42 +29,8 @@ namespace ET.Client
 		public int MaxPage_Gemstone = 1;
 
 		public long SearchTime;
-
-		public LoopVerticalScrollRect E_PaiMaiBuyItemsLoopVerticalScrollRect
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_PaiMaiBuyItemsLoopVerticalScrollRect == null )
-     			{
-		    		this.m_E_PaiMaiBuyItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<LoopVerticalScrollRect>(this.uiTransform.gameObject,"E_PaiMaiBuyItems");
-     			}
-     			return this.m_E_PaiMaiBuyItemsLoopVerticalScrollRect;
-     		}
-     	}
-
-		public RectTransform EG_ItemListNodeRectTransform
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_EG_ItemListNodeRectTransform == null )
-     			{
-		    		this.m_EG_ItemListNodeRectTransform = UIFindHelper.FindDeepChild<RectTransform>(this.uiTransform.gameObject,"E_PaiMaiBuyItems/EG_ItemListNode");
-     			}
-     			return this.m_EG_ItemListNodeRectTransform;
-     		}
-     	}
-
-		public RectTransform EG_TypeListNodeRectTransform
+		
+		public UnityEngine.RectTransform EG_TypeListNodeRectTransform
      	{
      		get
      		{
@@ -76,13 +41,30 @@ namespace ET.Client
      			}
      			if( this.m_EG_TypeListNodeRectTransform == null )
      			{
-		    		this.m_EG_TypeListNodeRectTransform = UIFindHelper.FindDeepChild<RectTransform>(this.uiTransform.gameObject,"ScrollView2/Viewport/EG_TypeListNode");
+		    		this.m_EG_TypeListNodeRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"Left/ScrollView2/Viewport/EG_TypeListNode");
      			}
      			return this.m_EG_TypeListNodeRectTransform;
      		}
      	}
 
-		public Button E_Btn_SearchButton
+		public UnityEngine.UI.LoopVerticalScrollRect E_PaiMaiBuyItemsLoopVerticalScrollRect
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_PaiMaiBuyItemsLoopVerticalScrollRect == null )
+     			{
+		    		this.m_E_PaiMaiBuyItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.LoopVerticalScrollRect>(this.uiTransform.gameObject,"Right/E_PaiMaiBuyItems");
+     			}
+     			return this.m_E_PaiMaiBuyItemsLoopVerticalScrollRect;
+     		}
+     	}
+
+		public UnityEngine.UI.Button E_Btn_SearchButton
      	{
      		get
      		{
@@ -93,13 +75,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Btn_SearchButton == null )
      			{
-		    		this.m_E_Btn_SearchButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_Btn_Search");
+		    		this.m_E_Btn_SearchButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Right/E_Btn_Search");
      			}
      			return this.m_E_Btn_SearchButton;
      		}
      	}
 
-		public Image E_Btn_SearchImage
+		public UnityEngine.UI.Image E_Btn_SearchImage
      	{
      		get
      		{
@@ -110,13 +92,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Btn_SearchImage == null )
      			{
-		    		this.m_E_Btn_SearchImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_Btn_Search");
+		    		this.m_E_Btn_SearchImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Right/E_Btn_Search");
      			}
      			return this.m_E_Btn_SearchImage;
      		}
      	}
 
-		public InputField E_InputFieldInputField
+		public UnityEngine.UI.InputField E_InputFieldInputField
      	{
      		get
      		{
@@ -127,13 +109,13 @@ namespace ET.Client
      			}
      			if( this.m_E_InputFieldInputField == null )
      			{
-		    		this.m_E_InputFieldInputField = UIFindHelper.FindDeepChild<InputField>(this.uiTransform.gameObject,"E_InputField");
+		    		this.m_E_InputFieldInputField = UIFindHelper.FindDeepChild<UnityEngine.UI.InputField>(this.uiTransform.gameObject,"Right/E_InputField");
      			}
      			return this.m_E_InputFieldInputField;
      		}
      	}
 
-		public Image E_InputFieldImage
+		public UnityEngine.UI.Image E_InputFieldImage
      	{
      		get
      		{
@@ -144,13 +126,13 @@ namespace ET.Client
      			}
      			if( this.m_E_InputFieldImage == null )
      			{
-		    		this.m_E_InputFieldImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_InputField");
+		    		this.m_E_InputFieldImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Right/E_InputField");
      			}
      			return this.m_E_InputFieldImage;
      		}
      	}
 
-		public RectTransform EG_ShowPageRectTransform
+		public UnityEngine.RectTransform EG_ShowPageRectTransform
      	{
      		get
      		{
@@ -161,13 +143,13 @@ namespace ET.Client
      			}
      			if( this.m_EG_ShowPageRectTransform == null )
      			{
-		    		this.m_EG_ShowPageRectTransform = UIFindHelper.FindDeepChild<RectTransform>(this.uiTransform.gameObject,"EG_ShowPage");
+		    		this.m_EG_ShowPageRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"Right/EG_ShowPage");
      			}
      			return this.m_EG_ShowPageRectTransform;
      		}
      	}
 
-		public Text E_Text_PageShowText
+		public UnityEngine.UI.Text E_Text_PageShowText
      	{
      		get
      		{
@@ -178,13 +160,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Text_PageShowText == null )
      			{
-		    		this.m_E_Text_PageShowText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"EG_ShowPage/E_Text_PageShow");
+		    		this.m_E_Text_PageShowText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Right/EG_ShowPage/E_Text_PageShow");
      			}
      			return this.m_E_Text_PageShowText;
      		}
      	}
 
-		public Button E_NextPageBtnButton
+		public UnityEngine.UI.Button E_NextPageBtnButton
      	{
      		get
      		{
@@ -195,13 +177,13 @@ namespace ET.Client
      			}
      			if( this.m_E_NextPageBtnButton == null )
      			{
-		    		this.m_E_NextPageBtnButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"EG_ShowPage/E_NextPageBtn");
+		    		this.m_E_NextPageBtnButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Right/EG_ShowPage/E_NextPageBtn");
      			}
      			return this.m_E_NextPageBtnButton;
      		}
      	}
 
-		public Image E_NextPageBtnImage
+		public UnityEngine.UI.Image E_NextPageBtnImage
      	{
      		get
      		{
@@ -212,13 +194,13 @@ namespace ET.Client
      			}
      			if( this.m_E_NextPageBtnImage == null )
      			{
-		    		this.m_E_NextPageBtnImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"EG_ShowPage/E_NextPageBtn");
+		    		this.m_E_NextPageBtnImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Right/EG_ShowPage/E_NextPageBtn");
      			}
      			return this.m_E_NextPageBtnImage;
      		}
      	}
 
-		public Button E_PrePageBtnButton
+		public UnityEngine.UI.Button E_PrePageBtnButton
      	{
      		get
      		{
@@ -229,13 +211,13 @@ namespace ET.Client
      			}
      			if( this.m_E_PrePageBtnButton == null )
      			{
-		    		this.m_E_PrePageBtnButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"EG_ShowPage/E_PrePageBtn");
+		    		this.m_E_PrePageBtnButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Right/EG_ShowPage/E_PrePageBtn");
      			}
      			return this.m_E_PrePageBtnButton;
      		}
      	}
 
-		public Image E_PrePageBtnImage
+		public UnityEngine.UI.Image E_PrePageBtnImage
      	{
      		get
      		{
@@ -246,7 +228,7 @@ namespace ET.Client
      			}
      			if( this.m_E_PrePageBtnImage == null )
      			{
-		    		this.m_E_PrePageBtnImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"EG_ShowPage/E_PrePageBtn");
+		    		this.m_E_PrePageBtnImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Right/EG_ShowPage/E_PrePageBtn");
      			}
      			return this.m_E_PrePageBtnImage;
      		}
@@ -266,9 +248,8 @@ namespace ET.Client
 
 		public void DestroyWidget()
 		{
-			this.m_E_PaiMaiBuyItemsLoopVerticalScrollRect = null;
-			this.m_EG_ItemListNodeRectTransform = null;
 			this.m_EG_TypeListNodeRectTransform = null;
+			this.m_E_PaiMaiBuyItemsLoopVerticalScrollRect = null;
 			this.m_E_Btn_SearchButton = null;
 			this.m_E_Btn_SearchImage = null;
 			this.m_E_InputFieldInputField = null;
@@ -282,19 +263,18 @@ namespace ET.Client
 			this.uiTransform = null;
 		}
 
-		private LoopVerticalScrollRect m_E_PaiMaiBuyItemsLoopVerticalScrollRect = null;
-		private RectTransform m_EG_ItemListNodeRectTransform = null;
-		private RectTransform m_EG_TypeListNodeRectTransform = null;
-		private Button m_E_Btn_SearchButton = null;
-		private Image m_E_Btn_SearchImage = null;
-		private InputField m_E_InputFieldInputField = null;
-		private Image m_E_InputFieldImage = null;
-		private RectTransform m_EG_ShowPageRectTransform = null;
-		private Text m_E_Text_PageShowText = null;
-		private Button m_E_NextPageBtnButton = null;
-		private Image m_E_NextPageBtnImage = null;
-		private Button m_E_PrePageBtnButton = null;
-		private Image m_E_PrePageBtnImage = null;
+		private UnityEngine.RectTransform m_EG_TypeListNodeRectTransform = null;
+		private UnityEngine.UI.LoopVerticalScrollRect m_E_PaiMaiBuyItemsLoopVerticalScrollRect = null;
+		private UnityEngine.UI.Button m_E_Btn_SearchButton = null;
+		private UnityEngine.UI.Image m_E_Btn_SearchImage = null;
+		private UnityEngine.UI.InputField m_E_InputFieldInputField = null;
+		private UnityEngine.UI.Image m_E_InputFieldImage = null;
+		private UnityEngine.RectTransform m_EG_ShowPageRectTransform = null;
+		private UnityEngine.UI.Text m_E_Text_PageShowText = null;
+		private UnityEngine.UI.Button m_E_NextPageBtnButton = null;
+		private UnityEngine.UI.Image m_E_NextPageBtnImage = null;
+		private UnityEngine.UI.Button m_E_PrePageBtnButton = null;
+		private UnityEngine.UI.Image m_E_PrePageBtnImage = null;
 		public Transform uiTransform = null;
 	}
 }

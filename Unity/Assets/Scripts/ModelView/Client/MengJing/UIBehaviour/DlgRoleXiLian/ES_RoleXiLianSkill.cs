@@ -6,7 +6,7 @@ namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class ES_RoleXiLianSkill : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy
+	public  class ES_RoleXiLianSkill : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy 
 	{
 		public Dictionary<int, EntityRef<Scroll_Item_RoleXiLianSkillItem>> ScrollItemRoleXiLianSkillItems = new();
 		public List<EquipXiLianConfig> ShouJiConfigs;
@@ -24,7 +24,7 @@ namespace ET.Client
      			}
      			if( this.m_E_RoleXiLianSkillItemsScrollRect == null )
      			{
-		    		this.m_E_RoleXiLianSkillItemsScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.ScrollRect>(this.uiTransform.gameObject,"E_RoleXiLianSkillItems");
+		    		this.m_E_RoleXiLianSkillItemsScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.ScrollRect>(this.uiTransform.gameObject,"Right/E_RoleXiLianSkillItems");
      			}
      			return this.m_E_RoleXiLianSkillItemsScrollRect;
      		}
@@ -41,7 +41,7 @@ namespace ET.Client
      			}
      			if( this.m_E_RoleXiLianSkillItemsImage == null )
      			{
-		    		this.m_E_RoleXiLianSkillItemsImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_RoleXiLianSkillItems");
+		    		this.m_E_RoleXiLianSkillItemsImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Right/E_RoleXiLianSkillItems");
      			}
      			return this.m_E_RoleXiLianSkillItemsImage;
      		}

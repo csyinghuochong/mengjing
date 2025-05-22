@@ -1,7 +1,10 @@
-﻿namespace ET.Client
+﻿
+using UnityEngine;
+using UnityEngine.UI;
+namespace ET.Client
 {
 	[EntitySystemOf(typeof(DlgWorldLvViewComponent))]
-	[FriendOfAttribute(typeof(DlgWorldLvViewComponent))]
+	[FriendOfAttribute(typeof(ET.Client.DlgWorldLvViewComponent))]
 	public static partial class DlgWorldLvViewComponentSystem
 	{
 		[EntitySystem]

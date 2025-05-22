@@ -1,7 +1,10 @@
-﻿namespace ET.Client
+﻿
+using UnityEngine;
+using UnityEngine.UI;
+namespace ET.Client
 {
 	[EntitySystemOf(typeof(DlgTowerOpenViewComponent))]
-	[FriendOfAttribute(typeof(DlgTowerOpenViewComponent))]
+	[FriendOfAttribute(typeof(ET.Client.DlgTowerOpenViewComponent))]
 	public static partial class DlgTowerOpenViewComponentSystem
 	{
 		[EntitySystem]

@@ -1,13 +1,13 @@
-﻿using UnityEngine;
+﻿
+using UnityEngine;
 using UnityEngine.UI;
-
 namespace ET.Client
 {
 	[ComponentOf(typeof(DlgTeam))]
 	[EnableMethod]
 	public  class DlgTeamViewComponent : Entity,IAwake,IDestroy 
 	{
-		public Button E_ButtonApplyListButton
+		public UnityEngine.UI.Button E_ButtonApplyListButton
      	{
      		get
      		{
@@ -18,13 +18,13 @@ namespace ET.Client
      			}
      			if( this.m_E_ButtonApplyListButton == null )
      			{
-		    		this.m_E_ButtonApplyListButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_ButtonApplyList");
+		    		this.m_E_ButtonApplyListButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Center/E_ButtonApplyList");
      			}
      			return this.m_E_ButtonApplyListButton;
      		}
      	}
 
-		public Image E_ButtonApplyListImage
+		public UnityEngine.UI.Image E_ButtonApplyListImage
      	{
      		get
      		{
@@ -35,13 +35,13 @@ namespace ET.Client
      			}
      			if( this.m_E_ButtonApplyListImage == null )
      			{
-		    		this.m_E_ButtonApplyListImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_ButtonApplyList");
+		    		this.m_E_ButtonApplyListImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Center/E_ButtonApplyList");
      			}
      			return this.m_E_ButtonApplyListImage;
      		}
      	}
 
-		public Button E_ButtonLeaveButton
+		public UnityEngine.UI.Button E_ButtonLeaveButton
      	{
      		get
      		{
@@ -52,13 +52,13 @@ namespace ET.Client
      			}
      			if( this.m_E_ButtonLeaveButton == null )
      			{
-		    		this.m_E_ButtonLeaveButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_ButtonLeave");
+		    		this.m_E_ButtonLeaveButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Center/E_ButtonLeave");
      			}
      			return this.m_E_ButtonLeaveButton;
      		}
      	}
 
-		public Image E_ButtonLeaveImage
+		public UnityEngine.UI.Image E_ButtonLeaveImage
      	{
      		get
      		{
@@ -69,13 +69,13 @@ namespace ET.Client
      			}
      			if( this.m_E_ButtonLeaveImage == null )
      			{
-		    		this.m_E_ButtonLeaveImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_ButtonLeave");
+		    		this.m_E_ButtonLeaveImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Center/E_ButtonLeave");
      			}
      			return this.m_E_ButtonLeaveImage;
      		}
      	}
 
-		public ES_TeamItem ES_TeamItem
+		public ES_TeamItem ES_TeamItem_1
      	{
      		get
      		{
@@ -84,18 +84,18 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-
-		        ES_TeamItem es = this.m_es_teamitem;
+     			ES_TeamItem es = this.m_es_teamitem_1;
      			if( es == null )
+
      			{
-		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"ES_TeamItem");
-		    	   this.m_es_teamitem = this.AddChild<ES_TeamItem,Transform>(subTrans);
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"Center/ES_TeamItem_1");
+		    	   this.m_es_teamitem_1 = this.AddChild<ES_TeamItem,Transform>(subTrans);
      			}
-     			return this.m_es_teamitem;
+     			return this.m_es_teamitem_1;
      		}
      	}
 
-		public ES_TeamItem ES_TeamItem2
+		public ES_TeamItem ES_TeamItem_2
      	{
      		get
      		{
@@ -104,18 +104,18 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-
-		        ES_TeamItem es = this.m_es_teamitem2;
+     			ES_TeamItem es = this.m_es_teamitem_2;
      			if( es == null )
+
      			{
-		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"ES_TeamItem2");
-		    	   this.m_es_teamitem2 = this.AddChild<ES_TeamItem,Transform>(subTrans);
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"Center/ES_TeamItem_2");
+		    	   this.m_es_teamitem_2 = this.AddChild<ES_TeamItem,Transform>(subTrans);
      			}
-     			return this.m_es_teamitem2;
+     			return this.m_es_teamitem_2;
      		}
      	}
 
-		public ES_TeamItem ES_TeamItem3
+		public ES_TeamItem ES_TeamItem_3
      	{
      		get
      		{
@@ -124,14 +124,14 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-
-		        ES_TeamItem es = this.m_es_teamitem3;
+     			ES_TeamItem es = this.m_es_teamitem_3;
      			if( es == null )
+
      			{
-		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"ES_TeamItem3");
-		    	   this.m_es_teamitem3 = this.AddChild<ES_TeamItem,Transform>(subTrans);
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"Center/ES_TeamItem_3");
+		    	   this.m_es_teamitem_3 = this.AddChild<ES_TeamItem,Transform>(subTrans);
      			}
-     			return this.m_es_teamitem3;
+     			return this.m_es_teamitem_3;
      		}
      	}
 
@@ -141,19 +141,19 @@ namespace ET.Client
 			this.m_E_ButtonApplyListImage = null;
 			this.m_E_ButtonLeaveButton = null;
 			this.m_E_ButtonLeaveImage = null;
-			this.m_es_teamitem = null;
-			this.m_es_teamitem2 = null;
-			this.m_es_teamitem3 = null;
+			this.m_es_teamitem_1 = null;
+			this.m_es_teamitem_2 = null;
+			this.m_es_teamitem_3 = null;
 			this.uiTransform = null;
 		}
 
-		private Button m_E_ButtonApplyListButton = null;
-		private Image m_E_ButtonApplyListImage = null;
-		private Button m_E_ButtonLeaveButton = null;
-		private Image m_E_ButtonLeaveImage = null;
-		private EntityRef<ES_TeamItem> m_es_teamitem = null;
-		private EntityRef<ES_TeamItem> m_es_teamitem2 = null;
-		private EntityRef<ES_TeamItem> m_es_teamitem3 = null;
+		private UnityEngine.UI.Button m_E_ButtonApplyListButton = null;
+		private UnityEngine.UI.Image m_E_ButtonApplyListImage = null;
+		private UnityEngine.UI.Button m_E_ButtonLeaveButton = null;
+		private UnityEngine.UI.Image m_E_ButtonLeaveImage = null;
+		private EntityRef<ES_TeamItem> m_es_teamitem_1 = null;
+		private EntityRef<ES_TeamItem> m_es_teamitem_2 = null;
+		private EntityRef<ES_TeamItem> m_es_teamitem_3 = null;
 		public Transform uiTransform = null;
 	}
 }

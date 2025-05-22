@@ -97,7 +97,7 @@ namespace ET.Client
 				}
 
 				self.E_SeasonBossLevelText.text = zstring.Format("{0}级", bosslv + 1);
-				self.E_SeasonDonateTimes.text = zstring.Format("当前您已捐献<color=#C7FF40>{0}</color>次", numericComponentC.GetAsInt(NumericType.CommonSeasonDonateTimes));
+				self.E_SeasonDonateTimesText.text = zstring.Format("当前您已捐献<color=#C7FF40>{0}</color>次", numericComponentC.GetAsInt(NumericType.CommonSeasonDonateTimes));
 			}
 
 			self.ES_CostItem.UpdateItem( GlobalValueConfigCategory.Instance.CommonSeasonDonateItemId, 1, true );

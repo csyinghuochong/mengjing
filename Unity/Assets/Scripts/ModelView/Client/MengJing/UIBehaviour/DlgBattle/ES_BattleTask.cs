@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
 namespace ET.Client
 {
 	[ChildOf]
@@ -11,7 +10,7 @@ namespace ET.Client
 		public List<TaskPro> ShowTaskPro = new();
 		public Dictionary<int, EntityRef<Scroll_Item_BattleTaskItem>> ScrollItemBattleTaskItems;
 		
-		public LoopVerticalScrollRect E_BattleTaskItemsLoopVerticalScrollRect
+		public UnityEngine.UI.LoopVerticalScrollRect E_BattleTaskItemsLoopVerticalScrollRect
      	{
      		get
      		{
@@ -22,7 +21,7 @@ namespace ET.Client
      			}
      			if( this.m_E_BattleTaskItemsLoopVerticalScrollRect == null )
      			{
-		    		this.m_E_BattleTaskItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<LoopVerticalScrollRect>(this.uiTransform.gameObject,"E_BattleTaskItems");
+		    		this.m_E_BattleTaskItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.LoopVerticalScrollRect>(this.uiTransform.gameObject,"Center/E_BattleTaskItems");
      			}
      			return this.m_E_BattleTaskItemsLoopVerticalScrollRect;
      		}
@@ -46,7 +45,7 @@ namespace ET.Client
 			this.uiTransform = null;
 		}
 
-		private LoopVerticalScrollRect m_E_BattleTaskItemsLoopVerticalScrollRect = null;
+		private UnityEngine.UI.LoopVerticalScrollRect m_E_BattleTaskItemsLoopVerticalScrollRect = null;
 		public Transform uiTransform = null;
 	}
 }

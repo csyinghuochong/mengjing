@@ -1167,7 +1167,7 @@ GameObject:
   - component: {fileID: 3714112684627138001}
   - component: {fileID: 239158088509674571}
   m_Layer: 5
-  m_Name: UIGameSetting
+  m_Name: Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1185,6 +1185,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 2522242251144509491}
   - {fileID: 4930761001546599866}
   - {fileID: 3713605133830033155}
   - {fileID: 3713430910742269543}
@@ -1417,7 +1418,6 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 2522242251144509491}
   - {fileID: 3714112684627138001}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2774,11 +2774,11 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 3500530130120770969}
+  m_Father: {fileID: 3714112684627138001}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 984, y: 236}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 24, y: -181}
   m_SizeDelta: {x: 1300, y: 14}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4229683780727135837
