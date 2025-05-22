@@ -1,3 +1,5 @@
+using UnityEngine;
+
 namespace ET.Client
 {
     [FriendOf(typeof(ES_CountryTask))]
@@ -11,6 +13,8 @@ namespace ET.Client
         {
             self.View.E_FunctionSetBtnToggleGroup.AddListener(self.OnFunctionSetBtn);
             self.View.E_FunctionSetBtnToggleGroup.OnSelectIndex(0);
+            
+            IPHoneHelper.SetPosition(self.View.E_FunctionSetBtnToggleGroup.gameObject, new Vector2(170f, 0f));
         }
 
         public static void ShowWindow(this DlgCountry self, Entity contextData = null)

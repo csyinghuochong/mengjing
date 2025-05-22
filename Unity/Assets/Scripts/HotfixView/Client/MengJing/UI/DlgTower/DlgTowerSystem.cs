@@ -1,4 +1,6 @@
-﻿namespace ET.Client
+﻿using UnityEngine;
+
+namespace ET.Client
 {
     [FriendOf(typeof(ES_TowerDungeon))]
     [FriendOf(typeof(ES_TowerShop))]
@@ -8,6 +10,8 @@
         public static void RegisterUIEvent(this DlgTower self)
         {
             self.View.E_FunctionSetBtnToggleGroup.AddListener(self.OnFunctionSetBtn);
+            
+            IPHoneHelper.SetPosition(self.View.E_FunctionSetBtnToggleGroup.gameObject, new Vector2(170f, 0f));
         }
 
         public static void ShowWindow(this DlgTower self, Entity contextData = null)

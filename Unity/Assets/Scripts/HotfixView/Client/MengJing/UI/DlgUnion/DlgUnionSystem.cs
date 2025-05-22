@@ -20,6 +20,8 @@ namespace ET.Client
 		public static void RegisterUIEvent(this DlgUnion self)
 		{
 			self.View.E_FunctionSetBtnToggleGroup.AddListener(self.OnFunctionSetBtn, self.CheckPageButton_1);
+			
+			IPHoneHelper.SetPosition(self.View.E_FunctionSetBtnToggleGroup.gameObject, new Vector2(170f, 0f));
 			self.RequestFriendInfo().Coroutine();
         }
 

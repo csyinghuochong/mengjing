@@ -1,3 +1,5 @@
+using UnityEngine;
+
 namespace ET.Client
 {
     [FriendOf(typeof (ES_TaskGrowUp))]
@@ -9,6 +11,8 @@ namespace ET.Client
         public static void RegisterUIEvent(this DlgTask self)
         {
             self.View.E_FunctionSetBtnToggleGroup.AddListener(self.OnFunctionSetBtn);
+            
+            IPHoneHelper.SetPosition(self.View.E_FunctionSetBtnToggleGroup.gameObject, new Vector2(170f, 0f));
         }
 
         public static void ShowWindow(this DlgTask self, Entity contextData = null)

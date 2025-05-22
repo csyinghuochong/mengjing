@@ -1,4 +1,6 @@
-﻿namespace ET.Client
+﻿using UnityEngine;
+
+namespace ET.Client
 {
     [FriendOf(typeof(ES_PetMeleeSet))]
     [FriendOf(typeof(DlgPetMelee))]
@@ -7,6 +9,8 @@
         public static void RegisterUIEvent(this DlgPetMelee self)
         {
             self.View.E_FunctionSetBtnToggleGroup.AddListener(self.OnFunctionSetBtn);
+            
+            IPHoneHelper.SetPosition(self.View.E_FunctionSetBtnToggleGroup.gameObject, new Vector2(170f, 0f));
         }
 
         public static void ShowWindow(this DlgPetMelee self, Entity contextData = null)

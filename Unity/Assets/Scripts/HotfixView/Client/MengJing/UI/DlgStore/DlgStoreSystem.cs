@@ -11,6 +11,8 @@ namespace ET.Client
             // self.View.E_closeButtonButton.AddListener(self.OncloseButtonButton);
             self.View.E_StoreItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnStoreItemsRefresh);
             
+            IPHoneHelper.SetPosition(self.View.E_FunctionSetBtnToggleGroup.gameObject, new Vector2(170f, 0f));
+            
             self.InitModelShowView();
             self.InitData(self.Root().GetComponent<UIComponent>().CurrentNpcId);
         }

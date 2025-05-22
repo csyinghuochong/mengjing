@@ -1,3 +1,5 @@
+using UnityEngine;
+
 namespace ET.Client
 {
     [FriendOf(typeof (ES_RoleXiLianShow))]
@@ -11,6 +13,8 @@ namespace ET.Client
         public static void RegisterUIEvent(this DlgRoleXiLian self)
         {
             self.View.E_FunctionSetBtnToggleGroup.AddListener(self.OnFunctionSetBtn);
+            
+            IPHoneHelper.SetPosition(self.View.E_FunctionSetBtnToggleGroup.gameObject, new Vector2(170f, 0f));
         }
 
         public static void ShowWindow(this DlgRoleXiLian self, Entity contextData = null)

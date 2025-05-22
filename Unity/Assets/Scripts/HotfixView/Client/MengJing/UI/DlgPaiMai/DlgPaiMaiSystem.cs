@@ -1,3 +1,5 @@
+using UnityEngine;
+
 namespace ET.Client
 {
     [FriendOf(typeof(ES_PaiMaiShop))]
@@ -11,6 +13,8 @@ namespace ET.Client
         public static void RegisterUIEvent(this DlgPaiMai self)
         {
             self.View.E_FunctionSetBtnToggleGroup.AddListener(self.OnFunctionSetBtn);
+            
+            IPHoneHelper.SetPosition(self.View.E_FunctionSetBtnToggleGroup.gameObject, new Vector2(170f, 0f));
         }
 
         public static void ShowWindow(this DlgPaiMai self, Entity contextData = null)

@@ -1,4 +1,6 @@
-﻿namespace ET.Client
+﻿using UnityEngine;
+
+namespace ET.Client
 {
     [FriendOf(typeof(ES_ActivityLogin))]
     [FriendOf(typeof(ES_ZhanQuLevel))]
@@ -10,6 +12,8 @@
         public static void RegisterUIEvent(this DlgZhanQu self)
         {
             self.View.E_FunctionSetBtnToggleGroup.AddListener(self.OnFunctionSetBtn);
+            
+            IPHoneHelper.SetPosition(self.View.E_FunctionSetBtnToggleGroup.gameObject, new Vector2(170f, 0f));
         }
 
         public static void ShowWindow(this DlgZhanQu self, Entity contextData = null)

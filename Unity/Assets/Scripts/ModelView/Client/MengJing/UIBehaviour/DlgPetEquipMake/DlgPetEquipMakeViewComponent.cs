@@ -217,6 +217,23 @@ namespace ET.Client
      		}
      	}
 
+		public UnityEngine.UI.ToggleGroup E_FunctionSetBtnToggleGroup
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_FunctionSetBtnToggleGroup == null )
+     			{
+		    		this.m_E_FunctionSetBtnToggleGroup = UIFindHelper.FindDeepChild<UnityEngine.UI.ToggleGroup>(this.uiTransform.gameObject,"E_FunctionSetBtn");
+     			}
+     			return this.m_E_FunctionSetBtnToggleGroup;
+     		}
+     	}
+
 		public void DestroyWidget()
 		{
 			this.m_E_Text_CurrentText = null;
@@ -231,6 +248,7 @@ namespace ET.Client
 			this.m_E_Lab_MakeCDTimeText = null;
 			this.m_E_ImageSelectImage = null;
 			this.m_EG_MakeListNodeRectTransform = null;
+			this.m_E_FunctionSetBtnToggleGroup = null;
 			this.uiTransform = null;
 		}
 
@@ -246,6 +264,7 @@ namespace ET.Client
 		private UnityEngine.UI.Text m_E_Lab_MakeCDTimeText = null;
 		private UnityEngine.UI.Image m_E_ImageSelectImage = null;
 		private UnityEngine.RectTransform m_EG_MakeListNodeRectTransform = null;
+		private UnityEngine.UI.ToggleGroup m_E_FunctionSetBtnToggleGroup = null;
 		public Transform uiTransform = null;
 	}
 }

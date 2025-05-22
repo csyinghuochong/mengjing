@@ -32,6 +32,8 @@ namespace ET.Client
         public static void RegisterUIEvent(this DlgPetEquipMake self)
         {
             self.View.E_Btn_MakeButton.AddListenerAsync(self.OnBtn_MakeButton);
+            
+            IPHoneHelper.SetPosition(self.View.E_FunctionSetBtnToggleGroup.gameObject, new Vector2(170f, 0f));
 
             self.OnInitUI();
             int showValue = NpcConfigCategory.Instance.Get(self.Root().GetComponent<UIComponent>().CurrentNpcId).ShopValue;

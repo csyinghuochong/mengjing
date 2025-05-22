@@ -14,6 +14,8 @@ namespace ET.Client
         public static void RegisterUIEvent(this DlgPetBar self)
         {
             self.View.E_FunctionSetBtnToggleGroup.AddListener(self.OnFunctionSetBtn);
+            
+            IPHoneHelper.SetPosition(self.View.E_FunctionSetBtnToggleGroup.gameObject, new Vector2(170f, 0f));
         }
 
         public static void ShowWindow(this DlgPetBar self, Entity contextData = null)

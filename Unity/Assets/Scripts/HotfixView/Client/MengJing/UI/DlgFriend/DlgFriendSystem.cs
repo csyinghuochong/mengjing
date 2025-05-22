@@ -1,3 +1,5 @@
+using UnityEngine;
+
 namespace ET.Client
 {
     [FriendOf(typeof(ES_FriendList))]
@@ -39,6 +41,8 @@ namespace ET.Client
             ReddotViewComponent redPointComponent = self.Root().GetComponent<ReddotViewComponent>();
             redPointComponent.RegisterReddot(ReddotType.FriendApply, self.Reddot_FriendApply);
             redPointComponent.RegisterReddot(ReddotType.FriendChat, self.Reddot_FriendChat);
+            
+            IPHoneHelper.SetPosition(self.View.E_FunctionSetBtnToggleGroup.gameObject, new Vector2(170f, 0f));
         }
 
         public static void ShowWindow(this DlgFriend self, Entity contextData = null)

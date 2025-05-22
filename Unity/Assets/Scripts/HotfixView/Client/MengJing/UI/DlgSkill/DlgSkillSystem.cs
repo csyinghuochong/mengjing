@@ -1,3 +1,5 @@
+using UnityEngine;
+
 namespace ET.Client
 {
     [Event(SceneType.Demo)]
@@ -65,6 +67,8 @@ namespace ET.Client
             self.View.E_FunctionSetBtnToggleGroup.OnSelectIndex(0);
             ReddotViewComponent redPointComponent = self.Root().GetComponent<ReddotViewComponent>();
             redPointComponent.RegisterReddot(ReddotType.SkillUp, self.Reddot_SkillUp);
+            
+            IPHoneHelper.SetPosition(self.View.E_FunctionSetBtnToggleGroup.gameObject, new Vector2(170f, 0f));
         }
 
         public static void ShowWindow(this DlgSkill self, Entity contextData = null)
