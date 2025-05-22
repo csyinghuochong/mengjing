@@ -384,6 +384,12 @@ namespace ET.Client
             MoveComponent moveComponent = unit.GetComponent<MoveComponent>();
             SkillConfig skillConfig = SkillConfigCategory.Instance.Get(skillcmd.SkillInfos[0].WeaponSkillID);
 
+            if (unit.Type == UnitType.Monster)
+            {
+                MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(unit.ConfigId);
+                Log.Debug($"怪物：{monsterConfig.Id} {monsterConfig.MonsterName}  释放技能: {skillcmd.SkillInfos[0].WeaponSkillID}  {skillConfig.SkillName} ");
+            }
+
             if (moveComponent != null && !moveComponent.IsArrived() && skillConfig.IfStopMove == 0)
             {
                 moveComponent.Stop(false);
