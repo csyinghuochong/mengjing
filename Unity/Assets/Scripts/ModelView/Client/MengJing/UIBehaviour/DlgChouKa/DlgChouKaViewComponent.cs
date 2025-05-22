@@ -346,7 +346,7 @@ namespace ET.Client
      			if( es == null )
 
      			{
-		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"Center/ES_ChouKaChapterSelect");
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"ES_ChouKaChapterSelect");
 		    	   this.m_es_choukachapterselect = this.AddChild<ES_ChouKaChapterSelect,Transform>(subTrans);
      			}
      			return this.m_es_choukachapterselect;

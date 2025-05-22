@@ -40,7 +40,7 @@ namespace ET.Client
      			if( es == null )
 
      			{
-		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"Right/ES_ChatView");
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"ES_ChatView");
 		    	   this.m_es_chatview = this.AddChild<ES_ChatView,Transform>(subTrans);
      			}
      			return this.m_es_chatview;
