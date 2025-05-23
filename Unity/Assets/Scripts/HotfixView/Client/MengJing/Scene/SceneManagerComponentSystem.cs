@@ -145,7 +145,7 @@ namespace ET.Client
             // 打印当前场景的名称
             Debug.Log("当前场景的名称是: " + scenename);
 
-            bool changerender = scenename == "40001" || scenename ==  "20004";
+            bool changerender = scenename == "40001" || scenename ==  "20004" || scenename == "20002";
             ////临时解决方案！！！！
             GameObject.Find("Global").GetComponent<RenderScaleController>().ChangeRenderPassEvent(changerender);
 
