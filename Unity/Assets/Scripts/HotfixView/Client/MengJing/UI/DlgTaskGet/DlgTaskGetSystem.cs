@@ -630,7 +630,7 @@ namespace ET.Client
                 self.ShowBagInfos.Add(bagInfo);
             }
             
-            //self.View.ES_RewardList.Refresh(rewardItems, showNumber: true, showName: true);
+            self.View.ES_RewardList.Refresh(rewardItems);
 
             // self.AddUIScrollItems(ref self.ScrollItemTaskRewardItems, rewardItems.Count);
             // self.View.E_BagItemsLoopVerticalScrollRect.SetVisible(true, rewardItems.Count);

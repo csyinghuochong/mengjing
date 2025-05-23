@@ -321,7 +321,14 @@ namespace ET.Server
             // {
             //     taskPro.TrackStatus = 1;
             // }
-            if (taskConfig.TaskType == TaskTypeEnum.Main && self.GetTrackTaskList().Count < 3)
+            if ((taskConfig.TaskType == TaskTypeEnum.Main 
+                // || taskConfig.TaskType == TaskTypeEnum.Branch
+                || taskConfig.TaskType == TaskTypeEnum.Daily
+                || taskConfig.TaskType == TaskTypeEnum.Weekly
+                || taskConfig.TaskType == TaskTypeEnum.Treasure
+                || taskConfig.TaskType == TaskTypeEnum.Union
+                || taskConfig.TaskType == TaskTypeEnum.Ring)
+                && self.GetTrackTaskList().Count < 3)
             {
                 taskPro.TrackStatus = 1;
             }
