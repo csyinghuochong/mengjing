@@ -33,7 +33,7 @@
                     root.GetComponent<UIComponent>().GetDlgLogic<DlgPetEgg>()?.OnUpdateLuckly();
                     break;
                 case NumericType.WearWeaponFisrt:
-                    root.GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_WearWeapon).Coroutine();
+                    //root.GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_WearWeapon).Coroutine();
                     break;
                 case NumericType.Now_Stall:
                     long stallType = args.Defend.GetComponent<NumericComponentC>().GetAsLong(NumericType.Now_Stall);
