@@ -138,13 +138,14 @@ namespace ET.Client
             await resourcesLoaderComponent.LoadSceneAsync(path, LoadSceneMode.Single);
 
             Debug.Log("切换场景" + path);
-            
-            // 获取当前场景
- 
-            // 打印当前场景的名称
-            Debug.Log("当前场景的名称是: " +  SceneManager.GetActiveScene().name);
 
-            bool changerender = SceneManager.GetActiveScene().name == "40001";
+            // 获取当前场景
+
+            string scenename = SceneManager.GetActiveScene().name;
+            // 打印当前场景的名称
+            Debug.Log("当前场景的名称是: " + scenename);
+
+            bool changerender = scenename == "40001" || scenename ==  "20004";
             ////临时解决方案！！！！
             GameObject.Find("Global").GetComponent<RenderScaleController>().ChangeRenderPassEvent(changerender);
 
