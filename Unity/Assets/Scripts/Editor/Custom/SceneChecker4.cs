@@ -83,7 +83,7 @@ namespace ET.Client
                 }
 
                 List<string> result = new List<string>();
-                var biglist = bigname.OrderByDescending(p => int.Parse(p.Value));
+                var biglist = bigname.OrderByDescending(p => p.KeyId * int.Parse(p.Value));
                 foreach (var VARIABLE in biglist)
                 {
                     //if ((int.Parse(VARIABLE.Value)>100 && VARIABLE.KeyId >= 200) 
@@ -170,7 +170,7 @@ namespace ET.Client
             }
 
             List<string> result = new List<string>();
-            var biglist = bigname.OrderByDescending(p => int.Parse(p.Value));
+            var biglist = bigname.OrderByDescending(p => p.KeyId * int.Parse(p.Value));
             foreach (var VARIABLE in biglist)
             {
                 //if ((int.Parse(VARIABLE.Value)>100 && VARIABLE.KeyId >= 200) 
