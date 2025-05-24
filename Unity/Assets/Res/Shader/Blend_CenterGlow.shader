@@ -40,7 +40,6 @@ Shader "Hovl/Particles/Blend_CenterGlow"
 				#include "UnityShaderVariables.cginc"
 				#include "UnityCG.cginc"
 
-
 				struct appdata_t 
 				{
 					float4 vertex : POSITION;
