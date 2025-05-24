@@ -83,7 +83,7 @@ namespace ET.Client
                 }
 
                 List<string> result = new List<string>();
-                var biglist = bigname.OrderByDescending(p => p.KeyId);
+                var biglist = bigname.OrderByDescending(p => int.Parse(p.Value));
                 foreach (var VARIABLE in biglist)
                 {
                     //if ((int.Parse(VARIABLE.Value)>100 && VARIABLE.KeyId >= 200) 
@@ -170,7 +170,7 @@ namespace ET.Client
             }
 
             List<string> result = new List<string>();
-            var biglist = bigname.OrderByDescending(p => p.KeyId);
+            var biglist = bigname.OrderByDescending(p => int.Parse(p.Value));
             foreach (var VARIABLE in biglist)
             {
                 //if ((int.Parse(VARIABLE.Value)>100 && VARIABLE.KeyId >= 200) 
@@ -184,8 +184,8 @@ namespace ET.Client
                 }
             }
 
-            // EditorUtility.DisplayDialog("顶点统计", 
-            //     $"场景顶点总数: {totalVertices}", "确定");
+            EditorUtility.DisplayDialog("顶点统计", 
+                 $"场景顶点总数: {totalVertices}", "确定");
             File.WriteAllLines(outputPath, result);
             AssetDatabase.Refresh();
 
