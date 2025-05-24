@@ -40,8 +40,6 @@ Shader "Raygeas/Suntail Foliage"
 	{
 		LOD 0
 
-		
-
 		Tags { "RenderPipeline"="UniversalPipeline" "RenderType"="Opaque" "Queue"="Geometry" "UniversalMaterialType"="Lit" }
 
 		Cull Off
@@ -49,8 +47,6 @@ Shader "Raygeas/Suntail Foliage"
 		ZTest LEqual
 		Offset 0 , 0
 		AlphaToMask Off
-
-		
 
 		HLSLINCLUDE
 		#pragma target 3.5

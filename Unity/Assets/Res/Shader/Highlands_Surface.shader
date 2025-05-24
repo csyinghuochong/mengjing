@@ -47,8 +47,6 @@ Shader "Raygeas/Suntail Surface"
 	{
 		LOD 0
 
-		
-
 		Tags { "RenderPipeline"="UniversalPipeline" "RenderType"="Opaque" "Queue"="Geometry" "UniversalMaterialType"="Lit" }
 
 		Cull Back
@@ -56,8 +54,6 @@ Shader "Raygeas/Suntail Surface"
 		ZTest LEqual
 		Offset 0 , 0
 		AlphaToMask Off
-
-		
 
 		HLSLINCLUDE
 		#pragma target 3.5

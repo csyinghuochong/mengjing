@@ -52,8 +52,6 @@ Shader "Raygeas/Suntail Water"
 	{
 		LOD 0
 
-		
-
 		Tags { "RenderPipeline"="UniversalPipeline" "RenderType"="Transparent" "Queue"="Transparent" "UniversalMaterialType"="Lit" }
 
 		Cull Back
@@ -62,7 +60,6 @@ Shader "Raygeas/Suntail Water"
 		Offset 0 , 0
 		AlphaToMask Off
 
-		
 
 		HLSLINCLUDE
 		#pragma target 3.5
