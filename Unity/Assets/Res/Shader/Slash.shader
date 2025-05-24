@@ -11,7 +11,6 @@ Shader "ERB/Particles/Slash"
 		[Toggle]_Useblack("Use black", Float) = 0
 	}
 
-
 	Category 
 	{
 		SubShader
