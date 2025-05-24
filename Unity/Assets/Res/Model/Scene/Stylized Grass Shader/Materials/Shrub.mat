@@ -27,7 +27,9 @@ Material:
   m_ValidKeywords:
   - _ADVANCED_LIGHTING
   - _FADING
-  m_InvalidKeywords: []
+  m_InvalidKeywords:
+  - _ENVIRONMENTREFLECTIONS_ON
+  - _FADINGON_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
