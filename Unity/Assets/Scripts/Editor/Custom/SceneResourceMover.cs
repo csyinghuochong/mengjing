@@ -10,6 +10,47 @@ namespace ET.Client
         private const string ScenesRoot = "Assets/Bundles/Scenes";
         private const string OutputRoot = "Assets/ScenesRes";
 
+
+        [MenuItem("Tools/单个场景资源引用到的shader")]
+        private static void SingleSceneShaderReference()
+        {
+            // 打开文件面板让用户选择场景
+            string scenePath = EditorUtility.OpenFilePanel("选择场景", ScenesRoot, "unity");
+
+            if (string.IsNullOrEmpty(scenePath))
+            {
+                Debug.LogWarning("未选择任何场景。");
+                return;
+            }
+
+            // 将绝对路径转换为相对路径
+            if (!scenePath.StartsWith(Application.dataPath))
+            {
+                Debug.LogError("只能在项目的 Assets 目录下选择场景。");
+                return;
+            }
+
+            scenePath = "Assets" + scenePath.Substring(Application.dataPath.Length);
+
+            // 获取所有依赖
+            string[] dependencies = AssetDatabase.GetDependencies(scenePath, true);
+            var movedCount = 0;
+
+            foreach (var assetPath in dependencies)
+            {
+                if (assetPath == scenePath)
+                    continue; // 跳过场景自身
+
+                string fileName = Path.GetFileName(assetPath);
+
+                if (fileName.Contains(".shader"))
+                {
+                    UnityEngine.Debug.Log(assetPath);
+                }
+                // 如果目标已存在则跳过
+            }
+        }
+
         [MenuItem("Tools/单个场景资源整理")]
         private static void MoveSceneResourcesMenu()
         {
