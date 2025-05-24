@@ -1,11 +1,11 @@
 ﻿using System;
-using UnityEditor;
-using UnityEngine;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using UnityEditor.SceneManagement;
 using System.Reflection;
+using UnityEditor;
+using UnityEditor.SceneManagement;
+using UnityEngine;
 
 namespace ET.Client
 {
@@ -22,8 +22,65 @@ namespace ET.Client
             public Dictionary<string, int> sceneReferences = new Dictionary<string, int>(); // 各场景的引用次数
         }
 
-        [MenuItem("Tools/检测场景中引用的贴图")]
-        public static void FindTextureReferences()
+        [MenuItem("Tools/检测场景中引用的贴图【单个】")]
+        public static void FindTextureReferencesSingle()
+        {
+            Log.Debug("查找开始！");
+
+            string outputPath = "Assets/场景中引用的贴图单个场景.txt";
+            // 1. 收集所有场景的贴图信息
+            var renderers = GameObject.FindObjectsOfType<Renderer>();
+            Dictionary<Texture, int> currentSceneTextures = new Dictionary<Texture, int>();
+            foreach (var renderer in renderers)
+            {
+                var materials = renderer.sharedMaterials;
+                foreach (var material in materials)
+                {
+                    if (material == null) continue;
+                    foreach (var textureName in material.GetTexturePropertyNames())
+                    {
+                        Texture texture = material.GetTexture(textureName);
+                        if (texture == null)
+                        {
+                            continue;
+                        }
+                        if (!currentSceneTextures.ContainsKey(texture))
+                        {
+                            currentSceneTextures.Add(texture, 0);
+                        }
+
+                        // 更新场景引用信息
+                        currentSceneTextures[texture]++;
+                    }
+                }
+            }
+
+            // 2. 生成按场景组织的输出
+            List<string> result = new List<string>();
+            foreach (var sceneEntry in currentSceneTextures)
+            {
+                Texture texture = sceneEntry.Key;
+                string path = AssetDatabase.GetAssetPath(texture);
+             
+                string totalSceneRefs = sceneEntry.Value.ToString();
+
+                result.Add(
+                    $"引用：{totalSceneRefs,-10} " +
+                    $"{path}"
+                );
+                result.Add(""); // 空行分隔场景
+            }
+
+            // 3. 写入文件
+            File.WriteAllLines(outputPath, result);
+            AssetDatabase.Refresh();
+
+            Log.Debug($"查找结束！ 文件保存在 {outputPath}");
+        }
+
+
+        [MenuItem("Tools/检测场景中引用的贴图【全部】")]
+        public static void FindTextureReferencesAll()
         {
             Log.Debug("查找开始！");
 
