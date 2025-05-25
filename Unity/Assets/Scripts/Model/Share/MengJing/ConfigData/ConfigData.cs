@@ -1604,11 +1604,7 @@ namespace ET
                     99003063,
                     99003064
                 };
-
-        [StaticField]
-        public static List<string> RankChengHao =
-                new List<string>() { "天下第一勇士", "天下第二勇士", "天下第三勇士" };
-
+        
         [StaticField]
         public static List<string> OccRankChengHao =
                 new List<string>()
