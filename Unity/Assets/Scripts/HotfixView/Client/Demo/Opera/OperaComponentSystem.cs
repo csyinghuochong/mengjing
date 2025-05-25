@@ -729,7 +729,7 @@ namespace ET.Client
             }
 
             EventSystem.Instance.Publish(self.Root(), new BeforeMove() { DataParamString = operatetype });
-            int ret = await unit.MoveToAsync(position);
+            int ret = await unit.MoveToAsync(position, null, operatetype == "1");
             return ret;
         }
 

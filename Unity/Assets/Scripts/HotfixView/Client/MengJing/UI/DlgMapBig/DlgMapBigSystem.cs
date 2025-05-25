@@ -528,7 +528,8 @@ namespace ET.Client
             }
             else
             {
-                unit.MoveToAsync(self.BossList[configid], null, false).Coroutine();
+                EventSystem.Instance.Publish(self.Root(), new BeforeMove() { DataParamString = "1" });
+                unit.MoveToAsync(self.BossList[configid], null, true).Coroutine();
             }
         }
 
@@ -567,7 +568,7 @@ namespace ET.Client
             if (hit.collider != null)
             {
                 EventSystem.Instance.Publish(self.Root(), new BeforeMove() { DataParamString = "1" });
-                unit.MoveToAsync(hit.point).Coroutine();
+                unit.MoveToAsync(hit.point, null, true).Coroutine();
             }
         }
 

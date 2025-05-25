@@ -309,8 +309,7 @@ namespace ET.Client
                 Vector3 dir = (unitPosi - targetPos).normalized;
                 targetPos += dir * TaskData.NpcSpeakDistance;
                 EventSystem.Instance.Publish(root, new BeforeMove() { DataParamString = "1" });
-
-                ret = await unit.MoveToAsync(targetPos);
+                ret = await unit.MoveToAsync(targetPos, null, true);
             }
 
             if (instanceid != unit.InstanceId || Vector3.Distance(unit.Position, targetPos) > TaskData.NpcSpeakDistance)

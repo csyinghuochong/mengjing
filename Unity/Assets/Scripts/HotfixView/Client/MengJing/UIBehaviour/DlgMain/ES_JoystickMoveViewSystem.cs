@@ -379,15 +379,16 @@ namespace ET.Client
 
             EventSystem.Instance.Publish(self.Root(), new BeforeMove() { DataParamString = string.Empty });
 
-            if (SettingData.MoveMode == 0)
-            {
-                unit.MoveToAsync( newv3,  null).Coroutine();
-            }
-            else
-            {
-                unit.MoveResultToAsync(pathfind, null ).Coroutine();
-                unit.GetComponent<MoveComponent>().MoveToAsync(pathfind, speed).Coroutine();
-            }
+            // if (SettingData.MoveMode == 0)
+            // {
+            //     unit.MoveToAsync( newv3,  null).Coroutine();
+            // }
+            // else
+            // {
+            //     
+            // }
+            unit.MoveResultToAsync(pathfind, null ).Coroutine();
+            unit.GetComponent<MoveComponent>().MoveToAsync(pathfind, speed).Coroutine();
             
             self.lastSendTime = clientNow;
             self.lastDirection = direction;
@@ -521,16 +522,17 @@ namespace ET.Client
                 return;
             }
             
-            if (SettingData.MoveMode == 0)
-            {
-                MoveHelper.Stop(self.Root());
-            }
-            else
-            {
-                MoveComponent moveComponent = unit.GetComponent<MoveComponent>();
-                moveComponent.Stop(false);
-                MoveHelper.StopResult(self.Root(), unit.Position);
-            }
+            // if (SettingData.MoveMode == 0)
+            // {
+            //     MoveHelper.Stop(self.Root());
+            // }
+            // else
+            // {
+            //    
+            // }
+            MoveComponent moveComponent = unit.GetComponent<MoveComponent>();
+            moveComponent.Stop(false);
+            MoveHelper.StopResult(self.Root(), unit.Position);
         }
     }
 }
