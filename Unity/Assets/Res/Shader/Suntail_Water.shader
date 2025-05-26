@@ -1,29 +1,41 @@
 // Made with Amplify Shader Editor v1.9.1.8
 // Available at the Unity Asset Store - http://u3d.as/y3X 
-Shader "Raygeas/Suntail Foliage"
+Shader "Raygeas/Suntail Water"
 {
 	Properties
 	{
 		[HideInInspector] _EmissionColor("Emission Color", Color) = (1,1,1,1)
-		[ASEBegin][Header(Maps)][Space(10)][MainTexture]_Albedo("Albedo", 2D) = "white" {}
-		_SmoothnessTexture("Smoothness", 2D) = "white" {}
-		[Header(Settings)][Space(5)]_MainColor("Main Color", Color) = (1,1,1,0)
+		[HideInInspector] _AlphaCutoff("Alpha Cutoff ", Range(0, 1)) = 0.5
+		[ASEBegin][NoScaleOffset][Normal]_WavesNormal("Waves Normal", 2D) = "white" {}
+		_Color1("Color 1", Color) = (0,0,0,0)
+		_Color2("Color 2", Color) = (0,0,0,0)
+		_Opacity("Opacity", Range( 0 , 1)) = 0
 		_Smoothness("Smoothness", Range( 0 , 1)) = 0
-		_AlphaCutoff("Alpha Cutoff", Range( 0 , 1)) = 0.35
-		_TranslucencyInt("Translucency Int", Range( 0 , 100)) = 1
-		[Header(Second Color Settings)][Space(5)][Toggle(_COLOR2ENABLE_ON)] _Color2Enable("Enable", Float) = 0
-		_SecondColor("Second Color", Color) = (0,0,0,0)
-		[KeywordEnum(World_Position,UV_Based)] _SecondColorOverlayType("Overlay Type", Float) = 0
-		_SecondColorOffset("Offset", Float) = 0
-		_SecondColorFade("Fade", Range( -1 , 1)) = 0.5
-		_WorldScale("World Scale", Float) = 1
-		[Header(Wind Settings)][Space(5)][Toggle(_ENABLEWIND_ON)] _EnableWind("Enable", Float) = 1
-		_WindForce("Force", Range( 0 , 1)) = 0.3
-		_WindWavesScale("Waves Scale", Range( 0 , 1)) = 0.25
-		_WindSpeed("Speed", Range( 0 , 1)) = 0.5
-		[ASEEnd][Toggle(_ANCHORTHEFOLIAGEBASE_ON)] _Anchorthefoliagebase("Anchor the foliage base", Float) = 0
-		[HideInInspector] _texcoord( "", 2D ) = "white" {}
+		_Metallic("Metallic", Range( 0 , 1)) = 0
+		_WavesTile("Waves Tile", Float) = 1
+		_WavesSpeed("Waves Speed", Range( 0 , 1)) = 0
+		_WavesNormalIntensity("Waves Normal Intensity", Range( 0 , 2)) = 1
+		_FoamContrast("Foam Contrast", Range( 0 , 1)) = 0
+		_FoamDistance("Foam Distance", Range( 0 , 5)) = 0
+		_FoamDensity("Foam Density", Range( 0.1 , 1)) = 0.5
+		_DepthDistance("Depth Distance", Float) = 0
+		_RefractionScale("Refraction Scale", Range( 0 , 1)) = 0.2
+		[ASEEnd]_CoastOpacity("Coast Opacity", Range( 0 , 1)) = 0
 		
+		//_TransmissionShadow( "Transmission Shadow", Range( 0, 1 ) ) = 0.5
+		//_TransStrength( "Trans Strength", Range( 0, 50 ) ) = 1
+		//_TransNormal( "Trans Normal Distortion", Range( 0, 1 ) ) = 0.5
+		//_TransScattering( "Trans Scattering", Range( 1, 50 ) ) = 2
+		//_TransDirect( "Trans Direct", Range( 0, 1 ) ) = 0.9
+		//_TransAmbient( "Trans Ambient", Range( 0, 1 ) ) = 0.1
+		//_TransShadow( "Trans Shadow", Range( 0, 1 ) ) = 0.5
+		//_TessPhongStrength( "Tess Phong Strength", Range( 0, 1 ) ) = 0.5
+		//_TessValue( "Tess Max Tessellation", Range( 1, 32 ) ) = 16
+		//_TessMin( "Tess Min Distance", Float ) = 10
+		//_TessMax( "Tess Max Distance", Float ) = 25
+		//_TessEdgeLength ( "Tess Edge length", Range( 2, 50 ) ) = 16
+		//_TessMaxDisp( "Tess Max Displacement", Float ) = 25
+
 		[HideInInspector][ToggleOff] _SpecularHighlights("Specular Highlights", Float) = 1.0
 		[HideInInspector][ToggleOff] _EnvironmentReflections("Environment Reflections", Float) = 1.0
 		[HideInInspector][ToggleOff] _ReceiveShadows("Receive Shadows", Float) = 1.0
@@ -40,13 +52,17 @@ Shader "Raygeas/Suntail Foliage"
 	{
 		LOD 0
 
-		Tags { "RenderPipeline"="UniversalPipeline" "RenderType"="Opaque" "Queue"="Geometry" "UniversalMaterialType"="Lit" }
+		
 
-		Cull Off
+		Tags { "RenderPipeline"="UniversalPipeline" "RenderType"="Transparent" "Queue"="Transparent" "UniversalMaterialType"="Lit" }
+
+		Cull Back
 		ZWrite On
 		ZTest LEqual
 		Offset 0 , 0
 		AlphaToMask Off
+
+		
 
 		HLSLINCLUDE
 		#pragma target 3.5
@@ -166,7 +182,7 @@ Shader "Raygeas/Suntail Foliage"
 			Name "Forward"
 			Tags { "LightMode"="UniversalForward" }
 
-			Blend One Zero, One Zero
+			Blend SrcAlpha OneMinusSrcAlpha, One OneMinusSrcAlpha
 			ZWrite On
 			ZTest LEqual
 			Offset 0 , 0
@@ -176,14 +192,14 @@ Shader "Raygeas/Suntail Foliage"
 
 			HLSLPROGRAM
 
+			#define _SURFACE_TYPE_TRANSPARENT 1
 			#define _NORMAL_DROPOFF_TS 1
-			#pragma multi_compile_instancing
-			#pragma instancing_options renderinglayer
-			#pragma multi_compile_fragment _ LOD_FADE_CROSSFADE
 			#pragma multi_compile_fog
 			#define ASE_FOG 1
-			#define _ALPHATEST_ON 1
+			#define _NORMALMAP 1
 			#define ASE_SRP_VERSION 120113
+			#define REQUIRE_DEPTH_TEXTURE 1
+			#define REQUIRE_OPAQUE_TEXTURE 1
 
 
 			#pragma shader_feature_local _RECEIVE_SHADOWS_OFF
@@ -229,14 +245,9 @@ Shader "Raygeas/Suntail Foliage"
 				#define ENABLE_TERRAIN_PERPIXEL_NORMAL
 			#endif
 
+			#define ASE_NEEDS_FRAG_SCREEN_POSITION
 			#define ASE_NEEDS_FRAG_WORLD_POSITION
-			#define ASE_NEEDS_FRAG_WORLD_VIEW_DIR
-			#define ASE_NEEDS_FRAG_WORLD_NORMAL
-			#define ASE_NEEDS_FRAG_SHADOWCOORDS
-			#pragma shader_feature_local _ENABLEWIND_ON
-			#pragma shader_feature_local _ANCHORTHEFOLIAGEBASE_ON
-			#pragma shader_feature_local _COLOR2ENABLE_ON
-			#pragma shader_feature_local _SECONDCOLOROVERLAYTYPE_WORLD_POSITION _SECONDCOLOROVERLAYTYPE_UV_BASED
+			#define ASE_NEEDS_VERT_POSITION
 
 
 			#if defined(ASE_EARLY_Z_DEPTH_OPTIMIZE) && (SHADER_TARGET >= 45)
@@ -280,19 +291,20 @@ Shader "Raygeas/Suntail Foliage"
 			};
 
 			CBUFFER_START(UnityPerMaterial)
-			float4 _MainColor;
-			float4 _Albedo_ST;
-			float4 _SecondColor;
-			float4 _SmoothnessTexture_ST;
-			float _WindSpeed;
-			float _WindWavesScale;
-			float _WindForce;
-			float _WorldScale;
-			float _SecondColorOffset;
-			float _SecondColorFade;
-			float _TranslucencyInt;
+			float4 _Color2;
+			float4 _Color1;
+			float _DepthDistance;
+			float _WavesSpeed;
+			float _WavesTile;
+			float _WavesNormalIntensity;
+			float _RefractionScale;
+			float _FoamDensity;
+			float _FoamContrast;
+			float _FoamDistance;
+			float _Metallic;
 			float _Smoothness;
-			float _AlphaCutoff;
+			float _Opacity;
+			float _CoastOpacity;
 			#ifdef ASE_TRANSMISSION
 				float _TransmissionShadow;
 			#endif
@@ -325,8 +337,8 @@ Shader "Raygeas/Suntail Foliage"
 				int _PassValue;
 			#endif
 
-			sampler2D _Albedo;
-			sampler2D _SmoothnessTexture;
+			uniform float4 _CameraDepthTexture_TexelSize;
+			sampler2D _WavesNormal;
 
 
 			//#include "Packages/com.unity.render-pipelines.universal/Editor/ShaderGraph/Includes/Varyings.hlsl"
@@ -336,52 +348,51 @@ Shader "Raygeas/Suntail Foliage"
 			//#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/VisualEffectVertex.hlsl"
 			//#endif
 
-			float3 mod3D289( float3 x ) { return x - floor( x / 289.0 ) * 289.0; }
-			float4 mod3D289( float4 x ) { return x - floor( x / 289.0 ) * 289.0; }
-			float4 permute( float4 x ) { return mod3D289( ( x * 34.0 + 1.0 ) * x ); }
-			float4 taylorInvSqrt( float4 r ) { return 1.79284291400159 - r * 0.85373472095314; }
-			float snoise( float3 v )
+			inline float4 ASE_ComputeGrabScreenPos( float4 pos )
 			{
-				const float2 C = float2( 1.0 / 6.0, 1.0 / 3.0 );
-				float3 i = floor( v + dot( v, C.yyy ) );
-				float3 x0 = v - i + dot( i, C.xxx );
-				float3 g = step( x0.yzx, x0.xyz );
-				float3 l = 1.0 - g;
-				float3 i1 = min( g.xyz, l.zxy );
-				float3 i2 = max( g.xyz, l.zxy );
-				float3 x1 = x0 - i1 + C.xxx;
-				float3 x2 = x0 - i2 + C.yyy;
-				float3 x3 = x0 - 0.5;
-				i = mod3D289( i);
-				float4 p = permute( permute( permute( i.z + float4( 0.0, i1.z, i2.z, 1.0 ) ) + i.y + float4( 0.0, i1.y, i2.y, 1.0 ) ) + i.x + float4( 0.0, i1.x, i2.x, 1.0 ) );
-				float4 j = p - 49.0 * floor( p / 49.0 );  // mod(p,7*7)
-				float4 x_ = floor( j / 7.0 );
-				float4 y_ = floor( j - 7.0 * x_ );  // mod(j,N)
-				float4 x = ( x_ * 2.0 + 0.5 ) / 7.0 - 1.0;
-				float4 y = ( y_ * 2.0 + 0.5 ) / 7.0 - 1.0;
-				float4 h = 1.0 - abs( x ) - abs( y );
-				float4 b0 = float4( x.xy, y.xy );
-				float4 b1 = float4( x.zw, y.zw );
-				float4 s0 = floor( b0 ) * 2.0 + 1.0;
-				float4 s1 = floor( b1 ) * 2.0 + 1.0;
-				float4 sh = -step( h, 0.0 );
-				float4 a0 = b0.xzyw + s0.xzyw * sh.xxyy;
-				float4 a1 = b1.xzyw + s1.xzyw * sh.zzww;
-				float3 g0 = float3( a0.xy, h.x );
-				float3 g1 = float3( a0.zw, h.y );
-				float3 g2 = float3( a1.xy, h.z );
-				float3 g3 = float3( a1.zw, h.w );
-				float4 norm = taylorInvSqrt( float4( dot( g0, g0 ), dot( g1, g1 ), dot( g2, g2 ), dot( g3, g3 ) ) );
-				g0 *= norm.x;
-				g1 *= norm.y;
-				g2 *= norm.z;
-				g3 *= norm.w;
-				float4 m = max( 0.6 - float4( dot( x0, x0 ), dot( x1, x1 ), dot( x2, x2 ), dot( x3, x3 ) ), 0.0 );
-				m = m* m;
-				m = m* m;
-				float4 px = float4( dot( x0, g0 ), dot( x1, g1 ), dot( x2, g2 ), dot( x3, g3 ) );
-				return 42.0 * dot( m, px);
+				#if UNITY_UV_STARTS_AT_TOP
+				float scale = -1.0;
+				#else
+				float scale = 1.0;
+				#endif
+				float4 o = pos;
+				o.y = pos.w * 0.5f;
+				o.y = ( pos.y - o.y ) * _ProjectionParams.x * scale + o.y;
+				return o;
 			}
+			
+					float2 voronoihash61( float2 p )
+					{
+						
+						p = float2( dot( p, float2( 127.1, 311.7 ) ), dot( p, float2( 269.5, 183.3 ) ) );
+						return frac( sin( p ) *43758.5453);
+					}
+			
+					float voronoi61( float2 v, float time, inout float2 id, inout float2 mr, float smoothness, inout float2 smoothId )
+					{
+						float2 n = floor( v );
+						float2 f = frac( v );
+						float F1 = 8.0;
+						float F2 = 8.0; float2 mg = 0;
+						for ( int j = -1; j <= 1; j++ )
+						{
+							for ( int i = -1; i <= 1; i++ )
+						 	{
+						 		float2 g = float2( i, j );
+						 		float2 o = voronoihash61( n + g );
+								o = ( sin( time + o * 6.2831 ) * 0.5 + 0.5 ); float2 r = f - g - o;
+								float d = 0.5 * dot( r, r );
+						 //		if( d<F1 ) {
+						 //			F2 = F1;
+						 			float h = smoothstep(0.0, 1.0, 0.5 + 0.5 * (F1 - d) / smoothness); F1 = lerp(F1, d, h) - smoothness * h * (1.0 - h);mg = g; mr = r; id = o;
+						 //		} else if( d<F2 ) {
+						 //			F2 = d;
+						
+						 //		}
+						 	}
+						}
+						return F1;
+					}
 			
 
 			VertexOutput VertexFunction( VertexInput v  )
@@ -391,28 +402,13 @@ Shader "Raygeas/Suntail Foliage"
 				UNITY_TRANSFER_INSTANCE_ID(v, o);
 				UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(o);
 
-				float3 ase_worldPos = TransformObjectToWorld( (v.vertex).xyz );
-				float mulTime34 = _TimeParameters.x * ( _WindSpeed * 5 );
-				float simplePerlin3D35 = snoise( ( ase_worldPos + mulTime34 )*_WindWavesScale );
-				float temp_output_231_0 = ( simplePerlin3D35 * 0.01 );
-				float2 texCoord357 = v.texcoord.xy * float2( 1,1 ) + float2( 0,0 );
-				#ifdef _ANCHORTHEFOLIAGEBASE_ON
-				float staticSwitch376 = ( temp_output_231_0 * pow( texCoord357.y , 2.0 ) );
-				#else
-				float staticSwitch376 = temp_output_231_0;
-				#endif
-				#ifdef _ENABLEWIND_ON
-				float staticSwitch341 = ( staticSwitch376 * ( _WindForce * 30 ) );
-				#else
-				float staticSwitch341 = 0.0;
-				#endif
-				float Wind191 = staticSwitch341;
-				float3 temp_cast_0 = (Wind191).xxx;
+				float3 objectToViewPos = TransformWorldToView(TransformObjectToWorld(v.vertex.xyz));
+				float eyeDepth = -objectToViewPos.z;
+				o.ase_texcoord8.x = eyeDepth;
 				
-				o.ase_texcoord8.xy = v.texcoord.xy;
 				
 				//setting value to unused interpolator channels and avoid initialization warnings
-				o.ase_texcoord8.zw = 0;
+				o.ase_texcoord8.yzw = 0;
 
 				#ifdef ASE_ABSOLUTE_VERTEX_POS
 					float3 defaultVertexValue = v.vertex.xyz;
@@ -420,7 +416,7 @@ Shader "Raygeas/Suntail Foliage"
 					float3 defaultVertexValue = float3(0, 0, 0);
 				#endif
 
-				float3 vertexValue = temp_cast_0;
+				float3 vertexValue = defaultVertexValue;
 
 				#ifdef ASE_ABSOLUTE_VERTEX_POS
 					v.vertex.xyz = vertexValue;
@@ -610,51 +606,66 @@ Shader "Raygeas/Suntail Foliage"
 
 				WorldViewDirection = SafeNormalize( WorldViewDirection );
 
-				float2 uv_Albedo = IN.ase_texcoord8.xy * _Albedo_ST.xy + _Albedo_ST.zw;
-				float4 tex2DNode1 = tex2D( _Albedo, uv_Albedo );
-				float4 temp_output_10_0 = ( _MainColor * tex2DNode1 );
-				float simplePerlin3D742 = snoise( WorldPosition*_WorldScale );
-				simplePerlin3D742 = simplePerlin3D742*0.5 + 0.5;
-				float2 texCoord361 = IN.ase_texcoord8.xy * float2( 1,1 ) + float2( 0,0 );
-				#if defined(_SECONDCOLOROVERLAYTYPE_WORLD_POSITION)
-				float staticSwitch360 = simplePerlin3D742;
-				#elif defined(_SECONDCOLOROVERLAYTYPE_UV_BASED)
-				float staticSwitch360 = texCoord361.y;
-				#else
-				float staticSwitch360 = simplePerlin3D742;
-				#endif
-				float SecondColorMask335 = saturate( ( ( staticSwitch360 + _SecondColorOffset ) * ( _SecondColorFade * 2 ) ) );
-				float4 lerpResult332 = lerp( temp_output_10_0 , ( _SecondColor * tex2D( _Albedo, uv_Albedo ) ) , SecondColorMask335);
-				#ifdef _COLOR2ENABLE_ON
-				float4 staticSwitch340 = lerpResult332;
-				#else
-				float4 staticSwitch340 = temp_output_10_0;
-				#endif
-				float4 Albedo259 = staticSwitch340;
-				float dotResult461 = dot( SafeNormalize(_MainLightPosition.xyz) , WorldViewDirection );
-				float TranslucencyMask660 = (-dotResult461*1.0 + -0.2);
-				float3 normalizedWorldNormal = normalize( WorldNormal );
-				float dotResult672 = dot( SafeNormalize(_MainLightPosition.xyz) , normalizedWorldNormal );
-				float ase_lightAtten = 0;
-				Light ase_mainLight = GetMainLight( ShadowCoords );
-				ase_lightAtten = ase_mainLight.distanceAttenuation * ase_mainLight.shadowAttenuation;
-				float4 Translucency631 = saturate( ( ( TranslucencyMask660 * ( ( ( (dotResult672*1.0 + 1.0) * ase_lightAtten ) * _MainLightColor * Albedo259 ) * 0.25 ) ) * _TranslucencyInt ) );
+				float4 ase_screenPosNorm = ScreenPos / ScreenPos.w;
+				ase_screenPosNorm.z = ( UNITY_NEAR_CLIP_VALUE >= 0 ) ? ase_screenPosNorm.z : ase_screenPosNorm.z * 0.5 + 0.5;
+				float clampResult140 = clamp( _DepthDistance , 0.1 , 100.0 );
+				float screenDepth83 = LinearEyeDepth(SHADERGRAPH_SAMPLE_SCENE_DEPTH( ase_screenPosNorm.xy ),_ZBufferParams);
+				float distanceDepth83 = abs( ( screenDepth83 - LinearEyeDepth( ase_screenPosNorm.z,_ZBufferParams ) ) / ( clampResult140 ) );
+				float temp_output_364_0 = saturate( distanceDepth83 );
+				float4 Depth158 = saturate( ( saturate( ( _Color2 * temp_output_364_0 ) ) + saturate( ( ( 1.0 - temp_output_364_0 ) * _Color1 ) ) ) );
+				float4 ase_grabScreenPos = ASE_ComputeGrabScreenPos( ScreenPos );
+				float4 ase_grabScreenPosNorm = ase_grabScreenPos / ase_grabScreenPos.w;
+				float4 fetchOpaqueVal341 = float4( SHADERGRAPH_SAMPLE_SCENE_COLOR( ase_grabScreenPosNorm.xy ), 1.0 );
+				float temp_output_132_0 = ( _WavesSpeed * 0.1 );
+				float mulTime43 = _TimeParameters.x * temp_output_132_0;
+				float2 _Vector0 = float2(1,1);
+				float2 appendResult106 = (float2(WorldPosition.x , WorldPosition.z));
+				float2 WorldSpaceTile68 = ( appendResult106 * _WavesTile );
+				float2 panner112 = ( mulTime43 * _Vector0 + WorldSpaceTile68);
+				float3 unpack38 = UnpackNormalScale( tex2D( _WavesNormal, panner112 ), _WavesNormalIntensity );
+				unpack38.z = lerp( 1, unpack38.z, saturate(_WavesNormalIntensity) );
+				float2 panner114 = ( ( 1.0 - mulTime43 ) * _Vector0 + WorldSpaceTile68);
+				float3 unpack46 = UnpackNormalScale( tex2D( _WavesNormal, panner114 ), _WavesNormalIntensity );
+				unpack46.z = lerp( 1, unpack46.z, saturate(_WavesNormalIntensity) );
+				float3 Normal89 = ( unpack38 + unpack46 );
+				float4 temp_output_277_0 = ( ase_grabScreenPosNorm + float4( ( Normal89 * ( _RefractionScale * 0.1 ) ) , 0.0 ) );
+				float4 fetchOpaqueVal274 = float4( SHADERGRAPH_SAMPLE_SCENE_COLOR( temp_output_277_0.xy ), 1.0 );
+				float eyeDepth337 = LinearEyeDepth(SHADERGRAPH_SAMPLE_SCENE_DEPTH( temp_output_277_0.xy ),_ZBufferParams);
+				float eyeDepth = IN.ase_texcoord8.x;
+				float ifLocalVar336 = 0;
+				if( eyeDepth337 > eyeDepth )
+				ifLocalVar336 = 1.0;
+				else if( eyeDepth337 < eyeDepth )
+				ifLocalVar336 = 0.0;
+				float4 lerpResult342 = lerp( fetchOpaqueVal341 , fetchOpaqueVal274 , ifLocalVar336);
+				float4 Refractions282 = saturate( lerpResult342 );
+				float4 lerpResult323 = lerp( Depth158 , Refractions282 , Depth158);
+				float mulTime3 = _TimeParameters.x * ( temp_output_132_0 * 100 );
+				float time61 = mulTime3;
+				float2 voronoiSmoothId61 = 0;
+				float voronoiSmooth61 = ( 1.0 - _FoamDensity );
+				float2 coords61 = WorldSpaceTile68 * 50.0;
+				float2 id61 = 0;
+				float2 uv61 = 0;
+				float voroi61 = voronoi61( coords61, time61, id61, uv61, voronoiSmooth61, voronoiSmoothId61 );
+				float clampResult138 = clamp( _FoamContrast , 0.0 , 0.95 );
+				float screenDepth17 = LinearEyeDepth(SHADERGRAPH_SAMPLE_SCENE_DEPTH( ase_screenPosNorm.xy ),_ZBufferParams);
+				float distanceDepth17 = abs( ( screenDepth17 - LinearEyeDepth( ase_screenPosNorm.z,_ZBufferParams ) ) / ( _FoamDistance ) );
+				float Foam183 = saturate( ( pow( saturate( voroi61 ) , ( 1.0 - clampResult138 ) ) + ( 1.0 - distanceDepth17 ) ) );
 				
-				float2 uv_SmoothnessTexture = IN.ase_texcoord8.xy * _SmoothnessTexture_ST.xy + _SmoothnessTexture_ST.zw;
-				float4 Smoothness944 = ( tex2D( _SmoothnessTexture, uv_SmoothnessTexture ) * _Smoothness );
-				
-				float OpacityMask263 = tex2DNode1.a;
+				float screenDepth345 = LinearEyeDepth(SHADERGRAPH_SAMPLE_SCENE_DEPTH( ase_screenPosNorm.xy ),_ZBufferParams);
+				float distanceDepth345 = abs( ( screenDepth345 - LinearEyeDepth( ase_screenPosNorm.z,_ZBufferParams ) ) / ( _CoastOpacity ) );
 				
 
-				float3 BaseColor = ( Albedo259 + Translucency631 ).rgb;
-				float3 Normal = float3(0, 0, 1);
+				float3 BaseColor = ( lerpResult323 + Foam183 ).rgb;
+				float3 Normal = Normal89;
 				float3 Emission = 0;
 				float3 Specular = 0.5;
-				float Metallic = 0;
-				float Smoothness = Smoothness944.r;
+				float Metallic = _Metallic;
+				float Smoothness = _Smoothness;
 				float Occlusion = 1;
-				float Alpha = OpacityMask263;
-				float AlphaClipThreshold = _AlphaCutoff;
+				float Alpha = ( _Opacity * saturate( distanceDepth345 ) );
+				float AlphaClipThreshold = 0.5;
 				float AlphaClipThresholdShadow = 0.5;
 				float3 BakedGI = 0;
 				float3 RefractionColor = 1;
@@ -853,404 +864,6 @@ Shader "Raygeas/Suntail Foliage"
 		Pass
 		{
 			
-			Name "ShadowCaster"
-			Tags { "LightMode"="ShadowCaster" }
-
-			ZWrite On
-			ZTest LEqual
-			AlphaToMask Off
-			ColorMask 0
-
-			HLSLPROGRAM
-
-			#define _NORMAL_DROPOFF_TS 1
-			#pragma multi_compile_instancing
-			#pragma multi_compile_fragment _ LOD_FADE_CROSSFADE
-			#define ASE_FOG 1
-			#define _ALPHATEST_ON 1
-			#define ASE_SRP_VERSION 120113
-
-
-			#pragma vertex vert
-			#pragma fragment frag
-
-			#pragma multi_compile_vertex _ _CASTING_PUNCTUAL_LIGHT_SHADOW
-
-			#define SHADERPASS SHADERPASS_SHADOWCASTER
-
-			#include "Packages/com.unity.render-pipelines.core/ShaderLibrary/Color.hlsl"
-			#include "Packages/com.unity.render-pipelines.core/ShaderLibrary/Texture.hlsl"
-			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
-			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Lighting.hlsl"
-			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Input.hlsl"
-			#include "Packages/com.unity.render-pipelines.core/ShaderLibrary/TextureStack.hlsl"
-			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/ShaderGraphFunctions.hlsl"
-			#include "Packages/com.unity.render-pipelines.universal/Editor/ShaderGraph/Includes/ShaderPass.hlsl"
-
-			#pragma shader_feature_local _ENABLEWIND_ON
-			#pragma shader_feature_local _ANCHORTHEFOLIAGEBASE_ON
-
-
-			#if defined(ASE_EARLY_Z_DEPTH_OPTIMIZE) && (SHADER_TARGET >= 45)
-				#define ASE_SV_DEPTH SV_DepthLessEqual
-				#define ASE_SV_POSITION_QUALIFIERS linear noperspective centroid
-			#else
-				#define ASE_SV_DEPTH SV_Depth
-				#define ASE_SV_POSITION_QUALIFIERS
-			#endif
-
-			struct VertexInput
-			{
-				float4 vertex : POSITION;
-				float3 ase_normal : NORMAL;
-				float4 ase_texcoord : TEXCOORD0;
-				UNITY_VERTEX_INPUT_INSTANCE_ID
-			};
-
-			struct VertexOutput
-			{
-				ASE_SV_POSITION_QUALIFIERS float4 clipPos : SV_POSITION;
-				float4 clipPosV : TEXCOORD0;
-				#if defined(ASE_NEEDS_FRAG_WORLD_POSITION)
-					float3 worldPos : TEXCOORD1;
-				#endif
-				#if defined(REQUIRES_VERTEX_SHADOW_COORD_INTERPOLATOR) && defined(ASE_NEEDS_FRAG_SHADOWCOORDS)
-					float4 shadowCoord : TEXCOORD2;
-				#endif				
-				float4 ase_texcoord3 : TEXCOORD3;
-				UNITY_VERTEX_INPUT_INSTANCE_ID
-				UNITY_VERTEX_OUTPUT_STEREO
-			};
-
-			CBUFFER_START(UnityPerMaterial)
-			float4 _MainColor;
-			float4 _Albedo_ST;
-			float4 _SecondColor;
-			float4 _SmoothnessTexture_ST;
-			float _WindSpeed;
-			float _WindWavesScale;
-			float _WindForce;
-			float _WorldScale;
-			float _SecondColorOffset;
-			float _SecondColorFade;
-			float _TranslucencyInt;
-			float _Smoothness;
-			float _AlphaCutoff;
-			#ifdef ASE_TRANSMISSION
-				float _TransmissionShadow;
-			#endif
-			#ifdef ASE_TRANSLUCENCY
-				float _TransStrength;
-				float _TransNormal;
-				float _TransScattering;
-				float _TransDirect;
-				float _TransAmbient;
-				float _TransShadow;
-			#endif
-			#ifdef ASE_TESSELLATION
-				float _TessPhongStrength;
-				float _TessValue;
-				float _TessMin;
-				float _TessMax;
-				float _TessEdgeLength;
-				float _TessMaxDisp;
-			#endif
-			CBUFFER_END
-
-			// Property used by ScenePickingPass
-			#ifdef SCENEPICKINGPASS
-				float4 _SelectionID;
-			#endif
-
-			// Properties used by SceneSelectionPass
-			#ifdef SCENESELECTIONPASS
-				int _ObjectId;
-				int _PassValue;
-			#endif
-
-			sampler2D _Albedo;
-
-
-			//#include "Packages/com.unity.render-pipelines.universal/Editor/ShaderGraph/Includes/Varyings.hlsl"
-			//#include "Packages/com.unity.render-pipelines.universal/Editor/ShaderGraph/Includes/ShadowCasterPass.hlsl"
-
-			//#ifdef HAVE_VFX_MODIFICATION
-			//#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/VisualEffectVertex.hlsl"
-			//#endif
-
-			float3 mod3D289( float3 x ) { return x - floor( x / 289.0 ) * 289.0; }
-			float4 mod3D289( float4 x ) { return x - floor( x / 289.0 ) * 289.0; }
-			float4 permute( float4 x ) { return mod3D289( ( x * 34.0 + 1.0 ) * x ); }
-			float4 taylorInvSqrt( float4 r ) { return 1.79284291400159 - r * 0.85373472095314; }
-			float snoise( float3 v )
-			{
-				const float2 C = float2( 1.0 / 6.0, 1.0 / 3.0 );
-				float3 i = floor( v + dot( v, C.yyy ) );
-				float3 x0 = v - i + dot( i, C.xxx );
-				float3 g = step( x0.yzx, x0.xyz );
-				float3 l = 1.0 - g;
-				float3 i1 = min( g.xyz, l.zxy );
-				float3 i2 = max( g.xyz, l.zxy );
-				float3 x1 = x0 - i1 + C.xxx;
-				float3 x2 = x0 - i2 + C.yyy;
-				float3 x3 = x0 - 0.5;
-				i = mod3D289( i);
-				float4 p = permute( permute( permute( i.z + float4( 0.0, i1.z, i2.z, 1.0 ) ) + i.y + float4( 0.0, i1.y, i2.y, 1.0 ) ) + i.x + float4( 0.0, i1.x, i2.x, 1.0 ) );
-				float4 j = p - 49.0 * floor( p / 49.0 );  // mod(p,7*7)
-				float4 x_ = floor( j / 7.0 );
-				float4 y_ = floor( j - 7.0 * x_ );  // mod(j,N)
-				float4 x = ( x_ * 2.0 + 0.5 ) / 7.0 - 1.0;
-				float4 y = ( y_ * 2.0 + 0.5 ) / 7.0 - 1.0;
-				float4 h = 1.0 - abs( x ) - abs( y );
-				float4 b0 = float4( x.xy, y.xy );
-				float4 b1 = float4( x.zw, y.zw );
-				float4 s0 = floor( b0 ) * 2.0 + 1.0;
-				float4 s1 = floor( b1 ) * 2.0 + 1.0;
-				float4 sh = -step( h, 0.0 );
-				float4 a0 = b0.xzyw + s0.xzyw * sh.xxyy;
-				float4 a1 = b1.xzyw + s1.xzyw * sh.zzww;
-				float3 g0 = float3( a0.xy, h.x );
-				float3 g1 = float3( a0.zw, h.y );
-				float3 g2 = float3( a1.xy, h.z );
-				float3 g3 = float3( a1.zw, h.w );
-				float4 norm = taylorInvSqrt( float4( dot( g0, g0 ), dot( g1, g1 ), dot( g2, g2 ), dot( g3, g3 ) ) );
-				g0 *= norm.x;
-				g1 *= norm.y;
-				g2 *= norm.z;
-				g3 *= norm.w;
-				float4 m = max( 0.6 - float4( dot( x0, x0 ), dot( x1, x1 ), dot( x2, x2 ), dot( x3, x3 ) ), 0.0 );
-				m = m* m;
-				m = m* m;
-				float4 px = float4( dot( x0, g0 ), dot( x1, g1 ), dot( x2, g2 ), dot( x3, g3 ) );
-				return 42.0 * dot( m, px);
-			}
-			
-
-			float3 _LightDirection;
-			float3 _LightPosition;
-
-			VertexOutput VertexFunction( VertexInput v )
-			{
-				VertexOutput o;
-				UNITY_SETUP_INSTANCE_ID(v);
-				UNITY_TRANSFER_INSTANCE_ID(v, o);
-				UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO( o );
-
-				float3 ase_worldPos = TransformObjectToWorld( (v.vertex).xyz );
-				float mulTime34 = _TimeParameters.x * ( _WindSpeed * 5 );
-				float simplePerlin3D35 = snoise( ( ase_worldPos + mulTime34 )*_WindWavesScale );
-				float temp_output_231_0 = ( simplePerlin3D35 * 0.01 );
-				float2 texCoord357 = v.ase_texcoord.xy * float2( 1,1 ) + float2( 0,0 );
-				#ifdef _ANCHORTHEFOLIAGEBASE_ON
-				float staticSwitch376 = ( temp_output_231_0 * pow( texCoord357.y , 2.0 ) );
-				#else
-				float staticSwitch376 = temp_output_231_0;
-				#endif
-				#ifdef _ENABLEWIND_ON
-				float staticSwitch341 = ( staticSwitch376 * ( _WindForce * 30 ) );
-				#else
-				float staticSwitch341 = 0.0;
-				#endif
-				float Wind191 = staticSwitch341;
-				float3 temp_cast_0 = (Wind191).xxx;
-				
-				o.ase_texcoord3.xy = v.ase_texcoord.xy;
-				
-				//setting value to unused interpolator channels and avoid initialization warnings
-				o.ase_texcoord3.zw = 0;
-
-				#ifdef ASE_ABSOLUTE_VERTEX_POS
-					float3 defaultVertexValue = v.vertex.xyz;
-				#else
-					float3 defaultVertexValue = float3(0, 0, 0);
-				#endif
-
-				float3 vertexValue = temp_cast_0;
-				#ifdef ASE_ABSOLUTE_VERTEX_POS
-					v.vertex.xyz = vertexValue;
-				#else
-					v.vertex.xyz += vertexValue;
-				#endif
-
-				v.ase_normal = v.ase_normal;
-
-				float3 positionWS = TransformObjectToWorld( v.vertex.xyz );
-
-				#if defined(ASE_NEEDS_FRAG_WORLD_POSITION)
-					o.worldPos = positionWS;
-				#endif
-
-				float3 normalWS = TransformObjectToWorldDir(v.ase_normal);
-
-				#if _CASTING_PUNCTUAL_LIGHT_SHADOW
-					float3 lightDirectionWS = normalize(_LightPosition - positionWS);
-				#else
-					float3 lightDirectionWS = _LightDirection;
-				#endif
-
-				float4 clipPos = TransformWorldToHClip(ApplyShadowBias(positionWS, normalWS, lightDirectionWS));
-
-				#if UNITY_REVERSED_Z
-					clipPos.z = min(clipPos.z, UNITY_NEAR_CLIP_VALUE);
-				#else
-					clipPos.z = max(clipPos.z, UNITY_NEAR_CLIP_VALUE);
-				#endif
-
-				#if defined(REQUIRES_VERTEX_SHADOW_COORD_INTERPOLATOR) && defined(ASE_NEEDS_FRAG_SHADOWCOORDS)
-					VertexPositionInputs vertexInput = (VertexPositionInputs)0;
-					vertexInput.positionWS = positionWS;
-					vertexInput.positionCS = clipPos;
-					o.shadowCoord = GetShadowCoord( vertexInput );
-				#endif
-
-				o.clipPos = clipPos;
-				o.clipPosV = clipPos;
-				return o;
-			}
-
-			#if defined(ASE_TESSELLATION)
-			struct VertexControl
-			{
-				float4 vertex : INTERNALTESSPOS;
-				float3 ase_normal : NORMAL;
-				float4 ase_texcoord : TEXCOORD0;
-
-				UNITY_VERTEX_INPUT_INSTANCE_ID
-			};
-
-			struct TessellationFactors
-			{
-				float edge[3] : SV_TessFactor;
-				float inside : SV_InsideTessFactor;
-			};
-
-			VertexControl vert ( VertexInput v )
-			{
-				VertexControl o;
-				UNITY_SETUP_INSTANCE_ID(v);
-				UNITY_TRANSFER_INSTANCE_ID(v, o);
-				o.vertex = v.vertex;
-				o.ase_normal = v.ase_normal;
-				o.ase_texcoord = v.ase_texcoord;
-				return o;
-			}
-
-			TessellationFactors TessellationFunction (InputPatch<VertexControl,3> v)
-			{
-				TessellationFactors o;
-				float4 tf = 1;
-				float tessValue = _TessValue; float tessMin = _TessMin; float tessMax = _TessMax;
-				float edgeLength = _TessEdgeLength; float tessMaxDisp = _TessMaxDisp;
-				#if defined(ASE_FIXED_TESSELLATION)
-				tf = FixedTess( tessValue );
-				#elif defined(ASE_DISTANCE_TESSELLATION)
-				tf = DistanceBasedTess(v[0].vertex, v[1].vertex, v[2].vertex, tessValue, tessMin, tessMax, GetObjectToWorldMatrix(), _WorldSpaceCameraPos );
-				#elif defined(ASE_LENGTH_TESSELLATION)
-				tf = EdgeLengthBasedTess(v[0].vertex, v[1].vertex, v[2].vertex, edgeLength, GetObjectToWorldMatrix(), _WorldSpaceCameraPos, _ScreenParams );
-				#elif defined(ASE_LENGTH_CULL_TESSELLATION)
-				tf = EdgeLengthBasedTessCull(v[0].vertex, v[1].vertex, v[2].vertex, edgeLength, tessMaxDisp, GetObjectToWorldMatrix(), _WorldSpaceCameraPos, _ScreenParams, unity_CameraWorldClipPlanes );
-				#endif
-				o.edge[0] = tf.x; o.edge[1] = tf.y; o.edge[2] = tf.z; o.inside = tf.w;
-				return o;
-			}
-
-			[domain("tri")]
-			[partitioning("fractional_odd")]
-			[outputtopology("triangle_cw")]
-			[patchconstantfunc("TessellationFunction")]
-			[outputcontrolpoints(3)]
-			VertexControl HullFunction(InputPatch<VertexControl, 3> patch, uint id : SV_OutputControlPointID)
-			{
-				return patch[id];
-			}
-
-			[domain("tri")]
-			VertexOutput DomainFunction(TessellationFactors factors, OutputPatch<VertexControl, 3> patch, float3 bary : SV_DomainLocation)
-			{
-				VertexInput o = (VertexInput) 0;
-				o.vertex = patch[0].vertex * bary.x + patch[1].vertex * bary.y + patch[2].vertex * bary.z;
-				o.ase_normal = patch[0].ase_normal * bary.x + patch[1].ase_normal * bary.y + patch[2].ase_normal * bary.z;
-				o.ase_texcoord = patch[0].ase_texcoord * bary.x + patch[1].ase_texcoord * bary.y + patch[2].ase_texcoord * bary.z;
-				#if defined(ASE_PHONG_TESSELLATION)
-				float3 pp[3];
-				for (int i = 0; i < 3; ++i)
-					pp[i] = o.vertex.xyz - patch[i].ase_normal * (dot(o.vertex.xyz, patch[i].ase_normal) - dot(patch[i].vertex.xyz, patch[i].ase_normal));
-				float phongStrength = _TessPhongStrength;
-				o.vertex.xyz = phongStrength * (pp[0]*bary.x + pp[1]*bary.y + pp[2]*bary.z) + (1.0f-phongStrength) * o.vertex.xyz;
-				#endif
-				UNITY_TRANSFER_INSTANCE_ID(patch[0], o);
-				return VertexFunction(o);
-			}
-			#else
-			VertexOutput vert ( VertexInput v )
-			{
-				return VertexFunction( v );
-			}
-			#endif
-
-			half4 frag(	VertexOutput IN
-						#ifdef ASE_DEPTH_WRITE_ON
-						,out float outputDepth : ASE_SV_DEPTH
-						#endif
-						 ) : SV_TARGET
-			{
-				UNITY_SETUP_INSTANCE_ID( IN );
-				UNITY_SETUP_STEREO_EYE_INDEX_POST_VERTEX( IN );
-
-				#if defined(ASE_NEEDS_FRAG_WORLD_POSITION)
-					float3 WorldPosition = IN.worldPos;
-				#endif
-
-				float4 ShadowCoords = float4( 0, 0, 0, 0 );
-				float4 ClipPos = IN.clipPosV;
-				float4 ScreenPos = ComputeScreenPos( IN.clipPosV );
-
-				#if defined(ASE_NEEDS_FRAG_SHADOWCOORDS)
-					#if defined(REQUIRES_VERTEX_SHADOW_COORD_INTERPOLATOR)
-						ShadowCoords = IN.shadowCoord;
-					#elif defined(MAIN_LIGHT_CALCULATE_SHADOWS)
-						ShadowCoords = TransformWorldToShadowCoord( WorldPosition );
-					#endif
-				#endif
-
-				float2 uv_Albedo = IN.ase_texcoord3.xy * _Albedo_ST.xy + _Albedo_ST.zw;
-				float4 tex2DNode1 = tex2D( _Albedo, uv_Albedo );
-				float OpacityMask263 = tex2DNode1.a;
-				
-
-				float Alpha = OpacityMask263;
-				float AlphaClipThreshold = _AlphaCutoff;
-				float AlphaClipThresholdShadow = 0.5;
-
-				#ifdef ASE_DEPTH_WRITE_ON
-					float DepthValue = IN.clipPos.z;
-				#endif
-
-				#ifdef _ALPHATEST_ON
-					#ifdef _ALPHATEST_SHADOW_ON
-						clip(Alpha - AlphaClipThresholdShadow);
-					#else
-						clip(Alpha - AlphaClipThreshold);
-					#endif
-				#endif
-
-				#ifdef LOD_FADE_CROSSFADE
-					LODDitheringTransition( IN.clipPos.xyz, unity_LODFade.x );
-				#endif
-
-				#ifdef ASE_DEPTH_WRITE_ON
-					outputDepth = DepthValue;
-				#endif
-
-				return 0;
-			}
-			ENDHLSL
-		}
-
-		
-		Pass
-		{
-			
 			Name "DepthOnly"
 			Tags { "LightMode"="DepthOnly" }
 
@@ -1260,12 +873,12 @@ Shader "Raygeas/Suntail Foliage"
 
 			HLSLPROGRAM
 
+			#define _SURFACE_TYPE_TRANSPARENT 1
 			#define _NORMAL_DROPOFF_TS 1
-			#pragma multi_compile_instancing
-			#pragma multi_compile_fragment _ LOD_FADE_CROSSFADE
 			#define ASE_FOG 1
-			#define _ALPHATEST_ON 1
+			#define _NORMALMAP 1
 			#define ASE_SRP_VERSION 120113
+			#define REQUIRE_DEPTH_TEXTURE 1
 
 
 			#pragma vertex vert
@@ -1282,8 +895,7 @@ Shader "Raygeas/Suntail Foliage"
 			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/ShaderGraphFunctions.hlsl"
 			#include "Packages/com.unity.render-pipelines.universal/Editor/ShaderGraph/Includes/ShaderPass.hlsl"
 
-			#pragma shader_feature_local _ENABLEWIND_ON
-			#pragma shader_feature_local _ANCHORTHEFOLIAGEBASE_ON
+			#define ASE_NEEDS_FRAG_SCREEN_POSITION
 
 
 			#if defined(ASE_EARLY_Z_DEPTH_OPTIMIZE) && (SHADER_TARGET >= 45)
@@ -1298,7 +910,7 @@ Shader "Raygeas/Suntail Foliage"
 			{
 				float4 vertex : POSITION;
 				float3 ase_normal : NORMAL;
-				float4 ase_texcoord : TEXCOORD0;
+				
 				UNITY_VERTEX_INPUT_INSTANCE_ID
 			};
 
@@ -1312,25 +924,26 @@ Shader "Raygeas/Suntail Foliage"
 				#if defined(REQUIRES_VERTEX_SHADOW_COORD_INTERPOLATOR) && defined(ASE_NEEDS_FRAG_SHADOWCOORDS)
 				float4 shadowCoord : TEXCOORD2;
 				#endif
-				float4 ase_texcoord3 : TEXCOORD3;
+				
 				UNITY_VERTEX_INPUT_INSTANCE_ID
 				UNITY_VERTEX_OUTPUT_STEREO
 			};
 
 			CBUFFER_START(UnityPerMaterial)
-			float4 _MainColor;
-			float4 _Albedo_ST;
-			float4 _SecondColor;
-			float4 _SmoothnessTexture_ST;
-			float _WindSpeed;
-			float _WindWavesScale;
-			float _WindForce;
-			float _WorldScale;
-			float _SecondColorOffset;
-			float _SecondColorFade;
-			float _TranslucencyInt;
+			float4 _Color2;
+			float4 _Color1;
+			float _DepthDistance;
+			float _WavesSpeed;
+			float _WavesTile;
+			float _WavesNormalIntensity;
+			float _RefractionScale;
+			float _FoamDensity;
+			float _FoamContrast;
+			float _FoamDistance;
+			float _Metallic;
 			float _Smoothness;
-			float _AlphaCutoff;
+			float _Opacity;
+			float _CoastOpacity;
 			#ifdef ASE_TRANSMISSION
 				float _TransmissionShadow;
 			#endif
@@ -1363,7 +976,7 @@ Shader "Raygeas/Suntail Foliage"
 				int _PassValue;
 			#endif
 
-			sampler2D _Albedo;
+			uniform float4 _CameraDepthTexture_TexelSize;
 
 
 			//#include "Packages/com.unity.render-pipelines.universal/Editor/ShaderGraph/Includes/Varyings.hlsl"
@@ -1373,54 +986,7 @@ Shader "Raygeas/Suntail Foliage"
 			//#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/VisualEffectVertex.hlsl"
 			//#endif
 
-			float3 mod3D289( float3 x ) { return x - floor( x / 289.0 ) * 289.0; }
-			float4 mod3D289( float4 x ) { return x - floor( x / 289.0 ) * 289.0; }
-			float4 permute( float4 x ) { return mod3D289( ( x * 34.0 + 1.0 ) * x ); }
-			float4 taylorInvSqrt( float4 r ) { return 1.79284291400159 - r * 0.85373472095314; }
-			float snoise( float3 v )
-			{
-				const float2 C = float2( 1.0 / 6.0, 1.0 / 3.0 );
-				float3 i = floor( v + dot( v, C.yyy ) );
-				float3 x0 = v - i + dot( i, C.xxx );
-				float3 g = step( x0.yzx, x0.xyz );
-				float3 l = 1.0 - g;
-				float3 i1 = min( g.xyz, l.zxy );
-				float3 i2 = max( g.xyz, l.zxy );
-				float3 x1 = x0 - i1 + C.xxx;
-				float3 x2 = x0 - i2 + C.yyy;
-				float3 x3 = x0 - 0.5;
-				i = mod3D289( i);
-				float4 p = permute( permute( permute( i.z + float4( 0.0, i1.z, i2.z, 1.0 ) ) + i.y + float4( 0.0, i1.y, i2.y, 1.0 ) ) + i.x + float4( 0.0, i1.x, i2.x, 1.0 ) );
-				float4 j = p - 49.0 * floor( p / 49.0 );  // mod(p,7*7)
-				float4 x_ = floor( j / 7.0 );
-				float4 y_ = floor( j - 7.0 * x_ );  // mod(j,N)
-				float4 x = ( x_ * 2.0 + 0.5 ) / 7.0 - 1.0;
-				float4 y = ( y_ * 2.0 + 0.5 ) / 7.0 - 1.0;
-				float4 h = 1.0 - abs( x ) - abs( y );
-				float4 b0 = float4( x.xy, y.xy );
-				float4 b1 = float4( x.zw, y.zw );
-				float4 s0 = floor( b0 ) * 2.0 + 1.0;
-				float4 s1 = floor( b1 ) * 2.0 + 1.0;
-				float4 sh = -step( h, 0.0 );
-				float4 a0 = b0.xzyw + s0.xzyw * sh.xxyy;
-				float4 a1 = b1.xzyw + s1.xzyw * sh.zzww;
-				float3 g0 = float3( a0.xy, h.x );
-				float3 g1 = float3( a0.zw, h.y );
-				float3 g2 = float3( a1.xy, h.z );
-				float3 g3 = float3( a1.zw, h.w );
-				float4 norm = taylorInvSqrt( float4( dot( g0, g0 ), dot( g1, g1 ), dot( g2, g2 ), dot( g3, g3 ) ) );
-				g0 *= norm.x;
-				g1 *= norm.y;
-				g2 *= norm.z;
-				g3 *= norm.w;
-				float4 m = max( 0.6 - float4( dot( x0, x0 ), dot( x1, x1 ), dot( x2, x2 ), dot( x3, x3 ) ), 0.0 );
-				m = m* m;
-				m = m* m;
-				float4 px = float4( dot( x0, g0 ), dot( x1, g1 ), dot( x2, g2 ), dot( x3, g3 ) );
-				return 42.0 * dot( m, px);
-			}
 			
-
 			VertexOutput VertexFunction( VertexInput v  )
 			{
 				VertexOutput o = (VertexOutput)0;
@@ -1428,28 +994,7 @@ Shader "Raygeas/Suntail Foliage"
 				UNITY_TRANSFER_INSTANCE_ID(v, o);
 				UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(o);
 
-				float3 ase_worldPos = TransformObjectToWorld( (v.vertex).xyz );
-				float mulTime34 = _TimeParameters.x * ( _WindSpeed * 5 );
-				float simplePerlin3D35 = snoise( ( ase_worldPos + mulTime34 )*_WindWavesScale );
-				float temp_output_231_0 = ( simplePerlin3D35 * 0.01 );
-				float2 texCoord357 = v.ase_texcoord.xy * float2( 1,1 ) + float2( 0,0 );
-				#ifdef _ANCHORTHEFOLIAGEBASE_ON
-				float staticSwitch376 = ( temp_output_231_0 * pow( texCoord357.y , 2.0 ) );
-				#else
-				float staticSwitch376 = temp_output_231_0;
-				#endif
-				#ifdef _ENABLEWIND_ON
-				float staticSwitch341 = ( staticSwitch376 * ( _WindForce * 30 ) );
-				#else
-				float staticSwitch341 = 0.0;
-				#endif
-				float Wind191 = staticSwitch341;
-				float3 temp_cast_0 = (Wind191).xxx;
 				
-				o.ase_texcoord3.xy = v.ase_texcoord.xy;
-				
-				//setting value to unused interpolator channels and avoid initialization warnings
-				o.ase_texcoord3.zw = 0;
 
 				#ifdef ASE_ABSOLUTE_VERTEX_POS
 					float3 defaultVertexValue = v.vertex.xyz;
@@ -1457,7 +1002,7 @@ Shader "Raygeas/Suntail Foliage"
 					float3 defaultVertexValue = float3(0, 0, 0);
 				#endif
 
-				float3 vertexValue = temp_cast_0;
+				float3 vertexValue = defaultVertexValue;
 
 				#ifdef ASE_ABSOLUTE_VERTEX_POS
 					v.vertex.xyz = vertexValue;
@@ -1490,8 +1035,7 @@ Shader "Raygeas/Suntail Foliage"
 			{
 				float4 vertex : INTERNALTESSPOS;
 				float3 ase_normal : NORMAL;
-				float4 ase_texcoord : TEXCOORD0;
-
+				
 				UNITY_VERTEX_INPUT_INSTANCE_ID
 			};
 
@@ -1508,7 +1052,7 @@ Shader "Raygeas/Suntail Foliage"
 				UNITY_TRANSFER_INSTANCE_ID(v, o);
 				o.vertex = v.vertex;
 				o.ase_normal = v.ase_normal;
-				o.ase_texcoord = v.ase_texcoord;
+				
 				return o;
 			}
 
@@ -1547,7 +1091,7 @@ Shader "Raygeas/Suntail Foliage"
 				VertexInput o = (VertexInput) 0;
 				o.vertex = patch[0].vertex * bary.x + patch[1].vertex * bary.y + patch[2].vertex * bary.z;
 				o.ase_normal = patch[0].ase_normal * bary.x + patch[1].ase_normal * bary.y + patch[2].ase_normal * bary.z;
-				o.ase_texcoord = patch[0].ase_texcoord * bary.x + patch[1].ase_texcoord * bary.y + patch[2].ase_texcoord * bary.z;
+				
 				#if defined(ASE_PHONG_TESSELLATION)
 				float3 pp[3];
 				for (int i = 0; i < 3; ++i)
@@ -1590,13 +1134,14 @@ Shader "Raygeas/Suntail Foliage"
 					#endif
 				#endif
 
-				float2 uv_Albedo = IN.ase_texcoord3.xy * _Albedo_ST.xy + _Albedo_ST.zw;
-				float4 tex2DNode1 = tex2D( _Albedo, uv_Albedo );
-				float OpacityMask263 = tex2DNode1.a;
+				float4 ase_screenPosNorm = ScreenPos / ScreenPos.w;
+				ase_screenPosNorm.z = ( UNITY_NEAR_CLIP_VALUE >= 0 ) ? ase_screenPosNorm.z : ase_screenPosNorm.z * 0.5 + 0.5;
+				float screenDepth345 = LinearEyeDepth(SHADERGRAPH_SAMPLE_SCENE_DEPTH( ase_screenPosNorm.xy ),_ZBufferParams);
+				float distanceDepth345 = abs( ( screenDepth345 - LinearEyeDepth( ase_screenPosNorm.z,_ZBufferParams ) ) / ( _CoastOpacity ) );
 				
 
-				float Alpha = OpacityMask263;
-				float AlphaClipThreshold = _AlphaCutoff;
+				float Alpha = ( _Opacity * saturate( distanceDepth345 ) );
+				float AlphaClipThreshold = 0.5;
 				#ifdef ASE_DEPTH_WRITE_ON
 					float DepthValue = IN.clipPos.z;
 				#endif
@@ -1622,432 +1167,10 @@ Shader "Raygeas/Suntail Foliage"
 		Pass
 		{
 			
-			Name "Meta"
-			Tags { "LightMode"="Meta" }
-
-			Cull Off
-
-			HLSLPROGRAM
-
-			#define _NORMAL_DROPOFF_TS 1
-			#define ASE_FOG 1
-			#define _ALPHATEST_ON 1
-			#define ASE_SRP_VERSION 120113
-
-
-			#pragma vertex vert
-			#pragma fragment frag
-
-			#pragma shader_feature EDITOR_VISUALIZATION
-
-			#define SHADERPASS SHADERPASS_META
-
-			#include "Packages/com.unity.render-pipelines.core/ShaderLibrary/Color.hlsl"
-			#include "Packages/com.unity.render-pipelines.core/ShaderLibrary/Texture.hlsl"
-			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
-			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Lighting.hlsl"
-			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Input.hlsl"
-			#include "Packages/com.unity.render-pipelines.core/ShaderLibrary/TextureStack.hlsl"
-			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/ShaderGraphFunctions.hlsl"
-			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/MetaInput.hlsl"
-			#include "Packages/com.unity.render-pipelines.universal/Editor/ShaderGraph/Includes/ShaderPass.hlsl"
-
-			#define ASE_NEEDS_FRAG_WORLD_POSITION
-			#define ASE_NEEDS_VERT_NORMAL
-			#define ASE_NEEDS_FRAG_SHADOWCOORDS
-			#pragma shader_feature_local _ENABLEWIND_ON
-			#pragma shader_feature_local _ANCHORTHEFOLIAGEBASE_ON
-			#pragma shader_feature_local _COLOR2ENABLE_ON
-			#pragma shader_feature_local _SECONDCOLOROVERLAYTYPE_WORLD_POSITION _SECONDCOLOROVERLAYTYPE_UV_BASED
-			#pragma multi_compile _ _MAIN_LIGHT_SHADOWS _MAIN_LIGHT_SHADOWS_CASCADE _MAIN_LIGHT_SHADOWS_SCREEN
-			#pragma multi_compile _ _ADDITIONAL_LIGHTS_VERTEX _ADDITIONAL_LIGHTS
-			#pragma multi_compile_fragment _ _ADDITIONAL_LIGHT_SHADOWS
-			#pragma multi_compile_fragment _ _SHADOWS_SOFT
-
-
-			struct VertexInput
-			{
-				float4 vertex : POSITION;
-				float3 ase_normal : NORMAL;
-				float4 texcoord0 : TEXCOORD0;
-				float4 texcoord1 : TEXCOORD1;
-				float4 texcoord2 : TEXCOORD2;
-				
-				UNITY_VERTEX_INPUT_INSTANCE_ID
-			};
-
-			struct VertexOutput
-			{
-				float4 clipPos : SV_POSITION;
-				#if defined(ASE_NEEDS_FRAG_WORLD_POSITION)
-					float3 worldPos : TEXCOORD0;
-				#endif
-				#if defined(REQUIRES_VERTEX_SHADOW_COORD_INTERPOLATOR) && defined(ASE_NEEDS_FRAG_SHADOWCOORDS)
-					float4 shadowCoord : TEXCOORD1;
-				#endif
-				#ifdef EDITOR_VISUALIZATION
-					float4 VizUV : TEXCOORD2;
-					float4 LightCoord : TEXCOORD3;
-				#endif
-				float4 ase_texcoord4 : TEXCOORD4;
-				float4 ase_texcoord5 : TEXCOORD5;
-				UNITY_VERTEX_INPUT_INSTANCE_ID
-				UNITY_VERTEX_OUTPUT_STEREO
-			};
-
-			CBUFFER_START(UnityPerMaterial)
-			float4 _MainColor;
-			float4 _Albedo_ST;
-			float4 _SecondColor;
-			float4 _SmoothnessTexture_ST;
-			float _WindSpeed;
-			float _WindWavesScale;
-			float _WindForce;
-			float _WorldScale;
-			float _SecondColorOffset;
-			float _SecondColorFade;
-			float _TranslucencyInt;
-			float _Smoothness;
-			float _AlphaCutoff;
-			#ifdef ASE_TRANSMISSION
-				float _TransmissionShadow;
-			#endif
-			#ifdef ASE_TRANSLUCENCY
-				float _TransStrength;
-				float _TransNormal;
-				float _TransScattering;
-				float _TransDirect;
-				float _TransAmbient;
-				float _TransShadow;
-			#endif
-			#ifdef ASE_TESSELLATION
-				float _TessPhongStrength;
-				float _TessValue;
-				float _TessMin;
-				float _TessMax;
-				float _TessEdgeLength;
-				float _TessMaxDisp;
-			#endif
-			CBUFFER_END
-
-			// Property used by ScenePickingPass
-			#ifdef SCENEPICKINGPASS
-				float4 _SelectionID;
-			#endif
-
-			// Properties used by SceneSelectionPass
-			#ifdef SCENESELECTIONPASS
-				int _ObjectId;
-				int _PassValue;
-			#endif
-
-			sampler2D _Albedo;
-
-
-			//#include "Packages/com.unity.render-pipelines.universal/Editor/ShaderGraph/Includes/Varyings.hlsl"
-			//#include "Packages/com.unity.render-pipelines.universal/Editor/ShaderGraph/Includes/LightingMetaPass.hlsl"
-
-			//#ifdef HAVE_VFX_MODIFICATION
-			//#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/VisualEffectVertex.hlsl"
-			//#endif
-
-			float3 mod3D289( float3 x ) { return x - floor( x / 289.0 ) * 289.0; }
-			float4 mod3D289( float4 x ) { return x - floor( x / 289.0 ) * 289.0; }
-			float4 permute( float4 x ) { return mod3D289( ( x * 34.0 + 1.0 ) * x ); }
-			float4 taylorInvSqrt( float4 r ) { return 1.79284291400159 - r * 0.85373472095314; }
-			float snoise( float3 v )
-			{
-				const float2 C = float2( 1.0 / 6.0, 1.0 / 3.0 );
-				float3 i = floor( v + dot( v, C.yyy ) );
-				float3 x0 = v - i + dot( i, C.xxx );
-				float3 g = step( x0.yzx, x0.xyz );
-				float3 l = 1.0 - g;
-				float3 i1 = min( g.xyz, l.zxy );
-				float3 i2 = max( g.xyz, l.zxy );
-				float3 x1 = x0 - i1 + C.xxx;
-				float3 x2 = x0 - i2 + C.yyy;
-				float3 x3 = x0 - 0.5;
-				i = mod3D289( i);
-				float4 p = permute( permute( permute( i.z + float4( 0.0, i1.z, i2.z, 1.0 ) ) + i.y + float4( 0.0, i1.y, i2.y, 1.0 ) ) + i.x + float4( 0.0, i1.x, i2.x, 1.0 ) );
-				float4 j = p - 49.0 * floor( p / 49.0 );  // mod(p,7*7)
-				float4 x_ = floor( j / 7.0 );
-				float4 y_ = floor( j - 7.0 * x_ );  // mod(j,N)
-				float4 x = ( x_ * 2.0 + 0.5 ) / 7.0 - 1.0;
-				float4 y = ( y_ * 2.0 + 0.5 ) / 7.0 - 1.0;
-				float4 h = 1.0 - abs( x ) - abs( y );
-				float4 b0 = float4( x.xy, y.xy );
-				float4 b1 = float4( x.zw, y.zw );
-				float4 s0 = floor( b0 ) * 2.0 + 1.0;
-				float4 s1 = floor( b1 ) * 2.0 + 1.0;
-				float4 sh = -step( h, 0.0 );
-				float4 a0 = b0.xzyw + s0.xzyw * sh.xxyy;
-				float4 a1 = b1.xzyw + s1.xzyw * sh.zzww;
-				float3 g0 = float3( a0.xy, h.x );
-				float3 g1 = float3( a0.zw, h.y );
-				float3 g2 = float3( a1.xy, h.z );
-				float3 g3 = float3( a1.zw, h.w );
-				float4 norm = taylorInvSqrt( float4( dot( g0, g0 ), dot( g1, g1 ), dot( g2, g2 ), dot( g3, g3 ) ) );
-				g0 *= norm.x;
-				g1 *= norm.y;
-				g2 *= norm.z;
-				g3 *= norm.w;
-				float4 m = max( 0.6 - float4( dot( x0, x0 ), dot( x1, x1 ), dot( x2, x2 ), dot( x3, x3 ) ), 0.0 );
-				m = m* m;
-				m = m* m;
-				float4 px = float4( dot( x0, g0 ), dot( x1, g1 ), dot( x2, g2 ), dot( x3, g3 ) );
-				return 42.0 * dot( m, px);
-			}
-			
-
-			VertexOutput VertexFunction( VertexInput v  )
-			{
-				VertexOutput o = (VertexOutput)0;
-				UNITY_SETUP_INSTANCE_ID(v);
-				UNITY_TRANSFER_INSTANCE_ID(v, o);
-				UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(o);
-
-				float3 ase_worldPos = TransformObjectToWorld( (v.vertex).xyz );
-				float mulTime34 = _TimeParameters.x * ( _WindSpeed * 5 );
-				float simplePerlin3D35 = snoise( ( ase_worldPos + mulTime34 )*_WindWavesScale );
-				float temp_output_231_0 = ( simplePerlin3D35 * 0.01 );
-				float2 texCoord357 = v.texcoord0.xy * float2( 1,1 ) + float2( 0,0 );
-				#ifdef _ANCHORTHEFOLIAGEBASE_ON
-				float staticSwitch376 = ( temp_output_231_0 * pow( texCoord357.y , 2.0 ) );
-				#else
-				float staticSwitch376 = temp_output_231_0;
-				#endif
-				#ifdef _ENABLEWIND_ON
-				float staticSwitch341 = ( staticSwitch376 * ( _WindForce * 30 ) );
-				#else
-				float staticSwitch341 = 0.0;
-				#endif
-				float Wind191 = staticSwitch341;
-				float3 temp_cast_0 = (Wind191).xxx;
-				
-				float3 ase_worldNormal = TransformObjectToWorldNormal(v.ase_normal);
-				o.ase_texcoord5.xyz = ase_worldNormal;
-				
-				o.ase_texcoord4.xy = v.texcoord0.xy;
-				
-				//setting value to unused interpolator channels and avoid initialization warnings
-				o.ase_texcoord4.zw = 0;
-				o.ase_texcoord5.w = 0;
-
-				#ifdef ASE_ABSOLUTE_VERTEX_POS
-					float3 defaultVertexValue = v.vertex.xyz;
-				#else
-					float3 defaultVertexValue = float3(0, 0, 0);
-				#endif
-
-				float3 vertexValue = temp_cast_0;
-
-				#ifdef ASE_ABSOLUTE_VERTEX_POS
-					v.vertex.xyz = vertexValue;
-				#else
-					v.vertex.xyz += vertexValue;
-				#endif
-
-				v.ase_normal = v.ase_normal;
-
-				float3 positionWS = TransformObjectToWorld( v.vertex.xyz );
-
-				#if defined(ASE_NEEDS_FRAG_WORLD_POSITION)
-					o.worldPos = positionWS;
-				#endif
-
-				o.clipPos = MetaVertexPosition( v.vertex, v.texcoord1.xy, v.texcoord1.xy, unity_LightmapST, unity_DynamicLightmapST );
-
-				#ifdef EDITOR_VISUALIZATION
-					float2 VizUV = 0;
-					float4 LightCoord = 0;
-					UnityEditorVizData(v.vertex.xyz, v.texcoord0.xy, v.texcoord1.xy, v.texcoord2.xy, VizUV, LightCoord);
-					o.VizUV = float4(VizUV, 0, 0);
-					o.LightCoord = LightCoord;
-				#endif
-
-				#if defined(REQUIRES_VERTEX_SHADOW_COORD_INTERPOLATOR) && defined(ASE_NEEDS_FRAG_SHADOWCOORDS)
-					VertexPositionInputs vertexInput = (VertexPositionInputs)0;
-					vertexInput.positionWS = positionWS;
-					vertexInput.positionCS = o.clipPos;
-					o.shadowCoord = GetShadowCoord( vertexInput );
-				#endif
-
-				return o;
-			}
-
-			#if defined(ASE_TESSELLATION)
-			struct VertexControl
-			{
-				float4 vertex : INTERNALTESSPOS;
-				float3 ase_normal : NORMAL;
-				float4 texcoord0 : TEXCOORD0;
-				float4 texcoord1 : TEXCOORD1;
-				float4 texcoord2 : TEXCOORD2;
-				
-				UNITY_VERTEX_INPUT_INSTANCE_ID
-			};
-
-			struct TessellationFactors
-			{
-				float edge[3] : SV_TessFactor;
-				float inside : SV_InsideTessFactor;
-			};
-
-			VertexControl vert ( VertexInput v )
-			{
-				VertexControl o;
-				UNITY_SETUP_INSTANCE_ID(v);
-				UNITY_TRANSFER_INSTANCE_ID(v, o);
-				o.vertex = v.vertex;
-				o.ase_normal = v.ase_normal;
-				o.texcoord0 = v.texcoord0;
-				o.texcoord1 = v.texcoord1;
-				o.texcoord2 = v.texcoord2;
-				
-				return o;
-			}
-
-			TessellationFactors TessellationFunction (InputPatch<VertexControl,3> v)
-			{
-				TessellationFactors o;
-				float4 tf = 1;
-				float tessValue = _TessValue; float tessMin = _TessMin; float tessMax = _TessMax;
-				float edgeLength = _TessEdgeLength; float tessMaxDisp = _TessMaxDisp;
-				#if defined(ASE_FIXED_TESSELLATION)
-				tf = FixedTess( tessValue );
-				#elif defined(ASE_DISTANCE_TESSELLATION)
-				tf = DistanceBasedTess(v[0].vertex, v[1].vertex, v[2].vertex, tessValue, tessMin, tessMax, GetObjectToWorldMatrix(), _WorldSpaceCameraPos );
-				#elif defined(ASE_LENGTH_TESSELLATION)
-				tf = EdgeLengthBasedTess(v[0].vertex, v[1].vertex, v[2].vertex, edgeLength, GetObjectToWorldMatrix(), _WorldSpaceCameraPos, _ScreenParams );
-				#elif defined(ASE_LENGTH_CULL_TESSELLATION)
-				tf = EdgeLengthBasedTessCull(v[0].vertex, v[1].vertex, v[2].vertex, edgeLength, tessMaxDisp, GetObjectToWorldMatrix(), _WorldSpaceCameraPos, _ScreenParams, unity_CameraWorldClipPlanes );
-				#endif
-				o.edge[0] = tf.x; o.edge[1] = tf.y; o.edge[2] = tf.z; o.inside = tf.w;
-				return o;
-			}
-
-			[domain("tri")]
-			[partitioning("fractional_odd")]
-			[outputtopology("triangle_cw")]
-			[patchconstantfunc("TessellationFunction")]
-			[outputcontrolpoints(3)]
-			VertexControl HullFunction(InputPatch<VertexControl, 3> patch, uint id : SV_OutputControlPointID)
-			{
-				return patch[id];
-			}
-
-			[domain("tri")]
-			VertexOutput DomainFunction(TessellationFactors factors, OutputPatch<VertexControl, 3> patch, float3 bary : SV_DomainLocation)
-			{
-				VertexInput o = (VertexInput) 0;
-				o.vertex = patch[0].vertex * bary.x + patch[1].vertex * bary.y + patch[2].vertex * bary.z;
-				o.ase_normal = patch[0].ase_normal * bary.x + patch[1].ase_normal * bary.y + patch[2].ase_normal * bary.z;
-				o.texcoord0 = patch[0].texcoord0 * bary.x + patch[1].texcoord0 * bary.y + patch[2].texcoord0 * bary.z;
-				o.texcoord1 = patch[0].texcoord1 * bary.x + patch[1].texcoord1 * bary.y + patch[2].texcoord1 * bary.z;
-				o.texcoord2 = patch[0].texcoord2 * bary.x + patch[1].texcoord2 * bary.y + patch[2].texcoord2 * bary.z;
-				
-				#if defined(ASE_PHONG_TESSELLATION)
-				float3 pp[3];
-				for (int i = 0; i < 3; ++i)
-					pp[i] = o.vertex.xyz - patch[i].ase_normal * (dot(o.vertex.xyz, patch[i].ase_normal) - dot(patch[i].vertex.xyz, patch[i].ase_normal));
-				float phongStrength = _TessPhongStrength;
-				o.vertex.xyz = phongStrength * (pp[0]*bary.x + pp[1]*bary.y + pp[2]*bary.z) + (1.0f-phongStrength) * o.vertex.xyz;
-				#endif
-				UNITY_TRANSFER_INSTANCE_ID(patch[0], o);
-				return VertexFunction(o);
-			}
-			#else
-			VertexOutput vert ( VertexInput v )
-			{
-				return VertexFunction( v );
-			}
-			#endif
-
-			half4 frag(VertexOutput IN  ) : SV_TARGET
-			{
-				UNITY_SETUP_INSTANCE_ID(IN);
-				UNITY_SETUP_STEREO_EYE_INDEX_POST_VERTEX( IN );
-
-				#if defined(ASE_NEEDS_FRAG_WORLD_POSITION)
-					float3 WorldPosition = IN.worldPos;
-				#endif
-
-				float4 ShadowCoords = float4( 0, 0, 0, 0 );
-
-				#if defined(ASE_NEEDS_FRAG_SHADOWCOORDS)
-					#if defined(REQUIRES_VERTEX_SHADOW_COORD_INTERPOLATOR)
-						ShadowCoords = IN.shadowCoord;
-					#elif defined(MAIN_LIGHT_CALCULATE_SHADOWS)
-						ShadowCoords = TransformWorldToShadowCoord( WorldPosition );
-					#endif
-				#endif
-
-				float2 uv_Albedo = IN.ase_texcoord4.xy * _Albedo_ST.xy + _Albedo_ST.zw;
-				float4 tex2DNode1 = tex2D( _Albedo, uv_Albedo );
-				float4 temp_output_10_0 = ( _MainColor * tex2DNode1 );
-				float simplePerlin3D742 = snoise( WorldPosition*_WorldScale );
-				simplePerlin3D742 = simplePerlin3D742*0.5 + 0.5;
-				float2 texCoord361 = IN.ase_texcoord4.xy * float2( 1,1 ) + float2( 0,0 );
-				#if defined(_SECONDCOLOROVERLAYTYPE_WORLD_POSITION)
-				float staticSwitch360 = simplePerlin3D742;
-				#elif defined(_SECONDCOLOROVERLAYTYPE_UV_BASED)
-				float staticSwitch360 = texCoord361.y;
-				#else
-				float staticSwitch360 = simplePerlin3D742;
-				#endif
-				float SecondColorMask335 = saturate( ( ( staticSwitch360 + _SecondColorOffset ) * ( _SecondColorFade * 2 ) ) );
-				float4 lerpResult332 = lerp( temp_output_10_0 , ( _SecondColor * tex2D( _Albedo, uv_Albedo ) ) , SecondColorMask335);
-				#ifdef _COLOR2ENABLE_ON
-				float4 staticSwitch340 = lerpResult332;
-				#else
-				float4 staticSwitch340 = temp_output_10_0;
-				#endif
-				float4 Albedo259 = staticSwitch340;
-				float3 ase_worldViewDir = ( _WorldSpaceCameraPos.xyz - WorldPosition );
-				ase_worldViewDir = SafeNormalize( ase_worldViewDir );
-				float dotResult461 = dot( SafeNormalize(_MainLightPosition.xyz) , ase_worldViewDir );
-				float TranslucencyMask660 = (-dotResult461*1.0 + -0.2);
-				float3 ase_worldNormal = IN.ase_texcoord5.xyz;
-				float3 normalizedWorldNormal = normalize( ase_worldNormal );
-				float dotResult672 = dot( SafeNormalize(_MainLightPosition.xyz) , normalizedWorldNormal );
-				float ase_lightAtten = 0;
-				Light ase_mainLight = GetMainLight( ShadowCoords );
-				ase_lightAtten = ase_mainLight.distanceAttenuation * ase_mainLight.shadowAttenuation;
-				float4 Translucency631 = saturate( ( ( TranslucencyMask660 * ( ( ( (dotResult672*1.0 + 1.0) * ase_lightAtten ) * _MainLightColor * Albedo259 ) * 0.25 ) ) * _TranslucencyInt ) );
-				
-				float OpacityMask263 = tex2DNode1.a;
-				
-
-				float3 BaseColor = ( Albedo259 + Translucency631 ).rgb;
-				float3 Emission = 0;
-				float Alpha = OpacityMask263;
-				float AlphaClipThreshold = _AlphaCutoff;
-
-				#ifdef _ALPHATEST_ON
-					clip(Alpha - AlphaClipThreshold);
-				#endif
-
-				MetaInput metaInput = (MetaInput)0;
-				metaInput.Albedo = BaseColor;
-				metaInput.Emission = Emission;
-				#ifdef EDITOR_VISUALIZATION
-					metaInput.VizUV = IN.VizUV.xy;
-					metaInput.LightCoord = IN.LightCoord;
-				#endif
-
-				return UnityMetaFragment(metaInput);
-			}
-			ENDHLSL
-		}
-
-		
-		Pass
-		{
-			
 			Name "Universal2D"
 			Tags { "LightMode"="Universal2D" }
 
-			Blend One Zero, One Zero
+			Blend SrcAlpha OneMinusSrcAlpha, One OneMinusSrcAlpha
 			ZWrite On
 			ZTest LEqual
 			Offset 0 , 0
@@ -2055,10 +1178,13 @@ Shader "Raygeas/Suntail Foliage"
 
 			HLSLPROGRAM
 
+			#define _SURFACE_TYPE_TRANSPARENT 1
 			#define _NORMAL_DROPOFF_TS 1
 			#define ASE_FOG 1
-			#define _ALPHATEST_ON 1
+			#define _NORMALMAP 1
 			#define ASE_SRP_VERSION 120113
+			#define REQUIRE_DEPTH_TEXTURE 1
+			#define REQUIRE_OPAQUE_TEXTURE 1
 
 
 			#pragma vertex vert
@@ -2076,23 +1202,14 @@ Shader "Raygeas/Suntail Foliage"
 			#include "Packages/com.unity.render-pipelines.universal/Editor/ShaderGraph/Includes/ShaderPass.hlsl"
 
 			#define ASE_NEEDS_FRAG_WORLD_POSITION
-			#define ASE_NEEDS_VERT_NORMAL
-			#define ASE_NEEDS_FRAG_SHADOWCOORDS
-			#pragma shader_feature_local _ENABLEWIND_ON
-			#pragma shader_feature_local _ANCHORTHEFOLIAGEBASE_ON
-			#pragma shader_feature_local _COLOR2ENABLE_ON
-			#pragma shader_feature_local _SECONDCOLOROVERLAYTYPE_WORLD_POSITION _SECONDCOLOROVERLAYTYPE_UV_BASED
-			#pragma multi_compile _ _MAIN_LIGHT_SHADOWS _MAIN_LIGHT_SHADOWS_CASCADE _MAIN_LIGHT_SHADOWS_SCREEN
-			#pragma multi_compile _ _ADDITIONAL_LIGHTS_VERTEX _ADDITIONAL_LIGHTS
-			#pragma multi_compile_fragment _ _ADDITIONAL_LIGHT_SHADOWS
-			#pragma multi_compile_fragment _ _SHADOWS_SOFT
+			#define ASE_NEEDS_VERT_POSITION
 
 
 			struct VertexInput
 			{
 				float4 vertex : POSITION;
 				float3 ase_normal : NORMAL;
-				float4 ase_texcoord : TEXCOORD0;
+				
 				UNITY_VERTEX_INPUT_INSTANCE_ID
 			};
 
@@ -2112,19 +1229,20 @@ Shader "Raygeas/Suntail Foliage"
 			};
 
 			CBUFFER_START(UnityPerMaterial)
-			float4 _MainColor;
-			float4 _Albedo_ST;
-			float4 _SecondColor;
-			float4 _SmoothnessTexture_ST;
-			float _WindSpeed;
-			float _WindWavesScale;
-			float _WindForce;
-			float _WorldScale;
-			float _SecondColorOffset;
-			float _SecondColorFade;
-			float _TranslucencyInt;
+			float4 _Color2;
+			float4 _Color1;
+			float _DepthDistance;
+			float _WavesSpeed;
+			float _WavesTile;
+			float _WavesNormalIntensity;
+			float _RefractionScale;
+			float _FoamDensity;
+			float _FoamContrast;
+			float _FoamDistance;
+			float _Metallic;
 			float _Smoothness;
-			float _AlphaCutoff;
+			float _Opacity;
+			float _CoastOpacity;
 			#ifdef ASE_TRANSMISSION
 				float _TransmissionShadow;
 			#endif
@@ -2157,7 +1275,8 @@ Shader "Raygeas/Suntail Foliage"
 				int _PassValue;
 			#endif
 
-			sampler2D _Albedo;
+			uniform float4 _CameraDepthTexture_TexelSize;
+			sampler2D _WavesNormal;
 
 
 			//#include "Packages/com.unity.render-pipelines.universal/Editor/ShaderGraph/Includes/Varyings.hlsl"
@@ -2167,52 +1286,51 @@ Shader "Raygeas/Suntail Foliage"
 			//#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/VisualEffectVertex.hlsl"
 			//#endif
 
-			float3 mod3D289( float3 x ) { return x - floor( x / 289.0 ) * 289.0; }
-			float4 mod3D289( float4 x ) { return x - floor( x / 289.0 ) * 289.0; }
-			float4 permute( float4 x ) { return mod3D289( ( x * 34.0 + 1.0 ) * x ); }
-			float4 taylorInvSqrt( float4 r ) { return 1.79284291400159 - r * 0.85373472095314; }
-			float snoise( float3 v )
+			inline float4 ASE_ComputeGrabScreenPos( float4 pos )
 			{
-				const float2 C = float2( 1.0 / 6.0, 1.0 / 3.0 );
-				float3 i = floor( v + dot( v, C.yyy ) );
-				float3 x0 = v - i + dot( i, C.xxx );
-				float3 g = step( x0.yzx, x0.xyz );
-				float3 l = 1.0 - g;
-				float3 i1 = min( g.xyz, l.zxy );
-				float3 i2 = max( g.xyz, l.zxy );
-				float3 x1 = x0 - i1 + C.xxx;
-				float3 x2 = x0 - i2 + C.yyy;
-				float3 x3 = x0 - 0.5;
-				i = mod3D289( i);
-				float4 p = permute( permute( permute( i.z + float4( 0.0, i1.z, i2.z, 1.0 ) ) + i.y + float4( 0.0, i1.y, i2.y, 1.0 ) ) + i.x + float4( 0.0, i1.x, i2.x, 1.0 ) );
-				float4 j = p - 49.0 * floor( p / 49.0 );  // mod(p,7*7)
-				float4 x_ = floor( j / 7.0 );
-				float4 y_ = floor( j - 7.0 * x_ );  // mod(j,N)
-				float4 x = ( x_ * 2.0 + 0.5 ) / 7.0 - 1.0;
-				float4 y = ( y_ * 2.0 + 0.5 ) / 7.0 - 1.0;
-				float4 h = 1.0 - abs( x ) - abs( y );
-				float4 b0 = float4( x.xy, y.xy );
-				float4 b1 = float4( x.zw, y.zw );
-				float4 s0 = floor( b0 ) * 2.0 + 1.0;
-				float4 s1 = floor( b1 ) * 2.0 + 1.0;
-				float4 sh = -step( h, 0.0 );
-				float4 a0 = b0.xzyw + s0.xzyw * sh.xxyy;
-				float4 a1 = b1.xzyw + s1.xzyw * sh.zzww;
-				float3 g0 = float3( a0.xy, h.x );
-				float3 g1 = float3( a0.zw, h.y );
-				float3 g2 = float3( a1.xy, h.z );
-				float3 g3 = float3( a1.zw, h.w );
-				float4 norm = taylorInvSqrt( float4( dot( g0, g0 ), dot( g1, g1 ), dot( g2, g2 ), dot( g3, g3 ) ) );
-				g0 *= norm.x;
-				g1 *= norm.y;
-				g2 *= norm.z;
-				g3 *= norm.w;
-				float4 m = max( 0.6 - float4( dot( x0, x0 ), dot( x1, x1 ), dot( x2, x2 ), dot( x3, x3 ) ), 0.0 );
-				m = m* m;
-				m = m* m;
-				float4 px = float4( dot( x0, g0 ), dot( x1, g1 ), dot( x2, g2 ), dot( x3, g3 ) );
-				return 42.0 * dot( m, px);
+				#if UNITY_UV_STARTS_AT_TOP
+				float scale = -1.0;
+				#else
+				float scale = 1.0;
+				#endif
+				float4 o = pos;
+				o.y = pos.w * 0.5f;
+				o.y = ( pos.y - o.y ) * _ProjectionParams.x * scale + o.y;
+				return o;
 			}
+			
+					float2 voronoihash61( float2 p )
+					{
+						
+						p = float2( dot( p, float2( 127.1, 311.7 ) ), dot( p, float2( 269.5, 183.3 ) ) );
+						return frac( sin( p ) *43758.5453);
+					}
+			
+					float voronoi61( float2 v, float time, inout float2 id, inout float2 mr, float smoothness, inout float2 smoothId )
+					{
+						float2 n = floor( v );
+						float2 f = frac( v );
+						float F1 = 8.0;
+						float F2 = 8.0; float2 mg = 0;
+						for ( int j = -1; j <= 1; j++ )
+						{
+							for ( int i = -1; i <= 1; i++ )
+						 	{
+						 		float2 g = float2( i, j );
+						 		float2 o = voronoihash61( n + g );
+								o = ( sin( time + o * 6.2831 ) * 0.5 + 0.5 ); float2 r = f - g - o;
+								float d = 0.5 * dot( r, r );
+						 //		if( d<F1 ) {
+						 //			F2 = F1;
+						 			float h = smoothstep(0.0, 1.0, 0.5 + 0.5 * (F1 - d) / smoothness); F1 = lerp(F1, d, h) - smoothness * h * (1.0 - h);mg = g; mr = r; id = o;
+						 //		} else if( d<F2 ) {
+						 //			F2 = d;
+						
+						 //		}
+						 	}
+						}
+						return F1;
+					}
 			
 
 			VertexOutput VertexFunction( VertexInput v  )
@@ -2222,32 +1340,16 @@ Shader "Raygeas/Suntail Foliage"
 				UNITY_TRANSFER_INSTANCE_ID( v, o );
 				UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO( o );
 
-				float3 ase_worldPos = TransformObjectToWorld( (v.vertex).xyz );
-				float mulTime34 = _TimeParameters.x * ( _WindSpeed * 5 );
-				float simplePerlin3D35 = snoise( ( ase_worldPos + mulTime34 )*_WindWavesScale );
-				float temp_output_231_0 = ( simplePerlin3D35 * 0.01 );
-				float2 texCoord357 = v.ase_texcoord.xy * float2( 1,1 ) + float2( 0,0 );
-				#ifdef _ANCHORTHEFOLIAGEBASE_ON
-				float staticSwitch376 = ( temp_output_231_0 * pow( texCoord357.y , 2.0 ) );
-				#else
-				float staticSwitch376 = temp_output_231_0;
-				#endif
-				#ifdef _ENABLEWIND_ON
-				float staticSwitch341 = ( staticSwitch376 * ( _WindForce * 30 ) );
-				#else
-				float staticSwitch341 = 0.0;
-				#endif
-				float Wind191 = staticSwitch341;
-				float3 temp_cast_0 = (Wind191).xxx;
+				float4 ase_clipPos = TransformObjectToHClip((v.vertex).xyz);
+				float4 screenPos = ComputeScreenPos(ase_clipPos);
+				o.ase_texcoord2 = screenPos;
+				float3 objectToViewPos = TransformWorldToView(TransformObjectToWorld(v.vertex.xyz));
+				float eyeDepth = -objectToViewPos.z;
+				o.ase_texcoord3.x = eyeDepth;
 				
-				float3 ase_worldNormal = TransformObjectToWorldNormal(v.ase_normal);
-				o.ase_texcoord3.xyz = ase_worldNormal;
-				
-				o.ase_texcoord2.xy = v.ase_texcoord.xy;
 				
 				//setting value to unused interpolator channels and avoid initialization warnings
-				o.ase_texcoord2.zw = 0;
-				o.ase_texcoord3.w = 0;
+				o.ase_texcoord3.yzw = 0;
 
 				#ifdef ASE_ABSOLUTE_VERTEX_POS
 					float3 defaultVertexValue = v.vertex.xyz;
@@ -2255,7 +1357,7 @@ Shader "Raygeas/Suntail Foliage"
 					float3 defaultVertexValue = float3(0, 0, 0);
 				#endif
 
-				float3 vertexValue = temp_cast_0;
+				float3 vertexValue = defaultVertexValue;
 
 				#ifdef ASE_ABSOLUTE_VERTEX_POS
 					v.vertex.xyz = vertexValue;
@@ -2289,8 +1391,7 @@ Shader "Raygeas/Suntail Foliage"
 			{
 				float4 vertex : INTERNALTESSPOS;
 				float3 ase_normal : NORMAL;
-				float4 ase_texcoord : TEXCOORD0;
-
+				
 				UNITY_VERTEX_INPUT_INSTANCE_ID
 			};
 
@@ -2307,7 +1408,7 @@ Shader "Raygeas/Suntail Foliage"
 				UNITY_TRANSFER_INSTANCE_ID(v, o);
 				o.vertex = v.vertex;
 				o.ase_normal = v.ase_normal;
-				o.ase_texcoord = v.ase_texcoord;
+				
 				return o;
 			}
 
@@ -2346,7 +1447,7 @@ Shader "Raygeas/Suntail Foliage"
 				VertexInput o = (VertexInput) 0;
 				o.vertex = patch[0].vertex * bary.x + patch[1].vertex * bary.y + patch[2].vertex * bary.z;
 				o.ase_normal = patch[0].ase_normal * bary.x + patch[1].ase_normal * bary.y + patch[2].ase_normal * bary.z;
-				o.ase_texcoord = patch[0].ase_texcoord * bary.x + patch[1].ase_texcoord * bary.y + patch[2].ase_texcoord * bary.z;
+				
 				#if defined(ASE_PHONG_TESSELLATION)
 				float3 pp[3];
 				for (int i = 0; i < 3; ++i)
@@ -2383,45 +1484,61 @@ Shader "Raygeas/Suntail Foliage"
 					#endif
 				#endif
 
-				float2 uv_Albedo = IN.ase_texcoord2.xy * _Albedo_ST.xy + _Albedo_ST.zw;
-				float4 tex2DNode1 = tex2D( _Albedo, uv_Albedo );
-				float4 temp_output_10_0 = ( _MainColor * tex2DNode1 );
-				float simplePerlin3D742 = snoise( WorldPosition*_WorldScale );
-				simplePerlin3D742 = simplePerlin3D742*0.5 + 0.5;
-				float2 texCoord361 = IN.ase_texcoord2.xy * float2( 1,1 ) + float2( 0,0 );
-				#if defined(_SECONDCOLOROVERLAYTYPE_WORLD_POSITION)
-				float staticSwitch360 = simplePerlin3D742;
-				#elif defined(_SECONDCOLOROVERLAYTYPE_UV_BASED)
-				float staticSwitch360 = texCoord361.y;
-				#else
-				float staticSwitch360 = simplePerlin3D742;
-				#endif
-				float SecondColorMask335 = saturate( ( ( staticSwitch360 + _SecondColorOffset ) * ( _SecondColorFade * 2 ) ) );
-				float4 lerpResult332 = lerp( temp_output_10_0 , ( _SecondColor * tex2D( _Albedo, uv_Albedo ) ) , SecondColorMask335);
-				#ifdef _COLOR2ENABLE_ON
-				float4 staticSwitch340 = lerpResult332;
-				#else
-				float4 staticSwitch340 = temp_output_10_0;
-				#endif
-				float4 Albedo259 = staticSwitch340;
-				float3 ase_worldViewDir = ( _WorldSpaceCameraPos.xyz - WorldPosition );
-				ase_worldViewDir = SafeNormalize( ase_worldViewDir );
-				float dotResult461 = dot( SafeNormalize(_MainLightPosition.xyz) , ase_worldViewDir );
-				float TranslucencyMask660 = (-dotResult461*1.0 + -0.2);
-				float3 ase_worldNormal = IN.ase_texcoord3.xyz;
-				float3 normalizedWorldNormal = normalize( ase_worldNormal );
-				float dotResult672 = dot( SafeNormalize(_MainLightPosition.xyz) , normalizedWorldNormal );
-				float ase_lightAtten = 0;
-				Light ase_mainLight = GetMainLight( ShadowCoords );
-				ase_lightAtten = ase_mainLight.distanceAttenuation * ase_mainLight.shadowAttenuation;
-				float4 Translucency631 = saturate( ( ( TranslucencyMask660 * ( ( ( (dotResult672*1.0 + 1.0) * ase_lightAtten ) * _MainLightColor * Albedo259 ) * 0.25 ) ) * _TranslucencyInt ) );
+				float4 screenPos = IN.ase_texcoord2;
+				float4 ase_screenPosNorm = screenPos / screenPos.w;
+				ase_screenPosNorm.z = ( UNITY_NEAR_CLIP_VALUE >= 0 ) ? ase_screenPosNorm.z : ase_screenPosNorm.z * 0.5 + 0.5;
+				float clampResult140 = clamp( _DepthDistance , 0.1 , 100.0 );
+				float screenDepth83 = LinearEyeDepth(SHADERGRAPH_SAMPLE_SCENE_DEPTH( ase_screenPosNorm.xy ),_ZBufferParams);
+				float distanceDepth83 = abs( ( screenDepth83 - LinearEyeDepth( ase_screenPosNorm.z,_ZBufferParams ) ) / ( clampResult140 ) );
+				float temp_output_364_0 = saturate( distanceDepth83 );
+				float4 Depth158 = saturate( ( saturate( ( _Color2 * temp_output_364_0 ) ) + saturate( ( ( 1.0 - temp_output_364_0 ) * _Color1 ) ) ) );
+				float4 ase_grabScreenPos = ASE_ComputeGrabScreenPos( screenPos );
+				float4 ase_grabScreenPosNorm = ase_grabScreenPos / ase_grabScreenPos.w;
+				float4 fetchOpaqueVal341 = float4( SHADERGRAPH_SAMPLE_SCENE_COLOR( ase_grabScreenPosNorm.xy ), 1.0 );
+				float temp_output_132_0 = ( _WavesSpeed * 0.1 );
+				float mulTime43 = _TimeParameters.x * temp_output_132_0;
+				float2 _Vector0 = float2(1,1);
+				float2 appendResult106 = (float2(WorldPosition.x , WorldPosition.z));
+				float2 WorldSpaceTile68 = ( appendResult106 * _WavesTile );
+				float2 panner112 = ( mulTime43 * _Vector0 + WorldSpaceTile68);
+				float3 unpack38 = UnpackNormalScale( tex2D( _WavesNormal, panner112 ), _WavesNormalIntensity );
+				unpack38.z = lerp( 1, unpack38.z, saturate(_WavesNormalIntensity) );
+				float2 panner114 = ( ( 1.0 - mulTime43 ) * _Vector0 + WorldSpaceTile68);
+				float3 unpack46 = UnpackNormalScale( tex2D( _WavesNormal, panner114 ), _WavesNormalIntensity );
+				unpack46.z = lerp( 1, unpack46.z, saturate(_WavesNormalIntensity) );
+				float3 Normal89 = ( unpack38 + unpack46 );
+				float4 temp_output_277_0 = ( ase_grabScreenPosNorm + float4( ( Normal89 * ( _RefractionScale * 0.1 ) ) , 0.0 ) );
+				float4 fetchOpaqueVal274 = float4( SHADERGRAPH_SAMPLE_SCENE_COLOR( temp_output_277_0.xy ), 1.0 );
+				float eyeDepth337 = LinearEyeDepth(SHADERGRAPH_SAMPLE_SCENE_DEPTH( temp_output_277_0.xy ),_ZBufferParams);
+				float eyeDepth = IN.ase_texcoord3.x;
+				float ifLocalVar336 = 0;
+				if( eyeDepth337 > eyeDepth )
+				ifLocalVar336 = 1.0;
+				else if( eyeDepth337 < eyeDepth )
+				ifLocalVar336 = 0.0;
+				float4 lerpResult342 = lerp( fetchOpaqueVal341 , fetchOpaqueVal274 , ifLocalVar336);
+				float4 Refractions282 = saturate( lerpResult342 );
+				float4 lerpResult323 = lerp( Depth158 , Refractions282 , Depth158);
+				float mulTime3 = _TimeParameters.x * ( temp_output_132_0 * 100 );
+				float time61 = mulTime3;
+				float2 voronoiSmoothId61 = 0;
+				float voronoiSmooth61 = ( 1.0 - _FoamDensity );
+				float2 coords61 = WorldSpaceTile68 * 50.0;
+				float2 id61 = 0;
+				float2 uv61 = 0;
+				float voroi61 = voronoi61( coords61, time61, id61, uv61, voronoiSmooth61, voronoiSmoothId61 );
+				float clampResult138 = clamp( _FoamContrast , 0.0 , 0.95 );
+				float screenDepth17 = LinearEyeDepth(SHADERGRAPH_SAMPLE_SCENE_DEPTH( ase_screenPosNorm.xy ),_ZBufferParams);
+				float distanceDepth17 = abs( ( screenDepth17 - LinearEyeDepth( ase_screenPosNorm.z,_ZBufferParams ) ) / ( _FoamDistance ) );
+				float Foam183 = saturate( ( pow( saturate( voroi61 ) , ( 1.0 - clampResult138 ) ) + ( 1.0 - distanceDepth17 ) ) );
 				
-				float OpacityMask263 = tex2DNode1.a;
+				float screenDepth345 = LinearEyeDepth(SHADERGRAPH_SAMPLE_SCENE_DEPTH( ase_screenPosNorm.xy ),_ZBufferParams);
+				float distanceDepth345 = abs( ( screenDepth345 - LinearEyeDepth( ase_screenPosNorm.z,_ZBufferParams ) ) / ( _CoastOpacity ) );
 				
 
-				float3 BaseColor = ( Albedo259 + Translucency631 ).rgb;
-				float Alpha = OpacityMask263;
-				float AlphaClipThreshold = _AlphaCutoff;
+				float3 BaseColor = ( lerpResult323 + Foam183 ).rgb;
+				float Alpha = ( _Opacity * saturate( distanceDepth345 ) );
+				float AlphaClipThreshold = 0.5;
 
 				half4 color = half4(BaseColor, Alpha );
 
@@ -2448,12 +1565,12 @@ Shader "Raygeas/Suntail Foliage"
 
 			HLSLPROGRAM
 
+			#define _SURFACE_TYPE_TRANSPARENT 1
 			#define _NORMAL_DROPOFF_TS 1
-			#pragma multi_compile_instancing
-			#pragma multi_compile_fragment _ LOD_FADE_CROSSFADE
 			#define ASE_FOG 1
-			#define _ALPHATEST_ON 1
+			#define _NORMALMAP 1
 			#define ASE_SRP_VERSION 120113
+			#define REQUIRE_DEPTH_TEXTURE 1
 
 
 			#pragma vertex vert
@@ -2470,8 +1587,8 @@ Shader "Raygeas/Suntail Foliage"
 			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/ShaderGraphFunctions.hlsl"
 			#include "Packages/com.unity.render-pipelines.universal/Editor/ShaderGraph/Includes/ShaderPass.hlsl"
 
-			#pragma shader_feature_local _ENABLEWIND_ON
-			#pragma shader_feature_local _ANCHORTHEFOLIAGEBASE_ON
+			#define ASE_NEEDS_FRAG_WORLD_POSITION
+			#define ASE_NEEDS_FRAG_SCREEN_POSITION
 
 
 			#if defined(ASE_EARLY_Z_DEPTH_OPTIMIZE) && (SHADER_TARGET >= 45)
@@ -2487,7 +1604,7 @@ Shader "Raygeas/Suntail Foliage"
 				float4 vertex : POSITION;
 				float3 ase_normal : NORMAL;
 				float4 ase_tangent : TANGENT;
-				float4 ase_texcoord : TEXCOORD0;
+				
 				UNITY_VERTEX_INPUT_INSTANCE_ID
 			};
 
@@ -2503,25 +1620,26 @@ Shader "Raygeas/Suntail Foliage"
 				#if defined(REQUIRES_VERTEX_SHADOW_COORD_INTERPOLATOR) && defined(ASE_NEEDS_FRAG_SHADOWCOORDS)
 					float4 shadowCoord : TEXCOORD4;
 				#endif
-				float4 ase_texcoord5 : TEXCOORD5;
+				
 				UNITY_VERTEX_INPUT_INSTANCE_ID
 				UNITY_VERTEX_OUTPUT_STEREO
 			};
 
 			CBUFFER_START(UnityPerMaterial)
-			float4 _MainColor;
-			float4 _Albedo_ST;
-			float4 _SecondColor;
-			float4 _SmoothnessTexture_ST;
-			float _WindSpeed;
-			float _WindWavesScale;
-			float _WindForce;
-			float _WorldScale;
-			float _SecondColorOffset;
-			float _SecondColorFade;
-			float _TranslucencyInt;
+			float4 _Color2;
+			float4 _Color1;
+			float _DepthDistance;
+			float _WavesSpeed;
+			float _WavesTile;
+			float _WavesNormalIntensity;
+			float _RefractionScale;
+			float _FoamDensity;
+			float _FoamContrast;
+			float _FoamDistance;
+			float _Metallic;
 			float _Smoothness;
-			float _AlphaCutoff;
+			float _Opacity;
+			float _CoastOpacity;
 			#ifdef ASE_TRANSMISSION
 				float _TransmissionShadow;
 			#endif
@@ -2554,7 +1672,8 @@ Shader "Raygeas/Suntail Foliage"
 				int _PassValue;
 			#endif
 
-			sampler2D _Albedo;
+			sampler2D _WavesNormal;
+			uniform float4 _CameraDepthTexture_TexelSize;
 
 
 			//#include "Packages/com.unity.render-pipelines.universal/Editor/ShaderGraph/Includes/Varyings.hlsl"
@@ -2564,54 +1683,7 @@ Shader "Raygeas/Suntail Foliage"
 			//#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/VisualEffectVertex.hlsl"
 			//#endif
 
-			float3 mod3D289( float3 x ) { return x - floor( x / 289.0 ) * 289.0; }
-			float4 mod3D289( float4 x ) { return x - floor( x / 289.0 ) * 289.0; }
-			float4 permute( float4 x ) { return mod3D289( ( x * 34.0 + 1.0 ) * x ); }
-			float4 taylorInvSqrt( float4 r ) { return 1.79284291400159 - r * 0.85373472095314; }
-			float snoise( float3 v )
-			{
-				const float2 C = float2( 1.0 / 6.0, 1.0 / 3.0 );
-				float3 i = floor( v + dot( v, C.yyy ) );
-				float3 x0 = v - i + dot( i, C.xxx );
-				float3 g = step( x0.yzx, x0.xyz );
-				float3 l = 1.0 - g;
-				float3 i1 = min( g.xyz, l.zxy );
-				float3 i2 = max( g.xyz, l.zxy );
-				float3 x1 = x0 - i1 + C.xxx;
-				float3 x2 = x0 - i2 + C.yyy;
-				float3 x3 = x0 - 0.5;
-				i = mod3D289( i);
-				float4 p = permute( permute( permute( i.z + float4( 0.0, i1.z, i2.z, 1.0 ) ) + i.y + float4( 0.0, i1.y, i2.y, 1.0 ) ) + i.x + float4( 0.0, i1.x, i2.x, 1.0 ) );
-				float4 j = p - 49.0 * floor( p / 49.0 );  // mod(p,7*7)
-				float4 x_ = floor( j / 7.0 );
-				float4 y_ = floor( j - 7.0 * x_ );  // mod(j,N)
-				float4 x = ( x_ * 2.0 + 0.5 ) / 7.0 - 1.0;
-				float4 y = ( y_ * 2.0 + 0.5 ) / 7.0 - 1.0;
-				float4 h = 1.0 - abs( x ) - abs( y );
-				float4 b0 = float4( x.xy, y.xy );
-				float4 b1 = float4( x.zw, y.zw );
-				float4 s0 = floor( b0 ) * 2.0 + 1.0;
-				float4 s1 = floor( b1 ) * 2.0 + 1.0;
-				float4 sh = -step( h, 0.0 );
-				float4 a0 = b0.xzyw + s0.xzyw * sh.xxyy;
-				float4 a1 = b1.xzyw + s1.xzyw * sh.zzww;
-				float3 g0 = float3( a0.xy, h.x );
-				float3 g1 = float3( a0.zw, h.y );
-				float3 g2 = float3( a1.xy, h.z );
-				float3 g3 = float3( a1.zw, h.w );
-				float4 norm = taylorInvSqrt( float4( dot( g0, g0 ), dot( g1, g1 ), dot( g2, g2 ), dot( g3, g3 ) ) );
-				g0 *= norm.x;
-				g1 *= norm.y;
-				g2 *= norm.z;
-				g3 *= norm.w;
-				float4 m = max( 0.6 - float4( dot( x0, x0 ), dot( x1, x1 ), dot( x2, x2 ), dot( x3, x3 ) ), 0.0 );
-				m = m* m;
-				m = m* m;
-				float4 px = float4( dot( x0, g0 ), dot( x1, g1 ), dot( x2, g2 ), dot( x3, g3 ) );
-				return 42.0 * dot( m, px);
-			}
 			
-
 			VertexOutput VertexFunction( VertexInput v  )
 			{
 				VertexOutput o = (VertexOutput)0;
@@ -2619,35 +1691,14 @@ Shader "Raygeas/Suntail Foliage"
 				UNITY_TRANSFER_INSTANCE_ID(v, o);
 				UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(o);
 
-				float3 ase_worldPos = TransformObjectToWorld( (v.vertex).xyz );
-				float mulTime34 = _TimeParameters.x * ( _WindSpeed * 5 );
-				float simplePerlin3D35 = snoise( ( ase_worldPos + mulTime34 )*_WindWavesScale );
-				float temp_output_231_0 = ( simplePerlin3D35 * 0.01 );
-				float2 texCoord357 = v.ase_texcoord.xy * float2( 1,1 ) + float2( 0,0 );
-				#ifdef _ANCHORTHEFOLIAGEBASE_ON
-				float staticSwitch376 = ( temp_output_231_0 * pow( texCoord357.y , 2.0 ) );
-				#else
-				float staticSwitch376 = temp_output_231_0;
-				#endif
-				#ifdef _ENABLEWIND_ON
-				float staticSwitch341 = ( staticSwitch376 * ( _WindForce * 30 ) );
-				#else
-				float staticSwitch341 = 0.0;
-				#endif
-				float Wind191 = staticSwitch341;
-				float3 temp_cast_0 = (Wind191).xxx;
 				
-				o.ase_texcoord5.xy = v.ase_texcoord.xy;
-				
-				//setting value to unused interpolator channels and avoid initialization warnings
-				o.ase_texcoord5.zw = 0;
 				#ifdef ASE_ABSOLUTE_VERTEX_POS
 					float3 defaultVertexValue = v.vertex.xyz;
 				#else
 					float3 defaultVertexValue = float3(0, 0, 0);
 				#endif
 
-				float3 vertexValue = temp_cast_0;
+				float3 vertexValue = defaultVertexValue;
 
 				#ifdef ASE_ABSOLUTE_VERTEX_POS
 					v.vertex.xyz = vertexValue;
@@ -2686,8 +1737,7 @@ Shader "Raygeas/Suntail Foliage"
 				float4 vertex : INTERNALTESSPOS;
 				float3 ase_normal : NORMAL;
 				float4 ase_tangent : TANGENT;
-				float4 ase_texcoord : TEXCOORD0;
-
+				
 				UNITY_VERTEX_INPUT_INSTANCE_ID
 			};
 
@@ -2705,7 +1755,7 @@ Shader "Raygeas/Suntail Foliage"
 				o.vertex = v.vertex;
 				o.ase_normal = v.ase_normal;
 				o.ase_tangent = v.ase_tangent;
-				o.ase_texcoord = v.ase_texcoord;
+				
 				return o;
 			}
 
@@ -2745,7 +1795,7 @@ Shader "Raygeas/Suntail Foliage"
 				o.vertex = patch[0].vertex * bary.x + patch[1].vertex * bary.y + patch[2].vertex * bary.z;
 				o.ase_normal = patch[0].ase_normal * bary.x + patch[1].ase_normal * bary.y + patch[2].ase_normal * bary.z;
 				o.ase_tangent = patch[0].ase_tangent * bary.x + patch[1].ase_tangent * bary.y + patch[2].ase_tangent * bary.z;
-				o.ase_texcoord = patch[0].ase_texcoord * bary.x + patch[1].ase_texcoord * bary.y + patch[2].ase_texcoord * bary.z;
+				
 				#if defined(ASE_PHONG_TESSELLATION)
 				float3 pp[3];
 				for (int i = 0; i < 3; ++i)
@@ -2791,14 +1841,28 @@ Shader "Raygeas/Suntail Foliage"
 					#endif
 				#endif
 
-				float2 uv_Albedo = IN.ase_texcoord5.xy * _Albedo_ST.xy + _Albedo_ST.zw;
-				float4 tex2DNode1 = tex2D( _Albedo, uv_Albedo );
-				float OpacityMask263 = tex2DNode1.a;
+				float temp_output_132_0 = ( _WavesSpeed * 0.1 );
+				float mulTime43 = _TimeParameters.x * temp_output_132_0;
+				float2 _Vector0 = float2(1,1);
+				float2 appendResult106 = (float2(WorldPosition.x , WorldPosition.z));
+				float2 WorldSpaceTile68 = ( appendResult106 * _WavesTile );
+				float2 panner112 = ( mulTime43 * _Vector0 + WorldSpaceTile68);
+				float3 unpack38 = UnpackNormalScale( tex2D( _WavesNormal, panner112 ), _WavesNormalIntensity );
+				unpack38.z = lerp( 1, unpack38.z, saturate(_WavesNormalIntensity) );
+				float2 panner114 = ( ( 1.0 - mulTime43 ) * _Vector0 + WorldSpaceTile68);
+				float3 unpack46 = UnpackNormalScale( tex2D( _WavesNormal, panner114 ), _WavesNormalIntensity );
+				unpack46.z = lerp( 1, unpack46.z, saturate(_WavesNormalIntensity) );
+				float3 Normal89 = ( unpack38 + unpack46 );
+				
+				float4 ase_screenPosNorm = ScreenPos / ScreenPos.w;
+				ase_screenPosNorm.z = ( UNITY_NEAR_CLIP_VALUE >= 0 ) ? ase_screenPosNorm.z : ase_screenPosNorm.z * 0.5 + 0.5;
+				float screenDepth345 = LinearEyeDepth(SHADERGRAPH_SAMPLE_SCENE_DEPTH( ase_screenPosNorm.xy ),_ZBufferParams);
+				float distanceDepth345 = abs( ( screenDepth345 - LinearEyeDepth( ase_screenPosNorm.z,_ZBufferParams ) ) / ( _CoastOpacity ) );
 				
 
-				float3 Normal = float3(0, 0, 1);
-				float Alpha = OpacityMask263;
-				float AlphaClipThreshold = _AlphaCutoff;
+				float3 Normal = Normal89;
+				float Alpha = ( _Opacity * saturate( distanceDepth345 ) );
+				float AlphaClipThreshold = 0.5;
 				#ifdef ASE_DEPTH_WRITE_ON
 					float DepthValue = IN.clipPos.z;
 				#endif
@@ -2847,7 +1911,7 @@ Shader "Raygeas/Suntail Foliage"
 			Name "GBuffer"
 			Tags { "LightMode"="UniversalGBuffer" }
 
-			Blend One Zero, One Zero
+			Blend SrcAlpha OneMinusSrcAlpha, One OneMinusSrcAlpha
 			ZWrite On
 			ZTest LEqual
 			Offset 0 , 0
@@ -2856,14 +1920,14 @@ Shader "Raygeas/Suntail Foliage"
 
 			HLSLPROGRAM
 
+			#define _SURFACE_TYPE_TRANSPARENT 1
 			#define _NORMAL_DROPOFF_TS 1
-			#pragma multi_compile_instancing
-			#pragma instancing_options renderinglayer
-			#pragma multi_compile_fragment _ LOD_FADE_CROSSFADE
 			#pragma multi_compile_fog
 			#define ASE_FOG 1
-			#define _ALPHATEST_ON 1
+			#define _NORMALMAP 1
 			#define ASE_SRP_VERSION 120113
+			#define REQUIRE_DEPTH_TEXTURE 1
+			#define REQUIRE_OPAQUE_TEXTURE 1
 
 
 			#pragma shader_feature_local _RECEIVE_SHADOWS_OFF
@@ -2905,16 +1969,9 @@ Shader "Raygeas/Suntail Foliage"
 				#define ENABLE_TERRAIN_PERPIXEL_NORMAL
 			#endif
 
+			#define ASE_NEEDS_FRAG_SCREEN_POSITION
 			#define ASE_NEEDS_FRAG_WORLD_POSITION
-			#define ASE_NEEDS_FRAG_WORLD_VIEW_DIR
-			#define ASE_NEEDS_FRAG_WORLD_NORMAL
-			#define ASE_NEEDS_FRAG_SHADOWCOORDS
-			#pragma shader_feature_local _ENABLEWIND_ON
-			#pragma shader_feature_local _ANCHORTHEFOLIAGEBASE_ON
-			#pragma shader_feature_local _COLOR2ENABLE_ON
-			#pragma shader_feature_local _SECONDCOLOROVERLAYTYPE_WORLD_POSITION _SECONDCOLOROVERLAYTYPE_UV_BASED
-			#pragma multi_compile _ _ADDITIONAL_LIGHTS_VERTEX _ADDITIONAL_LIGHTS
-			#pragma multi_compile_fragment _ _ADDITIONAL_LIGHT_SHADOWS
+			#define ASE_NEEDS_VERT_POSITION
 
 
 			#if defined(ASE_EARLY_Z_DEPTH_OPTIMIZE) && (SHADER_TARGET >= 45)
@@ -2958,19 +2015,20 @@ Shader "Raygeas/Suntail Foliage"
 			};
 
 			CBUFFER_START(UnityPerMaterial)
-			float4 _MainColor;
-			float4 _Albedo_ST;
-			float4 _SecondColor;
-			float4 _SmoothnessTexture_ST;
-			float _WindSpeed;
-			float _WindWavesScale;
-			float _WindForce;
-			float _WorldScale;
-			float _SecondColorOffset;
-			float _SecondColorFade;
-			float _TranslucencyInt;
+			float4 _Color2;
+			float4 _Color1;
+			float _DepthDistance;
+			float _WavesSpeed;
+			float _WavesTile;
+			float _WavesNormalIntensity;
+			float _RefractionScale;
+			float _FoamDensity;
+			float _FoamContrast;
+			float _FoamDistance;
+			float _Metallic;
 			float _Smoothness;
-			float _AlphaCutoff;
+			float _Opacity;
+			float _CoastOpacity;
 			#ifdef ASE_TRANSMISSION
 				float _TransmissionShadow;
 			#endif
@@ -3003,60 +2061,59 @@ Shader "Raygeas/Suntail Foliage"
 				int _PassValue;
 			#endif
 
-			sampler2D _Albedo;
-			sampler2D _SmoothnessTexture;
+			uniform float4 _CameraDepthTexture_TexelSize;
+			sampler2D _WavesNormal;
 
 
 			//#include "Packages/com.unity.render-pipelines.universal/Editor/ShaderGraph/Includes/Varyings.hlsl"
 			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/UnityGBuffer.hlsl"
 			//#include "Packages/com.unity.render-pipelines.universal/Editor/ShaderGraph/Includes/PBRGBufferPass.hlsl"
 
-			float3 mod3D289( float3 x ) { return x - floor( x / 289.0 ) * 289.0; }
-			float4 mod3D289( float4 x ) { return x - floor( x / 289.0 ) * 289.0; }
-			float4 permute( float4 x ) { return mod3D289( ( x * 34.0 + 1.0 ) * x ); }
-			float4 taylorInvSqrt( float4 r ) { return 1.79284291400159 - r * 0.85373472095314; }
-			float snoise( float3 v )
+			inline float4 ASE_ComputeGrabScreenPos( float4 pos )
 			{
-				const float2 C = float2( 1.0 / 6.0, 1.0 / 3.0 );
-				float3 i = floor( v + dot( v, C.yyy ) );
-				float3 x0 = v - i + dot( i, C.xxx );
-				float3 g = step( x0.yzx, x0.xyz );
-				float3 l = 1.0 - g;
-				float3 i1 = min( g.xyz, l.zxy );
-				float3 i2 = max( g.xyz, l.zxy );
-				float3 x1 = x0 - i1 + C.xxx;
-				float3 x2 = x0 - i2 + C.yyy;
-				float3 x3 = x0 - 0.5;
-				i = mod3D289( i);
-				float4 p = permute( permute( permute( i.z + float4( 0.0, i1.z, i2.z, 1.0 ) ) + i.y + float4( 0.0, i1.y, i2.y, 1.0 ) ) + i.x + float4( 0.0, i1.x, i2.x, 1.0 ) );
-				float4 j = p - 49.0 * floor( p / 49.0 );  // mod(p,7*7)
-				float4 x_ = floor( j / 7.0 );
-				float4 y_ = floor( j - 7.0 * x_ );  // mod(j,N)
-				float4 x = ( x_ * 2.0 + 0.5 ) / 7.0 - 1.0;
-				float4 y = ( y_ * 2.0 + 0.5 ) / 7.0 - 1.0;
-				float4 h = 1.0 - abs( x ) - abs( y );
-				float4 b0 = float4( x.xy, y.xy );
-				float4 b1 = float4( x.zw, y.zw );
-				float4 s0 = floor( b0 ) * 2.0 + 1.0;
-				float4 s1 = floor( b1 ) * 2.0 + 1.0;
-				float4 sh = -step( h, 0.0 );
-				float4 a0 = b0.xzyw + s0.xzyw * sh.xxyy;
-				float4 a1 = b1.xzyw + s1.xzyw * sh.zzww;
-				float3 g0 = float3( a0.xy, h.x );
-				float3 g1 = float3( a0.zw, h.y );
-				float3 g2 = float3( a1.xy, h.z );
-				float3 g3 = float3( a1.zw, h.w );
-				float4 norm = taylorInvSqrt( float4( dot( g0, g0 ), dot( g1, g1 ), dot( g2, g2 ), dot( g3, g3 ) ) );
-				g0 *= norm.x;
-				g1 *= norm.y;
-				g2 *= norm.z;
-				g3 *= norm.w;
-				float4 m = max( 0.6 - float4( dot( x0, x0 ), dot( x1, x1 ), dot( x2, x2 ), dot( x3, x3 ) ), 0.0 );
-				m = m* m;
-				m = m* m;
-				float4 px = float4( dot( x0, g0 ), dot( x1, g1 ), dot( x2, g2 ), dot( x3, g3 ) );
-				return 42.0 * dot( m, px);
+				#if UNITY_UV_STARTS_AT_TOP
+				float scale = -1.0;
+				#else
+				float scale = 1.0;
+				#endif
+				float4 o = pos;
+				o.y = pos.w * 0.5f;
+				o.y = ( pos.y - o.y ) * _ProjectionParams.x * scale + o.y;
+				return o;
 			}
+			
+					float2 voronoihash61( float2 p )
+					{
+						
+						p = float2( dot( p, float2( 127.1, 311.7 ) ), dot( p, float2( 269.5, 183.3 ) ) );
+						return frac( sin( p ) *43758.5453);
+					}
+			
+					float voronoi61( float2 v, float time, inout float2 id, inout float2 mr, float smoothness, inout float2 smoothId )
+					{
+						float2 n = floor( v );
+						float2 f = frac( v );
+						float F1 = 8.0;
+						float F2 = 8.0; float2 mg = 0;
+						for ( int j = -1; j <= 1; j++ )
+						{
+							for ( int i = -1; i <= 1; i++ )
+						 	{
+						 		float2 g = float2( i, j );
+						 		float2 o = voronoihash61( n + g );
+								o = ( sin( time + o * 6.2831 ) * 0.5 + 0.5 ); float2 r = f - g - o;
+								float d = 0.5 * dot( r, r );
+						 //		if( d<F1 ) {
+						 //			F2 = F1;
+						 			float h = smoothstep(0.0, 1.0, 0.5 + 0.5 * (F1 - d) / smoothness); F1 = lerp(F1, d, h) - smoothness * h * (1.0 - h);mg = g; mr = r; id = o;
+						 //		} else if( d<F2 ) {
+						 //			F2 = d;
+						
+						 //		}
+						 	}
+						}
+						return F1;
+					}
 			
 
 			VertexOutput VertexFunction( VertexInput v  )
@@ -3066,35 +2123,20 @@ Shader "Raygeas/Suntail Foliage"
 				UNITY_TRANSFER_INSTANCE_ID(v, o);
 				UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(o);
 
-				float3 ase_worldPos = TransformObjectToWorld( (v.vertex).xyz );
-				float mulTime34 = _TimeParameters.x * ( _WindSpeed * 5 );
-				float simplePerlin3D35 = snoise( ( ase_worldPos + mulTime34 )*_WindWavesScale );
-				float temp_output_231_0 = ( simplePerlin3D35 * 0.01 );
-				float2 texCoord357 = v.texcoord.xy * float2( 1,1 ) + float2( 0,0 );
-				#ifdef _ANCHORTHEFOLIAGEBASE_ON
-				float staticSwitch376 = ( temp_output_231_0 * pow( texCoord357.y , 2.0 ) );
-				#else
-				float staticSwitch376 = temp_output_231_0;
-				#endif
-				#ifdef _ENABLEWIND_ON
-				float staticSwitch341 = ( staticSwitch376 * ( _WindForce * 30 ) );
-				#else
-				float staticSwitch341 = 0.0;
-				#endif
-				float Wind191 = staticSwitch341;
-				float3 temp_cast_0 = (Wind191).xxx;
+				float3 objectToViewPos = TransformWorldToView(TransformObjectToWorld(v.vertex.xyz));
+				float eyeDepth = -objectToViewPos.z;
+				o.ase_texcoord8.x = eyeDepth;
 				
-				o.ase_texcoord8.xy = v.texcoord.xy;
 				
 				//setting value to unused interpolator channels and avoid initialization warnings
-				o.ase_texcoord8.zw = 0;
+				o.ase_texcoord8.yzw = 0;
 				#ifdef ASE_ABSOLUTE_VERTEX_POS
 					float3 defaultVertexValue = v.vertex.xyz;
 				#else
 					float3 defaultVertexValue = float3(0, 0, 0);
 				#endif
 
-				float3 vertexValue = temp_cast_0;
+				float3 vertexValue = defaultVertexValue;
 
 				#ifdef ASE_ABSOLUTE_VERTEX_POS
 					v.vertex.xyz = vertexValue;
@@ -3281,51 +2323,66 @@ Shader "Raygeas/Suntail Foliage"
 
 				WorldViewDirection = SafeNormalize( WorldViewDirection );
 
-				float2 uv_Albedo = IN.ase_texcoord8.xy * _Albedo_ST.xy + _Albedo_ST.zw;
-				float4 tex2DNode1 = tex2D( _Albedo, uv_Albedo );
-				float4 temp_output_10_0 = ( _MainColor * tex2DNode1 );
-				float simplePerlin3D742 = snoise( WorldPosition*_WorldScale );
-				simplePerlin3D742 = simplePerlin3D742*0.5 + 0.5;
-				float2 texCoord361 = IN.ase_texcoord8.xy * float2( 1,1 ) + float2( 0,0 );
-				#if defined(_SECONDCOLOROVERLAYTYPE_WORLD_POSITION)
-				float staticSwitch360 = simplePerlin3D742;
-				#elif defined(_SECONDCOLOROVERLAYTYPE_UV_BASED)
-				float staticSwitch360 = texCoord361.y;
-				#else
-				float staticSwitch360 = simplePerlin3D742;
-				#endif
-				float SecondColorMask335 = saturate( ( ( staticSwitch360 + _SecondColorOffset ) * ( _SecondColorFade * 2 ) ) );
-				float4 lerpResult332 = lerp( temp_output_10_0 , ( _SecondColor * tex2D( _Albedo, uv_Albedo ) ) , SecondColorMask335);
-				#ifdef _COLOR2ENABLE_ON
-				float4 staticSwitch340 = lerpResult332;
-				#else
-				float4 staticSwitch340 = temp_output_10_0;
-				#endif
-				float4 Albedo259 = staticSwitch340;
-				float dotResult461 = dot( SafeNormalize(_MainLightPosition.xyz) , WorldViewDirection );
-				float TranslucencyMask660 = (-dotResult461*1.0 + -0.2);
-				float3 normalizedWorldNormal = normalize( WorldNormal );
-				float dotResult672 = dot( SafeNormalize(_MainLightPosition.xyz) , normalizedWorldNormal );
-				float ase_lightAtten = 0;
-				Light ase_mainLight = GetMainLight( ShadowCoords );
-				ase_lightAtten = ase_mainLight.distanceAttenuation * ase_mainLight.shadowAttenuation;
-				float4 Translucency631 = saturate( ( ( TranslucencyMask660 * ( ( ( (dotResult672*1.0 + 1.0) * ase_lightAtten ) * _MainLightColor * Albedo259 ) * 0.25 ) ) * _TranslucencyInt ) );
+				float4 ase_screenPosNorm = ScreenPos / ScreenPos.w;
+				ase_screenPosNorm.z = ( UNITY_NEAR_CLIP_VALUE >= 0 ) ? ase_screenPosNorm.z : ase_screenPosNorm.z * 0.5 + 0.5;
+				float clampResult140 = clamp( _DepthDistance , 0.1 , 100.0 );
+				float screenDepth83 = LinearEyeDepth(SHADERGRAPH_SAMPLE_SCENE_DEPTH( ase_screenPosNorm.xy ),_ZBufferParams);
+				float distanceDepth83 = abs( ( screenDepth83 - LinearEyeDepth( ase_screenPosNorm.z,_ZBufferParams ) ) / ( clampResult140 ) );
+				float temp_output_364_0 = saturate( distanceDepth83 );
+				float4 Depth158 = saturate( ( saturate( ( _Color2 * temp_output_364_0 ) ) + saturate( ( ( 1.0 - temp_output_364_0 ) * _Color1 ) ) ) );
+				float4 ase_grabScreenPos = ASE_ComputeGrabScreenPos( ScreenPos );
+				float4 ase_grabScreenPosNorm = ase_grabScreenPos / ase_grabScreenPos.w;
+				float4 fetchOpaqueVal341 = float4( SHADERGRAPH_SAMPLE_SCENE_COLOR( ase_grabScreenPosNorm.xy ), 1.0 );
+				float temp_output_132_0 = ( _WavesSpeed * 0.1 );
+				float mulTime43 = _TimeParameters.x * temp_output_132_0;
+				float2 _Vector0 = float2(1,1);
+				float2 appendResult106 = (float2(WorldPosition.x , WorldPosition.z));
+				float2 WorldSpaceTile68 = ( appendResult106 * _WavesTile );
+				float2 panner112 = ( mulTime43 * _Vector0 + WorldSpaceTile68);
+				float3 unpack38 = UnpackNormalScale( tex2D( _WavesNormal, panner112 ), _WavesNormalIntensity );
+				unpack38.z = lerp( 1, unpack38.z, saturate(_WavesNormalIntensity) );
+				float2 panner114 = ( ( 1.0 - mulTime43 ) * _Vector0 + WorldSpaceTile68);
+				float3 unpack46 = UnpackNormalScale( tex2D( _WavesNormal, panner114 ), _WavesNormalIntensity );
+				unpack46.z = lerp( 1, unpack46.z, saturate(_WavesNormalIntensity) );
+				float3 Normal89 = ( unpack38 + unpack46 );
+				float4 temp_output_277_0 = ( ase_grabScreenPosNorm + float4( ( Normal89 * ( _RefractionScale * 0.1 ) ) , 0.0 ) );
+				float4 fetchOpaqueVal274 = float4( SHADERGRAPH_SAMPLE_SCENE_COLOR( temp_output_277_0.xy ), 1.0 );
+				float eyeDepth337 = LinearEyeDepth(SHADERGRAPH_SAMPLE_SCENE_DEPTH( temp_output_277_0.xy ),_ZBufferParams);
+				float eyeDepth = IN.ase_texcoord8.x;
+				float ifLocalVar336 = 0;
+				if( eyeDepth337 > eyeDepth )
+				ifLocalVar336 = 1.0;
+				else if( eyeDepth337 < eyeDepth )
+				ifLocalVar336 = 0.0;
+				float4 lerpResult342 = lerp( fetchOpaqueVal341 , fetchOpaqueVal274 , ifLocalVar336);
+				float4 Refractions282 = saturate( lerpResult342 );
+				float4 lerpResult323 = lerp( Depth158 , Refractions282 , Depth158);
+				float mulTime3 = _TimeParameters.x * ( temp_output_132_0 * 100 );
+				float time61 = mulTime3;
+				float2 voronoiSmoothId61 = 0;
+				float voronoiSmooth61 = ( 1.0 - _FoamDensity );
+				float2 coords61 = WorldSpaceTile68 * 50.0;
+				float2 id61 = 0;
+				float2 uv61 = 0;
+				float voroi61 = voronoi61( coords61, time61, id61, uv61, voronoiSmooth61, voronoiSmoothId61 );
+				float clampResult138 = clamp( _FoamContrast , 0.0 , 0.95 );
+				float screenDepth17 = LinearEyeDepth(SHADERGRAPH_SAMPLE_SCENE_DEPTH( ase_screenPosNorm.xy ),_ZBufferParams);
+				float distanceDepth17 = abs( ( screenDepth17 - LinearEyeDepth( ase_screenPosNorm.z,_ZBufferParams ) ) / ( _FoamDistance ) );
+				float Foam183 = saturate( ( pow( saturate( voroi61 ) , ( 1.0 - clampResult138 ) ) + ( 1.0 - distanceDepth17 ) ) );
 				
-				float2 uv_SmoothnessTexture = IN.ase_texcoord8.xy * _SmoothnessTexture_ST.xy + _SmoothnessTexture_ST.zw;
-				float4 Smoothness944 = ( tex2D( _SmoothnessTexture, uv_SmoothnessTexture ) * _Smoothness );
-				
-				float OpacityMask263 = tex2DNode1.a;
+				float screenDepth345 = LinearEyeDepth(SHADERGRAPH_SAMPLE_SCENE_DEPTH( ase_screenPosNorm.xy ),_ZBufferParams);
+				float distanceDepth345 = abs( ( screenDepth345 - LinearEyeDepth( ase_screenPosNorm.z,_ZBufferParams ) ) / ( _CoastOpacity ) );
 				
 
-				float3 BaseColor = ( Albedo259 + Translucency631 ).rgb;
-				float3 Normal = float3(0, 0, 1);
+				float3 BaseColor = ( lerpResult323 + Foam183 ).rgb;
+				float3 Normal = Normal89;
 				float3 Emission = 0;
 				float3 Specular = 0.5;
-				float Metallic = 0;
-				float Smoothness = Smoothness944.r;
+				float Metallic = _Metallic;
+				float Smoothness = _Smoothness;
 				float Occlusion = 1;
-				float Alpha = OpacityMask263;
-				float AlphaClipThreshold = _AlphaCutoff;
+				float Alpha = ( _Opacity * saturate( distanceDepth345 ) );
+				float AlphaClipThreshold = 0.5;
 				float AlphaClipThresholdShadow = 0.5;
 				float3 BakedGI = 0;
 				float3 RefractionColor = 1;
@@ -3438,10 +2495,12 @@ Shader "Raygeas/Suntail Foliage"
 
 			HLSLPROGRAM
 
+			#define _SURFACE_TYPE_TRANSPARENT 1
 			#define _NORMAL_DROPOFF_TS 1
 			#define ASE_FOG 1
-			#define _ALPHATEST_ON 1
+			#define _NORMALMAP 1
 			#define ASE_SRP_VERSION 120113
+			#define REQUIRE_DEPTH_TEXTURE 1
 
 
 			#pragma vertex vert
@@ -3462,15 +2521,13 @@ Shader "Raygeas/Suntail Foliage"
 			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/ShaderGraphFunctions.hlsl"
 			#include "Packages/com.unity.render-pipelines.universal/Editor/ShaderGraph/Includes/ShaderPass.hlsl"
 
-			#pragma shader_feature_local _ENABLEWIND_ON
-			#pragma shader_feature_local _ANCHORTHEFOLIAGEBASE_ON
-
+			
 
 			struct VertexInput
 			{
 				float4 vertex : POSITION;
 				float3 ase_normal : NORMAL;
-				float4 ase_texcoord : TEXCOORD0;
+				
 				UNITY_VERTEX_INPUT_INSTANCE_ID
 			};
 
@@ -3483,19 +2540,20 @@ Shader "Raygeas/Suntail Foliage"
 			};
 
 			CBUFFER_START(UnityPerMaterial)
-			float4 _MainColor;
-			float4 _Albedo_ST;
-			float4 _SecondColor;
-			float4 _SmoothnessTexture_ST;
-			float _WindSpeed;
-			float _WindWavesScale;
-			float _WindForce;
-			float _WorldScale;
-			float _SecondColorOffset;
-			float _SecondColorFade;
-			float _TranslucencyInt;
+			float4 _Color2;
+			float4 _Color1;
+			float _DepthDistance;
+			float _WavesSpeed;
+			float _WavesTile;
+			float _WavesNormalIntensity;
+			float _RefractionScale;
+			float _FoamDensity;
+			float _FoamContrast;
+			float _FoamDistance;
+			float _Metallic;
 			float _Smoothness;
-			float _AlphaCutoff;
+			float _Opacity;
+			float _CoastOpacity;
 			#ifdef ASE_TRANSMISSION
 				float _TransmissionShadow;
 			#endif
@@ -3528,7 +2586,7 @@ Shader "Raygeas/Suntail Foliage"
 				int _PassValue;
 			#endif
 
-			sampler2D _Albedo;
+			uniform float4 _CameraDepthTexture_TexelSize;
 
 
 			//#include "Packages/com.unity.render-pipelines.universal/Editor/ShaderGraph/Includes/Varyings.hlsl"
@@ -3538,54 +2596,7 @@ Shader "Raygeas/Suntail Foliage"
 			//#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/VisualEffectVertex.hlsl"
 			//#endif
 
-			float3 mod3D289( float3 x ) { return x - floor( x / 289.0 ) * 289.0; }
-			float4 mod3D289( float4 x ) { return x - floor( x / 289.0 ) * 289.0; }
-			float4 permute( float4 x ) { return mod3D289( ( x * 34.0 + 1.0 ) * x ); }
-			float4 taylorInvSqrt( float4 r ) { return 1.79284291400159 - r * 0.85373472095314; }
-			float snoise( float3 v )
-			{
-				const float2 C = float2( 1.0 / 6.0, 1.0 / 3.0 );
-				float3 i = floor( v + dot( v, C.yyy ) );
-				float3 x0 = v - i + dot( i, C.xxx );
-				float3 g = step( x0.yzx, x0.xyz );
-				float3 l = 1.0 - g;
-				float3 i1 = min( g.xyz, l.zxy );
-				float3 i2 = max( g.xyz, l.zxy );
-				float3 x1 = x0 - i1 + C.xxx;
-				float3 x2 = x0 - i2 + C.yyy;
-				float3 x3 = x0 - 0.5;
-				i = mod3D289( i);
-				float4 p = permute( permute( permute( i.z + float4( 0.0, i1.z, i2.z, 1.0 ) ) + i.y + float4( 0.0, i1.y, i2.y, 1.0 ) ) + i.x + float4( 0.0, i1.x, i2.x, 1.0 ) );
-				float4 j = p - 49.0 * floor( p / 49.0 );  // mod(p,7*7)
-				float4 x_ = floor( j / 7.0 );
-				float4 y_ = floor( j - 7.0 * x_ );  // mod(j,N)
-				float4 x = ( x_ * 2.0 + 0.5 ) / 7.0 - 1.0;
-				float4 y = ( y_ * 2.0 + 0.5 ) / 7.0 - 1.0;
-				float4 h = 1.0 - abs( x ) - abs( y );
-				float4 b0 = float4( x.xy, y.xy );
-				float4 b1 = float4( x.zw, y.zw );
-				float4 s0 = floor( b0 ) * 2.0 + 1.0;
-				float4 s1 = floor( b1 ) * 2.0 + 1.0;
-				float4 sh = -step( h, 0.0 );
-				float4 a0 = b0.xzyw + s0.xzyw * sh.xxyy;
-				float4 a1 = b1.xzyw + s1.xzyw * sh.zzww;
-				float3 g0 = float3( a0.xy, h.x );
-				float3 g1 = float3( a0.zw, h.y );
-				float3 g2 = float3( a1.xy, h.z );
-				float3 g3 = float3( a1.zw, h.w );
-				float4 norm = taylorInvSqrt( float4( dot( g0, g0 ), dot( g1, g1 ), dot( g2, g2 ), dot( g3, g3 ) ) );
-				g0 *= norm.x;
-				g1 *= norm.y;
-				g2 *= norm.z;
-				g3 *= norm.w;
-				float4 m = max( 0.6 - float4( dot( x0, x0 ), dot( x1, x1 ), dot( x2, x2 ), dot( x3, x3 ) ), 0.0 );
-				m = m* m;
-				m = m* m;
-				float4 px = float4( dot( x0, g0 ), dot( x1, g1 ), dot( x2, g2 ), dot( x3, g3 ) );
-				return 42.0 * dot( m, px);
-			}
 			
-
 			struct SurfaceDescription
 			{
 				float Alpha;
@@ -3601,28 +2612,10 @@ Shader "Raygeas/Suntail Foliage"
 				UNITY_TRANSFER_INSTANCE_ID(v, o);
 				UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(o);
 
-				float3 ase_worldPos = TransformObjectToWorld( (v.vertex).xyz );
-				float mulTime34 = _TimeParameters.x * ( _WindSpeed * 5 );
-				float simplePerlin3D35 = snoise( ( ase_worldPos + mulTime34 )*_WindWavesScale );
-				float temp_output_231_0 = ( simplePerlin3D35 * 0.01 );
-				float2 texCoord357 = v.ase_texcoord.xy * float2( 1,1 ) + float2( 0,0 );
-				#ifdef _ANCHORTHEFOLIAGEBASE_ON
-				float staticSwitch376 = ( temp_output_231_0 * pow( texCoord357.y , 2.0 ) );
-				#else
-				float staticSwitch376 = temp_output_231_0;
-				#endif
-				#ifdef _ENABLEWIND_ON
-				float staticSwitch341 = ( staticSwitch376 * ( _WindForce * 30 ) );
-				#else
-				float staticSwitch341 = 0.0;
-				#endif
-				float Wind191 = staticSwitch341;
-				float3 temp_cast_0 = (Wind191).xxx;
+				float4 ase_clipPos = TransformObjectToHClip((v.vertex).xyz);
+				float4 screenPos = ComputeScreenPos(ase_clipPos);
+				o.ase_texcoord = screenPos;
 				
-				o.ase_texcoord.xy = v.ase_texcoord.xy;
-				
-				//setting value to unused interpolator channels and avoid initialization warnings
-				o.ase_texcoord.zw = 0;
 
 				#ifdef ASE_ABSOLUTE_VERTEX_POS
 					float3 defaultVertexValue = v.vertex.xyz;
@@ -3630,7 +2623,7 @@ Shader "Raygeas/Suntail Foliage"
 					float3 defaultVertexValue = float3(0, 0, 0);
 				#endif
 
-				float3 vertexValue = temp_cast_0;
+				float3 vertexValue = defaultVertexValue;
 
 				#ifdef ASE_ABSOLUTE_VERTEX_POS
 					v.vertex.xyz = vertexValue;
@@ -3652,8 +2645,7 @@ Shader "Raygeas/Suntail Foliage"
 			{
 				float4 vertex : INTERNALTESSPOS;
 				float3 ase_normal : NORMAL;
-				float4 ase_texcoord : TEXCOORD0;
-
+				
 				UNITY_VERTEX_INPUT_INSTANCE_ID
 			};
 
@@ -3670,7 +2662,7 @@ Shader "Raygeas/Suntail Foliage"
 				UNITY_TRANSFER_INSTANCE_ID(v, o);
 				o.vertex = v.vertex;
 				o.ase_normal = v.ase_normal;
-				o.ase_texcoord = v.ase_texcoord;
+				
 				return o;
 			}
 
@@ -3709,7 +2701,7 @@ Shader "Raygeas/Suntail Foliage"
 				VertexInput o = (VertexInput) 0;
 				o.vertex = patch[0].vertex * bary.x + patch[1].vertex * bary.y + patch[2].vertex * bary.z;
 				o.ase_normal = patch[0].ase_normal * bary.x + patch[1].ase_normal * bary.y + patch[2].ase_normal * bary.z;
-				o.ase_texcoord = patch[0].ase_texcoord * bary.x + patch[1].ase_texcoord * bary.y + patch[2].ase_texcoord * bary.z;
+				
 				#if defined(ASE_PHONG_TESSELLATION)
 				float3 pp[3];
 				for (int i = 0; i < 3; ++i)
@@ -3731,13 +2723,15 @@ Shader "Raygeas/Suntail Foliage"
 			{
 				SurfaceDescription surfaceDescription = (SurfaceDescription)0;
 
-				float2 uv_Albedo = IN.ase_texcoord.xy * _Albedo_ST.xy + _Albedo_ST.zw;
-				float4 tex2DNode1 = tex2D( _Albedo, uv_Albedo );
-				float OpacityMask263 = tex2DNode1.a;
+				float4 screenPos = IN.ase_texcoord;
+				float4 ase_screenPosNorm = screenPos / screenPos.w;
+				ase_screenPosNorm.z = ( UNITY_NEAR_CLIP_VALUE >= 0 ) ? ase_screenPosNorm.z : ase_screenPosNorm.z * 0.5 + 0.5;
+				float screenDepth345 = LinearEyeDepth(SHADERGRAPH_SAMPLE_SCENE_DEPTH( ase_screenPosNorm.xy ),_ZBufferParams);
+				float distanceDepth345 = abs( ( screenDepth345 - LinearEyeDepth( ase_screenPosNorm.z,_ZBufferParams ) ) / ( _CoastOpacity ) );
 				
 
-				surfaceDescription.Alpha = OpacityMask263;
-				surfaceDescription.AlphaClipThreshold = _AlphaCutoff;
+				surfaceDescription.Alpha = ( _Opacity * saturate( distanceDepth345 ) );
+				surfaceDescription.AlphaClipThreshold = 0.5;
 
 				#if _ALPHATEST_ON
 					float alphaClipThreshold = 0.01f;
@@ -3770,10 +2764,12 @@ Shader "Raygeas/Suntail Foliage"
 
 			HLSLPROGRAM
 
+			#define _SURFACE_TYPE_TRANSPARENT 1
 			#define _NORMAL_DROPOFF_TS 1
 			#define ASE_FOG 1
-			#define _ALPHATEST_ON 1
+			#define _NORMALMAP 1
 			#define ASE_SRP_VERSION 120113
+			#define REQUIRE_DEPTH_TEXTURE 1
 
 
 			#pragma vertex vert
@@ -3794,15 +2790,13 @@ Shader "Raygeas/Suntail Foliage"
 			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/ShaderGraphFunctions.hlsl"
 			#include "Packages/com.unity.render-pipelines.universal/Editor/ShaderGraph/Includes/ShaderPass.hlsl"
 
-			#pragma shader_feature_local _ENABLEWIND_ON
-			#pragma shader_feature_local _ANCHORTHEFOLIAGEBASE_ON
-
+			
 
 			struct VertexInput
 			{
 				float4 vertex : POSITION;
 				float3 ase_normal : NORMAL;
-				float4 ase_texcoord : TEXCOORD0;
+				
 				UNITY_VERTEX_INPUT_INSTANCE_ID
 			};
 
@@ -3815,19 +2809,20 @@ Shader "Raygeas/Suntail Foliage"
 			};
 
 			CBUFFER_START(UnityPerMaterial)
-			float4 _MainColor;
-			float4 _Albedo_ST;
-			float4 _SecondColor;
-			float4 _SmoothnessTexture_ST;
-			float _WindSpeed;
-			float _WindWavesScale;
-			float _WindForce;
-			float _WorldScale;
-			float _SecondColorOffset;
-			float _SecondColorFade;
-			float _TranslucencyInt;
+			float4 _Color2;
+			float4 _Color1;
+			float _DepthDistance;
+			float _WavesSpeed;
+			float _WavesTile;
+			float _WavesNormalIntensity;
+			float _RefractionScale;
+			float _FoamDensity;
+			float _FoamContrast;
+			float _FoamDistance;
+			float _Metallic;
 			float _Smoothness;
-			float _AlphaCutoff;
+			float _Opacity;
+			float _CoastOpacity;
 			#ifdef ASE_TRANSMISSION
 				float _TransmissionShadow;
 			#endif
@@ -3860,56 +2855,17 @@ Shader "Raygeas/Suntail Foliage"
 				int _PassValue;
 			#endif
 
-			sampler2D _Albedo;
+			uniform float4 _CameraDepthTexture_TexelSize;
 
-			float3 mod3D289( float3 x ) { return x - floor( x / 289.0 ) * 289.0; }
-			float4 mod3D289( float4 x ) { return x - floor( x / 289.0 ) * 289.0; }
-			float4 permute( float4 x ) { return mod3D289( ( x * 34.0 + 1.0 ) * x ); }
-			float4 taylorInvSqrt( float4 r ) { return 1.79284291400159 - r * 0.85373472095314; }
-			float snoise( float3 v )
-			{
-				const float2 C = float2( 1.0 / 6.0, 1.0 / 3.0 );
-				float3 i = floor( v + dot( v, C.yyy ) );
-				float3 x0 = v - i + dot( i, C.xxx );
-				float3 g = step( x0.yzx, x0.xyz );
-				float3 l = 1.0 - g;
-				float3 i1 = min( g.xyz, l.zxy );
-				float3 i2 = max( g.xyz, l.zxy );
-				float3 x1 = x0 - i1 + C.xxx;
-				float3 x2 = x0 - i2 + C.yyy;
-				float3 x3 = x0 - 0.5;
-				i = mod3D289( i);
-				float4 p = permute( permute( permute( i.z + float4( 0.0, i1.z, i2.z, 1.0 ) ) + i.y + float4( 0.0, i1.y, i2.y, 1.0 ) ) + i.x + float4( 0.0, i1.x, i2.x, 1.0 ) );
-				float4 j = p - 49.0 * floor( p / 49.0 );  // mod(p,7*7)
-				float4 x_ = floor( j / 7.0 );
-				float4 y_ = floor( j - 7.0 * x_ );  // mod(j,N)
-				float4 x = ( x_ * 2.0 + 0.5 ) / 7.0 - 1.0;
-				float4 y = ( y_ * 2.0 + 0.5 ) / 7.0 - 1.0;
-				float4 h = 1.0 - abs( x ) - abs( y );
-				float4 b0 = float4( x.xy, y.xy );
-				float4 b1 = float4( x.zw, y.zw );
-				float4 s0 = floor( b0 ) * 2.0 + 1.0;
-				float4 s1 = floor( b1 ) * 2.0 + 1.0;
-				float4 sh = -step( h, 0.0 );
-				float4 a0 = b0.xzyw + s0.xzyw * sh.xxyy;
-				float4 a1 = b1.xzyw + s1.xzyw * sh.zzww;
-				float3 g0 = float3( a0.xy, h.x );
-				float3 g1 = float3( a0.zw, h.y );
-				float3 g2 = float3( a1.xy, h.z );
-				float3 g3 = float3( a1.zw, h.w );
-				float4 norm = taylorInvSqrt( float4( dot( g0, g0 ), dot( g1, g1 ), dot( g2, g2 ), dot( g3, g3 ) ) );
-				g0 *= norm.x;
-				g1 *= norm.y;
-				g2 *= norm.z;
-				g3 *= norm.w;
-				float4 m = max( 0.6 - float4( dot( x0, x0 ), dot( x1, x1 ), dot( x2, x2 ), dot( x3, x3 ) ), 0.0 );
-				m = m* m;
-				m = m* m;
-				float4 px = float4( dot( x0, g0 ), dot( x1, g1 ), dot( x2, g2 ), dot( x3, g3 ) );
-				return 42.0 * dot( m, px);
-			}
+
+			//#include "Packages/com.unity.render-pipelines.universal/Editor/ShaderGraph/Includes/Varyings.hlsl"
+			//#include "Packages/com.unity.render-pipelines.universal/Editor/ShaderGraph/Includes/SelectionPickingPass.hlsl"
+
+			//#ifdef HAVE_VFX_MODIFICATION
+			//#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/VisualEffectVertex.hlsl"
+			//#endif
+
 			
-
 			struct SurfaceDescription
 			{
 				float Alpha;
@@ -3925,28 +2881,10 @@ Shader "Raygeas/Suntail Foliage"
 				UNITY_TRANSFER_INSTANCE_ID(v, o);
 				UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(o);
 
-				float3 ase_worldPos = TransformObjectToWorld( (v.vertex).xyz );
-				float mulTime34 = _TimeParameters.x * ( _WindSpeed * 5 );
-				float simplePerlin3D35 = snoise( ( ase_worldPos + mulTime34 )*_WindWavesScale );
-				float temp_output_231_0 = ( simplePerlin3D35 * 0.01 );
-				float2 texCoord357 = v.ase_texcoord.xy * float2( 1,1 ) + float2( 0,0 );
-				#ifdef _ANCHORTHEFOLIAGEBASE_ON
-				float staticSwitch376 = ( temp_output_231_0 * pow( texCoord357.y , 2.0 ) );
-				#else
-				float staticSwitch376 = temp_output_231_0;
-				#endif
-				#ifdef _ENABLEWIND_ON
-				float staticSwitch341 = ( staticSwitch376 * ( _WindForce * 30 ) );
-				#else
-				float staticSwitch341 = 0.0;
-				#endif
-				float Wind191 = staticSwitch341;
-				float3 temp_cast_0 = (Wind191).xxx;
+				float4 ase_clipPos = TransformObjectToHClip((v.vertex).xyz);
+				float4 screenPos = ComputeScreenPos(ase_clipPos);
+				o.ase_texcoord = screenPos;
 				
-				o.ase_texcoord.xy = v.ase_texcoord.xy;
-				
-				//setting value to unused interpolator channels and avoid initialization warnings
-				o.ase_texcoord.zw = 0;
 
 				#ifdef ASE_ABSOLUTE_VERTEX_POS
 					float3 defaultVertexValue = v.vertex.xyz;
@@ -3954,7 +2892,7 @@ Shader "Raygeas/Suntail Foliage"
 					float3 defaultVertexValue = float3(0, 0, 0);
 				#endif
 
-				float3 vertexValue = temp_cast_0;
+				float3 vertexValue = defaultVertexValue;
 
 				#ifdef ASE_ABSOLUTE_VERTEX_POS
 					v.vertex.xyz = vertexValue;
@@ -3975,8 +2913,7 @@ Shader "Raygeas/Suntail Foliage"
 			{
 				float4 vertex : INTERNALTESSPOS;
 				float3 ase_normal : NORMAL;
-				float4 ase_texcoord : TEXCOORD0;
-
+				
 				UNITY_VERTEX_INPUT_INSTANCE_ID
 			};
 
@@ -3993,7 +2930,7 @@ Shader "Raygeas/Suntail Foliage"
 				UNITY_TRANSFER_INSTANCE_ID(v, o);
 				o.vertex = v.vertex;
 				o.ase_normal = v.ase_normal;
-				o.ase_texcoord = v.ase_texcoord;
+				
 				return o;
 			}
 
@@ -4032,7 +2969,7 @@ Shader "Raygeas/Suntail Foliage"
 				VertexInput o = (VertexInput) 0;
 				o.vertex = patch[0].vertex * bary.x + patch[1].vertex * bary.y + patch[2].vertex * bary.z;
 				o.ase_normal = patch[0].ase_normal * bary.x + patch[1].ase_normal * bary.y + patch[2].ase_normal * bary.z;
-				o.ase_texcoord = patch[0].ase_texcoord * bary.x + patch[1].ase_texcoord * bary.y + patch[2].ase_texcoord * bary.z;
+				
 				#if defined(ASE_PHONG_TESSELLATION)
 				float3 pp[3];
 				for (int i = 0; i < 3; ++i)
@@ -4054,13 +2991,15 @@ Shader "Raygeas/Suntail Foliage"
 			{
 				SurfaceDescription surfaceDescription = (SurfaceDescription)0;
 
-				float2 uv_Albedo = IN.ase_texcoord.xy * _Albedo_ST.xy + _Albedo_ST.zw;
-				float4 tex2DNode1 = tex2D( _Albedo, uv_Albedo );
-				float OpacityMask263 = tex2DNode1.a;
+				float4 screenPos = IN.ase_texcoord;
+				float4 ase_screenPosNorm = screenPos / screenPos.w;
+				ase_screenPosNorm.z = ( UNITY_NEAR_CLIP_VALUE >= 0 ) ? ase_screenPosNorm.z : ase_screenPosNorm.z * 0.5 + 0.5;
+				float screenDepth345 = LinearEyeDepth(SHADERGRAPH_SAMPLE_SCENE_DEPTH( ase_screenPosNorm.xy ),_ZBufferParams);
+				float distanceDepth345 = abs( ( screenDepth345 - LinearEyeDepth( ase_screenPosNorm.z,_ZBufferParams ) ) / ( _CoastOpacity ) );
 				
 
-				surfaceDescription.Alpha = OpacityMask263;
-				surfaceDescription.AlphaClipThreshold = _AlphaCutoff;
+				surfaceDescription.Alpha = ( _Opacity * saturate( distanceDepth345 ) );
+				surfaceDescription.AlphaClipThreshold = 0.5;
 
 				#if _ALPHATEST_ON
 					float alphaClipThreshold = 0.01f;
@@ -4089,5 +3028,198 @@ Shader "Raygeas/Suntail Foliage"
 	CustomEditor "UnityEditor.ShaderGraphLitGUI"
 	FallBack "Hidden/Shader Graph/FallbackError"
 	
-	Fallback Off
+	Fallback "Hidden/InternalErrorShader"
 }
+/*ASEBEGIN
+Version=19108
+Node;AmplifyShaderEditor.CommentaryNode;95;-2684.993,788.4299;Inherit;False;970.8306;441.1572;;5;68;107;106;100;66;World Space Tile;1,1,1,1;0;0
+Node;AmplifyShaderEditor.CommentaryNode;343;-4838.384,784.4971;Inherit;False;2098.784;833.2174;;16;344;276;282;302;342;336;341;274;338;340;339;337;277;278;273;281;Refraction;1,1,1,1;0;0
+Node;AmplifyShaderEditor.CommentaryNode;179;-4846.875,-1463.306;Inherit;False;2068.099;656.4753;;18;183;188;186;19;6;64;17;136;18;61;138;135;3;7;5;130;131;63;Foam;1,1,1,1;0;0
+Node;AmplifyShaderEditor.CommentaryNode;94;-4849.317,-741.4441;Inherit;False;2219.204;635.6195;;16;89;51;46;38;112;114;88;129;128;53;127;116;101;117;43;113;Normal;1,1,1,1;0;0
+Node;AmplifyShaderEditor.CommentaryNode;157;-4844.658,-37.79259;Inherit;False;2232.14;734.4948;;14;158;229;227;85;83;140;84;211;230;355;356;360;361;364;Depth;1,1,1,1;0;0
+Node;AmplifyShaderEditor.RangedFloatNode;339;-3860.057,1412.131;Inherit;False;Constant;_Float1;Float 1;13;0;Create;True;0;0;0;False;0;False;1;0;0;0;0;1;FLOAT;0
+Node;AmplifyShaderEditor.ScreenDepthNode;337;-3917.284,1216.882;Inherit;False;0;True;1;0;FLOAT4;0,0,0,0;False;1;FLOAT;0
+Node;AmplifyShaderEditor.PowerNode;6;-3572.226,-1219.038;Inherit;False;False;2;0;FLOAT;0;False;1;FLOAT;1;False;1;FLOAT;0
+Node;AmplifyShaderEditor.LerpOp;342;-3368.581,1085.435;Inherit;False;3;0;COLOR;0,0,0,0;False;1;COLOR;0,0,0,0;False;2;FLOAT;0;False;1;COLOR;0
+Node;AmplifyShaderEditor.SaturateNode;64;-3746.012,-1290.282;Inherit;False;1;0;FLOAT;0;False;1;FLOAT;0
+Node;AmplifyShaderEditor.ConditionalIfNode;336;-3646.734,1324.909;Inherit;False;False;5;0;FLOAT;0;False;1;FLOAT;0;False;2;FLOAT;0;False;3;FLOAT;0;False;4;FLOAT;0;False;1;FLOAT;0
+Node;AmplifyShaderEditor.OneMinusNode;136;-3761.058,-1115.657;Inherit;False;1;0;FLOAT;0;False;1;FLOAT;0
+Node;AmplifyShaderEditor.RangedFloatNode;340;-3859.729,1506.948;Inherit;False;Constant;_Float2;Float 2;13;0;Create;True;0;0;0;False;0;False;0;0;0;0;0;1;FLOAT;0
+Node;AmplifyShaderEditor.ScreenColorNode;274;-3653.063,1055.286;Inherit;False;Global;_GrabScreen0;Grab Screen 0;12;0;Create;True;0;0;0;False;0;False;Object;-1;False;False;False;False;2;0;FLOAT2;0,0;False;1;FLOAT;0;False;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
+Node;AmplifyShaderEditor.SaturateNode;361;-3373.392,366.7633;Inherit;False;1;0;COLOR;0,0,0,0;False;1;COLOR;0
+Node;AmplifyShaderEditor.OneMinusNode;19;-3574.874,-968.2001;Inherit;False;1;0;FLOAT;0;False;1;FLOAT;0
+Node;AmplifyShaderEditor.ScreenColorNode;341;-3674.766,875.5948;Inherit;False;Global;_GrabScreen1;Grab Screen 1;12;0;Create;True;0;0;0;False;0;False;Instance;274;False;False;False;False;2;0;FLOAT2;0,0;False;1;FLOAT;0;False;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
+Node;AmplifyShaderEditor.DepthFade;17;-3845.474,-967.9393;Inherit;False;True;False;True;2;1;FLOAT3;0,0,0;False;0;FLOAT;1;False;1;FLOAT;0
+Node;AmplifyShaderEditor.SimpleMultiplyOpNode;356;-3556.392,433.7633;Inherit;False;2;2;0;FLOAT;0;False;1;COLOR;0,0,0,0;False;1;COLOR;0
+Node;AmplifyShaderEditor.SimpleMultiplyOpNode;355;-3555.943,169.053;Inherit;False;2;2;0;COLOR;0,0,0,0;False;1;FLOAT;0;False;1;COLOR;0
+Node;AmplifyShaderEditor.RangedFloatNode;18;-4159.086,-947.4217;Inherit;False;Property;_FoamDistance;Foam Distance;10;0;Create;True;0;0;0;False;0;False;0;0.7;0;5;0;1;FLOAT;0
+Node;AmplifyShaderEditor.ClampOpNode;138;-3956.907,-1116.104;Inherit;False;3;0;FLOAT;0;False;1;FLOAT;0;False;2;FLOAT;0.95;False;1;FLOAT;0
+Node;AmplifyShaderEditor.SaturateNode;360;-3372.392,213.7633;Inherit;False;1;0;COLOR;0,0,0,0;False;1;COLOR;0
+Node;AmplifyShaderEditor.SimpleAddOpNode;230;-3172.141,257.9694;Inherit;False;2;2;0;COLOR;0,0,0,0;False;1;COLOR;0,0,0,0;False;1;COLOR;0
+Node;AmplifyShaderEditor.SaturateNode;302;-3167.676,1085.865;Inherit;False;1;0;COLOR;0,0,0,0;False;1;COLOR;0
+Node;AmplifyShaderEditor.GetLocalVarNode;103;-1693.934,64.53035;Inherit;False;89;Normal;1;0;OBJECT;;False;1;FLOAT3;0
+Node;AmplifyShaderEditor.SimpleAddOpNode;25;-1656.537,-72.6391;Inherit;False;2;2;0;COLOR;0,0,0,0;False;1;FLOAT;0;False;1;COLOR;0
+Node;AmplifyShaderEditor.RangedFloatNode;16;-1795.561,255.5613;Inherit;False;Property;_Smoothness;Smoothness;4;0;Create;True;0;0;0;False;0;False;0;0.9;0;1;0;1;FLOAT;0
+Node;AmplifyShaderEditor.RangedFloatNode;365;-1797.882,158.7533;Inherit;False;Property;_Metallic;Metallic;5;0;Create;True;0;0;0;False;0;False;0;0;0;1;0;1;FLOAT;0
+Node;AmplifyShaderEditor.SimpleMultiplyOpNode;350;-1630.565,415.8665;Inherit;False;2;2;0;FLOAT;0;False;1;FLOAT;0;False;1;FLOAT;0
+Node;AmplifyShaderEditor.GetLocalVarNode;191;-1930.989,13.57632;Inherit;False;183;Foam;1;0;OBJECT;;False;1;FLOAT;0
+Node;AmplifyShaderEditor.LerpOp;323;-1919.971,-163.8079;Inherit;False;3;0;COLOR;0,0,0,0;False;1;COLOR;0,0,0,0;False;2;COLOR;0,0,0,0;False;1;COLOR;0
+Node;AmplifyShaderEditor.RangedFloatNode;194;-1960.297,362.692;Inherit;False;Property;_Opacity;Opacity;3;0;Create;True;0;0;0;False;0;False;0;0.8;0;1;0;1;FLOAT;0
+Node;AmplifyShaderEditor.SaturateNode;351;-1833.565,476.8665;Inherit;False;1;0;FLOAT;0;False;1;FLOAT;0
+Node;AmplifyShaderEditor.DepthFade;345;-2118.564,476.8665;Inherit;False;True;False;True;2;1;FLOAT3;0,0,0;False;0;FLOAT;1;False;1;FLOAT;0
+Node;AmplifyShaderEditor.RegisterLocalVarNode;183;-3005.991,-1112.722;Inherit;False;Foam;-1;True;1;0;FLOAT;0;False;1;FLOAT;0
+Node;AmplifyShaderEditor.GetLocalVarNode;209;-2209.618,-223.0469;Inherit;False;158;Depth;1;0;OBJECT;;False;1;COLOR;0
+Node;AmplifyShaderEditor.GetLocalVarNode;292;-2206.272,-65.67823;Inherit;False;282;Refractions;1;0;OBJECT;;False;1;COLOR;0
+Node;AmplifyShaderEditor.RegisterLocalVarNode;282;-2980,1080.204;Inherit;False;Refractions;-1;True;1;0;COLOR;0,0,0,0;False;1;COLOR;0
+Node;AmplifyShaderEditor.SaturateNode;188;-3187.473,-1107.528;Inherit;False;1;0;FLOAT;0;False;1;FLOAT;0
+Node;AmplifyShaderEditor.RegisterLocalVarNode;158;-2825.167,253.1071;Inherit;False;Depth;-1;True;1;0;COLOR;0,0,0,0;False;1;COLOR;0
+Node;AmplifyShaderEditor.RangedFloatNode;346;-2438.564,493.8665;Inherit;False;Property;_CoastOpacity;Coast Opacity;14;0;Create;True;0;0;0;False;0;False;0;0;0;1;0;1;FLOAT;0
+Node;AmplifyShaderEditor.SaturateNode;211;-3009.974,257.9755;Inherit;False;1;0;COLOR;0,0,0,0;False;1;COLOR;0
+Node;AmplifyShaderEditor.SimpleAddOpNode;186;-3371.75,-1105.804;Inherit;False;2;2;0;FLOAT;0;False;1;FLOAT;0;False;1;FLOAT;0
+Node;AmplifyShaderEditor.VoronoiNode;61;-4247.94,-1289.851;Inherit;False;0;0;1;0;1;False;1;False;True;False;4;0;FLOAT2;0,0;False;1;FLOAT;0;False;2;FLOAT;1;False;3;FLOAT;0;False;3;FLOAT;0;FLOAT;1;FLOAT2;2
+Node;AmplifyShaderEditor.OneMinusNode;229;-3759.916,397.9956;Inherit;False;1;0;FLOAT;0;False;1;FLOAT;0
+Node;AmplifyShaderEditor.SurfaceDepthNode;338;-3971.449,1312.356;Inherit;False;0;1;0;FLOAT3;0,0,0;False;1;FLOAT;0
+Node;AmplifyShaderEditor.ColorNode;227;-3812.819,491.8506;Inherit;False;Property;_Color1;Color 1;1;0;Create;True;0;0;0;False;0;False;0,0,0,0;0,0.310371,0.6886792,0;True;0;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
+Node;AmplifyShaderEditor.WireNode;128;-3822.972,-252.4999;Inherit;False;1;0;FLOAT;0;False;1;FLOAT;0
+Node;AmplifyShaderEditor.OneMinusNode;135;-4494.521,-1117.147;Inherit;False;1;0;FLOAT;0;False;1;FLOAT;0
+Node;AmplifyShaderEditor.PannerNode;114;-4085.262,-297.6844;Inherit;False;3;0;FLOAT2;0,0;False;2;FLOAT2;0,0;False;1;FLOAT;1;False;1;FLOAT2;0
+Node;AmplifyShaderEditor.PannerNode;112;-4087.049,-613.376;Inherit;False;3;0;FLOAT2;0,0;False;2;FLOAT2;0,0;False;1;FLOAT;1;False;1;FLOAT2;0
+Node;AmplifyShaderEditor.RangedFloatNode;127;-4095.972,-422.4999;Inherit;False;Property;_WavesNormalIntensity;Waves Normal Intensity;8;0;Create;True;0;0;0;False;0;False;1;0.15;0;2;0;1;FLOAT;0
+Node;AmplifyShaderEditor.OneMinusNode;53;-4566.438,-250.0213;Inherit;False;1;0;FLOAT;0;False;1;FLOAT;0
+Node;AmplifyShaderEditor.GetLocalVarNode;101;-4360.976,-458.9648;Inherit;False;68;WorldSpaceTile;1;0;OBJECT;;False;1;FLOAT2;0
+Node;AmplifyShaderEditor.WireNode;116;-4387.03,-496.4804;Inherit;False;1;0;FLOAT2;0,0;False;1;FLOAT2;0
+Node;AmplifyShaderEditor.WireNode;117;-4388.332,-353.4807;Inherit;False;1;0;FLOAT2;0,0;False;1;FLOAT2;0
+Node;AmplifyShaderEditor.RegisterLocalVarNode;68;-1976.508,982.7732;Inherit;False;WorldSpaceTile;-1;True;1;0;FLOAT2;0,0;False;1;FLOAT2;0
+Node;AmplifyShaderEditor.Vector2Node;113;-4569.425,-456.7563;Inherit;False;Constant;_Vector0;Vector 0;15;0;Create;True;0;0;0;False;0;False;1,1;1,0;0;3;FLOAT2;0;FLOAT;1;FLOAT;2
+Node;AmplifyShaderEditor.SimpleMultiplyOpNode;107;-2154.367,987.3421;Inherit;False;2;2;0;FLOAT2;0,0;False;1;FLOAT;0;False;1;FLOAT2;0
+Node;AmplifyShaderEditor.ScaleNode;132;-5237.797,-987.9325;Inherit;False;0.1;1;0;FLOAT;0;False;1;FLOAT;0
+Node;AmplifyShaderEditor.DynamicAppendNode;106;-2351.414,909.6379;Inherit;False;FLOAT2;4;0;FLOAT;0;False;1;FLOAT;0;False;2;FLOAT;0;False;3;FLOAT;0;False;1;FLOAT2;0
+Node;AmplifyShaderEditor.RangedFloatNode;58;-5550.533,-993.7839;Inherit;False;Property;_WavesSpeed;Waves Speed;7;0;Create;True;0;0;0;False;0;False;0;0.1;0;1;0;1;FLOAT;0
+Node;AmplifyShaderEditor.RangedFloatNode;100;-2370.237,1084.813;Inherit;False;Property;_WavesTile;Waves Tile;6;0;Create;True;0;0;0;False;0;False;1;0.15;0;0;0;1;FLOAT;0
+Node;AmplifyShaderEditor.WorldPosInputsNode;66;-2622.027,885.5659;Inherit;True;0;4;FLOAT3;0;FLOAT;1;FLOAT;2;FLOAT;3
+Node;AmplifyShaderEditor.SimpleTimeNode;43;-4790.86,-565.7832;Inherit;False;1;0;FLOAT;0.01;False;1;FLOAT;0
+Node;AmplifyShaderEditor.SamplerNode;38;-3437.942,-644.7739;Inherit;True;Property;_TextureSample0;Texture Sample 0;8;1;[Normal];Create;True;0;0;0;False;0;False;-1;None;None;True;0;True;bump;Auto;True;Instance;-1;Auto;Texture2D;8;0;SAMPLER2D;;False;1;FLOAT2;0,0;False;2;FLOAT;0;False;3;FLOAT2;0,0;False;4;FLOAT2;0,0;False;5;FLOAT;1;False;6;FLOAT;0;False;7;SAMPLERSTATE;;False;5;FLOAT3;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
+Node;AmplifyShaderEditor.WireNode;129;-3822.972,-527.4999;Inherit;False;1;0;FLOAT;0;False;1;FLOAT;0
+Node;AmplifyShaderEditor.RangedFloatNode;84;-4815.066,324.6495;Inherit;False;Property;_DepthDistance;Depth Distance;12;0;Create;True;0;0;0;False;0;False;0;1;0;0;0;1;FLOAT;0
+Node;AmplifyShaderEditor.ColorNode;85;-3816.418,58.36393;Inherit;False;Property;_Color2;Color 2;2;0;Create;True;0;0;0;False;0;False;0,0,0,0;0,0.7075471,0.7008876,0;True;0;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
+Node;AmplifyShaderEditor.GetLocalVarNode;130;-4546.644,-1387.98;Inherit;False;68;WorldSpaceTile;1;0;OBJECT;;False;1;FLOAT2;0
+Node;AmplifyShaderEditor.SimpleTimeNode;3;-4513.123,-1301.942;Inherit;False;1;0;FLOAT;1;False;1;FLOAT;0
+Node;AmplifyShaderEditor.SimpleAddOpNode;277;-4099.323,1062.857;Inherit;False;2;2;0;FLOAT4;0,0,0,0;False;1;FLOAT3;0,0,0;False;1;FLOAT4;0
+Node;AmplifyShaderEditor.SamplerNode;46;-3435.147,-328.2323;Inherit;True;Property;_TextureSample1;Texture Sample 1;9;1;[Normal];Create;True;0;0;0;False;0;False;-1;None;None;True;0;True;bump;Auto;True;Instance;-1;Auto;Texture2D;8;0;SAMPLER2D;;False;1;FLOAT2;0,0;False;2;FLOAT;0;False;3;FLOAT2;0,0;False;4;FLOAT2;0,0;False;5;FLOAT;1;False;6;FLOAT;0;False;7;SAMPLERSTATE;;False;5;FLOAT3;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
+Node;AmplifyShaderEditor.RangedFloatNode;5;-4512.252,-1214.334;Inherit;False;Constant;_VoronoiScale;Voronoi Scale;7;0;Create;True;0;0;0;False;0;False;50;50;0;0;0;1;FLOAT;0
+Node;AmplifyShaderEditor.RangedFloatNode;63;-4793.106,-1121.849;Inherit;False;Property;_FoamDensity;Foam Density;11;0;Create;True;0;0;0;False;0;False;0.5;0.392;0.1;1;0;1;FLOAT;0
+Node;AmplifyShaderEditor.GrabScreenPosition;273;-4383.235,878.0894;Inherit;False;0;0;5;FLOAT4;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
+Node;AmplifyShaderEditor.SimpleMultiplyOpNode;278;-4289.611,1180.191;Inherit;False;2;2;0;FLOAT3;0,0,0;False;1;FLOAT;0;False;1;FLOAT3;0
+Node;AmplifyShaderEditor.RangedFloatNode;7;-4281.874,-1121.359;Inherit;False;Property;_FoamContrast;Foam Contrast;9;0;Create;True;0;0;0;False;0;False;0;0.7;0;1;0;1;FLOAT;0
+Node;AmplifyShaderEditor.SaturateNode;364;-3817.542,312.7014;Inherit;False;1;0;FLOAT;0;False;1;FLOAT;0
+Node;AmplifyShaderEditor.GetLocalVarNode;281;-4538.498,1133.13;Inherit;False;89;Normal;1;0;OBJECT;;False;1;FLOAT3;0
+Node;AmplifyShaderEditor.DepthFade;83;-4078.166,302.9496;Inherit;False;True;False;True;2;1;FLOAT3;0,0,0;False;0;FLOAT;1;False;1;FLOAT;0
+Node;AmplifyShaderEditor.ScaleNode;344;-4506.194,1262.309;Inherit;False;0.1;1;0;FLOAT;0;False;1;FLOAT;0
+Node;AmplifyShaderEditor.RegisterLocalVarNode;89;-2874.999,-485.6454;Inherit;False;Normal;-1;True;1;0;FLOAT3;0,0,0;False;1;FLOAT3;0
+Node;AmplifyShaderEditor.RangedFloatNode;276;-4805.279,1258.042;Inherit;False;Property;_RefractionScale;Refraction Scale;13;0;Create;True;0;0;0;False;0;False;0.2;0;0;1;0;1;FLOAT;0
+Node;AmplifyShaderEditor.ClampOpNode;140;-4290.595,327.9685;Inherit;False;3;0;FLOAT;0;False;1;FLOAT;0.1;False;2;FLOAT;100;False;1;FLOAT;0
+Node;AmplifyShaderEditor.SimpleAddOpNode;51;-3071.296,-480.7129;Inherit;False;2;2;0;FLOAT3;0,0,0;False;1;FLOAT3;0,0,0;False;1;FLOAT3;0
+Node;AmplifyShaderEditor.ScaleNode;131;-4702.088,-1301.849;Inherit;False;100;1;0;FLOAT;0;False;1;FLOAT;0
+Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;373;-1437.424,64.73611;Float;False;False;-1;2;UnityEditor.ShaderGraphLitGUI;0;1;New Amplify Shader;94348b07e5e8bab40bd6c8a1e3df54cd;True;GBuffer;0;7;GBuffer;0;False;False;False;False;False;False;False;False;False;False;False;False;True;0;False;;False;True;0;False;;False;False;False;False;False;False;False;False;False;True;False;255;False;;255;False;;255;False;;7;False;;1;False;;1;False;;1;False;;7;False;;1;False;;1;False;;1;False;;False;True;1;False;;True;3;False;;True;True;0;False;;0;False;;True;4;RenderPipeline=UniversalPipeline;RenderType=Opaque=RenderType;Queue=Geometry=Queue=0;UniversalMaterialType=Lit;True;3;True;12;all;0;False;True;1;5;False;;10;False;;1;1;False;;10;False;;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;True;True;True;True;0;False;;False;False;False;False;False;False;False;True;False;255;False;;255;False;;255;False;;7;False;;1;False;;1;False;;1;False;;7;False;;1;False;;1;False;;1;False;;False;True;1;False;;True;3;False;;True;True;0;False;;0;False;;True;1;LightMode=UniversalGBuffer;False;False;0;Hidden/InternalErrorShader;0;0;Standard;0;False;0
+Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;372;-1437.424,64.73611;Float;False;False;-1;2;UnityEditor.ShaderGraphLitGUI;0;1;New Amplify Shader;94348b07e5e8bab40bd6c8a1e3df54cd;True;DepthNormals;0;6;DepthNormals;0;False;False;False;False;False;False;False;False;False;False;False;False;True;0;False;;False;True;0;False;;False;False;False;False;False;False;False;False;False;True;False;255;False;;255;False;;255;False;;7;False;;1;False;;1;False;;1;False;;7;False;;1;False;;1;False;;1;False;;False;True;1;False;;True;3;False;;True;True;0;False;;0;False;;True;4;RenderPipeline=UniversalPipeline;RenderType=Opaque=RenderType;Queue=Geometry=Queue=0;UniversalMaterialType=Lit;True;3;True;12;all;0;False;True;1;1;False;;0;False;;0;1;False;;0;False;;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;1;False;;True;3;False;;False;True;1;LightMode=DepthNormals;False;False;0;Hidden/InternalErrorShader;0;0;Standard;0;False;0
+Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;371;-1437.424,4.736108;Float;False;False;-1;2;UnityEditor.ShaderGraphLitGUI;0;1;New Amplify Shader;94348b07e5e8bab40bd6c8a1e3df54cd;True;Universal2D;0;5;Universal2D;0;False;False;False;False;False;False;False;False;False;False;False;False;True;0;False;;False;True;0;False;;False;False;False;False;False;False;False;False;False;True;False;255;False;;255;False;;255;False;;7;False;;1;False;;1;False;;1;False;;7;False;;1;False;;1;False;;1;False;;False;True;1;False;;True;3;False;;True;True;0;False;;0;False;;True;4;RenderPipeline=UniversalPipeline;RenderType=Opaque=RenderType;Queue=Geometry=Queue=0;UniversalMaterialType=Lit;True;3;True;12;all;0;False;True;1;5;False;;10;False;;1;1;False;;10;False;;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;True;True;True;True;0;False;;False;False;False;False;False;False;False;False;False;True;1;False;;True;3;False;;True;True;0;False;;0;False;;True;1;LightMode=Universal2D;False;False;0;Hidden/InternalErrorShader;0;0;Standard;0;False;0
+Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;367;-1437.424,4.736108;Float;False;True;-1;2;UnityEditor.ShaderGraphLitGUI;0;12;Raygeas/Suntail Water;94348b07e5e8bab40bd6c8a1e3df54cd;True;Forward;0;1;Forward;20;False;False;False;False;False;False;False;False;False;False;False;False;True;0;False;;False;True;0;False;;False;False;False;False;False;False;False;False;False;True;False;255;False;;255;False;;255;False;;7;False;;1;False;;1;False;;1;False;;7;False;;1;False;;1;False;;1;False;;False;True;1;False;;True;3;False;;True;True;0;False;;0;False;;True;4;RenderPipeline=UniversalPipeline;RenderType=Transparent=RenderType;Queue=Transparent=Queue=0;UniversalMaterialType=Lit;True;3;True;12;all;0;False;True;1;5;False;;10;False;;1;1;False;;10;False;;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;True;True;True;True;0;False;;False;False;False;False;False;False;False;True;False;255;False;;255;False;;255;False;;7;False;;1;False;;1;False;;1;False;;7;False;;1;False;;1;False;;1;False;;False;True;1;False;;True;3;False;;True;True;0;False;;0;False;;True;1;LightMode=UniversalForward;False;False;0;Hidden/InternalErrorShader;0;0;Standard;41;Workflow;1;0;Surface;1;0;  Refraction Model;0;0;  Blend;0;0;Two Sided;1;0;Fragment Normal Space,InvertActionOnDeselection;0;0;Forward Only;0;0;Transmission;0;0;  Transmission Shadow;0.5,False,;0;Translucency;0;0;  Translucency Strength;1,False,;0;  Normal Distortion;0.5,False,;0;  Scattering;2,False,;0;  Direct;0.9,False,;0;  Ambient;0.1,False,;0;  Shadow;0.5,False,;0;Cast Shadows;0;0;  Use Shadow Threshold;0;0;Receive Shadows;1;0;GPU Instancing;0;637754427363599394;LOD CrossFade;0;0;Built-in Fog;1;0;_FinalColorxAlpha;0;0;Meta Pass;0;637754427418597015;Override Baked GI;0;0;Extra Pre Pass;0;0;DOTS Instancing;0;0;Tessellation;0;0;  Phong;0;0;  Strength;0.5,False,;0;  Type;0;0;  Tess;16,False,;0;  Min;10,False,;0;  Max;25,False,;0;  Edge Length;16,False,;0;  Max Displacement;25,False,;0;Write Depth;0;0;  Early Z;0;0;Vertex Position,InvertActionOnDeselection;1;0;Debug Display;0;0;Clear Coat;0;0;0;10;False;True;False;True;False;True;True;True;True;True;False;;False;0
+Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;369;-1437.424,4.736108;Float;False;False;-1;2;UnityEditor.ShaderGraphLitGUI;0;1;New Amplify Shader;94348b07e5e8bab40bd6c8a1e3df54cd;True;DepthOnly;0;3;DepthOnly;0;False;False;False;False;False;False;False;False;False;False;False;False;True;0;False;;False;True;0;False;;False;False;False;False;False;False;False;False;False;True;False;255;False;;255;False;;255;False;;7;False;;1;False;;1;False;;1;False;;7;False;;1;False;;1;False;;1;False;;False;True;1;False;;True;3;False;;True;True;0;False;;0;False;;True;4;RenderPipeline=UniversalPipeline;RenderType=Opaque=RenderType;Queue=Geometry=Queue=0;UniversalMaterialType=Lit;True;3;True;12;all;0;False;False;False;False;False;False;False;False;False;False;False;False;True;0;False;;False;False;False;True;False;False;False;False;0;False;;False;False;False;False;False;False;False;False;False;True;1;False;;False;False;True;1;LightMode=DepthOnly;False;False;0;Hidden/InternalErrorShader;0;0;Standard;0;False;0
+Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;370;-1437.424,4.736108;Float;False;False;-1;2;UnityEditor.ShaderGraphLitGUI;0;1;New Amplify Shader;94348b07e5e8bab40bd6c8a1e3df54cd;True;Meta;0;4;Meta;0;False;False;False;False;False;False;False;False;False;False;False;False;True;0;False;;False;True;0;False;;False;False;False;False;False;False;False;False;False;True;False;255;False;;255;False;;255;False;;7;False;;1;False;;1;False;;1;False;;7;False;;1;False;;1;False;;1;False;;False;True;1;False;;True;3;False;;True;True;0;False;;0;False;;True;4;RenderPipeline=UniversalPipeline;RenderType=Opaque=RenderType;Queue=Geometry=Queue=0;UniversalMaterialType=Lit;True;3;True;12;all;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;2;False;;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;1;LightMode=Meta;False;False;0;Hidden/InternalErrorShader;0;0;Standard;0;False;0
+Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;368;-1437.424,4.736108;Float;False;False;-1;2;UnityEditor.ShaderGraphLitGUI;0;1;New Amplify Shader;94348b07e5e8bab40bd6c8a1e3df54cd;True;ShadowCaster;0;2;ShadowCaster;0;False;False;False;False;False;False;False;False;False;False;False;False;True;0;False;;False;True;0;False;;False;False;False;False;False;False;False;False;False;True;False;255;False;;255;False;;255;False;;7;False;;1;False;;1;False;;1;False;;7;False;;1;False;;1;False;;1;False;;False;True;1;False;;True;3;False;;True;True;0;False;;0;False;;True;4;RenderPipeline=UniversalPipeline;RenderType=Opaque=RenderType;Queue=Geometry=Queue=0;UniversalMaterialType=Lit;True;3;True;12;all;0;False;False;False;False;False;False;False;False;False;False;False;False;True;0;False;;False;False;False;True;False;False;False;False;0;False;;False;False;False;False;False;False;False;False;False;True;1;False;;True;3;False;;False;True;1;LightMode=ShadowCaster;False;False;0;Hidden/InternalErrorShader;0;0;Standard;0;False;0
+Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;374;-1437.424,64.73611;Float;False;False;-1;2;UnityEditor.ShaderGraphLitGUI;0;1;New Amplify Shader;94348b07e5e8bab40bd6c8a1e3df54cd;True;SceneSelectionPass;0;8;SceneSelectionPass;0;False;False;False;False;False;False;False;False;False;False;False;False;True;0;False;;False;True;0;False;;False;False;False;False;False;False;False;False;False;True;False;255;False;;255;False;;255;False;;7;False;;1;False;;1;False;;1;False;;7;False;;1;False;;1;False;;1;False;;False;True;1;False;;True;3;False;;True;True;0;False;;0;False;;True;4;RenderPipeline=UniversalPipeline;RenderType=Opaque=RenderType;Queue=Geometry=Queue=0;UniversalMaterialType=Lit;True;3;True;12;all;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;2;False;;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;1;LightMode=SceneSelectionPass;False;False;0;Hidden/InternalErrorShader;0;0;Standard;0;False;0
+Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;366;-1437.424,4.736108;Float;False;False;-1;2;UnityEditor.ShaderGraphLitGUI;0;1;New Amplify Shader;94348b07e5e8bab40bd6c8a1e3df54cd;True;ExtraPrePass;0;0;ExtraPrePass;5;False;False;False;False;False;False;False;False;False;False;False;False;True;0;False;;False;True;0;False;;False;False;False;False;False;False;False;False;False;True;False;255;False;;255;False;;255;False;;7;False;;1;False;;1;False;;1;False;;7;False;;1;False;;1;False;;1;False;;False;True;1;False;;True;3;False;;True;True;0;False;;0;False;;True;4;RenderPipeline=UniversalPipeline;RenderType=Opaque=RenderType;Queue=Geometry=Queue=0;UniversalMaterialType=Lit;True;3;True;12;all;0;False;True;1;1;False;;0;False;;0;1;False;;0;False;;False;False;False;False;False;False;False;False;False;False;False;False;True;0;False;;False;True;True;True;True;True;0;False;;False;False;False;False;False;False;False;True;False;255;False;;255;False;;255;False;;7;False;;1;False;;1;False;;1;False;;7;False;;1;False;;1;False;;1;False;;False;True;1;False;;True;3;False;;True;True;0;False;;0;False;;True;0;False;False;0;Hidden/InternalErrorShader;0;0;Standard;0;False;0
+Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;375;-1437.424,64.73611;Float;False;False;-1;2;UnityEditor.ShaderGraphLitGUI;0;1;New Amplify Shader;94348b07e5e8bab40bd6c8a1e3df54cd;True;ScenePickingPass;0;9;ScenePickingPass;0;False;False;False;False;False;False;False;False;False;False;False;False;True;0;False;;False;True;0;False;;False;False;False;False;False;False;False;False;False;True;False;255;False;;255;False;;255;False;;7;False;;1;False;;1;False;;1;False;;7;False;;1;False;;1;False;;1;False;;False;True;1;False;;True;3;False;;True;True;0;False;;0;False;;True;4;RenderPipeline=UniversalPipeline;RenderType=Opaque=RenderType;Queue=Geometry=Queue=0;UniversalMaterialType=Lit;True;3;True;12;all;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;1;LightMode=Picking;False;False;0;Hidden/InternalErrorShader;0;0;Standard;0;False;0
+Node;AmplifyShaderEditor.TexturePropertyNode;88;-3770.253,-469.6925;Inherit;True;Property;_WavesNormal;Waves Normal;0;2;[NoScaleOffset];[Normal];Create;True;0;0;0;False;0;False;None;None;True;white;Auto;Texture2D;-1;0;2;SAMPLER2D;0;SAMPLERSTATE;1
+WireConnection;337;0;277;0
+WireConnection;6;0;64;0
+WireConnection;6;1;136;0
+WireConnection;342;0;341;0
+WireConnection;342;1;274;0
+WireConnection;342;2;336;0
+WireConnection;64;0;61;0
+WireConnection;336;0;337;0
+WireConnection;336;1;338;0
+WireConnection;336;2;339;0
+WireConnection;336;4;340;0
+WireConnection;136;0;138;0
+WireConnection;274;0;277;0
+WireConnection;361;0;356;0
+WireConnection;19;0;17;0
+WireConnection;341;0;273;0
+WireConnection;17;0;18;0
+WireConnection;356;0;229;0
+WireConnection;356;1;227;0
+WireConnection;355;0;85;0
+WireConnection;355;1;364;0
+WireConnection;138;0;7;0
+WireConnection;360;0;355;0
+WireConnection;230;0;360;0
+WireConnection;230;1;361;0
+WireConnection;302;0;342;0
+WireConnection;25;0;323;0
+WireConnection;25;1;191;0
+WireConnection;350;0;194;0
+WireConnection;350;1;351;0
+WireConnection;323;0;209;0
+WireConnection;323;1;292;0
+WireConnection;323;2;209;0
+WireConnection;351;0;345;0
+WireConnection;345;0;346;0
+WireConnection;183;0;188;0
+WireConnection;282;0;302;0
+WireConnection;188;0;186;0
+WireConnection;158;0;211;0
+WireConnection;211;0;230;0
+WireConnection;186;0;6;0
+WireConnection;186;1;19;0
+WireConnection;61;0;130;0
+WireConnection;61;1;3;0
+WireConnection;61;2;5;0
+WireConnection;61;3;135;0
+WireConnection;229;0;364;0
+WireConnection;128;0;127;0
+WireConnection;135;0;63;0
+WireConnection;114;0;101;0
+WireConnection;114;2;117;0
+WireConnection;114;1;53;0
+WireConnection;112;0;101;0
+WireConnection;112;2;116;0
+WireConnection;112;1;43;0
+WireConnection;53;0;43;0
+WireConnection;116;0;113;0
+WireConnection;117;0;113;0
+WireConnection;68;0;107;0
+WireConnection;107;0;106;0
+WireConnection;107;1;100;0
+WireConnection;132;0;58;0
+WireConnection;106;0;66;1
+WireConnection;106;1;66;3
+WireConnection;43;0;132;0
+WireConnection;38;0;88;0
+WireConnection;38;1;112;0
+WireConnection;38;5;129;0
+WireConnection;129;0;127;0
+WireConnection;3;0;131;0
+WireConnection;277;0;273;0
+WireConnection;277;1;278;0
+WireConnection;46;0;88;0
+WireConnection;46;1;114;0
+WireConnection;46;5;128;0
+WireConnection;278;0;281;0
+WireConnection;278;1;344;0
+WireConnection;364;0;83;0
+WireConnection;83;0;140;0
+WireConnection;344;0;276;0
+WireConnection;89;0;51;0
+WireConnection;140;0;84;0
+WireConnection;51;0;38;0
+WireConnection;51;1;46;0
+WireConnection;131;0;132;0
+WireConnection;367;0;25;0
+WireConnection;367;1;103;0
+WireConnection;367;3;365;0
+WireConnection;367;4;16;0
+WireConnection;367;6;350;0
+ASEEND*/
+//CHKSM=8A9DA0139B9C336FF6D8FCB0F1D1CC796A5821A8

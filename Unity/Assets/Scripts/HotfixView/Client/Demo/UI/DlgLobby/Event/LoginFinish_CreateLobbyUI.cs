@@ -1,9 +1,66 @@
 ﻿using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Reflection;
+using static UnityEngine.ShaderVariantCollection;
 
 namespace ET.Client
 {
+
+    public static class ShaderWarmupHelper
+    {
+        public static void WarmupShader(Shader shader)
+        {
+            if (shader == null) return;
+
+            // 使用反射调用内部方法
+            MethodInfo warmupMethod = typeof(Shader).GetMethod(
+                "WarmupAllShadersFor",
+                BindingFlags.NonPublic | BindingFlags.Static
+            );
+
+            if (warmupMethod != null)
+            {
+                warmupMethod.Invoke(null, new object[] { new Shader[] { shader } });
+                Debug.Log($"成功预热 Shader: {shader.name}");
+            }
+            else
+            {
+                Debug.LogError("无法找到 Shader 预热方法");
+            }
+        }
+
+
+        public static void WarmupShader2(Scene scene, Shader problematicShader)
+        {
+            var path = ("Assets/Bundles/Material/MyShaderVariants2.shadervariants");
+            ShaderVariantCollection shaderVariants =  scene.GetComponent<ResourcesLoaderComponent>().LoadAssetSync<ShaderVariantCollection>(path);
+
+            // 创建临时多重采样纹理
+            RenderTexture msaaTexture = new RenderTexture(1024, 1024, 24);
+            msaaTexture.antiAliasing = 4; // 4x MSAA
+            msaaTexture.Create();
+
+            // 为材质设置正确的纹理
+            Material tempMaterial = new Material(problematicShader);
+            tempMaterial.mainTexture = msaaTexture;
+
+            // 将材质添加到变体集合（确保使用正确纹理）
+            // 注意：需要在编辑器中手动配置 ShaderVariantCollection
+
+            // 预热
+            if (shaderVariants != null)
+            {
+                shaderVariants.WarmUp();
+            }
+
+            // 清理资源
+            GameObject.Destroy(tempMaterial);
+            GameObject.Destroy(msaaTexture);
+        }
+    }
+
+
     [Event(SceneType.Demo)]
     public class LoginFinish_CreateLobbyUI : AEvent<Scene, LoginFinish>
     {
@@ -58,10 +115,29 @@ namespace ET.Client
             FlyTipComponent.Instance.ShowFlyTip("账号已完成实名认证!");
             // await scene.GetComponent<TimerComponent>().WaitAsync(500);
 
+
+            await scene.GetComponent<TimerComponent>().WaitAsync(2000);
+            GameObject targetObject = GameObject.Find("Stone_3 (2)/Stone_3_LOD0");
+            Renderer objectRenderer = targetObject.GetComponent<Renderer>();
+            if (objectRenderer != null)
+            {
+                // 获取材质的Shader
+                Shader objectShader = objectRenderer.material.shader;
+
+                // 输出Shader名称
+                Debug.Log("Stone_3_LOD0对象使用的Shader是: " + objectShader.name + "   materials: " + objectRenderer.materials.Length);
+               
+            }
+            else
+            {
+                Debug.LogError("目标对象没有Renderer组件!");
+            }
+
             PlayerInfoComponent playerInfoComponent = scene.GetComponent<PlayerInfoComponent>();
             await scene.GetComponent<UIComponent>()
                     .ShowWindowAsync(playerInfoComponent.CreateRoleList.Count > 0 ? WindowID.WindowID_MJLobby : WindowID.WindowID_CreateRole);
             scene.GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_MJLogin);
+
         }
     }
 }
