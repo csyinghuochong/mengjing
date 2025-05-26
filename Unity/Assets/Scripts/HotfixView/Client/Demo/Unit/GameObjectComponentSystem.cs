@@ -1005,15 +1005,15 @@ namespace ET.Client
             }
 
             Unit unit = self.GetParent<Unit>();
-            OutlineComponent outlineComponent = unit.GetComponent<OutlineComponent>();
-            if (outlineComponent != null)
-            {
-                outlineComponent.OnEnable();
-            }
-            else
-            {
-                outlineComponent = unit.AddComponent<OutlineComponent>();
-            }
+            // OutlineComponent outlineComponent = unit.GetComponent<OutlineComponent>();
+            // if (outlineComponent != null)
+            // {
+            //     outlineComponent.OnEnable();
+            // }
+            // else
+            // {
+            //     outlineComponent = unit.AddComponent<OutlineComponent>();
+            // }
         }
 
         public static void ExitBaTi(this GameObjectComponent self)
@@ -1024,11 +1024,11 @@ namespace ET.Client
             }
 
             Unit unit = self.GetParent<Unit>();
-            OutlineComponent outlineComponent = unit.GetComponent<OutlineComponent>();
-            if (outlineComponent != null)
-            {
-                outlineComponent.OnDisable();
-            }
+            // OutlineComponent outlineComponent = unit.GetComponent<OutlineComponent>();
+            // if (outlineComponent != null)
+            // {
+            //     outlineComponent.OnDisable();
+            // }
         }
 
         public static void ExitHide(this GameObjectComponent self)

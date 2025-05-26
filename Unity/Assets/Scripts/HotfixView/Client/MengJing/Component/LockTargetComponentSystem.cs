@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
-using HighlightPlus;
+using System.Linq;
+using EPOOutline;
 using UnityEngine;
 
 namespace ET.Client
@@ -189,40 +190,42 @@ namespace ET.Client
             {
                 return;
             }
-
-            HighlightEffect effect = gameObject.GetComponent<HighlightEffect>();
-            if (effect == null)
+            
+            Outlinable outlinable = gameObject.GetComponent<Outlinable>();
+            if (outlinable == null)
             {
-                effect = gameObject.AddComponent<HighlightEffect>();
-
-                // 一些物体不用高亮描边
-                effect.excludeNameFilter = new[] { "BackDi", "fake shadow (5)" };
-
-                // 描边
-                effect.outline = 1;
-                effect.outlineColor = new Color(181 / 255f, 250 / 255f, 130 / 255f, 255 / 255f);
-                effect.outlineWidth = 0.2f;
-                effect.outlineVisibility = Visibility.AlwaysOnTop;
-
-                // 发出微弱的光
-                // effect.glow = 1f;
-                // effect.glowWidth = 0.2f;
-                // effect.SetGlowColor(new Color(181 / 255f, 250 / 255f, 130 / 255f, 255 / 255f));
-                // effect.glowDownsampling = 1;
-                // effect.glowAnimationSpeed = 1f;
-
-                // effect.innerGlow = 0.2f;
-                // effect.innerGlowColor = new Color(1f, 1f, 1f, 1f);
-                // effect.innerGlowWidth = 1f;
-
-                // 表面的颜色
-                // effect.overlay = 0.1f;
-                // effect.overlayColor = new Color(181 / 255f, 250 / 255f, 130 / 255f, 255 / 255f);
-
-                effect.UpdateMaterialProperties();
+                outlinable = gameObject.AddComponent<Outlinable>();
+                
+                MeshRenderer[] meshRenderers = gameObject.GetComponentsInChildren<MeshRenderer>();
+                SkinnedMeshRenderer[] skinnedMeshRenderers = gameObject.GetComponentsInChildren<SkinnedMeshRenderer>();
+                
+                string[] excludeNameFilter = new[] { "BackDi", "fake shadow (5)", "Rose_BackDi" };
+            
+                foreach (var mr in meshRenderers)
+                {
+                    if (excludeNameFilter.Contains(mr.gameObject.name))
+                    {
+                        continue;
+                    }
+            
+                    outlinable.AddRenderer(mr);
+                }
+            
+                foreach (var smr in skinnedMeshRenderers)
+                {
+                    if (excludeNameFilter.Contains(smr.gameObject.name))
+                    {
+                        continue;
+                    }
+            
+                    outlinable.AddRenderer(smr);
+                }
             }
-
-            effect.SetHighlighted(isHighlight);
+            outlinable.OutlineParameters.Color = new Color(181 / 255f, 250 / 255f, 130 / 255f, 255 / 255f);
+            outlinable.OutlineParameters.BlurShift = 0.2f;
+            outlinable.OutlineParameters.DilateShift = 0.2f;
+            
+            outlinable.OutlineParameters.Enabled = isHighlight;
         }
 
         public static void SkillLock(this LockTargetComponent self, Unit main, SkillConfig skillConfig)
