@@ -80,19 +80,9 @@ namespace ET
         public quaternion To;
         
         //0 摇杆移动 1点击移动
-        public bool MoveWait;
-        private bool yaoganmove = false;
-        public bool YaoganMove
-        {
-            get
-            {
-                return this.yaoganmove;
-            }
-            set
-            {
-                this.yaoganmove = value;
-            }
-        }
+        public bool WaitMove { get; set; }
+        public bool WaitMode{ get; set; }
+        
 
         public float3 TargetPosition;
     }

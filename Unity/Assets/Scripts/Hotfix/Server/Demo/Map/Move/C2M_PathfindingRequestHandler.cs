@@ -15,7 +15,6 @@ namespace ET.Server
 			{
 				return;
 			}
-
 			
 			MapComponent mapComponent = unit.Scene().GetComponent<MapComponent>();
 			if (mapComponent.MapType == MapTypeEnum.Happy
@@ -38,7 +37,7 @@ namespace ET.Server
 			unit.GetComponent<SkillPassiveComponent>().OnPlayerMove();
 			unit.GetComponent<BuffManagerComponentS>().BuffRemoveType(1);
 			unit.FindPathMoveToAsync(message.Position).Coroutine();
-			
+
 			await ETTask.CompletedTask;
 		}
 	}

@@ -1,7 +1,5 @@
 // Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
 
-// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
-
 Shader "Particles/Alpha Blended DetachAlpha Top" {
 Properties {
 	_TintColor ("Tint Color", Color) = (0.5,0.5,0.5,0.5)
@@ -51,7 +49,6 @@ Category {
 			v2f vert (appdata_t v)
 			{
 				v2f o;
-				//o.vertex = UnityObjectToClipPos(v.vertex);
 				o.vertex = UnityObjectToClipPos(v.vertex);
 				#ifdef SOFTPARTICLES_ON
 				o.projPos = ComputeScreenPos (o.vertex);
@@ -74,6 +71,7 @@ Category {
 				i.color.a *= fade;
 				#endif
 				
+
 				fixed4 color = 2.0f * i.color * _TintColor * tex2D(_MainTex, i.texcoord);
 				color.a *= tex2D(_AlphaTexLM, i.texcoord);
 				

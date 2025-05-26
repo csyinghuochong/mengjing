@@ -14,7 +14,7 @@ namespace ET.Client
         private string singleScenePath;
         private List<string> allScenePaths;
 
-        [MenuItem("Tools/场景资源整理")] 
+        //[MenuItem("Tools/场景资源整理[公用不移动]")] 
         public static void ShowWindow() => GetWindow<SceneResourceOrganizer>("场景资源整理工具");
 
         private void OnEnable()

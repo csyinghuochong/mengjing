@@ -323,13 +323,14 @@ namespace ET.Client
                     }
                 }
 
-                if (string.IsNullOrEmpty(unionname))
-                {
-                    int rankId = numericComponent.GetAsInt(NumericType.CombatRankID);
-                    int occRankId = numericComponent.GetAsInt(NumericType.OccCombatRankID);
-                    int occ = unit.ConfigId;
-                    unionname = ConfigHelper.GetRankChengHao(rankId, occRankId, occ);
-                }
+                //梦境称号取消 天下第一什么的
+                // if (string.IsNullOrEmpty(unionname))
+                // {
+                //     int rankId = numericComponent.GetAsInt(NumericType.CombatRankID);
+                //     int occRankId = numericComponent.GetAsInt(NumericType.OccCombatRankID);
+                //     int occ = unit.ConfigId;
+                //     unionname = ConfigHelper.GetRankChengHao(rankId, occRankId, occ);
+                // }
 
                 if (string.IsNullOrEmpty(unionname) && !string.IsNullOrEmpty(infoComponent.UnionName))
                 {

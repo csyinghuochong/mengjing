@@ -38,6 +38,7 @@ Shader "VFX_Klaus/VFX_lab"
 			o.Alpha = 1;
 		}
 
+
 		ENDCG
 	}
 	Fallback "Diffuse"

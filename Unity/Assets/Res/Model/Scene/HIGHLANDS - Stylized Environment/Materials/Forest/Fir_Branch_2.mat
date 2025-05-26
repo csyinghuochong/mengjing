@@ -8,21 +8,23 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Fir_Branch_2
-  m_Shader: {fileID: 4800000, guid: c723bf599da5bf2418887cb5d81e4600, type: 3}
+  m_Shader: {fileID: 4800000, guid: ce10dae746648d146a491f1089c9588d, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
   - _ENABLEWIND_ON
-  - _LOCKBYVCOORDINATES_ON
   - _SECONDCOLOROVERLAYTYPE_WORLD_POSITION
-  - _SMOOTHNESSSOURCE_SMOOTHNESS_R
   m_InvalidKeywords:
-  - _ANCHORTHEFOLIAGEBASE_ON
+  - _LOCKBYVCOORDINATES_ON
   - _RAYGLOBALENABLEWIND_ON
+  - _SMOOTHNESSSOURCE_SMOOTHNESS_R
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
+  m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -93,6 +95,7 @@ Material:
     m_Ints: []
     m_Floats:
     - _AlphaCutoff: 0.17
+    - _Anchorthefoliagebase: 0
     - _BumpScale: 1
     - _Color2Enable: 0
     - _CullMode: 0
@@ -123,6 +126,7 @@ Material:
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _Translucency: 0
+    - _TranslucencyInt: 1
     - _UVSec: 0
     - _VertexAO: 0
     - _VertexAOIntensity: 1

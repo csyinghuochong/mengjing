@@ -57,6 +57,5 @@ Shader "Cartoon/Vertex/Textured Add"
 			ENDCG
 		}
 	}
-	
 	Fallback "VertexLit"
 }

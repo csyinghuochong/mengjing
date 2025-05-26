@@ -424,15 +424,15 @@ namespace ET.Client
             }
 
             //播放对应攻击动作
-            if (skillConfig.IfStopMove == 1)
-            {
-                EventSystem.Instance.Publish(self.Root(), new PlayAnimator()
-                {
-                    Unit = unit,
-                    Animator = skillConfig.SkillAnimation
-                });
-            }
-            else
+            // if (skillConfig.IfStopMove == 1)
+            // {
+            //     EventSystem.Instance.Publish(self.Root(), new PlayAnimator()
+            //     {
+            //         Unit = unit,
+            //         Animator = skillConfig.SkillAnimation
+            //     });
+            // }
+            // else
             {
                 bool noMoveSkill = skillConfig.GameObjectName.Equals("Skill_Other_XuanFengZhan_1");
                 long SkillMoveTime = noMoveSkill ? skillConfig.SkillLiveTime + TimeHelper.ClientNow() : 0;

@@ -68,9 +68,9 @@ namespace ET.Client
                     $"引用：{totalSceneRefs,-10} " +
                     $"{path}"
                 );
-                result.Add(""); // 空行分隔场景
+               
             }
-
+            result.Add(""); // 空行分隔场景
             // 3. 写入文件
             File.WriteAllLines(outputPath, result);
             AssetDatabase.Refresh();
