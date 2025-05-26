@@ -1422,12 +1422,14 @@ namespace ET.Client
             if (leftTime <= 0)
             {
                 // 先切换回英雄
+                self.View.E_TextPetSwitchTitleText.gameObject.SetActive(false);
                 self.View.E_TextPetSwitchText.text = string.Empty;
                 self.Root().GetComponent<TimerComponent>().Remove(ref self.MainPetSwitchTimer);
                 PetNetHelper.RequestPetFightSwitch(self.Root(), 0).Coroutine();
             }
             else
             {
+                self.View.E_TextPetSwitchTitleText.gameObject.SetActive(true);
                 using (zstring.Block())
                 {
                     self.View.E_TextPetSwitchText.text = zstring.Format("{0}", leftTime);
@@ -1451,6 +1453,7 @@ namespace ET.Client
 
                 self.View.ES_MainSkill.OnEnterScene(unit, petId);
                 self.View.ES_MainSkill.OnPetFightSwitch(petId);
+                self.View.E_TextPetSwitchTitleText.gameObject.SetActive(true);
                 self.View.E_TextPetSwitchText.text = ConfigData.PetSwichEndCD.ToString();
                 self.MainPetSwitchEndTime = TimeHelper.ServerNow() + TimeHelper.Second * ConfigData.PetSwichEndCD;
                 self.MainPetSwitchTimer = root.GetComponent<TimerComponent>().NewRepeatedTimer(1000, TimerInvokeType.MainPetSwitchTimer, self);
@@ -1460,6 +1463,7 @@ namespace ET.Client
                 // FlyTipComponent.Instance.ShowFlyTip("切换成英雄");
                 self.View.ES_MainSkill.OnEnterScene(unit, 0);
                 self.View.ES_MainSkill.OnPetFightSwitch(0);
+                self.View.E_TextPetSwitchTitleText.gameObject.SetActive(false);
                 self.View.E_TextPetSwitchText.text = string.Empty;
                 self.MainPetSwitchEndTime = 0;
             }
