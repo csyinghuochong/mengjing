@@ -10,8 +10,7 @@ namespace ET.Client
         private const string ScenesRoot = "Assets/Bundles/Scenes";
         private const string OutputRoot = "Assets/ScenesRes";
 
-
-        [MenuItem("Tools/单个场景资源引用到的shader")]
+        //[MenuItem("Tools/单个场景资源引用到的shader")]
         private static void SingleSceneShaderReference()
         {
             // 打开文件面板让用户选择场景
@@ -51,7 +50,7 @@ namespace ET.Client
             }
         }
 
-        [MenuItem("Tools/单个场景资源整理")]
+        [MenuItem("Tools/单个场景资源整理[全部移动]")]
         private static void MoveSceneResourcesMenu()
         {
             // 打开文件面板让用户选择场景
