@@ -35,7 +35,7 @@ namespace ET.Client
             
             self.RequestTeamDungeonInfo().Coroutine();
             //IOS适配
-            IPHoneHelper.SetPosition(self.View.E_FunctionSetBtnToggleGroup.gameObject, new Vector2(120f, 0));
+            // IPHoneHelper.SetPosition(self.View.E_FunctionSetBtnToggleGroup.gameObject, new Vector2(120f, 0));
         }
 
         public static void ShowWindow(this DlgTeamDungeon self, Entity contextData = null)

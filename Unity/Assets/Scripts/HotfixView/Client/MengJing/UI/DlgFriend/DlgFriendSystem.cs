@@ -42,7 +42,7 @@ namespace ET.Client
             redPointComponent.RegisterReddot(ReddotType.FriendApply, self.Reddot_FriendApply);
             redPointComponent.RegisterReddot(ReddotType.FriendChat, self.Reddot_FriendChat);
             
-            IPHoneHelper.SetPosition(self.View.E_FunctionSetBtnToggleGroup.gameObject, new Vector2(170f, 0f));
+            // IPHoneHelper.SetPosition(self.View.E_FunctionSetBtnToggleGroup.gameObject, new Vector2(170f, 0f));
         }
 
         public static void ShowWindow(this DlgFriend self, Entity contextData = null)

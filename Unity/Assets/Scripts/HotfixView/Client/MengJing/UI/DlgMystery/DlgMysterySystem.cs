@@ -11,7 +11,7 @@ namespace ET.Client
         {
             self.View.E_MysteryItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnMysteryItemsRefresh);
             
-            IPHoneHelper.SetPosition(self.View.E_FunctionSetBtnToggleGroup.gameObject, new Vector2(170f, 0f));
+            // IPHoneHelper.SetPosition(self.View.E_FunctionSetBtnToggleGroup.gameObject, new Vector2(170f, 0f));
             
             self.InitModelShowView();
             self.RequestMystery().Coroutine();
