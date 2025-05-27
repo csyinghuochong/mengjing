@@ -117,21 +117,21 @@ namespace ET.Client
 
 
             await scene.GetComponent<TimerComponent>().WaitAsync(2000);
-            GameObject targetObject = GameObject.Find("Stone_3 (2)/Stone_3_LOD0");
-            Renderer objectRenderer = targetObject.GetComponent<Renderer>();
-            if (objectRenderer != null)
-            {
-                // 获取材质的Shader
-                Shader objectShader = objectRenderer.material.shader;
+            //GameObject targetObject = GameObject.Find("Stone_3 (2)/Stone_3_LOD0");
+            //Renderer objectRenderer = targetObject.GetComponent<Renderer>();
+            //if (objectRenderer != null)
+            //{
+            //    // 获取材质的Shader
+            //    Shader objectShader = objectRenderer.material.shader;
 
-                // 输出Shader名称
-                Debug.Log("Stone_3_LOD0对象使用的Shader是: " + objectShader.name + "   materials: " + objectRenderer.materials.Length);
+            //    // 输出Shader名称
+            //    Debug.Log("Stone_3_LOD0对象使用的Shader是: " + objectShader.name + "   materials: " + objectRenderer.materials.Length);
                
-            }
-            else
-            {
-                Debug.LogError("目标对象没有Renderer组件!");
-            }
+            //}
+            //else
+            //{
+            //    Debug.LogError("目标对象没有Renderer组件!");
+            //}
 
             PlayerInfoComponent playerInfoComponent = scene.GetComponent<PlayerInfoComponent>();
             await scene.GetComponent<UIComponent>()
