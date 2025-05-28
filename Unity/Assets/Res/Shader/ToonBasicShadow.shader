@@ -1,4 +1,4 @@
-Shader "Toon/BasicURPShadow"
+Shader "Toon/BasicShadow"
 {
     Properties
     {
