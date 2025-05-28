@@ -7,13 +7,14 @@ public class ShaderPropertyUpdater : EditorWindow
     [MenuItem("Tools/Update Shader Properties")]
     static void UpdateShaderProperties()
     {
-        string targetShaderName = "Raygeas/Suntail Surface"; // 修改后的Shader名称
+        string targetShaderName = "Raygeas/Suntail Foliage"; // 修改后的Shader名称
 
         // 定义需要更新的属性映射，支持多种属性类型
         var propertyMappings = new (string oldName, string newName, ShaderUtil.ShaderPropertyType type)[]
         {
+            ("_SmoothnessTexture", "_MetallicGlossMap", ShaderUtil.ShaderPropertyType.TexEnv),
             //("_Color", "_BaseColor", ShaderUtil.ShaderPropertyType.Color),
-            ("_SurfaceSmoothness", "_Smoothness", ShaderUtil.ShaderPropertyType.Range),
+            //("_SurfaceSmoothness", "_Smoothness", ShaderUtil.ShaderPropertyType.Range),
             //("_MetallicSmoothness", "_MetallicGlossMap", ShaderUtil.ShaderPropertyType.TexEnv),
             //("_OldFloatProperty", "_NewFloatProperty", ShaderUtil.ShaderPropertyType.Float),
             //("_OldRangeProperty", "_NewRangeProperty", ShaderUtil.ShaderPropertyType.Range),
