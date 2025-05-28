@@ -9,6 +9,8 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: zhucheng_xinxiaowujian
   m_Shader: {fileID: 4800000, guid: 6856502c6f7145441a2b8b7366e521b3, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
   m_InvalidKeywords:
   - _WINDQUALITY_NONE
@@ -18,6 +20,7 @@ Material:
   m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
+  m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -77,6 +80,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _NormalTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -125,6 +132,7 @@ Material:
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _Factor: 0.01
+    - _Gloss: 20
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
@@ -160,6 +168,7 @@ Material:
     - _OutLineColor: {r: 0.5372549, g: 0.37254903, b: 0, a: 1}
     - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+    - _Specular: {r: 1, g: 1, b: 1, a: 1}
     - _SubsurfaceColor: {r: 1, g: 1, b: 1, a: 1}
     - _TranslucencyColor: {r: 1, g: 0.5595379, b: 0.4481132, a: 1}
     - _TreeInstanceColor: {r: 1, g: 1, b: 1, a: 1}
