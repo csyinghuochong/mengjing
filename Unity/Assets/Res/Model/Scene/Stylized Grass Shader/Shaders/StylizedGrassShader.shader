@@ -1,225 +1,492 @@
+/* Integration: None */
+
+//Stylized Grass Shader
+//Staggart Creations (http://staggart.xyz)
+//Copyright protected under Unity Asset Store EULA
 Shader "Universal Render Pipeline/Nature/Stylized Grass"
 {
-    Properties
-    {
-        _MainTex ("Base Texture (RGBA)", 2D) = "white" {}
-        _Color ("Tint Color", Color) = (1,1,1,1)
-        _Cutoff ("Alpha Cutoff", Range(0,1)) = 0.5
-        _WindDir ("Wind Direction", Vector) = (0.5, 0, 0.5, 0)
-        _WindStrength ("Wind Strength", Range(0, 2)) = 0.5
-        _WindSpeed ("Wind Speed", Range(0, 5)) = 1.0
-        _BendScale ("Bend Scale", Range(0, 3)) = 1.0
-        _Frequency ("Frequency", Range(0, 10)) = 4.0
-        _NoiseTex ("Wind Noise", 2D) = "gray" {}
-    }
+	Properties
+	{
+		[MainTexture] _BaseMap("Albedo", 2D) = "white" {}
+		_Cutoff("Alpha Cutoff", Range(0.0, 1.0)) = 0.5
+		[MaterialEnum(Both,0,Front,1,Back,2)] _Cull("Render faces", Float) = 0
+		[Toggle] _AlphaToCoverage("Alpha to coverage", Float) = 0.0
+		
+		[MaterialEnum(Red,0,Green,1,Blue,2,Alpha,3)] _VertexColorShadingChannel("Vertex Color Shading Channel", Float) = 0.0
+		[MaterialEnum(Red,0,Green,1,Blue,2,Alpha,3)] _VertexColorWindChannel("Vertex Color Wind Channel", Float) = 0.0
+		[MaterialEnum(Red,0,Green,1,Blue,2,Alpha,3)] _VertexColorBendingChannel("Vertex Color Bending Channel", Float) = 0.0
 
-    SubShader
-    {
-        Tags 
-        { 
-            "RenderType" = "TransparentCutout"
-            "Queue" = "AlphaTest"
-            "RenderPipeline" = "UniversalPipeline"
-            "IgnoreProjector" = "True"
-        }
-        
-        Pass
+		//[Header(Shading)]
+		[MainColor] _BaseColor("Color", Color) = (0.49, 0.89, 0.12, 1.0)
+		_HueVariation("Hue Variation (Alpha = Intensity)", Color) = (1, 0.63, 0, 0.15)
+		_HueVariationHeight("Hue Variation Height", Range(0.0, 1.0)) = 0.0
+		_ColorMapStrength("Colormap Strength", Range(0.0, 1.0)) = 0.0
+		_ColorMapHeight("Colormap Height", Range(0.0, 1.0)) = 1.0
+		_ScalemapInfluence("Scale influence", vector) = (0,1,0,0)
+		_OcclusionStrength("Ambient Occlusion", Range(0.0, 1.0)) = 0.25
+		_VertexDarkening("Random Darkening", Range(0, 1)) = 0.1
+		_Smoothness("Smoothness", Range(0.0, 1.0)) = 0.0
+		_TranslucencyDirect("Translucency (Direct)", Range(0.0, 1.0)) = 1
+		_TranslucencyIndirect("Translucency (Indirect)", Range(0.0, 1.0)) = 0.0
+		_TranslucencyFalloff("Translucency Falloff", Range(1.0, 8.0)) = 4.0
+		_TranslucencyOffset("Translucency Offset", Range(0.0, 1.0)) = 0.0
+		[HDR] _EmissionColor("Emission Color", Color) = (0,0,0)
+		
+		_NormalFlattening("Normal Flattening",Range(0.0, 1.0)) = 1.0
+		_NormalSpherify("Normal Spherifying",Range(0.0, 1.0)) = 0.0
+		_NormalSpherifyMask("Normal Spherifying (tip mask)",Range(0.0, 1.0)) = 0.0
+		_NormalFlattenDepthNormals("Normal Spherifying (DepthNormals pass)",Range(0.0, 1.0)) = 0.0
+
+		_BumpScale("Normal Map Strength",Range(0.0, 1.0)) = 1.0
+		_BumpMap("Normal Map", 2D) = "bump" {}
+		_BendPushStrength("Push Strength (XZ)", Range(0.0, 1.0)) = 1.0
+		[MaterialEnum(Per Vertex,0,Uniform,1)]_BendMode("Bend Mode", Float) = 0.0
+		_BendFlattenStrength("Flatten Strength (Y)", Range(0.0, 1.0)) = 1.0
+		_BendTint("Bending tint", Color) = (1, 1, 1, 1.0)
+		_PerspectiveCorrection("Perspective Correction", Range(0.0, 1.0)) = 1.0
+		_BillboardingVerticalRotation("Billboarding, vertical rotation", Range(0.0, 1.0)) = 0.0
+
+		//[Header(Wind)]
+		_WindAmbientStrength("Ambient Strength", Range(0.0, 1.0)) = 0.2
+		_WindSpeed("Ambient Speed", Float) = 3.0
+		_WindDirection("Direction", vector) = (1,0,0,0)
+		_WindVertexRand("Vertex randomization", Range(0.0, 1.0)) = 0.6
+		_WindObjectRand("Object randomization", Range(0.0, 1.0)) = 0.5
+		_WindRandStrength("Random per-object strength", Range(0.0, 1.0)) = 0.5
+		_WindSwinging("Swinging", Range(0.0, 1.0)) = 0.15
+		_WindGustStrength("Gusting strength", Range(0.0, 1.0)) = 0.2
+		_WindGustFreq("Gusting frequency", Range(0.0, 10.0)) = 4
+		_WindGustSpeed("Gusting Speed", Float) = 4
+		[NoScaleOffset] _WindMap("Wind map", 2D) = "black" {}
+		_WindGustTint("Max Gusting tint", Range(0.0, 3.0)) = 0.1
+
+		//[Header(Rendering)]
+		[MinMaxSlider(0, 25)] _FadeNear("Near", vector) = (0.25, 0.5, 0, 0)
+		[MinMaxSlider(0, 500)] _FadeFar("Far", vector) = (50, 100, 0, 0)
+		_FadeAngleThreshold("Angle fading threshold", Range(0.0, 90.0)) = 15
+		
+		//Keyword states
+		[MaterialEnum(Unlit,0,Simple,1,Advanced,2)]_LightingMode("Lighting Mode", Float) = 2.0
+		[Toggle] _Scalemap("Scale grass by scalemap", Float) = 0.0
+		[Toggle] _Billboard("Billboard", Float) = 0.0
+		[ToggleOff] _ReceiveShadows("Receive Shadows", Float) = 1.0
+		[ToggleOff] _SpecularHighlights("Specular Highlights", Float) = 1.0
+		[Toggle] _EnvironmentReflections("Environment Reflections", Float) = 1.0
+		[Toggle] _FadingOn("Distance/Angle Fading", Float) = 0.0
+		
+		// Editmode props
+		[HideInInspector] _QueueOffset("Queue offset", Float) = 0.0
+
+		/* start CurvedWorld */
+		//[CurvedWorldBendSettings] _CurvedWorldBendSettings("0|1|1", Vector) = (0, 0, 0, 0)
+		/* end CurvedWorld */
+		
+		//Vegetation Studio Pro v1.4.0+
+		_LODDebugColor ("LOD Debug color", Color) = (1,1,1,1)
+		
+		[HideInInspector][NoScaleOffset]unity_Lightmaps("unity_Lightmaps", 2DArray) = "" {}
+		[HideInInspector][NoScaleOffset]unity_LightmapsInd("unity_LightmapsInd", 2DArray) = "" {}
+		[HideInInspector][NoScaleOffset]unity_ShadowMasks("unity_ShadowMasks", 2DArray) = "" {}
+		
+		/* start FoliageRenderer */
+//		[HideInInspector] _TerrainAlbedoProvided("Blend with Albedo Shader", Float) = 0
+//		
+//		[HideInInspector]_TerrainSize("Terrain Size", Vector) = (0,0,0,0)
+//		[HideInInspector]_TerrainPosition("Terrain Position", Vector) = (0,0,0,0)
+//		_TerrainYOffset("Y Offset", Float) = 0
+//		
+//		[HideInInspector]_TerrainAlbedoC("Terrain", 2D) = "black" {}
+//	    [HideInInspector]_TerrainAlbedoL("TerrainL", 2D) = "black" {}
+//	    [HideInInspector]_TerrainAlbedoR("TerrainR", 2D) = "black" {}
+//	    [HideInInspector]_TerrainAlbedoU("TerrainU", 2D) = "black" {}
+//	    [HideInInspector]_TerrainAlbedoUL("TerrainUL", 2D) = "black" {}
+//	    [HideInInspector]_TerrainAlbedoUR("TerrainUR", 2D) = "black" {}
+//	    [HideInInspector]_TerrainAlbedoB("TerrainB", 2D) = "black" {}
+//	    [HideInInspector]_TerrainAlbedoBL("TerrainBL", 2D) = "black" {}
+//	    [HideInInspector]_TerrainAlbedoBR("TerrainBR", 2D) = "black" {}
+		/* end FoliageRenderer */
+
+	}
+
+	SubShader
+	{
+		Tags{
+			"RenderType" = "Opaque"
+			"Queue" = "AlphaTest"
+			"RenderPipeline" = "UniversalPipeline"
+			"IgnoreProjector" = "True"
+			"NatureRendererInstancing" = "True"
+			"DisableBatching" = "True"
+		}
+		
+		HLSLINCLUDE
+		#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
+		#include "Packages/com.unity.render-pipelines.core/ShaderLibrary/UnityInstancing.hlsl"
+		#if UNITY_VERSION >= 202220
+		#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/LODCrossFade.hlsl"
+		#endif
+		#define REQUIRES_WORLD_SPACE_POS_INTERPOLATOR
+
+		//Hard coded features
+		#define _ALPHATEST_ON
+
+		//Uncomment to compile out these calculations
+		//#define DISABLE_WIND
+		//#define DISABLE_BENDING
+
+		//Uncomment to enable
+		//#define MASKING_SPHERE_DISPLACEMENT
+		
+		#pragma target 3.5
+
+	    #if UNITY_VERSION >= 202220 
+        #include_with_pragmas "Packages/com.unity.render-pipelines.universal/ShaderLibrary/DOTS.hlsl"
+        #endif
+
+		#if UNITY_VERSION >= 202230
+		#include_with_pragmas "Packages/com.unity.render-pipelines.universal/ShaderLibrary/RenderingLayers.hlsl"
+		#endif
+
+		// GPU Instancing
+		#pragma multi_compile_instancing
+
+		/* start CurvedWorld */
+		//#define CURVEDWORLD_BEND_TYPE_CLASSICRUNNER_X_POSITIVE
+		//#define CURVEDWORLD_BEND_ID_1
+		//#pragma shader_feature_local CURVEDWORLD_DISABLED_ON
+		//#pragma shader_feature_local CURVEDWORLD_NORMAL_TRANSFORMATION_ON
+		//#include "Assets/Amazing Assets/Curved World/Shaders/Core/CurvedWorldTransform.cginc"
+		/* end CurvedWorld */
+
+		//* start VegetationStudio */
+//		#define VegetationStudio
+//		#pragma instancing_options assumeuniformscaling renderinglayer procedural:setupVSPro
+		/* end VegetationStudio */
+
+		#ifdef VegetationStudio
+		/* include VegetationStudio */
+		#include "Assets/AwesomeTechnologies/VegetationStudioPro/Runtime/Shaders/Resources/VSPro_HDIndirect.cginc"
+		#endif
+
+		/* start GPUInstancer */
+//		#define GPUInstancer
+//		#pragma instancing_options procedural:setupGPUI
+		/* end GPUInstancer */
+
+		#ifdef GPUInstancer
+		/* include GPUInstancer */
+		#include "Assets/GPUInstancer/Shaders/Include/GPUInstancerInclude.cginc"
+		#endif
+		
+		/* start NatureRendererLegacy */
+//		#define NatureRendererLegacy
+//		#pragma instancing_options assumeuniformscaling procedural:SetupNatureRenderer
+		/* end NatureRendererLegacy */
+
+		#ifdef NatureRendererLegacy
+		/* include NatureRendererLegacy */
+		#include "Assets/Visual Design Cafe/Nature Shaders/Common/Nodes/Integrations/Nature Renderer.cginc"
+		#endif
+		
+		/* start NatureRenderer */
+//		#define NatureRenderer
+//		#pragma instancing_options procedural:SetupNatureRenderer
+		/* end NatureRenderer */
+
+		#ifdef NatureRenderer
+		/* include NatureRenderer */
+		#include "Assets/Visual Design Cafe/Nature Renderer/Shader Includes/Nature Renderer.templatex"
+		#endif
+
+		/* start FoliageRenderer */
+//		#define FoliageRenderer
+//		#pragma instancing_options procedural:setupFoliageRenderer forwardadd
+		/* end FoliageRenderer */
+
+		#ifdef FoliageRenderer
+		/* include FoliageRenderer */
+#include "Assets/FoliageRenderer/Shaders/FoliageRendererInstancing.cginc"
+		#endif
+		
+		ENDHLSL
+
+		// ------------------------------------------------------------------
+		//  Forward pass. Shades all light in a single pass. GI + emission + Fog
+		Pass
+		{
+			Name "ForwardLit"
+			Tags{ "LightMode" = "UniversalForward" }
+
+			AlphaToMask [_AlphaToCoverage]
+			Blend One Zero, One Zero
+			Cull [_Cull]
+			ZWrite On
+
+			HLSLPROGRAM
+
+			//In place for projects that use a custom RP or modified URP and require specific behaviour for vegetation
+			#define VEGETATION_SHADER
+
+			// -------------------------------------
+			// Material Keywords
+			#pragma multi_compile _ LOD_FADE_CROSSFADE //Note: Cannot use _fragment suffix, unity_LODFade conflicts with unity_RenderingLayer in cBuffer somehow
+			#pragma shader_feature_local_vertex _SCALEMAP
+			#pragma shader_feature_local_vertex _BILLBOARD
+			#pragma shader_feature_local_fragment _FADING
+			#pragma shader_feature_local _NORMALMAP
+			#pragma shader_feature_local _ _SIMPLE_LIGHTING _ADVANCED_LIGHTING
+			#pragma shader_feature_local_fragment _SPECULARHIGHLIGHTS_OFF
+			#pragma shader_feature_local_fragment _ENVIRONMENTREFLECTIONS_OFF
+			#pragma shader_feature_local _RECEIVE_SHADOWS_OFF
+			
+			// -------------------------------------
+            // Universal Pipeline keywords
+			#pragma multi_compile _ _MAIN_LIGHT_SHADOWS _MAIN_LIGHT_SHADOWS_CASCADE  
+			//#pragma multi_compile _ _MAIN_LIGHT_SHADOWS_CASCADE
+			#pragma multi_compile _ _MAIN_LIGHT_SHADOWS_SCREEN
+            #pragma multi_compile _ _ADDITIONAL_LIGHTS_VERTEX _ADDITIONAL_LIGHTS	
+            #pragma multi_compile_fragment _ _ADDITIONAL_LIGHT_SHADOWS
+            #pragma multi_compile_fragment _ _SHADOWS_SOFT
+
+			#if !_SIMPLE_LIGHTING && !_ADVANCED_LIGHTING
+			#define _UNLIT
+			#undef _NORMALMAP
+			#endif
+			
+			// -------------------------------------
+			// Unity defined keywords
+			//#pragma multi_compile _ DIRLIGHTMAP_COMBINED
+			#pragma multi_compile _ LIGHTMAP_ON
+			#pragma multi_compile _ DYNAMICLIGHTMAP_ON
+			#pragma multi_compile_fog
+			#if UNITY_VERSION >= 202310            
+            #include_with_pragmas "Packages/com.unity.render-pipelines.universal/ShaderLibrary/ProbeVolumeVariants.hlsl"
+            #endif
+
+			//VVV Stripped on older URP versions VVV
+
+			//URP 10+
+			#pragma multi_compile _ LIGHTMAP_SHADOW_MIXING
+            #pragma multi_compile _ SHADOWS_SHADOWMASK 
+			#pragma multi_compile_fragment _ _SCREEN_SPACE_OCCLUSION 
+			
+			//URP 12+
+			#pragma multi_compile_fragment _ _DBUFFER_MRT1 _DBUFFER_MRT2 _DBUFFER_MRT3 
+            #pragma multi_compile_fragment _ _LIGHT_LAYERS 
+			#pragma multi_compile_fragment _ _LIGHT_COOKIES 
+            //#pragma multi_compile _ _MIXED_LIGHTING_SUBTRACTIVE //Deprecated?
+			#pragma multi_compile _ _CLUSTERED_RENDERING 
+			#pragma multi_compile_fragment _ DEBUG_DISPLAY
+
+			//URP 14+
+			#pragma multi_compile_fragment _ _FORWARD_PLUS
+			
+			//Constants
+			#define SHADERPASS_FORWARD
+			#pragma instancing_options renderinglayer
+			
+			#pragma vertex LitPassVertex
+			#pragma fragment LightingPassFragment
+
+			//Half-fix for shadow cascades breaking in 2020.3, due to keywords following a set up needed to support newer versions
+			#if UNITY_VERSION < 202110 && _MAIN_LIGHT_SHADOWS
+			#define _MAIN_LIGHT_SHADOWS_CASCADE 0
+			#endif
+			
+			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Lighting.hlsl"
+			#include "Packages/com.unity.render-pipelines.core/ShaderLibrary/Color.hlsl"
+
+			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/SurfaceInput.hlsl"
+
+			#include "Libraries/Input.hlsl"
+			#include "Libraries/Common.hlsl"
+			#include "Libraries/Color.hlsl"
+			#include "Libraries/Lighting.hlsl"
+			#include "LightingPass.hlsl"
+			ENDHLSL
+		}
+
+		Pass
+		{
+			Name "ShadowCaster"
+			Tags{"LightMode" = "ShadowCaster"}
+
+			ZWrite On
+			ZTest LEqual
+			Cull[_Cull]
+
+			HLSLPROGRAM
+
+			#pragma multi_compile _ LOD_FADE_CROSSFADE
+			#pragma shader_feature_local_vertex _SCALEMAP
+			#pragma shader_feature_local_vertex _BILLBOARD
+			#pragma shader_feature_local_fragment _FADING
+
+			#define SHADERPASS_SHADOWCASTER
+			
+			#pragma vertex ShadowPassVertex
+			#pragma fragment ShadowPassFragment
+
+			#include "Libraries/Input.hlsl"
+			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Shadows.hlsl"
+			
+			#include "Libraries/Common.hlsl"
+
+			#include "ShadowPass.hlsl"
+			ENDHLSL
+		}
+		
+		//Deferred rendering
+		Pass
         {
-            Name "ForwardLit"
-            Tags { "LightMode" = "UniversalForward" }
-            
-            Cull Off  // 双面渲染确保草丛两面可见
-            
-            HLSLPROGRAM
-            #pragma vertex vert
-            #pragma fragment frag
-            #pragma multi_compile_instancing
-            #pragma shader_feature_local _ALPHATEST_ON
+            Name "GBuffer"
+            Tags{"LightMode" = "UniversalGBuffer"}
 
-            #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
-            #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Lighting.hlsl"
+            //AlphaToMask [_AlphaToCoverage] //Not supported in deferred
+			Blend One Zero, One Zero
+			Cull [_Cull]
+			ZWrite On
 
-            struct Attributes
-            {
-                float4 positionOS : POSITION;
-                float2 uv : TEXCOORD0;
-                float3 normalOS : NORMAL;
-                float4 color : COLOR; // 顶点色控制摆动权重
-                UNITY_VERTEX_INPUT_INSTANCE_ID
-            };
+			HLSLPROGRAM
 
-            struct Varyings
-            {
-                float4 positionCS : SV_POSITION;
-                float2 uv : TEXCOORD0;
-                float3 positionWS : TEXCOORD1;
-                float3 normalWS : TEXCOORD2;
-                float4 color : COLOR;
-            };
+			//In place for projects that use a custom RP or modified URP and require specific behaviour for vegetation
+			#define VEGETATION_SHADER
 
-            sampler2D _MainTex;
-            sampler2D _NoiseTex;
-            float4 _MainTex_ST;
-            
-            CBUFFER_START(UnityPerMaterial)
-                float4 _Color;
-                float4 _WindDir;
-                float _WindStrength;
-                float _WindSpeed;
-                float _BendScale;
-                float _Frequency;
-                float _Cutoff;
-            CBUFFER_END
+			// -------------------------------------
+			// Material Keywords
+			#pragma multi_compile _ LOD_FADE_CROSSFADE
+			#pragma shader_feature_local_vertex _SCALEMAP
+			#pragma shader_feature_local_vertex _BILLBOARD
+			#pragma shader_feature_local_fragment _FADING
+			#pragma shader_feature_local _NORMALMAP
+			#pragma shader_feature_local_fragment _SPECULARHIGHLIGHTS_OFF
+			#pragma shader_feature_local_fragment _ENVIRONMENTREFLECTIONS_OFF
+			#pragma shader_feature_local _RECEIVE_SHADOWS_OFF
+		
+			//Disable features
+			#undef _ALPHAPREMULTIPLY_ON
+			#undef _EMISSION
+			#undef _SMOOTHNESS_TEXTURE_ALBEDO_CHANNEL_A
+			#undef _OCCLUSIONMAP
+			#undef _METALLICSPECGLOSSMAP
 
-            // 风场动画函数
-            float3 WindAnimation(float3 positionWS, float weight)
-            {
-                // 规范化风向
-                float3 windVector = normalize(float3(_WindDir.x, 0, _WindDir.z));
-                
-                // 采样噪声纹理
-                float2 noiseUV = positionWS.xz * 0.1 + _Time.y * _WindSpeed * 0.3;
-                float2 noise = tex2Dlod(_NoiseTex, float4(noiseUV, 0, 0)).rg;
-                
-                // 基础正弦波
-                float baseWave = sin(_Time.y * _WindSpeed + positionWS.x * _Frequency) * 0.5 + 0.5;
-                
-                // 复合风场 (噪声+正弦波)
-                float windPower = (noise.r * 0.8 + noise.g * 0.4 + baseWave * 0.6) * _WindStrength;
-                
-                // 应用权重（顶点色R通道控制）
-                windPower *= weight * _BendScale;
-                
-                return windVector * windPower;
-            }
+			// -------------------------------------
+			// Universal Pipeline keywords
+			#pragma multi_compile _ _MAIN_LIGHT_SHADOWS _MAIN_LIGHT_SHADOWS_CASCADE _MAIN_LIGHT_SHADOWS_SCREEN
+            //#pragma multi_compile _ _ADDITIONAL_LIGHTS_VERTEX _ADDITIONAL_LIGHTS
+            //#pragma multi_compile_fragment _ _ADDITIONAL_LIGHT_SHADOWS
+            #pragma multi_compile_fragment _ _SHADOWS_SOFT
 
-            Varyings vert(Attributes input)
-            {
-                Varyings output;
-                UNITY_SETUP_INSTANCE_ID(input);
-                
-                // 获取世界空间位置
-                float3 positionWS = TransformObjectToWorld(input.positionOS.xyz);
-                
-                // 计算风场偏移
-                float3 windOffset = WindAnimation(positionWS, input.color.r);
-                
-                // 应用偏移 (主要影响XZ平面)
-                positionWS += float3(windOffset.x, 0, windOffset.z);
-                
-                // Y轴轻微弯曲效果
-                positionWS.y -= abs(windOffset.x + windOffset.z) * 0.1;
-                
-                output.positionCS = TransformWorldToHClip(positionWS);
-                output.positionWS = positionWS;
-                output.uv = TRANSFORM_TEX(input.uv, _MainTex);
-                output.color = input.color;
-                output.normalWS = TransformObjectToWorldNormal(input.normalOS);
-                
-                return output;
-            }
+			//URP 10+
+            #pragma multi_compile _ SHADOWS_SHADOWMASK
+            #pragma multi_compile _ LIGHTMAP_SHADOW_MIXING
+            #pragma multi_compile_fragment _ _SCREEN_SPACE_OCCLUSION
 
-            half4 frag(Varyings input) : SV_Target
-            {
-                // 采样主纹理 - 只使用alpha通道
-                half4 texSample = tex2D(_MainTex, input.uv);
-                
-                // Alpha裁剪 - 关键步骤
-                clip(texSample.a - _Cutoff);
-                
-                // 使用_Color作为基础颜色（忽略纹理RGB）
-                half4 col = _Color;
-                
-                // 简单光照计算
-                Light mainLight = GetMainLight();
-                float3 lightDir = normalize(mainLight.direction);
-                float NdotL = saturate(dot(input.normalWS, lightDir)) + 0.5;
+			// -------------------------------------
+			// Unity defined keywords
+			//#pragma multi_compile _ DIRLIGHTMAP_COMBINED
+			#pragma multi_compile _ LIGHTMAP_ON
+			#pragma multi_compile_fog
+			//Accurate G-buffer normals option in renderer settings
+			#pragma multi_compile_fragment _ _GBUFFER_NORMALS_OCT
 
-                if(NdotL > 1)
-                {
-                    NdotL = 1;
-                }
+			//URP12+
+			#pragma multi_compile _ DYNAMICLIGHTMAP_ON //Realtime GI
+			#pragma multi_compile_fragment _ _DBUFFER_MRT1 _DBUFFER_MRT2 _DBUFFER_MRT3 //Decal support
+            #pragma multi_compile_fragment _ _LIGHT_LAYERS
+            #pragma multi_compile_fragment _ _RENDER_PASS_ENABLED //Stencil support
 
-                float3 diffuse = mainLight.color * NdotL;
-                
-                // 应用光照并增强底部阴影
-                col.rgb *= diffuse *lerp(0.7, 1.2, input.color.r);
-                
-                // 添加环境光
-               col.rgb += SampleSH(input.normalWS) * 0.3;
-                
-                return col;
-            }
-            ENDHLSL
+			//Constants
+			#define SHADERPASS_DEFERRED
+
+			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Lighting.hlsl"
+			#include "Packages/com.unity.render-pipelines.core/ShaderLibrary/Color.hlsl"
+
+			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/SurfaceInput.hlsl"
+
+			#include "Libraries/Input.hlsl"
+			#include "Libraries/Common.hlsl"
+			
+			#include "Libraries/Color.hlsl"
+			#include "Libraries/Lighting.hlsl"
+
+			#pragma vertex LitPassVertex
+			#pragma fragment LightingPassFragment
+			
+			#include "LightingPass.hlsl"
+
+			ENDHLSL
         }
-        
-        // 添加深度和阴影Pass确保正确渲染
-        Pass
-        {
-            Name "DepthOnly"
-            Tags { "LightMode" = "DepthOnly" }
-            
-            Cull Off
-            
-            HLSLPROGRAM
-            #pragma vertex DepthOnlyVertex
-            #pragma fragment DepthOnlyFragment
-            #pragma multi_compile_instancing
-            
-            #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
-            
-            struct DepthAttributes
-            {
-                float4 positionOS : POSITION;
-                float2 uv : TEXCOORD0;
-                float4 color : COLOR;
-                UNITY_VERTEX_INPUT_INSTANCE_ID
-            };
-            
-            struct DepthVaryings
-            {
-                float4 positionCS : SV_POSITION;
-                float2 uv : TEXCOORD0;
-            };
-            
-            float4 _WindDir;
-            float _WindSpeed;
-            sampler2D _MainTex;
-            float4 _MainTex_ST;
-            float _Cutoff;
-            sampler2D _NoiseTex;
-            float _WindStrength;
-            float _BendScale;
-            
-            DepthVaryings DepthOnlyVertex(DepthAttributes input)
-            {
-                DepthVaryings output;
-                UNITY_SETUP_INSTANCE_ID(input);
-                
-                float3 positionWS = TransformObjectToWorld(input.positionOS.xyz);
-                
 
-                // 风场动画 (简化版)
-                float3 windVector = normalize(float3(_WindDir.x, 0, _WindDir.z));
-                float2 noiseUV = positionWS.xz * 0.1 + _Time.y * _WindSpeed * 0.3;
-                float noise = tex2Dlod(_NoiseTex, float4(noiseUV, 0, 0)).r;
-                float windPower = noise * _WindStrength * input.color.r * _BendScale;
-                positionWS += windVector * windPower;
-                
-                output.positionCS = TransformWorldToHClip(positionWS);
-                output.uv = TRANSFORM_TEX(input.uv, _MainTex);
-                return output;
-            }
-            
-            half4 DepthOnlyFragment(DepthVaryings input) : SV_Target
-            {
-                half alpha = tex2D(_MainTex, input.uv).a;
-                clip(alpha - _Cutoff);
-                return 0;
-            }
-            ENDHLSL
-        }
-    }
-    
-    Fallback "Universal Render Pipeline/Simple Lit"
-}
+		Pass
+		{
+			Name "DepthOnly"
+			Tags{"LightMode" = "DepthOnly"}
+
+			ZWrite On
+			ColorMask 0
+			Cull[_Cull]
+
+			HLSLPROGRAM
+
+			#define SHADERPASS_DEPTHONLY
+
+			// -------------------------------------
+			// Material Keywords
+			#pragma multi_compile _ LOD_FADE_CROSSFADE
+			#pragma shader_feature_local_vertex _SCALEMAP
+			#pragma shader_feature_local_vertex _BILLBOARD
+			#pragma shader_feature_local_fragment _FADING
+
+			#include "Libraries/Input.hlsl"
+			#include "Libraries/Common.hlsl"
+
+			#pragma vertex DepthOnlyVertex
+			#pragma fragment DepthOnlyFragment
+			
+			#include "DepthPass.hlsl"
+			ENDHLSL
+		}
+
+		// This pass is used when drawing to a _CameraNormalsTexture texture
+		Pass
+		{
+			Name "DepthNormals"
+			Tags{"LightMode" = "DepthNormals"}
+
+			ZWrite On
+			Cull[_Cull]
+
+			HLSLPROGRAM
+
+			#define SHADERPASS_DEPTH_ONLY
+			#define SHADERPASS_DEPTHNORMALS
+			
+			#pragma vertex DepthOnlyVertex	
+			//Only URP 10.0.0+ does this amounts to the actual fragment shader, otherwise a dummy is used
+			#pragma fragment DepthNormalsFragment
+
+			// -------------------------------------
+			// Material Keywords
+			#pragma multi_compile _ LOD_FADE_CROSSFADE
+			#pragma shader_feature_local_vertex _SCALEMAP
+			#pragma shader_feature_local_vertex _BILLBOARD
+			#pragma shader_feature_local_fragment _FADING
+
+			#include "Libraries/Input.hlsl"            			
+			#include "Libraries/Common.hlsl"
+
+			#include "DepthPass.hlsl"
+			ENDHLSL
+		}
+
+		// Used for Baking GI. This pass is stripped from build.
+		//Disabled, breaks SRP batcher, shader doesn't have the exact same properties as the Lit shader
+		//UsePass "Universal Render Pipeline/Lit/Meta"
+
+	}//Subshader
+
+	FallBack "Hidden/Universal Render Pipeline/FallbackError"
+	CustomEditor "StylizedGrass.MaterialUI"
+
+}//Shader
