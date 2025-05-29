@@ -12,11 +12,15 @@ Material:
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
-  - _NORMALMAP
-  m_InvalidKeywords:
   - _ADVANCED_LIGHTING
   - _FADING
+  - _NORMALMAP
   - _SCALEMAP
+  m_InvalidKeywords:
+  - _ALPHATOCOVERAGE_ON
+  - _ENVIRONMENTREFLECTIONS_ON
+  - _FADINGON_ON
+  - _SCALEMAP_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
@@ -113,7 +117,7 @@ Material:
     - _ColorMapHeight: 1
     - _ColorMapStrength: 1
     - _Cull: 0
-    - _Cutoff: 0.547
+    - _Cutoff: 0.432
     - _Darkening: 0.487
     - _DisableBending: 0
     - _DisableDecals: 0
@@ -122,7 +126,7 @@ Material:
     - _EnvironmentReflections: 1
     - _FadeAngleThreshold: 45
     - _FadingOn: 1
-    - _Frequency: 1.72
+    - _Frequency: 2.01
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
