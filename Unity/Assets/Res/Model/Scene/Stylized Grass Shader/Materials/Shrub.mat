@@ -24,11 +24,11 @@ Material:
   m_Shader: {fileID: 4800000, guid: d7dd1c3f4cba1d441a7d295a168bac0d, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
-  m_ValidKeywords:
-  - _ADVANCED_LIGHTING
-  - _FADING
+  m_ValidKeywords: []
   m_InvalidKeywords:
+  - _ADVANCED_LIGHTING
   - _ENVIRONMENTREFLECTIONS_ON
+  - _FADING
   - _FADINGON_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 1
@@ -57,6 +57,10 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _NoiseTex:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -89,11 +93,15 @@ Material:
     - _AlphaClip: 0
     - _AlphaToCoverage: 0
     - _AngleFading: 0
+    - _BendFactor: 0.5
     - _BendFlattenStrength: 0
     - _BendMode: 1
     - _BendPushStrength: 0.088
+    - _BendScale: 1
     - _Billboard: 0
     - _BillboardingVerticalRotation: 0
+    - _BladeHeight: 0.5
+    - _BladeWidth: 0.1
     - _Blend: 0
     - _BumpScale: 1
     - _ColorMapHeight: 0
@@ -106,9 +114,11 @@ Material:
     - _EnvironmentReflections: 1
     - _FadeAngleThreshold: 15
     - _FadingOn: 1
+    - _Frequency: 4
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
+    - _GrassHeight: 1
     - _HueVariationHeight: 0
     - _LightingMode: 2
     - _Metallic: 0
@@ -124,6 +134,7 @@ Material:
     - _ShadowBiasCorrection: 0
     - _Smoothness: 0
     - _SmoothnessTextureChannel: 0
+    - _Specular: 0.5
     - _SpecularHighlights: 1
     - _SpherifyNormals: 0
     - _SrcBlend: 1
@@ -139,21 +150,28 @@ Material:
     - _VertexColorWindChannel: 0
     - _VertexDarkening: 0.111
     - _WindAmbientStrength: 0.088
+    - _WindBend: 0.5
+    - _WindFrequency: 2
     - _WindGustFreq: 10
+    - _WindGustScale: 0.02
     - _WindGustSpeed: 4
     - _WindGustStrength: 0.031
     - _WindGustTint: 0.006
+    - _WindNoiseScale: 0.05
     - _WindObjectRand: 0.705
     - _WindRandStrength: 0.5
+    - _WindRandom: 0.3
     - _WindSpeed: 3
+    - _WindStrength: 1
     - _WindSwinging: 0.15
     - _WindVertexRand: 1
+    - _WindWave: 0.1
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _BendTint: {r: 1, g: 1, b: 1, a: 1}
-    - _Color: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+    - _Color: {r: 0.109069064, g: 0.4056604, b: 0.120510474, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _FadeFar: {r: 50, g: 100, b: 0, a: 0}
     - _FadeNear: {r: 0.25, g: 0.5, b: 0, a: 0}
@@ -163,5 +181,7 @@ Material:
     - _NormalParams: {r: 0, g: 0, b: 0, a: 0}
     - _ScalemapInfluence: {r: 0, g: 1, b: 0, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
+    - _Specular: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+    - _WindDir: {r: 0.5, g: 0, b: 0.5, a: 0}
     - _WindDirection: {r: 1, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
