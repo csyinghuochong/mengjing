@@ -2371,7 +2371,7 @@ namespace ET.Client
      			}
      			if( this.m_E_DragPanelImage == null )
      			{
-		    		this.m_E_DragPanelImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Center/E_DragPanel");
+		    		this.m_E_DragPanelImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_DragPanel");
      			}
      			return this.m_E_DragPanelImage;
      		}
