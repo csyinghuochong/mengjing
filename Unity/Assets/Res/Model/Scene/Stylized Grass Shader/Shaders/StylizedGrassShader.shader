@@ -1,8 +1,3 @@
-/* Integration: None */
-
-//Stylized Grass Shader
-//Staggart Creations (http://staggart.xyz)
-//Copyright protected under Unity Asset Store EULA
 Shader "Universal Render Pipeline/Nature/Stylized Grass"
 {
 	Properties
@@ -77,10 +72,6 @@ Shader "Universal Render Pipeline/Nature/Stylized Grass"
 		// Editmode props
 		[HideInInspector] _QueueOffset("Queue offset", Float) = 0.0
 
-		/* start CurvedWorld */
-		//[CurvedWorldBendSettings] _CurvedWorldBendSettings("0|1|1", Vector) = (0, 0, 0, 0)
-		/* end CurvedWorld */
-		
 		//Vegetation Studio Pro v1.4.0+
 		_LODDebugColor ("LOD Debug color", Color) = (1,1,1,1)
 		
@@ -88,24 +79,6 @@ Shader "Universal Render Pipeline/Nature/Stylized Grass"
 		[HideInInspector][NoScaleOffset]unity_LightmapsInd("unity_LightmapsInd", 2DArray) = "" {}
 		[HideInInspector][NoScaleOffset]unity_ShadowMasks("unity_ShadowMasks", 2DArray) = "" {}
 		
-		/* start FoliageRenderer */
-//		[HideInInspector] _TerrainAlbedoProvided("Blend with Albedo Shader", Float) = 0
-//		
-//		[HideInInspector]_TerrainSize("Terrain Size", Vector) = (0,0,0,0)
-//		[HideInInspector]_TerrainPosition("Terrain Position", Vector) = (0,0,0,0)
-//		_TerrainYOffset("Y Offset", Float) = 0
-//		
-//		[HideInInspector]_TerrainAlbedoC("Terrain", 2D) = "black" {}
-//	    [HideInInspector]_TerrainAlbedoL("TerrainL", 2D) = "black" {}
-//	    [HideInInspector]_TerrainAlbedoR("TerrainR", 2D) = "black" {}
-//	    [HideInInspector]_TerrainAlbedoU("TerrainU", 2D) = "black" {}
-//	    [HideInInspector]_TerrainAlbedoUL("TerrainUL", 2D) = "black" {}
-//	    [HideInInspector]_TerrainAlbedoUR("TerrainUR", 2D) = "black" {}
-//	    [HideInInspector]_TerrainAlbedoB("TerrainB", 2D) = "black" {}
-//	    [HideInInspector]_TerrainAlbedoBL("TerrainBL", 2D) = "black" {}
-//	    [HideInInspector]_TerrainAlbedoBR("TerrainBR", 2D) = "black" {}
-		/* end FoliageRenderer */
-
 	}
 
 	SubShader
@@ -130,13 +103,6 @@ Shader "Universal Render Pipeline/Nature/Stylized Grass"
 		//Hard coded features
 		#define _ALPHATEST_ON
 
-		//Uncomment to compile out these calculations
-		//#define DISABLE_WIND
-		//#define DISABLE_BENDING
-
-		//Uncomment to enable
-		//#define MASKING_SPHERE_DISPLACEMENT
-		
 		#pragma target 3.5
 
 	    #if UNITY_VERSION >= 202220 
@@ -150,58 +116,30 @@ Shader "Universal Render Pipeline/Nature/Stylized Grass"
 		// GPU Instancing
 		#pragma multi_compile_instancing
 
-		/* start CurvedWorld */
-		//#define CURVEDWORLD_BEND_TYPE_CLASSICRUNNER_X_POSITIVE
-		//#define CURVEDWORLD_BEND_ID_1
-		//#pragma shader_feature_local CURVEDWORLD_DISABLED_ON
-		//#pragma shader_feature_local CURVEDWORLD_NORMAL_TRANSFORMATION_ON
-		//#include "Assets/Amazing Assets/Curved World/Shaders/Core/CurvedWorldTransform.cginc"
-		/* end CurvedWorld */
-
-		//* start VegetationStudio */
-//		#define VegetationStudio
-//		#pragma instancing_options assumeuniformscaling renderinglayer procedural:setupVSPro
-		/* end VegetationStudio */
 
 		#ifdef VegetationStudio
 		/* include VegetationStudio */
 		#include "Assets/AwesomeTechnologies/VegetationStudioPro/Runtime/Shaders/Resources/VSPro_HDIndirect.cginc"
 		#endif
 
-		/* start GPUInstancer */
-//		#define GPUInstancer
-//		#pragma instancing_options procedural:setupGPUI
-		/* end GPUInstancer */
+
 
 		#ifdef GPUInstancer
 		/* include GPUInstancer */
 		#include "Assets/GPUInstancer/Shaders/Include/GPUInstancerInclude.cginc"
 		#endif
 		
-		/* start NatureRendererLegacy */
-//		#define NatureRendererLegacy
-//		#pragma instancing_options assumeuniformscaling procedural:SetupNatureRenderer
-		/* end NatureRendererLegacy */
 
 		#ifdef NatureRendererLegacy
 		/* include NatureRendererLegacy */
 		#include "Assets/Visual Design Cafe/Nature Shaders/Common/Nodes/Integrations/Nature Renderer.cginc"
 		#endif
 		
-		/* start NatureRenderer */
-//		#define NatureRenderer
-//		#pragma instancing_options procedural:SetupNatureRenderer
-		/* end NatureRenderer */
-
 		#ifdef NatureRenderer
 		/* include NatureRenderer */
 		#include "Assets/Visual Design Cafe/Nature Renderer/Shader Includes/Nature Renderer.templatex"
 		#endif
 
-		/* start FoliageRenderer */
-//		#define FoliageRenderer
-//		#pragma instancing_options procedural:setupFoliageRenderer forwardadd
-		/* end FoliageRenderer */
 
 		#ifdef FoliageRenderer
 		/* include FoliageRenderer */
@@ -480,13 +418,9 @@ Shader "Universal Render Pipeline/Nature/Stylized Grass"
 			ENDHLSL
 		}
 
-		// Used for Baking GI. This pass is stripped from build.
-		//Disabled, breaks SRP batcher, shader doesn't have the exact same properties as the Lit shader
-		//UsePass "Universal Render Pipeline/Lit/Meta"
-
-	}//Subshader
+	}
 
 	FallBack "Hidden/Universal Render Pipeline/FallbackError"
 	CustomEditor "StylizedGrass.MaterialUI"
 
-}//Shader
+}
