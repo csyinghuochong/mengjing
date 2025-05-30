@@ -2388,7 +2388,7 @@ namespace ET.Client
      			}
      			if( this.m_E_DragPanelEventTrigger == null )
      			{
-		    		this.m_E_DragPanelEventTrigger = UIFindHelper.FindDeepChild<UnityEngine.EventSystems.EventTrigger>(this.uiTransform.gameObject,"Center/E_DragPanel");
+		    		this.m_E_DragPanelEventTrigger = UIFindHelper.FindDeepChild<UnityEngine.EventSystems.EventTrigger>(this.uiTransform.gameObject,"E_DragPanel");
      			}
      			return this.m_E_DragPanelEventTrigger;
      		}
