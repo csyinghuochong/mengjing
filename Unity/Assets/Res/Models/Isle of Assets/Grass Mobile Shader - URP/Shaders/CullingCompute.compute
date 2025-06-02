@@ -1,0 +1,23 @@
+﻿#pragma kernel CSMain
+
+float4x4 _VPMatrix;
+StructuredBuffer<float3> _InstancesBuffer;
+AppendStructuredBuffer<uint> _InstanceIDBuffer;
+float _DrawDistance, _CameraViewLeftOffset, _CameraViewRightOffset, _CameraViewBottomOffset, _CameraViewTopOffset;
+uint _IDOffset;
+
+[numthreads(64, 1, 1)]
+void CSMain(uint3 id : SV_DispatchThreadID)
+{
+    float4 instancePosHomogeneous = mul(_VPMatrix, float4(_InstancesBuffer[id.x + _IDOffset], 1.0));
+    float4 normalizedDeviceCoords = instancePosHomogeneous / instancePosHomogeneous.w;
+    if (normalizedDeviceCoords.z < 1.0 &&
+        instancePosHomogeneous.w < _DrawDistance &&
+        -normalizedDeviceCoords.y < normalizedDeviceCoords.w * (2.5 + _CameraViewBottomOffset) &&
+        -normalizedDeviceCoords.x < normalizedDeviceCoords.w * (1.05 + _CameraViewLeftOffset) &&
+        normalizedDeviceCoords.y < normalizedDeviceCoords.w * (1.0 + _CameraViewTopOffset) &&
+        normalizedDeviceCoords.x < normalizedDeviceCoords.w * (1.0 + _CameraViewRightOffset))
+    {
+        _InstanceIDBuffer.Append(id.x + _IDOffset);
+    }
+}
