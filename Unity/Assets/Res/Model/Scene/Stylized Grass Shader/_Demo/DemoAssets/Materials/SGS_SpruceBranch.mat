@@ -15,20 +15,26 @@ MonoBehaviour:
   version: 1
 --- !u!21 &2100000
 Material:
-  serializedVersion: 6
+  serializedVersion: 8
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: SGS_SpruceBranch
   m_Shader: {fileID: 4800000, guid: d7dd1c3f4cba1d441a7d295a168bac0d, type: 3}
-  m_ShaderKeywords: _ADVANCED_LIGHTING _NORMALMAP
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords:
+  - _ADVANCED_LIGHTING
+  - _NORMALMAP
+  m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 1
   m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
+  m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -88,6 +94,7 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    m_Ints: []
     m_Floats:
     - Vector1_399D6047: 1
     - Vector1_66094E41: 0.039
@@ -103,6 +110,7 @@ Material:
     - _Billboard: 0
     - _BillboardKwToggle: 0
     - _BillboardShadowFade: 0.5
+    - _BillboardingVerticalRotation: 0
     - _Blend: 0
     - _BumpScale: 1
     - _ColorMapHeight: 1
@@ -153,6 +161,9 @@ Material:
     - _TranslucencyIndirect: 0
     - _TranslucencyOffset: 0
     - _TwoSided: 2
+    - _VertexColorBendingChannel: 0
+    - _VertexColorShadingChannel: 0
+    - _VertexColorWindChannel: 0
     - _VertexDarkening: 0.1
     - _WindAmbientStrength: 0.2
     - _WindGustFreq: 4
