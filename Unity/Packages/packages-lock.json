@@ -1,14 +1,5 @@
 {
   "dependencies": {
-    "ai.meshy": {
-      "version": "file:ai.meshy",
-      "depth": 0,
-      "source": "embedded",
-      "dependencies": {
-        "com.unity.mathematics": "1.2.6",
-        "com.unity.burst": "1.8.4"
-      }
-    },
     "com.code-philosophy.hybridclr": {
       "version": "https://gitee.com/focus-creative-games/hybridclr_unity.git",
       "depth": 0,
@@ -182,7 +173,7 @@
     },
     "com.unity.render-pipelines.core": {
       "version": "14.0.11",
-      "depth": 1,
+      "depth": 0,
       "source": "builtin",
       "dependencies": {
         "com.unity.ugui": "1.0.0",
