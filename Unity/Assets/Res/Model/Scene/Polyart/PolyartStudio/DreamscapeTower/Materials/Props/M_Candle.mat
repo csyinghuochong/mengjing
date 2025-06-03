@@ -2,20 +2,25 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!21 &2100000
 Material:
-  serializedVersion: 6
+  serializedVersion: 8
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: M_Candle
-  m_Shader: {fileID: 4800000, guid: 9965e7dabb0b116409c8824a014842dc, type: 3}
-  m_ShaderKeywords: _EDGEBLENDING_VERTEXBLENDING
+  m_Shader: {fileID: 4800000, guid: aeb1f46455590df4e8218a767fe6e02f, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords:
+  - _EDGEBLENDING_VERTEXBLENDING
+  m_InvalidKeywords: []
   m_LightmapFlags: 0
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
+  m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -55,8 +60,22 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - unity_Lightmaps:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_LightmapsInd:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_ShadowMasks:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
     m_Floats:
     - _AOIntensity: 1.542
+    - _AlphaCutoff: 0.5
     - _CoverageMetallicIntensity: 0
     - _CoverageNormalIntensity: 1
     - _CoverageRoughnessIntensity: 1
@@ -64,15 +83,21 @@ Material:
     - _EdgeBlending: 0
     - _EmissiveIntensity: 0
     - _EnableCoverage: 0
+    - _EnvironmentReflections: 1
     - _MetallicIntensity: 1
     - _NoiseTextureSize: 100
     - _NormalIntensity: 1
+    - _QueueControl: 0
+    - _QueueOffset: 0
+    - _ReceiveShadows: 1
     - _RoughnessIntensity: 1.019
     - _SlopeContrast: 1
     - _SlopeOffset: 0
+    - _SpecularHighlights: 1
     - _TextureSize: 100
     - __dirty: 0
     m_Colors:
     - _ColorTint: {r: 1, g: 1, b: 1, a: 0}
+    - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
     - _EmissiveColor: {r: 0, g: 1, b: 0.9645386, a: 0}
   m_BuildTextureStacks: []
