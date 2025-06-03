@@ -1,3 +1,5 @@
+using UnityEngine;
+
 namespace ET.Client
 {
     [Event(SceneType.Demo)]
@@ -17,8 +19,16 @@ namespace ET.Client
                 mapComponent.SonSceneId);
    
             scene.GetComponent<CellDungeonComponentC>().CheckChuansongOpen();
-
+            
+            WaitAsyncEffect(scene).Coroutine();
+   
             await ETTask.CompletedTask;
+        }
+
+        private async ETTask WaitAsyncEffect(Scene scene)
+        {
+            await scene.GetComponent<TimerComponent>().WaitAsync(200);
+            FunctionEffect.PlaySelfEffect(UnitHelper.GetMyUnitFromClientScene(scene) ,200004);
         }
     }
 }

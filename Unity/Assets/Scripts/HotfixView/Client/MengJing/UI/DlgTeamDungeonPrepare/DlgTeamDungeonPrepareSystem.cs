@@ -151,6 +151,11 @@ namespace ET.Client
                 self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_TeamDungeonPrepare);
             }
 
+            if (self.IsDisposed)
+            {
+                return;
+            }
+
             if (self.TeamInfo.PlayerList.Count == 1)
             {
                 TeamNetHelper.TeamDungeonPrepareRequest(self.Root(), self.TeamInfo, 1).Coroutine();
