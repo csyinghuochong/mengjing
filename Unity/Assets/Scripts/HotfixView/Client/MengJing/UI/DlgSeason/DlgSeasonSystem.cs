@@ -15,7 +15,7 @@ namespace ET.Client
         {
             self.View.E_FunctionSetBtnToggleGroup.AddListener(self.OnFunctionSetBtn);
             
-            // IPHoneHelper.SetPosition(self.View.E_FunctionSetBtnToggleGroup.gameObject, new Vector2(170f, 0f));
+            IPHoneHelper.SetPosition(self.View.E_FunctionSetBtnToggleGroup.gameObject, new Vector2(300f, 0f));
         }
 
         public static void ShowWindow(this DlgSeason self, Entity contextData = null)
