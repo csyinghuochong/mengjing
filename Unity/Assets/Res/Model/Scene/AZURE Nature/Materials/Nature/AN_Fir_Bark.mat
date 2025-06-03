@@ -8,7 +8,9 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: AN_Fir_Bark
-  m_Shader: {fileID: 4800000, guid: c61194769c49566439e564fcdf2deff8, type: 3}
+  m_Shader: {fileID: 4800000, guid: 340fa54ead8c50b48b012192aa2f2f7d, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
   - _BLENDNORMALS_ON
   - _COVERAGEOVERLAYTYPE_VERTEX_POSITION
@@ -28,6 +30,7 @@ Material:
   m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
+  m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -161,6 +164,7 @@ Material:
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
+    - _EnvironmentReflections: 1
     - _Float0: 1
     - _GlossMapScale: 0.353
     - _Glossiness: 0.5
@@ -176,6 +180,7 @@ Material:
     - _Parallax: 0.02
     - _QueueControl: 0
     - _QueueOffset: 0
+    - _ReceiveShadows: 1
     - _SNOW: 0
     - _Smoothness: 0.35
     - _SmoothnessTextureChannel: 0
