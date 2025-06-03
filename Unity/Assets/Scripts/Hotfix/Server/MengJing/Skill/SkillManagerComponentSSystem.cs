@@ -778,11 +778,11 @@ namespace ET.Server
               NumericComponentS numericComponent = unit.GetComponent<NumericComponentS>();
               double skillcdTime = skillConfig.SkillCD;
 
-              if (skillConfig.SkillActType == 0 && unit.Type == UnitType.Monster)
-              {
-                  MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(unit.ConfigId);
-                  skillcdTime = monsterConfig.ActInterValTime;
-              }
+              //if (skillConfig.SkillActType == 0 && unit.Type == UnitType.Monster)
+              //{
+              //    MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(unit.ConfigId);
+              //    skillcdTime = monsterConfig.ActInterValTime;
+              //}
               if(skillConfig.SkillActType == 0 && unit.Type == UnitType.Pet)
               {
                   PetConfig petConfig = PetConfigCategory.Instance.Get(unit.ConfigId);
