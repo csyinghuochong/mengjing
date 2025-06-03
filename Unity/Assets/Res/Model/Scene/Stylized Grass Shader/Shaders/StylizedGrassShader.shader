@@ -13,7 +13,7 @@ Shader "Universal Render Pipeline/Nature/Stylized Grass"
 
 		//[Header(Shading)]
 		[MainColor] _BaseColor("Color", Color) = (0.49, 0.89, 0.12, 1.0)
-		_HueVariation("Hue Variation (Alpha = Intensity)", Color) = (1, 0.63, 0, 0.15)
+		_HueVariation("Hue Variation (Alpha = Intensity)", Color) = (1, 0.63, 0, 0.0)
 		_HueVariationHeight("Hue Variation Height", Range(0.0, 1.0)) = 0.0
 		_ColorMapStrength("Colormap Strength", Range(0.0, 1.0)) = 0.0
 		_ColorMapHeight("Colormap Height", Range(0.0, 1.0)) = 1.0
@@ -32,13 +32,13 @@ Shader "Universal Render Pipeline/Nature/Stylized Grass"
 		_NormalSpherifyMask("Normal Spherifying (tip mask)",Range(0.0, 1.0)) = 0.0
 		_NormalFlattenDepthNormals("Normal Spherifying (DepthNormals pass)",Range(0.0, 1.0)) = 0.0
 
-		_BumpScale("Normal Map Strength",Range(0.0, 1.0)) = 1.0
+		_BumpScale("Normal Map Strength",Range(0.0, 1.0)) = 0.0
 		_BumpMap("Normal Map", 2D) = "bump" {}
 		_BendPushStrength("Push Strength (XZ)", Range(0.0, 1.0)) = 1.0
 		[MaterialEnum(Per Vertex,0,Uniform,1)]_BendMode("Bend Mode", Float) = 0.0
 		_BendFlattenStrength("Flatten Strength (Y)", Range(0.0, 1.0)) = 1.0
 		_BendTint("Bending tint", Color) = (1, 1, 1, 1.0)
-		_PerspectiveCorrection("Perspective Correction", Range(0.0, 1.0)) = 1.0
+		_PerspectiveCorrection("Perspective Correction", Range(0.0, 1.0)) = 0.0
 		_BillboardingVerticalRotation("Billboarding, vertical rotation", Range(0.0, 1.0)) = 0.0
 
 		//[Header(Wind)]
@@ -48,7 +48,7 @@ Shader "Universal Render Pipeline/Nature/Stylized Grass"
 		_WindVertexRand("Vertex randomization", Range(0.0, 1.0)) = 0.6
 		_WindObjectRand("Object randomization", Range(0.0, 1.0)) = 0.5
 		_WindRandStrength("Random per-object strength", Range(0.0, 1.0)) = 0.5
-		_WindSwinging("Swinging", Range(0.0, 1.0)) = 0.15
+		_WindSwinging("Swinging", Range(0.0, 1.0)) = 0.1
 		_WindGustStrength("Gusting strength", Range(0.0, 1.0)) = 0.2
 		_WindGustFreq("Gusting frequency", Range(0.0, 10.0)) = 4
 		_WindGustSpeed("Gusting Speed", Float) = 4
@@ -61,7 +61,7 @@ Shader "Universal Render Pipeline/Nature/Stylized Grass"
 		_FadeAngleThreshold("Angle fading threshold", Range(0.0, 90.0)) = 15
 		
 		//Keyword states
-		[MaterialEnum(Unlit,0,Simple,1,Advanced,2)]_LightingMode("Lighting Mode", Float) = 2.0
+		[MaterialEnum(Unlit,0,Simple,1,Advanced,2)]_LightingMode("Lighting Mode", Float) = 0
 		[Toggle] _Scalemap("Scale grass by scalemap", Float) = 0.0
 		[Toggle] _Billboard("Billboard", Float) = 0.0
 		[ToggleOff] _ReceiveShadows("Receive Shadows", Float) = 1.0
@@ -99,6 +99,11 @@ Shader "Universal Render Pipeline/Nature/Stylized Grass"
 		#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/LODCrossFade.hlsl"
 		#endif
 		#define REQUIRES_WORLD_SPACE_POS_INTERPOLATOR
+		#define _SPECULARHIGHLIGHTS_OFF // ���Ӻ궨��
+		#define _ENVIRONMENTREFLECTIONS_OFF // ���Ӻ궨��
+		#define _NORMALMAP 0 // ���Ӻ궨�����
+		#define _SIMPLE_WIND // ���Ӽ򵥷綯�꣨������ƫ�ƣ�
+
 
 		//Hard coded features
 		#define _ALPHATEST_ON
@@ -171,21 +176,19 @@ Shader "Universal Render Pipeline/Nature/Stylized Grass"
 			#pragma shader_feature_local_vertex _SCALEMAP
 			#pragma shader_feature_local_vertex _BILLBOARD
 			#pragma shader_feature_local_fragment _FADING
-			#pragma shader_feature_local _NORMALMAP
+			
 			#pragma shader_feature_local _ _SIMPLE_LIGHTING _ADVANCED_LIGHTING
 			#pragma shader_feature_local_fragment _SPECULARHIGHLIGHTS_OFF
 			#pragma shader_feature_local_fragment _ENVIRONMENTREFLECTIONS_OFF
-			#pragma shader_feature_local _RECEIVE_SHADOWS_OFF
 			
+
 			// -------------------------------------
             // Universal Pipeline keywords
-			#pragma multi_compile _ _MAIN_LIGHT_SHADOWS _MAIN_LIGHT_SHADOWS_CASCADE  
 			//#pragma multi_compile _ _MAIN_LIGHT_SHADOWS_CASCADE
 			#pragma multi_compile _ _MAIN_LIGHT_SHADOWS_SCREEN
             #pragma multi_compile _ _ADDITIONAL_LIGHTS_VERTEX _ADDITIONAL_LIGHTS	
-            #pragma multi_compile_fragment _ _ADDITIONAL_LIGHT_SHADOWS
-            #pragma multi_compile_fragment _ _SHADOWS_SOFT
-
+          
+		
 			#if !_SIMPLE_LIGHTING && !_ADVANCED_LIGHTING
 			#define _UNLIT
 			#undef _NORMALMAP
@@ -244,183 +247,10 @@ Shader "Universal Render Pipeline/Nature/Stylized Grass"
 			ENDHLSL
 		}
 
-		Pass
-		{
-			Name "ShadowCaster"
-			Tags{"LightMode" = "ShadowCaster"}
-
-			ZWrite On
-			ZTest LEqual
-			Cull[_Cull]
-
-			HLSLPROGRAM
-
-			#pragma multi_compile _ LOD_FADE_CROSSFADE
-			#pragma shader_feature_local_vertex _SCALEMAP
-			#pragma shader_feature_local_vertex _BILLBOARD
-			#pragma shader_feature_local_fragment _FADING
-
-			#define SHADERPASS_SHADOWCASTER
-			
-			#pragma vertex ShadowPassVertex
-			#pragma fragment ShadowPassFragment
-
-			#include "Libraries/Input.hlsl"
-			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Shadows.hlsl"
-			
-			#include "Libraries/Common.hlsl"
-
-			#include "ShadowPass.hlsl"
-			ENDHLSL
-		}
-		
-		//Deferred rendering
-		Pass
-        {
-            Name "GBuffer"
-            Tags{"LightMode" = "UniversalGBuffer"}
-
-            //AlphaToMask [_AlphaToCoverage] //Not supported in deferred
-			Blend One Zero, One Zero
-			Cull [_Cull]
-			ZWrite On
-
-			HLSLPROGRAM
-
-			//In place for projects that use a custom RP or modified URP and require specific behaviour for vegetation
-			#define VEGETATION_SHADER
-
-			// -------------------------------------
-			// Material Keywords
-			#pragma multi_compile _ LOD_FADE_CROSSFADE
-			#pragma shader_feature_local_vertex _SCALEMAP
-			#pragma shader_feature_local_vertex _BILLBOARD
-			#pragma shader_feature_local_fragment _FADING
-			#pragma shader_feature_local _NORMALMAP
-			#pragma shader_feature_local_fragment _SPECULARHIGHLIGHTS_OFF
-			#pragma shader_feature_local_fragment _ENVIRONMENTREFLECTIONS_OFF
-			#pragma shader_feature_local _RECEIVE_SHADOWS_OFF
-		
-			//Disable features
-			#undef _ALPHAPREMULTIPLY_ON
-			#undef _EMISSION
-			#undef _SMOOTHNESS_TEXTURE_ALBEDO_CHANNEL_A
-			#undef _OCCLUSIONMAP
-			#undef _METALLICSPECGLOSSMAP
-
-			// -------------------------------------
-			// Universal Pipeline keywords
-			#pragma multi_compile _ _MAIN_LIGHT_SHADOWS _MAIN_LIGHT_SHADOWS_CASCADE _MAIN_LIGHT_SHADOWS_SCREEN
-            //#pragma multi_compile _ _ADDITIONAL_LIGHTS_VERTEX _ADDITIONAL_LIGHTS
-            //#pragma multi_compile_fragment _ _ADDITIONAL_LIGHT_SHADOWS
-            #pragma multi_compile_fragment _ _SHADOWS_SOFT
-
-			//URP 10+
-            #pragma multi_compile _ SHADOWS_SHADOWMASK
-            #pragma multi_compile _ LIGHTMAP_SHADOW_MIXING
-            #pragma multi_compile_fragment _ _SCREEN_SPACE_OCCLUSION
-
-			// -------------------------------------
-			// Unity defined keywords
-			//#pragma multi_compile _ DIRLIGHTMAP_COMBINED
-			#pragma multi_compile _ LIGHTMAP_ON
-			#pragma multi_compile_fog
-			//Accurate G-buffer normals option in renderer settings
-			#pragma multi_compile_fragment _ _GBUFFER_NORMALS_OCT
-
-			//URP12+
-			#pragma multi_compile _ DYNAMICLIGHTMAP_ON //Realtime GI
-			#pragma multi_compile_fragment _ _DBUFFER_MRT1 _DBUFFER_MRT2 _DBUFFER_MRT3 //Decal support
-            #pragma multi_compile_fragment _ _LIGHT_LAYERS
-            #pragma multi_compile_fragment _ _RENDER_PASS_ENABLED //Stencil support
-
-			//Constants
-			#define SHADERPASS_DEFERRED
-
-			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Lighting.hlsl"
-			#include "Packages/com.unity.render-pipelines.core/ShaderLibrary/Color.hlsl"
-
-			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/SurfaceInput.hlsl"
-
-			#include "Libraries/Input.hlsl"
-			#include "Libraries/Common.hlsl"
-			
-			#include "Libraries/Color.hlsl"
-			#include "Libraries/Lighting.hlsl"
-
-			#pragma vertex LitPassVertex
-			#pragma fragment LightingPassFragment
-			
-			#include "LightingPass.hlsl"
-
-			ENDHLSL
-        }
-
-		Pass
-		{
-			Name "DepthOnly"
-			Tags{"LightMode" = "DepthOnly"}
-
-			ZWrite On
-			ColorMask 0
-			Cull[_Cull]
-
-			HLSLPROGRAM
-
-			#define SHADERPASS_DEPTHONLY
-
-			// -------------------------------------
-			// Material Keywords
-			#pragma multi_compile _ LOD_FADE_CROSSFADE
-			#pragma shader_feature_local_vertex _SCALEMAP
-			#pragma shader_feature_local_vertex _BILLBOARD
-			#pragma shader_feature_local_fragment _FADING
-
-			#include "Libraries/Input.hlsl"
-			#include "Libraries/Common.hlsl"
-
-			#pragma vertex DepthOnlyVertex
-			#pragma fragment DepthOnlyFragment
-			
-			#include "DepthPass.hlsl"
-			ENDHLSL
-		}
-
-		// This pass is used when drawing to a _CameraNormalsTexture texture
-		Pass
-		{
-			Name "DepthNormals"
-			Tags{"LightMode" = "DepthNormals"}
-
-			ZWrite On
-			Cull[_Cull]
-
-			HLSLPROGRAM
-
-			#define SHADERPASS_DEPTH_ONLY
-			#define SHADERPASS_DEPTHNORMALS
-			
-			#pragma vertex DepthOnlyVertex	
-			//Only URP 10.0.0+ does this amounts to the actual fragment shader, otherwise a dummy is used
-			#pragma fragment DepthNormalsFragment
-
-			// -------------------------------------
-			// Material Keywords
-			#pragma multi_compile _ LOD_FADE_CROSSFADE
-			#pragma shader_feature_local_vertex _SCALEMAP
-			#pragma shader_feature_local_vertex _BILLBOARD
-			#pragma shader_feature_local_fragment _FADING
-
-			#include "Libraries/Input.hlsl"            			
-			#include "Libraries/Common.hlsl"
-
-			#include "DepthPass.hlsl"
-			ENDHLSL
-		}
 
 	}
 
 	FallBack "Hidden/Universal Render Pipeline/FallbackError"
-	CustomEditor "StylizedGrass.MaterialUI"
+	//CustomEditor "StylizedGrass.MaterialUI"
 
 }

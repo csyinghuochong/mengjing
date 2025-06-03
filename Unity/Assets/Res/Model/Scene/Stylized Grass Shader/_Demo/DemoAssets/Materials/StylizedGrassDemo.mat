@@ -14,9 +14,13 @@ Material:
   m_ValidKeywords:
   - _ADVANCED_LIGHTING
   - _FADING
-  - _NORMALMAP
   - _SCALEMAP
-  m_InvalidKeywords: []
+  m_InvalidKeywords:
+  - _ALPHATOCOVERAGE_ON
+  - _ENVIRONMENTREFLECTIONS_ON
+  - _FADINGON_ON
+  - _NORMALMAP
+  - _SCALEMAP_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
@@ -193,7 +197,7 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - _BaseColor: {r: 0.57894707, g: 0.8301887, b: 0, a: 1}
+    - _BaseColor: {r: 0.61302954, g: 0.7924528, b: 0.1981132, a: 1}
     - _BendTint: {r: 0.8, g: 0.8, b: 0.8, a: 1}
     - _Color: {r: 0.15683849, g: 0.6415094, b: 0.069597736, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 0}
