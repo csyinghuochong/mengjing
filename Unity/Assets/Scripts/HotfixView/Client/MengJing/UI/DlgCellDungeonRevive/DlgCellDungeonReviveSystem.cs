@@ -22,8 +22,7 @@ namespace ET.Client
                     || sceneType == MapTypeEnum.Battle
                     || sceneType == MapTypeEnum.BaoZang
                     || sceneType == MapTypeEnum.MiJing
-                    || sceneType == MapTypeEnum.UnionRace
-                    || sceneType == MapTypeEnum.DragonDungeon;
+                    || sceneType == MapTypeEnum.UnionRace;
         }
 
         public static void Check(this DlgCellDungeonRevive self, int leftTime)
@@ -100,6 +99,10 @@ namespace ET.Client
             if (self.SceneType != MapTypeEnum.LocalDungeon)
             {
                 self.View.E_Text_ExitDesText.text = "返回出生点";
+            }
+            if (self.SceneType == MapTypeEnum.CellDungeon || self.SceneType == MapTypeEnum.DragonDungeon)
+            {
+                self.View.E_Text_ExitDesText.text = "返回主城";
             }
             
             self.RequestDamageValueList().Coroutine();  
@@ -193,7 +196,7 @@ namespace ET.Client
                 {
                     using (zstring.Block())
                     {
-                        if (self.SceneType == MapTypeEnum.LocalDungeon)
+                        if (self.SceneType == MapTypeEnum.LocalDungeon || self.SceneType == MapTypeEnum.CellDungeon|| self.SceneType == MapTypeEnum.DragonDungeon)
                         {
                             FlyTipComponent.Instance.ShowFlyTip(zstring.Format("{0}秒后可返回主城！", self.LeftTime));
                         }
