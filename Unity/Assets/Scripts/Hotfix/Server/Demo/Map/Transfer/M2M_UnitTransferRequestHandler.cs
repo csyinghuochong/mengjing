@@ -139,6 +139,7 @@ namespace ET.Server
                     // 通知客户端创建My Unit
                     m2CCreateUnits.Unit = MapMessageHelper.CreateUnitInfo(unit);
                     MapMessageHelper.SendToClient(unit, m2CCreateUnits);
+                    aoivalue = 10;
                     // 加入aoi
                     unit.AddComponent<AOIEntity, int, float3>(aoivalue * 1000, unit.Position);
 

@@ -89,17 +89,17 @@ namespace ET.Client
             {
                 self.StartPoint = parent.Position;
                 self.EndPoint = self.MyUnit.Position;
+                
+                self.Timer = self.Root().GetComponent<TimerComponent>().NewFrameTimer(TimerInvokeType.DropUITimer, self);
+                self.GeneratePositions();
+                self.LateUpdate();
             }
             else
             {
                 self.StartPoint = self.MyUnit.Position;
                 self.EndPoint = self.MyUnit.Position;
             }
-
-            self.Timer = self.Root().GetComponent<TimerComponent>().NewFrameTimer(TimerInvokeType.DropUITimer, self);
-            self.GeneratePositions();
-
-            self.LateUpdate();
+            
             self.AutoPickItem().Coroutine();
         }
 

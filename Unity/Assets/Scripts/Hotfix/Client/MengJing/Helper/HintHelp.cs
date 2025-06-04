@@ -22,7 +22,8 @@
             }
             if (code == ErrorCode.ERR_CanNotMove_NetWait 
                 || code == ErrorCode.ERR_CanNotMove_Rigidity
-                || code == ErrorCode.ERR_CanNotMove_Speed)
+                || code == ErrorCode.ERR_CanNotMove_Speed
+                || code == ErrorCode.ERR_CanNotUseSkill_NetWait)
             {
                 return ;
             }

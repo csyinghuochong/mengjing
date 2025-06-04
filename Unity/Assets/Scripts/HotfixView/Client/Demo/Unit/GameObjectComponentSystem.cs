@@ -786,7 +786,6 @@ namespace ET.Client
                     go.transform.localPosition = unit.Position;
                     go.transform.rotation = unit.Rotation;
                     go.name = unit.Id.ToString();
-                    DropComponentC dropComponent = unit.GetComponent<DropComponentC>();
                     unit.AddComponent<EffectViewComponent>();
                     unit.AddComponent<UIDropComponent>().InitData();
                     break;
