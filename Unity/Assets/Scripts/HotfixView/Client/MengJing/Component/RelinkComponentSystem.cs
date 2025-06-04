@@ -96,7 +96,7 @@ namespace ET.Client
 
         private static async ETTask CheckSession(this RelinkComponent self)
         {
-            await self.Root().GetComponent<TimerComponent>().WaitFrameAsync();
+            await self.Root().GetComponent<TimerComponent>().WaitAsync(200);
 
             if (self.Relink)
             {
@@ -115,6 +115,12 @@ namespace ET.Client
             
             Log.Warning($"NetClient2Main_CheckSession: {response.Error}");
             FlyTipComponent.Instance.ShowFlyTipDi($"NetClient2Main_CheckSession: {response.Error}");
+
+            
+            if (response.Error == ErrorCode.ERR_Success)  //== ErrorCode.ERR_SessionDisconnect
+            {
+                return;
+            }
 
             if (mapComponent.MapType <= MapTypeEnum.CreateRole)
             {

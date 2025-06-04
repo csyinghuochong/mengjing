@@ -18,12 +18,41 @@ namespace ET.Client
             if (request.MapType < MapTypeEnum.MainCityScene)
             {
                 RealmPingComponent realmPingComponent = session.GetComponent<RealmPingComponent>();
+                if (realmPingComponent == null)
+                {
+                    response.Error = ErrorCode.ERR_SessionDisconnect;
+                    return;
+                }
+
                 Log.Warning($"realmPingComponent :{realmPingComponent!=null}");
+                C2R_Ping c2GPing = C2R_Ping.Create(true);
+                using R2C_Ping response_1 = await session.Call(c2GPing) as R2C_Ping;
+                if (response_1 == null)
+                {
+                    response.Error = ErrorCode.ERR_SessionDisconnect;
+                    return;
+                }
+
+                response.Error = response_1.Error;
             }
             else
             {
                 PingComponent pingComponent = session.GetComponent<PingComponent>();
+                if (pingComponent == null)
+                {
+                    response.Error = ErrorCode.ERR_SessionDisconnect;
+                    return;
+                }
+                
                 Log.Warning($"pingComponent :{pingComponent!=null}");
+                C2G_Ping c2GPing = C2G_Ping.Create(true);
+                using G2C_Ping response_1 = await session.Call(c2GPing) as G2C_Ping;
+                if (response_1 == null)
+                {
+                    response.Error = ErrorCode.ERR_SessionDisconnect;
+                    return;
+                }
+                response.Error = response_1.Error;
             }
         }
     }

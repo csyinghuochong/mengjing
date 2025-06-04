@@ -2556,7 +2556,7 @@ namespace ET.Client
 
         public static void OnApplicationFocusExit(this DlgMain self)
         {
-            self.View.ES_JoystickMove.ResetUI(true);
+            //self.View.ES_JoystickMove.ResetUI(true);
             //self.OnMoveStart();
         }
         
