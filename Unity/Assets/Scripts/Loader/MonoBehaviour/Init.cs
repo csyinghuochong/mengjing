@@ -14,6 +14,9 @@ namespace ET
 		public int VersionMode = ET.VersionMode.Alpha;
 		private EPlayMode ePlayMode;
 		
+		public Action<bool> OnApplicationFocusHandler;
+		public Action OnApplicationQuitHandler;
+		
 		private void Start()
 		{
 			this.StartAsync().Coroutine();
@@ -36,7 +39,7 @@ namespace ET
 			Options.Instance.StartConfig = $"StartConfig/Localhost";
 
 			Options.Instance.Develop =  VersionMode == ET.VersionMode.Beta ?0 : 1;
-			Options.Instance.LogLevel = VersionMode == ET.VersionMode.Beta ?6 : 1;// 打印Debug Message消耗较大，可根据需要改为 3
+			Options.Instance.LogLevel = VersionMode == ET.VersionMode.Beta ?3 : 1;// 打印Debug Message消耗较大，可根据需要改为 3
 			
 			World.Instance.AddSingleton<Logger>().Log = new UnityLogger();
 			ETTask.ExceptionHandler += Log.Error;
@@ -104,6 +107,21 @@ namespace ET
 		private void OnApplicationQuit()
 		{
 			World.Instance.Dispose();
+		}
+		
+		/// 当程序获得或者是去焦点时
+		/// </summary>
+		/// <param name="focus"></param>
+		private void OnApplicationFocus(bool hasFocus)
+		{
+			try
+			{
+				OnApplicationFocusHandler?.Invoke(hasFocus);
+			}
+			catch (System.Exception)
+			{
+				throw;
+			}
 		}
 	}
 	
