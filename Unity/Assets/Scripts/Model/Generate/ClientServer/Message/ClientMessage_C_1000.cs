@@ -528,6 +528,69 @@ namespace ET
         }
     }
 
+    [MemoryPackable]
+    [Message(ClientMessage.Main2NetClient_CheckSession)]
+    [ResponseType(nameof(NetClient2Main_CheckSession))]
+    public partial class Main2NetClient_CheckSession : MessageObject, IRequest
+    {
+        public static Main2NetClient_CheckSession Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(Main2NetClient_CheckSession), isFromPool) as Main2NetClient_CheckSession;
+        }
+
+        [MemoryPackOrder(0)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(1)]
+        public int MapType { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.MapType = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
+    [Message(ClientMessage.NetClient2Main_CheckSession)]
+    public partial class NetClient2Main_CheckSession : MessageObject, IResponse
+    {
+        public static NetClient2Main_CheckSession Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(NetClient2Main_CheckSession), isFromPool) as NetClient2Main_CheckSession;
+        }
+
+        [MemoryPackOrder(0)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(1)]
+        public int Error { get; set; }
+
+        [MemoryPackOrder(2)]
+        public string Message { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.Error = default;
+            this.Message = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
     public static class ClientMessage
     {
         public const ushort Main2NetClient_ServerList = 1001;
@@ -542,5 +605,7 @@ namespace ET
         public const ushort RobotClient2Main_Message = 1010;
         public const ushort Main2RobotManager_Message = 1011;
         public const ushort RobotManager2Main_Message = 1012;
+        public const ushort Main2NetClient_CheckSession = 1013;
+        public const ushort NetClient2Main_CheckSession = 1014;
     }
 }

@@ -103,9 +103,27 @@ namespace ET.Client
                 return;
             }
 
-           
+            MapComponent mapComponent = self.Root().GetComponent<MapComponent>();
+            if (mapComponent.MapType < MapTypeEnum.CreateRole)
+            {
+                Log.Warning($" mapComponent.MapType < MapTypeEnum.CreateRole: {mapComponent.MapType} 不检测");
+                return;
+            }
+
+            ClientSenderCompnent clientSenderComponent = self.Root().GetComponent<ClientSenderCompnent>();
+            NetClient2Main_CheckSession response =   await clientSenderComponent.RequestCheckSession(mapComponent.MapType);
             
-            self.CheckRelink().Coroutine();
+            Log.Warning($"NetClient2Main_CheckSession: {response.Error}");
+            FlyTipComponent.Instance.ShowFlyTipDi($"NetClient2Main_CheckSession: {response.Error}");
+
+            if (mapComponent.MapType <= MapTypeEnum.CreateRole)
+            {
+                EventSystem.Instance.Publish(self.Root(), new ReturnLogin());
+            }
+            else
+            {
+                self.CheckRelink().Coroutine();
+            }
         }
 
         private static void OnApplicationFocusHandler(this RelinkComponent self, bool value)
@@ -113,7 +131,7 @@ namespace ET.Client
             if (value)
             {
                 FlyTipComponent.Instance.ShowFlyTipDi($"OnApplicationFocusHandler: true");
-                //self.CheckSession().Coroutine();
+                self.CheckSession().Coroutine();
             }
             else
             {

@@ -123,3 +123,17 @@ message RobotManager2Main_Message // IResponse
 	int32 Error = 2;
 	string Message = 3;
 }
+
+//ResponseType NetClient2Main_CheckSession
+message Main2NetClient_CheckSession // IRequest
+{
+	int32 RpcId = 1;
+	int32 MapType = 2;
+}
+
+message NetClient2Main_CheckSession // IResponse
+{
+	int32 RpcId = 1;
+	int32 Error = 2;
+	string Message = 3;
+}

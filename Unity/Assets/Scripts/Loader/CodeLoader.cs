@@ -96,7 +96,7 @@ namespace ET
                 typeof (World).Assembly, typeof (Init).Assembly, this.modelAssembly, this.modelViewAssembly, hotfixAssembly,
                 hotfixViewAssembly
             });
-
+            Log.Warning($"this.modelAssembly:  {this.modelAssembly.FullName}");
             IStaticMethod start = new StaticMethod(this.modelAssembly, "ET.Entry", "Start");
             start.Run();
         }

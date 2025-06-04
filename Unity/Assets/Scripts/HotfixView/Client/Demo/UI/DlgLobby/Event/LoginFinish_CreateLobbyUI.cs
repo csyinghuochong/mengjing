@@ -105,6 +105,7 @@ namespace ET.Client
         public static async ETTask OnLoginSucess(Scene scene, LoginFinish args)
         {
             // FlyTipComponent.Instance.ShowFlyTip("登录成功!");
+            scene.GetComponent<MapComponent>().MapType = MapTypeEnum.CreateRole;
             var path = ABPathHelper.GetScenePath("CreateRole");
             await scene.GetComponent<ResourcesLoaderComponent>().LoadSceneAsync(path, LoadSceneMode.Single);
             // await scene.GetComponent<TimerComponent>().WaitAsync(500);
@@ -114,24 +115,8 @@ namespace ET.Client
 
             FlyTipComponent.Instance.ShowFlyTip("账号已完成实名认证!");
             // await scene.GetComponent<TimerComponent>().WaitAsync(500);
-
-
+            
             await scene.GetComponent<TimerComponent>().WaitAsync(2000);
-            //GameObject targetObject = GameObject.Find("Stone_3 (2)/Stone_3_LOD0");
-            //Renderer objectRenderer = targetObject.GetComponent<Renderer>();
-            //if (objectRenderer != null)
-            //{
-            //    // 获取材质的Shader
-            //    Shader objectShader = objectRenderer.material.shader;
-
-            //    // 输出Shader名称
-            //    Debug.Log("Stone_3_LOD0对象使用的Shader是: " + objectShader.name + "   materials: " + objectRenderer.materials.Length);
-               
-            //}
-            //else
-            //{
-            //    Debug.LogError("目标对象没有Renderer组件!");
-            //}
 
             PlayerInfoComponent playerInfoComponent = scene.GetComponent<PlayerInfoComponent>();
             await scene.GetComponent<UIComponent>()

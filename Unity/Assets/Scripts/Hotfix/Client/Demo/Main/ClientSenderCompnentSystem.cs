@@ -35,7 +35,7 @@ namespace ET.Client
             self.fiberId = 0;
             await FiberManager.Instance.Remove(fiberId);
         }
-
+        
         public static async ETTask<R2C_ServerList> GetServerList(this ClientSenderCompnent self, int versionMode)
         {
             self.fiberId = await FiberManager.Instance.Create(SchedulerType.ThreadPool, 0, SceneType.NetClient, "");
@@ -51,7 +51,7 @@ namespace ET.Client
             r2CServerList.NoticeText = respone.NoticeText;
             return r2CServerList;
         }
-
+        
         public static async ETTask<NetClient2Main_RealName> RealNameAsync(this ClientSenderCompnent self, long accountId,string name,  string idcard, int versionmode)
         {
             self.fiberId = await FiberManager.Instance.Create(SchedulerType.ThreadPool, 0, SceneType.NetClient, "");
@@ -99,7 +99,13 @@ namespace ET.Client
             return response.Error;
         }
 
-        
+        public static async ETTask<NetClient2Main_CheckSession> RequestCheckSession(this ClientSenderCompnent self, int maptype)
+        {
+            Main2NetClient_CheckSession main2NetClientCheck = Main2NetClient_CheckSession.Create();
+            main2NetClientCheck.MapType = maptype;
+            NetClient2Main_CheckSession respone = await self.Root().GetComponent<ProcessInnerSender>().Call(self.netClientActorId, main2NetClientCheck) as NetClient2Main_CheckSession;
+            return respone;
+        }
         
         public static async ETTask<NetClient2Main_LoginGame> LoginGameAsync(this ClientSenderCompnent self, string account, long accountId, long key,long roleId,string address,int reLink)
         {
