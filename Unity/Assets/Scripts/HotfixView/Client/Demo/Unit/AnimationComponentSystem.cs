@@ -99,7 +99,7 @@ namespace ET.Client
                 {
                     using (zstring.Block())
                     {
-                        Log.Warning(zstring.Format("动画 {0} 未加载", name));
+                        Log.Debug(zstring.Format("动画 {0} 未加载", name));
                     }
 
                     continue;
@@ -109,7 +109,7 @@ namespace ET.Client
                 {
                     using (zstring.Block())
                     {
-                        Log.Warning(zstring.Format("动画片段 {0} 未加载", name));
+                        Log.Debug(zstring.Format("动画片段 {0} 未加载", name));
                     }
 
                     continue;

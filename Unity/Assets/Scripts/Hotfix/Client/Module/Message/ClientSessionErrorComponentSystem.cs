@@ -13,7 +13,7 @@
         private static void Destroy(this ClientSessionErrorComponent self)
         {
             Fiber fiber = self.Fiber();
-            Log.Debug($"ClientSessionErrorComponent.Destroy: {fiber.IsDisposed}");
+            Log.Warning($"ClientSessionErrorComponent.Destroy: {fiber.IsDisposed}");
             
             if (fiber.IsDisposed)
             {

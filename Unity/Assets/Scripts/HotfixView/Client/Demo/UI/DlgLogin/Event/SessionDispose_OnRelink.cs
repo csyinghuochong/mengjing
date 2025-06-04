@@ -12,7 +12,7 @@ namespace ET.Client
             MapComponent mapComponent = root.GetComponent<MapComponent>();
             int disconnectType = root.GetComponent<PlayerInfoComponent>().DisconnectType;
             root.GetComponent<PlayerInfoComponent>().DisconnectType = 0;
-            Log.Info($"SessionDispose_OnHandler: {mapComponent.MapType}  {disconnectType}");
+            Log.Warning($"SessionDispose_OnHandler: {mapComponent.MapType}  {disconnectType}");
             if (mapComponent.MapType < MapTypeEnum.MainCityScene)
             {
                 //直接返回登陆
@@ -47,7 +47,7 @@ namespace ET.Client
         {
             // 断线重连的流程
             // 需要显示菊花。。
-            Log.Debug($"OnSessionDisconnect...Relink");
+            Log.Warning($"OnSessionDisconnect...Relink");
             root.GetComponent<RelinkComponent>().CheckRelink().Coroutine();
         }
 

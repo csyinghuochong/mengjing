@@ -117,9 +117,6 @@ namespace ET.Client
                 {
                     return;
                 }
-
-                Log.Warning($"寻路方案1 路径点{points}");
-                
                 float speed = unit.GetComponent<NumericComponentC>().GetAsFloat(NumericType.Now_Speed);
                 unit.GetComponent<MoveComponent>().MoveToAsync(points, speed, 100, (int)speed).Coroutine();
             }
@@ -144,8 +141,6 @@ namespace ET.Client
                 {
                     return;
                 }
-
-                Log.Warning($"寻路方案2 路径点{points}");
 
                 float speed = unit.GetComponent<NumericComponentC>().GetAsFloat(NumericType.Now_Speed);
                 unit.GetComponent<MoveComponent>().MoveToAsync(points, speed, 100, (int)speed).Coroutine();

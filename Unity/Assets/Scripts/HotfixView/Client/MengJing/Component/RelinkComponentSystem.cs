@@ -1,4 +1,6 @@
-﻿namespace ET.Client
+﻿using UnityEngine;
+
+namespace ET.Client
 {
     [FriendOf(typeof(RelinkComponent))]
     [EntitySystemOf(typeof(RelinkComponent))]
@@ -8,8 +10,9 @@
         private static void Awake(this RelinkComponent self)
         {
             self.Relink = false;
-            // GameObject.Find("Global").GetComponent<Init>().OnApplicationFocusHandler = (bool value) => { self.OnApplicationFocusHandler(value); };
-            // GameObject.Find("Global").GetComponent<Init>().OnApplicationQuitHandler = () => { self.OnApplicationQuitHandler().Coroutine(); };
+            
+            GameObject.Find("Global").GetComponent<Init>().OnApplicationFocusHandler = (bool value) => { self.OnApplicationFocusHandler(value); };
+            GameObject.Find("Global").GetComponent<Init>().OnApplicationQuitHandler = () => { self.OnApplicationQuitHandler().Coroutine(); };
         }
 
         [EntitySystem]
