@@ -14,9 +14,12 @@ namespace ET
 		public int VersionMode = ET.VersionMode.Alpha;
 		private EPlayMode ePlayMode;
 		
+		private int BigVersion = 0;
+		private int BigVersionIOS = 0;
+		
 		public Action<bool> OnApplicationFocusHandler;
 		public Action OnApplicationQuitHandler;
-		
+
 		private void Start()
 		{
 			this.StartAsync().Coroutine();
