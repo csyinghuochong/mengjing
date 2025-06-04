@@ -8,6 +8,11 @@
             M2C_UserInfoInitResponse response =
                     (M2C_UserInfoInitResponse)await root.GetComponent<ClientSenderCompnent>().Call(C2M_UserInfoInitRequest.Create());
 
+            if (response.Error != ErrorCode.ERR_Success)
+            {
+                return response.Error;
+            }
+
             UserInfo userInfo = root.GetComponent<UserInfoComponentC>().AddChild<UserInfo>();
             userInfo.FromMessage(response.UserInfoProto);
             root.GetComponent<UserInfoComponentC>().UserInfo = userInfo;
@@ -16,7 +21,7 @@
             root.GetComponent<ShoujiComponentC>().ShouJiChapterInfos = response.ShouJiChapterInfos;
             root.GetComponent<TitleComponentC>().TitleList = response.TitleList;
             userInfo.Dispose();
-            return ErrorCode.ERR_Success;
+            return response.Error;
         }
 
         public static async ETTask RequestFreshUnit(Scene root)

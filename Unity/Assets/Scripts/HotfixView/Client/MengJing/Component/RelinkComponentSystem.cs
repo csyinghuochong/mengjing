@@ -96,9 +96,20 @@ namespace ET.Client
 
         private static async ETTask CheckSession(this RelinkComponent self)
         {
-            await self.Root().GetComponent<TimerComponent>().WaitAsync(200);
+            await self.Root().GetComponent<TimerComponent>().WaitFrameAsync();
 
+            if (self.Relink)
+            {
+                return;
+            }
+
+            int errorcode =  await UserInfoNetHelper.RequestUserInfoInit(self.Root());
+            if (errorcode == ErrorCode.ERR_Success)
+            {
+                return;
+            }
             
+            self.CheckRelink().Coroutine();
         }
 
         private static void OnApplicationFocusHandler(this RelinkComponent self, bool value)
@@ -107,6 +118,14 @@ namespace ET.Client
             {
                 FlyTipComponent.Instance.ShowFlyTipDi($"OnApplicationFocusHandler: true");
                 self.CheckSession().Coroutine();
+            }
+            else
+            {
+                DlgMain dlgMain = self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgMain>();
+                if (dlgMain != null)
+                {
+                    //dlgMain.OnStopAction();
+                }
             }
             // if (value)
             // {
