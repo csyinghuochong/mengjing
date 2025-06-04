@@ -103,11 +103,7 @@ namespace ET.Client
                 return;
             }
 
-            int errorcode =  await UserInfoNetHelper.RequestUserInfoInit(self.Root());
-            if (errorcode == ErrorCode.ERR_Success)
-            {
-                return;
-            }
+           
             
             self.CheckRelink().Coroutine();
         }
@@ -117,7 +113,7 @@ namespace ET.Client
             if (value)
             {
                 FlyTipComponent.Instance.ShowFlyTipDi($"OnApplicationFocusHandler: true");
-                self.CheckSession().Coroutine();
+                //self.CheckSession().Coroutine();
             }
             else
             {
