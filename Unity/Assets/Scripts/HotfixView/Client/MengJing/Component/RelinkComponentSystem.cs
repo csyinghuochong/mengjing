@@ -114,9 +114,8 @@ namespace ET.Client
             NetClient2Main_CheckSession response =   await clientSenderComponent.RequestCheckSession(mapComponent.MapType);
             
             Log.Warning($"NetClient2Main_CheckSession: {response.Error}");
-            FlyTipComponent.Instance.ShowFlyTipDi($"NetClient2Main_CheckSession: {response.Error}");
+            FlyTipComponent.Instance.ShowFlyTipDi($"检测Seesion: {response.Error}");
 
-            
             if (response.Error == ErrorCode.ERR_Success)  //== ErrorCode.ERR_SessionDisconnect
             {
                 return;
@@ -136,7 +135,7 @@ namespace ET.Client
         {
             if (value)
             {
-                FlyTipComponent.Instance.ShowFlyTipDi($"OnApplicationFocusHandler: true");
+                FlyTipComponent.Instance.ShowFlyTipDi($"获得焦点！！");
                 self.CheckSession().Coroutine();
             }
             else

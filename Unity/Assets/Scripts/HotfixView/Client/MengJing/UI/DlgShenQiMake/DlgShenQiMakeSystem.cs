@@ -32,7 +32,7 @@ namespace ET.Client
         {
             self.View.E_Btn_MakeButton.AddListenerAsync(self.OnBtn_MakeButton);
             
-            IPHoneHelper.SetPosition(self.View.E_FunctionSetBtnToggleGroup.gameObject, new Vector2(300f, 0f));
+            IPHoneHelper.SetPosition(self.View.E_FunctionSetBtnToggleGroup.gameObject, new Vector2(200f, 0f));
             
             self.OnInitUI();
             int showValue = NpcConfigCategory.Instance.Get(self.Root().GetComponent<UIComponent>().CurrentNpcId).ShopValue;

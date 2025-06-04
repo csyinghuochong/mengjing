@@ -89,7 +89,7 @@ namespace ET.Client
             ReddotComponentC reddotComponent = self.Root().GetComponent<ReddotComponentC>();
             reddotComponent.UpdateReddont(ReddotType.RolePoint);
 
-            IPHoneHelper.SetPosition(self.View.E_FunctionSetBtnToggleGroup.gameObject, new Vector2(300f, 0f));
+            IPHoneHelper.SetPosition(self.View.E_FunctionSetBtnToggleGroup.gameObject, new Vector2(200f, 0f));
         }
 
         public static void ShowWindow(this DlgRole self, Entity contextData = null)
