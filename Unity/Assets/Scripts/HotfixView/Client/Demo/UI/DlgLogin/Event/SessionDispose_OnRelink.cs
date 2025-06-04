@@ -12,7 +12,10 @@ namespace ET.Client
             MapComponent mapComponent = root.GetComponent<MapComponent>();
             int disconnectType = root.GetComponent<PlayerInfoComponent>().DisconnectType;
             root.GetComponent<PlayerInfoComponent>().DisconnectType = 0;
+            
             Log.Warning($"SessionDispose_OnHandler: {mapComponent.MapType}  {disconnectType}");
+            FlyTipComponent.Instance.ShowFlyTipDi($"SessionDispose_OnHandler: {mapComponent.MapType}  {disconnectType}");
+            
             if (mapComponent.MapType < MapTypeEnum.MainCityScene)
             {
                 //直接返回登陆
