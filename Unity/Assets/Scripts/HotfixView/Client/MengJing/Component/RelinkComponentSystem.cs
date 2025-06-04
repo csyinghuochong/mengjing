@@ -124,7 +124,7 @@ namespace ET.Client
                 DlgMain dlgMain = self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgMain>();
                 if (dlgMain != null)
                 {
-                    //dlgMain.OnStopAction();
+                    dlgMain.OnApplicationFocusExit();
                 }
             }
             // if (value)

@@ -2554,6 +2554,12 @@ namespace ET.Client
             self.View.ES_JoystickMove.lastSendTime = 0;
         }
 
+        public static void OnApplicationFocusExit(this DlgMain self)
+        {
+            self.View.ES_JoystickMove.ResetUI(true);
+            //self.OnMoveStart();
+        }
+        
         public static void OnSelfDead(this DlgMain self)
         {
             self.StopAction();
