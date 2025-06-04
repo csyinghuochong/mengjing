@@ -69,7 +69,7 @@ namespace ET.Client
             }
         }
 
-        public static async ETTask OnApplicationQuitHandler(this RelinkComponent self)
+        private static async ETTask OnApplicationQuitHandler(this RelinkComponent self)
         {
             // SessionComponent sessionComponent = self.DomainScene().GetComponent<SessionComponent>();
             // if (sessionComponent == null)
@@ -94,8 +94,20 @@ namespace ET.Client
             await ETTask.CompletedTask;
         }
 
-        public static void OnApplicationFocusHandler(this RelinkComponent self, bool value)
+        private static async ETTask CheckSession(this RelinkComponent self)
         {
+            await self.Root().GetComponent<TimerComponent>().WaitAsync(200);
+
+            
+        }
+
+        private static void OnApplicationFocusHandler(this RelinkComponent self, bool value)
+        {
+            if (value)
+            {
+                FlyTipComponent.Instance.ShowFlyTipDi($"OnApplicationFocusHandler: true");
+                self.CheckSession().Coroutine();
+            }
             // if (value)
             // {
             //     MapComponent mapComponent = self.Root().GetComponent<MapComponent>();
