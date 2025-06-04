@@ -497,9 +497,9 @@ namespace ET.Server
             }
             else
             {
-                if (monsterNumber >= 1000)
+                if (monsterNumber >= 200)
                 {
-                    Log.Console($"monsterNumber >= 1000:  {mapComponent.SceneId}");
+                    Log.Console($"monsterNumber >= 200:  {mapComponent.SceneId}");
                     return;
                 }
             }

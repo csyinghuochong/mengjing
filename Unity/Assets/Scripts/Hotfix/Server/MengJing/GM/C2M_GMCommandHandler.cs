@@ -155,7 +155,21 @@ namespace ET.Server
                     unit.GetComponent<ChengJiuComponentS>().OpenAllPetTuJian();
                     return;
                 }
-                
+
+                if (message.GMMsg == "#testmonster")
+                {
+                    List<Unit> allmonster = UnitHelper.GetUnitList(unit.Scene(), UnitType.Monster);
+                    for (int i = 0; i < allmonster.Count; i++)
+                    {
+                        int monsterid = allmonster[i].ConfigId;
+                        MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(monsterid);
+                        if (monsterConfig.MonsterName.Contains("森林熊"))
+                        {
+                            Console.WriteLine($"森林熊:  {monsterid}");
+                        }
+                    }
+                }
+
                 switch (int.Parse(commands[0]))
                 {
                     case 1: //新增道具1#12000003#200 【添加道具/道具id/道具数量】
