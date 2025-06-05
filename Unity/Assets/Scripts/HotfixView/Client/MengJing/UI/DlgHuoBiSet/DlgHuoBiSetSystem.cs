@@ -27,7 +27,7 @@ namespace ET.Client
 
             self.DefaultTitleIconSprite = self.View.E_TitleIconImage.sprite;
             
-            IPHoneHelper.SetPosition( self.View.E_TopLeftTitle.gameObject, new Vector2(50f, 0f) );
+            IPHoneHelper.SetPosition( self.View.E_TopLeftTitle.gameObject, new Vector2(220f, 0f) );
 
             self.InitShow();
         }
