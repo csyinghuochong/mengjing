@@ -314,17 +314,14 @@ namespace ET.Client
             {
                 return;
             }
-
             if (self.lastDirection == direction && clientNow - self.lastSendTime < self.checkTime)
             {
                 return;
             }
-          
             if(self.BattleMessageComponent.TransferMap)
             {
                 return;
             }
-            
             Unit unit = self.MainUnit;
             quaternion rotation = quaternion.Euler(0, math.radians(direction), 0);
             List<float3> pathfind = new List<float3>();
