@@ -264,26 +264,6 @@ namespace ET.Client
      		}
      	}
 
-		public ES_EquipSetItem ES_EquipSetItem
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			ES_EquipSetItem es = this.m_es_equipsetitem;
-     			if( es == null )
-
-     			{
-		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"Right/ES_EquipSetItem");
-		    	   this.m_es_equipsetitem = this.AddChild<ES_EquipSetItem,Transform>(subTrans);
-     			}
-     			return this.m_es_equipsetitem;
-     		}
-     	}
-
 		public UnityEngine.RectTransform EG_MaxNodeRectTransform
      	{
      		get
@@ -352,77 +332,6 @@ namespace ET.Client
      		}
      	}
 
-		public ES_CostList ES_CostList
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			ES_CostList es = this.m_es_costlist;
-     			if( es == null )
-
-     			{
-		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"Right/EG_NextNode/ES_CostList");
-		    	   this.m_es_costlist = this.AddChild<ES_CostList,Transform>(subTrans);
-     			}
-     			return this.m_es_costlist;
-     		}
-     	}
-
-		public UnityEngine.UI.Toggle E_ToggleLuckyToggle
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_ToggleLuckyToggle == null )
-     			{
-		    		this.m_E_ToggleLuckyToggle = UIFindHelper.FindDeepChild<UnityEngine.UI.Toggle>(this.uiTransform.gameObject,"Right/EG_NextNode/E_ToggleLucky");
-     			}
-     			return this.m_E_ToggleLuckyToggle;
-     		}
-     	}
-
-		public UnityEngine.UI.Image E_Img_LodingValueImage
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_Img_LodingValueImage == null )
-     			{
-		    		this.m_E_Img_LodingValueImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Right/EG_NextNode/E_Img_LodingValue");
-     			}
-     			return this.m_E_Img_LodingValueImage;
-     		}
-     	}
-
-		public UnityEngine.UI.Image E_Img_LodingImage
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_Img_LodingImage == null )
-     			{
-		    		this.m_E_Img_LodingImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Right/EG_NextNode/E_Img_LodingValue/E_Img_Loding");
-     			}
-     			return this.m_E_Img_LodingImage;
-     		}
-     	}
-
 		public UnityEngine.UI.Text E_Attribute2Text
      	{
      		get
@@ -440,40 +349,6 @@ namespace ET.Client
      		}
      	}
 
-		public UnityEngine.UI.Text E_SuccessRateText
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_SuccessRateText == null )
-     			{
-		    		this.m_E_SuccessRateText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Right/EG_NextNode/E_SuccessRate");
-     			}
-     			return this.m_E_SuccessRateText;
-     		}
-     	}
-
-		public UnityEngine.UI.Text E_SuccessAdditionText
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_SuccessAdditionText == null )
-     			{
-		    		this.m_E_SuccessAdditionText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Right/EG_NextNode/E_SuccessAddition");
-     			}
-     			return this.m_E_SuccessAdditionText;
-     		}
-     	}
-
 		public UnityEngine.UI.Text E_CostTipText
      	{
      		get
@@ -488,40 +363,6 @@ namespace ET.Client
 		    		this.m_E_CostTipText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Right/EG_NextNode/E_CostTip");
      			}
      			return this.m_E_CostTipText;
-     		}
-     	}
-
-		public UnityEngine.UI.Text E_CostTip2Text
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_CostTip2Text == null )
-     			{
-		    		this.m_E_CostTip2Text = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Right/EG_NextNode/E_CostTip2");
-     			}
-     			return this.m_E_CostTip2Text;
-     		}
-     	}
-
-		public UnityEngine.UI.Text E_QiangHuaLevelText
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_QiangHuaLevelText == null )
-     			{
-		    		this.m_E_QiangHuaLevelText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Right/EG_NextNode/E_QiangHuaLevel");
-     			}
-     			return this.m_E_QiangHuaLevelText;
      		}
      	}
 
@@ -556,23 +397,6 @@ namespace ET.Client
 		    		this.m_E_TextGoldDiText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Right/EG_NextNode/E_TextGoldDi");
      			}
      			return this.m_E_TextGoldDiText;
-     		}
-     	}
-
-		public UnityEngine.UI.Text E_QiangHuaProgressText
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_QiangHuaProgressText == null )
-     			{
-		    		this.m_E_QiangHuaProgressText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Right/EG_NextNode/E_QiangHuaProgress");
-     			}
-     			return this.m_E_QiangHuaProgressText;
      		}
      	}
 
@@ -627,6 +451,60 @@ namespace ET.Client
      		}
      	}
 
+		public UnityEngine.UI.Text E_SuccessRateText
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_SuccessRateText == null )
+     			{
+		    		this.m_E_SuccessRateText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Center/E_SuccessRate");
+     			}
+     			return this.m_E_SuccessRateText;
+     		}
+     	}
+
+		public UnityEngine.UI.Text E_SuccessAdditionText
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_SuccessAdditionText == null )
+     			{
+		    		this.m_E_SuccessAdditionText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Center/E_SuccessAddition");
+     			}
+     			return this.m_E_SuccessAdditionText;
+     		}
+     	}
+
+		public ES_EquipSetItem ES_EquipSetItem
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			ES_EquipSetItem es = this.m_es_equipsetitem;
+     			if( es == null )
+
+     			{
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"Center/ES_EquipSetItem");
+		    	   this.m_es_equipsetitem = this.AddChild<ES_EquipSetItem,Transform>(subTrans);
+     			}
+     			return this.m_es_equipsetitem;
+     		}
+     	}
+
 		public UnityEngine.UI.Text E_QiangItemNameText
      	{
      		get
@@ -638,9 +516,131 @@ namespace ET.Client
      			}
      			if( this.m_E_QiangItemNameText == null )
      			{
-		    		this.m_E_QiangItemNameText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Right/E_QiangItemName");
+		    		this.m_E_QiangItemNameText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Center/E_QiangItemName");
      			}
      			return this.m_E_QiangItemNameText;
+     		}
+     	}
+
+		public UnityEngine.UI.Toggle E_ToggleLuckyToggle
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_ToggleLuckyToggle == null )
+     			{
+		    		this.m_E_ToggleLuckyToggle = UIFindHelper.FindDeepChild<UnityEngine.UI.Toggle>(this.uiTransform.gameObject,"Center/E_ToggleLucky");
+     			}
+     			return this.m_E_ToggleLuckyToggle;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_Img_LodingValueImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Img_LodingValueImage == null )
+     			{
+		    		this.m_E_Img_LodingValueImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Center/E_Img_LodingValue");
+     			}
+     			return this.m_E_Img_LodingValueImage;
+     		}
+     	}
+
+		public UnityEngine.UI.Text E_CostTip2Text
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_CostTip2Text == null )
+     			{
+		    		this.m_E_CostTip2Text = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Center/E_CostTip2");
+     			}
+     			return this.m_E_CostTip2Text;
+     		}
+     	}
+
+		public UnityEngine.UI.Text E_QiangHuaLevelText
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_QiangHuaLevelText == null )
+     			{
+		    		this.m_E_QiangHuaLevelText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Center/E_QiangHuaLevel");
+     			}
+     			return this.m_E_QiangHuaLevelText;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_Img_LodingImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Img_LodingImage == null )
+     			{
+		    		this.m_E_Img_LodingImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Center/E_Img_Loding");
+     			}
+     			return this.m_E_Img_LodingImage;
+     		}
+     	}
+
+		public UnityEngine.UI.Text E_QiangHuaProgressText
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_QiangHuaProgressText == null )
+     			{
+		    		this.m_E_QiangHuaProgressText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Center/E_QiangHuaProgress");
+     			}
+     			return this.m_E_QiangHuaProgressText;
+     		}
+     	}
+
+		public ES_CostList ES_CostList
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			ES_CostList es = this.m_es_costlist;
+     			if( es == null )
+
+     			{
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"Center/ES_CostList");
+		    	   this.m_es_costlist = this.AddChild<ES_CostList,Transform>(subTrans);
+     			}
+     			return this.m_es_costlist;
      		}
      	}
 
@@ -671,28 +671,28 @@ namespace ET.Client
 			this.m_es_roleqianghuaitem_10 = null;
 			this.m_es_roleqianghuaitem_11 = null;
 			this.m_EG_QiangHuaLevelListRectTransform = null;
-			this.m_es_equipsetitem = null;
 			this.m_EG_MaxNodeRectTransform = null;
 			this.m_EG_NextNodeRectTransform = null;
 			this.m_E_QiangHuaButton = null;
 			this.m_E_QiangHuaImage = null;
-			this.m_es_costlist = null;
-			this.m_E_ToggleLuckyToggle = null;
-			this.m_E_Img_LodingValueImage = null;
-			this.m_E_Img_LodingImage = null;
 			this.m_E_Attribute2Text = null;
-			this.m_E_SuccessRateText = null;
-			this.m_E_SuccessAdditionText = null;
 			this.m_E_CostTipText = null;
-			this.m_E_CostTip2Text = null;
-			this.m_E_QiangHuaLevelText = null;
 			this.m_E_TextGoldText = null;
 			this.m_E_TextGoldDiText = null;
-			this.m_E_QiangHuaProgressText = null;
 			this.m_E_Attribute1Text = null;
 			this.m_E_QiangHuaNameText = null;
 			this.m_E_QiangHuaTipText = null;
+			this.m_E_SuccessRateText = null;
+			this.m_E_SuccessAdditionText = null;
+			this.m_es_equipsetitem = null;
 			this.m_E_QiangItemNameText = null;
+			this.m_E_ToggleLuckyToggle = null;
+			this.m_E_Img_LodingValueImage = null;
+			this.m_E_CostTip2Text = null;
+			this.m_E_QiangHuaLevelText = null;
+			this.m_E_Img_LodingImage = null;
+			this.m_E_QiangHuaProgressText = null;
+			this.m_es_costlist = null;
 			this.uiTransform = null;
 		}
 
@@ -709,28 +709,28 @@ namespace ET.Client
 		private EntityRef<ES_RoleQiangHuaItem> m_es_roleqianghuaitem_10 = null;
 		private EntityRef<ES_RoleQiangHuaItem> m_es_roleqianghuaitem_11 = null;
 		private UnityEngine.RectTransform m_EG_QiangHuaLevelListRectTransform = null;
-		private EntityRef<ES_EquipSetItem> m_es_equipsetitem = null;
 		private UnityEngine.RectTransform m_EG_MaxNodeRectTransform = null;
 		private UnityEngine.RectTransform m_EG_NextNodeRectTransform = null;
 		private UnityEngine.UI.Button m_E_QiangHuaButton = null;
 		private UnityEngine.UI.Image m_E_QiangHuaImage = null;
-		private EntityRef<ES_CostList> m_es_costlist = null;
-		private UnityEngine.UI.Toggle m_E_ToggleLuckyToggle = null;
-		private UnityEngine.UI.Image m_E_Img_LodingValueImage = null;
-		private UnityEngine.UI.Image m_E_Img_LodingImage = null;
 		private UnityEngine.UI.Text m_E_Attribute2Text = null;
-		private UnityEngine.UI.Text m_E_SuccessRateText = null;
-		private UnityEngine.UI.Text m_E_SuccessAdditionText = null;
 		private UnityEngine.UI.Text m_E_CostTipText = null;
-		private UnityEngine.UI.Text m_E_CostTip2Text = null;
-		private UnityEngine.UI.Text m_E_QiangHuaLevelText = null;
 		private UnityEngine.UI.Text m_E_TextGoldText = null;
 		private UnityEngine.UI.Text m_E_TextGoldDiText = null;
-		private UnityEngine.UI.Text m_E_QiangHuaProgressText = null;
 		private UnityEngine.UI.Text m_E_Attribute1Text = null;
 		private UnityEngine.UI.Text m_E_QiangHuaNameText = null;
 		private UnityEngine.UI.Text m_E_QiangHuaTipText = null;
+		private UnityEngine.UI.Text m_E_SuccessRateText = null;
+		private UnityEngine.UI.Text m_E_SuccessAdditionText = null;
+		private EntityRef<ES_EquipSetItem> m_es_equipsetitem = null;
 		private UnityEngine.UI.Text m_E_QiangItemNameText = null;
+		private UnityEngine.UI.Toggle m_E_ToggleLuckyToggle = null;
+		private UnityEngine.UI.Image m_E_Img_LodingValueImage = null;
+		private UnityEngine.UI.Text m_E_CostTip2Text = null;
+		private UnityEngine.UI.Text m_E_QiangHuaLevelText = null;
+		private UnityEngine.UI.Image m_E_Img_LodingImage = null;
+		private UnityEngine.UI.Text m_E_QiangHuaProgressText = null;
+		private EntityRef<ES_CostList> m_es_costlist = null;
 		public Transform uiTransform = null;
 	}
 }
