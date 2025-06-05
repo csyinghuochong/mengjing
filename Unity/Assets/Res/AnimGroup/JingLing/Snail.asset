@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea1ccaf882e41cd4d9cc3acea406739c, type: 3}
+  m_Name: Snail
+  m_EditorClassIdentifier: 
+  AnimInfos:
+  - StateName: idle
+    AnimationClip: {fileID: -5252816984213320552, guid: 40842eb165281e241ac5eaadc628338f,
+      type: 3}
+    Speed: 1
+    NextStateName: 
+  - StateName: attack
+    AnimationClip: {fileID: -6239216113759591374, guid: 40842eb165281e241ac5eaadc628338f,
+      type: 3}
+    Speed: 1
+    NextStateName: 
+  - StateName: Attack01
+    AnimationClip: {fileID: -566917892213607882, guid: 40842eb165281e241ac5eaadc628338f,
+      type: 3}
+    Speed: 1
+    NextStateName: 
+  - StateName: Death
+    AnimationClip: {fileID: 4348485665485846014, guid: 40842eb165281e241ac5eaadc628338f,
+      type: 3}
+    Speed: 1
+    NextStateName: 
+  - StateName: Hide_End
+    AnimationClip: {fileID: 4244425886003181503, guid: 40842eb165281e241ac5eaadc628338f,
+      type: 3}
+    Speed: 1
+    NextStateName: 
+  - StateName: Hide_Loop
+    AnimationClip: {fileID: -4433454607183869177, guid: 40842eb165281e241ac5eaadc628338f,
+      type: 3}
+    Speed: 1
+    NextStateName: Hide_End
+  - StateName: Hide_Start
+    AnimationClip: {fileID: -1883351621986168794, guid: 40842eb165281e241ac5eaadc628338f,
+      type: 3}
+    Speed: 1
+    NextStateName: Hide_Loop
+  - StateName: hit
+    AnimationClip: {fileID: 2459078804267041145, guid: 40842eb165281e241ac5eaadc628338f,
+      type: 3}
+    Speed: 1
+    NextStateName: 
+  - StateName: walk
+    AnimationClip: {fileID: -3419257869308726280, guid: 40842eb165281e241ac5eaadc628338f,
+      type: 3}
+    Speed: 1
+    NextStateName: 

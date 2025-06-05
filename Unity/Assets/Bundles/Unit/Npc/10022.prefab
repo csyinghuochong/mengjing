@@ -1313,6 +1313,8 @@ GameObject:
   m_Component:
   - component: {fileID: 8363894304025640158}
   - component: {fileID: 45315677113785073}
+  - component: {fileID: 2004622272135046490}
+  - component: {fileID: 1823081434323791300}
   m_Layer: 0
   m_Name: Kiki-v2
   m_TagString: Untagged
@@ -1358,6 +1360,33 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &2004622272135046490
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2908565045787993781}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ad50f81b1d25c441943c37a89ba23f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _Animator: {fileID: 45315677113785073}
+  _ActionOnDisable: 0
+--- !u!114 &1823081434323791300
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2908565045787993781}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d3967c910cf9304a90fe607c1531405, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AnimGroup: {fileID: 11400000, guid: d73875b9c22c1884ebef94eeebd5b6b9, type: 2}
 --- !u!1 &3072065528583240722
 GameObject:
   m_ObjectHideFlags: 0
@@ -2435,7 +2464,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d3967c910cf9304a90fe607c1531405, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AnimGroup: {fileID: 11400000, guid: 1f768275ba98a81489cabbbcdd1bc499, type: 2}
+  AnimGroup: {fileID: 11400000, guid: 90b73082148b0134eb06d4acf18fb811, type: 2}
 --- !u!114 &3787048961157696938
 MonoBehaviour:
   m_ObjectHideFlags: 0

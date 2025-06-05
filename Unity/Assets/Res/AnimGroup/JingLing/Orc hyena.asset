@@ -1,0 +1,50 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea1ccaf882e41cd4d9cc3acea406739c, type: 3}
+  m_Name: Orc hyena
+  m_EditorClassIdentifier: 
+  AnimInfos:
+  - StateName: Orc_hyena_Attack
+    AnimationClip: {fileID: -6059279455154786589, guid: 9e278c9836a1b0a44a3667b5d1a47cf7,
+      type: 3}
+    Speed: 1
+    NextStateName: Orc_hyena_Idle
+  - StateName: Orc_hyena_Idle
+    AnimationClip: {fileID: -9005301439455263240, guid: 9e278c9836a1b0a44a3667b5d1a47cf7,
+      type: 3}
+    Speed: 1
+    NextStateName: Orc_hyena_Idle_long
+  - StateName: Orc_hyena_Idle_long
+    AnimationClip: {fileID: -57886740994319441, guid: 9e278c9836a1b0a44a3667b5d1a47cf7,
+      type: 3}
+    Speed: 1
+    NextStateName: Orc_hyena_Run
+  - StateName: Orc_hyena_Run
+    AnimationClip: {fileID: -5117131908719768419, guid: 9e278c9836a1b0a44a3667b5d1a47cf7,
+      type: 3}
+    Speed: 1
+    NextStateName: Orc_hyena_Tpose
+  - StateName: Orc_hyena_Tpose
+    AnimationClip: {fileID: 8729799579279636674, guid: 9e278c9836a1b0a44a3667b5d1a47cf7,
+      type: 3}
+    Speed: 1
+    NextStateName: Orc_hyena_Victory
+  - StateName: Orc_hyena_Victory
+    AnimationClip: {fileID: -7603049350983109383, guid: 9e278c9836a1b0a44a3667b5d1a47cf7,
+      type: 3}
+    Speed: 1
+    NextStateName: Orc_hyena_Walk
+  - StateName: Orc_hyena_Walk
+    AnimationClip: {fileID: 8689427343547124617, guid: 9e278c9836a1b0a44a3667b5d1a47cf7,
+      type: 3}
+    Speed: 1
+    NextStateName: Orc_hyena_Attack

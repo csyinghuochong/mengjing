@@ -159,7 +159,7 @@ namespace ET.Client
                 return;
             }
 
-            if (Time.time - self.LastSendTime < 0.2f)
+            if (Time.time - self.LastSendTime < 0.1f)
             {
                 return;
             }
@@ -204,7 +204,8 @@ namespace ET.Client
             }
 
             if (dir != Vector3.zero)
-            {
+            {      
+                self.Root().GetComponent<AttackComponent>().RemoveTimer();
                 Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
                 if (ErrorCode.ERR_Success != unit.GetComponent<StateComponentC>().CanMove())
                 {

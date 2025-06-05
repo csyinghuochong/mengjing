@@ -21,7 +21,10 @@ namespace ET.Client
             self.View.E_AgeTipCloseButton.AddListener(() => { self.View.EG_UIAgeTipRectTransform.gameObject.SetActive(false); });
             self.View.E_AgeTipClose_2Button.AddListener(() => { self.View.EG_UIAgeTipRectTransform.gameObject.SetActive(false); });
 
+
             Application.targetFrameRate = 60;
+            SettingData.AnimController = GlobalHelp.GetVersionMode() == 0 ? 0 : 1;
+            
             GameObject.Find("Global").GetComponent<Init>().TogglePatchWindow(false);
             
             self.View.E_AccountInputField.text = PlayerPrefsHelp.GetString("MJ_Account");

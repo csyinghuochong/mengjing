@@ -302,13 +302,14 @@ namespace ET.Client
 
         private static void SendMove(this ES_JoystickMove self, int direction)
         {
-            long clientNow = TimeHelper.ClientNow();
+            self.AttackComponent.RemoveTimer();
             
+            long clientNow = TimeHelper.ClientNow();
+ 
             if ( clientNow - self.lastSendTime < 30)
             {
                 return;
             }
-            
             if (clientNow - self.AttackComponent.MoveAttackTime < 200)
             {
                 return;

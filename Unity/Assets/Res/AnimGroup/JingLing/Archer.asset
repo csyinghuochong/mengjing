@@ -1,0 +1,50 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea1ccaf882e41cd4d9cc3acea406739c, type: 3}
+  m_Name: Archer
+  m_EditorClassIdentifier: 
+  AnimInfos:
+  - StateName: Archer_Attack_1
+    AnimationClip: {fileID: -4135757578987360305, guid: 9601918f61bf7fc4294ce3cf5991e0e6,
+      type: 3}
+    Speed: 1
+    NextStateName: Archer_Attack_2
+  - StateName: Archer_Attack_2
+    AnimationClip: {fileID: 2565348769522704817, guid: 9601918f61bf7fc4294ce3cf5991e0e6,
+      type: 3}
+    Speed: 1
+    NextStateName: Archer_Damage
+  - StateName: Archer_Damage
+    AnimationClip: {fileID: 7105576632841871235, guid: 9601918f61bf7fc4294ce3cf5991e0e6,
+      type: 3}
+    Speed: 1
+    NextStateName: Archer_Death
+  - StateName: Archer_Death
+    AnimationClip: {fileID: -929028030558871457, guid: 9601918f61bf7fc4294ce3cf5991e0e6,
+      type: 3}
+    Speed: 1
+    NextStateName: Archer_Idle
+  - StateName: Archer_Idle
+    AnimationClip: {fileID: 5005133701790567042, guid: 9601918f61bf7fc4294ce3cf5991e0e6,
+      type: 3}
+    Speed: 1
+    NextStateName: Archer_Idle_long
+  - StateName: Archer_Idle_long
+    AnimationClip: {fileID: -8184462611961846167, guid: 9601918f61bf7fc4294ce3cf5991e0e6,
+      type: 3}
+    Speed: 1
+    NextStateName: Archer_Walk
+  - StateName: Archer_Walk
+    AnimationClip: {fileID: 4036672006632547579, guid: 9601918f61bf7fc4294ce3cf5991e0e6,
+      type: 3}
+    Speed: 1
+    NextStateName: Archer_Attack_1

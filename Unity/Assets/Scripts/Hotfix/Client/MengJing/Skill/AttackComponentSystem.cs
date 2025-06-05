@@ -47,7 +47,10 @@ namespace ET.Client
         public static void RemoveTimer(this AttackComponent self)
         {
             self.MoveAttackId = 0;
-            self.Root().GetComponent<TimerComponent>()?.Remove(ref self.Timer);
+            if (self.Timer > 0)
+            {
+                self.Root().GetComponent<TimerComponent>()?.Remove(ref self.Timer);
+            }
         }
 
         private static Unit GetMainUnit(this AttackComponent self)

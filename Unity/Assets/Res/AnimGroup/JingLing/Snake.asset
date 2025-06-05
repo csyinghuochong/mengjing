@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea1ccaf882e41cd4d9cc3acea406739c, type: 3}
+  m_Name: Snake
+  m_EditorClassIdentifier: 
+  AnimInfos:
+  - StateName: Snake_Appear
+    AnimationClip: {fileID: -57243793384512586, guid: 02d44a1d70f47234f857a1e2821d74c4,
+      type: 3}
+    Speed: 1
+    NextStateName: Snake_Attack_close
+  - StateName: Snake_Attack_close
+    AnimationClip: {fileID: 1163032034673728442, guid: 02d44a1d70f47234f857a1e2821d74c4,
+      type: 3}
+    Speed: 1
+    NextStateName: Snake_Attack_far
+  - StateName: Snake_Attack_far
+    AnimationClip: {fileID: -1302428700559474151, guid: 02d44a1d70f47234f857a1e2821d74c4,
+      type: 3}
+    Speed: 1
+    NextStateName: Snake_Damage
+  - StateName: Snake_Damage
+    AnimationClip: {fileID: 4824713161616298116, guid: 02d44a1d70f47234f857a1e2821d74c4,
+      type: 3}
+    Speed: 1
+    NextStateName: Snake_Death
+  - StateName: Snake_Death
+    AnimationClip: {fileID: -5479443367515970791, guid: 02d44a1d70f47234f857a1e2821d74c4,
+      type: 3}
+    Speed: 1
+    NextStateName: Snake_Hide
+  - StateName: Snake_Hide
+    AnimationClip: {fileID: 5382079462631724470, guid: 02d44a1d70f47234f857a1e2821d74c4,
+      type: 3}
+    Speed: 1
+    NextStateName: Snake_Idle
+  - StateName: Snake_Idle
+    AnimationClip: {fileID: -1635428245183274144, guid: 02d44a1d70f47234f857a1e2821d74c4,
+      type: 3}
+    Speed: 1
+    NextStateName: Snake_Idle_long
+  - StateName: Snake_Idle_long
+    AnimationClip: {fileID: -6019812096818461934, guid: 02d44a1d70f47234f857a1e2821d74c4,
+      type: 3}
+    Speed: 1
+    NextStateName: Snake_Appear

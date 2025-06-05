@@ -1,0 +1,90 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea1ccaf882e41cd4d9cc3acea406739c, type: 3}
+  m_Name: Goat
+  m_EditorClassIdentifier: 
+  AnimInfos:
+  - StateName: idle
+    AnimationClip: {fileID: -5252816984213320552, guid: bd61f8cab57db0d43bf940cb64a0e208,
+      type: 3}
+    Speed: 1
+    NextStateName: Idle01
+  - StateName: attack
+    AnimationClip: {fileID: -6239216113759591374, guid: bd61f8cab57db0d43bf940cb64a0e208,
+      type: 3}
+    Speed: 1
+    NextStateName: 
+  - StateName: Attack01
+    AnimationClip: {fileID: -566917892213607882, guid: bd61f8cab57db0d43bf940cb64a0e208,
+      type: 3}
+    Speed: 1
+    NextStateName: 
+  - StateName: AttackRear
+    AnimationClip: {fileID: 847428728477163982, guid: bd61f8cab57db0d43bf940cb64a0e208,
+      type: 3}
+    Speed: 1
+    NextStateName: 
+  - StateName: Charge
+    AnimationClip: {fileID: 842011099488704110, guid: bd61f8cab57db0d43bf940cb64a0e208,
+      type: 3}
+    Speed: 1
+    NextStateName: 
+  - StateName: Death
+    AnimationClip: {fileID: 4348485665485846014, guid: bd61f8cab57db0d43bf940cb64a0e208,
+      type: 3}
+    Speed: 1
+    NextStateName: 
+  - StateName: hit
+    AnimationClip: {fileID: 2459078804267041145, guid: bd61f8cab57db0d43bf940cb64a0e208,
+      type: 3}
+    Speed: 1
+    NextStateName: 
+  - StateName: Idle01
+    AnimationClip: {fileID: 2646724620217826704, guid: bd61f8cab57db0d43bf940cb64a0e208,
+      type: 3}
+    Speed: 1
+    NextStateName: idle
+  - StateName: Idle02
+    AnimationClip: {fileID: 6868592044210321722, guid: bd61f8cab57db0d43bf940cb64a0e208,
+      type: 3}
+    Speed: 1
+    NextStateName: Idle01
+  - StateName: JumpEnd
+    AnimationClip: {fileID: 8324654356728483127, guid: bd61f8cab57db0d43bf940cb64a0e208,
+      type: 3}
+    Speed: 1
+    NextStateName: 
+  - StateName: JumpLoop
+    AnimationClip: {fileID: 5903817753728149134, guid: bd61f8cab57db0d43bf940cb64a0e208,
+      type: 3}
+    Speed: 1
+    NextStateName: JumpEnd
+  - StateName: JumpStart
+    AnimationClip: {fileID: 7478122292733868173, guid: bd61f8cab57db0d43bf940cb64a0e208,
+      type: 3}
+    Speed: 1
+    NextStateName: JumpLoop
+  - StateName: run
+    AnimationClip: {fileID: 6200578666267062213, guid: bd61f8cab57db0d43bf940cb64a0e208,
+      type: 3}
+    Speed: 1
+    NextStateName: 
+  - StateName: Stun
+    AnimationClip: {fileID: 7666019288946695810, guid: bd61f8cab57db0d43bf940cb64a0e208,
+      type: 3}
+    Speed: 1
+    NextStateName: 
+  - StateName: walk
+    AnimationClip: {fileID: -3419257869308726280, guid: bd61f8cab57db0d43bf940cb64a0e208,
+      type: 3}
+    Speed: 1
+    NextStateName: 
