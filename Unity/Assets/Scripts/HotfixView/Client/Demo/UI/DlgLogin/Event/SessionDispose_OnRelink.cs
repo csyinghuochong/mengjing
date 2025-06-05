@@ -14,7 +14,7 @@ namespace ET.Client
             root.GetComponent<PlayerInfoComponent>().DisconnectType = 0;
             
             Log.Warning($"SessionDispose_OnHandler: {mapComponent.MapType}  {disconnectType}");
-            FlyTipComponent.Instance.ShowFlyTipDi($"SessionDispose_OnHandler: {mapComponent.MapType}  {disconnectType}");
+            FlyTipComponent.Instance.ShowFlyTipDi($"SessionDispose_OnRelink: {mapComponent.MapType}  {disconnectType}");
             
             if (mapComponent.MapType < MapTypeEnum.MainCityScene)
             {

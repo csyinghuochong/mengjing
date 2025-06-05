@@ -135,7 +135,7 @@ namespace ET.Client
         {
             if (value)
             {
-                FlyTipComponent.Instance.ShowFlyTipDi($"获得焦点！！");
+                //FlyTipComponent.Instance.ShowFlyTipDi($"获得焦点！！");
                 self.CheckSession().Coroutine();
             }
             else
