@@ -18,7 +18,7 @@ namespace ET.Client
      			}
      			if( this.m_E_TitleIconImage == null )
      			{
-		    		this.m_E_TitleIconImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Top/E_TitleIcon");
+		    		this.m_E_TitleIconImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"TopLeft/Title/E_TitleIcon");
      			}
      			return this.m_E_TitleIconImage;
      		}
@@ -35,7 +35,7 @@ namespace ET.Client
      			}
      			if( this.m_E_TitleTextText == null )
      			{
-		    		this.m_E_TitleTextText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Top/E_TitleText");
+		    		this.m_E_TitleTextText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"TopLeft/Title/E_TitleText");
      			}
      			return this.m_E_TitleTextText;
      		}
@@ -415,6 +415,23 @@ namespace ET.Client
      		}
      	}
 
+		public UnityEngine.Transform E_TopLeftTitle
+		{
+			get
+			{
+				if (this.uiTransform == null)
+				{
+					Log.Error("uiTransform is null.");
+					return null;
+				}
+				if( this.m_E_TopLeftTitle == null )
+				{
+					this.m_E_TopLeftTitle = UIFindHelper.FindDeepChild<UnityEngine.Transform>(this.uiTransform.gameObject,"TopLeft/Title");
+				}
+				return this.m_E_TopLeftTitle;
+			}
+		}
+
 		public UnityEngine.UI.Image E_Close2Image
      	{
      		get
@@ -459,6 +476,7 @@ namespace ET.Client
 			this.m_E_CloseImage = null;
 			this.m_E_Close2Button = null;
 			this.m_E_Close2Image = null;
+			this.m_E_TopLeftTitle = null;
 			this.uiTransform = null;
 		}
 
@@ -487,6 +505,7 @@ namespace ET.Client
 		private UnityEngine.UI.Image m_E_CloseImage = null;
 		private UnityEngine.UI.Button m_E_Close2Button = null;
 		private UnityEngine.UI.Image m_E_Close2Image = null;
+		private UnityEngine.Transform m_E_TopLeftTitle = null;
 		public Transform uiTransform = null;
 	}
 }

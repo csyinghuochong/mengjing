@@ -26,6 +26,8 @@ namespace ET.Client
             self.View.E_Close2Button.AddListener(self.OnCloseButton);
 
             self.DefaultTitleIconSprite = self.View.E_TitleIconImage.sprite;
+            
+            IPHoneHelper.SetPosition( self.View.E_TopLeftTitle.gameObject, new Vector2(50f, 0f) );
 
             self.InitShow();
         }
