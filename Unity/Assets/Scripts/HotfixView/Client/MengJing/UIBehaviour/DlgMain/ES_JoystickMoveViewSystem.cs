@@ -303,25 +303,23 @@ namespace ET.Client
         private static void SendMove(this ES_JoystickMove self, int direction)
         {
             self.AttackComponent.RemoveTimer();
-            
-            long clientNow = TimeHelper.ClientNow();
- 
-            if ( clientNow - self.lastSendTime < 30)
-            {
-                return;
-            }
-            if (clientNow - self.AttackComponent.MoveAttackTime < 200)
-            {
-                return;
-            }
-            if (self.lastDirection == direction && clientNow - self.lastSendTime < self.checkTime)
-            {
-                return;
-            }
+
             if(self.BattleMessageComponent.TransferMap)
             {
                 return;
             }
+            long clientNow = TimeHelper.ClientNow();
+            //自动攻击正在向怪物移动 这个时候不要频繁的打断。。
+            if (clientNow - self.AttackComponent.MoveAttackTime < 200)
+            {
+                return;
+            }
+            long passTime = clientNow - self.lastSendTime;
+            if (passTime  < 30 || (self.lastDirection == direction && passTime < self.checkTime))
+            {
+                return;
+            }
+                        
             Unit unit = self.MainUnit;
             quaternion rotation = quaternion.Euler(0, math.radians(direction), 0);
             List<float3> pathfind = new List<float3>();

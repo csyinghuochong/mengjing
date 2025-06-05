@@ -266,17 +266,17 @@ namespace ET.Client
             Unit unit = self.GetParent<Unit>();
             try
             {
-                unit.GetComponent<StateComponentC>().SetNetWaitEndTime(time_1 + 200);
+                StateComponentC stateComponentC = unit.GetComponent<StateComponentC>();
+                stateComponentC.SetNetWaitEndTime(time_1 + 1000);
                 M2C_SkillCmd m2C_SkillCmd = await self.Root().GetComponent<ClientSenderCompnent>().Call(skillCmd) as M2C_SkillCmd;
                 if (unit.IsDisposed)
                 {
                     return ErrorCode.ERR_NetWorkError;
                 }
-
-                unit.GetComponent<StateComponentC>().SetNetWaitEndTime(0);
+                stateComponentC.SetNetWaitEndTime(0);
+                
                 if (m2C_SkillCmd.Error == 0)
                 {
-                    BagComponentC bagComponent = self.Root().GetComponent<BagComponentC>();
                     SkillSetComponentC skillSetComponent = self.Root().GetComponent<SkillSetComponentC>();
                     int weaponSkill = SkillHelp.GetWeaponSkill(skillCmd.SkillID, UnitHelper.GetEquipType(self.Root()),
                         skillSetComponent.SkillList);
@@ -287,11 +287,11 @@ namespace ET.Client
                     long rigidity = addTime - (time_2 - time_1);
                     rigidity = Math.Max(rigidity, 0);
 
-                    unit.GetComponent<StateComponentC>().SetRigidityEndTime(rigidity + time_2);
+                    stateComponentC.SetRigidityEndTime(rigidity + time_2);
                 }
                 else
                 {
-                    unit.GetComponent<StateComponentC>().SetRigidityEndTime(0);
+                    stateComponentC.SetRigidityEndTime(0);
                 }
 
                 if (!string.IsNullOrEmpty(m2C_SkillCmd.Message))
