@@ -196,9 +196,9 @@ namespace ET.Client
             self.SendMove(self.direction);
             self.Root().GetComponent<TimerComponent>().Remove(ref self.JoystickTimer);
             self.JoystickTimer = self.Root().GetComponent<TimerComponent>().NewFrameTimer(TimerInvokeType.JoystickTimer, self);
-            
-            EventSystem.Instance.Publish(self.Root().CurrentScene(), new MoveStart() { Unit = unit });
-            unit.Rotation =  quaternion.Euler(0, math.radians(self.direction ), 0);
+
+            //EventSystem.Instance.Publish(self.Root().CurrentScene(), new MoveStart() { Unit = unit });
+            //unit.Rotation =  quaternion.Euler(0, math.radians(self.direction ), 0);
         }
 
         private static GameObject GetYaoGanDi(this ES_JoystickMove self)
@@ -375,14 +375,6 @@ namespace ET.Client
 
             EventSystem.Instance.Publish(self.Root(), new BeforeMove() { DataParamString = string.Empty });
 
-            // if (SettingData.MoveMode == 0)
-            // {
-            //     unit.MoveToAsync( newv3,  null).Coroutine();
-            // }
-            // else
-            // {
-            //     
-            // }
             unit.MoveResultToAsync(pathfind, null ).Coroutine();
             unit.GetComponent<MoveComponent>().MoveToAsync(pathfind, speed).Coroutine();
             
@@ -390,7 +382,6 @@ namespace ET.Client
             self.lastDirection = direction;
         }
         
-
         private static void ShowObstructName(this ES_JoystickMove self, GameObject hit)
         {
             //FlyTipComponent.Instance.ShowFlyTip($"阻挡物： {self.GetPath(hit)}");
@@ -499,7 +490,7 @@ namespace ET.Client
             {
                 return;
             }
-            EventSystem.Instance.Publish(self.Root().CurrentScene(), new MoveStop() { Unit = unit });
+            //EventSystem.Instance.Publish(self.Root().CurrentScene(), new MoveStop() { Unit = unit });
             
             long lastTimer = self.JoystickTimer;
             self.ResetJoystick();
@@ -518,14 +509,7 @@ namespace ET.Client
                 return;
             }
             
-            // if (SettingData.MoveMode == 0)
-            // {
-            //     MoveHelper.Stop(self.Root());
-            // }
-            // else
-            // {
-            //    
-            // }
+            EventSystem.Instance.Publish(self.Root().CurrentScene(), new MoveStop() { Unit = unit });
             MoveComponent moveComponent = unit.GetComponent<MoveComponent>();
             moveComponent.Stop(false);
             MoveHelper.StopResult(self.Root(), unit.Position);
