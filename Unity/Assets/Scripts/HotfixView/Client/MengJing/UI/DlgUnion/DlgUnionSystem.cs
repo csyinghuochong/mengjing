@@ -21,7 +21,7 @@ namespace ET.Client
 		{
 			self.View.E_FunctionSetBtnToggleGroup.AddListener(self.OnFunctionSetBtn, self.CheckPageButton_1);
 			
-			IPHoneHelper.SetPosition(self.View.E_FunctionSetBtnToggleGroup.gameObject, new Vector2(200f, 0f));
+			IPHoneHelper.SetPosition(self.View.E_FunctionSetBtnToggleGroup.gameObject, new Vector2(220f, 0f));
 			self.RequestFriendInfo().Coroutine();
         }
 

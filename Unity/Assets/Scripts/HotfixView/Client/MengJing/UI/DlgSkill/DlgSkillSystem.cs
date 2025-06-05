@@ -68,7 +68,7 @@ namespace ET.Client
             ReddotViewComponent redPointComponent = self.Root().GetComponent<ReddotViewComponent>();
             redPointComponent.RegisterReddot(ReddotType.SkillUp, self.Reddot_SkillUp);
             
-            IPHoneHelper.SetPosition(self.View.E_FunctionSetBtnToggleGroup.gameObject, new Vector2(200f, 0f));
+            IPHoneHelper.SetPosition(self.View.E_FunctionSetBtnToggleGroup.gameObject, new Vector2(220f, 0f));
         }
 
         public static void ShowWindow(this DlgSkill self, Entity contextData = null)
