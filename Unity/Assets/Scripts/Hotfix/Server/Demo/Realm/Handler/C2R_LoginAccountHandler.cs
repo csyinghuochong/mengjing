@@ -64,7 +64,7 @@ namespace ET.Server
                 {
 
                     DBComponent dBComponent = session.Root().GetComponent<DBManagerComponent>().GetZoneDB(session.Zone()); 
-                    List<DBCenterAccountInfo> centerAccountInfoList = await dBComponent.Query<DBCenterAccountInfo>(session.Zone(), d => d.Account == request.Account && d.Password == request.Password);
+                    List<DBCenterAccountInfo> centerAccountInfoList = await dBComponent.Query<DBCenterAccountInfo>(session.Zone(), d => d.Account == request.Account);
                     DBCenterAccountInfo centerAccountInfo = null;
                     if (centerAccountInfoList != null && centerAccountInfoList.Count > 0)
                     {
