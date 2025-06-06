@@ -22,6 +22,9 @@ public class DoTweeningMove : MonoBehaviour
     private Vector2 curPostion;
     private float passTime = 0;
     public float MoveToTime;
+    
+    // 激活GameObject重新播放动画
+    public bool ShouldPlay = true;
 
     // Start is called before the first frame update
     void Start()
@@ -65,7 +68,7 @@ public class DoTweeningMove : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         if (Time.deltaTime > 0.1f)
         {
@@ -77,7 +80,12 @@ public class DoTweeningMove : MonoBehaviour
             if (!this.isLoop)
             {
                 this.curPostion = this.oldPostition;
-                this.enabled = false;
+
+                if (!this.ShouldPlay)
+                {
+                    this.enabled = false;
+                }
+
                 return;
             }
             this.front = !this.front;
@@ -96,6 +104,6 @@ public class DoTweeningMove : MonoBehaviour
         {
             this.curPostion = this.front ? this.oldPostition : this.startPosition;
         }
-       this.gameObject.GetComponent<RectTransform>().anchoredPosition = this.curPostion;
+        this.gameObject.GetComponent<RectTransform>().anchoredPosition = this.curPostion;
     }
 }
