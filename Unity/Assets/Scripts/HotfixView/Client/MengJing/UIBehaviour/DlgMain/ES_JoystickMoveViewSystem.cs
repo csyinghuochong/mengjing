@@ -308,13 +308,13 @@ namespace ET.Client
             {
                 return;
             }
-            long clientNow = TimeHelper.ClientNow();
+            long serverNow = TimeHelper.ServerNow();
             //自动攻击正在向怪物移动 这个时候不要频繁的打断。。
-            if (clientNow - self.AttackComponent.MoveAttackTime < 200)
+            if (serverNow - self.AttackComponent.MoveAttackTime < 200)
             {
                 return;
             }
-            long passTime = clientNow - self.lastSendTime;
+            long passTime = serverNow - self.lastSendTime;
             if (passTime  < 30 || (self.lastDirection == direction && passTime < self.checkTime))
             {
                 return;
@@ -355,7 +355,7 @@ namespace ET.Client
                 if (skillManager.HaveSkillType(ConfigData.Skill_XuanZhuan_Attack_2))
                 {
                     self.checkTime = 100;
-                    self.lastSendTime = clientNow;
+                    self.lastSendTime = serverNow;
                     self.lastDirection = direction;
                     MoveHelper.RequestSkillXuanZhuan( self.Root(), direction ).Coroutine();
                     return;
@@ -375,10 +375,10 @@ namespace ET.Client
 
             EventSystem.Instance.Publish(self.Root(), new BeforeMove() { DataParamString = string.Empty });
 
-            unit.MoveResultToAsync(pathfind, null ).Coroutine();
+            unit.MoveResultToAsync(pathfind, null, 100, serverNow ).Coroutine();
             unit.GetComponent<MoveComponent>().MoveToAsync(pathfind, speed).Coroutine();
             
-            self.lastSendTime = clientNow;
+            self.lastSendTime = serverNow;
             self.lastDirection = direction;
         }
         

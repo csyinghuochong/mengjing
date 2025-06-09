@@ -888,6 +888,12 @@ namespace ET
         [MemoryPackOrder(2)]
         public int SpeedRate { get; set; }
 
+        /// <summary>
+        /// 服务器时间戳
+        /// </summary>
+        [MemoryPackOrder(3)]
+        public long ServerTime { get; set; }
+
         public override void Dispose()
         {
             if (!this.IsFromPool)
@@ -898,6 +904,7 @@ namespace ET
             this.RpcId = default;
             this.Position.Clear();
             this.SpeedRate = default;
+            this.ServerTime = default;
 
             ObjectPool.Instance.Recycle(this);
         }
