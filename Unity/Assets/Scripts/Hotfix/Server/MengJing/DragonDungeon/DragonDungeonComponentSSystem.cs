@@ -526,7 +526,7 @@ namespace ET.Server
                         continue;
                     }
 
-                    if (MonsterConfigCategory.Instance.Contain(int.Parse(seneItems[1])))
+                    if (!MonsterConfigCategory.Instance.Contain(int.Parse(seneItems[1])))
                     {
                         Console.WriteLine($"怪物ID配置有误: {int.Parse(seneItems[1])}");
                         Log.Error($"怪物ID配置有误: {int.Parse(seneItems[1])}");

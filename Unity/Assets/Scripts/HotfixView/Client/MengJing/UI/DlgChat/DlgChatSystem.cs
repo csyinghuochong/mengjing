@@ -168,6 +168,12 @@ namespace ET.Client
                 return;
             }
 
+            if (text.Equals("#fps"))
+            {
+                self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgMain>().ShowPing();
+                return;
+            }
+
           
             if (text.Equals("#resetall"))
             {
