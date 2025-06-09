@@ -526,6 +526,13 @@ namespace ET.Server
                         continue;
                     }
 
+                    if (MonsterConfigCategory.Instance.Contain(int.Parse(seneItems[1])))
+                    {
+                        Console.WriteLine($"怪物ID配置有误: {int.Parse(seneItems[1])}");
+                        Log.Error($"怪物ID配置有误: {int.Parse(seneItems[1])}");
+                        continue;
+                    }
+
                     string[] position = seneItems[0].Split(",");
                     float3 vector3 = new float3(float.Parse(position[0]), float.Parse(position[1]), float.Parse(position[2]));
                     UnitFactory.CreateMonster(self.Scene(), int.Parse(seneItems[1]), vector3,
