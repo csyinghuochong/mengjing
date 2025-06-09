@@ -85,8 +85,8 @@ namespace ET
 
 #if DOTNET
 
-        public float3 Current;
-        public int Frame;
+        public float3 Current{ get; set; }
+        public int Frame{ get; set; }
         
  #endif
         

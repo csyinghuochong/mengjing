@@ -882,9 +882,6 @@ namespace ET
         [MemoryPackOrder(0)]
         public int RpcId { get; set; }
 
-        [MemoryPackOrder(1)]
-        public List<Unity.Mathematics.float3> Position { get; set; } = new();
-
         [MemoryPackOrder(2)]
         public int SpeedRate { get; set; }
 
@@ -894,6 +891,21 @@ namespace ET
         [MemoryPackOrder(3)]
         public long ServerTime { get; set; }
 
+        [MemoryPackOrder(4)]
+        public List<Unity.Mathematics.float3> Position { get; set; } = new();
+
+        /// <summary>
+        /// 当前位置
+        /// </summary>
+        [MemoryPackOrder(5)]
+        public Unity.Mathematics.float3 Current { get; set; }
+
+        /// <summary>
+        /// 当前帧
+        /// </summary>
+        [MemoryPackOrder(6)]
+        public int Frame { get; set; }
+
         public override void Dispose()
         {
             if (!this.IsFromPool)
@@ -902,9 +914,11 @@ namespace ET
             }
 
             this.RpcId = default;
-            this.Position.Clear();
             this.SpeedRate = default;
             this.ServerTime = default;
+            this.Position.Clear();
+            this.Current = default;
+            this.Frame = default;
 
             ObjectPool.Instance.Recycle(this);
         }
