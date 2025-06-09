@@ -79,11 +79,17 @@ namespace ET
 
         public quaternion To;
         
-        //0 摇杆移动 1点击移动
-        public bool WaitMove { get; set; }
-        public bool WaitMode{ get; set; }
-        
+       //0 摇杆移动 1点击移动
+               public bool WaitMove { get; set; }
+               public bool WaitMode{ get; set; }
 
+#if DOTNET
+
+        public float3 Current;
+        public int Frame;
+        
+ #endif
+        
         public float3 TargetPosition;
     }
 }

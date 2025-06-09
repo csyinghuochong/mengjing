@@ -200,9 +200,12 @@ message C2M_PathfindingRequest // ILocationMessage
 message C2M_PathfindingResult // ILocationMessage
 {
 	int32 RpcId = 1;
-  repeated	Unity.Mathematics.float3 Position = 2;
+  
 	int32 SpeedRate = 3;
 	int64 ServerTime = 4;   //服务器时间戳
+	repeated	Unity.Mathematics.float3 Position = 5;
+	Unity.Mathematics.float3 Current = 6;   //当前位置
+	int32 Frame = 7;                        //当前帧
 }
 
 message C2M_Stop // ILocationMessage
