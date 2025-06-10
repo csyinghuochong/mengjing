@@ -14,13 +14,14 @@ namespace ET.Server
                 return;
             }
             
+            if ( self.Player == null || self.Player.IsDisposed )
+             {
+                 return;
+             }
+            
             // 发送断线消息
             root.GetComponent<MessageLocationSenderComponent>().Get(LocationType.Unit).Send(self.Player.Id, G2M_SessionDisconnect.Create());
-
-            if ( self.Player == null || self.Player.IsDisposed )
-            {
-                return;
-            }
+            
             Console.WriteLine($"SessionPlayerComponent.Destroy:  {self.Player.Id}");
             
             PlayerSessionComponent playerSessionComponent = self.Player.GetComponent<PlayerSessionComponent>();
