@@ -12,6 +12,7 @@ Material:
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
+  - _BLENDNORMALSON_ON
   - _GROUNDCOVERON_ON
   m_InvalidKeywords: []
   m_LightmapFlags: 0
@@ -115,12 +116,13 @@ Material:
     m_Ints: []
     m_Floats:
     - _AlphaCutoff: 0.5
-    - _BlendnormalsON: 0
+    - _BlendnormalsON: 1
     - _BumpScale: 1
     - _CoverageContrast: 0.1
     - _CoverageFade: 1
     - _CoverageLevel: -0.12
     - _CoverageMetallic: 0
+    - _CoverageSmoothness: 0.5
     - _CoverageSmoothnessMultiplier: 0
     - _CoverageThickness: 0
     - _CoverageThicknessLevel1: 0.1
@@ -153,4 +155,5 @@ Material:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _CoverageTint: {r: 0.57235086, g: 0.8679245, b: 0.2251691, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _EmissiveColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
