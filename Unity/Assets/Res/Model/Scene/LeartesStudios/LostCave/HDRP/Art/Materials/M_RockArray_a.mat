@@ -37,17 +37,17 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: M_RockArray_a
-  m_Shader: {fileID: -6465566751694194690, guid: fcb2cde8723ed424da57abd345ee05af,
-    type: 3}
+  m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
-  m_ValidKeywords: []
-  m_InvalidKeywords:
-  - _DISABLE_SSR_TRANSPARENT
+  m_ValidKeywords:
+  - _METALLICSPECGLOSSMAP
+  - _NORMALMAP
+  m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 2225
+  m_CustomRenderQueue: -1
   stringTagMap:
     MotionVector: User
     RenderType: Opaque
@@ -65,6 +65,22 @@ Material:
         m_Texture: {fileID: 2800000, guid: 721b53d1344a83943bab7188d4ae7b82, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _BumpMap:
+        m_Texture: {fileID: 2800000, guid: ade59cf611593ab459ade1150a4c6667, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailAlbedoMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailMask:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailNormalMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _Detail_Map_Normal:
         m_Texture: {fileID: 2800000, guid: d7b6103e4aa403f4595df6ac718a71ae, type: 3}
         m_Scale: {x: 1, y: 1}
@@ -73,12 +89,24 @@ Material:
         m_Texture: {fileID: 2800000, guid: 8a566cf791d599242b6d22c0d59f83e3, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _EmissionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _Emissive:
         m_Texture: {fileID: 2800000, guid: d14bc1e4f8accef4fabe39b3656daf5c, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Macro_Normal:
         m_Texture: {fileID: 2800000, guid: d7b6103e4aa403f4595df6ac718a71ae, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 2800000, guid: 721b53d1344a83943bab7188d4ae7b82, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MetallicGlossMap:
+        m_Texture: {fileID: 2800000, guid: e7cca791a55d3874088f31d93ee0a7c2, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MossDiffuse:
@@ -109,11 +137,19 @@ Material:
         m_Texture: {fileID: 2800000, guid: ea42c502c9fae374b91031a97b0f0618, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _OcclusionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _Opacity:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OpacityMask:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ParallaxMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -131,6 +167,10 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _RockNormal:
         m_Texture: {fileID: 2800000, guid: ade59cf611593ab459ade1150a4c6667, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SpecGlossMap:
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
@@ -172,13 +212,19 @@ Material:
     - _Blend: 0
     - _BlendMode: 0
     - _BlendModePreserveSpecular: 0
+    - _BumpScale: 1
     - _CastShadows: 1
+    - _ClearCoatMask: 0
+    - _ClearCoatSmoothness: 0
     - _ConservativeDepthOffsetEnable: 0
     - _Contrast: 9.7
     - _Cull: 2
     - _CullMode: 2
     - _CullModeForward: 2
+    - _Cutoff: 0.5
     - _DepthOffsetEnable: 0
+    - _DetailAlbedoMapScale: 1
+    - _DetailNormalMapScale: 1
     - _Detail_A_Curvature: 1
     - _Detail_Curvature_Max: 0.05
     - _Detail_Curvature_Min: 0.55
@@ -188,15 +234,20 @@ Material:
     - _DoubleSidedGIMode: 0
     - _DoubleSidedNormalMode: 2
     - _DstBlend: 0
+    - _DstBlendAlpha: 0
     - _Emission_Strength: 1
     - _EmissiveFlicker: 0
     - _Emissive_Power: 1
     - _EnableBlendModePreserveSpecularLighting: 1
     - _EnableFogOnTransparent: 1
     - _Enable_Opacity: 0
+    - _EnvironmentReflections: 1
     - _Flatness: 0.5
+    - _GlossMapScale: 0
+    - _Glossiness: 0
+    - _GlossyReflections: 0
     - _Level: 1.37
-    - _Metallic: 0
+    - _Metallic: 0.2
     - _Metallic_Strength: 1
     - _MossDiffuseStrength: 1
     - _MossGlossStrength: 1
@@ -207,9 +258,11 @@ Material:
     - _NormalMap_Strength: 1
     - _NormalStrength: 1
     - _Normal_Map_A_Strength: 0.2
+    - _OcclusionStrength: 1
     - _OpacityMap: 0
     - _Opacity_from_Basecolor_Alpha: 1
     - _OpaqueCullMode: 2
+    - _Parallax: 0.005
     - _QueueControl: 1
     - _QueueOffset: 0
     - _RayTracing: 0
@@ -227,8 +280,12 @@ Material:
     - _Roughness_Power: 2
     - _Roughness_Strength: 1
     - _Saturation: 1
+    - _Smoothness: 0.2
+    - _SmoothnessTextureChannel: 0
+    - _SpecularHighlights: 1
     - _Speed: 0.7
     - _SrcBlend: 1
+    - _SrcBlendAlpha: 1
     - _StencilRef: 0
     - _StencilRefDepth: 8
     - _StencilRefDistortionVec: 4
@@ -272,13 +329,16 @@ Material:
     - _tvflicker_onoff2: 0.9
     m_Colors:
     - _BC_Tint: {r: 1, g: 1, b: 1, a: 0}
+    - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _BaseColor_Value: {r: 0.7294118, g: 0.7294118, b: 0.7294118, a: 1}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _DirtColor: {r: 0.39607847, g: 0.33333328, b: 0.26274508, a: 1}
     - _DoubleSidedConstants: {r: 1, g: 1, b: -1, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
     - _EmissiveColor: {r: 1, g: 1, b: 1, a: 0}
     - _MossOffset: {r: 1.19, g: 1.99, b: 0.64, a: 0}
     - _ORM_1: {r: 0.97647053, g: 0.5647059, b: 0, a: 1}
+    - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []
 --- !u!114 &4959632002188563569
 MonoBehaviour:
