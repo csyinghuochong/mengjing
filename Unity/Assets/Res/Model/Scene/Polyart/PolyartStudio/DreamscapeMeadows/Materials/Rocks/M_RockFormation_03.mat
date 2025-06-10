@@ -9,16 +9,21 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: M_RockFormation_03
   m_Shader: {fileID: 4800000, guid: 9e462be833276004095a6c0ca5194f33, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
+  - _BLENDNORMALS
+  - _GROUNDCOVERON
+  m_InvalidKeywords:
   - _BLENDNORMALSON_ON
   - _GROUNDCOVERON_ON
-  m_InvalidKeywords: []
   m_LightmapFlags: 0
   m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
+  m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -32,7 +37,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _CoverageMask:
         m_Texture: {fileID: 2800000, guid: f3a1f84b44733e44e9e06b47e364540b, type: 3}
-        m_Scale: {x: 2.89, y: 1}
+        m_Scale: {x: 3, y: 3}
         m_Offset: {x: 0, y: 0}
     - _CoverageNormalTexture:
         m_Texture: {fileID: 2800000, guid: d6545aaaf3fe7644db0ce9cedba45f55, type: 3}
@@ -113,14 +118,17 @@ Material:
     m_Ints: []
     m_Floats:
     - _AlphaCutoff: 0.5
+    - _BlendNormalsON: 1
     - _BlendnormalsON: 1
+    - _Brightness: 3
     - _BumpScale: 1
+    - _Contrast: 1
     - _CoverageContrast: 0.1
     - _CoverageFade: 0.51
     - _CoverageLevel: -0.47
-    - _CoverageMetallic: 0
-    - _CoverageSmoothnessMultiplier: -0.03
-    - _CoverageThickness: 0.1
+    - _CoverageMetallic: 1
+    - _CoverageSmoothnessMultiplier: -2
+    - _CoverageThickness: 0.3
     - _CoverageThicknessLevel1: 0.1
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
@@ -139,7 +147,7 @@ Material:
     - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
-    - _SmoothnessMultiplier: 1
+    - _SmoothnessMultiplier: 0.2
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
@@ -149,6 +157,6 @@ Material:
     m_Colors:
     - _AlbedoTint: {r: 1, g: 1, b: 1, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _CoverageTint: {r: 0.54603964, g: 0.8584906, b: 0.18222678, a: 1}
+    - _CoverageTint: {r: 0.5697603, g: 0.9622642, b: 0.11347453, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
   m_BuildTextureStacks: []
