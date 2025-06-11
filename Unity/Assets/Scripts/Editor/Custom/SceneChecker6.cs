@@ -51,6 +51,11 @@ namespace ET.Client
             string[] dependPathList = AssetDatabase.GetDependencies(new string[] { fontPath });
             foreach (string path in dependPathList)
             {
+                if (path.Contains("Packages/com.unity.render-pipelines.universal"))
+                {
+                    continue;
+                }
+
                 if (path.EndsWith(".shader") || path.EndsWith(".shadergraph"))
                 {
                     using (var stream = File.OpenRead(path))
