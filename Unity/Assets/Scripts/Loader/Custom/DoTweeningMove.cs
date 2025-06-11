@@ -75,6 +75,7 @@ public class DoTweeningMove : MonoBehaviour
             return;
         }
 
+        
         if (this.passTime > MoveToTime)
         {
             if (!this.isLoop)

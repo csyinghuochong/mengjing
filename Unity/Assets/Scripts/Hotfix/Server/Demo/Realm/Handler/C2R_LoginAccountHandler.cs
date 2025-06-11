@@ -81,7 +81,7 @@ namespace ET.Server
                         
                         if (!centerAccountInfo.Password.Equals(request.Password))
                         {
-                            response.Error = ErrorCode.ERR_LoginInfoIsNull;
+                            response.Error = ErrorCode.ERR_AccountOrPasswordError;
                             session.Disconnect().Coroutine();
                             centerAccountInfo?.Dispose();
                             return;
