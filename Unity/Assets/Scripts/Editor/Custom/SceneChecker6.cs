@@ -41,6 +41,30 @@ namespace ET.Client
             UnityEngine.Debug.Log("KCheckDependencies: End");
         }
 
+        [MenuItem("Assets/Custom/Check Dependencies Shader", false, 1)] //路径
+        public static void CheckDependenciesShader()
+        {
+            string fontPath = AssetDatabase.GetAssetPath(Selection.activeInstanceID);
+            UnityEngine.Debug.Log("fontPath: " + fontPath);
+            UnityEngine.Debug.Log("KCheckDependencies: Begin");
+
+            string[] dependPathList = AssetDatabase.GetDependencies(new string[] { fontPath });
+            foreach (string path in dependPathList)
+            {
+                if (path.EndsWith(".shader") || path.EndsWith(".shadergraph"))
+                {
+                    using (var stream = File.OpenRead(path))
+                    {
+                        long fileSize = stream.Length;
+                        UnityEngine.Debug.Log(fileSize + "   " + path);
+                    }
+                }
+            }
+
+            UnityEngine.Debug.Log("KCheckDependencies: End");
+        }
+        
+        
         // [MenuItem("Asset / ), false, 1]
         [MenuItem("Assets/Custom/Check References Bundler", false, 1)] //路径
         public static void KCheckBundleReferences()
