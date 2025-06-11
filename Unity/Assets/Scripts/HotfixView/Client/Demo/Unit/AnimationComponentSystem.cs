@@ -37,14 +37,14 @@ namespace ET.Client
                 AnimancerComponent animancerComponent = animator.gameObject.GetComponent<AnimancerComponent>();
                 if (animancerComponent == null)
                 {
-                    Log.Error("对象未添加 mono脚本 AnimancerComponent！！！");
+                    Log.Error($"对象未添加 mono脚本 AnimancerComponent！！！  {go.name}");
                     return;
                 }
 
                 AnimData animData = animator.gameObject.GetComponent<AnimData>();
                 if (animData == null)
                 {
-                    Log.Error("对象未添加 mono脚本 AnimData！！！");
+                    Log.Error($"对象未添加 mono脚本 AnimData！！！  {go.name}");
                     return;
                 }
 
