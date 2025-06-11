@@ -30,7 +30,7 @@ namespace ET.Client
         {
             GUILayout.Label("场景预制体分组", EditorStyles.boldLabel);
             processAllScenes = EditorGUILayout.ToggleLeft($"处理所有场景 ({ScenesRoot})", processAllScenes);
-
+            processAllScenes = false;
             if (!processAllScenes)
             {
                 EditorGUILayout.Space();
