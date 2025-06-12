@@ -17,13 +17,6 @@ Shader "Shader Graphs/S_Water_Moving"
         _line_threshold("line_threshold", Float) = 0.642857
         _uv_fade("uv_fade", Float) = 0
         _line_color("line_color", Color) = (0.572549, 0.9137256, 1, 1)
-        _foam_scale("foam_scale", Float) = 3
-        _foam_speed("foam_speed", Float) = 0.015
-        _Foam_fade_dist("Foam_fade_dist", Float) = 40
-        _fade_edge_distance("fade_edge_distance", Float) = 5
-        _foam_contrast("foam_contrast", Float) = 1
-        _Rough_tiling("Rough_tiling", Float) = 0.5
-        _Rough_mask_speed("Rough_mask_speed", Float) = 0
         [NoScaleOffset]_Rough_mask("Rough_mask", 2D) = "white" {}
         _roughness("roughness", Float) = 0.15
         _rough_contrast("rough_contrast", Float) = 0
@@ -33,40 +26,22 @@ Shader "Shader Graphs/S_Water_Moving"
         _wave_large_normal_Strength("wave_large_normal_Strength", Float) = 0.8
         _tiling_small("tiling_small", Float) = 20
         _wave_small_normal_strength("wave_small_normal_strength", Float) = 0.8
-        _Normal_Fade("Normal_Fade", Float) = 4424.14
+
         [NonModifiableTextureData][NoScaleOffset]_SampleTexture2D_f64e160b100a4c1faf2dfe6fb27e0c39_Texture_1_Texture2D("Texture2D", 2D) = "white" {}
         [NonModifiableTextureData][Normal][NoScaleOffset]_SampleTexture2D_19c2ee1cfad84fc8ab6b00b0833b25bf_Texture_1_Texture2D("Texture2D", 2D) = "bump" {}
         [NonModifiableTextureData][Normal][NoScaleOffset]_SampleTexture2D_059e5ab9551d4a10a1361de5ac7a2ab3_Texture_1_Texture2D("Texture2D", 2D) = "bump" {}
-        [HideInInspector]_WorkflowMode("_WorkflowMode", Float) = 1
-        [HideInInspector]_CastShadows("_CastShadows", Float) = 1
-        [HideInInspector]_ReceiveShadows("_ReceiveShadows", Float) = 1
+
+
         [HideInInspector]_Surface("_Surface", Float) = 0
         [HideInInspector]_Blend("_Blend", Float) = 0
-        [HideInInspector]_AlphaClip("_AlphaClip", Float) = 0
-        [HideInInspector]_BlendModePreserveSpecular("_BlendModePreserveSpecular", Float) = 0
+
         [HideInInspector]_SrcBlend("_SrcBlend", Float) = 1
         [HideInInspector]_DstBlend("_DstBlend", Float) = 0
         [HideInInspector][ToggleUI]_ZWrite("_ZWrite", Float) = 1
-        [HideInInspector]_ZWriteControl("_ZWriteControl", Float) = 0
+
         [HideInInspector]_ZTest("_ZTest", Float) = 4
         [HideInInspector]_Cull("_Cull", Float) = 2
         [HideInInspector]_AlphaToMask("_AlphaToMask", Float) = 0
-        [HideInInspector]_QueueOffset("_QueueOffset", Float) = 0
-        [HideInInspector]_QueueControl("_QueueControl", Float) = -1
-        [HideInInspector][NoScaleOffset]unity_Lightmaps("unity_Lightmaps", 2DArray) = "" {}
-        [HideInInspector][NoScaleOffset]unity_LightmapsInd("unity_LightmapsInd", 2DArray) = "" {}
-        [HideInInspector][NoScaleOffset]unity_ShadowMasks("unity_ShadowMasks", 2DArray) = "" {}
-        [HideInInspector]_BUILTIN_Surface("Float", Float) = 0
-        [HideInInspector]_BUILTIN_Blend("Float", Float) = 0
-        [HideInInspector]_BUILTIN_AlphaClip("Float", Float) = 0
-        [HideInInspector]_BUILTIN_SrcBlend("Float", Float) = 1
-        [HideInInspector]_BUILTIN_DstBlend("Float", Float) = 0
-        [HideInInspector]_BUILTIN_ZWrite("Float", Float) = 1
-        [HideInInspector]_BUILTIN_ZWriteControl("Float", Float) = 0
-        [HideInInspector]_BUILTIN_ZTest("Float", Float) = 4
-        [HideInInspector]_BUILTIN_CullMode("Float", Float) = 2
-        [HideInInspector]_BUILTIN_QueueOffset("Float", Float) = 0
-        [HideInInspector]_BUILTIN_QueueControl("Float", Float) = -1
     }
     SubShader
     {
@@ -372,13 +347,6 @@ Shader "Shader Graphs/S_Water_Moving"
         float _line_threshold;
         float _uv_fade;
         float4 _line_color;
-        float _foam_scale;
-        float _foam_speed;
-        float _fade_edge_distance;
-        float _Foam_fade_dist;
-        float _foam_contrast;
-        float _Rough_tiling;
-        float _Rough_mask_speed;
         float4 _Rough_mask_TexelSize;
         float _roughness;
         float _rough_contrast;
@@ -388,7 +356,7 @@ Shader "Shader Graphs/S_Water_Moving"
         float _wave_large_normal_Strength;
         float _tiling_small;
         float _wave_small_normal_strength;
-        float _Normal_Fade;
+
         CBUFFER_END
 
         SAMPLER(SamplerState_Linear_Repeat);
@@ -1162,13 +1130,6 @@ Shader "Shader Graphs/S_Water_Moving"
         float _line_threshold;
         float _uv_fade;
         float4 _line_color;
-        float _foam_scale;
-        float _foam_speed;
-        float _fade_edge_distance;
-        float _Foam_fade_dist;
-        float _foam_contrast;
-        float _Rough_tiling;
-        float _Rough_mask_speed;
         float4 _Rough_mask_TexelSize;
         float _roughness;
         float _rough_contrast;
@@ -1178,7 +1139,7 @@ Shader "Shader Graphs/S_Water_Moving"
         float _wave_large_normal_Strength;
         float _tiling_small;
         float _wave_small_normal_strength;
-        float _Normal_Fade;
+
         CBUFFER_END
      
         SAMPLER(SamplerState_Linear_Repeat);
