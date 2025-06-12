@@ -24,7 +24,7 @@ namespace ET.Client
 
             Application.targetFrameRate = 60;
             SettingData.AnimController = GlobalHelp.GetVersionMode() == 0 ? 0 : 1;
-            
+            GlobalComponent.Instance.MainCamera.GetComponent<Camera>().farClipPlane = 20;
             GameObject.Find("Global").GetComponent<Init>().TogglePatchWindow(false);
             
             self.View.E_AccountInputField.text = PlayerPrefsHelp.GetString("MJ_Account");
