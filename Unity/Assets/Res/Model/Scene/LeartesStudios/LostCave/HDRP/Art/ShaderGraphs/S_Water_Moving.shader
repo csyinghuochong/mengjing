@@ -58,19 +58,14 @@ Shader "Shader Graphs/S_Water_Moving"
                 "LightMode" = "UniversalForward"
             }
         
-        // Render State
+
         Cull [_Cull]
         Blend [_SrcBlend] [_DstBlend]
         ZTest [_ZTest]
         ZWrite [_ZWrite]
         AlphaToMask [_AlphaToMask]
         
-        // Debug
-        // <None>
-        
-        // --------------------------------------------------
-        // Pass
-        
+
         HLSLPROGRAM
         
         // Pragmas
@@ -106,9 +101,7 @@ Shader "Shader Graphs/S_Water_Moving"
         #pragma shader_feature_local_fragment _ _ALPHATEST_ON
         #pragma shader_feature_local_fragment _ _SPECULAR_SETUP
         #pragma shader_feature_local _ _RECEIVE_SHADOWS_OFF
-        // GraphKeywords: <None>
-        
-        // Defines
+
         
         #define _NORMALMAP 1
         #define _NORMAL_DROPOFF_TS 1
@@ -124,36 +117,19 @@ Shader "Shader Graphs/S_Water_Moving"
         #define VARYINGS_NEED_FOG_AND_VERTEX_LIGHT
         #define VARYINGS_NEED_SHADOW_COORD
         #define FEATURES_GRAPH_VERTEX
-        /* WARNING: $splice Could not find named fragment 'PassInstancing' */
         #define SHADERPASS SHADERPASS_FORWARD
         #define _FOG_FRAGMENT 1
         #define REQUIRE_DEPTH_TEXTURE
         
-        
-        // custom interpolator pre-include
-        /* WARNING: $splice Could not find named fragment 'sgci_CustomInterpolatorPreInclude' */
-        
-        // Includes
-        #include_with_pragmas "Packages/com.unity.render-pipelines.universal/ShaderLibrary/DOTS.hlsl"
-        #include_with_pragmas "Packages/com.unity.render-pipelines.universal/ShaderLibrary/RenderingLayers.hlsl"
+
         #include "Packages/com.unity.render-pipelines.core/ShaderLibrary/Color.hlsl"
         #include "Packages/com.unity.render-pipelines.core/ShaderLibrary/Texture.hlsl"
         #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
         #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Lighting.hlsl"
         #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Input.hlsl"
         #include "Packages/com.unity.render-pipelines.core/ShaderLibrary/TextureStack.hlsl"
-        #include_with_pragmas "Packages/com.unity.render-pipelines.core/ShaderLibrary/FoveatedRenderingKeywords.hlsl"
-        #include "Packages/com.unity.render-pipelines.core/ShaderLibrary/FoveatedRendering.hlsl"
-        #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Shadows.hlsl"
         #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/ShaderGraphFunctions.hlsl"
-        #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/DBuffer.hlsl"
         #include "Packages/com.unity.render-pipelines.universal/Editor/ShaderGraph/Includes/ShaderPass.hlsl"
-        
-        // --------------------------------------------------
-        // Structs and Packing
-        
-        // custom interpolators pre packing
-        /* WARNING: $splice Could not find named fragment 'CustomInterpolatorPrePacking' */
         
         struct Attributes
         {
@@ -291,12 +267,7 @@ Shader "Shader Graphs/S_Water_Moving"
         {
             Varyings output;
             output.positionCS = input.positionCS;
-            #if defined(LIGHTMAP_ON)
-            output.staticLightmapUV = input.staticLightmapUV;
-            #endif
-            #if defined(DYNAMICLIGHTMAP_ON)
-            output.dynamicLightmapUV = input.dynamicLightmapUV;
-            #endif
+           
             #if !defined(LIGHTMAP_ON)
             output.sh = input.sh;
             #endif
@@ -915,16 +886,13 @@ Shader "Shader Graphs/S_Water_Moving"
         #define SHADERPASS SHADERPASS_GBUFFER
         #define _FOG_FRAGMENT 1
         #define REQUIRE_DEPTH_TEXTURE
-  
-        #include_with_pragmas "Packages/com.unity.render-pipelines.universal/ShaderLibrary/DOTS.hlsl"
-        #include_with_pragmas "Packages/com.unity.render-pipelines.universal/ShaderLibrary/RenderingLayers.hlsl"
+        
         #include "Packages/com.unity.render-pipelines.core/ShaderLibrary/Color.hlsl"
         #include "Packages/com.unity.render-pipelines.core/ShaderLibrary/Texture.hlsl"
         #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
         #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Lighting.hlsl"
         #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Input.hlsl"
         #include "Packages/com.unity.render-pipelines.core/ShaderLibrary/TextureStack.hlsl"
-        #include_with_pragmas "Packages/com.unity.render-pipelines.core/ShaderLibrary/FoveatedRenderingKeywords.hlsl"
         #include "Packages/com.unity.render-pipelines.core/ShaderLibrary/FoveatedRendering.hlsl"
         #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Shadows.hlsl"
         #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/ShaderGraphFunctions.hlsl"
