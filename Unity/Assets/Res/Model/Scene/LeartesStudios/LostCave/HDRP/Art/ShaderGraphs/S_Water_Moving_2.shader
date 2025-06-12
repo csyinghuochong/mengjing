@@ -487,9 +487,10 @@ Shader "Shader Graphs/S_Water_Moving_2"
                 // 主线条纹理处理
                 float4 mainLineUV = uv0;
                 float4 mainLineScale = float4(_LineScaleWidth * mainLineUV.r, pow(mainLineUV.g, _LineAcceleration), 0, 0);
+               // 修改主线条纹理移动方向
                 float4 mainLineUVScaled = float4(
                     _LinesMainScaleX * mainLineScale.r,
-                    _LinesMainScaleY * (mainLineScale.g - input.TimeParameters.x * _LinesMainSpeed),
+                    _LinesMainScaleY * (mainLineScale.g + input.TimeParameters.x * _LinesMainSpeed), // 将减号改为加号
                     0, 0
                 );
                 
@@ -498,11 +499,13 @@ Shader "Shader Graphs/S_Water_Moving_2"
                 
                 // 次线条纹理处理
                 float4 secondaryLineUV = uv0;
+                // 修改次线条纹理移动方向
                 float4 secondaryLineScale = float4(
                     _LinesSecondaryScaleX * secondaryLineUV.r,
-                    _LinesSecondaryScaleY * (secondaryLineUV.g - input.TimeParameters.x * _TimeSecondarySpeed),
+                    _LinesSecondaryScaleY * (secondaryLineUV.g + input.TimeParameters.x * _TimeSecondarySpeed), // 将减号改为加号
                     0, 0
                 );
+
                 
                 float4 secondaryLineTex = SAMPLE_TEXTURE2D(_BaseTexture, sampler_BaseTexture, secondaryLineScale.xy);
                 float4 combinedLines = mainLineEnhanced * secondaryLineTex * float4(2, 2, 2, 2);
@@ -531,7 +534,8 @@ Shader "Shader Graphs/S_Water_Moving_2"
                 
                 // 小波纹法线
                 float4 smallNormalUV = uv0 * _TilingSmall;
-                float2 smallNormalMotion = float2(0, -2) * input.TimeParameters.x;
+               // 修改小波纹法线移动方向
+                float2 smallNormalMotion = float2(0, 2) * input.TimeParameters.x; // 移除负号或修改符号
                 float2 rotatedSmallUV = smallNormalUV.xy + smallNormalMotion;
                 
                 float4 rotatedSmallNormalUV;
