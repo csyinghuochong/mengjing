@@ -71,6 +71,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _BaseTexture:
+        m_Texture: {fileID: 2800000, guid: 668eb5bf08e537141ad09b8d869dc2a5, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _BentNormalMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -105,6 +109,14 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _IridescenceThicknessMap:
         m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _LargeNormalMap:
+        m_Texture: {fileID: 2800000, guid: 332af182a64451141acd978bdd7c24d2, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _LinesMainTex:
+        m_Texture: {fileID: 2800000, guid: 668eb5bf08e537141ad09b8d869dc2a5, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
@@ -169,6 +181,10 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _SampleTexture2D_f64e160b100a4c1faf2dfe6fb27e0c39_Texture_1_Texture2D:
         m_Texture: {fileID: 2800000, guid: 668eb5bf08e537141ad09b8d869dc2a5, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SmallNormalMap:
+        m_Texture: {fileID: 2800000, guid: 332af182a64451141acd978bdd7c24d2, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SpecularColorMap:
@@ -275,6 +291,7 @@ Material:
     - _EnableFogOnTransparent: 1
     - _EnableGeometricSpecularAA: 0
     - _EnergyConservingSpecularColor: 1
+    - _FadeDistanceColor: 1000
     - _Fade_distance_color: 1000
     - _Flatness: 0.5
     - _Foam_fade_dist: 40
@@ -291,6 +308,14 @@ Material:
     - _Ior: 1.5
     - _IridescenceMask: 1
     - _IridescenceThickness: 1
+    - _LineAcceleration: 0.5
+    - _LineScaleWidth: 1
+    - _LineThreshold: 0.642857
+    - _LinesMainScaleX: 0.5
+    - _LinesMainScaleY: 1.3
+    - _LinesMainSpeed: 0.13
+    - _LinesSecondaryScaleX: 2
+    - _LinesSecondaryScaleY: 1
     - _Lines_secondary_scale_X: 0.5
     - _Lines_secondary_scale_X_1: 1
     - _Lines_secondary_scale_X_2: 1
@@ -348,6 +373,9 @@ Material:
     - _TexWorldScale: 1
     - _TexWorldScaleEmissive: 1
     - _Thickness: 1
+    - _TilingLarge: 12
+    - _TilingSmall: 20
+    - _TimeSecondarySpeed: 1.15
     - _TransmissionEnable: 1
     - _TransparentBackfaceEnable: 0
     - _TransparentCullMode: 2
@@ -360,11 +388,14 @@ Material:
     - _UVBase: 0
     - _UVDetail: 0
     - _UVEmissive: 0
+    - _UVFade: 0
     - _UseEmissiveIntensity: 0
     - _UseShadowThreshold: 0
     - _Use_Emissive: 0
     - _WPO_Speed: 5
     - _WPO_Tiling: 1
+    - _WaveLargeNormalStrength: 0.8
+    - _WaveSmallNormalStrength: 0.8
     - _WorkflowMode: 1
     - _ZTest: 4
     - _ZTestDepthEqualForOpaque: 4
@@ -410,12 +441,15 @@ Material:
     - _EmissiveColorLDR: {r: 0, g: 0, b: 0, a: 1}
     - _InvPrimScale: {r: 1, g: 1, b: 0, a: 0}
     - _IridescenceThicknessRemap: {r: 0, g: 1, b: 0, a: 0}
+    - _LineColor: {r: 0.572549, g: 0.9137256, b: 1, a: 1}
     - _SpecularColor: {r: 1, g: 1, b: 1, a: 1}
     - _ThicknessRemap: {r: 0, g: 1, b: 0, a: 0}
     - _TransmittanceColor: {r: 1, g: 1, b: 1, a: 1}
     - _UVDetailsMappingMask: {r: 1, g: 0, b: 0, a: 0}
     - _UVMappingMask: {r: 1, g: 0, b: 0, a: 0}
     - _UVMappingMaskEmissive: {r: 1, g: 0, b: 0, a: 0}
+    - _WaterColor: {r: 0, g: 0.42745098, b: 0.454902, a: 1}
+    - _WaterColorDeep: {r: 0, g: 0.29019606, b: 0.38039213, a: 1}
     - _Water_color: {r: 0.079061314, g: 0.57844067, b: 0.6132076, a: 1}
     - _Water_color_deep: {r: 1, g: 1, b: 1, a: 1}
     - _line_color: {r: 1, g: 1, b: 1, a: 1}
