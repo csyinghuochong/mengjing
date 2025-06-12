@@ -35,7 +35,6 @@ public class GameStartImg : MonoBehaviour
         nowShowImgNum = 0;
         PassTime = 0f;
         Obj_StartImg[nowShowImgNum].SetActive(true);
-        UnityEngine.Debug.Log($"00000000000: {this.transform.name}");
     }
 	
     void  CrossFadeAlpha(Transform transform, float alpha, float duration)
