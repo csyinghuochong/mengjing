@@ -353,11 +353,6 @@ Shader "Shader Graphs/S_Water_Moving"
             return output;
         }
         
-        
-        // --------------------------------------------------
-        // Graph
-        
-        // Graph Properties
         CBUFFER_START(UnityPerMaterial)
         float4 _SampleTexture2D_059e5ab9551d4a10a1361de5ac7a2ab3_Texture_1_Texture2D_TexelSize;
         float4 _SampleTexture2D_19c2ee1cfad84fc8ab6b00b0833b25bf_Texture_1_Texture2D_TexelSize;
@@ -395,9 +390,7 @@ Shader "Shader Graphs/S_Water_Moving"
         float _wave_small_normal_strength;
         float _Normal_Fade;
         CBUFFER_END
-        
-        
-        // Object and Global properties
+
         SAMPLER(SamplerState_Linear_Repeat);
         TEXTURE2D(_SampleTexture2D_059e5ab9551d4a10a1361de5ac7a2ab3_Texture_1_Texture2D);
         SAMPLER(sampler_SampleTexture2D_059e5ab9551d4a10a1361de5ac7a2ab3_Texture_1_Texture2D);
@@ -410,21 +403,14 @@ Shader "Shader Graphs/S_Water_Moving"
         TEXTURE2D(_Rough_mask);
         SAMPLER(sampler_Rough_mask);
         
-        // Graph Includes
-        // GraphIncludes: <None>
-        
-        // -- Property used by ScenePickingPass
         #ifdef SCENEPICKINGPASS
         float4 _SelectionID;
         #endif
         
-        // -- Properties used by SceneSelectionPass
         #ifdef SCENESELECTIONPASS
         int _ObjectId;
         int _PassValue;
         #endif
-        
-        // Graph Functions
         
         void Unity_SceneDepth_Eye_float(float4 UV, out float Out)
         {
@@ -874,14 +860,9 @@ Shader "Shader Graphs/S_Water_Moving"
             /* WARNING: $splice Could not find named fragment 'VFXSetFragInputs' */
         
         #endif
-        
             
-        
-        
-        
             output.TangentSpaceNormal = float3(0.0f, 0.0f, 1.0f);
-        
-        
+
             output.WorldSpacePosition = input.positionWS;
             output.ScreenPosition = ComputeScreenPos(TransformWorldToHClip(input.positionWS), _ProjectionParams.x);
         
@@ -906,14 +887,10 @@ Shader "Shader Graphs/S_Water_Moving"
                 return output;
         }
         
-        // --------------------------------------------------
-        // Main
-        
         #include "Packages/com.unity.render-pipelines.universal/Editor/ShaderGraph/Includes/Varyings.hlsl"
         #include "Packages/com.unity.render-pipelines.universal/Editor/ShaderGraph/Includes/PBRForwardPass.hlsl"
         
         // --------------------------------------------------
-        // Visual Effect Vertex Invocations
         #ifdef HAVE_VFX_MODIFICATION
         #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/VisualEffectVertex.hlsl"
         #endif
@@ -927,22 +904,14 @@ Shader "Shader Graphs/S_Water_Moving"
             {
                 "LightMode" = "UniversalGBuffer"
             }
-        
-        // Render State
+            
         Cull [_Cull]
         Blend [_SrcBlend] [_DstBlend]
         ZTest [_ZTest]
         ZWrite [_ZWrite]
-        
-        // Debug
-        // <None>
-        
-        // --------------------------------------------------
-        // Pass
-        
+   
         HLSLPROGRAM
         
-        // Pragmas
         #pragma target 4.5
         #pragma exclude_renderers gles gles3 glcore
         #pragma multi_compile_instancing
@@ -951,7 +920,6 @@ Shader "Shader Graphs/S_Water_Moving"
         #pragma vertex vert
         #pragma fragment frag
         
-        // Keywords
         #pragma multi_compile _ LIGHTMAP_ON
         #pragma multi_compile _ DYNAMICLIGHTMAP_ON
         #pragma multi_compile _ DIRLIGHTMAP_COMBINED
@@ -972,10 +940,7 @@ Shader "Shader Graphs/S_Water_Moving"
         #pragma shader_feature_local_fragment _ _ALPHATEST_ON
         #pragma shader_feature_local_fragment _ _SPECULAR_SETUP
         #pragma shader_feature_local _ _RECEIVE_SHADOWS_OFF
-        // GraphKeywords: <None>
-        
-        // Defines
-        
+
         #define _NORMALMAP 1
         #define _NORMAL_DROPOFF_TS 1
         #define ATTRIBUTES_NEED_NORMAL
@@ -990,16 +955,11 @@ Shader "Shader Graphs/S_Water_Moving"
         #define VARYINGS_NEED_FOG_AND_VERTEX_LIGHT
         #define VARYINGS_NEED_SHADOW_COORD
         #define FEATURES_GRAPH_VERTEX
-        /* WARNING: $splice Could not find named fragment 'PassInstancing' */
+      
         #define SHADERPASS SHADERPASS_GBUFFER
         #define _FOG_FRAGMENT 1
         #define REQUIRE_DEPTH_TEXTURE
-        
-        
-        // custom interpolator pre-include
-        /* WARNING: $splice Could not find named fragment 'sgci_CustomInterpolatorPreInclude' */
-        
-        // Includes
+  
         #include_with_pragmas "Packages/com.unity.render-pipelines.universal/ShaderLibrary/DOTS.hlsl"
         #include_with_pragmas "Packages/com.unity.render-pipelines.universal/ShaderLibrary/RenderingLayers.hlsl"
         #include "Packages/com.unity.render-pipelines.core/ShaderLibrary/Color.hlsl"
@@ -1014,13 +974,7 @@ Shader "Shader Graphs/S_Water_Moving"
         #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/ShaderGraphFunctions.hlsl"
         #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/DBuffer.hlsl"
         #include "Packages/com.unity.render-pipelines.universal/Editor/ShaderGraph/Includes/ShaderPass.hlsl"
-        
-        // --------------------------------------------------
-        // Structs and Packing
-        
-        // custom interpolators pre packing
-        /* WARNING: $splice Could not find named fragment 'CustomInterpolatorPrePacking' */
-        
+       
         struct Attributes
         {
              float3 positionOS : POSITION;
@@ -1189,11 +1143,6 @@ Shader "Shader Graphs/S_Water_Moving"
             return output;
         }
         
-        
-        // --------------------------------------------------
-        // Graph
-        
-        // Graph Properties
         CBUFFER_START(UnityPerMaterial)
         float4 _SampleTexture2D_059e5ab9551d4a10a1361de5ac7a2ab3_Texture_1_Texture2D_TexelSize;
         float4 _SampleTexture2D_19c2ee1cfad84fc8ab6b00b0833b25bf_Texture_1_Texture2D_TexelSize;
@@ -1231,9 +1180,7 @@ Shader "Shader Graphs/S_Water_Moving"
         float _wave_small_normal_strength;
         float _Normal_Fade;
         CBUFFER_END
-        
-        
-        // Object and Global properties
+     
         SAMPLER(SamplerState_Linear_Repeat);
         TEXTURE2D(_SampleTexture2D_059e5ab9551d4a10a1361de5ac7a2ab3_Texture_1_Texture2D);
         SAMPLER(sampler_SampleTexture2D_059e5ab9551d4a10a1361de5ac7a2ab3_Texture_1_Texture2D);
@@ -1245,23 +1192,16 @@ Shader "Shader Graphs/S_Water_Moving"
         SAMPLER(sampler_lines_main_tex);
         TEXTURE2D(_Rough_mask);
         SAMPLER(sampler_Rough_mask);
-        
-        // Graph Includes
-        // GraphIncludes: <None>
-        
-        // -- Property used by ScenePickingPass
+     
         #ifdef SCENEPICKINGPASS
         float4 _SelectionID;
         #endif
-        
-        // -- Properties used by SceneSelectionPass
+
         #ifdef SCENESELECTIONPASS
         int _ObjectId;
         int _PassValue;
         #endif
-        
-        // Graph Functions
-        
+   
         void Unity_SceneDepth_Eye_float(float4 UV, out float Out)
         {
             if (unity_OrthoParams.w == 1.0)
@@ -1458,11 +1398,7 @@ Shader "Shader Graphs/S_Water_Moving"
         Unity_Lerp_float3(_Property_da3b89567e634fa6a223a4aaf0f855a8_Out_0_Vector3, _Vector3_697e2eeaaaaf4d78a93328f58dd06bfa_Out_0_Vector3, (_Property_e4cf7b886c5d4008b4d19bb5281eab91_Out_0_Float.xxx), _Lerp_be915237183140fab80bd249c1f18291_Out_3_Vector3);
         Out_Vector4_1 = _Lerp_be915237183140fab80bd249c1f18291_Out_3_Vector3;
         }
-        
-        // Custom interpolators pre vertex
-        /* WARNING: $splice Could not find named fragment 'CustomInterpolatorPreVertex' */
-        
-        // Graph Vertex
+    
         struct VertexDescription
         {
             float3 Position;
@@ -1478,8 +1414,7 @@ Shader "Shader Graphs/S_Water_Moving"
             description.Tangent = IN.ObjectSpaceTangent;
             return description;
         }
-        
-        // Custom interpolators, pre surface
+
         #ifdef FEATURES_GRAPH_VERTEX
         Varyings CustomInterpolatorPassThroughFunc(inout Varyings output, VertexDescription input)
         {
@@ -1487,8 +1422,7 @@ Shader "Shader Graphs/S_Water_Moving"
         }
         #define CUSTOMINTERPOLATOR_VARYPASSTHROUGH_FUNC
         #endif
-        
-        // Graph Pixel
+
         struct SurfaceDescription
         {
             float3 BaseColor;
@@ -1710,14 +1644,7 @@ Shader "Shader Graphs/S_Water_Moving"
             /* WARNING: $splice Could not find named fragment 'VFXSetFragInputs' */
         
         #endif
-        
-            
-        
-        
-        
             output.TangentSpaceNormal = float3(0.0f, 0.0f, 1.0f);
-        
-        
             output.WorldSpacePosition = input.positionWS;
             output.ScreenPosition = ComputeScreenPos(TransformWorldToHClip(input.positionWS), _ProjectionParams.x);
         
@@ -1731,7 +1658,7 @@ Shader "Shader Graphs/S_Water_Moving"
             output.NDCPosition.y = 1.0f - output.NDCPosition.y;
         
             output.uv0 = input.texCoord0;
-            output.TimeParameters = _TimeParameters.xyz; // This is mainly for LW as HD overwrite this value
+            output.TimeParameters = _TimeParameters.xyz; 
         #if defined(SHADER_STAGE_FRAGMENT) && defined(VARYINGS_NEED_CULLFACE)
         #define BUILD_SURFACE_DESCRIPTION_INPUTS_OUTPUT_FACESIGN output.FaceSign =                    IS_FRONT_VFACE(input.cullFace, true, false);
         #else
@@ -1741,16 +1668,11 @@ Shader "Shader Graphs/S_Water_Moving"
         
                 return output;
         }
-        
-        // --------------------------------------------------
-        // Main
-        
+
         #include "Packages/com.unity.render-pipelines.universal/Editor/ShaderGraph/Includes/Varyings.hlsl"
         #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/UnityGBuffer.hlsl"
         #include "Packages/com.unity.render-pipelines.universal/Editor/ShaderGraph/Includes/PBRGBufferPass.hlsl"
-        
-        // --------------------------------------------------
-        // Visual Effect Vertex Invocations
+    
         #ifdef HAVE_VFX_MODIFICATION
         #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/VisualEffectVertex.hlsl"
         #endif
