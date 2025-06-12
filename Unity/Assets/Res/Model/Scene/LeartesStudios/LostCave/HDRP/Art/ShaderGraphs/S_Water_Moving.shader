@@ -17,11 +17,6 @@ Shader "Shader Graphs/S_Water_Moving"
         _line_threshold("line_threshold", Float) = 0.642857
         _uv_fade("uv_fade", Float) = 0
         _line_color("line_color", Color) = (0.572549, 0.9137256, 1, 1)
-        [NoScaleOffset]_Rough_mask("Rough_mask", 2D) = "white" {}
-        _roughness("roughness", Float) = 0.15
-        _rough_contrast("rough_contrast", Float) = 0
-        _WPO_Tiling("WPO_Tiling", Float) = 1
-        _WPO_Speed("WPO_Speed", Float) = 1
         _tiling_large("tiling_large", Float) = 12
         _wave_large_normal_Strength("wave_large_normal_Strength", Float) = 0.8
         _tiling_small("tiling_small", Float) = 20
@@ -347,11 +342,6 @@ Shader "Shader Graphs/S_Water_Moving"
         float _line_threshold;
         float _uv_fade;
         float4 _line_color;
-        float4 _Rough_mask_TexelSize;
-        float _roughness;
-        float _rough_contrast;
-        float _WPO_Speed;
-        float _WPO_Tiling;
         float _tiling_large;
         float _wave_large_normal_Strength;
         float _tiling_small;
@@ -368,9 +358,7 @@ Shader "Shader Graphs/S_Water_Moving"
         SAMPLER(sampler_SampleTexture2D_f64e160b100a4c1faf2dfe6fb27e0c39_Texture_1_Texture2D);
         TEXTURE2D(_lines_main_tex);
         SAMPLER(sampler_lines_main_tex);
-        TEXTURE2D(_Rough_mask);
-        SAMPLER(sampler_Rough_mask);
-        
+
         #ifdef SCENEPICKINGPASS
         float4 _SelectionID;
         #endif
@@ -1130,11 +1118,6 @@ Shader "Shader Graphs/S_Water_Moving"
         float _line_threshold;
         float _uv_fade;
         float4 _line_color;
-        float4 _Rough_mask_TexelSize;
-        float _roughness;
-        float _rough_contrast;
-        float _WPO_Speed;
-        float _WPO_Tiling;
         float _tiling_large;
         float _wave_large_normal_Strength;
         float _tiling_small;
@@ -1151,8 +1134,6 @@ Shader "Shader Graphs/S_Water_Moving"
         SAMPLER(sampler_SampleTexture2D_f64e160b100a4c1faf2dfe6fb27e0c39_Texture_1_Texture2D);
         TEXTURE2D(_lines_main_tex);
         SAMPLER(sampler_lines_main_tex);
-        TEXTURE2D(_Rough_mask);
-        SAMPLER(sampler_Rough_mask);
      
         #ifdef SCENEPICKINGPASS
         float4 _SelectionID;
