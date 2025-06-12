@@ -19,6 +19,9 @@ namespace ET.Client
             self.E_ActivateButton.AddListenerAsync(self.OnButtonActivate);
             self.E_UseButton.AddListenerAsync(self.OnButtonUse);
             self.E_ShouHuiButton.AddListenerAsync(self.OnButtonUse);
+            
+            self.E_UseButton.gameObject.SetActive(false);
+            self.E_ShouHuiButton.gameObject.SetActive(false);
 
             self.E_ItemTypeSetToggleGroup.OnSelectIndex(0);
         }
@@ -230,8 +233,8 @@ namespace ET.Client
                 bool current = chengJiuComponent.GetFightJingLing() == self.JingLingId;
                 self.E_UnactivateText.gameObject.SetActive(false);
                 self.E_ActivateButton.gameObject.SetActive(false);
-                self.E_UseButton.gameObject.SetActive(!current);
-                self.E_ShouHuiButton.gameObject.SetActive(current);
+                // self.E_UseButton.gameObject.SetActive(!current);
+                // self.E_ShouHuiButton.gameObject.SetActive(current);
             }
             else
             {
@@ -246,8 +249,8 @@ namespace ET.Client
                     self.E_ActivateButton.gameObject.SetActive(false);
                 }
 
-                self.E_UseButton.gameObject.SetActive(false);
-                self.E_ShouHuiButton.gameObject.SetActive(false);
+                // self.E_UseButton.gameObject.SetActive(false);
+                // self.E_ShouHuiButton.gameObject.SetActive(false);
             }
         }
     }
