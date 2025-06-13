@@ -2421,11 +2421,15 @@ namespace ET.Client
                 // 遍历所有灯光
                 foreach (Light light in lights)
                 {
-                    if (!light.name.Contains("Directional Light"))
+                    //if (!light.name.Contains("Directional Light"))
+                    //{
+                    //    continue;
+                    //}
+
+                    if (light.type != LightType.Directional)
                     {
                         continue;
                     }
-
                     light.shadows = value == "0" ? LightShadows.None : LightShadows.Soft;
                     light.shadowStrength = 0.5f;
                     Log.Debug($"UpdateShadow:  {light.name}    {value}");
