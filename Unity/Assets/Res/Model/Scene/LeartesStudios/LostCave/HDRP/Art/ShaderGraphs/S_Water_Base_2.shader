@@ -48,22 +48,6 @@ Shader "Shader Graphs/S_Water_Base_2"
         [HideInInspector]_ZTest("_ZTest", Float) = 4
         [HideInInspector]_Cull("_Cull", Float) = 2
         [HideInInspector]_AlphaToMask("_AlphaToMask", Float) = 0
-        [HideInInspector]_QueueOffset("_QueueOffset", Float) = 0
-        [HideInInspector]_QueueControl("_QueueControl", Float) = -1
-        [HideInInspector][NoScaleOffset]unity_Lightmaps("unity_Lightmaps", 2DArray) = "" {}
-        [HideInInspector][NoScaleOffset]unity_LightmapsInd("unity_LightmapsInd", 2DArray) = "" {}
-        [HideInInspector][NoScaleOffset]unity_ShadowMasks("unity_ShadowMasks", 2DArray) = "" {}
-        [HideInInspector]_BUILTIN_Surface("Float", Float) = 0
-        [HideInInspector]_BUILTIN_Blend("Float", Float) = 0
-        [HideInInspector]_BUILTIN_AlphaClip("Float", Float) = 0
-        [HideInInspector]_BUILTIN_SrcBlend("Float", Float) = 1
-        [HideInInspector]_BUILTIN_DstBlend("Float", Float) = 0
-        [HideInInspector]_BUILTIN_ZWrite("Float", Float) = 1
-        [HideInInspector]_BUILTIN_ZWriteControl("Float", Float) = 0
-        [HideInInspector]_BUILTIN_ZTest("Float", Float) = 4
-        [HideInInspector]_BUILTIN_CullMode("Float", Float) = 2
-        [HideInInspector]_BUILTIN_QueueOffset("Float", Float) = 0
-        [HideInInspector]_BUILTIN_QueueControl("Float", Float) = -1
     }
     SubShader
     {
@@ -161,15 +145,12 @@ Shader "Shader Graphs/S_Water_Base_2"
         /* WARNING: $splice Could not find named fragment 'sgci_CustomInterpolatorPreInclude' */
         
         // Includes
-        #include_with_pragmas "Packages/com.unity.render-pipelines.universal/ShaderLibrary/DOTS.hlsl"
-        #include_with_pragmas "Packages/com.unity.render-pipelines.universal/ShaderLibrary/RenderingLayers.hlsl"
         #include "Packages/com.unity.render-pipelines.core/ShaderLibrary/Color.hlsl"
         #include "Packages/com.unity.render-pipelines.core/ShaderLibrary/Texture.hlsl"
         #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
         #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Lighting.hlsl"
         #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Input.hlsl"
         #include "Packages/com.unity.render-pipelines.core/ShaderLibrary/TextureStack.hlsl"
-        #include_with_pragmas "Packages/com.unity.render-pipelines.core/ShaderLibrary/FoveatedRenderingKeywords.hlsl"
         #include "Packages/com.unity.render-pipelines.core/ShaderLibrary/FoveatedRendering.hlsl"
         #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Shadows.hlsl"
         #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/ShaderGraphFunctions.hlsl"
