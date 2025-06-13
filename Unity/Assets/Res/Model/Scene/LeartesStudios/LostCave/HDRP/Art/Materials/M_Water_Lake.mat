@@ -37,20 +37,15 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: M_Water_Lake
-  m_Shader: {fileID: -6465566751694194690, guid: 30778f7fc5c5d3d46b4db863aa021d2e,
-    type: 3}
+  m_Shader: {fileID: 4800000, guid: 9fdcdb08330d229478dfee50cce55bb4, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
-  m_InvalidKeywords:
-  - _DISABLE_SSR_TRANSPARENT
-  - _DOUBLESIDED_ON
-  - _ENABLE_FOG_ON_TRANSPARENT
-  - _NORMALMAP_TANGENT_SPACE
+  m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 1
-  m_CustomRenderQueue: 3000
+  m_CustomRenderQueue: -1
   stringTagMap:
     MotionVector: User
     RenderType: Opaque
@@ -433,10 +428,10 @@ Material:
     - _UVDetailsMappingMask: {r: 1, g: 0, b: 0, a: 0}
     - _UVMappingMask: {r: 1, g: 0, b: 0, a: 0}
     - _UVMappingMaskEmissive: {r: 1, g: 0, b: 0, a: 0}
-    - _Water_Color: {r: 0, g: 0.42745098, b: 0.454902, a: 1}
+    - _Water_Color: {r: 0, g: 0.42745098, b: 0.45490196, a: 1}
     - _Water_Color_01: {r: 0.6117647, g: 0.854902, b: 1, a: 1}
     - _Water_Color_02: {r: 0, g: 0.7529413, b: 0.8431373, a: 1}
-    - _Water_Color__deep: {r: 0, g: 0.29019606, b: 0.38039213, a: 1}
+    - _Water_Color__deep: {r: 0, g: 0.2901961, b: 0.38039216, a: 1}
     - _Water_color: {r: 0, g: 0.42745098, b: 0.454902, a: 1}
     - _Water_color_deep: {r: 0, g: 0.29019606, b: 0.38039213, a: 1}
     - _line_color: {r: 0.572549, g: 0.9137256, b: 1, a: 1}
