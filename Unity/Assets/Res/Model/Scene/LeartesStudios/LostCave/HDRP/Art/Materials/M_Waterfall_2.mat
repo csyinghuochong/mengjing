@@ -71,6 +71,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _BaseTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _BaseTexture:
         m_Texture: {fileID: 2800000, guid: 668eb5bf08e537141ad09b8d869dc2a5, type: 3}
         m_Scale: {x: 1, y: 1}
@@ -111,8 +115,16 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _LargeNormal:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _LargeNormalMap:
         m_Texture: {fileID: 2800000, guid: 332af182a64451141acd978bdd7c24d2, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _LineTex:
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _LinesMainTex:
@@ -181,6 +193,10 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _SampleTexture2D_f64e160b100a4c1faf2dfe6fb27e0c39_Texture_1_Texture2D:
         m_Texture: {fileID: 2800000, guid: 668eb5bf08e537141ad09b8d869dc2a5, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SmallNormal:
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SmallNormalMap:
@@ -268,6 +284,7 @@ Material:
     - _CullMode: 2
     - _CullModeForward: 2
     - _Cutoff: 0.5
+    - _DepthFadeDistance: 1000
     - _DepthOffsetEnable: 0
     - _DetailAlbedoScale: 1
     - _DetailNormalScale: 1
@@ -308,12 +325,19 @@ Material:
     - _Ior: 1.5
     - _IridescenceMask: 1
     - _IridescenceThickness: 1
+    - _LargeWaveScale: 12
+    - _LargeWaveStrength: 0.8
+    - _LineAccel: 0.5
     - _LineAcceleration: 26.5
     - _LineScaleWidth: 1
+    - _LineScaleX: 0.5
+    - _LineScaleY: 1.3
+    - _LineSpeed: 1.3
     - _LineThreshold: 0.642857
+    - _LineWidth: 1
     - _LinesMainScaleX: 0.5
     - _LinesMainScaleY: 1.3
-    - _LinesMainSpeed: 0.2
+    - _LinesMainSpeed: 0.1
     - _LinesSecondaryScaleX: 1.12
     - _LinesSecondaryScaleY: 1
     - _Lines_secondary_scale_X: 0.5
@@ -348,6 +372,8 @@ Material:
     - _Rough_tiling: 0.5
     - _Roughness: 0.5
     - _Saturation: 1
+    - _SmallWaveScale: 20
+    - _SmallWaveStrength: 0.8
     - _Smoothness: 0.5
     - _SmoothnessRemapMax: 1
     - _SmoothnessRemapMin: 0
@@ -375,7 +401,7 @@ Material:
     - _Thickness: 1
     - _TilingLarge: 12
     - _TilingSmall: 20
-    - _TimeSecondarySpeed: 1.78
+    - _TimeSecondarySpeed: 0.78
     - _TransmissionEnable: 1
     - _TransparentBackfaceEnable: 0
     - _TransparentCullMode: 2
@@ -389,6 +415,7 @@ Material:
     - _UVDetail: 0
     - _UVEmissive: 0
     - _UVFade: 0
+    - _UVFadeAmount: 0
     - _UseEmissiveIntensity: 0
     - _UseShadowThreshold: 0
     - _Use_Emissive: 0
@@ -434,6 +461,7 @@ Material:
     - _BaseColorMap_MipInfo: {r: 0, g: 0, b: 0, a: 0}
     - _BaseColor_Value: {r: 0, g: 0.34509805, b: 0.32941177, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _DeepColor: {r: 0, g: 0.29019606, b: 0.38039213, a: 1}
     - _DiffusionProfileAsset: {r: 0, g: 0, b: 0, a: 0}
     - _DoubleSidedConstants: {r: 1, g: 1, b: -1, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
@@ -442,6 +470,7 @@ Material:
     - _InvPrimScale: {r: 1, g: 1, b: 0, a: 0}
     - _IridescenceThicknessRemap: {r: 0, g: 1, b: 0, a: 0}
     - _LineColor: {r: 0.572549, g: 0.9137256, b: 1, a: 1}
+    - _LineTint: {r: 0.572549, g: 0.9137256, b: 1, a: 1}
     - _SpecularColor: {r: 1, g: 1, b: 1, a: 1}
     - _ThicknessRemap: {r: 0, g: 1, b: 0, a: 0}
     - _TransmittanceColor: {r: 1, g: 1, b: 1, a: 1}
