@@ -90,6 +90,10 @@ namespace EPOOutline
 
         public override void ClearRenderTarget(bool depth, bool clr, Color clearColor)
         {
+            if (buffer == null)
+            {
+                return;
+            }
             buffer.ClearRenderTarget(depth, clr, clearColor);
         }
 
