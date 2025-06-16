@@ -24,8 +24,8 @@ namespace ET.Client
 
             using (zstring.Block())
             {
-                self.E_TextTimes_2Text.text = zstring.Format("X{0}", jiaYuanVisit.Rubbish);
-                self.E_TextTimes_1Text.text = zstring.Format("X{0}", jiaYuanVisit.Gather);
+                self.E_TextTimes_2Text.text = zstring.Format("×{0}", jiaYuanVisit.Rubbish);
+                self.E_TextTimes_1Text.text = zstring.Format("×{0}", jiaYuanVisit.Gather);
             }
 
             self.E_TextNameText.text = jiaYuanVisit.PlayerName;

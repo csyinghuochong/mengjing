@@ -39,7 +39,7 @@
             // 如果该层的Boss未击败
             if (numericComponent.GetAsInt(NumericType.SealTowerArrived) > numericComponent.GetAsInt(NumericType.SealTowerFinished))
             {
-                FlyTipComponent.Instance.ShowFlyTip("该层boss并未击败，请击败本次boss再继续挑战!!!");
+                FlyTipComponent.Instance.ShowFlyTip("该层怪物并未击败，请击败本次怪物再继续挑战!!!");
                 return;
             }
             

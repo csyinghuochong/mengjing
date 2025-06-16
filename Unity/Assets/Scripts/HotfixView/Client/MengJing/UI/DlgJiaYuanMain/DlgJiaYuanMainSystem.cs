@@ -177,7 +177,7 @@ namespace ET.Client
                 return;
             }
 
-            FlyTipComponent.Instance.ShowFlyTip("UIJiaYuanPetFeed暂未开放");
+            // FlyTipComponent.Instance.ShowFlyTip("UIJiaYuanPetFeed暂未开放");
             await self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_JiaYuanPetFeed);
             self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgJiaYuanPetFeed>().OnInitUI(jiaYuanPet);
         }

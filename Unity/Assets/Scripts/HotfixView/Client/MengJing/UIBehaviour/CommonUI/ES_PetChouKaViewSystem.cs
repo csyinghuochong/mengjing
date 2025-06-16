@@ -210,7 +210,7 @@ namespace ET.Client
             ItemConfig itemConfig = ItemConfigCategory.Instance.Get(itemId);
             using (zstring.Block())
             {
-                FlyTipComponent.Instance.ShowFlyTip(zstring.Format("获得物品 {0} x{1}", itemConfig.ItemName, itemNum));
+                FlyTipComponent.Instance.ShowFlyTip(zstring.Format("获得物品 {0} ×{1}", itemConfig.ItemName, itemNum));
             }
         }
 

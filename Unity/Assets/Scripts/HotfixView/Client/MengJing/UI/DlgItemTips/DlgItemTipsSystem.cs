@@ -500,7 +500,7 @@ namespace ET.Client
                     string fubenName = DungeonConfigCategory.Instance.Get(needSceneId).ChapterName;
                     using (zstring.Block())
                     {
-                        FlyTipComponent.Instance.ShowFlyTip((zstring)"请前往" + fubenName);
+                        FlyTipComponent.Instance.ShowFlyTip(zstring.Format("请前往{0}", fubenName));
                     }
 
                     return;
@@ -511,7 +511,7 @@ namespace ET.Client
                     self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_Role);
                     using (zstring.Block())
                     {
-                        FlyTipComponent.Instance.ShowFlyTip((zstring)"消耗道具:" + itemConfig.ItemName);
+                        FlyTipComponent.Instance.ShowFlyTip(zstring.Format("消耗道具:{0}", itemConfig.ItemName));
                     }
 
                     self.OnCloseTips();
@@ -653,7 +653,7 @@ namespace ET.Client
                     BagClientNetHelper.SendFumoPro(self.Root(), 0).Coroutine();
                     using (zstring.Block())
                     {
-                        FlyTipComponent.Instance.ShowFlyTip((zstring)$"附魔属性 {itemfumo}");
+                        FlyTipComponent.Instance.ShowFlyTip(zstring.Format("附魔属性 {0}", itemfumo));
                     }
 
                     self.OnCloseTips();

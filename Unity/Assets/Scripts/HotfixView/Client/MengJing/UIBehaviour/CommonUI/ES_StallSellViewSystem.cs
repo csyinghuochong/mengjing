@@ -104,7 +104,7 @@ namespace ET.Client
 			Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
 			if (UnitHelper.GetUnitListByDis(unit.Root().CurrentScene(), unit.Position, UnitType.Npc, 5f).Count > 0)
 			{
-				PopupTipHelp.OpenPopupTip_2(self.Root(), "摆摊提示", "NPC附近不得摆摊, 是否前往摆摊区域进行摆摊?", () => { self.OnRun(); }).Coroutine();
+				PopupTipHelp.OpenPopupTip_2(self.Root(), "摆摊提示", "系统角色附近不得摆摊, 是否前往摆摊区域进行摆摊?", () => { self.OnRun(); }).Coroutine();
 				return;
 			}
 

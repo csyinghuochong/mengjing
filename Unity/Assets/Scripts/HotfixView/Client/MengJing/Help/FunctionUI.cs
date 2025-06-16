@@ -48,7 +48,7 @@ namespace ET.Client
             WindowID windowID = GetUIPath(funtionOpenConfig.Name);
             if (windowID == WindowID.WindowID_Invaild)
             {
-                FlyTipComponent.Instance.ShowFlyTip($"请添加NPC对应 {funtionOpenConfig.Name}");
+                // FlyTipComponent.Instance.ShowFlyTip($"请添加NPC对应 {funtionOpenConfig.Name}");
                 return;
             }
 

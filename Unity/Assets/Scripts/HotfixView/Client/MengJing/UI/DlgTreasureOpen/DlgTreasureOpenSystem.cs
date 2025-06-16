@@ -46,7 +46,7 @@ namespace ET.Client
                 ItemConfig itemConfig = ItemConfigCategory.Instance.Get(itemId);
                 using (zstring.Block())
                 {
-                    FlyTipComponent.Instance.ShowFlyTip(zstring.Format("获得物品 {0} x{1}", itemConfig.ItemName, itemInfo.Split(';')[1]));
+                    FlyTipComponent.Instance.ShowFlyTip(zstring.Format("获得物品 {0} ×{1}", itemConfig.ItemName, itemInfo.Split(';')[1]));
                 }
             }
         }

@@ -357,7 +357,7 @@ namespace ET.Client
             Log.Warning($"CameraVerticalOffset : {cameraComponent.VerticalOffset}");
             Log.Warning("==========================================");
 
-            FlyTipComponent.Instance.ShowFlyTip("视角参数打印成功，请在Console窗口中查看，类型Warning");
+            // FlyTipComponent.Instance.ShowFlyTip("视角参数打印成功，请在Console窗口中查看，类型Warning");
         }
 
         public static void OnLenDepth(this ES_SettingGame self, float value)
@@ -418,7 +418,7 @@ namespace ET.Client
 
             if (languageName == "Chinese")
             {
-                self.E_LocalizationBtnButton.GetComponentInChildren<Text>().text = "Change to English";
+                self.E_LocalizationBtnButton.GetComponentInChildren<Text>().text = "切换成英文";
             }
             else
             {

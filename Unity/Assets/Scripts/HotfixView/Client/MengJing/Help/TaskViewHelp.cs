@@ -223,7 +223,7 @@ namespace ET.Client
                     {
                         using (zstring.Block())
                         {
-                            flyTipComponent.ShowFlyTip((zstring)"请前往" + fubenname);
+                            flyTipComponent.ShowFlyTip(zstring.Format("请前往{0}", fubenname));
                         }
                     }
 
