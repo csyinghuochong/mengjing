@@ -173,8 +173,13 @@ namespace ET.Client
                 self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgMain>().ShowPing();
                 return;
             }
-
-          
+            
+            if (text.Equals("#fps60"))
+            {
+                Application.targetFrameRate = 60;
+                return;
+            }
+            
             if (text.Equals("#resetall"))
             {
                 bool svalue = !SettingData.ShowEffect;
