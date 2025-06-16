@@ -466,110 +466,111 @@ Shader "Shader Graphs/S_Water_Moving_2"
                 float AlphaClipThreshold; // 透明裁剪阈值
             };
             
-            SurfaceDescription SurfaceDescriptionFunction(SurfaceDescriptionInputs input)
-            {
-                SurfaceDescription surface = (SurfaceDescription)0;
-                
-                // 1. 深度渐变颜色混合
-                Bindings_SubGDepthFade depthFadeInput;
-                depthFadeInput.ScreenPosition = input.ScreenPosition;
-                depthFadeInput.NDCPosition = input.NDCPosition;
-                
-                float4 depthFadeOutput;
-                SG_SubGDepthFade(_FadeDistanceColor, depthFadeInput, depthFadeOutput);
-                
-                float4 waterColor = lerp(_WaterColor, _WaterColorDeep, depthFadeOutput);
-                
-                // 2. 线条效果计算
-                float4 uv0 = input.uv0;
-                float4 uvFade = float4(0, input.uv0.g * _UVFade, 0, 0);
-                
-                // 主线条纹理处理
-                float4 mainLineUV = uv0;
-                float4 mainLineScale = float4(_LineScaleWidth * mainLineUV.r, pow(mainLineUV.g, _LineAcceleration), 0, 0);
-               // 修改主线条纹理移动方向
-                float4 mainLineUVScaled = float4(
-                    _LinesMainScaleX * mainLineScale.r,
-                    _LinesMainScaleY * (mainLineScale.g + input.TimeParameters.x * _LinesMainSpeed), // 将减号改为加号
-                    0, 0
-                );
-                
-                float4 mainLineTex = SAMPLE_TEXTURE2D(_LinesMainTex, sampler_LinesMainTex, mainLineUVScaled.xy);
-                float4 mainLineEnhanced = mainLineTex * float4(2, 2, 2, 2);
-                
-                // 次线条纹理处理
-                float4 secondaryLineUV = uv0;
-                // 修改次线条纹理移动方向
-                float4 secondaryLineScale = float4(
-                    _LinesSecondaryScaleX * secondaryLineUV.r,
-                    _LinesSecondaryScaleY * (secondaryLineUV.g + input.TimeParameters.x * _TimeSecondarySpeed), // 将减号改为加号
-                    0, 0
-                );
+           SurfaceDescription SurfaceDescriptionFunction(SurfaceDescriptionInputs input)
+{
+    // 显式初始化所有结构体成员
+    SurfaceDescription surface = (SurfaceDescription)0;
+    
+    // 1. 深度渐变颜色混合
+    Bindings_SubGDepthFade depthFadeInput;
+    depthFadeInput.ScreenPosition = input.ScreenPosition;
+    depthFadeInput.NDCPosition = input.NDCPosition;
+    
+    float4 depthFadeOutput;
+    SG_SubGDepthFade(_FadeDistanceColor, depthFadeInput, depthFadeOutput);
+    
+    float4 waterColor = lerp(_WaterColor, _WaterColorDeep, depthFadeOutput);
+    
+    // 2. 线条效果计算
+    float4 uv0 = input.uv0;
+    float4 uvFade = float4(0, input.uv0.g * _UVFade, 0, 0);
+    
+    // 主线条纹理处理
+    float4 mainLineUV = uv0;
+    float4 mainLineScale = float4(_LineScaleWidth * mainLineUV.r, pow(mainLineUV.g, _LineAcceleration), 0, 0);
+    // 修改主线条纹理移动方向
+    float4 mainLineUVScaled = float4(
+        _LinesMainScaleX * mainLineScale.r,
+        _LinesMainScaleY * (mainLineScale.g + input.TimeParameters.x * _LinesMainSpeed), // 将减号改为加号
+        0, 0
+    );
+    
+    float4 mainLineTex = SAMPLE_TEXTURE2D(_LinesMainTex, sampler_LinesMainTex, mainLineUVScaled.xy);
+    float4 mainLineEnhanced = mainLineTex * float4(2, 2, 2, 2);
+    
+    // 次线条纹理处理
+    float4 secondaryLineUV = uv0;
+    // 修改次线条纹理移动方向
+    float4 secondaryLineScale = float4(
+        _LinesSecondaryScaleX * secondaryLineUV.r,
+        _LinesSecondaryScaleY * (secondaryLineUV.g + input.TimeParameters.x * _TimeSecondarySpeed), // 将减号改为加号
+        0, 0
+    );
 
-                
-                float4 secondaryLineTex = SAMPLE_TEXTURE2D(_BaseTexture, sampler_BaseTexture, secondaryLineScale.xy);
-                float4 combinedLines = mainLineEnhanced * secondaryLineTex * float4(2, 2, 2, 2);
-                
-                // 线条混合和阈值处理
-                float4 finalLines = uvFade + combinedLines;
-                float4 saturatedLines = saturate(finalLines);
-                float4 lineMask = floor(saturate(saturatedLines + (1 - _LineThreshold)));
-                
-                // 最终颜色混合
-                float4 finalColor = lerp(waterColor, _LineColor, lineMask);
-                
-                // 3. 法线贴图处理
-                // 大波纹法线
-                float4 largeNormalUV = uv0 * _TilingLarge;
-                float4 rotationVector = float4(0, -0.5, 0, 0) * 2;
-                float4 rotatedLargeUV = largeNormalUV + rotationVector;
-                
-                Bindings_SubGCustomRotator rotatorInput;
-                float4 rotatedLargeNormalUV;
-                SG_SubGCustomRotator(float2(0, 0), rotatedLargeUV.xy, 0, rotatorInput, rotatedLargeNormalUV);
-                
-                float4 largeNormalTex = SAMPLE_TEXTURE2D(_LargeNormalMap, sampler_LargeNormalMap, rotatedLargeNormalUV.xy);
-                largeNormalTex.rgb = UnpackNormal(largeNormalTex);
-                float3 largeNormal = largeNormalTex.rgb;
-                
-                // 小波纹法线
-                float4 smallNormalUV = uv0 * _TilingSmall;
-               // 修改小波纹法线移动方向
-                float2 smallNormalMotion = float2(0, 2) * input.TimeParameters.x; // 移除负号或修改符号
-                float2 rotatedSmallUV = smallNormalUV.xy + smallNormalMotion;
-                
-                float4 rotatedSmallNormalUV;
-                SG_SubGCustomRotator(float2(0, 0), rotatedSmallUV, 0, rotatorInput, rotatedSmallNormalUV);
-                
-                float4 smallNormalTex = SAMPLE_TEXTURE2D(_SmallNormalMap, sampler_SmallNormalMap, rotatedSmallNormalUV.xy);
-                smallNormalTex.rgb = UnpackNormal(smallNormalTex);
-                float3 smallNormal = smallNormalTex.rgb;
-                
-                // 法线混合
-                float3 blendedNormal = lerp(
-                    largeNormal, 
-                    smallNormal, 
-                    float3(0.5, 0.5, 0.5)
-                );
-                
-                // 法线平滑处理
-                float3 finalNormal;
-                SG_SubGFlattenNormal(blendedNormal, 1.0, (Bindings_SubGFlattenNormal)0, finalNormal);
-                finalNormal = lerp(finalNormal, blendedNormal, float3(0, 0, 0));
-                
-                // 设置表面描述结构
-                surface.BaseColor = finalColor.xyz;
-                surface.NormalTS = finalNormal;
-                surface.Emission = float3(0, 0, 0);
-                surface.Metallic = 0.0f;
-                surface.Specular = IsGammaSpace() ? float3(0.5, 0.5, 0.5) : SRGBToLinear(float3(0.5, 0.5, 0.5));
-                surface.Smoothness = 0.5f;
-                surface.Occlusion = 1.0f;
-                surface.Alpha = 1.0f;
-                surface.AlphaClipThreshold = 0.5f;
-                
-                return surface;
-            }
+    
+    float4 secondaryLineTex = SAMPLE_TEXTURE2D(_BaseTexture, sampler_BaseTexture, secondaryLineScale.xy);
+    float4 combinedLines = mainLineEnhanced * secondaryLineTex * float4(2, 2, 2, 2);
+    
+    // 线条混合和阈值处理
+    float4 finalLines = uvFade + combinedLines;
+    float4 saturatedLines = saturate(finalLines);
+    float4 lineMask = floor(saturate(saturatedLines + (1 - _LineThreshold)));
+    
+    // 最终颜色混合 - 确保所有颜色通道都被初始化
+    float4 finalColor = lerp(waterColor, _LineColor, lineMask);
+    
+    // 3. 法线贴图处理
+    // 大波纹法线
+    float4 largeNormalUV = uv0 * _TilingLarge;
+    float4 rotationVector = float4(0, -0.5, 0, 0) * 2;
+    float4 rotatedLargeUV = largeNormalUV + rotationVector;
+    
+    Bindings_SubGCustomRotator rotatorInput;
+    float4 rotatedLargeNormalUV;
+    SG_SubGCustomRotator(float2(0, 0), rotatedLargeUV.xy, 0, rotatorInput, rotatedLargeNormalUV);
+    
+    float4 largeNormalTex = SAMPLE_TEXTURE2D(_LargeNormalMap, sampler_LargeNormalMap, rotatedLargeNormalUV.xy);
+    largeNormalTex.rgb = UnpackNormal(largeNormalTex);
+    float3 largeNormal = largeNormalTex.rgb;
+    
+    // 小波纹法线
+    float4 smallNormalUV = uv0 * _TilingSmall;
+   // 修改小波纹法线移动方向
+    float2 smallNormalMotion = float2(0, 2) * input.TimeParameters.x; // 移除负号或修改符号
+    float2 rotatedSmallUV = smallNormalUV.xy + smallNormalMotion;
+    
+    float4 rotatedSmallNormalUV;
+    SG_SubGCustomRotator(float2(0, 0), rotatedSmallUV, 0, rotatorInput, rotatedSmallNormalUV);
+    
+    float4 smallNormalTex = SAMPLE_TEXTURE2D(_SmallNormalMap, sampler_SmallNormalMap, rotatedSmallNormalUV.xy);
+    smallNormalTex.rgb = UnpackNormal(smallNormalTex);
+    float3 smallNormal = smallNormalTex.rgb;
+    
+    // 法线混合
+    float3 blendedNormal = lerp(
+        largeNormal, 
+        smallNormal, 
+        float3(0.5, 0.5, 0.5)
+    );
+    
+    // 法线平滑处理
+    float3 finalNormal;
+    SG_SubGFlattenNormal(blendedNormal, 1.0, (Bindings_SubGFlattenNormal)0, finalNormal);
+    finalNormal = lerp(finalNormal, blendedNormal, float3(0, 0, 0));
+    
+    // 显式设置结构体的所有成员
+    surface.BaseColor = finalColor.xyz;
+    surface.NormalTS = finalNormal;
+    surface.Emission = float3(0, 0, 0);
+    surface.Metallic = 0.0f;
+    surface.Specular = IsGammaSpace() ? float3(0.5, 0.5, 0.5) : SRGBToLinear(float3(0.5, 0.5, 0.5));
+    surface.Smoothness = 0.5f;
+    surface.Occlusion = 1.0f;
+    surface.Alpha = 1.0f;
+    surface.AlphaClipThreshold = 0.5f;
+    
+    return surface;
+}
             
             // 构建输入数据函数
             #ifdef HAVE_VFX_MODIFICATION
