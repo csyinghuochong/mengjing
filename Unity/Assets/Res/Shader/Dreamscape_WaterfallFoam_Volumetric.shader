@@ -160,9 +160,7 @@ Shader "Polyart/Dreamscape Waterfall Foam Volumetric"
 			ZTest LEqual
 			Offset 0 , 0
 			ColorMask RGBA
-
 			
-
 			HLSLPROGRAM
 
 			#pragma multi_compile_instancing
@@ -193,8 +191,6 @@ Shader "Polyart/Dreamscape Waterfall Foam Volumetric"
 			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Debug/Debugging3D.hlsl"
 			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Input.hlsl"
 			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/SurfaceData.hlsl"
-
-			
 
 			struct VertexInput
 			{
