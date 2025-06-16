@@ -4,8 +4,7 @@ Shader "Polyart/Dreamscape/URP/Tree Wind"
 {
 	Properties
 	{
-		[HideInInspector] _EmissionColor("Emission Color", Color) = (1,1,1,1)
-		[HideInInspector] _AlphaCutoff("Alpha Cutoff ", Range(0, 1)) = 0.5
+
 		[ASEBegin][Header(Foliage)][Header(.)][SingleLineTexture]_FoliageColorMap("Foliage Color Map", 2D) = "white" {}
 		[Normal][SingleLineTexture]_FoliageNormalMap("Foliage Normal Map", 2D) = "bump" {}
 		_FoliageSize("Foliage Size", Float) = 100
@@ -55,9 +54,7 @@ Shader "Polyart/Dreamscape/URP/Tree Wind"
 	SubShader
 	{
 		LOD 0
-
 		
-
 		Tags { "RenderPipeline"="UniversalPipeline" "RenderType"="Opaque" "Queue"="Geometry" }
 
 		Cull Off
@@ -65,8 +62,6 @@ Shader "Polyart/Dreamscape/URP/Tree Wind"
 		ZTest LEqual
 		Offset 0 , 0
 		AlphaToMask Off
-
-		
 
 		HLSLINCLUDE
 		#pragma target 3.5
