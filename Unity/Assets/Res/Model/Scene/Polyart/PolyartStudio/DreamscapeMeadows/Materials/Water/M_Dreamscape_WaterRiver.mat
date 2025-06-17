@@ -12,7 +12,9 @@ Material:
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
-  m_InvalidKeywords: []
+  m_InvalidKeywords:
+  - _REFLECTION_OFF
+  - _REFRACTION_OFF
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -59,6 +61,8 @@ Material:
     m_Floats:
     - _AlphaCutoff: 0.5
     - _ColorDepthFade: -0.21
+    - _DisableReflection: 1
+    - _DisableRefraction: 1
     - _DisplaceStrength: 0.174
     - _EnvironmentReflections: 1
     - _FoamCutoff: 0.74
@@ -84,12 +88,13 @@ Material:
     - _TurbulenceScale: 1.77
     - _TurbulenceTiling: 10
     - _WaveNormalIntensity: 0.233
+    - _WaveTiling: 1
     - _WaveTiling01: 3
     - _WorldtoObjectPosition: 0
     - __dirty: 0
     m_Colors:
     - _ColorDeep: {r: 0, g: 0.42745098, b: 0.45490196, a: 0}
-    - _ColorShallow: {r: 0.9669811, g: 0.99255455, b: 1, a: 0}
+    - _ColorShallow: {r: 1, g: 1, b: 1, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
-    - _FoamColor: {r: 1, g: 1, b: 1, a: 1}
+    - _FoamColor: {r: 0.4245283, g: 0.4245283, b: 0.4245283, a: 1}
   m_BuildTextureStacks: []
