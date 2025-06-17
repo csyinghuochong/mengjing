@@ -107,7 +107,7 @@ namespace ET.Client
             AssetDatabase.Refresh();
             Log.Debug($"查找结束！ 文件保存在 {outputPath}");
         }
-
+        
         [MenuItem("Tools/检测场景顶点数【单个】")]
         static List<string> CalculateVerticesSingle()
         {
@@ -192,7 +192,39 @@ namespace ET.Client
             Log.Debug($"查找结束！ 文件保存在 {outputPath}");
             return result;
         }
+        
+        [MenuItem("GameObject/检测对象顶点数", false, -3)]
+        static void CalculateVerticesSelect()
+        {
+            if (Selection.gameObjects.Length == 0)
+            {
+                return;
+            }
+            int totalVertices = 0;
+            var renderers = Selection.gameObjects[0].GetComponentsInChildren<Renderer>(true); // 包含隐藏对象
 
+            foreach (var renderer in renderers)
+            {
+                if (renderer is MeshRenderer meshRenderer)
+                {
+                    var meshFilter = meshRenderer.GetComponent<MeshFilter>();
+                    if (meshFilter != null && meshFilter.sharedMesh != null)
+                    {
+         
+                        totalVertices += meshFilter.sharedMesh.vertexCount;
+                    }
+                }
+                else if (renderer is SkinnedMeshRenderer skinnedMeshRenderer)
+                {
+                    if (skinnedMeshRenderer.sharedMesh != null)
+                    {
+                        totalVertices += skinnedMeshRenderer.sharedMesh.vertexCount;
+                    }
+                }
+            }
+            UnityEngine.Debug.Log($"顶点数:  {totalVertices}");
+        }
+        
         [MenuItem("Custom/获取全部Shader路径")]
         static void FindAllShaders()
         {
