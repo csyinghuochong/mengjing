@@ -192,7 +192,7 @@ namespace ET.Client
             Log.Debug($"查找结束！ 文件保存在 {outputPath}");
             return result;
         }
-        
+
         [MenuItem("GameObject/检测对象顶点数", false, -3)]
         static void CalculateVerticesSelect()
         {
