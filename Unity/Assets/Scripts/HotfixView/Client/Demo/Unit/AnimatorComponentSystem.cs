@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace ET.Client
@@ -109,15 +110,25 @@ namespace ET.Client
                 return;
             }
 
-            self.Animator = animator;
+            List<Animator> enabledAnimators = new List<Animator>();
+            foreach (Animator a in animator)
+            {
+                if (a.enabled)
+                {
+                    enabledAnimators.Add(a);
+                }
+            }
+            Animator[] animators = enabledAnimators.ToArray();
+            
+            self.Animator = animators;
             self.animationClips.Clear();
             self.Parameter.Clear();
-            foreach (AnimationClip animationClip in animator[0].runtimeAnimatorController.animationClips)
+            foreach (AnimationClip animationClip in animators[0].runtimeAnimatorController.animationClips)
             {
                 self.animationClips[animationClip.name] = animationClip;
             }
 
-            foreach (AnimatorControllerParameter animatorControllerParameter in animator[0].parameters)
+            foreach (AnimatorControllerParameter animatorControllerParameter in animators[0].parameters)
             {
                 self.Parameter.Add(animatorControllerParameter.name);
             }

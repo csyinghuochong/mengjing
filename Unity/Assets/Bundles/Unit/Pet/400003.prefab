@@ -174,8 +174,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6078732415182483763}
   - component: {fileID: 1831998900390549600}
-  - component: {fileID: 5582305182910477771}
-  - component: {fileID: 5920566728635980478}
   m_Layer: 0
   m_Name: Forest_Butterfly_C
   m_TagString: Untagged
@@ -221,33 +219,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &5582305182910477771
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2975874457279510064}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ad50f81b1d25c441943c37a89ba23f6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _Animator: {fileID: 1831998900390549600}
-  _ActionOnDisable: 0
---- !u!114 &5920566728635980478
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2975874457279510064}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6d3967c910cf9304a90fe607c1531405, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  AnimGroup: {fileID: 11400000, guid: 23d611a5afce7ec49a146e9b9ccf01bc, type: 2}
 --- !u!1 &3099449111906002112
 GameObject:
   m_ObjectHideFlags: 0
@@ -662,7 +633,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5678900320650976447}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 22, y: -30.093124, z: 39.66086}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0

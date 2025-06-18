@@ -172,7 +172,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6377221458650536066}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -39.885212, y: -0.65869737, z: -142.06427}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -381,58 +381,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 829426370333895881, guid: 65c71405c96fe674db38a45d4f53ee1f,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 5140970732167573442}
-    - targetCorrespondingSourceObject: {fileID: 829426370333895881, guid: 65c71405c96fe674db38a45d4f53ee1f,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: -3946964469721237499}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 65c71405c96fe674db38a45d4f53ee1f, type: 3}
---- !u!95 &3202187061202595010 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 6004403290636661664, guid: 65c71405c96fe674db38a45d4f53ee1f,
-    type: 3}
-  m_PrefabInstance: {fileID: 9161334087829462882}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4826301802439868856 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4456856344091238106, guid: 65c71405c96fe674db38a45d4f53ee1f,
     type: 3}
   m_PrefabInstance: {fileID: 9161334087829462882}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &8404049179698492331 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 829426370333895881, guid: 65c71405c96fe674db38a45d4f53ee1f,
-    type: 3}
-  m_PrefabInstance: {fileID: 9161334087829462882}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &5140970732167573442
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8404049179698492331}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ad50f81b1d25c441943c37a89ba23f6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _Animator: {fileID: 3202187061202595010}
-  _ActionOnDisable: 0
---- !u!114 &-3946964469721237499
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8404049179698492331}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6d3967c910cf9304a90fe607c1531405, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  AnimGroup: {fileID: 11400000, guid: 084316bd6e2cfcf41928e817cbab57cc, type: 2}

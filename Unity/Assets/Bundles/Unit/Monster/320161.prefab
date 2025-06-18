@@ -2060,8 +2060,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7369869648017900081}
   - component: {fileID: 8303420106409317296}
-  - component: {fileID: -7469627673008714746}
-  - component: {fileID: 2748740507556180276}
   m_Layer: 0
   m_Name: CrabHermit_Red_Shell
   m_TagString: Untagged
@@ -2108,33 +2106,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &-7469627673008714746
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8770819894459386771}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ad50f81b1d25c441943c37a89ba23f6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _Animator: {fileID: 8303420106409317296}
-  _ActionOnDisable: 0
---- !u!114 &2748740507556180276
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8770819894459386771}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6d3967c910cf9304a90fe607c1531405, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  AnimGroup: {fileID: 11400000, guid: 3548d777888c8574d924861641e9d4d2, type: 2}
 --- !u!1 &9208902784434779808
 GameObject:
   m_ObjectHideFlags: 0

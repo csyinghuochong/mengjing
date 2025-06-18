@@ -77,13 +77,13 @@ namespace ET
         {
             if (string.IsNullOrEmpty(prefabFolderPath) || !prefabFolderPath.StartsWith("Assets"))
             {
-                Log.Error("请输入正确的文件路径");
+                Debug.LogError("请输入正确的文件路径");
                 return;
             }
 
             if (string.IsNullOrEmpty(assetBaseFolderPath) || !assetBaseFolderPath.StartsWith("Assets"))
             {
-                Log.Error("请输入正确的文件路径");
+                Debug.LogError("请输入正确的文件路径");
                 return;
             }
 
@@ -97,94 +97,135 @@ namespace ET
                 }
 
                 GameObject prefab = AssetDatabase.LoadAssetAtPath<GameObject>(prefabPath);
-                Animator[] animators = prefab.GetComponentsInChildren<Animator>(true);
-                foreach (Animator animator in animators)
+                
+                // 创建临时实例来修改
+                GameObject tempInstance = PrefabUtility.InstantiatePrefab(prefab) as GameObject;
+                
+                try
                 {
-                    if (animator != null)
+                    ProcessPrefabInstance(prefabPath, tempInstance);
+                    
+                    // 应用修改到原始预制件
+                    PrefabUtility.ApplyPrefabInstance(tempInstance, InteractionMode.AutomatedAction);
+                }
+                catch (Exception e)
+                {
+                    Debug.LogError($"处理预制件 {prefabPath} 时出错: {e.Message}\n{e.StackTrace}");
+                }
+                finally
+                {
+                    // 销毁临时实例
+                    DestroyImmediate(tempInstance);
+                }
+            }
+            
+            AssetDatabase.SaveAssets();
+            AssetDatabase.Refresh();
+        }
+
+        private void ProcessPrefabInstance(string prefabPath, GameObject instance)
+        {
+            Animator[] animators = instance.GetComponentsInChildren<Animator>(true);
+
+            foreach (Animator animator in animators)
+            {
+                if (!animator.enabled)
+                {
+                    // 使用 Undo 安全删除组件
+                    AnimancerComponent animancerComponent = animator.gameObject.GetComponent<AnimancerComponent>();
+                    if (animancerComponent != null)
                     {
-                        AnimatorController animatorController = animator.runtimeAnimatorController as AnimatorController;
-
-                        if (animatorController != null)
-                        {
-                            string relativePath = Path.GetDirectoryName(prefabPath).Substring(prefabFolderPath.Length);
-                            string assetFolderPath = (assetBaseFolderPath + relativePath).Replace('\\', '/');
-
-                            if (!AssetDatabase.IsValidFolder(assetFolderPath))
-                            {
-                                string[] folders = assetFolderPath.Split('/');
-                                string currentPath = "";
-                                for (int i = 0; i < folders.Length; i++)
-                                {
-                                    string folder = folders[i];
-                                    if (string.IsNullOrEmpty(folder)) continue;
-
-                                    if (i == 0)
-                                    {
-                                        currentPath = folder;
-                                    }
-                                    else
-                                    {
-                                        string parentPath = currentPath;
-                                        currentPath = $"{parentPath}/{folder}";
-                                        if (!AssetDatabase.IsValidFolder(currentPath))
-                                        {
-                                            AssetDatabase.CreateFolder(parentPath, folder);
-                                        }
-                                    }
-                                }
-                            }
-
-                            string assetName = animatorController.name;
-                            string assetPath = Path.Combine(assetFolderPath, $"{assetName}.asset");
-
-                            AnimGroup animGroup = AssetDatabase.LoadAssetAtPath<AnimGroup>(assetPath);
-
-                            if (animGroup == null)
-                            {
-                                animGroup = ScriptableObject.CreateInstance<AnimGroup>();
-                                AssetDatabase.CreateAsset(animGroup, assetPath);
-                            }
-
-                            var states = animatorController.layers[0].stateMachine.states;
-                            animGroup.AnimInfos = new AnimInfo[states.Length];
-
-                            for (int i = 0; i < states.Length; i++)
-                            {
-                                var state = states[i].state;
-                                animGroup.AnimInfos[i] = new AnimInfo()
-                                {
-                                    StateName = state.name,
-                                    AnimationClip = state.motion as AnimationClip,
-                                    Speed = state.speed,
-                                    NextStateName = GetNextStateName(state)
-                                };
-                            }
-
-                            EditorUtility.SetDirty(animGroup);
-                            AssetDatabase.SaveAssets();
-
-                            Log.Debug(prefabPath + " AnimGroup generated at " + assetPath);
-
-                            // 添加组件和引用
-                            AnimancerComponent animancerComponent = animator.gameObject.GetComponent<AnimancerComponent>();
-                            if (animancerComponent == null)
-                            {
-                                animator.gameObject.AddComponent<AnimancerComponent>();
-                            }
-
-                            AnimData animData = animator.gameObject.GetComponent<AnimData>();
-                            if (animData == null)
-                            {
-                                animData = animator.gameObject.AddComponent<AnimData>();
-                            }
-
-                            animData.AnimGroup = animGroup;
-                        }
+                        Undo.DestroyObjectImmediate(animancerComponent);
                     }
+
+                    AnimData animData = animator.gameObject.GetComponent<AnimData>();
+                    if (animData != null)
+                    {
+                        Undo.DestroyObjectImmediate(animData);
+                    }
+                    continue;
                 }
 
-                EditorUtility.SetDirty(prefab);
-                PrefabUtility.SavePrefabAsset(prefab);
+                AnimatorController animatorController = animator.runtimeAnimatorController as AnimatorController;
+
+                if (animatorController != null)
+                {
+                    string relativePath = Path.GetDirectoryName(prefabPath).Substring(prefabFolderPath.Length);
+                    string assetFolderPath = (assetBaseFolderPath + relativePath).Replace('\\', '/');
+
+                    // 确保文件夹路径存在
+                    if (!AssetDatabase.IsValidFolder(assetFolderPath))
+                    {
+                        string[] folders = assetFolderPath.Split('/');
+                        string currentPath = "";
+                        for (int i = 0; i < folders.Length; i++)
+                        {
+                            string folder = folders[i];
+                            if (string.IsNullOrEmpty(folder)) continue;
+
+                            if (i == 0)
+                            {
+                                currentPath = folder;
+                            }
+                            else
+                            {
+                                string parentPath = currentPath;
+                                currentPath = $"{parentPath}/{folder}";
+                                if (!AssetDatabase.IsValidFolder(currentPath))
+                                {
+                                    AssetDatabase.CreateFolder(parentPath, folder);
+                                }
+                            }
+                        }
+                    }
+
+                    string assetName = animatorController.name;
+                    string assetPath = Path.Combine(assetFolderPath, $"{assetName}.asset").Replace('\\', '/');
+
+                    AnimGroup animGroup = AssetDatabase.LoadAssetAtPath<AnimGroup>(assetPath);
+
+                    if (animGroup == null)
+                    {
+                        animGroup = ScriptableObject.CreateInstance<AnimGroup>();
+                        AssetDatabase.CreateAsset(animGroup, assetPath);
+                    }
+
+                    var states = animatorController.layers[0].stateMachine.states;
+                    animGroup.AnimInfos = new AnimInfo[states.Length];
+
+                    for (int i = 0; i < states.Length; i++)
+                    {
+                        var state = states[i].state;
+                        animGroup.AnimInfos[i] = new AnimInfo()
+                        {
+                            StateName = state.name,
+                            AnimationClip = state.motion as AnimationClip,
+                            Speed = state.speed,
+                            NextStateName = GetNextStateName(state)
+                        };
+                    }
+
+                    EditorUtility.SetDirty(animGroup);
+
+                    Debug.Log(prefabPath + " AnimGroup generated at " + assetPath);
+
+                    // 使用 Undo 安全添加/获取组件
+                    AnimancerComponent animancerComponent = animator.gameObject.GetComponent<AnimancerComponent>();
+                    if (animancerComponent == null)
+                    {
+                        animancerComponent = Undo.AddComponent<AnimancerComponent>(animator.gameObject);
+                    }
+
+                    AnimData animData = animator.gameObject.GetComponent<AnimData>();
+                    if (animData == null)
+                    {
+                        animData = Undo.AddComponent<AnimData>(animator.gameObject);
+                    }
+
+                    // 记录对象修改
+                    Undo.RecordObject(animData, "Assign AnimGroup");
+                    animData.AnimGroup = animGroup;
+                }
             }
         }
 

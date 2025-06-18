@@ -381,15 +381,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 5915482356002755490, guid: 7fd7e2e4e2ceb8846a7cc4b2d3e341fd,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 4625446680762720968}
-    - targetCorrespondingSourceObject: {fileID: 5915482356002755490, guid: 7fd7e2e4e2ceb8846a7cc4b2d3e341fd,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: -8545108472126321158}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7fd7e2e4e2ceb8846a7cc4b2d3e341fd, type: 3}
 --- !u!4 &24939475128636668 stripped
 Transform:
@@ -397,42 +389,3 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 6416302508422962660}
   m_PrefabAsset: {fileID: 0}
---- !u!95 &563551588437333956 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 6834610517749107232, guid: 7fd7e2e4e2ceb8846a7cc4b2d3e341fd,
-    type: 3}
-  m_PrefabInstance: {fileID: 6416302508422962660}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &798064016195653190 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5915482356002755490, guid: 7fd7e2e4e2ceb8846a7cc4b2d3e341fd,
-    type: 3}
-  m_PrefabInstance: {fileID: 6416302508422962660}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &4625446680762720968
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 798064016195653190}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ad50f81b1d25c441943c37a89ba23f6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _Animator: {fileID: 563551588437333956}
-  _ActionOnDisable: 0
---- !u!114 &-8545108472126321158
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 798064016195653190}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6d3967c910cf9304a90fe607c1531405, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  AnimGroup: {fileID: 11400000, guid: 3d9bd424f5690e44ca559401c7a38945, type: 2}

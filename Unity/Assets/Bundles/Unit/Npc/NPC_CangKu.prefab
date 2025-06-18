@@ -129,8 +129,6 @@ GameObject:
   - component: {fileID: 774128996321898207}
   - component: {fileID: 2259950100599835162}
   - component: {fileID: 4886316798976138407}
-  - component: {fileID: -49735260614693980}
-  - component: {fileID: 3012746438218388759}
   m_Layer: 0
   m_Name: Chest_Lid
   m_TagString: Interactive
@@ -362,33 +360,6 @@ MonoBehaviour:
   closeAnimationName: chestClose
   interactiveObjectDelayTime: 0
   interactiveObjectOpen: 0
---- !u!114 &-49735260614693980
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2598214960893096213}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ad50f81b1d25c441943c37a89ba23f6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _Animator: {fileID: 774128996321898207}
-  _ActionOnDisable: 0
---- !u!114 &3012746438218388759
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2598214960893096213}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6d3967c910cf9304a90fe607c1531405, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  AnimGroup: {fileID: 11400000, guid: 8e0a7d1f29bef00428c542fd9e4284f8, type: 2}
 --- !u!1 &3413657187824588852
 GameObject:
   m_ObjectHideFlags: 0

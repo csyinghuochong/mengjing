@@ -27,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 214125592445342801}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 2.883, y: 3.5957723, z: 8.9763565}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -381,15 +381,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 7532359175845415943, guid: 00009ba1bcf81434d90db47379479cc3,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 8827509986095441901}
-    - targetCorrespondingSourceObject: {fileID: 7532359175845415943, guid: 00009ba1bcf81434d90db47379479cc3,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: -6498735482566246673}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 00009ba1bcf81434d90db47379479cc3, type: 3}
 --- !u!4 &8238175750412225509 stripped
 Transform:
@@ -397,42 +389,3 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1265618548405116248}
   m_PrefabAsset: {fileID: 0}
---- !u!95 &8491915671115559579 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 7226369829546979267, guid: 00009ba1bcf81434d90db47379479cc3,
-    type: 3}
-  m_PrefabInstance: {fileID: 1265618548405116248}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &8725778833145237855 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7532359175845415943, guid: 00009ba1bcf81434d90db47379479cc3,
-    type: 3}
-  m_PrefabInstance: {fileID: 1265618548405116248}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &8827509986095441901
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8725778833145237855}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ad50f81b1d25c441943c37a89ba23f6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _Animator: {fileID: 8491915671115559579}
-  _ActionOnDisable: 0
---- !u!114 &-6498735482566246673
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8725778833145237855}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6d3967c910cf9304a90fe607c1531405, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  AnimGroup: {fileID: 11400000, guid: c46dbcbb6e788a749adaf921195d542b, type: 2}

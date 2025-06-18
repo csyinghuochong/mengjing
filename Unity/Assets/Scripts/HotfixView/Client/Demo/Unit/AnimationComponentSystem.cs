@@ -29,9 +29,14 @@ namespace ET.Client
             self.CurrentAnimation = null;
 
             // 使用Animancer的话Animator不要添加Controller
-            Animator[] animators = go.GetComponentsInChildren<Animator>(true);
+            Animator[] animators = go.GetComponentsInChildren<Animator>();
             foreach (Animator animator in animators)
             {
+                if (!animator.enabled)
+                {
+                    continue;
+                }
+                
                 animator.runtimeAnimatorController = null;
 
                 AnimancerComponent animancerComponent = animator.gameObject.GetComponent<AnimancerComponent>();
