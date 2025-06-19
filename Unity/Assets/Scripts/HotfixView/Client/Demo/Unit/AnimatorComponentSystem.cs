@@ -123,6 +123,12 @@ namespace ET.Client
             self.Animator = animators;
             self.animationClips.Clear();
             self.Parameter.Clear();
+
+            if (animators == null || animators.Length == 0)
+            {
+                return;
+            }
+
             foreach (AnimationClip animationClip in animators[0].runtimeAnimatorController.animationClips)
             {
                 self.animationClips[animationClip.name] = animationClip;
@@ -204,6 +210,11 @@ namespace ET.Client
             if (self.HasParameter(motionType.ToString()))
             {
                 self.PlayAnimator(motionType, replay);
+                return;
+            }
+
+            if (self.Animator == null || self.Animator.Length == 0)
+            {
                 return;
             }
 

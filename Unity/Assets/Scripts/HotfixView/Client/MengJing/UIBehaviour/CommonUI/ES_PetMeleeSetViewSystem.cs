@@ -319,6 +319,12 @@ namespace ET.Client
             self.ShowAssistPets.Clear();
             foreach (int id in self.Root().GetComponent<ChengJiuComponentC>().PetTuJianActives)
             {
+                //[优先处理]梦境宠物上阵辅战不要出现这个宠物   2025/06/19/20:53
+                if (id == 20003)
+                {
+                    continue;
+                }
+
                 self.ShowAssistPets.Add(id);
             }
 
