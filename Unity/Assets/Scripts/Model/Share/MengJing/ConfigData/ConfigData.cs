@@ -20,7 +20,7 @@ namespace ET
         /// <summary>
         /// 变成宠物持续时间，时间结束后变回英雄
         /// </summary>
-        public const long PetSwichEndCD = 600;
+        public const long PetSwichEndCD = 6;
         
         /// <summary>
         /// 变身宠物切换CD
