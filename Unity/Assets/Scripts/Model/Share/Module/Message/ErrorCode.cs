@@ -87,7 +87,7 @@ namespace ET
         public const int ERR_PackageFrequent = 200126;                                //发送太频繁
         public const int ERR_AlreadyHave = 200127;
         public const int ERR_LoginGameGateError01 = 200128;
-        public const int ERR_AccountNameFormError = 20129;
+        public const int ERR_AccountNameFormError = 200129;
         public const int ERR_PasswordFormError = 20130;
         
         //300001-400001 服务器提示性错误码

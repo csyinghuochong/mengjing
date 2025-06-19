@@ -49,9 +49,10 @@ namespace ET.Client
             ClientSenderCompnent clientSenderCompnent = root.AddComponent<ClientSenderCompnent>();
             
             int errCode =  await clientSenderCompnent.LoginAsync(account, password, reLink, versionmode);
+            
+            Log.Debug($"LoginAsync->{errCode}");
             if (errCode == ErrorCode.ERR_NotRealName)
             {
-                Log.Debug("LoginAsync->NotRealName");
                 EventSystem.Instance.Publish(root, new NotRealName() {   });
                 return errCode;
             }

@@ -36,13 +36,13 @@ namespace ET.Client
             if (r2CLoginAccount.Error == ErrorCode.ERR_Success)
             {
                 Log.Debug($"r2CLoginAccount.Error == ErrorCode.ERR_Success  Session = session");
+                root.AddComponent<SessionComponent>().Session = session;
             }
             else
             {
+                Log.Debug($"r2CLoginAccount.Error != ErrorCode.ERR_Success：{r2CLoginAccount.Error}   session?.Dispose");
                 session?.Dispose();
-                Log.Debug($"r2CLoginAccount.Error != ErrorCode.ERR_Success   session?.Dispose");
             }
-            root.AddComponent<SessionComponent>().Session = session;
             response.AccountId = r2CLoginAccount.AccountId;
             response.PlayerInfo = r2CLoginAccount.PlayerInfo;
             response.RoleLists = r2CLoginAccount.RoleLists;
