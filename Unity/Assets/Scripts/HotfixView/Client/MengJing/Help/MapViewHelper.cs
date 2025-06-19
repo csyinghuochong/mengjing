@@ -77,6 +77,9 @@ namespace ET.Client
                 case UnitType.Pet:
                     self.GetComponent<UIPetHpComponent>()?.EnterHide();
                     break;
+                case UnitType.Npc:
+                    self.GetComponent<UINpcHpComponent>()?.EnterHide();
+                    break;
                 default:
                     break;
             }
@@ -96,6 +99,9 @@ namespace ET.Client
                     break;
                 case UnitType.Pet:
                     self.GetComponent<UIPetHpComponent>()?.ExitHide();
+                    break;
+                case UnitType.Npc:
+                    self.GetComponent<UINpcHpComponent>()?.ExitHide();
                     break;
                 default:
                     break;

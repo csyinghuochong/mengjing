@@ -235,6 +235,26 @@ namespace ET.Client
             return addTaskids;
         }
 
+        public static void EnterHide(this UINpcHpComponent self)
+        {
+            if (self.UINpcName == null)
+            {
+                return;
+            }
+
+            self.UINpcName.gameObject.SetActive(false);
+        }
+
+        public static void ExitHide(this UINpcHpComponent self)
+        {
+            if (self.UINpcName == null)
+            {
+                return;
+            }
+
+            self.UINpcName.gameObject.SetActive(true);
+        }
+        
         public static void ShowNpcEffect(this UINpcHpComponent self, int type, int effectConfigId, bool show)
         {
             GameObject go = self.EffectComTask[type];
