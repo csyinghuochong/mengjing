@@ -38,7 +38,7 @@ namespace ET.Server
                 result_check.data = new RealNameData();
                 result_check.data.result = new RealNameResult();
                 using ListComponent<string> testCard = new ListComponent<string>();
-                for (int i = 0; i < 30; i++)
+                for (int i = 0; i < 34; i++)
                 {
                     testCard.Add($"400001{1990 + i}01012996");
                 }

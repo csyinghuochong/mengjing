@@ -8,6 +8,7 @@ namespace ET.Client
         protected override async ETTask Run(Scene scene, ReturnLogin args)
         {
             MapComponent mapComponent = scene.GetComponent<MapComponent>();
+            Log.Debug($"ReturnLogin.mapComponent.MapType  {mapComponent.MapType}");
             if (mapComponent.MapType == MapTypeEnum.LoginScene)
             {
                 return;
@@ -22,7 +23,6 @@ namespace ET.Client
         private async ETTask RunAsync2(Scene scene, ReturnLogin args, long waitTime)
         {
             long instanceId = scene.InstanceId;
-            Log.Debug($"ReturnLogin  111");
             TimerComponent timerComponent = scene.GetComponent<TimerComponent>();
             await timerComponent.WaitAsync(waitTime);
             if (instanceId != scene.InstanceId)
@@ -31,7 +31,7 @@ namespace ET.Client
             }
             
             Scene oldroot = scene.Root();
-            Log.Debug($"ReturnLogin222  {oldroot.Fiber.Id}");   
+            Log.Debug($"ReturnLogin.RunAsync2  {oldroot.Fiber.Id}");   
             scene.Root().RemoveComponent<ClientSenderCompnent>();
             Log.Debug($"ReturnLogin  {oldroot.CurrentScene()}   {oldroot.CurrentScene()?.GetComponent<UnitComponent>()?.Children.Count}");
             oldroot.CurrentScene()?.Dispose();

@@ -20,8 +20,7 @@ namespace ET.Client
             self.View.E_buttonAgeTipButton.AddListener(() => { self.View.EG_UIAgeTipRectTransform.gameObject.SetActive(true); });
             self.View.E_AgeTipCloseButton.AddListener(() => { self.View.EG_UIAgeTipRectTransform.gameObject.SetActive(false); });
             self.View.E_AgeTipClose_2Button.AddListener(() => { self.View.EG_UIAgeTipRectTransform.gameObject.SetActive(false); });
-
-
+            
             Application.targetFrameRate = 60;
             SettingData.AnimController = GlobalHelp.GetVersionMode() == 0 ? 0 : 1;
             GlobalComponent.Instance.MainCamera.GetComponent<Camera>().farClipPlane = 1000;
@@ -29,6 +28,9 @@ namespace ET.Client
             
             self.View.E_AccountInputField.text = PlayerPrefsHelp.GetString("MJ_Account");
             self.View.E_PasswordInputField.text = PlayerPrefsHelp.GetString("MJ_Password");
+            
+            self.View.E_AccountInputField.onValueChanged.AddListener((string text) => { self.CheckSensitiveWords_Account(); });
+            self.View.E_PasswordInputField.onValueChanged.AddListener((string text) => { self.CheckSensitiveWords_Password(); });
 
             self.View.E_TextYinSiText.gameObject.SetActive(false);
             UILoginHelper.ShowTextList(self.View.E_TextYinSiText.gameObject, GlobalHelp.GetPlatform());
@@ -45,6 +47,20 @@ namespace ET.Client
 
         public static void ShowWindow(this DlgMJLogin self, Entity contextData = null)
         {
+        }
+        
+        public static void CheckSensitiveWords_Account(this DlgMJLogin self)
+        {
+            string original = self.View.E_AccountInputField.text;
+            string result = original.Replace(" ", ""); 
+            self.View.E_AccountInputField.text = result;
+        }
+        
+        public static void CheckSensitiveWords_Password(this DlgMJLogin self)
+        {
+            string original = self.View.E_PasswordInputField.text;
+            string result = original.Replace(" ", ""); 
+            self.View.E_PasswordInputField.text = result;
         }
         
         private static void CheckServerList(this DlgMJLogin self, List<ServerItem> serverItems, int versionMode)
@@ -144,6 +160,7 @@ namespace ET.Client
             PlayerPrefsHelp.SetString("MJ_Password", self.View.E_PasswordInputField.text);
 
             int error =  await LoginHelper.Login(self.Root(), self.View.E_AccountInputField.text, self.View.E_PasswordInputField.text, 0, GlobalHelp.GetVersionMode());
+            Log.Debug($"LoginHelper.Login:  {error}");
             if (error  != ErrorCode.ERR_Success &&  !self.IsDisposed)
             {
                 self.HideLoadingView();

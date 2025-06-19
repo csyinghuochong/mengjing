@@ -981,8 +981,6 @@ namespace ET.Server
                      self.InitSkillPro(addskills[i], 0, (int)SkillSetEnum.Skill, (int)SkillSourceEnum.Equip);
                 }
             }
-
-            self.CheckInitSkill(occ);
         }
 
         public static void OnChangeEquipIndex(this SkillSetComponentS self, int equipIndex)

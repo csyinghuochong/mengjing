@@ -182,7 +182,9 @@ namespace ET.Client
             self.LastLoginTime = Time.time;
             PlayerPrefsHelp.SetString(PlayerPrefsHelp.LastUserID, self.SeletRoleInfo.UnitId.ToString());
             playerInfoComponent.CurrentRoleId = self.SeletRoleInfo.UnitId;
+            self.Root().GetComponent<MapComponent>().MapType = MapTypeEnum.LoginScene;
             int errorCode = await LoginHelper.LoginGameAsync(self.Root(), 0);
+            
             if (errorCode == ErrorCode.ERR_SessionDisconnect)
             {
                 FlyTipComponent.Instance.ShowFlyTip("网络断线，请重新登陆！");

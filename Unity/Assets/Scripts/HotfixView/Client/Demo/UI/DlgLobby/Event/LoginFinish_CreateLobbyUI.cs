@@ -105,11 +105,11 @@ namespace ET.Client
         public static async ETTask OnLoginSucess(Scene scene, LoginFinish args)
         {
             // FlyTipComponent.Instance.ShowFlyTip("登录成功!");
-            scene.GetComponent<MapComponent>().MapType = MapTypeEnum.CreateRole;
+            //scene.GetComponent<MapComponent>().MapType = MapTypeEnum.CreateRole;
             var path = ABPathHelper.GetScenePath("CreateRole");
             await scene.GetComponent<ResourcesLoaderComponent>().LoadSceneAsync(path, LoadSceneMode.Single);
             // await scene.GetComponent<TimerComponent>().WaitAsync(500);
-
+            
             GlobalComponent.Instance.MainCamera.transform.localPosition = new Vector3(23f, 2f, 13f);
             GlobalComponent.Instance.MainCamera.transform.localRotation = Quaternion.Euler(0f, 0f, 0f);
 
