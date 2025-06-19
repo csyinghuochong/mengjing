@@ -104,14 +104,14 @@ namespace ET.Client
                 MJCameraComponent cameraComponent = root.CurrentScene().GetComponent<MJCameraComponent>();
                 UIComponent uiComponent = self.Root().GetComponent<UIComponent>();
                 uiComponent.HideWindow(WindowID.WindowID_Main);
-                GlobalComponent globalComponent = self.Root().GetComponent<GlobalComponent>();
-                globalComponent.BloodRoot.gameObject.SetActive(false);
+                //GlobalComponent globalComponent = self.Root().GetComponent<GlobalComponent>();
+                //globalComponent.BloodRoot.gameObject.SetActive(false);
                 cameraComponent.SetBuildEnter(UnitHelper.GetMyUnitFromClientScene(root), CameraBuildType.Type_4,
                     () =>
                     {
                         uiComponent.ShowWindow(WindowID.WindowID_Role);
                         uiComponent.ShowWindow(WindowID.WindowID_Main);
-                        globalComponent.BloodRoot.gameObject.SetActive(true);
+                        //globalComponent.BloodRoot.gameObject.SetActive(true);
                     });
             }
 

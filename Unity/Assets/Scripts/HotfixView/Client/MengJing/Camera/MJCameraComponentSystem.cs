@@ -121,6 +121,8 @@ namespace ET.Client
                 self.OnBuildEnter();
                 self.OnBuildEnter = null;
                 MapViewHelper.ShowOtherUnit(self.Root(), false, self.NoHideIds);
+                GlobalComponent globalComponent = self.Root().GetComponent<GlobalComponent>();
+                globalComponent.BloodRoot.gameObject.SetActive(false);
                 self.NoHideIds.Clear();
             }
 
@@ -195,8 +197,6 @@ namespace ET.Client
             if (self.CameraMoveTime > 1f)
             {
                 self.CameraMoveType = CameraMoveType.Normal;
-                // UnitHelper.GetMyUnitFromClientScene(self.Root()).GetComponent<UIPlayerHpComponent>()?.ShowHearBar(true);
-                // self.Root().GetComponent<GlobalComponent>().BloodRoot.gameObject.SetActive(true);
                 return;
             }
 
@@ -330,8 +330,6 @@ namespace ET.Client
             self.OldCameraDirection = self.MainCamera.transform.position - unitPos;
             self.OnBuildEnter = action;
             self.NoHideIds.Clear();
-            // UnitHelper.GetMyUnitFromClientScene(self.Root()).GetComponent<UIPlayerHpComponent>()?.ShowHearBar(false);
-            // self.Root().GetComponent<GlobalComponent>().BloodRoot.gameObject.SetActive(false);
         }
 
         public static void SetBuildExit(this MJCameraComponent self)
@@ -342,6 +340,8 @@ namespace ET.Client
             self.OldCameraPostion = self.MainCamera.transform.localPosition;
             self.TargetPosition = unit.Position + self.OffsetPosition;
             MapViewHelper.ShowOtherUnit(self.Root(), true, null);
+            GlobalComponent globalComponent = self.Root().GetComponent<GlobalComponent>();
+            globalComponent.BloodRoot.gameObject.SetActive(true);
         }
 
         public static void OnEnterScene(this MJCameraComponent self, int sceneTypeEnum)
