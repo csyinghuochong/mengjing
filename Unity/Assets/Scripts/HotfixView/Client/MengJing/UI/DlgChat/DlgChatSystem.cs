@@ -176,7 +176,7 @@ namespace ET.Client
             
             if (text.Equals("#fps60"))
             {
-                Application.targetFrameRate = 60;
+                CommonViewHelper.TargetFrameRate(60);
                 return;
             }
             

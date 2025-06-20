@@ -20,6 +20,7 @@ namespace FantasyRPG
         {
             isSetFrameRate = true;
             Application.targetFrameRate = framerate;
+            UnityEngine.Debug.Log($"SetTargetFrameRate: {framerate}");
         }
 
         public void SetScreenSize(int width = 1920, int height = 1200)

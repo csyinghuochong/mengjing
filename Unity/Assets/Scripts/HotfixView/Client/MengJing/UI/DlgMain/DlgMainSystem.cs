@@ -2545,6 +2545,9 @@ namespace ET.Client
             string value = userInfoComponent.GetGameSettingValue(GameSettingEnum.AutoAttack);
             AttackComponent attackComponent = self.Root().GetComponent<AttackComponent>();
             attackComponent.AutoAttack = value == "1";
+
+            string fpsValue = userInfoComponent.GetGameSettingValue(GameSettingEnum.HighFps);
+            CommonViewHelper.TargetFrameRate(fpsValue == "1" ? 60 : 30);
         }
 
         public static void OnSpellStart(this DlgMain self)
