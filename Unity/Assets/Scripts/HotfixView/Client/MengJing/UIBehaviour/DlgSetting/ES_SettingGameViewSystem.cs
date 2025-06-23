@@ -543,6 +543,14 @@ namespace ET.Client
             self.EG_PickSetRectTransform.Find("Image_Click_1").gameObject.SetActive(setvalues2[1] == "1");
             self.EG_PickSetRectTransform.Find("Text_1").gameObject.SetActive(setvalues2[1] != "1");
 
+            //梦境版号服去掉这3个   
+            if (GlobalHelp.GetVersionMode() == 2)
+            {
+                self.UITransform.Find("Right/E_ScrollView_1/Viewport/Content/SettingItem_4").gameObject.SetActive(false);
+                self.UITransform.Find("Right/E_ScrollView_1/Viewport/Content/SettingItem_6").gameObject.SetActive(false);
+                self.UITransform.Find("Right/E_ScrollView_1/Viewport/Content/SettingItem_7").gameObject.SetActive(false);
+            }
+
             self.UpdateYaoGan();
             self.UpdateShadow();
             self.UpdateHighFps();
