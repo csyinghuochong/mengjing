@@ -8,21 +8,23 @@
       "hash": "903cf9faa2760d85bdaf8835101401070cef6fd3"
     },
     "com.coffee.ui-effect": {
-      "version": "file:com.coffee.ui-effect@dbdb99b52a",
+      "version": "https://github.com/mob-sakai/UIEffect.git?path=Packages/src",
       "depth": 0,
-      "source": "embedded",
+      "source": "git",
       "dependencies": {
         "com.unity.ugui": "1.0.0"
-      }
+      },
+      "hash": "145f56968a7d281c32507341e88e11ac1f4b0372"
     },
     "com.coffee.ui-particle": {
-      "version": "file:com.coffee.ui-particle@2e813c5313",
+      "version": "https://github.com/mob-sakai/ParticleEffectForUGUI.git",
       "depth": 0,
-      "source": "embedded",
+      "source": "git",
       "dependencies": {
         "com.unity.ugui": "1.0.0",
         "com.unity.modules.particlesystem": "1.0.0"
-      }
+      },
+      "hash": "4b98abd7469b10d55c9c623830cb6e1518f72731"
     },
     "com.cysharp.memorypack": {
       "version": "file:com.cysharp.memorypack@2554e81f03",
@@ -31,10 +33,11 @@
       "dependencies": {}
     },
     "com.gwiazdorrr.betterstreamingassets": {
-      "version": "file:com.gwiazdorrr.betterstreamingassets@840be15149",
+      "version": "https://github.com/gwiazdorrr/BetterStreamingAssets.git",
       "depth": 0,
-      "source": "embedded",
-      "dependencies": {}
+      "source": "git",
+      "dependencies": {},
+      "hash": "2bdc568484f7b98f9297a444ab12ad016b73f283"
     },
     "com.tuyoogame.yooasset": {
       "version": "file:YooAsset",
