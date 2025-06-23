@@ -17,7 +17,7 @@ namespace ET.Client
 
             self.E_Btn_HeChengExplainButton.AddListener(() =>
             {
-                self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_PetHeXinHeCheng).Coroutine();
+                self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_PetHeChengExplain).Coroutine();
             });
             self.E_Btn_HeChengButton.AddListener(self.OnBtn_HeChengButton);
             self.E_Btn_PreviewButton.AddListenerAsync(self.OnBtn_PreviewButton);
