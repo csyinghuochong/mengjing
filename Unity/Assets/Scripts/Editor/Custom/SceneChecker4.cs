@@ -246,6 +246,7 @@ namespace ET.Client
                 if (!file.Contains("nity\\Library\\PackageCache"))
                 {
                     if (!file.Contains(@"Assets\Res\Shader")
+                        && !file.Contains(@"Unity\Packages")
                         && !file.Contains(@"Amazing Assets")
                         && !file.Contains(@"HighlightPlus")
                         && !file.Contains(@"UnityChanShader")
@@ -258,14 +259,14 @@ namespace ET.Client
                         string[] pathlist = file.Split('\\');
                         string destinationFile = @"Assets\\Res\\Shader\\" + pathlist[pathlist.Length - 1];
                         bool moveret = FileHelper.MoveFile(prefabpath, destinationFile);
-                        FileHelper.MoveFile(prefabpath + ".meta", destinationFile + ".meta");
+                       FileHelper.MoveFile(prefabpath + ".meta", destinationFile + ".meta");
 
                         shaderPaths += file + "\n";
 
                         Debug.Log($"移动shader：{prefabpath}   ====>   {destinationFile}");
                     }
-                }
-            }
+              }
+           }
 
             ClipBoard.Copy(shaderPaths);
         }
