@@ -344,6 +344,12 @@ namespace ET.Client
             }
         }
 
+        private static async ETTask ChangeUniversalBlurFeature(this UIComponent self)
+        {
+            GameObject.Find("Global").GetComponent<RenderScaleController>().ChangeUniversalBlurFeature(true);
+            await self.Root().GetComponent<TimerComponent>().WaitFrameAsync();
+            GameObject.Find("Global").GetComponent<RenderScaleController>().ChangeUniversalBlurFeature(false);
+        }
 
         private static void RealShowWindow(this UIComponent self, UIBaseWindow baseWindow, WindowID id, Entity showData = null)
         {
@@ -372,8 +378,20 @@ namespace ET.Client
                 else
                 {
                     self.ShowWindowAsync(WindowID.WindowID_HuoBiSet).Coroutine();
-                    GameObject.Find("Global").GetComponent<RenderScaleController>().ChangeUniversalBlurFeature(true);
                 }
+            }
+
+            if (id == WindowID.WindowID_CellDungeonCell
+                ||id == WindowID.WindowID_Function
+                ||id == WindowID.WindowID_MapBig
+                ||id == WindowID.WindowID_PetBar
+                ||id == WindowID.WindowID_PetMelee
+                ||id == WindowID.WindowID_PetMeleeLevel
+                ||id == WindowID.WindowID_Role
+                ||id == WindowID.WindowID_MJLobby
+                ||id == WindowID.WindowID_Chat)
+            {
+                self.ChangeUniversalBlurFeature().Coroutine();
             }
 
             if (uILayerScript.HideMainUI)
@@ -441,7 +459,6 @@ namespace ET.Client
                 if (dlgHuoBiSet != null && !haveView)
                 {
                     self.CloseWindow(WindowID.WindowID_HuoBiSet);
-                    GameObject.Find("Global").GetComponent<RenderScaleController>().ChangeUniversalBlurFeature(false);
                 }
             }
 

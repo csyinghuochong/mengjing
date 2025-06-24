@@ -76,7 +76,13 @@ namespace ET.Client
 
         public static async ETTask ShowGuide(this ES_RoleProperty self)
         {
+            long instanceid = self.InstanceId;
             await self.Root().GetComponent<TimerComponent>().WaitAsync(10);
+            if (instanceid != self.InstanceId)
+            {
+                return;
+            }
+
             self.Root().GetComponent<GuideComponent>().OnTrigger(GuideTriggerType.OpenUI, "UIRoleProperty");
         }
         

@@ -87,7 +87,7 @@ namespace ET.Client
 
         public static void ExitHide(this Unit self)
         {
-            self.GetComponent<GameObjectComponent>().ExitHide();
+            self.GetComponent<GameObjectComponent>()?.ExitHide();
             
             switch (self.Type)
             {
