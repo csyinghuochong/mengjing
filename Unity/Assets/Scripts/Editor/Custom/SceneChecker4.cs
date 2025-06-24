@@ -258,12 +258,12 @@ namespace ET.Client
                         string prefabpath = file;
                         string[] pathlist = file.Split('\\');
                         string destinationFile = @"Assets\\Res\\Shader\\" + pathlist[pathlist.Length - 1];
-                        bool moveret = FileHelper.MoveFile(prefabpath, destinationFile);
-                       FileHelper.MoveFile(prefabpath + ".meta", destinationFile + ".meta");
+                        //bool moveret = FileHelper.MoveFile(prefabpath, destinationFile);
+                        //FileHelper.MoveFile(prefabpath + ".meta", destinationFile + ".meta");
 
                         shaderPaths += file + "\n";
 
-                        Debug.Log($"移动shader：{prefabpath}   ====>   {destinationFile}");
+                        //Debug.Log($"移动shader：{prefabpath}   ====>   {destinationFile}");
                     }
               }
            }
