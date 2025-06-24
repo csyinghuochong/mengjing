@@ -2020,9 +2020,10 @@ namespace ET.Client
         {
             bool zhankai = self.View.E_Button_ZhanKaiButton.transform.localScale == new Vector3(-1f, 1f, 1f);
             
-             GlobalComponent globalComponent = self.Root().GetComponent<GlobalComponent>();
-                        globalComponent.BloodRoot.gameObject.SetActive(true);
-            
+            GlobalComponent globalComponent = self.Root().GetComponent<GlobalComponent>();
+            globalComponent.BloodRoot.gameObject.SetActive(true);
+            //GameObject.Find("Global").GetComponent<RenderScaleController>().ChangeUniversalBlurFeature(false);
+        
             self.MainUnit = UnitHelper.GetMyUnitFromClientScene(self.Scene());
             self.View.EG_Btn_TopRight_1RectTransform.gameObject.SetActive(zhankai && SceneConfigHelper.ShowRightTopButton(sceneTypeEnum));
             self.View.EG_Btn_TopRight_2RectTransform.gameObject.SetActive(zhankai && SceneConfigHelper.ShowRightTopButton(sceneTypeEnum));

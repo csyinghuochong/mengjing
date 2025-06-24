@@ -143,6 +143,7 @@ namespace ET.Client
 
             string scenename = SceneManager.GetActiveScene().name;
             // 打印当前场景的名称
+            
             Debug.Log("当前场景的名称是: " + scenename);
 
             //动态生成场景
