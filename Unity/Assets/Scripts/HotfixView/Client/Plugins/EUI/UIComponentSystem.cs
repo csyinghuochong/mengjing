@@ -372,6 +372,7 @@ namespace ET.Client
                 else
                 {
                     self.ShowWindowAsync(WindowID.WindowID_HuoBiSet).Coroutine();
+                    GameObject.Find("Global").GetComponent<RenderScaleController>().ChangeUniversalBlurFeature(true);
                 }
             }
 
@@ -440,6 +441,7 @@ namespace ET.Client
                 if (dlgHuoBiSet != null && !haveView)
                 {
                     self.CloseWindow(WindowID.WindowID_HuoBiSet);
+                    GameObject.Find("Global").GetComponent<RenderScaleController>().ChangeUniversalBlurFeature(false);
                 }
             }
 

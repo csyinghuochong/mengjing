@@ -2022,7 +2022,7 @@ namespace ET.Client
             
             GlobalComponent globalComponent = self.Root().GetComponent<GlobalComponent>();
             globalComponent.BloodRoot.gameObject.SetActive(true);
-            //GameObject.Find("Global").GetComponent<RenderScaleController>().ChangeUniversalBlurFeature(false);
+            GameObject.Find("Global").GetComponent<RenderScaleController>().ChangeUniversalBlurFeature(false);
         
             self.MainUnit = UnitHelper.GetMyUnitFromClientScene(self.Scene());
             self.View.EG_Btn_TopRight_1RectTransform.gameObject.SetActive(zhankai && SceneConfigHelper.ShowRightTopButton(sceneTypeEnum));
