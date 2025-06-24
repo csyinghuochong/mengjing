@@ -22,7 +22,7 @@ namespace ET.Client
             self.View.E_AgeTipClose_2Button.AddListener(() => { self.View.EG_UIAgeTipRectTransform.gameObject.SetActive(false); });
 
             CommonViewHelper.TargetFrameRate(60);
-            SettingData.AnimController = GlobalHelp.GetVersionMode() == 0 ? 0 : 1;
+            SettingData.AnimController = 0;///GlobalHelp.GetVersionMode() == 0 ? 0 : 1;
             GlobalComponent.Instance.MainCamera.GetComponent<Camera>().farClipPlane = 1000;
             GameObject.Find("Global").GetComponent<Init>().TogglePatchWindow(false);
             
