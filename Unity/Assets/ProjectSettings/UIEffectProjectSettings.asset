@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!200 &-4089119303677528343
+--- !u!200 &-2443229137692030415
 ShaderVariantCollection:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,18 +8,9 @@ ShaderVariantCollection:
   m_PrefabAsset: {fileID: 0}
   m_Name: ShaderVariants
   m_Shaders:
-  - first: {fileID: 17, guid: 0000000000000000e000000000000000, type: 0}
-    second:
-      variants:
-      - keywords: 
-        passType: 0
   - first: {fileID: 4800000, guid: 96246b1ead49a4c5a996fd477bc5a117, type: 3}
     second:
       variants:
-      - keywords: COLOR_ADDITIVE SHADOW_COLOR_REPLACE
-        passType: 0
-      - keywords: COLOR_ADDITIVE SHADOW_COLOR_REPLACE TONE_GRAYSCALE
-        passType: 0
       - keywords: TONE_GRAYSCALE
         passType: 0
 --- !u!114 &11400000
@@ -31,33 +22,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7d43f626d9b5f4d729097092ded48bdb, type: 3}
+  m_Script: {fileID: 0}
   m_Name: UIEffectProjectSettings
-  m_EditorClassIdentifier: 
-  m_TransformSensitivity: 1
+  m_EditorClassIdentifier: Coffee.UIEffect:Coffee.UIEffects:UIEffectProjectSettings
   m_RuntimePresets: []
+  m_RuntimePresetsV2: []
   m_UseHDRColorPicker: 1
   m_ShaderVariantCollection: {fileID: 0}
   m_ShaderVariantRegistry:
     m_OptionalShaders:
     - key: Hidden/UI/Default (SoftMaskable)
       value: Hidden/UI/Default (UIEffect)
-    - key: Hidden/TextMeshPro/Bitmap (SoftMaskable)
-      value: Hidden/TextMeshPro/Bitmap (UIEffect)
-    - key: Hidden/TextMeshPro/Distance Field (SoftMaskable)
-      value: Hidden/TextMeshPro/Distance Field (UIEffect)
-    - key: Hidden/TextMeshPro/Distance Field Overlay (SoftMaskable)
-      value: Hidden/TextMeshPro/Distance Field Overlay (UIEffect)
-    - key: Hidden/TextMeshPro/Distance Field SSD (SoftMaskable)
-      value: Hidden/TextMeshPro/Distance Field SSD (UIEffect)
-    - key: Hidden/TextMeshPro/Mobile/Bitmap (SoftMaskable)
-      value: Hidden/TextMeshPro/Mobile/Bitmap (UIEffect)
-    - key: Hidden/TextMeshPro/Mobile/Distance Field (SoftMaskable)
-      value: Hidden/TextMeshPro/Mobile/Distance Field (UIEffect)
-    - key: Hidden/TextMeshPro/Mobile/Distance Field Overlay (SoftMaskable)
-      value: Hidden/TextMeshPro/Mobile/Distance Field Overlay (UIEffect)
-    - key: Hidden/TextMeshPro/Mobile/Distance Field SSD (SoftMaskable)
-      value: Hidden/TextMeshPro/Mobile/Distance Field SSD (UIEffect)
-    m_Asset: {fileID: -4089119303677528343}
+    m_Asset: {fileID: -2443229137692030415}
     m_ErrorOnUnregisteredVariant: 0
     m_UnregisteredVariants: []
