@@ -1,119 +1,170 @@
-Shader "Custom/TintedBlurUI_New"
+Shader "Custom/ScreenGaussianBlur_Final"
 {
     Properties
     {
-        [PerRendererData] _MainTex ("Sprite Texture", 2D) = "white" {}
-
-        _StencilComp ("Stencil Comparison", Float) = 8
-        _Stencil ("Stencil ID", Float) = 0
-        _StencilOp ("Stencil Operation", Float) = 0
-        _StencilWriteMask ("Stencil Write Mask", Float) = 255
-        _StencilReadMask ("Stencil Read Mask", Float) = 255
-
-        _ColorMask ("Color Mask", Float) = 15
-
-        [Toggle(UNITY_UI_ALPHACLIP)] _UseUIAlphaClip ("Use Alpha Clip", Float) = 0
+         [PerRendererData]_MainTex ("Base Texture", 2D) = "white" {}
+        _BlurStrength ("Blur Strength", Range(0, 10)) = 1.0
+        _BlurSampleCount ("Sample Count", Range(1, 5)) = 3
+        [Toggle(_USE_ALPHA_CONTROL)] _AlphaControl ("Use Alpha Control", Float) = 0
+        _BlurIterations ("Blur Iterations", Range(1, 3)) = 1
     }
 
     SubShader
     {
-        Tags
-        {
-            "Queue"="Transparent"
-            "IgnoreProjector"="True"
-            "RenderType"="Transparent"
-            "PreviewType"="Plane"
-            "CanUseSpriteAtlas"="True"
-        }
-
-        Stencil
-        {
-            Ref [_Stencil]
-            Comp [_StencilComp]
-            Pass [_StencilOp]
-            ReadMask [_StencilReadMask]
-            WriteMask [_StencilWriteMask]
-        }
-
-        Cull Off
-        Lighting Off
+        Tags { "Queue" = "Transparent" "RenderType" = "Opaque" }
         ZWrite Off
-        ZTest [unity_GUIZTestMode]
-        Blend SrcAlpha OneMinusSrcAlpha
-        ColorMask [_ColorMask]
-
+        Blend One OneMinusSrcAlpha
+        
+        // 水平模糊Pass
         Pass
         {
-            Name "Default"
-        CGPROGRAM
-            #pragma vertex vert
-            #pragma fragment frag
-            #pragma target 2.0
-
+            Name "HBLUR"
+            CGPROGRAM
+            #pragma vertex Vert
+            #pragma fragment Frag
+            #pragma target 3.0
+            
             #include "UnityCG.cginc"
-            #include "UnityUI.cginc"
-
-            #pragma multi_compile_local _ UNITY_UI_CLIP_RECT
-            #pragma multi_compile_local _ UNITY_UI_ALPHACLIP
-
-            struct appdata_t
+            
+            struct appdata
             {
-                float4 vertex   : POSITION;
-                float4 color    : COLOR;
-                float2 texcoord : TEXCOORD0;
-                UNITY_VERTEX_INPUT_INSTANCE_ID
+                float4 vertex : POSITION;
+                float2 uv : TEXCOORD0;
             };
-
+            
             struct v2f
             {
-                float4 vertex   : SV_POSITION;
-                fixed4 color    : COLOR;
-                float2 texcoord  : TEXCOORD0;
-                float4 worldPosition : TEXCOORD1;
-                float4 screenPos : TEXCOORD2;
-                UNITY_VERTEX_OUTPUT_STEREO
+                float4 vertex : SV_POSITION;
+                float2 uv : TEXCOORD0;
+                float baseStrength : TEXCOORD1;
             };
-
+            
             sampler2D _MainTex;
-            sampler2D _GlobalUniversalBlurTexture;
-            fixed4 _TextureSampleAdd;
-            float4 _ClipRect;
-            float4 _MainTex_ST;
-
-            v2f vert(appdata_t v)
+            float4 _MainTex_TexelSize;
+            float _BlurStrength;
+            float _BlurSampleCount;
+            int _USE_ALPHA_CONTROL;
+            int _BlurIterations;
+            
+            v2f Vert(appdata v)
             {
-                v2f OUT;
-                UNITY_SETUP_INSTANCE_ID(v);
-                UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(OUT);
-                OUT.worldPosition = v.vertex;
-                OUT.vertex = UnityObjectToClipPos(OUT.worldPosition);
-
-                OUT.texcoord = TRANSFORM_TEX(v.texcoord, _MainTex);
-
-                OUT.color = v.color;
-                OUT.screenPos = ComputeScreenPos(OUT.vertex);
-                return OUT;
+                v2f o;
+                o.vertex = UnityObjectToClipPos(v.vertex);
+                o.uv = v.uv;
+                o.baseStrength = _BlurStrength;
+                return o;
             }
-
-            fixed4 frag(v2f IN) : SV_Target
+            
+            fixed4 Frag(v2f i) : SV_Target
             {
-                half4 mainTexColor = tex2D(_MainTex, IN.texcoord) + _TextureSampleAdd;
+                // 采样主纹理获取颜色和alpha
+                fixed4 texColor = tex2D(_MainTex, i.uv);
+                float alpha = texColor.a;
                 
-                half4 color = (tex2D(_GlobalUniversalBlurTexture, IN.screenPos / IN.screenPos.w) + _TextureSampleAdd) * IN.color;
-
-                #ifdef UNITY_UI_CLIP_RECT
-                mainTexColor.a *= UnityGet2DClipping(IN.worldPosition.xy, _ClipRect);
-                #endif
+                // 计算有效模糊强度（alpha=0时模糊为0）
+                float effectiveStrength = i.baseStrength;
+                if (_USE_ALPHA_CONTROL == 1)
+                {
+                    effectiveStrength = i.baseStrength * alpha;
+                    effectiveStrength = max(effectiveStrength, 0.0);
+                }
                 
-                #ifdef UNITY_UI_ALPHACLIP
-                clip (mainTexColor.a - 0.001);
-                #endif
+                // 计算采样偏移量（基于有效强度）
+                float2 step = _MainTex_TexelSize.xy * 2.0 * effectiveStrength;
                 
-                color *= mainTexColor;
+                // 高斯模糊权重（5x5采样点）
+                float weights[5] = {0.05, 0.2, 0.3, 0.2, 0.05};
+                int sampleCount = min((int)_BlurSampleCount, 5);
                 
-                return color;
+                // 水平方向模糊计算
+                fixed4 sum = texColor * weights[2];
+                if (sampleCount > 1) sum += tex2D(_MainTex, i.uv + step * float2(-1, 0)) * weights[1];
+                if (sampleCount > 1) sum += tex2D(_MainTex, i.uv + step * float2(1, 0)) * weights[1];
+                if (sampleCount > 3) sum += tex2D(_MainTex, i.uv + step * float2(-2, 0)) * weights[0];
+                if (sampleCount > 3) sum += tex2D(_MainTex, i.uv + step * float2(2, 0)) * weights[0];
+                
+                // 保持主纹理alpha值
+                sum.a = texColor.a;
+                return sum;
             }
-        ENDCG
+            ENDCG
+        }
+        
+        // 垂直模糊Pass
+        Pass
+        {
+            Name "VBLUR"
+            CGPROGRAM
+            #pragma vertex Vert
+            #pragma fragment Frag
+            #pragma target 3.0
+            
+            #include "UnityCG.cginc"
+            
+            struct appdata
+            {
+                float4 vertex : POSITION;
+                float2 uv : TEXCOORD0;
+            };
+            
+            struct v2f
+            {
+                float4 vertex : SV_POSITION;
+                float2 uv : TEXCOORD0;
+                float baseStrength : TEXCOORD1;
+            };
+            
+            sampler2D _MainTex;
+            float4 _MainTex_TexelSize;
+            float _BlurStrength;
+            float _BlurSampleCount;
+            int _USE_ALPHA_CONTROL;
+            int _BlurIterations;
+            
+            v2f Vert(appdata v)
+            {
+                v2f o;
+                o.vertex = UnityObjectToClipPos(v.vertex);
+                o.uv = v.uv;
+                o.baseStrength = _BlurStrength;
+                return o;
+            }
+            
+            fixed4 Frag(v2f i) : SV_Target
+            {
+                // 采样主纹理获取颜色和alpha
+                fixed4 texColor = tex2D(_MainTex, i.uv);
+                float alpha = texColor.a;
+                
+                // 计算有效模糊强度
+                float effectiveStrength = i.baseStrength;
+                if (_USE_ALPHA_CONTROL == 1)
+                {
+                    effectiveStrength = i.baseStrength * alpha;
+                    effectiveStrength = max(effectiveStrength, 0.0);
+                }
+                
+                // 计算采样偏移量
+                float2 step = _MainTex_TexelSize.xy * 2.0 * effectiveStrength;
+                
+                // 高斯模糊权重
+                float weights[5] = {0.05, 0.2, 0.3, 0.2, 0.05};
+                int sampleCount = min((int)_BlurSampleCount, 5);
+                
+                // 垂直方向模糊计算
+                fixed4 sum = texColor * weights[2];
+                if (sampleCount > 1) sum += tex2D(_MainTex, i.uv + step * float2(0, -1)) * weights[1];
+                if (sampleCount > 1) sum += tex2D(_MainTex, i.uv + step * float2(0, 1)) * weights[1];
+                if (sampleCount > 3) sum += tex2D(_MainTex, i.uv + step * float2(0, -2)) * weights[0];
+                if (sampleCount > 3) sum += tex2D(_MainTex, i.uv + step * float2(0, 2)) * weights[0];
+                
+                // 保持主纹理alpha值
+                sum.a = texColor.a;
+                return sum;
+            }
+            ENDCG
         }
     }
+    
+    FallBack "Diffuse"
 }
