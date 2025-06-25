@@ -281,11 +281,11 @@ public class MyEditorScript
         //PlayerSettings.bundleVersion = "v0.0.1";
         if (name == "TikTok5")
         {
-            PlayerSettings.applicationIdentifier = "com.guangying.mengjing.bytedance.gamecenter";
+            PlayerSettings.applicationIdentifier = "com.goinggame.dragon.bytedance.gamecenter";
         }
         else
         {
-            PlayerSettings.applicationIdentifier = "com.guangying.mengjing";
+            PlayerSettings.applicationIdentifier = "com.goinggame.dragon";
         }
 
         GenericBuild(scenes, target_dir + "/" + target_name, buildTarget, targetGroup, BuildOptions.None);
