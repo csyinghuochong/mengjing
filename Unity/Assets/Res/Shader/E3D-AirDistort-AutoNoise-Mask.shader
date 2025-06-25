@@ -71,27 +71,28 @@ Shader "E3DEffect/AirDistort/AutoNoise-Mask"
             half4 frag(Varyings i) : SV_Target
             {
                 // Time-based animation for distortion
-                float2 panner = _Time.y * float2(0.24, 0.24);
-                float2 uvDistort = i.uv + panner;
+                //float2 panner = _Time.y * float2(0.24, 0.24);
+                //float2 uvDistort = i.uv + panner;
 
                 // Sample the distort map
-                half4 distortColor = tex2D(_DistortMap, uvDistort);
+                //half4 distortColor = tex2D(_DistortMap, uvDistort);
 
                 // Mask logic and applying alpha
-                float2 uvMask = i.uv * _MaskMap_ST.xy + _MaskMap_ST.zw;
-                half4 maskColor = tex2D(_MaskMap, uvMask);
-                half maskAlpha = clamp(maskColor.a * i.color.a * _Alpha, 0.0, 1.0);
+                //float2 uvMask = i.uv * _MaskMap_ST.xy + _MaskMap_ST.zw;
+                //half4 maskColor = tex2D(_MaskMap, uvMask);
+                //half maskAlpha = clamp(maskColor.a * i.color.a * _Alpha, 0.0, 1.0);
 
                 // Apply distortion based on mask and distortion offset
-                float2 distortedUV = lerp(i.uv, uvDistort * _DistortOffset, saturate(maskAlpha * _Distrot));
+                //float2 distortedUV = lerp(i.uv, uvDistort * _DistortOffset, saturate(maskAlpha * _Distrot));
 
                 // Sample the screen color from the grabbed texture
-                half4 screenColor =   half4(0,0,0,0); // tex2D(_GrabTexture, distortedUV);   20250625
+                //half4 screenColor =   tex2D(_GrabTexture, distortedUV);   20250625
 
                 // Set the emission (for unlit effect)
-                half4 finalColor = screenColor;
-                finalColor.a = maskAlpha;
+                //half4 finalColor = screenColor;
+                //finalColor.a = maskAlpha;
 
+                half4 finalColor =   half4(0,0,0,0);
                 return finalColor;
             }
 
