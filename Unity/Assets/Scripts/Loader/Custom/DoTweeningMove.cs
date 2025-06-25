@@ -70,11 +70,10 @@ public class DoTweeningMove : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        if (Time.deltaTime > 0.1f)
+        if (Time.deltaTime > 0.5f)
         {
             return;
         }
-
         
         if (this.passTime > MoveToTime)
         {

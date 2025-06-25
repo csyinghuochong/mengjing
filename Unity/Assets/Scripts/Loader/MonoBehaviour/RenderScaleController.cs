@@ -13,7 +13,7 @@ public class RenderScaleController : MonoBehaviour
 
     private UniversalBlurFeature universalBlurFeature;
 
-    private URPOutlineFeature urpOutlineFeature;
+    //private URPOutlineFeature urpOutlineFeature;
 
     public UniversalBlurFeature UniversalBlurFeature
     {
@@ -22,11 +22,11 @@ public class RenderScaleController : MonoBehaviour
     }
     
     
-    public URPOutlineFeature UrpOutlineFeature
-    {
-        get { return this.urpOutlineFeature; }
-        set { this.urpOutlineFeature = value; }
-    }
+    // public URPOutlineFeature UrpOutlineFeature
+    // {
+    //     get { return this.urpOutlineFeature; }
+    //     set { this.urpOutlineFeature = value; }
+    // }
     
 
    // GameObject.Find("Global").GetComponent<RenderScaleController>().ChangeRenderPassEvent(changerender);
@@ -37,7 +37,7 @@ public class RenderScaleController : MonoBehaviour
 
     public void ChangeURPOutlineFeature(bool value)
     {
-        this.urpOutlineFeature.SetActive(value); 
+        //this.urpOutlineFeature.SetActive(value); 
     }
     
     void Start()
@@ -92,8 +92,8 @@ public class RenderScaleController : MonoBehaviour
                            }
                            if (rendererFeatureItem.name.Contains("URPOutlineFeature"))
                            {
-                               this.urpOutlineFeature = (URPOutlineFeature) rendererFeatureItem;
-                               Debug.Log($"Renderer.Feature 名称: {urpOutlineFeature.name}");
+                               //this.urpOutlineFeature = (URPOutlineFeature) rendererFeatureItem;
+                               //Debug.Log($"Renderer.Feature 名称: {urpOutlineFeature.name}");
                            }
                        }
                        

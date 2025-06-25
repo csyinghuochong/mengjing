@@ -86,7 +86,7 @@ Shader "E3DEffect/AirDistort/AutoNoise-Mask"
                 float2 distortedUV = lerp(i.uv, uvDistort * _DistortOffset, saturate(maskAlpha * _Distrot));
 
                 // Sample the screen color from the grabbed texture
-                half4 screenColor = tex2D(_GrabTexture, distortedUV);
+                half4 screenColor =   half4(0,0,0,0); // tex2D(_GrabTexture, distortedUV);   20250625
 
                 // Set the emission (for unlit effect)
                 half4 finalColor = screenColor;
