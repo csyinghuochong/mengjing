@@ -347,7 +347,7 @@ namespace ET.Client
         private static async ETTask ChangeUniversalBlurFeature(this UIComponent self)
         {
             GameObject.Find("Global").GetComponent<RenderScaleController>().ChangeUniversalBlurFeature(true);
-            await self.Root().GetComponent<TimerComponent>().WaitFrameAsync();
+            await self.Root().GetComponent<TimerComponent>().WaitAsync(1000);
             GameObject.Find("Global").GetComponent<RenderScaleController>().ChangeUniversalBlurFeature(false);
         }
 

@@ -22,16 +22,15 @@ namespace ET.Client
             self.View.E_AgeTipClose_2Button.AddListener(() => { self.View.EG_UIAgeTipRectTransform.gameObject.SetActive(false); });
 
             CommonViewHelper.TargetFrameRate(60);
-            SettingData.AnimController = GlobalHelp.GetVersionMode() == 0 ? 0 : 1;
-            #if UNITY_EDITOR
-            SettingData.AnimController = 0;
-            #endif
-            
+            //SettingData.AnimController = GlobalHelp.GetVersionMode() == 0 ? 0 : 1;
+
             GlobalComponent.Instance.MainCamera.GetComponent<Camera>().farClipPlane = 1000;
             GameObject.Find("Global").GetComponent<Init>().TogglePatchWindow(false);
             
             self.View.E_AccountInputField.text = PlayerPrefsHelp.GetString("MJ_Account");
             self.View.E_PasswordInputField.text = PlayerPrefsHelp.GetString("MJ_Password");
+
+            SettingData.AnimController = self.View.E_AccountInputField.text != "18319670288" ? 0 : 1;
             
             self.View.E_AccountInputField.onValueChanged.AddListener((string text) => { self.CheckSensitiveWords_Account(); });
             self.View.E_PasswordInputField.onValueChanged.AddListener((string text) => { self.CheckSensitiveWords_Password(); });
