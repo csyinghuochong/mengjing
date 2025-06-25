@@ -12,7 +12,10 @@ namespace ET.Client
         public static void RegisterUIEvent(this DlgRank self)
         {
             self.View.E_FunctionSetBtnToggleGroup.AddListener(self.OnFunctionSetBtn);
-            
+
+            int version = GlobalHelp.GetVersionMode();
+            self.View.E_FunctionSetBtnToggleGroup.transform.Find("Type_1").gameObject.SetActive(version != 2);
+
             IPHoneHelper.SetPosition(self.View.E_FunctionSetBtnToggleGroup.gameObject, new Vector2(220f, 0f));
         }
 
