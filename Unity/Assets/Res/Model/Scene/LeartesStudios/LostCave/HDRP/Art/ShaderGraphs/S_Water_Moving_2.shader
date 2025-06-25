@@ -470,6 +470,15 @@ Shader "Shader Graphs/S_Water_Moving_2"
 {
     // 显式初始化所有结构体成员
     SurfaceDescription surface = (SurfaceDescription)0;
+    surface.BaseColor = float3(0, 0, 0);
+    surface.NormalTS = float3(0, 0, 1);
+    surface.Emission = float3(0, 0, 0);
+    surface.Metallic = 0;
+    surface.Specular = float3(0.5, 0.5, 0.5);
+    surface.Smoothness = 0.5;
+    surface.Occlusion = 1;
+    surface.Alpha = 1;
+    surface.AlphaClipThreshold = 0.5;
     
     // 1. 深度渐变颜色混合
     Bindings_SubGDepthFade depthFadeInput;

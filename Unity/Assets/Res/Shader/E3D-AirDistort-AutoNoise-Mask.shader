@@ -2,15 +2,15 @@ Shader "E3DEffect/AirDistort/AutoNoise-Mask"
 {
     Properties
     {
-        _DistortMap("DistortMap", 2D) = "white" {}
-        _Speed("Speed", Range(0, 1)) = 0.1
-        _Distrot("Distrot", Range(0, 0.1)) = 0.255728
-        _DistortOffset("DistortOffset", Range(-2, 2)) = -0.8
-        _MaskMap("MaskMap", 2D) = "white" {}
-        _Alpha("Alpha", Range(0, 5)) = 2
-        _Tiling("Tiling", Range(0, 5)) = 0
-        [HideInInspector] _texcoord("", 2D) = "white" {}
-        [HideInInspector] __dirty("", Int) = 1
+        //_DistortMap("DistortMap", 2D) = "white" {}
+        //_Speed("Speed", Range(0, 1)) = 0.1
+        //_Distrot("Distrot", Range(0, 0.1)) = 0.255728
+        //_DistortOffset("DistortOffset", Range(-2, 2)) = -0.8
+        //_MaskMap("MaskMap", 2D) = "white" {}
+        //_Alpha("Alpha", Range(0, 5)) = 2
+        ///_Tiling("Tiling", Range(0, 5)) = 0
+        //[HideInInspector] _texcoord("", 2D) = "white" {}
+        //[HideInInspector] __dirty("", Int) = 1
     }
 
     SubShader
@@ -22,11 +22,11 @@ Shader "E3DEffect/AirDistort/AutoNoise-Mask"
 
             Cull Back
             ZWrite Off
-            Blend SrcAlpha OneMinusSrcAlpha
+           // Blend SrcAlpha OneMinusSrcAlpha
             
             CGPROGRAM
-            #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
-            #include "UnityShaderVariables.cginc"
+          //  #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
+           /// #include "UnityShaderVariables.cginc"
 
             #pragma target 3.0
             #pragma vertex vert
@@ -61,8 +61,8 @@ Shader "E3DEffect/AirDistort/AutoNoise-Mask"
             Varyings vert(Attributes v)
             {
                 Varyings o;
-                o.position = TransformObjectToHClip(v.position.xyz);
-                o.uv = v.uv * _Tiling;
+                o.position = float4(0,0,0,0); //TransformObjectToHClip(v.position.xyz);
+                //o.uv = v.uv * _Tiling;
                 o.color = v.color;
                 return o;
             }
