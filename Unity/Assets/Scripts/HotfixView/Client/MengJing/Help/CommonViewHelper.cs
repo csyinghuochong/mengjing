@@ -238,32 +238,32 @@ namespace ET.Client
         public static void SetImageGray(Scene root, GameObject obj, bool val)
         {
             // 方案一
-            // if (val)
-            // {
-            //     Material mat = root.GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Material>(ABPathHelper.GetMaterialPath("UI_Hui"));
-            //     obj.GetComponent<Image>().material = mat;
-            // }
-            // else
-            // {
-            //     obj.GetComponent<Image>().material = null;
-            // }
+            if (val)
+             {
+                 Material mat = root.GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Material>(ABPathHelper.GetMaterialPath("UI_Hui"));
+                 obj.GetComponent<Image>().material = mat;
+             }
+             else
+             {
+                 obj.GetComponent<Image>().material = null;
+             }
             
             // 方案2
-            UIEffect effect = obj.GetComponent<UIEffect>();
-            if (effect == null)
-            {
-                effect = obj.AddComponent<UIEffect>();
-            }
-            if (val)
-            {
-                effect.toneFilter = ToneFilter.Grayscale;
-                effect.toneIntensity = 1f;
-            }
-            else
-            {
-                effect.toneFilter = ToneFilter.None;
-            }
-            effect.SetVerticesDirty();
+            //UIEffect effect = obj.GetComponent<UIEffect>();
+            //if (effect == null)
+            //{
+            //    effect = obj.AddComponent<UIEffect>();
+            //}
+            //if (val)
+            //{
+            //    effect.toneFilter = ToneFilter.Grayscale;
+            //    effect.toneIntensity = 1f;
+            //}
+            //else
+            //{
+            //    effect.toneFilter = ToneFilter.None;
+            //}
+            //effect.SetVerticesDirty();
         }
 
         public static void SetImageGrayAllChild(Scene root, GameObject obj, bool val)
