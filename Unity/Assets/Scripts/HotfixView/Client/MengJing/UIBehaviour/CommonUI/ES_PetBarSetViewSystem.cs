@@ -80,19 +80,28 @@ namespace ET.Client
 
         private static async ETTask OnPlanSet(this ES_PetBarSet self, int index)
         {
+            Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
+           
             PetComponentC petComponentC = self.Root().GetComponent<PetComponentC>();
 
             if (petComponentC.PetFightPlan != index)
             {
-                int error = await PetNetHelper.RequestPetFightPlan(self.Root(), index);
-
-                if (error == ErrorCode.ERR_Success)
+                if (unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.PetFightIndex) > 0)
                 {
-                    using (zstring.Block())
-                    {
-                        FlyTipComponent.Instance.ShowFlyTip(zstring.Format("宠物上阵切换 {0}", index));
-                    }
+                    FlyTipComponent.Instance.ShowFlyTip("当前正在变身状态，稍后切换");
                 }
+                else
+               {
+                    int error = await PetNetHelper.RequestPetFightPlan(self.Root(), index);
+                   
+                   if (error == ErrorCode.ERR_Success)
+                   {
+                       using (zstring.Block())
+                       {
+                           FlyTipComponent.Instance.ShowFlyTip(zstring.Format("宠物上阵切换 {0}", index));
+                       }
+                   }
+               }
             }
 
             // 复制一份
