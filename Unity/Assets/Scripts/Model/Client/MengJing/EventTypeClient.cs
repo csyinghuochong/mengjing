@@ -574,10 +574,15 @@ namespace ET.Client
     {
     }
 
+    public struct PetFightPlan
+    {
+        
+    }
+
     public struct PetMeleePlanUpdate
     {
     }
-    
+
     public struct PetMeleeSetUpdate
     {
     }

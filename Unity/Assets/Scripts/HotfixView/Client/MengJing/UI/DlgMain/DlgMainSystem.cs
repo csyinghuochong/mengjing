@@ -19,6 +19,17 @@ namespace ET.Client
             await ETTask.CompletedTask;
         }
     }
+    
+    [Event(SceneType.Demo)]
+    public class PetFightPlan_DlgMainRefresh : AEvent<Scene, PetFightPlan>
+    {
+        protected override async ETTask Run(Scene scene, PetFightPlan args)
+        {
+            scene.GetComponent<UIComponent>().GetDlgLogic<DlgMain>()?.RefreshPetFightPlan();
+            await ETTask.CompletedTask;
+        }
+    }
+    
 
     [Event(SceneType.Demo)]
     public class DataUpdate_TeamUpdatet_DlgMainRefresh : AEvent<Scene, RecvTeamUpdate>
@@ -1435,6 +1446,14 @@ namespace ET.Client
                     self.View.E_TextPetSwitchText.text = zstring.Format("{0}", leftTime);
                 }
             }
+        }
+
+        public static void RefreshPetFightPlan(this DlgMain self)
+        {
+            Scene root = self.Root();
+            Unit unit = UnitHelper.GetMyUnitFromClientScene(root);
+            root.GetComponent<TimerComponent>().Remove(ref self.MainPetSwitchTimer);
+             self.RefreshMainPetFightUI();
         }
 
         public static void RefreshFightSet(this DlgMain self)

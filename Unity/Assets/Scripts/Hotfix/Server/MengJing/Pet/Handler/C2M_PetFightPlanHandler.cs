@@ -13,6 +13,7 @@
 
             TransferHelper.RemoveFightPetList(unit);
             unit.GetComponent<PetComponentS>().PetFightPlan = request.PetFightPlan;
+            unit.GetComponent<NumericComponentS>().ApplyValue(NumericType.PetFightIndex, 0);
             TransferHelper.CreateFightPetList(unit);
 
             await ETTask.CompletedTask;

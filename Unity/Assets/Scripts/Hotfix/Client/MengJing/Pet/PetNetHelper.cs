@@ -485,6 +485,7 @@ namespace ET.Client
             if (response.Error == ErrorCode.ERR_Success)
             {
                 root.GetComponent<PetComponentC>().PetFightPlan = plan;
+                EventSystem.Instance.Publish(root, new PetFightPlan());
             }
 
             return response.Error;
