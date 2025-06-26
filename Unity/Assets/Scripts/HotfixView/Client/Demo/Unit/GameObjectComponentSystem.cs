@@ -101,6 +101,10 @@ namespace ET.Client
             self.Dissolve = false;
             string unitAssetsPath = self.UnitAssetsPath;
             GameObject gameObject = self.GameObject;
+            if (gameObject == null)
+            {
+                return;
+            }
 
             TimerComponent timerComponent = self.Root().GetComponent<TimerComponent>();
             await timerComponent.WaitAsync(1000); // 延迟1秒播放
