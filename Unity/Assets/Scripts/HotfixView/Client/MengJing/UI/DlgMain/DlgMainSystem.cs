@@ -1451,7 +1451,6 @@ namespace ET.Client
         public static void RefreshPetFightPlan(this DlgMain self)
         {
             Scene root = self.Root();
-            Unit unit = UnitHelper.GetMyUnitFromClientScene(root);
             root.GetComponent<TimerComponent>().Remove(ref self.MainPetSwitchTimer);
              self.RefreshMainPetFightUI();
         }
