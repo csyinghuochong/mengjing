@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: 10092
   m_EditorClassIdentifier: 
   AnimInfos:
-  - StateName: Ilde
+  - StateName: Idle
     AnimationClip: {fileID: 7400000, guid: 4a69417dc22e7084e8e277bbe9beaa7d, type: 2}
     Speed: 1
     NextStateName: 
   - StateName: Select
     AnimationClip: {fileID: 7400000, guid: ce2522ceff983d44ba55c029a4a3f5fe, type: 2}
     Speed: 1
-    NextStateName: Ilde
+    NextStateName: Idle
