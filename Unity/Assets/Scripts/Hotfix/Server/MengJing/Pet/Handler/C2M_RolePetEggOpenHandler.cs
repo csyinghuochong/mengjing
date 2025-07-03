@@ -38,7 +38,7 @@ namespace ET.Server
             {
                 index = 0;
             }
-            if (rolePetEgg.KeyId == 10010093)
+            if (rolePetEgg.KeyId == 1000035)
             {
                 unit.GetComponent<ChengJiuComponentS>().TriggerEvent(ChengJiuTargetEnum.OpenZGPetEggNumber_306, 0, 1);
             }
