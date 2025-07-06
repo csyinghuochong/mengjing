@@ -8,23 +8,21 @@
       "hash": "59a3c3974a6e435e0ed57fb9af61fbbc6d17a8b7"
     },
     "com.coffee.ui-effect": {
-      "version": "https://github.com/mob-sakai/UIEffect.git?path=Packages/src",
+      "version": "file:com.coffee.ui-effect@145f56968a",
       "depth": 0,
-      "source": "git",
+      "source": "embedded",
       "dependencies": {
         "com.unity.ugui": "1.0.0"
-      },
-      "hash": "145f56968a7d281c32507341e88e11ac1f4b0372"
+      }
     },
     "com.coffee.ui-particle": {
-      "version": "https://github.com/mob-sakai/ParticleEffectForUGUI.git",
+      "version": "file:com.coffee.ui-particle@4b98abd746",
       "depth": 0,
-      "source": "git",
+      "source": "embedded",
       "dependencies": {
         "com.unity.ugui": "1.0.0",
         "com.unity.modules.particlesystem": "1.0.0"
-      },
-      "hash": "4b98abd7469b10d55c9c623830cb6e1518f72731"
+      }
     },
     "com.cysharp.memorypack": {
       "version": "file:com.cysharp.memorypack@2554e81f03",
@@ -33,11 +31,10 @@
       "dependencies": {}
     },
     "com.gwiazdorrr.betterstreamingassets": {
-      "version": "https://github.com/gwiazdorrr/BetterStreamingAssets.git",
+      "version": "file:com.gwiazdorrr.betterstreamingassets@2bdc568484",
       "depth": 0,
-      "source": "git",
-      "dependencies": {},
-      "hash": "2bdc568484f7b98f9297a444ab12ad016b73f283"
+      "source": "embedded",
+      "dependencies": {}
     },
     "com.tuyoogame.yooasset": {
       "version": "file:YooAsset",
@@ -51,13 +48,12 @@
       }
     },
     "com.unify.unified-universal-blur": {
-      "version": "https://github.com/lukakldiashvili/Unified-Universal-Blur.git",
+      "version": "file:com.unify.unified-universal-blur@3f7b28476c",
       "depth": 0,
-      "source": "git",
+      "source": "embedded",
       "dependencies": {
         "com.unity.render-pipelines.universal": "14.0.11"
-      },
-      "hash": "3f7b28476cb83f2d56cf73a13c81de798a94f005"
+      }
     },
     "com.unity.2d.sprite": {
       "version": "1.0.0",
@@ -75,7 +71,7 @@
       "url": "https://packages.unity.cn"
     },
     "com.unity.burst": {
-      "version": "1.8.18",
+      "version": "1.8.19",
       "depth": 1,
       "source": "registry",
       "dependencies": {
@@ -119,7 +115,7 @@
       "url": "https://packages.unity.cn"
     },
     "com.unity.ide.rider": {
-      "version": "3.0.31",
+      "version": "3.0.34",
       "depth": 0,
       "source": "registry",
       "dependencies": {
@@ -151,7 +147,7 @@
       "url": "https://packages.unity.cn"
     },
     "com.unity.memoryprofiler": {
-      "version": "1.1.3",
+      "version": "1.1.5",
       "depth": 0,
       "source": "registry",
       "dependencies": {
@@ -180,7 +176,7 @@
       "url": "https://packages.unity.cn"
     },
     "com.unity.render-pipelines.core": {
-      "version": "14.0.11",
+      "version": "14.0.12",
       "depth": 0,
       "source": "builtin",
       "dependencies": {
@@ -191,14 +187,14 @@
       }
     },
     "com.unity.render-pipelines.universal": {
-      "version": "14.0.11",
+      "version": "14.0.12",
       "depth": 0,
       "source": "builtin",
       "dependencies": {
         "com.unity.mathematics": "1.2.1",
         "com.unity.burst": "1.8.9",
-        "com.unity.render-pipelines.core": "14.0.11",
-        "com.unity.shadergraph": "14.0.11",
+        "com.unity.render-pipelines.core": "14.0.12",
+        "com.unity.shadergraph": "14.0.12",
         "com.unity.render-pipelines.universal-config": "14.0.9"
       }
     },
@@ -211,7 +207,7 @@
       }
     },
     "com.unity.scriptablebuildpipeline": {
-      "version": "1.21.24",
+      "version": "1.21.25",
       "depth": 1,
       "source": "registry",
       "dependencies": {},
@@ -232,11 +228,11 @@
       "url": "https://packages.unity.cn"
     },
     "com.unity.shadergraph": {
-      "version": "14.0.11",
+      "version": "14.0.12",
       "depth": 1,
       "source": "builtin",
       "dependencies": {
-        "com.unity.render-pipelines.core": "14.0.11",
+        "com.unity.render-pipelines.core": "14.0.12",
         "com.unity.searcher": "4.9.2"
       }
     },
@@ -292,12 +288,12 @@
       }
     },
     "com.unity.visualeffectgraph": {
-      "version": "14.0.11",
+      "version": "14.0.12",
       "depth": 0,
       "source": "builtin",
       "dependencies": {
-        "com.unity.shadergraph": "14.0.11",
-        "com.unity.render-pipelines.core": "14.0.11"
+        "com.unity.shadergraph": "14.0.12",
+        "com.unity.render-pipelines.core": "14.0.12"
       }
     },
     "com.unity.modules.ai": {
