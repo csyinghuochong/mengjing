@@ -1,4 +1,6 @@
-﻿namespace ET.Client
+﻿using UnityEngine;
+
+namespace ET.Client
 {
     [FriendOf(typeof(Scroll_Item_TeamApplyItem))]
     [EntitySystemOf(typeof(Scroll_Item_TeamApplyItem))]
@@ -39,6 +41,9 @@
                 OccupationConfig occCof = OccupationConfigCategory.Instance.Get(teamPlayerInfo.Occ);
                 occName = occCof.OccupationName;
             }
+            
+            ResourcesLoaderComponent resourcesLoaderComponent = self.Root().GetComponent<ResourcesLoaderComponent>();
+            self.E_ImageIconImage.sprite = resourcesLoaderComponent.LoadAssetSync<Sprite>(ABPathHelper.GetAtlasPath_2(ABAtlasTypes.PlayerIcon, teamPlayerInfo.Occ.ToString()));
 
             self.E_TextOccText.text = occName;
             //是否是人机
