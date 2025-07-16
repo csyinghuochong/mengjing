@@ -42,20 +42,20 @@ namespace ET.Client
                 AnimancerComponent animancerComponent = animator.gameObject.GetComponent<AnimancerComponent>();
                 if (animancerComponent == null)
                 {
-                    Log.Error($"对象未添加 mono脚本 AnimancerComponent！！！  {go.name}");
+                    Log.Warning($"对象未添加 mono脚本 AnimancerComponent！！！  {go.name}");
                     return;
                 }
 
                 AnimData animData = animator.gameObject.GetComponent<AnimData>();
                 if (animData == null)
                 {
-                    Log.Error($"对象未添加 mono脚本 AnimData！！！  {go.name}");
+                    Log.Warning($"对象未添加 mono脚本 AnimData！！！  {go.name}");
                     return;
                 }
 
                 if (animData.AnimGroup == null)
                 {
-                    Log.Error("mono脚本 AnimData 没有添加AnimGroup！！！");
+                    Log.Warning("mono脚本 AnimData 没有添加AnimGroup！！！");
                     return;
                 }
 
@@ -63,7 +63,7 @@ namespace ET.Client
                 {
                     using (zstring.Block())
                     {
-                        Log.Error(zstring.Format("{0} 没有添加动画片段！！！", animData.AnimGroup.name));
+                        Log.Warning(zstring.Format("{0} 没有添加动画片段！！！", animData.AnimGroup.name));
                     }
 
                     return;
