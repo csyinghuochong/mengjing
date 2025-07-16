@@ -108,8 +108,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2385561539392481678}
   - component: {fileID: 5733421340820899060}
-  - component: {fileID: 6057817343125385168}
-  - component: {fileID: -8572368728442661004}
   m_Layer: 0
   m_Name: Boar_Grey
   m_TagString: Untagged
@@ -142,7 +140,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1675460335668321181}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 9000000, guid: 1e9661150f5854447a01a70c01bda9e4, type: 3}
   m_Controller: {fileID: 9100000, guid: 770c5ec0d1746b44fbff9fbba7a703f3, type: 2}
   m_CullingMode: 1
@@ -155,33 +153,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &6057817343125385168
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1675460335668321181}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ad50f81b1d25c441943c37a89ba23f6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _Animator: {fileID: 5733421340820899060}
-  _ActionOnDisable: 0
---- !u!114 &-8572368728442661004
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1675460335668321181}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6d3967c910cf9304a90fe607c1531405, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  AnimGroup: {fileID: 11400000, guid: cae569614196bc645b6ff0b90c76ea1d, type: 2}
 --- !u!1 &1879604876535495576
 GameObject:
   m_ObjectHideFlags: 0
