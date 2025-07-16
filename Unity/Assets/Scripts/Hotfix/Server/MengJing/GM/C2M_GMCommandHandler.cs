@@ -185,7 +185,39 @@ namespace ET.Server
                     }
                     return;
                 }
-                
+
+                // 获得并生成所有宠物
+                if (message.GMMsg == "#allPet")
+                {
+                    PetComponentS petComponent = unit.GetComponent<PetComponentS>();
+                    foreach (PetConfig config in PetConfigCategory.Instance.GetAll().Values)
+                    {
+                        bool have = false;
+                        foreach (RolePetInfo rolePetInfo in petComponent.RolePetInfos)
+                        {
+                            if (rolePetInfo.ConfigId == config.Id)
+                            {
+                                have = true;
+                                break;
+                            }
+                        }
+
+                        if (!have)
+                        {
+                            petComponent.OnAddPet(ItemGetWay.GM, config.Id);
+                        }
+                    }
+
+
+                    foreach (RolePetInfo rolePetInfo in petComponent.RolePetInfos)
+                    {
+                        UnitFactory.CreatePet(unit, rolePetInfo);
+                    }
+
+                    return;
+                }
+
+                // 免伤
                 if (message.GMMsg == "#mianshang")
                 {
                     BuffData buffData_1 = new BuffData();
@@ -195,6 +227,7 @@ namespace ET.Server
                     return;
                 }
                 
+                // 无限生命值
                 if (message.GMMsg == "#maxHp")
                 {
                     unit.GetComponent<NumericComponentS>().ApplyValue(NumericType.Base_MaxHp_Add, 999999999);
