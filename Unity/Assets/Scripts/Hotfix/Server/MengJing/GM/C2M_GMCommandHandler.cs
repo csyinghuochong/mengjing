@@ -170,6 +170,38 @@ namespace ET.Server
                     }
                 }
 
+                if (message.GMMsg == "#allmonster")
+                {
+                    List<MonsterConfig> monsterConfigs = MonsterConfigCategory.Instance.GetAll().Values.ToList();
+                    for (int i = 0; i < monsterConfigs.Count; i++)
+                    {
+                        await unit.Root().GetComponent<TimerComponent>().WaitAsync(1);
+                        float3 pos = unit.Position;
+                        float3 vector3 = new float3(pos.x + RandomHelper.RandFloat01() * 1, pos.y, pos.z + RandomHelper.RandFloat01() * 1);
+                        Unit monster = UnitFactory.CreateMonster(unit.Scene(), monsterConfigs[i].Id, vector3, new CreateMonsterInfo()
+                        {
+                            Camp = CampEnum.CampMonster1
+                        });
+                    }
+                    return;
+                }
+                
+                if (message.GMMsg == "#mianshang")
+                {
+                    BuffData buffData_1 = new BuffData();
+                    buffData_1.SkillId = 67000278;
+                    buffData_1.BuffId = 90106002;
+                    unit.GetComponent<BuffManagerComponentS>().BuffFactory(buffData_1, unit, null);
+                    return;
+                }
+                
+                if (message.GMMsg == "#maxHp")
+                {
+                    unit.GetComponent<NumericComponentS>().ApplyValue(NumericType.Base_MaxHp_Add, 999999999);
+                    unit.GetComponent<NumericComponentS>().ApplyValue(NumericType.Now_Hp, 999999999);
+                    return;
+                }
+                
                 switch (int.Parse(commands[0]))
                 {
                     case 1: //新增道具1#12000003#200 【添加道具/道具id/道具数量】
