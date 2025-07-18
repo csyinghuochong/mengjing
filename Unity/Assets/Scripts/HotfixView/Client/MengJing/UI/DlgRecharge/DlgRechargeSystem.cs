@@ -52,8 +52,15 @@ namespace ET.Client
 
         public static void ShowWindow(this DlgRecharge self, Entity contextData = null)
         {
+            self.UpdateRechargeNum();
         }
 
+        public static void UpdateRechargeNum(this DlgRecharge self)
+        {
+            FangChenMiComponentC fangChenMiComponent = self.Root().GetComponent<FangChenMiComponentC>();
+            self.View.E_Text_ReChargeText.text = $"{fangChenMiComponent.GetToDayNum()}/30";
+        }
+        
         private static void OnRechargeItemsRefresh(this DlgRecharge self, Transform transform, int index)
         {
             foreach (Scroll_Item_RechargeItem item in self.ScrollItemRechargeItems.Values)
@@ -183,6 +190,8 @@ namespace ET.Client
 
 #endif
 
+            self.UpdateRechargeNum();
+            
             await ETTask.CompletedTask;
         }
 

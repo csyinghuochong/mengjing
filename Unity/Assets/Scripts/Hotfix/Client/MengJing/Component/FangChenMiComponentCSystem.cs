@@ -87,6 +87,26 @@ namespace ET.Client
 
             return total;
         }
+        
+        public static int GetToDayNum(this FangChenMiComponentC self)
+        {
+            int total = 0;
+            DateTime dateTime = TimeHelper.DateTimeNow();
+            int monsth = dateTime.Month;
+            int day = dateTime.Day;
+
+            List<RechargeInfo> rechargeInfos = self.Root().GetComponent<PlayerInfoComponent>().PlayerInfo.RechargeInfos;
+            for (int i = 0; i < rechargeInfos.Count; i++)
+            {
+                dateTime = TimeInfo.Instance.ToDateTime(rechargeInfos[i].Time);
+                if (monsth == dateTime.Month && day == dateTime.Day)
+                {
+                    total += 1;
+                }
+            }
+
+            return total;
+        }
 
         public static int CanRechage(this FangChenMiComponentC self, int number)
         {

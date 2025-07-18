@@ -41,6 +41,23 @@ namespace ET.Client
      		}
      	}
 
+		public UnityEngine.UI.Text E_Text_ReChargeText
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Text_ReChargeText == null )
+     			{
+		    		this.m_E_Text_ReChargeText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Center/E_Text_ReCharge");
+     			}
+     			return this.m_E_Text_ReChargeText;
+     		}
+     	}
+
 		public UnityEngine.UI.LoopVerticalScrollRect E_RechargeItemsLoopVerticalScrollRect
      	{
      		get
@@ -181,6 +198,7 @@ namespace ET.Client
 		{
 			this.m_E_ImageButtonButton = null;
 			this.m_E_ImageButtonImage = null;
+			this.m_E_Text_ReChargeText = null;
 			this.m_E_RechargeItemsLoopVerticalScrollRect = null;
 			this.m_EG_LoadingRectTransform = null;
 			this.m_E_ButtonWeiXinButton = null;
@@ -194,6 +212,7 @@ namespace ET.Client
 
 		private UnityEngine.UI.Button m_E_ImageButtonButton = null;
 		private UnityEngine.UI.Image m_E_ImageButtonImage = null;
+		private UnityEngine.UI.Text m_E_Text_ReChargeText = null;
 		private UnityEngine.UI.LoopVerticalScrollRect m_E_RechargeItemsLoopVerticalScrollRect = null;
 		private UnityEngine.RectTransform m_EG_LoadingRectTransform = null;
 		private UnityEngine.UI.Button m_E_ButtonWeiXinButton = null;
