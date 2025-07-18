@@ -189,8 +189,7 @@ namespace ET.Client
             }
 
 #endif
-
-            self.UpdateRechargeNum();
+            
             
             await ETTask.CompletedTask;
         }

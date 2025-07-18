@@ -28,6 +28,7 @@
                     }
 
                     root.GetComponent<UIComponent>().GetDlgLogic<DlgMain>()?.OnRechageSucess(addNumer);
+                    root.GetComponent<UIComponent>().GetDlgLogic<DlgRecharge>()?.UpdateRechargeNum();
                     break;
                 case NumericType.PetExploreLuckly:
                     root.GetComponent<UIComponent>().GetDlgLogic<DlgPetEgg>()?.OnUpdateLuckly();
