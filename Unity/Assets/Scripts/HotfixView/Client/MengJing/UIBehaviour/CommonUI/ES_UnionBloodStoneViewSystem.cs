@@ -71,7 +71,7 @@ namespace ET.Client
             {
                 using (zstring.Block())
                 {
-                    FlyTipComponent.Instance.ShowFlyTip(zstring.Format("玩家等级不足，{0}开启", publicQiangHuaConfig.UpLvLimit));
+                    FlyTipComponent.Instance.ShowFlyTip(zstring.Format("玩家等级不足，{0}开启。", publicQiangHuaConfig.UpLvLimit));
                 }
 
                 return;

@@ -1937,7 +1937,7 @@ namespace ET.Client
             string tipStr = "确定返回主城？";
             if (mapComponent.MapType == MapTypeEnum.Battle)
             {
-                tipStr = "现在离开战场，将不会获得战场胜利的奖励哦";
+                tipStr = "现在离开战场，将不会获得战场胜利的奖励哦。";
             }
 
             PopupTipHelp.OpenPopupTip(self.Root(), "", LanguageComponent.Instance.LoadLocalization(tipStr),

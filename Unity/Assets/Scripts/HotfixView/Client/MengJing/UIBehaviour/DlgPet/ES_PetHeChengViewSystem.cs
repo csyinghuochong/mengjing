@@ -113,7 +113,7 @@ namespace ET.Client
             using (zstring.Block())
             {
                 PopupTipHelp.OpenPopupTip(self.Root(), "宠物合成",
-                    zstring.Format("合成后将随机保留一个宠物，另外一个宠物会销毁，<color=#ff0000>{0}</color> 请确认是否执行合成", addStr),
+                    zstring.Format("合成后将随机保留一个宠物，另外一个宠物会销毁，<color=#ff0000>{0}</color> 请确认是否执行合成。", addStr),
                     () => { self.ReqestHeCheng().Coroutine(); }).Coroutine();
             }
         }

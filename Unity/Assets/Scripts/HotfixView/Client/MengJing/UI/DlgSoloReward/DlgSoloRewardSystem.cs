@@ -22,7 +22,7 @@ namespace ET.Client
             }
             else
             {
-                self.View.E_Text_CengText.text = "非常遗憾！你在本场挑战失败，请再接再厉";
+                self.View.E_Text_CengText.text = "非常遗憾！你在本场挑战失败，请再接再厉。";
             }
 
             //显示奖励列表

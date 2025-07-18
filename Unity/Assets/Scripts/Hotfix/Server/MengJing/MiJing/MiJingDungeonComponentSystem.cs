@@ -63,7 +63,7 @@ namespace ET.Server
                 MailInfo mailInfo = MailInfo.Create();
                 mailInfo.Status = 0;
                 int num = i + 1;
-                mailInfo.Context = $"恭喜你在秘境中获得第{num}名，获得如下奖励";
+                mailInfo.Context = $"恭喜你在秘境中获得第{num}名，获得如下奖励。";
                 mailInfo.Title = "秘境领主排名奖励";
                 mailInfo.MailId = IdGenerater.Instance.GenerateId();
                 string[] needList = rewardList.Split('@');

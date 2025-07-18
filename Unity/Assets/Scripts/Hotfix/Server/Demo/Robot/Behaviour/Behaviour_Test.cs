@@ -117,7 +117,7 @@ namespace ET
                 await RobotHelper.FriendApplyReply(root);
 
                 Console.WriteLine("问候我亲爱的好友们");
-                await RobotHelper.SendFriendChat(root, "许久未见，我亲爱的友友。紫禁之巅，今晚8点，是兄弟就来砍！");
+                await RobotHelper.SendFriendChat(root, "许久未见，我亲爱的友友。紫禁之巅，今晚8点，是兄弟就来砍！。");
 
                 Console.WriteLine("将好友添加到黑名单");
                 await RobotHelper.AddFriend(root);
@@ -133,12 +133,12 @@ namespace ET
                 Console.WriteLine("使用一个精灵");
                 await RobotHelper.JingLingUse(root);
 
-                Console.WriteLine("发言，打个招呼");
-                await ChatNetHelper.RequestSendChat(root, ChannelEnum.Word, "大家好，我是Robot");
-                await ChatNetHelper.RequestSendChat(root, ChannelEnum.Team, "兄弟们好，我是Robot");
-                await ChatNetHelper.RequestSendChat(root, ChannelEnum.Union, "家人们好，我是Robot");
+                Console.WriteLine("发言，打个招呼。");
+                await ChatNetHelper.RequestSendChat(root, ChannelEnum.Word, "大家好，我是Robot。");
+                await ChatNetHelper.RequestSendChat(root, ChannelEnum.Team, "兄弟们好，我是Robot。");
+                await ChatNetHelper.RequestSendChat(root, ChannelEnum.Union, "家人们好，我是Robot。");
 
-                Console.WriteLine("组队 有队伍加入队伍，无队伍自己创建一个");
+                Console.WriteLine("组队 有队伍加入队伍，无队伍自己创建一个。");
                 await RobotHelper.JoinTeam(root);
 
                 Console.WriteLine("去杂货店老板 买个东西");

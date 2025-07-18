@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -125,7 +125,7 @@ namespace ET.Client
                     int petFightIndex = numericComponentC.GetAsInt(NumericType.PetFightIndex);
                     if (petFightIndex > 0 && unit.Id == petComponentC.GetNowPetFightList()[petFightIndex - 1].PetId)
                     {
-                        FlyTipComponent.Instance.ShowFlyTip("宠物死亡，自动切换为英雄");
+                        FlyTipComponent.Instance.ShowFlyTip("宠物死亡，自动切换为英雄。");
                         PetNetHelper.RequestPetFightSwitch(root, 0).Coroutine();
                     }
                 }

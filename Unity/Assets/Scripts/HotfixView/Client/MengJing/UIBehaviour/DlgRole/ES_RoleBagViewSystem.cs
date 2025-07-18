@@ -281,7 +281,7 @@ namespace ET.Client
 
         private static void OnOneSellButton(this ES_RoleBag self)
         {
-            PopupTipHelp.OpenPopupTip(self.Root(), "一键出售", "是否一键出售低品质装备和宝石，出售品质可以在设置中进行选择",
+            PopupTipHelp.OpenPopupTip(self.Root(), "一键出售", "是否一键出售低品质装备和宝石，出售品质可以在设置中进行选择。",
                         () => { BagClientNetHelper.RequestOneSell(self.Root(), ItemLocType.ItemLocBag).Coroutine(); }, null)
                     .Coroutine();
         }

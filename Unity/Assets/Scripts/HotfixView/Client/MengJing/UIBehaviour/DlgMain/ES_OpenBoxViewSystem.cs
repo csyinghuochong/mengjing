@@ -84,14 +84,14 @@ namespace ET.Client
             UserInfo userInfo = self.Root().GetComponent<UserInfoComponentC>().UserInfo;
             if (userInfo.PiLao <= 0 && monsterConfig.MonsterSonType == MonsterSonTypeEnum.Type_56)
             {
-                FlyTipComponent.Instance.ShowFlyTip("体力不足，无法拾取");
+                FlyTipComponent.Instance.ShowFlyTip("体力不足，无法拾取。");
                 return;
             }
 
             BagComponentC bagComponent = self.Root().GetComponent<BagComponentC>();
             if (bagComponent.GetBagLeftCell(ItemLocType.ItemLocBag) < 1 && monsterConfig.MonsterSonType == MonsterSonTypeEnum.Type_57)
             {
-                FlyTipComponent.Instance.ShowFlyTip("背包空间不足，无法拾取");
+                FlyTipComponent.Instance.ShowFlyTip("背包空间不足，无法拾取。");
                 return;
             }
 

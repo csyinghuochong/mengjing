@@ -195,7 +195,7 @@ namespace ET.Server
                     MailInfo mailInfo = MailInfo.Create();
                     mailInfo.Status = 0;
                     mailInfo.Context = "竞拍失败";
-                    mailInfo.Title = $"金币小于{self.AuctionPrice}，竞拍失败";
+                    mailInfo.Title = $"金币小于{self.AuctionPrice}，竞拍失败。";
                     mailInfo.MailId = IdGenerater.Instance.GenerateId();
                     await MailHelp.SendUserMail(self.Root(), self.AuctioUnitId, mailInfo, ItemGetWay.Auction);
                 }

@@ -47,7 +47,7 @@ namespace ET.Client
             UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
             if (!userInfoComponent.IsHaveFristWinReward(self.FristWinId, diff))
             {
-                FlyTipComponent.Instance.ShowFlyTip("对应难度的领主怪物未被击败，请先击败对应怪物");
+                FlyTipComponent.Instance.ShowFlyTip("对应难度的领主怪物未被击败，请先击败对应怪物。");
                 return;
             }
 

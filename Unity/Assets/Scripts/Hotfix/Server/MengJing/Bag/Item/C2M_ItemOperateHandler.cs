@@ -765,7 +765,7 @@ namespace ET.Server
                             //unit.GetComponent<ChengJiuComponent>().TriggerEvent(ChengJiuTargetEnum.EquipActiveSkillId_222, useBagInfo.HideSkillLists[i], 1);
                         }
 
-                        string noticeContent = $"恭喜玩家<color=#B6FF00>{userInfoComponent.UserName}</color>在拾取装备时，意外在装备上发现了隐藏技能:<color=#FFA313>{skillName}</color>";
+                        string noticeContent = $"恭喜玩家<color=#B6FF00>{userInfoComponent.UserName}</color>在拾取装备时，意外在装备上发现了隐藏技能:<color=#FFA313>{skillName}</color>。";
                         BroadCastHelper.SendBroadMessage(unit.Root(), NoticeType.Notice, noticeContent);
                     }
 

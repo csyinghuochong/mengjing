@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -88,7 +88,7 @@ namespace ET.Client
             {
                 if (unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.PetFightIndex) > 0)
                 {
-                    FlyTipComponent.Instance.ShowFlyTip("当前正在变身状态，稍后切换");
+                    FlyTipComponent.Instance.ShowFlyTip("当前正在变身状态，稍后切换。");
                 }
                 else
                {

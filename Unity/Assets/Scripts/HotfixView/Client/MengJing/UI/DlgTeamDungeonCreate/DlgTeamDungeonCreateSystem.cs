@@ -184,7 +184,7 @@ namespace ET.Client
 
                 if (totalTimes - times > 0 && totalTimes_2 - times_2 <= 0)
                 {
-                    PopupTipHelp.OpenPopupTip(self.Root(), "系统提示", "帮助副本次数已尽，开启副本会消耗正常次数",  () =>
+                    PopupTipHelp.OpenPopupTip(self.Root(), "系统提示", "帮助副本次数已尽，开启副本会消耗正常次数。",  () =>
                     {
                         self.RequestDragonDungeonCreate(dungeonType).Coroutine();
                     }, null).Coroutine();

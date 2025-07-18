@@ -16,7 +16,7 @@ namespace ET.Client
         {
             if (message.LeftPlayer < 0)
             {
-                PopupTipHelp.OpenPopupTip(self.Root(), "竞技场第一", "恭喜你获得竞技场第1名，奖励内容8点发送至邮箱", () =>
+                PopupTipHelp.OpenPopupTip(self.Root(), "竞技场第一", "恭喜你获得竞技场第1名，奖励内容8点发送至邮箱。", () =>
                 {
                     if (self.IsDisposed)
                     {

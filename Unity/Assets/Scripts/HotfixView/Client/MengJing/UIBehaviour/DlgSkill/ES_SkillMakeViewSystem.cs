@@ -96,7 +96,7 @@ namespace ET.Client
         
         public static void OnBtn_ResetButton(this ES_SkillMake self)
         {
-            PopupTipHelp.OpenPopupTip(self.Root(), "遗忘技能", "遗忘后将可以重新学习其他的生活技能，之前学习的所有技能将重置，请谨慎选择", async () =>
+            PopupTipHelp.OpenPopupTip(self.Root(), "遗忘技能", "遗忘后将可以重新学习其他的生活技能，之前学习的所有技能将重置，请谨慎选择。", async () =>
             {
                 await SkillNetHelper.MakeReset(self.Root(), self.Plan == -1 ? 1 : self.Plan);
                 
@@ -205,11 +205,11 @@ namespace ET.Client
                 {
                     if (rechargeNumber < needRecharge)
                     {
-                        tip = zstring.Format("当前充值金额累计达到{0}元，将自动开启第二个生活技能栏位，当前充值金额{1}元", needRecharge, rechargeNumber);
+                        tip = zstring.Format("当前充值金额累计达到{0}元，将自动开启第二个生活技能栏位，当前充值金额{1}元。", needRecharge, rechargeNumber);
                     }
                     else
                     {
-                        tip = zstring.Format("当前充值金额累计达到{0}元，将自动开启第二个生活技能栏位，您目前已经满足条件，请点击开启", needRecharge);
+                        tip = zstring.Format("当前充值金额累计达到{0}元，将自动开启第二个生活技能栏位，您目前已经满足条件，请点击开启。", needRecharge);
                     }
                 }
 

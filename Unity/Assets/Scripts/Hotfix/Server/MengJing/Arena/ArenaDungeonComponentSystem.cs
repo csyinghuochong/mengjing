@@ -136,11 +136,11 @@ namespace ET.Server
 
                 if (players[i].RankId > 0)
                 {
-                    mailInfo.Context = $"恭喜你在角斗场中获得第{players[i].RankId}名，获得如下奖励";
+                    mailInfo.Context = $"恭喜你在角斗场中获得第{players[i].RankId}名，获得如下奖励。";
                 }
                 else
                 {
-                    mailInfo.Context = $"参与角斗场，获得如下奖励";
+                    mailInfo.Context = $"参与角斗场，获得如下奖励。";
                 }
 
                 string[] needList = rewardList.Split('@');

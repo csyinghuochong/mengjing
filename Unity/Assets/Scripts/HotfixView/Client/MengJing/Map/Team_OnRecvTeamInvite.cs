@@ -52,7 +52,7 @@ namespace ET.Client
             string tip = string.Empty;
             if (robotNumber > 0)
             {
-                tip = "<color=#FDFB47>队伍内有人机，副本掉率将降低!</color>\n建议:和其他玩家组队爆率将获得大幅度提升\n";
+                tip = "<color=#FDFB47>队伍内有人机，副本掉率将降低!</color>\n建议:和其他玩家组队爆率将获得大幅度提升。\n";
             }
 
             Log.Debug($"ShowWindowAsync(WindowID.WindowID_TeamDungeonPrepare)");

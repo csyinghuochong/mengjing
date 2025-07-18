@@ -90,7 +90,7 @@ namespace ET.Client
                 using (zstring.Block())
                 {
                     PopupTipHelp.OpenPopupTip(self.Root(), "系统提示",
-                        zstring.Format("制造道具的装备材料中{0}镶嵌宝石，制造会导致<color='#55FF00'>宝石消失!</color>请问是否继续制造此道具", tip),
+                        zstring.Format("制造道具的装备材料中{0}镶嵌宝石，制造会导致<color='#55FF00'>宝石消失!</color>请问是否继续制造此道具。", tip),
                         () => { self.RequestEquipMake().Coroutine(); }, null).Coroutine();
                 }
             }
