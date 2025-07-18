@@ -159,7 +159,7 @@ namespace ET.Client
                 WindowID.WindowID_GemMake=>"宝石制造",
                 WindowID.WindowID_PaiMai=>"交易行",
                 WindowID.WindowID_MakeLearn=>"学习制造",
-                WindowID.WindowID_RoleXiLian=>"装备洗炼",
+                WindowID.WindowID_RoleXiLian=>"装备洗练",
                 WindowID.WindowID_ShenQiMake=>"制造神器",
                 WindowID.WindowID_Store =>"商店系统",
                 WindowID.WindowID_Mail=>"邮件系统",

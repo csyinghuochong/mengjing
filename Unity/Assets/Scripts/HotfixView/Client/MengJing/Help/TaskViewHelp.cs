@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -932,7 +932,7 @@ namespace ET.Client
 
         private static string PetXiLian10010086_33(TaskPro taskPro, TaskConfig taskConfig)
         {
-            string progress = LanguageComponent.Instance.LoadLocalization("宠物使用宠之晶洗炼宠物次数 {0}/{1}");
+            string progress = LanguageComponent.Instance.LoadLocalization("宠物使用宠之晶洗练宠物次数 {0}/{1}");
             string text1;
             using (zstring.Block())
             {
@@ -1028,7 +1028,7 @@ namespace ET.Client
 
         private static string XiLianSkillNumber_44(TaskPro taskPro, TaskConfig taskConfig)
         {
-            string progress = LanguageComponent.Instance.LoadLocalization("洗炼出带有任何隐藏技能的装备 {0}/{1}");
+            string progress = LanguageComponent.Instance.LoadLocalization("洗练出带有任何隐藏技能的装备 {0}/{1}");
             string text1;
             using (zstring.Block())
             {
@@ -1040,7 +1040,7 @@ namespace ET.Client
 
         private static string XiLianAttriId_45(TaskPro taskPro, TaskConfig taskConfig)
         {
-            string progress = LanguageComponent.Instance.LoadLocalization("洗炼出带有指定属性的装备 {0}/{1}");
+            string progress = LanguageComponent.Instance.LoadLocalization("洗练出带有指定属性的装备 {0}/{1}");
             string text1;
             using (zstring.Block())
             {

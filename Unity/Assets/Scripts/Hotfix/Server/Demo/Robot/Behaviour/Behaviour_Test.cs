@@ -150,7 +150,7 @@ namespace ET
                 Console.WriteLine("去储物箱 存取东西");
                 await RobotHelper.Warehous(root);
 
-                Console.WriteLine("去装备洗炼大师 给自己的装备洗练一下");
+                Console.WriteLine("去装备洗练大师 给自己的装备洗练一下");
                 await RobotHelper.RoleXiLian(root);
 
                 Console.WriteLine("去邮箱 领取信件");

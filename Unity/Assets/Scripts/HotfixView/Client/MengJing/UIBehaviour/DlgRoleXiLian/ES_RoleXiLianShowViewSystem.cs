@@ -1043,7 +1043,7 @@ namespace ET.Client
 
             if (times == 1)
             {
-                FlyTipComponent.Instance.ShowFlyTip("洗炼道具成功");
+                FlyTipComponent.Instance.ShowFlyTip("洗练道具成功");
                 self.UpdateEquipCombatChange(itemInfo, response.ItemXiLianResults[0].ChangeCombat);
                 self.OnXiLianReturn();
                 self.ShowXiLianEffect().Coroutine();
@@ -1054,7 +1054,7 @@ namespace ET.Client
                 int newXiLianDu = unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.ItemXiLianDu);
                 using (zstring.Block())
                 {
-                    FlyTipComponent.Instance.ShowFlyTip(zstring.Format("获得{0}洗炼经验", newXiLianDu - oldXiLianDu));
+                    FlyTipComponent.Instance.ShowFlyTip(zstring.Format("获得{0}洗练经验", newXiLianDu - oldXiLianDu));
                 }
 
                 await self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_RoleXiLianTen);

@@ -356,7 +356,7 @@ MonoBehaviour:
     \u6D17\u7EC3\u540E\u88C5\u5907\u83B7\u5F97\u7684\u6781\u54C1\u5C5E\u6027\u5B8C\u5168\u968F\u673A\u3002\n3.
     \u88C5\u5907\u7B49\u7EA7\u8D8A\u9AD8\uFF0C\u6D17\u7EC3\u6D88\u8017\u7684\u91D1\u5E01\u8D8A\u9AD8\uFF0C\u83B7\u5F97\u7684\r\n\u6781\u54C1\u5C5E\u6027\u8D8A\u597D\u3002\n4.
     \u6D17\u7EC3\u6709\u4E00\u5B9A\u6982\u7387\u5931\u8D25\uFF0C\u5931\u8D25\u88C5\u5907\u5C5E\u6027\u4E0D\u53D8\u3002\n5.
-    \u6D17\u70BC\u6709\u6982\u7387\u51FA\u73B0\u5E78\u8FD0\u503C\u5C5E\u6027\u3002"
+    \u6D17\u7EC3\u6709\u6982\u7387\u51FA\u73B0\u5E78\u8FD0\u503C\u5C5E\u6027\u3002"
 --- !u!114 &8051256107168414639
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5646,6 +5646,7 @@ MonoBehaviour:
   moveDistance: 5
   isLoop: 1
   MoveToTime: 1
+  ShouldPlay: 1
 --- !u!1 &1763274298363283232
 GameObject:
   m_ObjectHideFlags: 0
@@ -5941,6 +5942,7 @@ MonoBehaviour:
   moveDistance: 2000
   isLoop: 0
   MoveToTime: 0
+  ShouldPlay: 1
 --- !u!1 &2241567557934672278
 GameObject:
   m_ObjectHideFlags: 0
@@ -5996,6 +5998,7 @@ MonoBehaviour:
   moveDistance: -1000
   isLoop: 0
   MoveToTime: 0
+  ShouldPlay: 1
 --- !u!1 &2407590201342734225
 GameObject:
   m_ObjectHideFlags: 0
@@ -6299,6 +6302,7 @@ MonoBehaviour:
   moveDistance: 5
   isLoop: 1
   MoveToTime: 1
+  ShouldPlay: 1
 --- !u!1 &3086311218574433667
 GameObject:
   m_ObjectHideFlags: 0
@@ -29839,7 +29843,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u5F00\u59CB\u6D17\u70BC"
+  m_Text: "\u5F00\u59CB\u6D17\u7EC3"
 --- !u!1 &8514358130009039476
 GameObject:
   m_ObjectHideFlags: 0

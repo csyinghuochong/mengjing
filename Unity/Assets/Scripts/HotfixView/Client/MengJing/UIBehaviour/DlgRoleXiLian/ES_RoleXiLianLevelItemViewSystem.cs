@@ -76,7 +76,7 @@ namespace ET.Client
                 float progress = shuliandu * 1f / equipXiLianConfig.NeedShuLianDu;
                 self.E_ImageExpImage.fillAmount = Mathf.Min(progress, 1f);
                 self.E_TextTitleText.text = equipXiLianConfig.Title;
-                self.E_TextLevelTipText.text = zstring.Format("获得{0}，洗炼获得高品质属性概率提升", equipXiLianConfig.Title);
+                self.E_TextLevelTipText.text = zstring.Format("获得{0}，洗练获得高品质属性概率提升", equipXiLianConfig.Title);
 
                 if (equipXiLianConfig.ProList_Type[0] != 0)
                 {

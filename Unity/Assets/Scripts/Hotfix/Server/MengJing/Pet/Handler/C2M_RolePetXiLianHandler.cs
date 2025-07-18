@@ -257,7 +257,7 @@ namespace ET.Server
 			int petType = petConfig.PetType;
 			if (petType != 0)
 			{
-				//Game_PublicClassVar.Get_function_UI.GameGirdHint_Front("洗炼变异宠物请使用更强大的道具！");
+				//Game_PublicClassVar.Get_function_UI.GameGirdHint_Front("洗练变异宠物请使用更强大的道具！");
 				ErrorCore = 1;
 			}
 
@@ -274,7 +274,7 @@ namespace ET.Server
 					}
 					//获取玩家名称
 					//string roseName = "";
-					//广播【"恭喜玩家" + roseName + "洗炼宠物时一不小心打翻了药坛子，宠物不小心变了一个颜色!"】
+					//广播【"恭喜玩家" + roseName + "洗练宠物时一不小心打翻了药坛子，宠物不小心变了一个颜色!"】
 				}
 			}
 			*/
