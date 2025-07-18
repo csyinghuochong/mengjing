@@ -1099,7 +1099,7 @@ namespace ET.Server
             if (getType != ItemGetWay.GemHeCheng) //宝石合成在对应的协议有判断
             {
                 //宠物之核都是通过ItemLocType.ItemLocBag进入背包的
-                if ((petHeXinNumber + self.GetItemByLoc(ItemLocType.ItemPetHeXinBag).Count > GlobalValueConfigCategory.Instance.PetHeXinMax) &&
+                if (petHeXinNumber > 0 && (petHeXinNumber + self.GetItemByLoc(ItemLocType.ItemPetHeXinBag).Count > GlobalValueConfigCategory.Instance.PetHeXinMax) &&
                     UseLocType == ItemLocType.ItemLocBag)
                 {
                     return false;
