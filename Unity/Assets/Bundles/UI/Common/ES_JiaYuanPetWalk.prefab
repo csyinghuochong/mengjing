@@ -32,7 +32,6 @@ RectTransform:
   - {fileID: 4309302576125280692}
   - {fileID: 7563494774017544720}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -90,7 +89,6 @@ RectTransform:
   m_Children:
   - {fileID: 8213950396277607410}
   m_Father: {fileID: 743600214868092229}
-  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -178,7 +176,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 743600214868092229}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -226,7 +223,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 0.7
-  m_Text: "\u63D0\u793A:\u70B9\u51FB\u6563\u6B65\u7684\u5BA0\u7269\u53EF\u4EE5\u5582\u98DF\u589E\u52A0\u5FC3\u60C5\u503C,\u5FC3\u60C5\u503C\u8D8A\u9AD8\u83B7\u5F97\u5956\u52B1\u4F1A\u8D8A\u591A\u3002"
+  m_Text: "\u63D0\u793A:\u70B9\u51FB\u6563\u6B65\u7684\u5BA0\u7269\u53EF\u4EE5\u5582\u98DF\u589E\u52A0\u5FC3\u60C5\u503C\uFF0C\u5FC3\u60C5\u503C\u8D8A\u9AD8\u83B7\u5F97\u5956\u52B1\u4F1A\u8D8A\u591A\u3002"
 --- !u!114 &1243773105588224367
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -273,7 +270,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7563494774017544720}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}

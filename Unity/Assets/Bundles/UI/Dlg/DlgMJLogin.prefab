@@ -1634,7 +1634,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u63D0\u793A:\u624B\u673A\u548C\u5FAE\u4FE1\u767B\u5F55\u652F\u6301\u5B89\u5353\u548C\u82F9\u679C\u8BBE\u5907\u5207\u6362,QQ\u767B\u5F55\u4E0D\u652F\u6301\u3002"
+  m_Text: "\u63D0\u793A:\u624B\u673A\u548C\u5FAE\u4FE1\u767B\u5F55\u652F\u6301\u5B89\u5353\u548C\u82F9\u679C\u8BBE\u5907\u5207\u6362\uFF0CQQ\u767B\u5F55\u4E0D\u652F\u6301\u3002"
 --- !u!114 &4398906397077795237
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6406,6 +6406,7 @@ MonoBehaviour:
   moveDistance: 10
   isLoop: 1
   MoveToTime: 1
+  ShouldPlay: 1
 --- !u!1 &3824030986144077789
 GameObject:
   m_ObjectHideFlags: 0

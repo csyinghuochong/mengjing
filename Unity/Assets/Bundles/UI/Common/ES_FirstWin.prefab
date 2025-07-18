@@ -379,6 +379,7 @@ MonoBehaviour:
   m_AutoScalingMode: 2
   m_UseCustomView: 0
   m_CustomViewSize: 10
+  m_TimeScaleMultiplier: 1
 --- !u!1 &1797412645678905552
 GameObject:
   m_ObjectHideFlags: 0
@@ -1648,6 +1649,7 @@ MonoBehaviour:
   m_AutoScalingMode: 2
   m_UseCustomView: 0
   m_CustomViewSize: 10
+  m_TimeScaleMultiplier: 1
 --- !u!1 &4471953624968033441
 GameObject:
   m_ObjectHideFlags: 0
@@ -2889,7 +2891,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u63D0\u793A:\u51FB\u8D25\u4F1A\u83B7\u5F971\u70B9\u9886\u4E3B\u7ECF\u9A8C,\u5347\u7EA7\u540E\u9886\u4E3B\u6389\u843D\u4F1A\u589E\u52A0\uFF0C\u9886\u4E3B\u5B9E\u529B\u4E5F\u4F1A\u63D0\u5347\u3002"
+  m_Text: "\u63D0\u793A:\u51FB\u8D25\u4F1A\u83B7\u5F971\u70B9\u9886\u4E3B\u7ECF\u9A8C\uFF0C\u5347\u7EA7\u540E\u9886\u4E3B\u6389\u843D\u4F1A\u589E\u52A0\uFF0C\u9886\u4E3B\u5B9E\u529B\u4E5F\u4F1A\u63D0\u5347\u3002"
 --- !u!114 &3823910464945325596
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2958,6 +2960,7 @@ MonoBehaviour:
   moveDistance: 2000
   isLoop: 0
   MoveToTime: 0
+  ShouldPlay: 1
 --- !u!1 &6997244415129696742
 GameObject:
   m_ObjectHideFlags: 0
@@ -4107,6 +4110,7 @@ MonoBehaviour:
   moveDistance: 2000
   isLoop: 0
   MoveToTime: 0
+  ShouldPlay: 1
 --- !u!1 &8487019158243489728
 GameObject:
   m_ObjectHideFlags: 0

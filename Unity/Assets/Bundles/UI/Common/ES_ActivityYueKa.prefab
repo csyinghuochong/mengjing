@@ -56,6 +56,7 @@ MonoBehaviour:
   moveDistance: 2000
   isLoop: 0
   MoveToTime: 0
+  ShouldPlay: 1
 --- !u!1 &416779552532776946
 GameObject:
   m_ObjectHideFlags: 0
@@ -1009,6 +1010,7 @@ MonoBehaviour:
   moveDistance: 2000
   isLoop: 0
   MoveToTime: 0
+  ShouldPlay: 1
 --- !u!1 &4570104805734460404
 GameObject:
   m_ObjectHideFlags: 0
@@ -1575,6 +1577,7 @@ MonoBehaviour:
   m_AutoScalingMode: 2
   m_UseCustomView: 0
   m_CustomViewSize: 10
+  m_TimeScaleMultiplier: 1
 --- !u!1 &5749118071424640937
 GameObject:
   m_ObjectHideFlags: 0
@@ -1654,7 +1657,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u56DE\u9988\u7279\u6743\n\u6FC0\u6D3B\u540E,\u526F\u672C\u5173\u5361\u5C06\u989D\u5916\u5F00\u542F\u4E00\u4E2A\u5B9D\u7BB1"
+  m_Text: "\u56DE\u9988\u7279\u6743\n\u6FC0\u6D3B\u540E\uFF0C\u526F\u672C\u5173\u5361\u5C06\u989D\u5916\u5F00\u542F\u4E00\u4E2A\u5B9D\u7BB1"
 --- !u!114 &8628334178973969565
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1756,6 +1759,7 @@ MonoBehaviour:
   m_AutoScalingMode: 2
   m_UseCustomView: 0
   m_CustomViewSize: 10
+  m_TimeScaleMultiplier: 1
 --- !u!1 &6483848936626764127
 GameObject:
   m_ObjectHideFlags: 0
@@ -1995,6 +1999,7 @@ MonoBehaviour:
   moveDistance: 30
   isLoop: 1
   MoveToTime: 2
+  ShouldPlay: 1
 --- !u!1 &7792086848827976515
 GameObject:
   m_ObjectHideFlags: 0
