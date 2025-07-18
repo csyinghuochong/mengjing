@@ -230,7 +230,7 @@ namespace ET.Server
             {
                 if (randomNum >= 2)
                 {
-                    string noticeContent = $"恭喜玩家<color=#B6FF00>{unit.GetComponent<UserInfoComponentS>().GetName()}</color>使用鉴定符鉴定装备时,一道金光装备出现<color=#FFA313>{randomNum}条极品属性</color>";
+                    string noticeContent = $"恭喜玩家<color=#B6FF00>{unit.GetComponent<UserInfoComponentS>().GetName()}</color>使用鉴定符鉴定装备时，一道金光装备出现<color=#FFA313>{randomNum}条极品属性</color>";
                     //ServerMessageHelper.SendBroadMessage(unit.DomainZone(), NoticeType.Notice, noticeContent);
                 }
             }

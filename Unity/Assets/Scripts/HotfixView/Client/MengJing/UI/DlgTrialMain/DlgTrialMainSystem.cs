@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Unity.Mathematics;
 
 namespace ET.Client
@@ -99,7 +99,7 @@ namespace ET.Client
 
             self.LastTiaoZhan = TimeHelper.ServerNow();
 
-            PopupTipHelp.OpenPopupTip(self.Root(), "系统提示", "是否重新开始挑战,开始后倒计时和怪物生命将自动初始化", () => { self.RequestTiaozhan().Coroutine(); }, null)
+            PopupTipHelp.OpenPopupTip(self.Root(), "系统提示", "是否重新开始挑战，开始后倒计时和怪物生命将自动初始化", () => { self.RequestTiaozhan().Coroutine(); }, null)
                     .Coroutine();
         }
 

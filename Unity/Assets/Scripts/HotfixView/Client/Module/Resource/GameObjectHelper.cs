@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using UnityEngine;
 
 namespace ET.Client
@@ -13,7 +13,7 @@ namespace ET.Client
 			}
 			catch (Exception e)
 			{
-				throw new Exception($"获取{gameObject.name}的ReferenceCollector key失败, key: {key}", e);
+				throw new Exception($"获取{gameObject.name}的ReferenceCollector key失败， key: {key}", e);
 			}
 		}
 	}

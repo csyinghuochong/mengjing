@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -165,13 +165,13 @@ namespace ET.Client
 
             if (self.Root().GetComponent<PetComponentC>().TeamPetList.Contains(self.LastSelectItem.Id))
             {
-                FlyTipComponent.Instance.ShowFlyTip("当前宠物存在于宠物天梯上阵中,不能分解！");
+                FlyTipComponent.Instance.ShowFlyTip("当前宠物存在于宠物天梯上阵中，不能分解！");
                 return;
             }
 
             if (self.Root().GetComponent<PetComponentC>().PetFormations.Contains(self.LastSelectItem.Id))
             {
-                FlyTipComponent.Instance.ShowFlyTip("当前宠物存在于宠物副本上阵中,不能分解！");
+                FlyTipComponent.Instance.ShowFlyTip("当前宠物存在于宠物副本上阵中，不能分解！");
                 return;
             }
 
@@ -189,7 +189,7 @@ namespace ET.Client
 
             //if (self.PetComponent.PetMingList.Contains(self.LastSelectItem.Id))
             //{
-            //    FloatTipManager.Instance.ShowFloatTip("当前宠物存在于宠物矿场队伍中,不能分解！");
+            //    FloatTipManager.Instance.ShowFloatTip("当前宠物存在于宠物矿场队伍中，不能分解！");
             //    return;
             //}
             PopupTipHelp.OpenPopupTip(self.Root(), "", LanguageComponent.Instance.LoadLocalization("确定放生?"),

@@ -213,7 +213,7 @@ namespace ET.Client
 
             BagClientNetHelper.RequestAppraisalItem(self.Root(), self.BagInfo_Equip, self.BagInfo_Appri.BagInfoID).Coroutine();
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_AppraisalSelect);
-            flyTipComponent.ShowFlyTip("恭喜您！道具发挥了作用,鉴定成功!");
+            flyTipComponent.ShowFlyTip("恭喜您！道具发挥了作用，鉴定成功!");
         }
     }
 }

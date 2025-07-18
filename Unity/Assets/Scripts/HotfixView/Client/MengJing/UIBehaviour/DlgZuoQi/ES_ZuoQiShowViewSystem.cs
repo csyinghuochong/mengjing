@@ -132,7 +132,7 @@ namespace ET.Client
 
             if (response.Error == ErrorCode.ERR_Success)
             {
-                FlyTipComponent.Instance.ShowFlyTip("激活坐骑成功,清在主界面点击骑乘按钮即可喔！");
+                FlyTipComponent.Instance.ShowFlyTip("激活坐骑成功，清在主界面点击骑乘按钮即可喔！");
             }
         }
 

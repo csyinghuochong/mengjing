@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace ET.Client
 {
@@ -136,7 +136,7 @@ namespace ET.Client
                         
             if (response.Error == ErrorCore.ERR_MessageTimeout)
             {
-                throw new RpcException(response.Error, $"Rpc error: request, 注意Actor消息超时，请注意查看是否死锁或者没有reply: {request}, response: {response}");
+                throw new RpcException(response.Error, $"Rpc error: request， 注意Actor消息超时，请注意查看是否死锁或者没有reply: {request}， response: {response}");
             }
 
             if (needException && ErrorCore.IsRpcNeedThrowException(response.Error))

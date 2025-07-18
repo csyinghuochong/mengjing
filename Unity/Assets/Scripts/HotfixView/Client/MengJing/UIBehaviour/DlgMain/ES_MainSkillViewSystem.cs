@@ -458,7 +458,7 @@ namespace ET.Client
             int zhuabutype = self.GetZhuaBuType(target.ConfigId);
             if (zhuabutype == 0)
             {
-                FlyTipComponent.Instance.ShowFlyTip("无法捕捉,此怪物无法成为您的宠物哦！");
+                FlyTipComponent.Instance.ShowFlyTip("无法捕捉，此怪物无法成为您的宠物哦！");
                 return;
             }
             if (zhuabutype == 1)
@@ -615,7 +615,7 @@ namespace ET.Client
             // 捕捉失败怪物逃跑（怪物随机出现在当前地图的任意一个位置）
             if (response.Error == ErrorCode.ERR_Success && response.Message == string.Empty)
             {
-                FlyTipComponent.Instance.ShowFlyTip("恭喜你,抓捕成功！");
+                FlyTipComponent.Instance.ShowFlyTip("恭喜你，抓捕成功！");
             }
             if (response.Message == "1")
             {

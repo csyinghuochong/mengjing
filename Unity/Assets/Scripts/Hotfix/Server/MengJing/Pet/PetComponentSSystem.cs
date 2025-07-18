@@ -994,7 +994,7 @@ namespace ET.Server
                 if (RandomHelper.RandFloat01() <= 0.02f && rolePetInfo.UpStageStatus == 0)
                 {
                     rolePetInfo.UpStageStatus = 1;
-                    //unit.GetComponent<UserInfoComponentServer>().UpdateRoleData(UserDataType.Message, "恭喜你,你的宠物在升级时金光一闪,领悟进化！");
+                    //unit.GetComponent<UserInfoComponentServer>().UpdateRoleData(UserDataType.Message, "恭喜你，你的宠物在升级时金光一闪，领悟进化！");
                 }
                 else
                 {
@@ -1002,7 +1002,7 @@ namespace ET.Server
                     if (rolePetInfo.PetLv >= 70 && rolePetInfo.UpStageStatus == 0)
                     {
                         rolePetInfo.UpStageStatus = 1;
-                        //unit.GetComponent<UserInfoComponentServer>().UpdateRoleData(UserDataType.Message, "恭喜你,你的宠物在升级时金光一闪,领悟进化！");
+                        //unit.GetComponent<UserInfoComponentServer>().UpdateRoleData(UserDataType.Message, "恭喜你，你的宠物在升级时金光一闪，领悟进化！");
                     }
                 }
             }

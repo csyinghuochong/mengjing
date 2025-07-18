@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 
 namespace ET.Server
 {
@@ -274,7 +274,7 @@ namespace ET.Server
 					}
 					//获取玩家名称
 					//string roseName = "";
-					//广播【"恭喜玩家" + roseName + "洗炼宠物时一不小心打翻了药坛子,宠物不小心变了一个颜色!"】
+					//广播【"恭喜玩家" + roseName + "洗炼宠物时一不小心打翻了药坛子，宠物不小心变了一个颜色!"】
 				}
 			}
 			*/
@@ -333,7 +333,7 @@ namespace ET.Server
 				//宠物属性使用失败,当前加点总数必须大于一定值。
 				//langStrHint = Game_PublicClassVar.Get_gameSettingLanguge.LoadLocalizationHint("hint_230");
 				//Game_PublicClassVar.Get_function_UI.GameGirdHint_Front(langStrHint);
-				//Game_PublicClassVar.Get_function_UI.GameGirdHint_Front("重置失败,点数不符！");
+				//Game_PublicClassVar.Get_function_UI.GameGirdHint_Front("重置失败，点数不符！");
 				return false;
 			}
 

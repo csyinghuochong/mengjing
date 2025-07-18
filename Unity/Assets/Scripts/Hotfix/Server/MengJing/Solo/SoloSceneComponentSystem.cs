@@ -170,7 +170,7 @@ namespace ET.Server
                 }
 
                 mailInfo.Title = "竞技场第" + num + "名";
-                mailInfo.Context = "恭喜你获得竞技场第" + num + "名,奖励如下";
+                mailInfo.Context = "恭喜你获得竞技场第" + num + "名，奖励如下";
                 MailHelp.SendUserMail(self.Root(), unitId, mailInfo, ItemGetWay.SoloReward).Coroutine();
 
                 //只发送前100

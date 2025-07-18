@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -187,7 +187,7 @@ namespace ET.Client
                     self.Root().RemoveComponent<UnitGuaJiComponent>();
                 }
 
-                FlyTipComponent.Instance.ShowFlyTip("体力已经消耗完毕,请确保体力充足喔!");
+                FlyTipComponent.Instance.ShowFlyTip("体力已经消耗完毕，请确保体力充足喔!");
                 return;
             }
 
@@ -204,7 +204,7 @@ namespace ET.Client
             }
             else
             {
-                FlyTipComponent.Instance.ShowFlyTip("当前正在挂机,请确保周围是怪物刷新点!");
+                FlyTipComponent.Instance.ShowFlyTip("当前正在挂机，请确保周围是怪物刷新点!");
             }
 
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_Setting);

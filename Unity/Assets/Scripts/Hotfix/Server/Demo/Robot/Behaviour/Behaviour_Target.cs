@@ -31,7 +31,7 @@ namespace ET
                     long teamid = unit.GetTeamId();
                     if (teamid == unit.Id)
                     {
-                        Console.WriteLine($"队长不可能是机器人,逻辑错误！！！: {unit.Id} " );
+                        Console.WriteLine($"队长不可能是机器人，逻辑错误！！！: {unit.Id} " );
                         break;
                     }
 

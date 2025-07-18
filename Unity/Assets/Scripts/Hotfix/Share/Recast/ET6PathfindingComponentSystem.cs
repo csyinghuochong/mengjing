@@ -152,7 +152,7 @@ namespace ET
         //     if (ret == 0)
         //     {
         //         throw new Exception(
-        //             $"RecastFindNearestPoint fail, 可能是位置配置有问题: sceneName:{self.DomainScene().Name} {pos} {self.Name} {self.GetParent<Unit>().Id} {self.GetParent<Unit>().ConfigId} {self.EndPos.ArrayToString()}");
+        //             $"RecastFindNearestPoint fail， 可能是位置配置有问题: sceneName:{self.DomainScene().Name} {pos} {self.Name} {self.GetParent<Unit>().Id} {self.GetParent<Unit>().ConfigId} {self.EndPos.ArrayToString()}");
         //     }
         //
         //     return new Vector3(-self.EndPos[0], self.EndPos[1], self.EndPos[2]);

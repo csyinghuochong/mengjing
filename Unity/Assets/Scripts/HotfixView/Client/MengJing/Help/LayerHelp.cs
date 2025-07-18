@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 namespace ET.Client
 {
@@ -8,7 +8,7 @@ namespace ET.Client
         {
             //if (LayerMask.NameToLayer(targetLayer.ToString()) == -1)
             //{
-            //    Log.Debug("Layer中不存在,请手动添加LayerName");
+            //    Log.Debug("Layer中不存在，请手动添加LayerName");
             //    return;
             //}
 
@@ -25,7 +25,7 @@ namespace ET.Client
         {
             //if (LayerMask.NameToLayer(targetLayer.ToString()) == -1)
             //{
-            //    Log.Debug("Layer中不存在,请手动添加LayerName");
+            //    Log.Debug("Layer中不存在，请手动添加LayerName");
             //    return;
             //}
 

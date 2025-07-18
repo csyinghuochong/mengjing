@@ -341,7 +341,7 @@ namespace ET.Client
 
                 if (tip != "")
                 {
-                    tip += " 中镶嵌宝石,分解会导致宝石消失!\n";
+                    tip += " 中镶嵌宝石，分解会导致宝石消失!\n";
                 }
 
                 if (petHeXin8)

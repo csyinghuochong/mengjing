@@ -1,4 +1,4 @@
-﻿namespace ET.Client
+namespace ET.Client
 {
     [FriendOf(typeof(DlgTowerFightReward))]
     public static class DlgTowerFightRewardSystem
@@ -45,7 +45,7 @@
             {
                 using (zstring.Block())
                 {
-                    self.View.E_Text_ResultText.text = zstring.Format("你当前成功完成挑战{0}波,获得奖励如下:", towerConfig.CengNum);
+                    self.View.E_Text_ResultText.text = zstring.Format("你当前成功完成挑战{0}波，获得奖励如下:", towerConfig.CengNum);
                 }
             }
 

@@ -64,7 +64,7 @@ namespace ET.Client
             await self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_CountryHuoDongJieShao);
 
             self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgCountryHuoDongJieShao>().OnUpdateJieShao("角斗场规则",
-                " 1.活动开启后,所有12级以上玩家均可进入。\n 2.活动开启10分钟后将禁止所有玩家进入此地图。\n 3.在角斗场内,玩家将互相发起挑战,坚持到最后1名的玩家将会\n 获得丰厚奖励。\n 4.在同一个角斗场内,人数最多达到20人。\n 5.20:00活动结束,如果场内剩余多人,则按照当前最低排名发放奖励。");
+                " 1.活动开启后，所有12级以上玩家均可进入。\n 2.活动开启10分钟后将禁止所有玩家进入此地图。\n 3.在角斗场内，玩家将互相发起挑战，坚持到最后1名的玩家将会\n 获得丰厚奖励。\n 4.在同一个角斗场内，人数最多达到20人。\n 5.20:00活动结束，如果场内剩余多人，则按照当前最低排名发放奖励。");
         }
 
         public static void OnBtn_HuoDong_ArenaButton(this ES_CountryHuoDong self)

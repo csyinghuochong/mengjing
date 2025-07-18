@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Net;
 
 namespace ET.Server
@@ -153,7 +153,7 @@ namespace ET.Server
         {
             if (response.Error == ErrorCore.ERR_MessageTimeout)
             {
-                self.SetException(new RpcException(response.Error, $"Rpc error: request, 注意Actor消息超时，请注意查看是否死锁或者没有reply: actorId: {self.ActorId} {self.RequestType.FullName}, response: {response}"));
+                self.SetException(new RpcException(response.Error, $"Rpc error: request， 注意Actor消息超时，请注意查看是否死锁或者没有reply: actorId: {self.ActorId} {self.RequestType.FullName}， response: {response}"));
                 return;
             }
 

@@ -113,7 +113,7 @@ namespace ET.Client
                 {
                     using (zstring.Block())
                     {
-                        FlyTipComponent.Instance.ShowFlyTip(zstring.Format("{0}{1}", LanguageComponent.Instance.LoadLocalization("出售价格过低,当前最低价格为:"),
+                        FlyTipComponent.Instance.ShowFlyTip(zstring.Format("{0}{1}", LanguageComponent.Instance.LoadLocalization("出售价格过低，当前最低价格为:"),
                             (int)(oldPrice * 0.5f) * paiMaiItemInfo.BagInfo.ItemNum));
                     }
 
@@ -182,7 +182,7 @@ namespace ET.Client
             if (self.priceProNum >= 10)
             {
                 self.priceProNum = 10;
-                FlyTipComponent.Instance.ShowFlyTip(LanguageComponent.Instance.LoadLocalization("如需再提高价格,请手动修改价格!"));
+                FlyTipComponent.Instance.ShowFlyTip(LanguageComponent.Instance.LoadLocalization("如需再提高价格，请手动修改价格!"));
             }
 
             self.nowPrice = (int)(self.oldPrice * (1f + 0.1f * self.priceProNum));

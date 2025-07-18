@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -231,7 +231,7 @@ namespace ET.Client
             UIBaseWindow baseWindow = self.VisibleWindowsDic[(int)id];
             if ( baseWindow == null || baseWindow.IsDisposed )
             {
-                Log.Error($"UIBaseWindow is null  or isDisposed ,  WindowsID: {id} 失败！");
+                Log.Error($"UIBaseWindow is null  or isDisposed ，  WindowsID: {id} 失败！");
                 return;
             }
             

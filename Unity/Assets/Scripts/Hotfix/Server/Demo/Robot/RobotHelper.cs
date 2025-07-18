@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Unity.Mathematics;
@@ -1440,7 +1440,7 @@ namespace ET.Client
             {
                 if (makeType_1 != 0)
                 {
-                    // "重置后自身学习的生活技能将全部遗忘,请谨慎选择!"
+                    // "重置后自身学习的生活技能将全部遗忘，请谨慎选择!"
                 }
 
                 await SkillNetHelper.MakeSelect(root, showValue, plan == -1 ? 1 : plan);

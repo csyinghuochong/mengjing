@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 
 namespace ET.Client
 {
@@ -33,7 +33,7 @@ namespace ET.Client
             // 判断是否到达100层
             if (finished >= 100)
             {
-                FlyTipComponent.Instance.ShowFlyTip("今日已经达到塔顶,请明天再来挑战哦!");
+                FlyTipComponent.Instance.ShowFlyTip("今日已经达到塔顶，请明天再来挑战哦!");
                 return;
             }
 

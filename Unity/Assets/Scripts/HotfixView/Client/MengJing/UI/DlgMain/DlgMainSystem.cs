@@ -1078,7 +1078,7 @@ namespace ET.Client
 
         public static void OnButtonStallCancel(this DlgMain self)
         {
-            PopupTipHelp.OpenPopupTip(self.Root(), "摊位提示", "是否收起自己的摊位?\n 支持下线,摊位可以离线显示6小时!",
+            PopupTipHelp.OpenPopupTip(self.Root(), "摊位提示", "是否收起自己的摊位?\n 支持下线，摊位可以离线显示6小时!",
                 () =>
                 {
                     PaiMaiNetHelper.RequestStallOperation(self.Root(), 0, string.Empty).Coroutine();
@@ -1906,7 +1906,7 @@ namespace ET.Client
 
         public static void OnBtn_RerurnDungeonButton(this DlgMain self)
         {
-            PopupTipHelp.OpenPopupTip(self.Root(), "返回副本", LanguageComponent.Instance.LoadLocalization("移动次数消耗完毕,请返回副本!"),
+            PopupTipHelp.OpenPopupTip(self.Root(), "返回副本", LanguageComponent.Instance.LoadLocalization("移动次数消耗完毕，请返回副本!"),
                 () =>
                 {
                     int sceneid = self.Root().GetComponent<BattleMessageComponent>().LastDungeonId;
@@ -1937,7 +1937,7 @@ namespace ET.Client
             string tipStr = "确定返回主城？";
             if (mapComponent.MapType == MapTypeEnum.Battle)
             {
-                tipStr = "现在离开战场,将不会获得战场胜利的奖励哦";
+                tipStr = "现在离开战场，将不会获得战场胜利的奖励哦";
             }
 
             PopupTipHelp.OpenPopupTip(self.Root(), "", LanguageComponent.Instance.LoadLocalization(tipStr),

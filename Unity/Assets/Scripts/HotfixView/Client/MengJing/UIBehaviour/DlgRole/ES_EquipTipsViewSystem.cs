@@ -457,7 +457,7 @@ namespace ET.Client
 
                 if (itemConfig.ItemSubType == 110 && equipShiShiGemNum > 4)
                 {
-                    text.GetComponent<Text>().text += "(超过4个,属性无效)";
+                    text.GetComponent<Text>().text += "(超过4个，属性无效)";
                 }
             }
         }

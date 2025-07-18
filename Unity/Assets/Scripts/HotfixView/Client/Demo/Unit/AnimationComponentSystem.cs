@@ -1,4 +1,4 @@
-﻿using Animancer;
+using Animancer;
 using UnityEngine;
 
 namespace ET.Client
@@ -134,7 +134,7 @@ namespace ET.Client
                     {
                         using (zstring.Block())
                         {
-                            Log.Debug(zstring.Format("{0} 播放完毕,自动切换为 {1}", animInfo.StateName, animInfo.NextStateName));
+                            Log.Debug(zstring.Format("{0} 播放完毕，自动切换为 {1}", animInfo.StateName, animInfo.NextStateName));
                         }
 
                         self.Play(animInfo.NextStateName);

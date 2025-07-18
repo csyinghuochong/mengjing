@@ -1086,27 +1086,27 @@ namespace ET
         [StaticField]
         public static List<WorldSayConfig> WorldSayList = new()
         {
-            new WorldSayConfig() { Time = 1230, OpenDay = new List<int> { -1 }, Conent = "巨龙神已经准时出现在宝藏之地,想要挑战我的就带上你们的武器过来挑战我吧!" },
-            new WorldSayConfig() { Time = 1930, OpenDay = new List<int> { -1 }, Conent = "一波红包雨已经来临,赶紧来看看自己是否是那个幸运玩家!" },
+            new WorldSayConfig() { Time = 1230, OpenDay = new List<int> { -1 }, Conent = "巨龙神已经准时出现在宝藏之地，想要挑战我的就带上你们的武器过来挑战我吧!" },
+            new WorldSayConfig() { Time = 1930, OpenDay = new List<int> { -1 }, Conent = "一波红包雨已经来临，赶紧来看看自己是否是那个幸运玩家!" },
             new WorldSayConfig() { Time = 1940, OpenDay = new List<int> { -1 }, Conent = "角斗场已经开启,想要参加的勇士要抓紧时间哦!" },
-            new WorldSayConfig() { Time = 2000, OpenDay = new List<int> { 1, 3, 5, 0 }, Conent = "世界领主已经出现在密境中,赶紧过来看看吧!" },
-            new WorldSayConfig() { Time = 2015, OpenDay = new List<int> { -1 }, Conent = "拍卖特惠已经开启,有需要的玩家可以购买哦!" },
-            new WorldSayConfig() { Time = 2030, OpenDay = new List<int> { -1 }, Conent = "战场活动已经开启,可以通过右上角的战场按钮快速加入哦!" },
-            new WorldSayConfig() { Time = 2100, OpenDay = new List<int> { 1, 3, 5, 0 }, Conent = "一大波宝箱出现在宝藏之地,想要去的玩家赶紧前往哦!" },
-            new WorldSayConfig() { Time = 2110, OpenDay = new List<int> { 1, 3, 5, 0 }, Conent = "一大波宝箱出现在宝藏之地,想要去的玩家赶紧前往哦!" },
-            new WorldSayConfig() { Time = 2120, OpenDay = new List<int> { 1, 3, 5, 0 }, Conent = "一大波宝箱出现在宝藏之地,想要去的玩家赶紧前往哦!" },
-            new WorldSayConfig() { Time = 2100, OpenDay = new List<int> { 2, 4, 6 }, Conent = "变身大赛活动即将开启,想要参加的小伙伴记得要准时参加噢,5分钟后开启正式比赛!" },
+            new WorldSayConfig() { Time = 2000, OpenDay = new List<int> { 1, 3, 5, 0 }, Conent = "世界领主已经出现在密境中，赶紧过来看看吧!" },
+            new WorldSayConfig() { Time = 2015, OpenDay = new List<int> { -1 }, Conent = "拍卖特惠已经开启，有需要的玩家可以购买哦!" },
+            new WorldSayConfig() { Time = 2030, OpenDay = new List<int> { -1 }, Conent = "战场活动已经开启，可以通过右上角的战场按钮快速加入哦!" },
+            new WorldSayConfig() { Time = 2100, OpenDay = new List<int> { 1, 3, 5, 0 }, Conent = "一大波宝箱出现在宝藏之地，想要去的玩家赶紧前往哦!" },
+            new WorldSayConfig() { Time = 2110, OpenDay = new List<int> { 1, 3, 5, 0 }, Conent = "一大波宝箱出现在宝藏之地，想要去的玩家赶紧前往哦!" },
+            new WorldSayConfig() { Time = 2120, OpenDay = new List<int> { 1, 3, 5, 0 }, Conent = "一大波宝箱出现在宝藏之地，想要去的玩家赶紧前往哦!" },
+            new WorldSayConfig() { Time = 2100, OpenDay = new List<int> { 2, 4, 6 }, Conent = "变身大赛活动即将开启，想要参加的小伙伴记得要准时参加噢，5分钟后开启正式比赛!" },
             //年兽
-            new WorldSayConfig() { Time = 2114, OpenDay = new List<int> { -1 }, Conent = "新年活动:新年的年兽-夕还有1分钟即将来到宝藏之地,主城的勇士们,带上你们的装备快去迎接挑战吧！" },
+            new WorldSayConfig() { Time = 2114, OpenDay = new List<int> { -1 }, Conent = "新年活动:新年的年兽-夕还有1分钟即将来到宝藏之地，主城的勇士们，带上你们的装备快去迎接挑战吧！" },
             new WorldSayConfig()
             {
-                Time = 2115, OpenDay = new List<int> { -1 }, Conent = "新年的年兽-夕：我已经等了整整一年,弱者不配与我进行战斗,想要挑战我的就带上你们的装备过来吧,我已经到来到宝藏之地的中心！"
+                Time = 2115, OpenDay = new List<int> { -1 }, Conent = "新年的年兽-夕：我已经等了整整一年，弱者不配与我进行战斗，想要挑战我的就带上你们的装备过来吧，我已经到来到宝藏之地的中心！"
             },
-            new WorldSayConfig() { Time = 2000, OpenDay = new List<int> { -1 }, Conent = "新年活动:捣乱的年兽出现在宝藏之地,想要去的玩家带上鞭炮赶紧前往哦!" },
-            new WorldSayConfig() { Time = 2100, OpenDay = new List<int> { -1 }, Conent = "新年活动:捣乱的年兽出现在宝藏之地,想要去的玩家带上鞭炮赶紧前往哦!" },
-            new WorldSayConfig() { Time = 2200, OpenDay = new List<int> { -1 }, Conent = "新年活动:捣乱的年兽出现在宝藏之地,想要去的玩家带上鞭炮赶紧前往哦!" },
-            new WorldSayConfig() { Time = 2200, OpenDay = new List<int> { 2, 4, 6 }, Conent = "家族入侵:家族出现了入侵怪兽,想要奖励的小勇士请带上你们的武器速速前往!" },
-            new WorldSayConfig() { Time = 2200, OpenDay = new List<int> { 1, 3, 5, 0 }, Conent = "竞技场活动已经开启,想要证明自己能力的小伙伴记得前往噢!" },
+            new WorldSayConfig() { Time = 2000, OpenDay = new List<int> { -1 }, Conent = "新年活动:捣乱的年兽出现在宝藏之地，想要去的玩家带上鞭炮赶紧前往哦!" },
+            new WorldSayConfig() { Time = 2100, OpenDay = new List<int> { -1 }, Conent = "新年活动:捣乱的年兽出现在宝藏之地，想要去的玩家带上鞭炮赶紧前往哦!" },
+            new WorldSayConfig() { Time = 2200, OpenDay = new List<int> { -1 }, Conent = "新年活动:捣乱的年兽出现在宝藏之地，想要去的玩家带上鞭炮赶紧前往哦!" },
+            new WorldSayConfig() { Time = 2200, OpenDay = new List<int> { 2, 4, 6 }, Conent = "家族入侵:家族出现了入侵怪兽，想要奖励的小勇士请带上你们的武器速速前往!" },
+            new WorldSayConfig() { Time = 2200, OpenDay = new List<int> { 1, 3, 5, 0 }, Conent = "竞技场活动已经开启，想要证明自己能力的小伙伴记得前往噢!" },
         };
 
         /// <summary>
@@ -1836,8 +1836,8 @@ namespace ET
         [StaticField]
         public static Dictionary<int, List<string>> TurtleSpeakList = new()
         {
-            { 1, new List<string>() { "不知道后面是不是有东西追我,我号好害怕,我要赶紧溜。", "加油,我一定是最后获得胜利的那只神龟", "冲冲冲,我不会让大家失望的!" } }, //开始跑了
-            { 2, new List<string>() { "我好累,妈妈说累了就可以歇一歇", "好饱啊,我要停下来歇一歇。", "唉呀,谁用石头丢了我一下,头好晕哦" } }
+            { 1, new List<string>() { "不知道后面是不是有东西追我，我号好害怕，我要赶紧溜。", "加油，我一定是最后获得胜利的那只神龟", "冲冲冲，我不会让大家失望的!" } }, //开始跑了
+            { 2, new List<string>() { "我好累，妈妈说累了就可以歇一歇", "好饱啊，我要停下来歇一歇。", "唉呀，谁用石头丢了我一下，头好晕哦" } }
         };
 
         /// <summary>

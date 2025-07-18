@@ -1,4 +1,4 @@
-﻿namespace ET.Server
+namespace ET.Server
 {
     
     [MessageHandler(SceneType.Map)]
@@ -8,7 +8,7 @@
         protected override async ETTask Run(Unit unit, C2M_IOSPayVerifyRequest request, M2C_IOSPayVerifyResponse response)
         {
             //发送支付数据做验证
-            Log.Warning($"IOS充值回调,收到支付请求消息:  {unit.Id}");
+            Log.Warning($"IOS充值回调，收到支付请求消息:  {unit.Id}");
 
             //携程锁
             using (await unit.Root().GetComponent<CoroutineLockComponent>().Wait(CoroutineLockType.Recharge, unit.Id))

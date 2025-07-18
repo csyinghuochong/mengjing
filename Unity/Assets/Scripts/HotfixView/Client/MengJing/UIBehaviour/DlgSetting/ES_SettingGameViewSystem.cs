@@ -163,7 +163,7 @@ namespace ET.Client
             DlgMain dlgMain = self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgMain>();
             if (!dlgMain.View.ES_MainSkill.uiTransform.gameObject.activeSelf)
             {
-                FlyTipComponent.Instance.ShowFlyTip("请移动至有技能框的区域,比如探险地区进行更改");
+                FlyTipComponent.Instance.ShowFlyTip("请移动至有技能框的区域，比如探险地区进行更改");
                 return;
             }
 

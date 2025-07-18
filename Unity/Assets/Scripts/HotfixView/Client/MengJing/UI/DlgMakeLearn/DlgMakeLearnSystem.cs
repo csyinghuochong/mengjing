@@ -99,7 +99,7 @@ namespace ET.Client
             {
                 int cost = GlobalValueConfigCategory.Instance.MakeResetCost;
                 PopupTipHelp.OpenPopupTip(self.Root(), "技能重置",
-                    "重置后自身学习的生活技能将全部遗忘,请谨慎选择!", () => { self.RequestMakeSelect(makeId).Coroutine(); }, null).Coroutine();
+                    "重置后自身学习的生活技能将全部遗忘，请谨慎选择!", () => { self.RequestMakeSelect(makeId).Coroutine(); }, null).Coroutine();
                 return;
             }
 

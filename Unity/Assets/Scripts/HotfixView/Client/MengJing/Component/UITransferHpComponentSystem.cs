@@ -174,7 +174,7 @@ namespace ET.Client
                 self.EnterRange = true;
                 if (UnitHelper.IsHaveBoss(mainhero.Scene(), vector3, 8f))
                 {
-                    PopupTipHelp.OpenPopupTip(self.Root(), "系统提示", "附近有领主出现,请问是否进入新地图?", () => { self.StartTimer(); }, null).Coroutine();
+                    PopupTipHelp.OpenPopupTip(self.Root(), "系统提示", "附近有领主出现，请问是否进入新地图?", () => { self.StartTimer(); }, null).Coroutine();
                 }
                 else
                 {

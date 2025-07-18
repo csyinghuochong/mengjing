@@ -111,7 +111,7 @@ namespace ET.Client
                     hour = 0;
                 }
 
-                self.View.E_JiaYuanUpHintText.text = zstring.Format("提示:经验产出{0}/小时,预计{1}小时后可升级家园", jiayuanCof.JiaYuanAddExp, hour);
+                self.View.E_JiaYuanUpHintText.text = zstring.Format("提示:经验产出{0}/小时，预计{1}小时后可升级家园", jiayuanCof.JiaYuanAddExp, hour);
 
                 self.View.E_ZiJinDuiHuanTextText.text = zstring.Format("兑换次数:10/{0}", numericComponent.GetAsInt(NumericType.JiaYuanExchangeZiJin));
                 self.View.E_ExpDuiHuanTextText.text = zstring.Format("兑换次数:10/{0}", numericComponent.GetAsInt(NumericType.JiaYuanExchangeExp));

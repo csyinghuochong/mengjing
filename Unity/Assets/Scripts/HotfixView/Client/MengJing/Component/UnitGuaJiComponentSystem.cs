@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace ET.Client
@@ -81,7 +81,7 @@ namespace ET.Client
             MapComponent mapComponent = self.Root().GetComponent<MapComponent>();
             if (mapComponent.SceneId == 101)
             {
-                FlyTipComponent.Instance.ShowFlyTip("主城禁止挂机喔,已为你自动移除挂机!");
+                FlyTipComponent.Instance.ShowFlyTip("主城禁止挂机喔，已为你自动移除挂机!");
                 self.Root().RemoveComponent<UnitGuaJiComponent>();
                 return false;
             }
@@ -90,7 +90,7 @@ namespace ET.Client
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
             if (unit.Root().GetComponent<UserInfoComponentC>().UserInfo.PiLao <= 0)
             {
-                FlyTipComponent.Instance.ShowFlyTip("体力已经消耗完毕,请确保体力充足喔!");
+                FlyTipComponent.Instance.ShowFlyTip("体力已经消耗完毕，请确保体力充足喔!");
                 self.Root().RemoveComponent<UnitGuaJiComponent>(); //移除体力组件
                 return false;
             }

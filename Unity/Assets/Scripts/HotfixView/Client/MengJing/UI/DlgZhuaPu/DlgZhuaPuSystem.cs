@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -257,14 +257,14 @@ namespace ET.Client
             M2C_ZhuaBuType1Response response = await JingLingNetHelper.ZhuaBuType1Request(self.Root(), self.MonsterUnitid, self.ItemId, jiacheng);
             if (response.Error == ErrorCode.ERR_Success && response.Message != "1")
             {
-                FlyTipComponent.Instance.ShowFlyTip("恭喜你,抓捕成功！");
+                FlyTipComponent.Instance.ShowFlyTip("恭喜你，抓捕成功！");
             }
 
             if (response.Error == ErrorCode.ERR_ZhuaBuFail)
             {
                 List<string> strList = new List<string>();
-                strList.Add("它趁你不注意,偷偷的溜走了!");
-                strList.Add("抓铺的动作太大,被他发现后马上的逃走了!");
+                strList.Add("它趁你不注意，偷偷的溜走了!");
+                strList.Add("抓铺的动作太大，被他发现后马上的逃走了!");
 
                 int randInt = RandomHelper.RandomNumber(0, strList.Count);
                 FlyTipComponent.Instance.ShowFlyTip(strList[randInt]);

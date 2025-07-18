@@ -188,7 +188,7 @@ namespace ET.Client
             //     //开区第一天
             //     if (self.Root().GetComponent<UserInfoComponentC>().UserInfo.Lv + 3 > self.WorldPlayerLv)
             //     {
-            //         FlyTipComponent.Instance.ShowFlyTip($"等级第一的玩家为:{self.WorldPlayerLv}级,开服第一天低于第一等级玩家3级内才可使用!");
+            //         FlyTipComponent.Instance.ShowFlyTip($"等级第一的玩家为:{self.WorldPlayerLv}级，开服第一天低于第一等级玩家3级内才可使用!");
             //         return;
             //     }
             // }

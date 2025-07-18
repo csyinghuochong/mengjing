@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 namespace ET.Client
 {
@@ -194,7 +194,7 @@ namespace ET.Client
 
             if (response.Mail == 1)
             {
-                PopupTipHelp.OpenPopupTip(self.Root(), "副本奖励", "由于您背包已满通关宝箱的奖励已经自动发放进您的邮箱中,请注意查收", null, null).Coroutine();
+                PopupTipHelp.OpenPopupTip(self.Root(), "副本奖励", "由于您背包已满通关宝箱的奖励已经自动发放进您的邮箱中，请注意查收", null, null).Coroutine();
             }
         }
 

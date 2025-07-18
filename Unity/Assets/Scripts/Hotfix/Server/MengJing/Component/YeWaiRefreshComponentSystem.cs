@@ -524,7 +524,7 @@ namespace ET.Server
                 monsterConfig.Id == 72009021)
             {
                 string noticeContent =
-                        $"神器活动!<color=#B6FF00>{monsterConfig.MonsterName}</color>携带神器出现在地图<color=#FFA313>{"宝藏之地"}</color>,想要挑战的玩家请在主城宝藏之地处进入!";
+                        $"神器活动!<color=#B6FF00>{monsterConfig.MonsterName}</color>携带神器出现在地图<color=#FFA313>{"宝藏之地"}</color>，想要挑战的玩家请在主城宝藏之地处进入!";
                 BroadCastHelper.SendBroadMessage(self.Root(), NoticeType.Notice, noticeContent);
             }
         }

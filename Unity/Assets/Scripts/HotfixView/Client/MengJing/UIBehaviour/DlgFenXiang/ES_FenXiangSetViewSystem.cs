@@ -134,7 +134,7 @@ namespace ET.Client
             // if (shareType == 4 || shareType == 5)
             // {
             //     title = "快来和我一起玩危境吧!";
-            //     text = "一把木剑，一件布衣,点击这个链接开始你的探险吧!";
+            //     text = "一把木剑，一件布衣，点击这个链接开始你的探险吧!";
             // }
 
             // FenXiangContent fenXiangContent = new FenXiangContent();

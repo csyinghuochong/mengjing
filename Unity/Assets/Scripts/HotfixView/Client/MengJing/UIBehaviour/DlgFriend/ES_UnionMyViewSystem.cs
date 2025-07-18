@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -167,7 +167,7 @@ namespace ET.Client
             UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
             if (userInfoComponent.UserInfo.UserId == self.UnionInfo.LeaderId && self.UnionInfo.UnionPlayerList.Count > 1)
             {
-                FlyTipComponent.Instance.ShowFlyTip("会长不能离开家族, 请先转移会长！");
+                FlyTipComponent.Instance.ShowFlyTip("会长不能离开家族， 请先转移会长！");
                 return;
             }
 

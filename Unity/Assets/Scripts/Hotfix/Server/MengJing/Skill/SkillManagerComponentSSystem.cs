@@ -619,7 +619,7 @@ namespace ET.Server
               {
                   if (unit.Type == UnitType.Player)
                   {
-                      m2C_Skill.Message = "双重施法,触发法术连击!";
+                      m2C_Skill.Message = "双重施法，触发法术连击!";
                   }
                   self.LastLianJiTime = TimeHelper.ServerFrameTime();
                   self.OnContinueSkill(skillcmd).Coroutine();

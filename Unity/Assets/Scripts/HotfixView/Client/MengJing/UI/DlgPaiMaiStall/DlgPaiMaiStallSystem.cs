@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using System;
 using UnityEngine;
@@ -146,7 +146,7 @@ namespace ET.Client
 		//收回摊位
 		public static void OnButtonShouTan(this DlgPaiMaiStall self)
 		{
-			PopupTipHelp.OpenPopupTip(self.Root(), "摊位提示", "是否收起自己的摊位?\n 支持下线,摊位可以离线显示6小时!",
+			PopupTipHelp.OpenPopupTip(self.Root(), "摊位提示", "是否收起自己的摊位?\n 支持下线，摊位可以离线显示6小时!",
 				() =>
 				{
 					PaiMaiNetHelper.RequestStallOperation(self.Root(), 0, string.Empty).Coroutine();

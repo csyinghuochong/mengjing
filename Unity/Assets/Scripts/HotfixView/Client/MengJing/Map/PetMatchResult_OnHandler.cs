@@ -7,7 +7,7 @@ namespace ET.Client
         {
             scene.GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_Country);
 
-            string tipStr = "竞技场匹配完成,请尽快进入!";
+            string tipStr = "竞技场匹配完成，请尽快进入!";
             bool removeStatus = false;
 
             PopupTipHelp.OpenPopupTip(scene, "", LanguageComponent.Instance.LoadLocalization(tipStr),
