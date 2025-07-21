@@ -1,3 +1,5 @@
+using System;
+
 namespace ET.Server
 {
     
@@ -6,8 +8,9 @@ namespace ET.Server
     {
         protected override async ETTask Run(Unit unit, C2M_HongBaoOpenRequest request, M2C_HongBaoOpenResponse response)
         {
-
-            if (FuntionConfigCategory.Instance.Get(1023).IfOpen !="0")
+            int functionId = 1023;
+            
+            if (FuntionConfigCategory.Instance.Get(functionId).IfOpen !="0")
             {
                 response.Error = ErrorCode.ERR_ModifyData;
 
@@ -32,6 +35,12 @@ namespace ET.Server
             if (unit.GetComponent<NumericComponentS>().GetAsInt(NumericType.HongBao) != 0)
             {
                 response.Error = ErrorCode.ERR_AlreadyReceived;
+                return;
+            }
+            
+            if (!FunctionHelp.IsFunctionTimeOpen(functionId))
+            {
+                response.Error = ErrorCode.ERR_ModifyData;
                 return;
             }
 
