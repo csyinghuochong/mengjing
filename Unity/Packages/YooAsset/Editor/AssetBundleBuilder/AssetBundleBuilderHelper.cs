@@ -13,12 +13,12 @@ namespace YooAsset.Editor
 		/// </summary>
 		public static string GetDefaultBuildOutputRoot()
 		{
-			string projectPath = EditorTools.GetProjectPath();
 			if (!string.IsNullOrEmpty(AssetBundleBuilderSettingData.Setting.BuildOutput))
 			{
 				return AssetBundleBuilderSettingData.Setting.BuildOutput;
 			}
 			
+			string projectPath = EditorTools.GetProjectPath();
 			return $"{projectPath}/Bundles";
 		}
 
