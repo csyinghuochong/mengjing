@@ -6,6 +6,8 @@ namespace YooAsset.Editor
 	[CreateAssetMenu(fileName = "AssetBundleBuilderSetting", menuName = "YooAsset/Create AssetBundle Builder Settings")]
 	public class AssetBundleBuilderSetting : ScriptableObject
 	{
+		public string BuildOutput;
+		
 		/// <summary>
 		/// 构建管线
 		/// </summary>
