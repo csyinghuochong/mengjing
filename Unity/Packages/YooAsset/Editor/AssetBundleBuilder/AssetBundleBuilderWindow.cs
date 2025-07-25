@@ -66,7 +66,7 @@ namespace YooAsset.Editor
 				string defaultOutputRoot = AssetBundleBuilderHelper.GetDefaultBuildOutputRoot();
 				_buildOutputField = root.Q<TextField>("BuildOutput");
 				_buildOutputField.SetValueWithoutNotify(defaultOutputRoot);
-				_buildOutputField.SetEnabled(false);
+				_buildOutputField.SetEnabled(true);
 
 				// 构建管线
 				_buildPipelineField = root.Q<EnumField>("BuildPipeline");
