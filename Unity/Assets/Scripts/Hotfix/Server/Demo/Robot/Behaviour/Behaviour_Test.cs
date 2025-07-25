@@ -127,7 +127,7 @@ namespace ET
                 Console.WriteLine("无情删除所有好友");
                 await RobotHelper.FriendDelete(root);
 
-                Console.WriteLine("申请加入最弱的工会");
+                Console.WriteLine("申请加入最弱的公会");
                 await RobotHelper.UnionApply(root);
 
                 Console.WriteLine("使用一个精灵");
