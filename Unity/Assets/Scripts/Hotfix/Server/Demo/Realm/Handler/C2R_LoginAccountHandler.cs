@@ -40,6 +40,9 @@ namespace ET.Server
                 session.Disconnect().Coroutine();
                 return;
             }
+            
+            request.Account = request.Account.Trim().ToLower();
+            request.Password = request.Password.Trim().ToLower();
 
             session.RemoveComponent<SessionAcceptTimeoutComponent>();
 
