@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using Unity.Mathematics;
 
 
 namespace ET.Server
@@ -64,9 +65,23 @@ namespace ET.Server
             
             return proList;
         }
-        
+
+        public static void CheckData(this ChengJiuComponentS self)
+        {
+            for (int i = self.ChengJiuProgessList.Count - 1; i >= 0; i--)
+            {
+                ChengJiuInfo chengJiuInfo = self.ChengJiuProgessList[i];
+
+                if (!ChengJiuConfigCategory.Instance.Contain(chengJiuInfo.ChengJiuID))
+                {
+                    self.ChengJiuProgessList.RemoveAt(i);
+                }
+            }
+        }
+
         public static void OnLogin(this ChengJiuComponentS self, int lv)
         {
+            self.CheckData();
             self.TriggerEvent(ChengJiuTargetEnum.PlayerLevel_205, 0, lv, false);
 
             Dictionary<int, JingLingConfig> alljingling = JingLingConfigCategory.Instance.GetAll();

@@ -139,6 +139,8 @@ namespace ET.Server
  
                         player.ChatInfoInstanceId = await EnterWorldChatServer(unit); //登录聊天服
                         // 等到一帧的最后面再传送，先让G2C_EnterMap返回，否则传送消息可能比G2C_EnterMap还早
+
+                        unit.GetComponent<ChengJiuComponentS>().CheckData();
                         Function_Fight.UnitUpdateProperty_Base(unit,false, false);
                         unit.OnLogin(session.RemoteAddress.ToString(), "");
 
