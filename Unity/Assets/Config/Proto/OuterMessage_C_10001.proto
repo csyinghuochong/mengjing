@@ -797,7 +797,7 @@ message UnionInfo
 	repeated int32 UnionKeJiList = 14;
 	int32 KeJiActitePos = 15;			//当前升级的科技， 当前只能升级一个
 	int64 KeJiActiteTime = 16;			//当前升级时间
-	int64 UnionGold = 17;               //家族金币
+	int64 UnionGold = 17;               //公会金币
 	repeated string ActiveRecord = 18;	//记录 $"{playerName}_{getWay}_{dataType}_{dataValue}
 	int64 UnionWishTime = 19;
 }
@@ -806,7 +806,7 @@ message UnionPlayerInfo
 {
 	string PlayerName = 1;
 	int32 PlayerLevel = 2;
-	int32 Position = 3;    ///1族长 2副族长  ///3长老  ///族长认命副族长 副族长可以认命长老 长老和副族长也可以包名家族战
+	int32 Position = 3;    ///1族长 2副族长  ///3长老  ///族长认命副族长 副族长可以认命长老 长老和副族长也可以包名公会战
 	int64 UserID = 4;
 	int32 Combat = 5;
 	int32 Occ = 6;
@@ -3807,7 +3807,7 @@ message M2C_BloodstoneQiangHuaResponse // ILocationResponse
 	int32 Level = 1;
 }
 
-//家族争霸赛捐献
+//公会争霸赛捐献
 //ResponseType M2C_DonationResponse
 message C2M_DonationRequest // ILocationRequest
 {
@@ -3892,7 +3892,7 @@ message M2C_UnionWishSendResponse // ILocationResponse
 	string Message = 92;
 }
 
-//邀请玩家加入家族
+//邀请玩家加入公会
 message C2M_UnionInviteRequest // ILocationMessage
 {
 	int32 RpcId = 90;
@@ -3949,7 +3949,7 @@ message M2C_UnionLeaveResponse // ILocationResponse
 	string Message = 92;
 }
 
-//家族神秘商店道具
+//公会神秘商店道具
 //ResponseType M2C_UnionMysteryBuyResponse
 message C2M_UnionMysteryBuyRequest // ILocationRequest
 {
@@ -3982,7 +3982,7 @@ message M2C_UnionTransferResponse // ILocationResponse
 	string Message = 92;
 }
 
-//家族修炼
+//公会修炼
 //ResponseType M2C_UnionXiuLianResponse
 message C2M_UnionXiuLianRequest // ILocationRequest
 {
@@ -4144,7 +4144,7 @@ message U2C_UnionApplyReplyResponse // IUnionActorResponse
 	string Message = 92;
 }
 
-//家族竞选
+//公会竞选
 //ResponseType U2C_UnionJingXuanResponse
 message C2U_UnionJingXuanRequest // IUnionActorRequest
 {
@@ -4276,13 +4276,13 @@ message U2C_UnionMyInfoResponse // IUnionActorResponse
 	repeated int64 OnLinePlayer = 2;
 }
 
-//家族神秘商店道具
+//公会神秘商店道具
 //ResponseType U2C_UnionMysteryListResponse
 message C2U_UnionMysteryListRequest // IUnionActorRequest
 {
 	int32 RpcId = 90;
 	int64 ActorId = 93;
-	int64 UnionId = 1;				//家族ID
+	int64 UnionId = 1;				//公会ID
 }
 
 message U2C_UnionMysteryListResponse // IUnionActorResponse

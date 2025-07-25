@@ -832,7 +832,7 @@ message Chat2M_UpdateUnion //IResponse
 	string Message = 92;
 }
 
-//家族操作  1增加经验  2获取等级
+//公会操作  1增加经验  2获取等级
 //ResponseType U2M_UnionOperationResponse
 message M2U_UnionOperationRequest // IRequest
 {
@@ -1014,7 +1014,7 @@ message Union2G_EnterUnion //IResponse
 	int64 LeaderId = 4;
 }
 
-//进入家族地图
+//进入公会地图
 //ResponseType F2M_UnionEnterResponse
 message M2F_UnionEnterRequest // IRequest
 {
@@ -1023,7 +1023,7 @@ message M2F_UnionEnterRequest // IRequest
 	int64 UnionId = 1;
 	int64 UnitId = 2;
 	int32 SceneId = 3;
-	int32 OperateType = 4;   ///0默认 1家族争霸赛
+	int32 OperateType = 4;   ///0默认 1公会争霸赛
 }
 
 message F2M_UnionEnterResponse // IResponse
