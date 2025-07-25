@@ -82,7 +82,7 @@ namespace ET.Client
             using (zstring.Block())
             {
                 self.E_LvTextText.text = zstring.Format("科技等级：{0}/{1}", nowUnionKeJiConfig.QiangHuaLv.ToString(), UnionKeJiConfigCategory.Instance.UnionQiangHuaList[position].Count);
-                // self.E_NeedUnionLvTextText.text = zstring.Format("需要家族等级达到{0}级", unionKeJiConfig.NeedUnionLv);
+                // self.E_NeedUnionLvTextText.text = zstring.Format("需要公会等级达到{0}级", unionKeJiConfig.NeedUnionLv);
                 
                 self.E_NowAttributeTextText.text = ItemViewHelp.GetAttributeDesc(nowUnionKeJiConfig.EquipPropreAdd);
                 if (nowUnionKeJiConfig.NextID != 0)
@@ -232,7 +232,7 @@ namespace ET.Client
 
             if (self.UnionMyInfo.UnionGold < unionKeJiConfig.CostUnionGold)
             {
-                FlyTipComponent.Instance.ShowFlyTip("家族金币不足！");
+                FlyTipComponent.Instance.ShowFlyTip("公会金币不足！");
                 return;
             }
 

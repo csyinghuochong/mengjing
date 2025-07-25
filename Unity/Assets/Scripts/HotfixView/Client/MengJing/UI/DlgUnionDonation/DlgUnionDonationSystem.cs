@@ -27,7 +27,7 @@
                     unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.UnionDiamondDonationNumber));
             }
 
-            //客户端获取家族等级
+            //客户端获取公会等级
             U2C_UnionMyInfoResponse respose = await UnionNetHelper.UnionMyInfo(self.Root());
             if (respose.Error != ErrorCode.ERR_Success)
             {

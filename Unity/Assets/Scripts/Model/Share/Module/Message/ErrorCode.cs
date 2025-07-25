@@ -238,13 +238,13 @@ namespace ET
         public const int ERR_PetMelee_MainPetNumMax = 300919;
         public const int ERR_PetMelee_PositionError = 300920;
 
-        public const int ERR_Union_Same_Name = 301001;                              //同名的家族
+        public const int ERR_Union_Same_Name = 301001;                              //同名的公会
         public const int ERR_MysteryItem_Max = 301002;                              //改道具每日购买次数已达上限
-        public const int ERR_Union_Not_Exist = 301003;                              //家族不存在
+        public const int ERR_Union_Not_Exist = 301003;                              //公会不存在
         public const int ERR_UnionXiuLianMax = 301004;
-        public const int ERR_Union_PeopleMax = 301005;                              //家族人数上限
+        public const int ERR_Union_PeopleMax = 301005;                              //公会人数上限
         public const int ERR_Union_NotLeader = 301006;
-        public const int ERR_Union_NotRemove = 301007;                              //会长不能解算家族
+        public const int ERR_Union_NotRemove = 301007;                              //会长不能解算公会
         public const int ERR_Union_NoPlayer = 301008;
         public const int ERR_Union_NoLimits = 301009;
         public const int ERR_PlayerHaveUnion = 301010;

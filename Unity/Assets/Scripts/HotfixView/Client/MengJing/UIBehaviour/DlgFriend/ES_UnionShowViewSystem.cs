@@ -127,7 +127,7 @@ namespace ET.Client
                 string tip = TimeHelper.ShowLeftTime(TimeHelper.Hour * 8 - (TimeHelper.ServerNow() - leaveTime));
                 using (zstring.Block())
                 {
-                    FlyTipComponent.Instance.ShowFlyTip(zstring.Format("{0} 后才能加入家族！", tip));
+                    FlyTipComponent.Instance.ShowFlyTip(zstring.Format("{0} 后才能加入公会！", tip));
                 }
 
                 return;
@@ -213,13 +213,13 @@ namespace ET.Client
             bool mask = MaskWordHelper.Instance.IsContainSensitiveWords(unionName);
             if (mask || unionName.Contains("*"))
             {
-                FlyTipComponent.Instance.ShowFlyTip("家族名字不能包含特殊字符！");
+                FlyTipComponent.Instance.ShowFlyTip("公会名字不能包含特殊字符！");
                 return;
             }
 
             if (unionName.Length > 7)
             {
-                FlyTipComponent.Instance.ShowFlyTip("家族名字最多七个字！");
+                FlyTipComponent.Instance.ShowFlyTip("公会名字最多七个字！");
                 return;
             }
 

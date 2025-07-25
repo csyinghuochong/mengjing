@@ -311,7 +311,7 @@ namespace ET.Client
             using (zstring.Block())
             {
                 string unionname = string.Empty;
-                //判断自身是否有家族进行显示
+                //判断自身是否有公会进行显示
                 if (firstUnionName == 1 && infoComponent.UnionName.Length > 0)
                 {
                     string text1 = numericComponent.GetAsInt(NumericType.UnionLeader) == 1 ? "会长" : "成员";

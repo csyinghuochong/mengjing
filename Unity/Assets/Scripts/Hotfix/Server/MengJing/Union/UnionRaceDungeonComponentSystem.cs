@@ -121,7 +121,7 @@ namespace ET.Server
             if (minite == 0)
             {
                 Log.Warning(unionplayerNumber);
-                Log.Warning($"胜利家族:  {self.Zone()} {winunionid}");
+                Log.Warning($"胜利公会:  {self.Zone()} {winunionid}");
 
                 self.OnUnionRaceOver(winunionid).Coroutine();
             }
@@ -130,7 +130,7 @@ namespace ET.Server
             if (dBUnionInfo != null)
             {
                 BroadCastHelper.SendBroadMessage(self.Root(), NoticeType.Notice,
-                    $"恭喜 <color=#{CommonHelp.QualityReturnColor(2)}>{dBUnionInfo.UnionInfo.UnionName}</color>家族占领了家族争霸赛地图!");
+                    $"恭喜 <color=#{CommonHelp.QualityReturnColor(2)}>{dBUnionInfo.UnionInfo.UnionName}</color>公会占领了公会争霸赛地图!");
             }
         }
 
@@ -140,12 +140,12 @@ namespace ET.Server
         {
             int minite = (int)((FunctionHelp.GetCloseTime(1044) - FunctionHelp.GetOpenTime(1044)) / 60);
             /////进程9
-            Log.Console($"家族争霸赛开始！！:{self.Zone()}  {minite}");
-            Log.Warning($"家族争霸赛开始！！:{self.Zone()}  {minite}");
+            Log.Console($"公会争霸赛开始！！:{self.Zone()}  {minite}");
+            Log.Warning($"公会争霸赛开始！！:{self.Zone()}  {minite}");
             for (int i = minite - 1; i >= 0; i--)
             {
                 await self.Root().GetComponent<TimerComponent>().WaitAsync(60 * 1000);
-                Log.Console($"家族争霸赛检测！！: {self.Zone()}  {i}");
+                Log.Console($"公会争霸赛检测！！: {self.Zone()}  {i}");
 
                 self.CheckWinUnion(i).Coroutine();
             }
@@ -156,8 +156,8 @@ namespace ET.Server
         {
             long serverTime = TimeHelper.ServerNow();
 
-            Log.Console($"家族争霸赛结束！！:{self.Zone()}");
-            Log.Warning($"家族争霸赛结束！！: {self.Zone()}");
+            Log.Console($"公会争霸赛结束！！:{self.Zone()}");
+            Log.Warning($"公会争霸赛结束！！: {self.Zone()}");
             int allwinunits = 0;
             int allfailunits = 0;
             foreach ((long unionid, List<long> unitids) in self.UnionRaceUnits)
@@ -183,7 +183,7 @@ namespace ET.Server
             int winJingJin = (int)(allJiangjin * 0.6f / allwinunits);
             int failJiangJin = (int)(allJiangjin * 0.4f / allfailunits);
 
-            Log.Console("家族战发放奖励");
+            Log.Console("公会战发放奖励");
             Log.Warning(
                 $"allwinunits: {allwinunits}   allfailunits: {allfailunits}  winJingJin: {winJingJin} failJiangJin:{failJiangJin} winunionid: {winunionid} allJiangjin:{allJiangjin}");
 
@@ -194,12 +194,12 @@ namespace ET.Server
                 {
                     MailInfo mailInfo = MailInfo.Create();
                     mailInfo.Status = 0;
-                    mailInfo.Title = "家族争霸赛奖励";
+                    mailInfo.Title = "公会争霸赛奖励";
                     mailInfo.MailId = IdGenerater.Instance.GenerateId();
 
                     if (unionid == winunionid)
                     {
-                        mailInfo.Context = "发送家族争霸赛胜利奖励";
+                        mailInfo.Context = "发送公会争霸赛胜利奖励";
                         Log.Warning($"发送奖励胜利！！: {self.Zone()} {unitids[i]}");
                         ItemInfoProto BagInfo = ItemInfoProto.Create();
                         BagInfo.ItemID = 1;
@@ -209,7 +209,7 @@ namespace ET.Server
                     }
                     else
                     {
-                        mailInfo.Context = "发送家族争霸赛失败奖励";
+                        mailInfo.Context = "发送公会争霸赛失败奖励";
                         Log.Warning($"发送奖励失败！！: {self.Zone()} {unitids[i]}");
                         ItemInfoProto BagInfo = ItemInfoProto.Create();
                         BagInfo.ItemID = 1;
@@ -227,7 +227,7 @@ namespace ET.Server
                     //         .Call(mailServerId, M2E_EMailSendRequest);
                     // if (g_EMailSendResponse.Error != ErrorCode.ERR_Success)
                     // {
-                    //     Log.Warning($"家族战发送奖励失败: {unitids[i]}");
+                    //     Log.Warning($"公会战发送奖励失败: {unitids[i]}");
                     // }
                 }
             }
@@ -242,7 +242,7 @@ namespace ET.Server
                 MapMessageHelper.SendToClient(allunits[i], m2C_Battle);
             }
 
-            //通知家族争霸赛地图开始踢人
+            //通知公会争霸赛地图开始踢人
             await self.Root().GetComponent<TimerComponent>().WaitAsync(TimeHelper.Minute);
             C2M_TransferMap actor_Transfer = C2M_TransferMap.Create();
             actor_Transfer.SceneType = MapTypeEnum.MainCityScene;

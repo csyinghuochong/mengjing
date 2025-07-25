@@ -58,8 +58,8 @@ namespace ET
         public const int MiJing = 14;        //野外地图 [秘境]
         public const int Arena = 15;        //角斗场
         public const int JiaYuan = 16;       //家园
-        public const int Union = 17;        //家族
-        public const int UnionRace = 18;    //家族争霸赛
+        public const int Union = 17;        // 公会
+        public const int UnionRace = 18;    // 公会争霸赛
         public const int Solo = 19;         //竞技场单人
         public const int SealTower = 20;  // 封印之塔
         public const int Happy = 21;        //喜从天降

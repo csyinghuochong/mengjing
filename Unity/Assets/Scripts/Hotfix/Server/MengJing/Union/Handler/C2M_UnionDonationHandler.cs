@@ -6,7 +6,7 @@
     {
         protected override async ETTask Run(Unit unit, C2M_UnionDonationRequest request, M2C_UnionDonationResponse response)
         {
-            //获取家族等级
+            //获取公会等级
             long unionid = unit.GetComponent<NumericComponentS>().GetAsLong(NumericType.UnionId_0);
             if (unionid == 0)
             {

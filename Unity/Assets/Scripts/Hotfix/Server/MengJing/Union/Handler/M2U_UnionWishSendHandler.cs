@@ -33,8 +33,8 @@ namespace ET.Server
                 UnionPlayerInfo unionPlayerInfo = dBUnionInfo.UnionInfo.UnionPlayerList[i];
 
                 MailInfo mailInfo = MailInfo.Create();
-                mailInfo.Title = "家族祝福";
-                mailInfo.Context = "恭喜您!您所在得家族等级获得提升，这是家族升级的奖励!";
+                mailInfo.Title = "公会祝福";
+                mailInfo.Context = "恭喜您!您所在得公会等级获得提升，这是公会升级的奖励!";
                 
                 long serverTime = TimeHelper.ServerNow();
                 UnionConfig unionCof = UnionConfigCategory.Instance.Get(dBUnionInfo.UnionInfo.Level);

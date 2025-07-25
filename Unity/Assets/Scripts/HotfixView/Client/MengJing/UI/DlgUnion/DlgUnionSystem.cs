@@ -36,7 +36,7 @@ namespace ET.Client
 			long unionId = unit.GetComponent<NumericComponentC>().GetAsLong(NumericType.UnionId_0);
 			if (unionId == 0)
 			{
-				FlyTipComponent.Instance.ShowFlyTip("请先创建或者加入一个家族");
+				FlyTipComponent.Instance.ShowFlyTip("请先创建或者加入一个公会");
 			}
 			
 			return unionId > 0;

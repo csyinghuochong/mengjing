@@ -12,7 +12,7 @@ namespace ET.Server
     {
 
         /// <summary>
-        /// 家族boss击杀
+        /// 公会boss击杀
         /// </summary>
         /// <param name="self"></param>
         /// <param name="scene"></param>
@@ -31,7 +31,7 @@ namespace ET.Server
             {
                 MailInfo mailInfo = MailInfo.Create();
                 mailInfo.Status = 0;
-                mailInfo.Title = "家族入侵怪物奖励";
+                mailInfo.Title = "公会入侵怪物奖励";
                 mailInfo.MailId = IdGenerater.Instance.GenerateId();
 
                 ItemInfoProto BagInfo = ItemInfoProto.Create();

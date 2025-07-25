@@ -167,11 +167,11 @@ namespace ET.Client
             UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
             if (userInfoComponent.UserInfo.UserId == self.UnionInfo.LeaderId && self.UnionInfo.UnionPlayerList.Count > 1)
             {
-                FlyTipComponent.Instance.ShowFlyTip("会长不能离开家族， 请先转移会长！");
+                FlyTipComponent.Instance.ShowFlyTip("会长不能离开公会， 请先转移会长！");
                 return;
             }
 
-            PopupTipHelp.OpenPopupTip(self.Root(), "离开家族", "离开家族24小时内无法加入新家族", () => { self.RequestLevelUnion().Coroutine(); }, null)
+            PopupTipHelp.OpenPopupTip(self.Root(), "离开公会", "离开公会24小时内无法加入新公会", () => { self.RequestLevelUnion().Coroutine(); }, null)
                     .Coroutine();
         }
 
@@ -381,7 +381,7 @@ namespace ET.Client
                 return;
             }
             
-            PopupTipHelp.OpenPopupTip(self.Root(), "家族升级", $"是否确认花费{unionConfig.UnionGoldCost}家族资金升级？", () => { self.RequestUnionUpgrade().Coroutine(); }, null)
+            PopupTipHelp.OpenPopupTip(self.Root(), "公会升级", $"是否确认花费{unionConfig.UnionGoldCost}公会资金升级？", () => { self.RequestUnionUpgrade().Coroutine(); }, null)
                 .Coroutine();
         }
     }

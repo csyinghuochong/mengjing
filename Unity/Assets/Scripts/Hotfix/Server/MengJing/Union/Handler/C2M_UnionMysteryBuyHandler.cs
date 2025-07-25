@@ -54,7 +54,7 @@
                     return;
                 }
 
-                Log.Warning($"家族神秘商人购买道具: {unit.Zone()} {unit.Id} {mysteryId}");
+                Log.Warning($"公会神秘商人购买道具: {unit.Zone()} {unit.Id} {mysteryId}");
                 unit.GetComponent<UserInfoComponentS>().OnMysteryBuy(mysteryId);
                 unit.GetComponent<BagComponentS>().OnCostItemData($"{mysteryConfig.SellType};{mysteryConfig.SellValue}");
                 unit.GetComponent<BagComponentS>().OnAddItemData($"{mysteryConfig.SellItemID};{1}",

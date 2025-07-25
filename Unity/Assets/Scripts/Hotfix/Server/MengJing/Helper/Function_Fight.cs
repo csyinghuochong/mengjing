@@ -2061,7 +2061,7 @@ namespace ET.Server
                  AddUpdateProDicList(pettujianProList[i].HideID, pettujianProList[i].HideValue, UpdateProDicList);
              }
 
-             //家族修炼属性
+             //公会修炼属性
              int xiuLian_0 = numericComponent.GetAsInt(NumericType.UnionXiuLian_0);
              int xiuLian_1 = numericComponent.GetAsInt(NumericType.UnionXiuLian_1);
              int xiuLian_2 = numericComponent.GetAsInt(NumericType.UnionXiuLian_2);
@@ -2109,7 +2109,7 @@ namespace ET.Server
                  }
              }
              
-             //家族属性
+             //公会属性
              List<int> unionAttributes = new List<int>() {  NumericType.UnionAttribute_1, NumericType.UnionAttribute_2 };
              for ( int unionattri = 0;  unionattri < unionAttributes.Count; unionattri++ )
              {

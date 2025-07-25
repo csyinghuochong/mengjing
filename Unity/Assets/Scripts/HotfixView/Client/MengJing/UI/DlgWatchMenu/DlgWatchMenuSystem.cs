@@ -84,13 +84,13 @@ namespace ET.Client
 
             Unit watchUnit = unit.GetParent<UnitComponent>().Get(self.UserId);
             string playName = watchUnit.GetComponent<UnitInfoComponent>().MasterName;
-            PopupTipHelp.OpenPopupTip(self.Root(), "邀请加入", $"邀请玩家{playName}加入{userInfo.UnionName}家族?",
+            PopupTipHelp.OpenPopupTip(self.Root(), "邀请加入", $"邀请玩家{playName}加入{userInfo.UnionName}公会?",
                 () => { UnionNetHelper.UnionInviteRequest(self.Root(), self.UserId); }, null).Coroutine();
         }
 
         public static void OnButton_KickUnion(this DlgWatchMenu self)
         {
-            PopupTipHelp.OpenPopupTip(self.Root(), "踢出家族", "确定将该玩家踢出家族?", () => { self.RequestKickUnion().Coroutine(); }, null).Coroutine();
+            PopupTipHelp.OpenPopupTip(self.Root(), "踢出公会", "确定将该玩家踢出公会?", () => { self.RequestKickUnion().Coroutine(); }, null).Coroutine();
         }
 
         public static async ETTask OnButton_JinYan(this DlgWatchMenu self)
@@ -237,7 +237,7 @@ namespace ET.Client
         }
 
         /// <summary>
-        /// 家族菜单
+        /// 公会菜单
         /// </summary>
         /// <param name="self"></param>
         /// <param name="menuList"></param>

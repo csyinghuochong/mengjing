@@ -26,7 +26,7 @@
         public const int Born_Z = 3021;
         public const int TowerId = 3022;
         public const int MasterId = 3023;                                          //主人ID
-        public const int UnionLeader = 3025;                                        //家族会长
+        public const int UnionLeader = 3025;                                        //公会会长
         public const int LastLoginTime = 3026;
         public const int Ling_DiLv = 3027;
         public const int Ling_DiExp = 3028;
@@ -101,12 +101,12 @@
         public const int AttackMode = 3102;
         public const int RaceDonationRankID = 3103;                                 //捐献排行
         public const int RaceDonationNumber = 3104;
-        public const int UnionDonationNumber = 3105;                                //家族捐献
+        public const int UnionDonationNumber = 3105;                                //公会捐献
         public const int UnionXiuLian_0 = 3106;
         public const int UnionXiuLian_1 = 3107;
         public const int UnionXiuLian_2 = 3108;
         public const int UnionXiuLian_3 = 3109;
-        public const int UnionTaskId = 3110;                                        //家族任务
+        public const int UnionTaskId = 3110;                                        //公会任务
         public const int UnionTaskNumber = 3111;
         public const int UnionRaceWin = 3112;
         public const int HongBaoLastTime = 3113;
@@ -156,7 +156,7 @@
         public const int UnionPetXiuLian_1 = 3157;                              //UnionQiangHuaConfig需要重新配置
         public const int UnionPetXiuLian_2 = 3158;
         public const int UnionPetXiuLian_3 = 3159;
-        public const int UnionDiamondDonationNumber = 3160;                     //家族钻石捐献
+        public const int UnionDiamondDonationNumber = 3160;                     //公会钻石捐献
         public const int RingTaskNumber = 3161;
         public const int RingTaskId = 3162;
         public const int SeasonTowerId = 3163;
@@ -175,7 +175,7 @@
         public const int MakeShuLianDu_2 = 3176;                                    //第二套生活技能熟练度
         public const int DrawIndex2 = 3177;                                         // 减1
         public const int OccCombatRankID = 3178;
-        public const int FirstUnionName = 3179;                                         //优先家族称号
+        public const int FirstUnionName = 3179;                                         //优先公会称号
         public const int SkillMakePlan2 = 3180;                                         //
         public const int ItemXiLianNumber = 3181;                                   //道具洗练次数次数
         public const int SystemTask = 3182;                                         //系统任务

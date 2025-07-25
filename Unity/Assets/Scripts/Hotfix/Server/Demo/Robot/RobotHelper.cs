@@ -940,7 +940,7 @@ namespace ET.Client
             if (TimeHelper.ServerNow() - leaveTime < TimeHelper.Hour * 8)
             {
                 string tip = TimeHelper.ShowLeftTime(TimeHelper.Hour * 8 - (TimeHelper.ServerNow() - leaveTime));
-                // $"{tip} 后才能加入家族！"
+                // $"{tip} 后才能加入公会！"
                 return;
             }
 
@@ -1865,7 +1865,7 @@ namespace ET.Client
                         }
                     }
 
-                    if (npcid == 20000102) //家族任务
+                    if (npcid == 20000102) //公会任务
                     {
                         int unionTaskId = numericComponent.GetAsInt(NumericType.UnionTaskId);
                         if (unionTaskId > 0 && taskComponent.GetTaskById(unionTaskId) == null)
@@ -1901,7 +1901,7 @@ namespace ET.Client
                                      taskConfig.TargetType == (int)TaskTargetType.GivePet_25) &&
                                  taskConfig.TaskType == TaskTypeEnum.Ring && npcid == 20000102)
                         {
-                            // 家族给予任务可以CompleteNpcID==0，找家族任务NPC提交
+                            // 公会给予任务可以CompleteNpcID==0，找公会任务NPC提交
                             taskids.Add(taskPros[i].taskID);
                         }
                     }

@@ -4,7 +4,7 @@ namespace ET.Server
 {
     
     /// <summary>
-    /// 踢出家族， 在家族地图直接退出
+    /// 踢出公会， 在公会地图直接退出
     /// </summary>
     [MessageHandler(SceneType.Map)]
     public class U2M_UnionKickOutHandler : MessageLocationHandler<Unit, U2M_UnionKickOutRequest, M2U_UnionKickOutResponse>

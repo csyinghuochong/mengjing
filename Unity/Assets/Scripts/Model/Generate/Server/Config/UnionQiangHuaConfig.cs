@@ -71,7 +71,7 @@ namespace ET
 		public int UpLvLimit { get; set; }
 		/// <summary>成功概率</summary>
 		public double SuccessPro { get; set; }
-		/// <summary>消耗家族贡献</summary>
+		/// <summary>消耗公会贡献</summary>
 		public int CostGold { get; set; }
 		/// <summary>消耗道具</summary>
 		public string CostItem { get; set; }

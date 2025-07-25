@@ -42,8 +42,8 @@ namespace ET.Server
                 dBUnionInfo.UnionInfo.UnionGold -= unionConfig.UnionGoldCost;
                 
                 MailInfo mailInfo = MailInfo.Create();
-                mailInfo.Title = "家族升级";
-                mailInfo.Context = "恭喜您!您所在得家族等级获得提升，这是家族升级的奖励!";
+                mailInfo.Title = "公会升级";
+                mailInfo.Context = "恭喜您!您所在得公会等级获得提升，这是公会升级的奖励!";
                 
                 long serverTime = TimeHelper.ServerNow();
                 UnionConfig unionCof = UnionConfigCategory.Instance.Get(dBUnionInfo.UnionInfo.Level);
@@ -64,7 +64,7 @@ namespace ET.Server
                     MailHelp.SendUserMail(scene.Root(), dBUnionInfo.UnionInfo.UnionPlayerList[i].UserID, mailInfo,ItemGetWay.UnionUpLv).Coroutine();
                 }
                 
-                string noticeContent = $"恭喜 <color=#{CommonHelp.QualityReturnColor(5)}>{dBUnionInfo.UnionInfo.UnionName}</color> 家族等级提升至{dBUnionInfo.UnionInfo.Level}级";
+                string noticeContent = $"恭喜 <color=#{CommonHelp.QualityReturnColor(5)}>{dBUnionInfo.UnionInfo.UnionName}</color> 公会等级提升至{dBUnionInfo.UnionInfo.Level}级";
                 BroadCastHelper.SendBroadMessage(scene.Root(), NoticeType.Notice, noticeContent);
  
                 response.UnionMyInfo = dBUnionInfo.UnionInfo;

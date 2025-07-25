@@ -91,7 +91,7 @@ namespace ET.Client
             using (zstring.Block())
             {
                 self.EG_Pro_1RectTransform.parent.transform.Find("Text_Tip_Pro_1").GetComponent<Text>().text =
-                        zstring.Format("消耗:{0}点家族贡献", unionQiangHuaConfig.CostGold);
+                        zstring.Format("消耗:{0}点公会贡献", unionQiangHuaConfig.CostGold);
             }
 
             if (!CommonHelp.IfNull(unionQiangHuaConfig.CostItem))
@@ -102,7 +102,7 @@ namespace ET.Client
 
         public static async ETTask OnButton_DonationButton(this ES_UnionRoleXiuLian self)
         {
-            //家族等级
+            //公会等级
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
             U2C_UnionMyInfoResponse respose = await UnionNetHelper.UnionMyInfo(self.Root());
             if (respose.Error != ErrorCode.ERR_Success)
@@ -117,7 +117,7 @@ namespace ET.Client
             UnionQiangHuaConfig unionQiangHuaConfig = UnionQiangHuaConfigCategory.Instance.Get(xiulianid);
             if (unionQiangHuaConfig.QiangHuaLv >= unionConfig.XiuLianLevel)
             {
-                FlyTipComponent.Instance.ShowFlyTip("请先提升家族等级！");
+                FlyTipComponent.Instance.ShowFlyTip("请先提升公会等级！");
                 return;
             }
 

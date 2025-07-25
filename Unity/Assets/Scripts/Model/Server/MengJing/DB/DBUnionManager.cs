@@ -14,7 +14,7 @@ namespace ET.Server
         public List<RankingInfo> rankingDonation { get; set; } = new List<RankingInfo>();
 
         /// <summary>
-        /// 报名家族
+        /// 报名公会
         /// </summary>
         public List<long> SignupUnions { get; set; } = new List<long> { };
 
@@ -29,12 +29,12 @@ namespace ET.Server
         public long LastWeakDonation { get; set; } = 0;
 
         /// <summary>
-        /// 家族争霸赛次数
+        /// 公会争霸赛次数
         /// </summary>
         public int UnionRaceTime { get; set; } = 0;
 
         /// <summary>
-        /// 胜利家族
+        /// 胜利公会
         /// </summary>
         public long WinUnionId { get; set; }
 

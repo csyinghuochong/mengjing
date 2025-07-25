@@ -86,7 +86,7 @@ namespace ET.Client
 
             if (numericComponent.GetAsLong(NumericType.UnionId_0) == 0)
             {
-                FlyTipComponent.Instance.ShowFlyTip("没有家族！");
+                FlyTipComponent.Instance.ShowFlyTip("没有公会！");
                 return;
             }
 
@@ -122,7 +122,7 @@ namespace ET.Client
                 self.E_Text_BonusText.text = zstring.Format("累计总奖金： {0}", response.TotalDonation);
             }
 
-            string unionnamelist = "已报名家族: ";
+            string unionnamelist = "已报名公会: ";
             for (int i = 0; i < self.UnionListItems.Count; i++)
             {
                 unionnamelist = unionnamelist + self.UnionListItems[i].UnionName + "   ";

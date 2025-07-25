@@ -32,7 +32,7 @@ namespace ET.Server
                             }
                             dBUnionInfo.UnionInfo.Exp += addExp;
                             
-                            dBUnionInfo.UnionInfo.ActiveRecord.Add($"{request.Par} 为家族增加经验 {addExp}");
+                            dBUnionInfo.UnionInfo.ActiveRecord.Add($"{request.Par} 为公会增加经验 {addExp}");
                         }
                         else if (valuePararm[1] == "35") //UserDataType.UnionGold
                         {
@@ -40,7 +40,7 @@ namespace ET.Server
                             dBUnionInfo.UnionInfo.UnionGold += addExp;
                             dBUnionInfo.UnionInfo.UnionGold = Math.Min(unionConfig.UnionGoldLimit, dBUnionInfo.UnionInfo.UnionGold);
                             
-                            dBUnionInfo.UnionInfo.ActiveRecord.Add($"{request.Par} 为家族增加资金 {addExp}");
+                            dBUnionInfo.UnionInfo.ActiveRecord.Add($"{request.Par} 为公会增加资金 {addExp}");
                         }
                         else
                         {

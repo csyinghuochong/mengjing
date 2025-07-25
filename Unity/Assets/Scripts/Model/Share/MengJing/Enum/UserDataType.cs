@@ -19,8 +19,8 @@ namespace ET
         public const int JiaYuanFund = 13;           //家园资金
         public const int JiaYuanExp = 14;            //家园经验
         public const int BaoShiDu = 15;
-        public const int UnionContri = 16;            //家族贡献
-        public const int UnionExp = 17;              //家族经验
+        public const int UnionContri = 16;            //公会贡献
+        public const int UnionExp = 17;              //公会经验
         public const int JueXingExp = 18;
         
         public const int Lv = 19;                     //等级       
@@ -41,7 +41,7 @@ namespace ET
         public const int SeasonLevel = 33;
 
         public const int InvestMent = 34;                       //投资资金
-        public const int UnionGold = 35;                        //家族金币
+        public const int UnionGold = 35;                        //公会金币
         public const int WeiJingGold = 36;                  //
         public const int TalentPoints = 37;                     //天赋点
 

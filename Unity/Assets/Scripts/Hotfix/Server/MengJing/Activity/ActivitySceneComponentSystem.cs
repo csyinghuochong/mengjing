@@ -373,8 +373,8 @@ namespace ET.Server
                     case 1058: //奔跑比赛
                     case 1059: //恶魔活动
                     case 1055: //喜从天降
-                    case 1043: //家族Boss
-                    case 1044: //家族争霸
+                    case 1043: //公会Boss
+                    case 1044: //公会争霸
                         sceneserverid = UnitCacheHelper.GetFubenCenterId(self.Zone());
                         break;
                     case 1074://宠物挑战赛
@@ -410,7 +410,7 @@ namespace ET.Server
                     A2A_ActivityUpdateRequest.Hour = -1;
                     A2A_ActivityUpdateRequest.FunctionId = functionId;
                     A2A_ActivityUpdateRequest.FunctionType = 2;
-                    ////家族战结束. 发送奖励
+                    ////公会战结束. 发送奖励
                     A2A_ActivityUpdateResponse m2m_TrasferUnitResponse = (A2A_ActivityUpdateResponse)await self.Root().GetComponent<MessageSender>()
                             .Call(rankserverid, A2A_ActivityUpdateRequest);
                 }
@@ -430,7 +430,7 @@ namespace ET.Server
             DateTime dateTime = TimeInfo.Instance.ToDateTime(serverTime);
             long curTime = (dateTime.Hour * 60 + dateTime.Minute) * 60 + dateTime.Second;
 
-            ///1025 战场 1031勇士角斗 1043家族boss 1044家族争霸  1045竞技 1052狩猎活动  1055喜从天降  1057小龟大赛  1058奔跑比赛 1059恶魔活动 1074宠物挑战赛
+            ///1025 战场 1031勇士角斗 1043公会boss 1044公会争霸  1045竞技 1052狩猎活动  1055喜从天降  1057小龟大赛  1058奔跑比赛 1059恶魔活动 1074宠物挑战赛
             List<int> functonIds = new List<int>()
             {
                 1025,

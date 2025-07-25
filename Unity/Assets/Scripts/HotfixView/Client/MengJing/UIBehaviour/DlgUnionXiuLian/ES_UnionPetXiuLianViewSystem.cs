@@ -97,7 +97,7 @@ namespace ET.Client
 
         public static async ETTask OnButton_DonationButton(this ES_UnionPetXiuLian self)
         {
-            //家族等级
+            //公会等级
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
             U2C_UnionMyInfoResponse respose = await UnionNetHelper.UnionMyInfo(self.Root());
             if (respose.Error != ErrorCode.ERR_Success)
@@ -115,13 +115,13 @@ namespace ET.Client
 
             if (!unionLevelMax && unionQiangHuaConfig.QiangHuaLv >= unionConfig.XiuLianLevel)
             {
-                FlyTipComponent.Instance.ShowFlyTip("请先提升家族等级！");
+                FlyTipComponent.Instance.ShowFlyTip("请先提升公会等级！");
                 return;
             }
 
             if (self.Root().GetComponent<UserInfoComponentC>().UserInfo.UnionZiJin < unionQiangHuaConfig.CostGold)
             {
-                FlyTipComponent.Instance.ShowFlyTip("家族贡献不足！");
+                FlyTipComponent.Instance.ShowFlyTip("公会贡献不足！");
                 return;
             }
 

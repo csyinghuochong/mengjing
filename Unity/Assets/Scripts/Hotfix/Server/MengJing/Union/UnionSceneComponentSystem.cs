@@ -104,17 +104,17 @@ namespace ET.Server
                 dBUnionInfo.UnionInfo.ApplyList.Remove(unitid);
             }
 
-            //判断玩家是否已经有家族了
+            //判断玩家是否已经有公会了
             NumericComponentS numericComponent_0 = await UnitCacheHelper.GetComponentCache<NumericComponentS>(self.Root(), unitid);
             if (numericComponent_0.GetAsLong(NumericType.UnionId_0) > 0)
             {
                 return ErrorCode.ERR_PlayerHaveUnion;
             }
 
-            //判断家族人数是否已满
-            //获取家族等级
+            //判断公会人数是否已满
+            //获取公会等级
             UnionConfig unionCof = UnionConfigCategory.Instance.Get(dBUnionInfo.UnionInfo.Level);
-            //判断家族成员是否已达上限
+            //判断公会成员是否已达上限
             if (replyCode == 1 && dBUnionInfo.UnionInfo.UnionPlayerList.Count >= unionCof.PeopleNum)
             {
                 return ErrorCode.ERR_Union_PeopleMax;

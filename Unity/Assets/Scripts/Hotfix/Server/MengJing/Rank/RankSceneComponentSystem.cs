@@ -823,12 +823,12 @@ namespace ET.Server
             }
         }
 
-        //家族战结束
+        //公会战结束
         public static async ETTask OnUnionRaceOver(this RankSceneComponent self)
         {
             int zone = self.Zone();
 
-            Log.Warning($"发放家族战排行榜奖励： {zone}");
+            Log.Warning($"发放公会战排行榜奖励： {zone}");
             long serverTime = TimeHelper.ServerNow();
             List<RankShouLieInfo> rankingInfos = self.DBRankInfo.rankUnionRace;
             ActorId mailServerId = StartSceneConfigCategory.Instance.GetBySceneName(self.Zone(), "EMail").ActorId;
@@ -842,11 +842,11 @@ namespace ET.Server
 
                 MailInfo mailInfo = MailInfo.Create();
 
-                Log.Warning($"发放家族战排行榜奖励2： {rankingInfos[i].UnitID}");
+                Log.Warning($"发放公会战排行榜奖励2： {rankingInfos[i].UnitID}");
 
                 mailInfo.Status = 0;
-                mailInfo.Context = $"恭喜您获得家族战排行榜第{i + 1}名奖励";
-                mailInfo.Title = "家族战排行榜奖励";
+                mailInfo.Context = $"恭喜您获得公会战排行榜第{i + 1}名奖励";
+                mailInfo.Title = "公会战排行榜奖励";
                 mailInfo.MailId = IdGenerater.Instance.GenerateId();
 
                 string[] needList = rankRewardConfig.RewardItems.Split('@');

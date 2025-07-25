@@ -223,7 +223,7 @@ namespace ET.Client
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
             NumericComponentC numericComponent = unit.GetComponent<NumericComponentC>();
             TaskComponentC taskComponent = self.Root().GetComponent<TaskComponentC>();
-            if (npcId == 20000102) //家族任务
+            if (npcId == 20000102) //公会任务
             {
                 int unionTaskId = numericComponent.GetAsInt(NumericType.UnionTaskId);
                 if (unionTaskId > 0 && taskComponent.GetTaskById(unionTaskId) == null)

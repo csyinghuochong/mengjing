@@ -31,7 +31,7 @@ namespace ET.Server
 				}
 				if (request.GameSettingInfos[i].KeyId == (int)GameSettingEnum.FirstUnionName)
 				{
-					//1显示家族称号 2其他称号
+					//1显示公会称号 2其他称号
                     unit.GetComponent<NumericComponentS>().ApplyValue(NumericType.FirstUnionName, int.Parse(request.GameSettingInfos[i].Value));
                 }
 

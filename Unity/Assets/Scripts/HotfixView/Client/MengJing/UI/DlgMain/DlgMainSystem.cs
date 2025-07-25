@@ -2291,7 +2291,7 @@ namespace ET.Client
                     {
                         using (zstring.Block())
                         {
-                            FlyTipComponent.Instance.ShowFlyTip(zstring.Format("获得{0} 家族捐献", updateValue));
+                            FlyTipComponent.Instance.ShowFlyTip(zstring.Format("获得{0} 公会捐献", updateValue));
                         }
                     }
 
@@ -2299,7 +2299,7 @@ namespace ET.Client
                     {
                         using (zstring.Block())
                         {
-                            FlyTipComponent.Instance.ShowFlyTip(zstring.Format("消耗{0} 家族捐献", int.Parse(updateValue) * -1));
+                            FlyTipComponent.Instance.ShowFlyTip(zstring.Format("消耗{0} 公会捐献", int.Parse(updateValue) * -1));
                         }
                     }
 

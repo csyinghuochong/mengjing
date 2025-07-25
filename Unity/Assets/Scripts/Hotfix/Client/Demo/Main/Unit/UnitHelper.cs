@@ -428,7 +428,7 @@ namespace ET.Client
 
                 //0全体: 对全部造成伤害
                 //1队伍 : 对自己队伍之外的人和怪造成伤害
-                //2家族：对自己家族外的人和怪造成伤害
+                //2公会：对自己公会外的人和怪造成伤害
                 //3和平：对任何人都不造成伤害
                 int attackmode = self.GetAttackMode();
                 if (attackmode == 1 && self.IsSameTeam(defend))

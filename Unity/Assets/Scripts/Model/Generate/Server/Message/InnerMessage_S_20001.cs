@@ -3595,7 +3595,7 @@ namespace ET
         }
     }
 
-    // 家族操作  1增加经验  2获取等级
+    // 公会操作  1增加经验  2获取等级
     [MemoryPackable]
     [Message(InnerMessage.M2U_UnionOperationRequest)]
     [ResponseType(nameof(U2M_UnionOperationResponse))]
@@ -4387,7 +4387,7 @@ namespace ET
         }
     }
 
-    // 进入家族地图
+    // 进入公会地图
     [MemoryPackable]
     [Message(InnerMessage.M2F_UnionEnterRequest)]
     [ResponseType(nameof(F2M_UnionEnterResponse))]
@@ -4414,7 +4414,7 @@ namespace ET
         public int SceneId { get; set; }
 
         /// <summary>
-        /// /0默认 1家族争霸赛
+        /// /0默认 1公会争霸赛
         /// </summary>
         [MemoryPackOrder(3)]
         public int OperateType { get; set; }

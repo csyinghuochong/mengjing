@@ -20,17 +20,17 @@ namespace ET
         public const int Trial = 4;             //试炼任务(没做)
         public const int Weekly = 5;            //每周任务
         public const int Treasure = 6;          //挖宝任务
-        public const int Union = 7;             //家族任务
+        public const int Union = 7;             //公会任务
         public const int Season = 8;            //赛季主线任务
         public const int Welfare = 9;           //福利任务        只做一次
         public const int Ring = 10;             //跑环任务
         public const int System = 11;           //系统任务        只做一次
-        public const int UnionOrder = 12;       //家族订单任务     每日刷新
+        public const int UnionOrder = 12;       //公会订单任务     每日刷新
         
         public const int Country = 21;    //活跃任务
         public const int Battle = 22;     //战场任务
         public const int ShowLie = 23;    //狩猎任务
-        public const int UnionRace = 24;  //家族战
+        public const int UnionRace = 24;  //公会战
         public const int Mine = 25;       //宠物矿场
         public const int SeasonDaily = 26;    //赛季每日任务
         public const int ActivityV1 = 27; //活动每日任务
@@ -44,7 +44,7 @@ namespace ET
     //6：击杀任意BOSS级别怪物
     //7：通关某个副本
     //8: 转职
-    //9: 加入家族
+    //9: 加入公会
     //10：给与任务
     //11:获得任意宠物N个(算上之前)
     //12:制造N个道具
@@ -140,7 +140,7 @@ namespace ET
 
     //1201 : 狩猎数量
 
-    //1301:  家族战击杀玩家
+    //1301:  公会战击杀玩家
 
     public static class TaskTargetType
     {

@@ -71,11 +71,11 @@ namespace ET
 		public int NextID { get; set; }
 		/// <summary>等级</summary>
 		public int QiangHuaLv { get; set; }
-		/// <summary>需要家族等级</summary>
+		/// <summary>需要公会等级</summary>
 		public int NeedUnionLv { get; set; }
 		/// <summary>升级需要时间（单位:s）</summary>
 		public int NeedTime { get; set; }
-		/// <summary>升级消耗家族金币</summary>
+		/// <summary>升级消耗公会金币</summary>
 		public int CostUnionGold { get; set; }
 		/// <summary>消耗科技点数</summary>
 		public int Point { get; set; }

@@ -69,12 +69,12 @@ namespace ET.Server
         public List<BattleInfo> ArenaInfos { get; set; } = new List<BattleInfo>();
         
         /// <summary>
-        /// 家族争霸
+        /// 公会争霸
         /// </summary>
         public BattleInfo UnionRaceScene { get; set; } 
         
         /// <summary>
-        /// 家族地图
+        /// 公会地图
         /// </summary>
         public Dictionary<long, ActorId> UnionFubens = new Dictionary<long, ActorId>();   //unionid->actorid
 

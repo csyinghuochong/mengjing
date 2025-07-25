@@ -59,9 +59,9 @@ namespace ET
         public const int Serial = 48;               //序列号奖励
         public const int JiaYuanCook = 49;          //家园厨房
         public const int Donation = 50;             //捐献
-        public const int UnionXiuLian = 51;         //家族修炼
-        public const int UnionBoss = 52;            //家族BOSS
-        public const int UnionRace = 53;            //家族争霸
+        public const int UnionXiuLian = 51;         //公会修炼
+        public const int UnionBoss = 52;            //公会BOSS
+        public const int UnionRace = 53;            //公会争霸
         public const int Auction = 54;              //竞拍
         public const int PetChouKa = 55;             //宠物抽卡
         public const int ItemBox_8 = 56;               //道具盒子
@@ -74,7 +74,7 @@ namespace ET
         public const int ArenaWin = 63;                 //角斗场胜利
         public const int MiJingBoss = 64;               //密境BOSS
         public const int AuctionJoin = 65;              //竞拍保证金
-        public const int UnionUpLv = 66;                 //家族升级
+        public const int UnionUpLv = 66;                 //公会升级
         public const int GemHeCheng = 67;                //宝石合成
         public const int SoloReward = 68;               //竞技场奖励
         public const int Activity_MaoXianJia = 69;      //冒险家
@@ -83,7 +83,7 @@ namespace ET
         public const int TowerOfSealCost = 72;          // 封印之塔消耗钻石
         public const int JueXing = 73;                  //觉醒
         public const int Activity_DayTeHui = 74;           //每日特惠
-        public const int UnionMysteryBuy = 75;            //家族神秘商店
+        public const int UnionMysteryBuy = 75;            //公会神秘商店
         public const int HappyMove = 76;                    //喜从天降
         public const int Turtle = 77;                   //小龟大赛
         public const int ShowLie = 78;                  //狩猎

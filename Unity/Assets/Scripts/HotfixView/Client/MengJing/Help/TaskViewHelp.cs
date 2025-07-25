@@ -1172,7 +1172,7 @@ namespace ET.Client
 
         private static string GetJoinUnion(TaskPro taskPro, TaskConfig taskConfig)
         {
-            string progress = LanguageComponent.Instance.LoadLocalization("加入家族 {0}/{1}");
+            string progress = LanguageComponent.Instance.LoadLocalization("加入公会 {0}/{1}");
             string text1;
             using (zstring.Block())
             {

@@ -52,7 +52,7 @@ namespace ET
         }
         
         /// <summary>
-        /// 1044 家族战
+        /// 1044 公会战
         /// </summary>
         /// <param name="day"></param>
         /// <param name="functionid"></param>

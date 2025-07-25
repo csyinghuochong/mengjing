@@ -686,7 +686,7 @@ namespace ET.Server
 
         public static ActorId GetUnionFubenId(this FubenCenterComponent self, long unionid, long unitid)
         {
-            //需要判读一下unitid 是否属于这个家族！
+            //需要判读一下unitid 是否属于这个公会！
             if (self.UnionFubens.ContainsKey(unionid))
             {
                 return self.UnionFubens[unionid];

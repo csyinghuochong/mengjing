@@ -53,7 +53,7 @@ namespace ET.Server
         //}
         public string PetPingfen;
 
-        //家族名称
+        //公会名称
         public string UnionName;
 
         //家园等级

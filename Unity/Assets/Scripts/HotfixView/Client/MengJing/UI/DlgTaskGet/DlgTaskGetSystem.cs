@@ -446,7 +446,7 @@ namespace ET.Client
                 }
             }
 
-            if (npcId == 2002) //家族任务
+            if (npcId == 2002) //公会任务
             {
                 int unionTaskId = numericComponent.GetAsInt(NumericType.UnionTaskId);
                 if (unionTaskId > 0 && taskComponent.GetTaskById(unionTaskId) == null)
@@ -499,7 +499,7 @@ namespace ET.Client
                 else if ((taskConfig.TargetType == (int)TaskTargetType.GiveItem_10 || taskConfig.TargetType == (int)TaskTargetType.GivePet_25) &&
                          taskConfig.TaskType == TaskTypeEnum.Ring && self.NpcID == 20000102)
                 {
-                    // 家族给予任务可以CompleteNpcID==0，找家族任务NPC提交
+                    // 公会给予任务可以CompleteNpcID==0，找公会任务NPC提交
                     taskids.Add(taskPros[i].taskID);
                 }
             }
