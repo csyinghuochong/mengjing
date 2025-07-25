@@ -182,7 +182,6 @@ GameObject:
   - component: {fileID: 331409021463978426}
   - component: {fileID: 331409021463978427}
   - component: {fileID: 500215181412669685}
-  - component: {fileID: 7429143327064671058}
   m_Layer: 0
   m_Name: FireWork_9
   m_TagString: Untagged
@@ -5027,44 +5026,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 331409021463978425}
   m_CullTransparentMesh: 1
---- !u!114 &7429143327064671058
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 331409021463978425}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 16f0b0b6d0b7542bfbd20a3e05b04ff1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_IsTrail: 0
-  m_IgnoreCanvasScaler: 0
-  m_AbsoluteMode: 0
-  m_Scale3D: {x: 120, y: 120, z: 120}
-  m_AnimatableProperties: []
-  m_Particles:
-  - {fileID: 331409021463978426}
-  - {fileID: 331409022317567171}
-  - {fileID: 331409022126689973}
-  - {fileID: 331409022145232993}
-  m_MeshSharing: 0
-  m_GroupId: 0
-  m_GroupMaxId: 0
-  m_PositionMode: 0
-  m_AutoScaling: 0
-  m_AutoScalingMode: 2
-  m_UseCustomView: 0
-  m_CustomViewSize: 10
 --- !u!1 &331409022126689968
 GameObject:
   m_ObjectHideFlags: 0
@@ -20627,6 +20588,7 @@ MonoBehaviour:
   moveDistance: -2000
   isLoop: 0
   MoveToTime: 0
+  ShouldPlay: 1
 --- !u!1 &2087152726957356949
 GameObject:
   m_ObjectHideFlags: 0
@@ -21332,6 +21294,7 @@ MonoBehaviour:
   moveDistance: -2000
   isLoop: 0
   MoveToTime: 0
+  ShouldPlay: 1
 --- !u!1 &3426877666662664859
 GameObject:
   m_ObjectHideFlags: 0
@@ -31323,7 +31286,6 @@ GameObject:
   - component: {fileID: 3816031414100242399}
   - component: {fileID: 3816031414100242398}
   - component: {fileID: 287915097524707381}
-  - component: {fileID: 8072964061562183985}
   m_Layer: 0
   m_Name: OpenBox_FX_2
   m_TagString: Untagged
@@ -36171,45 +36133,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3816031414100242397}
   m_CullTransparentMesh: 1
---- !u!114 &8072964061562183985
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3816031414100242397}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 16f0b0b6d0b7542bfbd20a3e05b04ff1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_IsTrail: 0
-  m_IgnoreCanvasScaler: 0
-  m_AbsoluteMode: 0
-  m_Scale3D: {x: 150, y: 150, z: 150}
-  m_AnimatableProperties: []
-  m_Particles:
-  - {fileID: 3816031414100242399}
-  - {fileID: 3816031413793846666}
-  - {fileID: 3816031414314191976}
-  - {fileID: 3816031413035079954}
-  - {fileID: 3816031414434273610}
-  m_MeshSharing: 0
-  m_GroupId: 0
-  m_GroupMaxId: 0
-  m_PositionMode: 0
-  m_AutoScaling: 0
-  m_AutoScalingMode: 2
-  m_UseCustomView: 0
-  m_CustomViewSize: 10
 --- !u!1 &3816031414314191981
 GameObject:
   m_ObjectHideFlags: 0
@@ -51563,7 +51486,6 @@ GameObject:
   - component: {fileID: 5219740964865784317}
   - component: {fileID: 5219740964865784306}
   - component: {fileID: 2700329926136408992}
-  - component: {fileID: 9159985451041752142}
   m_Layer: 0
   m_Name: Magic_Circle_FX_2
   m_TagString: Untagged
@@ -56400,46 +56322,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5219740964865784304}
   m_CullTransparentMesh: 1
---- !u!114 &9159985451041752142
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5219740964865784304}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 16f0b0b6d0b7542bfbd20a3e05b04ff1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_IsTrail: 0
-  m_IgnoreCanvasScaler: 0
-  m_AbsoluteMode: 0
-  m_Scale3D: {x: 150, y: 150, z: 150}
-  m_AnimatableProperties: []
-  m_Particles:
-  - {fileID: 5219740964865784317}
-  - {fileID: 5219740966230414003}
-  - {fileID: 5219740964781886695}
-  - {fileID: 5219740965977970689}
-  - {fileID: 5219740966283060981}
-  - {fileID: 5219740965866392865}
-  m_MeshSharing: 0
-  m_GroupId: 0
-  m_GroupMaxId: 0
-  m_PositionMode: 0
-  m_AutoScaling: 0
-  m_AutoScalingMode: 2
-  m_UseCustomView: 0
-  m_CustomViewSize: 10
 --- !u!1 &5219740965866392868
 GameObject:
   m_ObjectHideFlags: 0
@@ -76018,7 +75900,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u8BF7\u8F93\u5165\u5DE5\u4F1A\u540D\u5B57"
+  m_Text: "\u8BF7\u8F93\u5165\u516C\u4F1A\u540D\u5B57"
 --- !u!1 &5606271903277983545
 GameObject:
   m_ObjectHideFlags: 0
@@ -76497,7 +76379,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u521B\u5EFA\u5DE5\u4F1A"
+  m_Text: "\u521B\u5EFA\u516C\u4F1A"
 --- !u!114 &5442664801468985105
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -76607,6 +76489,7 @@ MonoBehaviour:
   moveDistance: 30
   isLoop: 1
   MoveToTime: 3
+  ShouldPlay: 1
 --- !u!1 &6163351675868493581
 GameObject:
   m_ObjectHideFlags: 0
@@ -76623,7 +76506,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &6163351675846528247
 RectTransform:
   m_ObjectHideFlags: 0
@@ -76826,7 +76709,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u8BF7\u8F93\u5165\u5DE5\u4F1A\u4FE1\u606F"
+  m_Text: "\u8BF7\u8F93\u5165\u516C\u4F1A\u4FE1\u606F"
 --- !u!1 &6890646463627297988
 GameObject:
   m_ObjectHideFlags: 0
@@ -76892,6 +76775,7 @@ MonoBehaviour:
   moveDistance: 2000
   isLoop: 0
   MoveToTime: 0
+  ShouldPlay: 1
 --- !u!1 &6924428640140782962
 GameObject:
   m_ObjectHideFlags: 0
@@ -76970,7 +76854,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u521B\u5EFA\u5DE5\u4F1A"
+  m_Text: "\u521B\u5EFA\u516C\u4F1A"
 --- !u!1 &7041422814000159607
 GameObject:
   m_ObjectHideFlags: 0
@@ -77247,6 +77131,7 @@ MonoBehaviour:
   moveDistance: 2000
   isLoop: 0
   MoveToTime: 0
+  ShouldPlay: 1
 --- !u!1 &7830295770716910442
 GameObject:
   m_ObjectHideFlags: 0

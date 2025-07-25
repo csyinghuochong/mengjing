@@ -5271,7 +5271,6 @@ GameObject:
   - component: {fileID: 3828344559563213264}
   - component: {fileID: 7075206679484394000}
   - component: {fileID: 1632534906142927061}
-  - component: {fileID: 2249467116811205744}
   m_Layer: 0
   m_Name: Magic_Circle_FX_2
   m_TagString: Untagged
@@ -10108,46 +10107,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 510230142763326997}
   m_CullTransparentMesh: 1
---- !u!114 &2249467116811205744
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 510230142763326997}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 16f0b0b6d0b7542bfbd20a3e05b04ff1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_IsTrail: 0
-  m_IgnoreCanvasScaler: 0
-  m_AbsoluteMode: 0
-  m_Scale3D: {x: 150, y: 150, z: 150}
-  m_AnimatableProperties: []
-  m_Particles:
-  - {fileID: 3828344559563213264}
-  - {fileID: 8053710208614301759}
-  - {fileID: 8367540375030792590}
-  - {fileID: 2962983565624416314}
-  - {fileID: 5437360425381920104}
-  - {fileID: 732818046096597695}
-  m_MeshSharing: 0
-  m_GroupId: 0
-  m_GroupMaxId: 0
-  m_PositionMode: 0
-  m_AutoScaling: 0
-  m_AutoScalingMode: 2
-  m_UseCustomView: 0
-  m_CustomViewSize: 10
 --- !u!1 &643592574414459081
 GameObject:
   m_ObjectHideFlags: 0
@@ -10697,7 +10656,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u5347\u7EA7\u5BB6\u65CF"
+  m_Text: "\u5347\u7EA7\u516C\u4F1A"
 --- !u!114 &7446248883562044979
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10887,7 +10846,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u5DE5\u4F1A\u4FE1\u606F"
+  m_Text: "\u516C\u4F1A\u4FE1\u606F"
 --- !u!114 &1709803574121812317
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17477,6 +17436,7 @@ MonoBehaviour:
   moveDistance: 2000
   isLoop: 0
   MoveToTime: 0
+  ShouldPlay: 1
 --- !u!1 &2822377656920594419
 GameObject:
   m_ObjectHideFlags: 0
@@ -17571,6 +17531,7 @@ MonoBehaviour:
   moveDistance: 30
   isLoop: 1
   MoveToTime: 3
+  ShouldPlay: 1
 --- !u!1 &2950487311322129482
 GameObject:
   m_ObjectHideFlags: 0
@@ -18205,6 +18166,7 @@ MonoBehaviour:
   moveDistance: -2000
   isLoop: 0
   MoveToTime: 0
+  ShouldPlay: 1
 --- !u!1 &4635612250607130173
 GameObject:
   m_ObjectHideFlags: 0
@@ -33130,7 +33092,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u5BB6\u65CF\u8BB0\u5F55"
+  m_Text: "\u516C\u4F1A\u8BB0\u5F55"
 --- !u!114 &2214015394371886693
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -48792,7 +48754,6 @@ GameObject:
   - component: {fileID: 5267228446175855342}
   - component: {fileID: 3289236329504748178}
   - component: {fileID: 3802167962442093977}
-  - component: {fileID: 8765966415526961542}
   m_Layer: 0
   m_Name: OpenBox_FX_2
   m_TagString: Untagged
@@ -53640,45 +53601,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7896808481731514094}
   m_CullTransparentMesh: 1
---- !u!114 &8765966415526961542
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7896808481731514094}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 16f0b0b6d0b7542bfbd20a3e05b04ff1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_IsTrail: 0
-  m_IgnoreCanvasScaler: 0
-  m_AbsoluteMode: 0
-  m_Scale3D: {x: 150, y: 150, z: 150}
-  m_AnimatableProperties: []
-  m_Particles:
-  - {fileID: 5267228446175855342}
-  - {fileID: 5353087834708426832}
-  - {fileID: 4986957263268988800}
-  - {fileID: 866170697200851990}
-  - {fileID: 7271061825840308337}
-  m_MeshSharing: 0
-  m_GroupId: 0
-  m_GroupMaxId: 0
-  m_PositionMode: 0
-  m_AutoScaling: 0
-  m_AutoScalingMode: 2
-  m_UseCustomView: 0
-  m_CustomViewSize: 10
 --- !u!1 &7900236423947099758
 GameObject:
   m_ObjectHideFlags: 0
