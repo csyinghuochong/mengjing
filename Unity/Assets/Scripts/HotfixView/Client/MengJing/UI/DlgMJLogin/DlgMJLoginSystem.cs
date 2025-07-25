@@ -55,14 +55,14 @@ namespace ET.Client
         public static void CheckSensitiveWords_Account(this DlgMJLogin self)
         {
             string original = self.View.E_AccountInputField.text;
-            string result = original.Replace(" ", ""); 
+            string result = original.Replace(" ", "").Trim(); //.ToLower(); 
             self.View.E_AccountInputField.text = result;
         }
         
         public static void CheckSensitiveWords_Password(this DlgMJLogin self)
         {
             string original = self.View.E_PasswordInputField.text;
-            string result = original.Replace(" ", ""); 
+            string result = original.Replace(" ", "").Trim(); //.ToLower(); 
             self.View.E_PasswordInputField.text = result;
         }
         
@@ -152,8 +152,8 @@ namespace ET.Client
             self.LastLoginTime = TimeHelper.ServerNow();
             PlayerInfoComponent playerInfoComponent = self.Root().GetComponent<PlayerInfoComponent>();
             playerInfoComponent.ServerItem = self.ServerInfo;
-            playerInfoComponent.Account = self.View.E_AccountInputField.text;
-            playerInfoComponent.Password = self.View.E_PasswordInputField.text;
+            playerInfoComponent.Account = self.View.E_AccountInputField.text.ToLower();
+            playerInfoComponent.Password = self.View.E_PasswordInputField.text.ToLower();
             playerInfoComponent.VersionMode = GlobalHelp.GetVersionMode();
             self.View.EG_LoadingRectTransform.gameObject.SetActive(true);
 
