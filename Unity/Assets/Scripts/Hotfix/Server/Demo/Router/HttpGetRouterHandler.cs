@@ -1,3 +1,4 @@
+using System;
 using System.Net;
 
 namespace ET.Server
@@ -7,6 +8,7 @@ namespace ET.Server
     {
         public async ETTask Handle(Scene scene, HttpListenerContext context)
         {
+            Console.WriteLine("HttpGetRouterHandler");
             HttpGetRouterResponse response = new();
             foreach (StartSceneConfig startSceneConfig in StartSceneConfigCategory.Instance.Realms)
             {
