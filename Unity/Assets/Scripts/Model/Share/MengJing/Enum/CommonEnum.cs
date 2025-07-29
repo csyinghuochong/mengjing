@@ -3,6 +3,13 @@
 namespace ET
 {
 
+
+    public class CertificateDomainInfo : Entity
+    {
+        public string CommonName { get; set; }
+        public List<string> SubjectAlternativeNames { get; } = new List<string>();
+    }
+
     public static class CellDungeonNpc
     {
         public const int HuiFuItem = 1;

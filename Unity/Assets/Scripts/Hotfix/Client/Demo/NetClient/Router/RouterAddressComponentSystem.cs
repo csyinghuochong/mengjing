@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using System.Diagnostics;
+using System.Net;
 using System.Net.Sockets;
 
 namespace ET.Client
@@ -22,7 +23,44 @@ namespace ET.Client
 
         private static async ETTask GetAllRouter(this RouterAddressComponent self)
         {
+            string domain =  "molongbanhao.weijinggame.com";
+            //"weijinggameserver.weijinggame.com";
+            //"molongbanhao.weijinggame.com";
+            // "www.weijinggame.com"; // 要解析的域名
+
+            // 获取域名对应的所有IP地址
+            //IPAddress[] ipAddresses = Dns.GetHostAddresses(domain);
+
+            //Log.Debug($"域名 {domain} 对应的IP地址：");
+            //foreach (IPAddress ip in ipAddresses)
+            //{
+            //    // 区分IPv4和IPv6地址
+            //    if (ip.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
+            //    {
+            //        Log.Debug($"IPv4: {ip}");
+            //    }
+            //    else if (ip.AddressFamily == System.Net.Sockets.AddressFamily.InterNetworkV6)
+            //    {
+            //        Log.Debug($"IPv6: {ip}");
+            //    }
+            //}
+            IPAddress[] ipAddresses = Dns.GetHostAddresses(domain);
+            IPAddress returnIpAddress = null;
+            foreach (IPAddress ipAddress in ipAddresses)
+            {
+                returnIpAddress = ipAddress;
+                if (ipAddress.AddressFamily == AddressFamily.InterNetwork)
+                {
+                    Log.Debug($"ipAddress: {ipAddress.ToString()}");
+                }
+            }
+
+
+            // string url = $"https://molongbanhao.weijinggame.com:30410/get_router?v={RandomGenerator.RandUInt32()}";
+            //string url = $"https://www.weijinggame.com:30410/get_router?v={RandomGenerator.RandUInt32()}";
+
             string url = $"http://{self.RouterManagerHost}:{self.RouterManagerPort}/get_router?v={RandomGenerator.RandUInt32()}";
+
             Log.Debug($"start get router info: {url}");
             string routerInfo = await HttpClientHelper.Get(url);
             Log.Debug($"recv router info: {routerInfo}");
