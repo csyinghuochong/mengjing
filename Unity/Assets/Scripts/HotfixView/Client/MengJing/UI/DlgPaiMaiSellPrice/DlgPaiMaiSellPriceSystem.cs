@@ -121,9 +121,10 @@ namespace ET.Client
                 }
             }
 
-            if (paiMaiItemInfo.Price * self.SellNum >= 10000000)
+            if (paiMaiItemInfo.Price * self.SellNum >= 1000000)
             {
-                FlyTipComponent.Instance.ShowFlyTip("上架总金额不能超过1000万金币！");
+                //FlyTipComponent.Instance.ShowFlyTip("上架总金额不能超过100万金币！");
+                PopupTipHelp.OpenPopupTip_2(self.Root(), "系统提示", "上架总金额不能超过100万金币！", null).Coroutine();
                 return;
             }
 

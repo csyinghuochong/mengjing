@@ -15,7 +15,7 @@
 					return;
 				}
 				long allprice = request.PaiMaiItemInfo.BagInfo.ItemNum * request.PaiMaiItemInfo.Price;
-                if (allprice > 10000000 || allprice < 0)
+                if (allprice > 1000000 || allprice < 0)
                 {
                     Log.Error($"C2M_PaiMaiSellRequest 2");
                     response.Error = ErrorCode.ERR_ModifyData;
