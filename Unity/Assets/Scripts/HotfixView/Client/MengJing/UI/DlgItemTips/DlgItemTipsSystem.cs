@@ -41,7 +41,7 @@ namespace ET.Client
             self.View.uiTransform.GetComponent<RectTransform>().anchoredPosition = vector2;
         }
 
-        public static void RefreshInfo(this DlgItemTips self, ItemInfo bagInfo, ItemOperateEnum itemOperateEnum, int currentHouse)
+        public static void  RefreshInfo(this DlgItemTips self, ItemInfo bagInfo, ItemOperateEnum itemOperateEnum, int currentHouse)
         {
             self.BagInfo = bagInfo;
             self.ItemOperateEnum = itemOperateEnum;
@@ -110,6 +110,26 @@ namespace ET.Client
 
             string itemDes = ItemViewHelp.GetItemDesc(bagInfo).Replace("\\n", "\n");
             self.View.E_ItemDesText.text = itemDes;
+
+            //Dictionary<int, ItemConfig> allitems = ItemConfigCategory.Instance.GetAll();
+            //string itemDes = string.Empty;
+            //foreach (var item in allitems)
+            //{
+            //    if (item.Value.Id > 1800404)
+            //    {
+            //        break;
+            //    }
+            //    bagInfo.ItemID = item.Value.Id;
+            //    itemDes = ItemViewHelp.GetItemDesc(bagInfo).Replace("\\n", "\n");
+            //    self.View.E_ItemDesText.text = itemDes;
+
+            //    bool checkpunctuation = PunctuationCheckHelper.DetectMiddleWhitespace(self.View.E_ItemDesText);
+            //    if (checkpunctuation)
+            //    {
+            //        Debug.LogWarning($"{bagInfo.ItemID}");
+            //    }
+            //    await self.Root().GetComponent<TimerComponent>().WaitAsync(200);
+            //}
 
             float exceedWidth = self.View.E_ItemNameText.preferredWidth - self.Lab_ItemNameWidth;
             if (exceedWidth > -20)
