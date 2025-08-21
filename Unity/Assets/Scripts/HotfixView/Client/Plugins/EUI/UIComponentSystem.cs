@@ -351,6 +351,28 @@ namespace ET.Client
             GameObject.Find("Global").GetComponent<RenderScaleController>().ChangeUniversalBlurFeature(false);
         }
 
+        private static void ChangeUniversalBlurFeature(this UIComponent self, bool value)
+        {
+            GameObject.Find("Global").GetComponent<RenderScaleController>().ChangeUniversalBlurFeature(value);
+        }
+
+        private static  bool HaveUniversalBlurFeature(this UIComponent self, WindowID id)
+        {
+            if (id == WindowID.WindowID_CellDungeonCell
+                || id == WindowID.WindowID_Function
+                || id == WindowID.WindowID_MapBig
+                || id == WindowID.WindowID_PetBar
+                || id == WindowID.WindowID_PetMelee
+                || id == WindowID.WindowID_PetMeleeLevel
+                || id == WindowID.WindowID_Role
+                || id == WindowID.WindowID_MJLobby
+                || id == WindowID.WindowID_Chat)
+            {
+                return true;
+            }
+            return false;
+        }
+
         private static void RealShowWindow(this UIComponent self, UIBaseWindow baseWindow, WindowID id, Entity showData = null)
         {
             Entity contextData = showData == null? null : showData;
@@ -381,17 +403,10 @@ namespace ET.Client
                 }
             }
 
-            if (id == WindowID.WindowID_CellDungeonCell
-                ||id == WindowID.WindowID_Function
-                ||id == WindowID.WindowID_MapBig
-                ||id == WindowID.WindowID_PetBar
-                ||id == WindowID.WindowID_PetMelee
-                ||id == WindowID.WindowID_PetMeleeLevel
-                ||id == WindowID.WindowID_Role
-                ||id == WindowID.WindowID_MJLobby
-                ||id == WindowID.WindowID_Chat)
+            if (self.HaveUniversalBlurFeature(id))
             {
-                self.ChangeUniversalBlurFeature().Coroutine();
+                //self.ChangeUniversalBlurFeature().Coroutine();
+                self.ChangeUniversalBlurFeature(true);
             }
 
             if (uILayerScript.HideMainUI)
@@ -472,6 +487,14 @@ namespace ET.Client
             {
                 self.CloseWindow(WindowID.WindowID_Guide);
                 self.GuideUISet = WindowID.WindowID_Invaild;
+            }
+
+            if (self.HaveUniversalBlurFeature(windowId))
+            {
+                //self.ChangeUniversalBlurFeature().Coroutine();
+                
+
+               self.ChangeUniversalBlurFeature(false);
             }
 
             self.HideWindow(windowId);
