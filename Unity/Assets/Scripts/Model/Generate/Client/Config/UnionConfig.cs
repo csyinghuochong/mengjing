@@ -77,11 +77,11 @@ namespace ET
 		public int[] DonateReward { get; set; }
 		/// <summary>升级全员奖励</summary>
 		public string UpAllReward { get; set; }
-		/// <summary>捐献增加公会金币</summary>
+		/// <summary>捐献增加家族金币</summary>
 		public int[] AddUnionGold { get; set; }
-		/// <summary>公会金币上限</summary>
+		/// <summary>家族金币上限</summary>
 		public int UnionGoldLimit { get; set; }
-		/// <summary>消耗公会资金</summary>
+		/// <summary>消耗家族资金</summary>
 		public int UnionGoldCost { get; set; }
 
 	}

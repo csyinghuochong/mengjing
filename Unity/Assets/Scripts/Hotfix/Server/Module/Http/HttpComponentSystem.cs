@@ -19,32 +19,33 @@ namespace ET.Server
         [EntitySystem]
         private static void Awake(this HttpComponent self, string address)
         {
-            try
-            {
-                string absolutePath = @"D:\mycert.pfx";
-                string password = "tcg19851228";
-                X509Certificate2 serverCert = X509Certificate2Helper.LoadCertificateWithRetry(absolutePath, password);
-                Console.WriteLine($"成功加载证书: {serverCert.Subject}");
-                var domainInfo = X509Certificate2Helper.GetCertificateDomains(serverCert);
-                // 打印结果
-                Console.WriteLine($"证书主题名称 (CN): {domainInfo.CommonName}");
-                Console.WriteLine("主题备用名称 (SANs):");
-                foreach (var san in domainInfo.SubjectAlternativeNames)
-                {
-                    Console.WriteLine($"  - {san}");
-                }
+            //try
+            //{
 
-                // 验证域名是否匹配
-                string targetDomain = "yourdomain.com";
-                bool domainMatch = domainInfo.CommonName.Equals(targetDomain, StringComparison.OrdinalIgnoreCase) ||
-                                  domainInfo.SubjectAlternativeNames.Contains(targetDomain, StringComparer.OrdinalIgnoreCase);
+            //    string absolutePath = @"D:\mycert.pfx";
+            //    string password = "tcg19851228";
+            //    X509Certificate2 serverCert = X509Certificate2Helper.LoadCertificateWithRetry(absolutePath, password);
+            //    Console.WriteLine($"成功加载证书: {serverCert.Subject}");
+            //    var domainInfo = X509Certificate2Helper.GetCertificateDomains(serverCert);
+            //    // 打印结果
+            //    Console.WriteLine($"证书主题名称 (CN): {domainInfo.CommonName}");
+            //    Console.WriteLine("主题备用名称 (SANs):");
+            //    foreach (var san in domainInfo.SubjectAlternativeNames)
+            //    {
+            //        Console.WriteLine($"  - {san}");
+            //    }
 
-                Console.WriteLine($"证书是否匹配 '{targetDomain}': {domainMatch}");
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.ToString());
-            }
+            //    // 验证域名是否匹配
+            //    string targetDomain = "yourdomain.com";
+            //    bool domainMatch = domainInfo.CommonName.Equals(targetDomain, StringComparison.OrdinalIgnoreCase) ||
+            //                      domainInfo.SubjectAlternativeNames.Contains(targetDomain, StringComparer.OrdinalIgnoreCase);
+
+            //    Console.WriteLine($"证书是否匹配 '{targetDomain}': {domainMatch}");
+            //}
+            //catch (Exception ex)
+            //{
+            //    Console.WriteLine(ex.ToString());
+            //}
 
 
             try
@@ -53,14 +54,11 @@ namespace ET.Server
                 Console.WriteLine($"HttpComponent: Awake");
                 foreach (string s in address.Split(';'))
                 {
-
-                    Console.WriteLine($"HttpComponent11: {s}");
-
                     if (s.Trim() == "")
                     {
                         continue;
                     }
-                    Console.WriteLine($"HttpComponent22: {s}  ");
+                    Console.WriteLine($"HttpComponent: {s}  ");
 
                     self.Listener.Prefixes.Add(s);
                 }

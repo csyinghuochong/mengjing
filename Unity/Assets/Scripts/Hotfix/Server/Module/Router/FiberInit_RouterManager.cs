@@ -11,7 +11,6 @@ namespace ET.Server
             StartSceneConfig startSceneConfig = StartSceneConfigCategory.Instance.Get((int)root.Id);
 
             Console.WriteLine($"FiberInit_RouterManager");
-            //root.AddComponent<HttpComponent, string>($"https://*:30410/");
             root.AddComponent<HttpComponent, string>($"http://*:{startSceneConfig.Port}/");
 
             await ETTask.CompletedTask;

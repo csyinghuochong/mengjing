@@ -32,6 +32,8 @@ public class RenderScaleController : MonoBehaviour
    // GameObject.Find("Global").GetComponent<RenderScaleController>().ChangeRenderPassEvent(changerender);
     public void ChangeUniversalBlurFeature(bool value)
     {
+        Debug.Log("ChangeUniversalBlurFeature:  " + value);
+
         this.universalBlurFeature.SetActive(value); 
     }
 
