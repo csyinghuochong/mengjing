@@ -677,9 +677,9 @@ MonoBehaviour:
     m_Bottom: 0
   m_ChildAlignment: 0
   m_StartCorner: 0
-  m_StartAxis: 0
+  m_StartAxis: 1
   m_CellSize: {x: 300, y: 60}
-  m_Spacing: {x: 0, y: 0}
+  m_Spacing: {x: 40, y: 0}
   m_Constraint: 1
   m_ConstraintCount: 2
 --- !u!114 &1483429063946181757
@@ -6276,6 +6276,7 @@ MonoBehaviour:
   moveDistance: 2000
   isLoop: 0
   MoveToTime: 0
+  ShouldPlay: 1
 --- !u!1 &5642623466534808879
 GameObject:
   m_ObjectHideFlags: 0
