@@ -29,6 +29,7 @@ namespace ET.Client
             self.View.E_SendButton.AddListenerAsync(self.OnSendButton);
             self.View.E_Button_CloseButton.AddListener(self.OnCloseButton);
             self.View.E_ChatItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnChatItemsRefresh);
+            self.View.E_ChatInputField.onValueChanged.AddListener((string text) => { self.CheckSensitiveWords(); });
 
             ReddotViewComponent redPointComponent = self.Root().GetComponent<ReddotViewComponent>();
             redPointComponent.RegisterReddot(ReddotType.WordChat, self.Reddot_WordChat);
@@ -83,7 +84,22 @@ namespace ET.Client
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_Chat);
         }
 
-       
+        private static void CheckSensitiveWords(this DlgChat self)
+        {
+            PlayerInfoComponent playerInfoComponent = self.Root().GetComponent<PlayerInfoComponent>();
+            bool gm = GMHelp.IsGmAccount(playerInfoComponent.Account);
+            if (gm)
+            {
+                return;
+            }
+            string text_new = "";
+            string text_old = self.View.E_ChatInputField.GetComponent<InputField>().text;
+            if (text_old.Equals("#etgm"))
+                return;
+            MaskWordHelper.Instance.IsContainSensitiveWords(ref text_old,out text_new);
+            self.View.E_ChatInputField.GetComponent<InputField>().text = text_old;
+        }
+        
         private static async ETTask OnSendButton(this DlgChat self)
         {
             string text = self.View.E_ChatInputField.text;

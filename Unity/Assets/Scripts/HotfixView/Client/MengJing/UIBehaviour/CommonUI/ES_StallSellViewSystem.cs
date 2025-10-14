@@ -17,6 +17,8 @@ namespace ET.Client
 		{
 			self.uiTransform = transform;
 			
+			self.E_Stall_NameInputField.onValueChanged.AddListener((string text) => { self.CheckSensitiveWords(); });
+			self.E_Btn_ChangeNameButton.AddListener(() => { self.OnBtn_ChangeName().Coroutine(); });
 			self.E_ItemTypeSetToggleGroup.AddListener(self.OnItemTypeSet);
 			self.E_BagItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnBagItemsRefresh);
 			self.E_PaiMaiSellItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnPaiMaiSellItemsRefresh);
