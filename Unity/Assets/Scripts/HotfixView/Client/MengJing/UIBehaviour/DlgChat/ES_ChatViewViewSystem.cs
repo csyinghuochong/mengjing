@@ -16,6 +16,7 @@ namespace ET.Client
 
             self.E_FriendChatItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnFriendChatItemsRefresh);
             self.E_CloseChatButton.AddListener(self.OnCloseChatButton);
+            self.E_InputInputField.onValueChanged.AddListener((string text) => { self.CheckSensitiveWords(); });
             self.E_SendButton.AddListenerAsync(self.OnSendButton);
         }
 
@@ -25,6 +26,14 @@ namespace ET.Client
             self.DestroyWidget();
         }
 
+        public static void CheckSensitiveWords(this ES_ChatView self)
+        {
+            string text_new = "";
+            string text_old = self.E_InputInputField.text;
+            MaskWordHelper.Instance.IsContainSensitiveWords(ref text_old, out text_new);
+            self.E_InputInputField.text = text_old;
+        }
+        
         private static void OnFriendChatItemsRefresh(this ES_ChatView self, Transform transform, int index)
         {
             foreach (Scroll_Item_FriendChatItem item in self.ScrollItemFriendChatItems.Values)
@@ -91,6 +100,13 @@ namespace ET.Client
                 return;
             }
 
+            bool mask = MaskWordHelper.Instance.IsContainSensitiveWords(text);
+            if (mask)
+            {
+                flyTipComponent.ShowFlyTip("请重新输入！");
+                return;
+            }
+            
             int error = await ChatNetHelper.RequestSendChat(self.Root(), ChannelEnum.Friend, text, self.FriendInfo.UserId);
             if (error == ErrorCode.ERR_Success)
             {
