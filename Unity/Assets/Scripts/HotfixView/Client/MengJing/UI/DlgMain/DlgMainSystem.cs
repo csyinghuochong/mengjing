@@ -1950,12 +1950,6 @@ namespace ET.Client
         public static void OnUpdateHP(this DlgMain self, int sceneType, Unit defend, Unit attack, long hurtvalue)
         {
             int unitType = defend.Type;
-            
-            if (unitType == UnitType.Player)
-            {
-                self.View.ES_RoleHead.UpdateShowRoleHp();
-            }
-            
             if (unitType == UnitType.Player && sceneType == MapTypeEnum.TeamDungeon)
             {
                 self.OnUpdateTeamHP(defend);

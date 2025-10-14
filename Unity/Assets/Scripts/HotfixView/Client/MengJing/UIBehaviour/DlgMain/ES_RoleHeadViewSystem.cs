@@ -34,7 +34,6 @@ namespace ET.Client
 
         public static void OnEnterScene(this ES_RoleHead self, int sceneTypeEnum)
         {
-            self.InitShow();
             self.OnPetFightSet();
         }
 
@@ -61,7 +60,6 @@ namespace ET.Client
         {
             self.UpdateShowRoleName();
             self.UpdateShowRoleExp();
-            self.UpdateShowRoleHp();
             self.UpdateShowRolePiLao();
             self.OnPetFightSet();
             self.OnUpdateCombat();
@@ -105,28 +103,18 @@ namespace ET.Client
             self.E_RoleLvText.text = self.UserInfoComponent.UserInfo.Lv.ToString();
         }
 
-        public static void UpdateShowRoleHp(this ES_RoleHead self)
-        {
-            Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
-            NumericComponentC numericComponent = unit.GetComponent<NumericComponentC>();
-            float curhp = numericComponent.GetAsLong(NumericType.Now_Hp);
-            float blood = curhp / numericComponent.GetAsLong(NumericType.Now_MaxHp);
-            blood = Mathf.Max(blood, 0f);
-            self.E_RolePiLaoImgImage.fillAmount = blood;
-        }
-        
         //角色疲劳更新
         public static void UpdateShowRolePiLao(this ES_RoleHead self)
         {
-            // Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
-            // int maxPiLao = unit.GetMaxPiLao();
-            // using (zstring.Block())
-            // {
-            //     self.E_RolePiLaoText.text = zstring.Format("{0}{1}/{2}", LanguageComponent.Instance.LoadLocalization("体力:"),
-            //         self.UserInfoComponent.UserInfo.PiLao, maxPiLao);
-            // }
-            //
-            // self.E_RolePiLaoImgImage.fillAmount = 1f * self.UserInfoComponent.UserInfo.PiLao / maxPiLao;
+            Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
+            int maxPiLao = unit.GetMaxPiLao();
+            using (zstring.Block())
+            {
+                self.E_RolePiLaoText.text = zstring.Format("{0}{1}/{2}", LanguageComponent.Instance.LoadLocalization("体力:"),
+                    self.UserInfoComponent.UserInfo.PiLao, maxPiLao);
+            }
+
+            self.E_RolePiLaoImgImage.fillAmount = 1f * self.UserInfoComponent.UserInfo.PiLao / maxPiLao;
         }
 
         //更新活力
