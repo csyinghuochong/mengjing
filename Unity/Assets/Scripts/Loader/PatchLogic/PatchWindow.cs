@@ -110,7 +110,7 @@ public class PatchWindow : MonoBehaviour
             float sizeMB = msg.TotalSizeBytes / 1048576f;
             sizeMB = Mathf.Clamp(sizeMB, 0.1f, float.MaxValue);
             string totalSizeMB = sizeMB.ToString("f1");
-            ShowMessageBox($"发现需要更新的资源, 资源数量 {msg.TotalCount} 资源大小 {totalSizeMB}兆", callback);
+            ShowMessageBox($"发现需要更新的资源，资源数量 {msg.TotalCount} 资源大小 {totalSizeMB}兆。", callback);
         }
         else if (message is PatchEventDefine.DownloadProgressUpdate)
         {
@@ -127,7 +127,7 @@ public class PatchWindow : MonoBehaviour
             {
                 UserEventDefine.UserTryUpdatePackageVersion.SendEventMessage();
             };
-            ShowMessageBox($"更新版本失败, 请检查网络状态.", callback);
+            ShowMessageBox($"更新版本失败，请检查网络状态。", callback);
         }
         else if (message is PatchEventDefine.PatchManifestUpdateFailed)
         {
@@ -135,7 +135,7 @@ public class PatchWindow : MonoBehaviour
             {
                 UserEventDefine.UserTryUpdatePatchManifest.SendEventMessage();
             };
-            ShowMessageBox($"更新资源清单失败, 请检查网络状态.", callback);
+            ShowMessageBox($"更新资源清单失败，请检查网络状态。", callback);
         }
         else if (message is PatchEventDefine.WebFileDownloadFailed)
         {
