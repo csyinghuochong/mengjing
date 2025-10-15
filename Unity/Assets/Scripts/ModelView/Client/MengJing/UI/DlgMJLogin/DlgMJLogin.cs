@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace ET.Client
 {
@@ -10,5 +11,7 @@ namespace ET.Client
         public ServerItem ServerInfo;
 
         public long LastLoginTime;
+
+        public Vector2 YinsixieyiPostion;
     }
 }

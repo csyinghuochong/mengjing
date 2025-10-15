@@ -13,7 +13,11 @@ namespace ET.Client
             self.View.E_SelectBtnButton.AddListener(self.OnSelectBtnButton);
 
             self.View.E_TextButton_1Button.AddListener(() => { self.View.EG_YinSiXieYiRectTransform.gameObject.SetActive(true);  });
-            self.View.E_TextButton_2Button.AddListener(() => { self.View.EG_YongHuXieYiRectTransform.gameObject.SetActive(true); });
+            self.View.E_TextButton_2Button.AddListener(() =>
+            {
+                self.View.EG_YongHuXieYiRectTransform.localPosition = self.YinsixieyiPostion;
+                self.View.EG_YongHuXieYiRectTransform.gameObject.SetActive(true);
+            });
             self.View.E_YinSiXieYiCloseButton.AddListener(() => { self.View.EG_YinSiXieYiRectTransform.gameObject.SetActive(false); });
             self.View.E_YongHuXieYiCloseButton.AddListener(() => { self.View.EG_YongHuXieYiRectTransform.gameObject.SetActive(false); });
 
@@ -36,9 +40,10 @@ namespace ET.Client
             self.View.E_PasswordInputField.onValueChanged.AddListener((string text) => { self.CheckSensitiveWords_Password(); });
 
             self.View.E_TextYinSiText.gameObject.SetActive(false);
-            UILoginHelper.ShowTextList(self.Root(), self.View.E_TextYinSiText.gameObject, GlobalHelp.GetPlatform()).Coroutine();
-          
+           
             self.RequestServerList().Coroutine();
+
+            self.ShowTextList().Coroutine();
 
             // if (string.IsNullOrEmpty(PlayerPrefsHelp.GetString("UIYinSi0627")))
             // {
@@ -46,6 +51,28 @@ namespace ET.Client
             //     PlayerPrefsHelp.SetString("UIYinSi0627", "1");
             // }
             //self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_YinSi).Coroutine();
+        }
+
+        private static async ETTask ShowTextList(this DlgMJLogin self)
+        {
+            self.YinsixieyiPostion = self.View.EG_YongHuXieYiRectTransform.localPosition;
+            
+            self.View.EG_YongHuXieYiRectTransform.localPosition = new Vector2(-3000f, 0f);
+            self.View.EG_YongHuXieYiRectTransform.gameObject.SetActive(true);
+            await  UILoginHelper.ShowTextList(self.Root(), self.View.EG_YongHuXieYiRectTransform.gameObject,  self.View.E_TextYinSiText.gameObject, GlobalHelp.GetPlatform());
+
+            if (self.IsDisposed)
+            {
+                return;
+            }
+            
+            if (self.View.EG_YongHuXieYiRectTransform.localPosition .Equals(self.YinsixieyiPostion) )
+            {
+                return;
+            }
+            
+            self.View.EG_YongHuXieYiRectTransform.localPosition = self.YinsixieyiPostion;
+            self.View.EG_YongHuXieYiRectTransform.gameObject.SetActive(false);
         }
 
         public static void ShowWindow(this DlgMJLogin self, Entity contextData = null)

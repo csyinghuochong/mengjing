@@ -40,6 +40,9 @@ public class TextFitEx : MonoBehaviour
     private bool setposition = false;
 
     private int updateNumber = 0;
+    
+    [SerializeField]
+    private bool onenableUpdate = false;
 
     void Awake()
     {
@@ -56,8 +59,8 @@ public class TextFitEx : MonoBehaviour
         
         if (targetText != null)
         {
-            // 监听Text组件的顶点更新
-            targetText.RegisterDirtyVerticesCallback(OnTextChange);
+            // 监听Text组件的顶点更新  [这个有问题 ，隐藏再打开刷新错乱]
+            //targetText.RegisterDirtyVerticesCallback(OnTextChange);
         }
         else
         {
@@ -67,7 +70,7 @@ public class TextFitEx : MonoBehaviour
 
     void OnEnable()
     {
-        if (targetText != null)
+        if (targetText != null && this.onenableUpdate)
         {
             // 启用时立即处理一次文本
             StartCoroutine(ProcessTextAfterFrame());
@@ -112,8 +115,7 @@ public class TextFitEx : MonoBehaviour
 
         // 必须等当前帧跑完后，不然如果在运行text显示的时候对显示内容进行修改会报错
         yield return new WaitForEndOfFrame();
-
-
+        
         bool debuglog = false;
         if (this.targetText.text.Contains(("若用户继续使用长沙萤火信息科技有限公司所提供的相关产品或服务")))
         {
@@ -164,7 +166,7 @@ public class TextFitEx : MonoBehaviour
             
             if (debuglog)
             {
-                Debug.LogError($"行： {i}   {lingsterr}");
+                //Debug.LogError($"行： {i}   {lingsterr}");
             }
             if (debuglog && IsPunctuation)
             {
@@ -241,7 +243,6 @@ public class TextFitEx : MonoBehaviour
         if (targetText != null)
         {
             targetText.text = text;
-            
             RefreshText();
         }
     }
