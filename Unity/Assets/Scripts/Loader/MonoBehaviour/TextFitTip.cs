@@ -49,8 +49,8 @@ public class TextFitTip : MonoBehaviour
     {
         if (this.enabled && this.setposition)
         {
-            this.localposition = this.transform.localPosition;
-            this.transform.localPosition = new Vector2( localposition.x, this.localposition.y + 1000 );
+            this.localposition = this.transform.GetComponent<RectTransform>().anchoredPosition;
+            this.transform.GetComponent<RectTransform>().anchoredPosition = new Vector2( localposition.x, this.localposition.y + 1000 );
         }
         // 如果没有手动指定Text组件，自动获取
         if (targetText == null)
@@ -224,7 +224,11 @@ public class TextFitTip : MonoBehaviour
             this.OnTextChange();
             this.updateNumber--;
         }
-        this.transform.localPosition = this.localposition;
+
+        if (this.setposition)
+        {
+            this.transform.GetComponent<RectTransform>().anchoredPosition = this.localposition;
+        }
     }
 
     // 公开方法用于手动刷新文本

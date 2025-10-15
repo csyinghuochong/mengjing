@@ -137,11 +137,11 @@ namespace ET.Client
                 {
                     if (string.IsNullOrEmpty(bagInfo.ItemPar))
                     {
-                        itemDes = zstring.Format("{0}\n\n烹饪品质:无？？", itemDes);
+                        itemDes = zstring.Format("{0}\n烹饪品质:无？？", itemDes);
                     }
                     else
                     {
-                        itemDes = zstring.Format("{0}\n\n烹饪品质:{1}", itemDes, bagInfo.ItemPar);
+                        itemDes = zstring.Format("{0}\n烹饪品质:{1}", itemDes, bagInfo.ItemPar);
                     }
                 }
             }
@@ -152,7 +152,7 @@ namespace ET.Client
                 SkillConfig skillCof = SkillConfigCategory.Instance.Get(int.Parse(itemConfig.ItemUsePar));
                 using (zstring.Block())
                 {
-                    itemDes = zstring.Format("{0}\n\n技能描述:{1}", itemDes, skillCof.SkillDescribe);
+                    itemDes = zstring.Format("{0}\n技能描述:{1}", itemDes, skillCof.SkillDescribe);
                 }
             }
 

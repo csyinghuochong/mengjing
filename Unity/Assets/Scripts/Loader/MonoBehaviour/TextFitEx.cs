@@ -225,7 +225,12 @@ public class TextFitEx : MonoBehaviour
             this.OnTextChange();
             this.updateNumber++;
         }
-        this.transform.localPosition = this.localposition;
+
+        if (this.setposition)
+        {
+            this.transform.localPosition = this.localposition;
+        }
+
     }
 
     // 公开方法用于手动刷新文本
