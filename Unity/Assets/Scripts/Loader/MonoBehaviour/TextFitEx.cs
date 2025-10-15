@@ -29,6 +29,9 @@ public class TextFitEx : MonoBehaviour
     private float lastUpdateTime = 0f;
     
     private Vector2 localposition = Vector2.zero;
+    
+    [SerializeField]
+    private bool removeHuanHang = false;
 
     void Awake()
     {
@@ -111,7 +114,10 @@ public class TextFitEx : MonoBehaviour
         }
 
         // 清除上一次添加的换行符号
-        //targetText.text = targetText.text.Replace("\n", string.Empty);
+        if (removeHuanHang)
+        {
+            targetText.text = targetText.text.Replace("\n", string.Empty);
+        }
 
         // 获取TextGenerator的行信息
         var textGenerator = targetText.cachedTextGenerator;

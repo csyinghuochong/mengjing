@@ -5611,7 +5611,7 @@ GameObject:
   - component: {fileID: 1281381395633349369}
   - component: {fileID: 3127069358796852276}
   - component: {fileID: 8653712440273500195}
-  - component: {fileID: 3382580681631055520}
+  - component: {fileID: 4780242895496888372}
   m_Layer: 5
   m_Name: E_TextYinSi
   m_TagString: Untagged
@@ -5714,7 +5714,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HorizontalFit: 0
   m_VerticalFit: 2
---- !u!114 &3382580681631055520
+--- !u!114 &4780242895496888372
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5727,6 +5727,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetText: {fileID: 1281381395633349369}
+  removeHuanHang: 0
 --- !u!1 &3084173624456602519
 GameObject:
   m_ObjectHideFlags: 0

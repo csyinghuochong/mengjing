@@ -485,7 +485,7 @@ GameObject:
   - component: {fileID: 22236070}
   - component: {fileID: 11459808}
   - component: {fileID: 11425064}
-  - component: {fileID: 3300472879133850038}
+  - component: {fileID: 7417094375506273385}
   m_Layer: 5
   m_Name: E_ItemDes
   m_TagString: Untagged
@@ -569,7 +569,7 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
   m_EffectDistance: {x: 1, y: -1}
   m_UseGraphicAlpha: 1
---- !u!114 &3300472879133850038
+--- !u!114 &7417094375506273385
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -578,10 +578,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 135434}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2851086673e5da8459f746cab022d825, type: 3}
+  m_Script: {fileID: 11500000, guid: 84d127c3ccc71534386fb0411d8aa897, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   targetText: {fileID: 11459808}
+  removeHuanHang: 1
 --- !u!1 &142002
 GameObject:
   m_ObjectHideFlags: 0
