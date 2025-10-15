@@ -146,8 +146,7 @@ public class TextFit : MonoBehaviour
             }
             else
             {
-
-                Debug.LogError("shousddsdsd");
+                Debug.LogError($"句首有符号： {targetText.text}");
                 
                 // 有标点时保存当前下标
                 ChangeIndex = TextLine[i].startCharIdx;
