@@ -114,7 +114,7 @@ namespace ET.Client
             NetClient2Main_CheckSession response =   await clientSenderComponent.RequestCheckSession(mapComponent.MapType);
             
             Log.Warning($"NetClient2Main_CheckSession: {response.Error}");
-            FlyTipComponent.Instance.ShowFlyTipDi($"检测网络: {response.Error}");
+            //FlyTipComponent.Instance.ShowFlyTipDi($"检测网络: {response.Error}");
 
             if (response.Error == ErrorCode.ERR_Success)  //== ErrorCode.ERR_SessionDisconnect
             {
