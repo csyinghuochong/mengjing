@@ -125,7 +125,7 @@ namespace ET.Client
                 using (zstring.Block())
                 {
                     string itempar = string.IsNullOrEmpty(bagInfo.ItemPar) ? " " : $"鉴定符品质:{bagInfo.ItemPar}"; 
-                    itemDes =zstring.Format("{0}\n\n{1}\n品质越高，鉴定出极品的概率越高。\n鉴定符品质与制造者技巧值相关。", itemDes, itempar);
+                    itemDes =zstring.Format("{0}\n{1}\n品质越高，鉴定出极品的概率越高。\n鉴定符品质与制造者技巧值相关。", itemDes, itempar);
                 }
             }
 
