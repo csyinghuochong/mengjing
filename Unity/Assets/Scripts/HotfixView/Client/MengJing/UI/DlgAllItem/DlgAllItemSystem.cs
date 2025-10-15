@@ -39,6 +39,7 @@ namespace ET.Client
                 newItem.transform.Find("Image_Quality").GetComponent<Image>().sprite = sp2;
 
                 newItem.transform.Find("Text_Name").GetComponent<Text>().text = itemConfig.ItemName;
+                newItem.transform.Find("Text_Name").GetComponent<Text>().color = FunctionUI.QualityReturnColorDi(itemConfig.ItemQuality);
                 
                 newItem.transform.Find("Image_Icon").GetComponent<Button>().AddListener(() =>
                 {
