@@ -106,8 +106,8 @@ public class TextFitEx : MonoBehaviour
         bool debuglog = false;
         if (this.targetText.text.Contains(("若用户继续使用长沙萤火信息科技有限公司所提供的相关产品或服务")))
         {
-            debuglog = true;
-            Debug.LogError("this.targetText.text: " +  this.targetText.text);
+            //debuglog = true;
+            //Debug.LogError("this.targetText.text: " +  this.targetText.text);
         }
 
         // 清除上一次添加的换行符号
@@ -143,23 +143,20 @@ public class TextFitEx : MonoBehaviour
                 }
             }
 
-            if (debuglog)
-            {
-                Debug.LogError($"行： {i}   {lingsterr}");
-            }
-
             string ccc = TempText[TextLine[i].startCharIdx].ToString();
             
             // 首位是否有标点
             bool IsPunctuation = Regex.IsMatch(ccc, strPunctuation);
             
-            
+            if (debuglog)
+            {
+                Debug.LogError($"行： {i}   {lingsterr}");
+            }
             if (debuglog && IsPunctuation)
             {
-                Debug.LogError($"行符号： {i}  {lingsterr}  {ccc}");
+                //Debug.LogError($"行首符号： {i}    {ccc}");
             }
 
-            
             // 因为将换行空格都改成不换行空格后需要另外判断下如果首字符是不换行空格那么还是需要调整换行字符的下标
             if (TempText[TextLine[i].startCharIdx].ToString() == Non_breaking_space)
             {
