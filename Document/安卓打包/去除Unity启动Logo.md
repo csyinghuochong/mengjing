@@ -1,4 +1,6 @@
-工具来源：https://github.com/kiraio-moe/USSR，还得更新一下工具的文件https://github.com/kiraio-moe/USSR/issues/29
+工具来源：https://github.com/kiraio-moe/USSR，工具放在USSR-v1.1.8-net8.0-win-x64文件夹中了。 
+
+Tip: 直接从GitHub下载的工具对Unity2022.3.60f1c1会报错，要手动更新一个文件 https://github.com/kiraio-moe/USSR/issues/29。
 
 ![屏幕截图 2025-10-15 152146](..\Images\屏幕截图 2025-10-15 152146.png)
 
