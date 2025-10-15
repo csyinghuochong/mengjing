@@ -271,6 +271,16 @@ namespace ET.Server
             return StartSceneConfigCategory.Instance.LoginCenterConfig.ActorId;
         }
 
+        public static List<ActorId> GetRealmId()
+        {
+            List<ActorId> actorIds = new List<ActorId>();
+            foreach (StartSceneConfig startSceneConfig in StartSceneConfigCategory.Instance.Realms)
+            {
+                actorIds.Add(startSceneConfig.ActorId);
+            }
+            
+            return actorIds;
+        }
         
         public static ActorId GetQueueServerId(int zone)
         {

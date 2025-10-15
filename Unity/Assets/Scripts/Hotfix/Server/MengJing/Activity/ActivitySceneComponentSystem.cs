@@ -54,6 +54,8 @@ namespace ET.Server
             self.MapIdList.Add(UnitCacheHelper.GetUnionServerId(self.Zone()));
             self.MapIdList.Add(UnitCacheHelper.GetSoloServerId(self.Zone()));
             self.MapIdList.Add(UnitCacheHelper.GetDbCacheId(self.Zone()));
+            self.MapIdList.Add(UnitCacheHelper.GetLoginCenterId());
+            self.MapIdList.AddRange(UnitCacheHelper.GetRealmId());
             
             self.InitDayActivity().Coroutine();
             self.InitFunctionButton().Coroutine();
