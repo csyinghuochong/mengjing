@@ -42,7 +42,6 @@ namespace ET.Client
             string text_new = "";
             string text_old = self.View.E_CreateRoleNameInputField.text;
             MaskWordHelper.Instance.IsContainSensitiveWords(ref text_old, out text_new);
-            text_old = text_old.Replace("*", "");
             self.View.E_CreateRoleNameInputField.text = text_old;
         }
 
