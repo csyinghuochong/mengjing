@@ -48,8 +48,8 @@ public class TextFitEx : MonoBehaviour
     {
         if (this.enabled && this.setposition)
         {
-            this.localposition = this.transform.localPosition;
-            this.transform.localPosition = new Vector2( localposition.x, this.localposition.y + 1000 );
+            this.localposition = this.transform.GetComponent<RectTransform>().anchoredPosition;
+            this.transform.GetComponent<RectTransform>().anchoredPosition = new Vector2( localposition.x, this.localposition.y + 1000 );
         }
         // 如果没有手动指定Text组件，自动获取
         if (targetText == null)
@@ -141,6 +141,7 @@ public class TextFitEx : MonoBehaviour
         
         // 需要改变的字符序号
         int ChangeIndex = -1;
+        bool showhuanhang = false;
         TempText = new System.Text.StringBuilder(targetText.text);
         
         for (int i = 1; i < TextLine.Count; i++)
@@ -212,7 +213,7 @@ public class TextFitEx : MonoBehaviour
                 if (ChangeIndex > 0 && TempText[ChangeIndex - 1] != '\n')
                 {
                     TempText.Insert(ChangeIndex, "\n");
-                    
+                    showhuanhang = true;
                     break;
                 }
             }
@@ -220,7 +221,7 @@ public class TextFitEx : MonoBehaviour
 
         targetText.text = TempText.ToString();
         isProcessingText = false;
-        if (this.updateNumber <= 1)
+        if (showhuanhang || this.updateNumber <= 1)
         {
             this.OnTextChange();
             this.updateNumber++;
@@ -228,7 +229,7 @@ public class TextFitEx : MonoBehaviour
 
         if (this.setposition)
         {
-            this.transform.localPosition = this.localposition;
+            this.transform.GetComponent<RectTransform>().anchoredPosition = this.localposition;
         }
 
     }
