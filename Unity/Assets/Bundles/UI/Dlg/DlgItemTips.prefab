@@ -485,6 +485,7 @@ GameObject:
   - component: {fileID: 22236070}
   - component: {fileID: 11459808}
   - component: {fileID: 11425064}
+  - component: {fileID: 3300472879133850038}
   m_Layer: 5
   m_Name: E_ItemDes
   m_TagString: Untagged
@@ -568,6 +569,19 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
   m_EffectDistance: {x: 1, y: -1}
   m_UseGraphicAlpha: 1
+--- !u!114 &3300472879133850038
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 135434}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2851086673e5da8459f746cab022d825, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetText: {fileID: 11459808}
 --- !u!1 &142002
 GameObject:
   m_ObjectHideFlags: 0

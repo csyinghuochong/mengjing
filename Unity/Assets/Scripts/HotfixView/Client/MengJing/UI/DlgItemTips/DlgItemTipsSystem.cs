@@ -41,7 +41,7 @@ namespace ET.Client
             self.View.uiTransform.GetComponent<RectTransform>().anchoredPosition = vector2;
         }
 
-        public static void  RefreshInfo(this DlgItemTips self, ItemInfo bagInfo, ItemOperateEnum itemOperateEnum, int currentHouse)
+        public static   void RefreshInfo(this DlgItemTips self, ItemInfo bagInfo, ItemOperateEnum itemOperateEnum, int currentHouse)
         {
             self.BagInfo = bagInfo;
             self.ItemOperateEnum = itemOperateEnum;
@@ -109,28 +109,9 @@ namespace ET.Client
             self.View.E_ItemNameText.color = FunctionUI.QualityReturnColor(itemConfig.ItemQuality);
 
             string itemDes = ItemViewHelp.GetItemDesc(bagInfo).Replace("\\n", "\n");
-            self.View.E_ItemDesText.text = itemDes;
+            //self.View.E_ItemDesText.text = itemDes;
 
-            //Dictionary<int, ItemConfig> allitems = ItemConfigCategory.Instance.GetAll();
-            //string itemDes = string.Empty;
-            //foreach (var item in allitems)
-            //{
-            //    if (item.Value.Id > 1800404)
-            //    {
-            //        break;
-            //    }
-            //    bagInfo.ItemID = item.Value.Id;
-            //    itemDes = ItemViewHelp.GetItemDesc(bagInfo).Replace("\\n", "\n");
-            //    self.View.E_ItemDesText.text = itemDes;
-
-            //    bool checkpunctuation = PunctuationCheckHelper.DetectMiddleWhitespace(self.View.E_ItemDesText);
-            //    if (checkpunctuation)
-            //    {
-            //        Debug.LogWarning($"{bagInfo.ItemID}");
-            //    }
-            //    await self.Root().GetComponent<TimerComponent>().WaitAsync(200);
-            //}
-
+           
             float exceedWidth = self.View.E_ItemNameText.preferredWidth - self.Lab_ItemNameWidth;
             if (exceedWidth > -20)
             {
@@ -144,7 +125,7 @@ namespace ET.Client
                 using (zstring.Block())
                 {
                     string itempar = string.IsNullOrEmpty(bagInfo.ItemPar) ? " " : $"鉴定符品质:{bagInfo.ItemPar}"; 
-                    self.View.E_ItemDesText.GetComponent<Text>().text =zstring.Format("{0}\n\n{1}\n品质越高，鉴定出极品的概率越高。\n鉴定符品质与制造者技巧值相关。", itemDes, itempar);
+                    itemDes =zstring.Format("{0}\n\n{1}\n品质越高，鉴定出极品的概率越高。\n鉴定符品质与制造者技巧值相关。", itemDes, itempar);
                 }
             }
 
@@ -156,11 +137,11 @@ namespace ET.Client
                 {
                     if (string.IsNullOrEmpty(bagInfo.ItemPar))
                     {
-                        self.View.E_ItemDesText.GetComponent<Text>().text = zstring.Format("{0}\n\n烹饪品质:无？？", itemDes);
+                        itemDes = zstring.Format("{0}\n\n烹饪品质:无？？", itemDes);
                     }
                     else
                     {
-                        self.View.E_ItemDesText.GetComponent<Text>().text = zstring.Format("{0}\n\n烹饪品质:{1}", itemDes, bagInfo.ItemPar);
+                        itemDes = zstring.Format("{0}\n\n烹饪品质:{1}", itemDes, bagInfo.ItemPar);
                     }
                 }
             }
@@ -171,7 +152,7 @@ namespace ET.Client
                 SkillConfig skillCof = SkillConfigCategory.Instance.Get(int.Parse(itemConfig.ItemUsePar));
                 using (zstring.Block())
                 {
-                    self.View.E_ItemDesText.GetComponent<Text>().text = zstring.Format("{0}\n\n技能描述:{1}", itemDes, skillCof.SkillDescribe);
+                    itemDes = zstring.Format("{0}\n\n技能描述:{1}", itemDes, skillCof.SkillDescribe);
                 }
             }
 
@@ -181,7 +162,7 @@ namespace ET.Client
                 int sceneID = int.Parse(self.BagInfo.ItemPar.Split('@')[0]);
                 using (zstring.Block())
                 {
-                    self.View.E_ItemDesText.GetComponent<Text>().text = zstring.Format("{0}\n前往地图:{1}开启藏宝图!", itemConfig.ItemDes,
+                    itemDes = zstring.Format("{0}\n前往地图:{1}开启藏宝图!", itemConfig.ItemDes,
                         DungeonConfigCategory.Instance.Get(sceneID).ChapterName);
                 }
             }
@@ -195,7 +176,10 @@ namespace ET.Client
             {
                 self.View.E_ItemLvText.text = langStr + ":1";
             }
-
+            
+            self.View.E_ItemDesText.text = (itemDes);
+            //self.View.E_ItemDesText.GetComponent<TextFit>().SetText(itemDes);
+            
             // 显示按钮
             self.View.E_UseButton.GetComponentInChildren<Text>().text = itemConfig.ItemSubType == 114 ? "镶嵌" : "使用";
             self.View.EG_BagOpenSetRectTransform.gameObject.SetActive(false);
