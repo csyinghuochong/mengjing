@@ -49,7 +49,7 @@ namespace ET.Client
             son.transform.localScale = Vector3.one;
         }
         
-        public static void ShowTextList(GameObject textItem, int platForm)
+        public static async ETTask ShowTextList(Scene root, GameObject textItem, int platForm)
         {
             string pageHtml = GetYingSiText(platForm);
 
@@ -98,14 +98,12 @@ namespace ET.Client
                     SetParent(textGo, parentobject);
 
                     Text text = textGo.GetComponent<Text>();
-
                     text.text = lineStr;
-
-                    text.GetComponent<RectTransform>().sizeDelta = new Vector2(1400, text.preferredHeight);
-
                     text.gameObject.SetActive(false);
                     text.gameObject.SetActive(true);
-
+                    await root.GetComponent<TimerComponent>().WaitAsync(100);
+                        
+                    text.GetComponent<RectTransform>().sizeDelta = new Vector2(1400, text.preferredHeight);
                     lineStr = string.Empty;
                 }
             }

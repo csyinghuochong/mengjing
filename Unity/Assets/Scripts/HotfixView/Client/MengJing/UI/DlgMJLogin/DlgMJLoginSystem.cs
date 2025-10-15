@@ -36,7 +36,7 @@ namespace ET.Client
             self.View.E_PasswordInputField.onValueChanged.AddListener((string text) => { self.CheckSensitiveWords_Password(); });
 
             self.View.E_TextYinSiText.gameObject.SetActive(false);
-            UILoginHelper.ShowTextList(self.View.E_TextYinSiText.gameObject, GlobalHelp.GetPlatform());
+            UILoginHelper.ShowTextList(self.Root(), self.View.E_TextYinSiText.gameObject, GlobalHelp.GetPlatform()).Coroutine();
           
             self.RequestServerList().Coroutine();
 
