@@ -50,7 +50,10 @@ namespace ET.Client
             self.View.E_Image_SkillIconImage.sprite = sp;
 
             self.View.E_Lab_SkillNameText.text = skillConfig.SkillName;
-            self.View.E_Lab_SkillDesText.text = skillConfig.SkillDescribe.Replace("\\n", "\n") + addTip;
+            
+            string tipdesc = skillConfig.SkillDescribe.Replace("\\n", "\n") + addTip;
+            //self.View.E_Lab_SkillDesText.text = tipdesc
+            self.View.E_Lab_SkillDesText.GetComponent<TextFitTip>().SetText(tipdesc);
 
             if (skillConfig.SkillType == (int)SkillTypeEnum.PassiveSkill ||
                 skillConfig.SkillType == (int)SkillTypeEnum.PassiveAddProSkill ||
