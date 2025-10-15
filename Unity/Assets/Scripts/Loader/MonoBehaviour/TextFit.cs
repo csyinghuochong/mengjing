@@ -32,10 +32,11 @@ public class TextFit : MonoBehaviour
 
     void Awake()
     {
-
-        this.localposition = this.transform.localPosition;
-        this.transform.localPosition = new Vector2( localposition.x, this.localposition.y + 1000 );
-        
+        if (this.enabled)
+        {
+            this.localposition = this.transform.localPosition;
+            this.transform.localPosition = new Vector2( localposition.x, this.localposition.y + 1000 );
+        }
         // 如果没有手动指定Text组件，自动获取
         if (targetText == null)
         {
@@ -58,23 +59,18 @@ public class TextFit : MonoBehaviour
         if (targetText != null)
         {
             // 启用时立即处理一次文本
-            //StartCoroutine(ProcessTextAfterFrame());
+            StartCoroutine(ProcessTextAfterFrame());
         }
     }
-
-    private void Update()
-    {
-        // if (this.lastUpdateTime > 0f && Time.time - this.lastUpdateTime > 0.1f)
-        // {
-        //     this.lastUpdateTime = 0f;
-        //     this.gameObject.SetActive(false);
-        //     this.gameObject.SetActive(true);
-        // }
-    }
-
+    
     // 解决换行空格问题
     public void OnTextChange()
     {
+        if (!this.enabled)
+        {
+           return;
+        }
+        
         if (isProcessingText) return;
         
         if (targetText != null && targetText.text.Contains(" "))
