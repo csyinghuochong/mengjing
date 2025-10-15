@@ -16,7 +16,6 @@ namespace ET.Client
         }
     }
 
-  
     [FriendOf(typeof(Scroll_Item_ChatItem))]
     [FriendOf(typeof(PlayerInfoComponent))]
     [FriendOf(typeof(DlgChat))]
@@ -86,20 +85,33 @@ namespace ET.Client
 
         private static void CheckSensitiveWords(this DlgChat self)
         {
+            string text_new = "";
+            string text_old = self.View.E_ChatInputField.GetComponent<InputField>().text;
+
             PlayerInfoComponent playerInfoComponent = self.Root().GetComponent<PlayerInfoComponent>();
             bool gm = GMHelp.IsGmAccount(playerInfoComponent.Account);
             if (gm)
             {
-                return;
+                var excludedCommands = new List<string>
+                {
+                    "#etgm", "#blood", "#guanghuan", "#animation", "#sound",
+                    "#showsceneunit", "#showmonster", "#unloadasset", "#light",
+                    "#fps", "#fps60", "#resetall", "#allitemui"
+                };
+
+                // 检查当前输入是否是完整命令，或者是某个命令的前缀
+                bool isExcludedCommand = excludedCommands.Any(cmd => text_old == cmd || cmd.StartsWith(text_old));
+
+                if (isExcludedCommand)
+                {
+                    return;
+                }
             }
-            string text_new = "";
-            string text_old = self.View.E_ChatInputField.GetComponent<InputField>().text;
-            if (text_old.Equals("#etgm"))
-                return;
-            MaskWordHelper.Instance.IsContainSensitiveWords(ref text_old,out text_new);
+
+            MaskWordHelper.Instance.IsContainSensitiveWords(ref text_old, out text_new);
             self.View.E_ChatInputField.GetComponent<InputField>().text = text_old;
         }
-        
+
         private static async ETTask OnSendButton(this DlgChat self)
         {
             string text = self.View.E_ChatInputField.text;
@@ -112,107 +124,154 @@ namespace ET.Client
             PlayerInfoComponent playerInfoComponent = self.Root().GetComponent<PlayerInfoComponent>();
 
             bool gm = ET.GMHelp.IsGmAccount(playerInfoComponent.Account);
-            if(CommonHelp.IsBanHaoZone( playerInfoComponent.ServerItem.ServerId ))
+            if (CommonHelp.IsBanHaoZone(playerInfoComponent.ServerItem.ServerId))
             {
                 gm = true;
             }
 
             bool mask = false;
-            if (!gm)
+            if (gm)
             {
-                // 替换敏感词
-                mask = MaskWordHelper.Instance.IsContainSensitiveWords(text);
+                if (text.Equals("#etgm"))
+                {
+                    self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_GM).Coroutine();
+                    return;
+                }
+
+                if (text.Equals("#blood"))
+                {
+                    SettingData.ShowBlood = !SettingData.ShowBlood;
+                    self.View.E_ChatInputField.GetComponent<InputField>().text = "";
+                    return;
+                }
+
+                if (text.Equals("#guanghuan"))
+                {
+                    SettingData.ShowGuangHuan = !SettingData.ShowGuangHuan;
+                    self.View.E_ChatInputField.GetComponent<InputField>().text = "";
+                    return;
+                }
+
+                if (text.Equals("#animation"))
+                {
+                    SettingData.ShowAnimation = !SettingData.ShowAnimation;
+                    self.View.E_ChatInputField.GetComponent<InputField>().text = "";
+                    return;
+                }
+
+                if (text.Equals("#sound"))
+                {
+                    SettingData.PlaySound = !SettingData.PlaySound;
+                    self.View.E_ChatInputField.GetComponent<InputField>().text = "";
+                    return;
+                }
+
+                if (text.Equals("#showsceneunit"))
+                {
+                    SettingData.ShowSceneUnit = !SettingData.ShowSceneUnit;
+                    self.View.E_ChatInputField.GetComponent<InputField>().text = "";
+                    return;
+                }
+
+                if (text.Equals("#showmonster"))
+                {
+                    SettingData.ShowMonster = !SettingData.ShowMonster;
+                    return;
+                }
+
+                if (text.Equals("#unloadasset"))
+                {
+                    self.Root().GetComponent<SceneManagerComponent>().UnLoadAsset();
+                    return;
+                }
+
+                if (text.Equals("#light"))
+                {
+                    GameObject T1errain = GameObject.Find("AdditiveHide/ScenceModelSet/Directional Light (1)");
+                    T1errain.gameObject.SetActive(!T1errain.gameObject.activeSelf);
+                    return;
+                }
+
+                if (text.Equals("#fps"))
+                {
+                    self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgMain>().ShowPing();
+                    return;
+                }
+
+                if (text.Equals("#fps60"))
+                {
+                    CommonViewHelper.TargetFrameRate(60);
+                    return;
+                }
+
+                if (text.Equals("#resetall"))
+                {
+                    bool svalue = !SettingData.ShowEffect;
+                    SettingData.ShowBlood = svalue;
+                    SettingData.ShowEffect = svalue;
+                    SettingData.ShowGuangHuan = svalue;
+                    SettingData.ShowAnimation = svalue;
+                    SettingData.PlaySound = svalue;
+                    self.View.E_ChatInputField.GetComponent<InputField>().text = "";
+                    return;
+                }
+
+                if (text.Equals("#allitemui"))
+                {
+                    self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_AllItem).Coroutine();
+                    return;
+                }
+
+                if (text.Contains("#"))
+                {
+                    string[] commands = text.Split('#');
+                    if (commands[0] == "3")
+                    {
+                        return;
+                    }
+
+                    if (commands[1].Contains("alltask"))
+                    {
+                        List<TaskConfig> tasks = TaskConfigCategory.Instance.GetAll().Values.ToList();
+                        for (int i = 0; i < tasks.Count; i++)
+                        {
+                            if (tasks[i].TaskType != (int)TaskTargetType.ItemID_Number_2)
+                            {
+                                continue;
+                            }
+
+                            int monster = tasks[i].Target[0];
+                            if (!MonsterConfigCategory.Instance.Contain(monster))
+                            {
+                                Log.Error($"任务ID: {tasks[i].Id} 错误怪物ID: {monster}");
+                            }
+                        }
+
+                        return;
+                    }
+
+                    if (commands[1].Contains("chuji")
+                        || commands[1].Contains("zhongji")
+                        || commands[1].Contains("zhongji")
+                       )
+                    {
+                        GMNetHelp.SendGmCommands(self.Root(), text);
+                        return;
+                    }
+
+                    GMNetHelp.SendGmCommand(self.Root(), text);
+
+                    if (text == "#hightest" || text == "#middletest")
+                    {
+                        await UserInfoNetHelper.RequestUserInfoInit(self.Root());
+                        await ChengJiuNetHelper.GetChengJiuList(self.Root());
+                    }
+
+                    return;
+                }
             }
 
-            if (text.Equals("#etgm"))
-            {
-                self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_GM).Coroutine();
-                return;
-            }
-
-            if (text.Equals("#blood"))
-            {
-                SettingData.ShowBlood = !SettingData.ShowBlood;
-                self.View.E_ChatInputField.GetComponent<InputField>().text = "";
-                return;
-            }
-
-            if (text.Equals("#guanghuan"))
-            {
-                SettingData.ShowGuangHuan = !SettingData.ShowGuangHuan;
-                self.View.E_ChatInputField.GetComponent<InputField>().text = "";
-                return;
-            }
-
-            if (text.Equals("#animation"))
-            {
-                SettingData.ShowAnimation = !SettingData.ShowAnimation;
-                self.View.E_ChatInputField.GetComponent<InputField>().text = "";
-                return;
-            }
-
-            if (text.Equals("#sound"))
-            {
-                SettingData.PlaySound = !SettingData.PlaySound;
-                self.View.E_ChatInputField.GetComponent<InputField>().text = "";
-                return;
-            }
-
-            if (text.Equals("#showsceneunit"))
-            {
-                SettingData.ShowSceneUnit = !SettingData.ShowSceneUnit;
-                self.View.E_ChatInputField.GetComponent<InputField>().text = "";
-                return;
-            }
-
-            if (text.Equals("#showmonster"))
-            {
-                SettingData.ShowMonster = !SettingData.ShowMonster;
-                return;
-            }
-
-            if (text.Equals("#unloadasset"))
-            {
-                self.Root().GetComponent<SceneManagerComponent>().UnLoadAsset();
-                return;
-            }
-
-            if (text.Equals("#light"))
-            {
-                GameObject T1errain = GameObject.Find("AdditiveHide/ScenceModelSet/Directional Light (1)");
-                T1errain.gameObject.SetActive(!T1errain.gameObject.activeSelf);
-                return;
-            }
-
-            if (text.Equals("#fps"))
-            {
-                self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgMain>().ShowPing();
-                return;
-            }
-            
-            if (text.Equals("#fps60"))
-            {
-                CommonViewHelper.TargetFrameRate(60);
-                return;
-            }
-            
-            if (text.Equals("#resetall"))
-            {
-                bool svalue = !SettingData.ShowEffect;
-                SettingData.ShowBlood = svalue;
-                SettingData.ShowEffect = svalue;
-                SettingData.ShowGuangHuan = svalue;
-                SettingData.ShowAnimation = svalue;
-                SettingData.PlaySound = svalue;
-                self.View.E_ChatInputField.GetComponent<InputField>().text = "";
-                return;
-            }
-
-            if (text.Equals("#allitemui"))
-            {
-                self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_AllItem).Coroutine();
-                return;
-            }
+            mask = MaskWordHelper.Instance.IsContainSensitiveWords(text);
 
             if (mask)
             {
@@ -227,55 +286,7 @@ namespace ET.Client
                 return;
             }
 
-            if (text.Contains("#"))
-            {
-                string[] commands = text.Split('#');
-                if (commands[0] == "3")
-                {
-                    return;
-                }
-
-                if (commands[1].Contains("alltask"))
-                {
-                    List<TaskConfig> tasks = TaskConfigCategory.Instance.GetAll().Values.ToList();
-                    for (int i = 0; i < tasks.Count; i++)
-                    {
-                        if (tasks[i].TaskType != (int)TaskTargetType.ItemID_Number_2)
-                        {
-                            continue;
-                        }
-
-                        int monster = tasks[i].Target[0];
-                        if (!MonsterConfigCategory.Instance.Contain(monster))
-                        {
-                            Log.Error($"任务ID: {tasks[i].Id} 错误怪物ID: {monster}");
-                        }
-                    }
-
-                    return;
-                }
-
-                if (commands[1].Contains("chuji")
-                    || commands[1].Contains("zhongji")
-                    || commands[1].Contains("zhongji")
-                   )
-                {
-                    GMNetHelp.SendGmCommands(self.Root(), text);
-                    return;
-                }
-
-                GMNetHelp.SendGmCommand(self.Root(), text);
-                
-                if (text == "#hightest" || text == "#middletest")
-                {
-                    await UserInfoNetHelper.RequestUserInfoInit(self.Root());
-                    await ChengJiuNetHelper.GetChengJiuList(self.Root());
-                }
-            }
-            else
-            {
-                await ChatNetHelper.RequestSendChat(self.Root(), itemType, text);
-            }
+            await ChatNetHelper.RequestSendChat(self.Root(), itemType, text);
 
             if (self.IsDisposed)
             {
@@ -294,7 +305,7 @@ namespace ET.Client
                     item.uiTransform = null;
                 }
             }
-            
+
             Scroll_Item_ChatItem scrollItemChatItem = self.ScrollItemChatItems[index].BindTrans(transform);
             scrollItemChatItem.Refresh(self.ShowChatInfos[index]);
         }
