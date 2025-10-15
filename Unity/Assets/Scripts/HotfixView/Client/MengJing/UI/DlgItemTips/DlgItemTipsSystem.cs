@@ -178,7 +178,7 @@ namespace ET.Client
             }
             
             //self.View.E_ItemDesText.text = (itemDes);
-            self.View.E_ItemDesText.GetComponent<TextFitEx>().SetText(itemDes);
+            self.View.E_ItemDesText.GetComponent<TextFitTip>().SetText(itemDes);
             
             // 显示按钮
             self.View.E_UseButton.GetComponentInChildren<Text>().text = itemConfig.ItemSubType == 114 ? "镶嵌" : "使用";
