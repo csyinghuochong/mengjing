@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using UnityEngine;
@@ -16,6 +17,8 @@ public class TextFitEx : MonoBehaviour
 
     /// 用于存储text组件中的内容
     private System.Text.StringBuilder TempText = null;
+    
+    private System.Text.StringBuilder OldTempText = null;
 
     /// 用于存储text生成器中的内容
     private IList<UILineInfo> TextLine;
@@ -35,6 +38,8 @@ public class TextFitEx : MonoBehaviour
     
     [SerializeField]
     private bool setposition = false;
+
+    private int updateNumber = 0;
 
     void Awake()
     {
@@ -213,14 +218,12 @@ public class TextFitEx : MonoBehaviour
 
         targetText.text = TempText.ToString();
         isProcessingText = false;
-        if (targetText.text.Equals((TempText)))
+        if (this.updateNumber <= 1)
         {
             this.OnTextChange();
+            this.updateNumber++;
         }
-        else
-        {
-            this.transform.localPosition = this.localposition;
-        }
+        this.transform.localPosition = this.localposition;
     }
 
     // 公开方法用于手动刷新文本
