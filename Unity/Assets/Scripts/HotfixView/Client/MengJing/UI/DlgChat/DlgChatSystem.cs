@@ -88,10 +88,10 @@ namespace ET.Client
         {
             PlayerInfoComponent playerInfoComponent = self.Root().GetComponent<PlayerInfoComponent>();
             bool gm = GMHelp.IsGmAccount(playerInfoComponent.Account);
-            // if (gm)
-            // {
-            //     return;
-            // }
+            if (gm)
+            {
+                return;
+            }
             string text_new = "";
             string text_old = self.View.E_ChatInputField.GetComponent<InputField>().text;
             if (text_old.Equals("#etgm"))
@@ -118,12 +118,11 @@ namespace ET.Client
             }
 
             bool mask = false;
-            // if (!gm)
-            // {
-            //     // 替换敏感词
-            //     mask = MaskWordHelper.Instance.IsContainSensitiveWords(text);
-            // }
-            mask = MaskWordHelper.Instance.IsContainSensitiveWords(text);
+            if (!gm)
+            {
+                // 替换敏感词
+                mask = MaskWordHelper.Instance.IsContainSensitiveWords(text);
+            }
 
             if (text.Equals("#etgm"))
             {
@@ -206,6 +205,12 @@ namespace ET.Client
                 SettingData.ShowAnimation = svalue;
                 SettingData.PlaySound = svalue;
                 self.View.E_ChatInputField.GetComponent<InputField>().text = "";
+                return;
+            }
+
+            if (text.Equals("#allitemui"))
+            {
+                self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_AllItem).Coroutine();
                 return;
             }
 

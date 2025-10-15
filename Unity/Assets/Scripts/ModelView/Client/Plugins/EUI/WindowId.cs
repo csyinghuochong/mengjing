@@ -234,5 +234,6 @@ namespace ET.Client
 		WindowID_FangChengMiTip,
 		WindowID_DragonDungeonPrepare,
 		WindowID_DragonDungeonSettlement,
+		WindowID_AllItem,
 	}
 }
