@@ -119,6 +119,18 @@ namespace ET.Client
             self.ES_RewardList.Refresh(chengJiuConfig.RewardItems);
         }
 
+        private static async ETTask UpdateTextdesc(this ES_ChengJiuReward self, int rewardId)
+        {
+            ChengJiuRewardConfig chengJiuConfig = ChengJiuRewardConfigCategory.Instance.Get(rewardId);
+            
+            //self.E_Text_RewardDescText.text = chengJiuConfig.Desc;
+            self.E_Text_RewardDescText.rectTransform.anchoredPosition = new Vector2(-402f, 1140f);
+            self.E_Text_RewardDescText.GetComponent<TextFitTip>().SetText(chengJiuConfig.Desc);
+
+            await self.Root().GetComponent<TimerComponent>().WaitAsync(200);
+            self.E_Text_RewardDescText.rectTransform.anchoredPosition = new Vector2(-402f, 140f);
+        }
+
         private static void OnUpdateSlectInfo(this ES_ChengJiuReward self, int rewardId)
         {
             ChengJiuRewardConfig chengJiuConfig = ChengJiuRewardConfigCategory.Instance.Get(rewardId);
@@ -133,8 +145,9 @@ namespace ET.Client
                 self.E_Text_RewardPointText.text = zstring.Format("{0}成就奖励", chengJiuConfig.NeedPoint);
             }
 
-            self.E_Text_RewardDescText.text = chengJiuConfig.Desc;
 
+            self.UpdateTextdesc(rewardId).Coroutine();
+            
             self.E_Text_TotalPointText.text = self.Root().GetComponent<ChengJiuComponentC>().TotalChengJiuPoint.ToString();
         }
     }

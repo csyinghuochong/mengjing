@@ -352,6 +352,7 @@ GameObject:
   - component: {fileID: 369821229495754354}
   - component: {fileID: 6585424303956741838}
   - component: {fileID: 6033595584579822142}
+  - component: {fileID: 6132876644803812212}
   m_Layer: 5
   m_Name: E_Text_RewardDesc
   m_TagString: Untagged
@@ -375,7 +376,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -401.9958, y: 140}
+  m_AnchoredPosition: {x: -402, y: 140}
   m_SizeDelta: {x: 550, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &369821229495754354
@@ -435,6 +436,23 @@ MonoBehaviour:
   m_EffectColor: {r: 0.6117647, g: 0.38431373, b: 0.21568628, a: 0.5}
   m_EffectDistance: {x: 1, y: -1}
   m_UseGraphicAlpha: 1
+--- !u!114 &6132876644803812212
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2120816487818530194}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 678ea9f7e937aa9429becf648440c2b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetText: {fileID: 6585424303956741838}
+  removeHuanHang: 0
+  setposition: 0
+  updateNumber: 0
+  onenableUpdate: 0
 --- !u!1 &2152617966391334463
 GameObject:
   m_ObjectHideFlags: 0
@@ -1059,6 +1077,7 @@ MonoBehaviour:
   moveDistance: 2000
   isLoop: 0
   MoveToTime: 0
+  ShouldPlay: 1
 --- !u!1 &5932826092619187337
 GameObject:
   m_ObjectHideFlags: 0
@@ -1858,6 +1877,7 @@ MonoBehaviour:
   moveDistance: -2000
   isLoop: 0
   MoveToTime: 0
+  ShouldPlay: 1
 --- !u!1 &8292933096362833399
 GameObject:
   m_ObjectHideFlags: 0
