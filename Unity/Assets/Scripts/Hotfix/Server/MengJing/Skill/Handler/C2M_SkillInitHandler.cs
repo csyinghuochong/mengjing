@@ -9,11 +9,21 @@ namespace ET.Server
     {
         protected override async ETTask Run(Unit unit, C2M_SkillInitRequest request, M2C_SkillInitResponse response)
         {
-
+            Console.WriteLine($" C2M_SkillInitHandler: ");
             int occ = unit.GetComponent<UserInfoComponentS>().GetOcc();
             int occTwo = unit.GetComponent<UserInfoComponentS>().GetOccTwo();
             SkillSetComponentS skillSetComponent = unit.GetComponent<SkillSetComponentS>();
 
+            for (int i = skillSetComponent.SkillList.Count - 1; i >= 0; i--)
+            {
+                SkillPro skillPro = skillSetComponent.SkillList[i];
+                if (skillPro.SkillSource == SkillSourceEnum.PetEcho
+                    && !CommonHelperS.IsPetEchoSkill((skillPro.SkillID)))
+                {
+                    skillSetComponent.SkillList.RemoveAt(i);
+                }
+            }
+            
             //强化技能可以激活
             bool haveqianghuaskill = false;
             for (int i = 0; i < skillSetComponent.SkillList.Count; i++)
