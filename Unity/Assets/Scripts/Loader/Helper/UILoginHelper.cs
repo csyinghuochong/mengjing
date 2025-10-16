@@ -101,7 +101,8 @@ namespace ET.Client
                     //text.text = lineStr;
                     //text.gameObject.SetActive(false);
                     text.gameObject.SetActive(true);
-                    text.GetComponent<TextFitEx>().SetText(lineStr);
+                    
+                    text.GetComponent<TextFitTip>().SetText(lineStr);
                     //await root.GetComponent<TimerComponent>().WaitAsync(100);
                         
                     //text.GetComponent<RectTransform>().sizeDelta = new Vector2(1400, text.preferredHeight);

@@ -1827,6 +1827,7 @@ GameObject:
   - component: {fileID: 5125210271710343441}
   - component: {fileID: 642859038624455124}
   - component: {fileID: 6705998258214448082}
+  - component: {fileID: 1363690560976427324}
   m_Layer: 5
   m_Name: TextButton
   m_TagString: Untagged
@@ -1918,6 +1919,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HorizontalFit: 0
   m_VerticalFit: 2
+--- !u!114 &1363690560976427324
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5071572549260620846}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 678ea9f7e937aa9429becf648440c2b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetText: {fileID: 642859038624455124}
+  removeHuanHang: 0
+  setposition: 0
+  updateNumber: 0
+  onenableUpdate: 1
 --- !u!1 &5259046358809846293
 GameObject:
   m_ObjectHideFlags: 0
@@ -2532,6 +2550,7 @@ GameObject:
   - component: {fileID: 8255499342691309174}
   - component: {fileID: 3625735455179787051}
   - component: {fileID: 2670868282941942662}
+  - component: {fileID: 6788461684401969823}
   m_Layer: 5
   m_Name: E_TextYinSi
   m_TagString: Untagged
@@ -2620,6 +2639,23 @@ MonoBehaviour:
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
+--- !u!114 &6788461684401969823
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7390783178091263899}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 678ea9f7e937aa9429becf648440c2b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetText: {fileID: 3625735455179787051}
+  removeHuanHang: 0
+  setposition: 0
+  updateNumber: 0
+  onenableUpdate: 0
 --- !u!1 &7925153767473254724
 GameObject:
   m_ObjectHideFlags: 0
