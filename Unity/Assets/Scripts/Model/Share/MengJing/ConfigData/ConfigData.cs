@@ -1115,11 +1115,11 @@ namespace ET
         [StaticField]
         public static List<KeyValuePairLong> SeasonTimeList = new List<KeyValuePairLong>()
         {
-            new KeyValuePairLong(){ KeyId = 0, Value = 1701360000000, Value2 = 1713715200000 },
-            new KeyValuePairLong(){ KeyId = 1, Value = 1713715200001, Value2 = 1721577600000 },
-            new KeyValuePairLong(){ KeyId = 2, Value = 1721577600001, Value2 = 1730390400000 },
-            new KeyValuePairLong(){ KeyId = 3, Value = 1730390400001, Value2 = 1738339200000 },
-            new KeyValuePairLong(){ KeyId = 4, Value = 1738339200001, Value2 = 1753977600000 },
+            new KeyValuePairLong(){ KeyId = 0, Value = 1753977600001, Value2 = 1759248000000 },  // 2025年9月1日 - 2025年10月1日
+            new KeyValuePairLong(){ KeyId = 1, Value = 1759248000001, Value2 = 1767206400000 },  // 2025年10月1日 - 2025年12月1日
+            new KeyValuePairLong(){ KeyId = 2, Value = 1767206400001, Value2 = 1775078400000 },  // 2025年12月1日 - 2026年2月1日
+            new KeyValuePairLong(){ KeyId = 3, Value = 1775078400001, Value2 = 1782940800000 },  // 2026年2月1日 - 2026年4月1日
+            new KeyValuePairLong(){ KeyId = 4, Value = 1782940800001, Value2 = 1790803200000 },  // 2026年4月1日 - 2026年6月1日
         };
 
         public const int SeasonBossId = 820001;
