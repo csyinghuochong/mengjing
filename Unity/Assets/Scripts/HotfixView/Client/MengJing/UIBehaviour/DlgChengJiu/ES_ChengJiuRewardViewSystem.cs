@@ -122,7 +122,7 @@ namespace ET.Client
         private static async ETTask UpdateTextdesc(this ES_ChengJiuReward self, int rewardId)
         {
             ChengJiuRewardConfig chengJiuConfig = ChengJiuRewardConfigCategory.Instance.Get(rewardId);
-            
+            await self.Root().GetComponent<TimerComponent>().WaitFrameAsync();
             //self.E_Text_RewardDescText.text = chengJiuConfig.Desc;
             self.E_Text_RewardDescText.rectTransform.anchoredPosition = new Vector2(-402f, 1140f);
             self.E_Text_RewardDescText.GetComponent<TextFitTip>().SetText(chengJiuConfig.Desc);
