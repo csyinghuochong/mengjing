@@ -12,7 +12,6 @@ namespace ET.Client
 
         public long LastLoginTime;
 
-        public Vector2 YonghuxieyiPostion;
-        public Vector2 YinSiXieYiPostion;
+        public Vector2 YinsixieyiPostion;
     }
 }

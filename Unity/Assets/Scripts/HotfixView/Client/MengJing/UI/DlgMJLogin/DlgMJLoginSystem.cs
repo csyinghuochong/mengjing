@@ -12,14 +12,10 @@ namespace ET.Client
             self.View.E_LoginButton.AddListenerAsync(self.OnLoginButton);
             self.View.E_SelectBtnButton.AddListener(self.OnSelectBtnButton);
 
-            self.View.E_TextButton_1Button.AddListener(() =>
-            {
-                self.View.EG_YinSiXieYiRectTransform.anchoredPosition = self.YinSiXieYiPostion;
-                self.View.EG_YinSiXieYiRectTransform.gameObject.SetActive(true);
-            });
+            self.View.E_TextButton_1Button.AddListener(() => { self.View.EG_YinSiXieYiRectTransform.gameObject.SetActive(true);  });
             self.View.E_TextButton_2Button.AddListener(() =>
             {
-                self.View.EG_YongHuXieYiRectTransform.anchoredPosition = self.YonghuxieyiPostion;
+                self.View.EG_YongHuXieYiRectTransform.localPosition = self.YinsixieyiPostion;
                 self.View.EG_YongHuXieYiRectTransform.gameObject.SetActive(true);
             });
             self.View.E_YinSiXieYiCloseButton.AddListener(() => { self.View.EG_YinSiXieYiRectTransform.gameObject.SetActive(false); });
@@ -48,7 +44,6 @@ namespace ET.Client
             self.RequestServerList().Coroutine();
 
             self.ShowTextList().Coroutine();
-            self.ShowEGYinSiXieYi().Coroutine();
 
             // if (string.IsNullOrEmpty(PlayerPrefsHelp.GetString("UIYinSi0627")))
             // {
@@ -58,24 +53,11 @@ namespace ET.Client
             //self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_YinSi).Coroutine();
         }
 
-        private static async ETTask ShowEGYinSiXieYi(this DlgMJLogin self)
-        {
-            self.YinSiXieYiPostion = self.View.EG_YinSiXieYiRectTransform.anchoredPosition;
-            
-            self.View.EG_YinSiXieYiRectTransform.anchoredPosition = new Vector2(-3000f, 0f);
-            self.View.EG_YinSiXieYiRectTransform.gameObject.SetActive(true);
-            
-            await self.Root().GetComponent<TimerComponent>().WaitAsync(1000);
-            
-            self.View.EG_YinSiXieYiRectTransform.anchoredPosition = self.YinSiXieYiPostion;
-            self.View.EG_YinSiXieYiRectTransform.gameObject.SetActive(false);
-        }
-
         private static async ETTask ShowTextList(this DlgMJLogin self)
         {
-            self.YonghuxieyiPostion = self.View.EG_YongHuXieYiRectTransform.anchoredPosition;
+            self.YinsixieyiPostion = self.View.EG_YongHuXieYiRectTransform.localPosition;
             
-            self.View.EG_YongHuXieYiRectTransform.anchoredPosition = new Vector2(-3000f, 0f);
+            self.View.EG_YongHuXieYiRectTransform.localPosition = new Vector2(-3000f, 0f);
             self.View.EG_YongHuXieYiRectTransform.gameObject.SetActive(true);
             await  UILoginHelper.ShowTextList(self.Root(), self.View.EG_YongHuXieYiRectTransform.gameObject,  self.View.E_TextYinSiText.gameObject, GlobalHelp.GetPlatform());
 
@@ -84,12 +66,12 @@ namespace ET.Client
                 return;
             }
             
-            if (self.View.EG_YongHuXieYiRectTransform.anchoredPosition .Equals(self.YonghuxieyiPostion) )
+            if (self.View.EG_YongHuXieYiRectTransform.localPosition .Equals(self.YinsixieyiPostion) )
             {
                 return;
             }
             
-            self.View.EG_YongHuXieYiRectTransform.anchoredPosition = self.YonghuxieyiPostion;
+            self.View.EG_YongHuXieYiRectTransform.localPosition = self.YinsixieyiPostion;
             self.View.EG_YongHuXieYiRectTransform.gameObject.SetActive(false);
         }
 

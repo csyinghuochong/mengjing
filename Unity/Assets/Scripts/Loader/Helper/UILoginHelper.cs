@@ -101,15 +101,14 @@ namespace ET.Client
                     //text.text = lineStr;
                     //text.gameObject.SetActive(false);
                     text.gameObject.SetActive(true);
-                    
-                    text.GetComponent<TextFitTip>().SetText(lineStr);
+                    text.GetComponent<TextFitEx>().SetText(lineStr);
                     //await root.GetComponent<TimerComponent>().WaitAsync(100);
                         
                     //text.GetComponent<RectTransform>().sizeDelta = new Vector2(1400, text.preferredHeight);
                     lineStr = string.Empty;
                 }
             }
-            await root.GetComponent<TimerComponent>().WaitAsync(1000);
+            await root.GetComponent<TimerComponent>().WaitAsync(10000);
         }
 
         public static string GetGongGaoText()
