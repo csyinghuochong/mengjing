@@ -1024,7 +1024,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u63D0\u793A:\u5BF9\u8D85\u8FC74\u4E2A(\u542B4\u4E2A)\u6280\u80FD\u7684\u5BA0\u7269\u4F7F\u7528\u6280\u80FD\u4E66\uFF0C\u5FC5\u5B9A\u4F1A\u66FF\u63621\u4E2A\u539F\u59CB\u6280\u80FD"
+  m_Text: "\u63D0\u793A:\u5BF9\u8D85\u8FC74\u4E2A(\u542B4\u4E2A)\u6280\u80FD\u7684\u5BA0\u7269\u4F7F\u7528\u6280\u80FD\u4E66\uFF0C\u5FC5\u5B9A\u4F1A\u66FF\u63621\u4E2A\u539F\u59CB\u6280\u80FD\u3002"
 --- !u!114 &5132597161639662911
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2660,6 +2660,7 @@ MonoBehaviour:
   moveDistance: 2000
   isLoop: 0
   MoveToTime: 0
+  ShouldPlay: 1
 --- !u!1 &3719291435566923394
 GameObject:
   m_ObjectHideFlags: 0
@@ -3065,6 +3066,7 @@ MonoBehaviour:
   moveDistance: -1000
   isLoop: 0
   MoveToTime: 0
+  ShouldPlay: 1
 --- !u!1 &4805122098315824215
 GameObject:
   m_ObjectHideFlags: 0
@@ -3805,6 +3807,7 @@ MonoBehaviour:
   moveDistance: -1000
   isLoop: 0
   MoveToTime: 0
+  ShouldPlay: 1
 --- !u!1 &5876250502567796623
 GameObject:
   m_ObjectHideFlags: 0
@@ -7039,7 +7042,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7279456627162808761, guid: 5e333a87993232347a35639d3e8341b3, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

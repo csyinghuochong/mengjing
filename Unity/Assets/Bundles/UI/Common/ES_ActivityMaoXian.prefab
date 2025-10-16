@@ -430,6 +430,7 @@ MonoBehaviour:
   moveDistance: 2000
   isLoop: 0
   MoveToTime: 0
+  ShouldPlay: 1
 --- !u!1 &3257491413492025641
 GameObject:
   m_ObjectHideFlags: 0
@@ -851,6 +852,7 @@ MonoBehaviour:
   moveDistance: 20
   isLoop: 1
   MoveToTime: 1
+  ShouldPlay: 1
 --- !u!1 &4677581926422558397
 GameObject:
   m_ObjectHideFlags: 0
@@ -1390,7 +1392,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1.2
-  m_Text: "1.\u5B8C\u6210\u6D3B\u8DC3\u4EFB\u52A1\u53EF\u83B7\u5F97\u79EF\u5206\n2.\u5145\u503C1\u5143\u53EF\u83B7\u5F9710\u70B9\u79EF\u5206\n"
+  m_Text: "1.\u5B8C\u6210\u6D3B\u8DC3\u4EFB\u52A1\u53EF\u83B7\u5F97\u79EF\u5206\u3002\n2.\u5145\u503C1\u5143\u53EF\u83B7\u5F9710\u70B9\u79EF\u5206\u3002\n"
 --- !u!114 &6464497213926859665
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1465,6 +1467,7 @@ MonoBehaviour:
   moveDistance: 2000
   isLoop: 0
   MoveToTime: 0
+  ShouldPlay: 1
 --- !u!1 &6671911320819400712
 GameObject:
   m_ObjectHideFlags: 0
@@ -2438,7 +2441,8 @@ PrefabInstance:
       propertyPath: m_SortingLayer
       value: 32709
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5084599116109622674, guid: 4d0bdf590db8e0440adc4f6a1fcc2661, type: 3}
     m_RemovedGameObjects:
     - {fileID: 8540750879097351104, guid: 4d0bdf590db8e0440adc4f6a1fcc2661, type: 3}
     - {fileID: 7626668628064271002, guid: 4d0bdf590db8e0440adc4f6a1fcc2661, type: 3}
@@ -2661,7 +2665,8 @@ PrefabInstance:
       propertyPath: m_SortingLayer
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5084599116109622674, guid: 4d0bdf590db8e0440adc4f6a1fcc2661, type: 3}
     m_RemovedGameObjects:
     - {fileID: 8540750879097351104, guid: 4d0bdf590db8e0440adc4f6a1fcc2661, type: 3}
     m_AddedGameObjects: []

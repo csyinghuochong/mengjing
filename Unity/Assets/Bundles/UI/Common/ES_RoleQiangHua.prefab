@@ -2432,6 +2432,7 @@ MonoBehaviour:
   moveDistance: 20
   isLoop: 1
   MoveToTime: 1
+  ShouldPlay: 1
 --- !u!1 &1585410548131131807
 GameObject:
   m_ObjectHideFlags: 0
@@ -4194,6 +4195,7 @@ MonoBehaviour:
   moveDistance: -1500
   isLoop: 0
   MoveToTime: 0
+  ShouldPlay: 1
 --- !u!1 &2900465960027712623
 GameObject:
   m_ObjectHideFlags: 0
@@ -7740,6 +7742,7 @@ MonoBehaviour:
   moveDistance: -1500
   isLoop: 0
   MoveToTime: 0
+  ShouldPlay: 1
 --- !u!1 &5486262584212666031
 GameObject:
   m_ObjectHideFlags: 0
@@ -8999,7 +9002,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -7, y: -442.45755}
-  m_SizeDelta: {x: 600, y: 40}
+  m_SizeDelta: {x: 650, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5629338156004019564
 CanvasRenderer:
@@ -9042,7 +9045,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u63D0\u793A\uFF1A\u5F53\u5171\u9E23\u503C\u8FBE\u5230100%\u65F6\uFF0C\u5FC5\u5B9A\u589E\u52A0\u5171\u9E23\u7B49\u7EA7"
+  m_Text: "\u63D0\u793A\uFF1A\u5F53\u5171\u9E23\u503C\u8FBE\u5230100%\u65F6\uFF0C\u5FC5\u5B9A\u589E\u52A0\u5171\u9E23\u7B49\u7EA7\u3002"
 --- !u!1 &6118325106095778542
 GameObject:
   m_ObjectHideFlags: 0
@@ -13447,6 +13450,7 @@ MonoBehaviour:
   moveDistance: 2000
   isLoop: 0
   MoveToTime: 0
+  ShouldPlay: 1
 --- !u!1 &8951087218230903861
 GameObject:
   m_ObjectHideFlags: 0

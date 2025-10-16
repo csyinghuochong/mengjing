@@ -144,6 +144,7 @@ MonoBehaviour:
   moveDistance: 2000
   isLoop: 0
   MoveToTime: 0
+  ShouldPlay: 1
 --- !u!1 &735583941958466026
 GameObject:
   m_ObjectHideFlags: 0
@@ -1838,7 +1839,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u63D0\u793A\uFF1A\u51CC\u6668\u4F1A\u8FDB\u884C\u5237\u65B0\u62CD\u5356\u884C\u4EF7\u683C"
+  m_Text: "\u63D0\u793A\uFF1A\u51CC\u6668\u4F1A\u8FDB\u884C\u5237\u65B0\u62CD\u5356\u884C\u4EF7\u683C\u3002"
 --- !u!114 &538699955401118269
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2356,3 +2357,4 @@ MonoBehaviour:
   moveDistance: 2000
   isLoop: 0
   MoveToTime: 0
+  ShouldPlay: 1
