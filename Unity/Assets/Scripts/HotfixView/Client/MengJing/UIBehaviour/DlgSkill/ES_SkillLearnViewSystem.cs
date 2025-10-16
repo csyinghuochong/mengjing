@@ -208,6 +208,7 @@ namespace ET.Client
                 Scroll_Item_SkillLearnItem scrollItemSkillLearnItem = self.ScrollItemSkillLearnItems[i];
                 scrollItemSkillLearnItem.SetClickHander((SkillPro skillpro) => { self.OnSelectSkill(skillpro); });
                 scrollItemSkillLearnItem.OnUpdateUI(self.ShowLearnSkillPros[i]);
+                scrollItemSkillLearnItem.uiTransform.gameObject.SetActive(true);
             }
 
             if (self.ScrollItemSkillLearnItems.Count > self.ShowLearnSkillPros.Count)
