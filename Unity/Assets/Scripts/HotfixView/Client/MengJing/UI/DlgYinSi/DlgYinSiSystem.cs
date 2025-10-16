@@ -7,15 +7,18 @@ namespace ET.Client
     {
         public static void RegisterUIEvent(this DlgYinSi self)
         {
-            self.View.E_TextButton_1Button.AddListener(() => { self.View.EG_YinSiXieYiRectTransform.gameObject.SetActive(true); });
+            self.View.E_TextButton_1Button.AddListener(() =>
+            {
+                self.View.EG_YinSiXieYiRectTransform.anchoredPosition = self.YinSiXieYiPostion;
+                self.View.EG_YinSiXieYiRectTransform.gameObject.SetActive(true);
+            });
             self.View.E_TextButton_2Button.AddListener(() =>
             {
-                self.View.EG_YongHuXieYiRectTransform.localPosition = self.YinsixieyiPostion;
+                self.View.EG_YongHuXieYiRectTransform.anchoredPosition = self.YonghuxieyiPostion;
                 self.View.EG_YongHuXieYiRectTransform.gameObject.SetActive(true);
             });
 
             self.View.E_TextYinSiText.gameObject.SetActive(false);
-            UILoginHelper.ShowTextList(self.Root(),self.View.EG_YongHuXieYiRectTransform.gameObject, self.View.E_TextYinSiText.gameObject, GlobalHelp.GetPlatform()).Coroutine();
 
             self.View.E_YongHuXieYiCloseButton.AddListener(() => { self.View.EG_YongHuXieYiRectTransform.gameObject.SetActive(false); });
             self.View.E_YinSiXieYiCloseButton.AddListener(() => { self.View.EG_YinSiXieYiRectTransform.gameObject.SetActive(false); });
@@ -23,17 +26,32 @@ namespace ET.Client
             self.View.E_ButtonRefuseButton.AddListener(self.OnButtonRefuse);
             self.View.E_ButtonAgreeButton.AddListener(self.OnButtonAgree);
             self.View.E_ButtonCloseButton.AddListener(self.OnButtonRefuse);
+            
+            
 
             // GameObject.Find("Global").GetComponent<Init>().OnGetPermissionsHandler = self.onRequestPermissionsResult;
 
             self.AgreeNumber = 0;
         }
         
+        private static async ETTask ShowEGYinSiXieYi(this DlgYinSi self)
+        {
+            self.YinSiXieYiPostion = self.View.EG_YinSiXieYiRectTransform.anchoredPosition;
+            
+            self.View.EG_YinSiXieYiRectTransform.anchoredPosition = new Vector2(-3000f, 0f);
+            self.View.EG_YinSiXieYiRectTransform.gameObject.SetActive(true);
+            
+            await self.Root().GetComponent<TimerComponent>().WaitAsync(1000);
+            
+            self.View.EG_YinSiXieYiRectTransform.anchoredPosition = self.YinSiXieYiPostion;
+            self.View.EG_YinSiXieYiRectTransform.gameObject.SetActive(false);
+        }
+
         private static async ETTask ShowTextList(this DlgYinSi self)
         {
-            self.YinsixieyiPostion = self.View.EG_YongHuXieYiRectTransform.localPosition;
+            self.YonghuxieyiPostion = self.View.EG_YongHuXieYiRectTransform.anchoredPosition;
             
-            self.View.EG_YongHuXieYiRectTransform.localPosition = new Vector2(-3000f, 0f);
+            self.View.EG_YongHuXieYiRectTransform.anchoredPosition = new Vector2(-3000f, 0f);
             self.View.EG_YongHuXieYiRectTransform.gameObject.SetActive(true);
             await  UILoginHelper.ShowTextList(self.Root(), self.View.EG_YongHuXieYiRectTransform.gameObject,  self.View.E_TextYinSiText.gameObject, GlobalHelp.GetPlatform());
 
@@ -41,16 +59,16 @@ namespace ET.Client
             {
                 return;
             }
-
-            if (self.View.EG_YongHuXieYiRectTransform.localPosition .Equals(self.YinsixieyiPostion) )
+            
+            if (self.View.EG_YongHuXieYiRectTransform.anchoredPosition .Equals(self.YonghuxieyiPostion) )
             {
                 return;
             }
             
-            self.View.EG_YongHuXieYiRectTransform.localPosition = self.YinsixieyiPostion;
+            self.View.EG_YongHuXieYiRectTransform.anchoredPosition = self.YonghuxieyiPostion;
             self.View.EG_YongHuXieYiRectTransform.gameObject.SetActive(false);
         }
-
+        
         public static void ShowWindow(this DlgYinSi self, Entity contextData = null)
         {
         }

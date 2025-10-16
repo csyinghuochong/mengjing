@@ -109,7 +109,7 @@ namespace ET.Client
                     lineStr = string.Empty;
                 }
             }
-            await root.GetComponent<TimerComponent>().WaitAsync(10000);
+            await root.GetComponent<TimerComponent>().WaitAsync(1000);
         }
 
         public static string GetGongGaoText()
