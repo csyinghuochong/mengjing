@@ -13,7 +13,7 @@ public class TextFitTip : MonoBehaviour
     public static readonly string Non_breaking_space = "\u00A0";
 
     /// 用于匹配标点符号（正则表达式）
-    private readonly string strPunctuation =  @"[.,。，、;；%]" ;//@"\p{P}";
+    private readonly string strPunctuation =  @"[.,。，、;；%！!]" ;//@"\p{P}";
 
     /// 用于存储text组件中的内容
     private System.Text.StringBuilder TempText = null;

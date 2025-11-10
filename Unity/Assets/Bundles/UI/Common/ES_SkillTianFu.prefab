@@ -11530,6 +11530,7 @@ MonoBehaviour:
   moveDistance: -1000
   isLoop: 0
   MoveToTime: 0
+  ShouldPlay: 1
 --- !u!1 &6315348594704040201
 GameObject:
   m_ObjectHideFlags: 0
@@ -31936,6 +31937,7 @@ MonoBehaviour:
   m_AutoScalingMode: 2
   m_UseCustomView: 0
   m_CustomViewSize: 10
+  m_TimeScaleMultiplier: 1
 --- !u!1 &6923367716113886136
 GameObject:
   m_ObjectHideFlags: 0
@@ -32079,6 +32081,7 @@ MonoBehaviour:
   moveDistance: 2000
   isLoop: 0
   MoveToTime: 0
+  ShouldPlay: 1
 --- !u!1 &7085781588403061351
 GameObject:
   m_ObjectHideFlags: 0
@@ -34793,6 +34796,7 @@ GameObject:
   - component: {fileID: 1394506850739095258}
   - component: {fileID: 7711278860568680998}
   - component: {fileID: 640424719881951245}
+  - component: {fileID: 3136256828582559709}
   m_Layer: 0
   m_Name: E_TextDesc1
   m_TagString: Untagged
@@ -34877,6 +34881,23 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
   m_EffectDistance: {x: 1, y: -1}
   m_UseGraphicAlpha: 1
+--- !u!114 &3136256828582559709
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8712120289072775817}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 678ea9f7e937aa9429becf648440c2b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetText: {fileID: 0}
+  removeHuanHang: 0
+  setposition: 0
+  updateNumber: 0
+  onenableUpdate: 0
 --- !u!1 &8716010847163149545
 GameObject:
   m_ObjectHideFlags: 0
