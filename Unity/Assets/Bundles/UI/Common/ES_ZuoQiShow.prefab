@@ -54,6 +54,7 @@ MonoBehaviour:
   moveDistance: -2000
   isLoop: 0
   MoveToTime: 0
+  ShouldPlay: 1
 --- !u!1 &540040436182799872
 GameObject:
   m_ObjectHideFlags: 0
@@ -195,6 +196,7 @@ MonoBehaviour:
   moveDistance: 2000
   isLoop: 0
   MoveToTime: 0
+  ShouldPlay: 1
 --- !u!1 &1081152257400819272
 GameObject:
   m_ObjectHideFlags: 0
@@ -6057,6 +6059,7 @@ GameObject:
   - component: {fileID: 7692393486875820875}
   - component: {fileID: 4527542607705937951}
   - component: {fileID: 7572274555664634020}
+  - component: {fileID: 4813600921570810975}
   m_Layer: 5
   m_Name: E_Des
   m_TagString: Untagged
@@ -6140,6 +6143,23 @@ MonoBehaviour:
   m_EffectColor: {r: 0.27905208, g: 0.3773585, b: 0.0017799971, a: 0.5}
   m_EffectDistance: {x: 1, y: -1}
   m_UseGraphicAlpha: 1
+--- !u!114 &4813600921570810975
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4281469740099011052}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 678ea9f7e937aa9429becf648440c2b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetText: {fileID: 0}
+  removeHuanHang: 0
+  setposition: 0
+  updateNumber: 0
+  onenableUpdate: 1
 --- !u!1 &4666459516111301826
 GameObject:
   m_ObjectHideFlags: 0

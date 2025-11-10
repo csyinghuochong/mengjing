@@ -91,7 +91,7 @@ namespace ET.Client
 
             self.E_TextNameText.text = zuoQiConfig.Name;
             
-            self.E_DesText.text = self.ZuoQiConfig.Des;
+            self.E_DesText.GetComponent<TextFitTip>().SetText(self.ZuoQiConfig.Des);
 
             self.E_LabProDesText.text = self.ZuoQiConfig.AddPropertyDes;
 
