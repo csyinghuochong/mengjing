@@ -675,7 +675,7 @@ namespace ET.Client
             // 显示描述
             if (itemConfig.ItemDes != "" && itemConfig.ItemDes != "0" && itemConfig.ItemDes != null)
             {
-                string[] des = itemConfig.ItemDes.Split('\n');
+                string[] des = itemConfig.ItemDes.Split("\\n");
                 foreach (string s in des)
                 {
                     int allLength = s.Length;
