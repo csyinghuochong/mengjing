@@ -97,13 +97,13 @@ namespace ET.Client
 			{
 				int error = await PetNetHelper.RequestPetMeleePlan(self.Root(), MapTypeEnum.PetMelee, index);
 
-				if (error == ErrorCode.ERR_Success)
-				{
-					using (zstring.Block())
-					{
-						FlyTipComponent.Instance.ShowFlyTip(zstring.Format("宠物乱斗切换 {0}", index));
-					}
-				}
+				// if (error == ErrorCode.ERR_Success)
+				// {
+				// 	using (zstring.Block())
+				// 	{
+				// 		FlyTipComponent.Instance.ShowFlyTip(zstring.Format("宠物乱斗切换 {0}", index));
+				// 	}
+				// }
 			}
 
 			// 复制一份
