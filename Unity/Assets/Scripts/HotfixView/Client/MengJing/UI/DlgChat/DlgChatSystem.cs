@@ -96,7 +96,7 @@ namespace ET.Client
                 {
                     "#etgm", "#blood", "#guanghuan", "#animation", "#sound",
                     "#showsceneunit", "#showmonster", "#unloadasset", "#light",
-                    "#fps", "#fps60", "#resetall", "#allitemui"
+                    "#fps", "#fps60", "#resetall", "#allitemui", "#hightest", "#middletest"
                 };
 
                 // 检查当前输入是否是完整命令，或者是某个命令的前缀
