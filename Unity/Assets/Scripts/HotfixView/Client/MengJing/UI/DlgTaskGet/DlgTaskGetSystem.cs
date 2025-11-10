@@ -661,6 +661,7 @@ namespace ET.Client
             {
                 return;
             }
+            self.View.E_ButtonGiveTaskButton.gameObject.SetActive(false);
             self.View.E_ButtonReturnButton.gameObject.SetActive(false);  
             self.View.E_TaskGetItemsScrollRect.gameObject.SetActive(true);
             self.UpdataTask();
