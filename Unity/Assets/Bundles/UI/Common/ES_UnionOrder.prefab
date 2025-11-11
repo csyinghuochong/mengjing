@@ -825,6 +825,7 @@ MonoBehaviour:
   moveDistance: -2000
   isLoop: 0
   MoveToTime: 0
+  ShouldPlay: 1
 --- !u!1 &2181954664528403330
 GameObject:
   m_ObjectHideFlags: 0
@@ -911,6 +912,7 @@ GameObject:
   - component: {fileID: 2777177942943386091}
   - component: {fileID: 8918843586865100416}
   - component: {fileID: 576948009649525842}
+  - component: {fileID: 1912903845567966341}
   m_Layer: 5
   m_Name: E_Text_TaskDes
   m_TagString: Untagged
@@ -979,6 +981,23 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1.2
   m_Text: "\u6700\u8FD1\u6D77\u4E0A\u7684\u98CE\u6D6A\u592A\u5927\u3002\u6700\u8FD1\u6D77\u4E0A\u7684\u98CE\u6D6A\u592A\u5927\u3002\u6700\u8FD1\u6D77\u4E0A\u7684\u98CE\u6D6A\u592A\u5927\u3002\u6700\u8FD1\u6D77\u4E0A\u7684\u98CE\u6D6A\u592A\u5927\u3002"
+--- !u!114 &1912903845567966341
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2761925711685325807}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 678ea9f7e937aa9429becf648440c2b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetText: {fileID: 0}
+  removeHuanHang: 0
+  setposition: 0
+  updateNumber: 0
+  onenableUpdate: 0
 --- !u!1 &2967137575449854019
 GameObject:
   m_ObjectHideFlags: 0
@@ -1041,6 +1060,7 @@ MonoBehaviour:
   moveDistance: 2000
   isLoop: 0
   MoveToTime: 0
+  ShouldPlay: 1
 --- !u!1 &3377797595286537968
 GameObject:
   m_ObjectHideFlags: 0

@@ -138,7 +138,8 @@ namespace ET.Client
 			}
 			self.ES_CommonItem.HideItemNumber();
 			self.ES_CommonItem.E_ItemNameText.gameObject.SetActive(true);
-			self.E_Text_TaskDesText.text = taskConfig.TaskDes;
+			// self.E_Text_TaskDesText.text = taskConfig.TaskDes;
+			self.E_Text_TaskDesText.GetComponent<TextFitTip>().SetText(taskConfig.TaskDes);
 			self.ES_RewardList.Refresh(TaskHelper.GetTaskRewards(taskConfig.Id, taskConfig));
 		}
 
