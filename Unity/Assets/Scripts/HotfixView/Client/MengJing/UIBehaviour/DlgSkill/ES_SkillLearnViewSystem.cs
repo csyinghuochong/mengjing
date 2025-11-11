@@ -270,7 +270,8 @@ namespace ET.Client
                 int itemEquipType = UnitHelper.GetEquipType(self.Root());
                 SkillConfig skillConfig_base = SkillConfigCategory.Instance.Get(baseskill);
 
-                self.E_SkillDesText.text = skillConfig_base.SkillDescribe.Replace("\\n", "\n");
+                // self.E_SkillDesText.text = skillConfig_base.SkillDescribe.Replace("\\n", "\n");
+                self.E_SkillDesText.GetComponent<TextFitTip>().SetText(skillConfig_base.SkillDescribe.Replace("\\n", "\n"));
                 
                 // string[] skillDesc = skillConfig_base.SkillDescribe.Split(new[] { "\\n\\n" }, StringSplitOptions.None);
                 //

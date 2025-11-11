@@ -3020,6 +3020,7 @@ GameObject:
   - component: {fileID: 6839161791462018582}
   - component: {fileID: 810769919405134663}
   - component: {fileID: 2627790847193045321}
+  - component: {fileID: 8080695208585329868}
   m_Layer: 5
   m_Name: E_SkillDes
   m_TagString: Untagged
@@ -3088,6 +3089,23 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: "\u6280\u80FD\u63CF\u8FF0..............................................................................................................."
+--- !u!114 &8080695208585329868
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7071568381962580241}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 678ea9f7e937aa9429becf648440c2b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetText: {fileID: 0}
+  removeHuanHang: 0
+  setposition: 0
+  updateNumber: 0
+  onenableUpdate: 0
 --- !u!1 &7198920325824354817
 GameObject:
   m_ObjectHideFlags: 0
