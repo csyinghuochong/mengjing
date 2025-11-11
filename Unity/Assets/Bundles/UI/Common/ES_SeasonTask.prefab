@@ -328,6 +328,7 @@ GameObject:
   - component: {fileID: 2271532298551792945}
   - component: {fileID: 5252763247292657127}
   - component: {fileID: 8892013668500598033}
+  - component: {fileID: 3311012406640897161}
   m_Layer: 5
   m_Name: E_TaskDescText
   m_TagString: Untagged
@@ -396,6 +397,23 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: ......................................................
+--- !u!114 &3311012406640897161
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1468009156099512042}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 678ea9f7e937aa9429becf648440c2b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetText: {fileID: 0}
+  removeHuanHang: 0
+  setposition: 0
+  updateNumber: 0
+  onenableUpdate: 0
 --- !u!1 &1471183270975279508
 GameObject:
   m_ObjectHideFlags: 0
@@ -933,6 +951,7 @@ MonoBehaviour:
   moveDistance: 2000
   isLoop: 0
   MoveToTime: 0
+  ShouldPlay: 1
 --- !u!1 &2358043829934786821
 GameObject:
   m_ObjectHideFlags: 0
@@ -2530,6 +2549,7 @@ MonoBehaviour:
   moveDistance: 2000
   isLoop: 0
   MoveToTime: 0
+  ShouldPlay: 1
 --- !u!1 &6167354908036346012
 GameObject:
   m_ObjectHideFlags: 0

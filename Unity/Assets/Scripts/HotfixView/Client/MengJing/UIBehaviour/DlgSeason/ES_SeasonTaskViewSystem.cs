@@ -272,7 +272,8 @@ namespace ET.Client
                 self.E_AcvityedImgImage.gameObject.SetActive(false);
             }
 
-            self.E_TaskDescTextText.text = taskConfig.TaskDes;
+            // self.E_TaskDescTextText.text = taskConfig.TaskDes;
+            self.E_TaskDescTextText.GetComponent<TextFitTip>().SetText(taskConfig.TaskDes);
             List<RewardItem> rewardItems = new List<RewardItem>();
             if (taskConfig.TaskCoin != 0)
             {
@@ -387,7 +388,8 @@ namespace ET.Client
                 self.E_AcvityedImgImage.gameObject.SetActive(false);
             }
 
-            self.E_TaskDescTextText.text = taskConfig.TaskDes;
+            // self.E_TaskDescTextText.text = taskConfig.TaskDes;
+            self.E_TaskDescTextText.GetComponent<TextFitTip>().SetText(taskConfig.TaskDes);
 
             List<RewardItem> rewardItems = new List<RewardItem>();
             if (taskConfig.TaskCoin != 0)
