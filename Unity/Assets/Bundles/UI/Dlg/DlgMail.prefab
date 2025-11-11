@@ -843,6 +843,7 @@ GameObject:
   - component: {fileID: 1790720671147987465}
   - component: {fileID: 2214956410256230703}
   - component: {fileID: 9049359797354701995}
+  - component: {fileID: 1082924598937778419}
   m_Layer: 5
   m_Name: E_TextMailContent
   m_TagString: Untagged
@@ -911,6 +912,23 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: "\u90AE\u4EF6\u5185\u5BB9"
+--- !u!114 &1082924598937778419
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2321951447574696994}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 678ea9f7e937aa9429becf648440c2b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetText: {fileID: 0}
+  removeHuanHang: 0
+  setposition: 0
+  updateNumber: 0
+  onenableUpdate: 0
 --- !u!1 &3063312460582492972
 GameObject:
   m_ObjectHideFlags: 0

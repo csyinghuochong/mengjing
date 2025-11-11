@@ -106,7 +106,8 @@ namespace ET.Client
             MailComponentC mailComponent = self.Root().GetComponent<MailComponentC>();
             MailInfo mailInfos = mailComponent.SelectMail;
             self.View.E_TextMailTitleText.text = mailInfos.Title;
-            self.View.E_TextMailContentText.text = mailInfos.Context;
+            // self.View.E_TextMailContentText.text = mailInfos.Context;
+            self.View.E_TextMailContentText.GetComponent<TextFitTip>().SetText(mailInfos.Context);
 
             List<RewardItem> rewardItems = new();
             foreach (ItemInfoProto bagInfo in mailInfos.ItemList)
