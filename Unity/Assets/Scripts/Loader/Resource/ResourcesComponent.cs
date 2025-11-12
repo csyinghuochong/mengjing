@@ -120,22 +120,22 @@ namespace ET
                 
 #if UNITY_EDITOR
                 if (EditorUserBuildSettings.activeBuildTarget == BuildTarget.Android)
-                    return $"{hostServerIP}/weijing1/DLCBeta/MJ/Android";
+                    return $"{hostServerIP}/weijing1/DLCBeta20220362/MJ/Android";
                 else if (EditorUserBuildSettings.activeBuildTarget == BuildTarget.iOS)
-                    return $"{hostServerIP}/weijing1/DLCBeta/MJ/iOS";
+                    return $"{hostServerIP}/weijing1/DLCBeta20220362/MJ/iOS";
                 else if (EditorUserBuildSettings.activeBuildTarget == BuildTarget.WebGL)
-                    return $"{hostServerIP}/weijing1/DLCBeta/MJ/WebGL";
+                    return $"{hostServerIP}/weijing1/DLCBeta20220362/MJ/WebGL";
                 else
-                    return $"{hostServerIP}/weijing1/DLCBeta/MJ/PC";
+                    return $"{hostServerIP}/weijing1/DLCBeta20220362/MJ/PC";
 #else
 		        if (Application.platform == RuntimePlatform.Android)
-		        	return $"{hostServerIP}/weijing1/DLCBeta/MJ/Android";
+		        	return $"{hostServerIP}/weijing1/DLCBeta20220362/MJ/Android";
 		        else if (Application.platform == RuntimePlatform.IPhonePlayer)
-		        	return $"{hostServerIP}/weijing1/DLCBeta/MJ/iOS";
+		        	return $"{hostServerIP}/weijing1/DLCBeta20220362/MJ/iOS";
 		        else if (Application.platform == RuntimePlatform.WebGLPlayer)
-		        	return $"{hostServerIP}/weijing1/DLCBeta/MJ/WebGL";
+		        	return $"{hostServerIP}/weijing1/DLCBeta20220362/MJ/WebGL";
 		        else
-		        	return $"{hostServerIP}/weijing1/DLCBeta/MJ/PC";
+		        	return $"{hostServerIP}/weijing1/DLCBeta20220362/MJ/PC";
 #endif
             }
         }

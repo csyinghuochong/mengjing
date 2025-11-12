@@ -106,13 +106,13 @@
 //         ///weijing1/DLCBeta/Test/Android
 // #if UNITY_EDITOR
 //         if (UnityEditor.EditorUserBuildSettings.activeBuildTarget == UnityEditor.BuildTarget.Android)
-//             return $"{hostServerIP}/weijing1/DLCBeta/Test/Android/{appVersion}";
+//             return $"{hostServerIP}/weijing1/DLCBeta20220362/Test/Android/{appVersion}";
 //         else if (UnityEditor.EditorUserBuildSettings.activeBuildTarget == UnityEditor.BuildTarget.iOS)
-//             return $"{hostServerIP}/weijing1/DLCBeta/Test/IPhone/{appVersion}";
+//             return $"{hostServerIP}/weijing1/DLCBeta20220362/Test/IPhone/{appVersion}";
 //         else if (UnityEditor.EditorUserBuildSettings.activeBuildTarget == UnityEditor.BuildTarget.WebGL)
-//             return $"{hostServerIP}/weijing1/DLCBeta/Test/WebGL/{appVersion}";
+//             return $"{hostServerIP}/weijing1/DLCBeta20220362/Test/WebGL/{appVersion}";
 //         else
-//             return $"{hostServerIP}/weijing1/DLCBeta/Test/PC/{appVersion}";
+//             return $"{hostServerIP}/weijing1/DLCBeta20220362/Test/PC/{appVersion}";
 // #else
 //         if (Application.platform == RuntimePlatform.Android)
 //             return $"{hostServerIP}/CDN/Android/{appVersion}";
