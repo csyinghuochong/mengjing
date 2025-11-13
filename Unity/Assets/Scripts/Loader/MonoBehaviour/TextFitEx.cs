@@ -13,7 +13,7 @@ public class TextFitEx : MonoBehaviour
     public static readonly string Non_breaking_space = "\u00A0";
 
     /// 用于匹配标点符号（正则表达式）
-    private readonly string strPunctuation =  @"[.,。，、;；]" ;//@"\p{P}";
+    //private readonly string strPunctuation =  @"[.,。，、;；%！!+-]" ;//@"\p{P}";
 
     /// 用于存储text组件中的内容
     private System.Text.StringBuilder TempText = null;
@@ -163,7 +163,7 @@ public class TextFitEx : MonoBehaviour
             string ccc = TempText[TextLine[i].startCharIdx].ToString();
             
             // 首位是否有标点
-            bool IsPunctuation = Regex.IsMatch(ccc, strPunctuation);
+            bool IsPunctuation = Regex.IsMatch(ccc, TextFitTip.strPunctuation);
             
             if (debuglog)
             {
@@ -198,7 +198,7 @@ public class TextFitEx : MonoBehaviour
                     ChangeIndex = ChangeIndex - 1;
                     if (ChangeIndex < 0) break;
 
-                    IsPunctuation = Regex.IsMatch(TempText[ChangeIndex].ToString(), strPunctuation);
+                    IsPunctuation = Regex.IsMatch(TempText[ChangeIndex].ToString(), TextFitTip.strPunctuation);
                     
                     // 因为将换行空格都改成不换行空格后需要另外判断下如果首字符是不换行空格那么还是需要调整换行字符的下标
                     if (TempText[ChangeIndex].ToString() == Non_breaking_space)
