@@ -125,6 +125,7 @@ namespace ET.Client
         }
         public static void OnBtn_GoPayButton(this ES_ActivityYueKa self)
         {
+            self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_Recharge).Coroutine();
         }
     }
 }
