@@ -64,7 +64,7 @@ namespace ET.Client
         public static void SetSelected(this Scroll_Item_PetMeleeLevelItem self, int sceneId)
         {
             self.E_SelectedImage.gameObject.SetActive(self.SceneId == sceneId);
-            CommonViewHelper.SetImageOutline(self.E_IconImage.gameObject, self.SceneId == sceneId);
+            //CommonViewHelper.SetImageOutline(self.E_IconImage.gameObject, self.SceneId == sceneId);
         }
     }
 }

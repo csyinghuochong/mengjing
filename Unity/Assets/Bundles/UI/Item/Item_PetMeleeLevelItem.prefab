@@ -437,6 +437,7 @@ MonoBehaviour:
   moveDistance: 10
   isLoop: 1
   MoveToTime: 1
+  ShouldPlay: 1
 --- !u!1 &3867717511992369028
 GameObject:
   m_ObjectHideFlags: 0
@@ -1175,10 +1176,30 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7716153226992073132}
     m_Modifications:
+    - target: {fileID: 4848620783752832412, guid: 5e333a87993232347a35639d3e8341b3,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4848620783752832412, guid: 5e333a87993232347a35639d3e8341b3,
+        type: 3}
+      propertyPath: m_SortingLayer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6346550451048801097, guid: 5e333a87993232347a35639d3e8341b3,
         type: 3}
       propertyPath: m_Name
       value: PetShowDi (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7205078271075749552, guid: 5e333a87993232347a35639d3e8341b3,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7205078271075749552, guid: 5e333a87993232347a35639d3e8341b3,
+        type: 3}
+      propertyPath: m_SortingLayer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7785456629526624792, guid: 5e333a87993232347a35639d3e8341b3,
         type: 3}
