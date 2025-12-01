@@ -43,24 +43,39 @@ namespace ET.Server
         public static async ETTask SendToAccountCenter(Scene root, long accountId, long userId, int rechargeNumber, string ordinfo)
         {
             await ETTask.CompletedTask;
-            // rechargeRequest.AccountId = accountId;
-            // rechargeRequest.RechargeInfo = RechargeInfo.Create();
-            // rechargeRequest.RechargeInfo.Amount = rechargeNumber;
-            // rechargeRequest.RechargeInfo.Time = TimeHelper.ServerNow();
-            // rechargeRequest.RechargeInfo.UnitId = userId; 
-            // rechargeRequest.RechargeInfo.OrderInfo = ordinfo;
-            //
-            // using (await scene.Root().GetComponent<CoroutineLockComponent>().Wait(CoroutineLockType.Recharge, request.AccountId))
-            // {
-            //     int zone = scene.Zone();
-            //     Log.Warning($"A2Center_RechargeRequest: {scene.Zone()}");
-            //     DBManagerComponent dbManagerComponent = scene.Root().GetComponent<DBManagerComponent>();
-            //     DBComponent dbComponent = dbManagerComponent.GetZoneDB(scene.Zone());
-            //     
-            //     List<DBCenterAccountInfo> resulets = await dbComponent.Query<DBCenterAccountInfo>(zone, d => d.Id == request.AccountId);
-            //     resulets[0].PlayerInfo.RechargeInfos.Add(request.RechargeInfo);
-            //     dbComponent.Save<DBCenterAccountInfo>(scene.Zone(), resulets[0]).Coroutine();
-            // }
+            //rechargeRequest.AccountId = accountId;
+            //rechargeRequest.RechargeInfo = RechargeInfo.Create();
+            //rechargeRequest.RechargeInfo.Amount = rechargeNumber;
+            //rechargeRequest.RechargeInfo.Time = TimeHelper.ServerNow();
+            //rechargeRequest.RechargeInfo.UnitId = userId;
+            //rechargeRequest.RechargeInfo.OrderInfo = ordinfo;
+
+            //using (await scene.Root().GetComponent<CoroutineLockComponent>().Wait(CoroutineLockType.Recharge, request.AccountId))
+            //{
+            //    int zone = scene.Zone();
+            //    Log.Warning($"A2Center_RechargeRequest: {scene.Zone()}");
+            //    DBManagerComponent dbManagerComponent = scene.Root().GetComponent<DBManagerComponent>();
+            //    DBComponent dbComponent = dbManagerComponent.GetZoneDB(scene.Zone());
+
+            //    List<DBCenterAccountInfo> resulets = await dbComponent.Query<DBCenterAccountInfo>(zone, d => d.Id == request.AccountId);
+            //    resulets[0].PlayerInfo.RechargeInfos.Add(request.RechargeInfo);
+            //    dbComponent.Save<DBCenterAccountInfo>(scene.Zone(), resulets[0]).Coroutine();
+            //}
+
+            RechargeInfo rechargeInfo = RechargeInfo.Create();
+            rechargeInfo.Amount = rechargeNumber;
+            rechargeInfo.Time = TimeHelper.ServerNow();
+            rechargeInfo.UnitId = userId;
+            rechargeInfo.OrderInfo = ordinfo;
+
+            int dbzone = 1000;
+            DBCenterAccountInfo dbCenterAccountInfo =
+                      (DBCenterAccountInfo)await UnitCacheHelper.GetComponent<DBCenterAccountInfo>(root.Root(), accountId, dbzone);
+            if (dbCenterAccountInfo != null)
+            {
+                dbCenterAccountInfo.PlayerInfo.RechargeInfos.Add(rechargeInfo);
+                UnitCacheHelper.SaveComponent(root.Root(), accountId, dbCenterAccountInfo, dbzone).Coroutine();
+            }
         }
 
         public static async ETTask OnPaySucessToUnit(Scene scene, long userId, int rechargeNumber, string orderInfo)
