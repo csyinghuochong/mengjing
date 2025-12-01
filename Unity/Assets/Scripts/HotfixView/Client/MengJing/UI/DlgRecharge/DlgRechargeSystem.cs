@@ -131,6 +131,14 @@ namespace ET.Client
         public static async ETTask OnClickRechargeItem(this DlgRecharge self, int chargetNumber)
         {
             FangChenMiComponentC fangChenMiComponent = self.Root().GetComponent<FangChenMiComponentC>();
+
+            if (fangChenMiComponent.GetToDayNum() >= 30)
+            {
+                FlyTipComponent.Instance.ShowFlyTip("今日充值次数已达上限!");
+                return;
+            }
+
+
             int code = fangChenMiComponent.CanRechage(chargetNumber);
             if (code != ErrorCode.ERR_Success)
             {
