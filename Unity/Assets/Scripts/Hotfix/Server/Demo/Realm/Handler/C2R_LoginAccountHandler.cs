@@ -281,7 +281,7 @@ namespace ET.Server
             {
                 return ErrorCode.ERR_Success;
             }
-            if (age < 12)
+            if (age < 8)
             {
                 return ErrorCode.ERR_FangChengMi_Tip6;
             }
