@@ -143,13 +143,13 @@ namespace ET.Client
             if (code != ErrorCode.ERR_Success)
             {
                 string tips = "";
-                if (code == ErrorCode.ERR_FangChengMi_Tip3)
+                if (code == ErrorCode.ERR_FangChengMi_Tip3 || code == ErrorCode.ERR_FangChengMi_Tip4 || code == ErrorCode.ERR_FangChengMi_Tip5)
                 {
                     tips = $"{ErrorViewData.ErrorHints[code]}";
                 }
                 else
                 {
-                    tips = $"{ErrorViewData.ErrorHints[code]} 你本月已充值{fangChenMiComponent.GetMouthTotal()}元";
+                    tips = $"{ErrorViewData.ErrorHints[code]} 你本月已充值{fangChenMiComponent.GetMouthTotal()}元。";
                 }
             
                 PopupTipHelp.OpenPopupTip_2(self.Root(), "防沉迷提示", tips, () => { }).Coroutine();
