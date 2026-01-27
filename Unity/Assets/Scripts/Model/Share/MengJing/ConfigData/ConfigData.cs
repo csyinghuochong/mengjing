@@ -8,6 +8,8 @@ namespace ET
     {
         public const float DefaultShiquRange = 6f;
 
+        public const int AgeLimit = 12;
+        
         [StaticField]
         public static long LastRemoveTime = 0;
 

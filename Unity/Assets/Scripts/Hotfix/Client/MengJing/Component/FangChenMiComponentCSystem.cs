@@ -111,10 +111,11 @@ namespace ET.Client
         public static int CanRechage(this FangChenMiComponentC self, int number)
         {
             int age = self.GetPlayerAge();
-            // if (age < 8)
-            // {
-            //     return ErrorCode.ERR_FangChengMi_Tip3;
-            // }
+            
+            if (age < ConfigData.AgeLimit)
+            {
+                return ErrorCode.ERR_FangChengMi_Tip3;
+            }
             
             if (age < 16)
             {
