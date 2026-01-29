@@ -1,5 +1,14 @@
 {
   "dependencies": {
+    "ai.meshy": {
+      "version": "file:ai.meshy",
+      "depth": 0,
+      "source": "embedded",
+      "dependencies": {
+        "com.unity.mathematics": "1.2.6",
+        "com.unity.burst": "1.8.4"
+      }
+    },
     "com.code-philosophy.hybridclr": {
       "version": "https://gitee.com/focus-creative-games/hybridclr_unity.git",
       "depth": 0,
@@ -8,21 +17,23 @@
       "hash": "59a3c3974a6e435e0ed57fb9af61fbbc6d17a8b7"
     },
     "com.coffee.ui-effect": {
-      "version": "file:com.coffee.ui-effect@145f56968a",
+      "version": "https://github.com/mob-sakai/UIEffect.git?path=Packages/src",
       "depth": 0,
-      "source": "embedded",
+      "source": "git",
       "dependencies": {
         "com.unity.ugui": "1.0.0"
-      }
+      },
+      "hash": "6f90044ec83adbd66475a6d2b5baa38e85678809"
     },
     "com.coffee.ui-particle": {
-      "version": "file:com.coffee.ui-particle@4b98abd746",
+      "version": "https://github.com/mob-sakai/ParticleEffectForUGUI.git",
       "depth": 0,
-      "source": "embedded",
+      "source": "git",
       "dependencies": {
         "com.unity.ugui": "1.0.0",
         "com.unity.modules.particlesystem": "1.0.0"
-      }
+      },
+      "hash": "4b98abd7469b10d55c9c623830cb6e1518f72731"
     },
     "com.cysharp.memorypack": {
       "version": "file:com.cysharp.memorypack@2554e81f03",
@@ -31,7 +42,7 @@
       "dependencies": {}
     },
     "com.gwiazdorrr.betterstreamingassets": {
-      "version": "file:com.gwiazdorrr.betterstreamingassets@2bdc568484",
+      "version": "file:com.gwiazdorrr.betterstreamingassets@103724d100",
       "depth": 0,
       "source": "embedded",
       "dependencies": {}
@@ -48,12 +59,13 @@
       }
     },
     "com.unify.unified-universal-blur": {
-      "version": "file:com.unify.unified-universal-blur@3f7b28476c",
+      "version": "https://github.com/lukakldiashvili/Unified-Universal-Blur.git",
       "depth": 0,
-      "source": "embedded",
+      "source": "git",
       "dependencies": {
         "com.unity.render-pipelines.universal": "14.0.11"
-      }
+      },
+      "hash": "3f7b28476cb83f2d56cf73a13c81de798a94f005"
     },
     "com.unity.2d.sprite": {
       "version": "1.0.0",
@@ -248,7 +260,7 @@
       "url": "https://packages.unity.cn"
     },
     "com.unity.textmeshpro": {
-      "version": "3.0.7",
+      "version": "3.0.9",
       "depth": 0,
       "source": "registry",
       "dependencies": {
