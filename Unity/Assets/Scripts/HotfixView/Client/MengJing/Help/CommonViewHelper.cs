@@ -340,7 +340,63 @@ namespace ET.Client
             }
             effect.SetVerticesDirty();
         }
-        
+
+        public static void SetImageOutline_2(GameObject gameObject, bool val)
+        {
+            UIEffect effect = gameObject.GetComponent<UIEffect>();
+            if (effect == null)
+            {
+                effect = gameObject.AddComponent<UIEffect>();
+            }
+            UIEffectTweener tweener = effect.GetComponent<UIEffectTweener>();
+
+            if (val)
+            {
+                // 描边：根据平台适配参数
+                effect.shadowMode = Application.isMobilePlatform ? ShadowMode.Outline : ShadowMode.Outline8;
+                effect.shadowDistance = Application.isMobilePlatform ? new Vector2(1, -1) : new Vector2(2, -2);
+                effect.shadowIteration = 2;
+                effect.shadowColorFilter = ColorFilter.Replace;
+                effect.shadowColor = new Color(255 / 255f, 235 / 255f, 0 / 255f, 1f);
+                effect.shadowFade = 0.25f;
+
+                // 闪烁：移动端降低频率
+                effect.colorFilter = ColorFilter.Additive;
+                effect.color = new Color(225 / 255f, 225 / 255f, 225 / 255f, 1f);
+
+                if (tweener == null)
+                {
+                    tweener = gameObject.AddComponent<UIEffectTweener>();
+                }
+
+                tweener.enabled = true;
+                tweener.cullingMask = UIEffectTweener.CullingMask.Color;
+                tweener.curve =  AnimationCurve.Linear(0.0f, 0.0f, 1f, 0.25f);
+                tweener.interval = Application.isMobilePlatform ? 0.8f : 0.5f;
+                tweener.wrapMode = UIEffectTweener.WrapMode.PingPongLoop;
+                effect.toneIntensity = 1f;
+            }
+            else
+            {
+                // 彻底重置参数，避免残留
+                effect.shadowMode = ShadowMode.None;
+                effect.shadowDistance = Vector2.zero;
+                effect.shadowIteration = 0;
+                effect.shadowColorFilter = ColorFilter.None;
+                effect.shadowColor = Color.white;
+                effect.shadowFade = 1f;
+
+                effect.colorFilter = ColorFilter.None;
+                effect.color = Color.white;
+
+                if (tweener != null)
+                {
+                    tweener.enabled = false;
+                }
+            }
+            effect.SetVerticesDirty();
+        }
+
         public static void SetRawImageGray(Scene root, GameObject obj, bool val)
         {
             // 方案1
