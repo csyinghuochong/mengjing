@@ -112,7 +112,7 @@ namespace ET.Client
         {
             int age = self.GetPlayerAge();
             
-            if (age < ConfigData.AgeLimit)
+            if (age < ConfigData.RechageLimit)
             {
                 return ErrorCode.ERR_FangChengMi_Tip3;
             }
