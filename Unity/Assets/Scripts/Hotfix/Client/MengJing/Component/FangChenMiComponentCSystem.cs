@@ -126,7 +126,7 @@ namespace ET.Client
 
                 if (number + self.GetMouthTotal() > 200)
                 {
-                    return ErrorCode.ERR_FangChengMi_Tip4;
+                    return ErrorCode.ERR_FangChengMi_Tip9;
                 }
             }
 
@@ -139,7 +139,7 @@ namespace ET.Client
 
                 if (number + self.GetMouthTotal() > 400)
                 {
-                    return ErrorCode.ERR_FangChengMi_Tip5;
+                    return ErrorCode.ERR_FangChengMi_Tip8;
                 }
             }
 

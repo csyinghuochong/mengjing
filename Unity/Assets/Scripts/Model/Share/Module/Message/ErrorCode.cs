@@ -143,6 +143,8 @@ namespace ET
         public const int ERR_FangChengMi_Tip5 = 300505;
         public const int ERR_FangChengMi_Tip6 = 300506;
         public const int ERR_FangChengMi_Tip7 = 300507;
+        public const int ERR_FangChengMi_Tip8 = 300508;
+        public const int ERR_FangChengMi_Tip9 = 300509;
 
         public const int ERR_TaskCommited = 300601;                             //已经领取
         public const int ERR_NotFindLevel = 300602;                             //找不到对应关卡
