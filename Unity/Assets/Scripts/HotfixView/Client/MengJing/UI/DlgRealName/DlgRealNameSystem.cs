@@ -89,7 +89,10 @@ namespace ET.Client
 				//实名认证成功再登陆。
 				if (errorCode != ErrorCode.ERR_Success)
 				{
-					FlyTipComponent.Instance.ShowFlyTip("实名认证失败！");
+					//FlyTipComponent.Instance.ShowFlyTip("实名认证失败！");
+					PopupTipHelp.OpenPopupTip_2(self.Root(), "认证提示", "身份证号格式校验失败，实名认证失败!", () =>
+					{
+					}).Coroutine();
 					return;
 				}
 
