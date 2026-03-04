@@ -1,0 +1,13 @@
+点击Unity菜单 -> ET -> Compile(或按快捷键F6)进行编译
+
+打开YooAsset -> AssetBundle Builder窗口，按照以下步骤操作:
+①BuildPipeline : 'ScriptableBuildPipeline'
+②BuildMode : 'IncrementalBuild'
+③CopyBuildinFileOption : 'ClearAndCopyAll'
+④点击'Click Build'
+
+
+1 打包assetbundle.
+2 拷贝到F:\GitWeiJingBanHao\Release\DLCBeta20220362\MJ\Android  提交git.  
+3 92服务器更新资源.. C:\Tomcat 7.0\webapps\weijing1\DLCBeta20220362  执行git_pull.bat
+4 刷新cdn:   http://weijinghot.weijinggame.com/weijing1/DLCBeta20220362/MJ/Android/
