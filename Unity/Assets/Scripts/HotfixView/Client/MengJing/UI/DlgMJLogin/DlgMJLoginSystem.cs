@@ -4,6 +4,16 @@ using System.Collections.Generic;
 
 namespace ET.Client
 {
+    [Event(SceneType.Demo)]
+    public class YinSiAgree_OnApply : AEvent<Scene, YinSiAgree>
+    {
+        protected override async ETTask Run(Scene scene, YinSiAgree args)
+        {
+            scene.GetComponent<UIComponent>().GetDlgLogic<DlgMJLogin>()?.OnYinSiYinSiAgree();
+            await ETTask.CompletedTask;
+        }
+    }
+    
     [FriendOf(typeof(DlgMJLogin))]
     public static class DlgMJLoginSystem
     {
@@ -40,6 +50,7 @@ namespace ET.Client
             self.View.E_PasswordInputField.onValueChanged.AddListener((string text) => { self.CheckSensitiveWords_Password(); });
 
             self.View.E_TextYinSiText.gameObject.SetActive(false);
+            self.View.E_YinSiToggleToggle.isOn = PlayerPrefsHelp.GetInt(PlayerPrefsHelp.IsAgreeUserPrivacy) > 0;
            
             self.RequestServerList().Coroutine();
 
@@ -164,6 +175,11 @@ namespace ET.Client
             self.View.EG_LoadingRectTransform.gameObject.SetActive(false);
         }
 
+        public static void OnYinSiYinSiAgree(this DlgMJLogin self)
+        {
+            self.View.E_YinSiToggleToggle.isOn = true;
+        }
+        
         public static async ETTask OnLoginButton(this DlgMJLogin self)
         {
             if (TimeHelper.ServerNow() - self.LastLoginTime < 3000)
@@ -175,6 +191,13 @@ namespace ET.Client
                 self.RequestServerList().Coroutine();
                 return;
             }
+
+            if (!self.View.E_YinSiToggleToggle.isOn)
+            {
+                self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_YinSi).Coroutine();
+                return;
+            }
+            PlayerPrefsHelp.SetInt(PlayerPrefsHelp.IsAgreeUserPrivacy, 1);
 
             self.LastLoginTime = TimeHelper.ServerNow();
             PlayerInfoComponent playerInfoComponent = self.Root().GetComponent<PlayerInfoComponent>();

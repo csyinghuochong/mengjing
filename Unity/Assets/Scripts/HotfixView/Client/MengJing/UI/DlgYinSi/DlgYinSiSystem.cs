@@ -98,8 +98,11 @@ namespace ET.Client
 
         public static void OnButtonAgree(this DlgYinSi self)
         {
-            self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_YinSi);
+            Scene root = self.Root();
+            root.GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_YinSi);
             // GameObject.Find("Global").GetComponent<Init>().SetIsPermissionGranted();
+
+            EventSystem.Instance.Publish(root, new YinSiAgree());
         }
     }
 }

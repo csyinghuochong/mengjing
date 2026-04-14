@@ -34,6 +34,7 @@ namespace ET.Client
 
         public const string ZhuBo = "MJ_ZhuBo";
         public const string Localization = "MJ_Localization";
+        public const string IsAgreeUserPrivacy = "MJ_IsAgreeUserPrivacy";
 
         public static string LastAccount(string loginType)
         {

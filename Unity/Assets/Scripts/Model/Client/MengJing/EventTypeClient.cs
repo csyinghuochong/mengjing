@@ -632,4 +632,8 @@ namespace ET.Client
     {
         public M2C_PetMatchResult m2C_SoloMatch;
     }
+
+    public struct YinSiAgree
+    {
+    }
 }

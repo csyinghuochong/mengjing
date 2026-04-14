@@ -7,6 +7,23 @@ namespace ET.Client
 	[EnableMethod]
 	public  class DlgMJLoginViewComponent : Entity,IAwake,IDestroy 
 	{
+		public UnityEngine.UI.Toggle E_YinSiToggleToggle
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_YinSiToggleToggle == null )
+     			{
+		    		this.m_E_YinSiToggleToggle = UIFindHelper.FindDeepChild<UnityEngine.UI.Toggle>(this.uiTransform.gameObject,"Center/HideNode/YinSiButon/E_YinSiToggle");
+     			}
+     			return this.m_E_YinSiToggleToggle;
+     		}
+     	}
+
 		public UnityEngine.UI.Button E_TextButton_1Button
      	{
      		get
@@ -485,6 +502,7 @@ namespace ET.Client
 
 		public void DestroyWidget()
 		{
+			this.m_E_YinSiToggleToggle = null;
 			this.m_E_TextButton_1Button = null;
 			this.m_E_TextButton_1Text = null;
 			this.m_E_TextButton_2Button = null;
@@ -516,6 +534,7 @@ namespace ET.Client
 			this.uiTransform = null;
 		}
 
+		private UnityEngine.UI.Toggle m_E_YinSiToggleToggle = null;
 		private UnityEngine.UI.Button m_E_TextButton_1Button = null;
 		private UnityEngine.UI.Text m_E_TextButton_1Text = null;
 		private UnityEngine.UI.Button m_E_TextButton_2Button = null;
