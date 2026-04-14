@@ -26,8 +26,8 @@ namespace ET.Client
             {
                 List<ChatInfo> chatInfos = new List<ChatInfo>();
                 chatInfos.AddRange(self.ChatTypeList[ChannelEnum.Word]);
-                chatInfos.AddRange(self.ChatTypeList[ChannelEnum.System]);
-                chatInfos.AddRange(self.ChatTypeList[ChannelEnum.Union]);
+                // chatInfos.AddRange(self.ChatTypeList[ChannelEnum.System]);
+                // chatInfos.AddRange(self.ChatTypeList[ChannelEnum.Union]);
                 chatInfos.Sort(delegate(ChatInfo a, ChatInfo b) { return (int)(a.Time - b.Time); });
 
                 return chatInfos;

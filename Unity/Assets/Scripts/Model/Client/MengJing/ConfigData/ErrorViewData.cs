@@ -77,7 +77,7 @@ namespace ET.Client
             { ErrorCode.ERR_NotRealName, "请先实名认证" },
             { ErrorCode.ERR_RealNameFail, "实名认证失败!" },
             { ErrorCode.ERR_TeamDungeonTimesMax, "副本参与次数已经最大" },
-            { ErrorCode.ERR_WordChat, "世界频道发消息 1分钟1次" },
+            { ErrorCode.ERR_WordChat, "频道发消息 10秒1次" },
             { ErrorCode.ERR_InMakeCD, "制作冷却中!" },
             { ErrorCode.ERR_MakeTypeError, "制作类型不符!" },
             { ErrorCode.ERR_ZhuaBuFail, "抓捕失败!" },
