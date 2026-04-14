@@ -4,16 +4,6 @@ using System.Collections.Generic;
 
 namespace ET.Client
 {
-    [Event(SceneType.Demo)]
-    public class YinSiAgree_OnApply : AEvent<Scene, YinSiAgree>
-    {
-        protected override async ETTask Run(Scene scene, YinSiAgree args)
-        {
-            scene.GetComponent<UIComponent>().GetDlgLogic<DlgMJLogin>()?.OnYinSiYinSiAgree();
-            await ETTask.CompletedTask;
-        }
-    }
-    
     [FriendOf(typeof(DlgMJLogin))]
     public static class DlgMJLoginSystem
     {
@@ -194,9 +184,10 @@ namespace ET.Client
 
             if (!self.View.E_YinSiToggleToggle.isOn)
             {
-                self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_YinSi).Coroutine();
+                PopupTipHelp.OpenPopupTip(self.Root(), "提示", "请您阅读并同意《用户协议》和《隐私协议》，勾选同意后，您即可开始游戏。", () => { self.OnYinSiYinSiAgree(); }).Coroutine();
                 return;
             }
+
             PlayerPrefsHelp.SetInt(PlayerPrefsHelp.IsAgreeUserPrivacy, 1);
 
             self.LastLoginTime = TimeHelper.ServerNow();
