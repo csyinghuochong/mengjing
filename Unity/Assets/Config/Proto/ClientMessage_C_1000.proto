@@ -48,6 +48,24 @@ message NetClient2Main_Login // IResponse
 	repeated CreateRoleInfo RoleLists = 12;
 }
 
+//ResponseType NetClient2Main_Register
+message Main2NetClient_Register // IRequest
+{
+	int32 RpcId = 1;
+	int32 OwnerFiberId = 2;
+	string Account = 3;
+	string Password = 4;
+	int32 ServerId = 5;
+	int32 VersionMode = 6;
+}
+
+message NetClient2Main_Register // IResponse
+{
+	int32 RpcId = 1;
+	int32 Error = 2;
+	string Message = 3;
+}
+
 //ResponseType NetClient2Main_RealName
 message Main2NetClient_RealName // IRequest
 {

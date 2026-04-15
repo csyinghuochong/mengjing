@@ -194,6 +194,85 @@ namespace ET
     }
 
     [MemoryPackable]
+    [Message(ClientMessage.Main2NetClient_Register)]
+    [ResponseType(nameof(NetClient2Main_Register))]
+    public partial class Main2NetClient_Register : MessageObject, IRequest
+    {
+        public static Main2NetClient_Register Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(Main2NetClient_Register), isFromPool) as Main2NetClient_Register;
+        }
+
+        [MemoryPackOrder(0)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(1)]
+        public int OwnerFiberId { get; set; }
+
+        [MemoryPackOrder(2)]
+        public string Account { get; set; }
+
+        [MemoryPackOrder(3)]
+        public string Password { get; set; }
+
+        [MemoryPackOrder(4)]
+        public int ServerId { get; set; }
+
+        [MemoryPackOrder(5)]
+        public int VersionMode { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.OwnerFiberId = default;
+            this.Account = default;
+            this.Password = default;
+            this.ServerId = default;
+            this.VersionMode = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
+    [Message(ClientMessage.NetClient2Main_Register)]
+    public partial class NetClient2Main_Register : MessageObject, IResponse
+    {
+        public static NetClient2Main_Register Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(NetClient2Main_Register), isFromPool) as NetClient2Main_Register;
+        }
+
+        [MemoryPackOrder(0)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(1)]
+        public int Error { get; set; }
+
+        [MemoryPackOrder(2)]
+        public string Message { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.Error = default;
+            this.Message = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
     [Message(ClientMessage.Main2NetClient_RealName)]
     [ResponseType(nameof(NetClient2Main_RealName))]
     public partial class Main2NetClient_RealName : MessageObject, IRequest
@@ -597,15 +676,17 @@ namespace ET
         public const ushort NetClient2Main_ServerList = 1002;
         public const ushort Main2NetClient_Login = 1003;
         public const ushort NetClient2Main_Login = 1004;
-        public const ushort Main2NetClient_RealName = 1005;
-        public const ushort NetClient2Main_RealName = 1006;
-        public const ushort Main2NetClient_LoginGame = 1007;
-        public const ushort NetClient2Main_LoginGame = 1008;
-        public const ushort Main2RobotClient_Message = 1009;
-        public const ushort RobotClient2Main_Message = 1010;
-        public const ushort Main2RobotManager_Message = 1011;
-        public const ushort RobotManager2Main_Message = 1012;
-        public const ushort Main2NetClient_CheckSession = 1013;
-        public const ushort NetClient2Main_CheckSession = 1014;
+        public const ushort Main2NetClient_Register = 1005;
+        public const ushort NetClient2Main_Register = 1006;
+        public const ushort Main2NetClient_RealName = 1007;
+        public const ushort NetClient2Main_RealName = 1008;
+        public const ushort Main2NetClient_LoginGame = 1009;
+        public const ushort NetClient2Main_LoginGame = 1010;
+        public const ushort Main2RobotClient_Message = 1011;
+        public const ushort RobotClient2Main_Message = 1012;
+        public const ushort Main2RobotManager_Message = 1013;
+        public const ushort RobotManager2Main_Message = 1014;
+        public const ushort Main2NetClient_CheckSession = 1015;
+        public const ushort NetClient2Main_CheckSession = 1016;
     }
 }

@@ -39,10 +39,20 @@ namespace ET.Client
             if (response.Error == ErrorCode.ERR_Success && response.PlayerInfo != null)
             {
                 playerInfoComponent.PlayerInfo = response.PlayerInfo;
-           }
+            }
             return response.Error;
         }
 
+        public static async ETTask<int> Register(Scene root, string account, string password, int versionmode)
+        {
+            root.RemoveComponent<ClientSenderCompnent>();
+            ClientSenderCompnent clientSenderCompnent = root.AddComponent<ClientSenderCompnent>();
+            
+            int errCode =  await clientSenderCompnent.RegisterAsync(account, password, versionmode);
+
+            return errCode;
+        }
+        
         public static async ETTask<int> Login(Scene root, string account, string password, int reLink, int versionmode)
         {
             root.RemoveComponent<ClientSenderCompnent>();

@@ -92,19 +92,24 @@ namespace ET.Server
                     }
                     else
                     {
-                        centerAccountInfo =  session.AddChild<DBCenterAccountInfo>();
-                        centerAccountInfo.PlayerInfo = PlayerInfo.Create();
-                        centerAccountInfo.Account = request.Account.Trim();
-                        centerAccountInfo.Password = request.Password;
-                        centerAccountInfo.CreateTime  = TimeInfo.Instance.ServerNow();
-                        centerAccountInfo.AccountType = (int)AccountType.Normal;
-                        if (ConfigData.RobotPassWord.Equals(request.Password))
-                        {
-                            centerAccountInfo.PlayerInfo.RealName = 1;
-                            centerAccountInfo.PlayerInfo.Name = request.Account;
-                            centerAccountInfo.PlayerInfo.IdCardNo = "429001198010232399";
-                        }
-                        await dBComponent.Save<DBCenterAccountInfo>(centerAccountInfo);
+                        // 先屏蔽自动登录注册功能
+                        // centerAccountInfo =  session.AddChild<DBCenterAccountInfo>();
+                        // centerAccountInfo.PlayerInfo = PlayerInfo.Create();
+                        // centerAccountInfo.Account = request.Account.Trim();
+                        // centerAccountInfo.Password = request.Password;
+                        // centerAccountInfo.CreateTime  = TimeInfo.Instance.ServerNow();
+                        // centerAccountInfo.AccountType = (int)AccountType.Normal;
+                        // if (ConfigData.RobotPassWord.Equals(request.Password))
+                        // {
+                        //     centerAccountInfo.PlayerInfo.RealName = 1;
+                        //     centerAccountInfo.PlayerInfo.Name = request.Account;
+                        //     centerAccountInfo.PlayerInfo.IdCardNo = "429001198010232399";
+                        // }
+                        // await dBComponent.Save<DBCenterAccountInfo>(centerAccountInfo);
+                        
+                        response.Error = ErrorCode.ERR_AccountNotExists;
+                        session.Disconnect().Coroutine();
+                        return;
                     }
 
                     if (session.IsDisposed || session.Zone() == 0)

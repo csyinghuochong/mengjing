@@ -339,6 +339,21 @@ message R2C_ServerList // ISessionResponse
 	string NoticeText = 6;
 }
 
+//ResponseType R2C_RegisterAccount
+message C2R_RegisterAccount // ISessionRequest
+{
+	int32 RpcId = 1;
+	string  Account = 2;  // 帐号
+	string  Password = 3;  // 密码
+}
+
+message R2C_RegisterAccount // ISessionResponse
+{
+	int32 RpcId = 1;
+	int32 Error = 2;
+	string Message = 3;
+}
+
 //ResponseType R2C_LoginAccount
 message C2R_LoginAccount // ISessionRequest
 {

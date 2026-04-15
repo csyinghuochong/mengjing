@@ -40,6 +40,7 @@ namespace ET
         public const int Chat = 39;
         public const int EMail = 40;
         public const int Season = 41;
+        public const int RegisterAccount = 42;
         
         public const int BeiYong = 99;
         public const int Max = 100; // 这个必须最大

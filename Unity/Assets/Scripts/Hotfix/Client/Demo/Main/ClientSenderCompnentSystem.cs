@@ -75,6 +75,23 @@ namespace ET.Client
             return netClient2MainRealName;
         }
 
+        public static async ETTask<int> RegisterAsync(this ClientSenderCompnent self, string account, string password, int versionmode)
+        {
+            self.fiberId = await FiberManager.Instance.Create(SchedulerType.ThreadPool, 0, SceneType.NetClient, "");
+            self.netClientActorId = new ActorId(self.Fiber().Process, self.fiberId);  // this.Root = new Scene(this, id, 1, sceneType, name); / this.InstanceId = 1;
+            
+            PlayerInfoComponent playerInfoComponent = self.Root().GetComponent<PlayerInfoComponent>();
+            Main2NetClient_Register main2NetClientRegister = Main2NetClient_Register.Create();
+            main2NetClientRegister.OwnerFiberId = self.Fiber().Id;
+            main2NetClientRegister.Account      = account;
+            main2NetClientRegister.Password     = password;
+            main2NetClientRegister.ServerId     = playerInfoComponent.ServerItem.ServerId;
+            main2NetClientRegister.VersionMode  = versionmode;
+            NetClient2Main_Register response = await self.Root().GetComponent<ProcessInnerSender>().Call(self.netClientActorId, main2NetClientRegister) as NetClient2Main_Register;
+            
+            return response.Error;
+        }
+        
         public static async ETTask<int> LoginAsync(this ClientSenderCompnent self, string account, string password, int relink, int versionmode)
         {
             self.fiberId = await FiberManager.Instance.Create(SchedulerType.ThreadPool, 0, SceneType.NetClient, "");

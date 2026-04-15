@@ -88,7 +88,9 @@ namespace ET
         public const int ERR_AlreadyHave = 200127;
         public const int ERR_LoginGameGateError01 = 200128;
         public const int ERR_AccountNameFormError = 200129;
-        public const int ERR_PasswordFormError = 20130;
+        public const int ERR_PasswordFormError = 200130;
+        public const int ERR_AccountAlreadyExists = 200131;                          //账号已经存在
+        public const int ERR_AccountNotExists = 200132;                              //账号不存在
         
         //300001-400001 服务器提示性错误码
         //角色
