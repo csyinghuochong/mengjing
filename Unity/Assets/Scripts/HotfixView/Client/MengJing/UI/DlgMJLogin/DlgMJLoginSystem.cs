@@ -214,11 +214,6 @@ namespace ET.Client
 
         private static void OnRegisterButton(this DlgMJLogin self)
         {
-            if (TimeHelper.ServerNow() - self.LastLoginTime < 3000)
-            {
-                return;
-            }
-
             if (self.ServerInfo == null)
             {
                 self.RequestServerList().Coroutine();

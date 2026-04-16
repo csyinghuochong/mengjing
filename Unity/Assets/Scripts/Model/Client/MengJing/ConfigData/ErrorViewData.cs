@@ -22,6 +22,7 @@ namespace ET.Client
             { ErrorCode.ERR_VersionNoMatch, "版本不一致，请重开客户端。" },
             { ErrorCode.ERR_EnterGameError, "角色登录异常，请尝试再次重新登录账号!" },
             { ErrorCode.ERR_OtherNotExist, "该玩家不在主城!" },
+            { ErrorCode.ERR_AccountAlreadyExists, "此账户已经注册！" },
             { ErrorCode.ERR_AccountNotExists, "账号不存在" },
             { ErrorCode.ERR_NonePlayerError, "玩家不存在!" },
             { ErrorCode.ERR_GoldNotEnoughError, "金币不足!" },
