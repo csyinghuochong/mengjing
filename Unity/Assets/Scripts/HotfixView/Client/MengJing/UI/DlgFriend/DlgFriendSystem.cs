@@ -101,7 +101,12 @@ namespace ET.Client
               default:
                     break;
             }
+            
+            if (index == 1)
+            {
+                ReddotComponentC redPointComponent = self.Root().GetComponent<ReddotComponentC>();
+                redPointComponent.RemoveReddont(ReddotType.FriendApply);
+            }
         }
-        
     }
 }
