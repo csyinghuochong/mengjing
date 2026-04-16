@@ -235,5 +235,6 @@ namespace ET.Client
 		WindowID_DragonDungeonPrepare,
 		WindowID_DragonDungeonSettlement,
 		WindowID_AllItem,
+		WindowID_Register,
 	}
 }

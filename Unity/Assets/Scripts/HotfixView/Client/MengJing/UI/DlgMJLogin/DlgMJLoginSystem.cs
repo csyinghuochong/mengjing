@@ -11,6 +11,7 @@ namespace ET.Client
         {
             self.View.E_LoginButton.AddListenerAsync(self.OnLoginButton);
             self.View.E_SelectBtnButton.AddListener(self.OnSelectBtnButton);
+            self.View.E_RegisterAccountButton.AddListener(self.OnRegisterButton);
 
             self.View.E_TextButton_1Button.AddListener(() => { self.View.EG_YinSiXieYiRectTransform.gameObject.SetActive(true);  });
             self.View.E_TextButton_2Button.AddListener(() =>
@@ -209,6 +210,28 @@ namespace ET.Client
             {
                 self.HideLoadingView();
             }
+        }
+
+        private static void OnRegisterButton(this DlgMJLogin self)
+        {
+            if (TimeHelper.ServerNow() - self.LastLoginTime < 3000)
+            {
+                return;
+            }
+
+            if (self.ServerInfo == null)
+            {
+                self.RequestServerList().Coroutine();
+                return;
+            }
+
+            if (!self.View.E_YinSiToggleToggle.isOn)
+            {
+                PopupTipHelp.OpenPopupTip(self.Root(), "提示", "请您阅读并同意《用户协议》和《隐私协议》，勾选同意后，您即可注册账号。", () => { self.OnYinSiYinSiAgree(); }).Coroutine();
+                return;
+            }
+
+            self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_Register).Coroutine();
         }
 
         public static void OnSelectServer(this DlgMJLogin self, ServerItem serverId)
