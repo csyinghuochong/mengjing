@@ -8,7 +8,7 @@ namespace ET.Client
 	public  class ES_ChatView : Entity,IAwake<Transform>,IDestroy,IUILogic
 	{
 		public FriendInfo FriendInfo;
-		public Dictionary<int, EntityRef<Scroll_Item_FriendChatItem>> ScrollItemFriendChatItems;
+		public Dictionary<int, EntityRef<Scroll_Item_FriendChatItem>> ScrollItemFriendChatItems = new();
 		public List<ChatInfo> ShowChatInfos = new();
 		
 		public UnityEngine.UI.Text E_ChatPlayNameText
@@ -96,7 +96,7 @@ namespace ET.Client
      		}
      	}
 
-		public UnityEngine.UI.LoopVerticalScrollRect E_FriendChatItemsLoopVerticalScrollRect
+		public UnityEngine.UI.ScrollRect E_FriendChatItemsLoopVerticalScrollRect
      	{
      		get
      		{
@@ -107,7 +107,7 @@ namespace ET.Client
      			}
      			if( this.m_E_FriendChatItemsLoopVerticalScrollRect == null )
      			{
-		    		this.m_E_FriendChatItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.LoopVerticalScrollRect>(this.uiTransform.gameObject,"Center/E_FriendChatItems");
+		    		this.m_E_FriendChatItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.ScrollRect>(this.uiTransform.gameObject,"Center/E_FriendChatItems");
      			}
      			return this.m_E_FriendChatItemsLoopVerticalScrollRect;
      		}
@@ -177,7 +177,7 @@ namespace ET.Client
 		private UnityEngine.UI.Image m_E_SendImage = null;
 		private UnityEngine.UI.InputField m_E_InputInputField = null;
 		private UnityEngine.UI.Image m_E_InputImage = null;
-		private UnityEngine.UI.LoopVerticalScrollRect m_E_FriendChatItemsLoopVerticalScrollRect = null;
+		private UnityEngine.UI.ScrollRect m_E_FriendChatItemsLoopVerticalScrollRect = null;
 		private UnityEngine.UI.Button m_E_CloseChatButton = null;
 		private UnityEngine.UI.Image m_E_CloseChatImage = null;
 		public Transform uiTransform = null;

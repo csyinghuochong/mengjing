@@ -14,7 +14,7 @@ namespace ET.Client
         {
             self.uiTransform = transform;
 
-            self.E_FriendChatItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnFriendChatItemsRefresh);
+            // self.E_FriendChatItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnFriendChatItemsRefresh);
             self.E_CloseChatButton.AddListener(self.OnCloseChatButton);
             self.E_InputInputField.onValueChanged.AddListener((string text) => { self.CheckSensitiveWords(); });
             self.E_SendButton.AddListenerAsync(self.OnSendButton);
@@ -70,8 +70,34 @@ namespace ET.Client
                 self.ShowChatInfos.AddRange(chatInfos);
             }
 
-            self.AddUIScrollItems(ref self.ScrollItemFriendChatItems, self.ShowChatInfos.Count);
-            self.E_FriendChatItemsLoopVerticalScrollRect.SetVisible(true, self.ShowChatInfos.Count);
+            ResourcesLoaderComponent resourcesLoaderComponent = self.Root().GetComponent<ResourcesLoaderComponent>();
+            for (int i = 0; i < self.ShowChatInfos.Count; i++)
+            {
+                if (!self.ScrollItemFriendChatItems.ContainsKey(i))
+                {
+                    Scroll_Item_FriendChatItem item = self.AddChild<Scroll_Item_FriendChatItem>();
+                    string path = "Assets/Bundles/UI/Item/Item_FriendChatItem.prefab";
+
+                    GameObject prefab = resourcesLoaderComponent.LoadAssetSync<GameObject>(path);
+                    GameObject go = UnityEngine.Object.Instantiate(prefab, self.E_FriendChatItemsLoopVerticalScrollRect.transform.Find("Content").gameObject.transform);
+                    item.BindTrans(go.transform);
+                    self.ScrollItemFriendChatItems.Add(i, item);
+                }
+
+                Scroll_Item_FriendChatItem scrollItemTaskGetItem = self.ScrollItemFriendChatItems[i];
+                scrollItemTaskGetItem.uiTransform.gameObject.SetActive(true);
+                scrollItemTaskGetItem.Refresh(self.ShowChatInfos[i]);
+            }
+
+            if (self.ScrollItemFriendChatItems.Count > self.ShowChatInfos.Count)
+            {
+                for (int i = self.ShowChatInfos.Count; i < self.ScrollItemFriendChatItems.Count; i++)
+                {
+                    Scroll_Item_FriendChatItem selfScrollItemFriendChatItem = self.ScrollItemFriendChatItems[i];
+                    selfScrollItemFriendChatItem.uiTransform.gameObject.SetActive(false);
+                }
+            }
+
             self.UpdatePosition().Coroutine();
         }
 
