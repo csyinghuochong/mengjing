@@ -185,7 +185,7 @@ namespace ET.Client
 
             if (!self.View.E_YinSiToggleToggle.isOn)
             {
-                PopupTipHelp.OpenPopupTip(self.Root(), "提示", "请您阅读并同意《用户协议》和《隐私协议》，勾选同意后，您即可开始游戏。", () => { self.OnYinSiYinSiAgree(); }).Coroutine();
+                PopupTipHelp.OpenPopupTip(self.Root(), "提示", "请您阅读并同意《用户协议》和《隐私协议》，勾选同意后，您即可开始游戏。", null).Coroutine();
                 return;
             }
 
@@ -222,7 +222,7 @@ namespace ET.Client
 
             if (!self.View.E_YinSiToggleToggle.isOn)
             {
-                PopupTipHelp.OpenPopupTip(self.Root(), "提示", "请您阅读并同意《用户协议》和《隐私协议》，勾选同意后，您即可注册账号。", () => { self.OnYinSiYinSiAgree(); }).Coroutine();
+                PopupTipHelp.OpenPopupTip(self.Root(), "提示", "请您阅读并同意《用户协议》和《隐私协议》，勾选同意后，您即可注册账号。", null).Coroutine();
                 return;
             }
 
