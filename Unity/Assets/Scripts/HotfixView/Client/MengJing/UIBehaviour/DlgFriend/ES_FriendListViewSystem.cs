@@ -13,7 +13,7 @@ namespace ET.Client
         private static void Awake(this ES_FriendList self, Transform transform)
         {
             self.uiTransform = transform;
-            self.E_FriendListItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnFriendListItemsRefresh);
+            // self.E_FriendListItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnFriendListItemsRefresh);
 
             self.ES_ChatView.uiTransform.gameObject.SetActive(false);
 
@@ -26,28 +26,39 @@ namespace ET.Client
             self.DestroyWidget();
         }
 
-        private static void OnFriendListItemsRefresh(this ES_FriendList self, Transform transform, int index)
-        {
-            foreach (Scroll_Item_FriendListItem item in self.ScrollItemFriendListItems.Values)
-            {
-                if (item.uiTransform == transform)
-                {
-                    item.uiTransform = null;
-                }
-            }
-            
-            Scroll_Item_FriendListItem scrollItemFriendListItem = self.ScrollItemFriendListItems[index].BindTrans(transform);
-            scrollItemFriendListItem.Refresh(self.ShowFriendInfos[index], self.OnDeleteHandler, self.OnChatHandler);
-        }
-
         public static void Refresh(this ES_FriendList self)
         {
             FriendComponent friendComponent = self.Root().GetComponent<FriendComponent>();
             self.ShowFriendInfos.Clear();
             self.ShowFriendInfos.AddRange(friendComponent.FriendList);
 
-            self.AddUIScrollItems(ref self.ScrollItemFriendListItems, self.ShowFriendInfos.Count);
-            self.E_FriendListItemsLoopVerticalScrollRect.SetVisible(true, self.ShowFriendInfos.Count);
+            ResourcesLoaderComponent resourcesLoaderComponent = self.Root().GetComponent<ResourcesLoaderComponent>();
+            for (int i = 0; i < self.ShowFriendInfos.Count; i++)
+            {
+                if (!self.ScrollItemFriendListItems.ContainsKey(i))
+                {
+                    Scroll_Item_FriendListItem item = self.AddChild<Scroll_Item_FriendListItem>();
+                    string path = "Assets/Bundles/UI/Item/Item_FriendListItem.prefab";
+
+                    GameObject prefab = resourcesLoaderComponent.LoadAssetSync<GameObject>(path);
+                    GameObject go = UnityEngine.Object.Instantiate(prefab, self.E_FriendListItemsLoopVerticalScrollRect.transform.Find("Content").gameObject.transform);
+                    item.BindTrans(go.transform);
+                    self.ScrollItemFriendListItems.Add(i, item);
+                }
+
+                Scroll_Item_FriendListItem scrollItemFriendListItem = self.ScrollItemFriendListItems[i];
+                scrollItemFriendListItem.uiTransform.gameObject.SetActive(true);
+                scrollItemFriendListItem.Refresh(self.ShowFriendInfos[i], self.OnDeleteHandler, self.OnChatHandler, friendComponent.FriendChatId.Contains(friendComponent.FriendList[i].UserId));
+            }
+
+            if (self.ScrollItemFriendListItems.Count > self.ShowFriendInfos.Count)
+            {
+                for (int i = self.ShowFriendInfos.Count; i < self.ScrollItemFriendListItems.Count; i++)
+                {
+                    Scroll_Item_FriendListItem scrollItemFriendListItem = self.ScrollItemFriendListItems[i];
+                    scrollItemFriendListItem.uiTransform.gameObject.SetActive(false);
+                }
+            }
         }
 
         private static void OnChatHandler(this ES_FriendList self, FriendInfo friendInfo)

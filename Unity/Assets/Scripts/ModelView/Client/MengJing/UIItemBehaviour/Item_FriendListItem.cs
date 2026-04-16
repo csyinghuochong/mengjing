@@ -1,12 +1,16 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace ET.Client
 {
+	[ChildOf]
 	[EnableMethod]
 	public  class Scroll_Item_FriendListItem : Entity,IAwake,IDestroy,IUIScrollItem<Scroll_Item_FriendListItem>
 	{
 		public FriendInfo FriendInfo;
+		public Action DeleteHandler;
+		public Action<FriendInfo> ClickHandler;
 		
 		public long DataId {get;set;}
 		private bool isCacheNode = false;

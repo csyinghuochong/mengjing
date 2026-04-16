@@ -7,10 +7,10 @@ namespace ET.Client
 	[EnableMethod]
 	public  class ES_FriendList : Entity,IAwake<Transform>,IDestroy ,IUILogic
 	{
-		public Dictionary<int, EntityRef<Scroll_Item_FriendListItem>> ScrollItemFriendListItems;
+		public Dictionary<int, EntityRef<Scroll_Item_FriendListItem>> ScrollItemFriendListItems = new();
 		public List<FriendInfo> ShowFriendInfos = new();
 		
-		public UnityEngine.UI.LoopVerticalScrollRect E_FriendListItemsLoopVerticalScrollRect
+		public UnityEngine.UI.ScrollRect E_FriendListItemsLoopVerticalScrollRect
      	{
      		get
      		{
@@ -21,7 +21,7 @@ namespace ET.Client
      			}
      			if( this.m_E_FriendListItemsLoopVerticalScrollRect == null )
      			{
-		    		this.m_E_FriendListItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.LoopVerticalScrollRect>(this.uiTransform.gameObject,"Center/E_FriendListItems");
+		    		this.m_E_FriendListItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.ScrollRect>(this.uiTransform.gameObject,"Center/E_FriendListItems");
      			}
      			return this.m_E_FriendListItemsLoopVerticalScrollRect;
      		}
@@ -66,7 +66,7 @@ namespace ET.Client
 			this.uiTransform = null;
 		}
 
-		private UnityEngine.UI.LoopVerticalScrollRect m_E_FriendListItemsLoopVerticalScrollRect = null;
+		private UnityEngine.UI.ScrollRect m_E_FriendListItemsLoopVerticalScrollRect = null;
 		private EntityRef<ES_ChatView> m_es_chatview = null;
 		public Transform uiTransform = null;
 	}
