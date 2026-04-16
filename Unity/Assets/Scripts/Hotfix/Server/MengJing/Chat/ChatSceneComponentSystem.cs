@@ -129,8 +129,18 @@ namespace ET.Server
             if (self.ChatInfoUnitsDict.TryGetValue(id, out ChatInfoUnit chatInfoUnit))
             {
                 self.ChatInfoUnitsDict.Remove(id);
-                chatInfoUnit?.Dispose();
+                self.ChatUnitExit(chatInfoUnit).Coroutine();
             }
+        }
+
+        private static async ETTask ChatUnitExit(this ChatSceneComponent self, ChatInfoUnit chatUnit)
+        {
+            await chatUnit.Fiber().WaitFrameFinish();
+            // await chatUnit.RemoveLocation(LocationType.Chat);
+            chatUnit.Root().GetComponent<MessageLocationSenderComponent>().Get(LocationType.GateSession).Remove(chatUnit.GateSessionActorId);
+            chatUnit.Dispose();
+
+            await ETTask.CompletedTask;
         }
     }
 }
