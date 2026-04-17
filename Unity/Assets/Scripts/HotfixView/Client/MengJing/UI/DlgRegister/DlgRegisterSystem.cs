@@ -66,7 +66,10 @@ namespace ET.Client
 
             if (errCode == ErrorCode.ERR_Success)
             {
-                EventSystem.Instance.Publish(self.Root(), new CommonPopup() { HintText = "创建成功！" });
+                PopupTipHelp.OpenPopupTip(self.Root(), "系统提示", "创建成功！", () =>
+                {
+                    self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_Register);
+                }, null).Coroutine();
             }
             else
             {
