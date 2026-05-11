@@ -45,9 +45,12 @@ namespace ET.Client
 
             if (!string.IsNullOrEmpty(text_new))
             {
+                // 收起键盘
+                self.View.E_CreateRoleNameInputField.DeactivateInputField();
+
                 HintHelp.ShowErrorHint(self.Root(), ErrorCode.ERR_SensitiveWords);
             }
-            
+
             text_old = text_old.Replace("*", "");
             self.View.E_CreateRoleNameInputField.text = text_old;
         }
