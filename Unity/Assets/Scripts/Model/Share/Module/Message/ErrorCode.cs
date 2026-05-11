@@ -91,6 +91,7 @@ namespace ET
         public const int ERR_PasswordFormError = 200130;
         public const int ERR_AccountAlreadyExists = 200131;                          //账号已经存在
         public const int ERR_AccountNotExists = 200132;                              //账号不存在
+        public const int ERR_SensitiveWords =  200133;                               //存在敏感词
         
         //300001-400001 服务器提示性错误码
         //角色

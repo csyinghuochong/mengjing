@@ -24,6 +24,7 @@ namespace ET.Client
             { ErrorCode.ERR_OtherNotExist, "该玩家不在主城!" },
             { ErrorCode.ERR_AccountAlreadyExists, "此账户已经注册！" },
             { ErrorCode.ERR_AccountNotExists, "账号不存在" },
+            { ErrorCode.ERR_SensitiveWords, "您输入的文字内包含敏感词，请修改后再进行提交。" },
             { ErrorCode.ERR_NonePlayerError, "玩家不存在!" },
             { ErrorCode.ERR_GoldNotEnoughError, "金币不足!" },
             { ErrorCode.ERR_DiamondNotEnoughError, "钻石不足!" },
