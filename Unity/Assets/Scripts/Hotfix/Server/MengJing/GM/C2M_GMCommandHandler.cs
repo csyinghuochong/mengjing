@@ -51,7 +51,22 @@ namespace ET.Server
                     }
                     return;
                 }
-                
+
+                if (message.GMMsg == "#ceshizhuangbei")
+                {
+                    string items = "1560103;1@1560203;1@1560303;1@1560403;1@1560503;1@1560601;1@1560701;1@1560801;1@1560901;1@1561001;1@1561103;1@1561003;1";
+                    List<RewardItem> rewardItems = new List<RewardItem>();
+                    foreach (string str in items.Split('@'))
+                    {
+                        string[] itemInfo = str.Split(';');
+                        int itemId = int.Parse(itemInfo[0]);
+                        int itemNumber = int.Parse(itemInfo[1]);
+                        rewardItems.Add(new RewardItem() { ItemID = itemId, ItemNum = itemNumber });
+                    }
+                    bool restut = unit.GetComponent<BagComponentS>().OnAddItemData(rewardItems, string.Empty, $"{ItemGetWay.GM}_{TimeHelper.ServerNow()}", true, true);
+                    return;
+                }
+
                 if (message.GMMsg == "#hightest")
                 {
                     // 提升等级
