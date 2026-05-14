@@ -66,6 +66,38 @@ namespace ET.Server
                     bool restut = unit.GetComponent<BagComponentS>().OnAddItemData(rewardItems, string.Empty, $"{ItemGetWay.GM}_{TimeHelper.ServerNow()}", true, true);
                     return;
                 }
+                
+                // 宠物等级提升到和玩家一样
+                if (message.GMMsg == "#cwlv")
+                {
+                    PetComponentS petComponent = unit.GetComponent<PetComponentS>();
+                    int playerLv = unit.GetComponent<UserInfoComponentS>().GetUserLv();
+                    foreach (RolePetInfo rolePetInfo in petComponent.RolePetInfos)
+                    {
+                        if (rolePetInfo.PetLv < playerLv)
+                        {
+                            petComponent.PetAddLv(rolePetInfo, playerLv - rolePetInfo.PetLv);
+                        }
+                    }
+
+                    return;
+                }
+                
+                // 发一套宠物装备
+                if (message.GMMsg == "#cwzhuangbei")
+                {
+                    string items = "1800401;1@1800402;1@1800403;1@1800404;1";
+                    List<RewardItem> rewardItems = new List<RewardItem>();
+                    foreach (string str in items.Split('@'))
+                    {
+                        string[] itemInfo = str.Split(';');
+                        int itemId = int.Parse(itemInfo[0]);
+                        int itemNumber = int.Parse(itemInfo[1]);
+                        rewardItems.Add(new RewardItem() { ItemID = itemId, ItemNum = itemNumber });
+                    }
+                    bool restut = unit.GetComponent<BagComponentS>().OnAddItemData(rewardItems, string.Empty, $"{ItemGetWay.GM}_{TimeHelper.ServerNow()}", true, true);
+                    return;
+                }
 
                 if (message.GMMsg == "#hightest")
                 {
