@@ -110,8 +110,14 @@ namespace ET.Client
                     textEquipTypeSon = LanguageComponent.Instance.LoadLocalization("生肖");
                 }
 
+                if (itemConfig.EquipType == 301)
+                {
+                    textEquipType = CommonViewHelper.GetPetEquipType(itemConfig.ItemSubType);
+                    textEquipTypeSon = LanguageComponent.Instance.LoadLocalization("宠物装备");
+                }
+
                 self.E_EquipTypeText.text = zstring.Format("{0}:{1}", LanguageComponent.Instance.LoadLocalization("部位"), string.IsNullOrEmpty(textEquipType) ? "-" : textEquipType);
-                self.E_EquipTypeSonText.text = zstring.Format("{0}:{1}", LanguageComponent.Instance.LoadLocalization("类型"), string.IsNullOrEmpty(textEquipType) ? "-" : textEquipType);
+                self.E_EquipTypeSonText.text = zstring.Format("{0}:{1}", LanguageComponent.Instance.LoadLocalization("类型"), string.IsNullOrEmpty(textEquipTypeSon) ? "-" : textEquipTypeSon);
 
                 int occTwo = self.Root().GetComponent<UserInfoComponentC>().UserInfo.OccTwo;
                 if (occTwo != 0)

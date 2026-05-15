@@ -698,8 +698,7 @@ namespace ET.Client
         {
             self.E_ButtonEquipXieXiaButton.onClick.RemoveAllListeners();
             self.E_ButtonEquipXieXiaButton.AddListener(() => { self.OnButtonPetEquipXieXia().Coroutine(); });
-            List<string> TypeNames = new List<string>() { "颈环", "护腕", "坠饰", "装甲" };
-            self.E_TextTypePetEquipText.GetComponent<Text>().text = TypeNames[self.PetEquipPosition];
+            self.E_TextTypePetEquipText.GetComponent<Text>().text = CommonViewHelper.GetPetEquipType(self.PetEquipPosition + 3001);
             
             // 当前宠物装备的属性
             long baginfoId = 0;

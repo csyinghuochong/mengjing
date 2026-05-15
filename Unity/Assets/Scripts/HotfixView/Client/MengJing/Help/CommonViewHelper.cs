@@ -9,6 +9,27 @@ namespace ET.Client
     public static class CommonViewHelper
     {
 
+        public static string GetPetEquipType(int type)
+        {
+
+            switch (type)
+            {
+
+                case 3001:
+                    return LanguageComponent.Instance.LoadLocalization("颈环");
+
+                case 3002:
+                    return LanguageComponent.Instance.LoadLocalization("护腕");
+
+                case 3003:
+                    return LanguageComponent.Instance.LoadLocalization("坠饰");
+                
+                case 3004:
+                    return LanguageComponent.Instance.LoadLocalization("装甲");
+            }
+            return "";
+        }
+        
         public static string GetMonsterShowName(int babaType)
         {
             if (babaType == 1)
