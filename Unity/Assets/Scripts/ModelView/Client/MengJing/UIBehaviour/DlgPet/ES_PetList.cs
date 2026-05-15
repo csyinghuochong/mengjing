@@ -23,6 +23,14 @@ namespace ET.Client
 		public int UnactiveId;
 		public int UnactiveNum;
 		
+		// 宠物装备
+		public List<UIPetEquipSetItem> EquipList { get; set; } = new List<UIPetEquipSetItem>();
+		public int PetEquipPosition;
+		public ItemInfo PetEquipBagInfo { get; set; }
+		public ItemInfo PetEquipEquipdBagInfo { get; set; }
+		public RolePetInfo RolePetInfo;
+		public Dictionary<int, EntityRef<Scroll_Item_CommonItem>> PetEquipScrollItemCommonItems = new();
+		
 		public int Position;
 		public int Type;
 		private EntityRef<ItemInfo> bagInfo;
@@ -1160,6 +1168,193 @@ namespace ET.Client
      		}
      	}
 
+		public UnityEngine.RectTransform EG_PetEquipSetRectTransform
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_EG_PetEquipSetRectTransform == null )
+     			{
+		    		this.m_EG_PetEquipSetRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_Right/EG_PetEquipSet");
+     			}
+     			return this.m_EG_PetEquipSetRectTransform;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_ImageIconPetEquipImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_ImageIconPetEquipImage == null )
+     			{
+		    		this.m_E_ImageIconPetEquipImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_Right/EG_PetEquipSet/E_ImageIconPetEquip");
+     			}
+     			return this.m_E_ImageIconPetEquipImage;
+     		}
+     	}
+
+		public UnityEngine.UI.Text E_TextNamePetEquipText
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_TextNamePetEquipText == null )
+     			{
+		    		this.m_E_TextNamePetEquipText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"EG_Right/EG_PetEquipSet/E_TextNamePetEquip");
+     			}
+     			return this.m_E_TextNamePetEquipText;
+     		}
+     	}
+
+		public UnityEngine.UI.Text E_TextLevelPetEquipText
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_TextLevelPetEquipText == null )
+     			{
+		    		this.m_E_TextLevelPetEquipText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"EG_Right/EG_PetEquipSet/E_TextLevelPetEquip");
+     			}
+     			return this.m_E_TextLevelPetEquipText;
+     		}
+     	}
+
+		public UnityEngine.UI.ScrollRect E_PetEquipListScrollRect
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_PetEquipListScrollRect == null )
+     			{
+		    		this.m_E_PetEquipListScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.ScrollRect>(this.uiTransform.gameObject,"EG_Right/EG_PetEquipSet/E_PetEquipList");
+     			}
+     			return this.m_E_PetEquipListScrollRect;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_PetEquipListImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_PetEquipListImage == null )
+     			{
+		    		this.m_E_PetEquipListImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_Right/EG_PetEquipSet/E_PetEquipList");
+     			}
+     			return this.m_E_PetEquipListImage;
+     		}
+     	}
+
+		public UnityEngine.UI.Button E_ButtonClosePetEquipListButton
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_ButtonClosePetEquipListButton == null )
+     			{
+		    		this.m_E_ButtonClosePetEquipListButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"EG_Right/EG_PetEquipSet/E_ButtonClosePetEquipList");
+     			}
+     			return this.m_E_ButtonClosePetEquipListButton;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_ButtonClosePetEquipListImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_ButtonClosePetEquipListImage == null )
+     			{
+		    		this.m_E_ButtonClosePetEquipListImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_Right/EG_PetEquipSet/E_ButtonClosePetEquipList");
+     			}
+     			return this.m_E_ButtonClosePetEquipListImage;
+     		}
+     	}
+
+		public UnityEngine.UI.Text E_TextTypePetEquipText
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_TextTypePetEquipText == null )
+     			{
+		    		this.m_E_TextTypePetEquipText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"EG_Right/EG_PetEquipSet/E_TextTypePetEquip");
+     			}
+     			return this.m_E_TextTypePetEquipText;
+     		}
+     	}
+
+		public UnityEngine.UI.Button E_ButtonPetEquipXieXiaButton
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_ButtonPetEquipXieXiaButton == null )
+     			{
+		    		this.m_E_ButtonPetEquipXieXiaButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"EG_Right/EG_PetEquipSet/E_ButtonPetEquipXieXia");
+     			}
+     			return this.m_E_ButtonPetEquipXieXiaButton;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_ButtonPetEquipXieXiaImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_ButtonPetEquipXieXiaImage == null )
+     			{
+		    		this.m_E_ButtonPetEquipXieXiaImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_Right/EG_PetEquipSet/E_ButtonPetEquipXieXia");
+     			}
+     			return this.m_E_ButtonPetEquipXieXiaImage;
+     		}
+     	}
+
 		public UnityEngine.RectTransform EG_PetAddPointRectTransform
      	{
      		get
@@ -1716,6 +1911,17 @@ namespace ET.Client
 			this.m_E_TextTypeText = null;
 			this.m_E_ButtonEquipXieXiaButton = null;
 			this.m_E_ButtonEquipXieXiaImage = null;
+			this.m_EG_PetEquipSetRectTransform = null;
+			this.m_E_ImageIconPetEquipImage = null;
+			this.m_E_TextNamePetEquipText = null;
+			this.m_E_TextLevelPetEquipText = null;
+			this.m_E_PetEquipListScrollRect = null;
+			this.m_E_PetEquipListImage = null;
+			this.m_E_ButtonClosePetEquipListButton = null;
+			this.m_E_ButtonClosePetEquipListImage = null;
+			this.m_E_TextTypePetEquipText = null;
+			this.m_E_ButtonPetEquipXieXiaButton = null;
+			this.m_E_ButtonPetEquipXieXiaImage = null;
 			this.m_EG_PetAddPointRectTransform = null;
 			this.m_E_Lab_ShengYuNumText = null;
 			this.m_E_Btn_ConfirmButton = null;
@@ -1813,6 +2019,17 @@ namespace ET.Client
 		private UnityEngine.UI.Text m_E_TextTypeText = null;
 		private UnityEngine.UI.Button m_E_ButtonEquipXieXiaButton = null;
 		private UnityEngine.UI.Image m_E_ButtonEquipXieXiaImage = null;
+		private UnityEngine.RectTransform m_EG_PetEquipSetRectTransform = null;
+		private UnityEngine.UI.Image m_E_ImageIconPetEquipImage = null;
+		private UnityEngine.UI.Text m_E_TextNamePetEquipText = null;
+		private UnityEngine.UI.Text m_E_TextLevelPetEquipText = null;
+		private UnityEngine.UI.ScrollRect m_E_PetEquipListScrollRect = null;
+		private UnityEngine.UI.Image m_E_PetEquipListImage = null;
+		private UnityEngine.UI.Button m_E_ButtonClosePetEquipListButton = null;
+		private UnityEngine.UI.Image m_E_ButtonClosePetEquipListImage = null;
+		private UnityEngine.UI.Text m_E_TextTypePetEquipText = null;
+		private UnityEngine.UI.Button m_E_ButtonPetEquipXieXiaButton = null;
+		private UnityEngine.UI.Image m_E_ButtonPetEquipXieXiaImage = null;
 		private UnityEngine.RectTransform m_EG_PetAddPointRectTransform = null;
 		private UnityEngine.UI.Text m_E_Lab_ShengYuNumText = null;
 		private UnityEngine.UI.Button m_E_Btn_ConfirmButton = null;

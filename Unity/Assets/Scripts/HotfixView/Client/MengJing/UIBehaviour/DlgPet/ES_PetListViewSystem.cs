@@ -44,6 +44,21 @@ namespace ET.Client
                 self.OnButtonPetHeXinItem(2);
             });
 
+            self.EG_EquipSetRectTransform.gameObject.SetActive(true);
+            for (int i = 0; i <= 3; i++)
+            {
+                GameObject go = self.EG_EquipSetRectTransform.Find("Equip_" + i).gameObject;
+                UIPetEquipSetItem uiitem = self.AddChild<UIPetEquipSetItem, GameObject>(go);
+                uiitem.Btn_Equip.GetComponent<Button>().onClick.RemoveAllListeners();
+                int i1 = i;
+                uiitem.Btn_Equip.GetComponent<Button>().onClick.AddListener(() => { self.OnChangeNode(4); });
+                uiitem.Btn_Equip.GetComponent<Button>().onClick.AddListener(() => { self.OnButtonPetEquipItem(i1); });
+                uiitem.InitUI(0);
+                self.EquipList.Add(uiitem);
+            }
+            self.E_ButtonPetEquipXieXiaButton.AddListener(()=> { self.OnButtonPetEquipXieXia().Coroutine(); });
+            self.E_ButtonClosePetEquipListButton.AddListener(() => { self.OnChangeNode(1); });
+            
             self.E_PetHeXinItem0Image.transform.Find("ImageSelect").gameObject.SetActive(false);
             self.E_PetHeXinItem1Image.transform.Find("ImageSelect").gameObject.SetActive(false);
             self.E_PetHeXinItem2Image.transform.Find("ImageSelect").gameObject.SetActive(false);
@@ -499,6 +514,7 @@ namespace ET.Client
             self.OnUpdatePetInfo(self.LastSelectItem);
             self.UpdatePetSelected(self.LastSelectItem);
             self.UpdatePetHeXin(self.LastSelectItem);
+            self.UpdatePetEquip(self.LastSelectItem);
             self.E_JiBanButton.gameObject.SetActive(PetHelper.IsShenShou(self.LastSelectItem.ConfigId));
         }
 
@@ -623,8 +639,237 @@ namespace ET.Client
             self.EG_AttributeNodeRectTransform.gameObject.SetActive(nodetype == 1);
             self.EG_PetHeXinSetRectTransform.gameObject.SetActive(nodetype == 2);
             self.EG_PetAddPointRectTransform.gameObject.SetActive(nodetype == 3);
+            self.EG_PetEquipSetRectTransform.gameObject.SetActive(nodetype == 4);
         }
 
+        # region 宠物装备
+
+        public static void OnEquipPetEquip(this ES_PetList self)
+        {
+            List<ItemInfo> bagInfos = self.Root().GetComponent<BagComponentC>().GetItemsByLoc(ItemLocType.ItemLocBag);
+            List<ItemInfo> eqipInfos = self.Root().GetComponent<BagComponentC>().GetItemsByLoc(ItemLocType.PetLocEquip);
+            self.LastSelectItem = self.Root().GetComponent<PetComponentC>().GetPetInfoByID(self.LastSelectItem.Id);
+            self.UpdatePetEquip(self.LastSelectItem);
+            self.UpdateAttribute(self.LastSelectItem);
+            self.UpdateSkillList(self.LastSelectItem);
+            self.RolePetInfo = self.LastSelectItem;
+            self.SelectPetEquipItemHandlder(null);
+            self.UpdatePetEquipItem(eqipInfos);
+            self.OnPetEquipUpdateItemList(bagInfos);
+        }
+        
+        private static void UpdatePetEquip(this ES_PetList self, RolePetInfo rolePetItem)
+        {
+            for (int i = 0; i < self.EquipList.Count; i++)
+            {
+                self.EquipList[i].InitUI(0);
+            }
+
+            BagComponentC bagComponent = self.Root().GetComponent<BagComponentC>();
+            for (int i = 0; i < rolePetItem.PetEquipList.Count; i++)
+            {
+                ItemInfo bagInfo = bagComponent.GetBagInfo(rolePetItem.PetEquipList[i]);
+                ItemConfig itemConfig = ItemConfigCategory.Instance.Get(bagInfo.ItemID);
+                self.EquipList[itemConfig.ItemSubType - 3001].UpdateData(bagInfo, ItemOperateEnum.None, null);
+            }
+        }
+
+        private static void OnButtonPetEquipItem(this ES_PetList self, int position)
+        {
+             // TODO 配置表也要改下，3004配成了3003
+            
+            List<ItemInfo> bagInfos = self.Root().GetComponent<BagComponentC>().GetItemsByLoc(ItemLocType.ItemLocBag);
+            List<ItemInfo> eqipInfos = self.Root().GetComponent<BagComponentC>().GetItemsByLoc(ItemLocType.PetLocEquip);
+
+            self.OnPetEquipUpdateUI(self.LastSelectItem, position);
+            self.UpdatePetEquipItem(eqipInfos);
+            self.OnPetEquipUpdateItemList(bagInfos);
+        }
+        
+        private static void OnPetEquipUpdateUI(this ES_PetList self, RolePetInfo rolePetInfo, int position)
+        {
+            self.PetEquipBagInfo = null;
+            self.PetEquipEquipdBagInfo = null;
+            self.PetEquipPosition = position;
+            self.RolePetInfo = rolePetInfo;
+        }
+
+        private static void UpdatePetEquipItem(this ES_PetList self, List<ItemInfo> bagInfos)
+        {
+            self.E_ButtonEquipXieXiaButton.onClick.RemoveAllListeners();
+            self.E_ButtonEquipXieXiaButton.AddListener(() => { self.OnButtonPetEquipXieXia().Coroutine(); });
+            List<string> TypeNames = new List<string>() { "颈环", "护腕", "坠饰", "装甲" };
+            self.E_TextTypePetEquipText.GetComponent<Text>().text = TypeNames[self.PetEquipPosition];
+            
+            // 当前宠物装备的属性
+            long baginfoId = 0;
+
+            foreach (long l in self.RolePetInfo.PetEquipList)
+            {
+                ItemInfo bagInfo1 = null;
+                foreach (ItemInfo info in bagInfos)
+                {
+                    if (info.BagInfoID == l)
+                    {
+                        bagInfo1 = info;
+                        break;
+                    }
+                }
+
+                if (bagInfo1 == null)
+                {
+                    continue;
+                }
+
+                ItemConfig itemConfig1 = ItemConfigCategory.Instance.Get(bagInfo1.ItemID);
+                if (itemConfig1.ItemSubType - 3001 == self.PetEquipPosition)
+                {
+                    baginfoId = l;
+                }
+            }
+
+            ItemInfo bagInfo = null;
+            for (int i = 0; i < bagInfos.Count; i++)
+            {
+                if (bagInfos[i].BagInfoID == baginfoId)
+                {
+                    bagInfo = bagInfos[i];
+                }
+            }
+
+            self.PetEquipEquipdBagInfo = bagInfo;
+            self.E_ImageIconPetEquipImage.gameObject.SetActive(bagInfo != null);
+            self.E_ButtonPetEquipXieXiaButton.gameObject.SetActive(bagInfo != null);
+            if (bagInfo == null)
+            {
+                self.E_TextNamePetEquipText.text = "空";
+                self.E_TextLevelPetEquipText.text = string.Format("等级: {0}", 0);
+                return;
+            }
+
+            ItemConfig itemConfig = ItemConfigCategory.Instance.Get(bagInfo.ItemID);
+            self.E_TextNamePetEquipText.text = itemConfig.ItemName;
+            self.E_TextLevelPetEquipText.text = string.Format("等级: {0}", itemConfig.UseLv);
+            string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemIcon, itemConfig.Icon);
+            Sprite sp = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
+
+            self.E_ImageIconPetEquipImage.GetComponent<Image>().sprite = sp;
+        }
+        
+        private static void OnPetEquipUpdateItemList(this ES_PetList self, List<ItemInfo> bagInfos)
+        {
+            self.PetEquipBagInfo = null;
+            var path = "Assets/Bundles/UI/Item/Item_CommonItem.prefab";
+            
+            ResourcesLoaderComponent resourcesLoaderComponent = self.Root().GetComponent<ResourcesLoaderComponent>();
+            GameObject prefab = resourcesLoaderComponent.LoadAssetSync<GameObject>(path);
+            int num = 0;
+            for (int i = 0; i < bagInfos.Count; i++)
+            {
+                ItemConfig itemConfig = ItemConfigCategory.Instance.Get(bagInfos[i].ItemID);
+
+                if (itemConfig.ItemSubType - 3001 != self.PetEquipPosition)
+                {
+                    continue;
+                }
+                
+                if (!self.PetEquipScrollItemCommonItems.ContainsKey(num))
+                {
+                    Scroll_Item_CommonItem item = self.AddChild<Scroll_Item_CommonItem>();
+                    
+                    GameObject go = UnityEngine.Object.Instantiate(prefab,self.E_PetEquipListScrollRect.transform.Find("Content").gameObject.transform);
+                    item.BindTrans(go.transform);
+                    self.PetEquipScrollItemCommonItems.Add(num, item);
+                }
+                
+                Scroll_Item_CommonItem scrollItemCommonItem = self.PetEquipScrollItemCommonItems[num];
+                scrollItemCommonItem.uiTransform.gameObject.SetActive(true);
+                scrollItemCommonItem.Refresh(bagInfos[i], ItemOperateEnum.PetEquipBag, self.SelectPetEquipItemHandlder);
+                scrollItemCommonItem.HideItemName();
+
+                num++;
+            }
+
+            if (self.PetEquipScrollItemCommonItems.Count > num)
+            {
+                for (int i = num; i < self.PetEquipScrollItemCommonItems.Count; i++)
+                {
+                    Scroll_Item_CommonItem scrollItemCommonItem = self.PetEquipScrollItemCommonItems[i];
+                    scrollItemCommonItem.uiTransform.gameObject.SetActive(false);
+                }
+            }
+        }
+        
+        private static void SelectPetEquipItemHandlder(this ES_PetList self, ItemInfo bagInfo)
+        {
+            self.PetEquipBagInfo = bagInfo;
+            for (int i = 0; i < self.PetEquipScrollItemCommonItems.Count; i++)
+            {
+                Scroll_Item_CommonItem scrollItemCommonItem = self.PetEquipScrollItemCommonItems[i];
+                if (scrollItemCommonItem.uiTransform != null)
+                {
+                    scrollItemCommonItem.SetSelected(bagInfo);
+                }
+            }
+        }
+        
+        private static async ETTask OnButtonPetEquipXieXia(this ES_PetList self)
+        {
+            long instanceid = self.InstanceId;
+            if (self.PetEquipEquipdBagInfo == null)
+            {
+                return;
+            }
+
+            int error = await PetNetHelper.RequestPetEquip(self.Root(), self.PetEquipEquipdBagInfo.BagInfoID, self.RolePetInfo.Id, 2);
+            
+            if (error != ErrorCode.ERR_Success)
+            {
+                return;
+            }
+
+            if (instanceid != self.InstanceId)
+            {
+                return;
+            }
+            
+            self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgPet>().OnEquipPetEquip();
+        }
+
+        public static async ETTask<int> OnButtonEquipPetEquip(this ES_PetList self)
+        {
+            ItemConfig itemConfig = ItemConfigCategory.Instance.Get(self.PetEquipBagInfo.ItemID);
+            if (itemConfig.ItemSubType - 3001 != self.PetEquipPosition)
+            {
+                FlyTipComponent.Instance.ShowFlyTipDi("孔位不符！");
+                return -1;
+            }
+            if (self.RolePetInfo.PetLv < itemConfig.UseLv)
+            {
+                FlyTipComponent.Instance.ShowFlyTipDi("宠物等级不足！");
+                return -1;
+            }
+
+            long instanceid = self.InstanceId;
+
+            int error = await PetNetHelper.RequestPetEquip(self.Root(), self.PetEquipBagInfo.BagInfoID, self.RolePetInfo.Id, 1);
+            
+            if (error != ErrorCode.ERR_Success)
+            {
+                return -1;
+            }
+
+            if (instanceid != self.InstanceId)
+            {
+                return -1;
+            }
+
+            self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgPet>().OnEquipPetEquip();
+            return 0;
+        }
+        
+        # endregion
+        
         # region 核心
 
         public static void OnButtonPetHeXinItem(this ES_PetList self, int position)

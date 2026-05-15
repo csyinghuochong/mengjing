@@ -241,6 +241,22 @@ namespace ET.Client
             return response.Error;
         }
 
+        public static async ETTask<int> RequestPetEquip(Scene root, long bagInfoId, long petInfoId, int operateType)
+        {
+            C2M_PetEquipRequest request = C2M_PetEquipRequest.Create();
+            request.BagInfoId = bagInfoId;
+            request.PetInfoId = petInfoId;
+            request.OperateType = operateType;
+            M2C_PetEquipResponse response = (M2C_PetEquipResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+
+            if (response.Error == ErrorCode.ERR_Success)
+            {
+                root.GetComponent<PetComponentC>().OnRolePetUpdate(response.RolePetInfo);
+            }
+            
+            return response.Error;
+        }
+        
         public static async ETTask<RolePetInfo> RequestRolePetJiadian(Scene root, long petInfoId, List<int> addPropretyValue)
         {
             C2M_RolePetJiadian request = C2M_RolePetJiadian.Create();

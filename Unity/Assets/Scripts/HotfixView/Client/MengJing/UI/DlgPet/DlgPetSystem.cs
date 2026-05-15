@@ -140,6 +140,14 @@ namespace ET.Client
                 self.View.ES_PetList.OnEquipPetHeXin();
             }
         }
+        
+        public static void OnEquipPetEquip(this DlgPet self)
+        {
+            if (self.View.ES_PetList.uiTransform.gameObject.activeSelf)
+            {
+                self.View.ES_PetList.OnEquipPetEquip();
+            }
+        }
 
         public static void OnXiLianUpdate(this DlgPet self)
         {
@@ -159,7 +167,7 @@ namespace ET.Client
 
         public static async ETTask RequestPetEquipSelect(this DlgPet self)
         {
-            await self.View.ES_PetList.OnButtonEquipHeXinButton();
+            await self.View.ES_PetList.OnButtonEquipPetEquip();
         }
     }
 }

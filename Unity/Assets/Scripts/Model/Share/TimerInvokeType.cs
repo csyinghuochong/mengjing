@@ -120,5 +120,6 @@
         public const int PetEquipMakeCDTimer = 378;
         public const int UISingleHappyMoveTimer = 379;
         public const int UIGuideTimer = 380;
+        public const int PetEquipSetItemTimer = 381;
     }
 }
