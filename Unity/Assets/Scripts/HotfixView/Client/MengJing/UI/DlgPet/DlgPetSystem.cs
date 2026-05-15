@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace ET.Client
 {
@@ -38,6 +39,16 @@ namespace ET.Client
         protected override async ETTask Run(Scene scene, PetXiLianUpdate args)
         {
             scene.GetComponent<UIComponent>().GetDlgLogic<DlgPet>()?.OnXiLianUpdate();
+            await ETTask.CompletedTask;
+        }
+    }
+    
+    [Event(SceneType.Demo)]
+    public class BagItemUpdate_RefreshDlgPet : AEvent<Scene, BagItemUpdate>
+    {
+        protected override async ETTask Run(Scene scene, BagItemUpdate args)
+        {
+            scene.GetComponent<UIComponent>().GetDlgLogic<DlgPet>()?.OnUpdatePetEquipItemList();
             await ETTask.CompletedTask;
         }
     }
@@ -168,6 +179,15 @@ namespace ET.Client
         public static async ETTask RequestPetEquipSelect(this DlgPet self)
         {
             await self.View.ES_PetList.OnButtonEquipPetEquip();
+        }
+
+        public static void OnUpdatePetEquipItemList(this DlgPet self)
+        {
+            if (self.View.ES_PetList.uiTransform.gameObject.activeSelf)
+            {
+                List<ItemInfo> bagInfos = self.Root().GetComponent<BagComponentC>().GetItemsByLoc(ItemLocType.ItemLocBag);
+                self.View.ES_PetList.OnPetEquipUpdateItemList(bagInfos);
+            }
         }
     }
 }

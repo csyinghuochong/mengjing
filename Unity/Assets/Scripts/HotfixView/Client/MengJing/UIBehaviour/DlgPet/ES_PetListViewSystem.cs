@@ -756,7 +756,7 @@ namespace ET.Client
             self.E_ImageIconPetEquipImage.GetComponent<Image>().sprite = sp;
         }
         
-        private static void OnPetEquipUpdateItemList(this ES_PetList self, List<ItemInfo> bagInfos)
+        public static void OnPetEquipUpdateItemList(this ES_PetList self, List<ItemInfo> bagInfos)
         {
             self.PetEquipBagInfo = null;
             var path = "Assets/Bundles/UI/Item/Item_CommonItem.prefab";
