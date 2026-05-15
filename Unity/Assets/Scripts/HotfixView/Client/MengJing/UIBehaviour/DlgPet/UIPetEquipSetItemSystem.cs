@@ -6,6 +6,22 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
+    [Invoke(TimerInvokeType.PetEquipSetItemTimer)]
+    public class PetEquipSetItemTimer : ATimer<UIPetEquipSetItem>
+    {
+        protected override void Run(UIPetEquipSetItem self)
+        {
+            try
+            {
+                self.ShowEquipItemTips();
+            }
+            catch (Exception e)
+            {
+                Log.Error($"move timer error: {self.Id}\n{e}");
+            }
+        }
+    }
+    
     [FriendOf(typeof(UIPetEquipSetItem))]
     [EntitySystemOf(typeof(UIPetEquipSetItem))]
     public static partial class UIPetEquipSetItemSystem
