@@ -16,6 +16,21 @@ namespace ET.Client
             self.View.E_NextButton.AddListener(self.OnNextButton);
             self.View.E_CreateRoleItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnCreateRoleItemsRefresh);
             
+            string lastUserID = PlayerPrefsHelp.GetString(PlayerPrefsHelp.LastUserID);
+            PlayerInfoComponent playerInfoComponent = self.Root().GetComponent<PlayerInfoComponent>();
+            if (!string.IsNullOrEmpty(lastUserID))
+            {
+                long useid = long.Parse(lastUserID);
+                for (int i = 0; i < playerInfoComponent.CreateRoleList.Count; i++)
+                {
+                    if (playerInfoComponent.CreateRoleList[i].UnitId == useid)
+                    {
+                        self.SeletRoleInfo = playerInfoComponent.CreateRoleList[i];
+                        self.PageIndex = i / self.PageCount;
+                        break;
+                    }
+                }
+            }
             self.Refresh();
         }
 
@@ -40,22 +55,6 @@ namespace ET.Client
         private static void Refresh(this DlgMJLobby self)
         {
             self.RefreshCreateRoleItems();
-            
-            string lastUserID = PlayerPrefsHelp.GetString(PlayerPrefsHelp.LastUserID);
-            PlayerInfoComponent playerInfoComponent = self.Root().GetComponent<PlayerInfoComponent>();
-            if (!string.IsNullOrEmpty(lastUserID))
-            {
-                long useid = long.Parse(lastUserID);
-                for (int i = 0; i < playerInfoComponent.CreateRoleList.Count; i++)
-                {
-                    if (playerInfoComponent.CreateRoleList[i].UnitId == useid)
-                    {
-                        self.SeletRoleInfo = playerInfoComponent.CreateRoleList[i];
-                        self.PageIndex = i / self.PageCount;
-                        break;
-                    }
-                }
-            }
             
             self.UpdateSelect(self.SeletRoleInfo ?? self.ShowCreateRoleInfos[0]);
 
