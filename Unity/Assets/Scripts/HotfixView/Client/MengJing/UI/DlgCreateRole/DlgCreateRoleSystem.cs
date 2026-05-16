@@ -66,8 +66,11 @@ namespace ET.Client
 
             if (randomNameStr != "")
             {
-                randomNameStr = randomNameStr.Replace("*", "");
-                self.View.E_CreateRoleNameInputField.text = randomNameStr;
+                string text_new = "";
+                string text_old = randomNameStr;
+                MaskWordHelper.Instance.IsContainSensitiveWords(ref text_old, out text_new);
+                text_old = text_old.Replace("*", "");
+                self.View.E_CreateRoleNameInputField.text = text_old;
             }
         }
 
