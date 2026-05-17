@@ -162,7 +162,7 @@ namespace ET.Client
 
             if (self.LastSelectItem.PetStatus == 1)
             {
-                FlyTipComponent.Instance.ShowFlyTip("出战宠物不能分解！");
+                FlyTipComponent.Instance.ShowFlyTip("出战宠物不能放生！");
                 return;
             }
 
@@ -180,13 +180,13 @@ namespace ET.Client
 
             if (self.Root().GetComponent<PetComponentC>().TeamPetList.Contains(self.LastSelectItem.Id))
             {
-                FlyTipComponent.Instance.ShowFlyTip("当前宠物存在于宠物天梯上阵中，不能分解！");
+                FlyTipComponent.Instance.ShowFlyTip("当前宠物存在于宠物天梯上阵中，不能放生！");
                 return;
             }
 
             if (self.Root().GetComponent<PetComponentC>().PetFormations.Contains(self.LastSelectItem.Id))
             {
-                FlyTipComponent.Instance.ShowFlyTip("当前宠物存在于宠物副本上阵中，不能分解！");
+                FlyTipComponent.Instance.ShowFlyTip("当前宠物存在于宠物副本上阵中，不能放生！");
                 return;
             }
 
