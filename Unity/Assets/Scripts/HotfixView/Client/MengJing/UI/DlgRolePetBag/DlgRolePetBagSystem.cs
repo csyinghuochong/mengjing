@@ -163,9 +163,18 @@ namespace ET.Client
                 {
                     go.SetActive(true);
                 }
+                self.View.E_CommonSkillItemsLoopVerticalScrollRect.gameObject.SetActive(true);
 
                 Scroll_Item_RolePetBagItem scrollItemRolePetBagItem = self.ScrollItemRolePetBagItems[0];
                 scrollItemRolePetBagItem.OnImage_ItemButton();
+            }
+            else
+            {
+                foreach (GameObject go in self.PetZiZhiItemList)
+                {
+                    go.SetActive(false);
+                }
+                self.View.E_CommonSkillItemsLoopVerticalScrollRect.gameObject.SetActive(false);
             }
 
             using (zstring.Block())
