@@ -196,6 +196,8 @@ namespace ET.Client
             self.ShowBagInfos.AddRange(bagComponentC.GetItemsByType(itemTypeEnum));
             self.AddUIScrollItems(ref self.ScrollItemCommonItems, allNumber);
             self.E_BagItemsLoopVerticalScrollRect.SetVisible(true, allNumber);
+
+            self.E_BagNumberValueShowText.text = $"{self.ShowBagInfos.Count}/{allNumber}";
         }
 
         private static void UpdateSelect(this ES_RoleBag self, ItemInfo bagInfo)
