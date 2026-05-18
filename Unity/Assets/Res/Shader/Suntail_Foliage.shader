@@ -17,7 +17,7 @@ Shader "Raygeas/Suntail Foliage"
         _WorldScale("World Scale", Float) = 1
         
         [Toggle(_ENABLEWIND_ON)] _EnableWind("Enable Wind", Float) = 1
-        _WindForce("Force", Range(0,1)) = 0.3
+        _WindForce("Force", Range(0,5)) = 0.3
         _WindWavesScale("Waves Scale", Range(0,1)) = 0.25
         _WindSpeed("Speed", Range(0,1)) = 0.5
         [Toggle(_ANCHORTHEFOLIAGEBASE_ON)] _Anchorthefoliagebase("Anchor the foliage base", Float) = 0
