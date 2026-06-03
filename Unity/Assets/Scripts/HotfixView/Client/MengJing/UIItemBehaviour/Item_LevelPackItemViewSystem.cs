@@ -28,8 +28,8 @@ namespace ET.Client
             self.E_TextPriceText.text = activityInfo.Par_2.Split(';')[1];
             
             ActivityComponentC activityComponent = self.Root().GetComponent<ActivityComponentC>();
-            self.EG_YiLingQuSetRectTransform.gameObject.SetActive(activityComponent.ZhanQuReceiveIds.Contains(activityInfo.Id));
-            self.E_ButtonReceiveButton.gameObject.SetActive(!activityComponent.ZhanQuReceiveIds.Contains(activityInfo.Id));
+            self.EG_YiLingQuSetRectTransform.gameObject.SetActive(activityComponent.ActivityReceiveIds.Contains(activityInfo.Id));
+            self.E_ButtonReceiveButton.gameObject.SetActive(!activityComponent.ActivityReceiveIds.Contains(activityInfo.Id));
         }
 
         public static async ETTask OnButtonReceive(this Scroll_Item_LevelPackItem self)
@@ -48,6 +48,8 @@ namespace ET.Client
             }
 
             await ActivityNetHelper.ActivityReceive(self.Root(), self.ActivityConfig.ActivityType, self.ActivityConfig.Id);
+            
+            self.OnInitUI(self.ActivityConfig);
         }
     }
 }

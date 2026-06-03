@@ -6,6 +6,7 @@ namespace ET.Client
     [FriendOf(typeof(ES_ZhanQuLevel))]
     [FriendOf(typeof(ES_ZhanQuCombat))]
     [FriendOf(typeof(ES_FirstWin))]
+    [FriendOf(typeof(ES_LevelPack))]
     [FriendOf(typeof(DlgZhanQu))]
     public static class DlgZhanQuSystem
     {
@@ -52,6 +53,9 @@ namespace ET.Client
                 case 3:
                     self.View.ES_ActivityLogin.uiTransform.gameObject.SetActive(true);
                     self.View.ES_ActivityLogin.OnUpdateUI();
+                    break;
+                case 4:
+                    self.View.ES_LevelPack.uiTransform.gameObject.SetActive(true);
                     break;
             }
         }

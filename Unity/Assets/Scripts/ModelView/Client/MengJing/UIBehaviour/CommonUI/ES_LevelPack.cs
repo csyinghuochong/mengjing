@@ -1,12 +1,16 @@
 ﻿
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class ES_LevelPack : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy 
+	public  class ES_LevelPack : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy
 	{
+		public List<ActivityConfig> ShowActivityConfigs = new();
+		public Dictionary<int, EntityRef<Scroll_Item_LevelPackItem>> ScrollItemLevelPackItems = new();
+		
 		public UnityEngine.UI.ScrollRect E_LevelPackItemsScrollRect
      	{
      		get
