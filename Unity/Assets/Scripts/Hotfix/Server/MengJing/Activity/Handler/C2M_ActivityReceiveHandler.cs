@@ -59,7 +59,38 @@ namespace ET.Server
                         activityComponent.ActivityReceiveIds.Add(request.ActivityId);
                         
                         break;
-                    case (int)ActivityEnum.Type_23:  //免费签到
+                    case (int)ActivityEnum.Type_3: //等级礼包
+                        needList = activityConfig.Par_3.Split('@');
+                        if (unit.GetComponent<BagComponentS>().GetBagLeftCell(ItemLocType.ItemLocBag) < needList.Length)
+                        {
+                            response.Error = ErrorCode.ERR_BagIsFull;
+                            return;
+                        }
+                        
+                        UserInfoComponentS userInfoComponent = unit.GetComponent<UserInfoComponentS>();
+                        if (userInfoComponent.UserInfo.Lv < int.Parse(activityConfig.Par_1))
+                        {
+                            response.Error = ErrorCode.ERR_LevelNoEnough;
+                            return;
+                        }
+
+                        if (!unit.GetComponent<BagComponentS>().OnCostItemData(activityConfig.Par_2))
+                        {
+                            response.Error = ErrorCode.ERR_DiamondNotEnoughError;
+
+                            return;
+                        }
+
+                        if (!unit.GetComponent<BagComponentS>().OnAddItemData(activityConfig.Par_3, $"{ItemGetWay.Activity}_{TimeHelper.ServerNow()}"))
+                        {
+                            response.Error = ErrorCode.ERR_BagIsFull;
+                            return;
+                        }
+
+                        activityComponent.ActivityReceiveIds.Add(request.ActivityId);
+                        
+                        break;
+                    case (int)ActivityEnum.Type_23: //免费签到
                         int curDay = activityComponent.TotalSignNumber;
                         long serverNow = TimeHelper.ServerNow();
                         bool isSign = CommonHelp.GetDayByTime(serverNow) == CommonHelp.GetDayByTime(activityComponent.LastSignTime);
@@ -106,7 +137,7 @@ namespace ET.Server
                                 return;
                             }
                         }
-                        UserInfoComponentS userInfoComponent = unit.GetComponent<UserInfoComponentS>();
+                        userInfoComponent = unit.GetComponent<UserInfoComponentS>();
                         if (userInfoComponent.UserInfo.Lv < int.Parse(activityConfig.Par_1))
                         {
                             return;
