@@ -146,16 +146,64 @@ namespace ET.Client
                 }
                 self.View.E_LvText.gameObject.SetActive(true);
 
-                self.View.ES_ModelShow.SetCameraPosition(new Vector3(0f, 70f, 150f));
-                self.View.ES_ModelShow.SetShow(true);
-                self.View.ES_ModelShow.ShowPlayerModel(new ItemInfo(), createRoleInfo.PlayerOcc, 0, new List<int>());
+                // self.View.ES_ModelShow.SetCameraPosition(new Vector3(0f, 70f, 150f));
+                // self.View.ES_ModelShow.SetShow(true);
+                // self.View.ES_ModelShow.ShowPlayerModel(new ItemInfo(), createRoleInfo.PlayerOcc, 0, new List<int>());
+                
+                // 显示人物模型 方案2
+                self.ShowPlayerModel(new ItemInfo(), createRoleInfo.PlayerOcc, 0, new List<int>());
             }
             else
             {
                 self.View.E_NameText.gameObject.SetActive(false);
                 self.View.E_LvText.gameObject.SetActive(false);
-                self.View.ES_ModelShow.SetShow(false);
+                // self.View.ES_ModelShow.SetShow(false);
+                
+                // 隐藏人物模型 方案2
+                CommonViewHelper.DestoryChild(GameObject.Find("RolePoint"));
             }
+        }
+
+        private static void ShowPlayerModel(this DlgMJLobby self, ItemInfo bagInfo, int occ, int equipIndex, List<int> fashionids)
+        {
+            Transform rootTrans = GameObject.Find("RolePoint")?.transform;
+            if (rootTrans == null)
+            {
+                return;
+            }
+
+            CommonViewHelper.DestoryChild(rootTrans.gameObject);
+            
+            string path = ABPathHelper.GetUnitPath($"Player/{OccupationConfigCategory.Instance.Get(occ).ModelAsset}");
+            GameObject prefab = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
+            
+            GameObject go = UnityEngine.Object.Instantiate(prefab, rootTrans, true);
+            ChangeEquipHelper changeEquipHelper = self.GetComponent<ChangeEquipHelper>() ?? self.AddComponent<ChangeEquipHelper>();
+            changeEquipHelper.WeaponId = self.GetWeaponId(bagInfo, occ);
+            changeEquipHelper.EquipIndex = equipIndex;
+            changeEquipHelper.UseLayer = true;
+            changeEquipHelper.LoadEquipment(go, fashionids, occ);
+            Animator animator = go.GetComponentInChildren<Animator>();
+            if (animator != null)
+            {
+                // animator.Play("ShowIdel");
+            }
+
+            LayerHelp.ChangeLayerAll(go.transform, LayerEnum.Player);
+            go.transform.localScale = Vector3.one;
+            go.transform.localPosition = Vector3.zero;
+            go.transform.localEulerAngles = Vector3.zero;
+        }
+        
+        private static int GetWeaponId(this DlgMJLobby self, ItemInfo bagInfo, int occ)
+        {
+            int weaponId = 0;
+            if (bagInfo != null && bagInfo.ItemID != 0)
+            {
+                weaponId = bagInfo.ItemID;
+            }
+
+            return weaponId;
         }
 
         private static async ETTask OnEnterMapButton(this DlgMJLobby self)

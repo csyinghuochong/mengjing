@@ -128,8 +128,10 @@ namespace ET.Client
             }
 
             self.Occ = index + 1;
-            self.View.ES_ModelShow.SetCameraPosition(new Vector3(0f, 70f, 150f));
-            self.View.ES_ModelShow.ShowPlayerModel(new ItemInfo(), self.Occ, 0, new List<int>());
+            // self.View.ES_ModelShow.SetCameraPosition(new Vector3(0f, 70f, 150f));
+            // self.View.ES_ModelShow.ShowPlayerModel(new ItemInfo(), self.Occ, 0, new List<int>());
+            // 显示人物模型 方案2
+            self.ShowPlayerModel(new ItemInfo(), self.Occ, 0, new List<int>());
 
             OccupationConfig occupationConfig = OccupationConfigCategory.Instance.Get(self.Occ);
 
@@ -162,6 +164,48 @@ namespace ET.Client
             }
         }
 
+        private static void ShowPlayerModel(this DlgCreateRole self, ItemInfo bagInfo, int occ, int equipIndex, List<int> fashionids)
+        {
+            Transform rootTrans = GameObject.Find("RolePoint")?.transform;
+            if (rootTrans == null)
+            {
+                return;
+            }
+
+            CommonViewHelper.DestoryChild(rootTrans.gameObject);
+            
+            string path = ABPathHelper.GetUnitPath($"Player/{OccupationConfigCategory.Instance.Get(occ).ModelAsset}");
+            GameObject prefab = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
+            
+            GameObject go = UnityEngine.Object.Instantiate(prefab, rootTrans, true);
+            ChangeEquipHelper changeEquipHelper = self.GetComponent<ChangeEquipHelper>() ?? self.AddComponent<ChangeEquipHelper>();
+            changeEquipHelper.WeaponId = self.GetWeaponId(bagInfo, occ);
+            changeEquipHelper.EquipIndex = equipIndex;
+            changeEquipHelper.UseLayer = true;
+            changeEquipHelper.LoadEquipment(go, fashionids, occ);
+            Animator animator = go.GetComponentInChildren<Animator>();
+            if (animator != null)
+            {
+                // animator.Play("ShowIdel");
+            }
+
+            LayerHelp.ChangeLayerAll(go.transform, LayerEnum.Player);
+            go.transform.localScale = Vector3.one;
+            go.transform.localPosition = Vector3.zero;
+            go.transform.localEulerAngles = Vector3.zero;
+        }
+        
+        private static int GetWeaponId(this DlgCreateRole self, ItemInfo bagInfo, int occ)
+        {
+            int weaponId = 0;
+            if (bagInfo != null && bagInfo.ItemID != 0)
+            {
+                weaponId = bagInfo.ItemID;
+            }
+
+            return weaponId;
+        }
+        
         private static void OnCloseButton(this DlgCreateRole self)
         {
             UIComponent uiComponent = self.Root().GetComponent<UIComponent>();
