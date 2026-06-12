@@ -46,6 +46,23 @@ namespace ET.Client
      		}
      	}
 
+		public Text E_QiangText
+		{
+			get
+			{
+				if (this.uiTransform == null)
+				{
+					Log.Error("uiTransform is null.");
+					return null;
+				}
+				if( this.m_E_QiangText == null )
+				{
+					this.m_E_QiangText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_QiangText");
+				}
+				return this.m_E_QiangText;
+			}
+		}
+		
 		public Image E_EquipQualityImage
      	{
      		get
@@ -152,6 +169,7 @@ namespace ET.Client
 		{
 			this.m_E_EquipBackImage = null;
 			this.m_E_EquipBackTextImage = null;
+			this.m_E_QiangText = null;
 			this.m_E_EquipQualityImage = null;
 			this.m_E_EquipIconImage = null;
 			this.m_E_EquipButton = null;
@@ -163,6 +181,7 @@ namespace ET.Client
 
 		private Image m_E_EquipBackImage = null;
 		private Image m_E_EquipBackTextImage = null;
+		private Text m_E_QiangText = null;
 		private Image m_E_EquipQualityImage = null;
 		private Image m_E_EquipIconImage = null;
 		private Button m_E_EquipButton = null;
