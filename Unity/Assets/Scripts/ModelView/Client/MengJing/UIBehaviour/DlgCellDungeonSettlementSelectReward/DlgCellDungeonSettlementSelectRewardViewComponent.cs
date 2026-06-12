@@ -69,7 +69,7 @@ namespace ET.Client
      			}
      			if( this.m_E_Text_LeftTimeText == null )
      			{
-		    		this.m_E_Text_LeftTimeText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Left/E_Text_LeftTime");
+		    		this.m_E_Text_LeftTimeText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Center/E_Text_LeftTime");
      			}
      			return this.m_E_Text_LeftTimeText;
      		}
@@ -88,7 +88,7 @@ namespace ET.Client
      			if( es == null )
 
      			{
-		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"Left/ES_SettlementReward_1");
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"Center/ES_SettlementReward_1");
 		    	   this.m_es_settlementreward_1 = this.AddChild<ES_SettlementReward,Transform>(subTrans);
      			}
      			return this.m_es_settlementreward_1;
@@ -108,7 +108,7 @@ namespace ET.Client
      			if( es == null )
 
      			{
-		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"Left/ES_SettlementReward_2");
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"Center/ES_SettlementReward_2");
 		    	   this.m_es_settlementreward_2 = this.AddChild<ES_SettlementReward,Transform>(subTrans);
      			}
      			return this.m_es_settlementreward_2;
@@ -128,7 +128,7 @@ namespace ET.Client
      			if( es == null )
 
      			{
-		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"Left/ES_SettlementReward_3");
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"Center/ES_SettlementReward_3");
 		    	   this.m_es_settlementreward_3 = this.AddChild<ES_SettlementReward,Transform>(subTrans);
      			}
      			return this.m_es_settlementreward_3;
@@ -148,7 +148,7 @@ namespace ET.Client
      			if( es == null )
 
      			{
-		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"Left/ES_SettlementReward_4");
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"Center/ES_SettlementReward_4");
 		    	   this.m_es_settlementreward_4 = this.AddChild<ES_SettlementReward,Transform>(subTrans);
      			}
      			return this.m_es_settlementreward_4;
@@ -168,7 +168,7 @@ namespace ET.Client
      			if( es == null )
 
      			{
-		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"Left/ES_SettlementReward_5");
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"Center/ES_SettlementReward_5");
 		    	   this.m_es_settlementreward_5 = this.AddChild<ES_SettlementReward,Transform>(subTrans);
      			}
      			return this.m_es_settlementreward_5;
@@ -188,7 +188,7 @@ namespace ET.Client
      			if( es == null )
 
      			{
-		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"Left/ES_SettlementReward_6");
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"Center/ES_SettlementReward_6");
 		    	   this.m_es_settlementreward_6 = this.AddChild<ES_SettlementReward,Transform>(subTrans);
      			}
      			return this.m_es_settlementreward_6;
@@ -206,7 +206,7 @@ namespace ET.Client
      			}
      			if( this.m_E_Button_exitButton == null )
      			{
-		    		this.m_E_Button_exitButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Left/E_Button_exit");
+		    		this.m_E_Button_exitButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Center/E_Button_exit");
      			}
      			return this.m_E_Button_exitButton;
      		}
@@ -223,7 +223,7 @@ namespace ET.Client
      			}
      			if( this.m_E_Button_exitImage == null )
      			{
-		    		this.m_E_Button_exitImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Left/E_Button_exit");
+		    		this.m_E_Button_exitImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Center/E_Button_exit");
      			}
      			return this.m_E_Button_exitImage;
      		}
@@ -240,7 +240,7 @@ namespace ET.Client
      			}
      			if( this.m_E_Button_continueButton == null )
      			{
-		    		this.m_E_Button_continueButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Left/E_Button_continue");
+		    		this.m_E_Button_continueButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Center/E_Button_continue");
      			}
      			return this.m_E_Button_continueButton;
      		}
@@ -257,7 +257,7 @@ namespace ET.Client
      			}
      			if( this.m_E_Button_continueImage == null )
      			{
-		    		this.m_E_Button_continueImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Left/E_Button_continue");
+		    		this.m_E_Button_continueImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Center/E_Button_continue");
      			}
      			return this.m_E_Button_continueImage;
      		}
