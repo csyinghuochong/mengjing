@@ -236,5 +236,6 @@ namespace ET.Client
 		WindowID_DragonDungeonSettlement,
 		WindowID_AllItem,
 		WindowID_Register,
+		WindowID_CellDungeonSettlementSelectReward,
 	}
 }
