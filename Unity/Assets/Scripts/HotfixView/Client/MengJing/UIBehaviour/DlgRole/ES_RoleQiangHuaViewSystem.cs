@@ -49,17 +49,17 @@ namespace ET.Client
 
         public static void OnUpdateUI(this ES_RoleQiangHua self)
         {
-            self.ES_RoleQiangHuaItem_1.OnInitUI(1);
+            self.ES_RoleQiangHuaItem_1.OnInitUI(10);
             self.ES_RoleQiangHuaItem_2.OnInitUI(2);
-            self.ES_RoleQiangHuaItem_3.OnInitUI(3);
-            self.ES_RoleQiangHuaItem_4.OnInitUI(4);
-            self.ES_RoleQiangHuaItem_5.OnInitUI(5);
-            self.ES_RoleQiangHuaItem_6.OnInitUI(6);
-            self.ES_RoleQiangHuaItem_7.OnInitUI(7);
-            self.ES_RoleQiangHuaItem_8.OnInitUI(8);
-            self.ES_RoleQiangHuaItem_9.OnInitUI(9);
-            self.ES_RoleQiangHuaItem_10.OnInitUI(10);
-            self.ES_RoleQiangHuaItem_11.OnInitUI(11);
+            self.ES_RoleQiangHuaItem_3.OnInitUI(1);
+            self.ES_RoleQiangHuaItem_4.OnInitUI(7);
+            self.ES_RoleQiangHuaItem_5.OnInitUI(6);
+            self.ES_RoleQiangHuaItem_6.OnInitUI(11);
+            self.ES_RoleQiangHuaItem_7.OnInitUI(9);
+            self.ES_RoleQiangHuaItem_8.OnInitUI(4);
+            self.ES_RoleQiangHuaItem_9.OnInitUI(8);
+            self.ES_RoleQiangHuaItem_10.OnInitUI(3);
+            self.ES_RoleQiangHuaItem_11.OnInitUI(5);
             
             BagComponentC bagComponent = self.Root().GetComponent<BagComponentC>();
             for (int i = 0; i < self.QiangHuaItemList.Count; i++)
@@ -91,7 +91,19 @@ namespace ET.Client
             self.EG_MaxNodeRectTransform.gameObject.SetActive(qianghuaLevel >= maxLevel - 1);
             self.EG_NextNodeRectTransform.gameObject.SetActive(!self.EG_MaxNodeRectTransform.gameObject.activeSelf);
 
-            ES_RoleQiangHuaItem esRoleQiangHuaItem = self.QiangHuaItemList[subType - 1];
+            ES_RoleQiangHuaItem esRoleQiangHuaItem = null;
+            foreach (ES_RoleQiangHuaItem item in self.QiangHuaItemList)
+            {
+                if (item.ItemSubType == subType)
+                {
+                    esRoleQiangHuaItem = item;
+                    break;
+                }
+            }
+            if (esRoleQiangHuaItem == null)
+            {
+                return;
+            }
             CommonViewHelper.SetParent(self.E_ImageSelectImage.gameObject, esRoleQiangHuaItem.uiTransform.gameObject);
             self.E_ImageSelectImage.transform.localPosition = new Vector3(1f, -2f, 0f);
             string qianghuaName = ItemViewData.EquipWeiZhiToName[subType].Name;
