@@ -211,6 +211,40 @@ namespace ET.Client
      		}
      	}
 
+		public UnityEngine.UI.ScrollRect E_RewardListScrollRect
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_RewardListScrollRect == null )
+     			{
+		    		this.m_E_RewardListScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.ScrollRect>(this.uiTransform.gameObject,"Center/E_RewardList");
+     			}
+     			return this.m_E_RewardListScrollRect;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_RewardListImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_RewardListImage == null )
+     			{
+		    		this.m_E_RewardListImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Center/E_RewardList");
+     			}
+     			return this.m_E_RewardListImage;
+     		}
+     	}
+
 		public void DestroyWidget()
 		{
 			this.m_E_closeButtonButton = null;
@@ -225,6 +259,8 @@ namespace ET.Client
 			this.m_E_Text_ResultText = null;
 			this.m_E_Text_expText = null;
 			this.m_E_Text_goldText = null;
+			this.m_E_RewardListScrollRect = null;
+			this.m_E_RewardListImage = null;
 			this.uiTransform = null;
 		}
 
@@ -240,6 +276,8 @@ namespace ET.Client
 		private UnityEngine.UI.Text m_E_Text_ResultText = null;
 		private UnityEngine.UI.Text m_E_Text_expText = null;
 		private UnityEngine.UI.Text m_E_Text_goldText = null;
+		private UnityEngine.UI.ScrollRect m_E_RewardListScrollRect = null;
+		private UnityEngine.UI.Image m_E_RewardListImage = null;
 		public Transform uiTransform = null;
 	}
 }

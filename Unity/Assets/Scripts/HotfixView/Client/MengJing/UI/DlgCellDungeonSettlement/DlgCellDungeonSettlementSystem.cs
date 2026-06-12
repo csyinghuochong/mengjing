@@ -45,8 +45,45 @@ namespace ET.Client
             self.m2C_FubenSettlement = m2C_FubenSettlement;
             self.OpenTime = TimeHelper.ClientNow();
             
-            self.View.E_Text_expText.text = m2C_FubenSettlement.RewardExp.ToString();
-            self.View.E_Text_goldText.text = m2C_FubenSettlement.RewardGold.ToString();
+            // self.View.E_Text_expText.text = m2C_FubenSettlement.RewardExp.ToString();
+            // self.View.E_Text_goldText.text = m2C_FubenSettlement.RewardGold.ToString();
+            ResourcesLoaderComponent resourcesLoaderComponent = self.Root().GetComponent<ResourcesLoaderComponent>();
+            string prefabPath = "Assets/Bundles/UI/Item/Item_CommonItem.prefab";
+            GameObject prefab = resourcesLoaderComponent.LoadAssetSync<GameObject>(prefabPath);
+            
+            GameObject gameObject2 = UnityEngine.Object.Instantiate(prefab, self.View.E_RewardListScrollRect.transform.Find("Content").gameObject.transform);
+            Scroll_Item_CommonItem item2 = self.AddChild<Scroll_Item_CommonItem>();
+            item2.BindTrans(gameObject2.transform);
+            ItemInfo bagInfo2 = new ItemInfo();
+            bagInfo2.ItemID = 2;
+            bagInfo2.ItemNum = 0;
+            item2.Refresh(bagInfo2, ItemOperateEnum.None);
+            item2.E_ItemNumText.text = ShowNum(m2C_FubenSettlement.RewardExp);
+            
+            GameObject gameObject1 = UnityEngine.Object.Instantiate(prefab, self.View.E_RewardListScrollRect.transform.Find("Content").gameObject.transform);
+            Scroll_Item_CommonItem item1 = self.AddChild<Scroll_Item_CommonItem>();
+            item1.BindTrans(gameObject1.transform);
+            ItemInfo bagInfo1 = new ItemInfo();
+            bagInfo1.ItemID = 1;
+            bagInfo1.ItemNum = 0;
+            item1.Refresh(bagInfo1, ItemOperateEnum.None);
+            item1.E_ItemNumText.text = ShowNum(m2C_FubenSettlement.RewardGold);
+
+            string ShowNum(int num)
+            {
+                if (num < 1000)
+                {
+                    return num.ToString();
+                }
+                else if(num < 10000)
+                {
+                    return $"{num / 1000}千+";
+                }
+                else
+                {
+                    return $"{num / 10000}万+";
+                }
+            }
 
             self.View.E_Star_3_OKImage.gameObject.SetActive(m2C_FubenSettlement.StarInfos[2] == 1);
             self.View.E_Star_2_OKImage.gameObject.SetActive(m2C_FubenSettlement.StarInfos[1] == 1);
