@@ -88,7 +88,8 @@ namespace ET.Client
             if (createRoleListInfo != null && createRoleListInfo == self.CreateRoleInfo)
             {
                 self.E_SelectImage.gameObject.SetActive(true);
-                self.uiTransform.localScale = Vector3.one * 1.2f;
+                // self.uiTransform.localScale = Vector3.one * 1.2f;
+                self.uiTransform.localScale = Vector3.one;
             }
             else
             {
