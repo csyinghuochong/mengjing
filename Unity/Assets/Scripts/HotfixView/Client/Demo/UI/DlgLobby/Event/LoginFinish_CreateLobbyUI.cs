@@ -118,9 +118,10 @@ namespace ET.Client
             Log.Warning($"{TimeHelper.DateTimeNow()} 实名认证成功");
             FlyTipComponent.Instance.ShowFlyTip("账号已完成实名认证!");
             // await scene.GetComponent<TimerComponent>().WaitAsync(500);
-            
-            await scene.GetComponent<TimerComponent>().WaitAsync(2000);
-
+            Log.Warning($"{TimeHelper.DateTimeNow()} 111111111111");
+            // 在一些电脑上大概超过500会卡死一会 ？？？，目前猜测可能是CPU有问题，ET这里是多线程
+            await scene.GetComponent<TimerComponent>().WaitAsync(500);
+            Log.Warning($"{TimeHelper.DateTimeNow()} 222222222222");
             PlayerInfoComponent playerInfoComponent = scene.GetComponent<PlayerInfoComponent>();
             Log.Warning($"{TimeHelper.DateTimeNow()} 开始加载选择角色界面");
             await scene.GetComponent<UIComponent>().ShowWindowAsync(playerInfoComponent.CreateRoleList.Count > 0 ? WindowID.WindowID_MJLobby : WindowID.WindowID_CreateRole);
