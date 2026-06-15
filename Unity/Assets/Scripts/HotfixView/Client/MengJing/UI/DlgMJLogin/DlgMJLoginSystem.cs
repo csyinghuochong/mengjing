@@ -42,6 +42,8 @@ namespace ET.Client
 
             self.View.E_TextYinSiText.gameObject.SetActive(false);
             self.View.E_YinSiToggleToggle.isOn = PlayerPrefsHelp.GetInt(PlayerPrefsHelp.IsAgreeUserPrivacy) > 0;
+            
+            self.View.EG_LoadingRectTransform.gameObject.SetActive(false);
            
             self.RequestServerList().Coroutine();
 
