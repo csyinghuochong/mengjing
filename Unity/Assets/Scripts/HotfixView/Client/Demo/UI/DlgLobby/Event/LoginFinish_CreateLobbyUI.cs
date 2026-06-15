@@ -107,22 +107,25 @@ namespace ET.Client
             // FlyTipComponent.Instance.ShowFlyTip("登录成功!");
             //scene.GetComponent<MapComponent>().MapType = MapTypeEnum.CreateRole;
             var path = ABPathHelper.GetScenePath("CreateRole");
+            Log.Warning($"{TimeHelper.DateTimeNow()} 开始加载场景CreateRole");
             await scene.GetComponent<ResourcesLoaderComponent>().LoadSceneAsync(path, LoadSceneMode.Single);
+            Log.Warning($"{TimeHelper.DateTimeNow()} 加载场景完成");
             // await scene.GetComponent<TimerComponent>().WaitAsync(500);
             
             GlobalComponent.Instance.MainCamera.transform.localPosition = new Vector3(23f, 2f, 13f);
             GlobalComponent.Instance.MainCamera.transform.localRotation = Quaternion.Euler(0f, 0f, 0f);
 
+            Log.Warning($"{TimeHelper.DateTimeNow()} 实名认证成功");
             FlyTipComponent.Instance.ShowFlyTip("账号已完成实名认证!");
             // await scene.GetComponent<TimerComponent>().WaitAsync(500);
             
             await scene.GetComponent<TimerComponent>().WaitAsync(2000);
 
             PlayerInfoComponent playerInfoComponent = scene.GetComponent<PlayerInfoComponent>();
-            await scene.GetComponent<UIComponent>()
-                    .ShowWindowAsync(playerInfoComponent.CreateRoleList.Count > 0 ? WindowID.WindowID_MJLobby : WindowID.WindowID_CreateRole);
+            Log.Warning($"{TimeHelper.DateTimeNow()} 开始加载选择角色界面");
+            await scene.GetComponent<UIComponent>().ShowWindowAsync(playerInfoComponent.CreateRoleList.Count > 0 ? WindowID.WindowID_MJLobby : WindowID.WindowID_CreateRole);
+            Log.Warning($"{TimeHelper.DateTimeNow()} 加载界面完成");
             scene.GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_MJLogin);
-
         }
     }
 }
