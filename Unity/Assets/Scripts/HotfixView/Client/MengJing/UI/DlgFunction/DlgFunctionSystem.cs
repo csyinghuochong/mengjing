@@ -110,7 +110,7 @@ namespace ET.Client
                     () =>
                     {
                         uiComponent.ShowWindow(WindowID.WindowID_Role);
-                        uiComponent.ShowWindow(WindowID.WindowID_Main);
+                        // uiComponent.ShowWindow(WindowID.WindowID_Main);
                         //globalComponent.BloodRoot.gameObject.SetActive(true);
                     });
             }

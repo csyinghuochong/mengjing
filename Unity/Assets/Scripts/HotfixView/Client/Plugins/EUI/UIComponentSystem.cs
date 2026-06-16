@@ -165,6 +165,12 @@ namespace ET.Client
             {
                 self.RealShowWindow(baseWindow, id, showData);
             }
+            
+            // 隐藏主界面
+            if (HideMain(id))
+            {
+                self.HideWindow(WindowID.WindowID_Main);
+            }
         }
         
         /// <summary>
@@ -519,11 +525,20 @@ namespace ET.Client
             self.UnLoadWindow(windowId);
             
             // 显示主界面
-            if (HideMain(windowId))
+            bool show = HideMain(windowId);
+            foreach (WindowID id in self.OpenUIList)
+            {
+                if (HideMain(id))
+                {
+                    show = false;
+                    break;
+                }
+            }
+            if (show)
             {
                 self.ShowWindow(WindowID.WindowID_Main);
             }
-            
+
             Debug.Log("<color=magenta>## close window without PopNavigationWindow() ##</color>");
         }
         
