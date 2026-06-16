@@ -47,8 +47,9 @@ namespace ET.Client
                     }
                 }
 
-                self.E_RoleHeadIconImage.sprite = self.Root().GetComponent<ResourcesLoaderComponent>()
-                        .LoadAssetSync<Sprite>(ABPathHelper.GetAtlasPath_2(ABAtlasTypes.PlayerIcon, createRoleInfo.PlayerOcc.ToString()));
+                self.E_RoleHeadIconImage.sprite = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(ABPathHelper.GetAtlasPath_2(ABAtlasTypes.PlayerIcon, createRoleInfo.PlayerOcc.ToString()));
+                self.E_OccBadge_1Image.gameObject.SetActive(createRoleInfo.PlayerOcc == 1);
+                self.E_OccBadge_2Image.gameObject.SetActive(createRoleInfo.PlayerOcc == 2);
                 self.EG_NoRoleRectTransform.gameObject.SetActive(false);
                 self.EG_RoleRectTransform.gameObject.SetActive(true);
             }
