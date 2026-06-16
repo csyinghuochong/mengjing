@@ -3486,7 +3486,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &6011398134619597280
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3799,6 +3799,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3420183334752444734, guid: 8638676caa60d054984b5d6415ac0248,
         type: 3}
+      propertyPath: m_Spacing.x
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 3420183334752444734, guid: 8638676caa60d054984b5d6415ac0248,
+        type: 3}
       propertyPath: m_ChildAlignment
       value: 4
       objectReference: {fileID: 0}
@@ -3890,7 +3895,7 @@ PrefabInstance:
     - target: {fileID: 8891773470136064505, guid: 8638676caa60d054984b5d6415ac0248,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -9
+      value: 34
       objectReference: {fileID: 0}
     - target: {fileID: 8891773470136064505, guid: 8638676caa60d054984b5d6415ac0248,
         type: 3}
@@ -4080,6 +4085,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: ES_ModelShow
+      objectReference: {fileID: 0}
+    - target: {fileID: 5778694252293507365, guid: e054e9e6398f89f4f9ac3290731344c5,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7884296612449405013, guid: e054e9e6398f89f4f9ac3290731344c5,
         type: 3}
