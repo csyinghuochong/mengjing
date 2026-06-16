@@ -99,6 +99,23 @@ namespace ET.Client
      		}
      	}
 
+		public UnityEngine.UI.Image E_XuanZhongImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_XuanZhongImage == null )
+     			{
+		    		this.m_E_XuanZhongImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_XuanZhong");
+     			}
+     			return this.m_E_XuanZhongImage;
+     		}
+     	}
+
 		public UnityEngine.RectTransform EG_PetPanelRectTransform
      	{
      		get
@@ -440,6 +457,7 @@ namespace ET.Client
 			this.m_es_petbarsetitem_1 = null;
 			this.m_es_petbarsetitem_2 = null;
 			this.m_es_petbarsetitem_3 = null;
+			this.m_E_XuanZhongImage = null;
 			this.m_EG_PetPanelRectTransform = null;
 			this.m_E_PetTypeSetToggleGroup = null;
 			this.m_E_PetbarSetPetItemsScrollRect = null;
@@ -466,6 +484,7 @@ namespace ET.Client
 		private EntityRef<ES_PetBarSetItem> m_es_petbarsetitem_1 = null;
 		private EntityRef<ES_PetBarSetItem> m_es_petbarsetitem_2 = null;
 		private EntityRef<ES_PetBarSetItem> m_es_petbarsetitem_3 = null;
+		private UnityEngine.UI.Image m_E_XuanZhongImage = null;
 		private UnityEngine.RectTransform m_EG_PetPanelRectTransform = null;
 		private UnityEngine.UI.ToggleGroup m_E_PetTypeSetToggleGroup = null;
 		private UnityEngine.UI.ScrollRect m_E_PetbarSetPetItemsScrollRect = null;

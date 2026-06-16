@@ -38,21 +38,22 @@ namespace ET.Client
             self.ES_PetBarSetItem_1.E_PetBarSetIconButton.AddListener(() => self.OnClickPetIcon(1));
             self.ES_PetBarSetItem_1.E_LockButton.AddListener(() => self.OnClickPetIcon(1));
             self.ES_PetBarSetItem_1.E_TouchButton.AddListener(() => self.OnClickSet(1));
-            self.ES_PetBarSetItem_1.E_AppearSkillButton.AddListener(() => self.OnClickSkill(1, 0, 0));
-            self.ES_PetBarSetItem_1.E_ActiveSkill_0Button.AddListener(() => self.OnClickSkill(1, 1, 0));
+            self.ES_PetBarSetItem_1.E_AppearSkillButton.AddListener(() => self.OnClickSkill(1, 0, 0, self.ES_PetBarSetItem_1.E_AppearSkillButton.transform));
+            self.ES_PetBarSetItem_1.E_ActiveSkill_0Button.AddListener(() => self.OnClickSkill(1, 1, 0, self.ES_PetBarSetItem_1.E_ActiveSkill_0Button.transform));
 
             self.ES_PetBarSetItem_2.E_PetBarSetIconButton.AddListener(() => self.OnClickPetIcon(2));
             self.ES_PetBarSetItem_2.E_LockButton.AddListener(() => self.OnClickPetIcon(2));
             self.ES_PetBarSetItem_2.E_TouchButton.AddListener(() => self.OnClickSet(2));
-            self.ES_PetBarSetItem_2.E_AppearSkillButton.AddListener(() => self.OnClickSkill(2, 0, 0));
-            self.ES_PetBarSetItem_2.E_ActiveSkill_0Button.AddListener(() => self.OnClickSkill(2, 1, 0));
+            self.ES_PetBarSetItem_2.E_AppearSkillButton.AddListener(() => self.OnClickSkill(2, 0, 0, self.ES_PetBarSetItem_2.E_AppearSkillButton.transform));
+            self.ES_PetBarSetItem_2.E_ActiveSkill_0Button.AddListener(() => self.OnClickSkill(2, 1, 0, self.ES_PetBarSetItem_2.E_ActiveSkill_0Button.transform));
 
             self.ES_PetBarSetItem_3.E_PetBarSetIconButton.AddListener(() => self.OnClickPetIcon(3));
             self.ES_PetBarSetItem_3.E_LockButton.AddListener(() => self.OnClickPetIcon(3));
             self.ES_PetBarSetItem_3.E_TouchButton.AddListener(() => self.OnClickSet(3));
-            self.ES_PetBarSetItem_3.E_AppearSkillButton.AddListener(() => self.OnClickSkill(3, 0, 0));
-            self.ES_PetBarSetItem_3.E_ActiveSkill_0Button.AddListener(() => self.OnClickSkill(3, 1, 0));
+            self.ES_PetBarSetItem_3.E_AppearSkillButton.AddListener(() => self.OnClickSkill(3, 0, 0, self.ES_PetBarSetItem_3.E_AppearSkillButton.transform));
+            self.ES_PetBarSetItem_3.E_ActiveSkill_0Button.AddListener(() => self.OnClickSkill(3, 1, 0, self.ES_PetBarSetItem_3.E_ActiveSkill_0Button.transform));
 
+            self.E_XuanZhongImage.gameObject.SetActive(false);
             self.EG_PetPanelRectTransform.gameObject.SetActive(false);
             self.EG_SkillPanelRectTransform.gameObject.SetActive(false);
             self.EG_PetIconRectTransform.gameObject.SetActive(false);
@@ -566,7 +567,7 @@ namespace ET.Client
             }
         }
 
-        private static void OnClickSkill(this ES_PetBarSet self, int petIndex, int skillType, int skillIndex)
+        private static void OnClickSkill(this ES_PetBarSet self, int petIndex, int skillType, int skillIndex, Transform parent)
         {
             self.PetBarIndex = petIndex;
             self.SkillType = skillType;
@@ -579,6 +580,10 @@ namespace ET.Client
             self.ES_PetBarSetItem_2.E_HighlightImage.gameObject.SetActive(petIndex == 2);
             self.ES_PetBarSetItem_3.E_HighlightImage.gameObject.SetActive(petIndex == 3);
 
+            self.E_XuanZhongImage.gameObject.SetActive(true);
+            self.E_XuanZhongImage.transform.SetParent(parent);
+            self.E_XuanZhongImage.transform.localPosition = Vector3.zero;
+            
             self.E_SkillTypeSetToggleGroup.OnSelectIndex(0);
         }
         

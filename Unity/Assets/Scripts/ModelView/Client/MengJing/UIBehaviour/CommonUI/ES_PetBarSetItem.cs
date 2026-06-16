@@ -23,24 +23,41 @@ namespace ET.Client
      			return this.m_E_HighlightImage;
      		}
      	}
-		
+
 		public UnityEngine.UI.Button E_TouchButton
-		{
-			get
-			{
-				if (this.uiTransform == null)
-				{
-					Log.Error("uiTransform is null.");
-					return null;
-				}
-				if( this.m_E_TouchButton == null )
-				{
-					this.m_E_TouchButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_Touch");
-				}
-				return this.m_E_TouchButton;
-			}
-		}
-				
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_TouchButton == null )
+     			{
+		    		this.m_E_TouchButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_Touch");
+     			}
+     			return this.m_E_TouchButton;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_TouchImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_TouchImage == null )
+     			{
+		    		this.m_E_TouchImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Touch");
+     			}
+     			return this.m_E_TouchImage;
+     		}
+     	}
+
 		public UnityEngine.UI.Button E_PetBarSetIconButton
      	{
      		get
@@ -76,39 +93,39 @@ namespace ET.Client
      	}
 
 		public UnityEngine.UI.Button E_LockButton
-		{
-			get
-			{
-				if (this.uiTransform == null)
-				{
-					Log.Error("uiTransform is null.");
-					return null;
-				}
-				if( this.m_E_LockButton == null )
-				{
-					this.m_E_LockButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Mask/E_Lock");
-				}
-				return this.m_E_LockButton;
-			}
-		}
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_LockButton == null )
+     			{
+		    		this.m_E_LockButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Mask/E_Lock");
+     			}
+     			return this.m_E_LockButton;
+     		}
+     	}
 
 		public UnityEngine.UI.Image E_LockImage
-		{
-			get
-			{
-				if (this.uiTransform == null)
-				{
-					Log.Error("uiTransform is null.");
-					return null;
-				}
-				if( this.m_E_LockImage == null )
-				{
-					this.m_E_LockImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Mask/E_Lock");
-				}
-				return this.m_E_LockImage;
-			}
-		}
-		
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_LockImage == null )
+     			{
+		    		this.m_E_LockImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Mask/E_Lock");
+     			}
+     			return this.m_E_LockImage;
+     		}
+     	}
+
 		public UnityEngine.UI.Text E_LvText
      	{
      		get
@@ -210,6 +227,7 @@ namespace ET.Client
 		{
 			this.m_E_HighlightImage = null;
 			this.m_E_TouchButton = null;
+			this.m_E_TouchImage = null;
 			this.m_E_PetBarSetIconButton = null;
 			this.m_E_PetBarSetIconImage = null;
 			this.m_E_LockButton = null;
@@ -224,6 +242,7 @@ namespace ET.Client
 
 		private UnityEngine.UI.Image m_E_HighlightImage = null;
 		private UnityEngine.UI.Button m_E_TouchButton = null;
+		private UnityEngine.UI.Image m_E_TouchImage = null;
 		private UnityEngine.UI.Button m_E_PetBarSetIconButton = null;
 		private UnityEngine.UI.Image m_E_PetBarSetIconImage = null;
 		private UnityEngine.UI.Button m_E_LockButton = null;
