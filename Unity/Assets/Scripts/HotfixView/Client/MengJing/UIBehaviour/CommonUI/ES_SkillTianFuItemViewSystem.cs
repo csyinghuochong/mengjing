@@ -73,19 +73,18 @@ namespace ET.Client
                     curlv = (int)keyValuePairInt.Value;
                 }
             }
-            
+
             int maxlv = talentConfig.Lv;
 
-            using (zstring.Block())
+            if (active)
             {
-                if (active)
-                {
-                    self.E_PointText.text = zstring.Format("{0}/{1}", curlv, maxlv);
-                }
-                else
-                {
-                    self.E_PointText.text = zstring.Format("{0}/{1}", 0, maxlv);
-                }
+                self.E_PointText.text = $"{curlv}/{maxlv}";
+                self.E_PointText.color = new Color(208f / 255f, 255f / 255f, 115f / 255f, 255f / 255f);
+            }
+            else
+            {
+                self.E_PointText.text = $"{0}/{maxlv}";
+                self.E_PointText.color = Color.white;
             }
 
             string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.RoleSkillIcon, talentConfig.Icon.ToString());
