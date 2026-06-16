@@ -200,6 +200,24 @@ namespace ET.Client
             {
                 Log.Error(e);
             }
+
+            // 隐藏主界面
+            if (HideMain(id))
+            {
+                self.HideWindow(WindowID.WindowID_Main);
+            }
+        }
+
+        private static bool HideMain(WindowID id)
+        {
+            if (id is WindowID.WindowID_Function or WindowID.WindowID_Role)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
         
         /// <summary>
@@ -499,6 +517,13 @@ namespace ET.Client
 
             self.HideWindow(windowId);
             self.UnLoadWindow(windowId);
+            
+            // 显示主界面
+            if (HideMain(windowId))
+            {
+                self.ShowWindow(WindowID.WindowID_Main);
+            }
+            
             Debug.Log("<color=magenta>## close window without PopNavigationWindow() ##</color>");
         }
         
