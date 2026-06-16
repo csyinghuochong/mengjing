@@ -182,14 +182,7 @@ namespace ET.Client
             //超过10万才显示
             if (num >= 100000)
             {
-                if (num % 10000 == 0)
-                {
-                    return (num / 10000).ToString() + "万";
-                }
-                else
-                {
-                    return ((float)num / 10000f).ToString("F2") + "万";
-                }
+                return (num / 10000).ToString() + "万";
             }
             else
             {
