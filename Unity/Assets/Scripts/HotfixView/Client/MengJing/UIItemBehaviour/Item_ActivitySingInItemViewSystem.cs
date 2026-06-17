@@ -119,6 +119,7 @@ namespace ET.Client
         {
             ActivityComponentC activityComponent = self.Root().GetComponent<ActivityComponentC>();
             self.E_LingQuImage.gameObject.SetActive(activityComponent.ActivityReceiveIds.Contains(self.ActivityConfig.Id));
+            CommonViewHelper.SetImageGray(self.Root(), self.E_ItemIconImage.gameObject, activityComponent.ActivityReceiveIds.Contains(self.ActivityConfig.Id));
         }
 
         public static void SetSignState(this Scroll_Item_ActivitySingInItem self, int curDay)
