@@ -92,7 +92,8 @@ namespace ET.Client
             int equipSuitNum = 0;
             for (int i = 0; i < equipList.Count; i++)
             {
-                if (needEquipIDSet.Contains(equipList[i].ItemID))
+                ItemConfig itemConfig = ItemConfigCategory.Instance.Get(equipList[i].ItemID);
+                if (needEquipIDSet.Contains(itemConfig.ItemEquipID))
                 {
                     equipSuitNum++;
                 }
@@ -105,11 +106,9 @@ namespace ET.Client
                 EquipSuitPropertyConfig equipSuitProperty = EquipSuitPropertyConfigCategory.Instance.Get(int.Parse(triggerSuitPropertyID));
 
                 GameObject go = self.EquipSuitPropertyList[i];
-                
-                using (zstring.Block())
-                {
-                    go.transform.Find("Text_Num").GetComponent<Text>().text = zstring.Format("激活{0}/{1}：", equipSuitNum, triggerSuitNum);
-                }
+
+                go.transform.Find("Text_Num").GetComponent<Text>().text = equipSuitNum < int.Parse(triggerSuitNum) ? $"激活{equipSuitNum}/{triggerSuitNum}：" : $"激活{triggerSuitNum}/{triggerSuitNum}：";
+
                 go.transform.Find("Text_Prop").GetComponent<Text>().text = equipSuitProperty.EquipSuitDes;
                 go.transform.Find("Actived").gameObject.SetActive(equipSuitNum >= int.Parse(triggerSuitNum));
             }
