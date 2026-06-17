@@ -97,10 +97,10 @@ namespace ET.Client
                    
                    if (error == ErrorCode.ERR_Success)
                    {
-                       using (zstring.Block())
-                       {
-                           FlyTipComponent.Instance.ShowFlyTip(zstring.Format("宠物上阵切换 {0}", index));
-                       }
+                       // using (zstring.Block())
+                       // {
+                       //     FlyTipComponent.Instance.ShowFlyTip(zstring.Format("宠物上阵切换 {0}", index));
+                       // }
                    }
                }
             }
@@ -144,7 +144,7 @@ namespace ET.Client
             int error = await PetNetHelper.RequestPetBarSet(self.Root(), self.PetFightList);
             if (error == ErrorCode.ERR_Success)
             {
-                FlyTipComponent.Instance.ShowFlyTip("上阵成功！");
+                // FlyTipComponent.Instance.ShowFlyTip("上阵成功！");
             }
         }
 
