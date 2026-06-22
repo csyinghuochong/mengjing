@@ -29,13 +29,11 @@ namespace ET.Client
             
             self.E_EquipIconImage.gameObject.SetActive(false);
             self.E_EquipQualityImage.gameObject.SetActive(false);
-            self.E_QiangHuaText.gameObject.SetActive(true);
             self.E_QiangText.gameObject.SetActive(true);
             if (bagInfo != null)
             {
                 self.E_EquipIconImage.gameObject.SetActive(true);
                 self.E_EquipQualityImage.gameObject.SetActive(true);
-                self.E_QiangHuaText.gameObject.SetActive(false);
                 self.E_QiangText.gameObject.SetActive(false);
                 
                 ItemConfig itemConfig = ItemConfigCategory.Instance.Get(bagInfo.ItemID);
