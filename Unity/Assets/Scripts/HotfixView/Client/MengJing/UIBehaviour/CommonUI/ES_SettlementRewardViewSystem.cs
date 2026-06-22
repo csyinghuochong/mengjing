@@ -80,11 +80,11 @@ namespace ET.Client
         public static void OnClickItem(this ES_SettlementReward self)
         {
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
-            if (self.Index >= 3 && !unit.IsYueKaEndStates())
-            {
-                FlyTipComponent.Instance.ShowFlyTip("周卡用户才能开启！");
-                return;
-            }
+            // if (self.Index >= 3 && !unit.IsYueKaEndStates())
+            // {
+            //     FlyTipComponent.Instance.ShowFlyTip("周卡用户才能开启！");
+            //     return;
+            // }
 
             if (self.ES_CommonItem.uiTransform.gameObject.activeSelf)
             {

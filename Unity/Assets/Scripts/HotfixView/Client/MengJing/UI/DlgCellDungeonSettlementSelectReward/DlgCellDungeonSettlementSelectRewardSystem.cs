@@ -127,7 +127,7 @@ namespace ET.Client
             }
 
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
-            if (!self.bottomSelect && unit.IsYueKaEndStates())
+	        if (!self.bottomSelect)
             {
                 self.RewardUIList[3].OnClickItem();
             }
@@ -136,11 +136,11 @@ namespace ET.Client
         public static async ETTask OnClickRewardItem(this DlgCellDungeonSettlementSelectReward self, int index)
         {
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
-            if (index >= 3 && !unit.IsYueKaEndStates())
-            {
-                FlyTipComponent.Instance.ShowFlyTip("周卡用户才能开启！");
-                return;
-            }
+            // if (index >= 3 && !unit.IsYueKaEndStates())
+            // {
+            //     FlyTipComponent.Instance.ShowFlyTip("周卡用户才能开启！");
+            //     return;
+            // }
 
             ES_SettlementReward select = self.RewardUIList[index];
             CommonViewHelper.SetParent(self.View.EG_SelectEffectSetRectTransform.gameObject, select.uiTransform.gameObject);
