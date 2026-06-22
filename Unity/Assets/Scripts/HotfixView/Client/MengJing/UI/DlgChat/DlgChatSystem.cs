@@ -89,7 +89,7 @@ namespace ET.Client
             string text_old = self.View.E_ChatInputField.GetComponent<InputField>().text;
 
             PlayerInfoComponent playerInfoComponent = self.Root().GetComponent<PlayerInfoComponent>();
-            bool gm = GMHelp.IsGmAccount(playerInfoComponent.Account);
+            bool gm = GMHelp.IsGmAccount(playerInfoComponent.Account) || CommonHelp.IsBanHaoZone(self.Root().GetComponent<PlayerInfoComponent>().ServerItem.ServerId);
             if (gm)
             {
                 var excludedCommands = new List<string>
