@@ -58,6 +58,16 @@ Shader "Toon/BasicShadow"
                 float _ShadowIntensity;
             CBUFFER_END
 
+            bool IsUrpEmptyMainLightShadow()
+            {
+                // URP 14 strips the main-light "OFF" variant in UniversalRenderer and
+                // emulates it with an empty shadow map plus this sentinel shadow param.
+                // Treat that path as "no shadow" for this shadow-only shader to avoid
+                // sampling stale shadow coords on device builds.
+                half4 shadowParams = GetMainLightShadowParams();
+                return all(abs(shadowParams - half4(1.0h, 0.0h, 1.0h, 0.0h)) < 1e-4h);
+            }
+
             Varyings vert(Attributes input)
             {
                 Varyings output;
@@ -72,8 +82,16 @@ Shader "Toon/BasicShadow"
             half4 frag(Varyings input) : SV_Target
             {
                 half4 albedo = SAMPLE_TEXTURE2D(_BaseMap, sampler_BaseMap, input.uv) * _BaseColor;
-                Light light = GetMainLight(input.shadowCoord);
-                float shadowAttenuation = lerp(1.0, light.shadowAttenuation, _ShadowIntensity);
+                float shadowAttenuation = 1.0;
+
+                #if defined(MAIN_LIGHT_CALCULATE_SHADOWS)
+                if (!IsUrpEmptyMainLightShadow())
+                {
+                    Light light = GetMainLight(input.shadowCoord);
+                    shadowAttenuation = lerp(1.0, light.shadowAttenuation, _ShadowIntensity);
+                }
+                #endif
+
                 half3 finalColor = albedo.rgb * shadowAttenuation;
                 return half4(finalColor, albedo.a);
             }
