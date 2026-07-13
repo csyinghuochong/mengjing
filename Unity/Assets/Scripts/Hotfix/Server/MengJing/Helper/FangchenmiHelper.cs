@@ -32,7 +32,7 @@ namespace ET.Server
         private const String host = "https://naidcard.market.alicloudapi.com/nidCard";
         private const String path = "/nidCard";
         private const String method = "GET";
-        private const String appcode = "d59fefe68cf644f6a8f54dd039c3806f";//开通服务后 买家中心-查看AppCode
+        private const String appcode = "764a47910a4a4cce8aa957f6e1b4a535";//开通服务后 买家中心-查看AppCode
 
         //ai = ai,
         //name = request.Name,
