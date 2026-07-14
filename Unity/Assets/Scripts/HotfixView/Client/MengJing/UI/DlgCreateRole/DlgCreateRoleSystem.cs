@@ -48,7 +48,12 @@ namespace ET.Client
                 // 收起键盘
                 self.View.E_CreateRoleNameInputField.DeactivateInputField();
 
-                HintHelp.ShowErrorHint(self.Root(), ErrorCode.ERR_SensitiveWords);
+                // HintHelp.ShowErrorHint(self.Root(), ErrorCode.ERR_SensitiveWords);
+                PopupTipHelp.OpenPopupTip_2(self.Root(),
+                            "系统提示",
+                            "您输入的文字内包含敏感词，请修改后再进行提交。",
+                            () => { })
+                        .Coroutine();
             }
 
             text_old = text_old.Replace("*", "");
