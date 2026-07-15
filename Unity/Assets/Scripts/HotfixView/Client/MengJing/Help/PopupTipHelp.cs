@@ -46,7 +46,7 @@ namespace ET.Client
 
             dlgPopupTip.View.E_CloseButton.gameObject.SetActive(false);
             dlgPopupTip.View.E_FalseButton.gameObject.SetActive(false);
-            dlgPopupTip.View.E_TrueButton.transform.localPosition = new Vector3(0f, -169f, 0f);
+            dlgPopupTip.View.E_TrueButton.transform.localPosition = new Vector3(0f, -190f, 0f);
         }
     }
 }
