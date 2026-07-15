@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using UnityEngine;
 
 namespace ET.Client
@@ -41,6 +42,15 @@ namespace ET.Client
         {
             string text_new = "";
             string text_old = self.View.E_CreateRoleNameInputField.text;
+            
+            // 不能包含英文
+            string res1 = self.RemoveAllEnglish(text_old, out bool hasEn1);
+            if (hasEn1)
+            {
+                text_old = res1;
+            }
+
+            // 敏感词检测
             MaskWordHelper.Instance.IsContainSensitiveWords(ref text_old, out text_new);
 
             if (!string.IsNullOrEmpty(text_new))
@@ -55,9 +65,37 @@ namespace ET.Client
                             () => { })
                         .Coroutine();
             }
+            else if (hasEn1)
+            {
+                // 收起键盘
+                self.View.E_CreateRoleNameInputField.DeactivateInputField();
+
+                PopupTipHelp.OpenPopupTip_2(self.Root(),
+                            "系统提示",
+                            "角色名称仅限输入中文角色名称。",
+                            () => { })
+                        .Coroutine();
+            }
 
             text_old = text_old.Replace("*", "");
             self.View.E_CreateRoleNameInputField.text = text_old;
+        }
+
+        public static string RemoveAllEnglish(this DlgCreateRole self, string input, out bool hasEnglish)
+        {
+            if (string.IsNullOrEmpty(input))
+            {
+                hasEnglish = false;
+                return input;
+            }
+
+            // 匹配所有大小写英文字母 A-Za-z
+            Regex regex = new Regex(@"[A-Za-z]");
+            hasEnglish = regex.IsMatch(input);
+
+            // 删除所有英文
+            string result = regex.Replace(input, "");
+            return result;
         }
 
         private static void OnRandomNameButton(this DlgCreateRole self)
