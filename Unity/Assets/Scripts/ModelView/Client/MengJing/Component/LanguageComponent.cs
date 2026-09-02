@@ -7,7 +7,7 @@ using UnityEngine;
 namespace ET.Client
 {
     [ComponentOf(typeof(Scene))]
-    public class LanguageComponent : Entity, IAwake
+    public class LanguageComponent : Entity, IAwake, IUpdate
     {
         [StaticField]
         public static LanguageComponent Instance { get; set; }
@@ -33,15 +33,15 @@ namespace ET.Client
         public Dictionary<string, string> MulLanguage = new();
 
         // 多语言插件
-        public LanguageSource m_LanguageSource;
-        public LanguageSourceData m_SourceData => m_LanguageSource.SourceData;
+        public LanguageSource LanguageSource;
+        public LanguageSourceData LanguageSourceData => this.LanguageSource.SourceData;
 
-        public List<string> m_AllLanguage = new List<string>();
+        public List<string> AllLanguage = new List<string>();
 
-        public bool m_UseRuntimeModule = false; //模拟平台运行时 编辑器资源不加载
+        public bool UseRuntimeModule = false; //模拟平台运行时 编辑器资源不加载
 
-        public string m_DefaultLanguage;
+        public string DefaultLanguage;
 
-        public string m_CurrentLanguage;
+        public string CurrentLanguage;
     }
 }

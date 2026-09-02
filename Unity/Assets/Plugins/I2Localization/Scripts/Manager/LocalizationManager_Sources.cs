@@ -87,6 +87,11 @@ namespace I2.Loc
 			return sourceAsset;
 		}
 		
+#else
+		// 防止报错
+		public static void RegisterSourceInEditor()
+		{
+	    }
 #endif
 		static void RegisterSceneSources()
 		{

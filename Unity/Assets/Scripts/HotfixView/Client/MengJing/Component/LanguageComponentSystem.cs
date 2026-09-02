@@ -6,6 +6,13 @@ using UnityEngine;
 
 namespace ET.Client
 {
+    public static class LanguageType
+    {
+        public const string Chinese = "Chinese";
+        public const string English = "English";
+        public const string Japanese = "Japanese";
+    }
+    
     [FriendOf(typeof(LanguageComponent))]
     [EntitySystemOf(typeof(LanguageComponent))]
     public static partial class GameSettingLanguageSystem
@@ -15,7 +22,7 @@ namespace ET.Client
         {
             LanguageComponent.Instance = self;
             self.OnInit().Coroutine();
-            self.OnInitL2Localization().Coroutine();
+            self.OnInitL2Localization();
         }
 
         private static async ETTask OnInit(this LanguageComponent self)
@@ -86,47 +93,73 @@ namespace ET.Client
             return text;
         }
 
-        #region 本地化插件
+        // 本地化插件
 
-        private static async ETTask OnInitL2Localization(this LanguageComponent self)
+        [EntitySystem]
+        private static void Update(this LanguageComponent self)
         {
-            self.m_DefaultLanguage = PlayerPrefsHelp.GetString(PlayerPrefsHelp.Localization, "Chinese");
-            GameObject go = UnityEngine.Object.Instantiate(new GameObject(), GlobalComponent.Instance.Global);
-            go.name = "I2LocalizeMgr";
-            go.AddComponent<LanguageSource>();
-            self.m_LanguageSource = go.GetComponent<LanguageSource>();
-
-#if UNITY_EDITOR
-            if (!self.m_UseRuntimeModule)
+            if (InputHelper.GetKey((int)KeyCode.LeftAlt) && InputHelper.GetKeyDown((int)KeyCode.L) ||
+                InputHelper.GetKeyDown((int)KeyCode.LeftAlt) && InputHelper.GetKey((int)KeyCode.L))
             {
-                LocalizationManager.RegisterSourceInEditor();
-                self.UpdateAllLanguages();
-                self.SetLanguage(self.m_DefaultLanguage);
+                var languages = new List<string>
+                {
+                    LanguageType.Chinese,
+                    LanguageType.English,
+                    LanguageType.Japanese
+                };
+
+                int currentIndex = languages.IndexOf(self.CurrentLanguage);
+
+                int nextIndex = (currentIndex + 1) % languages.Count;
+
+                self.SetLanguage(languages[nextIndex], true);
+            }
+        }
+        
+        private static void OnInitL2Localization(this LanguageComponent self)
+        {
+            self.DefaultLanguage = PlayerPrefsHelp.GetString(PlayerPrefsHelp.Localization, LanguageType.Chinese);
+
+            GameObject go = UnityEngine.Object.Instantiate(new GameObject());
+            UnityEngine.Object.DontDestroyOnLoad(go);
+            go.name = "[I2LocalizeMgr]";
+            go.AddComponent<LanguageSource>();
+            self.LanguageSource = go.GetComponent<LanguageSource>();
+
+            if (Define.IsEditor)
+            {
+                if (!self.UseRuntimeModule)
+                {
+                    LocalizationManager.RegisterSourceInEditor();
+                    self.UpdateAllLanguages();
+                    self.SetLanguage(self.DefaultLanguage);
+                }
+                else
+                {
+                    self.LanguageSourceData.Awake();
+                    self.LoadLanguage(self.DefaultLanguage, true).Coroutine();
+                }
             }
             else
             {
-                self.m_SourceData.Awake();
-                await self.LoadLanguage(self.m_DefaultLanguage, true);
+                self.LanguageSourceData.Awake();
+                self.LoadLanguage(self.DefaultLanguage, true).Coroutine();
             }
-#else
-                self.m_SourceData.Awake();
-                await self.LoadLanguage(self.m_DefaultLanguage, true);
-#endif
         }
 
         private static void UpdateAllLanguages(this LanguageComponent self)
         {
-            self.m_AllLanguage.Clear();
+            self.AllLanguage.Clear();
             foreach (var language in LocalizationManager.GetAllLanguages())
             {
                 var newLanguage = Regex.Replace(language, @"[\r\n]", "");
-                self.m_AllLanguage.Add(newLanguage);
+                self.AllLanguage.Add(newLanguage);
             }
         }
 
         public static bool CheckLanguage(this LanguageComponent self, string language)
         {
-            return self.m_AllLanguage.Contains(language);
+            return self.AllLanguage.Contains(language);
         }
 
         //运行时注意 需要提前加载你需要的所有语言
@@ -144,27 +177,28 @@ namespace ET.Client
                 return false;
             }
 
-            if (self.m_CurrentLanguage == language)
+            if (self.CurrentLanguage == language)
             {
                 return true;
             }
 
             Log.Debug($"设置当前语言 = {language}");
             LocalizationManager.CurrentLanguage = language;
-            self.m_CurrentLanguage = language;
+            self.CurrentLanguage = language;
             return true;
         }
 
         //根据需求可提前加载语言
         public static async ETTask LoadLanguage(this LanguageComponent self, string language, bool setCurrent = false)
         {
-#if UNITY_EDITOR
-            if (!self.m_UseRuntimeModule)
+            if (Define.IsEditor)
             {
-                Log.Error($"禁止在此模式下 动态加载语言 {language}");
-                return;
+                if (!self.UseRuntimeModule)
+                {
+                    Log.Error($"禁止在此模式下 动态加载语言 {language}");
+                    return;
+                }
             }
-#endif
 
             if (self.CheckLanguage(language))
             {
@@ -200,7 +234,7 @@ namespace ET.Client
 
         private static void UseLocalizationCSV(this LanguageComponent self, string text, bool isLocalizeAll = false)
         {
-            self.m_SourceData.Import_CSV(string.Empty, text, eSpreadsheetUpdateMode.Replace, ',');
+            self.LanguageSourceData.Import_CSV(string.Empty, text, eSpreadsheetUpdateMode.Replace, ',');
             if (isLocalizeAll)
             {
                 LocalizationManager.LocalizeAll(); // 强制使用新数据本地化所有启用的标签/精灵
@@ -208,7 +242,5 @@ namespace ET.Client
 
             self.UpdateAllLanguages();
         }
-
-        #endregion
     }
 }

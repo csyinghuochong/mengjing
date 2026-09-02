@@ -149,7 +149,7 @@ namespace ET
             GUILayout.Space(5);
         }
 
-        public const string UII2SourceResPath = "Assets/Editor/I2Localization"; //这是编辑器下的数据 平台运行时 是不需要的
+        public const string UII2SourceResPath = "Assets/Config/Localization"; //这是编辑器下的数据 平台运行时 是不需要的
         public const string UII2SourceResName = "AllSource";
         public const string UII2TargetLanguageResPath = "Assets/Bundles/Text";
 
@@ -174,7 +174,14 @@ namespace ET
                 var sError =
                         m_LanguageSourceData.Import_CSV(string.Empty, content, eSpreadsheetUpdateMode.Replace, ',');
                 if (!string.IsNullOrEmpty(sError))
-                    Log.Error($"导入全数据时发生错误 请检查 {sError} {path}");
+                {
+                    Debug.LogError($"导入全数据时发生错误 请检查 {sError} {path}");
+                    return;
+                }
+
+                EditorUtility.SetDirty(editorAsset);
+                AssetDatabase.SaveAssets();
+                AssetDatabase.Refresh();
             }
             catch (Exception e)
             {
