@@ -872,25 +872,25 @@ PlayerSettings:
   webGLMemoryGeometricGrowthCap: 96
   webGLPowerPreference: 2
   scriptingDefineSymbols:
-    Android: UNITY;ENABLE_VIEW;TapTap1;TextMeshPro;UNITY_PIPELINE_URP;DEBUG_MODE_FOLIAGE
-    EmbeddedLinux: TextMeshPro
-    GameCoreScarlett: 
-    GameCoreXboxOne: TextMeshPro
-    LinuxHeadlessSimulation: 
+    Android: UNITY;ENABLE_VIEW;TapTap1;TextMeshPro;UNITY_PIPELINE_URP;DEBUG_MODE_FOLIAGE;DOTWEEN
+    EmbeddedLinux: TextMeshPro;DOTWEEN
+    GameCoreScarlett: DOTWEEN
+    GameCoreXboxOne: TextMeshPro;DOTWEEN
+    LinuxHeadlessSimulation: DOTWEEN
     Lumin: TextMeshPro
-    Nintendo Switch: TextMeshPro
-    PS4: TextMeshPro
-    PS5: TextMeshPro
-    QNX: TextMeshPro
+    Nintendo Switch: TextMeshPro;DOTWEEN
+    PS4: TextMeshPro;DOTWEEN
+    PS5: TextMeshPro;DOTWEEN
+    QNX: TextMeshPro;DOTWEEN
     Server: UNITY;ENABLE_DLL;ENABLE_VIEW
-    Stadia: TextMeshPro
-    Standalone: UNITY;ENABLE_VIEW;ENABLE_DLL;TextMeshPro;UNITY_PIPELINE_URP
-    VisionOS: TextMeshPro
-    WebGL: UNITY;ENABLE_DLL;ENABLE_VIEW;TextMeshPro
-    Windows Store Apps: TextMeshPro
-    XboxOne: TextMeshPro
-    iPhone: UNITY;ENABLE_DLL;ENABLE_VIEW;TextMeshPro;UNITY_PIPELINE_URP
-    tvOS: TextMeshPro
+    Stadia: TextMeshPro;DOTWEEN
+    Standalone: UNITY;ENABLE_VIEW;ENABLE_DLL;TextMeshPro;UNITY_PIPELINE_URP;DOTWEEN
+    VisionOS: TextMeshPro;DOTWEEN
+    WebGL: UNITY;ENABLE_DLL;ENABLE_VIEW;TextMeshPro;DOTWEEN
+    Windows Store Apps: TextMeshPro;DOTWEEN
+    XboxOne: TextMeshPro;DOTWEEN
+    iPhone: UNITY;ENABLE_DLL;ENABLE_VIEW;TextMeshPro;UNITY_PIPELINE_URP;DOTWEEN
+    tvOS: TextMeshPro;DOTWEEN
   additionalCompilerArguments: {}
   platformArchitecture:
     iPhone: 1
