@@ -2,8 +2,17 @@
     "name": "Unity.Mono",
     "rootNamespace": "ET",
     "references": [
+        "Unity.ThirdParty",
+        "Unity.Core",
+        "Unity.Loader",
         "Unity.TextMeshPro",
-        "DOTween.Modules"
+        "DOTween.Modules",
+        "Animancer",
+        "Coffee.UIParticle",
+        "Unity.RenderPipelines.Universal.Runtime",
+        "Unified.Universal.Blur",
+        "EPO",
+        "EPOURP"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
