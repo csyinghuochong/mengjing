@@ -9,6 +9,7 @@ namespace ET
 {
     public class CodeLoader: Singleton<CodeLoader>, ISingletonAwake
     {
+        private Assembly monoAssembly;
         private Assembly modelAssembly;
         private Assembly modelViewAssembly;
 
@@ -18,7 +19,8 @@ namespace ET
 
         public void Awake()
         {
-            this.enableDll = Resources.Load<GlobalConfig>("GlobalConfig").EnableDll;
+            // 加了Mono程序集后不能启用EnableDll，不然会Edit下运行后会找不到脚本
+            // this.enableDll = Resources.Load<GlobalConfig>("GlobalConfig").EnableDll;
         }
 
         public async ETTask DownloadAsync()
@@ -34,6 +36,8 @@ namespace ET
         {
             if (!Define.IsEditor)
             {
+                byte[] monoAssBytes = this.dlls["Unity.Mono.dll"].bytes;
+                byte[] monoPdbBytes = this.dlls["Unity.Mono.pdb"].bytes;
                 byte[] modelAssBytes = this.dlls["Unity.Model.dll"].bytes;
                 byte[] modelPdbBytes = this.dlls["Unity.Model.pdb"].bytes;
                 byte[] modelViewAssBytes = this.dlls["Unity.ModelView.dll"].bytes;
@@ -52,6 +56,7 @@ namespace ET
                         RuntimeApi.LoadMetadataForAOTAssembly(textAsset.bytes, HomologousImageMode.SuperSet);
                     }
                 }
+                this.monoAssembly = Assembly.Load(monoAssBytes, monoPdbBytes);
                 this.modelAssembly = Assembly.Load(modelAssBytes, modelPdbBytes);
                 this.modelViewAssembly = Assembly.Load(modelViewAssBytes, modelViewPdbBytes);
             }
@@ -72,7 +77,11 @@ namespace ET
                     foreach (Assembly ass in assemblies)
                     {
                         string name = ass.GetName().Name;
-                        if (name == "Unity.Model")
+                        if (name == "Unity.Mono")
+                        {
+                            this.monoAssembly = ass;
+                        }
+                        else if (name == "Unity.Model")
                         {
                             this.modelAssembly = ass;
                         }
@@ -93,7 +102,7 @@ namespace ET
 
             World.Instance.AddSingleton<CodeTypes, Assembly[]>(new[]
             {
-                typeof (World).Assembly, typeof (Init).Assembly, this.modelAssembly, this.modelViewAssembly, hotfixAssembly,
+                typeof(World).Assembly, typeof(Init).Assembly, this.monoAssembly, this.modelAssembly, this.modelViewAssembly, hotfixAssembly,
                 hotfixViewAssembly
             });
             Log.Warning($"this.modelAssembly:  {this.modelAssembly.FullName}");
@@ -162,16 +171,18 @@ namespace ET
 
         public void Reload()
         {
-            (Assembly hotfixAssembly, Assembly hotfixViewAssembly) = this.LoadHotfix();
-
-            CodeTypes codeTypes = World.Instance.AddSingleton<CodeTypes, Assembly[]>(new[]
-            {
-                typeof (World).Assembly, typeof (Init).Assembly, this.modelAssembly, this.modelViewAssembly, hotfixAssembly,
-                hotfixViewAssembly
-            });
-            codeTypes.CreateCode();
-
-            Log.Info($"reload dll finish!");
+            Log.Warning("客户端取消热重载功能");
+            // 热重载只能更新逻辑，客户端用了委托不能热重载，加了mono程序集应该也不能热重载
+            // (Assembly hotfixAssembly, Assembly hotfixViewAssembly) = this.LoadHotfix();
+            //
+            // CodeTypes codeTypes = World.Instance.AddSingleton<CodeTypes, Assembly[]>(new[]
+            // {
+            //     typeof (World).Assembly, typeof (Init).Assembly, this.modelAssembly, this.modelViewAssembly, hotfixAssembly,
+            //     hotfixViewAssembly
+            // });
+            // codeTypes.CreateCode();
+            //
+            // Log.Info($"reload dll finish!");
         }
     }
 }

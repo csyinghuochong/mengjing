@@ -27,6 +27,11 @@ namespace ET
             {
                 return GenerateCustomProject(content);
             }
+            
+            if (path.EndsWith("Unity.Mono.csproj") || path.EndsWith("Unity.Mono.csproj"))
+            {
+                return AddCopyAfterBuild(GenerateCustomProject(content));
+            }
 
             if (path.EndsWith("Unity.Model.csproj") || path.EndsWith("Unity.Hotfix.csproj"))
             {
