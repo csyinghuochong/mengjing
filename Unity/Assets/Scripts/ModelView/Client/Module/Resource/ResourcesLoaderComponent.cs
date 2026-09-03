@@ -29,27 +29,24 @@ namespace ET.Client
             self.UnLoadAllAsset();
         }
 
-        public static void ReleaseHandler(this ResourcesLoaderComponent self, OperationHandleBase handleBase)
+        public static void ReleaseHandler(this ResourcesLoaderComponent self, HandleBase handleBase)
         {
             switch (handleBase)
             {
-                case AssetOperationHandle handle:
+                case AssetHandle handle:
                     handle.Release();
                     break;
-                case AllAssetsOperationHandle handle:
+                case AllAssetsHandle handle:
                     handle.Release();
                     break;
-                case SubAssetsOperationHandle handle:
+                case SubAssetsHandle handle:
                     handle.Release();
                     break;
-                case RawFileOperationHandle handle:
+                case RawFileHandle handle:
                     handle.Release();
                     break;
-                case SceneOperationHandle handle:
-                    if (!handle.IsMainScene())
-                    {
-                        handle.UnloadAsync();
-                    }
+                case SceneHandle handle:
+                    handle.UnloadAsync();
                     break;
             }
         }
@@ -77,7 +74,7 @@ namespace ET.Client
             //
             // self.Handlers.Clear();
 
-            self.Package.UnloadUnusedAssets();
+            self.Package.UnloadUnusedAssetsAsync();
         }
 
         public static void UnloadUnusedAssets(this ResourcesLoaderComponent self)
@@ -93,23 +90,21 @@ namespace ET.Client
                 }
             }
 
-            using (zstring.Block())
-            {
-                Log.Debug(zstring.Format("目前数量：{0}     定时清理数量：{1}", self.Handlers.Count, keysToRemove.Count));
-            }
+            Log.Debug($"目前数量：{self.Handlers.Count}     定时清理数量：{keysToRemove.Count}");
 
             foreach (string s in keysToRemove)
             {
                 self.UnLoadAsset(s);
             }
 
-            self.Package.UnloadUnusedAssets();
+            self.Package.UnloadUnusedAssetsAsync();
         }
 
+        // 小游戏不支持同步加载，除非提前加载好
         public static T LoadAssetSync<T>(this ResourcesLoaderComponent self, string location, long liveTime = 30 * 1000) where T : UnityEngine.Object
         {
-            OperationHandleBase handler;
-            if (!self.Handlers.TryGetValue(location, out (OperationHandleBase handler, long destroyTime) selfHandler))
+            HandleBase handler;
+            if (!self.Handlers.TryGetValue(location, out (HandleBase handler, long destroyTime) selfHandler))
             {
                 handler = self.Package.LoadAssetSync<T>(location);
                 self.Handlers.Add(location, (handler, TimeInfo.Instance.ServerNow() + liveTime));
@@ -120,18 +115,16 @@ namespace ET.Client
                 handler = selfHandler.handler;
             }
 
-            return (T)((AssetOperationHandle)handler).AssetObject;
+            return (T)((AssetHandle)handler).AssetObject;
         }
 
-        public static async ETTask<T> LoadAssetAsync<T>(this ResourcesLoaderComponent self, string location)
-                where T : UnityEngine.Object
+        public static async ETTask<T> LoadAssetAsync<T>(this ResourcesLoaderComponent self, string location) where T : UnityEngine.Object
         {
-            using CoroutineLock coroutineLock = await self.Root().GetComponent<CoroutineLockComponent>()
-                    .Wait(CoroutineLockType.ResourcesLoader, location.GetHashCode());
+            using CoroutineLock coroutineLock = await self.Root().GetComponent<CoroutineLockComponent>().Wait(CoroutineLockType.ResourcesLoader, location.GetHashCode());
             
             long liveTime = TimeHelper.Hour;
-            OperationHandleBase handler;
-            if (!self.Handlers.TryGetValue(location, out (OperationHandleBase handler, long destroyTime) selfHandler))
+            HandleBase handler;
+            if (!self.Handlers.TryGetValue(location, out (HandleBase handler, long destroyTime) selfHandler))
             {
                 handler = self.Package.LoadAssetAsync<T>(location);
                 await handler.Task;
@@ -143,15 +136,14 @@ namespace ET.Client
                 handler = selfHandler.handler;
             }
 
-            return (T)((AssetOperationHandle)handler).AssetObject;
+            return (T)((AssetHandle)handler).AssetObject;
         }
 
         public static async ETTask LoadSceneAsync(this ResourcesLoaderComponent self, string location, LoadSceneMode loadSceneMode)
         {
-            using CoroutineLock coroutineLock = await self.Root().GetComponent<CoroutineLockComponent>()
-                    .Wait(CoroutineLockType.ResourcesLoader, location.GetHashCode());
+            using CoroutineLock coroutineLock = await self.Root().GetComponent<CoroutineLockComponent>().Wait(CoroutineLockType.ResourcesLoader, location.GetHashCode());
 
-            OperationHandleBase handler;
+            HandleBase handler;
 
             // YooAsset内部是这样处理的  调用LoadSceneAsync()，如果加载的是主场景，则自动卸载所有缓存的场景
             // 该项目都是单独场景，所以暂时屏蔽 self.handlers.Add
@@ -161,7 +153,7 @@ namespace ET.Client
             //     return;
             // }
 
-            handler = self.Package.LoadSceneAsync(location);
+            handler = self.Package.LoadSceneAsync(location, loadSceneMode);
 
             await handler.Task;
             // self.handlers.Add(location, handler);
@@ -176,6 +168,6 @@ namespace ET.Client
     public class ResourcesLoaderComponent : Entity, IAwake, IDestroy
     {
         public ResourcePackage Package;
-        public Dictionary<string, (OperationHandleBase handler, long destroyTime)> Handlers = new();
+        public Dictionary<string, (HandleBase handler, long destroyTime)> Handlers = new();
     }
 }

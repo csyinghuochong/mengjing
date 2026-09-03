@@ -1,6 +1,7 @@
 using System;
-using UniFramework.Event;
+using UnityEngine;
 using UniFramework.Machine;
+using UniFramework.Event;
 using YooAsset;
 
 public class PatchOperation : GameAsyncOperation
@@ -15,58 +16,62 @@ public class PatchOperation : GameAsyncOperation
     public Action UpdateDownHandler;
     private readonly EventGroup _eventGroup = new EventGroup();
     private readonly StateMachine _machine;
+    private readonly string _packageName;
     private ESteps _steps = ESteps.None;
 
-    public PatchOperation(string packageName, string buildPipeline, EPlayMode playMode)
+    public PatchOperation(string packageName, EPlayMode playMode)
     {
+        _packageName = packageName;
+
         // 注册监听事件
         _eventGroup.AddListener<UserEventDefine.UserTryInitialize>(OnHandleEventMessage);
         _eventGroup.AddListener<UserEventDefine.UserBeginDownloadWebFiles>(OnHandleEventMessage);
-        _eventGroup.AddListener<UserEventDefine.UserTryUpdatePackageVersion>(OnHandleEventMessage);
-        _eventGroup.AddListener<UserEventDefine.UserTryUpdatePatchManifest>(OnHandleEventMessage);
+        _eventGroup.AddListener<UserEventDefine.UserTryRequestPackageVersion>(OnHandleEventMessage);
+        _eventGroup.AddListener<UserEventDefine.UserTryUpdatePackageManifest>(OnHandleEventMessage);
         _eventGroup.AddListener<UserEventDefine.UserTryDownloadWebFiles>(OnHandleEventMessage);
 
         // 创建状态机
         _machine = new StateMachine(this);
-        _machine.AddNode<FsmUpdatePackageVersion>();
+        _machine.AddNode<FsmInitializePackage>();
+        _machine.AddNode<FsmRequestPackageVersion>();
         _machine.AddNode<FsmUpdatePackageManifest>();
-        _machine.AddNode<FsmCreatePackageDownloader>();
+        _machine.AddNode<FsmCreateDownloader>();
         _machine.AddNode<FsmDownloadPackageFiles>();
         _machine.AddNode<FsmDownloadPackageOver>();
-        _machine.AddNode<FsmClearPackageCache>();
-        _machine.AddNode<FsmUpdaterDone>();
+        _machine.AddNode<FsmClearCacheBundle>();
+        _machine.AddNode<FsmStartGame>();
 
         _machine.SetBlackboardValue("PackageName", packageName);
         _machine.SetBlackboardValue("PlayMode", playMode);
-        _machine.SetBlackboardValue("BuildPipeline", buildPipeline);
     }
     protected override void OnStart()
     {
         _steps = ESteps.Update;
-        _machine.Run<FsmUpdatePackageVersion>();
+        _machine.Run<FsmInitializePackage>();
     }
     protected override void OnUpdate()
     {
         if (_steps == ESteps.None || _steps == ESteps.Done)
             return;
 
-        if(_steps == ESteps.Update)
+        if (_steps == ESteps.Update)
         {
             _machine.Update();
-            if(_machine.CurrentNode == typeof(FsmUpdaterDone).FullName)
-            {
-                _eventGroup.RemoveAllListener();
-                Status = EOperationStatus.Succeed;
-                _steps = ESteps.Done;
-                
-                UpdateDownHandler?.Invoke();
-            }
         }
     }
-    
-    // protected override void OnAbort()
-    // {
-    // }
+    protected override void OnAbort()
+    {
+    }
+
+    public void SetFinish()
+    {
+        _steps = ESteps.Done;
+        _eventGroup.RemoveAllListener();
+        Status = EOperationStatus.Succeed;
+        Debug.Log($"Package {_packageName} patch done !");
+        
+        UpdateDownHandler?.Invoke();
+    }
 
     /// <summary>
     /// 接收事件
@@ -81,21 +86,21 @@ public class PatchOperation : GameAsyncOperation
         {
             _machine.ChangeState<FsmDownloadPackageFiles>();
         }
-        else if (message is UserEventDefine.UserTryUpdatePackageVersion)
+        else if (message is UserEventDefine.UserTryRequestPackageVersion)
         {
-            _machine.ChangeState<FsmUpdatePackageVersion>();
+            _machine.ChangeState<FsmRequestPackageVersion>();
         }
-        else if (message is UserEventDefine.UserTryUpdatePatchManifest)
+        else if (message is UserEventDefine.UserTryUpdatePackageManifest)
         {
             _machine.ChangeState<FsmUpdatePackageManifest>();
         }
         else if (message is UserEventDefine.UserTryDownloadWebFiles)
         {
-            _machine.ChangeState<FsmCreatePackageDownloader>();
+            _machine.ChangeState<FsmCreateDownloader>();
         }
         else
         {
-            throw new NotImplementedException($"{message.GetType()}");
+            throw new System.NotImplementedException($"{message.GetType()}");
         }
     }
 }

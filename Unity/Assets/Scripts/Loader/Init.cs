@@ -6,7 +6,6 @@ using YooAsset;
 
 namespace ET
 {
-	
 	[EnableClass]
 	public class Init: MonoBehaviour
 	{
@@ -59,11 +58,12 @@ namespace ET
 #else
 			ePlayMode = EPlayMode.HostPlayMode;
 #endif
-			YooAssets.SetDownloadSystemBreakpointResumeFileSize(5 * 1024 * 1024);
-			await World.Instance.AddSingleton<ResourcesComponent>().CreatePackageAsync("DefaultPackage",ePlayMode, true);
-			
 			// 游戏管理器
 			GameManager.Instance.Behaviour = this;
+			
+			// 初始化资源系统
+			World.Instance.AddSingleton<ResourcesComponent>();
+			
 			//OnStartGame();
 		}
 		
@@ -71,13 +71,12 @@ namespace ET
 		{
 			TogglePatchWindow(true);
 			// 开始补丁更新流程
-			StartCoroutine(StartUpdate(ePlayMode));
+			StartCoroutine(StartUpdate());
 		}
 
-		IEnumerator StartUpdate(EPlayMode ePlayMode)
+		IEnumerator StartUpdate()
 		{
-			// 开始补丁更新流程
-			PatchOperation operation = new PatchOperation("DefaultPackage", EDefaultBuildPipeline.BuiltinBuildPipeline.ToString(), ePlayMode);
+			PatchOperation operation = new PatchOperation("DefaultPackage", ePlayMode);
 			operation.UpdateDownHandler = () => { OnUpdaterDone().Coroutine(); };
 			YooAssets.StartOperation(operation);
 			yield return operation;
@@ -127,6 +126,4 @@ namespace ET
 			}
 		}
 	}
-	
-	
 }

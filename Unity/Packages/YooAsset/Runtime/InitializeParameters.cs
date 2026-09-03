@@ -1,115 +1,111 @@
-﻿
+﻿using System.Collections.Generic;
+
 namespace YooAsset
 {
-	
-	/// <summary>
-	/// 默认的构建管线
-	/// </summary>
-	public enum EDefaultBuildPipeline
-	{
-		/// <summary>
-		/// 内置构建管线
-		/// </summary>
-		BuiltinBuildPipeline,
+    /// <summary>
+    /// 运行模式
+    /// </summary>
+    public enum EPlayMode
+    {
+        /// <summary>
+        /// 编辑器下的模拟模式
+        /// </summary>
+        EditorSimulateMode,
 
-		/// <summary>
-		/// 可编程构建管线
-		/// </summary>
-		ScriptableBuildPipeline,
+        /// <summary>
+        /// 离线运行模式
+        /// </summary>
+        OfflinePlayMode,
 
-		/// <summary>
-		/// 原生文件构建管线
-		/// </summary>
-		RawFileBuildPipeline,
-	}
-	
-	/// <summary>
-	/// 运行模式
-	/// </summary>
-	public enum EPlayMode
-	{
-		/// <summary>
-		/// 编辑器下的模拟模式
-		/// </summary>
-		EditorSimulateMode,
+        /// <summary>
+        /// 联机运行模式
+        /// </summary>
+        HostPlayMode,
 
-		/// <summary>
-		/// 离线运行模式
-		/// </summary>
-		OfflinePlayMode,
+        /// <summary>
+        /// WebGL运行模式
+        /// </summary>
+        WebPlayMode,
 
-		/// <summary>
-		/// 联机运行模式
-		/// </summary>
-		HostPlayMode,
-	}
+        /// <summary>
+        /// 自定义运行模式
+        /// </summary>
+        CustomPlayMode,
+    }
 
-	/// <summary>
-	/// 初始化参数
-	/// </summary>
-	public abstract class InitializeParameters
-	{
-		/// <summary>
-		/// 文件解密服务接口
-		/// </summary>
-		public IDecryptionServices DecryptionServices = null;
+    /// <summary>
+    /// 初始化参数
+    /// </summary>
+    public abstract class InitializeParameters
+    {
+        /// <summary>
+        /// 同时加载Bundle文件的最大并发数
+        /// </summary>
+        public int BundleLoadingMaxConcurrency = int.MaxValue;
 
-		/// <summary>
-		/// 内置文件的根路径
-		/// 注意：当参数为空的时候会使用默认的根目录。
-		/// </summary>
-		public string BuildinRootDirectory = string.Empty;
+        /// <summary>
+        /// 当资源引用计数为零的时候自动释放资源包
+        /// </summary>
+        public bool AutoUnloadBundleWhenUnused = false;
 
-		/// <summary>
-		/// 沙盒文件的根路径
-		/// 注意：当参数为空的时候会使用默认的根目录。
-		/// </summary>
-		public string SandboxRootDirectory = string.Empty;
-		
-		/// <summary>
-		/// 资源加载每帧处理的最大时间片段
-		/// 注意：默认值为MaxValue
-		/// </summary>
-		public long LoadingMaxTimeSlice = long.MaxValue;
-		
-		/// <summary>
-		/// 下载失败尝试次数
-		/// 注意：默认值为MaxValue
-		/// </summary>
-		public int DownloadFailedTryAgain = int.MaxValue;
-	}
+        /// <summary>
+        /// WebGL平台强制同步加载资源对象
+        /// </summary>
+        public bool WebGLForceSyncLoadAsset = false;
 
-	/// <summary>
-	/// 编辑器下模拟运行模式的初始化参数
-	/// </summary>
-	public class EditorSimulateModeParameters : InitializeParameters
-	{
-		/// <summary>
-		/// 用于模拟运行的资源清单路径
-		/// </summary>
-		public string SimulateManifestFilePath = string.Empty;
-	}
+#if YOOASSET_EXPERIMENTAL
+        /// <summary>
+        /// 启用弱引用资源句柄
+        /// </summary>
+        public bool UseWeakReferenceHandle = false;
+#else
+        internal bool UseWeakReferenceHandle = false;
+#endif
+    }
 
-	/// <summary>
-	/// 离线运行模式的初始化参数
-	/// </summary>
-	public class OfflinePlayModeParameters : InitializeParameters
-	{
-	}
+    /// <summary>
+    /// 编辑器下模拟运行模式的初始化参数
+    /// </summary>
+    public class EditorSimulateModeParameters : InitializeParameters
+    {
+        public FileSystemParameters EditorFileSystemParameters;
+    }
 
-	/// <summary>
-	/// 联机运行模式的初始化参数
-	/// </summary>
-	public class HostPlayModeParameters : InitializeParameters
-	{
-		/// <summary>
-		/// 内置资源查询服务接口
-		/// </summary>
-		public IQueryServices QueryServices = null;
+    /// <summary>
+    /// 离线运行模式的初始化参数
+    /// </summary>
+    public class OfflinePlayModeParameters : InitializeParameters
+    {
+        public FileSystemParameters BuildinFileSystemParameters;
+    }
 
-		/// <summary>
-		/// 远端资源地址查询服务类
-		/// </summary>
-		public IRemoteServices RemoteServices = null;
-	}
+    /// <summary>
+    /// 联机运行模式的初始化参数
+    /// </summary>
+    public class HostPlayModeParameters : InitializeParameters
+    {
+        public FileSystemParameters BuildinFileSystemParameters;
+        public FileSystemParameters CacheFileSystemParameters;
+    }
+
+    /// <summary>
+    /// WebGL运行模式的初始化参数
+    /// </summary>
+    public class WebPlayModeParameters : InitializeParameters
+    {
+        public FileSystemParameters WebServerFileSystemParameters;
+        public FileSystemParameters WebRemoteFileSystemParameters;
+    }
+
+    /// <summary>
+    /// 自定义运行模式的初始化参数
+    /// </summary>
+    public class CustomPlayModeParameters : InitializeParameters
+    {
+        /// <summary>
+        /// 文件系统初始化参数列表
+        /// 注意：列表最后一个元素作为主文件系统！
+        /// </summary>
+        public readonly List<FileSystemParameters> FileSystemParameterList = new List<FileSystemParameters>();
+    }
 }

@@ -6,28 +6,23 @@ using UnityEditor;
 
 namespace YooAsset.Editor
 {
-	public static class AssetBundleBuilderHelper
-	{
-		/// <summary>
-		/// 获取默认的输出根路录
-		/// </summary>
-		public static string GetDefaultBuildOutputRoot()
-		{
-			//if (!string.IsNullOrEmpty(AssetBundleBuilderSettingData.Setting.BuildOutput))
-			//{
-			//	return AssetBundleBuilderSettingData.Setting.BuildOutput;
-			//}
-			string projectPath = EditorTools.GetProjectPath();
-
+    public static class AssetBundleBuilderHelper
+    {
+        /// <summary>
+        /// 获取默认的输出根目录
+        /// </summary>
+        public static string GetDefaultBuildOutputRoot()
+        {
+            string projectPath = EditorTools.GetProjectPath();
             return $"{projectPath}/Bundles";
-		}
+        }
 
-		/// <summary>
-		/// 获取流文件夹路径
-		/// </summary>
-		public static string GetDefaultStreamingAssetsRoot()
-		{
-			return $"{Application.dataPath}/StreamingAssets/{YooAssetSettings.DefaultYooFolderName}/";
-		}
-	}
+        /// <summary>
+        /// 获取流文件夹路径
+        /// </summary>
+        public static string GetStreamingAssetsRoot()
+        {
+            return YooAssetSettingsData.GetYooDefaultBuildinRoot();
+        }
+    }
 }

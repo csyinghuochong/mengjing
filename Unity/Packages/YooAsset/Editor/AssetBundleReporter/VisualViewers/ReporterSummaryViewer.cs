@@ -9,170 +9,173 @@ using UnityEngine.UIElements;
 
 namespace YooAsset.Editor
 {
-	internal class ReporterSummaryViewer
-	{
-		private class ItemWrapper
-		{
-			public string Title { private set; get; }
-			public string Value { private set; get; }
+    internal class ReporterSummaryViewer
+    {
+        private VisualTreeAsset _visualAsset;
+        private TemplateContainer _root;
+        private ScrollView _scrollView;
 
-			public ItemWrapper(string title, string value)
-			{
-				Title = title;
-				Value = value;
-			}
-		}
+        /// <summary>
+        /// 初始化页面
+        /// </summary>
+        public void InitViewer()
+        {
+            // 加载布局文件
+            _visualAsset = UxmlLoader.LoadWindowUXML<ReporterSummaryViewer>();
+            if (_visualAsset == null)
+                return;
 
-		private VisualTreeAsset _visualAsset;
-		private TemplateContainer _root;
+            _root = _visualAsset.CloneTree();
+            _root.style.flexGrow = 1f;
 
-		private ListView _listView;
-		private readonly List<ItemWrapper> _items = new List<ItemWrapper>();
+            // 概述列表
+            _scrollView = _root.Q<ScrollView>("ScrollView");
+        }
 
+        /// <summary>
+        /// 填充页面数据
+        /// </summary>
+        public void FillViewData(BuildReport buildReport)
+        {
+            _scrollView.Clear();
 
-		/// <summary>
-		/// 初始化页面
-		/// </summary>
-		public void InitViewer()
-		{
-			// 加载布局文件
-			_visualAsset = UxmlLoader.LoadWindowUXML<ReporterSummaryViewer>();
-			if (_visualAsset == null)
-				return;
+            BindListViewHeader("Build Infos");
+            BindListViewItem("YooAsset Version", buildReport.Summary.YooVersion);
+            BindListViewItem("UnityEngine Version", buildReport.Summary.UnityVersion);
+            BindListViewItem("Build Date", buildReport.Summary.BuildDate);
+            BindListViewItem("Build Seconds", ConvertTime(buildReport.Summary.BuildSeconds));
+            BindListViewItem("Build Target", $"{buildReport.Summary.BuildTarget}");
+            BindListViewItem("Build Pipeline", $"{buildReport.Summary.BuildPipeline}");
+            BindListViewItem("Build Bundle Type", buildReport.Summary.BuildBundleType.ToString());
+            BindListViewItem("Package Name", buildReport.Summary.BuildPackageName);
+            BindListViewItem("Package Version", buildReport.Summary.BuildPackageVersion);
+            BindListViewItem("Package Note", buildReport.Summary.BuildPackageNote);
+            BindListViewItem(string.Empty, string.Empty);
 
-			_root = _visualAsset.CloneTree();
-			_root.style.flexGrow = 1f;
+            BindListViewHeader("Collect Settings");
+            BindListViewItem("Unique Bundle Name", $"{buildReport.Summary.UniqueBundleName}");
+            BindListViewItem("Enable Addressable", $"{buildReport.Summary.EnableAddressable}");
+            BindListViewItem("Support Extensionless", $"{buildReport.Summary.SupportExtensionless}");
+            BindListViewItem("Location To Lower", $"{buildReport.Summary.LocationToLower}");
+            BindListViewItem("Include Asset GUID", $"{buildReport.Summary.IncludeAssetGUID}");
+            BindListViewItem("Auto Collect Shaders", $"{buildReport.Summary.AutoCollectShaders}");
+            BindListViewItem("Ignore Rule Name", $"{buildReport.Summary.IgnoreRuleName}");
+            BindListViewItem(string.Empty, string.Empty);
 
-			// 概述列表
-			_listView = _root.Q<ListView>("ListView");
-			_listView.makeItem = MakeListViewItem;
-			_listView.bindItem = BindListViewItem;
-		}
+            BindListViewHeader("Build Params");
+            BindListViewItem("Clear Build Cache Files", $"{buildReport.Summary.ClearBuildCacheFiles}");
+            BindListViewItem("Use Asset Dependency DB", $"{buildReport.Summary.UseAssetDependencyDB}");
+            BindListViewItem("Enable Share Pack Rule", $"{buildReport.Summary.EnableSharePackRule}");
+            BindListViewItem("Single Referenced Pack Alone", $"{buildReport.Summary.SingleReferencedPackAlone}");
+            BindListViewItem("Encryption Services", buildReport.Summary.EncryptionServicesClassName);
+            BindListViewItem("Manifest Process Services", buildReport.Summary.ManifestProcessServicesClassName);
+            BindListViewItem("Manifest Restore Services", buildReport.Summary.ManifestRestoreServicesClassName);
+            BindListViewItem("FileNameStyle", $"{buildReport.Summary.FileNameStyle}");
+            BindListViewItem("CompressOption", $"{buildReport.Summary.CompressOption}");
+            BindListViewItem("DisableWriteTypeTree", $"{buildReport.Summary.DisableWriteTypeTree}");
+            BindListViewItem("IgnoreTypeTreeChanges", $"{buildReport.Summary.IgnoreTypeTreeChanges}");
+            BindListViewItem("ReplaceAssetPathWithAddress", $"{buildReport.Summary.ReplaceAssetPathWithAddress}");
+            BindListViewItem(string.Empty, string.Empty);
 
-		/// <summary>
-		/// 填充页面数据
-		/// </summary>
-		public void FillViewData(BuildReport buildReport)
-		{
-			_items.Clear();
+            BindListViewHeader("Build Results");
+            BindListViewItem("Asset File Total Count", $"{buildReport.Summary.AssetFileTotalCount}");
+            BindListViewItem("Main Asset Total Count", $"{buildReport.Summary.MainAssetTotalCount}");
+            BindListViewItem("All Bundle Total Count", $"{buildReport.Summary.AllBundleTotalCount}");
+            BindListViewItem("All Bundle Total Size", ConvertSize(buildReport.Summary.AllBundleTotalSize));
+            BindListViewItem("Encrypted Bundle Total Count", $"{buildReport.Summary.EncryptedBundleTotalCount}");
+            BindListViewItem("Encrypted Bundle Total Size", ConvertSize(buildReport.Summary.EncryptedBundleTotalSize));
+        }
 
-			_items.Add(new ItemWrapper("YooAsset版本", buildReport.Summary.YooVersion));
-			_items.Add(new ItemWrapper("引擎版本", buildReport.Summary.UnityVersion));
-			_items.Add(new ItemWrapper("构建时间", buildReport.Summary.BuildDate));
-			_items.Add(new ItemWrapper("构建耗时", ConvertTime(buildReport.Summary.BuildSeconds)));
-			_items.Add(new ItemWrapper("构建平台", $"{buildReport.Summary.BuildTarget}"));
-			_items.Add(new ItemWrapper("构建管线", $"{buildReport.Summary.BuildPipeline}"));
-			_items.Add(new ItemWrapper("构建模式", $"{buildReport.Summary.BuildMode}"));
-			_items.Add(new ItemWrapper("包裹名称", buildReport.Summary.BuildPackageName));
-			_items.Add(new ItemWrapper("包裹版本", buildReport.Summary.BuildPackageVersion));
+        /// <summary>
+        /// 挂接到父类页面上
+        /// </summary>
+        public void AttachParent(VisualElement parent)
+        {
+            parent.Add(_root);
+        }
 
-			_items.Add(new ItemWrapper(string.Empty, string.Empty));
-			_items.Add(new ItemWrapper("启用可寻址资源定位", $"{buildReport.Summary.EnableAddressable}"));
-			_items.Add(new ItemWrapper("资源定位地址大小写不敏感", $"{buildReport.Summary.LocationToLower}"));
-			_items.Add(new ItemWrapper("包含资源GUID数据", $"{buildReport.Summary.IncludeAssetGUID}"));
-			_items.Add(new ItemWrapper("资源包名唯一化", $"{buildReport.Summary.UniqueBundleName}"));
-			_items.Add(new ItemWrapper("共享资源打包规则", buildReport.Summary.SharedPackRuleClassName));
-			_items.Add(new ItemWrapper("资源加密服务类", buildReport.Summary.EncryptionServicesClassName));
+        /// <summary>
+        /// 从父类页面脱离开
+        /// </summary>
+        public void DetachParent()
+        {
+            _root.RemoveFromHierarchy();
+        }
 
-			_items.Add(new ItemWrapper(string.Empty, string.Empty));
-			_items.Add(new ItemWrapper("构建参数", string.Empty));
-			_items.Add(new ItemWrapper("OutputNameStyle", $"{buildReport.Summary.OutputNameStyle}"));
-			_items.Add(new ItemWrapper("CompressOption", $"{buildReport.Summary.CompressOption}"));
-			_items.Add(new ItemWrapper("DisableWriteTypeTree", $"{buildReport.Summary.DisableWriteTypeTree}"));
-			_items.Add(new ItemWrapper("IgnoreTypeTreeChanges", $"{buildReport.Summary.IgnoreTypeTreeChanges}"));
+        // 列表相关
+        private void BindListViewHeader(string titile)
+        {
+            Toolbar toolbar = new Toolbar();
+            _scrollView.Add(toolbar);
 
-			_items.Add(new ItemWrapper(string.Empty, string.Empty));
-			_items.Add(new ItemWrapper("构建结果", string.Empty));
-			_items.Add(new ItemWrapper("构建文件总数", $"{buildReport.Summary.AssetFileTotalCount}"));
-			_items.Add(new ItemWrapper("主资源总数", $"{buildReport.Summary.MainAssetTotalCount}"));
-			_items.Add(new ItemWrapper("资源包总数", $"{buildReport.Summary.AllBundleTotalCount}"));
-			_items.Add(new ItemWrapper("资源包总大小", ConvertSize(buildReport.Summary.AllBundleTotalSize)));
-			_items.Add(new ItemWrapper("加密资源包总数", $"{buildReport.Summary.EncryptedBundleTotalCount}"));
-			_items.Add(new ItemWrapper("加密资源包总大小", ConvertSize(buildReport.Summary.EncryptedBundleTotalSize)));
-			_items.Add(new ItemWrapper("原生资源包总数", $"{buildReport.Summary.RawBundleTotalCount}"));
-			_items.Add(new ItemWrapper("原生资源包总大小", ConvertSize(buildReport.Summary.RawBundleTotalSize)));
+            ToolbarButton titleButton = new ToolbarButton();
+            titleButton.text = titile;
+            titleButton.style.unityTextAlign = TextAnchor.MiddleCenter;
+            titleButton.style.width = 200;
+            toolbar.Add(titleButton);
 
-			_listView.Clear();
-			_listView.ClearSelection();
-			_listView.itemsSource = _items;
-			_listView.Rebuild();
-		}
+            ToolbarButton valueButton = new ToolbarButton();
+            valueButton.style.unityTextAlign = TextAnchor.MiddleCenter;
+            valueButton.style.width = 150;
+            valueButton.style.flexShrink = 1;
+            valueButton.style.flexGrow = 1;
+            valueButton.SetEnabled(false);
+            toolbar.Add(valueButton);
+        }
+        private void BindListViewItem(string name, string value)
+        {
+            VisualElement element = MakeListViewItem();
+            _scrollView.Add(element);
 
-		/// <summary>
-		/// 挂接到父类页面上
-		/// </summary>
-		public void AttachParent(VisualElement parent)
-		{
-			parent.Add(_root);
-		}
+            // Title
+            var titleLabel = element.Q<Label>("TitleLabel");
+            titleLabel.text = name;
 
-		/// <summary>
-		/// 从父类页面脱离开
-		/// </summary>
-		public void DetachParent()
-		{
-			_root.RemoveFromHierarchy();
-		}
+            // Value
+            var valueLabel = element.Q<Label>("ValueLabel");
+            valueLabel.text = value;
+        }
+        private VisualElement MakeListViewItem()
+        {
+            VisualElement element = new VisualElement();
+            element.style.flexDirection = FlexDirection.Row;
 
-		// 列表相关
-		private VisualElement MakeListViewItem()
-		{
-			VisualElement element = new VisualElement();
-			element.style.flexDirection = FlexDirection.Row;
+            var titleLabel = new Label();
+            titleLabel.name = "TitleLabel";
+            titleLabel.style.unityTextAlign = TextAnchor.MiddleLeft;
+            titleLabel.style.marginLeft = 3f;
+            titleLabel.style.width = 200;
+            element.Add(titleLabel);
 
-			{
-				var label = new Label();
-				label.name = "Label1";
-				label.style.unityTextAlign = TextAnchor.MiddleLeft;
-				label.style.marginLeft = 3f;
-				//label.style.flexGrow = 1f;
-				label.style.width = 200;
-				element.Add(label);
-			}
+            var valueLabel = new Label();
+            valueLabel.name = "ValueLabel";
+            valueLabel.style.unityTextAlign = TextAnchor.MiddleLeft;
+            valueLabel.style.marginLeft = 3f;
+            valueLabel.style.flexGrow = 1f;
+            valueLabel.style.width = 150;
+            element.Add(valueLabel);
 
-			{
-				var label = new Label();
-				label.name = "Label2";
-				label.style.unityTextAlign = TextAnchor.MiddleLeft;
-				label.style.marginLeft = 3f;
-				label.style.flexGrow = 1f;
-				label.style.width = 150;
-				element.Add(label);
-			}
+            return element;
+        }
 
-			return element;
-		}
-		private void BindListViewItem(VisualElement element, int index)
-		{
-			var itemWrapper = _items[index];
-
-			// Title
-			var label1 = element.Q<Label>("Label1");
-			label1.text = itemWrapper.Title;
-
-			// Value
-			var label2 = element.Q<Label>("Label2");
-			label2.text = itemWrapper.Value;
-		}
-
-		private string ConvertTime(int time)
-		{
-			if (time <= 60)
-			{
-				return $"{time}秒钟";
-			}
-			else
-			{
-				int minute = time / 60;
-				return $"{minute}分钟";
-			}
-		}
-		private string ConvertSize(long size)
-		{
-			if (size == 0)
-				return "0";
-			return EditorUtility.FormatBytes(size);
-		}
-	}
+        private string ConvertTime(int time)
+        {
+            if (time <= 60)
+            {
+                return $"{time}秒钟";
+            }
+            else
+            {
+                int minute = time / 60;
+                return $"{minute}分钟";
+            }
+        }
+        private string ConvertSize(long size)
+        {
+            if (size == 0)
+                return "0";
+            return EditorUtility.FormatBytes(size);
+        }
+    }
 }
 #endif

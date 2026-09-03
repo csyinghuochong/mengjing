@@ -1,11 +1,12 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 
 namespace UniFramework.Machine
 {
 	public class StateMachine
 	{
-		private readonly Dictionary<string, Object> _blackboard = new Dictionary<string, object>(100);
+		private readonly Dictionary<string, System.Object> _blackboard = new Dictionary<string, object>(100);
 		private readonly Dictionary<string, IStateNode> _nodes = new Dictionary<string, IStateNode>(100);
 		private IStateNode _curNode;
 		private IStateNode _preNode;
@@ -13,7 +14,7 @@ namespace UniFramework.Machine
 		/// <summary>
 		/// 状态机持有者
 		/// </summary>
-		public Object Owner { private set; get; }
+		public System.Object Owner { private set; get; }
 
 		/// <summary>
 		/// 当前运行的节点名称
@@ -33,7 +34,7 @@ namespace UniFramework.Machine
 
 
 		private StateMachine() { }
-		public StateMachine(Object owner)
+		public StateMachine(System.Object owner)
 		{
 			Owner = owner;
 		}
@@ -138,7 +139,7 @@ namespace UniFramework.Machine
 		/// </summary>
 		/// <param name="key"></param>
 		/// <param name="value"></param>
-		public void SetBlackboardValue(string key, Object value)
+		public void SetBlackboardValue(string key, System.Object value)
 		{
 			if (_blackboard.ContainsKey(key) == false)
 				_blackboard.Add(key, value);
@@ -149,9 +150,9 @@ namespace UniFramework.Machine
 		/// <summary>
 		/// 获取黑板数据
 		/// </summary>
-		public Object GetBlackboardValue(string key)
+		public System.Object GetBlackboardValue(string key)
 		{
-			if (_blackboard.TryGetValue(key, out Object value))
+			if (_blackboard.TryGetValue(key, out System.Object value))
 			{
 				return value;
 			}

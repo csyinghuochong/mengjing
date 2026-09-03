@@ -1,8 +1,9 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
-using UniFramework.Event;
 using UnityEngine;
 using UnityEngine.UI;
+using UniFramework.Event;
 
 public class PatchWindow : MonoBehaviour
 {
@@ -14,7 +15,7 @@ public class PatchWindow : MonoBehaviour
         private GameObject _cloneObject;
         private Text _content;
         private Button _btnOK;
-        private Action _clickOK;
+        private System.Action _clickOK;
 
         public bool ActiveSelf
         {
@@ -31,7 +32,7 @@ public class PatchWindow : MonoBehaviour
             _btnOK = cloneObject.transform.Find("btn_ok").GetComponent<Button>();
             _btnOK.onClick.AddListener(OnClickYes);
         }
-        public void Show(string content, Action clickOK)
+        public void Show(string content, System.Action clickOK)
         {
             _content.text = content;
             _clickOK = clickOK;
@@ -51,7 +52,6 @@ public class PatchWindow : MonoBehaviour
         }
     }
 
-
     private readonly EventGroup _eventGroup = new EventGroup();
     private readonly List<MessageBox> _msgBoxList = new List<MessageBox>();
 
@@ -59,7 +59,6 @@ public class PatchWindow : MonoBehaviour
     private GameObject _messageBoxObj;
     private Slider _slider;
     private Text _tips;
-
 
     void Awake()
     {
@@ -70,11 +69,11 @@ public class PatchWindow : MonoBehaviour
         _messageBoxObj.SetActive(false);
 
         _eventGroup.AddListener<PatchEventDefine.InitializeFailed>(OnHandleEventMessage);
-        _eventGroup.AddListener<PatchEventDefine.PatchStatesChange>(OnHandleEventMessage);
+        _eventGroup.AddListener<PatchEventDefine.PatchStepsChange>(OnHandleEventMessage);
         _eventGroup.AddListener<PatchEventDefine.FoundUpdateFiles>(OnHandleEventMessage);
-        _eventGroup.AddListener<PatchEventDefine.DownloadProgressUpdate>(OnHandleEventMessage);
-        _eventGroup.AddListener<PatchEventDefine.PackageVersionUpdateFailed>(OnHandleEventMessage);
-        _eventGroup.AddListener<PatchEventDefine.PatchManifestUpdateFailed>(OnHandleEventMessage);
+        _eventGroup.AddListener<PatchEventDefine.DownloadUpdate>(OnHandleEventMessage);
+        _eventGroup.AddListener<PatchEventDefine.PackageVersionRequestFailed>(OnHandleEventMessage);
+        _eventGroup.AddListener<PatchEventDefine.PackageManifestUpdateFailed>(OnHandleEventMessage);
         _eventGroup.AddListener<PatchEventDefine.WebFileDownloadFailed>(OnHandleEventMessage);
     }
     void OnDestroy()
@@ -89,58 +88,58 @@ public class PatchWindow : MonoBehaviour
     {
         if (message is PatchEventDefine.InitializeFailed)
         {
-            Action callback = () =>
+            System.Action callback = () =>
             {
                 UserEventDefine.UserTryInitialize.SendEventMessage();
             };
             ShowMessageBox($"初始化资源包失败 !", callback);
         }
-        else if (message is PatchEventDefine.PatchStatesChange)
+        else if (message is PatchEventDefine.PatchStepsChange)
         {
-            var msg = message as PatchEventDefine.PatchStatesChange;
+            var msg = message as PatchEventDefine.PatchStepsChange;
             _tips.text = msg.Tips;
+            UnityEngine.Debug.Log(msg.Tips);
         }
         else if (message is PatchEventDefine.FoundUpdateFiles)
         {
             var msg = message as PatchEventDefine.FoundUpdateFiles;
-            Action callback = () =>
+            System.Action callback = () =>
             {
                 UserEventDefine.UserBeginDownloadWebFiles.SendEventMessage();
             };
             float sizeMB = msg.TotalSizeBytes / 1048576f;
             sizeMB = Mathf.Clamp(sizeMB, 0.1f, float.MaxValue);
             string totalSizeMB = sizeMB.ToString("f1");
-            ShowMessageBox($"发现需要更新的资源，资源数量 {msg.TotalCount} 资源大小 {totalSizeMB}兆。", callback);
+            ShowMessageBox($"发现需要更新的资源, 资源数量 {msg.TotalCount} 资源大小 {totalSizeMB}MB", callback);
         }
-        else if (message is PatchEventDefine.DownloadProgressUpdate)
+        else if (message is PatchEventDefine.DownloadUpdate)
         {
-            var msg = message as PatchEventDefine.DownloadProgressUpdate;
-            //_slider.value = (float)msg.CurrentDownloadCount / msg.TotalDownloadCount;
+            var msg = message as PatchEventDefine.DownloadUpdate;
+            _slider.value = (float)msg.CurrentDownloadCount / msg.TotalDownloadCount;
             string currentSizeMB = (msg.CurrentDownloadSizeBytes / 1048576f).ToString("f1");
             string totalSizeMB = (msg.TotalDownloadSizeBytes / 1048576f).ToString("f1");
-            _slider.value = (float)msg.CurrentDownloadSizeBytes / msg.TotalDownloadSizeBytes;
-            _tips.text = $"{msg.CurrentDownloadCount}/{msg.TotalDownloadCount} {currentSizeMB}兆/{totalSizeMB}兆";
+            _tips.text = $"{msg.CurrentDownloadCount}/{msg.TotalDownloadCount} {currentSizeMB}MB/{totalSizeMB}MB";
         }
-        else if (message is PatchEventDefine.PackageVersionUpdateFailed)
+        else if (message is PatchEventDefine.PackageVersionRequestFailed)
         {
-            Action callback = () =>
+            System.Action callback = () =>
             {
-                UserEventDefine.UserTryUpdatePackageVersion.SendEventMessage();
+                UserEventDefine.UserTryRequestPackageVersion.SendEventMessage();
             };
-            ShowMessageBox($"更新版本失败，请检查网络状态。", callback);
+            ShowMessageBox($"更新版本失败, 请检查网络状态。", callback);
         }
-        else if (message is PatchEventDefine.PatchManifestUpdateFailed)
+        else if (message is PatchEventDefine.PackageManifestUpdateFailed)
         {
-            Action callback = () =>
+            System.Action callback = () =>
             {
-                UserEventDefine.UserTryUpdatePatchManifest.SendEventMessage();
+                UserEventDefine.UserTryUpdatePackageManifest.SendEventMessage();
             };
-            ShowMessageBox($"更新资源清单失败，请检查网络状态。", callback);
+            ShowMessageBox($"更新资源清单失败, 请检查网络状态。", callback);
         }
         else if (message is PatchEventDefine.WebFileDownloadFailed)
         {
             var msg = message as PatchEventDefine.WebFileDownloadFailed;
-            Action callback = () =>
+            System.Action callback = () =>
             {
                 UserEventDefine.UserTryDownloadWebFiles.SendEventMessage();
             };
@@ -148,14 +147,14 @@ public class PatchWindow : MonoBehaviour
         }
         else
         {
-            throw new NotImplementedException($"{message.GetType()}");
+            throw new System.NotImplementedException($"{message.GetType()}");
         }
     }
 
     /// <summary>
     /// 显示对话框
     /// </summary>
-    private void ShowMessageBox(string content, Action ok)
+    private void ShowMessageBox(string content, System.Action ok)
     {
         // 尝试获取一个可用的对话框
         MessageBox msgBox = null;
@@ -173,7 +172,7 @@ public class PatchWindow : MonoBehaviour
         if (msgBox == null)
         {
             msgBox = new MessageBox();
-            var cloneObject = Instantiate(_messageBoxObj, _messageBoxObj.transform.parent);
+            var cloneObject = GameObject.Instantiate(_messageBoxObj, _messageBoxObj.transform.parent);
             msgBox.Create(cloneObject);
             _msgBoxList.Add(msgBox);
         }

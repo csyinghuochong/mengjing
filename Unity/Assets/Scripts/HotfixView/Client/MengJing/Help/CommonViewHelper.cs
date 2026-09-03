@@ -8,6 +8,11 @@ namespace ET.Client
 {
     public static class CommonViewHelper
     {
+        public static string StringToAB(this string value)
+        {
+            string result =  $"Assets/Bundles/UI/Dlg/{value}.prefab";
+            return result;
+        }
 
         public static string GetPetEquipType(int type)
         {

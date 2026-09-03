@@ -1,5 +1,7 @@
-﻿using UniFramework.Event;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+using UniFramework.Event;
 
 public class BattleEventDefine
 {

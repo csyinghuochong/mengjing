@@ -9,351 +9,166 @@ using UnityEngine.UIElements;
 
 namespace YooAsset.Editor
 {
-	public class AssetBundleBuilderWindow : EditorWindow
-	{
-		[MenuItem("YooAsset/AssetBundle Builder", false, 102)]
-		public static void OpenWindow()
-		{
-			AssetBundleBuilderWindow window = GetWindow<AssetBundleBuilderWindow>("资源包构建工具", true, WindowsDefine.DockedWindowTypes);
-			window.minSize = new Vector2(800, 600);
-		}
+    public class AssetBundleBuilderWindow : EditorWindow
+    {
+        [MenuItem("YooAsset/AssetBundle Builder", false, 102)]
+        public static void OpenWindow()
+        {
+            AssetBundleBuilderWindow window = GetWindow<AssetBundleBuilderWindow>("AssetBundle Builder", true, WindowsDefine.DockedWindowTypes);
+            window.minSize = new Vector2(800, 600);
+        }
 
-		private BuildTarget _buildTarget;
-		private List<Type> _encryptionServicesClassTypes;
-		private List<string> _encryptionServicesClassNames;
-		private List<string> _buildPackageNames;
+        private string _buildPackage;
+        private string _buildPipeline;
 
-		private Button _saveButton;
-		private TextField _buildOutputField;
-		private EnumField _buildPipelineField;
-		private EnumField _buildModeField;
-		private TextField _buildVersionField;
-		private PopupField<string> _buildPackageField;
-		private PopupField<string> _encryptionField;
-		private EnumField _compressionField;
-		private EnumField _outputNameStyleField;
-		private EnumField _copyBuildinFileOptionField;
-		private TextField _copyBuildinFileTagsField;
+        private Dictionary<string, Type> _viewClassDic = new Dictionary<string, Type>(10);
 
-		public void CreateGUI()
-		{
-			try
-			{
-				VisualElement root = this.rootVisualElement;
+        private Toolbar _toolbar;
+        private ToolbarMenu _packageMenu;
+        private ToolbarMenu _pipelineMenu;
+        private VisualElement _container;
 
-				// 加载布局文件
-				var visualAsset = UxmlLoader.LoadWindowUXML<AssetBundleBuilderWindow>();
-				if (visualAsset == null)
-					return;
 
-				visualAsset.CloneTree(root);
+        public void CreateGUI()
+        {
+            try
+            {
+                VisualElement root = this.rootVisualElement;
 
-				// 配置保存按钮
-				_saveButton = root.Q<Button>("SaveButton");
-				_saveButton.clicked += SaveBtn_clicked;
+                // 加载布局文件
+                var visualAsset = UxmlLoader.LoadWindowUXML<AssetBundleBuilderWindow>();
+                if (visualAsset == null)
+                    return;
 
-				// 构建平台
-				_buildTarget = EditorUserBuildSettings.activeBuildTarget;
+                visualAsset.CloneTree(root);
+                _toolbar = root.Q<Toolbar>("Toolbar");
+                _container = root.Q("Container");
 
-				// 包裹名称列表
-				_buildPackageNames = GetBuildPackageNames();
+                // 检测构建包裹
+                var packageNames = GetBuildPackageNames();
+                if (packageNames.Count == 0)
+                {
+                    var label = new Label();
+                    label.text = "Not found any package";
+                    label.style.width = 100;
+                    _toolbar.Add(label);
+                    return;
+                }
 
-				// 加密服务类
-				_encryptionServicesClassTypes = GetEncryptionServicesClassTypes();
-				_encryptionServicesClassNames = _encryptionServicesClassTypes.Select(t => t.Name).ToList();
+                // 构建包裹
+                {
+                    _buildPackage = packageNames[0];
+                    _packageMenu = new ToolbarMenu();
+                    _packageMenu.style.width = 200;
+                    foreach (var packageName in packageNames)
+                    {
+                        _packageMenu.menu.AppendAction(packageName, PackageMenuAction, PackageMenuFun, packageName);
+                    }
+                    _toolbar.Add(_packageMenu);
+                }
 
-				// 输出目录
-				string defaultOutputRoot = AssetBundleBuilderHelper.GetDefaultBuildOutputRoot();
-				_buildOutputField = root.Q<TextField>("BuildOutput");
-				_buildOutputField.SetValueWithoutNotify(defaultOutputRoot);
-				_buildOutputField.SetEnabled(true);
+                // 构建管线
+                {
+                    _pipelineMenu = new ToolbarMenu();
+                    _pipelineMenu.style.width = 200;
+                    _toolbar.Add(_pipelineMenu);
 
-				// 构建管线
-				_buildPipelineField = root.Q<EnumField>("BuildPipeline");
-				_buildPipelineField.Init(AssetBundleBuilderSettingData.Setting.BuildPipeline);
-				_buildPipelineField.SetValueWithoutNotify(AssetBundleBuilderSettingData.Setting.BuildPipeline);
-				_buildPipelineField.style.width = 350;
-				_buildPipelineField.RegisterValueChangedCallback(evt =>
-				{
-					AssetBundleBuilderSettingData.IsDirty = true;
-					AssetBundleBuilderSettingData.Setting.BuildPipeline = (EBuildPipeline)_buildPipelineField.value;
-					RefreshWindow();
-				});
+                    var viewerClassTypes = EditorTools.GetAssignableTypes(typeof(BuildPipelineViewerBase));
+                    foreach (var classType in viewerClassTypes)
+                    {
+                        var buildPipelineAttribute = EditorTools.GetAttribute<BuildPipelineAttribute>(classType);
+                        if (buildPipelineAttribute == null)
+                        {
+                            Debug.LogWarning($"The class {classType.FullName} need attribute {nameof(BuildPipelineAttribute)}");
+                            continue;
+                        }
 
-				// 构建模式
-				_buildModeField = root.Q<EnumField>("BuildMode");
-				_buildModeField.Init(AssetBundleBuilderSettingData.Setting.BuildMode);
-				_buildModeField.SetValueWithoutNotify(AssetBundleBuilderSettingData.Setting.BuildMode);
-				_buildModeField.style.width = 350;
-				_buildModeField.RegisterValueChangedCallback(evt =>
-				{
-					AssetBundleBuilderSettingData.IsDirty = true;
-					AssetBundleBuilderSettingData.Setting.BuildMode = (EBuildMode)_buildModeField.value;
-					RefreshWindow();
-				});
+                        string pipelineName = buildPipelineAttribute.PipelineName;
+                        if (_viewClassDic.ContainsKey(pipelineName))
+                        {
+                            Debug.LogWarning($"The pipeline has already exist : {pipelineName}");
+                        }
+                        else
+                        {
+                            _viewClassDic.Add(pipelineName, classType);
+                            _pipelineMenu.menu.AppendAction(pipelineName, PipelineMenuAction, PipelineMenuFun);
+                        }
+                    }
+                }
 
-				// 构建版本
-				_buildVersionField = root.Q<TextField>("BuildVersion");
-				_buildVersionField.SetValueWithoutNotify(GetBuildPackageVersion());
+                RefreshBuildPipelineView();
+            }
+            catch (Exception e)
+            {
+                Debug.LogError(e.ToString());
+            }
+        }
 
-				// 构建包裹
-				var buildPackageContainer = root.Q("BuildPackageContainer");
-				if (_buildPackageNames.Count > 0)
-				{
-					int defaultIndex = GetDefaultPackageIndex(AssetBundleBuilderSettingData.Setting.BuildPackage);
-					_buildPackageField = new PopupField<string>(_buildPackageNames, defaultIndex);
-					_buildPackageField.label = "Build Package";
-					_buildPackageField.style.width = 350;
-					_buildPackageField.RegisterValueChangedCallback(evt =>
-					{
-						AssetBundleBuilderSettingData.IsDirty = true;
-						AssetBundleBuilderSettingData.Setting.BuildPackage = _buildPackageField.value;
-					});
-					buildPackageContainer.Add(_buildPackageField);
-				}
-				else
-				{
-					_buildPackageField = new PopupField<string>();
-					_buildPackageField.label = "Build Package";
-					_buildPackageField.style.width = 350;
-					buildPackageContainer.Add(_buildPackageField);
-				}
+        private void RefreshBuildPipelineView()
+        {
+            // 清空扩展区域
+            _container.Clear();
 
-				// 加密方法
-				var encryptionContainer = root.Q("EncryptionContainer");
-				if (_encryptionServicesClassNames.Count > 0)
-				{
-					int defaultIndex = GetDefaultEncryptionIndex(AssetBundleBuilderSettingData.Setting.EncyptionClassName);
-					_encryptionField = new PopupField<string>(_encryptionServicesClassNames, defaultIndex);
-					_encryptionField.label = "Encryption";
-					_encryptionField.style.width = 350;
-					_encryptionField.RegisterValueChangedCallback(evt =>
-					{
-						AssetBundleBuilderSettingData.IsDirty = true;
-						AssetBundleBuilderSettingData.Setting.EncyptionClassName = _encryptionField.value;
-					});
-					encryptionContainer.Add(_encryptionField);
-				}
-				else
-				{
-					_encryptionField = new PopupField<string>();
-					_encryptionField.label = "Encryption";
-					_encryptionField.style.width = 350;
-					encryptionContainer.Add(_encryptionField);
-				}
+            _buildPipeline = AssetBundleBuilderSetting.GetPackageBuildPipeline(_buildPackage);
+            _packageMenu.text = _buildPackage;
+            _pipelineMenu.text = _buildPipeline;
 
-				// 压缩方式选项
-				_compressionField = root.Q<EnumField>("Compression");
-				_compressionField.Init(AssetBundleBuilderSettingData.Setting.CompressOption);
-				_compressionField.SetValueWithoutNotify(AssetBundleBuilderSettingData.Setting.CompressOption);
-				_compressionField.style.width = 350;
-				_compressionField.RegisterValueChangedCallback(evt =>
-				{
-					AssetBundleBuilderSettingData.IsDirty = true;
-					AssetBundleBuilderSettingData.Setting.CompressOption = (ECompressOption)_compressionField.value;
-				});
+            if (_viewClassDic.TryGetValue(_buildPipeline, out Type value))
+            {
+                var buildTarget = EditorUserBuildSettings.activeBuildTarget;
+                var viewer = Activator.CreateInstance(value) as BuildPipelineViewerBase;
+                viewer.InitView(_buildPackage, _buildPipeline, buildTarget);
+                viewer.CreateView(_container);
+            }
+            else
+            {
+                Debug.LogError($"Not found build pipeline : {_buildPipeline}");
+            }
+        }
+        private List<string> GetBuildPackageNames()
+        {
+            List<string> result = new List<string>();
+            foreach (var package in AssetBundleCollectorSettingData.Setting.Packages)
+            {
+                result.Add(package.PackageName);
+            }
+            return result;
+        }
 
-				// 输出文件名称样式
-				_outputNameStyleField = root.Q<EnumField>("OutputNameStyle");
-				_outputNameStyleField.Init(AssetBundleBuilderSettingData.Setting.OutputNameStyle);
-				_outputNameStyleField.SetValueWithoutNotify(AssetBundleBuilderSettingData.Setting.OutputNameStyle);
-				_outputNameStyleField.style.width = 350;
-				_outputNameStyleField.RegisterValueChangedCallback(evt =>
-				{
-					AssetBundleBuilderSettingData.IsDirty = true;
-					AssetBundleBuilderSettingData.Setting.OutputNameStyle = (EOutputNameStyle)_outputNameStyleField.value;
-				});
+        private void PackageMenuAction(DropdownMenuAction action)
+        {
+            var packageName = (string)action.userData;
+            if (_buildPackage != packageName)
+            {
+                _buildPackage = packageName;
+                RefreshBuildPipelineView();
+            }
+        }
+        private DropdownMenuAction.Status PackageMenuFun(DropdownMenuAction action)
+        {
+            var packageName = (string)action.userData;
+            if (_buildPackage == packageName)
+                return DropdownMenuAction.Status.Checked;
+            else
+                return DropdownMenuAction.Status.Normal;
+        }
 
-				// 首包文件拷贝选项
-				_copyBuildinFileOptionField = root.Q<EnumField>("CopyBuildinFileOption");
-				_copyBuildinFileOptionField.Init(AssetBundleBuilderSettingData.Setting.CopyBuildinFileOption);
-				_copyBuildinFileOptionField.SetValueWithoutNotify(AssetBundleBuilderSettingData.Setting.CopyBuildinFileOption);
-				_copyBuildinFileOptionField.style.width = 350;
-				_copyBuildinFileOptionField.RegisterValueChangedCallback(evt =>
-				{
-					AssetBundleBuilderSettingData.IsDirty = true;
-					AssetBundleBuilderSettingData.Setting.CopyBuildinFileOption = (ECopyBuildinFileOption)_copyBuildinFileOptionField.value;
-					RefreshWindow();
-				});
-
-				// 首包文件的资源标签
-				_copyBuildinFileTagsField = root.Q<TextField>("CopyBuildinFileTags");
-				_copyBuildinFileTagsField.SetValueWithoutNotify(AssetBundleBuilderSettingData.Setting.CopyBuildinFileTags);
-				_copyBuildinFileTagsField.RegisterValueChangedCallback(evt =>
-				{
-					AssetBundleBuilderSettingData.IsDirty = true;
-					AssetBundleBuilderSettingData.Setting.CopyBuildinFileTags = _copyBuildinFileTagsField.value;
-				});
-
-				// 构建按钮
-				var buildButton = root.Q<Button>("Build");
-				buildButton.clicked += BuildButton_clicked; ;
-
-				RefreshWindow();
-			}
-			catch (Exception e)
-			{
-				Debug.LogError(e.ToString());
-			}
-		}
-		public void OnDestroy()
-		{
-			if (AssetBundleBuilderSettingData.IsDirty)
-				AssetBundleBuilderSettingData.SaveFile();
-		}
-		public void Update()
-		{
-			if (_saveButton != null)
-			{
-				if (AssetBundleBuilderSettingData.IsDirty)
-				{
-					if (_saveButton.enabledSelf == false)
-						_saveButton.SetEnabled(true);
-				}
-				else
-				{
-					if (_saveButton.enabledSelf)
-						_saveButton.SetEnabled(false);
-				}
-			}
-		}
-
-		private void RefreshWindow()
-		{
-			var buildPipeline = AssetBundleBuilderSettingData.Setting.BuildPipeline;
-			var buildMode = AssetBundleBuilderSettingData.Setting.BuildMode;
-			var copyOption = AssetBundleBuilderSettingData.Setting.CopyBuildinFileOption;
-			bool enableElement = buildMode == EBuildMode.ForceRebuild;
-			bool tagsFiledVisible = copyOption == ECopyBuildinFileOption.ClearAndCopyByTags || copyOption == ECopyBuildinFileOption.OnlyCopyByTags;
-
-			if (buildPipeline == EBuildPipeline.BuiltinBuildPipeline)
-			{
-				_compressionField.SetEnabled(enableElement);
-				_outputNameStyleField.SetEnabled(enableElement);
-				_copyBuildinFileOptionField.SetEnabled(enableElement);
-				_copyBuildinFileTagsField.SetEnabled(enableElement);
-			}
-			else
-			{
-				_compressionField.SetEnabled(true);
-				_outputNameStyleField.SetEnabled(true);
-				_copyBuildinFileOptionField.SetEnabled(true);
-				_copyBuildinFileTagsField.SetEnabled(true);
-			}
-
-			_copyBuildinFileTagsField.visible = tagsFiledVisible;
-		}
-		private void SaveBtn_clicked()
-		{
-			AssetBundleBuilderSettingData.SaveFile();
-		}
-		private void BuildButton_clicked()
-		{
-			var buildMode = AssetBundleBuilderSettingData.Setting.BuildMode;
-			if (EditorUtility.DisplayDialog("提示", $"通过构建模式【{buildMode}】来构建！", "Yes", "No"))
-			{
-				EditorTools.ClearUnityConsole();
-				EditorApplication.delayCall += ExecuteBuild;
-			}
-			else
-			{
-				Debug.LogWarning("[Build] 打包已经取消");
-			}
-		}
-
-		/// <summary>
-		/// 执行构建
-		/// </summary>
-		private void ExecuteBuild()
-		{
-			BuildParameters buildParameters = new BuildParameters();
-			buildParameters.StreamingAssetsRoot = AssetBundleBuilderHelper.GetDefaultStreamingAssetsRoot();
-			buildParameters.BuildOutputRoot = AssetBundleBuilderHelper.GetDefaultBuildOutputRoot();
-			buildParameters.BuildTarget = _buildTarget;
-			buildParameters.BuildPipeline = AssetBundleBuilderSettingData.Setting.BuildPipeline;
-			buildParameters.BuildMode = AssetBundleBuilderSettingData.Setting.BuildMode;
-			buildParameters.PackageName = AssetBundleBuilderSettingData.Setting.BuildPackage;
-			buildParameters.PackageVersion = _buildVersionField.value;
-			buildParameters.VerifyBuildingResult = true;
-			buildParameters.SharedPackRule = new ZeroRedundancySharedPackRule();
-			buildParameters.EncryptionServices = CreateEncryptionServicesInstance();
-			buildParameters.CompressOption = AssetBundleBuilderSettingData.Setting.CompressOption;
-			buildParameters.OutputNameStyle = AssetBundleBuilderSettingData.Setting.OutputNameStyle;
-			buildParameters.CopyBuildinFileOption = AssetBundleBuilderSettingData.Setting.CopyBuildinFileOption;
-			buildParameters.CopyBuildinFileTags = AssetBundleBuilderSettingData.Setting.CopyBuildinFileTags;
-
-			if (AssetBundleBuilderSettingData.Setting.BuildPipeline == EBuildPipeline.ScriptableBuildPipeline)
-			{
-				buildParameters.SBPParameters = new BuildParameters.SBPBuildParameters();
-				buildParameters.SBPParameters.WriteLinkXML = true;
-			}
-
-			var builder = new AssetBundleBuilder();
-			var buildResult = builder.Run(buildParameters);
-			if (buildResult.Success)
-			{
-				EditorUtility.RevealInFinder(buildResult.OutputPackageDirectory);
-			}
-		}
-
-		// 构建版本相关
-		private string GetBuildPackageVersion()
-		{
-			int totalMinutes = DateTime.Now.Hour * 60 + DateTime.Now.Minute;
-			return DateTime.Now.ToString("yyyy-MM-dd") + "-" + totalMinutes;
-		}
-
-		// 构建包裹相关
-		private int GetDefaultPackageIndex(string packageName)
-		{
-			for (int index = 0; index < _buildPackageNames.Count; index++)
-			{
-				if (_buildPackageNames[index] == packageName)
-				{
-					return index;
-				}
-			}
-
-			AssetBundleBuilderSettingData.IsDirty = true;
-			AssetBundleBuilderSettingData.Setting.BuildPackage = _buildPackageNames[0];
-			return 0;
-		}
-		private List<string> GetBuildPackageNames()
-		{
-			List<string> result = new List<string>();
-			foreach (var package in AssetBundleCollectorSettingData.Setting.Packages)
-			{
-				result.Add(package.PackageName);
-			}
-			return result;
-		}
-
-		// 加密类相关
-		private int GetDefaultEncryptionIndex(string className)
-		{
-			for (int index = 0; index < _encryptionServicesClassNames.Count; index++)
-			{
-				if (_encryptionServicesClassNames[index] == className)
-				{
-					return index;
-				}
-			}
-
-			AssetBundleBuilderSettingData.IsDirty = true;
-			AssetBundleBuilderSettingData.Setting.EncyptionClassName = _encryptionServicesClassNames[0];
-			return 0;
-		}
-		private List<Type> GetEncryptionServicesClassTypes()
-		{
-			return EditorTools.GetAssignableTypes(typeof(IEncryptionServices));
-		}
-		private IEncryptionServices CreateEncryptionServicesInstance()
-		{
-			if (_encryptionField.index < 0)
-				return null;
-			var classType = _encryptionServicesClassTypes[_encryptionField.index];
-			return (IEncryptionServices)Activator.CreateInstance(classType);
-		}
-	}
+        private void PipelineMenuAction(DropdownMenuAction action)
+        {
+            if (_buildPipeline != action.name)
+            {
+                _buildPipeline = action.name;
+                AssetBundleBuilderSetting.SetPackageBuildPipeline(_buildPackage, _buildPipeline);
+                RefreshBuildPipelineView();
+            }
+        }
+        private DropdownMenuAction.Status PipelineMenuFun(DropdownMenuAction action)
+        {
+            if (_buildPipeline == action.name)
+                return DropdownMenuAction.Status.Checked;
+            else
+                return DropdownMenuAction.Status.Normal;
+        }
+    }
 }
 #endif
