@@ -13,7 +13,7 @@ internal class FsmStartGame : IStateNode
     }
     void IStateNode.OnEnter()
     {
-        PatchEventDefine.PatchStepsChange.SendEventMessage("开始游戏！");
+        PatchEventDefine.PatchStepsChange.SendEventMessage("资源加载中...");
         _owner.SetFinish();
     }
     void IStateNode.OnUpdate()
