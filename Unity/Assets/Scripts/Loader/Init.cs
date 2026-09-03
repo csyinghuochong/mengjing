@@ -87,8 +87,12 @@ namespace ET
 			GameObject.Find("Global/UI/PopUpRoot/PatchWindow").gameObject.SetActive(show);
 		}
 
-		public async ETTask OnUpdaterDone()
+		private async ETTask OnUpdaterDone()
 		{
+			// 设置默认的资源包
+			var gamePackage = YooAssets.GetPackage("DefaultPackage");
+			YooAssets.SetDefaultPackage(gamePackage);
+
 			CodeLoader codeLoader = World.Instance.AddSingleton<CodeLoader>();
 			await codeLoader.DownloadAsync();
 
