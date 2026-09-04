@@ -7,7 +7,7 @@ namespace ET
 
         public Dictionary<int,  List<int>> TalentPositionList = new Dictionary<int, List<int>>();
 
-        public override void EndInit()
+        partial void PostInit()
         {
             foreach (TalentConfig talentConfig in this.GetAll().Values)
             {

@@ -21,7 +21,7 @@ namespace ET
             return JiaYuanProMax[jiayuanlv][keyid];
         }
 
-        public override void EndInit()
+        partial void PostInit()
         {
             foreach (JiaYuanConfig functionConfig in this.GetAll().Values)
             {

@@ -39,7 +39,7 @@ namespace ET
             return baseskillid;
         }
 
-        public override void EndInit()
+        partial void PostInit()
         {
 
             foreach (SkillConfig skillconfig in this.GetAll().Values)

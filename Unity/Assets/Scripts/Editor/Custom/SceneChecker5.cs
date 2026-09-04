@@ -183,7 +183,7 @@ namespace ET.Client
 
         string destinationPath = $"{Application.dataPath}\\Bundles\\MapConfig\\{EditorSceneManager.GetActiveScene().name}.bytes";
         // 将二进制数据写入.bytes文件
-        File.WriteAllBytes(destinationPath, mapObjectConfig.ToBson());
+        File.WriteAllBytes(destinationPath, MongoHelper.Serialize(mapObjectConfig));
 
         GameObject.DestroyImmediate(gameObjectpool);
 

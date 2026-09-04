@@ -7,7 +7,7 @@ namespace ET
         public Dictionary<int, List<int>> TreasureList = new();
         private List<ItemStarInfo> ItemStarInfos = new List<ItemStarInfo>();
 
-        public override void EndInit()
+        partial void PostInit()
         {
             foreach (ShouJiItemConfig shoujiConfig in this.GetAll().Values)
             {

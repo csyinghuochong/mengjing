@@ -8,7 +8,7 @@ namespace ET
         public Dictionary<int, List<int>> JingLingActive = new Dictionary<int, List<int>>();
 
 
-        public override void EndInit()
+        partial void PostInit()
         {
             foreach (JingLingConfig jingLingConfig in this.GetAll().Values)
             {

@@ -13,7 +13,7 @@ namespace ET
 			return this.AIConfigs[aiConfigId];
 		}
 
-		public override void EndInit()
+		partial void PostInit()
 		{
 			foreach (var kv in this.GetAll())
 			{

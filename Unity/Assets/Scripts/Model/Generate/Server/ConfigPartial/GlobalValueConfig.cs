@@ -153,7 +153,7 @@ namespace ET
 
         public Dictionary<int, int> SingleHappyDrops = new Dictionary<int,int>();
 
-        public override void EndInit()
+        partial void PostInit()
         {
             DayMonsterList.Clear();
             InitTaskId = int.Parse(this.Get(1).Value);

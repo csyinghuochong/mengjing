@@ -7,7 +7,7 @@ namespace ET
     {
         public Dictionary<int, List<int>> OccSuiList = new Dictionary<int, List<int>>();
 
-        public override void EndInit()
+        partial void PostInit()
         {
             foreach (EquipSuitConfig suitConfig in this.GetAll().Values)
             {

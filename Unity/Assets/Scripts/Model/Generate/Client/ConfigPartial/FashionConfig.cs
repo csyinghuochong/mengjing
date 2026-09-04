@@ -10,7 +10,7 @@ namespace ET
 
         public Dictionary<int, Dictionary<int, List<int>>> OccFashionList = new Dictionary<int, Dictionary<int, List<int>>>();
 
-        public override void EndInit()
+        partial void PostInit()
         {
             foreach (FashionConfig fashionConfig in this.GetAll().Values)
             {

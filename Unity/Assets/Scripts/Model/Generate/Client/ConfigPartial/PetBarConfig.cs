@@ -6,7 +6,7 @@ namespace ET
     {
         public Dictionary<int, List<int>> PetBarGroupList { get; set; } = new();
 
-        public override void EndInit()
+        partial void PostInit()
         {
             int index = 0;
             foreach (PetBarConfig petBarConfig in this.GetAll().Values)

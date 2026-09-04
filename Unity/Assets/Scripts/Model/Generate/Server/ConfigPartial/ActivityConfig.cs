@@ -9,7 +9,7 @@ namespace ET
         public Dictionary<int, List<int>> MaoXianJiaBuffs = new Dictionary<int, List<int>>();
 
 
-        public override void EndInit()
+        partial void PostInit()
         {
             foreach (ActivityConfig activityConfig in this.GetAll().Values)
             {

@@ -54,9 +54,9 @@ namespace ET
             return this.UnitCaches[zone];
         }
 
-        public override void EndInit()
+        partial void PostInit()
         {
-            foreach (StartSceneConfig startSceneConfig in this.GetAll().Values)
+            foreach (StartSceneConfig startSceneConfig in this.DataList)
             {
                 this.ProcessScenes.Add(startSceneConfig.Process, startSceneConfig);
 
@@ -163,7 +163,7 @@ namespace ET
             }
         }
 
-        public override void EndInit()
+        partial void PostInit()
         {
             this.ActorId = new ActorId(this.Process, this.Id, 1);
             this.Type = EnumHelper.FromString<SceneType>(this.SceneType);

@@ -6,7 +6,7 @@ namespace ET
     {
         public Dictionary<int, List<UnionQiangHuaConfig>> UnionQiangHuaList = new Dictionary<int, List<UnionQiangHuaConfig>>();
 
-        public override void EndInit()
+        partial void PostInit()
         {
             int position = 0;
 

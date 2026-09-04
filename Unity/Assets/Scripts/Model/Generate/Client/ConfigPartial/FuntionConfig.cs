@@ -3,7 +3,7 @@
     public partial class FuntionConfigCategory
     {
 
-        public override void EndInit()
+        partial void PostInit()
         {
             foreach (FuntionConfig activityConfig in this.GetAll().Values)
             {

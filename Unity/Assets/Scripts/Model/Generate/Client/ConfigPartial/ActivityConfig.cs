@@ -10,7 +10,7 @@ namespace ET
         public Dictionary<string, int> PulicSerialList = new Dictionary<string, int>();
 
 
-        public override void EndInit()
+        partial void PostInit()
         {
             foreach (ActivityConfig activityConfig in this.GetAll().Values)
             {

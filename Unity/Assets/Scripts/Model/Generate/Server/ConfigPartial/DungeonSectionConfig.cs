@@ -17,7 +17,7 @@ namespace ET
         public Dictionary<int, List<int>> MysteryDungeon = new Dictionary<int, List<int>>();
 
 
-        public override void EndInit()
+        partial void PostInit()
         {
 
             foreach (DungeonSectionConfig functionConfig in this.GetAll().Values)

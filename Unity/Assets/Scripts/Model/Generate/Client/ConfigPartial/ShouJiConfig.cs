@@ -17,7 +17,7 @@ namespace ET
         
         public List<ItemStarInfo> ItemStarInfos = new List<ItemStarInfo>();
         
-        public override void EndInit()
+        partial void PostInit()
         {
             foreach (ShouJiConfig sceneConfig in this.GetAll().Values)
             {

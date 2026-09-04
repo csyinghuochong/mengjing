@@ -6,7 +6,7 @@ namespace ET
     {
         public List<EquipXiLianConfig> EquipXiLianLevelList = new List<EquipXiLianConfig>();
 
-        public override void EndInit()
+        partial void PostInit()
         {
             foreach (EquipXiLianConfig  equipXiLianConfig in this.GetAll().Values)
             {

@@ -20,7 +20,7 @@ namespace ET
             return relieveBuffs;
         }
         
-        public override void EndInit()
+        partial void PostInit()
         {
             foreach (SkillBuffConfig skillBuffConfig in this.GetAll().Values)
             {

@@ -7,7 +7,7 @@ namespace ET
 
         public Dictionary<int, List<int>> SeasonTaskList = new Dictionary<int, List<int>>();
 
-        public override void EndInit()
+        partial void PostInit()
         {
             foreach (TaskConfig taskCountryConfig in this.GetAll().Values)
             {

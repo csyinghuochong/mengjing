@@ -6,7 +6,7 @@ namespace ET
     {
         public Dictionary<int, List<PetZhuangJiaConfig>> PetZhuangJiaList = new Dictionary<int, List<PetZhuangJiaConfig>>();
 
-        public override void EndInit()
+        partial void PostInit()
         {
             int position = 0;
 

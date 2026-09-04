@@ -9,7 +9,7 @@ namespace ET
 
         //public List<int> NoSkillMonsterList = new List<int>();
 
-        public override void EndInit()
+        partial void PostInit()
         {
             foreach (MonsterConfig monsterConfig in this.GetAll().Values)
             {

@@ -42,7 +42,7 @@ namespace ET
         }
 
 
-        public override void EndInit()
+        partial void PostInit()
         {
             for (int i = 0; i < (int)ChengJiuTypeEnum.Number; i++)
             {

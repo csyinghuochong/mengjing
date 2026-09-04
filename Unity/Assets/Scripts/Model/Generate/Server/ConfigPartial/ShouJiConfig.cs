@@ -21,7 +21,7 @@ namespace ET
         private readonly object _lockObject = new object();
         
         
-        public override void EndInit()
+        partial void PostInit()
         {
             ItemStarInfos.Clear();
         }

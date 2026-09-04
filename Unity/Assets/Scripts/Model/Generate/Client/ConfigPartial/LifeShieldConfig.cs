@@ -6,7 +6,7 @@ namespace ET
     {
         public MultiDictionary<int, int, int> LifeShieldList = new MultiDictionary<int, int, int>();
 
-        public override void EndInit()
+        partial void PostInit()
         {
             foreach (LifeShieldConfig lifeShield in this.GetAll().Values)
             {

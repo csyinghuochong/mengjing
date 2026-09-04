@@ -10,7 +10,7 @@ namespace ET
         /// </summary>
         public Dictionary<int, KeyValuePairInt> GetHeChengList = new Dictionary<int, KeyValuePairInt>();
 
-        public override void EndInit()
+        partial void PostInit()
         {
             foreach (EquipMakeConfig firstWinConfig in this.GetAll().Values)
             {

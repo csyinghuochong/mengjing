@@ -8,7 +8,7 @@ namespace ET
 
         public List<int> NpcIdList = new List<int>();
 
-        public override void EndInit()
+        partial void PostInit()
         {
             foreach (SceneConfig sceneConfig in this.GetAll().Values)
             {

@@ -9,7 +9,7 @@ namespace ET
 
         private Dictionary<int, List<KeyValuePairInt>> AutoPathList = new Dictionary<int, List<KeyValuePairInt>>();
 
-        public override void EndInit()
+        partial void PostInit()
         {
             try
             {

@@ -6,7 +6,7 @@ namespace ET
     {
         public Dictionary<int, int> ItemToSell = new Dictionary<int, int>();
 
-        public override void EndInit()
+        partial void PostInit()
         {
             foreach (PaiMaiSellConfig firstWinConfig in this.GetAll().Values)
             {

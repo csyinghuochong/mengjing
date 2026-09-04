@@ -2,14 +2,14 @@
 {
     public static class ToolsEditor
     {
-        public static void ExcelExporter(string name = "All")
+        public static void ExcelExporter()
         {
 #if UNITY_EDITOR_OSX || UNITY_EDITOR_LINUX
             const string tools = "./Tool";
 #else
             const string tools = ".\\Tool.exe";
 #endif
-            ShellHelper.Run($"{tools} --AppType=ExcelExporter --Console=1 --StartConfig={name}", "../Bin/");
+            ShellHelper.Run($"{tools} --AppType=ExcelExporter --Console=1", "../Bin/");
         }
         
         public static void Proto2CS()

@@ -11,7 +11,7 @@ namespace ET
         /// </summary>
         public Dictionary<int, int> PetSkillToHideProId = new Dictionary<int, int>();
 
-        public override void EndInit()
+        partial void PostInit()
         {
             int petinitSkill = 2001;
             while (petinitSkill != 0)
