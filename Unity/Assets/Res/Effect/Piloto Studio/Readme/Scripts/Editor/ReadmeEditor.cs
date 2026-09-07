@@ -10,7 +10,6 @@ namespace ReadmeSystem.Editor
 
 
     [CustomEditor(typeof(Readme))]
-    [InitializeOnLoad]
     public class ReadmeEditor : UnityEditor.Editor
     {
 
@@ -43,27 +42,7 @@ namespace ReadmeSystem.Editor
 
         static bool showInEditMode = false;
 
-        static string kShowedReadmeSessionStateName = "ReadmeEditor.showedReadme";
-
         static float kSpace = 16f;
-
-        static ReadmeEditor()
-        {
-            EditorApplication.delayCall += SelectReadmeAutomatically;
-        }
-
-        static void SelectReadmeAutomatically()
-        {
-            if (!SessionState.GetBool(kShowedReadmeSessionStateName, false))
-            {
-                var readme = SelectReadme();
-                if (readme)
-                {
-                    SessionState.SetBool(kShowedReadmeSessionStateName, true);
-                }
-            }
-        }
-
 
         [MenuItem("Tutorial/Show Tutorial Instructions")]
         static Readme SelectReadme()
