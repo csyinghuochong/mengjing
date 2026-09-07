@@ -68,9 +68,6 @@ namespace Animancer.Editor
         /// <inheritdoc/>
         protected override string ExampleURL => Strings.DocsURLs.Examples;
 
-        /// <inheritdoc/>
-        protected override string UpdateURL => Strings.DocsURLs.LatestVersion;
-
         /************************************************************************************************************************/
 
         public AnimancerReadMe() : base(

@@ -54,9 +54,6 @@ namespace Animancer.Editor
         /// <summary>The URL for the example documentation.</summary>
         protected abstract string ExampleURL { get; }
 
-        /// <summary>The URL to check for the latest version.</summary>
-        protected virtual string UpdateURL => null;
-
         /************************************************************************************************************************/
 
         /// <summary>
@@ -86,7 +83,6 @@ namespace Animancer.Editor
         public ReadMe(params LinkSection[] linkSections)
         {
             LinkSections = linkSections;
-            _CheckForUpdatesKey = $"{PrefKey}.{nameof(CheckForUpdates)}";
         }
 
         /************************************************************************************************************************/
@@ -131,199 +127,6 @@ namespace Animancer.Editor
         /************************************************************************************************************************/
         #endregion
         /************************************************************************************************************************/
-        #region Show On Startup and Check for Updates
-        /************************************************************************************************************************/
-
-        [SerializeField] private bool _DontShowOnStartup;
-
-        [NonSerialized] private string _CheckForUpdatesKey;
-        [NonSerialized] private bool _CheckedForUpdates;
-        [NonSerialized] private bool _NewVersionAvailable;
-        [NonSerialized] private string _UpdateCheckFailureMessage;
-        [NonSerialized] private string _LatestVersionName;
-        [NonSerialized] private string _LatestVersionChangeLogURL;
-        [NonSerialized] private int _LatestVersionNumber;
-
-        private bool CheckForUpdates
-        {
-            get => EditorPrefs.GetBool(_CheckForUpdatesKey, true);
-            set => EditorPrefs.SetBool(_CheckForUpdatesKey, value);
-        }
-
-        /************************************************************************************************************************/
-
-        private static readonly Dictionary<Type, IDisposable>
-            TypeToUpdateCheck = new Dictionary<Type, IDisposable>();
-
-        static ReadMe()
-        {
-            AssemblyReloadEvents.beforeAssemblyReload += () =>
-            {
-                foreach (var webRequest in TypeToUpdateCheck.Values)
-                    webRequest.Dispose();
-
-                TypeToUpdateCheck.Clear();
-            };
-        }
-
-        /************************************************************************************************************************/
-
-        /// <summary>Automatically selects a <see cref="ReadMe"/> on startup.</summary>
-        [InitializeOnLoadMethod]
-        private static void ShowReadMe()
-        {
-            EditorApplication.delayCall += () =>
-            {
-                var instances = FindInstances(out var autoSelect);
-
-                for (int i = 0; i < instances.Count; i++)
-                    instances[i].StartCheckForUpdates();
-
-                // Delay the call again to ensure that the Project window actually shows the selection.
-                if (autoSelect != null)
-                    EditorApplication.delayCall += () =>
-                        Selection.activeObject = autoSelect;
-            };
-        }
-
-        /************************************************************************************************************************/
-
-        /// <summary>
-        /// Finds the most recently modified <see cref="ReadMe"/> asset with <see cref="_DontShowOnStartup"/> disabled.
-        /// </summary>
-        private static List<ReadMe> FindInstances(out ReadMe autoSelect)
-        {
-            var instances = new List<ReadMe>();
-
-            DateTime latestWriteTime = default;
-            autoSelect = null;
-            string autoSelectGUID = null;
-
-            var guids = AssetDatabase.FindAssets($"t:{nameof(ReadMe)}");
-            for (int i = 0; i < guids.Length; i++)
-            {
-                var guid = guids[i];
-
-                var assetPath = AssetDatabase.GUIDToAssetPath(guid);
-                var asset = AssetDatabase.LoadAssetAtPath<ReadMe>(assetPath);
-                if (asset == null)
-                    continue;
-
-                instances.Add(asset);
-
-                if (asset._DontShowOnStartup && asset.HasCorrectName)
-                    continue;
-
-                // Check if already shown since opening the Unity Editor.
-                if (SessionState.GetBool(guid, false))
-                    continue;
-
-                var writeTime = File.GetLastWriteTimeUtc(assetPath);
-                if (latestWriteTime < writeTime)
-                {
-                    latestWriteTime = writeTime;
-                    autoSelect = asset;
-                    autoSelectGUID = guid;
-                }
-            }
-
-            if (autoSelectGUID != null)
-                SessionState.SetBool(autoSelectGUID, true);
-
-            return instances;
-        }
-
-        /************************************************************************************************************************/
-
-        protected virtual void OnEnable()
-        {
-            var name = GetType().FullName;
-            var updateText = SessionState.GetString(name, "");
-            OnUpdateCheckComplete(updateText);
-        }
-
-        /************************************************************************************************************************/
-
-        private void StartCheckForUpdates()
-        {
-            if (!CheckForUpdates ||
-                _CheckedForUpdates)
-                return;
-
-            var type = GetType();
-            if (TypeToUpdateCheck.ContainsKey(type))
-                return;
-
-            var url = UpdateURL;
-            if (string.IsNullOrEmpty(url))
-                return;
-
-            _CheckedForUpdates = true;
-
-            var webRequest = UnityEngine.Networking.UnityWebRequest.Get(url);
-            TypeToUpdateCheck.Add(type, webRequest);
-            webRequest.SendWebRequest().completed += _ =>
-            {
-                var name = GetType().FullName;
-
-#if UNITY_2020_3_OR_NEWER
-                if (webRequest.result == UnityEngine.Networking.UnityWebRequest.Result.Success)
-#else
-                if (!webRequest.isNetworkError &&
-                    !webRequest.isHttpError)
-#endif
-                {
-                    var text = webRequest.downloadHandler.text;
-                    OnUpdateCheckComplete(text);
-                    SessionState.SetString(name, text);
-                }
-                else
-                {
-                    _UpdateCheckFailureMessage = $"Update check failed: {webRequest.error}.";
-                    SessionState.SetString(name, "");
-                }
-
-                TypeToUpdateCheck.Remove(GetType());
-                webRequest.Dispose();
-            };
-        }
-
-        /************************************************************************************************************************/
-
-        private void OnUpdateCheckComplete(string text)
-        {
-            if (string.IsNullOrEmpty(text))
-                return;
-
-            _CheckedForUpdates = true;
-
-            var lines = text.Split('\n');
-            if (lines.Length < 3)
-            {
-                _UpdateCheckFailureMessage = "Update check failed: text is malformed.";
-                return;
-            }
-
-            int.TryParse(lines[0], out _LatestVersionNumber);
-            _LatestVersionName = lines[1].Trim();
-            _LatestVersionChangeLogURL = $"{DocumentationURL}/{lines[2].Trim()}";
-
-            if (ReleaseNumber >= _LatestVersionNumber)
-                return;
-
-            _NewVersionAvailable = true;
-
-            Debug.Log($"{_LatestVersionName} is now available." +
-                $"\n• Change Log: {_LatestVersionChangeLogURL}" +
-                $"\n• This check can be disabled in the Read Me asset's Inspector.",
-                this);
-
-            Selection.activeObject = this;
-        }
-
-        /************************************************************************************************************************/
-        #endregion
-        /************************************************************************************************************************/
         #region Custom Editor
         /************************************************************************************************************************/
 
@@ -343,7 +146,6 @@ namespace Animancer.Editor
             [NonSerialized] private string _ExamplesDirectory;
             [NonSerialized] private List<ExampleGroup> _Examples;
             [NonSerialized] private string _Title;
-            [NonSerialized] private SerializedProperty _DontShowOnStartupProperty;
 
             /************************************************************************************************************************/
 
@@ -363,7 +165,6 @@ namespace Animancer.Editor
                 _Examples = ExampleGroup.Gather(_Target._ExamplesFolder, out _ExamplesDirectory);
 
                 _Title = $"{_Target.ProductName}\n{_Target.VersionName}";
-                _DontShowOnStartupProperty = serializedObject.FindProperty(nameof(_DontShowOnStartup));
             }
 
             /************************************************************************************************************************/
@@ -395,11 +196,6 @@ namespace Animancer.Editor
 
                 DoWarnings();
 
-                DoNewVersionDetails();
-
-                DoCheckForUpdates();
-                DoShowOnStartup();
-
                 DoSpace();
 
                 DoIntroductionBlock();
@@ -413,9 +209,6 @@ namespace Animancer.Editor
                 DoSupportBlock();
 
                 DoSpace();
-
-                DoCheckForUpdates();
-                DoShowOnStartup();
 
                 serializedObject.ApplyModifiedProperties();
             }
@@ -434,74 +227,6 @@ namespace Animancer.Editor
 
                 DoSpace();
                 GUILayout.Label(introduction, EditorStyles.wordWrappedLabel);
-            }
-
-            /************************************************************************************************************************/
-
-            private void DoNewVersionDetails()
-            {
-
-                if (_Target._UpdateCheckFailureMessage != null)
-                {
-                    EditorGUILayout.HelpBox(_Target._UpdateCheckFailureMessage, MessageType.Info);
-                    return;
-                }
-
-                if (_Target._LatestVersionName == null ||
-                    _Target._LatestVersionChangeLogURL == null)
-                    return;
-
-                var message = _Target._NewVersionAvailable
-                    ? $"{_Target._LatestVersionName} is now available.\nClick here to view the Change Log."
-                    : $"{_Target.BaseProductName} is up to date.";
-
-                EditorGUILayout.HelpBox(message, MessageType.Info);
-
-                if (TryUseClickEventInLastRect())
-                    Application.OpenURL(_Target._LatestVersionChangeLogURL);
-            }
-
-            /************************************************************************************************************************/
-
-            private void DoCheckForUpdates()
-            {
-                if (string.IsNullOrEmpty(_Target.UpdateURL))
-                    return;
-
-                var area = GUILayoutUtility.GetRect(0, EditorGUIUtility.singleLineHeight);
-                area.xMin += EditorGUIUtility.singleLineHeight * 0.2f;
-
-                EditorGUI.BeginChangeCheck();
-                var value = GUI.Toggle(area, _Target.CheckForUpdates, "Check For Updates");
-                if (EditorGUI.EndChangeCheck())
-                {
-                    _Target.CheckForUpdates = value;
-                    if (value)
-                        _Target.StartCheckForUpdates();
-                }
-            }
-
-            /************************************************************************************************************************/
-
-            private void DoShowOnStartup()
-            {
-                var area = GUILayoutUtility.GetRect(0, EditorGUIUtility.singleLineHeight);
-                area.xMin += EditorGUIUtility.singleLineHeight * 0.2f;
-
-                GUIContent.text = _DontShowOnStartupProperty.displayName;
-                GUIContent.tooltip = _DontShowOnStartupProperty.tooltip;
-
-                var label = EditorGUI.BeginProperty(area, GUIContent, _DontShowOnStartupProperty);
-                EditorGUI.BeginChangeCheck();
-                var value = _DontShowOnStartupProperty.boolValue;
-                value = GUI.Toggle(area, value, label);
-                if (EditorGUI.EndChangeCheck())
-                {
-                    _DontShowOnStartupProperty.boolValue = value;
-                    if (value)
-                        PlayerPrefs.SetInt(_ReleaseNumberPrefKey, _Target.ReleaseNumber);
-                }
-                EditorGUI.EndProperty();
             }
 
             /************************************************************************************************************************/
