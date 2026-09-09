@@ -58,8 +58,7 @@ namespace KO.UI.Common.Atlas
 
         public SpriteCache GetSpriteCacheByName(string name)
         {
-#if UNITY_EDITOR
-            if (!Application.isPlaying)
+            if (ET.Define.IsEditor && !Application.isPlaying)
             {
                 for (int i = 0; i < Groups.Count; i++)
                 {
@@ -84,7 +83,6 @@ namespace KO.UI.Common.Atlas
                 }
                 return GetDefaultSprite();
             }
-#endif
 
             if (mSpriteDict == null)
             {

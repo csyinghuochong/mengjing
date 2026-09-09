@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using KO.UI.Common.Atlas;
 using UnityEngine;
@@ -57,9 +57,10 @@ public class UIAtlasInfo : MonoBehaviour
             if (!mSpriteCached.ContainsKey(sp.name))
                 mSpriteCached.Add(sp.name, sp);
         }
-#if !UNITY_EDITOR
-        sprites.Clear();
-#endif
+if (!ET.Define.IsEditor)
+        {
+            sprites.Clear();
+        }
     }
 
     public void Apply()

@@ -23,9 +23,6 @@ namespace Pool
         /// </summary>
         public GameObject prefab;
 
-#if UNITY_EDITOR
-        public string info;
-#endif
 
         /// <summary>
         /// Amount of instances to create at game start.

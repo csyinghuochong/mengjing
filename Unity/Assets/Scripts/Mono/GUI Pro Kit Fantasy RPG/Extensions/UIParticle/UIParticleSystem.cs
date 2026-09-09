@@ -133,15 +133,13 @@ namespace UnityEngine.UI.Extensions
 
         protected override void OnPopulateMesh(VertexHelper vh)
         {
-#if UNITY_EDITOR
-            if (!Application.isPlaying)
+            if (ET.Define.IsEditor && !Application.isPlaying)
             {
                 if (!Initialize())
                 {
                     return;
                 }
             }
-#endif
             // prepare vertices
             vh.Clear();
 
