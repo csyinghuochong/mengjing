@@ -92,12 +92,8 @@ namespace ET.Server
             {
                 self.WaitDeletUnit.Remove(unitId);
             }
-            if (self.UnitCachesTime.ContainsKey(unitId))
-            {
-                self.UnitCachesTime[unitId] = self.CurHourTime;
-                return;
-            }
-            self.UnitCachesTime.Add(unitId, self.CurHourTime);
+
+            self.UnitCachesTime[unitId] = TimeHelper.ServerNow();
         }
         
         public static async ETTask AddOrUpdate(this UnitCacheComponent self, long id, ListComponent<Entity> entityList)
@@ -137,6 +133,8 @@ namespace ET.Server
             {
                 cache.Delete(unitId);
             }
+
+            self.UnitCachesTime.Remove(unitId);
         }
         
         public static void CheckUnitCacheList(this UnitCacheComponent self)
@@ -169,7 +167,6 @@ namespace ET.Server
                 }
             }
             self.WaitDeletUnit.Clear();
-            self.CurHourTime = TimeHelper.ServerNow();
         }
         
         public static void DeleteRole(this UnitCacheComponent self, long unitId)
