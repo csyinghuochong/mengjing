@@ -51,6 +51,8 @@ namespace ET.Server
 
         public static async ETTask<Entity> Get(this UnitCacheComponent self, long unitId, string key)
         {
+            self.SetUnitCacheTime(unitId);
+            
             UnitCache unitCache = null;
             self.UnitCaches.TryGetValue(key, out EntityRef<UnitCache> refunitCache);
             unitCache = refunitCache;
@@ -67,6 +69,8 @@ namespace ET.Server
 
         public static async ETTask<T> Get<T>(this UnitCacheComponent self, long unitId) where T : Entity
         {
+            self.SetUnitCacheTime(unitId);
+            
             string key = typeof(T).Name;
             UnitCache unitCache;
             if (!self.UnitCaches.TryGetValue(key, out EntityRef<UnitCache> refunitCache))
@@ -82,8 +86,24 @@ namespace ET.Server
             return await unitCache.Get(unitId) as T;
         }
 
+        public static void SetUnitCacheTime(this UnitCacheComponent self, long unitId)
+        {
+            if (self.WaitDeletUnit.Contains(unitId))
+            {
+                self.WaitDeletUnit.Remove(unitId);
+            }
+            if (self.UnitCachesTime.ContainsKey(unitId))
+            {
+                self.UnitCachesTime[unitId] = self.CurHourTime;
+                return;
+            }
+            self.UnitCachesTime.Add(unitId, self.CurHourTime);
+        }
+        
         public static async ETTask AddOrUpdate(this UnitCacheComponent self, long id, ListComponent<Entity> entityList)
         {
+            self.SetUnitCacheTime(id);
+            
             using (ListComponent<Entity> list = ListComponent<Entity>.Create())
             {
                 foreach (Entity entity in entityList)
@@ -155,8 +175,6 @@ namespace ET.Server
         public static void DeleteRole(this UnitCacheComponent self, long unitId)
         {
             self.Delete(unitId);
-
-           
         }
     }
 }
