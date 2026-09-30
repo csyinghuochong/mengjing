@@ -1,0 +1,200 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-3760979886193998370
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 7
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: MI_Sky_01
+  m_Shader: {fileID: -6465566751694194690, guid: 3b22c13e03e3d914f8a10dda1a515a74,
+    type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 2
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _BotTexture0:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _BumpMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _CloudsNoiseMask:
+        m_Texture: {fileID: 2800000, guid: 598fd09022b66044bb2b00f55a9d9331, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Clouds_Noise_Mask:
+        m_Texture: {fileID: 2800000, guid: 598fd09022b66044bb2b00f55a9d9331, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailAlbedoMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailMask:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailNormalMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmissionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _HorizonClouds:
+        m_Texture: {fileID: 2800000, guid: fc200d194fda3cb4d92e3aa5d407e308, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Horizon_Clouds:
+        m_Texture: {fileID: 2800000, guid: fc200d194fda3cb4d92e3aa5d407e308, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Horizon_Clouds_Mask:
+        m_Texture: {fileID: 2800000, guid: fc200d194fda3cb4d92e3aa5d407e308, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MetallicGlossMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Notused1:
+        m_Texture: {fileID: 2800000, guid: fc200d194fda3cb4d92e3aa5d407e308, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Notused2:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _OcclusionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ParallaxMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _T_Clouds_01_Noise_01_M:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _TopCloudsMask:
+        m_Texture: {fileID: 2800000, guid: 5b7b19df6253a174b9eca5123baeab91, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _TopTexture0:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Top_Clouds_Mask:
+        m_Texture: {fileID: 2800000, guid: 5b7b19df6253a174b9eca5123baeab91, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _texcoord:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_Lightmaps:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_LightmapsInd:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_ShadowMasks:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _AlphaCutoff: 0.5
+    - _BumpScale: 1
+    - _Cutoff: 0.5
+    - _DetailNormalMapScale: 1
+    - _DstBlend: 0
+    - _GlobalSunlightGradient: 1.13
+    - _GlobalSunlightIntensity: 3.53
+    - _Global_Sunlight_Gradient: 0.91
+    - _Global_Sunlight_Intensity: 4.34
+    - _GlossMapScale: 1
+    - _Glossiness: 0
+    - _GlossyReflections: 1
+    - _HCloudsWarpIntensity: 0.07
+    - _H_Clouds_Height: 0.75
+    - _H_Clouds_Opacity: 9.5
+    - _H_Clouds_Tiling: 0.48
+    - _H_Clouds_Warp: 0.07
+    - _H_Clouds_Warp_Intensity: 0.07
+    - _HorizonCloudsHeight: 0.75
+    - _HorizonCloudsOpacity: 9.5
+    - _Horizon_Clouds_Height: 0.65
+    - _Horizon_Clouds_Opacity: 4.27
+    - _Metallic: 0
+    - _Mode: 0
+    - _OcclusionStrength: 1
+    - _Opacity: 0.578
+    - _Parallax: 0.02
+    - _QueueControl: 0
+    - _QueueOffset: 0
+    - _ReceiveShadows: 1
+    - _SSSFresnelGradient: 29.22
+    - _SSSIntensity: 0.8
+    - _SSS_Fresnel_Gradient: 29.22
+    - _SSS_Intensity: 7.61
+    - _SmoothnessTextureChannel: 0
+    - _SpecularHighlights: 1
+    - _SrcBlend: 1
+    - _TopCloudsTiling: 3
+    - _TopCloudsWarpIntensity: 0.05
+    - _Top_Clouds_Tiling: 1
+    - _Top_Clouds_Warp: 0.05
+    - _Top_Clouds_Warp_Intensity: 0.05
+    - _UVSec: 0
+    - _WarpSize: 1.45
+    - _WarpTimeScale: 0.75
+    - _Warp_Size: 1.45
+    - _Warp_Time_Scale: 0.75
+    - _ZWrite: 1
+    - __dirty: 0
+    m_Colors:
+    - _Color: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _InnerColor: {r: 0.41948494, g: 0.7026189, b: 0.9528302, a: 0}
+    - _Inner_Color: {r: 0.7877358, g: 0.9214128, b: 1, a: 1}
+    - _InscatteringColor: {r: 1, g: 0.9091981, b: 0.7232704, a: 0}
+    - _Inscattering_Color: {r: 1, g: 0.8745099, b: 0.6156863, a: 1}
+    - _OuterColor: {r: 0.321437, g: 0.4158604, b: 0.5188679, a: 0}
+    - _Outer_Color: {r: 0, g: 0.30616152, b: 0.6320754, a: 1}
+  m_BuildTextureStacks: []

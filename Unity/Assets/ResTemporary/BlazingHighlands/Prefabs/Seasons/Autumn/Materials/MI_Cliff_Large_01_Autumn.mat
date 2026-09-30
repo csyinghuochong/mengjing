@@ -1,0 +1,206 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-4547461452148570482
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 7
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: MI_Cliff_Large_01_Autumn
+  m_Shader: {fileID: -6465566751694194690, guid: fadf2078e3f9b2d4c9126e206790d38e,
+    type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 1
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _BumpMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Cliff_Detail_BaseColor:
+        m_Texture: {fileID: 2800000, guid: 2ca560eb6383d9145a79e8fc03f265ae, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Cliff_Detail_Base_Color:
+        m_Texture: {fileID: 2800000, guid: 2ca560eb6383d9145a79e8fc03f265ae, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Cliff_Detail_Normal:
+        m_Texture: {fileID: 2800000, guid: 989a6d46e9353be489694e85035e8eec, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Cliff_Top_BaseColor:
+        m_Texture: {fileID: 2800000, guid: 2cfbaf55cb8673040852426322e1ac01, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Cliff_Top_Base_Color:
+        m_Texture: {fileID: 2800000, guid: 2cfbaf55cb8673040852426322e1ac01, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Cliff_Top_Normal:
+        m_Texture: {fileID: 2800000, guid: de43119f1ba92114b9773128b4dcacab, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailAlbedoMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailMask:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailNormalMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmissionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MasterBaseColor:
+        m_Texture: {fileID: 2800000, guid: 931d0511de341d74cacb0c3f8d4d84df, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MasterNormal:
+        m_Texture: {fileID: 2800000, guid: 40d7cf1271a72b04f9954e0b4d34219e, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Master_Base_Color:
+        m_Texture: {fileID: 2800000, guid: 931d0511de341d74cacb0c3f8d4d84df, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Master_Normal:
+        m_Texture: {fileID: 2800000, guid: 40d7cf1271a72b04f9954e0b4d34219e, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MetallicGlossMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MsterNormal:
+        m_Texture: {fileID: 2800000, guid: 40d7cf1271a72b04f9954e0b4d34219e, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _OcclusionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ParallaxMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _T_Cliff_Large_01_AO:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _T_Cliff_Large_01_BC:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Transition_Mask:
+        m_Texture: {fileID: 2800000, guid: 9f49c0db47200e64189f9d00c6679033, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _texcoord:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_Lightmaps:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_LightmapsInd:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_ShadowMasks:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _AlphaCutoff: 0.5
+    - _BCDetailBalance: 0.5
+    - _BC_Detail_Balance: 0.5
+    - _Blend_Contrast: 2.55
+    - _Blend_Contrast1: 3.1
+    - _Blend_Shift: 0.6
+    - _BumpScale: 1
+    - _Cliff_Detail_Normal_Power: 0.8
+    - _Cutoff: 0.5
+    - _DetailNormalMapScale: 1
+    - _DstBlend: 0
+    - _EnvironmentReflections: 1
+    - _Float0: 0
+    - _Float10: -0.25
+    - _Float5: -0.57
+    - _Float6: 1
+    - _Float7: 1.41
+    - _Float8: 1.89
+    - _Float9: 0.5
+    - _GlossMapScale: 1
+    - _Glossiness: 0
+    - _GlossyReflections: 1
+    - _MaxTiling: 4
+    - _MaxTilingCliffs: 4
+    - _Max_Tiling_Cliffs: 4
+    - _Metallic: 0
+    - _MinTiling: 1
+    - _MinTilingCliffs: 1
+    - _Min_Tiling_Cliffs: 1
+    - _Mode: 0
+    - _OcclusionStrength: 1
+    - _Parallax: 0.02
+    - _QueueControl: 0
+    - _QueueOffset: 0
+    - _ReceiveShadows: 1
+    - _SmoothnessTextureChannel: 0
+    - _Smoothness_Top: 0.1
+    - _Smotthness_Cliffs: 0.1
+    - _SpecularHighlights: 1
+    - _Specular_Cliffs: 0.04
+    - _Specular_Top: 0.04
+    - _SrcBlend: 1
+    - _TilingCliffs: 3
+    - _TilingTop: 50
+    - _Tiling_Cliffs: 3
+    - _Tiling_Top: 50
+    - _Top_Normal_Power: 1
+    - _TransitionContrast: 1.89
+    - _Transition_Contrast: 1.9
+    - _Transition_Mask_Tiling: 75
+    - _UVSec: 0
+    - _ZWrite: 1
+    - __dirty: 0
+    m_Colors:
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+  m_BuildTextureStacks: []

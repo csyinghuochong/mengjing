@@ -1,0 +1,1437 @@
+; FBX 7.5.0 project file
+; Copyright (C) 1997-2010 Autodesk Inc. and/or its licensors.
+; All rights reserved.
+; ----------------------------------------------------
+
+FBXHeaderExtension:  {
+	FBXHeaderVersion: 1003
+	FBXVersion: 7500
+	CreationTimeStamp:  {
+		Version: 1000
+		Year: 2023
+		Month: 6
+		Day: 28
+		Hour: 16
+		Minute: 59
+		Second: 13
+		Millisecond: 646
+	}
+	Creator: "FBX SDK/FBX Plugins version 2016.1.2"
+	SceneInfo: "SceneInfo::GlobalInfo", "UserData" {
+		Type: "UserData"
+		Version: 100
+		MetaData:  {
+			Version: 100
+			Title: ""
+			Subject: ""
+			Author: ""
+			Keywords: ""
+			Revision: ""
+			Comment: ""
+		}
+		Properties70:  {
+			P: "DocumentUrl", "KString", "Url", "", "W:\DragonsNotAllowed\MistyHighlands\Unity\BlazingHighlands_Village_2020\Assets\DnA_BlazingHighlands\Source\SM_House_Window_06m_01.fbx"
+			P: "SrcDocumentUrl", "KString", "Url", "", "W:\DragonsNotAllowed\MistyHighlands\Unity\BlazingHighlands_Village_2020\Assets\DnA_BlazingHighlands\Source\SM_House_Window_06m_01.fbx"
+			P: "Original", "Compound", "", ""
+			P: "Original|ApplicationVendor", "KString", "", "", "Autodesk"
+			P: "Original|ApplicationName", "KString", "", "", "Maya LT"
+			P: "Original|ApplicationVersion", "KString", "", "", "2016"
+			P: "Original|DateTime_GMT", "DateTime", "", "", "28/06/2023 13:59:13.645"
+			P: "Original|FileName", "KString", "", "", "W:\DragonsNotAllowed\MistyHighlands\Unity\BlazingHighlands_Village_2020\Assets\DnA_BlazingHighlands\Source\SM_House_Window_06m_01.fbx"
+			P: "LastSaved", "Compound", "", ""
+			P: "LastSaved|ApplicationVendor", "KString", "", "", "Autodesk"
+			P: "LastSaved|ApplicationName", "KString", "", "", "Maya LT"
+			P: "LastSaved|ApplicationVersion", "KString", "", "", "2016"
+			P: "LastSaved|DateTime_GMT", "DateTime", "", "", "28/06/2023 13:59:13.645"
+			P: "Original|ApplicationActiveProject", "KString", "", "", "W:\DragonsNotAllowed\MistyHighlands\Unity\BlazingHighlands_Village_2020\Assets\DnA_BlazingHighlands"
+			P: "Original|ApplicationNativeFile", "KString", "", "", "A:\DragonsNotAllowed\Maya\Village_FINAL_09.mlt"
+		}
+	}
+}
+GlobalSettings:  {
+	Version: 1000
+	Properties70:  {
+		P: "UpAxis", "int", "Integer", "",1
+		P: "UpAxisSign", "int", "Integer", "",1
+		P: "FrontAxis", "int", "Integer", "",2
+		P: "FrontAxisSign", "int", "Integer", "",1
+		P: "CoordAxis", "int", "Integer", "",0
+		P: "CoordAxisSign", "int", "Integer", "",1
+		P: "OriginalUpAxis", "int", "Integer", "",1
+		P: "OriginalUpAxisSign", "int", "Integer", "",1
+		P: "UnitScaleFactor", "double", "Number", "",1
+		P: "OriginalUnitScaleFactor", "double", "Number", "",1
+		P: "AmbientColor", "ColorRGB", "Color", "",0,0,0
+		P: "DefaultCamera", "KString", "", "", "Producer Perspective"
+		P: "TimeMode", "enum", "", "",6
+		P: "TimeProtocol", "enum", "", "",2
+		P: "SnapOnFrameMode", "enum", "", "",0
+		P: "TimeSpanStart", "KTime", "Time", "",1539538600
+		P: "TimeSpanStop", "KTime", "Time", "",92372316000
+		P: "CustomFrameRate", "double", "Number", "",-1
+		P: "TimeMarker", "Compound", "", ""
+		P: "CurrentTimeMarker", "int", "Integer", "",-1
+	}
+}
+
+; Documents Description
+;------------------------------------------------------------------
+
+Documents:  {
+	Count: 1
+	Document: 1681491952288, "", "Scene" {
+		Properties70:  {
+			P: "SourceObject", "object", "", ""
+			P: "ActiveAnimStackName", "KString", "", "", "Take 001"
+		}
+		RootNode: 0
+	}
+}
+
+; Document References
+;------------------------------------------------------------------
+
+References:  {
+}
+
+; Object definitions
+;------------------------------------------------------------------
+
+Definitions:  {
+	Version: 100
+	Count: 26
+	ObjectType: "GlobalSettings" {
+		Count: 1
+	}
+	ObjectType: "AnimationStack" {
+		Count: 1
+		PropertyTemplate: "FbxAnimStack" {
+			Properties70:  {
+				P: "Description", "KString", "", "", ""
+				P: "LocalStart", "KTime", "Time", "",0
+				P: "LocalStop", "KTime", "Time", "",0
+				P: "ReferenceStart", "KTime", "Time", "",0
+				P: "ReferenceStop", "KTime", "Time", "",0
+			}
+		}
+	}
+	ObjectType: "AnimationLayer" {
+		Count: 1
+		PropertyTemplate: "FbxAnimLayer" {
+			Properties70:  {
+				P: "Weight", "Number", "", "A",100
+				P: "Mute", "bool", "", "",0
+				P: "Solo", "bool", "", "",0
+				P: "Lock", "bool", "", "",0
+				P: "Color", "ColorRGB", "Color", "",0.8,0.8,0.8
+				P: "BlendMode", "enum", "", "",0
+				P: "RotationAccumulationMode", "enum", "", "",0
+				P: "ScaleAccumulationMode", "enum", "", "",0
+				P: "BlendModeBypass", "ULongLong", "", "",0
+			}
+		}
+	}
+	ObjectType: "NodeAttribute" {
+		Count: 1
+		PropertyTemplate: "FbxNull" {
+			Properties70:  {
+				P: "Color", "ColorRGB", "Color", "",0.8,0.8,0.8
+				P: "Size", "double", "Number", "",100
+				P: "Look", "enum", "", "",1
+			}
+		}
+	}
+	ObjectType: "Model" {
+		Count: 8
+		PropertyTemplate: "FbxNode" {
+			Properties70:  {
+				P: "QuaternionInterpolate", "enum", "", "",0
+				P: "RotationOffset", "Vector3D", "Vector", "",0,0,0
+				P: "RotationPivot", "Vector3D", "Vector", "",0,0,0
+				P: "ScalingOffset", "Vector3D", "Vector", "",0,0,0
+				P: "ScalingPivot", "Vector3D", "Vector", "",0,0,0
+				P: "TranslationActive", "bool", "", "",0
+				P: "TranslationMin", "Vector3D", "Vector", "",0,0,0
+				P: "TranslationMax", "Vector3D", "Vector", "",0,0,0
+				P: "TranslationMinX", "bool", "", "",0
+				P: "TranslationMinY", "bool", "", "",0
+				P: "TranslationMinZ", "bool", "", "",0
+				P: "TranslationMaxX", "bool", "", "",0
+				P: "TranslationMaxY", "bool", "", "",0
+				P: "TranslationMaxZ", "bool", "", "",0
+				P: "RotationOrder", "enum", "", "",0
+				P: "RotationSpaceForLimitOnly", "bool", "", "",0
+				P: "RotationStiffnessX", "double", "Number", "",0
+				P: "RotationStiffnessY", "double", "Number", "",0
+				P: "RotationStiffnessZ", "double", "Number", "",0
+				P: "AxisLen", "double", "Number", "",10
+				P: "PreRotation", "Vector3D", "Vector", "",0,0,0
+				P: "PostRotation", "Vector3D", "Vector", "",0,0,0
+				P: "RotationActive", "bool", "", "",0
+				P: "RotationMin", "Vector3D", "Vector", "",0,0,0
+				P: "RotationMax", "Vector3D", "Vector", "",0,0,0
+				P: "RotationMinX", "bool", "", "",0
+				P: "RotationMinY", "bool", "", "",0
+				P: "RotationMinZ", "bool", "", "",0
+				P: "RotationMaxX", "bool", "", "",0
+				P: "RotationMaxY", "bool", "", "",0
+				P: "RotationMaxZ", "bool", "", "",0
+				P: "InheritType", "enum", "", "",0
+				P: "ScalingActive", "bool", "", "",0
+				P: "ScalingMin", "Vector3D", "Vector", "",0,0,0
+				P: "ScalingMax", "Vector3D", "Vector", "",1,1,1
+				P: "ScalingMinX", "bool", "", "",0
+				P: "ScalingMinY", "bool", "", "",0
+				P: "ScalingMinZ", "bool", "", "",0
+				P: "ScalingMaxX", "bool", "", "",0
+				P: "ScalingMaxY", "bool", "", "",0
+				P: "ScalingMaxZ", "bool", "", "",0
+				P: "GeometricTranslation", "Vector3D", "Vector", "",0,0,0
+				P: "GeometricRotation", "Vector3D", "Vector", "",0,0,0
+				P: "GeometricScaling", "Vector3D", "Vector", "",1,1,1
+				P: "MinDampRangeX", "double", "Number", "",0
+				P: "MinDampRangeY", "double", "Number", "",0
+				P: "MinDampRangeZ", "double", "Number", "",0
+				P: "MaxDampRangeX", "double", "Number", "",0
+				P: "MaxDampRangeY", "double", "Number", "",0
+				P: "MaxDampRangeZ", "double", "Number", "",0
+				P: "MinDampStrengthX", "double", "Number", "",0
+				P: "MinDampStrengthY", "double", "Number", "",0
+				P: "MinDampStrengthZ", "double", "Number", "",0
+				P: "MaxDampStrengthX", "double", "Number", "",0
+				P: "MaxDampStrengthY", "double", "Number", "",0
+				P: "MaxDampStrengthZ", "double", "Number", "",0
+				P: "PreferedAngleX", "double", "Number", "",0
+				P: "PreferedAngleY", "double", "Number", "",0
+				P: "PreferedAngleZ", "double", "Number", "",0
+				P: "LookAtProperty", "object", "", ""
+				P: "UpVectorProperty", "object", "", ""
+				P: "Show", "bool", "", "",1
+				P: "NegativePercentShapeSupport", "bool", "", "",1
+				P: "DefaultAttributeIndex", "int", "Integer", "",-1
+				P: "Freeze", "bool", "", "",0
+				P: "LODBox", "bool", "", "",0
+				P: "Lcl Translation", "Lcl Translation", "", "A",0,0,0
+				P: "Lcl Rotation", "Lcl Rotation", "", "A",0,0,0
+				P: "Lcl Scaling", "Lcl Scaling", "", "A",1,1,1
+				P: "Visibility", "Visibility", "", "A",1
+				P: "Visibility Inheritance", "Visibility Inheritance", "", "",1
+			}
+		}
+	}
+	ObjectType: "Geometry" {
+		Count: 7
+		PropertyTemplate: "FbxMesh" {
+			Properties70:  {
+				P: "Color", "ColorRGB", "Color", "",0.8,0.8,0.8
+				P: "BBoxMin", "Vector3D", "Vector", "",0,0,0
+				P: "BBoxMax", "Vector3D", "Vector", "",0,0,0
+				P: "Primary Visibility", "bool", "", "",1
+				P: "Casts Shadows", "bool", "", "",1
+				P: "Receive Shadows", "bool", "", "",1
+			}
+		}
+	}
+	ObjectType: "Material" {
+		Count: 3
+		PropertyTemplate: "FbxSurfacePhong" {
+			Properties70:  {
+				P: "ShadingModel", "KString", "", "", "Phong"
+				P: "MultiLayer", "bool", "", "",0
+				P: "EmissiveColor", "Color", "", "A",0,0,0
+				P: "EmissiveFactor", "Number", "", "A",1
+				P: "AmbientColor", "Color", "", "A",0.2,0.2,0.2
+				P: "AmbientFactor", "Number", "", "A",1
+				P: "DiffuseColor", "Color", "", "A",0.8,0.8,0.8
+				P: "DiffuseFactor", "Number", "", "A",1
+				P: "Bump", "Vector3D", "Vector", "",0,0,0
+				P: "NormalMap", "Vector3D", "Vector", "",0,0,0
+				P: "BumpFactor", "double", "Number", "",1
+				P: "TransparentColor", "Color", "", "A",0,0,0
+				P: "TransparencyFactor", "Number", "", "A",0
+				P: "DisplacementColor", "ColorRGB", "Color", "",0,0,0
+				P: "DisplacementFactor", "double", "Number", "",1
+				P: "VectorDisplacementColor", "ColorRGB", "Color", "",0,0,0
+				P: "VectorDisplacementFactor", "double", "Number", "",1
+				P: "SpecularColor", "Color", "", "A",0.2,0.2,0.2
+				P: "SpecularFactor", "Number", "", "A",1
+				P: "ShininessExponent", "Number", "", "A",20
+				P: "ReflectionColor", "Color", "", "A",0,0,0
+				P: "ReflectionFactor", "Number", "", "A",1
+			}
+		}
+	}
+	ObjectType: "Texture" {
+		Count: 2
+		PropertyTemplate: "FbxFileTexture" {
+			Properties70:  {
+				P: "TextureTypeUse", "enum", "", "",0
+				P: "Texture alpha", "Number", "", "A",1
+				P: "CurrentMappingType", "enum", "", "",0
+				P: "WrapModeU", "enum", "", "",0
+				P: "WrapModeV", "enum", "", "",0
+				P: "UVSwap", "bool", "", "",0
+				P: "PremultiplyAlpha", "bool", "", "",1
+				P: "Translation", "Vector", "", "A",0,0,0
+				P: "Rotation", "Vector", "", "A",0,0,0
+				P: "Scaling", "Vector", "", "A",1,1,1
+				P: "TextureRotationPivot", "Vector3D", "Vector", "",0,0,0
+				P: "TextureScalingPivot", "Vector3D", "Vector", "",0,0,0
+				P: "CurrentTextureBlendMode", "enum", "", "",1
+				P: "UVSet", "KString", "", "", "default"
+				P: "UseMaterial", "bool", "", "",0
+				P: "UseMipMap", "bool", "", "",0
+			}
+		}
+	}
+	ObjectType: "Video" {
+		Count: 2
+		PropertyTemplate: "FbxVideo" {
+			Properties70:  {
+				P: "ImageSequence", "bool", "", "",0
+				P: "ImageSequenceOffset", "int", "Integer", "",0
+				P: "FrameRate", "double", "Number", "",0
+				P: "LastFrame", "int", "Integer", "",0
+				P: "Width", "int", "Integer", "",0
+				P: "Height", "int", "Integer", "",0
+				P: "Path", "KString", "XRefUrl", "", ""
+				P: "StartFrame", "int", "Integer", "",0
+				P: "StopFrame", "int", "Integer", "",0
+				P: "PlaySpeed", "double", "Number", "",0
+				P: "Offset", "KTime", "Time", "",0
+				P: "InterlaceMode", "enum", "", "",0
+				P: "FreeRunning", "bool", "", "",0
+				P: "Loop", "bool", "", "",0
+				P: "AccessMode", "enum", "", "",0
+			}
+		}
+	}
+}
+
+; Object properties
+;------------------------------------------------------------------
+
+Objects:  {
+	NodeAttribute: 1681697609568, "NodeAttribute::", "Null" {
+		Properties70:  {
+			P: "Look", "enum", "", "",0
+		}
+		TypeFlags: "Null"
+	}
+	Geometry: 1683593644688, "Geometry::", "Mesh" {
+		Vertices: *24 {
+			a: 14.4365234375,300.000030517578,300,-14.4365234375,300.000030517578,300,-14.4365234375,0,300,-14.4365234375,193.539184570313,33.260986328125,14.4365234375,193.539184570313,33.260986328125,14.4365234375,103.186248779297,33.260986328125,-14.4365234375,103.186248779297,33.260986328125,14.4365234375,0,300
+		} 
+		PolygonVertexIndex: *16 {
+			a: 3,4,5,-7,1,2,7,-1,3,6,2,-2,0,7,5,-5
+		} 
+		Edges: *12 {
+			a: 1,3,5,9,15,11,4,6,13,0,2,7
+		} 
+		GeometryVersion: 124
+		LayerElementNormal: 0 {
+			Version: 102
+			Name: ""
+			MappingInformationType: "ByPolygonVertex"
+			ReferenceInformationType: "Direct"
+			Normals: *48 {
+				a: 0,0,-1,0,0,-1,0,0,-1,0,0,-1,0,0,0.999999940395355,0,0,0.999999940395355,0,0,0.999999940395355,0,0,0.999999940395355,-1,0,0,-1,0,0,-0.999999940395355,0,0,-1,0,0,1,0,0,0.999999940395355,0,0,1,0,0,1,0,0
+			} 
+			NormalsW: *16 {
+				a: 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
+			} 
+		}
+		LayerElementBinormal: 0 {
+			Version: 102
+			Name: "map1"
+			MappingInformationType: "ByPolygonVertex"
+			ReferenceInformationType: "Direct"
+			Binormals: *48 {
+				a: 0,1,0,-1.20896487487698e-007,1,0,-2.41792974975397e-007,1,0,-1.20896487487698e-007,1,0,0,-1,0,0,-1,0,0,-1,0,0,-1,0,0,0.998547732830048,-0.0538757145404816,0,0.999999821186066,0.000555387348867953,0,0.998547673225403,-0.0538757108151913,0,0.994134902954102,-0.108147069811821,0,0.994134604930878,-0.108149878680706,0,0.998547554016113,-0.0538784228265285,-0,0.999999821186066,0.000552779005374759,0,0.998547613620758,-0.0538784265518188
+			} 
+			BinormalsW: *16 {
+				a: 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
+			} 
+
+		}
+		LayerElementTangent: 0 {
+			Version: 102
+			Name: "map1"
+			MappingInformationType: "ByPolygonVertex"
+			ReferenceInformationType: "Direct"
+			Tangents: *48 {
+				a: -1,-0,0,-1,-1.20896487487698e-007,0,-1,-2.41792974975397e-007,0,-1,-1.20896487487698e-007,0,-1,0,0,-1,0,0,-1,0,0,-1,0,0,0,0.053875707089901,0.998547613620758,0,-0.000555387407075614,0.999999940395355,0,0.053875707089901,0.998547613620758,0,0.108147069811821,0.994134902954102,0,-0.108149878680706,-0.994134604930878,0,-0.0538784191012383,-0.998547494411469,-0,0.00055277906358242,-0.999999940395355,0,-0.0538784191012383,-0.998547494411469
+			} 
+			TangentsW: *16 {
+				a: 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
+			} 
+		}
+		LayerElementUV: 0 {
+			Version: 101
+			Name: "map1"
+			MappingInformationType: "ByPolygonVertex"
+			ReferenceInformationType: "IndexToDirect"
+			UV: *32 {
+				a: 0.296580940485001,0.632970571517944,0.171580955386162,0.632970571517944,0.171580955386162,0.247264832258224,0.296580940485001,0.247264862060547,0.651172041893005,0.111686192452908,0.651286602020264,1,0.526286661624908,1,0.526172161102295,0.111686192452908,0.621377468109131,0.658911108970642,0.621269822120667,0.351065695285797,1,8.94069671630859e-008,0.99996417760849,0.88819432258606,-3.47969653375912e-005,0.888198435306549,2.98023223876953e-008,8.94069671630859e-008,0.378705531358719,0.351069629192352,0.378567636013031,0.658916413784027
+			} 
+			UVIndex: *16 {
+				a: 0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15
+			} 
+		}
+		LayerElementSmoothing: 0 {
+			Version: 102
+			Name: ""
+			MappingInformationType: "ByEdge"
+			ReferenceInformationType: "Direct"
+			Smoothing: *12 {
+				a: 0,0,0,0,0,0,0,0,0,0,0,0
+			} 
+		}
+		LayerElementMaterial: 0 {
+			Version: 101
+			Name: ""
+			MappingInformationType: "AllSame"
+			ReferenceInformationType: "IndexToDirect"
+			Materials: *1 {
+				a: 0
+			} 
+		}
+		Layer: 0 {
+			Version: 100
+			LayerElement:  {
+				Type: "LayerElementNormal"
+				TypedIndex: 0
+			}
+			LayerElement:  {
+				Type: "LayerElementBinormal"
+				TypedIndex: 0
+			}
+			LayerElement:  {
+				Type: "LayerElementTangent"
+				TypedIndex: 0
+			}
+			LayerElement:  {
+				Type: "LayerElementMaterial"
+				TypedIndex: 0
+			}
+			LayerElement:  {
+				Type: "LayerElementSmoothing"
+				TypedIndex: 0
+			}
+			LayerElement:  {
+				Type: "LayerElementUV"
+				TypedIndex: 0
+			}
+		}
+	}
+	Geometry: 1683593633936, "Geometry::", "Mesh" {
+		Vertices: *24 {
+			a: 14.4365234375,0,-300,14.4365234375,300.000030517578,-300,14.4365234375,193.539184570313,-34.8659362792969,-14.4365234375,103.186248779297,-34.8659362792969,14.4365234375,103.186248779297,-34.8659362792969,-14.4365234375,0,-300,-14.4365234375,300.000030517578,-300,-14.4365234375,193.539184570313,-34.8659362792969
+		} 
+		PolygonVertexIndex: *16 {
+			a: 1,0,5,-7,1,2,4,-1,4,2,7,-4,7,6,5,-4
+		} 
+		Edges: *12 {
+			a: 3,6,2,0,11,4,1,14,12,10,9,5
+		} 
+		GeometryVersion: 124
+		LayerElementNormal: 0 {
+			Version: 102
+			Name: ""
+			MappingInformationType: "ByPolygonVertex"
+			ReferenceInformationType: "Direct"
+			Normals: *48 {
+				a: 0,0,-0.999999940395355,0,0,-0.999999940395355,0,0,-0.999999940395355,0,0,-0.999999940395355,1,0,0,0.999999940395355,0,0,1,0,0,1,0,0,0,0,1,0,0,1,0,0,1,0,0,1,-0.999999940395355,0,0,-1,0,0,-1,0,0,-1,0,0
+			} 
+			NormalsW: *16 {
+				a: 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
+			} 
+		}
+		LayerElementBinormal: 0 {
+			Version: 102
+			Name: "map1"
+			MappingInformationType: "ByPolygonVertex"
+			ReferenceInformationType: "Direct"
+			Binormals: *48 {
+				a: 0,1,0,0,1,0,0,1,0,0,1,0,-0,0.994064271450043,0.108794361352921,-0,0.998530268669128,0.0541988201439381,0,0.999999821186066,-0.000559361767955124,-0,0.998530209064484,0.0541988201439381,-1.93434516404523e-006,-1,0,-9.67172582022613e-007,-1,0,0,-1,0,-9.67172582022613e-007,-1,0,0,0.998530030250549,0.0542018972337246,0,0.994064033031464,0.108796834945679,0,0.998530089855194,0.0542019009590149,0,0.999999821186066,-0.00055567710660398
+			} 
+			BinormalsW: *16 {
+				a: 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
+			} 
+
+		}
+		LayerElementTangent: 0 {
+			Version: 102
+			Name: "map1"
+			MappingInformationType: "ByPolygonVertex"
+			ReferenceInformationType: "Direct"
+			Tangents: *48 {
+				a: -1,0,0,-1,0,0,-1,-0,0,-1,0,0,-0,0.108794361352921,-0.994064271450043,0,0.0541988126933575,-0.998530089855194,0,-0.000559361826162785,-0.999999940395355,0,0.0541988126933575,-0.998530089855194,-1,1.93434516404523e-006,0,-1,9.67172582022613e-007,0,-1,0,0,-1,9.67172582022613e-007,0,0,-0.0542018935084343,0.998529970645905,0,-0.108796834945679,0.994064033031464,0,-0.0542018935084343,0.998529970645905,0,0.000555677164811641,0.999999940395355
+			} 
+			TangentsW: *16 {
+				a: 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
+			} 
+		}
+		LayerElementUV: 0 {
+			Version: 101
+			Name: "map1"
+			MappingInformationType: "ByPolygonVertex"
+			ReferenceInformationType: "IndexToDirect"
+			UV: *32 {
+				a: 0.171583592891693,0.888210475444794,0.171571969985962,5.96046447753906e-008,0.296571969985962,5.96046447753906e-008,0.296583592891693,0.888210475444794,0.999965131282806,0.888198435306549,0.622133314609528,0.65891444683075,0.622025430202484,0.351067215204239,1,8.94069671630859e-008,0.526204764842987,0.7526615858078,0.526204705238342,0.366956114768982,0.651204645633698,0.366956114768982,0.651204586029053,0.752661824226379,0.377811521291733,0.658913373947144,-3.58011129719671e-005,0.88819432258606,2.98023223876953e-008,8.94069671630859e-008,0.377949625253677,0.351068198680878
+			} 
+			UVIndex: *16 {
+				a: 0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15
+			} 
+		}
+		LayerElementSmoothing: 0 {
+			Version: 102
+			Name: ""
+			MappingInformationType: "ByEdge"
+			ReferenceInformationType: "Direct"
+			Smoothing: *12 {
+				a: 0,0,0,0,0,0,0,0,0,0,0,0
+			} 
+		}
+		LayerElementMaterial: 0 {
+			Version: 101
+			Name: ""
+			MappingInformationType: "AllSame"
+			ReferenceInformationType: "IndexToDirect"
+			Materials: *1 {
+				a: 0
+			} 
+		}
+		Layer: 0 {
+			Version: 100
+			LayerElement:  {
+				Type: "LayerElementNormal"
+				TypedIndex: 0
+			}
+			LayerElement:  {
+				Type: "LayerElementBinormal"
+				TypedIndex: 0
+			}
+			LayerElement:  {
+				Type: "LayerElementTangent"
+				TypedIndex: 0
+			}
+			LayerElement:  {
+				Type: "LayerElementMaterial"
+				TypedIndex: 0
+			}
+			LayerElement:  {
+				Type: "LayerElementSmoothing"
+				TypedIndex: 0
+			}
+			LayerElement:  {
+				Type: "LayerElementUV"
+				TypedIndex: 0
+			}
+		}
+	}
+	Geometry: 1683593651344, "Geometry::", "Mesh" {
+		Vertices: *24 {
+			a: -14.4365234375,193.539184570313,33.0271301269531,14.4365234375,193.539184570313,33.0271301269531,-14.4365234375,300.000030517578,-299.741607666016,-14.4365234375,193.539184570313,-34.6265258789063,14.4365234375,300.000030517578,-299.741607666016,14.4365234375,300.000030517578,299.747680664063,-14.4365234375,300.000030517578,299.747680664063,14.4365234375,193.539184570313,-34.6265258789063
+		} 
+		PolygonVertexIndex: *16 {
+			a: 6,5,4,-3,3,0,6,-3,7,1,0,-4,4,5,1,-8
+		} 
+		Edges: *12 {
+			a: 9,0,11,7,4,5,8,13,15,2,1,3
+		} 
+		GeometryVersion: 124
+		LayerElementNormal: 0 {
+			Version: 102
+			Name: ""
+			MappingInformationType: "ByPolygonVertex"
+			ReferenceInformationType: "Direct"
+			Normals: *48 {
+				a: 0,1,0,0,1,0,0,1,0,0,1,0,-1,6.8748180481748e-009,0,-0.999999940395355,6.87481849226401e-009,0,-1,6.87481893635322e-009,0,-1,6.8748180481748e-009,0,0,-1,0,0,-1,0,0,-1,0,0,-1,0,1,6.8748180481748e-009,0,1,6.87481893635322e-009,0,0.999999940395355,6.87481849226401e-009,0,1,6.8748180481748e-009,0
+			} 
+			NormalsW: *16 {
+				a: 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
+			} 
+		}
+		LayerElementBinormal: 0 {
+			Version: 102
+			Name: "map1"
+			MappingInformationType: "ByPolygonVertex"
+			ReferenceInformationType: "Direct"
+			Binormals: *48 {
+				a: 0,-0,1,-1.47529547172426e-012,0,1,-2.95059094344852e-012,0,1,-1.47529547172426e-012,0,1,6.8748180481748e-009,1,-1.554573282192e-005,6.87481938044243e-009,1,-7.77286641095998e-006,6.87481893635322e-009,1,0,6.8748180481748e-009,1,-7.77286641095998e-006,-0,-0,-1,-0,-0,-1,0,0,-1,-0,-0,-1,-6.8748180481748e-009,1,0,-6.87481893635322e-009,1,6.75005594530376e-006,-6.87481938044243e-009,1,1.35001128001022e-005,-6.8748180481748e-009,1,6.75005594530376e-006
+			} 
+			BinormalsW: *16 {
+				a: 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
+			} 
+
+		}
+		LayerElementTangent: 0 {
+			Version: 102
+			Name: "map1"
+			MappingInformationType: "ByPolygonVertex"
+			ReferenceInformationType: "Direct"
+			Tangents: *48 {
+				a: -1,0,0,-1,0,-1.47529547172426e-012,-1,0,-2.95059094344852e-012,-1,0,-1.47529547172426e-012,1.06874083964214e-013,1.554573282192e-005,1,5.3437041982107e-014,7.77286641095998e-006,1,0,-0,1,5.3437041982107e-014,7.77286641095998e-006,1,-1,0,0,-1,0,0,-1,0,-0,-1,0,0,0,0,-1,-4.64054115230025e-014,6.75005594530376e-006,-1,-9.28108162697415e-014,1.35001118906075e-005,-1,-4.64054081348707e-014,6.75005594530376e-006,-1
+			} 
+			TangentsW: *16 {
+				a: 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
+			} 
+		}
+		LayerElementUV: 0 {
+			Version: 101
+			Name: "map1"
+			MappingInformationType: "ByPolygonVertex"
+			ReferenceInformationType: "IndexToDirect"
+			UV: *32 {
+				a: 0.4741450548172,0.999999761581421,0.349145114421844,0.999999761581421,0.349145114421844,-2.64799410842897e-007,0.4741450548172,-2.6479926873435e-007,0.377811521291733,0.658913373947144,0.621377468109131,0.658911108970642,0.99996417760849,0.88819432258606,-3.58011129719671e-005,0.88819432258606,0.703428447246552,0.682166218757629,0.703428447246552,0.363833427429199,0.828428447246552,0.363833427429199,0.828428447246552,0.682166218757629,0.999965131282806,0.888198435306549,-3.47969653375912e-005,0.888198435306549,0.378567636013031,0.658916413784027,0.622133314609528,0.65891444683075
+			} 
+			UVIndex: *16 {
+				a: 0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15
+			} 
+		}
+		LayerElementSmoothing: 0 {
+			Version: 102
+			Name: ""
+			MappingInformationType: "ByEdge"
+			ReferenceInformationType: "Direct"
+			Smoothing: *12 {
+				a: 0,0,0,0,0,0,0,0,0,0,0,0
+			} 
+		}
+		LayerElementMaterial: 0 {
+			Version: 101
+			Name: ""
+			MappingInformationType: "AllSame"
+			ReferenceInformationType: "IndexToDirect"
+			Materials: *1 {
+				a: 0
+			} 
+		}
+		Layer: 0 {
+			Version: 100
+			LayerElement:  {
+				Type: "LayerElementNormal"
+				TypedIndex: 0
+			}
+			LayerElement:  {
+				Type: "LayerElementBinormal"
+				TypedIndex: 0
+			}
+			LayerElement:  {
+				Type: "LayerElementTangent"
+				TypedIndex: 0
+			}
+			LayerElement:  {
+				Type: "LayerElementMaterial"
+				TypedIndex: 0
+			}
+			LayerElement:  {
+				Type: "LayerElementSmoothing"
+				TypedIndex: 0
+			}
+			LayerElement:  {
+				Type: "LayerElementUV"
+				TypedIndex: 0
+			}
+		}
+	}
+	Geometry: 1683593640080, "Geometry::", "Mesh" {
+		Vertices: *24 {
+			a: 14.4365234375,103.186248779297,32.9896850585938,-14.4365234375,103.186248779297,32.9896850585938,-14.4365234375,0,-299.705871582031,14.4365234375,0,299.707214355469,14.4365234375,0,-299.705871582031,-14.4365234375,0,299.707214355469,-14.4365234375,103.186248779297,-34.5933837890625,14.4365234375,103.186248779297,-34.5933837890625
+		} 
+		PolygonVertexIndex: *16 {
+			a: 4,3,5,-3,2,5,1,-7,0,3,4,-8,6,1,0,-8
+		} 
+		Edges: *12 {
+			a: 13,3,2,7,6,11,8,5,10,0,1,15
+		} 
+		GeometryVersion: 124
+		LayerElementNormal: 0 {
+			Version: 102
+			Name: ""
+			MappingInformationType: "ByPolygonVertex"
+			ReferenceInformationType: "Direct"
+			Normals: *48 {
+				a: 0,-1,0,0,-1,0,0,-1,0,0,-1,0,-0.999999940395355,1.41891032257035e-008,0,-1,1.41891023375251e-008,0,-1,1.41891014493467e-008,0,-1,1.41891014493467e-008,0,1,1.41891014493467e-008,0,1,1.41891023375251e-008,0,0.999999940395355,1.41891032257035e-008,0,1,1.41891014493467e-008,0,0,1,0,0,1,0,0,1,0,0,1,0
+			} 
+			NormalsW: *16 {
+				a: 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
+			} 
+		}
+		LayerElementBinormal: 0 {
+			Version: 102
+			Name: "map1"
+			MappingInformationType: "ByPolygonVertex"
+			ReferenceInformationType: "Direct"
+			Binormals: *48 {
+				a: -0,-0,-1,-0,-0,-1,0,0,-1,-0,-0,-1,1.41891050020604e-008,1,0,1.41891023375251e-008,1,-5.44386375622707e-006,1.41891014493467e-008,1,-1.08877275124541e-005,1.41891014493467e-008,1,-5.44386375622707e-006,-1.41891014493467e-008,1,5.24941106050392e-006,-1.41891023375251e-008,1,0,-1.41891050020604e-008,1,5.24941106050392e-006,-1.41891014493467e-008,1,1.04988221210078e-005,2.19136310875001e-007,-0,1,1.09568155437501e-007,-0,1,0,-0,1,1.09568155437501e-007,-0,1
+			} 
+			BinormalsW: *16 {
+				a: 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
+			} 
+
+		}
+		LayerElementTangent: 0 {
+			Version: 102
+			Name: "map1"
+			MappingInformationType: "ByPolygonVertex"
+			ReferenceInformationType: "Direct"
+			Tangents: *48 {
+				a: -1,0,0,-1,0,0,-1,0,-0,-1,0,0,0,-0,1,7.72435433215972e-014,5.44386375622707e-006,1,1.54487073090667e-013,1.08877275124541e-005,1,7.72435365453336e-014,5.44386375622707e-006,1,-7.44844317517382e-014,5.24941106050392e-006,-1,0,0,-1,-7.44844317517382e-014,5.24941106050392e-006,-1,-1.48968863503476e-013,1.04988221210078e-005,-1,-1,-0,2.19136310875001e-007,-1,0,1.09568155437501e-007,-1,0,0,-1,0,1.09568155437501e-007
+			} 
+			TangentsW: *16 {
+				a: 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
+			} 
+		}
+		LayerElementUV: 0 {
+			Version: 101
+			Name: "map1"
+			MappingInformationType: "ByPolygonVertex"
+			ReferenceInformationType: "IndexToDirect"
+			UV: *32 {
+				a: 0.703428030014038,1,0.703428030014038,5.96046447753906e-008,0.828428030014038,5.96046447753906e-008,0.828428030014038,1,2.98023223876953e-008,8.94069671630859e-008,1,8.94069671630859e-008,0.621269822120667,0.351065695285797,0.377949625253677,0.351068198680878,0.378705531358719,0.351069629192352,2.98023223876953e-008,8.94069671630859e-008,1,8.94069671630859e-008,0.622025430202484,0.351067215204239,0.4741450548172,0.317833781242371,0.4741450548172,0.636166334152222,0.349145144224167,0.636166334152222,0.349145144224167,0.317833811044693
+			} 
+			UVIndex: *16 {
+				a: 0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15
+			} 
+		}
+		LayerElementSmoothing: 0 {
+			Version: 102
+			Name: ""
+			MappingInformationType: "ByEdge"
+			ReferenceInformationType: "Direct"
+			Smoothing: *12 {
+				a: 0,0,0,0,0,0,0,0,0,0,0,0
+			} 
+		}
+		LayerElementMaterial: 0 {
+			Version: 101
+			Name: ""
+			MappingInformationType: "AllSame"
+			ReferenceInformationType: "IndexToDirect"
+			Materials: *1 {
+				a: 0
+			} 
+		}
+		Layer: 0 {
+			Version: 100
+			LayerElement:  {
+				Type: "LayerElementNormal"
+				TypedIndex: 0
+			}
+			LayerElement:  {
+				Type: "LayerElementBinormal"
+				TypedIndex: 0
+			}
+			LayerElement:  {
+				Type: "LayerElementTangent"
+				TypedIndex: 0
+			}
+			LayerElement:  {
+				Type: "LayerElementMaterial"
+				TypedIndex: 0
+			}
+			LayerElement:  {
+				Type: "LayerElementSmoothing"
+				TypedIndex: 0
+			}
+			LayerElement:  {
+				Type: "LayerElementUV"
+				TypedIndex: 0
+			}
+		}
+	}
+	Geometry: 1683593649296, "Geometry::", "Mesh" {
+		Vertices: *36 {
+			a: 14.8466796875,300.000122070313,-321.304931640625,-15.351806640625,300.000122070313,-321.304931640625,14.8466796875,-2.8421709430404e-014,-321.304931640625,-15.351806640625,-2.8421709430404e-014,-321.304931640625,20.99072265625,299.999877929688,-306.3876953125,20.99072265625,299.999877929688,-270.036865234375,20.99072265625,-2.8421709430404e-014,-306.3876953125,20.99072265625,-2.8421709430404e-014,-270.036865234375,-20.99072265625,299.999877929688,-270.328369140625,-20.99072265625,299.999877929688,-306.3251953125,-20.99072265625,-2.8421709430404e-014,-270.328369140625,-20.99072265625,-2.8421709430404e-014,-306.3251953125
+		} 
+		PolygonVertexIndex: *36 {
+			a: 2,3,1,-1,2,0,4,-7,5,7,6,-5,3,11,9,-2,8,10,7,-6,9,11,10,-9,7,10,11,3,2,-7,9,8,5,4,0,-2
+		} 
+		Edges: *18 {
+			a: 2,1,0,3,5,19,11,8,7,9,6,14,23,13,17,21,12,16
+		} 
+		GeometryVersion: 124
+		LayerElementNormal: 0 {
+			Version: 102
+			Name: ""
+			MappingInformationType: "ByPolygonVertex"
+			ReferenceInformationType: "Direct"
+			Normals: *108 {
+				a: 0,0,-1,0,0,-1,0,0,-1,0,0,-1,0.924641907215118,0,-0.380837827920914,0.924641847610474,0,-0.380837798118591,0.924641847610474,0,-0.380837827920914,0.924641907215118,0,-0.380837827920914,1,0,0,1,0,0,1,0,0,1,0,0,-0.935886323451996,0,-0.352302104234695,-0.935886323451996,0,-0.352302104234695,-0.935886323451996,0,-0.352302074432373,-0.935886383056641,0,-0.352302104234695,-0.00694362726062536,0,0.999975919723511,-0.00694362726062536,0,0.999975919723511,-0.00694362726062536,0,0.999975919723511,-0.00694362726062536,0,0.999975919723511,-0.999999940395355,0,0,-0.999999940395355,0,0,-0.999999940395355,0,0,-0.999999940395355,0,0,0,-0.999999940395355,0,0,-1,0,0,-1,0,0,-1,0,0,-1,0,0,-1,0,3.7069582958793e-009,1,4.27041595685296e-006,3.70695851792391e-009,1,4.27041595685296e-006,3.7069582958793e-009,0.999999940395355,4.27041550210561e-006,3.70695851792391e-009,1,4.27041595685296e-006,3.7069582958793e-009,1,4.27041641160031e-006,3.70695873996851e-009,1,4.27041641160031e-006
+			} 
+			NormalsW: *36 {
+				a: 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
+			} 
+		}
+		LayerElementBinormal: 0 {
+			Version: 102
+			Name: "map1"
+			MappingInformationType: "ByPolygonVertex"
+			ReferenceInformationType: "Direct"
+			Binormals: *108 {
+				a: -1,-2.13361090573017e-006,-0,-1,-2.1331134121283e-006,-0,-1,-2.1326161459001e-006,-0,-1,-2.1331134121283e-006,-0,-0.380837827920914,4.47091006208211e-005,-0.924641907215118,-0.380837857723236,2.24232280743308e-005,-0.924641966819763,-0.380837827920914,1.37356764184915e-007,-0.924641847610474,-0.380837827920914,2.24232280743308e-005,-0.924641907215118,0,3.04527657135623e-005,-1,0,3.04567693092395e-005,-1,0,3.04607710859273e-005,-1,0,3.04567693092395e-005,-1,-0.352302104234695,7.93186336522922e-006,0.935886323451996,-0.352302104234695,3.13603050017264e-006,0.935886323451996,-0.352302074432373,-1.65980327437865e-006,0.935886323451996,-0.352302104234695,3.13603050017264e-006,0.935886383056641,0.999975919723511,1.04235778053408e-006,0.00694362726062536,0.999975919723511,1.21068405860569e-005,0.00694362726062536,0.999975919723511,2.31713238463271e-005,0.00694362726062536,0.999975919723511,1.21068405860569e-005,0.00694362726062536,0,-0.000328617868945003,1,0,-0.000328617868945003,1,0,-0.000328617868945003,1,0,-0.000328617868945003,1,-1,-0,-3.14145722768444e-007,-1,-0,-3.9499917647845e-007,-0.999589562416077,-0,0.0286481343209744,-0.972769856452942,-0,0.231773167848587,-0.999065220355988,-0,0.0432277545332909,-0.998794913291931,-0,-0.0490801297128201,-0.999589681625366,-1.18626573453184e-007,0.0286463927477598,-1,3.70691655149358e-009,9.81705117197862e-009,-1,3.70687480710785e-009,1.96341023439572e-008,-0.998794853687286,2.13301959206547e-007,-0.0490817464888096,-0.999065458774567,-1.80884811129545e-007,0.0432248935103416,-0.972769856452942,-9.86161694527254e-007,0.231773108243942
+			} 
+			BinormalsW: *36 {
+				a: 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
+			} 
+
+		}
+		LayerElementTangent: 0 {
+			Version: 102
+			Name: "map1"
+			MappingInformationType: "ByPolygonVertex"
+			ReferenceInformationType: "Direct"
+			Tangents: *108 {
+				a: 2.13361090573017e-006,-1,0,2.1331134121283e-006,-1,0,2.1326161459001e-006,-1,0,2.1331134121283e-006,-1,0,-1.70269158843439e-005,-1,-4.1339902963955e-005,-8.53961319080554e-006,-1,-2.07334542210447e-005,-5.23106535865736e-008,-1,-1.27005819194892e-007,-8.53961319080554e-006,-1,-2.07334542210447e-005,0,-1,-3.04527657135623e-005,0,-1,-3.04567693092395e-005,0,-1,-3.04607710859273e-005,0,-1,-3.04567693092395e-005,-2.7944124667556e-006,-1,7.42332304071169e-006,-1.10483017579099e-006,-1,2.93496805170435e-006,-5.84752115173615e-007,1,1.55338716467668e-006,-1.10483006210416e-006,-1,2.93496805170435e-006,1.04233265574294e-006,-1,7.23774373767583e-009,1.21065486382577e-005,-1,8.40653910927358e-008,-2.31707654165803e-005,1,-1.60893037559617e-007,1.21065486382577e-005,-1,8.40653910927358e-008,0,-0.999999940395355,-0.000328617868945003,0,-0.999999940395355,-0.000328617868945003,0,-0.999999940395355,-0.000328617868945003,0,-0.999999940395355,-0.000328617868945003,3.14145722768444e-007,0,-1,3.9499917647845e-007,0,-1,-0.0286481343209744,0,-0.999589562416077,-0.231773167848587,0,-0.972769856452942,-0.0432277545332909,0,-0.999065220355988,0.0490801222622395,0,-0.998794794082642,-0.0286463927477598,4.2687702261901e-006,-0.999589681625366,-9.81703518476706e-009,4.27041595685296e-006,-1,-1.96340863567457e-008,4.27041504735826e-006,-1,0.049081739038229,4.26508722739527e-006,-0.998794734477997,-0.0432248897850513,4.26658561991644e-006,-0.999065339565277,-0.231773108243942,4.1549915295036e-006,-0.972769856452942
+			} 
+			TangentsW: *36 {
+				a: 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
+			} 
+		}
+		LayerElementUV: 0 {
+			Version: 101
+			Name: "map1"
+			MappingInformationType: "ByPolygonVertex"
+			ReferenceInformationType: "IndexToDirect"
+			UV: *72 {
+				a: 1.95672953128815,0.00415061507374048,1.95672953128815,0.145523861050606,1.08371293544769,0.145520865917206,1.0837128162384,0.00414761854335666,2.34240770339966,0.614961564540863,1.48049199581146,0.615462243556976,1.08816277980804,0.0127408970147371,1.95662891864777,0.0127393575385213,1.48489201068878,0.0291941519826651,2.34238266944885,0.0291728861629963,2.34239864349365,0.11378812789917,1.48490798473358,0.113809399306774,1.9578994512558,0.287936419248581,1.08267557621002,0.514058768749237,1.94095647335052,0.514051735401154,1.08437919616699,0.287970036268234,1.08821296691895,0.012745188549161,1.95666909217834,0.0127414502203465,1.08273756504059,0.514550864696503,1.94128930568695,0.51463395357132,1.71126770973206,1.02946662902832,2.56926703453064,1.02969574928284,2.56927061080933,1.11335527896881,1.71127140522003,1.11312615871429,1.03168272972107,0.0192953608930111,1.03217422962189,0.128857880830765,1.08431994915009,0.128857925534248,1.10536706447601,0.108355484902859,1.1053671836853,0.041115865111351,1.08442378044128,0.0192953906953335,1.08432006835938,0.128857865929604,1.03217422962189,0.128857865929604,1.03168272972107,0.0192953199148178,1.08442378044128,0.0192953180521727,1.1053671836853,0.0411160215735435,1.10536706447601,0.108355477452278
+			} 
+			UVIndex: *36 {
+				a: 0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35
+			} 
+		}
+		LayerElementSmoothing: 0 {
+			Version: 102
+			Name: ""
+			MappingInformationType: "ByEdge"
+			ReferenceInformationType: "Direct"
+			Smoothing: *18 {
+				a: 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+			} 
+		}
+		LayerElementMaterial: 0 {
+			Version: 101
+			Name: ""
+			MappingInformationType: "AllSame"
+			ReferenceInformationType: "IndexToDirect"
+			Materials: *1 {
+				a: 0
+			} 
+		}
+		Layer: 0 {
+			Version: 100
+			LayerElement:  {
+				Type: "LayerElementNormal"
+				TypedIndex: 0
+			}
+			LayerElement:  {
+				Type: "LayerElementBinormal"
+				TypedIndex: 0
+			}
+			LayerElement:  {
+				Type: "LayerElementTangent"
+				TypedIndex: 0
+			}
+			LayerElement:  {
+				Type: "LayerElementMaterial"
+				TypedIndex: 0
+			}
+			LayerElement:  {
+				Type: "LayerElementSmoothing"
+				TypedIndex: 0
+			}
+			LayerElement:  {
+				Type: "LayerElementUV"
+				TypedIndex: 0
+			}
+		}
+	}
+	Geometry: 1683593651856, "Geometry::", "Mesh" {
+		Vertices: *36 {
+			a: -14.8466796875,300.000122070313,321.515502929688,15.351806640625,300.000122070313,321.515502929688,-14.8466796875,-2.8421709430404e-014,321.515502929688,15.351806640625,-2.8421709430404e-014,321.515502929688,-20.99072265625,299.999877929688,306.3876953125,-20.99072265625,299.999877929688,270.036865234375,-20.99072265625,-2.8421709430404e-014,306.3876953125,-20.99072265625,-2.8421709430404e-014,270.036865234375,20.99072265625,299.999877929688,270.328369140625,20.99072265625,299.999877929688,306.3251953125,20.99072265625,-2.8421709430404e-014,270.328369140625,20.99072265625,-2.8421709430404e-014,306.3251953125
+		} 
+		PolygonVertexIndex: *36 {
+			a: 2,3,1,-1,2,0,4,-7,5,7,6,-5,3,11,9,-2,8,10,7,-6,9,11,10,-9,7,10,11,3,2,-7,9,8,5,4,0,-2
+		} 
+		Edges: *18 {
+			a: 2,1,0,3,5,19,11,8,7,9,6,14,23,13,17,21,12,16
+		} 
+		GeometryVersion: 124
+		LayerElementNormal: 0 {
+			Version: 102
+			Name: ""
+			MappingInformationType: "ByPolygonVertex"
+			ReferenceInformationType: "Direct"
+			Normals: *108 {
+				a: 0,0,1,0,0,1,0,0,1,0,0,1,-0.926501154899597,0,0.376291841268539,-0.926501214504242,0,0.376291871070862,-0.926501154899597,0,0.376291841268539,-0.926501154899597,0,0.376291841268539,-1,0,0,-1,0,0,-1,0,0,-1,0,0,0.937489569187164,0,0.348013520240784,0.937489569187164,0,0.348013520240784,0.937489569187164,0,0.348013490438461,0.93748950958252,0,0.348013490438461,0.00694362726062536,0,-0.999975919723511,0.00694362726062536,0,-0.999975919723511,0.00694362726062536,0,-0.999975919723511,0.00694362726062536,0,-0.999975919723511,0.999999940395355,0,0,0.999999940395355,0,0,0.999999940395355,0,0,0.999999940395355,0,0,0,-0.999999940395355,0,0,-1,0,0,-1,0,0,-0.999999940395355,0,0,-1,0,0,-0.999999940395355,0,-3.69332076033402e-009,1,-4.25470534537453e-006,-3.69332098237862e-009,1,-4.25470534537453e-006,-3.69332076033402e-009,0.999999940395355,-4.25470534537453e-006,-3.69332076033402e-009,0.999999940395355,-4.25470534537453e-006,-3.69332053828941e-009,1,-4.25470534537453e-006,-3.69332031624481e-009,0.999999940395355,-4.25470489062718e-006
+			} 
+			NormalsW: *36 {
+				a: 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
+			} 
+		}
+		LayerElementBinormal: 0 {
+			Version: 102
+			Name: "map1"
+			MappingInformationType: "ByPolygonVertex"
+			ReferenceInformationType: "Direct"
+			Binormals: *108 {
+				a: 1,-2.13361090573017e-006,0,1,-2.1331134121283e-006,0,1,-2.1326161459001e-006,0,1,-2.1331134121283e-006,0,0.376291900873184,4.52492276963312e-005,0.926501274108887,0.376291871070862,2.26941192522645e-005,0.926501214504242,0.376291900873184,1.39016165690009e-007,0.926501274108887,0.376291900873184,2.26941210712539e-005,0.926501274108887,0,3.04527657135623e-005,1,0,3.04567693092395e-005,1,0,3.04607710859273e-005,1,0,3.04567693092395e-005,1,0.348013520240784,8.02960857981816e-006,-0.937489569187164,0.348013520240784,3.174675612172e-006,-0.937489569187164,0.348013490438461,-1.68025701441366e-006,-0.937489569187164,0.348013490438461,3.17467538479832e-006,-0.93748950958252,-0.999975919723511,1.04235778053408e-006,-0.00694362726062536,-0.999975919723511,1.21068405860569e-005,-0.00694362726062536,-0.999975919723511,2.31713238463271e-005,-0.00694362726062536,-0.999975919723511,1.21068405860569e-005,-0.00694362726062536,0,-0.000328617868945003,-1,0,-0.000328617868945003,-1,0,-0.000328617868945003,-1,0,-0.000328617868945003,-1,1,0,3.14145722768444e-007,1,0,3.9499917647845e-007,0.99737161397934,-0,-0.0724561735987663,0.998940289020538,0,0.0460247173905373,0.97201806306839,0,0.234906032681465,0.999739944934845,0,0.0228072609752417,0.997371673583984,-3.04594237832134e-007,-0.0724557489156723,1,3.6932792379929e-009,-9.81705117197862e-009,1,3.69323771565178e-009,-1.96341023439572e-008,0.999739825725555,1.00739413255724e-007,0.0228093452751637,0.972016215324402,1.00307875072758e-006,0.234913736581802,0.998940110206604,1.99530731492814e-007,0.0460293479263783
+			} 
+			BinormalsW: *36 {
+				a: 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
+			} 
+
+		}
+		LayerElementTangent: 0 {
+			Version: 102
+			Name: "map1"
+			MappingInformationType: "ByPolygonVertex"
+			ReferenceInformationType: "Direct"
+			Tangents: *108 {
+				a: -2.13361090573017e-006,-1,0,-2.1331134121283e-006,-1,0,-2.1326161459001e-006,-1,0,-2.1331134121283e-006,-1,0,1.70269140653545e-005,-1,4.19234602304641e-005,8.53961228131084e-006,-1,2.10261277970858e-005,5.23106464811463e-008,-1,1.28798632204052e-007,8.53961228131084e-006,-1,2.10261296160752e-005,0,-1,3.04527657135623e-005,0,-1,3.04567693092395e-005,0,-1,3.04607710859273e-005,0,-1,3.04567693092395e-005,2.79441201200825e-006,-1,-7.52767346057226e-006,1.10482994841732e-006,-1,-2.97622500511352e-006,5.84752058330196e-007,1,-1.57522333665838e-006,1.10482994841732e-006,-1,-2.97622500511352e-006,-1.04233265574294e-006,-1,-7.23774373767583e-009,-1.21065486382577e-005,-1,-8.40653910927358e-008,2.31707654165803e-005,1,1.60893037559617e-007,-1.21065486382577e-005,-1,-8.40653910927358e-008,-0,-0.999999940395355,0.000328617868945003,0,-0.999999940395355,0.000328617868945003,0,-0.999999940395355,0.000328617868945003,0,-0.999999940395355,0.000328617868945003,-3.14145722768444e-007,0,1,-3.9499917647845e-007,0,1,0.0724561735987663,0,0.99737161397934,-0.0460247211158276,0,0.998940348625183,-0.234906062483788,0,0.972018182277679,-0.0228072609752417,0,0.9997398853302,0.0724557489156723,4.2437900447112e-006,0.997371673583984,9.81703518476706e-009,4.25470534537453e-006,1,1.96340863567457e-008,4.25470489062718e-006,1,-0.0228093452751637,4.25351481680991e-006,0.999739766120911,-0.234913736581802,4.13477482652524e-006,0.972016215324402,-0.0460293479263783,4.25002644988126e-006,0.998940050601959
+			} 
+			TangentsW: *36 {
+				a: 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
+			} 
+		}
+		LayerElementUV: 0 {
+			Version: 101
+			Name: "map1"
+			MappingInformationType: "ByPolygonVertex"
+			ReferenceInformationType: "IndexToDirect"
+			UV: *72 {
+				a: 1.95672953128815,0.00415061507374048,1.95672953128815,0.145523861050606,1.08371293544769,0.145520865917206,1.0837128162384,0.00414761854335666,2.34240770339966,0.614961564540863,1.48049199581146,0.615462243556976,1.08816277980804,0.0127408970147371,1.95662891864777,0.0127393575385213,1.48489201068878,0.0291941519826651,2.34238266944885,0.0291728861629963,2.34239864349365,0.11378812789917,1.48490798473358,0.113809399306774,1.9578994512558,0.287936419248581,1.08267557621002,0.514058768749237,1.94095647335052,0.514051735401154,1.08437919616699,0.287970036268234,1.08821296691895,0.012745188549161,1.95666909217834,0.0127414502203465,1.08273756504059,0.514550864696503,1.94128930568695,0.51463395357132,1.71126770973206,1.02946662902832,2.56926703453064,1.02969574928284,2.56927061080933,1.11335527896881,1.71127140522003,1.11312615871429,1.03168272972107,0.0192953608930111,1.03217422962189,0.128857880830765,1.08431994915009,0.128857925534248,1.10536706447601,0.108355484902859,1.1053671836853,0.041115865111351,1.08442378044128,0.0192953906953335,1.08432006835938,0.128857865929604,1.03217422962189,0.128857865929604,1.03168272972107,0.0192953199148178,1.08442378044128,0.0192953180521727,1.1053671836853,0.0411160215735435,1.10536706447601,0.108355477452278
+			} 
+			UVIndex: *36 {
+				a: 0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35
+			} 
+		}
+		LayerElementSmoothing: 0 {
+			Version: 102
+			Name: ""
+			MappingInformationType: "ByEdge"
+			ReferenceInformationType: "Direct"
+			Smoothing: *18 {
+				a: 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+			} 
+		}
+		LayerElementMaterial: 0 {
+			Version: 101
+			Name: ""
+			MappingInformationType: "AllSame"
+			ReferenceInformationType: "IndexToDirect"
+			Materials: *1 {
+				a: 0
+			} 
+		}
+		Layer: 0 {
+			Version: 100
+			LayerElement:  {
+				Type: "LayerElementNormal"
+				TypedIndex: 0
+			}
+			LayerElement:  {
+				Type: "LayerElementBinormal"
+				TypedIndex: 0
+			}
+			LayerElement:  {
+				Type: "LayerElementTangent"
+				TypedIndex: 0
+			}
+			LayerElement:  {
+				Type: "LayerElementMaterial"
+				TypedIndex: 0
+			}
+			LayerElement:  {
+				Type: "LayerElementSmoothing"
+				TypedIndex: 0
+			}
+			LayerElement:  {
+				Type: "LayerElementUV"
+				TypedIndex: 0
+			}
+		}
+	}
+	Geometry: 1683593637520, "Geometry::", "Mesh" {
+		Vertices: *498 {
+			a: -19.252685546875,258.821044921875,-300,19.25244140625,258.821044921875,-300,-19.252685546875,258.821044921875,300,19.25244140625,258.821044921875,300,-19.252685546875,300.000030517578,300,19.25244140625,300,300,-19.252685546875,300.000030517578,-300,19.25244140625,300,-300,13.171630859375,300.000122070313,-321.304931640625,-13.56396484375,300.000122070313,-321.304931640625,14.8466796875,300,-306.387939453125,-15.351806640625,300,-306.3251953125,13.171630859375,-2.8421709430404e-014,-321.304931640625,-13.56396484375,-2.8421709430404e-014,-321.304931640625,14.8466796875,-2.8421709430404e-014,-306.387939453125,-15.351806640625,-2.8421709430404e-014,-306.3251953125,20.99072265625,299.999877929688,-306.3876953125,20.99072265625,299.999877929688,-270.036865234375,20.99072265625,-2.8421709430404e-014,-306.3876953125,20.99072265625,-2.8421709430404e-014,-270.036865234375,-20.99072265625,299.999877929688,-270.328369140625,-20.99072265625,299.999877929688,-306.3251953125,-20.99072265625,-2.8421709430404e-014,-270.328369140625,-20.99072265625,-2.8421709430404e-014,-306.3251953125,-0.10107421875,301.494018554688,-297.02490234375,-13.060546875,300.000122070313,321.515502929688,13.673583984375,300.000122070313,321.515502929688,-14.8466796875,300,306.387939453125,15.351806640625,300,306.3251953125,-13.060546875,-2.8421709430404e-014,321.515502929688,13.673583984375,-2.8421709430404e-014,321.515502929688,-14.8466796875,-2.8421709430404e-014,306.387939453125,15.351806640625,-2.8421709430404e-014,306.3251953125,-20.99072265625,299.999877929688,306.3876953125,-20.99072265625,299.999877929688,270.036865234375,-20.99072265625,-2.8421709430404e-014,306.3876953125,-20.99072265625,-2.8421709430404e-014,270.036865234375,20.99072265625,299.999877929688,270.328369140625,20.99072265625,299.999877929688,306.3251953125,20.99072265625,-2.8421709430404e-014,270.328369140625,20.99072265625,-2.8421709430404e-014,306.3251953125,0.10107421875,301.494018554688,297.02490234375,-19.600830078125,222.041412353516,305.573669433594,-19.600830078125,222.041412353516,272.428924560547,
+18.677978515625,222.041412353516,272.694702148438,18.677978515625,222.041412353516,305.516693115234,13.536376953125,222.04150390625,305.516693115234,12.06640625,222.041580200195,319.367248535156,-12.3095703125,222.041580200195,319.367248535156,-13.99853515625,222.04150390625,305.573913574219,-21.036865234375,94.0003814697266,308.132904052734,-21.036865234375,94.0003814697266,272.966796875,22.085205078125,94.0003814697266,273.248809814453,22.085205078125,94.0003814697266,308.072448730469,16.292724609375,94.0004119873047,308.072448730469,14.506591796875,94.0004577636719,322.767669677734,-12.953369140625,94.0004577636719,322.767669677734,-14.725830078125,94.0004119873047,308.133148193359,-20.85205078125,226.971145629883,-306.165924072266,-20.85205078125,226.971145629883,-272.158569335938,18.809326171875,226.971145629883,-271.883178710938,18.809326171875,226.971145629883,-306.224975585938,13.0048828125,226.971237182617,-306.225219726563,11.541015625,226.971313476563,-320.317749023438,-13.717041015625,226.971313476563,-320.317749023438,-15.524658203125,226.971237182617,-306.165924072266,-22.64501953125,130.794219970703,-304.001770019531,-22.64501953125,130.794219970703,-270.115356445313,23.68115234375,130.794219970703,-269.840942382813,23.68115234375,130.794219970703,-304.060607910156,16.9013671875,130.79426574707,-304.060821533203,14.99072265625,130.794311523438,-318.103271484375,-14.511962890625,130.794311523438,-318.103271484375,-16.422607421875,130.79426574707,-304.001770019531,-4.841064453125,191.726669311523,36.6513671875,4.841064453125,191.726669311523,36.6513671875,4.841064453125,102.634666442871,36.6513671875,-4.841064453125,102.634666442871,36.6513671875,14.4365234375,0,-300,-14.4365234375,0,-300,14.4365234375,283.821044921875,-300,-14.4365234375,283.821044921875,-300,14.4365234375,283.821044921875,300,-14.4365234375,283.821044921875,300,14.4365234375,0,300,-14.4365234375,0,300,-4.841064453125,191.726669311523,-36.8779296875,4.841064453125,191.726669311523,-36.8779296875,-4.841064453125,102.634666442871,-36.8779296875,
+4.841064453125,102.634666442871,-36.8779296875,-14.991455078125,189.46110534668,-47.65234375,14.991455078125,189.46110534668,-47.65234375,-14.991455078125,107.184715270996,-47.65234375,14.991455078125,107.184715270996,-47.65234375,-14.9912109375,107.184715270996,-31.81396484375,14.99169921875,107.184715270996,-31.81396484375,-14.9912109375,189.46110534668,-31.81396484375,14.99169921875,189.46110534668,-31.81396484375,-14.991455078125,189.679336547852,30.9148559570313,14.991455078125,189.679336547852,30.9148559570313,-14.991455078125,107.248123168945,28.3401184082031,14.991455078125,107.248123168945,28.3401184082031,-14.991455078125,106.771224975586,43.5152435302734,14.991455078125,106.771224975586,43.5152435302734,-14.991455078125,189.202438354492,46.0899810791016,14.991455078125,189.202438354492,46.0899810791016,-18.333984375,186.605392456055,-53.4986572265625,18.333984375,186.605392456055,-53.4986572265625,-18.333984375,189.207214355469,50.0028076171875,18.333984375,189.207214355469,50.0028076171875,-18.333984375,202.210357666016,49.6759033203125,18.333984375,202.210357666016,49.6759033203125,-18.333984375,199.608535766602,-53.8255615234375,18.333984375,199.608535766602,-53.8255615234375,-18.333984375,94.3382949829102,-52.89990234375,18.333984375,94.3382949829102,-52.89990234375,-18.333984375,94.3382949829102,50.63427734375,18.333984375,94.3382949829102,50.63427734375,-18.333984375,107.49112701416,50.63427734375,18.333984375,107.49112701416,50.63427734375,-18.333984375,107.49112701416,-52.89990234375,18.333984375,107.49112701416,-52.89990234375,-17.995361328125,186.876251220703,-12.6925964355469,-17.995361328125,198.876693725586,-14.4552001953125,17.995361328125,198.876693725586,-14.4552001953125,17.995361328125,186.876251220703,-12.6925964355469,-14.9912109375,129.944473266602,-32.6400451660156,-14.991455078125,129.944458007813,-46.8262634277344,14.991455078125,129.944458007813,-46.8262634277344,14.99169921875,129.944473266602,-32.6400451660156,-14.991455078125,165.349868774414,30.9288635253906,-14.991455078125,164.921859741211,44.5483245849609,
+14.991455078125,164.921859741211,44.5483245849609,14.991455078125,165.349868774414,30.9288635253906,-18.333984375,107.656295776367,5.823486328125,-18.333984375,95.989875793457,5.823486328125,18.333984375,95.989875793457,5.823486328125,18.333984375,107.656295776367,5.823486328125,-14.4365234375,204.462478637695,52.5567474365234,-14.4365234375,200.543243408203,-53.7928466796875,-14.4365234375,90.4209289550781,-55.2052917480469,-14.4365234375,91.7096862792969,53.8234405517578,14.436279296875,205.088668823242,51.9085693359375,14.436767578125,200.902557373047,-55.1661376953125,14.436767578125,91.1201400756836,-54.0763549804688,14.436279296875,91.8222579956055,51.0937194824219,17.01220703125,227.80078125,127.391754150391,13.11181640625,219.249160766602,-130.945556640625,16.97119140625,52.6046028137207,-94.6222839355469,12.15576171875,49.1058959960938,139.191192626953,-15.115478515625,230.194732666016,141.177261352539,-11.2880859375,222.327346801758,-125.99983215332,-13.73583984375,58.1001663208008,-88.2344360351563,-17.62744140625,50.330696105957,100.930206298828,-18.576904296875,300.000030517578,-0.496047973632813,-18.576904296875,260.423583984375,-0.496047973632813,19.56640625,260.423583984375,-0.44964599609375,19.56640625,300,-0.44964599609375,-20.108154296875,300.000030517578,-144.160293579102,-20.108154296875,262.325378417969,-144.160293579102,19.25244140625,262.325378417969,-144.170776367188,19.25244140625,300,-144.170776367188,-19.252685546875,300.000030517578,145.074630737305,-19.252685546875,256.673187255859,145.074630737305,20.275390625,256.673187255859,145.038711547852,20.275390625,300,145.038711547852
+		} 
+		PolygonVertexIndex: *600 {
+			a: 163,164,3,-3,2,3,5,-5,165,162,4,-6,6,7,1,-1,4,162,163,-3,164,165,5,-4,63,64,9,-9,9,64,65,-12,10,62,63,-9,61,62,10,-17,17,60,61,-17,21,11,65,-59,20,59,60,-18,21,58,59,-21,19,22,23,15,13,12,14,-19,24,20,-18,17,16,-25,16,10,-25,10,8,-25,8,9,-25,9,11,-25,11,21,-25,21,20,-25,29,30,55,-57,55,30,32,-55,57,31,29,-57,35,31,57,-51,51,36,35,-51,53,54,32,-41,52,39,36,-52,53,40,39,-53,36,39,40,32,30,29,31,-36,41,37,-35,34,33,-42,33,27,-42,27,25,-42,25,26,-42,26,28,-42,28,38,-42,38,37,-42,34,43,42,-34,37,44,43,-35,38,45,44,-38,38,28,46,-46,26,47,46,-29,48,47,26,-26,27,49,48,-26,42,49,27,-34,43,51,50,-43,44,52,51,-44,45,53,52,-45,45,46,54,-54,47,55,54,-47,56,55,47,-49,49,57,56,-49,50,57,49,-43,58,66,67,-60,60,59,67,-69,61,60,68,-70,69,70,62,-62,63,62,70,-72,71,72,64,-64,65,64,72,-74,58,65,73,-67,66,23,22,-68,68,67,22,-20,69,68,19,-19,18,14,70,-70,71,70,14,-13,12,13,72,-72,73,72,13,-16,66,73,15,-24,74,75,76,-78,80,78,79,-82,83,82,80,-82,83,85,84,-83,78,84,85,-80,74,77,141,-139,82,84,149,-147,86,74,138,-140,148,78,80,-148,140,141,77,-89,84,78,148,-150,89,87,86,-89,87,75,74,-87,88,77,76,-90,86,139,140,-89,80,82,146,-148,127,128,93,-93,94,95,129,-127,128,129,95,-94,126,127,92,-95,98,99,133,-131,131,132,105,-105,99,105,132,-134,104,98,130,-132,125,122,106,-108,108,109,111,-111,112,123,124,-114,112,113,107,-107,124,125,107,-114,122,123,112,-107,135,136,117,-117,116,117,119,-119,118,119,137,-135,120,121,115,-115,136,137,119,-118,134,135,116,-119,123,122,108,-111,124,123,110,-112,125,124,111,-110,108,122,125,-110,96,90,127,-127,90,91,128,-128,91,97,129,-129,126,129,97,-97,131,130,100,-103,102,103,132,-132,133,132,103,-102,130,133,101,-101,120,114,135,-135,114,115,136,-136,115,121,137,-137,134,137,121,-121,139,138,150,-152,140,139,151,-153,141,140,152,-154,153,150,138,-142,143,142,75,-88,144,143,87,-90,76,145,144,-90,142,145,76,-76,147,146,142,-144,144,148,147,-144,149,148,144,-146,146,149,145,-143,151,150,83,-82,152,151,81,-80,153,152,79,-86,83,150,153,-86,154,158,159,-156,159,160,156,-156,160,161,157,-157,161,158,154,
+-158,158,6,0,-160,0,1,160,-160,1,7,161,-161,7,6,158,-162,162,154,155,-164,155,156,164,-164,156,157,165,-165,157,154,162,-166
+		} 
+		Edges: *308 {
+			a: 14,2,6,12,7,5,11,15,13,9,573,570,26,35,31,30,32,269,60,59,61,267,38,51,43,40,62,63,259,44,55,47,56,57,58,250,64,66,68,71,74,77,80,83,140,137,143,165,176,89,88,93,97,91,134,129,131,152,100,105,103,146,149,160,113,117,110,112,128,130,132,135,138,141,144,147,154,184,153,156,157,192,161,197,166,168,169,175,172,208,177,180,186,104,107,188,115,111,119,94,108,200,95,207,90,96,99,102,216,48,53,223,49,39,41,229,36,27,33,25,24,243,29,46,248,218,217,255,222,227,226,261,228,235,234,237,236,275,242,246,281,280,283,282,285,287,288,293,291,289,326,312,324,296,298,303,286,308,328,284,319,292,294,512,318,334,325,327,539,444,346,348,454,441,445,358,354,351,349,440,448,360,470,460,366,363,361,458,466,459,461,372,368,378,380,382,387,377,379,383,381,427,431,391,389,414,402,406,412,473,477,407,405,411,409,415,413,425,384,396,385,392,376,443,347,356,345,344,449,352,350,457,367,374,365,364,467,370,362,475,403,420,401,400,481,416,410,307,314,547,386,435,489,311,310,337,301,316,302,495,505,507,504,511,508,531,513,516,521,523,342,524,315,305,322,306,537,491,490,543,494,499,498,500,552,586,555,589,558,561,562,566,568,554,553,557,556,577,560,564,584,3,17,1,0,593,20,8
+		} 
+		GeometryVersion: 124
+		LayerElementNormal: 0 {
+			Version: 102
+			Name: ""
+			MappingInformationType: "ByPolygonVertex"
+			ReferenceInformationType: "Direct"
+			Normals: *1800 {
+				a: 4.98348026667372e-006,-0.999986231327057,-0.00524657871574163,4.97884275318938e-006,-0.999985873699188,-0.00530974846333265,6.38523897578125e-006,-0.999903976917267,0.0138610070571303,6.38523988527595e-006,-0.999903976917267,0.0138610089197755,0,0,1,0,0,1,0,0,1,0,0,1,7.8393225066975e-007,1,0,7.83926395797607e-007,1,0,7.8217033205874e-007,1,0,7.8217033205874e-007,1,0,0,0,-1,0,0,-1,0,0,-1,0,0,-1,-1,0,0,-0.999997556209564,0,-0.00222668726928532,-0.999997556209564,0,-0.00221780338324606,-1,0,0,0.999999403953552,0,0.00112182297743857,0.999999403953552,0,0.00109983119182289,0.999978244304657,0,0.00660117389634252,0.999978244304657,0,0.00660117343068123,0,-0.0190582573413849,-0.999818444252014,0,-0.0190539360046387,-0.999818444252014,0,-0.0135164801031351,-0.999908685684204,0,-0.0135164801031351,-0.999908685684204,-0.99246871471405,0.00125321082305163,-0.122491672635078,-0.991905033588409,0.00375290238298476,-0.126926779747009,-0.991894662380219,0.00379773415625095,-0.127006277441978,-0.992468774318695,0.00125321082305163,-0.122491680085659,0.993899047374725,-0.0244759172201157,-0.107542984187603,0.993428587913513,0.00925814174115658,-0.114079102873802,0.993447005748749,0.00866031274199486,-0.113964423537254,0.99389910697937,-0.024475920945406,-0.107542991638184,3.74891569663305e-005,-0.01407166197896,-0.999900937080383,3.75158269889653e-005,-0.0139590054750443,-0.999902546405792,4.0289742173627e-005,-0.00222927890717983,-0.999997556209564,4.02897458116058e-005,-0.00222927890717983,-0.999997496604919,0.99955415725708,-0.0298570841550827,0,0.999883770942688,0.0152421053498983,0,0.999887824058533,0.014978569932282,0,0.99955415725708,-0.0298570841550827,0,4.87758461531485e-006,-0.00218093465082347,-0.999997615814209,4.8775850700622e-006,-0.00218093465082347,-0.999997615814209,2.05205492420646e-006,-0.0139504121616483,-0.999902606010437,2.03057561520836e-006,-0.0140398740768433,-0.999901473522186,-0.00694105168804526,-0.0250660981982946,0.999661684036255,-0.00662261201068759,0.00189685705117881,0.999976277351379,
+-0.00662231026217341,0.00192218529991806,0.999976217746735,-0.00694105122238398,-0.0250660963356495,0.999661684036255,-0.999998152256012,-0.00189884612336755,0,-0.999954462051392,0.00954178348183632,0,-0.999953806400299,0.00960971880704165,0,-0.999998211860657,-0.00189884623978287,0,0,-0.999999940395355,0,0,-0.999999940395355,0,0,-1,0,0,-1,0,0,-1,0,0,-1,0,0,-0.999999940395355,0,0,-1,0,-1.85469289135654e-005,0.999963104724884,0.0085908304899931,-0.0236099977046251,0.999019980430603,0.0374378971755505,0.0233881287276745,0.999040305614471,0.0370311960577965,0.0233881287276745,0.999040305614471,0.0370311960577965,0.0687825456261635,0.997622549533844,-0.00425537209957838,-1.85469289135654e-005,0.999963104724884,0.0085908304899931,0.0687825456261635,0.997622549533844,-0.00425537209957838,0.0711517482995987,0.996431469917297,-0.0454070083796978,-1.85469289135654e-005,0.999963104724884,0.0085908304899931,0.0711517482995987,0.996431469917297,-0.0454070083796978,0.0162316504865885,0.998485803604126,-0.0525607690215111,-1.85469289135654e-005,0.999963104724884,0.0085908304899931,0.0162316504865885,0.998485803604126,-0.0525607690215111,-0.0165795087814331,0.998496890068054,-0.0522417947649956,-1.85469289135654e-005,0.999963104724884,0.0085908304899931,-0.0165795087814331,0.998496890068054,-0.0522417947649956,-0.0712573975324631,0.996520400047302,-0.043236929923296,-1.85469289135654e-005,0.999963104724884,0.0085908304899931,-0.0712573975324631,0.996520400047302,-0.043236929923296,-0.0695692896842957,0.99756908416748,-0.00400317693129182,-1.85469289135654e-005,0.999963104724884,0.0085908304899931,-0.0695692896842957,0.99756908416748,-0.00400317693129182,-0.0236099977046251,0.999019980430603,0.0374378971755505,-1.85469289135654e-005,0.999963104724884,0.0085908304899931,0,-0.0133196776732802,0.999911308288574,0,-0.0133196767419577,0.999911308288574,0,0.00917597115039825,0.999957919120789,0,0.00920158997178078,0.999957621097565,0.993434965610504,0.007952481508255,0.114121221005917,0.993285775184631,-0.0112093798816204,0.11514239013195,
+0.993285715579987,-0.0112093789502978,0.115142375230789,0.993434906005859,0.00801632925868034,0.114117778837681,-0.992772400379181,0.00429768301546574,0.119935341179371,-0.992927193641663,-0.000688513624481857,0.118722252547741,-0.992927312850952,-0.000688513682689518,0.118722282350063,-0.992773056030273,0.00427960464730859,0.119930952787399,-4.00304306822363e-005,-0.0185627564787865,0.999827742576599,-4.00304343202151e-005,-0.0185627564787865,0.999827742576599,-4.05674873036332e-005,0.0032883535604924,0.999994575977325,-4.05649043386802e-005,0.00318139139562845,0.999994874000549,-0.99998152256012,0.0060791252180934,0,-0.99999988079071,-0.00049086898798123,0,-0.999999940395355,-0.000490869046188891,0,-0.999981164932251,0.00612536165863276,0,-3.14386966238089e-006,0.00312985689379275,0.999995112419128,-3.16705268232909e-006,0.00329001503996551,0.999994575977325,0,-0.0185845158994198,0.99982738494873,0,-0.0185845140367746,0.999827325344086,0.00673271249979734,0.0111953327432275,-0.999914705753326,0.00673556327819824,0.0310655906796455,-0.999494671821594,0.00673556374385953,0.0310655888170004,-0.999494671821594,0.0067327069118619,0.0111730396747589,-0.999914824962616,0.999950230121613,0.00997727364301682,0,0.999932289123535,-0.0116426050662994,0,0.99993222951889,-0.0116426041349769,0,0.999951720237732,0.00982722640037537,0,0,-1,0,0,-1,0,0,-1,0,0,-1,0,0,-1,0,0,-1,0,0,-0.999999940395355,0,0,-1,0,-1.61431744345464e-005,0.999962747097015,-0.00864151865243912,0.0236099977046251,0.999019980430603,-0.0374378971755505,-0.0233881287276745,0.999040305614471,-0.0370311960577965,-0.0233881287276745,0.999040305614471,-0.0370311960577965,-0.0687825456261635,0.997622549533844,0.00425537209957838,-1.61431744345464e-005,0.999962747097015,-0.00864151865243912,-0.0687825456261635,0.997622549533844,0.00425537209957838,-0.0711542665958405,0.996431648731232,0.0454002730548382,-1.61431744345464e-005,0.999962747097015,-0.00864151865243912,-0.0711542665958405,0.996431648731232,0.0454002730548382,-0.0161750130355358,0.998504817485809,0.0522143393754959,
+-1.61431744345464e-005,0.999962747097015,-0.00864151865243912,-0.0161750130355358,0.998504817485809,0.0522143393754959,0.0164700727909803,0.998522698879242,0.0517813302576542,-1.61431744345464e-005,0.999962747097015,-0.00864151865243912,0.0164700727909803,0.998522698879242,0.0517813302576542,0.07182377576828,0.99651962518692,0.0423073098063469,-1.61431744345464e-005,0.999962747097015,-0.00864151865243912,0.07182377576828,0.99651962518692,0.0423073098063469,0.0695692896842957,0.99756908416748,0.00400317693129182,-1.61431744345464e-005,0.999962747097015,-0.00864151865243912,0.0695692896842957,0.99756908416748,0.00400317693129182,0.0236099977046251,0.999019980430603,-0.0374378971755505,-1.61431744345464e-005,0.999962747097015,-0.00864151865243912,-0.999841094017029,-0.0178258158266544,0,-1,-4.51141640951391e-005,0,-1,0.000147538929013535,0,-0.999841213226318,-0.0178258139640093,0,0.00693947914987803,-0.0305448658764362,-0.999509334564209,0.00680841319262981,-0.0141051020473242,-0.999877274036407,0.00680854124948382,-0.0141209624707699,-0.999877095222473,0.00693947868421674,-0.0305448621511459,-0.999509274959564,0.999560236930847,-0.029653275385499,0,0.99998664855957,0.0051651569083333,0,0.999988555908203,0.00479328399524093,0,0.999560296535492,-0.0296532772481442,0,0,-0.0103703672066331,0.999946177005768,0,-0.0103703690692782,0.999946236610413,-3.48836215380288e-006,0.00859018135815859,0.999963164329529,-3.48443177244917e-006,0.00856881681829691,0.999963343143463,0.993892312049866,-0.0238606557250023,0.107743911445141,0.993785202503204,0.00494962418451905,0.111204832792282,0.99378627538681,0.0048867124132812,0.111197367310524,0.993892252445221,-0.023860651999712,0.107743889093399,0,0.00622054282575846,0.999980628490448,0,0.00624513765797019,0.999980449676514,0,-0.0275459084659815,0.99962055683136,0,-0.0275459103286266,0.99962055683136,-0.992781162261963,-0.0124486042186618,0.119291372597218,-0.992741584777832,0.0002264775976073,0.120266780257225,-0.992741346359253,0.000256671541137621,0.120269075036049,-0.992781221866608,-0.0124486060813069,0.119291387498379,
+-4.00006829295307e-005,0.00854282733052969,0.999963581562042,-4.00051794713363e-005,0.00859602447599173,0.999963045120239,-3.83895458071493e-005,-0.0104418145492673,0.999945461750031,-3.83895421691705e-005,-0.0104418136179447,0.999945521354675,-1,-4.51141640951391e-005,0,-0.99998152256012,0.0060791252180934,0,-0.999981164932251,0.00612536165863276,0,-1,0.000147538929013535,0,0.00680841319262981,-0.0141051020473242,-0.999877274036407,0.00673271249979734,0.0111953327432275,-0.999914705753326,0.0067327069118619,0.0111730396747589,-0.999914824962616,0.00680854124948382,-0.0141209624707699,-0.999877095222473,0.99998664855957,0.0051651569083333,0,0.999950230121613,0.00997727364301682,0,0.999951720237732,0.00982722640037537,0,0.999988555908203,0.00479328399524093,0,-3.48443177244917e-006,0.00856881681829691,0.999963343143463,-3.48836215380288e-006,0.00859018135815859,0.999963164329529,-3.16705268232909e-006,0.00329001503996551,0.999994575977325,-3.14386966238089e-006,0.00312985689379275,0.999995112419128,0.993785202503204,0.00494962418451905,0.111204832792282,0.993434965610504,0.007952481508255,0.114121221005917,0.993434906005859,0.00801632925868034,0.114117778837681,0.99378627538681,0.0048867124132812,0.111197367310524,0,0.00920158997178078,0.999957621097565,0,0.00917597115039825,0.999957919120789,0,0.00624513765797019,0.999980449676514,0,0.00622054282575846,0.999980628490448,-0.992741584777832,0.0002264775976073,0.120266780257225,-0.992772400379181,0.00429768301546574,0.119935341179371,-0.992773056030273,0.00427960464730859,0.119930952787399,-0.992741346359253,0.000256671541137621,0.120269075036049,-4.05649043386802e-005,0.00318139139562845,0.999994874000549,-4.05674873036332e-005,0.0032883535604924,0.999994575977325,-4.00051794713363e-005,0.00859602447599173,0.999963045120239,-4.00006829295307e-005,0.00854282733052969,0.999963581562042,-0.999954462051392,0.00954178348183632,0,-0.999999940395355,0.000413419038522989,0,-1,0.000295244972221553,0,-0.999953806400299,0.00960971880704165,0,-0.00662231026217341,0.00192218529991806,0.999976217746735,
+-0.00662261201068759,0.00189685705117881,0.999976277351379,-0.00640198215842247,0.00790201127529144,0.99994820356369,-0.00640204129740596,0.00781472772359848,0.999948978424072,0.999887824058533,0.014978569932282,0,0.999883770942688,0.0152421053498983,0,0.999960482120514,0.008890843950212,0,0.999958038330078,0.00916034355759621,0,3.3651744161034e-005,0.00117016385775059,-0.999999225139618,3.36786142725032e-005,0.000826609204523265,-0.999999701976776,3.75158269889653e-005,-0.0139590054750443,-0.999902546405792,3.74891569663305e-005,-0.01407166197896,-0.999900937080383,0.993447005748749,0.00866031274199486,-0.113964423537254,0.993428587913513,0.00925814174115658,-0.114079102873802,0.992587029933929,0.00754896877333522,-0.121300876140594,0.992587268352509,0.00761926500126719,-0.121295176446438,0,0.00482124276459217,-0.999988377094269,0,0.00466502457857132,-0.999989151954651,0,-0.0190539360046387,-0.999818444252014,0,-0.0190582573413849,-0.999818444252014,-0.991894662380219,0.00379773415625095,-0.127006277441978,-0.991905033588409,0.00375290238298476,-0.126926779747009,-0.991779029369354,-0.00051363161765039,-0.127960920333862,-0.991779327392578,-0.00051968777552247,-0.127958491444588,2.03057561520836e-006,-0.0140398740768433,-0.999901473522186,2.05205492420646e-006,-0.0139504121616483,-0.999902606010437,2.93367975245928e-006,0.000955654715653509,-0.999999523162842,2.93930770567385e-006,0.00100065523292869,-0.999999463558197,-0.999999940395355,0.000413419038522989,0,-0.999920010566711,-0.0126470886170864,0,-0.999920010566711,-0.012647089548409,0,-1,0.000295244972221553,0,-0.00640204129740596,0.00781472772359848,0.999948978424072,-0.00640198215842247,0.00790201127529144,0.99994820356369,-0.00640807067975402,-0.00153786141891032,0.999978363513947,-0.00640807067975402,-0.00153786141891032,0.999978303909302,0.999958038330078,0.00916034355759621,0,0.999960482120514,0.008890843950212,0,0.999788463115692,-0.0205655861645937,0,0.999788522720337,-0.020565589889884,0,3.2347408705391e-005,0.0177886337041855,-0.999841749668121,3.2347408705391e-005,0.0177886337041855,-0.999841749668121,
+3.36786142725032e-005,0.000826609204523265,-0.999999701976776,3.3651744161034e-005,0.00117016385775059,-0.999999225139618,0.992587268352509,0.00761926500126719,-0.121295176446438,0.992587029933929,0.00754896877333522,-0.121300876140594,0.992349028587341,-0.0120984697714448,-0.122870549559593,0.992348909378052,-0.0120984679087996,-0.122870542109013,0,0.0244712606072426,-0.999700605869293,0,0.0244712568819523,-0.999700486660004,0,0.00466502457857132,-0.999989151954651,0,0.00482124276459217,-0.999988377094269,-0.991779327392578,-0.00051968777552247,-0.127958491444588,-0.991779029369354,-0.00051363161765039,-0.127960920333862,-0.991997301578522,-0.00499104056507349,-0.126160115003586,-0.991997361183167,-0.0049910400994122,-0.126160100102425,2.93930770567385e-006,0.00100065523292869,-0.999999463558197,2.93367975245928e-006,0.000955654715653509,-0.999999523162842,5.0349999582977e-006,0.0177611652761698,-0.99984222650528,5.03500041304505e-006,0.0177611671388149,-0.99984222650528,0,0,-1,0,0,-1,0,0,-1,0,0,-1,0,0,-1,0,0,-1,0,0,-1,0,0,-1,0,1,0,0,1,0,0,1,0,0,1,0,0,0,1,0,0,1,0,0,1,0,0,1,0,-1,0,0,-1,0,0,-1,0,0,-1,0,-0.897637069225311,-0.310630172491074,-0.312660455703735,-0.899498045444489,0.316043525934219,-0.301694810390472,-0.998341917991638,0.0337271094322205,-0.04664696007967,-0.998850584030151,0.00831255502998829,-0.0472064726054668,0.99997216463089,-0.00745978252962232,0.000276234524790198,0.999950110912323,-0.00985174905508757,0.00163025176152587,0.999961018562317,-0.00836315844208002,0.00282517122104764,0.999996483325958,-0.00158135546371341,-0.00209615705534816,-0.897107899188995,-0.327455163002014,0.29659840464592,-0.897637069225311,-0.310630172491074,-0.312660455703735,-0.998850584030151,0.00831255502998829,-0.0472064726054668,-0.999851167201996,0.00525738671422005,0.0164330992847681,0.999993026256561,0.00311992061324418,0.00205480773001909,0.999971985816956,0.0071588009595871,-0.00220119953155518,0.999957263469696,0.00867048278450966,-0.00322932004928589,0.999951303005219,0.00935906823724508,-0.00312368595041335,-0.999444365501404,0.0328872017562389,0.00541724683716893,
+-0.998341917991638,0.0337271094322205,-0.04664696007967,-0.899498045444489,0.316043525934219,-0.301694810390472,-0.906776130199432,0.307075530290604,0.288897305727005,0.999950110912323,-0.00985174905508757,0.00163025176152587,0.999971985816956,0.0071588009595871,-0.00220119953155518,0.999993026256561,0.00311992061324418,0.00205480773001909,0.999961018562317,-0.00836315844208002,0.00282517122104764,0,0,1,0,0,1,0,0,1,0,0,1,0,-1,0,0,-1,0,0,-1,0,0,-1,0,0,1,0,0,1,0,0,1,0,0,1,0,-0.897107899188995,-0.327455163002014,0.29659840464592,-0.999851167201996,0.00525738671422005,0.0164330992847681,-0.999444365501404,0.0328872017562389,0.00541724683716893,-0.906776130199432,0.307075530290604,0.288897305727005,0.999957263469696,0.00867048278450966,-0.00322932004928589,0.99997216463089,-0.00745978252962232,0.000276234524790198,0.999996483325958,-0.00158135546371341,-0.00209615705534816,0.999951303005219,0.00935906823724508,-0.00312368595041335,0,-9.84444414875441e-010,-0.999999940395355,0,-9.84444414875441e-010,-0.999999940395355,0,0.036271795630455,-0.999342024326324,0,0.036271795630455,-0.999342024326324,0,0.0362717695534229,0.999342024326324,0,0.0362717695534229,0.999342024326324,0,-9.84444414875441e-010,0.999999940395355,0,-9.84444414875441e-010,0.999999940395355,1,-6.52381482169062e-011,-1.62627093232004e-005,1,-6.52256165745158e-011,-1.62627111421898e-005,1,-1.67469842438095e-008,-1.62627002282534e-005,1,-1.67469842438095e-008,-1.62627002282534e-005,-1,1.41322703539615e-010,1.6262707504211e-005,-1,1.41349626447962e-010,1.6262707504211e-005,-1,3.62851331203728e-008,1.62627002282534e-005,-1,3.62851331203728e-008,1.62627002282534e-005,0,-0.000575744837988168,-0.99999988079071,0,-0.000575744837988168,-0.99999988079071,0,0.0312197580933571,-0.999512493610382,0,0.0312197580933571,-0.999512493610382,0,-0.0312197599560022,0.999512493610382,0,-0.0312197599560022,0.999512493610382,0,-0.0633658021688461,0.997990369796753,0,-0.0633658021688461,0.997990369796753,1,6.80666811803121e-009,0,1,6.80666811803121e-009,0,1,1.16240030934023e-008,0,
+1,1.16235128189146e-008,0,-1,-1.63360009963753e-008,0,-1,-1.63360027727322e-008,0,-1,1.54273527286364e-009,0,-0.999999940395355,1.54455215284344e-009,0,0,-0.999684572219849,0.0251166392117739,0,-0.999684572219849,0.0251166392117739,0,-0.999977946281433,0.00663762539625168,0,-0.999977946281433,0.00663762539625168,0,0.0251324623823166,0.99968409538269,0,0.0251324623823166,0.99968409538269,0,0.0251324623823166,0.99968409538269,0,0.0251324623823166,0.99968409538269,0,0.999827265739441,0.0185854863375425,0,0.999684989452362,-0.0250950418412685,0,0.999684989452362,-0.0250950418412685,0,0.999827265739441,0.0185854863375425,0,-0.0251324623823166,-0.99968409538269,0,-0.0251324623823166,-0.99968409538269,0,-0.0251324623823166,-0.99968409538269,0,-0.0251324623823166,-0.99968409538269,0.99999988079071,4.48372411483433e-005,0.000534886552486569,0.99999988079071,-4.25565558543894e-005,-0.000510971818584949,0.9999640583992,0.000706297229044139,0.00845070462673903,0.999963998794556,0.000706297112628818,0.00845070276409388,-0.99999988079071,-4.25565558543894e-005,-0.000510971818584949,-0.99999988079071,4.48372411483433e-005,0.000534886552486569,-0.999963998794556,0.000706297112628818,0.00845070276409388,-0.9999640583992,0.000706297229044139,0.00845070462673903,0,-0.999999940395355,0,0,-0.999999940395355,0,0,-0.999321520328522,-0.0368317253887653,0,-0.999321520328522,-0.0368317253887653,0,0,1,0,0,1,0,0,1,0,0,1,0,0.999993205070496,0.00368588580749929,0,0.999993205070496,0.00368588580749929,0,0.999999940395355,0,0,0.999999940395355,0,0,0,-1,0,0,-1,0,0,-1,0,0,-1,1,0,0,1,0,0,0.999999940395355,0,0,1,0,0,-1,0,0,-1,0,0,-1,0,0,-0.999999940395355,0,0,-0.99999988079071,4.48372411483433e-005,0.000534886552486569,-0.99999988079071,-4.25565558543894e-005,-0.000510971818584949,-0.999985694885254,-0.000444408127805218,-0.00532000651583076,-0.999985754489899,-0.000444408156909049,-0.00532000698149204,0,0.999684989452362,-0.0250950418412685,0,0.999684989452362,-0.0250950418412685,0,0.998651683330536,-0.0519119575619698,0,0.998651683330536,-0.0519119575619698,
+0.99999988079071,-4.25565558543894e-005,-0.000510971818584949,0.99999988079071,4.48372411483433e-005,0.000534886552486569,0.999985754489899,-0.000444408156909049,-0.00532000698149204,0.999985694885254,-0.000444408127805218,-0.00532000651583076,0,-0.999309539794922,0.0371533967554569,0,-0.999684572219849,0.0251166392117739,0,-0.999684572219849,0.0251166392117739,0,-0.999309539794922,0.0371533967554569,-1,-1.38757938472622e-008,1.62627093232004e-005,-1,-1.38757938472622e-008,1.62627093232004e-005,-1,1.41349626447962e-010,1.6262707504211e-005,-1,1.41322703539615e-010,1.6262707504211e-005,0,-0.0138784842565656,-0.999903738498688,0,-0.0138784842565656,-0.999903738498688,0,-9.84444414875441e-010,-0.999999940395355,0,-9.84444414875441e-010,-0.999999940395355,1,6.40421360387222e-009,-1.62627111421898e-005,1,6.40421360387222e-009,-1.62627111421898e-005,1,-6.52256165745158e-011,-1.62627111421898e-005,1,-6.52381482169062e-011,-1.62627093232004e-005,0,-9.84444414875441e-010,0.999999940395355,0,-9.84444414875441e-010,0.999999940395355,0,-0.0138784879818559,0.999903678894043,0,-0.0138784879818559,0.999903678894043,-0.999999940395355,1.54455215284344e-009,0,-1,1.54273527286364e-009,0,-0.999999940395355,9.10777675500185e-009,0,-1,9.10777764318027e-009,0,0,-0.017762802541256,0.999842286109924,0,-0.017762802541256,0.999842286109924,0,-0.0312197599560022,0.999512493610382,0,-0.0312197599560022,0.999512493610382,1,1.16235128189146e-008,0,1,1.16240030934023e-008,0,1,1.36616682411272e-008,0,1,1.36616682411272e-008,0,0,0.0312197580933571,-0.999512493610382,0,0.0312197580933571,-0.999512493610382,0,0.0445112138986588,-0.99900883436203,0,0.0445112138986588,-0.99900883436203,-1,0,0,-1,0,0,-1,0,0,-1,0,0,0,-0.999604761600494,0.0281136129051447,0,-0.999604761600494,0.0281136129051447,0,-0.999999940395355,0,0,-0.999999940395355,0,1,0,0,1,0,0,1,0,0,1,0,0,0,0.999999940395355,0,0,0.999999940395355,0,0,0.9999960064888,-0.00281264306977391,0,0.9999960064888,-0.00281264306977391,-0.999851167201996,0.00525738671422005,0.0164330992847681,-0.998850584030151,0.00831255502998829,-0.0472064726054668,
+-0.999981582164764,-0.00572524406015873,0.00199337303638458,-0.999986290931702,-0.00487332046031952,0.00194706406909972,-0.999444365501404,0.0328872017562389,0.00541724683716893,-0.999851167201996,0.00525738671422005,0.0164330992847681,-0.999986290931702,-0.00487332046031952,0.00194706406909972,-0.999986112117767,-0.00525055360049009,0.000382576516130939,-0.998341917991638,0.0337271094322205,-0.04664696007967,-0.999444365501404,0.0328872017562389,0.00541724683716893,-0.999986112117767,-0.00525055360049009,0.000382576516130939,-0.999982059001923,-0.00598252145573497,0.00035995410871692,-0.999982059001923,-0.00598252145573497,0.00035995410871692,-0.999981582164764,-0.00572524406015873,0.00199337303638458,-0.998850584030151,0.00831255502998829,-0.0472064726054668,-0.998341917991638,0.0337271094322205,-0.04664696007967,0.998951733112335,-0.023414047434926,0.0393321737647057,0.998766005039215,-0.0392607040703297,-0.0304157733917236,0.890855193138123,-0.313509374856949,-0.328768730163574,0.901644587516785,-0.321653515100479,0.289095461368561,0.998928487300873,0.0286591295152903,0.036339208483696,0.998951733112335,-0.023414047434926,0.0393321737647057,0.901644587516785,-0.321653515100479,0.289095461368561,0.90437376499176,0.308639526367188,0.29470294713974,0.886080861091614,0.324051380157471,-0.331438481807709,0.999770104885101,0.0110074067488313,-0.0183995962142944,0.998928487300873,0.0286591295152903,0.036339208483696,0.90437376499176,0.308639526367188,0.29470294713974,0.998766005039215,-0.0392607040703297,-0.0304157733917236,0.999770104885101,0.0110074067488313,-0.0183995962142944,0.886080861091614,0.324051380157471,-0.331438481807709,0.890855193138123,-0.313509374856949,-0.328768730163574,0.999951303005219,0.00935906823724508,-0.00312368595041335,0.999996483325958,-0.00158135546371341,-0.00209615705534816,0.998766005039215,-0.0392607040703297,-0.0304157733917236,0.998951733112335,-0.023414047434926,0.0393321737647057,0.998928487300873,0.0286591295152903,0.036339208483696,0.999993026256561,0.00311992061324418,0.00205480773001909,
+0.999951303005219,0.00935906823724508,-0.00312368595041335,0.998951733112335,-0.023414047434926,0.0393321737647057,0.999961018562317,-0.00836315844208002,0.00282517122104764,0.999993026256561,0.00311992061324418,0.00205480773001909,0.998928487300873,0.0286591295152903,0.036339208483696,0.999770104885101,0.0110074067488313,-0.0183995962142944,0.999996483325958,-0.00158135546371341,-0.00209615705534816,0.999961018562317,-0.00836315844208002,0.00282517122104764,0.999770104885101,0.0110074067488313,-0.0183995962142944,0.998766005039215,-0.0392607040703297,-0.0304157733917236,-0.999986290931702,-0.00487332046031952,0.00194706406909972,-0.999981582164764,-0.00572524406015873,0.00199337303638458,-0.99996155500412,0.000875165278557688,0.00873064529150724,-0.999964535236359,0.0024057668633759,0.00806925818324089,-0.999986112117767,-0.00525055360049009,0.000382576516130939,-0.999986290931702,-0.00487332046031952,0.00194706406909972,-0.999964535236359,0.0024057668633759,0.00806925818324089,-0.999956071376801,0.00365631794556975,0.00862827058881521,-0.999982059001923,-0.00598252145573497,0.00035995410871692,-0.999986112117767,-0.00525055360049009,0.000382576516130939,-0.999956071376801,0.00365631794556975,0.00862827058881521,-0.999953866004944,0.00211129640229046,0.00936487782746553,-0.99996155500412,0.000875165278557688,0.00873064529150724,-0.999981582164764,-0.00572524406015873,0.00199337303638458,-0.999982059001923,-0.00598252145573497,0.00035995410871692,-0.999953866004944,0.00211129640229046,0.00936487782746553,-0.999996364116669,0,0.00268776272423565,-0.999997675418854,0,0.00217361678369343,-0.999997675418854,0,0.00215018494054675,-0.999996662139893,0,0.00259339855983853,4.5180595407146e-006,-0.99998527765274,0.00541812041774392,4.52116591986851e-006,-0.999985456466675,0.00538230687379837,4.79162326882943e-006,-0.999808609485626,-0.0195647310465574,4.79919162899023e-006,-0.999809205532074,-0.0195290632545948,0.999999463558197,0,-0.00103375758044422,0.999999463558197,0,-0.00103692966513336,0.999993562698364,0,-0.00358445895835757,
+0.999993503093719,0,-0.00360104558058083,7.85604868269729e-007,1,0,7.85601230290922e-007,1,0,7.86658802098827e-007,1,0,7.86653970408224e-007,1,0,-0.999997675418854,0,0.00217361678369343,-0.999984979629517,0,-0.00548933213576674,-0.999984920024872,0,-0.00548933260142803,-0.999997675418854,0,0.00215018494054675,3.03736874229799e-006,-0.999747216701508,0.0224818158894777,3.03736919704534e-006,-0.999747276306152,0.022481819614768,4.52116591986851e-006,-0.999985456466675,0.00538230687379837,4.5180595407146e-006,-0.99998527765274,0.00541812041774392,1,0,0,1,0,0,0.999999463558197,0,-0.00103692966513336,0.999999463558197,0,-0.00103375758044422,7.83851703545224e-007,1,0,7.83851703545224e-007,1,0,7.85601230290922e-007,1,0,7.85604868269729e-007,1,0,-0.999997556209564,0,-0.00222668726928532,-0.999996364116669,0,0.00268776272423565,-0.999996662139893,0,0.00259339855983853,-0.999997556209564,0,-0.00221780338324606,4.79919162899023e-006,-0.999809205532074,-0.0195290632545948,4.79162326882943e-006,-0.999808609485626,-0.0195647310465574,4.97884275318938e-006,-0.999985873699188,-0.00530974846333265,4.98348026667372e-006,-0.999986231327057,-0.00524657871574163,0.999993503093719,0,-0.00360104558058083,0.999993562698364,0,-0.00358445895835757,0.999999403953552,0,0.00109983119182289,0.999999403953552,0,0.00112182297743857,7.86653970408224e-007,1,0,7.86658802098827e-007,1,0,7.83926395797607e-007,1,0,7.8393225066975e-007,1,0
+			} 
+			NormalsW: *600 {
+				a: 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
+			} 
+		}
+		LayerElementBinormal: 0 {
+			Version: 102
+			Name: "map1"
+			MappingInformationType: "ByPolygonVertex"
+			ReferenceInformationType: "Direct"
+			Binormals: *1800 {
+				a: -0.99999874830246,3.37310393661028e-006,-0.00159275834448636,-0.999999701976776,-3.87664897516515e-007,-0.000864670262672007,-0.99999463558197,-5.21299334650394e-005,-0.00329988449811935,-1,-6.3846264310996e-006,8.85153212948353e-008,0,1,-0,-8.95910972076308e-008,1,0,-1.79182194415262e-007,1,0,-8.95910972076308e-008,1,0,0.999997794628143,-7.83930545367184e-007,0.00212347344495356,0.999993026256561,-7.83920938829397e-007,0.00374783854931593,1,-7.8217033205874e-007,5.49217702427995e-008,0.999994575977325,-7.82166068802326e-007,0.00330063421279192,-6.65051800297078e-007,1,0,-3.32525900148539e-007,1,0,0,1,0,-3.32525900148539e-007,1,0,0,1,1.20758045341063e-007,-6.62112097415957e-006,0.999995589256287,0.00297352252528071,-1.31902406792506e-005,0.999982416629791,0.005947420373559,0,0.9999760389328,-0.00693128723651171,-6.68184475216549e-006,0.999982357025146,0.00595623441040516,-3.27505222230684e-006,0.999995589256287,0.0029777754098177,7.96942123404421e-010,1,-1.20724706675901e-007,4.5744665840175e-005,0.9999760389328,-0.00692962715402246,-0.999999701976776,-0.000790982448961586,1.50774849316804e-005,-0.99998664855957,0.0051766624674201,-9.86537124845199e-005,-0.999925553798676,0.0122060514986515,-0.000164997924002819,-0.999750971794128,0.0223168861120939,-0.000301673280773684,-0.122463189065456,0.0137199256569147,0.992378294467926,-0.126866459846497,0.0133870914578438,0.991829454898834,-0.12692679464817,0.0166623499244452,0.99177211523056,-0.122477658092976,0.00811025872826576,0.992438137531281,-0.107685029506683,-0.00455709267407656,-0.994174659252167,-0.113910675048828,-0.0170411262661219,-0.993344843387604,-0.113860458135605,-0.0116783641278744,-0.993428111076355,-0.107820235192776,-0.010300463065505,-0.994117081165314,-0.999959528446198,-0.0089992256835103,8.91552554094233e-005,-0.99997091293335,-0.00763198453933001,6.90269007463939e-005,-0.999620914459229,0.02753528021276,-0.000101658537460025,-0.999554216861725,0.0298576820641756,-0.000106833147583529,0.000755162793211639,0.0252813063561916,-0.99968010187149,
+7.82179413363338e-005,-0.00513110542669892,-0.999986827373505,0.000184660646482371,-0.0123269399628043,-0.999924063682556,0.000344788306392729,0.0115428082644939,-0.999933362007141,0.999998211860657,0.00189507915638387,7.44533735996811e-007,1,-0.000237683809245937,5.39597067472641e-006,0.999982893466949,-0.00585364364087582,8.37209081510082e-005,0.999974727630615,-0.00711266975849867,0.000101901554444339,0.999878287315369,-0.0141463167965412,0.00658784294500947,0.99994283914566,-0.00838265288621187,0.00663829129189253,0.999977648258209,0.00098476221319288,0.00662042712792754,0.999530434608459,-0.0300127975642681,0.00618758145719767,2.23140305024572e-005,-0.0117513425648212,0.999931037425995,0.000114747293991968,0.0120252221822739,0.999927759170532,4.70771810796577e-005,0.00489868689328432,0.9999880194664,4.81855822727084e-005,-0.0253761969506741,0.999677956104279,-1,-0,-3.14145722768444e-007,-0.998768627643585,-0,-0.0496123656630516,-1,-0,-3.41559683647574e-007,-0.999978125095367,-0,-0.00662379851564765,-0.999993979930878,-0,-0.00348382047377527,-0.9937544465065,-0,0.11158911138773,-0.998671412467957,-0,-0.0515303947031498,-0.988814949989319,-0,-0.149147838354111,-0.99999862909317,-3.32091403834056e-005,0.0017065885476768,-0.999721229076386,-0.0236020050942898,-0.000655465119052678,-0.999726533889771,0.0233800690621138,0.00065082183573395,-0.999726533889771,0.0233800690621138,0.00065082183573395,-0.960868239402771,0.0650999918580055,-0.269247442483902,-0.99999862909317,-3.32091403834056e-005,0.0017065885476768,-0.960868239402771,0.0650999918580055,-0.269247442483902,-0.974958300590515,0.0598582848906517,-0.214180782437325,-0.99999862909317,-3.32091403834056e-005,0.0017065885476768,-0.974958300590515,0.0598582848906517,-0.214180782437325,-0.998353540897369,0.0190771464258432,0.0540961362421513,-0.99999862909317,-3.32091403834056e-005,0.0017065885476768,-0.998353540897369,0.0190771464258432,0.0540961362421513,-0.997997105121613,-0.0197161547839642,-0.0601093024015427,-0.99999862909317,-3.32091403834056e-005,0.0017065885476768,
+-0.997997105121613,-0.0197161547839642,-0.0601093024015427,-0.972827911376953,-0.0598591864109039,0.223657995462418,-0.99999862909317,-3.32091403834056e-005,0.0017065885476768,-0.972827911376953,-0.0598591864109039,0.223657995462418,-0.957190752029419,-0.065622016787529,0.281921595335007,-0.99999862909317,-3.32091403834056e-005,0.0017065885476768,-0.957190752029419,-0.065622016787529,0.281921595335007,-0.999721229076386,-0.0236020050942898,-0.000655465119052678,-0.99999862909317,-3.32091403834056e-005,0.0017065885476768,0.999999403953552,-0.00114187865983695,-1.52108050315292e-005,0.999987542629242,-0.00500185787677765,-6.66290434310213e-005,0.999987065792084,0.00509217893704772,-4.672765135183e-005,0.999999523162842,0.0010032169520855,-9.23158222576603e-006,0.114169754087925,-0.00593985803425312,-0.993443548679352,0.11530189961195,0.0148076275363564,-0.993220210075378,0.115325547754765,0.0173568744212389,-0.993176162242889,0.114144489169121,-0.00295704207383096,-0.993459761142731,0.119952447712421,0.00396931730210781,0.992771744728088,0.118715614080429,-0.0178265850991011,0.992768287658691,0.118718951940537,-0.0152271287515759,0.992811143398285,0.119958609342575,0.00692869164049625,0.992754697799683,0.99999988079071,0.000490829814225435,4.91500468342565e-005,1,-0.000397105381125584,3.26646913890727e-005,0.999981701374054,-0.00605870876461267,6.04902525083162e-005,0.9999920129776,-0.00400234246626496,5.32978738192469e-005,-3.86365973099601e-005,-0.00635550078004599,0.999979794025421,1.52776301547419e-005,-0.0311236381530762,0.999515533447266,1.21877301353379e-005,-0.0248288810253143,0.999691724777222,4.52905169368023e-006,0.000739379494916648,0.999999761581421,-0.9999720454216,-0.0074834250845015,2.02783667191397e-005,-0.999978065490723,-0.00662157405167818,1.86181969183963e-005,-0.999950051307678,0.0100018791854382,0.000185912169399671,-0.999941527843475,0.0108182337135077,0.000201086339075118,-0.999949514865875,-0.00739306258037686,-0.0068157222121954,-0.99996143579483,0.00584680028259754,-0.0065569831058383,-0.999977350234985,-0.000146856327774003,-0.00674338126555085,
+-0.999976873397827,-0.000905670050997287,-0.00674324482679367,9.98848736344371e-006,-0.00100107409525663,-0.999999523162842,0.000285163288936019,0.0244914256036282,-0.999700009822845,0.000357680255547166,0.0307195875793695,-0.999527990818024,-5.92214601056185e-005,0.00602597324177623,-0.999981939792633,1,0,3.14145722768444e-007,0.99876856803894,0,0.0496123619377613,1,0,3.41559683647574e-007,0.999993145465851,0,0.00371179264038801,0.999993026256561,-0,-0.00374596170149744,0.993101716041565,-0,-0.117256045341492,0.998852550983429,0,0.047891341149807,0.988814949989319,0,0.149147838354111,0.999991357326508,-1.98313591681654e-005,-0.00416288617998362,0.999721229076386,-0.0236020050942898,0.000655465119052678,0.999726533889771,0.0233800690621138,-0.00065082183573395,0.999726533889771,0.0233800690621138,-0.00065082183573395,0.960868239402771,0.0650999918580055,0.269247442483902,0.999991357326508,-1.98313591681654e-005,-0.00416288617998362,0.960868239402771,0.0650999918580055,0.269247442483902,0.975553631782532,0.060031246393919,0.211403340101242,0.999991357326508,-1.98313591681654e-005,-0.00416288617998362,0.975553631782532,0.060031246393919,0.211403340101242,0.99806022644043,0.0192636214196682,-0.0592017658054829,0.999991357326508,-1.98313591681654e-005,-0.00416288617998362,0.99806022644043,0.0192636214196682,-0.0592017658054829,0.998382687568665,-0.0192419216036797,0.0534953400492668,0.999991357326508,-1.98313591681654e-005,-0.00416288617998362,0.998382687568665,-0.0192419216036797,0.0534953400492668,0.971797049045563,-0.0603637583553791,-0.227962195873261,0.999991357326508,-1.98313591681654e-005,-0.00416288617998362,0.971797049045563,-0.0603637583553791,-0.227962195873261,0.957190752029419,-0.065622016787529,-0.281921595335007,0.999991357326508,-1.98313591681654e-005,-0.00416288617998362,0.957190752029419,-0.065622016787529,-0.281921595335007,0.999721229076386,-0.0236020050942898,0.000655465119052678,0.999991357326508,-1.98313591681654e-005,-0.00416288617998362,-0.000547157076653093,0.0306897666305304,0.999528825283051,
+-3.68702103514806e-007,0.0081726461648941,0.999966681003571,6.8010245968253e-007,0.0046096476726234,0.99998939037323,-0.000180815681233071,0.0101418634876609,0.999948561191559,-0.999536573886871,0.0294146835803986,-0.00783857703208923,-0.999976456165314,-0.000948734465055168,-0.0067957048304379,-0.999971687793732,-0.00329997483640909,-0.00676258094608784,-0.999958097934723,0.00575843127444386,-0.00711857154965401,-0.000305251509416848,-0.0102894958108664,-0.999947011470795,2.55244485742878e-005,-0.00494159385561943,-0.999987781047821,4.03058329538908e-005,-0.00840871781110764,-0.999964654445648,-0.000908938352949917,-0.0306387282907963,-0.999530076980591,-0.999560475349426,0.0296463370323181,0.000307459937175736,-0.999649882316589,0.0264606717973948,0.000274421676294878,-0.999999701976776,0.000878914201166481,-1.10388000393868e-005,-0.999999344348907,0.00120263744611293,-1.37901151902042e-005,0.108338333666325,0.0252015255391598,-0.993794620037079,0.111216641962528,-0.00217721774242818,-0.993793845176697,0.111220814287663,-0.00481519475579262,-0.993784129619598,0.108151897788048,0.0165220033377409,-0.993997097015381,0.99999737739563,0.00230187550187111,-1.43191928145825e-005,0.999999761581421,0.000759100134018809,-4.74077705803211e-006,0.99978768825531,-0.0205976609140635,-0.000567596696782857,0.999984920024872,-0.00548767717555165,-0.000151220432599075,0.119492672383785,-0.0169181991368532,0.992690920829773,0.12026609480381,0.00573470443487167,0.992725133895874,0.120269283652306,0.00312734511680901,0.992736399173737,0.119576565921307,-0.0254499185830355,0.992498815059662,0.999995708465576,0.0029550320468843,1.47567225212697e-005,0.999996662139893,0.00260139722377062,1.76440225914121e-005,0.999897003173828,0.0143512347713113,0.000188248784979805,0.999841153621674,0.0178243070840836,0.000224513758439571,-3.68702103514806e-007,0.0081726461648941,0.999966681003571,-3.86365973099601e-005,-0.00635550078004599,0.999979794025421,4.52905169368023e-006,0.000739379494916648,0.999999761581421,6.8010245968253e-007,0.0046096476726234,0.99998939037323,
+-0.999976456165314,-0.000948734465055168,-0.0067957048304379,-0.999949514865875,-0.00739306258037686,-0.0068157222121954,-0.999976873397827,-0.000905670050997287,-0.00674324482679367,-0.999971687793732,-0.00329997483640909,-0.00676258094608784,2.55244485742878e-005,-0.00494159385561943,-0.999987781047821,9.98848736344371e-006,-0.00100107409525663,-0.999999523162842,-5.92214601056185e-005,0.00602597324177623,-0.999981939792633,4.03058329538908e-005,-0.00840871781110764,-0.999964654445648,-0.999999344348907,0.00120263744611293,-1.37901151902042e-005,-0.999999701976776,0.000878914201166481,-1.10388000393868e-005,-0.999978065490723,-0.00662157405167818,1.86181969183963e-005,-0.9999720454216,-0.0074834250845015,2.02783667191397e-005,0.111216641962528,-0.00217721774242818,-0.993793845176697,0.114169754087925,-0.00593985803425312,-0.993443548679352,0.114144489169121,-0.00295704207383096,-0.993459761142731,0.111220814287663,-0.00481519475579262,-0.993784129619598,0.999999523162842,0.0010032169520855,-9.23158222576603e-006,0.999987065792084,0.00509217893704772,-4.672765135183e-005,0.999999761581421,0.000759100134018809,-4.74077705803211e-006,0.99999737739563,0.00230187550187111,-1.43191928145825e-005,0.12026609480381,0.00573470443487167,0.992725133895874,0.119952447712421,0.00396931730210781,0.992771744728088,0.119958609342575,0.00692869164049625,0.992754697799683,0.120269283652306,0.00312734511680901,0.992736399173737,0.9999920129776,-0.00400234246626496,5.32978738192469e-005,0.999981701374054,-0.00605870876461267,6.04902525083162e-005,0.999996662139893,0.00260139722377062,1.76440225914121e-005,0.999995708465576,0.0029550320468843,1.47567225212697e-005,0.000114747293991968,0.0120252221822739,0.999927759170532,2.3855850486143e-006,0.00577037967741489,0.999983370304108,2.80313474831928e-006,0.00949426740407944,0.999954998493195,4.70771810796577e-005,0.00489868689328432,0.9999880194664,0.999977648258209,0.00098476221319288,0.00662042712792754,0.99994283914566,-0.00838265288621187,0.00663829129189253,0.99996143579483,0.00607190746814013,0.00635408423841,
+0.999866664409637,0.0150799378752708,0.00628366321325302,0.000184660646482371,-0.0123269399628043,-0.999924063682556,7.82179413363338e-005,-0.00513110542669892,-0.999986827373505,8.74231263878755e-005,-0.00983255077153444,-0.999951660633087,5.56576414965093e-005,-0.00607567885890603,-0.999981582164764,-0.999887228012085,-0.0150217041373253,-5.1225841161795e-005,-0.999906122684479,-0.0137061690911651,-4.50051156803966e-005,-0.99997091293335,-0.00763198453933001,6.90269007463939e-005,-0.999959528446198,-0.0089992256835103,8.91552554094233e-005,-0.113860458135605,-0.0116783641278744,-0.993428111076355,-0.113910675048828,-0.0170411262661219,-0.993344843387604,-0.121280297636986,-0.00312991463579237,-0.99261337518692,-0.121287181973457,-0.00150445685721934,-0.992616355419159,-0.999939799308777,-0.010977590456605,-5.29262470081449e-005,-0.999986290931702,-0.0052342489361763,-2.44181646849029e-005,-0.99998664855957,0.0051766624674201,-9.86537124845199e-005,-0.999999701976776,-0.000790982448961586,1.50774849316804e-005,-0.12692679464817,0.0166623499244452,0.99177211523056,-0.126866459846497,0.0133870914578438,0.991829454898834,-0.127961367368698,0.000931045622564852,0.99177873134613,-0.127959400415421,0.00246887560933828,0.991776347160339,0.999974727630615,-0.00711266975849867,0.000101901554444339,0.999982893466949,-0.00585364364087582,8.37209081510082e-005,0.999998450279236,-0.001789819332771,1.2232267181389e-006,0.999995529651642,-0.00300105707719922,-6.37289758742554e-008,2.3855850486143e-006,0.00577037967741489,0.999983370304108,0.000228718534344807,-0.018083231523633,0.999836564064026,0.000126598606584594,-0.010009297169745,0.999949932098389,2.80313474831928e-006,0.00949426740407944,0.999954998493195,0.999866664409637,0.0150799378752708,0.00628366321325302,0.99996143579483,0.00607190746814013,0.00635408423841,0.999899506568909,0.0126363495364785,0.00642699841409922,0.999971687793732,-0.00396982068195939,0.00640192301943898,5.56576414965093e-005,-0.00607567885890603,-0.999981582164764,8.74231263878755e-005,-0.00983255077153444,-0.999951660633087,
+0.000198891619220376,0.00966904312372208,-0.999953269958496,0.00036638681194745,0.0178117584437132,-0.999841332435608,-0.999835669994354,0.0181322693824768,0.00029025215189904,-0.999876618385315,0.0157038308680058,0.000247045361902565,-0.999906122684479,-0.0137061690911651,-4.50051156803966e-005,-0.999887228012085,-0.0150217041373253,-5.1225841161795e-005,-0.121287181973457,-0.00150445685721934,-0.992616355419159,-0.121280297636986,-0.00312991463579237,-0.99261337518692,-0.122563429176807,0.0234993323683739,-0.992182493209839,-0.122514769434929,0.0267240554094315,-0.992106914520264,-0.999994456768036,0.00332566094584763,8.14074955997057e-005,-0.999973833560944,-0.00724534969776869,-0.000177355934283696,-0.999986290931702,-0.0052342489361763,-2.44181646849029e-005,-0.999939799308777,-0.010977590456605,-5.29262470081449e-005,-0.127959400415421,0.00246887560933828,0.991776347160339,-0.127961367368698,0.000931045622564852,0.99177873134613,-0.125997349619865,-0.0251400675624609,0.991712033748627,-0.126023173332214,-0.0218726098537445,0.991786122322083,0.999995529651642,-0.00300105707719922,-6.37289758742554e-008,0.999998450279236,-0.001789819332771,1.2232267181389e-006,0.999966621398926,0.00818011444061995,0.000150346910231747,0.999945878982544,0.01040945854038,0.00018994884158019,0,1,0,-3.55493682491215e-007,1,0,-7.10987364982429e-007,1,0,-3.55493682491215e-007,1,0,0,1,0,0,1,0,0,1,0,0,1,0,0,-0,1,0,-0,1,0,-0,1,0,-0,1,0,-1,0,0,-1,0,0,-1,0,0,-1,0,-0,-0,-1,-0,-0,-1,0,0,-1,-0,-0,-1,-0.292837232351303,0.950529813766479,-0.103632099926472,0.303822815418243,0.94866156578064,0.0879376232624054,0.033529844135046,0.999425172805786,0.00500515569001436,0.00850015878677368,0.999956727027893,-0.00377476844005287,0.00745978392660618,0.99997216463089,-5.16718637300073e-006,0.00985169224441051,0.999951481819153,4.28903513238765e-005,0.00836285762488842,0.999965131282806,0.00011869880836457,0.00158127676695585,0.999998807907104,-3.93267146137077e-005,-0.32325890660286,0.944104552268982,0.0645781978964806,-0.292837232351303,0.950529813766479,-0.103632099926472,
+0.00850015878677368,0.999956727027893,-0.00377476844005287,0.00518960319459438,0.999977886676788,-0.00416475767269731,-0.00311978021636605,0.999995231628418,-7.1697126259096e-005,-0.00715878047049046,0.999974370002747,1.7049544112524e-005,-0.00867049209773541,0.999962449073792,1.09848524516565e-005,-0.0093590160831809,0.99995619058609,3.12445699819364e-005,0.0328211560845375,0.99939090013504,-0.0118604926392436,0.033529844135046,0.999425172805786,0.00500515569001436,0.303822815418243,0.94866156578064,0.0879376232624054,0.298537164926529,0.951498687267303,-0.0743363499641418,0.00985169224441051,0.999951481819153,4.28903513238765e-005,-0.00715878047049046,0.999974370002747,1.7049544112524e-005,-0.00311978021636605,0.999995231628418,-7.1697126259096e-005,0.00836285762488842,0.999965131282806,0.00011869880836457,-5.68790255783824e-006,-1,0,-2.84395127891912e-006,-1,0,0,-1,0,-2.84395127891912e-006,-1,0,-0,-0,-1,-0,-0,-1,0,0,-1,-0,-0,-1,7.10982021701057e-007,-0,1,3.55491010850528e-007,-0,1,0,-0,1,3.55491010850528e-007,-0,1,-0.32325890660286,0.944104552268982,0.0645781978964806,0.00518960319459438,0.999977886676788,-0.00416475767269731,0.0328211560845375,0.99939090013504,-0.0118604926392436,0.298537164926529,0.951498687267303,-0.0743363499641418,-0.00867049209773541,0.999962449073792,1.09848524516565e-005,0.00745978392660618,0.99997216463089,-5.16718637300073e-006,0.00158127676695585,0.999998807907104,-3.93267146137077e-005,-0.0093590160831809,0.99995619058609,3.12445699819364e-005,-1,-1.23922279726685e-006,1.2199460844257e-015,-1,-1.10949247300596e-006,1.09223373889137e-015,-1,-7.33854790269106e-007,-2.66357567113573e-008,-1,-1.10078258330759e-006,-3.99536475015339e-008,-1,0,0,-1,0,0,-1,-2.81002542124043e-007,-2.76631404982818e-016,-1,-9.36675519369601e-008,-9.22105014148306e-017,-1.62615197041305e-005,0.0120930345728993,-0.999926865100861,-1.62625383381965e-005,0.00462824804708362,-0.99998939037323,-1.62526066560531e-005,-0.0362717695534229,-0.99934196472168,-1.62627002282534e-005,1.30473747361748e-008,-1,1.62615197041305e-005,0.01209557056427,0.999926865100861,
+1.62625328812283e-005,0.00463075703009963,0.99998927116394,1.6250685803243e-005,-0.0362690426409245,0.999342083930969,1.62627002282534e-005,2.59823650594626e-006,1,-1,1.37482209083828e-006,-7.9154677257165e-010,-1,1.03111676708068e-006,-5.93660232084403e-010,-1,6.12402686783753e-007,1.91283895389915e-008,-1,8.79054482538777e-007,2.745725424802e-008,-1,-8.41546693663986e-007,-2.62857007271577e-008,-1,-8.79061190062203e-007,-2.74574656344839e-008,-1,-6.86029636653984e-007,-4.35583551450236e-008,-1,-1.02904402865533e-006,-6.53375025194691e-008,6.22068299649392e-011,-0.0091391010209918,-0.999958217144012,-2.07389105888467e-010,0.0304685197770596,-0.999535799026489,-5.10920805663062e-010,0.0439539439976215,-0.999033629894257,-3.79790254800838e-010,0.0326743088662624,-0.999466061592102,1.18447229802143e-009,-0.0725068673491478,0.997367918491364,5.35827771042108e-010,-0.0328004211187363,0.999462008476257,-2.91218750503308e-011,-0.0188767798244953,0.999821841716766,-4.70115370243551e-011,-0.0304370000958443,0.999536693096161,-0.999998927116394,-3.64405022992287e-005,-0.00145039346534759,-1,0,0,-0.999965667724609,5.50782460777555e-005,0.00829770136624575,-1,0,0,0,-0.99968421459198,0.0251324661076069,-1.14925946093081e-007,-0.99968421459198,0.0251324661076069,-2.29851892186161e-007,-0.99968421459198,0.0251324661076069,-1.14925946093081e-007,-0.99968421459198,0.0251324661076069,-0.999963045120239,-0.000159819581313059,0.00859767477959394,-1,0,-0,-0.999998688697815,-4.18155650550034e-005,-0.00166576309129596,-1,0,0,0,0.99968421459198,-0.0251324661076069,-9.57714263449816e-009,0.99968421459198,-0.0251324661076069,-1.91542852689963e-008,0.99968421459198,-0.0251324661076069,-9.57714263449816e-009,0.99968421459198,-0.0251324661076069,-3.63719627785031e-005,0.999875009059906,-0.0158158354461193,2.74564736173488e-005,0.999564409255981,-0.0295154247432947,-0.000754784501623362,0.999983251094818,0.0057358555495739,-0.000809995224699378,0.999924421310425,0.0122738098725677,-2.74566627922468e-005,0.999564349651337,-0.0295150429010391,3.63721192115918e-005,0.999875009059906,-0.0158155411481857,
+0.000809997087344527,0.999924421310425,0.0122740278020501,0.000754787120968103,0.999983251094818,0.00573616800829768,-1,0,1.61743071203091e-006,-1,0,1.49336938193301e-006,-1,-5.03997590328709e-008,1.36745063628041e-006,-1,-5.03997590328709e-008,1.36745063628041e-006,0,-1,0,0,-1,0,0,-1,0,0,-1,0,-1,-5.04707875492727e-009,1.36928940719372e-006,-1,-5.88825699310291e-009,1.59750391048874e-006,-1,0,1.65347535130422e-006,-1,0,1.52941481701419e-006,0,1,0,0,1,0,0,1,0,0,1,0,-0,0.999996244907379,0.00275854649953544,0,0.999984741210938,-0.00553251104429364,-0,0.999783754348755,0.0207975152879953,-0,0.999037384986877,0.043867290019989,0,0.999984741210938,-0.0055321897380054,0,0.999996244907379,0.00275894370861351,0,0.999037325382233,0.0438679382205009,0,0.99978369474411,0.0207980219274759,3.63721192115918e-005,0.999875009059906,-0.0158155411481857,-2.74566627922468e-005,0.999564349651337,-0.0295150429010391,-0.000290917232632637,0.99958473443985,-0.0288177281618118,-0.000210604252060875,0.999037325382233,-0.0438681878149509,-0.999998688697815,-4.18155650550034e-005,-0.00166576309129596,-1,0,-0,-0.999986112117767,-0.000273730518529192,-0.00526586640626192,-1,0,-0,2.74564736173488e-005,0.999564409255981,-0.0295154247432947,-3.63719627785031e-005,0.999875009059906,-0.0158158354461193,0.000210602331208065,0.999037325382233,-0.0438685491681099,0.000290914671495557,0.999584674835205,-0.0288182012736797,-0.99998539686203,-0.000200527079869062,-0.00539354793727398,-1,0,0,-0.999998927116394,-3.64405022992287e-005,-0.00145039346534759,-1,0,0,1.62613359862007e-005,-0.013875849545002,0.999903738498688,1.62627093232004e-005,2.4188780116674e-006,1,1.62625328812283e-005,0.00463075703009963,0.99998927116394,1.62615197041305e-005,0.01209557056427,0.999926865100861,-1,-1.12379564143339e-006,1.55980828253632e-008,-1,-1.12379564143339e-006,1.55980828253632e-008,-1,-1.10949247300596e-006,1.09223373889137e-015,-1,-1.23922279726685e-006,1.2199460844257e-015,-1.62610558618326e-005,-0.013878658413887,-0.999903678894043,-1.62627111421898e-005,-1.6486006870764e-007,-1,
+-1.62625383381965e-005,0.00462824804708362,-0.99998939037323,-1.62615197041305e-005,0.0120930345728993,-0.999926865100861,-1,-9.36675519369601e-008,-9.22105014148306e-017,-1,-2.81002542124043e-007,-2.76631404982818e-016,-1,-5.61896683848317e-007,-7.7990272018269e-009,-1,-4.21422612362221e-007,-5.84927173363781e-009,-4.70115370243551e-011,-0.0304370000958443,0.999536693096161,-2.91218750503308e-011,-0.0188767798244953,0.999821841716766,-3.44863221313219e-010,-0.0378646962344646,0.999282956123352,-2.89532897657097e-010,-0.031789630651474,0.999494612216949,-1,-5.75025978832855e-007,-1.02156842984868e-008,-1,-5.75025978832855e-007,-1.02156842984868e-008,-1,-8.79061190062203e-007,-2.74574656344839e-008,-1,-8.41546693663986e-007,-2.62857007271577e-008,-3.79790254800838e-010,0.0326743088662624,-0.999466061592102,-5.10920805663062e-010,0.0439539439976215,-0.999033629894257,-3.37817135376284e-010,0.0247273705899715,-0.999694228172302,-4.2221728890901e-010,0.0309052504599094,-0.99952232837677,-1,8.79054482538777e-007,2.745725424802e-008,-1,6.12402686783753e-007,1.91283895389915e-008,-1,5.74551563659043e-007,2.55993608533345e-008,-1,5.74551563659043e-007,2.55993608533345e-008,0,0.99988329410553,-0.0152766089886427,0,0.999762952327728,-0.021771227940917,0,0.999996244907379,0.00275894370861351,0,0.999984741210938,-0.0055321897380054,-1,4.89402651737691e-008,1.74011506715033e-006,-1,4.89402651737691e-008,1.74011506715033e-006,-1,0,1.49336938193301e-006,-1,0,1.61743071203091e-006,0,0.999762952327728,-0.0217715241014957,0,0.99988329410553,-0.0152768958359957,0,0.999984741210938,-0.00553251104429364,-0,0.999996244907379,0.00275854649953544,-1,0,1.52941481701419e-006,-1,0,1.65347535130422e-006,-1,4.89816942561561e-009,1.74147589859786e-006,-1,4.40835368209491e-009,1.56732869527332e-006,0.00518960319459438,0.999977886676788,-0.00416475767269731,0.00850015878677368,0.999956727027893,-0.00377476844005287,-0.00572822894901037,0.999982535839081,-0.00149474840145558,-0.00487619685009122,0.999987006187439,-0.00147556408774108,0.0328211560845375,0.99939090013504,-0.0118604926392436,
+0.00518960319459438,0.999977886676788,-0.00416475767269731,-0.00487619685009122,0.999987006187439,-0.00147556408774108,-0.00525219645351171,0.999976456165314,-0.00442727655172348,0.033529844135046,0.999425172805786,0.00500515569001436,0.0328211560845375,0.99939090013504,-0.0118604926392436,-0.00525219645351171,0.999976456165314,-0.00442727655172348,-0.00598409119993448,0.999971866607666,-0.00452956836670637,-0.00598409119993448,0.999971866607666,-0.00452956836670637,-0.00572822894901037,0.999982535839081,-0.00149474840145558,0.00850015878677368,0.999956727027893,-0.00377476844005287,0.033529844135046,0.999425172805786,0.00500515569001436,0.0232331808656454,0.999717354774475,0.00504936091601849,0.0390705205500126,0.99921315908432,-0.00682233413681388,0.291986346244812,0.949567198753357,-0.114307291805744,0.318269729614258,0.946098744869232,0.0600140988826752,-0.0284291114658117,0.999572455883026,-0.00683084782212973,0.0232331808656454,0.999717354774475,0.00504936091601849,0.318269729614258,0.946098744869232,0.0600140988826752,-0.300326704978943,0.950939834117889,-0.07427828758955,-0.307631313800812,0.945973515510559,0.10245580971241,-0.0109544759616256,0.999935626983643,0.00297504616901279,-0.0284291114658117,0.999572455883026,-0.00683084782212973,-0.300326704978943,0.950939834117889,-0.07427828758955,0.0390705205500126,0.99921315908432,-0.00682233413681388,-0.0109544759616256,0.999935626983643,0.00297504616901279,-0.307631313800812,0.945973515510559,0.10245580971241,0.291986346244812,0.949567198753357,-0.114307291805744,-0.0093590160831809,0.99995619058609,3.12445699819364e-005,0.00158127676695585,0.999998807907104,-3.93267146137077e-005,0.0390705205500126,0.99921315908432,-0.00682233413681388,0.0232331808656454,0.999717354774475,0.00504936091601849,-0.0284291114658117,0.999572455883026,-0.00683084782212973,-0.00311978021636605,0.999995231628418,-7.1697126259096e-005,-0.0093590160831809,0.99995619058609,3.12445699819364e-005,0.0232331808656454,0.999717354774475,0.00504936091601849,0.00836285762488842,0.999965131282806,0.00011869880836457,
+-0.00311978021636605,0.999995231628418,-7.1697126259096e-005,-0.0284291114658117,0.999572455883026,-0.00683084782212973,-0.0109544759616256,0.999935626983643,0.00297504616901279,0.00158127676695585,0.999998807907104,-3.93267146137077e-005,0.00836285762488842,0.999965131282806,0.00011869880836457,-0.0109544759616256,0.999935626983643,0.00297504616901279,0.0390705205500126,0.99921315908432,-0.00682233413681388,-0.00487619685009122,0.999987006187439,-0.00147556408774108,-0.00572822894901037,0.999982535839081,-0.00149474840145558,0.000865640526171774,0.999999046325684,-0.00109466770663857,0.00241622678004205,0.999996244907379,0.00128677592147142,-0.00525219645351171,0.999976456165314,-0.00442727655172348,-0.00487619685009122,0.999987006187439,-0.00147556408774108,0.00241622678004205,0.999996244907379,0.00128677592147142,0.00366556481458247,0.999992787837982,0.00105604971759021,-0.00598409119993448,0.999971866607666,-0.00452956836670637,-0.00525219645351171,0.999976456165314,-0.00442727655172348,0.00366556481458247,0.999992787837982,0.00105604971759021,0.00210207118652761,0.999997317790985,-0.000994831440038979,0.000865640526171774,0.999999046325684,-0.00109466770663857,-0.00572822894901037,0.999982535839081,-0.00149474840145558,-0.00598409119993448,0.999971866607666,-0.00452956836670637,0.00210207118652761,0.999997317790985,-0.000994831440038979,2.31412777793594e-005,0.999962985515594,0.00860983412712812,2.37967756611113e-010,1,1.09479827870018e-007,-4.69037695438601e-006,0.999997615814209,-0.00218137796036899,4.45951482106466e-005,0.999852180480957,0.0171955823898315,-0.999997735023499,7.00226064509479e-006,0.00212623691186309,-0.999998688697815,4.21161303165718e-006,0.00162248488049954,-0.999999523162842,-2.55154518526979e-005,0.00105899479240179,-0.999999642372131,1.31583965412574e-005,-0.000919402751605958,-2.25825669986079e-006,0.999997675418854,-0.00218451162800193,-1.13503768883749e-010,1,-1.09461339548034e-007,3.0849056201987e-005,0.999963045120239,0.00860628020018339,6.1926017224323e-005,0.999852240085602,0.0171965640038252,
+0.999998390674591,-7.85603617714514e-007,-0.00183831399772316,0.999996721744537,-7.85598672337073e-007,-0.00258438219316304,0.999994695186615,-7.86654652529251e-007,-0.0032683745957911,0.999993801116943,-7.86649081874202e-007,-0.00352881010621786,2.37967756611113e-010,1,1.09479827870018e-007,9.48425513342954e-005,0.999850809574127,-0.0172773525118828,0.000189657366718166,0.999402940273285,-0.0345496460795403,-4.69037695438601e-006,0.999997615814209,-0.00218137796036899,-0.999997437000275,4.87465404148679e-005,0.00230281986296177,-0.999999761581421,-1.89989023056114e-005,-0.000709761632606387,-0.999998688697815,4.21161303165718e-006,0.00162248488049954,-0.999997735023499,7.00226064509479e-006,0.00212623691186309,0,0.99940288066864,-0.0345531217753887,0,0.999850749969482,-0.0172791928052902,-1.13503768883749e-010,1,-1.09461339548034e-007,-2.25825669986079e-006,0.999997675418854,-0.00218451162800193,1,-7.83851703545224e-007,0,0.999996304512024,-7.83848804530862e-007,0.00274467631243169,0.999996721744537,-7.85598672337073e-007,-0.00258438219316304,0.999998390674591,-7.85603617714514e-007,-0.00183831399772316,-6.62112097415957e-006,0.999995589256287,0.00297352252528071,2.31412777793594e-005,0.999962985515594,0.00860983412712812,4.45951482106466e-005,0.999852180480957,0.0171955823898315,-1.31902406792506e-005,0.999982416629791,0.005947420373559,-0.999999642372131,1.31583965412574e-005,-0.000919402751605958,-0.999999523162842,-2.55154518526979e-005,0.00105899479240179,-0.999999701976776,-3.87664897516515e-007,-0.000864670262672007,-0.99999874830246,3.37310393661028e-006,-0.00159275834448636,6.1926017224323e-005,0.999852240085602,0.0171965640038252,3.0849056201987e-005,0.999963045120239,0.00860628020018339,-3.27505222230684e-006,0.999995589256287,0.0029777754098177,-6.68184475216549e-006,0.999982357025146,0.00595623441040516,0.999993801116943,-7.86649081874202e-007,-0.00352881010621786,0.999994695186615,-7.86654652529251e-007,-0.0032683745957911,0.999993026256561,-7.83920938829397e-007,0.00374783854931593,0.999997794628143,-7.83930545367184e-007,0.00212347344495356
+			} 
+			BinormalsW: *600 {
+				a: 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
+			} 
+
+		}
+		LayerElementTangent: 0 {
+			Version: 102
+			Name: "map1"
+			MappingInformationType: "ByPolygonVertex"
+			ReferenceInformationType: "Direct"
+			Tangents: *1800 {
+				a: -0.00159275403711945,-0.0052465801127255,0.999984979629517,-0.000864655943587422,-0.00530975125730038,0.99998551607132,-0.00330028985626996,0.0138609111309052,0.999898552894592,9.45779132094371e-012,0.0138610098510981,0.999904036521912,1,-0,-0,1,8.95910972076308e-008,-0,1,1.79182194415262e-007,-0,1,8.95910972076308e-008,-0,-0.00212347321212292,1.66465907724955e-009,0.999997675418854,-0.00374783808365464,2.93802915329877e-009,0.999992907047272,-5.49217702427995e-008,4.29581771630577e-014,1,-0.00330063421279192,2.58165822053513e-009,0.999994575977325,-1,-6.65051800297078e-007,0,-1,-3.32525900148539e-007,0,-1,-0,0,-1,-3.32525900148539e-007,0,0,-1.20758045341063e-007,1,-0.00222667749039829,-0.00297353020869195,0.999993205070496,-0.00221776426769793,-0.00594743387773633,0.999979794025421,0,0.00693128723651171,0.9999760389328,0.00112180307041854,0.00595623720437288,-0.999981582164764,0.00109982641879469,0.00297777727246284,-0.999994993209839,0.00660117482766509,-1.20727349894878e-007,-0.999978303909302,0.00660101510584354,-0.00692977802827954,-0.999954223632813,0.00079112610546872,-0.999817967414856,0.0190582480281591,-0.00517760263755918,-0.999805092811584,0.0190536808222532,-0.0122071662917733,-0.999834179878235,0.0135154724121094,-0.0223189238458872,-0.999659597873688,0.0135131124407053,-0.00292423577047884,-0.999905109405518,0.0134631246328354,-0.0054214196279645,-0.999903321266174,0.012802604585886,-0.00588270975276828,-0.999854028224945,0.0160452630370855,-0.00223717326298356,-0.999966323375702,0.0078956875950098,-0.0238432548940182,-0.999690115451813,0.00716498028486967,0.0111405616626143,-0.999811887741089,0.0158745385706425,0.00993431452661753,-0.999894261360168,0.0106157697737217,-0.0232241880148649,-0.999647378921509,0.012876620516181,0.0089995888993144,-0.999860465526581,0.0140714291483164,0.00763220340013504,-0.999873399734497,0.0139588853344321,-0.0275354366749525,-0.999618411064148,0.00222732406109571,-0.0298578459769487,-0.999551773071289,0.0022270823828876,-0.0298475325107574,-0.999234437942505,-0.0252925828099251,
+0.0152419032528996,-0.999870598316193,0.00513170147314668,0.0149774327874184,-0.999811887741089,0.0123283229768276,-0.0298550948500633,-0.999487578868866,-0.0115479566156864,-0.00189507310278714,0.999995827674866,-0.00218094000592828,0.000237695014220662,0.999997615814209,-0.00218093325383961,0.00585424154996872,0.999885559082031,-0.0139501625671983,0.00711339898407459,0.999876141548157,-0.0140395043417811,-0.0139763979241252,-0.999585688114166,-0.0251612365245819,-0.00839504692703485,-0.999963164329529,0.0018412338104099,0.000972013047430664,-0.999997615814209,0.00192866357974708,-0.0298475455492735,-0.999235272407532,-0.0252626482397318,0.00189871503971517,-0.999929189682007,-0.0117513621225953,-0.00954109523445368,-0.999882280826569,0.0120257697999477,-0.00960960332304239,-0.999941766262054,0.00489891273900867,0.00189823471009731,-0.999676167964935,-0.0253762416541576,3.14145722768444e-007,0,-1,0.0496123619377613,0,-0.99876856803894,3.41559683647574e-007,0,-1,0.00662379758432508,0,-0.999978005886078,0.00348382047377527,0,-0.999993979930878,-0.11158911138773,0,-0.9937544465065,0.0515303909778595,0,-0.998671352863312,0.14914782345295,0,-0.988814830780029,-0.00170681066811085,0.00859078764915466,-0.999961614608765,-0.000228786768275313,0.0374429374933243,-0.999298751354218,0.000215594613109715,0.0370362885296345,-0.999313950538635,0.000215594613109715,0.0370362885296345,-0.999313950538635,0.268330335617065,-0.0226083863526583,-0.963061690330505,-0.00170681066811085,0.00859078764915466,-0.999961614608765,0.268330335617065,-0.0226083863526583,-0.963061690330505,0.210698470473289,-0.0595092736184597,-0.975738108158112,-0.00170681066811085,0.00859078764915466,-0.999961614608765,0.210698470473289,-0.0595092736184597,-0.975738108158112,-0.0550169311463833,-0.0515961572527885,-0.997151494026184,-0.00170681066811085,0.00859078764915466,-0.999961614608765,-0.0550169311463833,-0.0515961572527885,-0.997151494026184,0.0610489472746849,-0.0511405728757381,-0.996823668479919,-0.00170681066811085,0.00859078764915466,-0.999961614608765,
+0.0610489472746849,-0.0511405728757381,-0.996823668479919,-0.220291614532471,-0.0579993724822998,-0.973708212375641,-0.00170681066811085,0.00859078764915466,-0.999961614608765,-0.220291614532471,-0.0579993724822998,-0.973708212375641,-0.280973523855209,-0.0234448853880167,-0.959429025650024,-0.00170681066811085,0.00859078764915466,-0.999961614608765,-0.280973523855209,-0.0234448853880167,-0.959429025650024,-0.000228786768275313,0.0374429374933243,-0.999298751354218,-0.00170681066811085,0.00859078764915466,-0.999961614608765,-0.00114197994116694,-0.999910652637482,-0.0133196683600545,-0.00500230165198445,-0.999898850917816,-0.0133195100352168,0.00509239360690117,-0.999945044517517,0.00917585287243128,0.00100325944367796,-0.999957203865051,0.00920158624649048,0.00722247688099742,-0.999950706958771,0.00680879456922412,-0.00942839682102203,-0.99982762336731,-0.0160006675869226,-0.00913437642157078,-0.999786496162415,-0.0185330621898174,0.00762644922360778,-0.999963462352753,0.00385264866054058,-0.00379055668599904,-0.999982833862305,0.0044561461545527,-0.00143287784885615,-0.999840974807739,-0.0177822392433882,-0.00112423545215279,-0.999883890151978,-0.0152011718600988,-0.00341763277538121,-0.99996680021286,0.00739199295639992,0.000491657643578947,-0.999827682971954,-0.0185627359896898,-0.000396430579712614,-0.999827682971954,-0.0185627732425928,-0.00605887407436967,-0.999976217746735,0.00328804762102664,-0.0040024914778769,-0.999986886978149,0.00318120303563774,-0.00607900228351355,-0.999961316585541,-0.00635561812669039,0.000490631209686399,-0.999515414237976,-0.0311236418783665,0.000490717706270516,-0.999691665172577,-0.0248288866132498,-0.00612536072731018,-0.999980986118317,0.000739393290132284,-0.00748345116153359,0.999967038631439,-0.00312979286536574,-0.00662159966304898,0.999972641468048,-0.00328996335156262,0.0100036058574915,0.999777257442474,0.0185835845768452,0.0108201019465923,0.999768793582916,0.0185834262520075,0.00746873486787081,-0.999909937381744,-0.0111449910327792,-0.00564014911651611,-0.999500274658203,-0.0311037730425596,
+0.000356269214535132,-0.999517440795898,-0.0310638956725597,0.000980935525149107,-0.999937176704407,-0.0111666852608323,0.00997726898640394,-0.999949753284454,0.00100112392101437,-0.0116391116753221,-0.999632239341736,-0.024493083357811,-0.0116371084004641,-0.999460220336914,-0.0307216700166464,0.00982704851776361,-0.999933540821075,-0.00602626334875822,-3.14145722768444e-007,0,1,-0.0496123619377613,0,0.99876856803894,-3.41559683647574e-007,0,1,-0.00371179264038801,0,0.999993145465851,0.00374596170149744,0,0.999993026256561,0.117256045341492,0,0.993101716041565,-0.0478913448750973,0,0.998852610588074,-0.14914782345295,0,0.988814830780029,0.0041629015468061,0.00864151772111654,0.999953925609589,0.000228786768275313,0.0374429374933243,0.999298751354218,-0.000215594613109715,0.0370362885296345,0.999313950538635,-0.000215594613109715,0.0370362885296345,0.999313950538635,-0.268330335617065,-0.0226083863526583,0.963061690330505,0.0041629015468061,0.00864151772111654,0.999953925609589,-0.268330335617065,-0.0226083863526583,0.963061690330505,-0.207923516631126,-0.0593326427042484,0.976343870162964,0.0041629015468061,0.00864151772111654,0.999953925609589,-0.207923516631126,-0.0593326427042484,0.976343870162964,0.0601190775632858,-0.0511554591357708,0.996879458427429,0.0041629015468061,0.00864151772111654,0.999953925609589,0.0601190775632858,-0.0511554591357708,0.996879458427429,-0.0544126816093922,-0.0508165098726749,0.997224628925323,0.0041629015468061,0.00864151772111654,0.999953925609589,-0.0544126816093922,-0.0508165098726749,0.997224628925323,0.224614962935448,-0.0574872270226479,0.9727503657341,0.0041629015468061,0.00864151772111654,0.999953925609589,0.224614962935448,-0.0574872270226479,0.9727503657341,0.280973523855209,-0.0234448853880167,0.959429025650024,0.0041629015468061,0.00864151772111654,0.999953925609589,0.280973523855209,-0.0234448853880167,0.959429025650024,0.000228786768275313,0.0374429374933243,0.999298751354218,0.0041629015468061,0.00864151772111654,0.999953925609589,0.0178174171596766,-0.999369978904724,0.0306946448981762,
+4.51126361440402e-005,-0.999966561794281,0.00817264523357153,-0.00014753732830286,-0.99998939037323,0.0046096476726234,0.0178248938173056,-0.999789655208588,0.010143474675715,-0.0296396780759096,-0.999100506305695,0.0303265862166882,0.000852764002047479,-0.999900162220001,0.0141112310811877,0.00320407515391707,-0.999894857406616,0.014143031090498,-0.00597304198890924,-0.999516844749451,0.030503623187542,-0.0296517014503479,-0.999507248401642,0.0102940229699016,0.00516509357839823,-0.999974429607391,0.00494165997952223,0.00479311542585492,-0.999953150749207,0.00840881373733282,-0.0296393427997828,-0.999090552330017,0.0306522101163864,0.0296479295939207,0.999506652355194,0.0103658093139529,0.0264620948582888,0.999596118927002,0.0103667378425598,0.000878976541571319,0.999962747097015,-0.00859017577022314,0.00120271136984229,0.999962568283081,-0.00856880657374859,-0.0209972802549601,-0.999397695064545,-0.0276326313614845,0.00467678904533386,-0.99998527765274,0.00271416688337922,0.00432089995592833,-0.999976515769959,0.00532877864316106,-0.0219372753053904,-0.999578833580017,-0.0190016683191061,0.00230192020535469,-0.999978065490723,0.0062205265276134,0.00075911486055702,-0.999980211257935,0.00624513579532504,-0.0206054802983999,-0.999408304691315,-0.0275400597602129,-0.00548976054415107,-0.999605536460876,-0.0275454949587584,0.0103394221514463,-0.999779462814331,-0.0182835906744003,0.000464864482637495,-0.999983549118042,0.00572031689807773,0.000121315533760935,-0.999995052814484,0.00313551421277225,0.00931927096098661,-0.999598681926727,-0.0267547629773617,0.00295479781925678,-0.999959170818329,0.00854290928691626,0.00260114949196577,-0.999959707260132,0.00859610084444284,0.014352417550981,-0.999842524528503,-0.010440188460052,0.0178256779909134,-0.999786615371704,-0.0104394694790244,4.51126361440402e-005,-0.999966561794281,0.00817264523357153,-0.00607900228351355,-0.999961316585541,-0.00635561812669039,-0.00612536072731018,-0.999980986118317,0.000739393290132284,-0.00014753732830286,-0.99998939037323,0.0046096476726234,
+0.000852764002047479,-0.999900162220001,0.0141112310811877,0.00746873486787081,-0.999909937381744,-0.0111449910327792,0.000980935525149107,-0.999937176704407,-0.0111666852608323,0.00320407515391707,-0.999894857406616,0.014143031090498,0.00516509357839823,-0.999974429607391,0.00494165997952223,0.00997726898640394,-0.999949753284454,0.00100112392101437,0.00982704851776361,-0.999933540821075,-0.00602626334875822,0.00479311542585492,-0.999953150749207,0.00840881373733282,0.00120271136984229,0.999962568283081,-0.00856880657374859,0.000878976541571319,0.999962747097015,-0.00859017577022314,-0.00662159966304898,0.999972641468048,-0.00328996335156262,-0.00748345116153359,0.999967038631439,-0.00312979286536574,0.00467678904533386,-0.99998527765274,0.00271416688337922,0.00722247688099742,-0.999950706958771,0.00680879456922412,0.00762644922360778,-0.999963462352753,0.00385264866054058,0.00432089995592833,-0.999976515769959,0.00532877864316106,0.00100325944367796,-0.999957203865051,0.00920158624649048,0.00509239360690117,-0.999945044517517,0.00917585287243128,0.00075911486055702,-0.999980211257935,0.00624513579532504,0.00230192020535469,-0.999978065490723,0.0062205265276134,0.000464864482637495,-0.999983549118042,0.00572031689807773,-0.00379055668599904,-0.999982833862305,0.0044561461545527,-0.00341763277538121,-0.99996680021286,0.00739199295639992,0.000121315533760935,-0.999995052814484,0.00313551421277225,-0.0040024914778769,-0.999986886978149,0.00318120303563774,-0.00605887407436967,-0.999976217746735,0.00328804762102664,0.00260114949196577,-0.999959707260132,0.00859610084444284,0.00295479781925678,-0.999959170818329,0.00854290928691626,-0.00954109523445368,-0.999882280826569,0.0120257697999477,-0.000413412024499848,-0.999983370304108,0.00577038060873747,-0.000295231438940391,-0.99995493888855,0.00949426740407944,-0.00960960332304239,-0.999941766262054,0.00489891273900867,0.000972013047430664,-0.999997615814209,0.00192866357974708,-0.00839504692703485,-0.999963164329529,0.0018412338104099,0.00602138321846724,-0.999950349330902,0.00794057920575142,
+0.0150300608947873,-0.999855756759644,0.00791022647172213,0.0149774327874184,-0.999811887741089,0.0123283229768276,0.0152419032528996,-0.999870598316193,0.00513170147314668,0.0088904146105051,-0.999912142753601,0.00983293913304806,0.0091601749882102,-0.999939620494843,0.00607593404129148,0.0150217525660992,-0.999886512756348,-0.00116952578537166,0.0137062007561326,-0.99990576505661,-0.000826070259790868,0.00763220340013504,-0.999873399734497,0.0139588853344321,0.0089995888993144,-0.999860465526581,0.0140714291483164,0.00993431452661753,-0.999894261360168,0.0106157697737217,0.0111405616626143,-0.999811887741089,0.0158745385706425,0.00787287019193172,-0.999966681003571,0.00219117174856365,0.00774548947811127,-0.999969840049744,0.000569185649510473,0.0109777171164751,-0.999928057193756,-0.00482095219194889,0.00523430574685335,-0.999975383281708,-0.00466496078297496,-0.00517760263755918,-0.999805092811584,0.0190536808222532,0.00079112610546872,-0.999817967414856,0.0190582480281591,-0.00588270975276828,-0.999854028224945,0.0160452630370855,-0.0054214196279645,-0.999903321266174,0.012802604585886,0.000390271452488378,-0.999999523162842,0.000989116611890495,0.000199500340386294,-0.999996781349182,0.0025150787550956,0.00711339898407459,0.999876141548157,-0.0140395043417811,0.00585424154996872,0.999885559082031,-0.0139501625671983,0.00178981735371053,0.999998033046722,0.000955658440943807,0.00300105568021536,0.999995052814484,0.00100065930746496,-0.000413412024499848,-0.999983370304108,0.00577038060873747,0.0126450201496482,-0.999756515026093,-0.0180846769362688,0.0126464571803808,-0.999870002269745,-0.0100100981071591,-0.000295231438940391,-0.99995493888855,0.00949426740407944,0.0150300608947873,-0.999855756759644,0.00791022647172213,0.00602138321846724,-0.999950349330902,0.00794057920575142,0.012645959854126,-0.99991899728775,-0.00145673204679042,-0.00395988905802369,-0.999990999698639,-0.00156325660645962,0.0091601749882102,-0.999939620494843,0.00607593404129148,0.0088904146105051,-0.999912142753601,0.00983293913304806,
+-0.0205646269023418,-0.999741852283478,-0.00967108923941851,-0.0205623246729374,-0.999629855155945,-0.0178155265748501,-0.0181345622986555,-0.999677360057831,-0.0177862942218781,-0.0157057419419289,-0.999718546867371,-0.0177869498729706,0.0137062007561326,-0.99990576505661,-0.000826070259790868,0.0150217525660992,-0.999886512756348,-0.00116952578537166,0.00774548947811127,-0.999969840049744,0.000569185649510473,0.00787287019193172,-0.999966681003571,0.00219117174856365,-0.0148912649601698,-0.999650716781616,-0.0218367092311382,-0.0152865722775459,-0.999569654464722,-0.0250373464077711,-0.00332665746100247,-0.999695003032684,-0.0244711227715015,0.00724752061069012,-0.999674379825592,-0.0244706198573112,0.00523430574685335,-0.999975383281708,-0.00466496078297496,0.0109777171164751,-0.999928057193756,-0.00482095219194889,0.000199500340386294,-0.999996781349182,0.0025150787550956,0.000390271452488378,-0.999999523162842,0.000989116611890495,0.00812134798616171,-0.999671459197998,-0.0243100188672543,0.00770949525758624,-0.999748349189758,-0.0210685860365629,0.00300105568021536,0.999995052814484,0.00100065930746496,0.00178981735371053,0.999998033046722,0.000955658440943807,-0.00818149372935295,0.999808788299561,0.0177605301141739,-0.0104111898690462,0.999788045883179,0.0177601538598537,-1,-0,0,-1,-3.55493682491215e-007,0,-1,-7.10987364982429e-007,0,-1,-3.55493682491215e-007,0,-1,0,0,-1,0,0,-1,-0,0,-1,0,0,-1,0,0,-1,0,0,-1,0,0,-1,0,0,-1,0,0,-1,0,0,-1,0,0,-1,0,0,-1,0,0,-1,0,0,-1,0,-0,-1,0,0,-0.329384297132492,0.00146538612898439,0.944194793701172,-0.313998371362686,0.0125620383769274,0.949340462684631,-0.0467889495193958,-0.00343279191292822,0.998898983001709,-0.0471730455756187,0.00417169230058789,0.998878061771393,0.00027618813328445,-7.22769073036034e-006,-0.999999940395355,0.00163059530314058,2.68274725385709e-005,-0.999998688697815,0.00282606575638056,9.50676621869206e-005,-0.9999960064888,-0.00209621735848486,-3.60119774995837e-005,-0.999997913837433,0.301166355609894,0.0379444658756256,0.952816307544708,-0.329384297132492,0.00146538612898439,0.944194793701172,
+-0.0471730455756187,0.00417169230058789,0.998878061771393,0.0164546240121126,0.00407885666936636,0.999856293201447,0.00205502123571932,-6.52860762784258e-005,-0.999997854232788,-0.00220126518979669,1.29116051539313e-006,-0.999997556209564,-0.00322929443791509,-1.70154162333347e-005,-0.999994874000549,-0.00312384171411395,2.00842214326258e-006,-0.999995112419128,0.00580401066690683,0.0116761028766632,0.99991500377655,-0.0467889495193958,-0.00343279191292822,0.998898983001709,-0.313998371362686,0.0125620383769274,0.949340462684631,0.29771226644516,-0.0188401639461517,0.954469680786133,0.00163059530314058,2.68274725385709e-005,-0.999998688697815,-0.00220126518979669,1.29116051539313e-006,-0.999997556209564,0.00205502123571932,-6.52860762784258e-005,-0.999997854232788,0.00282606575638056,9.50676621869206e-005,-0.9999960064888,-1,5.68790255783824e-006,0,-1,2.84395127891912e-006,0,-1,0,0,-1,2.84395127891912e-006,0,-1,0,0,-1,0,0,-1,0,-0,-1,0,0,-1,-0,7.10982021701057e-007,-1,0,3.55491010850528e-007,-1,0,0,-1,0,3.55491010850528e-007,0.301166355609894,0.0379444658756256,0.952816307544708,0.0164546240121126,0.00407885666936636,0.999856293201447,0.00580401066690683,0.0116761028766632,0.99991500377655,0.29771226644516,-0.0188401639461517,0.954469680786133,-0.00322929443791509,-1.70154162333347e-005,-0.999994874000549,0.00027618813328445,-7.22769073036034e-006,-0.999999940395355,-0.00209621735848486,-3.60119774995837e-005,-0.999997913837433,-0.00312384171411395,2.00842214326258e-006,-0.999995112419128,1.23922279726685e-006,-1,6.45252518083339e-010,1.10949247300596e-006,-1,-1.34854261091277e-009,7.34337959329423e-007,-0.99934196472168,-0.0362717919051647,1.10150733689807e-006,-0.99934196472168,-0.0362717919051647,0,0.99934196472168,-0.0362717658281326,0,0.99934196472168,-0.0362717658281326,-2.81002542124043e-007,1,6.45253794839817e-010,-9.36675448315327e-008,1,-1.34854061251133e-009,-1.96730738366568e-007,-0.999926865100861,-0.0120930345728993,-7.53330624547743e-008,-0.99998927116394,-0.00462824758142233,5.73140994220012e-007,-0.99934196472168,0.0362717695534229,
+-1.67471725376345e-008,-1,-1.30471020653999e-008,1.96565395071957e-007,-0.999926865100861,0.01209557056427,7.51673070453762e-008,-0.99998927116394,0.00463075703009963,-6.26093822120311e-007,-0.999342083930969,-0.0362690426409245,-3.62428558275951e-008,-1,2.59823718806729e-006,-1.37482220452512e-006,-0.999999821186066,0.000575744837988168,-1.03111688076751e-006,-0.999999821186066,0.000575744837988168,-6.12701398949866e-007,-0.999512612819672,-0.0312197636812925,-8.79483252447244e-007,-0.999512612819672,-0.0312197618186474,-8.4195715999158e-007,0.999512612819672,0.0312197636812925,-8.7948995997067e-007,0.999512612819672,0.0312197674065828,-6.87411102262558e-007,0.997990369796753,0.0633658021688461,-1.03111619864649e-006,0.997990369796753,0.0633658021688461,6.80638478911533e-009,-0.999958336353302,0.00913910195231438,6.80350842330313e-009,-0.999535799026489,-0.0304685197770596,1.16127685245715e-008,-0.999033629894257,-0.0439539439976215,1.16173071162962e-008,-0.999466061592102,-0.0326743088662624,1.62930025027208e-008,-0.997367918491364,-0.0725068673491478,1.6327211582734e-008,-0.999461889266968,-0.032800417393446,-1.54246038164274e-009,-0.999821841716766,-0.0188767798244953,-1.54383639205946e-009,-0.999536752700806,-0.0304370019584894,-0.00145085121039301,0.0251166131347418,0.999683499336243,0,0.0251166392117739,0.999684631824493,0.0082978829741478,0.0066373972222209,0.999943554401398,0,0.00663762586191297,0.999978005886078,-1,0,0,-1,1.14889637359283e-007,-2.88837198603176e-009,-1,2.29779274718567e-007,-5.77674397206351e-009,-1,1.14889637359283e-007,-2.88837198603176e-009,-0.00859916023910046,0.0185847990214825,-0.99979031085968,0,-0.0250950455665588,-0.999685108661652,0.00166628777515143,-0.0250950064510107,-0.999683678150177,0,0.0185854863375425,-0.999827265739441,-1,0,0,-1,-9.57411661062224e-009,2.40697156650427e-010,-1,-1.91482332212445e-008,4.81394313300854e-010,-1,-9.57411661062224e-009,2.40697156650427e-010,0.000535528641194105,-0.0158158112317324,-0.999874711036682,-0.000512005295604467,-0.0295154023915529,-0.999564170837402,
+0.00844651274383068,0.00574202788993716,-0.999947905540466,0.00844139512628317,0.0122802127152681,-0.999888956546783,-0.000512005237396806,0.0295150242745876,0.999564230442047,0.000535528524778783,0.0158155169337988,0.999874711036682,0.00844139512628317,-0.0122804306447506,0.999888956546783,0.00844651274383068,-0.00574234034866095,0.999947905540466,1.61743059834407e-006,7.70598251875754e-010,1,1.49336926824617e-006,-1.81153525513622e-009,1,1.36837900299724e-006,-0.0368317253887653,0.999321460723877,1.36837900299724e-006,-0.0368317253887653,0.999321460723877,-1,0,0,-1,0,0,-1,0,0,-1,0,0,-1.36929872951441e-006,0.00368588580749929,-0.999993205070496,-1.59751471073832e-006,0.00368588580749929,-0.999993205070496,-1.65347523761739e-006,-7.70648128645135e-011,-1,-1.52941470332735e-006,1.81165235590974e-010,-1,-1,-0,0,-1,-0,0,-1,-0,0,-1,-0,0,0,0.0027585462667048,-0.99999612569809,0,-0.00553251104429364,-0.999984741210938,0,0.0207975152879953,-0.99978369474411,-0,0.043867290019989,-0.999037384986877,0,0.0055321897380054,0.999984741210938,0,-0.00275894347578287,0.99999612569809,0,-0.0438679382205009,0.999037325382233,0,-0.0207980237901211,0.999783754348755,0.000535528524778783,0.0158155169337988,0.999874711036682,-0.000512005237396806,0.0295150242745876,0.999564230442047,-0.0053306040354073,0.0288157667964697,0.999570548534393,-0.00533438101410866,0.0438664443790913,0.999023199081421,0.00166628777515143,-0.0250950064510107,-0.999683678150177,0,-0.0250950455665588,-0.999685108661652,0.00527297612279654,-0.0519112348556519,-0.998637795448303,0,-0.0519119575619698,-0.998651742935181,-0.000512005295604467,-0.0295154023915529,-0.999564170837402,0.000535528641194105,-0.0158158112317324,-0.999874711036682,-0.00533438101410866,-0.0438668057322502,-0.999023199081421,-0.00533060450106859,-0.0288162436336279,-0.999570608139038,-0.00539727509021759,0.0371528603136539,0.999295115470886,0,0.0251166392117739,0.999684631824493,-0.00145085121039301,0.0251166131347418,0.999683499336243,0,0.0371534004807472,0.999309659004211,-2.11784453085784e-007,-0.999903738498688,-0.013875849545002,
+1.39151312694707e-008,-1,2.41887778429373e-006,7.51673070453762e-008,-0.99998927116394,0.00463075703009963,1.96565395071957e-007,-0.999926865100861,0.01209557056427,1.12390398498974e-006,-0.999903798103333,0.0138784851878881,1.12390398498974e-006,-0.999903798103333,0.0138784851878881,1.10949247300596e-006,-1,-1.34854261091277e-009,1.23922279726685e-006,-1,6.45252518083339e-010,2.32108206432713e-007,-0.999903678894043,0.013878658413887,6.40689146180762e-009,-1,1.64859969231657e-007,-7.53330624547743e-008,-0.99998927116394,-0.00462824758142233,-1.96730738366568e-007,-0.999926865100861,-0.0120930345728993,-9.36675448315327e-008,1,-1.34854061251133e-009,-2.81002542124043e-007,1,6.45253794839817e-010,-5.61950798783073e-007,0.999903678894043,0.0138784879818559,-4.21463198563288e-007,0.999903678894043,0.0138784879818559,-1.54383639205946e-009,-0.999536752700806,-0.0304370019584894,-1.54246038164274e-009,-0.999821841716766,-0.0188767798244953,-9.10124509090338e-009,-0.999282896518707,-0.0378646962344646,-9.10317421443096e-009,-0.999494612216949,-0.031789630651474,-5.75116757772776e-007,0.999842345714569,0.017762802541256,-5.75116757772776e-007,0.999842345714569,0.017762802541256,-8.7948995997067e-007,0.999512612819672,0.0312197674065828,-8.4195715999158e-007,0.999512612819672,0.0312197636812925,1.16173071162962e-008,-0.999466061592102,-0.0326743088662624,1.16127685245715e-008,-0.999033629894257,-0.0439539439976215,1.36574911380194e-008,-0.999694228172302,-0.0247273705899715,1.36551419060993e-008,-0.99952232837677,-0.0309052504599094,-8.79483252447244e-007,-0.999512612819672,-0.0312197618186474,-6.12701398949866e-007,-0.999512612819672,-0.0312197636812925,-5.7512153261996e-007,-0.999008893966675,-0.0445112176239491,-5.7512153261996e-007,-0.999008893966675,-0.0445112176239491,0,0.0152766108512878,0.999883413314819,0,0.0217712298035622,0.999763071537018,0,-0.00275894347578287,0.99999612569809,0,0.0055321897380054,0.999984741210938,1.74080332726589e-006,0.0281136129051447,0.999604761600494,1.74080332726589e-006,0.0281136129051447,0.999604761600494,
+1.49336926824617e-006,-1.81153525513622e-009,1,1.61743059834407e-006,7.70598251875754e-010,1,0,-0.0217715259641409,-0.999763071537018,0,-0.0152768976986408,-0.999883413314819,0,-0.00553251104429364,-0.999984741210938,0,0.0027585462667048,-0.99999612569809,-1.52941470332735e-006,1.81165235590974e-010,-1,-1.65347523761739e-006,-7.70648128645135e-011,-1,-1.74148283349496e-006,-0.00281264306977391,-0.999996066093445,-1.56733494804939e-006,-0.00281264306977391,-0.999996066093445,0.0164546240121126,0.00407885666936636,0.999856293201447,-0.0471730455756187,0.00417169230058789,0.998878061771393,0.00198477995581925,0.00150613917503506,0.999996900558472,0.00193984899669886,0.00148503796663135,0.999996960163116,0.00580401066690683,0.0116761028766632,0.99991500377655,0.0164546240121126,0.00407885666936636,0.999856293201447,0.00193984899669886,0.00148503796663135,0.999996960163116,0.000359320838470012,0.00442922441288829,0.999990105628967,-0.0467889495193958,-0.00343279191292822,0.998898983001709,0.00580401066690683,0.0116761028766632,0.99991500377655,0.000359320838470012,0.00442922441288829,0.999990105628967,0.000332846568198875,0.00453164102509618,0.999989688396454,0.000332846568198875,0.00453164102509618,0.999989688396454,0.00198477995581925,0.00150613917503506,0.999996900558472,-0.0471730455756187,0.00417169230058789,0.998878061771393,-0.0467889495193958,-0.00343279191292822,0.998898983001709,0.0394393242895603,0.0041302558965981,-0.999213457107544,-0.0306596886366606,-0.00562555529177189,-0.999514043331146,-0.348024427890778,-0.00583526352420449,-0.937467336654663,0.292816579341888,-0.0378989465534687,-0.955417275428772,0.0365194343030453,-0.0057904371060431,-0.999316155910492,0.0394393242895603,0.0041302558965981,-0.999213457107544,0.292816579341888,-0.0378989465534687,-0.955417275428772,0.303169965744019,0.0213318187743425,-0.95269775390625,-0.346732914447784,-0.011176728643477,-0.937897205352783,-0.0184311624616385,0.00277280434966087,-0.999826312065125,0.0365194343030453,-0.0057904371060431,-0.999316155910492,0.303169965744019,0.0213318187743425,-0.95269775390625,
+-0.0306596886366606,-0.00562555529177189,-0.999514043331146,-0.0184311624616385,0.00277280434966087,-0.999826312065125,-0.346732914447784,-0.011176728643477,-0.937897205352783,-0.348024427890778,-0.00583526352420449,-0.937467336654663,-0.00312384171411395,2.00842214326258e-006,-0.999995112419128,-0.00209621735848486,-3.60119774995837e-005,-0.999997913837433,-0.0306596886366606,-0.00562555529177189,-0.999514043331146,0.0394393242895603,0.0041302558965981,-0.999213457107544,0.0365194343030453,-0.0057904371060431,-0.999316155910492,0.00205502123571932,-6.52860762784258e-005,-0.999997854232788,-0.00312384171411395,2.00842214326258e-006,-0.999995112419128,0.0394393242895603,0.0041302558965981,-0.999213457107544,0.00282606575638056,9.50676621869206e-005,-0.9999960064888,0.00205502123571932,-6.52860762784258e-005,-0.999997854232788,0.0365194343030453,-0.0057904371060431,-0.999316155910492,-0.0184311624616385,0.00277280434966087,-0.999826312065125,-0.00209621735848486,-3.60119774995837e-005,-0.999997913837433,0.00282606575638056,9.50676621869206e-005,-0.9999960064888,-0.0184311624616385,0.00277280434966087,-0.999826312065125,-0.0306596886366606,-0.00562555529177189,-0.999514043331146,0.00193984899669886,0.00148503796663135,0.999996960163116,0.00198477995581925,0.00150613917503506,0.999996900558472,0.00873159524053335,0.00108706788159907,0.999961256980896,0.00806613173335791,-0.00130622752476484,0.999966621398926,0.000359320838470012,0.00442922441288829,0.999990105628967,0.00193984899669886,0.00148503796663135,0.999996960163116,0.00806613173335791,-0.00130622752476484,0.999966621398926,0.00862434785813093,-0.00108763063326478,0.999962210655212,0.000332846568198875,0.00453164102509618,0.999989688396454,0.000359320838470012,0.00442922441288829,0.999990105628967,0.00862434785813093,-0.00108763063326478,0.999962210655212,0.00936695281416178,0.000975100032519549,0.999955713748932,0.00873159524053335,0.00108706788159907,0.999961256980896,0.00198477995581925,0.00150613917503506,0.999996900558472,0.000332846568198875,0.00453164102509618,0.999989688396454,
+0.00936695281416178,0.000975100032519549,0.999955713748932,0.00268766353838146,-0.00860986486077309,0.999959290027618,0.00217361678369343,-1.09480097876258e-007,0.999997735023499,0.00215017958544195,0.00218138308264315,0.999995291233063,0.00259301508776844,-0.0171956401318312,0.999848783016205,0.00212624366395175,0.00541811808943748,0.999983072280884,0.00162248418200761,0.00538230733945966,0.999984264373779,0.00105929130222648,-0.0195647180080414,0.999808073043823,-0.000919484358746558,-0.0195290595293045,0.999808847904205,-0.00103375501930714,-0.0021845125593245,-0.999997019767761,-0.00103692966513336,-1.09461396391453e-007,-0.999999463558197,-0.00358432624489069,0.00860633421689272,-0.999956488609314,-0.00360051286406815,0.017196673899889,-0.999845623970032,0.00183831399772316,-1.44418843550653e-009,0.999998390674591,0.00258438219316304,-2.03029348888606e-009,0.999996721744537,0.0032683745957911,-2.57109578072345e-009,0.999994695186615,0.00352881010621786,-2.77595235687045e-009,0.999993801116943,0.00217361678369343,-1.09480097876258e-007,0.999997735023499,-0.0054885121062398,0.0172776095569134,0.999835610389709,-0.00548605527728796,0.034550167620182,0.999387919902802,0.00215017958544195,0.00218138308264315,0.999995291233063,0.00230333372019231,0.0224817637354136,0.999744594097137,-0.000710009422618896,0.0224818140268326,0.999747097492218,0.00162248418200761,0.00538230733945966,0.999984264373779,0.00212624366395175,0.00541811808943748,0.999983072280884,0,-0.0345531217753887,-0.99940288066864,0,-0.0172791928052902,-0.999850749969482,-0.00103692966513336,-1.09461396391453e-007,-0.999999463558197,-0.00103375501930714,-0.0021845125593245,-0.999997019767761,-0,0,1,-0.00274467631243169,2.15141926496187e-009,0.999996304512024,0.00258438219316304,-2.03029348888606e-009,0.999996721744537,0.00183831399772316,-1.44418843550653e-009,0.999998390674591,-0.00222667749039829,-0.00297353020869195,0.999993205070496,0.00268766353838146,-0.00860986486077309,0.999959290027618,0.00259301508776844,-0.0171956401318312,0.999848783016205,
+-0.00221776426769793,-0.00594743387773633,0.999979794025421,-0.000919484358746558,-0.0195290595293045,0.999808847904205,0.00105929130222648,-0.0195647180080414,0.999808073043823,-0.000864655943587422,-0.00530975125730038,0.99998551607132,-0.00159275403711945,-0.0052465801127255,0.999984979629517,-0.00360051286406815,0.017196673899889,-0.999845623970032,-0.00358432624489069,0.00860633421689272,-0.999956488609314,0.00109982641879469,0.00297777727246284,-0.999994993209839,0.00112180307041854,0.00595623720437288,-0.999981582164764,0.00352881010621786,-2.77595235687045e-009,0.999993801116943,0.0032683745957911,-2.57109578072345e-009,0.999994695186615,-0.00374783808365464,2.93802915329877e-009,0.999992907047272,-0.00212347321212292,1.66465907724955e-009,0.999997675418854
+			} 
+			TangentsW: *600 {
+				a: 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,-1,1,1,1,1,1,1,1,1,-1,-1,1,-1,-1,1,1,1,-1,-1,1,1,1,1,-1,1,-1,-1,1,1,-1,-1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,-1,1,1,1,1,-1,1,1,-1,1,1,-1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,-1,1,1,1,1,-1,-1,1,1,-1,1,1,-1,1,1,-1,-1,-1,1,1,-1,-1,1,1,1,1,-1,-1,-1,-1,1,1,1,1,1,-1,1,1,1,1,-1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,-1,1,1,1,1,1,1,-1,1,1,1,1,-1,-1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,-1,-1,1,1,1,1,1,1,1,-1,-1,1,1,1,1,1,-1,-1,1,1,-1,-1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,-1,-1,1,1,1,1,1,1,1,1,1,1,-1,-1,1,1,-1,-1,1,1,-1,-1,1,1,1,-1,-1,1,1,1,-1,-1,1,1,1,-1,1,1,1,1,-1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,-1,1,1,1,1,1,1,1,1,-1,1,1,1,1,-1,-1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
+			} 
+		}
+		LayerElementUV: 0 {
+			Version: 101
+			Name: "map1"
+			MappingInformationType: "ByPolygonVertex"
+			ReferenceInformationType: "IndexToDirect"
+			UV: *772 {
+				a: 0,0.644729614257813,0,0.50845742225647,2,0.50845742225647,2,0.644729614257813,0.762462139129639,0.768316745758057,0.972905516624451,0.768316745758057,0.972905457019806,0.899511456489563,0.762462079524994,0.899511575698853,0,0.391910970211029,0,0.257045209407806,2.00000023841858,0.257045239210129,2.00000023841858,0.391910970211029,0.742483377456665,0.972544968128204,0.532039880752563,0.97254478931427,0.532039880752563,0.841350078582764,0.742483377456665,0.841350078582764,2.00000023841858,0.892060339450836,0,0.892060041427612,0,0.760865092277527,2.00000023841858,0.760865390300751,1,0.760865092277527,1,0.892060041427612,-1.00000035762787,0.892059803009033,-1.00000035762787,0.760864853858948,1.95672953128815,0.00415061507374048,1.95672953128815,0.145523861050606,1.08371293544769,0.145520865917206,1.0837128162384,0.00414761854335666,1.08437919616699,0.287970036268234,1.9578994512558,0.287936419248581,1.95765781402588,0.322175800800323,1.08413791656494,0.322209417819977,1.48046588897705,0.581726789474487,2.34238123893738,0.581226110458374,2.34240770339966,0.614961564540863,1.48049199581146,0.615462243556976,1.95662891864777,0.0127393575385213,1.95656764507294,0.0493667386472225,1.08810114860535,0.0493682771921158,1.08816277980804,0.0127408970147371,1.48489201068878,0.0291941519826651,2.34238266944885,0.0291728861629963,2.34239864349365,0.11378812789917,1.48490798473358,0.113809399306774,1.94095647335052,0.514051735401154,1.9409304857254,0.548085868358612,1.08264923095703,0.548092901706696,1.08267557621002,0.514058768749237,0.14318522810936,0.518528640270233,0.9658522605896,0.518528640270233,0.963518142700195,0.638121366500854,0.140850603580475,0.638121247291565,1.71126770973206,1.02946662902832,2.56926703453064,1.02969574928284,2.56927061080933,1.11335527896881,1.71127140522003,1.11312615871429,1.03168272972107,0.0192953608930111,1.03217422962189,0.128857880830765,1.08431994915009,0.128857925534248,1.08432006835938,0.108355455100536,1.10536706447601,0.108355484902859,1.1053671836853,0.041115865111351,
+1.08442413806915,0.0411158315837383,1.08442378044128,0.0192953906953335,1.06889057159424,0.0743402689695358,1.03217422962189,0.128857865929604,1.03168272972107,0.0192953199148178,1.08442378044128,0.0192953180521727,1.08442461490631,0.0411159284412861,1.1053671836853,0.0411160215735435,1.10536706447601,0.108355477452278,1.08432018756866,0.108355507254601,1.08432006835938,0.128857865929604,1.95672953128815,0.00415061507374048,1.95672953128815,0.145523861050606,1.08371293544769,0.145520865917206,1.0837128162384,0.00414761854335666,1.08437919616699,0.287970036268234,1.9578994512558,0.287936419248581,1.95765781402588,0.322175800800323,1.08413791656494,0.322209417819977,1.48046588897705,0.581726789474487,2.34238123893738,0.581226110458374,2.34240770339966,0.614961564540863,1.48049199581146,0.615462243556976,1.95662891864777,0.0127393575385213,1.95656764507294,0.0493667386472225,1.08810114860535,0.0493682771921158,1.08816277980804,0.0127408970147371,1.48489201068878,0.0291941519826651,2.34238266944885,0.0291728861629963,2.34239864349365,0.11378812789917,1.48490798473358,0.113809399306774,1.94095647335052,0.514051735401154,1.9409304857254,0.548085868358612,1.08264923095703,0.548092901706696,1.08267557621002,0.514058768749237,0.134684413671494,0.514556169509888,0.964792370796204,0.514556169509888,0.965026497840881,0.630728602409363,0.134481281042099,0.630839228630066,1.71126770973206,1.02946662902832,2.56926703453064,1.02969574928284,2.56927061080933,1.11335527896881,1.71127140522003,1.11312615871429,1.03168272972107,0.0192953608930111,1.03217422962189,0.128857880830765,1.08431994915009,0.128857925534248,1.08432006835938,0.108355455100536,1.10536706447601,0.108355484902859,1.1053671836853,0.041115865111351,1.08442413806915,0.0411158315837383,1.08442378044128,0.0192953906953335,1.06889057159424,0.0743402689695358,1.03217422962189,0.128857865929604,1.03168272972107,0.0192953199148178,1.08442378044128,0.0192953180521727,1.08442461490631,0.0411159284412861,1.1053671836853,0.0411160215735435,1.10536706447601,0.108355477452278,1.08432018756866,
+0.108355507254601,1.08432006835938,0.128857865929604,1.70612287521362,0.113803908228874,1.3122091293335,0.0127405002713203,1.70610690116882,0.0291886664927006,0.348744779825211,0.630810678005219,1.93261742591858,1.11318528652191,0.348835110664368,0.514556169509888,1.93261384963989,1.02952575683594,1.71953773498535,0.514053523540497,1.71951174736023,0.5480877161026,1.30948805809021,0.322200745344162,1.30893325805664,0.145521640777588,1.30972933769226,0.287961363792419,1.70284843444824,0.615333080291748,1.30893301963806,0.00414839154109359,1.70282220840454,0.581597626209259,1.31214761734009,0.0493678785860538,2.07221579551697,0.113794833421707,1.68298780918121,0.0127398427575827,2.07219982147217,0.0291795879602432,0.703333675861359,0.630763411521912,2.29892730712891,1.11328315734863,0.703237295150757,0.514556169509888,2.2989239692688,1.02962350845337,1.35310757160187,0.51405656337738,1.35308122634888,0.548090696334839,1.68242430686951,0.322186410427094,1.68165457248688,0.145522922277451,1.68266582489014,0.287947028875351,2.07083058357239,0.615119338035584,1.68165445327759,0.00414967117831111,2.07080411911011,0.581383883953094,1.68292641639709,0.0493672229349613,1.91664028167725,1.02952146530151,1.73551654815674,0.514053404331207,1.91664385795593,1.11318099498749,0.34010049700737,0.518528640270233,1.69014275074005,0.0291890613734722,0.337765991687775,0.638121247291565,1.69015872478485,0.113804303109646,1.29604053497314,0.0127405282109976,1.68677568435669,0.581606924533844,1.29597902297974,0.0493679083883762,1.68680191040039,0.615342378616333,1.29267990589142,0.0041483361274004,1.29268002510071,0.145521581172943,1.29346680641174,0.28796198964119,1.73549056053162,0.548087537288666,1.29322552680969,0.322201371192932,2.19889760017395,1.0295969247818,1.45316672325134,0.514055728912354,2.19890117645264,1.11325633525848,0.610734462738037,0.518528640270233,1.97223281860352,0.0291820671409369,0.608400166034698,0.63812130689621,1.97224855422974,0.113797307014465,1.58174109458923,0.012740021571517,1.97032141685486,0.58144223690033,
+1.5816798210144,0.0493674054741859,1.97034752368927,0.615177631378174,1.57987749576569,0.00414932146668434,1.57987761497498,0.145522564649582,1.58083009719849,0.287950932979584,1.45314049720764,0.548089861869812,1.58058869838715,0.322190344333649,0.296580940485001,0.632970571517944,0.171580955386162,0.632970571517944,0.171580955386162,0.247264832258224,0.296580940485001,0.247264862060547,0.171584695577621,0.97400426864624,0.171571984887123,8.94069671630859e-008,0.29657194018364,8.94069671630859e-008,0.296584635972977,0.97400426864624,0.474145501852036,1.49999976158142,0.349145591259003,1.49999976158142,0.349145621061325,-0.500000655651093,0.474145531654358,-0.500000655651093,0.651160478591919,0.0258831456303597,0.651286065578461,1.00000083446503,0.52628618478775,1.00000083446503,0.526160538196564,0.0258831456303597,0.703428030014038,1.5,0.703428030014038,-0.499999910593033,0.828428030014038,-0.499999910593033,0.828428030014038,1.5,0.621377468109131,0.658911108970642,0.621269822120667,0.351065695285797,0.679385721683502,0.314713478088379,0.675154983997345,0.701745092868805,-0.500033438205719,0.97399240732193,-0.499996840953827,4.08096525461588e-007,0.0360399186611176,0.168491080403328,0.075341671705246,0.781789839267731,0.377811521291733,0.658913373947144,0.320669442415237,0.688288152217865,0.815397977828979,0.180502101778984,1.50000298023224,-1.60111558216158e-005,1.49996197223663,0.974042952060699,0.936455130577087,0.752441346645355,0.31598499417305,0.310288220643997,0.377949625253677,0.351068198680878,0.526204764842987,0.7526615858078,0.526204705238342,0.366956114768982,0.651204645633698,0.366956114768982,0.651204586029053,0.752661824226379,0.703428447246552,0.682166218757629,0.703428447246552,0.363833427429199,0.828428447246552,0.363833427429199,0.828428447246552,0.682166218757629,0.4741450548172,0.317833781242371,0.4741450548172,0.636166334152222,0.349145144224167,0.636166334152222,0.349145144224167,0.317833811044693,2.59817457199097,0.883222579956055,2.59817266464233,0.776365220546722,2.65631675720215,0.776365280151367,
+2.65631937980652,0.883222699165344,2.41295862197876,0.883225560188293,2.41295862197876,0.776368021965027,2.47110319137573,0.776368021965027,2.47110295295715,0.883225560188293,2.46270966529846,0.619818389415741,2.46270966529846,0.529602408409119,2.59060502052307,0.529602408409119,2.59060525894165,0.619818389415741,2.46272540092468,0.622028887271881,2.46272492408752,0.531812906265259,2.59062027931213,0.53181254863739,2.59062075614929,0.622028529644012,2.44396162033081,0.883241772651672,2.44396162033081,0.776384353637695,2.50693225860596,0.776384294033051,2.5069317817688,0.883241653442383,2.56221866607666,0.883224248886108,2.56221985816956,0.776366770267487,2.6251904964447,0.776366710662842,2.62518882751465,0.883224129676819,2.12475538253784,0.622076451778412,2.12475538253784,0.53186047077179,2.28190565109253,0.530756115913391,2.28189325332642,0.623315453529358,2.77532482147217,0.621497094631195,2.77532458305359,0.531281054019928,2.93268799781799,0.530225098133087,2.93266320228577,0.622822761535645,2.47858071327209,0.776372969150543,2.47858071327209,0.883230328559875,2.39594411849976,0.883230328559875,2.39594411849976,0.776372969150543,1.84150040149689,0.13108691573143,1.71800363063812,0.13108691573143,1.71800363063812,0.0965914502739906,1.84150040149689,0.0965914726257324,2.63352394104004,0.883230328559875,2.55088758468628,0.883230328559875,2.55088758468628,0.776372969150543,2.63352394104004,0.776372969150543,1.84150052070618,0.0562378764152527,1.71800351142883,0.0562378764152527,1.71800351142883,0.0217423401772976,1.84150052070618,0.0217423420399427,2.46063041687012,0.620284914970398,2.46063041687012,0.533515393733978,2.68296933174133,0.531792163848877,2.68296933174133,0.622008204460144,3.13602638244629,0.533515393733978,3.13602638244629,0.620284855365753,2.91368746757507,0.622008085250854,2.91368746757507,0.531792044639587,2.53069639205933,0.883230626583099,2.53069710731506,0.776373267173767,2.6335244178772,0.776373445987701,2.63352370262146,0.883230805397034,1.69803953170776,0.0554162263870239,1.57454264163971,0.0554162263870239,
+1.57454264163971,0.0205346457660198,1.69803953170776,0.0205346457660198,2.39594435691834,0.883230328559875,2.39594411849976,0.776372969150543,2.49877119064331,0.776372730731964,2.49877166748047,0.883230149745941,1.69803941249847,0.131646871566772,1.57454252243042,0.131646871566772,1.57454252243042,0.0967652946710587,1.69803941249847,0.0967652946710587,2.32043719291687,0.534349083900452,2.32043719291687,0.61945116519928,2.04379510879517,0.617499947547913,2.04379510879517,0.536300182342529,2.40689992904663,0.61945116519928,2.40689992904663,0.534349083900452,2.68354201316834,0.536300361156464,2.68354201316834,0.617500066757202,3.55291152000427,0.536746621131897,3.55291152000427,0.617053747177124,2.39594411849976,0.883230328559875,2.39594411849976,0.776372969150543,2.04374504089355,0.617053687572479,2.04374504089355,0.536746442317963,2.63352394104004,0.883230328559875,2.63352394104004,0.776372969150543,2.1237154006958,0.622029781341553,2.12371516227722,0.531813740730286,2.44405174255371,0.883222341537476,2.44405174255371,0.776364982128143,2.12369966506958,0.619818329811096,2.12369966506958,0.529602348804474,2.62522554397583,0.776367902755737,2.62522482872009,0.883225500583649,3.30577945709229,0.527721583843231,3.30569505691528,0.62596583366394,2.41292309761047,0.883224368095398,2.41292309761047,0.776366889476776,2.65449190139771,0.528137862682343,2.65444993972778,0.626252949237823,2.65622901916504,0.776384174823761,2.65622711181641,0.883241534233093,2.04436755180359,0.622008085250854,2.04436755180359,0.531792044639587,2.39594411849976,0.883230328559875,2.39594435691834,0.776372969150543,2.68296957015991,0.531792163848877,2.68296957015991,0.622008204460144,2.63352370262146,0.77637243270874,2.6335244178772,0.883229911327362,0.971334099769592,0.788960874080658,0.0810229629278183,0.764614522457123,0.204533711075783,0.200846269726753,0.835289597511292,0.171129286289215,0.683858036994934,0.689510107040405,0.326963752508163,0.703878462314606,0.378567636013031,0.658916413784027,0.622133314609528,0.65891444683075,0.680237889289856,
+0.312660336494446,0.622025430202484,0.351067215204239,0.378705531358719,0.351069629192352,0.329705595970154,0.315061450004578,1.5016393661499,0.972864329814911,-0.499453634023666,0.973589956760406,-0.501279592514038,0.000889829068910331,1.49989008903503,6.7847991886083e-005,0.998381614685059,0.892060160636902,0.998381614685059,0.257045209407806,0.998381614685059,0.760865211486816,0.998381495475769,0.644729614257813,0.998381495475769,0.50845742225647,0.00161832571029663,0.760864973068237,0.998381614685059,0.391910970211029,0.00161832571029663,0.892059922218323,0.519430816173553,0.892060101032257,0.519430816173553,0.257045209407806,0.519430816173553,0.754865109920502,0.519453227519989,0.650838851928711,0.51939982175827,0.508065760135651,0.480569183826447,0.754865050315857,0.519430816173553,0.391910970211029,0.480569183826447,0.892059981822968,1.48358225822449,0.892060279846191,1.48358225822449,0.257045209407806,1.48358225822449,0.760865330696106,1.4835821390152,0.644729614257813,1.4835821390152,0.50845742225647,-0.483582407236099,0.760864913463593,1.48358225822449,0.391910970211029,-0.483582407236099,0.892059862613678
+			} 
+			UVIndex: *600 {
+				a: 381,382,2,3,4,5,6,7,384,379,10,11,12,13,14,15,16,378,380,19,383,385,22,23,165,166,26,27,28,167,169,31,32,162,164,35,161,163,38,39,40,158,160,43,44,45,168,155,48,157,159,51,52,154,156,55,56,57,58,59,60,61,62,63,64,65,66,66,67,64,67,68,64,68,69,64,69,70,64,70,71,64,71,72,64,72,65,64,73,74,148,151,149,78,79,147,152,82,83,150,85,86,153,139,140,90,91,138,145,146,95,96,143,98,99,141,144,102,103,142,105,106,107,108,109,110,111,112,113,114,115,115,116,113,116,117,113,117,118,113,118,119,113,119,120,113,120,121,113,121,114,113,89,124,122,92,97,127,125,100,101,128,126,104,93,94,130,129,77,133,131,80,135,132,75,76,81,136,134,84,123,137,87,88,124,140,138,122,127,143,141,125,128,144,142,126,129,130,146,145,133,149,147,131,151,148,132,135,136,152,150,134,139,153,137,123,154,170,172,156,159,157,173,175,160,158,174,176,177,179,163,161,164,162,178,180,181,182,166,165,169,167,183,185,155,168,184,171,170,53,54,172,175,173,49,50,176,174,41,42,36,37,179,177,180,178,33,34,24,25,182,181,185,183,29,30,171,184,46,47,186,187,188,189,190,191,192,193,194,195,196,197,198,199,200,201,202,203,204,205,206,207,208,209,210,211,212,213,214,206,209,215,216,217,218,219,220,208,207,221,211,217,216,212,222,223,224,225,226,227,228,229,230,231,232,233,214,215,220,221,218,210,213,219,234,235,236,237,238,239,240,241,242,243,244,245,246,247,248,249,250,251,252,253,254,255,256,257,258,259,260,261,262,263,264,265,266,267,268,269,270,271,272,273,274,275,276,277,278,279,280,281,282,283,284,285,286,287,288,289,290,291,292,293,294,295,296,297,298,299,300,301,302,303,304,305,306,307,308,309,310,311,312,313,287,286,314,315,276,275,316,317,283,282,318,319,320,267,266,321,322,323,247,246,324,325,235,234,326,327,243,242,241,240,328,329,265,264,330,331,332,333,255,254,261,260,334,335,253,252,336,337,338,339,311,310,340,341,291,290,342,343,307,306,301,300,344,345,215,209,346,347,220,215,347,348,208,220,348,349,349,346,209,208,350,351,352,353,354,350,353,355,356,357,354,355,351,357,356,352,219,213,351,350,354,216,219,350,212,216,354,357,213,212,357,
+351,347,346,358,359,348,347,359,360,349,348,360,361,358,346,349,361,362,370,372,364,373,374,366,365,375,377,369,367,376,371,363,368,370,17,18,372,0,1,374,373,20,21,377,375,8,9,371,376,378,362,364,380,365,366,382,381,367,369,385,383,368,363,379,384
+			} 
+		}
+		LayerElementSmoothing: 0 {
+			Version: 102
+			Name: ""
+			MappingInformationType: "ByEdge"
+			ReferenceInformationType: "Direct"
+			Smoothing: *308 {
+				a: 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,0,0,1,0,1,0,1,0,1,0,1,0,1,0,1,1,0,0,1,0,1,0,1,0,1,0,1,0,1,0,1,1,0,0,1,0,1,0,1,0,1,0,1,0,1,0,1,1,0,0,1,0,1,0,1,0,1,0,1,0,1,0,1,1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,1,0,0,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,0,0,1,0,1,0,1,1,0,0,1,0,1,0,1,1,0,0,1,0,1,0,1,1,1,1,1,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,1,0,1,0,1,1,0,0,1,0,1,0,1,1,0,0,1,0,1,0,1,1
+			} 
+		}
+		LayerElementMaterial: 0 {
+			Version: 101
+			Name: ""
+			MappingInformationType: "ByPolygon"
+			ReferenceInformationType: "IndexToDirect"
+			Materials: *152 {
+				a: 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0
+			} 
+		}
+		Layer: 0 {
+			Version: 100
+			LayerElement:  {
+				Type: "LayerElementNormal"
+				TypedIndex: 0
+			}
+			LayerElement:  {
+				Type: "LayerElementBinormal"
+				TypedIndex: 0
+			}
+			LayerElement:  {
+				Type: "LayerElementTangent"
+				TypedIndex: 0
+			}
+			LayerElement:  {
+				Type: "LayerElementMaterial"
+				TypedIndex: 0
+			}
+			LayerElement:  {
+				Type: "LayerElementSmoothing"
+				TypedIndex: 0
+			}
+			LayerElement:  {
+				Type: "LayerElementUV"
+				TypedIndex: 0
+			}
+		}
+	}
+	Model: 1683452306656, "Model::SM_House_Window_06m_01", "Null" {
+		Version: 232
+		Properties70:  {
+			P: "RotationActive", "bool", "", "",1
+			P: "InheritType", "enum", "", "",1
+			P: "ScalingMax", "Vector3D", "Vector", "",0,0,0
+			P: "DefaultAttributeIndex", "int", "Integer", "",0
+		}
+		Shading: Y
+		Culling: "CullingOff"
+	}
+	Model: 1683452308976, "Model::UCX_SM_House_Window_06m_01_Mesh_06", "Mesh" {
+		Version: 232
+		Properties70:  {
+			P: "RotationActive", "bool", "", "",1
+			P: "InheritType", "enum", "", "",1
+			P: "ScalingMax", "Vector3D", "Vector", "",0,0,0
+			P: "DefaultAttributeIndex", "int", "Integer", "",0
+			P: "currentUVSet", "KString", "", "U", "map1"
+		}
+		Shading: T
+		Culling: "CullingOff"
+	}
+	Model: 1683452311296, "Model::UCX_SM_House_Window_06m_01_Mesh_01", "Mesh" {
+		Version: 232
+		Properties70:  {
+			P: "RotationActive", "bool", "", "",1
+			P: "InheritType", "enum", "", "",1
+			P: "ScalingMax", "Vector3D", "Vector", "",0,0,0
+			P: "DefaultAttributeIndex", "int", "Integer", "",0
+			P: "currentUVSet", "KString", "", "U", "map1"
+		}
+		Shading: T
+		Culling: "CullingOff"
+	}
+	Model: 1683452313616, "Model::UCX_SM_House_Window_06m_01_Mesh_02", "Mesh" {
+		Version: 232
+		Properties70:  {
+			P: "RotationActive", "bool", "", "",1
+			P: "InheritType", "enum", "", "",1
+			P: "ScalingMax", "Vector3D", "Vector", "",0,0,0
+			P: "DefaultAttributeIndex", "int", "Integer", "",0
+			P: "currentUVSet", "KString", "", "U", "map1"
+		}
+		Shading: T
+		Culling: "CullingOff"
+	}
+	Model: 1683452348416, "Model::UCX_SM_House_Window_06m_01_Mesh_03", "Mesh" {
+		Version: 232
+		Properties70:  {
+			P: "RotationActive", "bool", "", "",1
+			P: "InheritType", "enum", "", "",1
+			P: "ScalingMax", "Vector3D", "Vector", "",0,0,0
+			P: "DefaultAttributeIndex", "int", "Integer", "",0
+			P: "currentUVSet", "KString", "", "U", "map1"
+		}
+		Shading: T
+		Culling: "CullingOff"
+	}
+	Model: 1683452353056, "Model::UCX_SM_House_Window_06m_01_Mesh_04", "Mesh" {
+		Version: 232
+		Properties70:  {
+			P: "RotationActive", "bool", "", "",1
+			P: "InheritType", "enum", "", "",1
+			P: "ScalingMax", "Vector3D", "Vector", "",0,0,0
+			P: "DefaultAttributeIndex", "int", "Integer", "",0
+			P: "currentUVSet", "KString", "", "U", "map1"
+		}
+		Shading: T
+		Culling: "CullingOff"
+	}
+	Model: 1683452360016, "Model::UCX_SM_House_Window_06m_01_Mesh_05", "Mesh" {
+		Version: 232
+		Properties70:  {
+			P: "RotationActive", "bool", "", "",1
+			P: "InheritType", "enum", "", "",1
+			P: "ScalingMax", "Vector3D", "Vector", "",0,0,0
+			P: "DefaultAttributeIndex", "int", "Integer", "",0
+			P: "currentUVSet", "KString", "", "U", "map1"
+		}
+		Shading: T
+		Culling: "CullingOff"
+	}
+	Model: 1681520625872, "Model::SM_House_Window_06m_01_Mesh", "Mesh" {
+		Version: 232
+		Properties70:  {
+			P: "RotationActive", "bool", "", "",1
+			P: "InheritType", "enum", "", "",1
+			P: "ScalingMax", "Vector3D", "Vector", "",0,0,0
+			P: "DefaultAttributeIndex", "int", "Integer", "",0
+			P: "currentUVSet", "KString", "", "U", "map1"
+		}
+		Shading: T
+		Culling: "CullingOff"
+	}
+	Material: 1683529988976, "Material::MI_Collision_01", "" {
+		Version: 102
+		ShadingModel: "phong"
+		MultiLayer: 0
+		Properties70:  {
+			P: "AmbientColor", "Color", "", "A",0,0,0
+			P: "DiffuseColor", "Color", "", "A",0.5,0.131500005722046,0.131500005722046
+			P: "DiffuseFactor", "Number", "", "A",0.800000011920929
+			P: "TransparentColor", "Color", "", "A",0.538888871669769,0.538888871669769,0.538888871669769
+			P: "TransparencyFactor", "Number", "", "A",1
+			P: "SpecularColor", "Color", "", "A",0,0,0
+			P: "ReflectionFactor", "Number", "", "A",0.5
+			P: "Emissive", "Vector3D", "Vector", "",0,0,0
+			P: "Ambient", "Vector3D", "Vector", "",0,0,0
+			P: "Diffuse", "Vector3D", "Vector", "",0.400000005960464,0.105200006145239,0.105200006145239
+			P: "Specular", "Vector3D", "Vector", "",0,0,0
+			P: "Shininess", "double", "Number", "",20
+			P: "Opacity", "double", "Number", "",0.461111128330231
+			P: "Reflectivity", "double", "Number", "",0
+		}
+	}
+	Material: 1683530002896, "Material::MI_Wood_01", "" {
+		Version: 102
+		ShadingModel: "phong"
+		MultiLayer: 0
+		Properties70:  {
+			P: "AmbientColor", "Color", "", "A",0,0,0
+			P: "DiffuseColor", "Color", "", "A",1,1,1
+			P: "DiffuseFactor", "Number", "", "A",0.800000011920929
+			P: "TransparencyFactor", "Number", "", "A",1
+			P: "SpecularColor", "Color", "", "A",0,0,0
+			P: "ReflectionFactor", "Number", "", "A",0.5
+			P: "Emissive", "Vector3D", "Vector", "",0,0,0
+			P: "Ambient", "Vector3D", "Vector", "",0,0,0
+			P: "Diffuse", "Vector3D", "Vector", "",0.800000011920929,0.800000011920929,0.800000011920929
+			P: "Specular", "Vector3D", "Vector", "",0,0,0
+			P: "Shininess", "double", "Number", "",20
+			P: "Opacity", "double", "Number", "",1
+			P: "Reflectivity", "double", "Number", "",0
+		}
+	}
+	Material: 1683529990896, "Material::MI_Plaster_01", "" {
+		Version: 102
+		ShadingModel: "phong"
+		MultiLayer: 0
+		Properties70:  {
+			P: "AmbientColor", "Color", "", "A",0,0,0
+			P: "DiffuseColor", "Color", "", "A",1,1,1
+			P: "DiffuseFactor", "Number", "", "A",0.800000011920929
+			P: "TransparencyFactor", "Number", "", "A",1
+			P: "SpecularColor", "Color", "", "A",0,0,0
+			P: "ReflectionFactor", "Number", "", "A",0.5
+			P: "Emissive", "Vector3D", "Vector", "",0,0,0
+			P: "Ambient", "Vector3D", "Vector", "",0,0,0
+			P: "Diffuse", "Vector3D", "Vector", "",0.800000011920929,0.800000011920929,0.800000011920929
+			P: "Specular", "Vector3D", "Vector", "",0,0,0
+			P: "Shininess", "double", "Number", "",20
+			P: "Opacity", "double", "Number", "",1
+			P: "Reflectivity", "double", "Number", "",0
+		}
+	}
+	Video: 1683681919792, "Video::file1", "Clip" {
+		Type: "Clip"
+		Properties70:  {
+			P: "Path", "KString", "XRefUrl", "", "A:/RPGWorlds/Village/Unity/Vallage_2.0/Village_2.0/Assets/Source/Textures/Atlas_Wood_01_BC.png"
+		}
+		UseMipMap: 0
+		Filename: "A:/RPGWorlds/Village/Unity/Vallage_2.0/Village_2.0/Assets/Source/Textures/Atlas_Wood_01_BC.png"
+		RelativeFilename: "A:\RPGWorlds\Village\Unity\Vallage_2.0\Village_2.0\Assets\Source\Textures\Atlas_Wood_01_BC.png"
+	}
+	Video: 1683681906992, "Video::file106", "Clip" {
+		Type: "Clip"
+		Properties70:  {
+			P: "Path", "KString", "XRefUrl", "", "A:/DragonsNotAllowed/Unity/DragonsNotAllowed/Assets/DragonsNotAllowed/Adenia/Source/Textures/T_Plaster_01_BC.png"
+		}
+		UseMipMap: 0
+		Filename: "A:/DragonsNotAllowed/Unity/DragonsNotAllowed/Assets/DragonsNotAllowed/Adenia/Source/Textures/T_Plaster_01_BC.png"
+		RelativeFilename: "A:\DragonsNotAllowed\Unity\DragonsNotAllowed\Assets\DragonsNotAllowed\Adenia\Source\Textures\T_Plaster_01_BC.png"
+	}
+	Texture: 1683529979376, "Texture::file1", "" {
+		Type: "TextureVideoClip"
+		Version: 202
+		TextureName: "Texture::file1"
+		Properties70:  {
+			P: "CurrentTextureBlendMode", "enum", "", "",0
+			P: "UVSet", "KString", "", "", "map1"
+			P: "UseMaterial", "bool", "", "",1
+		}
+		Media: "Video::file1"
+		FileName: "A:/RPGWorlds/Village/Unity/Vallage_2.0/Village_2.0/Assets/Source/Textures/Atlas_Wood_01_BC.png"
+		RelativeFilename: "A:\RPGWorlds\Village\Unity\Vallage_2.0\Village_2.0\Assets\Source\Textures\Atlas_Wood_01_BC.png"
+		ModelUVTranslation: 0,0
+		ModelUVScaling: 1,1
+		Texture_Alpha_Source: "None"
+		Cropping: 0,0,0,0
+	}
+	Texture: 1683529981776, "Texture::file106", "" {
+		Type: "TextureVideoClip"
+		Version: 202
+		TextureName: "Texture::file106"
+		Properties70:  {
+			P: "CurrentTextureBlendMode", "enum", "", "",0
+			P: "UVSet", "KString", "", "", "map1"
+			P: "UseMaterial", "bool", "", "",1
+		}
+		Media: "Video::file106"
+		FileName: "A:/DragonsNotAllowed/Unity/DragonsNotAllowed/Assets/DragonsNotAllowed/Adenia/Source/Textures/T_Plaster_01_BC.png"
+		RelativeFilename: "A:\DragonsNotAllowed\Unity\DragonsNotAllowed\Assets\DragonsNotAllowed\Adenia\Source\Textures\T_Plaster_01_BC.png"
+		ModelUVTranslation: 0,0
+		ModelUVScaling: 1,1
+		Texture_Alpha_Source: "None"
+		Cropping: 0,0,0,0
+	}
+	AnimationStack: 1684116374592, "AnimStack::Take 001", "" {
+		Properties70:  {
+			P: "LocalStart", "KTime", "Time", "",1539538600
+			P: "LocalStop", "KTime", "Time", "",46186158000
+			P: "ReferenceStart", "KTime", "Time", "",1539538600
+			P: "ReferenceStop", "KTime", "Time", "",46186158000
+		}
+	}
+	AnimationLayer: 1681492755248, "AnimLayer::BaseLayer", "" {
+	}
+}
+
+; Object connections
+;------------------------------------------------------------------
+
+Connections:  {
+	
+	;Model::SM_House_Window_06m_01, Model::RootNode
+	C: "OO",1683452306656,0
+	
+	;AnimLayer::BaseLayer, AnimStack::Take 001
+	C: "OO",1681492755248,1684116374592
+	
+	;NodeAttribute::, Model::SM_House_Window_06m_01
+	C: "OO",1681697609568,1683452306656
+	
+	;Model::UCX_SM_House_Window_06m_01_Mesh_06, Model::SM_House_Window_06m_01
+	C: "OO",1683452308976,1683452306656
+	
+	;Model::UCX_SM_House_Window_06m_01_Mesh_01, Model::SM_House_Window_06m_01
+	C: "OO",1683452311296,1683452306656
+	
+	;Model::UCX_SM_House_Window_06m_01_Mesh_02, Model::SM_House_Window_06m_01
+	C: "OO",1683452313616,1683452306656
+	
+	;Model::UCX_SM_House_Window_06m_01_Mesh_03, Model::SM_House_Window_06m_01
+	C: "OO",1683452348416,1683452306656
+	
+	;Model::UCX_SM_House_Window_06m_01_Mesh_04, Model::SM_House_Window_06m_01
+	C: "OO",1683452353056,1683452306656
+	
+	;Model::UCX_SM_House_Window_06m_01_Mesh_05, Model::SM_House_Window_06m_01
+	C: "OO",1683452360016,1683452306656
+	
+	;Model::SM_House_Window_06m_01_Mesh, Model::SM_House_Window_06m_01
+	C: "OO",1681520625872,1683452306656
+	
+	;Geometry::, Model::UCX_SM_House_Window_06m_01_Mesh_06
+	C: "OO",1683593644688,1683452308976
+	
+	;Material::MI_Collision_01, Model::UCX_SM_House_Window_06m_01_Mesh_06
+	C: "OO",1683529988976,1683452308976
+	
+	;Geometry::, Model::UCX_SM_House_Window_06m_01_Mesh_01
+	C: "OO",1683593633936,1683452311296
+	
+	;Material::MI_Collision_01, Model::UCX_SM_House_Window_06m_01_Mesh_01
+	C: "OO",1683529988976,1683452311296
+	
+	;Geometry::, Model::UCX_SM_House_Window_06m_01_Mesh_02
+	C: "OO",1683593651344,1683452313616
+	
+	;Material::MI_Collision_01, Model::UCX_SM_House_Window_06m_01_Mesh_02
+	C: "OO",1683529988976,1683452313616
+	
+	;Geometry::, Model::UCX_SM_House_Window_06m_01_Mesh_03
+	C: "OO",1683593640080,1683452348416
+	
+	;Material::MI_Collision_01, Model::UCX_SM_House_Window_06m_01_Mesh_03
+	C: "OO",1683529988976,1683452348416
+	
+	;Geometry::, Model::UCX_SM_House_Window_06m_01_Mesh_04
+	C: "OO",1683593649296,1683452353056
+	
+	;Material::MI_Collision_01, Model::UCX_SM_House_Window_06m_01_Mesh_04
+	C: "OO",1683529988976,1683452353056
+	
+	;Geometry::, Model::UCX_SM_House_Window_06m_01_Mesh_05
+	C: "OO",1683593651856,1683452360016
+	
+	;Material::MI_Collision_01, Model::UCX_SM_House_Window_06m_01_Mesh_05
+	C: "OO",1683529988976,1683452360016
+	
+	;Texture::file1, Material::MI_Wood_01
+	C: "OP",1683529979376,1683530002896, "DiffuseColor"
+	
+	;Texture::file106, Material::MI_Plaster_01
+	C: "OP",1683529981776,1683529990896, "DiffuseColor"
+	
+	;Video::file1, Texture::file1
+	C: "OO",1683681919792,1683529979376
+	
+	;Video::file106, Texture::file106
+	C: "OO",1683681906992,1683529981776
+	
+	;Geometry::, Model::SM_House_Window_06m_01_Mesh
+	C: "OO",1683593637520,1681520625872
+	
+	;Material::MI_Wood_01, Model::SM_House_Window_06m_01_Mesh
+	C: "OO",1683530002896,1681520625872
+	
+	;Material::MI_Plaster_01, Model::SM_House_Window_06m_01_Mesh
+	C: "OO",1683529990896,1681520625872
+}
+;Takes section
+;----------------------------------------------------
+
+Takes:  {
+	Current: "Take 001"
+	Take: "Take 001" {
+		FileName: "Take_001.tak"
+		LocalTime: 1539538600,46186158000
+		ReferenceTime: 1539538600,46186158000
+	}
+}
