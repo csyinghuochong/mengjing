@@ -49,11 +49,11 @@ namespace ET
                     string configFilePath;
                     if (startConfigs.Contains(configType.Name))
                     {
-                        configFilePath = $"../Config/Excel/{ct}/{Options.Instance.StartConfig}/{configType.Name.ToLower()}.bytes";
+                        configFilePath = $"../Config/Excel/{ct}/{Options.Instance.StartConfig}/{configType.Name}.bytes";
                     }
                     else
                     {
-                        configFilePath = $"../Config/Excel/{ct}/{configType.Name.ToLower()}.bytes";
+                        configFilePath = $"../Config/Excel/{ct}/{configType.Name}.bytes";
                     }
 
                     output[configType] = new ByteBuf(File.ReadAllBytes(configFilePath));
@@ -64,7 +64,7 @@ namespace ET
                 foreach (Type type in configTypes)
                 {
                     TextAsset v = await ResourcesComponent.Instance.LoadAssetAsync<TextAsset>(
-                        $"Assets/Bundles/Config/{type.Name.ToLower()}.bytes");
+                        $"Assets/Bundles/Config/{type.Name}.bytes");
                     output[type] = new ByteBuf(v.bytes);
                 }
             }
@@ -109,11 +109,11 @@ namespace ET
             string configFilePath;
             if (startConfigs.Contains(configName))
             {
-                configFilePath = $"../Config/Excel/{ct}/{Options.Instance.StartConfig}/{configName.ToLower()}.bytes";
+                configFilePath = $"../Config/Excel/{ct}/{Options.Instance.StartConfig}/{configName}.bytes";
             }
             else
             {
-                configFilePath = $"../Config/Excel/{ct}/{configName.ToLower()}.bytes";
+                configFilePath = $"../Config/Excel/{ct}/{configName}.bytes";
             }
 
             await ETTask.CompletedTask;

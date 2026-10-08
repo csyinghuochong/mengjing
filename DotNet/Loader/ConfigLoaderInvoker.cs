@@ -24,11 +24,11 @@ namespace ET
                 string configFilePath;
                 if (startConfigs.Contains(configType.Name))
                 {
-                    configFilePath = $"../Config/Excel/s/{Options.Instance.StartConfig}/{configType.Name.ToLower()}.bytes";
+                    configFilePath = $"../Config/Excel/s/{Options.Instance.StartConfig}/{configType.Name}.bytes";
                 }
                 else
                 {
-                    configFilePath = $"../Config/Excel/s/{configType.Name.ToLower()}.bytes";
+                    configFilePath = $"../Config/Excel/s/{configType.Name}.bytes";
                 }
 
                 output[configType] = new ByteBuf(File.ReadAllBytes(configFilePath));
@@ -48,8 +48,8 @@ namespace ET
             bool isStartConfig = configName is "StartMachineConfigCategory" or "StartProcessConfigCategory" or
                     "StartSceneConfigCategory" or "StartZoneConfigCategory";
             string configFilePath = isStartConfig
-                    ? $"../Config/Excel/s/{Options.Instance.StartConfig}/{configName.ToLower()}.bytes"
-                    : $"../Config/Excel/s/{configName.ToLower()}.bytes";
+                    ? $"../Config/Excel/s/{Options.Instance.StartConfig}/{configName}.bytes"
+                    : $"../Config/Excel/s/{configName}.bytes";
             byte[] configBytes = File.ReadAllBytes(configFilePath);
             return new ByteBuf(configBytes);
         }
