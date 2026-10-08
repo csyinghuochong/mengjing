@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Runtime.InteropServices;
@@ -15,13 +16,25 @@ namespace ET
 
         public static void Export()
         {
-            string shellFilePath = RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? ".\\GenConfig.bat" : "./GenConfig.sh";
-            using Process configProcess = CreateProcess(shellFilePath, "../Tools/Luban/");
-            configProcess.Start();
-            configProcess.WaitForExit();
-            if (configProcess.ExitCode != 0)
+            Dictionary<string, byte[]> metaFiles = BackupMetaFiles(
+                ClientGeneratedCodeDir,
+                ServerGeneratedCodeDir,
+                ClientServerGeneratedCodeDir);
+
+            try
             {
-                throw new Exception($"Luban export failed with exit code {configProcess.ExitCode}");
+                string shellFilePath = RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? ".\\GenConfig.bat" : "./GenConfig.sh";
+                using Process configProcess = CreateProcess(shellFilePath, "../Tools/Luban/");
+                configProcess.Start();
+                configProcess.WaitForExit();
+                if (configProcess.ExitCode != 0)
+                {
+                    throw new Exception($"Luban export failed with exit code {configProcess.ExitCode}");
+                }
+            }
+            finally
+            {
+                RestoreMetaFiles(metaFiles);
             }
 
             CopyClientBytesToUnity();
@@ -29,6 +42,45 @@ namespace ET
             RemoveUnusedMetaFiles(ClientGeneratedCodeDir);
             RemoveUnusedMetaFiles(ServerGeneratedCodeDir);
             RemoveUnusedMetaFiles(ClientServerGeneratedCodeDir);
+        }
+
+        private static Dictionary<string, byte[]> BackupMetaFiles(params string[] directories)
+        {
+            Dictionary<string, byte[]> metaFiles = new(StringComparer.OrdinalIgnoreCase);
+            foreach (string directory in directories)
+            {
+                if (!Directory.Exists(directory))
+                {
+                    continue;
+                }
+
+                foreach (FileInfo info in new DirectoryInfo(directory).GetFiles("*.meta", SearchOption.AllDirectories))
+                {
+                    metaFiles[info.FullName] = File.ReadAllBytes(info.FullName);
+                }
+            }
+
+            return metaFiles;
+        }
+
+        private static void RestoreMetaFiles(Dictionary<string, byte[]> metaFiles)
+        {
+            foreach ((string metaPath, byte[] bytes) in metaFiles)
+            {
+                string assetPath = metaPath[..metaPath.LastIndexOf(".meta", StringComparison.Ordinal)];
+                if (!File.Exists(assetPath) && !Directory.Exists(assetPath))
+                {
+                    continue;
+                }
+
+                string directory = Path.GetDirectoryName(metaPath);
+                if (!string.IsNullOrEmpty(directory))
+                {
+                    Directory.CreateDirectory(directory);
+                }
+
+                File.WriteAllBytes(metaPath, bytes);
+            }
         }
 
         private static void CopyClientBytesToUnity()
