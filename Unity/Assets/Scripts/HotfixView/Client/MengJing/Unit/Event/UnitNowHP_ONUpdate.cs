@@ -30,6 +30,11 @@ namespace ET.Client
                 unitDefend.GetComponent<GameObjectComponent>()?.OnHighLight();
             }
 
+            if (args.ChangeHpValue < 0 && unitDefend.Type == UnitType.Monster && unitDefend.GetComponent<NumericComponentC>().GetAsLong(NumericType.Now_Hp) > 0)
+            {
+                unitDefend.GetComponent<FsmComponent>()?.PlayHit();
+            }
+
             bool isnotattackSelf = unitAttack != null && unitAttack != unitDefend;
             bool defendisPlayerorBoss = unitDefend.Type == UnitType.Player || unitDefend.IsBoss();
             bool attackisPlayerorBoss = unitAttack != null && (unitAttack.Type == UnitType.Player || unitAttack.IsBoss());

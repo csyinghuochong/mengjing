@@ -270,6 +270,29 @@ namespace ET.Client
             self.CurrentFsm = targetFsm;
         }
 
+        public static void PlayHit(this FsmComponent self)
+        {
+            Unit unit = self.GetParent<Unit>();
+            if (SettingData.AnimController == 0)
+            {
+                AnimatorComponent animatorComponent = unit.GetComponent<AnimatorComponent>();
+                if (animatorComponent == null)
+                {
+                    return;
+                }
+
+                foreach (Animator animator in animatorComponent.Animator)
+                {
+                    if (animator == null || !animator.GetCurrentAnimatorStateInfo(0).IsName(MotionType.Idle))
+                    {
+                        return;
+                    }
+                }
+
+                animatorComponent.Play(MotionType.Hit);
+            }
+        }
+
         public static void OnEnterFsmSkillState(this FsmComponent self, int skillid)
         {
             Unit unit = self.GetParent<Unit>();
