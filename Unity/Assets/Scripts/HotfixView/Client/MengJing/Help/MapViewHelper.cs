@@ -116,10 +116,10 @@ namespace ET.Client
             {
                 Unit uu = units[i];
 
-                if (uu.MainHero)
-                {
-                    continue;
-                }
+                // if (uu.MainHero)
+                // {
+                //     continue;
+                // }
 
                 if (show)
                 {
@@ -135,7 +135,7 @@ namespace ET.Client
                     uu.EnterHide();
                 }
             }
-         }
+        }
 
         public static void OnMainHeroPath(this Unit self, MapComponent mapComponent)
         {
