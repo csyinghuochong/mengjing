@@ -20,6 +20,7 @@ namespace ET.Client
     {
         protected override async ETTask Run(Scene scene, EquipWear args)
         {
+            scene.GetComponent<UIComponent>().GetDlgLogic<DlgRole>()?.SetModelShow();
             scene.GetComponent<UIComponent>().GetDlgLogic<DlgRole>()?.OnEquipWear();
             await ETTask.CompletedTask;
         }
@@ -95,6 +96,8 @@ namespace ET.Client
         public static void ShowWindow(this DlgRole self, Entity contextData = null)
         {
             self.ShowGuide().Coroutine();
+            
+            self.SetModelShow();
         }
         
         public static void BeforeUnload(this DlgRole self)
@@ -112,6 +115,15 @@ namespace ET.Client
         {
             await self.Root().GetComponent<TimerComponent>().WaitAsync(10);
             self.Root().GetComponent<GuideComponent>().OnTrigger(GuideTriggerType.OpenUI, "UIRole");
+        }
+
+        public static void SetModelShow(this DlgRole self)
+        {
+            BagComponentC bagComponent = self.Root().GetComponent<BagComponentC>();
+            UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
+            ItemInfo bagInfo = bagComponent.GetEquipBySubType(ItemLocType.ItemLocEquip, (int)ItemSubTypeEnum.Wuqi);
+            self.View.ES_ModelShow.SetCameraPosition(new Vector3(0f, 70f, 270f));
+            self.View.ES_ModelShow.ShowPlayerModel(bagInfo, userInfoComponent.UserInfo.Occ, 0, new List<int>(), playAnim: false);
         }
         
         public static void Reddot_RolePoint(this DlgRole self, int num)

@@ -105,8 +105,7 @@ namespace ET.Client
             self.GetComponent<ChangeEquipHelper>().ChangeWeapon(self.GetWeaponId(bagInfo, occ));
         }
 
-        public static void ShowPlayerModel(this ES_ModelShow self, ItemInfo bagInfo, int occ, int equipIndex, List<int> fashionids,
-        bool canDrag = true)
+        public static void ShowPlayerModel(this ES_ModelShow self, ItemInfo bagInfo, int occ, int equipIndex, List<int> fashionids, bool canDrag = true, bool playAnim = true)
         {
             self.RemoveModel();
 
@@ -132,7 +131,7 @@ namespace ET.Client
                 changeEquipHelper.UseLayer = true;
                 changeEquipHelper.LoadEquipment(go, fashionids, occ);
                 Animator animator = go.GetComponentInChildren<Animator>();
-                if (animator != null)
+                if (animator != null && playAnim)
                 {
                     animator.Play("ShowIdel");
                 }
