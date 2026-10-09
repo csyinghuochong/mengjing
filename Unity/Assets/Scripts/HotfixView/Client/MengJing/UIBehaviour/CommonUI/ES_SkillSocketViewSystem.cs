@@ -13,6 +13,9 @@ namespace ET.Client
 		{
 			self.uiTransform = transform;
 
+			self.GenerateSkillAugmentItems(self.EG_RotatingRoot_2RectTransform, self.EG_SkillAugmentItem_2RectTransform, 2, -15f, 60f, 164f);
+			self.GenerateSkillAugmentItems(self.EG_RotatingRoot_3RectTransform, self.EG_SkillAugmentItem_3RectTransform, 3, 0f, 30f, 348f);
+
 			// 两个点击区的圆心重合，外圈尺寸更大。让内圈处于外圈上方，
 			// 否则外圈会拦截内圈范围内的所有射线事件。
 			Transform innerHitArea = self.E_WheelHitArea_2Image.transform;
@@ -32,6 +35,29 @@ namespace ET.Client
 			self.E_WheelHitArea_2EventTrigger.triggers.Clear();
 			self.E_WheelHitArea_3EventTrigger.triggers.Clear();
 			self.DestroyWidget();
+		}
+
+		private static void GenerateSkillAugmentItems(this ES_SkillSocket self, RectTransform rotatingRoot, RectTransform itemTemplate, int itemCount,float angleStart, float angleInterval, float radius)
+		{
+			if (rotatingRoot == null || itemTemplate == null || itemCount <= 0 || radius < 0f)
+			{
+				return;
+			}
+
+			for (int i = 0; i < itemCount; i++)
+			{
+				RectTransform item = i == 0 ? itemTemplate : UnityEngine.Object.Instantiate(itemTemplate, rotatingRoot);
+
+				if (i > 0)
+				{
+					item.name = $"{itemTemplate.name}_{i}";
+				}
+
+				float angle = (angleStart + -1 * i * angleInterval) * Mathf.Deg2Rad;
+				item.anchoredPosition = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)) * radius;
+				item.localRotation = Quaternion.identity;
+				item.gameObject.SetActive(true);
+			}
 		}
 
 		private static void RegisterWheelDrag(this ES_SkillSocket self, EventTrigger eventTrigger, RectTransform rotatingRoot)
