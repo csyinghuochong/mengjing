@@ -160,6 +160,26 @@ namespace ET.Client
                 return this.m_es_skilllifeshield;
             }
         }
+        
+        public ES_SkillSocket ES_SkillSocket
+        {
+	        get
+	        {
+		        ES_SkillSocket es = this.m_es_skillSocket;
+		        if (es == null)
+		        {
+			        string path = "Assets/Bundles/UI/Common/ES_SkillSocket.prefab";
+			        GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
+			        GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewNodeRectTransform);
+			        go.SetActive(true);
+			        this.AssetList.Add(path);
+			        this.m_es_skillSocket = this.AddChild<ES_SkillSocket, Transform>(go.transform);
+			        go.SetActive(false);
+		        }
+
+		        return this.m_es_skillSocket;
+	        }
+        }
 		
 		public void DestroyWidget()
 		{
@@ -171,6 +191,7 @@ namespace ET.Client
 			this.m_es_skilltianfu = null;
 			this.m_es_skillmake = null;
 			this.m_es_skilllifeshield = null;
+			this.m_es_skillSocket = null;
 			this.uiTransform = null;
 			
 			ResourcesLoaderComponent resourcesLoaderComponent = this.Root().GetComponent<ResourcesLoaderComponent>();
@@ -190,6 +211,7 @@ namespace ET.Client
 		private EntityRef<ES_SkillTianFu> m_es_skilltianfu = null;
 		private EntityRef<ES_SkillMake> m_es_skillmake = null;
 		private EntityRef<ES_SkillLifeShield> m_es_skilllifeshield = null;
+		private EntityRef<ES_SkillSocket> m_es_skillSocket = null;
 		public Transform uiTransform = null;
 	}
 }
