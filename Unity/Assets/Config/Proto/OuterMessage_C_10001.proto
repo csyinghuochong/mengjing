@@ -1006,6 +1006,12 @@ message SkillPro
     int32 SkillSource = 5; //1职业技能 2装备技能 3天赋技能 4 精灵技能 5 套装技能
 }
 
+message SkillSocketInfo
+{
+	int32 BaseSkillId = 1;
+	repeated int32 AugmentIds = 2; //下标表示孔位，值为SkillAugmentConfig.Id，0表示空
+}
+
 message FubenPassInfo
 {
 	int32 FubenId = 1;
@@ -1935,6 +1941,7 @@ message SkillSetInfo
 	repeated KeyValuePairInt TianFuList2 = 3;
 	repeated LifeShieldInfo LifeShieldList = 4;
 	int32 TianFuPlan = 5;
+	repeated SkillSocketInfo SkillSocketList = 6;
 }
 
 //技能天赋更新

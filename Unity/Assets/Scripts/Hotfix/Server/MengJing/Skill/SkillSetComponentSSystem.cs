@@ -936,6 +936,42 @@ namespace ET.Server
             }            
         }
 
+        /// <summary>
+        /// 初始化职业初始技能的镶嵌孔位。
+        /// AugmentIds 的下标对应孔位，0 表示该孔位尚未镶嵌技能强化。
+        /// </summary>
+        private static void InitSkillSockets(this SkillSetComponentS self, int occ)
+        {
+            const int socketCount = 3;
+            int[] initSkillIds = OccupationConfigCategory.Instance.Get(occ).InitSkillID;
+
+            self.SkillSocketList ??= new List<SkillSocketInfo>();
+
+            for (int i = 0; i < initSkillIds.Length; i++)
+            {
+                int baseSkillId = SkillConfigCategory.Instance.GetInitSkill(initSkillIds[i]);
+                if (baseSkillId == 0)
+                {
+                    continue;
+                }
+
+                SkillSocketInfo skillSocketInfo = self.SkillSocketList.Find(info => info.BaseSkillId == baseSkillId);
+
+                if (skillSocketInfo == null)
+                {
+                    skillSocketInfo = SkillSocketInfo.Create();
+                    skillSocketInfo.BaseSkillId = baseSkillId;
+                    self.SkillSocketList.Add(skillSocketInfo);
+                }
+
+                // 3个孔位全部开启
+                while (skillSocketInfo.AugmentIds.Count < socketCount)
+                {
+                    skillSocketInfo.AugmentIds.Add(0);
+                }
+            }
+        }
+
         public static void OnLogin(this SkillSetComponentS self, int occ)
         {
             for (int k = self.SkillList.Count - 1; k >= 0; k--)
@@ -981,6 +1017,8 @@ namespace ET.Server
                      self.InitSkillPro(addskills[i], 0, (int)SkillSetEnum.Skill, (int)SkillSourceEnum.Equip);
                 }
             }
+
+            self.InitSkillSockets(occ);
         }
 
         public static void OnChangeEquipIndex(this SkillSetComponentS self, int equipIndex)
@@ -1415,6 +1453,7 @@ namespace ET.Server
             SkillSetInfo.TianFuList2 = self.TianFuList2;
             SkillSetInfo.SkillList = self.SkillList;
             SkillSetInfo.LifeShieldList = self.LifeShieldList;
+            SkillSetInfo.SkillSocketList = self.SkillSocketList;
             MapMessageHelper.SendToClient(unit, M2C_SkillSetMessage);
         }
         

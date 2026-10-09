@@ -24,6 +24,7 @@ namespace ET.Client
             self.LifeShieldList = skillSetInfo.LifeShieldList;
             self.TianFuList2 = skillSetInfo.TianFuList2;
             self.TianFuPlan = skillSetInfo.TianFuPlan;
+            self.SkillSocketList = skillSetInfo.SkillSocketList;
         }
 
         public static List<KeyValuePairInt> TianFuList(this SkillSetComponentC self)
