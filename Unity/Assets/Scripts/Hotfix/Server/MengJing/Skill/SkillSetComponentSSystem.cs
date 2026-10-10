@@ -955,6 +955,11 @@ namespace ET.Server
                     continue;
                 }
 
+                if (!SkillSocketConfigCategory.Instance.Contain(baseSkillId))
+                {
+                    continue;
+                }
+
                 SkillSocketInfo skillSocketInfo = self.SkillSocketList.Find(info => info.BaseSkillId == baseSkillId);
 
                 if (skillSocketInfo == null)

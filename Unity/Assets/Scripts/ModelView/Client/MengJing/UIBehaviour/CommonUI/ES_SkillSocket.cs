@@ -1,4 +1,5 @@
 ﻿
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 namespace ET.Client
@@ -7,6 +8,10 @@ namespace ET.Client
 	[EnableMethod]
 	public  class ES_SkillSocket : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy 
 	{
+		public Dictionary<int, EntityRef<Scroll_Item_SkillSocketItem>> ScrollItemSkillSocketItems = new();
+		public List<string> AssetList { get; set; } = new();
+		public int SelectedBaseSkillId;
+
 		public UnityEngine.UI.ScrollRect E_SkillSocketItemsScrollRect
      	{
      		get
@@ -38,176 +43,6 @@ namespace ET.Client
 		    		this.m_E_SkillSocketItemsImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Left/E_SkillSocketItems");
      			}
      			return this.m_E_SkillSocketItemsImage;
-     		}
-     	}
-
-		public UnityEngine.UI.Button E_HighlightButton
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_HighlightButton == null )
-     			{
-		    		this.m_E_HighlightButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Left/E_SkillSocketItems/Content/Item_SkillSocketItem/E_Highlight");
-     			}
-     			return this.m_E_HighlightButton;
-     		}
-     	}
-
-		public UnityEngine.UI.Image E_HighlightImage
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_HighlightImage == null )
-     			{
-		    		this.m_E_HighlightImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Left/E_SkillSocketItems/Content/Item_SkillSocketItem/E_Highlight");
-     			}
-     			return this.m_E_HighlightImage;
-     		}
-     	}
-
-		public UnityEngine.UI.Image E_SkillIconImage
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_SkillIconImage == null )
-     			{
-		    		this.m_E_SkillIconImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Left/E_SkillSocketItems/Content/Item_SkillSocketItem/Mask/E_SkillIcon");
-     			}
-     			return this.m_E_SkillIconImage;
-     		}
-     	}
-
-		public UnityEngine.UI.Image E_NullImage
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_NullImage == null )
-     			{
-		    		this.m_E_NullImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Left/E_SkillSocketItems/Content/Item_SkillSocketItem/E_Null");
-     			}
-     			return this.m_E_NullImage;
-     		}
-     	}
-
-		public UnityEngine.UI.Text E_SkillNameText
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_SkillNameText == null )
-     			{
-		    		this.m_E_SkillNameText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Left/E_SkillSocketItems/Content/Item_SkillSocketItem/E_SkillName");
-     			}
-     			return this.m_E_SkillNameText;
-     		}
-     	}
-
-		public UnityEngine.UI.Image E_SkillIcon_1Image
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_SkillIcon_1Image == null )
-     			{
-		    		this.m_E_SkillIcon_1Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Left/E_SkillSocketItems/Content/Item_SkillSocketItem/Mask (1)/E_SkillIcon_1");
-     			}
-     			return this.m_E_SkillIcon_1Image;
-     		}
-     	}
-
-		public UnityEngine.UI.Image E_SkillIcon_2Image
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_SkillIcon_2Image == null )
-     			{
-		    		this.m_E_SkillIcon_2Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Left/E_SkillSocketItems/Content/Item_SkillSocketItem/Mask (2)/E_SkillIcon_2");
-     			}
-     			return this.m_E_SkillIcon_2Image;
-     		}
-     	}
-
-		public UnityEngine.UI.Image E_SkillIcon_3Image
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_SkillIcon_3Image == null )
-     			{
-		    		this.m_E_SkillIcon_3Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Left/E_SkillSocketItems/Content/Item_SkillSocketItem/Mask (3)/E_SkillIcon_3");
-     			}
-     			return this.m_E_SkillIcon_3Image;
-     		}
-     	}
-
-		public UnityEngine.UI.Button E_ClickButton
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_ClickButton == null )
-     			{
-		    		this.m_E_ClickButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Left/E_SkillSocketItems/Content/Item_SkillSocketItem/E_Click");
-     			}
-     			return this.m_E_ClickButton;
-     		}
-     	}
-
-		public UnityEngine.UI.Image E_ClickImage
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_ClickImage == null )
-     			{
-		    		this.m_E_ClickImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Left/E_SkillSocketItems/Content/Item_SkillSocketItem/E_Click");
-     			}
-     			return this.m_E_ClickImage;
      		}
      	}
 
@@ -516,16 +351,6 @@ namespace ET.Client
 		{
 			this.m_E_SkillSocketItemsScrollRect = null;
 			this.m_E_SkillSocketItemsImage = null;
-			this.m_E_HighlightButton = null;
-			this.m_E_HighlightImage = null;
-			this.m_E_SkillIconImage = null;
-			this.m_E_NullImage = null;
-			this.m_E_SkillNameText = null;
-			this.m_E_SkillIcon_1Image = null;
-			this.m_E_SkillIcon_2Image = null;
-			this.m_E_SkillIcon_3Image = null;
-			this.m_E_ClickButton = null;
-			this.m_E_ClickImage = null;
 			this.m_E_ButtonResetButton = null;
 			this.m_E_ButtonResetImage = null;
 			this.m_E_BtnItemTypeSetToggleGroup = null;
@@ -548,16 +373,6 @@ namespace ET.Client
 
 		private UnityEngine.UI.ScrollRect m_E_SkillSocketItemsScrollRect = null;
 		private UnityEngine.UI.Image m_E_SkillSocketItemsImage = null;
-		private UnityEngine.UI.Button m_E_HighlightButton = null;
-		private UnityEngine.UI.Image m_E_HighlightImage = null;
-		private UnityEngine.UI.Image m_E_SkillIconImage = null;
-		private UnityEngine.UI.Image m_E_NullImage = null;
-		private UnityEngine.UI.Text m_E_SkillNameText = null;
-		private UnityEngine.UI.Image m_E_SkillIcon_1Image = null;
-		private UnityEngine.UI.Image m_E_SkillIcon_2Image = null;
-		private UnityEngine.UI.Image m_E_SkillIcon_3Image = null;
-		private UnityEngine.UI.Button m_E_ClickButton = null;
-		private UnityEngine.UI.Image m_E_ClickImage = null;
 		private UnityEngine.UI.Button m_E_ButtonResetButton = null;
 		private UnityEngine.UI.Image m_E_ButtonResetImage = null;
 		private UnityEngine.UI.ToggleGroup m_E_BtnItemTypeSetToggleGroup = null;

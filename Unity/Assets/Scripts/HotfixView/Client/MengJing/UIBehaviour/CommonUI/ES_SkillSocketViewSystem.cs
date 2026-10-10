@@ -1,16 +1,19 @@
 ﻿
 using DG.Tweening;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 namespace ET.Client
 {
+	[FriendOf(typeof(Scroll_Item_SkillSocketItem))]
 	[EntitySystemOf(typeof(ES_SkillSocket))]
 	[FriendOfAttribute(typeof(ES_SkillSocket))]
 	public static partial class ES_SkillSocketSystem 
 	{
 		private const float WheelSnapTargetAngle = -45f;
 		private const float WheelSnapDuration = 0.2f;
+		private const string SkillSocketItemPrefabPath = "Assets/Bundles/UI/Item/Item_SkillSocketItem.prefab";
 
 		[EntitySystem]
 		private static void Awake(this ES_SkillSocket self,Transform transform)
@@ -31,16 +34,200 @@ namespace ET.Client
 
 			self.RegisterWheelDrag(self.E_WheelHitArea_2EventTrigger, self.EG_RotatingRoot_2RectTransform);
 			self.RegisterWheelDrag(self.E_WheelHitArea_3EventTrigger, self.EG_RotatingRoot_3RectTransform);
+			self.RefreshSkillSocketItems();
 		}
 
 		[EntitySystem]
 		private static void Destroy(this ES_SkillSocket self)
 		{
+			ResourcesLoaderComponent resourcesLoaderComponent = self.Root().GetComponent<ResourcesLoaderComponent>();
+			for (int i = 0; i < self.AssetList.Count; i++)
+			{
+				resourcesLoaderComponent.UnLoadAsset(self.AssetList[i]);
+			}
+
+			self.AssetList.Clear();
+			self.ScrollItemSkillSocketItems.Clear();
+
 			self.EG_RotatingRoot_2RectTransform.DOKill();
 			self.EG_RotatingRoot_3RectTransform.DOKill();
 			self.E_WheelHitArea_2EventTrigger.triggers.Clear();
 			self.E_WheelHitArea_3EventTrigger.triggers.Clear();
 			self.DestroyWidget();
+		}
+
+		public static void RefreshSkillSocketItems(this ES_SkillSocket self)
+		{
+			List<SkillSocketInfo> skillSocketList = self.Root().GetComponent<SkillSetComponentC>().SkillSocketList;
+			ResourcesLoaderComponent resourcesLoaderComponent = self.Root().GetComponent<ResourcesLoaderComponent>();
+			Transform content = self.E_SkillSocketItemsScrollRect.content;
+
+			for (int i = 0; i < skillSocketList.Count; i++)
+			{
+				if (!self.ScrollItemSkillSocketItems.ContainsKey(i))
+				{
+					Scroll_Item_SkillSocketItem item = self.AddChild<Scroll_Item_SkillSocketItem>();
+					if (!self.AssetList.Contains(SkillSocketItemPrefabPath))
+					{
+						self.AssetList.Add(SkillSocketItemPrefabPath);
+					}
+
+					GameObject prefab = resourcesLoaderComponent.LoadAssetSync<GameObject>(SkillSocketItemPrefabPath);
+					GameObject itemGameObject = UnityEngine.Object.Instantiate(prefab, content);
+					item.BindTrans(itemGameObject.transform);
+					self.ScrollItemSkillSocketItems.Add(i, item);
+				}
+
+				Scroll_Item_SkillSocketItem scrollItem = self.ScrollItemSkillSocketItems[i];
+				scrollItem.SetClickHandler(self.OnSelectSkillSocket);
+				scrollItem.OnUpdateUI(skillSocketList[i]);
+				scrollItem.uiTransform.gameObject.SetActive(true);
+			}
+
+			for (int i = skillSocketList.Count; i < self.ScrollItemSkillSocketItems.Count; i++)
+			{
+				Scroll_Item_SkillSocketItem scrollItem = self.ScrollItemSkillSocketItems[i];
+				if (scrollItem.uiTransform != null)
+				{
+					scrollItem.uiTransform.gameObject.SetActive(false);
+				}
+			}
+
+			if (skillSocketList.Count == 0)
+			{
+				self.SelectedBaseSkillId = 0;
+				self.ClearWheelSkills();
+				return;
+			}
+
+			SkillSocketInfo selectedSkillSocket = skillSocketList.Find(info => info.BaseSkillId == self.SelectedBaseSkillId);
+			self.OnSelectSkillSocket(selectedSkillSocket ?? skillSocketList[0]);
+		}
+
+		private static void OnSelectSkillSocket(this ES_SkillSocket self, SkillSocketInfo skillSocketInfo)
+		{
+			if (skillSocketInfo == null)
+			{
+				return;
+			}
+
+			self.SelectedBaseSkillId = skillSocketInfo.BaseSkillId;
+			foreach (EntityRef<Scroll_Item_SkillSocketItem> itemRef in self.ScrollItemSkillSocketItems.Values)
+			{
+				Scroll_Item_SkillSocketItem item = itemRef;
+				if (item?.uiTransform != null && item.uiTransform.gameObject.activeSelf)
+				{
+					item.OnSetSelected(self.SelectedBaseSkillId);
+				}
+			}
+
+			self.SyncWheelSkills(skillSocketInfo);
+		}
+
+		private static void SyncWheelSkills(this ES_SkillSocket self, SkillSocketInfo skillSocketInfo)
+		{
+			SkillSocketConfig socketConfig = SkillSocketConfigCategory.Instance.GetOrDefault(skillSocketInfo.BaseSkillId);
+			if (socketConfig == null)
+			{
+				self.ClearWheelSkills();
+				return;
+			}
+
+			self.SetWheelAugmentItem(self.EG_SkillAugmentItem_1RectTransform,
+				socketConfig.SkillAugmentIds1 != null && socketConfig.SkillAugmentIds1.Length > 0 ? socketConfig.SkillAugmentIds1[0] : 0);
+
+			int selectedAugment2 = self.GetSelectedAugmentId(skillSocketInfo, 1);
+			int selectedAugment3 = self.GetSelectedAugmentId(skillSocketInfo, 2);
+			self.SetWheelAugmentItems(self.EG_RotatingRoot_2RectTransform, socketConfig.SkillAugmentIds2, selectedAugment2);
+			self.SetWheelAugmentItems(self.EG_RotatingRoot_3RectTransform, socketConfig.SkillAugmentIds3, selectedAugment3);
+		}
+
+		private static int GetSelectedAugmentId(this ES_SkillSocket self, SkillSocketInfo skillSocketInfo, int index)
+		{
+			return skillSocketInfo.AugmentIds != null && index < skillSocketInfo.AugmentIds.Count ? skillSocketInfo.AugmentIds[index] : 0;
+		}
+
+		private static void SetWheelAugmentItems(this ES_SkillSocket self, RectTransform rotatingRoot, int[] augmentIds, int selectedAugmentId)
+		{
+			int selectedIndex = -1;
+			for (int i = 0; i < rotatingRoot.childCount; i++)
+			{
+				RectTransform item = rotatingRoot.GetChild(i) as RectTransform;
+				int augmentId = augmentIds != null && i < augmentIds.Length ? augmentIds[i] : 0;
+				self.SetWheelAugmentItem(item, augmentId);
+
+				if (augmentId != 0 && augmentId == selectedAugmentId)
+				{
+					selectedIndex = i;
+				}
+			}
+
+			if (selectedIndex < 0 && augmentIds != null && augmentIds.Length > 0)
+			{
+				selectedIndex = 0;
+			}
+
+			self.AlignWheelToItem(rotatingRoot, selectedIndex);
+		}
+
+		private static void SetWheelAugmentItem(this ES_SkillSocket self, RectTransform item, int augmentId)
+		{
+			if (item == null || augmentId == 0)
+			{
+				if (item != null)
+				{
+					item.gameObject.SetActive(false);
+				}
+				return;
+			}
+
+			SkillAugmentConfig augmentConfig = SkillAugmentConfigCategory.Instance.GetOrDefault(augmentId);
+			if (augmentConfig == null || string.IsNullOrEmpty(augmentConfig.Icon))
+			{
+				item.gameObject.SetActive(false);
+				return;
+			}
+
+			Image iconImage = item.Find("Mask/SkillIcon")?.GetComponent<Image>();
+			if (iconImage == null)
+			{
+				item.gameObject.SetActive(false);
+				return;
+			}
+
+			string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.RoleSkillIcon, augmentConfig.Icon);
+			iconImage.sprite = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
+			item.gameObject.SetActive(true);
+		}
+
+		private static void AlignWheelToItem(this ES_SkillSocket self, RectTransform rotatingRoot, int itemIndex)
+		{
+			rotatingRoot.DOKill();
+			if (itemIndex < 0 || itemIndex >= rotatingRoot.childCount || !(rotatingRoot.GetChild(itemIndex) is RectTransform item) ||
+			    !item.gameObject.activeSelf)
+			{
+				return;
+			}
+
+			Vector2 itemPosition = item.anchoredPosition;
+			float itemLocalAngle = Mathf.Atan2(itemPosition.y, itemPosition.x) * Mathf.Rad2Deg;
+			Vector3 localEulerAngles = rotatingRoot.localEulerAngles;
+			localEulerAngles.z = WheelSnapTargetAngle - itemLocalAngle;
+			rotatingRoot.localEulerAngles = localEulerAngles;
+		}
+
+		private static void ClearWheelSkills(this ES_SkillSocket self)
+		{
+			self.EG_SkillAugmentItem_1RectTransform.gameObject.SetActive(false);
+			for (int i = 0; i < self.EG_RotatingRoot_2RectTransform.childCount; i++)
+			{
+				self.EG_RotatingRoot_2RectTransform.GetChild(i).gameObject.SetActive(false);
+			}
+
+			for (int i = 0; i < self.EG_RotatingRoot_3RectTransform.childCount; i++)
+			{
+				self.EG_RotatingRoot_3RectTransform.GetChild(i).gameObject.SetActive(false);
+			}
 		}
 
 		private static void GenerateSkillAugmentItems(this ES_SkillSocket self, RectTransform rotatingRoot, RectTransform itemTemplate, int itemCount,float angleStart, float angleInterval, float radius)
@@ -156,7 +343,7 @@ namespace ET.Client
 
 			for (int i = 0; i < rotatingRoot.childCount; i++)
 			{
-				if (!(rotatingRoot.GetChild(i) is RectTransform item))
+				if (!(rotatingRoot.GetChild(i) is RectTransform item) || !item.gameObject.activeSelf)
 				{
 					continue;
 				}
