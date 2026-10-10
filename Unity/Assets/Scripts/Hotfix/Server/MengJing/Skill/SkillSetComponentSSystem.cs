@@ -1034,6 +1034,12 @@ namespace ET.Server
                 return ErrorCode.ERR_ModifyData;
             }
 
+			// 第一个增幅孔要求技能达到 2 级，第二个增幅孔要求达到 3 级。
+			if (self.GetLearnedSkillLevel(baseSkillId) < tierIndex + 2)
+			{
+				return ErrorCode.ERR_ModifyData;
+			}
+
             SkillAugmentOptionsConfig augmentOptions = SkillAugmentOptionsConfigCategory.Instance.GetOrDefault(baseSkillId);
             SkillAugmentInfo augmentInfo = self.SkillAugmentList?.Find(info => info.BaseSkillId == baseSkillId);
             if (augmentOptions == null || augmentInfo == null)
@@ -1067,6 +1073,43 @@ namespace ET.Server
             self.UpdateSkillSet();
             return ErrorCode.ERR_Success;
         }
+
+		private static int GetLearnedSkillLevel(this SkillSetComponentS self, int baseSkillId)
+		{
+			if (baseSkillId == 0)
+			{
+				return 0;
+			}
+
+			int skillLevel = 0;
+			for (int i = 0; i < self.SkillList.Count; i++)
+			{
+				SkillConfig skillConfig = SkillConfigCategory.Instance.GetOrDefault(self.SkillList[i].SkillID);
+				if (skillConfig != null && SkillConfigCategory.Instance.GetInitSkill(skillConfig.Id) == baseSkillId)
+				{
+					skillLevel = Math.Max(skillLevel, skillConfig.SkillLv);
+				}
+			}
+
+			return skillLevel;
+		}
+
+		private static void ResetSkillAugments(this SkillSetComponentS self)
+		{
+			if (self.SkillAugmentList == null)
+			{
+				return;
+			}
+
+			for (int i = 0; i < self.SkillAugmentList.Count; i++)
+			{
+				List<int> activeAugmentIds = self.SkillAugmentList[i].ActiveAugmentIds;
+				for (int j = 0; j < activeAugmentIds.Count; j++)
+				{
+					activeAugmentIds[j] = 0;
+				}
+			}
+		}
 
         public static void OnChangeEquipIndex(this SkillSetComponentS self, int equipIndex)
         {
@@ -1443,6 +1486,7 @@ namespace ET.Server
                 }
             }
 
+			self.ResetSkillAugments();
             self.UpdateSkillSet();
         }
 

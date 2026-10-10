@@ -108,6 +108,7 @@ namespace ET.Client
                     break;
                 case 5:
                     self.View.ES_SkillAugment.uiTransform.gameObject.SetActive(true);
+					self.View.ES_SkillAugment.RefreshSkillAugmentItems();
                     break;
             }
         }

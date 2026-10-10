@@ -38,7 +38,6 @@ namespace ET.Client
 			self.SetWheelLineAlpha(self.EG_Line_3RectTransform, 0f);
 			self.RegisterWheelDrag(self.E_WheelHitArea_1EventTrigger, self.EG_RotatingRoot_1RectTransform, self.EG_ItemList_1RectTransform, self.EG_Line_2RectTransform, 0);
 			self.RegisterWheelDrag(self.E_WheelHitArea_2EventTrigger, self.EG_RotatingRoot_2RectTransform, self.EG_ItemList_2RectTransform, self.EG_Line_3RectTransform, 1);
-			self.RefreshSkillAugmentItems();
 		}
 
 		[EntitySystem]
@@ -142,10 +141,36 @@ namespace ET.Client
 
 			int selectedAugment1 = self.GetSelectedAugmentId(skillAugmentInfo, 0);
 			int selectedAugment2 = self.GetSelectedAugmentId(skillAugmentInfo, 1);
-			self.SetWheelAugmentItems(self.EG_RotatingRoot_1RectTransform, self.EG_ItemList_1RectTransform,
-				augmentOptions.SkillAugmentIds1, selectedAugment1, 0);
-			self.SetWheelAugmentItems(self.EG_RotatingRoot_2RectTransform, self.EG_ItemList_2RectTransform,
-				augmentOptions.SkillAugmentIds2, selectedAugment2, 1);
+			bool slot1Unlocked = self.IsAugmentSlotUnlocked(0);
+			bool slot2Unlocked = self.IsAugmentSlotUnlocked(1);
+			self.SetWheelAugmentItems(self.EG_RotatingRoot_1RectTransform, self.EG_ItemList_1RectTransform, augmentOptions.SkillAugmentIds1, selectedAugment1, 0, slot1Unlocked);
+			self.SetWheelAugmentItems(self.EG_RotatingRoot_2RectTransform, self.EG_ItemList_2RectTransform, augmentOptions.SkillAugmentIds2, selectedAugment2, 1, slot2Unlocked);
+		}
+
+		private static bool IsAugmentSlotUnlocked(this ES_SkillAugment self, int tierIndex)
+		{
+			return self.GetLearnedSkillLevel(self.SelectedBaseSkillId) >= tierIndex + 2;
+		}
+
+		private static int GetLearnedSkillLevel(this ES_SkillAugment self, int baseSkillId)
+		{
+			if (baseSkillId == 0)
+			{
+				return 0;
+			}
+
+			int skillLevel = 0;
+			List<SkillPro> skillList = self.Root().GetComponent<SkillSetComponentC>().SkillList;
+			for (int i = 0; i < skillList.Count; i++)
+			{
+				SkillConfig skillConfig = SkillConfigCategory.Instance.GetOrDefault(skillList[i].SkillID);
+				if (skillConfig != null && SkillConfigCategory.Instance.GetInitSkill(skillConfig.Id) == baseSkillId)
+				{
+					skillLevel = Mathf.Max(skillLevel, skillConfig.SkillLv);
+				}
+			}
+
+			return skillLevel;
 		}
 
 		private static int GetSelectedAugmentId(this ES_SkillAugment self, SkillAugmentInfo skillAugmentInfo, int tierIndex)
@@ -173,15 +198,14 @@ namespace ET.Client
 			iconImage.gameObject.SetActive(true);
 		}
 
-		private static void SetWheelAugmentItems(this ES_SkillAugment self, RectTransform rotatingRoot, RectTransform itemList,
-			int[] augmentIds, int selectedAugmentId, int tierIndex)
+		private static void SetWheelAugmentItems(this ES_SkillAugment self, RectTransform rotatingRoot, RectTransform itemList, int[] augmentIds, int selectedAugmentId, int tierIndex, bool isUnlocked)
 		{
 			int selectedIndex = -1;
 			for (int i = 0; i < itemList.childCount; i++)
 			{
 				RectTransform item = itemList.GetChild(i) as RectTransform;
 				int augmentId = augmentIds != null && i < augmentIds.Length ? augmentIds[i] : 0;
-				self.SetWheelAugmentItem(item, augmentId);
+				self.SetWheelAugmentItem(item, augmentId, isUnlocked);
 
 				if (augmentId != 0 && augmentId == selectedAugmentId)
 				{
@@ -195,13 +219,18 @@ namespace ET.Client
 			}
 
 			self.AlignWheelToItem(rotatingRoot, itemList, selectedIndex);
-			if (selectedIndex >= 0)
+			if (isUnlocked && selectedIndex >= 0)
 			{
 				self.OnWheelSnapCompleted(tierIndex, selectedIndex).Coroutine();
 			}
+			else if (!isUnlocked)
+			{
+				RectTransform wheelLine = tierIndex == 0 ? self.EG_Line_2RectTransform : self.EG_Line_3RectTransform;
+				self.SetWheelLineAlpha(wheelLine, 0f);
+			}
 		}
 
-		private static void SetWheelAugmentItem(this ES_SkillAugment self, RectTransform item, int augmentId)
+		private static void SetWheelAugmentItem(this ES_SkillAugment self, RectTransform item, int augmentId, bool isUnlocked)
 		{
 			if (item == null || augmentId == 0)
 			{
@@ -228,6 +257,7 @@ namespace ET.Client
 
 			string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.RoleSkillIcon, augmentConfig.Icon);
 			iconImage.sprite = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
+			CommonViewHelper.SetImageGray(self.Root(), iconImage.gameObject, !isUnlocked);
 			self.RegisterSkillAugmentItemClick(item, augmentId);
 			item.gameObject.SetActive(true);
 		}
@@ -316,8 +346,7 @@ namespace ET.Client
 			}
 		}
 
-		private static void RegisterWheelDrag(this ES_SkillAugment self, EventTrigger eventTrigger, RectTransform rotatingRoot,
-			RectTransform itemList, RectTransform wheelLine, int tierIndex)
+		private static void RegisterWheelDrag(this ES_SkillAugment self, EventTrigger eventTrigger, RectTransform rotatingRoot, RectTransform itemList, RectTransform wheelLine, int tierIndex)
 		{
 			RectTransform hitArea = eventTrigger.transform as RectTransform;
 
@@ -451,12 +480,15 @@ namespace ET.Client
 			return tween;
 		}
 
-		private static void RefreshWheelLineAlpha(this ES_SkillAugment self, RectTransform rotatingRoot, RectTransform itemList,
-			RectTransform wheelLine = null)
+		private static void RefreshWheelLineAlpha(this ES_SkillAugment self, RectTransform rotatingRoot, RectTransform itemList, RectTransform wheelLine = null)
 		{
-			wheelLine ??= rotatingRoot == self.EG_RotatingRoot_1RectTransform
-				? self.EG_Line_2RectTransform
-				: self.EG_Line_3RectTransform;
+			int tierIndex = rotatingRoot == self.EG_RotatingRoot_1RectTransform ? 0 : 1;
+			wheelLine ??= tierIndex == 0 ? self.EG_Line_2RectTransform : self.EG_Line_3RectTransform;
+			if (!self.IsAugmentSlotUnlocked(tierIndex))
+			{
+				self.SetWheelLineAlpha(wheelLine, 0f);
+				return;
+			}
 
 			float closestDistance = float.MaxValue;
 			float rootAngle = rotatingRoot.localEulerAngles.z;
@@ -499,6 +531,11 @@ namespace ET.Client
 
 		private static async ETTask OnWheelSnapCompleted(this ES_SkillAugment self, int tierIndex, int itemIndex)
 		{
+			if (!self.IsAugmentSlotUnlocked(tierIndex))
+			{
+				return;
+			}
+
 			SkillAugmentOptionsConfig augmentOptions = SkillAugmentOptionsConfigCategory.Instance.GetOrDefault(self.SelectedBaseSkillId);
 			int[] augmentIds = tierIndex switch
 			{
