@@ -11,11 +11,8 @@ Material:
   m_Shader: {fileID: -6465566751694194690, guid: c54b5097403c7204dab66c94ca8f2252, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
-  m_ValidKeywords:
-  - _ENABLE_FOG_ON_TRANSPARENT
-  - _SURFACE_TYPE_TRANSPARENT
+  m_ValidKeywords: []
   m_InvalidKeywords:
-  - _DOUBLESIDED_ON
   - _USEDEPTH_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -81,10 +78,12 @@ Material:
     - _CullMode: 0
     - _CullModeForward: 0
     - _DepthOffsetEnable: 0
+    - _Depthpower: 1
     - _DoubleSidedEnable: 1
     - _DoubleSidedGIMode: 0
     - _DoubleSidedNormalMode: 2
     - _DstBlend: 10
+    - _DstBlend2: 0
     - _Emission: 4
     - _EnableBlendModePreserveSpecularLighting: 0
     - _EnableFogOnTransparent: 1
@@ -92,6 +91,7 @@ Material:
     - _InvFade: 1
     - _NoiseOpacityLerp: 0
     - _OpaqueCullMode: 2
+    - _PerPixelSorting: 0
     - _QueueControl: 0
     - _QueueOffset: 0
     - _RenderQueueType: 3
@@ -126,6 +126,7 @@ Material:
     - _TextureMove: {r: 0, g: 0, b: 0, a: 0}
     - _TintColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.5}
   m_BuildTextureStacks: []
+  m_AllowLocking: 1
 --- !u!114 &2043146801802266821
 MonoBehaviour:
   m_ObjectHideFlags: 11
@@ -151,7 +152,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  version: 7
+  version: 10
 --- !u!114 &6260468279280662740
 MonoBehaviour:
   m_ObjectHideFlags: 11

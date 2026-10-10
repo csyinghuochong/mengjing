@@ -26,6 +26,7 @@ namespace PilotoStudio
 
         void PostUpdateLogic()
         {
+            if (displayName != null)
             displayName.text = particles[currentlyActive].name;
             if (particles[currentlyActive].TryGetComponent<ParticleHandler>(out ParticleHandler handler))
             {

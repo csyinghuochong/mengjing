@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: fireball_yellow
-  m_Shader: {fileID: 4800000, guid: c027d521ec056624fb87fa4829710a92, type: 3}
+  m_Shader: {fileID: 4800000, guid: 2b02ff58d507c6a478f8b1a00964a56d, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -43,6 +43,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _Flow:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _MainTex:
         m_Texture: {fileID: 2800000, guid: aebaf2833ac5be147b61b53a7112f26c, type: 3}
         m_Scale: {x: 1, y: 1.5}
@@ -52,6 +56,10 @@ Material:
         m_Scale: {x: 1, y: 3}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Noise:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -79,13 +87,20 @@ Material:
         m_Texture: {fileID: 2800000, guid: bca178b4ea45a034ab11a1334ae00023, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _texcoord:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
     - _BumpScale: 1
+    - _CullMode: 0
     - _Cutoff: 0.5
+    - _Depthpower: 1
     - _DetailNormalMapScale: 1
     - _Dissolve: 1.99
     - _DstBlend: 0
+    - _Emission: 1
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
@@ -94,22 +109,27 @@ Material:
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
+    - _Opacity: 1
     - _Parallax: 0.02
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
-    - _U: 2
+    - _U: -2
     - _UVSec: 0
-    - _U_Mask: -0.8
+    - _U_Mask: -0.87
     - _U_copy: 1.4
-    - _V: -0.2
-    - _V_Mask: 0.33
+    - _Usecenterglow: 0
+    - _Usedepth: 0
+    - _V: -0.12
+    - _V_Mask: -0.66
     - _V_copy: 0.3
     - _ZWrite: 1
     - _node_1992: 0.15
     m_Colors:
-    - _Color: {r: 1, g: 0.90428203, b: 0.7386462, a: 1}
+    - _Color: {r: 1, g: 0.954717, b: 0.87358487, a: 1}
+    - _DistortionSpeedXYPowerZ: {r: 0, g: 0, b: 0, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _SpeedMainTexUVNoiseZW: {r: 1, g: 0, b: 0, a: 0}
     - _TintColor: {r: 1, g: 0.4912778, b: 0.16176468, a: 0.5}
     - _node_7299: {r: 1, g: 0.9125639, b: 0.6206748, a: 1}
   m_BuildTextureStacks: []
