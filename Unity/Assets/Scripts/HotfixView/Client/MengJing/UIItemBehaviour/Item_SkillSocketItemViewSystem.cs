@@ -41,9 +41,9 @@ namespace ET.Client
 			}
 
 			self.E_HighlightImage.gameObject.SetActive(false);
-			self.SetAugmentIcon(self.E_SkillIcon_1Image, skillSocketInfo, 0);
-			self.SetAugmentIcon(self.E_SkillIcon_2Image, skillSocketInfo, 1);
-			self.SetAugmentIcon(self.E_SkillIcon_3Image, skillSocketInfo, 2);
+			self.SetAugmentIcon(self.EG_SkillAugment_1RectTransform.Find("Mask/Icon").transform.GetComponent<Image>(), skillSocketInfo, 0);
+			self.SetAugmentIcon(self.EG_SkillAugment_2RectTransform.Find("Mask/Icon").transform.GetComponent<Image>(), skillSocketInfo, 1);
+			self.SetAugmentIcon(self.EG_SkillAugment_3RectTransform.Find("Mask/Icon").transform.GetComponent<Image>(), skillSocketInfo, 2);
 		}
 
 		public static void SetClickHandler(this Scroll_Item_SkillSocketItem self, Action<SkillSocketInfo> clickHandler)
