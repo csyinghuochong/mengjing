@@ -154,6 +154,11 @@ namespace ET.Client
             {
                 self.View.ES_SkillSet.OnSkillSetting();
             }
+
+            if (self.View.ES_SkillSocket.uiTransform.gameObject.activeSelf)
+            {
+                self.View.ES_SkillSocket.RefreshSkillSocketItems();
+            }
         }
 
         public static void OnHuiShouSelect(this DlgSkill self, string dataParams)

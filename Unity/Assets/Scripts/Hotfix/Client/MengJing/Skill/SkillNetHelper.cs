@@ -96,6 +96,18 @@ namespace ET.Client
             EventSystem.Instance.Publish(root, new SkillSetting());
         }
 
+        public static async ETTask<int> SetSkillAugment(Scene root, int baseSkillId, int socketIndex, int augmentId)
+        {
+            C2M_SkillAugmentSetRequest request = C2M_SkillAugmentSetRequest.Create();
+            request.BaseSkillId = baseSkillId;
+            request.SocketIndex = socketIndex;
+            request.AugmentId = augmentId;
+
+            M2C_SkillAugmentSetResponse response =
+                    (M2C_SkillAugmentSetResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            return response.Error;
+        }
+
         public static async ETTask<int> SkillOperation(Scene root, int operationType)
         {
             C2M_SkillOperation request = C2M_SkillOperation.Create();

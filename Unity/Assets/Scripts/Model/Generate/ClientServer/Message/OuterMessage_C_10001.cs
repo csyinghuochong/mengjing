@@ -34407,6 +34407,78 @@ namespace ET
         }
     }
 
+    // 设置技能增幅
+    [MemoryPackable]
+    [Message(OuterMessage.C2M_SkillAugmentSetRequest)]
+    [ResponseType(nameof(M2C_SkillAugmentSetResponse))]
+    public partial class C2M_SkillAugmentSetRequest : MessageObject, ILocationRequest
+    {
+        public static C2M_SkillAugmentSetRequest Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(C2M_SkillAugmentSetRequest), isFromPool) as C2M_SkillAugmentSetRequest;
+        }
+
+        [MemoryPackOrder(89)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(0)]
+        public int BaseSkillId { get; set; }
+
+        [MemoryPackOrder(1)]
+        public int SocketIndex { get; set; }
+
+        [MemoryPackOrder(2)]
+        public int AugmentId { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.BaseSkillId = default;
+            this.SocketIndex = default;
+            this.AugmentId = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
+    [Message(OuterMessage.M2C_SkillAugmentSetResponse)]
+    public partial class M2C_SkillAugmentSetResponse : MessageObject, ILocationResponse
+    {
+        public static M2C_SkillAugmentSetResponse Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(M2C_SkillAugmentSetResponse), isFromPool) as M2C_SkillAugmentSetResponse;
+        }
+
+        [MemoryPackOrder(89)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(90)]
+        public int Error { get; set; }
+
+        [MemoryPackOrder(91)]
+        public string Message { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.Error = default;
+            this.Message = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
     public static class OuterMessage
     {
         public const ushort HttpGetRouterResponse = 10002;
@@ -35321,5 +35393,7 @@ namespace ET
         public const ushort PetMatch2C_RankListResponse = 10911;
         public const ushort C2M_SingleHappyOperateRequest = 10912;
         public const ushort M2C_SingleHappyOperateResponse = 10913;
+        public const ushort C2M_SkillAugmentSetRequest = 10914;
+        public const ushort M2C_SkillAugmentSetResponse = 10915;
     }
 }

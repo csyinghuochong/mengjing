@@ -1,4 +1,5 @@
 ﻿
+using System;
 using DG.Tweening;
 using System.Collections.Generic;
 using UnityEngine;
@@ -32,8 +33,8 @@ namespace ET.Client
 				outerHitArea.SetSiblingIndex(innerHitArea.GetSiblingIndex());
 			}
 
-			self.RegisterWheelDrag(self.E_WheelHitArea_2EventTrigger, self.EG_RotatingRoot_2RectTransform);
-			self.RegisterWheelDrag(self.E_WheelHitArea_3EventTrigger, self.EG_RotatingRoot_3RectTransform);
+			self.RegisterWheelDrag(self.E_WheelHitArea_2EventTrigger, self.EG_RotatingRoot_2RectTransform, 1);
+			self.RegisterWheelDrag(self.E_WheelHitArea_3EventTrigger, self.EG_RotatingRoot_3RectTransform, 2);
 			self.RefreshSkillSocketItems();
 		}
 
@@ -253,7 +254,7 @@ namespace ET.Client
 			}
 		}
 
-		private static void RegisterWheelDrag(this ES_SkillSocket self, EventTrigger eventTrigger, RectTransform rotatingRoot)
+		private static void RegisterWheelDrag(this ES_SkillSocket self, EventTrigger eventTrigger, RectTransform rotatingRoot, int socketIndex)
 		{
 			RectTransform hitArea = eventTrigger.transform as RectTransform;
 
@@ -320,7 +321,8 @@ namespace ET.Client
 
 				isDragging = false;
 				hasLastPointerAngle = false;
-				snapTween = self.SnapWheelToClosestItem(rotatingRoot);
+				snapTween = self.SnapWheelToClosestItem(rotatingRoot,
+					itemIndex => self.OnWheelSnapCompleted(socketIndex, itemIndex).Coroutine());
 			}
 
 			eventTrigger.RegisterEvent(EventTriggerType.EndDrag, _ => FinishDrag());
@@ -330,7 +332,7 @@ namespace ET.Client
 			snapTween = self.SnapWheelToClosestItem(rotatingRoot);
 		}
 
-		private static Tween SnapWheelToClosestItem(this ES_SkillSocket self, RectTransform rotatingRoot)
+		private static Tween SnapWheelToClosestItem(this ES_SkillSocket self, RectTransform rotatingRoot, Action<int> onComplete = null)
 		{
 			if (rotatingRoot == null || rotatingRoot.childCount == 0)
 			{
@@ -340,6 +342,7 @@ namespace ET.Client
 			float rootAngle = rotatingRoot.localEulerAngles.z;
 			float closestDeltaAngle = 0f;
 			float closestDistance = float.MaxValue;
+			int closestItemIndex = -1;
 
 			for (int i = 0; i < rotatingRoot.childCount; i++)
 			{
@@ -361,6 +364,7 @@ namespace ET.Client
 				{
 					closestDistance = distance;
 					closestDeltaAngle = deltaAngle;
+					closestItemIndex = i;
 				}
 			}
 
@@ -371,7 +375,38 @@ namespace ET.Client
 
 			Vector3 targetEulerAngles = rotatingRoot.localEulerAngles;
 			targetEulerAngles.z = rootAngle + closestDeltaAngle;
-			return rotatingRoot.DOLocalRotate(targetEulerAngles, WheelSnapDuration, RotateMode.FastBeyond360).SetEase(Ease.OutCubic);
+			Tween tween = rotatingRoot.DOLocalRotate(targetEulerAngles, WheelSnapDuration, RotateMode.FastBeyond360).SetEase(Ease.OutCubic);
+			if (onComplete != null)
+			{
+				tween.OnComplete(() => onComplete(closestItemIndex));
+			}
+			return tween;
+		}
+
+		private static async ETTask OnWheelSnapCompleted(this ES_SkillSocket self, int socketIndex, int itemIndex)
+		{
+			SkillSocketConfig socketConfig = SkillSocketConfigCategory.Instance.GetOrDefault(self.SelectedBaseSkillId);
+			int[] augmentIds = socketIndex switch
+			{
+				1 => socketConfig?.SkillAugmentIds2,
+				2 => socketConfig?.SkillAugmentIds3,
+				_ => null,
+			};
+
+			if (augmentIds == null || itemIndex < 0 || itemIndex >= augmentIds.Length)
+			{
+				return;
+			}
+
+			int augmentId = augmentIds[itemIndex];
+			SkillSocketInfo socketInfo = self.Root().GetComponent<SkillSetComponentC>().SkillSocketList
+				.Find(info => info.BaseSkillId == self.SelectedBaseSkillId);
+			if (augmentId == 0 || socketInfo == null || self.GetSelectedAugmentId(socketInfo, socketIndex) == augmentId)
+			{
+				return;
+			}
+
+			await SkillNetHelper.SetSkillAugment(self.Root(), self.SelectedBaseSkillId, socketIndex, augmentId);
 		}
 
 		private static bool TryGetPointerAngle(this ES_SkillSocket self, RectTransform hitArea, PointerEventData pointerEventData,

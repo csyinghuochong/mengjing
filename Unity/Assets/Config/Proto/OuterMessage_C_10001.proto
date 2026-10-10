@@ -7891,3 +7891,20 @@ message M2C_SingleHappyOperateResponse // ILocationResponse
 	int32 Error = 91;
 	string Message = 92;
 }
+
+//ResponseType M2C_SkillAugmentSetResponse
+//设置技能增幅
+message C2M_SkillAugmentSetRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int32 BaseSkillId = 1;
+	int32 SocketIndex = 2;
+	int32 AugmentId = 3;
+}
+
+message M2C_SkillAugmentSetResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}

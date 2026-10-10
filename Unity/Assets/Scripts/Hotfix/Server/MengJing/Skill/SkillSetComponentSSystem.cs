@@ -1026,6 +1026,48 @@ namespace ET.Server
             self.InitSkillSockets(occ);
         }
 
+        public static int SetSkillAugment(this SkillSetComponentS self, int baseSkillId, int socketIndex, int augmentId)
+        {
+            if (socketIndex < 0 || socketIndex > 2)
+            {
+                return ErrorCode.ERR_ModifyData;
+            }
+
+            SkillSocketConfig socketConfig = SkillSocketConfigCategory.Instance.GetOrDefault(baseSkillId);
+            SkillSocketInfo socketInfo = self.SkillSocketList?.Find(info => info.BaseSkillId == baseSkillId);
+            if (socketConfig == null || socketInfo == null)
+            {
+                return ErrorCode.ERR_ModifyData;
+            }
+
+            int[] allowedAugmentIds = socketIndex switch
+            {
+                0 => socketConfig.SkillAugmentIds1,
+                1 => socketConfig.SkillAugmentIds2,
+                2 => socketConfig.SkillAugmentIds3,
+                _ => null,
+            };
+
+            if (augmentId == 0 || allowedAugmentIds == null || !allowedAugmentIds.Contains(augmentId))
+            {
+                return ErrorCode.ERR_ModifyData;
+            }
+
+            while (socketInfo.AugmentIds.Count < 3)
+            {
+                socketInfo.AugmentIds.Add(0);
+            }
+
+            if (socketInfo.AugmentIds[socketIndex] == augmentId)
+            {
+                return ErrorCode.ERR_Success;
+            }
+
+            socketInfo.AugmentIds[socketIndex] = augmentId;
+            self.UpdateSkillSet();
+            return ErrorCode.ERR_Success;
+        }
+
         public static void OnChangeEquipIndex(this SkillSetComponentS self, int equipIndex)
         {
             self.OnRemoveEquipSkill(ConfigData.HunterFarSkill, 0);
