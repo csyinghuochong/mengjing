@@ -1,0 +1,153 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-4233116986985393652
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 639247ca83abc874e893eb93af2b5e44, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 0
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Necro_Scythe
+  m_Shader: {fileID: -6465566751694194690, guid: 7f11fe28133f1a74594785107b98f2fe,
+    type: 3}
+  m_Parent: {fileID: 2100000, guid: 70dd238d4a90884499ea5b3ff165bdd8, type: 2}
+  m_ModifiedSerializedProperties: 26
+  m_ValidKeywords:
+  - _ALPHATEST_ON
+  - _BUILTIN_ALPHATEST_ON
+  - _BUILTIN_AlphaClip
+  - _FRESNEL
+  - _USEALPHAOVERRIDE
+  m_InvalidKeywords:
+  - _DISABLE_SSR_TRANSPARENT
+  - _ISPARTICLE
+  - _NORMALMAP
+  - _NORMALMAP_TANGENT_SPACE
+  m_LightmapFlags: 2
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: 2450
+  stringTagMap:
+    MotionVector: User
+    RenderType: TransparentCutout
+  disabledShaderPasses:
+  - TransparentDepthPrepass
+  - TransparentDepthPostpass
+  - TransparentBackface
+  - RayTracingPrepass
+  - MOTIONVECTORS
+  m_LockedProperties: _DetailNoise _Metallic_Scale
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _AlphaOverride:
+        m_Texture: {fileID: 2800000, guid: d4bcf3654ae8b624197c00ab7db34093, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailNoise:
+        m_Texture: {fileID: 2800000, guid: da2524f8b80e4bb45920e31ab35a7827, type: 3}
+        m_Scale: {x: 5, y: 5}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 2800000, guid: 8793ca7b84ac75e4f978e20b409a260f, type: 3}
+        m_Scale: {x: 2, y: 5}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _AlphaClip: 1
+    - _AlphaCutoffEnable: 1
+    - _AlphaDstBlend: 0
+    - _AlphaToMask: 1
+    - _Alpha_Clip_Threshold: 0.1
+    - _BUILTIN_AlphaClip: 1
+    - _BUILTIN_Blend: 0
+    - _BUILTIN_CullMode: 2
+    - _BUILTIN_DstBlend: 10
+    - _BUILTIN_QueueControl: 1
+    - _BUILTIN_Surface: 0
+    - _BUILTIN_ZWrite: 1
+    - _Blend: 0
+    - _BlendMode: 0
+    - _CastShadows: 1
+    - _Cull: 2
+    - _CullMode: 2
+    - _CullModeForward: 2
+    - _DistortionIntensity: 0
+    - _DoubleSidedEnable: 0
+    - _DoubleSidedNormalMode: 1
+    - _DstBlend: 10
+    - _EnableBlendModePreserveSpecularLighting: 1
+    - _EnableFogOnTransparent: 1
+    - _FRESNEL: 1
+    - _FresnelPower: 1.95
+    - _FresnelScale: 0.86
+    - _MultiplyNoiseDesaturation: 0
+    - _QueueControl: 1
+    - _ReceivesSSR: 1
+    - _RenderQueueType: 1
+    - _StencilWriteMaskGBuffer: 15
+    - _Surface: 0
+    - _SurfaceType: 0
+    - _USEALPHAOVERRIDE: 1
+    - _ZTestDepthEqualForOpaque: 3
+    - _ZTestGBuffer: 3
+    - _ZWrite: 1
+    m_Colors:
+    - _AlphaOverrideChannel: {r: 3, g: 0, b: 0, a: 1}
+    - _DetailAdditiveChannel: {r: 1, g: 1, b: 1, a: 0}
+    - _DetailDistortionChannel: {r: 1, g: 0, b: 0, a: 0}
+    - _DetailMultiplyChannel: {r: 1, g: 1, b: 1, a: 1}
+    - _DetailNoisePanning: {r: 0.1, g: -0.3, b: 0, a: 0}
+    - _DetailVertexOffsetChannel: {r: 0, g: 1, b: 0.5, a: 0}
+    - _Disolve_Fade_Range: {r: -1, g: 1, b: 0, a: 0}
+    - _DoubleSidedConstants: {r: 1, g: 1, b: -1, a: 0}
+    - _FresnelColor: {r: 0.2688679, g: 1, b: 0.5197466, a: 1}
+    - _LastColor: {r: 0.023153365, g: 0.023153365, b: 0.023153365, a: 0}
+    - _MainAlphaChannel: {r: 5, g: 5, b: 15, a: 1}
+    - _MainTextureChannel: {r: 15, g: 15, b: 15, a: 0}
+    - _MainTexturePanning: {r: 0.1, g: -0.1, b: 0, a: 0}
+    - _MidColor: {r: 0.5019608, g: 0.5019608, b: 0.5019608, a: 0}
+    - _WhiteColor: {r: 1, g: 1, b: 1, a: 0}
+  m_BuildTextureStacks: []
+--- !u!114 &4802516673909545832
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da692e001514ec24dbc4cca1949ff7e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 13
+  hdPluginSubTargetMaterialVersions:
+    m_Keys: []
+    m_Values: 
+--- !u!114 &5882367685160139008
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 7

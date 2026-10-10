@@ -1,0 +1,254 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-2159827076099329454
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da692e001514ec24dbc4cca1949ff7e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 13
+  hdPluginSubTargetMaterialVersions:
+    m_Keys: []
+    m_Values: 
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: FX_ARPG_Poison_Ground_Noise_01_M
+  m_Shader: {fileID: -6465566751694194690, guid: 7f11fe28133f1a74594785107b98f2fe,
+    type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords:
+  - _SURFACE_TYPE_TRANSPARENT
+  - _USEALPHAOVERRIDE
+  - _USEUVOFFSET
+  m_InvalidKeywords:
+  - _DOUBLESIDED_ON
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 1
+  m_CustomRenderQueue: 3000
+  stringTagMap:
+    MotionVector: User
+    RenderType: Transparent
+  disabledShaderPasses:
+  - TransparentBackface
+  - MOTIONVECTORS
+  - TransparentDepthPrepass
+  - TransparentDepthPostpass
+  m_LockedProperties: _AlphaOverride
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _AlphaOverride:
+        m_Texture: {fileID: 2800000, guid: cdc14b3e0a032074a981a1e3808187ba, type: 3}
+        m_Scale: {x: 1, y: 1.3}
+        m_Offset: {x: 0, y: 0.18}
+    - _DetailNoise:
+        m_Texture: {fileID: 2800000, guid: 64b25161d992cab42a7dd9569d7e0078, type: 3}
+        m_Scale: {x: 3, y: 2}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 2800000, guid: 31a34680c8e4c5d42ae3c88689a66405, type: 3}
+        m_Scale: {x: 5, y: 2}
+        m_Offset: {x: 0, y: 0}
+    - _diff:
+        m_Texture: {fileID: 2800000, guid: 1c0a28d7a8db4e93bc4f05b6b878cd79, type: 3}
+        m_Scale: {x: 0.5, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _mask:
+        m_Texture: {fileID: 2800000, guid: 25fbfd66504d4108810eb716936aecc2, type: 3}
+        m_Scale: {x: -1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_Lightmaps:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_LightmapsInd:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_ShadowMasks:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _AddPrecomputedVelocity: 0
+    - _AlphaClip: 0
+    - _AlphaCutoff: 0.5
+    - _AlphaCutoffEnable: 0
+    - _AlphaDstBlend: 10
+    - _AlphaSrcBlend: 1
+    - _AlphaToMask: 0
+    - _AlphaToMaskInspectorValue: 0
+    - _Alpha_Clip_Threshold: 0.5
+    - _BUILTIN_AlphaClip: 0
+    - _BUILTIN_Blend: 0
+    - _BUILTIN_CullMode: 0
+    - _BUILTIN_DstBlend: 10
+    - _BUILTIN_QueueControl: -1
+    - _BUILTIN_QueueOffset: 0
+    - _BUILTIN_SrcBlend: 1
+    - _BUILTIN_Surface: 1
+    - _BUILTIN_ZTest: 4
+    - _BUILTIN_ZWrite: 0
+    - _BUILTIN_ZWriteControl: 0
+    - _Blend: 0
+    - _BlendMode: 0
+    - _BumpScale: 1
+    - _CastShadows: 0
+    - _ConservativeDepthOffsetEnable: 0
+    - _Cull: 0
+    - _CullMode: 0
+    - _CullModeForward: 0
+    - _Culling: 0
+    - _Cutoff: 0.5
+    - _DISABLEEROSION: 0
+    - _DepthOffsetEnable: 0
+    - _Desaturate: 0
+    - _DetailNormalMapScale: 1
+    - _DisableErosion: 0
+    - _DistortionEnable: 0
+    - _DistortionIntensity: 0.15
+    - _DistortionOnly: 0
+    - _DoubleSidedEnable: 1
+    - _DoubleSidedGIMode: 0
+    - _DoubleSidedNormalMode: 2
+    - _DstBlend: 10
+    - _EnableBlendModePreserveSpecularLighting: 0
+    - _EnableFogOnTransparent: 0
+    - _ExcludeFromTUAndAA: 0
+    - _FRESNEL: 0
+    - _Fresnel: 0
+    - _FresnelPower: 1
+    - _FresnelScale: 1
+    - _GlossMapScale: 1
+    - _Glossiness: 0.5
+    - _GlossyReflections: 1
+    - _Invert_Fresnel: 0
+    - _MaskValue: -0.6235294
+    - _Metallic: 0
+    - _MiddlePointPos: 0.88
+    - _MiddlePointPos1: 0.2
+    - _Mode: 0
+    - _MultiplyNoiseDesaturation: 0
+    - _OcclusionStrength: 1
+    - _OpaqueCullMode: 2
+    - _Parallax: 0.02
+    - _QueueControl: -1
+    - _QueueOffset: 0
+    - _ReceivesSSR: 1
+    - _ReceivesSSRTransparent: 0
+    - _RenderQueueType: 4
+    - _RequireSplitLighting: 0
+    - _SmoothnessTextureChannel: 0
+    - _SoftFadeFactor: 3
+    - _SourceBlendRGB: 1
+    - _SpecularHighlights: 1
+    - _SrcBlend: 1
+    - _StencilRef: 0
+    - _StencilRefDepth: 1
+    - _StencilRefDistortionVec: 4
+    - _StencilRefGBuffer: 2
+    - _StencilRefMV: 33
+    - _StencilWriteMask: 6
+    - _StencilWriteMaskDepth: 9
+    - _StencilWriteMaskDistortionVec: 4
+    - _StencilWriteMaskGBuffer: 14
+    - _StencilWriteMaskMV: 43
+    - _Surface: 1
+    - _SurfaceType: 1
+    - _Tint_Fresnel: 0
+    - _TransparentBackfaceEnable: 0
+    - _TransparentCullMode: 2
+    - _TransparentDepthPostpassEnable: 0
+    - _TransparentDepthPrepassEnable: 0
+    - _TransparentSortPriority: 0
+    - _TransparentWritingMotionVec: 0
+    - _TransparentZWrite: 0
+    - _USEALPHAOVERRIDE: 1
+    - _USEPIXELATION: 0
+    - _USERAMP: 0
+    - _USESOFTALPHA: 0
+    - _USEUVOFFSET: 1
+    - _UVSec: 0
+    - _UseAlphaOverride: 1
+    - _UsePixelation: 0
+    - _UseRamp: 0
+    - _UseShadowThreshold: 0
+    - _UseSoftAlpha: 0
+    - _UseUVOffset: 1
+    - _ZTest: 4
+    - _ZTestDepthEqualForOpaque: 4
+    - _ZTestGBuffer: 4
+    - _ZTestTransparent: 4
+    - _ZWrite: 0
+    - _ZWriteControl: 0
+    - __dirty: 1
+    - _switch: 0
+    - _u_mask_speed: 0
+    - _u_speed: 0
+    - _v_mask_speed: 0
+    - _v_speed: -1.2
+    m_Colors:
+    - _AlphaOverrideChannel: {r: 1, g: 0, b: 0, a: 0}
+    - _AlphaOverridePanning: {r: 0, g: 0, b: 0, a: 0}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Color0: {r: 1, g: 1, b: 1, a: 1}
+    - _DetailAdditiveChannel: {r: 0, g: 0, b: 0, a: 0}
+    - _DetailDisolveChannel: {r: 1, g: 0, b: 0, a: 0}
+    - _DetailDistortionChannel: {r: 1, g: 0, b: 0, a: 0}
+    - _DetailMultiplyChannel: {r: 1, g: 1, b: 1, a: 0}
+    - _DetailNoisePanning: {r: 0, g: -0.4, b: 0, a: 0}
+    - _DetailVertexOffsetChannel: {r: 0, g: 0, b: 0, a: 0}
+    - _Disolve_Fade_Range: {r: -0.6, g: 1, b: 0, a: 0}
+    - _DoubleSidedConstants: {r: 1, g: 1, b: 1, a: 0}
+    - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
+    - _FresnelColor: {r: 1, g: 1, b: 1, a: 1}
+    - _LastColor: {r: 0.032290023, g: 0.07450981, b: 0, a: 0}
+    - _MainAlphaChannel: {r: 1, g: 0, b: 0, a: 0}
+    - _MainTextureChannel: {r: 1, g: 1, b: 1, a: 0}
+    - _MainTexturePanning: {r: 0, g: 0, b: 0, a: 0}
+    - _MidColor: {r: 0.28450418, g: 0.39607844, b: 0, a: 0}
+    - _Resolution: {r: 64, g: 64, b: 0, a: 0}
+    - _UnlitColorMap_MipInfo: {r: 0, g: 0, b: 0, a: 0}
+    - _WhiteColor: {r: 0.6810261, g: 0.9622642, b: 0.18609825, a: 0}
+    - _diff_c: {r: 0.1541919, g: 0.4053115, b: 0.7264151, a: 1}
+  m_BuildTextureStacks: []
+--- !u!114 &238784941277567568
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 7
+--- !u!114 &8533732933087000482
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 639247ca83abc874e893eb93af2b5e44, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 0
