@@ -43,7 +43,6 @@ namespace ET.Client
 			self.E_HighlightImage.gameObject.SetActive(false);
 			self.SetAugmentIcon(self.EG_SkillAugment_1RectTransform.Find("Mask/Icon").transform.GetComponent<Image>(), skillAugmentInfo, 0);
 			self.SetAugmentIcon(self.EG_SkillAugment_2RectTransform.Find("Mask/Icon").transform.GetComponent<Image>(), skillAugmentInfo, 1);
-			self.SetAugmentIcon(self.EG_SkillAugment_3RectTransform.Find("Mask/Icon").transform.GetComponent<Image>(), skillAugmentInfo, 2);
 		}
 
 		public static void SetClickHandler(this Scroll_Item_SkillAugmentItem self, Action<SkillAugmentInfo> clickHandler)

@@ -240,30 +240,6 @@ namespace ET.Client
      		}
      	}
 
-		public UnityEngine.RectTransform EG_SkillAugment_3RectTransform
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if (this.isCacheNode)
-     			{
-     				if( this.m_EG_SkillAugment_3RectTransform == null )
-     				{
-		    			this.m_EG_SkillAugment_3RectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_SkillAugment_3");
-     				}
-     				return this.m_EG_SkillAugment_3RectTransform;
-     			}
-     			else
-     			{
-		    		return UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_SkillAugment_3");
-     			}
-     		}
-     	}
-
 		public void DestroyWidget()
 		{
 			this.m_E_HighlightButton = null;
@@ -275,7 +251,6 @@ namespace ET.Client
 			this.m_E_ClickImage = null;
 			this.m_EG_SkillAugment_1RectTransform = null;
 			this.m_EG_SkillAugment_2RectTransform = null;
-			this.m_EG_SkillAugment_3RectTransform = null;
 			this.uiTransform = null;
 			this.DataId = 0;
 		}
@@ -289,7 +264,6 @@ namespace ET.Client
 		private UnityEngine.UI.Image m_E_ClickImage = null;
 		private UnityEngine.RectTransform m_EG_SkillAugment_1RectTransform = null;
 		private UnityEngine.RectTransform m_EG_SkillAugment_2RectTransform = null;
-		private UnityEngine.RectTransform m_EG_SkillAugment_3RectTransform = null;
 		public Transform uiTransform = null;
 	}
 }

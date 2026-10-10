@@ -9,6 +9,8 @@ namespace ET.Server
     [FriendOf(typeof(SkillSetComponentS))]
     public static partial class SkillSetComponentSSystem
     {
+        private const int SkillAugmentSlotCount = 2;
+
         [EntitySystem]
         private static void Awake(this SkillSetComponentS self)
         {
@@ -942,7 +944,6 @@ namespace ET.Server
         /// </summary>
         private static void InitSkillAugments(this SkillSetComponentS self, int occ)
         {
-            const int tierCount = 3;
             int[] initSkillIds = OccupationConfigCategory.Instance.Get(occ).InitSkillID;
 
             self.SkillAugmentList ??= new List<SkillAugmentInfo>();
@@ -969,8 +970,8 @@ namespace ET.Server
                     self.SkillAugmentList.Add(skillAugmentInfo);
                 }
 
-                // 为三个增幅层级预留当前激活项
-                while (skillAugmentInfo.ActiveAugmentIds.Count < tierCount)
+                // 为两个增幅孔位预留当前激活项
+                while (skillAugmentInfo.ActiveAugmentIds.Count < SkillAugmentSlotCount)
                 {
                     skillAugmentInfo.ActiveAugmentIds.Add(0);
                 }
@@ -1028,7 +1029,7 @@ namespace ET.Server
 
         public static int SetSkillAugment(this SkillSetComponentS self, int baseSkillId, int tierIndex, int augmentId)
         {
-            if (tierIndex < 0 || tierIndex > 2)
+            if (tierIndex < 0 || tierIndex >= SkillAugmentSlotCount)
             {
                 return ErrorCode.ERR_ModifyData;
             }
@@ -1044,7 +1045,6 @@ namespace ET.Server
             {
                 0 => augmentOptions.SkillAugmentIds1,
                 1 => augmentOptions.SkillAugmentIds2,
-                2 => augmentOptions.SkillAugmentIds3,
                 _ => null,
             };
 
@@ -1053,7 +1053,7 @@ namespace ET.Server
                 return ErrorCode.ERR_ModifyData;
             }
 
-            while (augmentInfo.ActiveAugmentIds.Count < 3)
+            while (augmentInfo.ActiveAugmentIds.Count < SkillAugmentSlotCount)
             {
                 augmentInfo.ActiveAugmentIds.Add(0);
             }

@@ -182,6 +182,91 @@ namespace ET.Client
      		}
      	}
 
+		public UnityEngine.UI.Image E_WheelHitArea_1Image
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_WheelHitArea_1Image == null )
+     			{
+		    		this.m_E_WheelHitArea_1Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Right/EG_SkillInfoPanel/Mask/E_WheelHitArea_1");
+     			}
+     			return this.m_E_WheelHitArea_1Image;
+     		}
+     	}
+
+		public UnityEngine.EventSystems.EventTrigger E_WheelHitArea_1EventTrigger
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_WheelHitArea_1EventTrigger == null )
+     			{
+		    		this.m_E_WheelHitArea_1EventTrigger = UIFindHelper.FindDeepChild<UnityEngine.EventSystems.EventTrigger>(this.uiTransform.gameObject,"Right/EG_SkillInfoPanel/Mask/E_WheelHitArea_1");
+     			}
+     			return this.m_E_WheelHitArea_1EventTrigger;
+     		}
+     	}
+
+		public UnityEngine.RectTransform EG_RotatingRoot_1RectTransform
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_EG_RotatingRoot_1RectTransform == null )
+     			{
+		    		this.m_EG_RotatingRoot_1RectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"Right/EG_SkillInfoPanel/Mask/E_WheelHitArea_1/EG_RotatingRoot_1");
+     			}
+     			return this.m_EG_RotatingRoot_1RectTransform;
+     		}
+     	}
+
+		public UnityEngine.RectTransform EG_ItemList_1RectTransform
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_EG_ItemList_1RectTransform == null )
+     			{
+		    		this.m_EG_ItemList_1RectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"Right/EG_SkillInfoPanel/Mask/E_WheelHitArea_1/EG_RotatingRoot_1/EG_ItemList_1");
+     			}
+     			return this.m_EG_ItemList_1RectTransform;
+     		}
+     	}
+
+		public UnityEngine.RectTransform EG_SkillAugmentItem_1RectTransform
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_EG_SkillAugmentItem_1RectTransform == null )
+     			{
+		    		this.m_EG_SkillAugmentItem_1RectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"Right/EG_SkillInfoPanel/Mask/E_WheelHitArea_1/EG_RotatingRoot_1/EG_ItemList_1/EG_SkillAugmentItem_1");
+     			}
+     			return this.m_EG_SkillAugmentItem_1RectTransform;
+     		}
+     	}
+
 		public UnityEngine.UI.Image E_WheelHitArea_2Image
      	{
      		get
@@ -267,7 +352,7 @@ namespace ET.Client
      		}
      	}
 
-		public UnityEngine.UI.Image E_WheelHitArea_3Image
+		public UnityEngine.RectTransform EG_BaseSkilRectTransform
      	{
      		get
      		{
@@ -276,96 +361,11 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_E_WheelHitArea_3Image == null )
+     			if( this.m_EG_BaseSkilRectTransform == null )
      			{
-		    		this.m_E_WheelHitArea_3Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Right/EG_SkillInfoPanel/Mask/E_WheelHitArea_3");
+		    		this.m_EG_BaseSkilRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"Right/EG_SkillInfoPanel/Mask/EG_BaseSkil");
      			}
-     			return this.m_E_WheelHitArea_3Image;
-     		}
-     	}
-
-		public UnityEngine.EventSystems.EventTrigger E_WheelHitArea_3EventTrigger
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_WheelHitArea_3EventTrigger == null )
-     			{
-		    		this.m_E_WheelHitArea_3EventTrigger = UIFindHelper.FindDeepChild<UnityEngine.EventSystems.EventTrigger>(this.uiTransform.gameObject,"Right/EG_SkillInfoPanel/Mask/E_WheelHitArea_3");
-     			}
-     			return this.m_E_WheelHitArea_3EventTrigger;
-     		}
-     	}
-
-		public UnityEngine.RectTransform EG_RotatingRoot_3RectTransform
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_EG_RotatingRoot_3RectTransform == null )
-     			{
-		    		this.m_EG_RotatingRoot_3RectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"Right/EG_SkillInfoPanel/Mask/E_WheelHitArea_3/EG_RotatingRoot_3");
-     			}
-     			return this.m_EG_RotatingRoot_3RectTransform;
-     		}
-     	}
-
-		public UnityEngine.RectTransform EG_ItemList_3RectTransform
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_EG_ItemList_3RectTransform == null )
-     			{
-		    		this.m_EG_ItemList_3RectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"Right/EG_SkillInfoPanel/Mask/E_WheelHitArea_3/EG_RotatingRoot_3/EG_ItemList_3");
-     			}
-     			return this.m_EG_ItemList_3RectTransform;
-     		}
-     	}
-
-		public UnityEngine.RectTransform EG_SkillAugmentItem_3RectTransform
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_EG_SkillAugmentItem_3RectTransform == null )
-     			{
-		    		this.m_EG_SkillAugmentItem_3RectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"Right/EG_SkillInfoPanel/Mask/E_WheelHitArea_3/EG_RotatingRoot_3/EG_ItemList_3/EG_SkillAugmentItem_3");
-     			}
-     			return this.m_EG_SkillAugmentItem_3RectTransform;
-     		}
-     	}
-
-		public UnityEngine.RectTransform EG_SkillAugmentItem_1RectTransform
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_EG_SkillAugmentItem_1RectTransform == null )
-     			{
-		    		this.m_EG_SkillAugmentItem_1RectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"Right/EG_SkillInfoPanel/Mask/EG_SkillAugmentItem_1");
-     			}
-     			return this.m_EG_SkillAugmentItem_1RectTransform;
+     			return this.m_EG_BaseSkilRectTransform;
      		}
      	}
 
@@ -427,17 +427,17 @@ namespace ET.Client
 			this.m_E_SkillPointText = null;
 			this.m_E_SkillLearnButton = null;
 			this.m_E_SkillLearnImage = null;
+			this.m_E_WheelHitArea_1Image = null;
+			this.m_E_WheelHitArea_1EventTrigger = null;
+			this.m_EG_RotatingRoot_1RectTransform = null;
+			this.m_EG_ItemList_1RectTransform = null;
+			this.m_EG_SkillAugmentItem_1RectTransform = null;
 			this.m_E_WheelHitArea_2Image = null;
 			this.m_E_WheelHitArea_2EventTrigger = null;
 			this.m_EG_RotatingRoot_2RectTransform = null;
 			this.m_EG_ItemList_2RectTransform = null;
 			this.m_EG_SkillAugmentItem_2RectTransform = null;
-			this.m_E_WheelHitArea_3Image = null;
-			this.m_E_WheelHitArea_3EventTrigger = null;
-			this.m_EG_RotatingRoot_3RectTransform = null;
-			this.m_EG_ItemList_3RectTransform = null;
-			this.m_EG_SkillAugmentItem_3RectTransform = null;
-			this.m_EG_SkillAugmentItem_1RectTransform = null;
+			this.m_EG_BaseSkilRectTransform = null;
 			this.m_EG_Line_2RectTransform = null;
 			this.m_EG_Line_3RectTransform = null;
 			this.uiTransform = null;
@@ -453,17 +453,17 @@ namespace ET.Client
 		private UnityEngine.UI.Text m_E_SkillPointText = null;
 		private UnityEngine.UI.Button m_E_SkillLearnButton = null;
 		private UnityEngine.UI.Image m_E_SkillLearnImage = null;
+		private UnityEngine.UI.Image m_E_WheelHitArea_1Image = null;
+		private UnityEngine.EventSystems.EventTrigger m_E_WheelHitArea_1EventTrigger = null;
+		private UnityEngine.RectTransform m_EG_RotatingRoot_1RectTransform = null;
+		private UnityEngine.RectTransform m_EG_ItemList_1RectTransform = null;
+		private UnityEngine.RectTransform m_EG_SkillAugmentItem_1RectTransform = null;
 		private UnityEngine.UI.Image m_E_WheelHitArea_2Image = null;
 		private UnityEngine.EventSystems.EventTrigger m_E_WheelHitArea_2EventTrigger = null;
 		private UnityEngine.RectTransform m_EG_RotatingRoot_2RectTransform = null;
 		private UnityEngine.RectTransform m_EG_ItemList_2RectTransform = null;
 		private UnityEngine.RectTransform m_EG_SkillAugmentItem_2RectTransform = null;
-		private UnityEngine.UI.Image m_E_WheelHitArea_3Image = null;
-		private UnityEngine.EventSystems.EventTrigger m_E_WheelHitArea_3EventTrigger = null;
-		private UnityEngine.RectTransform m_EG_RotatingRoot_3RectTransform = null;
-		private UnityEngine.RectTransform m_EG_ItemList_3RectTransform = null;
-		private UnityEngine.RectTransform m_EG_SkillAugmentItem_3RectTransform = null;
-		private UnityEngine.RectTransform m_EG_SkillAugmentItem_1RectTransform = null;
+		private UnityEngine.RectTransform m_EG_BaseSkilRectTransform = null;
 		private UnityEngine.RectTransform m_EG_Line_2RectTransform = null;
 		private UnityEngine.RectTransform m_EG_Line_3RectTransform = null;
 		public Transform uiTransform = null;

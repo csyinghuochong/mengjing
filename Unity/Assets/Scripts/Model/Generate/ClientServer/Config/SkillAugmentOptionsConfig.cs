@@ -23,12 +23,8 @@ namespace ET
         {
             Id = _buf.ReadInt();
             Id_Ref = null;
-            Cost1 = _buf.ReadInt();
             {int __n0 = _buf.ReadSize(); SkillAugmentIds1 = new int[__n0];for(var __index0 = 0 ; __index0 < __n0 ; __index0++) { int __e0;__e0 = _buf.ReadInt(); SkillAugmentIds1[__index0] = __e0;}}
-            Cost2 = _buf.ReadInt();
             {int __n0 = _buf.ReadSize(); SkillAugmentIds2 = new int[__n0];for(var __index0 = 0 ; __index0 < __n0 ; __index0++) { int __e0;__e0 = _buf.ReadInt(); SkillAugmentIds2[__index0] = __e0;}}
-            Cost3 = _buf.ReadInt();
-            {int __n0 = _buf.ReadSize(); SkillAugmentIds3 = new int[__n0];for(var __index0 = 0 ; __index0 < __n0 ; __index0++) { int __e0;__e0 = _buf.ReadInt(); SkillAugmentIds3[__index0] = __e0;}}
 
             PostInit();
         }
@@ -46,34 +42,14 @@ namespace ET
         public SkillConfig Id_Ref { get; private set; }
 
         /// <summary>
-        /// 升级消耗
-        /// </summary>
-        public int Cost1;
-
-        /// <summary>
-        /// 1级技能增幅Ids
+        /// 第1个技能增幅Ids
         /// </summary>
         public int[] SkillAugmentIds1;
 
         /// <summary>
-        /// 升级消耗
-        /// </summary>
-        public int Cost2;
-
-        /// <summary>
-        /// 2级技能增幅Ids
+        /// 第2个技能增幅Ids
         /// </summary>
         public int[] SkillAugmentIds2;
-
-        /// <summary>
-        /// 升级消耗
-        /// </summary>
-        public int Cost3;
-
-        /// <summary>
-        /// 3级技能增幅Ids
-        /// </summary>
-        public int[] SkillAugmentIds3;
 
 
         public const int __ID__ = -1420871616;
@@ -84,22 +60,14 @@ namespace ET
             Id_Ref = SkillConfigCategory.Instance.GetOrDefault(Id);
             
             
-            
-            
-            
-            
         }
 
         public override string ToString()
         {
             return "{ "
             + "Id:" + Id + ","
-            + "Cost1:" + Cost1 + ","
             + "SkillAugmentIds1:" + Luban.StringUtil.CollectionToString(SkillAugmentIds1) + ","
-            + "Cost2:" + Cost2 + ","
             + "SkillAugmentIds2:" + Luban.StringUtil.CollectionToString(SkillAugmentIds2) + ","
-            + "Cost3:" + Cost3 + ","
-            + "SkillAugmentIds3:" + Luban.StringUtil.CollectionToString(SkillAugmentIds3) + ","
             + "}";
         }
 

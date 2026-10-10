@@ -22,13 +22,13 @@ namespace ET.Client
 		{
 			self.uiTransform = transform;
 
-			self.GenerateSkillAugmentItems(self.EG_ItemList_2RectTransform, self.EG_SkillAugmentItem_2RectTransform, 2, -15f, 60f, 164f);
-			self.GenerateSkillAugmentItems(self.EG_ItemList_3RectTransform, self.EG_SkillAugmentItem_3RectTransform, 3, 0f, 30f, 348f);
+			self.GenerateSkillAugmentItems(self.EG_ItemList_1RectTransform, self.EG_SkillAugmentItem_1RectTransform, 2, -15f, 60f, 164f);
+			self.GenerateSkillAugmentItems(self.EG_ItemList_2RectTransform, self.EG_SkillAugmentItem_2RectTransform, 3, 0f, 30f, 348f);
 
 			// 两个点击区的圆心重合，外圈尺寸更大。让内圈处于外圈上方，
 			// 否则外圈会拦截内圈范围内的所有射线事件。
-			Transform innerHitArea = self.E_WheelHitArea_2Image.transform;
-			Transform outerHitArea = self.E_WheelHitArea_3Image.transform;
+			Transform innerHitArea = self.E_WheelHitArea_1Image.transform;
+			Transform outerHitArea = self.E_WheelHitArea_2Image.transform;
 			if (outerHitArea.GetSiblingIndex() > innerHitArea.GetSiblingIndex())
 			{
 				outerHitArea.SetSiblingIndex(innerHitArea.GetSiblingIndex());
@@ -36,10 +36,8 @@ namespace ET.Client
 
 			self.SetWheelLineAlpha(self.EG_Line_2RectTransform, 0f);
 			self.SetWheelLineAlpha(self.EG_Line_3RectTransform, 0f);
-			self.RegisterWheelDrag(self.E_WheelHitArea_2EventTrigger, self.EG_RotatingRoot_2RectTransform,
-				self.EG_ItemList_2RectTransform, self.EG_Line_2RectTransform, 1);
-			self.RegisterWheelDrag(self.E_WheelHitArea_3EventTrigger, self.EG_RotatingRoot_3RectTransform,
-				self.EG_ItemList_3RectTransform, self.EG_Line_3RectTransform, 2);
+			self.RegisterWheelDrag(self.E_WheelHitArea_1EventTrigger, self.EG_RotatingRoot_1RectTransform, self.EG_ItemList_1RectTransform, self.EG_Line_2RectTransform, 0);
+			self.RegisterWheelDrag(self.E_WheelHitArea_2EventTrigger, self.EG_RotatingRoot_2RectTransform, self.EG_ItemList_2RectTransform, self.EG_Line_3RectTransform, 1);
 			self.RefreshSkillAugmentItems();
 		}
 
@@ -55,10 +53,10 @@ namespace ET.Client
 			self.AssetList.Clear();
 			self.ScrollItemSkillAugmentItems.Clear();
 
+			self.EG_RotatingRoot_1RectTransform.DOKill();
 			self.EG_RotatingRoot_2RectTransform.DOKill();
-			self.EG_RotatingRoot_3RectTransform.DOKill();
+			self.E_WheelHitArea_1EventTrigger.triggers.Clear();
 			self.E_WheelHitArea_2EventTrigger.triggers.Clear();
-			self.E_WheelHitArea_3EventTrigger.triggers.Clear();
 			self.DestroyWidget();
 		}
 
@@ -129,7 +127,6 @@ namespace ET.Client
 
 			self.SetSkillAugmentDescription(0);
 			self.SyncWheelSkills(skillAugmentInfo);
-			self.SubmitFixedSkillAugment(skillAugmentInfo).Coroutine();
 		}
 
 		private static void SyncWheelSkills(this ES_SkillAugment self, SkillAugmentInfo skillAugmentInfo)
@@ -141,15 +138,14 @@ namespace ET.Client
 				return;
 			}
 
-			self.SetWheelAugmentItem(self.EG_SkillAugmentItem_1RectTransform,
-				augmentOptions.SkillAugmentIds1 != null && augmentOptions.SkillAugmentIds1.Length > 0 ? augmentOptions.SkillAugmentIds1[0] : 0);
+			self.SetBaseSkillIcon(skillAugmentInfo.BaseSkillId);
 
+			int selectedAugment1 = self.GetSelectedAugmentId(skillAugmentInfo, 0);
 			int selectedAugment2 = self.GetSelectedAugmentId(skillAugmentInfo, 1);
-			int selectedAugment3 = self.GetSelectedAugmentId(skillAugmentInfo, 2);
+			self.SetWheelAugmentItems(self.EG_RotatingRoot_1RectTransform, self.EG_ItemList_1RectTransform,
+				augmentOptions.SkillAugmentIds1, selectedAugment1, 0);
 			self.SetWheelAugmentItems(self.EG_RotatingRoot_2RectTransform, self.EG_ItemList_2RectTransform,
-				augmentOptions.SkillAugmentIds2, selectedAugment2);
-			self.SetWheelAugmentItems(self.EG_RotatingRoot_3RectTransform, self.EG_ItemList_3RectTransform,
-				augmentOptions.SkillAugmentIds3, selectedAugment3);
+				augmentOptions.SkillAugmentIds2, selectedAugment2, 1);
 		}
 
 		private static int GetSelectedAugmentId(this ES_SkillAugment self, SkillAugmentInfo skillAugmentInfo, int tierIndex)
@@ -157,25 +153,28 @@ namespace ET.Client
 			return skillAugmentInfo.ActiveAugmentIds != null && tierIndex < skillAugmentInfo.ActiveAugmentIds.Count ? skillAugmentInfo.ActiveAugmentIds[tierIndex] : 0;
 		}
 
-		private static async ETTask SubmitFixedSkillAugment(this ES_SkillAugment self, SkillAugmentInfo skillAugmentInfo)
+		private static void SetBaseSkillIcon(this ES_SkillAugment self, int baseSkillId)
 		{
-			SkillAugmentOptionsConfig augmentOptions = SkillAugmentOptionsConfigCategory.Instance.GetOrDefault(skillAugmentInfo.BaseSkillId);
-			if (augmentOptions?.SkillAugmentIds1 == null || augmentOptions.SkillAugmentIds1.Length == 0)
+			Image iconImage = self.EG_BaseSkilRectTransform.Find("Mask/SkillIcon")?.GetComponent<Image>();
+			SkillConfig skillConfig = SkillConfigCategory.Instance.GetOrDefault(baseSkillId);
+			if (iconImage == null)
 			{
 				return;
 			}
 
-			int augmentId = augmentOptions.SkillAugmentIds1[0];
-			if (augmentId == 0 || self.GetSelectedAugmentId(skillAugmentInfo, 0) == augmentId)
+			if (skillConfig == null || string.IsNullOrEmpty(skillConfig.SkillIcon))
 			{
+				iconImage.gameObject.SetActive(false);
 				return;
 			}
 
-			await SkillNetHelper.SetSkillAugment(self.Root(), skillAugmentInfo.BaseSkillId, 0, augmentId);
+			string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.RoleSkillIcon, skillConfig.SkillIcon);
+			iconImage.sprite = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
+			iconImage.gameObject.SetActive(true);
 		}
 
 		private static void SetWheelAugmentItems(this ES_SkillAugment self, RectTransform rotatingRoot, RectTransform itemList,
-			int[] augmentIds, int selectedAugmentId)
+			int[] augmentIds, int selectedAugmentId, int tierIndex)
 		{
 			int selectedIndex = -1;
 			for (int i = 0; i < itemList.childCount; i++)
@@ -196,6 +195,10 @@ namespace ET.Client
 			}
 
 			self.AlignWheelToItem(rotatingRoot, itemList, selectedIndex);
+			if (selectedIndex >= 0)
+			{
+				self.OnWheelSnapCompleted(tierIndex, selectedIndex).Coroutine();
+			}
 		}
 
 		private static void SetWheelAugmentItem(this ES_SkillAugment self, RectTransform item, int augmentId)
@@ -272,15 +275,20 @@ namespace ET.Client
 			self.SetSkillAugmentDescription(0);
 			self.SetWheelLineAlpha(self.EG_Line_2RectTransform, 0f);
 			self.SetWheelLineAlpha(self.EG_Line_3RectTransform, 0f);
-			self.EG_SkillAugmentItem_1RectTransform.gameObject.SetActive(false);
+			Image baseSkillIcon = self.EG_BaseSkilRectTransform.Find("Mask/SkillIcon")?.GetComponent<Image>();
+			if (baseSkillIcon != null)
+			{
+				baseSkillIcon.gameObject.SetActive(false);
+			}
+
+			for (int i = 0; i < self.EG_ItemList_1RectTransform.childCount; i++)
+			{
+				self.EG_ItemList_1RectTransform.GetChild(i).gameObject.SetActive(false);
+			}
+
 			for (int i = 0; i < self.EG_ItemList_2RectTransform.childCount; i++)
 			{
 				self.EG_ItemList_2RectTransform.GetChild(i).gameObject.SetActive(false);
-			}
-
-			for (int i = 0; i < self.EG_ItemList_3RectTransform.childCount; i++)
-			{
-				self.EG_ItemList_3RectTransform.GetChild(i).gameObject.SetActive(false);
 			}
 		}
 
@@ -446,7 +454,7 @@ namespace ET.Client
 		private static void RefreshWheelLineAlpha(this ES_SkillAugment self, RectTransform rotatingRoot, RectTransform itemList,
 			RectTransform wheelLine = null)
 		{
-			wheelLine ??= rotatingRoot == self.EG_RotatingRoot_2RectTransform
+			wheelLine ??= rotatingRoot == self.EG_RotatingRoot_1RectTransform
 				? self.EG_Line_2RectTransform
 				: self.EG_Line_3RectTransform;
 
@@ -494,8 +502,8 @@ namespace ET.Client
 			SkillAugmentOptionsConfig augmentOptions = SkillAugmentOptionsConfigCategory.Instance.GetOrDefault(self.SelectedBaseSkillId);
 			int[] augmentIds = tierIndex switch
 			{
+				0 => augmentOptions?.SkillAugmentIds1,
 				1 => augmentOptions?.SkillAugmentIds2,
-				2 => augmentOptions?.SkillAugmentIds3,
 				_ => null,
 			};
 
