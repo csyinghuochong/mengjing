@@ -6,13 +6,13 @@ namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class ES_SkillSocket : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy 
+	public  class ES_SkillAugment : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy 
 	{
-		public Dictionary<int, EntityRef<Scroll_Item_SkillSocketItem>> ScrollItemSkillSocketItems = new();
+		public Dictionary<int, EntityRef<Scroll_Item_SkillAugmentItem>> ScrollItemSkillAugmentItems = new();
 		public List<string> AssetList { get; set; } = new();
 		public int SelectedBaseSkillId;
 
-		public UnityEngine.UI.ScrollRect E_SkillSocketItemsScrollRect
+		public UnityEngine.UI.ScrollRect E_SkillAugmentItemsScrollRect
      	{
      		get
      		{
@@ -21,15 +21,15 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_E_SkillSocketItemsScrollRect == null )
+			if( this.m_E_SkillAugmentItemsScrollRect == null )
      			{
-		    		this.m_E_SkillSocketItemsScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.ScrollRect>(this.uiTransform.gameObject,"Left/E_SkillSocketItems");
+		    		this.m_E_SkillAugmentItemsScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.ScrollRect>(this.uiTransform.gameObject,"Left/E_SkillAugmentItems");
      			}
-     			return this.m_E_SkillSocketItemsScrollRect;
+			return this.m_E_SkillAugmentItemsScrollRect;
      		}
      	}
 
-		public UnityEngine.UI.Image E_SkillSocketItemsImage
+		public UnityEngine.UI.Image E_SkillAugmentItemsImage
      	{
      		get
      		{
@@ -38,11 +38,11 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_E_SkillSocketItemsImage == null )
+			if( this.m_E_SkillAugmentItemsImage == null )
      			{
-		    		this.m_E_SkillSocketItemsImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Left/E_SkillSocketItems");
+		    		this.m_E_SkillAugmentItemsImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Left/E_SkillAugmentItems");
      			}
-     			return this.m_E_SkillSocketItemsImage;
+			return this.m_E_SkillAugmentItemsImage;
      		}
      	}
 
@@ -349,8 +349,8 @@ namespace ET.Client
 
 		public void DestroyWidget()
 		{
-			this.m_E_SkillSocketItemsScrollRect = null;
-			this.m_E_SkillSocketItemsImage = null;
+			this.m_E_SkillAugmentItemsScrollRect = null;
+			this.m_E_SkillAugmentItemsImage = null;
 			this.m_E_ButtonResetButton = null;
 			this.m_E_ButtonResetImage = null;
 			this.m_E_BtnItemTypeSetToggleGroup = null;
@@ -371,8 +371,8 @@ namespace ET.Client
 			this.uiTransform = null;
 		}
 
-		private UnityEngine.UI.ScrollRect m_E_SkillSocketItemsScrollRect = null;
-		private UnityEngine.UI.Image m_E_SkillSocketItemsImage = null;
+		private UnityEngine.UI.ScrollRect m_E_SkillAugmentItemsScrollRect = null;
+		private UnityEngine.UI.Image m_E_SkillAugmentItemsImage = null;
 		private UnityEngine.UI.Button m_E_ButtonResetButton = null;
 		private UnityEngine.UI.Image m_E_ButtonResetImage = null;
 		private UnityEngine.UI.ToggleGroup m_E_BtnItemTypeSetToggleGroup = null;

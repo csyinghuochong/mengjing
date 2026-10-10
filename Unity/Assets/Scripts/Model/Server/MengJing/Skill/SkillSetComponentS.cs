@@ -25,7 +25,7 @@ namespace ET.Server
         /// </summary>
         public List<LifeShieldInfo> LifeShieldList = new List<LifeShieldInfo>();
         
-        // 技能镶嵌
-        public List<SkillSocketInfo> SkillSocketList { get; set; } = new();
+        // 技能增幅
+        public List<SkillAugmentInfo> SkillAugmentList { get; set; } = new();
     }
 }

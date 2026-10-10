@@ -937,15 +937,15 @@ namespace ET.Server
         }
 
         /// <summary>
-        /// 初始化职业初始技能的镶嵌孔位。
-        /// AugmentIds 的下标对应孔位，0 表示该孔位尚未镶嵌技能强化。
+        /// 初始化职业初始技能的增幅选项。
+        /// ActiveAugmentIds 的下标对应增幅层级，0 表示该层级尚未激活增幅。
         /// </summary>
-        private static void InitSkillSockets(this SkillSetComponentS self, int occ)
+        private static void InitSkillAugments(this SkillSetComponentS self, int occ)
         {
-            const int socketCount = 3;
+            const int tierCount = 3;
             int[] initSkillIds = OccupationConfigCategory.Instance.Get(occ).InitSkillID;
 
-            self.SkillSocketList ??= new List<SkillSocketInfo>();
+            self.SkillAugmentList ??= new List<SkillAugmentInfo>();
 
             for (int i = 0; i < initSkillIds.Length; i++)
             {
@@ -955,24 +955,24 @@ namespace ET.Server
                     continue;
                 }
 
-                if (!SkillSocketConfigCategory.Instance.Contain(baseSkillId))
+                if (!SkillAugmentOptionsConfigCategory.Instance.Contain(baseSkillId))
                 {
                     continue;
                 }
 
-                SkillSocketInfo skillSocketInfo = self.SkillSocketList.Find(info => info.BaseSkillId == baseSkillId);
+                SkillAugmentInfo skillAugmentInfo = self.SkillAugmentList.Find(info => info.BaseSkillId == baseSkillId);
 
-                if (skillSocketInfo == null)
+                if (skillAugmentInfo == null)
                 {
-                    skillSocketInfo = SkillSocketInfo.Create();
-                    skillSocketInfo.BaseSkillId = baseSkillId;
-                    self.SkillSocketList.Add(skillSocketInfo);
+                    skillAugmentInfo = SkillAugmentInfo.Create();
+                    skillAugmentInfo.BaseSkillId = baseSkillId;
+                    self.SkillAugmentList.Add(skillAugmentInfo);
                 }
 
-                // 3个孔位全部开启
-                while (skillSocketInfo.AugmentIds.Count < socketCount)
+                // 为三个增幅层级预留当前激活项
+                while (skillAugmentInfo.ActiveAugmentIds.Count < tierCount)
                 {
-                    skillSocketInfo.AugmentIds.Add(0);
+                    skillAugmentInfo.ActiveAugmentIds.Add(0);
                 }
             }
         }
@@ -1023,28 +1023,28 @@ namespace ET.Server
                 }
             }
 
-            self.InitSkillSockets(occ);
+            self.InitSkillAugments(occ);
         }
 
-        public static int SetSkillAugment(this SkillSetComponentS self, int baseSkillId, int socketIndex, int augmentId)
+        public static int SetSkillAugment(this SkillSetComponentS self, int baseSkillId, int tierIndex, int augmentId)
         {
-            if (socketIndex < 0 || socketIndex > 2)
+            if (tierIndex < 0 || tierIndex > 2)
             {
                 return ErrorCode.ERR_ModifyData;
             }
 
-            SkillSocketConfig socketConfig = SkillSocketConfigCategory.Instance.GetOrDefault(baseSkillId);
-            SkillSocketInfo socketInfo = self.SkillSocketList?.Find(info => info.BaseSkillId == baseSkillId);
-            if (socketConfig == null || socketInfo == null)
+            SkillAugmentOptionsConfig augmentOptions = SkillAugmentOptionsConfigCategory.Instance.GetOrDefault(baseSkillId);
+            SkillAugmentInfo augmentInfo = self.SkillAugmentList?.Find(info => info.BaseSkillId == baseSkillId);
+            if (augmentOptions == null || augmentInfo == null)
             {
                 return ErrorCode.ERR_ModifyData;
             }
 
-            int[] allowedAugmentIds = socketIndex switch
+            int[] allowedAugmentIds = tierIndex switch
             {
-                0 => socketConfig.SkillAugmentIds1,
-                1 => socketConfig.SkillAugmentIds2,
-                2 => socketConfig.SkillAugmentIds3,
+                0 => augmentOptions.SkillAugmentIds1,
+                1 => augmentOptions.SkillAugmentIds2,
+                2 => augmentOptions.SkillAugmentIds3,
                 _ => null,
             };
 
@@ -1053,17 +1053,17 @@ namespace ET.Server
                 return ErrorCode.ERR_ModifyData;
             }
 
-            while (socketInfo.AugmentIds.Count < 3)
+            while (augmentInfo.ActiveAugmentIds.Count < 3)
             {
-                socketInfo.AugmentIds.Add(0);
+                augmentInfo.ActiveAugmentIds.Add(0);
             }
 
-            if (socketInfo.AugmentIds[socketIndex] == augmentId)
+            if (augmentInfo.ActiveAugmentIds[tierIndex] == augmentId)
             {
                 return ErrorCode.ERR_Success;
             }
 
-            socketInfo.AugmentIds[socketIndex] = augmentId;
+            augmentInfo.ActiveAugmentIds[tierIndex] = augmentId;
             self.UpdateSkillSet();
             return ErrorCode.ERR_Success;
         }
@@ -1500,7 +1500,7 @@ namespace ET.Server
             SkillSetInfo.TianFuList2 = self.TianFuList2;
             SkillSetInfo.SkillList = self.SkillList;
             SkillSetInfo.LifeShieldList = self.LifeShieldList;
-            SkillSetInfo.SkillSocketList = self.SkillSocketList;
+            SkillSetInfo.SkillAugmentList = self.SkillAugmentList;
             MapMessageHelper.SendToClient(unit, M2C_SkillSetMessage);
         }
         

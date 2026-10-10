@@ -7,17 +7,17 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 namespace ET.Client
 {
-	[FriendOf(typeof(Scroll_Item_SkillSocketItem))]
-	[EntitySystemOf(typeof(ES_SkillSocket))]
-	[FriendOfAttribute(typeof(ES_SkillSocket))]
-	public static partial class ES_SkillSocketSystem 
+	[FriendOf(typeof(Scroll_Item_SkillAugmentItem))]
+	[EntitySystemOf(typeof(ES_SkillAugment))]
+	[FriendOfAttribute(typeof(ES_SkillAugment))]
+	public static partial class ES_SkillAugmentSystem 
 	{
 		private const float WheelSnapTargetAngle = -45f;
 		private const float WheelSnapDuration = 0.2f;
-		private const string SkillSocketItemPrefabPath = "Assets/Bundles/UI/Item/Item_SkillSocketItem.prefab";
+		private const string SkillAugmentItemPrefabPath = "Assets/Bundles/UI/Item/Item_SkillAugmentItem.prefab";
 
 		[EntitySystem]
-		private static void Awake(this ES_SkillSocket self,Transform transform)
+		private static void Awake(this ES_SkillAugment self,Transform transform)
 		{
 			self.uiTransform = transform;
 
@@ -35,11 +35,11 @@ namespace ET.Client
 
 			self.RegisterWheelDrag(self.E_WheelHitArea_2EventTrigger, self.EG_RotatingRoot_2RectTransform, 1);
 			self.RegisterWheelDrag(self.E_WheelHitArea_3EventTrigger, self.EG_RotatingRoot_3RectTransform, 2);
-			self.RefreshSkillSocketItems();
+			self.RefreshSkillAugmentItems();
 		}
 
 		[EntitySystem]
-		private static void Destroy(this ES_SkillSocket self)
+		private static void Destroy(this ES_SkillAugment self)
 		{
 			ResourcesLoaderComponent resourcesLoaderComponent = self.Root().GetComponent<ResourcesLoaderComponent>();
 			for (int i = 0; i < self.AssetList.Count; i++)
@@ -48,7 +48,7 @@ namespace ET.Client
 			}
 
 			self.AssetList.Clear();
-			self.ScrollItemSkillSocketItems.Clear();
+			self.ScrollItemSkillAugmentItems.Clear();
 
 			self.EG_RotatingRoot_2RectTransform.DOKill();
 			self.EG_RotatingRoot_3RectTransform.DOKill();
@@ -57,116 +57,116 @@ namespace ET.Client
 			self.DestroyWidget();
 		}
 
-		public static void RefreshSkillSocketItems(this ES_SkillSocket self)
+		public static void RefreshSkillAugmentItems(this ES_SkillAugment self)
 		{
-			List<SkillSocketInfo> skillSocketList = self.Root().GetComponent<SkillSetComponentC>().SkillSocketList;
+			List<SkillAugmentInfo> skillAugmentList = self.Root().GetComponent<SkillSetComponentC>().SkillAugmentList;
 			ResourcesLoaderComponent resourcesLoaderComponent = self.Root().GetComponent<ResourcesLoaderComponent>();
-			Transform content = self.E_SkillSocketItemsScrollRect.content;
+			Transform content = self.E_SkillAugmentItemsScrollRect.content;
 
-			for (int i = 0; i < skillSocketList.Count; i++)
+			for (int i = 0; i < skillAugmentList.Count; i++)
 			{
-				if (!self.ScrollItemSkillSocketItems.ContainsKey(i))
+				if (!self.ScrollItemSkillAugmentItems.ContainsKey(i))
 				{
-					Scroll_Item_SkillSocketItem item = self.AddChild<Scroll_Item_SkillSocketItem>();
-					if (!self.AssetList.Contains(SkillSocketItemPrefabPath))
+					Scroll_Item_SkillAugmentItem item = self.AddChild<Scroll_Item_SkillAugmentItem>();
+					if (!self.AssetList.Contains(SkillAugmentItemPrefabPath))
 					{
-						self.AssetList.Add(SkillSocketItemPrefabPath);
+						self.AssetList.Add(SkillAugmentItemPrefabPath);
 					}
 
-					GameObject prefab = resourcesLoaderComponent.LoadAssetSync<GameObject>(SkillSocketItemPrefabPath);
+					GameObject prefab = resourcesLoaderComponent.LoadAssetSync<GameObject>(SkillAugmentItemPrefabPath);
 					GameObject itemGameObject = UnityEngine.Object.Instantiate(prefab, content);
 					item.BindTrans(itemGameObject.transform);
-					self.ScrollItemSkillSocketItems.Add(i, item);
+					self.ScrollItemSkillAugmentItems.Add(i, item);
 				}
 
-				Scroll_Item_SkillSocketItem scrollItem = self.ScrollItemSkillSocketItems[i];
-				scrollItem.SetClickHandler(self.OnSelectSkillSocket);
-				scrollItem.OnUpdateUI(skillSocketList[i]);
+				Scroll_Item_SkillAugmentItem scrollItem = self.ScrollItemSkillAugmentItems[i];
+				scrollItem.SetClickHandler(self.OnSelectSkillAugment);
+				scrollItem.OnUpdateUI(skillAugmentList[i]);
 				scrollItem.uiTransform.gameObject.SetActive(true);
 			}
 
-			for (int i = skillSocketList.Count; i < self.ScrollItemSkillSocketItems.Count; i++)
+			for (int i = skillAugmentList.Count; i < self.ScrollItemSkillAugmentItems.Count; i++)
 			{
-				Scroll_Item_SkillSocketItem scrollItem = self.ScrollItemSkillSocketItems[i];
+				Scroll_Item_SkillAugmentItem scrollItem = self.ScrollItemSkillAugmentItems[i];
 				if (scrollItem.uiTransform != null)
 				{
 					scrollItem.uiTransform.gameObject.SetActive(false);
 				}
 			}
 
-			if (skillSocketList.Count == 0)
+			if (skillAugmentList.Count == 0)
 			{
 				self.SelectedBaseSkillId = 0;
 				self.ClearWheelSkills();
 				return;
 			}
 
-			SkillSocketInfo selectedSkillSocket = skillSocketList.Find(info => info.BaseSkillId == self.SelectedBaseSkillId);
-			self.OnSelectSkillSocket(selectedSkillSocket ?? skillSocketList[0]);
+			SkillAugmentInfo selectedSkillAugment = skillAugmentList.Find(info => info.BaseSkillId == self.SelectedBaseSkillId);
+			self.OnSelectSkillAugment(selectedSkillAugment ?? skillAugmentList[0]);
 		}
 
-		private static void OnSelectSkillSocket(this ES_SkillSocket self, SkillSocketInfo skillSocketInfo)
+		private static void OnSelectSkillAugment(this ES_SkillAugment self, SkillAugmentInfo skillAugmentInfo)
 		{
-			if (skillSocketInfo == null)
+			if (skillAugmentInfo == null)
 			{
 				return;
 			}
 
-			self.SelectedBaseSkillId = skillSocketInfo.BaseSkillId;
-			foreach (EntityRef<Scroll_Item_SkillSocketItem> itemRef in self.ScrollItemSkillSocketItems.Values)
+			self.SelectedBaseSkillId = skillAugmentInfo.BaseSkillId;
+			foreach (EntityRef<Scroll_Item_SkillAugmentItem> itemRef in self.ScrollItemSkillAugmentItems.Values)
 			{
-				Scroll_Item_SkillSocketItem item = itemRef;
+				Scroll_Item_SkillAugmentItem item = itemRef;
 				if (item?.uiTransform != null && item.uiTransform.gameObject.activeSelf)
 				{
 					item.OnSetSelected(self.SelectedBaseSkillId);
 				}
 			}
 
-			self.SyncWheelSkills(skillSocketInfo);
-			self.SubmitFixedSkillAugment(skillSocketInfo).Coroutine();
+			self.SyncWheelSkills(skillAugmentInfo);
+			self.SubmitFixedSkillAugment(skillAugmentInfo).Coroutine();
 		}
 
-		private static void SyncWheelSkills(this ES_SkillSocket self, SkillSocketInfo skillSocketInfo)
+		private static void SyncWheelSkills(this ES_SkillAugment self, SkillAugmentInfo skillAugmentInfo)
 		{
-			SkillSocketConfig socketConfig = SkillSocketConfigCategory.Instance.GetOrDefault(skillSocketInfo.BaseSkillId);
-			if (socketConfig == null)
+			SkillAugmentOptionsConfig augmentOptions = SkillAugmentOptionsConfigCategory.Instance.GetOrDefault(skillAugmentInfo.BaseSkillId);
+			if (augmentOptions == null)
 			{
 				self.ClearWheelSkills();
 				return;
 			}
 
 			self.SetWheelAugmentItem(self.EG_SkillAugmentItem_1RectTransform,
-				socketConfig.SkillAugmentIds1 != null && socketConfig.SkillAugmentIds1.Length > 0 ? socketConfig.SkillAugmentIds1[0] : 0);
+				augmentOptions.SkillAugmentIds1 != null && augmentOptions.SkillAugmentIds1.Length > 0 ? augmentOptions.SkillAugmentIds1[0] : 0);
 
-			int selectedAugment2 = self.GetSelectedAugmentId(skillSocketInfo, 1);
-			int selectedAugment3 = self.GetSelectedAugmentId(skillSocketInfo, 2);
-			self.SetWheelAugmentItems(self.EG_RotatingRoot_2RectTransform, socketConfig.SkillAugmentIds2, selectedAugment2);
-			self.SetWheelAugmentItems(self.EG_RotatingRoot_3RectTransform, socketConfig.SkillAugmentIds3, selectedAugment3);
+			int selectedAugment2 = self.GetSelectedAugmentId(skillAugmentInfo, 1);
+			int selectedAugment3 = self.GetSelectedAugmentId(skillAugmentInfo, 2);
+			self.SetWheelAugmentItems(self.EG_RotatingRoot_2RectTransform, augmentOptions.SkillAugmentIds2, selectedAugment2);
+			self.SetWheelAugmentItems(self.EG_RotatingRoot_3RectTransform, augmentOptions.SkillAugmentIds3, selectedAugment3);
 		}
 
-		private static int GetSelectedAugmentId(this ES_SkillSocket self, SkillSocketInfo skillSocketInfo, int index)
+		private static int GetSelectedAugmentId(this ES_SkillAugment self, SkillAugmentInfo skillAugmentInfo, int tierIndex)
 		{
-			return skillSocketInfo.AugmentIds != null && index < skillSocketInfo.AugmentIds.Count ? skillSocketInfo.AugmentIds[index] : 0;
+			return skillAugmentInfo.ActiveAugmentIds != null && tierIndex < skillAugmentInfo.ActiveAugmentIds.Count ? skillAugmentInfo.ActiveAugmentIds[tierIndex] : 0;
 		}
 
-		private static async ETTask SubmitFixedSkillAugment(this ES_SkillSocket self, SkillSocketInfo skillSocketInfo)
+		private static async ETTask SubmitFixedSkillAugment(this ES_SkillAugment self, SkillAugmentInfo skillAugmentInfo)
 		{
-			SkillSocketConfig socketConfig = SkillSocketConfigCategory.Instance.GetOrDefault(skillSocketInfo.BaseSkillId);
-			if (socketConfig?.SkillAugmentIds1 == null || socketConfig.SkillAugmentIds1.Length == 0)
+			SkillAugmentOptionsConfig augmentOptions = SkillAugmentOptionsConfigCategory.Instance.GetOrDefault(skillAugmentInfo.BaseSkillId);
+			if (augmentOptions?.SkillAugmentIds1 == null || augmentOptions.SkillAugmentIds1.Length == 0)
 			{
 				return;
 			}
 
-			int augmentId = socketConfig.SkillAugmentIds1[0];
-			if (augmentId == 0 || self.GetSelectedAugmentId(skillSocketInfo, 0) == augmentId)
+			int augmentId = augmentOptions.SkillAugmentIds1[0];
+			if (augmentId == 0 || self.GetSelectedAugmentId(skillAugmentInfo, 0) == augmentId)
 			{
 				return;
 			}
 
-			await SkillNetHelper.SetSkillAugment(self.Root(), skillSocketInfo.BaseSkillId, 0, augmentId);
+			await SkillNetHelper.SetSkillAugment(self.Root(), skillAugmentInfo.BaseSkillId, 0, augmentId);
 		}
 
-		private static void SetWheelAugmentItems(this ES_SkillSocket self, RectTransform rotatingRoot, int[] augmentIds, int selectedAugmentId)
+		private static void SetWheelAugmentItems(this ES_SkillAugment self, RectTransform rotatingRoot, int[] augmentIds, int selectedAugmentId)
 		{
 			int selectedIndex = -1;
 			for (int i = 0; i < rotatingRoot.childCount; i++)
@@ -189,7 +189,7 @@ namespace ET.Client
 			self.AlignWheelToItem(rotatingRoot, selectedIndex);
 		}
 
-		private static void SetWheelAugmentItem(this ES_SkillSocket self, RectTransform item, int augmentId)
+		private static void SetWheelAugmentItem(this ES_SkillAugment self, RectTransform item, int augmentId)
 		{
 			if (item == null || augmentId == 0)
 			{
@@ -219,7 +219,7 @@ namespace ET.Client
 			item.gameObject.SetActive(true);
 		}
 
-		private static void AlignWheelToItem(this ES_SkillSocket self, RectTransform rotatingRoot, int itemIndex)
+		private static void AlignWheelToItem(this ES_SkillAugment self, RectTransform rotatingRoot, int itemIndex)
 		{
 			rotatingRoot.DOKill();
 			if (itemIndex < 0 || itemIndex >= rotatingRoot.childCount || !(rotatingRoot.GetChild(itemIndex) is RectTransform item) ||
@@ -235,7 +235,7 @@ namespace ET.Client
 			rotatingRoot.localEulerAngles = localEulerAngles;
 		}
 
-		private static void ClearWheelSkills(this ES_SkillSocket self)
+		private static void ClearWheelSkills(this ES_SkillAugment self)
 		{
 			self.EG_SkillAugmentItem_1RectTransform.gameObject.SetActive(false);
 			for (int i = 0; i < self.EG_RotatingRoot_2RectTransform.childCount; i++)
@@ -249,7 +249,7 @@ namespace ET.Client
 			}
 		}
 
-		private static void GenerateSkillAugmentItems(this ES_SkillSocket self, RectTransform rotatingRoot, RectTransform itemTemplate, int itemCount,float angleStart, float angleInterval, float radius)
+		private static void GenerateSkillAugmentItems(this ES_SkillAugment self, RectTransform rotatingRoot, RectTransform itemTemplate, int itemCount,float angleStart, float angleInterval, float radius)
 		{
 			if (rotatingRoot == null || itemTemplate == null || itemCount <= 0 || radius < 0f)
 			{
@@ -272,7 +272,7 @@ namespace ET.Client
 			}
 		}
 
-		private static void RegisterWheelDrag(this ES_SkillSocket self, EventTrigger eventTrigger, RectTransform rotatingRoot, int socketIndex)
+		private static void RegisterWheelDrag(this ES_SkillAugment self, EventTrigger eventTrigger, RectTransform rotatingRoot, int tierIndex)
 		{
 			RectTransform hitArea = eventTrigger.transform as RectTransform;
 
@@ -340,7 +340,7 @@ namespace ET.Client
 				isDragging = false;
 				hasLastPointerAngle = false;
 				snapTween = self.SnapWheelToClosestItem(rotatingRoot,
-					itemIndex => self.OnWheelSnapCompleted(socketIndex, itemIndex).Coroutine());
+					itemIndex => self.OnWheelSnapCompleted(tierIndex, itemIndex).Coroutine());
 			}
 
 			eventTrigger.RegisterEvent(EventTriggerType.EndDrag, _ => FinishDrag());
@@ -350,7 +350,7 @@ namespace ET.Client
 			snapTween = self.SnapWheelToClosestItem(rotatingRoot);
 		}
 
-		private static Tween SnapWheelToClosestItem(this ES_SkillSocket self, RectTransform rotatingRoot, Action<int> onComplete = null)
+		private static Tween SnapWheelToClosestItem(this ES_SkillAugment self, RectTransform rotatingRoot, Action<int> onComplete = null)
 		{
 			if (rotatingRoot == null || rotatingRoot.childCount == 0)
 			{
@@ -401,13 +401,13 @@ namespace ET.Client
 			return tween;
 		}
 
-		private static async ETTask OnWheelSnapCompleted(this ES_SkillSocket self, int socketIndex, int itemIndex)
+		private static async ETTask OnWheelSnapCompleted(this ES_SkillAugment self, int tierIndex, int itemIndex)
 		{
-			SkillSocketConfig socketConfig = SkillSocketConfigCategory.Instance.GetOrDefault(self.SelectedBaseSkillId);
-			int[] augmentIds = socketIndex switch
+			SkillAugmentOptionsConfig augmentOptions = SkillAugmentOptionsConfigCategory.Instance.GetOrDefault(self.SelectedBaseSkillId);
+			int[] augmentIds = tierIndex switch
 			{
-				1 => socketConfig?.SkillAugmentIds2,
-				2 => socketConfig?.SkillAugmentIds3,
+				1 => augmentOptions?.SkillAugmentIds2,
+				2 => augmentOptions?.SkillAugmentIds3,
 				_ => null,
 			};
 
@@ -417,17 +417,17 @@ namespace ET.Client
 			}
 
 			int augmentId = augmentIds[itemIndex];
-			SkillSocketInfo socketInfo = self.Root().GetComponent<SkillSetComponentC>().SkillSocketList
+			SkillAugmentInfo augmentInfo = self.Root().GetComponent<SkillSetComponentC>().SkillAugmentList
 				.Find(info => info.BaseSkillId == self.SelectedBaseSkillId);
-			if (augmentId == 0 || socketInfo == null || self.GetSelectedAugmentId(socketInfo, socketIndex) == augmentId)
+			if (augmentId == 0 || augmentInfo == null || self.GetSelectedAugmentId(augmentInfo, tierIndex) == augmentId)
 			{
 				return;
 			}
 
-			await SkillNetHelper.SetSkillAugment(self.Root(), self.SelectedBaseSkillId, socketIndex, augmentId);
+			await SkillNetHelper.SetSkillAugment(self.Root(), self.SelectedBaseSkillId, tierIndex, augmentId);
 		}
 
-		private static bool TryGetPointerAngle(this ES_SkillSocket self, RectTransform hitArea, PointerEventData pointerEventData,
+		private static bool TryGetPointerAngle(this ES_SkillAugment self, RectTransform hitArea, PointerEventData pointerEventData,
 			out float pointerAngle)
 		{
 			pointerAngle = 0f;

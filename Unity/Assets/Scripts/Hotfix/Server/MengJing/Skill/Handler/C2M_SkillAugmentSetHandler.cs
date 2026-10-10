@@ -5,7 +5,7 @@ namespace ET.Server
     {
         protected override async ETTask Run(Unit unit, C2M_SkillAugmentSetRequest request, M2C_SkillAugmentSetResponse response)
         {
-            response.Error = unit.GetComponent<SkillSetComponentS>().SetSkillAugment(request.BaseSkillId, request.SocketIndex, request.AugmentId);
+            response.Error = unit.GetComponent<SkillSetComponentS>().SetSkillAugment(request.BaseSkillId, request.TierIndex, request.AugmentId);
             await ETTask.CompletedTask;
         }
     }

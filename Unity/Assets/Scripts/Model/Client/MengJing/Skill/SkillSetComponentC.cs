@@ -21,7 +21,7 @@ namespace ET.Client
         //生命之盾
         public List<LifeShieldInfo> LifeShieldList { get; set; } = new();
 
-        //技能镶嵌
-        public List<SkillSocketInfo> SkillSocketList { get; set; } = new();
+        // 技能增幅
+        public List<SkillAugmentInfo> SkillAugmentList { get; set; } = new();
     }
 }

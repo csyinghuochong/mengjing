@@ -143,7 +143,7 @@ namespace ET.Server
             response.SkillSetInfo = SkillSetInfo.Create();
             response.SkillSetInfo.SkillList.AddRange(skillSetComponent.SkillList);
             response.SkillSetInfo.LifeShieldList.AddRange(skillSetComponent.LifeShieldList);
-            response.SkillSetInfo.SkillSocketList.AddRange(skillSetComponent.SkillSocketList);
+            response.SkillSetInfo.SkillAugmentList.AddRange(skillSetComponent.SkillAugmentList);
             response.SkillSetInfo.TianFuPlan = skillSetComponent.TianFuPlan;
 
             response.SkillSetInfo.TianFuList1.AddRange(tianfulist1);

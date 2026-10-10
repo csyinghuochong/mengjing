@@ -57,7 +57,7 @@ namespace ET.Client
     [FriendOf(typeof(ES_SkillMake))]
     [FriendOf(typeof(ES_SkillTianFu))]
     [FriendOf(typeof(ES_SkillLifeShield))]
-    [FriendOf(typeof(ES_SkillSocket))]
+    [FriendOf(typeof(ES_SkillAugment))]
     [FriendOf(typeof(DlgSkill))]
     public static class DlgSkillSystem
     {
@@ -107,7 +107,7 @@ namespace ET.Client
                     self.View.ES_SkillMake.uiTransform.gameObject.SetActive(true);
                     break;
                 case 5:
-                    self.View.ES_SkillSocket.uiTransform.gameObject.SetActive(true);
+                    self.View.ES_SkillAugment.uiTransform.gameObject.SetActive(true);
                     break;
             }
         }
@@ -155,9 +155,9 @@ namespace ET.Client
                 self.View.ES_SkillSet.OnSkillSetting();
             }
 
-            if (self.View.ES_SkillSocket.uiTransform.gameObject.activeSelf)
+            if (self.View.ES_SkillAugment.uiTransform.gameObject.activeSelf)
             {
-                self.View.ES_SkillSocket.RefreshSkillSocketItems();
+                self.View.ES_SkillAugment.RefreshSkillAugmentItems();
             }
         }
 

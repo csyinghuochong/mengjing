@@ -4352,22 +4352,22 @@ namespace ET
     }
 
     [MemoryPackable]
-    [Message(OuterMessage.SkillSocketInfo)]
-    public partial class SkillSocketInfo : MessageObject
+    [Message(OuterMessage.SkillAugmentInfo)]
+    public partial class SkillAugmentInfo : MessageObject
     {
-        public static SkillSocketInfo Create(bool isFromPool = false)
+        public static SkillAugmentInfo Create(bool isFromPool = false)
         {
-            return ObjectPool.Instance.Fetch(typeof(SkillSocketInfo), isFromPool) as SkillSocketInfo;
+            return ObjectPool.Instance.Fetch(typeof(SkillAugmentInfo), isFromPool) as SkillAugmentInfo;
         }
 
         [MemoryPackOrder(0)]
         public int BaseSkillId { get; set; }
 
         /// <summary>
-        /// 下标表示孔位，值为SkillAugmentConfig.Id，0表示空
+        /// 下标表示增幅层级，值为SkillAugmentConfig.Id，0表示未激活
         /// </summary>
         [MemoryPackOrder(1)]
-        public List<int> AugmentIds { get; set; } = new();
+        public List<int> ActiveAugmentIds { get; set; } = new();
 
         public override void Dispose()
         {
@@ -4377,7 +4377,7 @@ namespace ET
             }
 
             this.BaseSkillId = default;
-            this.AugmentIds.Clear();
+            this.ActiveAugmentIds.Clear();
 
             ObjectPool.Instance.Recycle(this);
         }
@@ -8436,7 +8436,7 @@ namespace ET
         public int TianFuPlan { get; set; }
 
         [MemoryPackOrder(5)]
-        public List<SkillSocketInfo> SkillSocketList { get; set; } = new();
+        public List<SkillAugmentInfo> SkillAugmentList { get; set; } = new();
 
         public override void Dispose()
         {
@@ -8450,7 +8450,7 @@ namespace ET
             this.TianFuList2.Clear();
             this.LifeShieldList.Clear();
             this.TianFuPlan = default;
-            this.SkillSocketList.Clear();
+            this.SkillAugmentList.Clear();
 
             ObjectPool.Instance.Recycle(this);
         }
@@ -34425,7 +34425,7 @@ namespace ET
         public int BaseSkillId { get; set; }
 
         [MemoryPackOrder(1)]
-        public int SocketIndex { get; set; }
+        public int TierIndex { get; set; }
 
         [MemoryPackOrder(2)]
         public int AugmentId { get; set; }
@@ -34439,7 +34439,7 @@ namespace ET
 
             this.RpcId = default;
             this.BaseSkillId = default;
-            this.SocketIndex = default;
+            this.TierIndex = default;
             this.AugmentId = default;
 
             ObjectPool.Instance.Recycle(this);
@@ -34579,7 +34579,7 @@ namespace ET
         public const ushort M2C_RoleDataUpdate = 10097;
         public const ushort M2C_RoleDataBroadcast = 10098;
         public const ushort SkillPro = 10099;
-        public const ushort SkillSocketInfo = 10100;
+        public const ushort SkillAugmentInfo = 10100;
         public const ushort FubenPassInfo = 10101;
         public const ushort C2A_ActivityInfoRequest = 10102;
         public const ushort A2C_ActivityInfoResponse = 10103;

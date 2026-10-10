@@ -1006,10 +1006,10 @@ message SkillPro
     int32 SkillSource = 5; //1职业技能 2装备技能 3天赋技能 4 精灵技能 5 套装技能
 }
 
-message SkillSocketInfo
+message SkillAugmentInfo
 {
 	int32 BaseSkillId = 1;
-	repeated int32 AugmentIds = 2; //下标表示孔位，值为SkillAugmentConfig.Id，0表示空
+	repeated int32 ActiveAugmentIds = 2; //下标表示增幅层级，值为SkillAugmentConfig.Id，0表示未激活
 }
 
 message FubenPassInfo
@@ -1941,7 +1941,7 @@ message SkillSetInfo
 	repeated KeyValuePairInt TianFuList2 = 3;
 	repeated LifeShieldInfo LifeShieldList = 4;
 	int32 TianFuPlan = 5;
-	repeated SkillSocketInfo SkillSocketList = 6;
+	repeated SkillAugmentInfo SkillAugmentList = 6;
 }
 
 //技能天赋更新
@@ -7898,7 +7898,7 @@ message C2M_SkillAugmentSetRequest // ILocationRequest
 {
 	int32 RpcId = 90;
 	int32 BaseSkillId = 1;
-	int32 SocketIndex = 2;
+	int32 TierIndex = 2;
 	int32 AugmentId = 3;
 }
 

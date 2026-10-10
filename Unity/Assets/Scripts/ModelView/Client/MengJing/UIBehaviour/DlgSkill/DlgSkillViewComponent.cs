@@ -161,23 +161,23 @@ namespace ET.Client
             }
         }
         
-        public ES_SkillSocket ES_SkillSocket
+        public ES_SkillAugment ES_SkillAugment
         {
 	        get
 	        {
-		        ES_SkillSocket es = this.m_es_skillSocket;
+		        ES_SkillAugment es = this.m_es_skillAugment;
 		        if (es == null)
 		        {
-			        string path = "Assets/Bundles/UI/Common/ES_SkillSocket.prefab";
+			        string path = "Assets/Bundles/UI/Common/ES_SkillAugment.prefab";
 			        GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
 			        GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewNodeRectTransform);
 			        go.SetActive(true);
 			        this.AssetList.Add(path);
-			        this.m_es_skillSocket = this.AddChild<ES_SkillSocket, Transform>(go.transform);
+			        this.m_es_skillAugment = this.AddChild<ES_SkillAugment, Transform>(go.transform);
 			        go.SetActive(false);
 		        }
 
-		        return this.m_es_skillSocket;
+		        return this.m_es_skillAugment;
 	        }
         }
 		
@@ -191,7 +191,7 @@ namespace ET.Client
 			this.m_es_skilltianfu = null;
 			this.m_es_skillmake = null;
 			this.m_es_skilllifeshield = null;
-			this.m_es_skillSocket = null;
+			this.m_es_skillAugment = null;
 			this.uiTransform = null;
 			
 			ResourcesLoaderComponent resourcesLoaderComponent = this.Root().GetComponent<ResourcesLoaderComponent>();
@@ -211,7 +211,7 @@ namespace ET.Client
 		private EntityRef<ES_SkillTianFu> m_es_skilltianfu = null;
 		private EntityRef<ES_SkillMake> m_es_skillmake = null;
 		private EntityRef<ES_SkillLifeShield> m_es_skilllifeshield = null;
-		private EntityRef<ES_SkillSocket> m_es_skillSocket = null;
+		private EntityRef<ES_SkillAugment> m_es_skillAugment = null;
 		public Transform uiTransform = null;
 	}
 }

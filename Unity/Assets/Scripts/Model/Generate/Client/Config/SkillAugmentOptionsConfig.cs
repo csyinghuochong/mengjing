@@ -12,14 +12,14 @@ using Luban;
 namespace ET
 {
     [EnableClass]
-    public sealed partial class SkillSocketConfig : BeanBase
+    public sealed partial class SkillAugmentOptionsConfig : BeanBase
     {
-        public SkillSocketConfig()
+        public SkillAugmentOptionsConfig()
         {
         }
 
 
-        public SkillSocketConfig(ByteBuf _buf)
+        public SkillAugmentOptionsConfig(ByteBuf _buf)
         {
             Id = _buf.ReadInt();
             Id_Ref = null;
@@ -33,9 +33,9 @@ namespace ET
             PostInit();
         }
 
-        public static SkillSocketConfig DeserializeSkillSocketConfig(ByteBuf _buf)
+        public static SkillAugmentOptionsConfig DeserializeSkillAugmentOptionsConfig(ByteBuf _buf)
         {
-            return new SkillSocketConfig(_buf);
+            return new SkillAugmentOptionsConfig(_buf);
         }
 
         /// <summary>
@@ -76,7 +76,7 @@ namespace ET
         public int[] SkillAugmentIds3;
 
 
-        public const int __ID__ = 510810470;
+        public const int __ID__ = -1420871616;
         public override int GetTypeId() => __ID__;
 
         public  void ResolveRef()

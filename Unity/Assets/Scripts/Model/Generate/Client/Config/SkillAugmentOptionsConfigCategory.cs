@@ -13,20 +13,20 @@ using System.Collections.Generic;
 namespace ET
 {
     [Config]
-    public partial class SkillSocketConfigCategory : Singleton<SkillSocketConfigCategory>, IConfig
+    public partial class SkillAugmentOptionsConfigCategory : Singleton<SkillAugmentOptionsConfigCategory>, IConfig
     {
-        private readonly Dictionary<int, SkillSocketConfig> _dataMap;
-        private readonly List<SkillSocketConfig> _dataList;
+        private readonly Dictionary<int, SkillAugmentOptionsConfig> _dataMap;
+        private readonly List<SkillAugmentOptionsConfig> _dataList;
 
-        public SkillSocketConfigCategory(ByteBuf _buf)
+        public SkillAugmentOptionsConfigCategory(ByteBuf _buf)
         {
-            _dataMap = new Dictionary<int, SkillSocketConfig>();
-            _dataList = new List<SkillSocketConfig>();
+            _dataMap = new Dictionary<int, SkillAugmentOptionsConfig>();
+            _dataList = new List<SkillAugmentOptionsConfig>();
 
             for (int n = _buf.ReadSize(); n > 0; --n)
             {
-                SkillSocketConfig _v;
-                _v = global::ET.SkillSocketConfig.DeserializeSkillSocketConfig(_buf);
+                SkillAugmentOptionsConfig _v;
+                _v = global::ET.SkillAugmentOptionsConfig.DeserializeSkillAugmentOptionsConfig(_buf);
                 _dataList.Add(_v);
                 _dataMap.Add(_v.Id, _v);
             }
@@ -34,13 +34,13 @@ namespace ET
             PostInit();
         }
 
-        public Dictionary<int, SkillSocketConfig> DataMap => _dataMap;
-        public List<SkillSocketConfig> DataList => _dataList;
-        public Dictionary<int, SkillSocketConfig> GetAll() => _dataMap;
+        public Dictionary<int, SkillAugmentOptionsConfig> DataMap => _dataMap;
+        public List<SkillAugmentOptionsConfig> DataList => _dataList;
+        public Dictionary<int, SkillAugmentOptionsConfig> GetAll() => _dataMap;
         public bool Contain(int key) => _dataMap.ContainsKey(key);
 
-        public SkillSocketConfig GetOrDefault(int key) => _dataMap.GetValueOrDefault(key);
-        public SkillSocketConfig Get(int key)
+        public SkillAugmentOptionsConfig GetOrDefault(int key) => _dataMap.GetValueOrDefault(key);
+        public SkillAugmentOptionsConfig Get(int key)
         {
             if (_dataMap.TryGetValue(key,out var v))
             {

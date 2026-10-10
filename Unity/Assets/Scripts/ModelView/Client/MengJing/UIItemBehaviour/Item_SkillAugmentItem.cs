@@ -6,10 +6,10 @@ namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class Scroll_Item_SkillSocketItem : Entity,IAwake,IDestroy,IUIScrollItem<Scroll_Item_SkillSocketItem> 
+	public  class Scroll_Item_SkillAugmentItem : Entity,IAwake,IDestroy,IUIScrollItem<Scroll_Item_SkillAugmentItem> 
 	{
-		public SkillSocketInfo SkillSocketInfo;
-		public Action<SkillSocketInfo> ClickHandler;
+		public SkillAugmentInfo SkillAugmentInfo;
+		public Action<SkillAugmentInfo> ClickHandler;
 
 		public long DataId {get;set;}
 		private bool isCacheNode = false;
@@ -18,7 +18,7 @@ namespace ET.Client
 			this.isCacheNode = isCache;
 		}
 
-		public Scroll_Item_SkillSocketItem BindTrans(Transform trans)
+		public Scroll_Item_SkillAugmentItem BindTrans(Transform trans)
 		{
 			this.uiTransform = trans;
 			return this;
