@@ -14,6 +14,7 @@ namespace ET.Client
 	{
 		private const float WheelSnapTargetAngle = -45f;
 		private const float WheelSnapDuration = 0.2f;
+		private const float WheelLineFadeAngle = 15f;
 		private const string SkillAugmentItemPrefabPath = "Assets/Bundles/UI/Item/Item_SkillAugmentItem.prefab";
 
 		[EntitySystem]
@@ -33,8 +34,10 @@ namespace ET.Client
 				outerHitArea.SetSiblingIndex(innerHitArea.GetSiblingIndex());
 			}
 
-			self.RegisterWheelDrag(self.E_WheelHitArea_2EventTrigger, self.EG_RotatingRoot_2RectTransform, 1);
-			self.RegisterWheelDrag(self.E_WheelHitArea_3EventTrigger, self.EG_RotatingRoot_3RectTransform, 2);
+			self.SetWheelLineAlpha(self.EG_Line_2RectTransform, 0f);
+			self.SetWheelLineAlpha(self.EG_Line_3RectTransform, 0f);
+			self.RegisterWheelDrag(self.E_WheelHitArea_2EventTrigger, self.EG_RotatingRoot_2RectTransform, self.EG_Line_2RectTransform, 1);
+			self.RegisterWheelDrag(self.E_WheelHitArea_3EventTrigger, self.EG_RotatingRoot_3RectTransform, self.EG_Line_3RectTransform, 2);
 			self.RefreshSkillAugmentItems();
 		}
 
@@ -247,6 +250,7 @@ namespace ET.Client
 			if (itemIndex < 0 || itemIndex >= rotatingRoot.childCount || !(rotatingRoot.GetChild(itemIndex) is RectTransform item) ||
 			    !item.gameObject.activeSelf)
 			{
+				self.RefreshWheelLineAlpha(rotatingRoot);
 				return;
 			}
 
@@ -255,11 +259,14 @@ namespace ET.Client
 			Vector3 localEulerAngles = rotatingRoot.localEulerAngles;
 			localEulerAngles.z = WheelSnapTargetAngle - itemLocalAngle;
 			rotatingRoot.localEulerAngles = localEulerAngles;
+			self.RefreshWheelLineAlpha(rotatingRoot);
 		}
 
 		private static void ClearWheelSkills(this ES_SkillAugment self)
 		{
 			self.SetSkillAugmentDescription(0);
+			self.SetWheelLineAlpha(self.EG_Line_2RectTransform, 0f);
+			self.SetWheelLineAlpha(self.EG_Line_3RectTransform, 0f);
 			self.EG_SkillAugmentItem_1RectTransform.gameObject.SetActive(false);
 			for (int i = 0; i < self.EG_RotatingRoot_2RectTransform.childCount; i++)
 			{
@@ -295,7 +302,8 @@ namespace ET.Client
 			}
 		}
 
-		private static void RegisterWheelDrag(this ES_SkillAugment self, EventTrigger eventTrigger, RectTransform rotatingRoot, int tierIndex)
+		private static void RegisterWheelDrag(this ES_SkillAugment self, EventTrigger eventTrigger, RectTransform rotatingRoot,
+			RectTransform wheelLine, int tierIndex)
 		{
 			RectTransform hitArea = eventTrigger.transform as RectTransform;
 
@@ -350,6 +358,7 @@ namespace ET.Client
 				Vector3 localEulerAngles = rotatingRoot.localEulerAngles;
 				localEulerAngles.z += deltaAngle;
 				rotatingRoot.localEulerAngles = localEulerAngles;
+				self.RefreshWheelLineAlpha(rotatingRoot, wheelLine);
 				lastPointerAngle = currentPointerAngle;
 			});
 
@@ -362,7 +371,7 @@ namespace ET.Client
 
 				isDragging = false;
 				hasLastPointerAngle = false;
-				snapTween = self.SnapWheelToClosestItem(rotatingRoot,
+				snapTween = self.SnapWheelToClosestItem(rotatingRoot, wheelLine,
 					itemIndex => self.OnWheelSnapCompleted(tierIndex, itemIndex).Coroutine());
 			}
 
@@ -370,10 +379,11 @@ namespace ET.Client
 			eventTrigger.RegisterEvent(EventTriggerType.PointerUp, _ => FinishDrag());
 
 			// 打开界面且未拖动时，也让最近的 Item 自动对准目标角度。
-			snapTween = self.SnapWheelToClosestItem(rotatingRoot);
+			snapTween = self.SnapWheelToClosestItem(rotatingRoot, wheelLine);
 		}
 
-		private static Tween SnapWheelToClosestItem(this ES_SkillAugment self, RectTransform rotatingRoot, Action<int> onComplete = null)
+		private static Tween SnapWheelToClosestItem(this ES_SkillAugment self, RectTransform rotatingRoot, RectTransform wheelLine,
+			Action<int> onComplete = null)
 		{
 			if (rotatingRoot == null || rotatingRoot.childCount == 0)
 			{
@@ -416,12 +426,60 @@ namespace ET.Client
 
 			Vector3 targetEulerAngles = rotatingRoot.localEulerAngles;
 			targetEulerAngles.z = rootAngle + closestDeltaAngle;
-			Tween tween = rotatingRoot.DOLocalRotate(targetEulerAngles, WheelSnapDuration, RotateMode.FastBeyond360).SetEase(Ease.OutCubic);
-			if (onComplete != null)
+			Tween tween = rotatingRoot.DOLocalRotate(targetEulerAngles, WheelSnapDuration, RotateMode.FastBeyond360)
+				.SetEase(Ease.OutCubic)
+				.OnUpdate(() => self.RefreshWheelLineAlpha(rotatingRoot, wheelLine));
+			tween.OnComplete(() =>
 			{
-				tween.OnComplete(() => onComplete(closestItemIndex));
-			}
+				self.RefreshWheelLineAlpha(rotatingRoot, wheelLine);
+				onComplete?.Invoke(closestItemIndex);
+			});
 			return tween;
+		}
+
+		private static void RefreshWheelLineAlpha(this ES_SkillAugment self, RectTransform rotatingRoot, RectTransform wheelLine = null)
+		{
+			wheelLine ??= rotatingRoot == self.EG_RotatingRoot_2RectTransform
+				? self.EG_Line_2RectTransform
+				: self.EG_Line_3RectTransform;
+
+			float closestDistance = float.MaxValue;
+			float rootAngle = rotatingRoot.localEulerAngles.z;
+			for (int i = 0; i < rotatingRoot.childCount; i++)
+			{
+				if (!(rotatingRoot.GetChild(i) is RectTransform item) || !item.gameObject.activeSelf)
+				{
+					continue;
+				}
+
+				Vector2 itemPosition = item.anchoredPosition;
+				if (itemPosition.sqrMagnitude < 1f)
+				{
+					continue;
+				}
+
+				float itemLocalAngle = Mathf.Atan2(itemPosition.y, itemPosition.x) * Mathf.Rad2Deg;
+				float distance = Mathf.Abs(Mathf.DeltaAngle(itemLocalAngle + rootAngle, WheelSnapTargetAngle));
+				closestDistance = Mathf.Min(closestDistance, distance);
+			}
+
+			float alpha = closestDistance == float.MaxValue
+				? 0f
+				: Mathf.SmoothStep(0f, 1f, 1f - Mathf.Clamp01(closestDistance / WheelLineFadeAngle));
+			self.SetWheelLineAlpha(wheelLine, alpha);
+		}
+
+		private static void SetWheelLineAlpha(this ES_SkillAugment self, RectTransform wheelLine, float alpha)
+		{
+			Image lineImage = wheelLine != null ? wheelLine.GetComponent<Image>() : null;
+			if (lineImage == null)
+			{
+				return;
+			}
+
+			Color color = lineImage.color;
+			color.a = Mathf.Clamp01(alpha);
+			lineImage.color = color;
 		}
 
 		private static async ETTask OnWheelSnapCompleted(this ES_SkillAugment self, int tierIndex, int itemIndex)

@@ -21,11 +21,11 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-			if( this.m_E_SkillAugmentItemsScrollRect == null )
+     			if( this.m_E_SkillAugmentItemsScrollRect == null )
      			{
 		    		this.m_E_SkillAugmentItemsScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.ScrollRect>(this.uiTransform.gameObject,"Left/E_SkillAugmentItems");
      			}
-			return this.m_E_SkillAugmentItemsScrollRect;
+     			return this.m_E_SkillAugmentItemsScrollRect;
      		}
      	}
 
@@ -38,11 +38,11 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-			if( this.m_E_SkillAugmentItemsImage == null )
+     			if( this.m_E_SkillAugmentItemsImage == null )
      			{
 		    		this.m_E_SkillAugmentItemsImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Left/E_SkillAugmentItems");
      			}
-			return this.m_E_SkillAugmentItemsImage;
+     			return this.m_E_SkillAugmentItemsImage;
      		}
      	}
 
@@ -335,6 +335,40 @@ namespace ET.Client
      		}
      	}
 
+		public UnityEngine.RectTransform EG_Line_2RectTransform
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_EG_Line_2RectTransform == null )
+     			{
+		    		this.m_EG_Line_2RectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"Right/EG_SkillInfoPanel/Mask/EG_Line_2");
+     			}
+     			return this.m_EG_Line_2RectTransform;
+     		}
+     	}
+
+		public UnityEngine.RectTransform EG_Line_3RectTransform
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_EG_Line_3RectTransform == null )
+     			{
+		    		this.m_EG_Line_3RectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"Right/EG_SkillInfoPanel/Mask/EG_Line_3");
+     			}
+     			return this.m_EG_Line_3RectTransform;
+     		}
+     	}
+
 		    public Transform UITransform
          {
      	    get
@@ -368,6 +402,8 @@ namespace ET.Client
 			this.m_EG_RotatingRoot_3RectTransform = null;
 			this.m_EG_SkillAugmentItem_3RectTransform = null;
 			this.m_EG_SkillAugmentItem_1RectTransform = null;
+			this.m_EG_Line_2RectTransform = null;
+			this.m_EG_Line_3RectTransform = null;
 			this.uiTransform = null;
 		}
 
@@ -390,6 +426,8 @@ namespace ET.Client
 		private UnityEngine.RectTransform m_EG_RotatingRoot_3RectTransform = null;
 		private UnityEngine.RectTransform m_EG_SkillAugmentItem_3RectTransform = null;
 		private UnityEngine.RectTransform m_EG_SkillAugmentItem_1RectTransform = null;
+		private UnityEngine.RectTransform m_EG_Line_2RectTransform = null;
+		private UnityEngine.RectTransform m_EG_Line_3RectTransform = null;
 		public Transform uiTransform = null;
 	}
 }
