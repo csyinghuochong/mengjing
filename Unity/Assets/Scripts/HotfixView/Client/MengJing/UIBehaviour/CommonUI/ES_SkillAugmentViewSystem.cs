@@ -22,8 +22,8 @@ namespace ET.Client
 		{
 			self.uiTransform = transform;
 
-			self.GenerateSkillAugmentItems(self.EG_RotatingRoot_2RectTransform, self.EG_SkillAugmentItem_2RectTransform, 2, -15f, 60f, 164f);
-			self.GenerateSkillAugmentItems(self.EG_RotatingRoot_3RectTransform, self.EG_SkillAugmentItem_3RectTransform, 3, 0f, 30f, 348f);
+			self.GenerateSkillAugmentItems(self.EG_ItemList_2RectTransform, self.EG_SkillAugmentItem_2RectTransform, 2, -15f, 60f, 164f);
+			self.GenerateSkillAugmentItems(self.EG_ItemList_3RectTransform, self.EG_SkillAugmentItem_3RectTransform, 3, 0f, 30f, 348f);
 
 			// 两个点击区的圆心重合，外圈尺寸更大。让内圈处于外圈上方，
 			// 否则外圈会拦截内圈范围内的所有射线事件。
@@ -36,8 +36,10 @@ namespace ET.Client
 
 			self.SetWheelLineAlpha(self.EG_Line_2RectTransform, 0f);
 			self.SetWheelLineAlpha(self.EG_Line_3RectTransform, 0f);
-			self.RegisterWheelDrag(self.E_WheelHitArea_2EventTrigger, self.EG_RotatingRoot_2RectTransform, self.EG_Line_2RectTransform, 1);
-			self.RegisterWheelDrag(self.E_WheelHitArea_3EventTrigger, self.EG_RotatingRoot_3RectTransform, self.EG_Line_3RectTransform, 2);
+			self.RegisterWheelDrag(self.E_WheelHitArea_2EventTrigger, self.EG_RotatingRoot_2RectTransform,
+				self.EG_ItemList_2RectTransform, self.EG_Line_2RectTransform, 1);
+			self.RegisterWheelDrag(self.E_WheelHitArea_3EventTrigger, self.EG_RotatingRoot_3RectTransform,
+				self.EG_ItemList_3RectTransform, self.EG_Line_3RectTransform, 2);
 			self.RefreshSkillAugmentItems();
 		}
 
@@ -144,8 +146,10 @@ namespace ET.Client
 
 			int selectedAugment2 = self.GetSelectedAugmentId(skillAugmentInfo, 1);
 			int selectedAugment3 = self.GetSelectedAugmentId(skillAugmentInfo, 2);
-			self.SetWheelAugmentItems(self.EG_RotatingRoot_2RectTransform, augmentOptions.SkillAugmentIds2, selectedAugment2);
-			self.SetWheelAugmentItems(self.EG_RotatingRoot_3RectTransform, augmentOptions.SkillAugmentIds3, selectedAugment3);
+			self.SetWheelAugmentItems(self.EG_RotatingRoot_2RectTransform, self.EG_ItemList_2RectTransform,
+				augmentOptions.SkillAugmentIds2, selectedAugment2);
+			self.SetWheelAugmentItems(self.EG_RotatingRoot_3RectTransform, self.EG_ItemList_3RectTransform,
+				augmentOptions.SkillAugmentIds3, selectedAugment3);
 		}
 
 		private static int GetSelectedAugmentId(this ES_SkillAugment self, SkillAugmentInfo skillAugmentInfo, int tierIndex)
@@ -170,12 +174,13 @@ namespace ET.Client
 			await SkillNetHelper.SetSkillAugment(self.Root(), skillAugmentInfo.BaseSkillId, 0, augmentId);
 		}
 
-		private static void SetWheelAugmentItems(this ES_SkillAugment self, RectTransform rotatingRoot, int[] augmentIds, int selectedAugmentId)
+		private static void SetWheelAugmentItems(this ES_SkillAugment self, RectTransform rotatingRoot, RectTransform itemList,
+			int[] augmentIds, int selectedAugmentId)
 		{
 			int selectedIndex = -1;
-			for (int i = 0; i < rotatingRoot.childCount; i++)
+			for (int i = 0; i < itemList.childCount; i++)
 			{
-				RectTransform item = rotatingRoot.GetChild(i) as RectTransform;
+				RectTransform item = itemList.GetChild(i) as RectTransform;
 				int augmentId = augmentIds != null && i < augmentIds.Length ? augmentIds[i] : 0;
 				self.SetWheelAugmentItem(item, augmentId);
 
@@ -190,7 +195,7 @@ namespace ET.Client
 				selectedIndex = 0;
 			}
 
-			self.AlignWheelToItem(rotatingRoot, selectedIndex);
+			self.AlignWheelToItem(rotatingRoot, itemList, selectedIndex);
 		}
 
 		private static void SetWheelAugmentItem(this ES_SkillAugment self, RectTransform item, int augmentId)
@@ -244,13 +249,13 @@ namespace ET.Client
 			self.E_SkillDesText.text = description;
 		}
 
-		private static void AlignWheelToItem(this ES_SkillAugment self, RectTransform rotatingRoot, int itemIndex)
+		private static void AlignWheelToItem(this ES_SkillAugment self, RectTransform rotatingRoot, RectTransform itemList, int itemIndex)
 		{
 			rotatingRoot.DOKill();
-			if (itemIndex < 0 || itemIndex >= rotatingRoot.childCount || !(rotatingRoot.GetChild(itemIndex) is RectTransform item) ||
+			if (itemIndex < 0 || itemIndex >= itemList.childCount || !(itemList.GetChild(itemIndex) is RectTransform item) ||
 			    !item.gameObject.activeSelf)
 			{
-				self.RefreshWheelLineAlpha(rotatingRoot);
+				self.RefreshWheelLineAlpha(rotatingRoot, itemList);
 				return;
 			}
 
@@ -259,7 +264,7 @@ namespace ET.Client
 			Vector3 localEulerAngles = rotatingRoot.localEulerAngles;
 			localEulerAngles.z = WheelSnapTargetAngle - itemLocalAngle;
 			rotatingRoot.localEulerAngles = localEulerAngles;
-			self.RefreshWheelLineAlpha(rotatingRoot);
+			self.RefreshWheelLineAlpha(rotatingRoot, itemList);
 		}
 
 		private static void ClearWheelSkills(this ES_SkillAugment self)
@@ -268,27 +273,28 @@ namespace ET.Client
 			self.SetWheelLineAlpha(self.EG_Line_2RectTransform, 0f);
 			self.SetWheelLineAlpha(self.EG_Line_3RectTransform, 0f);
 			self.EG_SkillAugmentItem_1RectTransform.gameObject.SetActive(false);
-			for (int i = 0; i < self.EG_RotatingRoot_2RectTransform.childCount; i++)
+			for (int i = 0; i < self.EG_ItemList_2RectTransform.childCount; i++)
 			{
-				self.EG_RotatingRoot_2RectTransform.GetChild(i).gameObject.SetActive(false);
+				self.EG_ItemList_2RectTransform.GetChild(i).gameObject.SetActive(false);
 			}
 
-			for (int i = 0; i < self.EG_RotatingRoot_3RectTransform.childCount; i++)
+			for (int i = 0; i < self.EG_ItemList_3RectTransform.childCount; i++)
 			{
-				self.EG_RotatingRoot_3RectTransform.GetChild(i).gameObject.SetActive(false);
+				self.EG_ItemList_3RectTransform.GetChild(i).gameObject.SetActive(false);
 			}
 		}
 
-		private static void GenerateSkillAugmentItems(this ES_SkillAugment self, RectTransform rotatingRoot, RectTransform itemTemplate, int itemCount,float angleStart, float angleInterval, float radius)
+		private static void GenerateSkillAugmentItems(this ES_SkillAugment self, RectTransform itemList, RectTransform itemTemplate,
+			int itemCount, float angleStart, float angleInterval, float radius)
 		{
-			if (rotatingRoot == null || itemTemplate == null || itemCount <= 0 || radius < 0f)
+			if (itemList == null || itemTemplate == null || itemCount <= 0 || radius < 0f)
 			{
 				return;
 			}
 
 			for (int i = 0; i < itemCount; i++)
 			{
-				RectTransform item = i == 0 ? itemTemplate : UnityEngine.Object.Instantiate(itemTemplate, rotatingRoot);
+				RectTransform item = i == 0 ? itemTemplate : UnityEngine.Object.Instantiate(itemTemplate, itemList);
 
 				if (i > 0)
 				{
@@ -303,7 +309,7 @@ namespace ET.Client
 		}
 
 		private static void RegisterWheelDrag(this ES_SkillAugment self, EventTrigger eventTrigger, RectTransform rotatingRoot,
-			RectTransform wheelLine, int tierIndex)
+			RectTransform itemList, RectTransform wheelLine, int tierIndex)
 		{
 			RectTransform hitArea = eventTrigger.transform as RectTransform;
 
@@ -358,7 +364,7 @@ namespace ET.Client
 				Vector3 localEulerAngles = rotatingRoot.localEulerAngles;
 				localEulerAngles.z += deltaAngle;
 				rotatingRoot.localEulerAngles = localEulerAngles;
-				self.RefreshWheelLineAlpha(rotatingRoot, wheelLine);
+				self.RefreshWheelLineAlpha(rotatingRoot, itemList, wheelLine);
 				lastPointerAngle = currentPointerAngle;
 			});
 
@@ -371,7 +377,7 @@ namespace ET.Client
 
 				isDragging = false;
 				hasLastPointerAngle = false;
-				snapTween = self.SnapWheelToClosestItem(rotatingRoot, wheelLine,
+				snapTween = self.SnapWheelToClosestItem(rotatingRoot, itemList, wheelLine,
 					itemIndex => self.OnWheelSnapCompleted(tierIndex, itemIndex).Coroutine());
 			}
 
@@ -379,13 +385,13 @@ namespace ET.Client
 			eventTrigger.RegisterEvent(EventTriggerType.PointerUp, _ => FinishDrag());
 
 			// 打开界面且未拖动时，也让最近的 Item 自动对准目标角度。
-			snapTween = self.SnapWheelToClosestItem(rotatingRoot, wheelLine);
+			snapTween = self.SnapWheelToClosestItem(rotatingRoot, itemList, wheelLine);
 		}
 
-		private static Tween SnapWheelToClosestItem(this ES_SkillAugment self, RectTransform rotatingRoot, RectTransform wheelLine,
-			Action<int> onComplete = null)
+		private static Tween SnapWheelToClosestItem(this ES_SkillAugment self, RectTransform rotatingRoot, RectTransform itemList,
+			RectTransform wheelLine, Action<int> onComplete = null)
 		{
-			if (rotatingRoot == null || rotatingRoot.childCount == 0)
+			if (rotatingRoot == null || itemList == null || itemList.childCount == 0)
 			{
 				return null;
 			}
@@ -395,9 +401,9 @@ namespace ET.Client
 			float closestDistance = float.MaxValue;
 			int closestItemIndex = -1;
 
-			for (int i = 0; i < rotatingRoot.childCount; i++)
+			for (int i = 0; i < itemList.childCount; i++)
 			{
-				if (!(rotatingRoot.GetChild(i) is RectTransform item) || !item.gameObject.activeSelf)
+				if (!(itemList.GetChild(i) is RectTransform item) || !item.gameObject.activeSelf)
 				{
 					continue;
 				}
@@ -428,16 +434,17 @@ namespace ET.Client
 			targetEulerAngles.z = rootAngle + closestDeltaAngle;
 			Tween tween = rotatingRoot.DOLocalRotate(targetEulerAngles, WheelSnapDuration, RotateMode.FastBeyond360)
 				.SetEase(Ease.OutCubic)
-				.OnUpdate(() => self.RefreshWheelLineAlpha(rotatingRoot, wheelLine));
+				.OnUpdate(() => self.RefreshWheelLineAlpha(rotatingRoot, itemList, wheelLine));
 			tween.OnComplete(() =>
 			{
-				self.RefreshWheelLineAlpha(rotatingRoot, wheelLine);
+				self.RefreshWheelLineAlpha(rotatingRoot, itemList, wheelLine);
 				onComplete?.Invoke(closestItemIndex);
 			});
 			return tween;
 		}
 
-		private static void RefreshWheelLineAlpha(this ES_SkillAugment self, RectTransform rotatingRoot, RectTransform wheelLine = null)
+		private static void RefreshWheelLineAlpha(this ES_SkillAugment self, RectTransform rotatingRoot, RectTransform itemList,
+			RectTransform wheelLine = null)
 		{
 			wheelLine ??= rotatingRoot == self.EG_RotatingRoot_2RectTransform
 				? self.EG_Line_2RectTransform
@@ -445,9 +452,9 @@ namespace ET.Client
 
 			float closestDistance = float.MaxValue;
 			float rootAngle = rotatingRoot.localEulerAngles.z;
-			for (int i = 0; i < rotatingRoot.childCount; i++)
+			for (int i = 0; i < itemList.childCount; i++)
 			{
-				if (!(rotatingRoot.GetChild(i) is RectTransform item) || !item.gameObject.activeSelf)
+				if (!(itemList.GetChild(i) is RectTransform item) || !item.gameObject.activeSelf)
 				{
 					continue;
 				}
