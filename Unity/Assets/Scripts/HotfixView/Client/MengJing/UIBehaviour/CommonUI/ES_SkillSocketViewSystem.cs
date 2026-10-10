@@ -123,6 +123,7 @@ namespace ET.Client
 			}
 
 			self.SyncWheelSkills(skillSocketInfo);
+			self.SubmitFixedSkillAugment(skillSocketInfo).Coroutine();
 		}
 
 		private static void SyncWheelSkills(this ES_SkillSocket self, SkillSocketInfo skillSocketInfo)
@@ -146,6 +147,23 @@ namespace ET.Client
 		private static int GetSelectedAugmentId(this ES_SkillSocket self, SkillSocketInfo skillSocketInfo, int index)
 		{
 			return skillSocketInfo.AugmentIds != null && index < skillSocketInfo.AugmentIds.Count ? skillSocketInfo.AugmentIds[index] : 0;
+		}
+
+		private static async ETTask SubmitFixedSkillAugment(this ES_SkillSocket self, SkillSocketInfo skillSocketInfo)
+		{
+			SkillSocketConfig socketConfig = SkillSocketConfigCategory.Instance.GetOrDefault(skillSocketInfo.BaseSkillId);
+			if (socketConfig?.SkillAugmentIds1 == null || socketConfig.SkillAugmentIds1.Length == 0)
+			{
+				return;
+			}
+
+			int augmentId = socketConfig.SkillAugmentIds1[0];
+			if (augmentId == 0 || self.GetSelectedAugmentId(skillSocketInfo, 0) == augmentId)
+			{
+				return;
+			}
+
+			await SkillNetHelper.SetSkillAugment(self.Root(), skillSocketInfo.BaseSkillId, 0, augmentId);
 		}
 
 		private static void SetWheelAugmentItems(this ES_SkillSocket self, RectTransform rotatingRoot, int[] augmentIds, int selectedAugmentId)
