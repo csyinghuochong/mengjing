@@ -24,6 +24,7 @@ namespace ET
             Id = _buf.ReadInt();
             Name = _buf.ReadString();
             Icon = _buf.ReadString();
+            Des = _buf.ReadString();
             AddPropreListStr = _buf.ReadString();
 
             PostInit();
@@ -50,6 +51,11 @@ namespace ET
         public string Icon;
 
         /// <summary>
+        /// 描述
+        /// </summary>
+        public string Des;
+
+        /// <summary>
         /// 附加
         /// </summary>
         public string AddPropreListStr;
@@ -64,6 +70,7 @@ namespace ET
             
             
             
+            
         }
 
         public override string ToString()
@@ -72,6 +79,7 @@ namespace ET
             + "Id:" + Id + ","
             + "Name:" + Name + ","
             + "Icon:" + Icon + ","
+            + "Des:" + Des + ","
             + "AddPropreListStr:" + AddPropreListStr + ","
             + "}";
         }

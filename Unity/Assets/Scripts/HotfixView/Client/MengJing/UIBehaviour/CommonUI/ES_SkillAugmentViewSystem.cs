@@ -122,6 +122,7 @@ namespace ET.Client
 				}
 			}
 
+			self.SetSkillAugmentDescription(0);
 			self.SyncWheelSkills(skillAugmentInfo);
 			self.SubmitFixedSkillAugment(skillAugmentInfo).Coroutine();
 		}
@@ -216,7 +217,28 @@ namespace ET.Client
 
 			string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.RoleSkillIcon, augmentConfig.Icon);
 			iconImage.sprite = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
+			self.RegisterSkillAugmentItemClick(item, augmentId);
 			item.gameObject.SetActive(true);
+		}
+
+		private static void RegisterSkillAugmentItemClick(this ES_SkillAugment self, RectTransform item, int augmentId)
+		{
+			Transform clickTarget = item.Find("Mask");
+			if (clickTarget == null)
+			{
+				return;
+			}
+
+			Button button = clickTarget.GetComponent<Button>();
+			button.AddListener(() => self.SetSkillAugmentDescription(augmentId));
+		}
+
+		private static void SetSkillAugmentDescription(this ES_SkillAugment self, int augmentId)
+		{
+			SkillAugmentConfig augmentConfig = SkillAugmentConfigCategory.Instance.GetOrDefault(augmentId);
+			string description = augmentConfig == null || string.IsNullOrEmpty(augmentConfig.Des) ? string.Empty : augmentConfig.Des.Replace("\\n", "\n");
+			
+			self.E_SkillDesText.text = description;
 		}
 
 		private static void AlignWheelToItem(this ES_SkillAugment self, RectTransform rotatingRoot, int itemIndex)
@@ -237,6 +259,7 @@ namespace ET.Client
 
 		private static void ClearWheelSkills(this ES_SkillAugment self)
 		{
+			self.SetSkillAugmentDescription(0);
 			self.EG_SkillAugmentItem_1RectTransform.gameObject.SetActive(false);
 			for (int i = 0; i < self.EG_RotatingRoot_2RectTransform.childCount; i++)
 			{
