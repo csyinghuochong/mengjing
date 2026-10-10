@@ -1,0 +1,163 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: M_VFX_Fresnel_Smoke_Psychic_06
+  m_Shader: {fileID: 4800000, guid: b72d9fd96c45e074e82e9f234d240cb6, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 0
+  m_EnableInstancingVariants: 1
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap:
+    MotionVector: User
+  disabledShaderPasses:
+  - DistortionVectors
+  - TransparentBackface
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _Mask_Texture1:
+        m_Texture: {fileID: 2800000, guid: 8f8763b3130ec144c87507b2fa49eceb, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _NoiseDistortion_Texture:
+        m_Texture: {fileID: 2800000, guid: 02b0d0a96eedb3d4fa5664350b35ba23, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Noise_01_Texture:
+        m_Texture: {fileID: 2800000, guid: bd2a188e11c0c2145b7428bc4aa7efec, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Noise_02_Texture:
+        m_Texture: {fileID: 2800000, guid: 4fd53252700548e4b93dc4c187bfbfd2, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Noise_Color_Texture:
+        m_Texture: {fileID: 2800000, guid: bd2a188e11c0c2145b7428bc4aa7efec, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Texture:
+        m_Texture: {fileID: 2800000, guid: 2b03b59c1f786984297d70163e795d57, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _TextureSample0:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _VertexOffset_Texture:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _texcoord:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_Lightmaps:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_LightmapsInd:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_ShadowMasks:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _AddPrecomputedVelocity: 1
+    - _AlphaCutoff: 0.5
+    - _AlphaCutoffEnable: 0
+    - _AlphaDstBlend: 10
+    - _AlphaSrcBlend: 1
+    - _BlendMode: 0
+    - _Cull: 2
+    - _CullMode: 2
+    - _CullModeForward: 2
+    - _DepthFade_Distance: 0
+    - _Dissolve: 0
+    - _DistortionEnable: 0
+    - _DistortionMask: 0
+    - _DistortionOnly: 0
+    - _DoubleSidedEnable: 0
+    - _DoubleSidedNormalMode: 2
+    - _Dst: 10
+    - _DstBlend: 10
+    - _Emissive_Amount: 400
+    - _Emissive_Intensity: 0.5
+    - _EnableFogOnTransparent: 1
+    - _Fresnel_Power: 0.8
+    - _Fresnel_Scale: -4
+    - _Global_Speed: 0.7
+    - _Global_Speed2: 1
+    - _Mask_Multiply: 1
+    - _Mask_Power: 3
+    - _Mask_Speed1: 0
+    - _NoiseColor_Intensity: 1
+    - _NoiseColor_Power: 0.5
+    - _NoiseDistortion_Intensity: 0
+    - _Opacity_Boost: 1.2
+    - _Opacity_DepthFade: 1
+    - _Opacity_DepthFade_Intensity: 1.5
+    - _Opacity_Power: 0.5
+    - _QueueControl: 0
+    - _QueueOffset: 0
+    - _ReceiveShadows: 1
+    - _ReceivesSSR: 0
+    - _RenderQueueType: 4
+    - _RequireSplitLighting: 0
+    - _Src: 5
+    - _SrcBlend: 1
+    - _StencilRef: 0
+    - _StencilRefDepth: 0
+    - _StencilRefDistortionVec: 4
+    - _StencilRefGBuffer: 2
+    - _StencilRefMV: 32
+    - _StencilWriteMask: 6
+    - _StencilWriteMaskDepth: 8
+    - _StencilWriteMaskDistortionVec: 4
+    - _StencilWriteMaskGBuffer: 14
+    - _StencilWriteMaskMV: 40
+    - _SurfaceType: 1
+    - _TransparentBackfaceEnable: 0
+    - _TransparentCullMode: 2
+    - _TransparentSortPriority: 0
+    - _TransparentZWrite: 0
+    - _UseShadowThreshold: 0
+    - _VertexOffset_Strength: 0
+    - _ZTest: 2
+    - _ZTestDepthEqualForOpaque: 4
+    - _ZTestGBuffer: 4
+    - _ZTestTransparent: 4
+    - _ZWrite: 0
+    - __dirty: 0
+    m_Colors:
+    - _Color_1: {r: 0.8, g: 0, b: 0.6666668, a: 0}
+    - _Color_2: {r: 0, g: 0.50097084, b: 0.6, a: 0}
+    - _DoubleSidedConstants: {r: 1, g: 1, b: -1, a: 0}
+    - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
+    - _Mask_Offset: {r: 0, g: 0, b: 0, a: 0}
+    - _Mask_Scale1: {r: 1, g: 1, b: 0, a: 0}
+    - _NoiseColor_Scale: {r: 2, g: 3, b: 0, a: 0}
+    - _NoiseColor_Speed: {r: -0.2, g: -0.2, b: 0, a: 0}
+    - _NoiseDistortion_Scale: {r: 2, g: 2, b: 0, a: 0}
+    - _NoiseDistortion_Speed: {r: 0, g: -0.3, b: 0, a: 0}
+    - _Noise_01_Scale: {r: 3, g: 2, b: 0, a: 0}
+    - _Noise_01_Speed: {r: 0, g: -0.3, b: 0, a: 0}
+    - _Noise_02_Scale: {r: 1, g: 1, b: 0, a: 0}
+    - _Noise_02_Speed: {r: 0, g: 0, b: 0, a: 0}
+    - _Vector0: {r: 1, g: 1, b: 0, a: 0}
+    - _VertexOffset_Scale: {r: 1, g: 1, b: 0, a: 0}
+    - _VertexOffset_Speed: {r: 0, g: 0, b: 0, a: 0}
+  m_BuildTextureStacks: []
