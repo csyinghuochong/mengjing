@@ -15,6 +15,7 @@ Material:
   m_ValidKeywords:
   - _SURFACE_TYPE_TRANSPARENT
   - _USEALPHAOVERRIDE
+  - _USESOFTALPHA
   m_InvalidKeywords:
   - _CONSERVATIVE_DEPTH_OFFSET
   m_LightmapFlags: 0
@@ -153,7 +154,7 @@ Material:
     - _RimOffset: 0.24
     - _RimShadow: 0
     - _SmoothnessScale: 1
-    - _SoftFadeFactor: 0.1
+    - _SoftFadeFactor: 3
     - _SourceBlendRGB: 1
     - _SrcBlend: 1
     - _StencilRef: 0
@@ -179,7 +180,7 @@ Material:
     - _USEALPHAOVERRIDE: 1
     - _USEPIXELATION: 0
     - _USERAMP: 0
-    - _USESOFTALPHA: 0
+    - _USESOFTALPHA: 1
     - _USEUVOFFSET: 0
     - _UseAlphaOverride: 1
     - _UsePixelation: 0
