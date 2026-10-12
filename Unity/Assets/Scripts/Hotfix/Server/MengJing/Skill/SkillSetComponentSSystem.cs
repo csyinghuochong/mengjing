@@ -1038,27 +1038,63 @@ namespace ET.Server
         }
 
         /// <summary>
-        /// 初始化职业初始技能的增幅选项。
+        /// 根据当前技能列表初始化技能增幅选项。
         /// ActiveAugmentIds 的下标对应增幅层级，0 表示该层级尚未激活增幅。
         /// </summary>
         private static void InitSkillAugments(this SkillSetComponentS self, int occ)
         {
             self.SkillAugmentList ??= new List<SkillAugmentInfo>();
 
-            // 删除旧的
+            HashSet<int> baseSkillIds = new HashSet<int>();
+            for (int i = 0; i < self.SkillList.Count; i++)
+            {
+                int skillId = self.SkillList[i].SkillID;
+                SkillConfig skillConfig = SkillConfigCategory.Instance.GetOrDefault(skillId);
+                if (skillConfig == null)
+                {
+                    continue;
+                }
+
+                // SkillLv为0表示技能尚未学习，学习后再创建对应的增幅记录。
+                if (skillConfig.SkillLv <= 0)
+                {
+                    continue;
+                }
+
+                if (skillConfig.WeaponType == 0)
+                {
+                    AddSkillAugmentBaseSkillId(baseSkillIds, skillId);
+                    continue;
+                }
+
+                switch (occ)
+                {
+                    case 1:
+                        AddSkillAugmentBaseSkillId(baseSkillIds, SkillHelp.GetWeaponSkill(skillId, ItemEquipType.Sword, self.SkillList));
+                        AddSkillAugmentBaseSkillId(baseSkillIds, SkillHelp.GetWeaponSkill(skillId, ItemEquipType.Knife, self.SkillList));
+                        break;
+                    case 2:
+                        AddSkillAugmentBaseSkillId(baseSkillIds, SkillHelp.GetWeaponSkill(skillId, ItemEquipType.Wand, self.SkillList));
+                        AddSkillAugmentBaseSkillId(baseSkillIds, SkillHelp.GetWeaponSkill(skillId, ItemEquipType.Book, self.SkillList));
+                        break;
+                    default:
+                        AddSkillAugmentBaseSkillId(baseSkillIds, self.GetParent<Unit>().GetWeaponSkill(skillId, self.SkillList));
+                        break;
+                }
+            }
+
+            // 删除当前未学习或没有增幅选项配置的技能记录
             for (int i = self.SkillAugmentList.Count - 1; i >= 0; i--)
             {
                 SkillAugmentInfo skillAugmentInfo = self.SkillAugmentList[i];
-                if (!SkillAugmentOptionsConfigCategory.Instance.Contain(skillAugmentInfo.BaseSkillId))
+                if (!baseSkillIds.Contains(skillAugmentInfo.BaseSkillId))
                 {
                     self.SkillAugmentList.RemoveAt(i);
                 }
             }
 
-            // 先全部加入
-            foreach (SkillAugmentOptionsConfig skillAugmentOptionsConfig in SkillAugmentOptionsConfigCategory.Instance.DataList)
+            foreach (int baseSkillId in baseSkillIds)
             {
-                int baseSkillId = skillAugmentOptionsConfig.Id;
                 SkillAugmentInfo skillAugmentInfo = self.SkillAugmentList.Find(info => info.BaseSkillId == baseSkillId);
 
                 if (skillAugmentInfo == null)
@@ -1074,6 +1110,26 @@ namespace ET.Server
                     skillAugmentInfo.ActiveAugmentIds.Add(0);
                 }
             }
+        }
+
+        private static void AddSkillAugmentBaseSkillId(HashSet<int> baseSkillIds, int skillId)
+        {
+            if (!SkillConfigCategory.Instance.Contain(skillId))
+            {
+                return;
+            }
+
+            int baseSkillId = SkillConfigCategory.Instance.GetInitSkill(skillId);
+            if (SkillAugmentOptionsConfigCategory.Instance.Contain(baseSkillId))
+            {
+                baseSkillIds.Add(baseSkillId);
+            }
+        }
+
+        public static void RefreshSkillAugments(this SkillSetComponentS self)
+        {
+            int occ = self.GetParent<Unit>().GetComponent<UserInfoComponentS>().GetOcc();
+            self.InitSkillAugments(occ);
         }
 
         public static void OnLogin(this SkillSetComponentS self, int occ)
@@ -1174,23 +1230,16 @@ namespace ET.Server
 
 		private static int GetLearnedSkillLevel(this SkillSetComponentS self, int baseSkillId)
 		{
-			if (baseSkillId == 0)
+			int occ = self.GetParent<Unit>().GetComponent<UserInfoComponentS>().GetOcc();
+			switch (occ)
 			{
-				return 0;
+				case 1:
+					return SkillHelp.GetSkillLevelByAugmentBaseSkill(self.SkillList, baseSkillId, ItemEquipType.Sword, ItemEquipType.Knife);
+				case 2:
+					return SkillHelp.GetSkillLevelByAugmentBaseSkill(self.SkillList, baseSkillId, ItemEquipType.Wand, ItemEquipType.Book);
+				default:
+					return SkillHelp.GetSkillLevelByAugmentBaseSkill(self.SkillList, baseSkillId, self.GetParent<Unit>().GetEquipType());
 			}
-
-			int skillLevel = 0;
-			int originalBaseSkillId = SkillHelp.GetBaseSkill(baseSkillId);
-			for (int i = 0; i < self.SkillList.Count; i++)
-			{
-				SkillConfig skillConfig = SkillConfigCategory.Instance.GetOrDefault(self.SkillList[i].SkillID);
-				if (skillConfig != null && SkillConfigCategory.Instance.GetInitSkill(skillConfig.Id) == originalBaseSkillId)
-				{
-					skillLevel = Math.Max(skillLevel, skillConfig.SkillLv);
-				}
-			}
-
-			return skillLevel;
 		}
 
 		private static void ResetSkillAugments(this SkillSetComponentS self)
@@ -1633,6 +1682,8 @@ namespace ET.Server
 
         public static void UpdateSkillSet(this SkillSetComponentS self)
         {
+            self.RefreshSkillAugments();
+
             Unit unit = self.GetParent<Unit>();
             M2C_SkillSetMessage M2C_SkillSetMessage = M2C_SkillSetMessage.Create();
             M2C_SkillSetMessage.SkillSetInfo = ET.SkillSetInfo.Create();

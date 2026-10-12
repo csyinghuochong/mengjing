@@ -49,6 +49,7 @@ namespace ET.Server
 			unit.GetComponent<UserInfoComponentS>().UpdateRoleData(UserDataType.Sp, (costSPValue * -1).ToString());
 
 			Function_Fight.UnitUpdateProperty_Base( unit,true, true );
+			skillSetComponent.UpdateSkillSet();
 
             await ETTask.CompletedTask;
         }

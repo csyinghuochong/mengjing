@@ -187,6 +187,41 @@ namespace ET
             }
         }
 
+        public static int GetSkillLevelByAugmentBaseSkill(List<SkillPro> skillPros, int baseSkillId, params int[] weaponTypes)
+        {
+            if (skillPros == null || baseSkillId == 0 || weaponTypes == null || weaponTypes.Length == 0)
+            {
+                return 0;
+            }
+
+            int skillLevel = 0;
+            for (int i = 0; i < skillPros.Count; i++)
+            {
+                SkillConfig skillConfig = SkillConfigCategory.Instance.GetOrDefault(skillPros[i].SkillID);
+                if (skillConfig == null)
+                {
+                    continue;
+                }
+
+                for (int j = 0; j < weaponTypes.Length; j++)
+                {
+                    int weaponSkillId = GetWeaponSkill(skillConfig.Id, weaponTypes[j], skillPros);
+                    if (SkillConfigCategory.Instance.GetInitSkill(weaponSkillId) != baseSkillId)
+                    {
+                        continue;
+                    }
+
+                    if (skillConfig.SkillLv > skillLevel)
+                    {
+                        skillLevel = skillConfig.SkillLv;
+                    }
+                    break;
+                }
+            }
+
+            return skillLevel;
+        }
+
         /// <summary>
         /// 模型高度
         /// </summary>

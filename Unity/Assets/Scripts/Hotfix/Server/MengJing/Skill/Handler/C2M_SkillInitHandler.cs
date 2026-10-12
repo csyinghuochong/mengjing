@@ -139,6 +139,7 @@ namespace ET.Server
             skillSetComponent.TianFuList1 = tianfulist1;
             skillSetComponent.TianFuList2 = tianfulist2;
 
+            skillSetComponent.RefreshSkillAugments();
 
             response.SkillSetInfo = SkillSetInfo.Create();
             response.SkillSetInfo.SkillList.AddRange(skillSetComponent.SkillList);

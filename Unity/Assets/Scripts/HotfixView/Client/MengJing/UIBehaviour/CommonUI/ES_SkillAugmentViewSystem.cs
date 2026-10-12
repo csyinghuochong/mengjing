@@ -21,6 +21,7 @@ namespace ET.Client
 		private static void Awake(this ES_SkillAugment self,Transform transform)
 		{
 			self.uiTransform = transform;
+			self.InitializeWeaponTypeSet();
 
 			self.GenerateSkillAugmentItems(self.EG_ItemList_1RectTransform, self.EG_SkillAugmentItem_1RectTransform, 2, -15f, 60f, 164f);
 			self.GenerateSkillAugmentItems(self.EG_ItemList_2RectTransform, self.EG_SkillAugmentItem_2RectTransform, 3, 0f, 30f, 348f);
@@ -61,7 +62,18 @@ namespace ET.Client
 
 		public static void RefreshSkillAugmentItems(this ES_SkillAugment self)
 		{
-			List<SkillAugmentInfo> skillAugmentList = self.Root().GetComponent<SkillSetComponentC>().SkillAugmentList;
+			List<SkillAugmentInfo> allSkillAugments = self.Root().GetComponent<SkillSetComponentC>().SkillAugmentList;
+			List<SkillAugmentInfo> skillAugmentList = new();
+			HashSet<int> weaponSkillBaseIds = self.GetWeaponSkillBaseIds();
+			for (int i = 0; i < allSkillAugments.Count; i++)
+			{
+				SkillAugmentInfo skillAugmentInfo = allSkillAugments[i];
+				if (self.SelectedWeaponType == ItemEquipType.Common || weaponSkillBaseIds.Contains(skillAugmentInfo.BaseSkillId))
+				{
+					skillAugmentList.Add(skillAugmentInfo);
+				}
+			}
+
 			ResourcesLoaderComponent resourcesLoaderComponent = self.Root().GetComponent<ResourcesLoaderComponent>();
 			Transform content = self.E_SkillAugmentItemsScrollRect.content;
 
@@ -105,6 +117,124 @@ namespace ET.Client
 
 			SkillAugmentInfo selectedSkillAugment = skillAugmentList.Find(info => info.BaseSkillId == self.SelectedBaseSkillId);
 			self.OnSelectSkillAugment(selectedSkillAugment ?? skillAugmentList[0]);
+		}
+
+		private static HashSet<int> GetWeaponSkillBaseIds(this ES_SkillAugment self)
+		{
+			HashSet<int> weaponSkillBaseIds = new();
+			List<SkillPro> skillList = self.Root().GetComponent<SkillSetComponentC>().SkillList;
+			for (int i = 0; i < skillList.Count; i++)
+			{
+				SkillPro skillPro = skillList[i];
+				if (skillPro.SkillSetType != (int)SkillSetEnum.Skill ||
+				    SkillConfigCategory.Instance.GetOrDefault(skillPro.SkillID) == null)
+				{
+					continue;
+				}
+
+				int weaponSkillId = SkillHelp.GetWeaponSkill(skillPro.SkillID, self.SelectedWeaponType, skillList);
+				if (SkillConfigCategory.Instance.GetOrDefault(weaponSkillId) == null)
+				{
+					continue;
+				}
+
+				int baseSkillId = SkillConfigCategory.Instance.GetInitSkill(weaponSkillId);
+				if (baseSkillId != 0)
+				{
+					weaponSkillBaseIds.Add(baseSkillId);
+				}
+			}
+
+			return weaponSkillBaseIds;
+		}
+
+		private static void InitializeWeaponTypeSet(this ES_SkillAugment self)
+		{
+			ToggleGroup weaponTypeSet = self.E_WeaponTypeSetToggleGroup;
+			if (!self.TryGetOccupationWeaponTypes(out int firstWeaponType, out int secondWeaponType))
+			{
+				self.SelectedWeaponType = ItemEquipType.Common;
+				weaponTypeSet.gameObject.SetActive(false);
+				return;
+			}
+
+			weaponTypeSet.gameObject.SetActive(true);
+			Toggle[] toggles = weaponTypeSet.GetComponentsInChildren<Toggle>(true);
+			int[] weaponTypes = { firstWeaponType, secondWeaponType };
+			for (int i = 0; i < toggles.Length && i < weaponTypes.Length; i++)
+			{
+				string weaponName = GetWeaponTypeName(weaponTypes[i]);
+				Text[] labels = toggles[i].GetComponentsInChildren<Text>(true);
+				for (int j = 0; j < labels.Length; j++)
+				{
+					labels[j].text = weaponName;
+				}
+			}
+
+			weaponTypeSet.AddListener(self.OnWeaponTypeSelected);
+			int selectedIndex = weaponTypeSet.GetCurrentIndex();
+			if (selectedIndex < 0 || selectedIndex >= weaponTypes.Length)
+			{
+				selectedIndex = 0;
+			}
+
+			self.SelectedWeaponType = weaponTypes[selectedIndex];
+			weaponTypeSet.OnSelectIndex(selectedIndex);
+		}
+
+		private static void OnWeaponTypeSelected(this ES_SkillAugment self, int index)
+		{
+			if (!self.TryGetOccupationWeaponTypes(out int firstWeaponType, out int secondWeaponType))
+			{
+				return;
+			}
+
+			int weaponType = index switch
+			{
+				0 => firstWeaponType,
+				1 => secondWeaponType,
+				_ => ItemEquipType.Common,
+			};
+			if (weaponType == ItemEquipType.Common || weaponType == self.SelectedWeaponType)
+			{
+				return;
+			}
+
+			self.SelectedWeaponType = weaponType;
+			self.SelectedBaseSkillId = 0;
+			self.RefreshSkillAugmentItems();
+		}
+
+		private static bool TryGetOccupationWeaponTypes(this ES_SkillAugment self, out int firstWeaponType, out int secondWeaponType)
+		{
+			int occupation = self.Root().GetComponent<UserInfoComponentC>().UserInfo.Occ;
+			switch (occupation)
+			{
+				case 1:
+					firstWeaponType = ItemEquipType.Sword;
+					secondWeaponType = ItemEquipType.Knife;
+					return true;
+				case 2:
+					firstWeaponType = ItemEquipType.Wand;
+					secondWeaponType = ItemEquipType.Book;
+					return true;
+				default:
+					firstWeaponType = ItemEquipType.Common;
+					secondWeaponType = ItemEquipType.Common;
+					return false;
+			}
+		}
+
+		private static string GetWeaponTypeName(int weaponType)
+		{
+			return weaponType switch
+			{
+				ItemEquipType.Sword => "剑",
+				ItemEquipType.Knife => "刀",
+				ItemEquipType.Wand => "法杖",
+				ItemEquipType.Book => "魔法书",
+				_ => string.Empty,
+			};
 		}
 
 		private static void OnSelectSkillAugment(this ES_SkillAugment self, SkillAugmentInfo skillAugmentInfo)
@@ -154,24 +284,8 @@ namespace ET.Client
 
 		private static int GetLearnedSkillLevel(this ES_SkillAugment self, int baseSkillId)
 		{
-			if (baseSkillId == 0)
-			{
-				return 0;
-			}
-
-			int skillLevel = 0;
-			int originalBaseSkillId = SkillHelp.GetBaseSkill(baseSkillId);
 			List<SkillPro> skillList = self.Root().GetComponent<SkillSetComponentC>().SkillList;
-			for (int i = 0; i < skillList.Count; i++)
-			{
-				SkillConfig skillConfig = SkillConfigCategory.Instance.GetOrDefault(skillList[i].SkillID);
-				if (skillConfig != null && SkillConfigCategory.Instance.GetInitSkill(skillConfig.Id) == originalBaseSkillId)
-				{
-					skillLevel = Mathf.Max(skillLevel, skillConfig.SkillLv);
-				}
-			}
-
-			return skillLevel;
+			return SkillHelp.GetSkillLevelByAugmentBaseSkill(skillList, baseSkillId, self.SelectedWeaponType);
 		}
 
 		private static int GetSelectedAugmentId(this ES_SkillAugment self, SkillAugmentInfo skillAugmentInfo, int tierIndex)
