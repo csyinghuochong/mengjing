@@ -713,7 +713,9 @@ namespace ET.Server
           public static async ETTask TriggerAddSkill(this SkillManagerComponentS self, C2M_SkillCmd c2M_SkillCmd, int skillId)
           {
               SkillConfig skillConfig = SkillConfigCategory.Instance.Get(skillId);
-              if (skillConfig.AddSkillID == 0)
+              SkillSetComponentS skillset = self.GetParent<Unit>().GetComponent<SkillSetComponentS>();
+              List<int> augmentAddSkills = skillset != null ? skillset.GetSkillIdAdd(skillId) : null;
+              if (skillConfig.AddSkillID == 0 && (augmentAddSkills == null || augmentAddSkills.Count == 0))
               {
                   return;
               }
@@ -723,20 +725,45 @@ namespace ET.Server
                   return;
               }
               int addSkillId = skillConfig.AddSkillID;
-              if (addSkillId!= 0 && !SkillConfigCategory.Instance.Contain(addSkillId))
+              if (addSkillId != 0)
               {
-                  Log.Debug($"skillConfig.AddSkillID无效：  {skillId} {addSkillId}");
+                  if (!SkillConfigCategory.Instance.Contain(addSkillId))
+                  {
+                      Log.Error($"skillConfig.AddSkillID无效：  {skillId} {addSkillId}");
+                  }
+                  else
+                  {
+                      c2M_SkillCmd.SkillID = addSkillId;
+                      self.OnUseSkill(c2M_SkillCmd, false);
+                  }
               }
-              
-              c2M_SkillCmd.SkillID = addSkillId;
-              self.OnUseSkill(c2M_SkillCmd, false);
-              
+
+              if (augmentAddSkills != null)
+              {
+                  for (int i = 0; i < augmentAddSkills.Count; i++)
+                  {
+                      int augmentAddSkillId = augmentAddSkills[i];
+                      if (!SkillConfigCategory.Instance.Contain(augmentAddSkillId))
+                      {
+                          Log.Error($"SkillAugment SkillIdAdd无效：  {skillId} {augmentAddSkillId}");
+                          continue;
+                      }
+
+                      c2M_SkillCmd.SkillID = augmentAddSkillId;
+                      self.OnUseSkill(c2M_SkillCmd, false);
+                  }
+              }
+
+              if (addSkillId == 0)
+              {
+                  return;
+              }
+
               int[] selfSkillList = skillConfig.TriggerSelfSkillID;
               if (selfSkillList == null || selfSkillList.Length == 0 || selfSkillList[0] == 0)
               {
                   return;
               }
-              SkillSetComponentS skillset = self.GetParent<Unit>().GetComponent<SkillSetComponentS>();
               if (skillset == null)
               {
                   return;

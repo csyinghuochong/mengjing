@@ -187,6 +187,7 @@ namespace ET
 
     public static class SkillAugmentProEnum
     {
+        public const string SkillIdAdd = "SkillIdAdd";
         public const string SkillPropertyAdd = "SkillPropertyAdd";
         public const string BuffIdAdd = "BuffIdAdd";
         public const string BuffInitIdAdd = "BuffInitIdAdd";

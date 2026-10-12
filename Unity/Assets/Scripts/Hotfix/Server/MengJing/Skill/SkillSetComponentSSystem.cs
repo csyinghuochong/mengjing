@@ -598,6 +598,31 @@ namespace ET.Server
             return HideProList;
         }
 
+        public static List<int> GetSkillIdAdd(this SkillSetComponentS self, int skillId)
+        {
+            List<int> addSkills = new List<int>();
+
+            List<string[]> augmentProperties = self.GetSkillAugmentProperties(skillId, SkillAugmentProEnum.SkillIdAdd);
+            if (augmentProperties.Count == 0)
+            {
+                return addSkills;
+            }
+
+            for (int i = 0; i < augmentProperties.Count; i++)
+            {
+                string[] propertyInfo = augmentProperties[i];
+                if (propertyInfo.Length < 2 || !int.TryParse(propertyInfo[1], out int addSkillId))
+                {
+                    Log.Error($"SkillAugment SkillIdAdd配置错误: {string.Join(';', propertyInfo)}");
+                    continue;
+                }
+
+                addSkills.Add(addSkillId);
+            }
+
+            return addSkills;
+        }
+
         public static bool IsSkillSingingCancel(this SkillSetComponentS self, int skillId)
         {
             List<KeyValuePairInt> tianfuids = self.GetTianFuIdsByType(TianFuProEnum.SkillSingingCancel);
