@@ -185,6 +185,13 @@ namespace ET
         public const string SkillSingingCancel = "SkillSingingCancel";
     }
 
+    public static class SkillAugmentProEnum
+    {
+        public const string SkillPropertyAdd = "SkillPropertyAdd";
+        public const string BuffIdAdd = "BuffIdAdd";
+        public const string BuffInitIdAdd = "BuffInitIdAdd";
+    }
+
     [EnableClass]
     public class SkillCDItem
     {

@@ -1,72 +1,72 @@
 [
   {
-    "Id": 101000111,
+    "Id": 111000111,
     "Name": "扩域",
     "Icon": "2102020",
     "Des": "增大技能范围",
-    "AddPropreListStr": ""
+    "AddPropreListStr": "SkillPropertyAdd;1;2"
   },
   {
-    "Id": 101000112,
+    "Id": 111000112,
     "Name": "雷击",
     "Icon": "2102010",
     "Des": "命中后电一下",
     "AddPropreListStr": ""
   },
   {
-    "Id": 101000121,
+    "Id": 111000121,
     "Name": "灼烧",
     "Icon": "2200010",
     "Des": "命中后挂个灼烧Buff",
-    "AddPropreListStr": ""
+    "AddPropreListStr": "BuffIdAdd;30204040"
   },
   {
-    "Id": 101000122,
+    "Id": 111000122,
     "Name": "寒霜",
     "Icon": "1120011",
     "Des": "命中后挂个减速Buff",
-    "AddPropreListStr": ""
+    "AddPropreListStr": "BuffIdAdd;11100012"
   },
   {
-    "Id": 101000123,
-    "Name": "恐惧",
-    "Icon": "2304070",
-    "Des": "命中后挂个恐惧Buff",
-    "AddPropreListStr": ""
+    "Id": 111000123,
+    "Name": "恢复",
+    "Icon": "2304030",
+    "Des": "使用技能时回口血",
+    "AddPropreListStr": "BuffInitIdAdd;40000010"
   },
   {
-    "Id": 101001111,
+    "Id": 111001111,
     "Name": "扩域2",
     "Icon": "2102020",
     "Des": "增大技能范围",
     "AddPropreListStr": ""
   },
   {
-    "Id": 101001112,
+    "Id": 111001112,
     "Name": "雷击2",
     "Icon": "2102010",
     "Des": "命中后电一下",
     "AddPropreListStr": ""
   },
   {
-    "Id": 101001121,
+    "Id": 111001121,
     "Name": "灼烧2",
     "Icon": "2200010",
     "Des": "命中后挂个灼烧Buff",
     "AddPropreListStr": ""
   },
   {
-    "Id": 101001122,
+    "Id": 111001122,
     "Name": "寒霜2",
     "Icon": "1120011",
     "Des": "命中后挂个减速Buff",
     "AddPropreListStr": ""
   },
   {
-    "Id": 101001123,
-    "Name": "恐惧2",
-    "Icon": "2304070",
-    "Des": "命中后挂个恐惧Buff",
+    "Id": 111001123,
+    "Name": "恢复",
+    "Icon": "2304030",
+    "Des": "使用技能时回口血",
     "AddPropreListStr": ""
   }
 ]

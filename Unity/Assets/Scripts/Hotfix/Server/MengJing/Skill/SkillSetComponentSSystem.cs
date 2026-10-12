@@ -489,10 +489,57 @@ namespace ET.Server
             return typeTianfus;
         }
 
+        private static List<string[]> GetSkillAugmentProperties(this SkillSetComponentS self, int skillId, string proType)
+        {
+            List<string[]> properties = new();
+            
+            if (self.SkillAugmentList == null || self.SkillAugmentList.Count == 0)
+            {
+                return properties;
+            }
+
+            int baseSkillId = SkillConfigCategory.Instance.GetInitSkill(skillId);
+            SkillAugmentInfo augmentInfo = self.SkillAugmentList.Find(info => info.BaseSkillId == baseSkillId);
+            if (augmentInfo == null || augmentInfo.ActiveAugmentIds == null)
+            {
+                return properties;
+            }
+            
+            for (int i = 0; i < augmentInfo.ActiveAugmentIds.Count; i++)
+            {
+                int augmentId = augmentInfo.ActiveAugmentIds[i];
+                if (augmentId == 0)
+                {
+                    continue;
+                }
+
+                SkillAugmentConfig augmentConfig = SkillAugmentConfigCategory.Instance.GetOrDefault(augmentId);
+                if (augmentConfig == null || string.IsNullOrEmpty(augmentConfig.AddPropreListStr))
+                {
+                    continue;
+                }
+
+                string[] addPropertyList = augmentConfig.AddPropreListStr.Split("@");
+                for (int k = 0; k < addPropertyList.Length; k++)
+                {
+                    string[] propertyInfo = addPropertyList[k].Split(";");
+                    if (propertyInfo[0] != proType)
+                    {
+                        continue;
+                    }
+
+                    properties.Add(propertyInfo);
+                }
+            }
+
+            return properties;
+        }
+
         public static Dictionary<int, float> GetSkillPropertyAdd(this SkillSetComponentS self, int skillId)
         {
             List<KeyValuePairInt> tianfuids = self.GetTianFuIdsByType(TianFuProEnum.SkillPropertyAdd);
-            if (tianfuids.Count == 0)
+            List<string[]> augmentProperties = self.GetSkillAugmentProperties(skillId, SkillAugmentProEnum.SkillPropertyAdd);
+            if (tianfuids.Count == 0 && augmentProperties.Count == 0)
                 return null;
 
             Dictionary<int, float> HideProList = new Dictionary<int, float>();
@@ -533,6 +580,21 @@ namespace ET.Server
                 }
             }
 
+            for (int i = 0; i < augmentProperties.Count; i++)
+            {
+                string[] propertyInfo = augmentProperties[i];
+                int key = int.Parse(propertyInfo[1]);
+                float value = float.Parse(propertyInfo[2]);
+                if (HideProList.ContainsKey(key))
+                {
+                    HideProList[key] += value;
+                }
+                else
+                {
+                    HideProList.Add(key, value);
+                }
+            }
+
             return HideProList;
         }
 
@@ -569,7 +631,8 @@ namespace ET.Server
         public static List<int> GetBuffIdAdd(this SkillSetComponentS self, int skillId)
         {
             List<KeyValuePairInt> tianfuids = self.GetTianFuIdsByType(TianFuProEnum.BuffIdAdd);
-            if (tianfuids.Count == 0)
+            List<string[]> augmentProperties = self.GetSkillAugmentProperties(skillId, SkillAugmentProEnum.BuffIdAdd);
+            if (tianfuids.Count == 0 && augmentProperties.Count == 0)
                 return null;
 
             List<int> addBuffs = new List<int>();
@@ -600,13 +663,19 @@ namespace ET.Server
                 }
             }
 
+            for (int i = 0; i < augmentProperties.Count; i++)
+            {
+                addBuffs.Add(int.Parse(augmentProperties[i][1]));
+            }
+
             return addBuffs;
         }
 
         public static List<int> GetBuffInitIdAdd(this SkillSetComponentS self, int skillId)
         {
             List<KeyValuePairInt> tianfuids = self.GetTianFuIdsByType(TianFuProEnum.BuffInitIdAdd);
-            if (tianfuids.Count == 0)
+            List<string[]> augmentProperties = self.GetSkillAugmentProperties(skillId, SkillAugmentProEnum.BuffInitIdAdd);
+            if (tianfuids.Count == 0 && augmentProperties.Count == 0)
                 return null;
 
             List<int> addBuffs = new List<int>();
@@ -635,6 +704,11 @@ namespace ET.Server
 
                     addBuffs.Add(int.Parse(properInfo[2]));
                 }
+            }
+
+            for (int i = 0; i < augmentProperties.Count; i++)
+            {
+                addBuffs.Add(int.Parse(augmentProperties[i][1]));
             }
 
             return addBuffs;
@@ -944,23 +1018,22 @@ namespace ET.Server
         /// </summary>
         private static void InitSkillAugments(this SkillSetComponentS self, int occ)
         {
-            int[] initSkillIds = OccupationConfigCategory.Instance.Get(occ).InitSkillID;
-
             self.SkillAugmentList ??= new List<SkillAugmentInfo>();
 
-            for (int i = 0; i < initSkillIds.Length; i++)
+            // 删除旧的
+            for (int i = self.SkillAugmentList.Count - 1; i >= 0; i--)
             {
-                int baseSkillId = SkillConfigCategory.Instance.GetInitSkill(initSkillIds[i]);
-                if (baseSkillId == 0)
+                SkillAugmentInfo skillAugmentInfo = self.SkillAugmentList[i];
+                if (!SkillAugmentOptionsConfigCategory.Instance.Contain(skillAugmentInfo.BaseSkillId))
                 {
-                    continue;
+                    self.SkillAugmentList.RemoveAt(i);
                 }
+            }
 
-                if (!SkillAugmentOptionsConfigCategory.Instance.Contain(baseSkillId))
-                {
-                    continue;
-                }
-
+            // 先全部加入
+            foreach (SkillAugmentOptionsConfig skillAugmentOptionsConfig in SkillAugmentOptionsConfigCategory.Instance.DataList)
+            {
+                int baseSkillId = skillAugmentOptionsConfig.Id;
                 SkillAugmentInfo skillAugmentInfo = self.SkillAugmentList.Find(info => info.BaseSkillId == baseSkillId);
 
                 if (skillAugmentInfo == null)
@@ -1082,10 +1155,11 @@ namespace ET.Server
 			}
 
 			int skillLevel = 0;
+			int originalBaseSkillId = SkillHelp.GetBaseSkill(baseSkillId);
 			for (int i = 0; i < self.SkillList.Count; i++)
 			{
 				SkillConfig skillConfig = SkillConfigCategory.Instance.GetOrDefault(self.SkillList[i].SkillID);
-				if (skillConfig != null && SkillConfigCategory.Instance.GetInitSkill(skillConfig.Id) == baseSkillId)
+				if (skillConfig != null && SkillConfigCategory.Instance.GetInitSkill(skillConfig.Id) == originalBaseSkillId)
 				{
 					skillLevel = Math.Max(skillLevel, skillConfig.SkillLv);
 				}

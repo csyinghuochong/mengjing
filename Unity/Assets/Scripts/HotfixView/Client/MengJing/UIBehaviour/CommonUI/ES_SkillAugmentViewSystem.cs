@@ -160,11 +160,12 @@ namespace ET.Client
 			}
 
 			int skillLevel = 0;
+			int originalBaseSkillId = SkillHelp.GetBaseSkill(baseSkillId);
 			List<SkillPro> skillList = self.Root().GetComponent<SkillSetComponentC>().SkillList;
 			for (int i = 0; i < skillList.Count; i++)
 			{
 				SkillConfig skillConfig = SkillConfigCategory.Instance.GetOrDefault(skillList[i].SkillID);
-				if (skillConfig != null && SkillConfigCategory.Instance.GetInitSkill(skillConfig.Id) == baseSkillId)
+				if (skillConfig != null && SkillConfigCategory.Instance.GetInitSkill(skillConfig.Id) == originalBaseSkillId)
 				{
 					skillLevel = Mathf.Max(skillLevel, skillConfig.SkillLv);
 				}
