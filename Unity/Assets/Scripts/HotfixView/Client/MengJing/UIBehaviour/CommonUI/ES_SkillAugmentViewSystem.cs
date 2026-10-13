@@ -21,6 +21,9 @@ namespace ET.Client
 		private static void Awake(this ES_SkillAugment self,Transform transform)
 		{
 			self.uiTransform = transform;
+			self.E_ButtonResetButton.AddListener(() => self.OnButtonReset(1));
+			self.E_SkillLearnButton.AddListener(self.OnSkillLearn);
+			self.UpdateSkillLearnPanel();
 			self.InitializeWeaponTypeSet();
 
 			self.GenerateSkillAugmentItems(self.EG_ItemList_1RectTransform, self.EG_SkillAugmentItem_1RectTransform, 2, -15f, 60f, 164f);
@@ -39,6 +42,82 @@ namespace ET.Client
 			self.SetWheelLineAlpha(self.EG_Line_3RectTransform, 0f);
 			self.RegisterWheelDrag(self.E_WheelHitArea_1EventTrigger, self.EG_RotatingRoot_1RectTransform, self.EG_ItemList_1RectTransform, self.EG_Line_2RectTransform, 0);
 			self.RegisterWheelDrag(self.E_WheelHitArea_2EventTrigger, self.EG_RotatingRoot_2RectTransform, self.EG_ItemList_2RectTransform, self.EG_Line_3RectTransform, 1);
+		}
+
+		private static void OnSkillLearn(this ES_SkillAugment self)
+		{
+			SkillPro skillPro = self.GetSelectedSkillPro();
+			if (skillPro == null)
+			{
+				return;
+			}
+
+			UserInfo userInfo = self.Root().GetComponent<UserInfoComponentC>().UserInfo;
+			SkillConfig skillConfig = SkillConfigCategory.Instance.Get(skillPro.SkillID);
+			if (userInfo.Sp < skillConfig.CostSPValue)
+			{
+				FlyTipComponent.Instance.ShowFlyTip("技能点不足！!");
+				return;
+			}
+
+			if (userInfo.Lv < skillConfig.LearnRoseLv)
+			{
+				FlyTipComponent.Instance.ShowFlyTip("等级不足！!");
+				return;
+			}
+
+			if (userInfo.Gold < skillConfig.CostGoldValue)
+			{
+				FlyTipComponent.Instance.ShowFlyTip("金币不足！!");
+				return;
+			}
+
+			if (skillConfig.NextSkillID == 0)
+			{
+				FlyTipComponent.Instance.ShowFlyTip("已满级！!");
+				return;
+			}
+
+			SkillNetHelper.ActiveSkillID(self.Root(), skillPro.SkillID).Coroutine();
+		}
+
+		private static void OnButtonReset(this ES_SkillAugment self, int operation)
+		{
+			GlobalValueConfig globalValueConfig = GlobalValueConfigCategory.Instance.Get(20);
+			int needGold = int.Parse(globalValueConfig.Value);
+			UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
+			if (userInfoComponent.UserInfo.Gold < needGold)
+			{
+				HintHelp.ShowErrorHint(self.Root(), ErrorCode.ERR_GoldNotEnoughError);
+				return;
+			}
+
+			using (zstring.Block())
+			{
+				PopupTipHelp.OpenPopupTip(self.Root(), "技能点重置", zstring.Format("是否花费{0}金币重置技能点", needGold),
+					() => self.RequestReset(operation).Coroutine()).Coroutine();
+			}
+		}
+
+		private static async ETTask RequestReset(this ES_SkillAugment self, int operation)
+		{
+			int error = await SkillNetHelper.SkillOperation(self.Root(), operation);
+			if (error != 0)
+			{
+				return;
+			}
+
+			if (operation == 1)
+			{
+				EventSystem.Instance.Publish(self.Root(), new SkillReset());
+			}
+
+			if (operation == 2)
+			{
+				UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
+				userInfoComponent.UserInfo.OccTwo = 0;
+				EventSystem.Instance.Publish(self.Root(), new SkillReset());
+			}
 		}
 
 		[EntitySystem]
@@ -111,6 +190,7 @@ namespace ET.Client
 			if (skillAugmentList.Count == 0)
 			{
 				self.SelectedBaseSkillId = 0;
+				self.UpdateSkillLearnPanel();
 				self.ClearWheelSkills();
 				return;
 			}
@@ -237,6 +317,66 @@ namespace ET.Client
 			};
 		}
 
+		private static SkillPro GetSelectedSkillPro(this ES_SkillAugment self)
+		{
+			if (self.SelectedBaseSkillId == 0)
+			{
+				return null;
+			}
+
+			List<SkillPro> skillList = self.Root().GetComponent<SkillSetComponentC>().SkillList;
+			for (int i = 0; i < skillList.Count; i++)
+			{
+				SkillPro skillPro = skillList[i];
+				if (skillPro.SkillSetType != (int)SkillSetEnum.Skill ||
+				    SkillConfigCategory.Instance.GetOrDefault(skillPro.SkillID) == null)
+				{
+					continue;
+				}
+
+				int weaponSkillId = SkillHelp.GetWeaponSkill(skillPro.SkillID, self.SelectedWeaponType, skillList);
+				if (SkillConfigCategory.Instance.GetOrDefault(weaponSkillId) != null &&
+				    SkillConfigCategory.Instance.GetInitSkill(weaponSkillId) == self.SelectedBaseSkillId)
+				{
+					return skillPro;
+				}
+			}
+
+			return null;
+		}
+
+		private static void UpdateSkillLearnPanel(this ES_SkillAugment self)
+		{
+			SkillPro skillPro = self.GetSelectedSkillPro();
+			if (skillPro == null)
+			{
+				self.E_SkillLvText.text = string.Empty;
+				self.E_SkillPointText.text = string.Empty;
+				self.E_SkillLearnButton.interactable = false;
+				return;
+			}
+
+			List<SkillPro> skillList = self.Root().GetComponent<SkillSetComponentC>().SkillList;
+			SkillConfig skillConfig = SkillConfigCategory.Instance.Get(skillPro.SkillID);
+			int weaponSkillId = SkillHelp.GetWeaponSkill(skillPro.SkillID, self.SelectedWeaponType, skillList);
+			SkillConfig weaponSkillConfig = SkillConfigCategory.Instance.GetOrDefault(weaponSkillId);
+			if (weaponSkillConfig == null)
+			{
+				self.E_SkillLvText.text = string.Empty;
+				self.E_SkillPointText.text = string.Empty;
+				self.E_SkillLearnButton.interactable = false;
+				return;
+			}
+
+			UserInfo userInfo = self.Root().GetComponent<UserInfoComponentC>().UserInfo;
+			using (zstring.Block())
+			{
+				self.E_SkillLvText.text = LanguageComponent.Instance.LoadLocalization("等级 ") + weaponSkillConfig.SkillLv;
+				self.E_SkillPointText.text = zstring.Format("技能点数：{0}/{1}", skillConfig.CostSPValue, userInfo.Sp);
+			}
+			self.E_SkillLearnButton.interactable = true;
+		}
+
 		private static void OnSelectSkillAugment(this ES_SkillAugment self, SkillAugmentInfo skillAugmentInfo)
 		{
 			if (skillAugmentInfo == null)
@@ -256,6 +396,7 @@ namespace ET.Client
 
 			self.SetSkillAugmentDescription(0);
 			self.SyncWheelSkills(skillAugmentInfo);
+			self.UpdateSkillLearnPanel();
 		}
 
 		private static void SyncWheelSkills(this ES_SkillAugment self, SkillAugmentInfo skillAugmentInfo)
@@ -391,9 +532,22 @@ namespace ET.Client
 
 		private static void SetSkillAugmentDescription(this ES_SkillAugment self, int augmentId)
 		{
-			SkillAugmentConfig augmentConfig = SkillAugmentConfigCategory.Instance.GetOrDefault(augmentId);
-			string description = augmentConfig == null || string.IsNullOrEmpty(augmentConfig.Des) ? string.Empty : augmentConfig.Des.Replace("\\n", "\n");
-			
+			string description;
+			if (augmentId == 0)
+			{
+				SkillConfig skillConfig = SkillConfigCategory.Instance.GetOrDefault(self.SelectedBaseSkillId);
+				description = skillConfig == null || string.IsNullOrEmpty(skillConfig.SkillDescribe)
+					? string.Empty
+					: skillConfig.SkillDescribe.Replace("\\n", "\n");
+			}
+			else
+			{
+				SkillAugmentConfig augmentConfig = SkillAugmentConfigCategory.Instance.GetOrDefault(augmentId);
+				description = augmentConfig == null || string.IsNullOrEmpty(augmentConfig.Des)
+					? string.Empty
+					: augmentConfig.Des.Replace("\\n", "\n");
+			}
+
 			self.E_SkillDesText.text = description;
 		}
 

@@ -132,6 +132,11 @@ namespace ET.Client
             {
                 self.View.ES_SkillLearn.E_BtnItemTypeSetToggleGroup.OnSelectIndex(0);
             }
+
+            if (self.View.ES_SkillAugment.uiTransform.gameObject.activeSelf)
+            {
+                self.View.ES_SkillAugment.RefreshSkillAugmentItems();
+            }
         }
 
         public static void OnSkillUpgrade(this DlgSkill self, string DataParams)
@@ -139,6 +144,11 @@ namespace ET.Client
             if (self.View.ES_SkillLearn.uiTransform.gameObject.activeSelf)
             {
                 self.View.ES_SkillLearn.OnSkillUpgrade(DataParams);
+            }
+
+            if (self.View.ES_SkillAugment.uiTransform.gameObject.activeSelf)
+            {
+                self.View.ES_SkillAugment.RefreshSkillAugmentItems();
             }
 
             self.Root().GetComponent<GuideComponent>().OnTrigger(GuideTriggerType.SkillUp, "0");
