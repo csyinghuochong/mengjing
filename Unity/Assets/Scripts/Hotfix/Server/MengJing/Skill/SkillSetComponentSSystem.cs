@@ -1055,12 +1055,6 @@ namespace ET.Server
                     continue;
                 }
 
-                // SkillLv为0表示技能尚未学习，学习后再创建对应的增幅记录。
-                if (skillConfig.SkillLv <= 0)
-                {
-                    continue;
-                }
-
                 if (skillConfig.WeaponType == 0)
                 {
                     AddSkillAugmentBaseSkillId(baseSkillIds, skillId);
@@ -1083,7 +1077,7 @@ namespace ET.Server
                 }
             }
 
-            // 删除当前未学习或没有增幅选项配置的技能记录
+            // 删除已不在技能列表中或没有增幅选项配置的技能记录
             for (int i = self.SkillAugmentList.Count - 1; i >= 0; i--)
             {
                 SkillAugmentInfo skillAugmentInfo = self.SkillAugmentList[i];
