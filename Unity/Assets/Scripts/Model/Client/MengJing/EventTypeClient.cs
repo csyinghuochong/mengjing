@@ -150,6 +150,10 @@ namespace ET.Client
     {
     }
 
+    public struct SkillAugmentSetting
+    {
+    }
+
     public struct SkillReset
     {
     }

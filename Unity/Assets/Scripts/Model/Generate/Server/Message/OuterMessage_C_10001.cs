@@ -34464,6 +34464,9 @@ namespace ET
         [MemoryPackOrder(91)]
         public string Message { get; set; }
 
+        [MemoryPackOrder(0)]
+        public SkillAugmentInfo SkillAugmentInfo { get; set; }
+
         public override void Dispose()
         {
             if (!this.IsFromPool)
@@ -34474,6 +34477,7 @@ namespace ET
             this.RpcId = default;
             this.Error = default;
             this.Message = default;
+            this.SkillAugmentInfo = default;
 
             ObjectPool.Instance.Recycle(this);
         }

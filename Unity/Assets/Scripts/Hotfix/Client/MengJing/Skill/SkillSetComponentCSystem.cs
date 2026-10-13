@@ -27,6 +27,23 @@ namespace ET.Client
             self.SkillAugmentList = skillSetInfo.SkillAugmentList;
         }
 
+        public static void UpdateSkillAugment(this SkillSetComponentC self, SkillAugmentInfo skillAugmentInfo)
+        {
+            if (skillAugmentInfo == null)
+            {
+                return;
+            }
+
+            int index = self.SkillAugmentList.FindIndex(info => info.BaseSkillId == skillAugmentInfo.BaseSkillId);
+            if (index >= 0)
+            {
+                self.SkillAugmentList[index] = skillAugmentInfo;
+                return;
+            }
+
+            self.SkillAugmentList.Add(skillAugmentInfo);
+        }
+
         public static List<KeyValuePairInt> TianFuList(this SkillSetComponentC self)
         {
             return self.TianFuPlan == 0 ? self.TianFuList1 : self.TianFuList2;

@@ -103,8 +103,13 @@ namespace ET.Client
             request.TierIndex = tierIndex;
             request.AugmentId = augmentId;
 
-            M2C_SkillAugmentSetResponse response =
-                    (M2C_SkillAugmentSetResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            M2C_SkillAugmentSetResponse response = (M2C_SkillAugmentSetResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            if (response.Error == ErrorCode.ERR_Success && response.SkillAugmentInfo != null)
+            {
+                root.GetComponent<SkillSetComponentC>().UpdateSkillAugment(response.SkillAugmentInfo);
+                EventSystem.Instance.Publish(root, new SkillAugmentSetting());
+            }
+
             return response.Error;
         }
 

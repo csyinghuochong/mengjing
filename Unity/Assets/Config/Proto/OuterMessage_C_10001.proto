@@ -7907,4 +7907,5 @@ message M2C_SkillAugmentSetResponse // ILocationResponse
 	int32 RpcId = 90;
 	int32 Error = 91;
 	string Message = 92;
+	SkillAugmentInfo SkillAugmentInfo = 1;
 }

@@ -1218,7 +1218,6 @@ namespace ET.Server
             }
 
             augmentInfo.ActiveAugmentIds[tierIndex] = augmentId;
-            self.UpdateSkillSet();
             return ErrorCode.ERR_Success;
         }
 

@@ -33,6 +33,16 @@ namespace ET.Client
     }
 
     [Event(SceneType.Demo)]
+    public class DataUpdate_SkillAugmentSetting_Refresh : AEvent<Scene, SkillAugmentSetting>
+    {
+        protected override async ETTask Run(Scene scene, SkillAugmentSetting args)
+        {
+            scene.GetComponent<UIComponent>().GetDlgLogic<DlgSkill>()?.OnSkillAugmentUpdate();
+            await ETTask.CompletedTask;
+        }
+    }
+
+    [Event(SceneType.Demo)]
     public class DataUpdate_OnActiveTianFu_Refresh : AEvent<Scene, OnActiveTianFu>
     {
         protected override async ETTask Run(Scene scene, OnActiveTianFu args)
@@ -166,6 +176,14 @@ namespace ET.Client
                 self.View.ES_SkillSet.OnSkillSetting();
             }
 
+            if (self.View.ES_SkillAugment.uiTransform.gameObject.activeSelf)
+            {
+                self.View.ES_SkillAugment.RefreshSkillAugmentItems();
+            }
+        }
+
+        public static void OnSkillAugmentUpdate(this DlgSkill self)
+        {
             if (self.View.ES_SkillAugment.uiTransform.gameObject.activeSelf)
             {
                 self.View.ES_SkillAugment.RefreshSkillAugmentItems();
