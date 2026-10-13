@@ -2104,7 +2104,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8639595908828293651}
-  - component: {fileID: 6998799154465790673}
+  - component: {fileID: 1771090341085048263}
   - component: {fileID: 5465782820048852894}
   m_Layer: 5
   m_Name: E_RewardList
@@ -2133,7 +2133,7 @@ RectTransform:
   m_AnchoredPosition: {x: 385.85175, y: -437.162}
   m_SizeDelta: {x: 679.5034, y: 41.3991}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &6998799154465790673
+--- !u!114 &1771090341085048263
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2142,9 +2142,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 5886072464544352894}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1aa08ab6e0800fa44ae55d278d1423e3, type: 3}
+  m_Script: {fileID: 11500000, guid: ce71017a2903f7c4c9a699e438d0b897, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  prefabSource:
+    prefabName: Item_CommonItem
+    poolSize: 5
+  totalCount: 0
+  reverseDirection: 0
   m_Content: {fileID: 9047778388747734922}
   m_Horizontal: 0
   m_Vertical: 1

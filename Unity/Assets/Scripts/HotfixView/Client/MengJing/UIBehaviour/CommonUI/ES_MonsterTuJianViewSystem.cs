@@ -12,7 +12,6 @@ namespace ET.Client
     public static partial class ES_MonsterTuJianSystem
     {
         private const string SkillItemPrefabPath = "Assets/Bundles/UI/Item/Item_CommonSkillItem.prefab";
-        private const string RewardItemPrefabPath = "Assets/Bundles/UI/Item/Item_CommonItem.prefab";
 
         [EntitySystem]
         private static void Awake(this ES_MonsterTuJian self, Transform transform)
@@ -24,12 +23,15 @@ namespace ET.Client
 
             self.ChapterTemplate.SetActive(false);
             self.MonsterListTemplate.SetActive(false);
+            self.E_RewardListLoopVerticalScrollRect.AddItemRefreshListener(self.OnRewardItemRefresh);
             self.InitMonsterTuJian();
         }
 
         [EntitySystem]
         private static void Destroy(this ES_MonsterTuJian self)
         {
+            self.E_RewardListLoopVerticalScrollRect.dataSource.scrollMoveEvent = null;
+            self.ShowRewardItems.Clear();
             self.DestroyWidget();
         }
 
@@ -388,33 +390,33 @@ namespace ET.Client
         {
             List<RewardItem> rewards = DropHelper.Show_MonsterDropNoRepeat(monsterId, 1f, true).Where(reward => ItemConfigCategory.Instance.Contain(reward.ItemID)).OrderByDescending(reward => ItemConfigCategory.Instance.Get(reward.ItemID).ItemQuality).ToList();
 
-            if (self.RewardItems.Count < rewards.Count)
+            self.ShowRewardItems.Clear();
+            foreach (RewardItem reward in rewards)
             {
-                GameObject prefab = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(RewardItemPrefabPath);
+                self.ShowRewardItems.Add(new ItemInfo { ItemID = reward.ItemID, ItemNum = reward.ItemNum });
+            }
 
-                while (self.RewardItems.Count < rewards.Count)
+            self.AddUIScrollItems(ref self.ScrollItemRewardItems, self.ShowRewardItems.Count);
+            self.E_RewardListLoopVerticalScrollRect.SetVisible(true, self.ShowRewardItems.Count);
+        }
+
+        private static void OnRewardItemRefresh(this ES_MonsterTuJian self, Transform transform, int index)
+        {
+            if (index < 0 || index >= self.ShowRewardItems.Count)
+            {
+                return;
+            }
+
+            foreach (Scroll_Item_CommonItem item in self.ScrollItemRewardItems.Values)
+            {
+                if (item.uiTransform == transform)
                 {
-                    GameObject go = UnityEngine.Object.Instantiate(prefab, self.E_RewardListScrollRect.content);
-                    go.SetActive(true);
-                    Scroll_Item_CommonItem item = self.AddChild<Scroll_Item_CommonItem>();
-                    item.BindTrans(go.transform);
-                    self.RewardItems.Add(item);
+                    item.uiTransform = null;
                 }
             }
 
-            for (int i = 0; i < self.RewardItems.Count; i++)
-            {
-                Scroll_Item_CommonItem item = self.RewardItems[i];
-                bool show = i < rewards.Count;
-                item.uiTransform.gameObject.SetActive(show);
-                if (show)
-                {
-                    RewardItem reward = rewards[i];
-                    item.Refresh(new ItemInfo { ItemID = reward.ItemID, ItemNum = reward.ItemNum }, ItemOperateEnum.None);
-                }
-            }
-
-            self.E_RewardListScrollRect.verticalNormalizedPosition = 1f;
+            Scroll_Item_CommonItem rewardItem = self.ScrollItemRewardItems[index].BindTrans(transform);
+            rewardItem.Refresh(self.ShowRewardItems[index], ItemOperateEnum.None);
         }
 
         private static void ClearMonsterDetail(this ES_MonsterTuJian self)
