@@ -15,6 +15,7 @@ namespace ET.Client
 		public readonly Dictionary<int, GameObject> ChapterMonsterLists = new();
 		public readonly Dictionary<int, List<int>> ChapterMonsters = new();
 		public readonly Dictionary<int, List<GameObject>> MonsterItems = new();
+		public readonly HashSet<int> InitializedChapters = new();
 		public readonly List<EntityRef<Scroll_Item_CommonSkillItem>> SkillItems = new();
 		public readonly List<EntityRef<Scroll_Item_CommonItem>> RewardItems = new();
 		public int SelectedChapterId;
@@ -146,6 +147,7 @@ namespace ET.Client
 			this.ChapterMonsterLists.Clear();
 			this.ChapterMonsters.Clear();
 			this.MonsterItems.Clear();
+			this.InitializedChapters.Clear();
 			this.SkillItems.Clear();
 			this.RewardItems.Clear();
 			this.m_E_Text_NameText = null;

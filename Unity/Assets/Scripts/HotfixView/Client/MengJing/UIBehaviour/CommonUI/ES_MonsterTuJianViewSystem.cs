@@ -55,7 +55,6 @@ namespace ET.Client
 
                 GameObject monsterList = UnityEngine.Object.Instantiate(self.MonsterListTemplate, self.LeftContent.transform);
                 monsterList.name = $"MonsterChapterList_{chapter.Id}";
-                self.CreateMonsterItems(monsterList, monsterIds);
                 monsterList.SetActive(false);
 
                 self.ChapterHeaders.Add(chapter.Id, chapterHeader);
@@ -165,7 +164,6 @@ namespace ET.Client
             Transform itemTemplate = monsterList.transform.Find("UIMonsterTuJianItem");
             itemTemplate.gameObject.SetActive(false);
             ResourcesLoaderComponent resourcesLoader = self.Root().GetComponent<ResourcesLoaderComponent>();
-
             foreach (int monsterIdValue in monsterIds)
             {
                 int monsterId = monsterIdValue;
@@ -200,6 +198,20 @@ namespace ET.Client
             }
         }
 
+        private static void EnsureChapterInitialized(this ES_MonsterTuJian self, int chapterId)
+        {
+            if (!self.InitializedChapters.Add(chapterId))
+            {
+                return;
+            }
+
+            if (self.ChapterMonsterLists.TryGetValue(chapterId, out GameObject monsterList) &&
+                self.ChapterMonsters.TryGetValue(chapterId, out List<int> monsters))
+            {
+                self.CreateMonsterItems(monsterList, monsters);
+            }
+        }
+
         private static void OnChapterClicked(this ES_MonsterTuJian self, int chapterId)
         {
             bool expand = self.SelectedChapterId != chapterId || !self.ChapterMonsterLists[chapterId].activeSelf;
@@ -213,6 +225,11 @@ namespace ET.Client
 
         private static void SetChapterExpanded(this ES_MonsterTuJian self, int chapterId, bool expanded)
         {
+            if (expanded)
+            {
+                self.EnsureChapterInitialized(chapterId);
+            }
+
             foreach ((int id, GameObject list) in self.ChapterMonsterLists)
             {
                 bool active = expanded && id == chapterId;
@@ -240,7 +257,14 @@ namespace ET.Client
 
         private static void RebuildChapterLayout(this ES_MonsterTuJian self)
         {
-            Canvas.ForceUpdateCanvases();
+            foreach (GameObject monsterList in self.ChapterMonsterLists.Values)
+            {
+                if (monsterList.activeSelf)
+                {
+                    LayoutRebuilder.ForceRebuildLayoutImmediate(monsterList.GetComponent<RectTransform>());
+                }
+            }
+
             LayoutRebuilder.ForceRebuildLayoutImmediate(self.LeftContent.GetComponent<RectTransform>());
         }
 
@@ -332,15 +356,18 @@ namespace ET.Client
                 }
             }
 
-            ResourcesLoaderComponent resourcesLoader = self.Root().GetComponent<ResourcesLoaderComponent>();
-            while (self.SkillItems.Count < skillIds.Count)
+            if (self.SkillItems.Count < skillIds.Count)
             {
-                GameObject prefab = resourcesLoader.LoadAssetSync<GameObject>(SkillItemPrefabPath);
-                GameObject go = UnityEngine.Object.Instantiate(prefab, self.E_CommonSkillItemsScrollRect.content);
-                go.SetActive(true);
-                Scroll_Item_CommonSkillItem item = self.AddChild<Scroll_Item_CommonSkillItem>();
-                item.BindTrans(go.transform);
-                self.SkillItems.Add(item);
+                GameObject prefab = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(SkillItemPrefabPath);
+
+                while (self.SkillItems.Count < skillIds.Count)
+                {
+                    GameObject go = UnityEngine.Object.Instantiate(prefab, self.E_CommonSkillItemsScrollRect.content);
+                    go.SetActive(true);
+                    Scroll_Item_CommonSkillItem item = self.AddChild<Scroll_Item_CommonSkillItem>();
+                    item.BindTrans(go.transform);
+                    self.SkillItems.Add(item);
+                }
             }
 
             for (int i = 0; i < self.SkillItems.Count; i++)
@@ -360,16 +387,19 @@ namespace ET.Client
         private static void RefreshRewards(this ES_MonsterTuJian self, int monsterId)
         {
             List<RewardItem> rewards = DropHelper.Show_MonsterDropNoRepeat(monsterId, 1f, true).Where(reward => ItemConfigCategory.Instance.Contain(reward.ItemID)).OrderByDescending(reward => ItemConfigCategory.Instance.Get(reward.ItemID).ItemQuality).ToList();
-            ResourcesLoaderComponent resourcesLoader = self.Root().GetComponent<ResourcesLoaderComponent>();
 
-            while (self.RewardItems.Count < rewards.Count)
+            if (self.RewardItems.Count < rewards.Count)
             {
-                GameObject prefab = resourcesLoader.LoadAssetSync<GameObject>(RewardItemPrefabPath);
-                GameObject go = UnityEngine.Object.Instantiate(prefab, self.E_RewardListScrollRect.content);
-                go.SetActive(true);
-                Scroll_Item_CommonItem item = self.AddChild<Scroll_Item_CommonItem>();
-                item.BindTrans(go.transform);
-                self.RewardItems.Add(item);
+                GameObject prefab = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(RewardItemPrefabPath);
+
+                while (self.RewardItems.Count < rewards.Count)
+                {
+                    GameObject go = UnityEngine.Object.Instantiate(prefab, self.E_RewardListScrollRect.content);
+                    go.SetActive(true);
+                    Scroll_Item_CommonItem item = self.AddChild<Scroll_Item_CommonItem>();
+                    item.BindTrans(go.transform);
+                    self.RewardItems.Add(item);
+                }
             }
 
             for (int i = 0; i < self.RewardItems.Count; i++)
