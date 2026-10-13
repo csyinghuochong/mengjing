@@ -74,6 +74,7 @@ namespace ET
             IfHide = _buf.ReadInt();
             RemoveBuff = _buf.ReadInt();
             ModelShowPosi = _buf.ReadString();
+            Backstory = _buf.ReadString();
             {int __n0 = _buf.ReadSize(); QiYuPetId = new int[__n0];for(var __index0 = 0 ; __index0 < __n0 ; __index0++) { int __e0;__e0 = _buf.ReadInt(); QiYuPetId[__index0] = __e0;}}
 
             PostInit();
@@ -350,6 +351,11 @@ namespace ET
         public string ModelShowPosi;
 
         /// <summary>
+        /// 背景故事
+        /// </summary>
+        public string Backstory;
+
+        /// <summary>
         /// 奇遇宠物id
         /// </summary>
         public int[] QiYuPetId;
@@ -360,6 +366,7 @@ namespace ET
 
         public  void ResolveRef()
         {
+            
             
             
             
@@ -472,6 +479,7 @@ namespace ET
             + "IfHide:" + IfHide + ","
             + "RemoveBuff:" + RemoveBuff + ","
             + "ModelShowPosi:" + ModelShowPosi + ","
+            + "Backstory:" + Backstory + ","
             + "QiYuPetId:" + Luban.StringUtil.CollectionToString(QiYuPetId) + ","
             + "}";
         }
