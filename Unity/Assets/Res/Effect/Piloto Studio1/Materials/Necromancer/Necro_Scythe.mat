@@ -88,7 +88,7 @@ Material:
     - _DistortionIntensity: 0
     - _DoubleSidedEnable: 0
     - _DoubleSidedNormalMode: 1
-    - _DstBlend: 10
+    - _DstBlend: 0
     - _EnableBlendModePreserveSpecularLighting: 1
     - _EnableFogOnTransparent: 1
     - _FRESNEL: 1
@@ -98,6 +98,7 @@ Material:
     - _QueueControl: 1
     - _ReceivesSSR: 1
     - _RenderQueueType: 1
+    - _SrcBlend: 1
     - _StencilWriteMaskGBuffer: 15
     - _Surface: 0
     - _SurfaceType: 0

@@ -8,16 +8,17 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: TwoSides49
-  m_Shader: {fileID: -6465566751694194690, guid: 23b841a5164f097488432f6f3df2e185, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: 23b841a5164f097488432f6f3df2e185,
+    type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
-  m_ValidKeywords:
+  m_ValidKeywords: []
+  m_InvalidKeywords:
   - _BUILTIN_ALPHATEST_ON
   - _BUILTIN_AlphaClip
   - _BUILTIN_SURFACE_TYPE_TRANSPARENT
-  - _SURFACE_TYPE_TRANSPARENT
-  m_InvalidKeywords:
   - _DOUBLESIDED_ON
+  - _SURFACE_TYPE_TRANSPARENT
   - _USEBACKFRESNEL_ON
   - _USECUSTOMDATA_ON
   - _USEFRESNEL_ON
@@ -28,13 +29,11 @@ Material:
   m_CustomRenderQueue: -1
   stringTagMap:
     MotionVector: User
-    RenderType: Transparent
   disabledShaderPasses:
   - TransparentDepthPrepass
   - TransparentDepthPostpass
   - TransparentBackface
   - MOTIONVECTORS
-  - DepthOnly
   m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
@@ -207,7 +206,6 @@ Material:
     - _FrontFacesColor: {r: 1, g: 1, b: 1, a: 1}
     - _SpeedMainTexUVNoiseZW: {r: 0.5, g: -2, b: 0.5, a: -3}
   m_BuildTextureStacks: []
-  m_AllowLocking: 1
 --- !u!114 &3429064771027530904
 MonoBehaviour:
   m_ObjectHideFlags: 11

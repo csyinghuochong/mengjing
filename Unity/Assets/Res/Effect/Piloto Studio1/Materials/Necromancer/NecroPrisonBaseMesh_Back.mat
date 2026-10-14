@@ -28,12 +28,12 @@ Material:
   m_ValidKeywords:
   - _BUILTIN_ALPHATEST_ON
   - _BUILTIN_AlphaClip
-  - _ENABLE_FOG_ON_TRANSPARENT
   - _SURFACE_TYPE_TRANSPARENT
   - _USEALPHAOVERRIDE
   - _USESOFTALPHA
   m_InvalidKeywords:
   - _DISABLE_SSR_TRANSPARENT
+  - _ENABLE_FOG_ON_TRANSPARENT
   - _ISPARTICLE
   - _NORMALMAP
   - _NORMALMAP_TANGENT_SPACE
@@ -50,6 +50,7 @@ Material:
   - TransparentBackface
   - RayTracingPrepass
   - MOTIONVECTORS
+  - DepthOnly
   m_LockedProperties: _DetailNoise _Metallic_Scale
   m_SavedProperties:
     serializedVersion: 3
@@ -212,7 +213,7 @@ Material:
     - _AlphaRemapMax: 1
     - _AlphaRemapMin: 0
     - _AlphaSrcBlend: 1
-    - _AlphaToMask: 1
+    - _AlphaToMask: 0
     - _Alpha_Clip_Threshold: 0.1
     - _Anisotropy: 0
     - _BUILTIN_AlphaClip: 0
@@ -347,7 +348,7 @@ Material:
     - _SpecularAAThreshold: 0.2
     - _SpecularHighlights: 1
     - _SpecularOcclusionMode: 1
-    - _SrcBlend: 1
+    - _SrcBlend: 5
     - _StencilRef: 0
     - _StencilRefDepth: 1
     - _StencilRefDistortionVec: 4

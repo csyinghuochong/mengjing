@@ -29,13 +29,13 @@ Material:
   - _ALPHATEST_ON
   - _BUILTIN_ALPHATEST_ON
   - _BUILTIN_AlphaClip
-  - _DISABLE_SSR_TRANSPARENT
-  - _DOUBLESIDED_ON
-  - _ENABLE_FOG_ON_TRANSPARENT
   - _ISPARTICLE
   - _SURFACE_TYPE_TRANSPARENT
   - _USEUVOFFSET
   m_InvalidKeywords:
+  - _DISABLE_SSR_TRANSPARENT
+  - _DOUBLESIDED_ON
+  - _ENABLE_FOG_ON_TRANSPARENT
   - _NORMALMAP
   - _NORMALMAP_TANGENT_SPACE
   m_LightmapFlags: 2
@@ -349,7 +349,7 @@ Material:
     - _SpecularAAThreshold: 0.2
     - _SpecularHighlights: 1
     - _SpecularOcclusionMode: 1
-    - _SrcBlend: 1
+    - _SrcBlend: 5
     - _StencilRef: 0
     - _StencilRefDepth: 0
     - _StencilRefDistortionVec: 4

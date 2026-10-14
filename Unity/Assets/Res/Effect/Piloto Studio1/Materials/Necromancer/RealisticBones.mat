@@ -42,10 +42,10 @@ Material:
   - _ALPHATEST_ON
   - _BUILTIN_ALPHATEST_ON
   - _BUILTIN_AlphaClip
-  - _DISABLE_SSR_TRANSPARENT
   - _ISPARTICLE
   - _SPECULAR_SETUP
-  m_InvalidKeywords: []
+  m_InvalidKeywords:
+  - _DISABLE_SSR_TRANSPARENT
   m_LightmapFlags: 2
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -137,7 +137,7 @@ Material:
     - _DoubleSidedEnable: 0
     - _DoubleSidedGIMode: 0
     - _DoubleSidedNormalMode: 2
-    - _DstBlend: 10
+    - _DstBlend: 0
     - _EnableBlendModePreserveSpecularLighting: 1
     - _EnableFogOnTransparent: 1
     - _ExcludeFromTUAndAA: 0

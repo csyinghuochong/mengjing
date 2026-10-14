@@ -49,11 +49,13 @@ Material:
   m_CustomRenderQueue: 2000
   stringTagMap:
     MotionVector: User
+    RenderType: Opaque
   disabledShaderPasses:
   - TransparentBackface
   - MOTIONVECTORS
   - TransparentDepthPrepass
   - TransparentDepthPostpass
+  - SHADOWCASTER
   m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
@@ -135,7 +137,7 @@ Material:
     - _MiddlePointPos1: 0.5
     - _MultiplyNoiseDesaturation: 1
     - _OpaqueCullMode: 2
-    - _QueueControl: -1
+    - _QueueControl: 1
     - _QueueOffset: 0
     - _ReceivesSSR: 0
     - _ReceivesSSRTransparent: 0
