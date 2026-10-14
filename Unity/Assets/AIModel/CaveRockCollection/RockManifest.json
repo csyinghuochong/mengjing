@@ -1,0 +1,484 @@
+{
+  "assets": [
+    {
+      "id": "R01",
+      "name": "Cave_R01_WeatheredBoulder",
+      "color": "Boulders",
+      "archetype": "WeatheredBoulder",
+      "chineseName": "风化岩块",
+      "variant": 1,
+      "model": "Models/Boulders/Cave_R01_WeatheredBoulder.fbx",
+      "source": "Sources/Boulders/Cave_R01_WeatheredBoulder.blend",
+      "lodTriangles": [
+        180,
+        48,
+        24
+      ],
+      "dimensionsUnity": [
+        1.7663064002990723,
+        1.153052806854248,
+        1.2817307710647583
+      ],
+      "hasRock": true,
+      "materialSlots": 1,
+      "pivot": "BottomCenter",
+      "openPassage": false
+    },
+    {
+      "id": "R02",
+      "name": "Cave_R02_JaggedBoulder",
+      "color": "Boulders",
+      "archetype": "JaggedBoulder",
+      "chineseName": "尖棱巨石",
+      "variant": 2,
+      "model": "Models/Boulders/Cave_R02_JaggedBoulder.fbx",
+      "source": "Sources/Boulders/Cave_R02_JaggedBoulder.blend",
+      "lodTriangles": [
+        400,
+        112,
+        56
+      ],
+      "dimensionsUnity": [
+        1.8238189220428467,
+        1.9590156078338623,
+        1.265103816986084
+      ],
+      "hasRock": true,
+      "materialSlots": 1,
+      "pivot": "BottomCenter",
+      "openPassage": false
+    },
+    {
+      "id": "R03",
+      "name": "Cave_R03_FlatSlab",
+      "color": "Boulders",
+      "archetype": "FlatSlab",
+      "chineseName": "扁平石板",
+      "variant": 3,
+      "model": "Models/Boulders/Cave_R03_FlatSlab.fbx",
+      "source": "Sources/Boulders/Cave_R03_FlatSlab.blend",
+      "lodTriangles": [
+        130,
+        44,
+        22
+      ],
+      "dimensionsUnity": [
+        3.0686376094818115,
+        0.4288237392902374,
+        1.9271413087844849
+      ],
+      "hasRock": true,
+      "materialSlots": 1,
+      "pivot": "BottomCenter",
+      "openPassage": false
+    },
+    {
+      "id": "R04",
+      "name": "Cave_R04_BrokenWedge",
+      "color": "Boulders",
+      "archetype": "BrokenWedge",
+      "chineseName": "断裂斜岩",
+      "variant": 4,
+      "model": "Models/Boulders/Cave_R04_BrokenWedge.fbx",
+      "source": "Sources/Boulders/Cave_R04_BrokenWedge.blend",
+      "lodTriangles": [
+        372,
+        94,
+        46
+      ],
+      "dimensionsUnity": [
+        2.325127601623535,
+        1.2363815307617188,
+        1.673614501953125
+      ],
+      "hasRock": true,
+      "materialSlots": 1,
+      "pivot": "BottomCenter",
+      "openPassage": false
+    },
+    {
+      "id": "R05",
+      "name": "Cave_R05_LayeredBoulder",
+      "color": "Boulders",
+      "archetype": "LayeredBoulder",
+      "chineseName": "层状巨石",
+      "variant": 5,
+      "model": "Models/Boulders/Cave_R05_LayeredBoulder.fbx",
+      "source": "Sources/Boulders/Cave_R05_LayeredBoulder.blend",
+      "lodTriangles": [
+        516,
+        132,
+        66
+      ],
+      "dimensionsUnity": [
+        3.409189224243164,
+        1.8662943840026855,
+        2.3697423934936523
+      ],
+      "hasRock": true,
+      "materialSlots": 1,
+      "pivot": "BottomCenter",
+      "openPassage": false
+    },
+    {
+      "id": "R06",
+      "name": "Cave_R06_SplitBoulder",
+      "color": "Boulders",
+      "archetype": "SplitBoulder",
+      "chineseName": "裂隙双岩",
+      "variant": 6,
+      "model": "Models/Boulders/Cave_R06_SplitBoulder.fbx",
+      "source": "Sources/Boulders/Cave_R06_SplitBoulder.blend",
+      "lodTriangles": [
+        706,
+        318,
+        162
+      ],
+      "dimensionsUnity": [
+        2.6228060722351074,
+        1.709586501121521,
+        1.5949041843414307
+      ],
+      "hasRock": true,
+      "materialSlots": 1,
+      "pivot": "BottomCenter",
+      "openPassage": false
+    },
+    {
+      "id": "R07",
+      "name": "Cave_R07_Scatter",
+      "color": "Rubble",
+      "archetype": "Scatter",
+      "chineseName": "碎石散布",
+      "variant": 7,
+      "model": "Models/Rubble/Cave_R07_Scatter.fbx",
+      "source": "Sources/Rubble/Cave_R07_Scatter.blend",
+      "lodTriangles": [
+        940,
+        694,
+        356
+      ],
+      "dimensionsUnity": [
+        2.7913222312927246,
+        0.41309016942977905,
+        1.981926441192627
+      ],
+      "hasRock": true,
+      "materialSlots": 1,
+      "pivot": "BottomCenter",
+      "openPassage": false
+    },
+    {
+      "id": "R08",
+      "name": "Cave_R08_RubblePile",
+      "color": "Rubble",
+      "archetype": "RubblePile",
+      "chineseName": "坍塌石堆",
+      "variant": 8,
+      "model": "Models/Rubble/Cave_R08_RubblePile.fbx",
+      "source": "Sources/Rubble/Cave_R08_RubblePile.blend",
+      "lodTriangles": [
+        2304,
+        1084,
+        556
+      ],
+      "dimensionsUnity": [
+        3.5023884773254395,
+        0.8553107976913452,
+        2.7600343227386475
+      ],
+      "hasRock": true,
+      "materialSlots": 1,
+      "pivot": "BottomCenter",
+      "openPassage": false
+    },
+    {
+      "id": "R09",
+      "name": "Cave_R09_WallSegment",
+      "color": "Walls",
+      "archetype": "WallSegment",
+      "chineseName": "层叠岩壁",
+      "variant": 9,
+      "model": "Models/Walls/Cave_R09_WallSegment.fbx",
+      "source": "Sources/Walls/Cave_R09_WallSegment.blend",
+      "lodTriangles": [
+        1628,
+        638,
+        324
+      ],
+      "dimensionsUnity": [
+        4.84774112701416,
+        3.10044002532959,
+        1.5586535930633545
+      ],
+      "hasRock": true,
+      "materialSlots": 1,
+      "pivot": "BottomCenter",
+      "openPassage": false
+    },
+    {
+      "id": "R10",
+      "name": "Cave_R10_WallCorner",
+      "color": "Walls",
+      "archetype": "WallCorner",
+      "chineseName": "转角岩壁",
+      "variant": 10,
+      "model": "Models/Walls/Cave_R10_WallCorner.fbx",
+      "source": "Sources/Walls/Cave_R10_WallCorner.blend",
+      "lodTriangles": [
+        1136,
+        466,
+        232
+      ],
+      "dimensionsUnity": [
+        3.8898119926452637,
+        3.538896322250366,
+        3.3001930713653564
+      ],
+      "hasRock": true,
+      "materialSlots": 1,
+      "pivot": "BottomCenter",
+      "openPassage": false
+    },
+    {
+      "id": "R11",
+      "name": "Cave_R11_Overhang",
+      "color": "Walls",
+      "archetype": "Overhang",
+      "chineseName": "悬挑岩台",
+      "variant": 11,
+      "model": "Models/Walls/Cave_R11_Overhang.fbx",
+      "source": "Sources/Walls/Cave_R11_Overhang.blend",
+      "lodTriangles": [
+        936,
+        406,
+        200
+      ],
+      "dimensionsUnity": [
+        3.8426053524017334,
+        2.5063087940216064,
+        2.5847744941711426
+      ],
+      "hasRock": true,
+      "materialSlots": 1,
+      "pivot": "BottomCenter",
+      "openPassage": false
+    },
+    {
+      "id": "R12",
+      "name": "Cave_R12_OpenArch",
+      "color": "Walls",
+      "archetype": "OpenArch",
+      "chineseName": "天然岩拱",
+      "variant": 12,
+      "model": "Models/Walls/Cave_R12_OpenArch.fbx",
+      "source": "Sources/Walls/Cave_R12_OpenArch.blend",
+      "lodTriangles": [
+        1550,
+        478,
+        246
+      ],
+      "dimensionsUnity": [
+        5.331606388092041,
+        4.307920455932617,
+        1.8357634544372559
+      ],
+      "hasRock": true,
+      "materialSlots": 1,
+      "pivot": "BottomCenter",
+      "openPassage": true
+    },
+    {
+      "id": "R13",
+      "name": "Cave_R13_Stalagmite",
+      "color": "Formations",
+      "archetype": "Stalagmite",
+      "chineseName": "独立石笋",
+      "variant": 13,
+      "model": "Models/Formations/Cave_R13_Stalagmite.fbx",
+      "source": "Sources/Formations/Cave_R13_Stalagmite.blend",
+      "lodTriangles": [
+        124,
+        94,
+        48
+      ],
+      "dimensionsUnity": [
+        0.8308578729629517,
+        2.373499870300293,
+        0.8566224575042725
+      ],
+      "hasRock": true,
+      "materialSlots": 1,
+      "pivot": "BottomCenter",
+      "openPassage": false
+    },
+    {
+      "id": "R14",
+      "name": "Cave_R14_TallStalagmites",
+      "color": "Formations",
+      "archetype": "TallStalagmites",
+      "chineseName": "高石笋簇",
+      "variant": 14,
+      "model": "Models/Formations/Cave_R14_TallStalagmites.fbx",
+      "source": "Sources/Formations/Cave_R14_TallStalagmites.blend",
+      "lodTriangles": [
+        824,
+        620,
+        316
+      ],
+      "dimensionsUnity": [
+        1.943557858467102,
+        3.0804998874664307,
+        1.4152964353561401
+      ],
+      "hasRock": true,
+      "materialSlots": 1,
+      "pivot": "BottomCenter",
+      "openPassage": false
+    },
+    {
+      "id": "R15",
+      "name": "Cave_R15_LowStalagmites",
+      "color": "Formations",
+      "archetype": "LowStalagmites",
+      "chineseName": "矮石笋簇",
+      "variant": 15,
+      "model": "Models/Formations/Cave_R15_LowStalagmites.fbx",
+      "source": "Sources/Formations/Cave_R15_LowStalagmites.blend",
+      "lodTriangles": [
+        868,
+        658,
+        336
+      ],
+      "dimensionsUnity": [
+        1.4279537200927734,
+        1.385286808013916,
+        1.5414400100708008
+      ],
+      "hasRock": true,
+      "materialSlots": 1,
+      "pivot": "BottomCenter",
+      "openPassage": false
+    },
+    {
+      "id": "R16",
+      "name": "Cave_R16_Stalactite",
+      "color": "Hanging",
+      "archetype": "Stalactite",
+      "chineseName": "独立钟乳石",
+      "variant": 16,
+      "model": "Models/Hanging/Cave_R16_Stalactite.fbx",
+      "source": "Sources/Hanging/Cave_R16_Stalactite.blend",
+      "lodTriangles": [
+        124,
+        94,
+        48
+      ],
+      "dimensionsUnity": [
+        1.0153197050094604,
+        2.676500082015991,
+        0.7634485960006714
+      ],
+      "hasRock": true,
+      "materialSlots": 1,
+      "pivot": "TopCenter",
+      "openPassage": false
+    },
+    {
+      "id": "R17",
+      "name": "Cave_R17_StalactiteCluster",
+      "color": "Hanging",
+      "archetype": "StalactiteCluster",
+      "chineseName": "钟乳石簇",
+      "variant": 17,
+      "model": "Models/Hanging/Cave_R17_StalactiteCluster.fbx",
+      "source": "Sources/Hanging/Cave_R17_StalactiteCluster.blend",
+      "lodTriangles": [
+        644,
+        416,
+        212
+      ],
+      "dimensionsUnity": [
+        2.36814546585083,
+        3.358048439025879,
+        1.690873384475708
+      ],
+      "hasRock": true,
+      "materialSlots": 1,
+      "pivot": "TopCenter",
+      "openPassage": false
+    },
+    {
+      "id": "R18",
+      "name": "Cave_R18_HangingRock",
+      "color": "Hanging",
+      "archetype": "HangingRock",
+      "chineseName": "悬垂岩块",
+      "variant": 18,
+      "model": "Models/Hanging/Cave_R18_HangingRock.fbx",
+      "source": "Sources/Hanging/Cave_R18_HangingRock.blend",
+      "lodTriangles": [
+        514,
+        198,
+        100
+      ],
+      "dimensionsUnity": [
+        2.169511556625366,
+        2.452289342880249,
+        1.9388561248779297
+      ],
+      "hasRock": true,
+      "materialSlots": 1,
+      "pivot": "TopCenter",
+      "openPassage": false
+    },
+    {
+      "id": "R19",
+      "name": "Cave_R19_CaveColumn",
+      "color": "Formations",
+      "archetype": "CaveColumn",
+      "chineseName": "洞窟石柱",
+      "variant": 19,
+      "model": "Models/Formations/Cave_R19_CaveColumn.fbx",
+      "source": "Sources/Formations/Cave_R19_CaveColumn.blend",
+      "lodTriangles": [
+        866,
+        476,
+        242
+      ],
+      "dimensionsUnity": [
+        1.915455937385559,
+        4.736317157745361,
+        1.6768046617507935
+      ],
+      "hasRock": true,
+      "materialSlots": 1,
+      "pivot": "BottomCenter",
+      "openPassage": false
+    },
+    {
+      "id": "R20",
+      "name": "Cave_R20_SteppedLedge",
+      "color": "Walls",
+      "archetype": "SteppedLedge",
+      "chineseName": "阶梯岩台",
+      "variant": 20,
+      "model": "Models/Walls/Cave_R20_SteppedLedge.fbx",
+      "source": "Sources/Walls/Cave_R20_SteppedLedge.blend",
+      "lodTriangles": [
+        446,
+        132,
+        66
+      ],
+      "dimensionsUnity": [
+        3.741464853286743,
+        1.2684416770935059,
+        2.8220391273498535
+      ],
+      "hasRock": true,
+      "materialSlots": 1,
+      "pivot": "BottomCenter",
+      "openPassage": false
+    }
+  ]
+}

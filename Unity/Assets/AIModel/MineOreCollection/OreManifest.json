@@ -1,0 +1,655 @@
+{
+  "assets": [
+    {
+      "id": "Y1",
+      "name": "Ore_Y1",
+      "color": "Yellow",
+      "variant": 1,
+      "archetype": "CompactCluster",
+      "model": "Models/Yellow/Ore_Y1.fbx",
+      "source": "Sources/Yellow/Ore_Y1.blend",
+      "lodTriangles": [
+        1278,
+        560,
+        176
+      ],
+      "dimensionsBlender": [
+        1.4197744727134705,
+        1.0122168958187103,
+        1.0499312169849873
+      ],
+      "dimensionsUnity": [
+        1.4197744727134705,
+        1.0499312169849873,
+        1.0122168958187103
+      ],
+      "hasRock": true,
+      "materialSlots": 2,
+      "vertices": [
+        687,
+        320,
+        112
+      ]
+    },
+    {
+      "id": "Y2",
+      "name": "Ore_Y2",
+      "color": "Yellow",
+      "variant": 2,
+      "archetype": "TallCluster",
+      "model": "Models/Yellow/Ore_Y2.fbx",
+      "source": "Sources/Yellow/Ore_Y2.blend",
+      "lodTriangles": [
+        1414,
+        616,
+        248
+      ],
+      "dimensionsBlender": [
+        1.3985220193862915,
+        1.1432238221168518,
+        2.1295664235949516
+      ],
+      "dimensionsUnity": [
+        1.3985220193862915,
+        2.1295664235949516,
+        1.1432238221168518
+      ],
+      "hasRock": true,
+      "materialSlots": 2,
+      "vertices": [
+        763,
+        354,
+        156
+      ]
+    },
+    {
+      "id": "Y3",
+      "name": "Ore_Y3",
+      "color": "Yellow",
+      "variant": 3,
+      "archetype": "FanCluster",
+      "model": "Models/Yellow/Ore_Y3.fbx",
+      "source": "Sources/Yellow/Ore_Y3.blend",
+      "lodTriangles": [
+        1474,
+        648,
+        260
+      ],
+      "dimensionsBlender": [
+        3.0397260189056396,
+        1.0375221371650696,
+        1.257861204445362
+      ],
+      "dimensionsUnity": [
+        3.0397260189056396,
+        1.257861204445362,
+        1.0375221371650696
+      ],
+      "hasRock": true,
+      "materialSlots": 2,
+      "vertices": [
+        795,
+        372,
+        164
+      ]
+    },
+    {
+      "id": "Y4",
+      "name": "Ore_Y4",
+      "color": "Yellow",
+      "variant": 4,
+      "archetype": "VeinBoulder",
+      "model": "Models/Yellow/Ore_Y4.fbx",
+      "source": "Sources/Yellow/Ore_Y4.blend",
+      "lodTriangles": [
+        1680,
+        704,
+        216
+      ],
+      "dimensionsBlender": [
+        1.6650713086128235,
+        1.5815938115119934,
+        1.434359514620155
+      ],
+      "dimensionsUnity": [
+        1.6650713086128235,
+        1.434359514620155,
+        1.5815938115119934
+      ],
+      "hasRock": true,
+      "materialSlots": 2,
+      "vertices": [
+        896,
+        396,
+        144
+      ]
+    },
+    {
+      "id": "Y5",
+      "name": "Ore_Y5",
+      "color": "Yellow",
+      "variant": 5,
+      "archetype": "Geode",
+      "model": "Models/Yellow/Ore_Y5.fbx",
+      "source": "Sources/Yellow/Ore_Y5.blend",
+      "lodTriangles": [
+        2258,
+        1120,
+        578
+      ],
+      "dimensionsBlender": [
+        1.8116322755813599,
+        1.4228463768959045,
+        2.0067796111106873
+      ],
+      "dimensionsUnity": [
+        1.8116322755813599,
+        2.0067796111106873,
+        1.4228463768959045
+      ],
+      "hasRock": true,
+      "materialSlots": 2,
+      "vertices": [
+        1230,
+        646,
+        355
+      ]
+    },
+    {
+      "id": "Y6",
+      "name": "Ore_Y6",
+      "color": "Yellow",
+      "variant": 6,
+      "archetype": "WallOutcrop",
+      "model": "Models/Yellow/Ore_Y6.fbx",
+      "source": "Sources/Yellow/Ore_Y6.blend",
+      "lodTriangles": [
+        1158,
+        442,
+        152
+      ],
+      "dimensionsBlender": [
+        2.647485375404358,
+        0.9292130172252655,
+        1.7647708654403687
+      ],
+      "dimensionsUnity": [
+        2.647485375404358,
+        1.7647708654403687,
+        0.9292130172252655
+      ],
+      "hasRock": true,
+      "materialSlots": 2,
+      "vertices": [
+        623,
+        253,
+        96
+      ]
+    },
+    {
+      "id": "Y7",
+      "name": "Ore_Y7",
+      "color": "Yellow",
+      "variant": 7,
+      "archetype": "BareCrystalCluster",
+      "model": "Models/Yellow/Ore_Y7.fbx",
+      "source": "Sources/Yellow/Ore_Y7.blend",
+      "lodTriangles": [
+        514,
+        242,
+        152
+      ],
+      "dimensionsBlender": [
+        1.076175034046173,
+        0.9330665171146393,
+        1.85095342900604
+      ],
+      "dimensionsUnity": [
+        1.076175034046173,
+        1.85095342900604,
+        0.9330665171146393
+      ],
+      "hasRock": false,
+      "materialSlots": 1,
+      "vertices": [
+        283,
+        143,
+        92
+      ]
+    },
+    {
+      "id": "B1",
+      "name": "Ore_B1",
+      "color": "Blue",
+      "variant": 1,
+      "archetype": "CompactCluster",
+      "model": "Models/Blue/Ore_B1.fbx",
+      "source": "Sources/Blue/Ore_B1.blend",
+      "lodTriangles": [
+        1278,
+        506,
+        176
+      ],
+      "dimensionsBlender": [
+        1.5021358728408813,
+        0.9997831284999847,
+        1.0524089261889458
+      ],
+      "dimensionsUnity": [
+        1.5021358728408813,
+        1.0524089261889458,
+        0.9997831284999847
+      ],
+      "hasRock": true,
+      "materialSlots": 2,
+      "vertices": [
+        687,
+        289,
+        112
+      ]
+    },
+    {
+      "id": "B2",
+      "name": "Ore_B2",
+      "color": "Blue",
+      "variant": 2,
+      "archetype": "TallCluster",
+      "model": "Models/Blue/Ore_B2.fbx",
+      "source": "Sources/Blue/Ore_B2.blend",
+      "lodTriangles": [
+        1414,
+        626,
+        248
+      ],
+      "dimensionsBlender": [
+        1.3226990699768066,
+        1.1990025639533997,
+        2.1283713430166245
+      ],
+      "dimensionsUnity": [
+        1.3226990699768066,
+        2.1283713430166245,
+        1.1990025639533997
+      ],
+      "hasRock": true,
+      "materialSlots": 2,
+      "vertices": [
+        763,
+        359,
+        156
+      ]
+    },
+    {
+      "id": "B3",
+      "name": "Ore_B3",
+      "color": "Blue",
+      "variant": 3,
+      "archetype": "FanCluster",
+      "model": "Models/Blue/Ore_B3.fbx",
+      "source": "Sources/Blue/Ore_B3.blend",
+      "lodTriangles": [
+        1474,
+        658,
+        260
+      ],
+      "dimensionsBlender": [
+        2.9478639364242554,
+        1.0184307098388672,
+        1.355870831757784
+      ],
+      "dimensionsUnity": [
+        2.9478639364242554,
+        1.355870831757784,
+        1.0184307098388672
+      ],
+      "hasRock": true,
+      "materialSlots": 2,
+      "vertices": [
+        795,
+        377,
+        164
+      ]
+    },
+    {
+      "id": "B4",
+      "name": "Ore_B4",
+      "color": "Blue",
+      "variant": 4,
+      "archetype": "VeinBoulder",
+      "model": "Models/Blue/Ore_B4.fbx",
+      "source": "Sources/Blue/Ore_B4.blend",
+      "lodTriangles": [
+        1680,
+        768,
+        216
+      ],
+      "dimensionsBlender": [
+        1.747108817100525,
+        1.6159498691558838,
+        1.4617642406374216
+      ],
+      "dimensionsUnity": [
+        1.747108817100525,
+        1.4617642406374216,
+        1.6159498691558838
+      ],
+      "hasRock": true,
+      "materialSlots": 2,
+      "vertices": [
+        896,
+        432,
+        144
+      ]
+    },
+    {
+      "id": "B5",
+      "name": "Ore_B5",
+      "color": "Blue",
+      "variant": 5,
+      "archetype": "Geode",
+      "model": "Models/Blue/Ore_B5.fbx",
+      "source": "Sources/Blue/Ore_B5.blend",
+      "lodTriangles": [
+        2258,
+        1088,
+        578
+      ],
+      "dimensionsBlender": [
+        1.8279622197151184,
+        1.2785771489143372,
+        1.9381956458091736
+      ],
+      "dimensionsUnity": [
+        1.8279622197151184,
+        1.9381956458091736,
+        1.2785771489143372
+      ],
+      "hasRock": true,
+      "materialSlots": 2,
+      "vertices": [
+        1230,
+        628,
+        355
+      ]
+    },
+    {
+      "id": "B6",
+      "name": "Ore_B6",
+      "color": "Blue",
+      "variant": 6,
+      "archetype": "WallOutcrop",
+      "model": "Models/Blue/Ore_B6.fbx",
+      "source": "Sources/Blue/Ore_B6.blend",
+      "lodTriangles": [
+        1158,
+        474,
+        152
+      ],
+      "dimensionsBlender": [
+        2.8427071571350098,
+        0.9860298335552216,
+        1.8437714576721191
+      ],
+      "dimensionsUnity": [
+        2.8427071571350098,
+        1.8437714576721191,
+        0.9860298335552216
+      ],
+      "hasRock": true,
+      "materialSlots": 2,
+      "vertices": [
+        623,
+        271,
+        96
+      ]
+    },
+    {
+      "id": "B7",
+      "name": "Ore_B7",
+      "color": "Blue",
+      "variant": 7,
+      "archetype": "BareCrystalCluster",
+      "model": "Models/Blue/Ore_B7.fbx",
+      "source": "Sources/Blue/Ore_B7.blend",
+      "lodTriangles": [
+        514,
+        264,
+        152
+      ],
+      "dimensionsBlender": [
+        1.0743677020072937,
+        0.9708823263645172,
+        1.8336637374013662
+      ],
+      "dimensionsUnity": [
+        1.0743677020072937,
+        1.8336637374013662,
+        0.9708823263645172
+      ],
+      "hasRock": false,
+      "materialSlots": 1,
+      "vertices": [
+        283,
+        156,
+        92
+      ]
+    },
+    {
+      "id": "P1",
+      "name": "Ore_P1",
+      "color": "Purple",
+      "variant": 1,
+      "archetype": "CompactCluster",
+      "model": "Models/Purple/Ore_P1.fbx",
+      "source": "Sources/Purple/Ore_P1.blend",
+      "lodTriangles": [
+        1278,
+        538,
+        176
+      ],
+      "dimensionsBlender": [
+        1.4725872874259949,
+        1.0423548817634583,
+        1.0439866073429585
+      ],
+      "dimensionsUnity": [
+        1.4725872874259949,
+        1.0439866073429585,
+        1.0423548817634583
+      ],
+      "hasRock": true,
+      "materialSlots": 2,
+      "vertices": [
+        687,
+        307,
+        112
+      ]
+    },
+    {
+      "id": "P2",
+      "name": "Ore_P2",
+      "color": "Purple",
+      "variant": 2,
+      "archetype": "TallCluster",
+      "model": "Models/Purple/Ore_P2.fbx",
+      "source": "Sources/Purple/Ore_P2.blend",
+      "lodTriangles": [
+        1414,
+        594,
+        248
+      ],
+      "dimensionsBlender": [
+        1.3555378913879395,
+        1.1651872396469116,
+        2.086564790457487
+      ],
+      "dimensionsUnity": [
+        1.3555378913879395,
+        2.086564790457487,
+        1.1651872396469116
+      ],
+      "hasRock": true,
+      "materialSlots": 2,
+      "vertices": [
+        763,
+        341,
+        156
+      ]
+    },
+    {
+      "id": "P3",
+      "name": "Ore_P3",
+      "color": "Purple",
+      "variant": 3,
+      "archetype": "FanCluster",
+      "model": "Models/Purple/Ore_P3.fbx",
+      "source": "Sources/Purple/Ore_P3.blend",
+      "lodTriangles": [
+        1474,
+        626,
+        260
+      ],
+      "dimensionsBlender": [
+        3.0280457735061646,
+        0.9998063445091248,
+        1.430723488330841
+      ],
+      "dimensionsUnity": [
+        3.0280457735061646,
+        1.430723488330841,
+        0.9998063445091248
+      ],
+      "hasRock": true,
+      "materialSlots": 2,
+      "vertices": [
+        795,
+        359,
+        164
+      ]
+    },
+    {
+      "id": "P4",
+      "name": "Ore_P4",
+      "color": "Purple",
+      "variant": 4,
+      "archetype": "VeinBoulder",
+      "model": "Models/Purple/Ore_P4.fbx",
+      "source": "Sources/Purple/Ore_P4.blend",
+      "lodTriangles": [
+        1680,
+        704,
+        216
+      ],
+      "dimensionsBlender": [
+        1.7499676942825317,
+        1.6335865259170532,
+        1.4483566377311945
+      ],
+      "dimensionsUnity": [
+        1.7499676942825317,
+        1.4483566377311945,
+        1.6335865259170532
+      ],
+      "hasRock": true,
+      "materialSlots": 2,
+      "vertices": [
+        896,
+        396,
+        144
+      ]
+    },
+    {
+      "id": "P5",
+      "name": "Ore_P5",
+      "color": "Purple",
+      "variant": 5,
+      "archetype": "Geode",
+      "model": "Models/Purple/Ore_P5.fbx",
+      "source": "Sources/Purple/Ore_P5.blend",
+      "lodTriangles": [
+        2258,
+        1098,
+        578
+      ],
+      "dimensionsBlender": [
+        1.828900158405304,
+        1.3798081874847412,
+        1.9513341784477234
+      ],
+      "dimensionsUnity": [
+        1.828900158405304,
+        1.9513341784477234,
+        1.3798081874847412
+      ],
+      "hasRock": true,
+      "materialSlots": 2,
+      "vertices": [
+        1230,
+        633,
+        355
+      ]
+    },
+    {
+      "id": "P6",
+      "name": "Ore_P6",
+      "color": "Purple",
+      "variant": 6,
+      "archetype": "WallOutcrop",
+      "model": "Models/Purple/Ore_P6.fbx",
+      "source": "Sources/Purple/Ore_P6.blend",
+      "lodTriangles": [
+        1158,
+        464,
+        152
+      ],
+      "dimensionsBlender": [
+        2.852009892463684,
+        0.9478728771209717,
+        1.8268687538802624
+      ],
+      "dimensionsUnity": [
+        2.852009892463684,
+        1.8268687538802624,
+        0.9478728771209717
+      ],
+      "hasRock": true,
+      "materialSlots": 2,
+      "vertices": [
+        623,
+        266,
+        96
+      ]
+    },
+    {
+      "id": "P7",
+      "name": "Ore_P7",
+      "color": "Purple",
+      "variant": 7,
+      "archetype": "BareCrystalCluster",
+      "model": "Models/Purple/Ore_P7.fbx",
+      "source": "Sources/Purple/Ore_P7.blend",
+      "lodTriangles": [
+        514,
+        242,
+        152
+      ],
+      "dimensionsBlender": [
+        1.1299864053726196,
+        0.9735440611839294,
+        1.7455606777220964
+      ],
+      "dimensionsUnity": [
+        1.1299864053726196,
+        1.7455606777220964,
+        0.9735440611839294
+      ],
+      "hasRock": false,
+      "materialSlots": 1,
+      "vertices": [
+        283,
+        143,
+        92
+      ]
+    }
+  ]
+}
