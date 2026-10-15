@@ -1,4 +1,5 @@
 ﻿
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 namespace ET.Client
@@ -7,6 +8,17 @@ namespace ET.Client
 	[EnableMethod]
 	public  class ES_Story : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy 
 	{
+		public readonly List<StoryChapterConfig> ShowStoryChapterConfigs = new();
+		public readonly List<StoryConfig> ShowStoryConfigs = new();
+		public readonly List<StoryChoiceConfig> ShowStoryChoiceConfigs = new();
+		public readonly Dictionary<int, EntityRef<Scroll_Item_StoryChapterItem>> ScrollItemStoryChapterItems = new();
+		public readonly Dictionary<int, EntityRef<Scroll_Item_StoryItem>> ScrollItemStoryItems = new();
+		public Dictionary<int, EntityRef<Scroll_Item_StoryChoiceItem>> ScrollItemStoryChoiceItems = new();
+		public readonly List<string> AssetList = new();
+		public int SelectedChapterId;
+		public int SelectedStoryId;
+		public int SelectedChoiceId;
+
 		public UnityEngine.RectTransform EG_MainRectTransform
      	{
      		get
@@ -313,39 +325,39 @@ namespace ET.Client
      		}
      	}
 
-		public UnityEngine.UI.Image E_StoryChoiceListImage
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_StoryChoiceListImage == null )
-     			{
-		    		this.m_E_StoryChoiceListImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_Story/EG_StoryRight/E_StoryChoiceList");
-     			}
-     			return this.m_E_StoryChoiceListImage;
-     		}
-     	}
+		public UnityEngine.UI.ScrollRect E_StoryChoiceListScrollRect
+		{
+			get
+			{
+				if (this.uiTransform == null)
+				{
+					Log.Error("uiTransform is null.");
+					return null;
+				}
+				if (this.m_E_StoryChoiceListScrollRect == null)
+				{
+					this.m_E_StoryChoiceListScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.ScrollRect>(this.uiTransform.gameObject,"EG_Story/EG_StoryRight/E_StoryChoiceList");
+				}
+				return this.m_E_StoryChoiceListScrollRect;
+			}
+		}
 
-		public UnityEngine.UI.LoopVerticalScrollRect E_StoryChoiceListLoopVerticalScrollRect
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_StoryChoiceListLoopVerticalScrollRect == null )
-     			{
-		    		this.m_E_StoryChoiceListLoopVerticalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.LoopVerticalScrollRect>(this.uiTransform.gameObject,"EG_Story/EG_StoryRight/E_StoryChoiceList");
-     			}
-     			return this.m_E_StoryChoiceListLoopVerticalScrollRect;
-     		}
-     	}
+		public UnityEngine.UI.Image E_StoryChoiceListImage
+		{
+			get
+			{
+				if (this.uiTransform == null)
+				{
+					Log.Error("uiTransform is null.");
+					return null;
+				}
+				if (this.m_E_StoryChoiceListImage == null)
+				{
+					this.m_E_StoryChoiceListImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_Story/EG_StoryRight/E_StoryChoiceList");
+				}
+				return this.m_E_StoryChoiceListImage;
+			}
+		}
 
 		public UnityEngine.UI.Button E_ConfirmChoiceButton
      	{
@@ -430,8 +442,8 @@ namespace ET.Client
 			this.m_E_StoryItemsImage = null;
 			this.m_E_StoryNameText = null;
 			this.m_E_StoryDesText = null;
+			this.m_E_StoryChoiceListScrollRect = null;
 			this.m_E_StoryChoiceListImage = null;
-			this.m_E_StoryChoiceListLoopVerticalScrollRect = null;
 			this.m_E_ConfirmChoiceButton = null;
 			this.m_E_ConfirmChoiceImage = null;
 			this.m_E_PageTypeSetToggleGroup = null;
@@ -456,8 +468,8 @@ namespace ET.Client
 		private UnityEngine.UI.Image m_E_StoryItemsImage = null;
 		private UnityEngine.UI.Text m_E_StoryNameText = null;
 		private UnityEngine.UI.Text m_E_StoryDesText = null;
+		private UnityEngine.UI.ScrollRect m_E_StoryChoiceListScrollRect = null;
 		private UnityEngine.UI.Image m_E_StoryChoiceListImage = null;
-		private UnityEngine.UI.LoopVerticalScrollRect m_E_StoryChoiceListLoopVerticalScrollRect = null;
 		private UnityEngine.UI.Button m_E_ConfirmChoiceButton = null;
 		private UnityEngine.UI.Image m_E_ConfirmChoiceImage = null;
 		private UnityEngine.UI.ToggleGroup m_E_PageTypeSetToggleGroup = null;

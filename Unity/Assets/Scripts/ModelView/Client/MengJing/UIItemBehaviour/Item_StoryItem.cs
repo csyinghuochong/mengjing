@@ -1,11 +1,16 @@
 ﻿
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 namespace ET.Client
 {
+	[ChildOf(typeof(ES_Story))]
 	[EnableMethod]
 	public  class Scroll_Item_StoryItem : Entity,IAwake,IDestroy,IUIScrollItem<Scroll_Item_StoryItem> 
 	{
+		public StoryConfig StoryConfig;
+		public Action<int> ClickHandler;
+
 		public long DataId {get;set;}
 		private bool isCacheNode = false;
 		public void SetCacheMode(bool isCache)

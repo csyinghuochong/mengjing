@@ -488,7 +488,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3053837521552980276
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1773,7 +1773,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 45, y: 0}
-  m_SizeDelta: {x: 0, y: 60}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &694529187487785465
 MonoBehaviour:
@@ -3255,8 +3255,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1682658232896671338}
-  - component: {fileID: 2724294119575687666}
   - component: {fileID: 2010361538480988706}
+  - component: {fileID: 7396621748898775405}
   - component: {fileID: 3153223907689620987}
   - component: {fileID: 2971962200013645224}
   m_Layer: 5
@@ -3286,7 +3286,15 @@ RectTransform:
   m_AnchoredPosition: {x: -540, y: -221.40134}
   m_SizeDelta: {x: 699.2, y: 269.6386}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &2724294119575687666
+--- !u!222 &2010361538480988706
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6229384754612950821}
+  m_CullTransparentMesh: 1
+--- !u!114 &7396621748898775405
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3295,14 +3303,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 6229384754612950821}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce71017a2903f7c4c9a699e438d0b897, type: 3}
+  m_Script: {fileID: 11500000, guid: 1aa08ab6e0800fa44ae55d278d1423e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefabSource:
-    prefabName: Item_CommonItem
-    poolSize: 5
-  totalCount: 0
-  reverseDirection: 0
   m_Content: {fileID: 5762381102770185639}
   m_Horizontal: 0
   m_Vertical: 1
@@ -3321,14 +3324,6 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
---- !u!222 &2010361538480988706
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6229384754612950821}
-  m_CullTransparentMesh: 1
 --- !u!114 &3153223907689620987
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4738,7 +4733,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &970369595433694059
 RectTransform:
   m_ObjectHideFlags: 0
