@@ -56,7 +56,7 @@ namespace ET
         public string Des;
 
         /// <summary>
-        /// 亲和下限，-1表示不限制
+        /// 亲和下限
         /// </summary>
         public int AffinityMin;
 
