@@ -9756,6 +9756,9 @@ namespace ET
         [MemoryPackOrder(1)]
         public List<int> RoleComoleteTaskList { get; set; } = new();
 
+        [MemoryPackOrder(2)]
+        public List<StoryInfo> StoryInfoList { get; set; } = new();
+
         [MemoryPackOrder(3)]
         public List<int> ReceiveHuoYueIds { get; set; } = new();
 
@@ -9774,6 +9777,7 @@ namespace ET
             this.Message = default;
             this.RoleTaskList.Clear();
             this.RoleComoleteTaskList.Clear();
+            this.StoryInfoList.Clear();
             this.ReceiveHuoYueIds.Clear();
             this.ReceiveGrowUpRewardIds.Clear();
 
@@ -34483,6 +34487,107 @@ namespace ET
         }
     }
 
+    [MemoryPackable]
+    [Message(OuterMessage.StoryInfo)]
+    public partial class StoryInfo : MessageObject
+    {
+        public static StoryInfo Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(StoryInfo), isFromPool) as StoryInfo;
+        }
+
+        [MemoryPackOrder(0)]
+        public int StroryId { get; set; }
+
+        [MemoryPackOrder(1)]
+        public int ChoiceId { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.StroryId = default;
+            this.ChoiceId = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    // 剧情选择
+    [MemoryPackable]
+    [Message(OuterMessage.C2M_StoryChoiceRequest)]
+    [ResponseType(nameof(M2C_StoryChoiceResponse))]
+    public partial class C2M_StoryChoiceRequest : MessageObject, ILocationRequest
+    {
+        public static C2M_StoryChoiceRequest Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(C2M_StoryChoiceRequest), isFromPool) as C2M_StoryChoiceRequest;
+        }
+
+        [MemoryPackOrder(89)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(0)]
+        public int StoryId { get; set; }
+
+        [MemoryPackOrder(1)]
+        public int ChoiceId { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.StoryId = default;
+            this.ChoiceId = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
+    [Message(OuterMessage.M2C_StoryChoiceResponse)]
+    public partial class M2C_StoryChoiceResponse : MessageObject, ILocationResponse
+    {
+        public static M2C_StoryChoiceResponse Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(M2C_StoryChoiceResponse), isFromPool) as M2C_StoryChoiceResponse;
+        }
+
+        [MemoryPackOrder(89)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(90)]
+        public int Error { get; set; }
+
+        [MemoryPackOrder(91)]
+        public string Message { get; set; }
+
+        [MemoryPackOrder(0)]
+        public List<StoryInfo> StoryInfoList { get; set; } = new();
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.Error = default;
+            this.Message = default;
+            this.StoryInfoList.Clear();
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
     public static class OuterMessage
     {
         public const ushort HttpGetRouterResponse = 10002;
@@ -35399,5 +35504,8 @@ namespace ET
         public const ushort M2C_SingleHappyOperateResponse = 10913;
         public const ushort C2M_SkillAugmentSetRequest = 10914;
         public const ushort M2C_SkillAugmentSetResponse = 10915;
+        public const ushort StoryInfo = 10916;
+        public const ushort C2M_StoryChoiceRequest = 10917;
+        public const ushort M2C_StoryChoiceResponse = 10918;
     }
 }

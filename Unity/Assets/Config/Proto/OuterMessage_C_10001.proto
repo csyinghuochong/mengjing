@@ -2246,6 +2246,7 @@ message M2C_TaskInitResponse    // ILocationResponse
 	string Message = 92;
 	repeated TaskPro RoleTaskList = 1;
 	repeated int32 RoleComoleteTaskList = 2;
+	repeated StoryInfo StoryInfoList = 3;
 	repeated int32 ReceiveHuoYueIds = 4;
 	repeated int32 ReceiveGrowUpRewardIds = 5;
 }
@@ -7908,4 +7909,27 @@ message M2C_SkillAugmentSetResponse // ILocationResponse
 	int32 Error = 91;
 	string Message = 92;
 	SkillAugmentInfo SkillAugmentInfo = 1;
+}
+
+message StoryInfo
+{
+	int32 StroryId = 1;
+	int32 ChoiceId = 2;
+}
+
+//剧情选择
+//ResponseType M2C_StoryChoiceResponse
+message C2M_StoryChoiceRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int32 StoryId = 1;
+	int32 ChoiceId = 2;
+}
+
+message M2C_StoryChoiceResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+	repeated StoryInfo StoryInfoList = 1;
 }

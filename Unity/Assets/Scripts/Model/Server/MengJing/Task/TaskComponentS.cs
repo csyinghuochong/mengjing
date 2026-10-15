@@ -15,5 +15,6 @@ namespace ET.Server
         public List<TaskPro> RoleTaskList = new List<TaskPro>();
         public List<int> RoleComoleteTaskList { get; set; } = new List<int>();
 
+        public List<StoryInfo> StoryInfoList = new();
     }
 }

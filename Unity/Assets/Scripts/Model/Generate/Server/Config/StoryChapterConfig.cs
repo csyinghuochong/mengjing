@@ -23,7 +23,7 @@ namespace ET
         {
             Id = _buf.ReadInt();
             Name = _buf.ReadString();
-            {int __n0 = _buf.ReadSize(); Choice = new int[__n0];for(var __index0 = 0 ; __index0 < __n0 ; __index0++) { int __e0;__e0 = _buf.ReadInt(); Choice[__index0] = __e0;}}
+            {int __n0 = _buf.ReadSize(); Stories = new int[__n0];for(var __index0 = 0 ; __index0 < __n0 ; __index0++) { int __e0;__e0 = _buf.ReadInt(); Stories[__index0] = __e0;}}
             EntryTaskId = _buf.ReadInt();
             EntryTaskId_Ref = null;
 
@@ -48,7 +48,7 @@ namespace ET
         /// <summary>
         /// 选项
         /// </summary>
-        public int[] Choice;
+        public int[] Stories;
 
         /// <summary>
         /// 解锁剧情系统的主线任务ID
@@ -74,7 +74,7 @@ namespace ET
             return "{ "
             + "Id:" + Id + ","
             + "Name:" + Name + ","
-            + "Choice:" + Luban.StringUtil.CollectionToString(Choice) + ","
+            + "Stories:" + Luban.StringUtil.CollectionToString(Stories) + ","
             + "EntryTaskId:" + EntryTaskId + ","
             + "}";
         }

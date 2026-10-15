@@ -93,6 +93,54 @@ namespace ET.Server
             return self.RoleComoleteTaskList.IndexOf(taskid) >= 0;
         }
 
+        public static int OnStoryChoice(this TaskComponentS self, int storyId, int choiceId)
+        {
+            StoryConfig storyConfig = StoryConfigCategory.Instance.GetOrDefault(storyId);
+            if (storyConfig == null || Array.IndexOf(storyConfig.Choice, choiceId) < 0)
+            {
+                return ErrorCode.ERR_ModifyData;
+            }
+
+            StoryChapterConfig storyChapterConfig = null;
+            foreach (StoryChapterConfig config in StoryChapterConfigCategory.Instance.GetAll().Values)
+            {
+                if (Array.IndexOf(config.Stories, storyId) >= 0)
+                {
+                    storyChapterConfig = config;
+                    break;
+                }
+            }
+
+            if (storyChapterConfig == null)
+            {
+                return ErrorCode.ERR_ModifyData;
+            }
+
+            if (storyChapterConfig.EntryTaskId != 0 && !self.IsHaveTask(storyChapterConfig.EntryTaskId))
+            {
+                return ErrorCode.Pre_Condition_Error;
+            }
+
+            for (int i = 0; i < self.StoryInfoList.Count; i++)
+            {
+                if (self.StoryInfoList[i].StroryId != storyId)
+                {
+                    continue;
+                }
+
+                return ErrorCode.ERR_ModifyData;
+            }
+
+            StoryInfo storyInfo = StoryInfo.Create();
+            storyInfo.StroryId = storyId;
+            storyInfo.ChoiceId = choiceId;
+            self.StoryInfoList.Add(storyInfo);
+            
+            // 获得选项奖励
+            
+            return ErrorCode.ERR_Success;
+        }
+
 
         public static int TaskTrack(this TaskComponentS self, C2M_TaskTrackRequest request)
         {

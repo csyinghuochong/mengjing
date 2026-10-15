@@ -11,5 +11,7 @@ namespace ET.Client
         public List<TaskPro> RoleTaskList { get; set; } = new();
         
         public List<int> RoleComoleteTaskList { get; set; } = new();
+
+        public List<StoryInfo> StoryInfoList { get; set; } = new();
     }
 }

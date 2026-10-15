@@ -14,6 +14,7 @@ namespace ET.Client
             TaskComponentC taskComponentC = root.GetComponent<TaskComponentC>();
             taskComponentC.RoleTaskList = response.RoleTaskList;
             taskComponentC.RoleComoleteTaskList = response.RoleComoleteTaskList;
+            taskComponentC.StoryInfoList = response.StoryInfoList;
             taskComponentC.ReceiveHuoYueIds = response.ReceiveHuoYueIds;
             taskComponentC.ReceiveGrowUpRewardIds = response.ReceiveGrowUpRewardIds;
             return response.Error;
@@ -24,6 +25,21 @@ namespace ET.Client
             C2M_UnionOrderOperateRequest request = C2M_UnionOrderOperateRequest.Create();   
             request.OperateType = operate;  
             M2C_UnionOrderOperateResponse response = (M2C_UnionOrderOperateResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            return response.Error;
+        }
+
+        public static async ETTask<int> StoryChoiceRequest(Scene root, int storyId, int choiceId)
+        {
+            C2M_StoryChoiceRequest request = C2M_StoryChoiceRequest.Create();
+            request.StoryId = storyId;
+            request.ChoiceId = choiceId;
+
+            M2C_StoryChoiceResponse response = (M2C_StoryChoiceResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            if (response.Error == ErrorCode.ERR_Success)
+            {
+                root.GetComponent<TaskComponentC>().StoryInfoList = response.StoryInfoList;
+            }
+
             return response.Error;
         }
 
