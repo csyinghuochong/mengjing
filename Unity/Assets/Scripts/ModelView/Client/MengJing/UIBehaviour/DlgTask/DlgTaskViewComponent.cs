@@ -124,6 +124,26 @@ namespace ET.Client
 			}
 		}
 		
+		public ES_Story ES_Story
+		{
+			get
+			{
+				ES_Story es = this.m_es_story;
+				if (es == null)
+				{
+					string path = "Assets/Bundles/UI/Common/ES_Story.prefab";
+					GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
+					GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
+					go.SetActive(true);
+					this.AssetList.Add(path);
+					this.m_es_story = this.AddChild<ES_Story, Transform>(go.transform);
+					go.SetActive(false);
+				}
+
+				return this.m_es_story;
+			}
+		}
+		
 		public void DestroyWidget()
 		{
 			this.m_EG_SubViewRectTransform = null;
@@ -132,6 +152,7 @@ namespace ET.Client
 			this.m_es_taskgrowup = null;
 			this.m_es_taskshop = null;
 			this.m_es_monsterTuJian = null;
+			this.m_es_story = null;
 			this.uiTransform = null;
 
 			ResourcesLoaderComponent resourcesLoaderComponent = this.Root().GetComponent<ResourcesLoaderComponent>();
@@ -149,6 +170,7 @@ namespace ET.Client
 		private EntityRef<ES_TaskGrowUp> m_es_taskgrowup = null;
 		private EntityRef<ES_TaskShop> m_es_taskshop = null;
 		private EntityRef<ES_MonsterTuJian> m_es_monsterTuJian = null;
+		private EntityRef<ES_Story> m_es_story = null;
 		public Transform uiTransform = null;
 	}
 }
