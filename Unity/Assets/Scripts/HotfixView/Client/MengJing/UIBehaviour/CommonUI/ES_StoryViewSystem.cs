@@ -213,6 +213,7 @@ namespace ET.Client
             StoryInfo storyInfo = self.GetStoryInfo(storyId);
             self.SelectedChoiceId = storyInfo?.ChoiceId ?? 0;
             self.RefreshChoiceItems();
+            self.RefreshStoryReply(storyInfo);
             self.E_ConfirmChoiceButton.interactable = storyInfo == null && self.SelectedChoiceId != 0;
         }
 
@@ -292,7 +293,17 @@ namespace ET.Client
                 self.SelectedChoiceId = storyInfo.ChoiceId;
             }
             self.RefreshStoryItems();
+            self.RefreshStoryReply(storyInfo);
             self.E_ConfirmChoiceButton.interactable = false;
+        }
+
+        private static void RefreshStoryReply(this ES_Story self, StoryInfo storyInfo)
+        {
+            StoryChoiceConfig choiceConfig = storyInfo == null ? null : StoryChoiceConfigCategory.Instance.GetOrDefault(storyInfo.ChoiceId);
+            bool showReply = choiceConfig != null && !string.IsNullOrEmpty(choiceConfig.ReplyText);
+
+            self.E_StoryReplyText.text = showReply ? choiceConfig.ReplyText : string.Empty;
+            self.E_StoryReplyText.gameObject.SetActive(showReply);
         }
 
         private static bool IsChapterUnlocked(this ES_Story self, StoryChapterConfig config)
@@ -364,6 +375,8 @@ namespace ET.Client
             self.ShowStoryChoiceConfigs.Clear();
             self.E_StoryNameText.text = string.Empty;
             self.E_StoryDesText.text = string.Empty;
+            self.E_StoryReplyText.text = string.Empty;
+            self.E_StoryReplyText.gameObject.SetActive(false);
             self.RefreshStoryItems();
             self.RefreshChoiceItems();
             self.E_ConfirmChoiceButton.interactable = false;

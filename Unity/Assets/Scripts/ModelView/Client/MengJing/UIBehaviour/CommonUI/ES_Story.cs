@@ -326,38 +326,55 @@ namespace ET.Client
      	}
 
 		public UnityEngine.UI.ScrollRect E_StoryChoiceListScrollRect
-		{
-			get
-			{
-				if (this.uiTransform == null)
-				{
-					Log.Error("uiTransform is null.");
-					return null;
-				}
-				if (this.m_E_StoryChoiceListScrollRect == null)
-				{
-					this.m_E_StoryChoiceListScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.ScrollRect>(this.uiTransform.gameObject,"EG_Story/EG_StoryRight/E_StoryChoiceList");
-				}
-				return this.m_E_StoryChoiceListScrollRect;
-			}
-		}
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_StoryChoiceListScrollRect == null )
+     			{
+		    		this.m_E_StoryChoiceListScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.ScrollRect>(this.uiTransform.gameObject,"EG_Story/EG_StoryRight/E_StoryChoiceList");
+     			}
+     			return this.m_E_StoryChoiceListScrollRect;
+     		}
+     	}
 
 		public UnityEngine.UI.Image E_StoryChoiceListImage
-		{
-			get
-			{
-				if (this.uiTransform == null)
-				{
-					Log.Error("uiTransform is null.");
-					return null;
-				}
-				if (this.m_E_StoryChoiceListImage == null)
-				{
-					this.m_E_StoryChoiceListImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_Story/EG_StoryRight/E_StoryChoiceList");
-				}
-				return this.m_E_StoryChoiceListImage;
-			}
-		}
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_StoryChoiceListImage == null )
+     			{
+		    		this.m_E_StoryChoiceListImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_Story/EG_StoryRight/E_StoryChoiceList");
+     			}
+     			return this.m_E_StoryChoiceListImage;
+     		}
+     	}
+
+		public UnityEngine.UI.Text E_StoryReplyText
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_StoryReplyText == null )
+     			{
+		    		this.m_E_StoryReplyText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"EG_Story/EG_StoryRight/E_StoryReply");
+     			}
+     			return this.m_E_StoryReplyText;
+     		}
+     	}
 
 		public UnityEngine.UI.Button E_ConfirmChoiceButton
      	{
@@ -444,6 +461,7 @@ namespace ET.Client
 			this.m_E_StoryDesText = null;
 			this.m_E_StoryChoiceListScrollRect = null;
 			this.m_E_StoryChoiceListImage = null;
+			this.m_E_StoryReplyText = null;
 			this.m_E_ConfirmChoiceButton = null;
 			this.m_E_ConfirmChoiceImage = null;
 			this.m_E_PageTypeSetToggleGroup = null;
@@ -470,6 +488,7 @@ namespace ET.Client
 		private UnityEngine.UI.Text m_E_StoryDesText = null;
 		private UnityEngine.UI.ScrollRect m_E_StoryChoiceListScrollRect = null;
 		private UnityEngine.UI.Image m_E_StoryChoiceListImage = null;
+		private UnityEngine.UI.Text m_E_StoryReplyText = null;
 		private UnityEngine.UI.Button m_E_ConfirmChoiceButton = null;
 		private UnityEngine.UI.Image m_E_ConfirmChoiceImage = null;
 		private UnityEngine.UI.ToggleGroup m_E_PageTypeSetToggleGroup = null;
