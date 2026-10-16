@@ -51,7 +51,7 @@ namespace ET.Client
             int cangkuNumber = unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.CangKuNumber);
             if (cangkuNumber <= page)
             {
-                string costItems = GlobalValueConfigCategory.Instance.Get(38).Value;
+                string costItems = GlobalValueConfigCategory.Instance.Value_38;
                 using (zstring.Block())
                 {
                     PopupTipHelp.OpenPopupTip(self.Root(), "开启仓库", zstring.Format("是否消耗{0}开启一个仓库", CommonViewHelper.GetNeedItemDesc(costItems)),

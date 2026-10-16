@@ -62,7 +62,7 @@ namespace ET
 
         public static int GetLastTower(int fubenDifficulty)
         {
-            string[] ids = GlobalValueConfigCategory.Instance.Get(71).Value.Split(';');
+            string[] ids = GlobalValueConfigCategory.Instance.Value_71.Split(';');
             return (int.Parse(ids[fubenDifficulty - 1]));
         }
 

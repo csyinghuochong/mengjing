@@ -509,9 +509,9 @@ namespace ET.Server
             UserInfo userInfo = self.GetParent<Unit>().GetComponent<UserInfoComponentS>().UserInfo;
             int jiayuanlv = JiaYuanConfigCategory.Instance.Get(userInfo.JiaYuanLv).Lv;
 
-            GlobalValueConfig globalValueConfig = GlobalValueConfigCategory.Instance.Get(87);
+            string globalValueConfig = GlobalValueConfigCategory.Instance.Value_87;
 
-            self.PlantGoods_7 = MysteryShopHelper.InitJiaYuanPlanItemInfos(openday, jiayuanlv, globalValueConfig.Value);
+            self.PlantGoods_7 = MysteryShopHelper.InitJiaYuanPlanItemInfos(openday, jiayuanlv, globalValueConfig);
             self.PastureGoods_7 = JiaYuanHelper.InitJiaYuanPastureList(jiayuanlv);
 
             self.JiaYuanStore = MysteryShopHelper.InitJiaYuanPlanItemInfos(openday, jiayuanlv, "400001;8");

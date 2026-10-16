@@ -36,8 +36,8 @@ namespace ET.Server
             // 判断道具是否足够
             if (request.CostType == 0) // 花费钻石
             {
-                GlobalValueConfig globalValueConfig = GlobalValueConfigCategory.Instance.Get(89);
-                int needGold = int.Parse(globalValueConfig.Value);
+                int globalValueConfig = GlobalValueConfigCategory.Instance.Value_89;
+                int needGold = globalValueConfig;
                 if (userInfoComponent.UserInfo.Diamond < needGold)
                 {
                     return;
@@ -49,8 +49,8 @@ namespace ET.Server
             else if(request.CostType == 1)//花费凭证
             {
                 BagComponentS bagComponent = unit.GetComponent<BagComponentS>();
-                GlobalValueConfig globalValueConfig = GlobalValueConfigCategory.Instance.Get(90);
-                int itemConfigID = int.Parse(globalValueConfig.Value);
+                int globalValueConfig = GlobalValueConfigCategory.Instance.Value_90;
+                int itemConfigID = globalValueConfig;
                 if (bagComponent.GetItemNumber(itemConfigID) <= 0)
                 {
                     return;
@@ -67,8 +67,8 @@ namespace ET.Server
             }
             else if (request.CostType == 10) // 钻石+钻石 去某10层，这里就相信客户端吧
             {
-                GlobalValueConfig globalValueConfig = GlobalValueConfigCategory.Instance.Get(89);
-                int needGold = int.Parse(globalValueConfig.Value) + 350;
+                int globalValueConfig = GlobalValueConfigCategory.Instance.Value_89;
+                int needGold = globalValueConfig + 350;
                 if (userInfoComponent.UserInfo.Diamond < needGold )
                 {
                     return;
@@ -89,8 +89,8 @@ namespace ET.Server
                 userInfoComponent.UpdateRoleMoneySub(UserDataType.Diamond, (-1 * needGold).ToString(), true, ItemGetWay.TowerOfSealCost);
 
                 BagComponentS bagComponent = unit.GetComponent<BagComponentS>();
-                GlobalValueConfig globalValueConfig = GlobalValueConfigCategory.Instance.Get(90);
-                int itemConfigID = int.Parse(globalValueConfig.Value);
+                int globalValueConfig = GlobalValueConfigCategory.Instance.Value_90;
+                int itemConfigID = globalValueConfig;
                 if (bagComponent.GetItemNumber(itemConfigID) <= 0)
                 {
                     return;

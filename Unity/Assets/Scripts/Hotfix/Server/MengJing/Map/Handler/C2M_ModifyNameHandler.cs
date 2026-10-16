@@ -47,8 +47,8 @@ namespace ET.Server
                 return;
             }
 
-            GlobalValueConfig globalValueConfig = GlobalValueConfigCategory.Instance.Get(70);
-            if (unit.GetComponent<BagComponentS>().OnCostItemData(globalValueConfig.Value))
+            string globalValueConfig = GlobalValueConfigCategory.Instance.Value_70;
+            if (unit.GetComponent<BagComponentS>().OnCostItemData(globalValueConfig))
             {
                 unit.GetComponent<UserInfoComponentS>().UpdateRoleData(UserDataType.Name, request.NewName);
                 M2C_RoleDataBroadcast m2C_BroadcastRoleData = M2C_RoleDataBroadcast.Create();

@@ -55,10 +55,10 @@ namespace ET.Client
 
         public static void InitReward(this ES_ActivityYueKa self)
         {
-            string reward = GlobalValueConfigCategory.Instance.Get(28).Value;
+            string reward = GlobalValueConfigCategory.Instance.Value_28;
             self.ES_RewardList.Refresh(reward);
             self.ES_RewardList.ShowUIEffect( 41100001 );
-            self.E_TextYueKaCostText.text = GlobalValueConfigCategory.Instance.Get(37).Value;
+            self.E_TextYueKaCostText.text = GlobalValueConfigCategory.Instance.Value_37.ToString();
         }
 
         public static async ETTask OnBtn_GetRewardButton(this ES_ActivityYueKa self)
@@ -77,8 +77,8 @@ namespace ET.Client
                 return;
             }
 
-            int maxPiLao = int.Parse(GlobalValueConfigCategory.Instance
-                    .Get(unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.YueKaRemainTimes) > 0 ? 26 : 10).Value);
+            int maxPiLao = 0;
+            maxPiLao = unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.YueKaRemainTimes) > 0 ? GlobalValueConfigCategory.Instance.MaxPiLaoYuKaUser : GlobalValueConfigCategory.Instance.MaxPiLao;
             long nowPiLao = self.Root().GetComponent<UserInfoComponentC>().UserInfo.PiLao;
 
             if (maxPiLao < nowPiLao + 20)
@@ -116,7 +116,7 @@ namespace ET.Client
         public static void OnBtn_OpenYueKaButton(this ES_ActivityYueKa self)
         {
             // 判断自身是否有钻石
-            string cost = GlobalValueConfigCategory.Instance.Get(37).Value;
+            string cost = GlobalValueConfigCategory.Instance.Value_37.ToString();
             using (zstring.Block())
             {
                 PopupTipHelp.OpenPopupTip(self.Root(), "开启月卡", zstring.Format("是否花费{0}钻石开启月卡?", cost), () => { self.ReqestOnBtn_OpenYueKaButton().Coroutine(); },

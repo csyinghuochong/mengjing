@@ -490,7 +490,7 @@ namespace ET.Server
             }
             else if (mapComponent.MapType == MapTypeEnum.BaoZang)
             {
-                if (monsterNumber >= int.Parse( GlobalValueConfigCategory.Instance.Get(78).Value))
+                if (monsterNumber >= GlobalValueConfigCategory.Instance.Value_78)
                 {
                     return;
                 }

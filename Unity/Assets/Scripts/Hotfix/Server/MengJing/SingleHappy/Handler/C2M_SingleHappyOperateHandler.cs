@@ -40,13 +40,13 @@ namespace ET.Server
                     return;
                 }
 
-                GlobalValueConfig globalValueConfig = GlobalValueConfigCategory.Instance.Get(132);
-                if (userInfoComponent.UserInfo.Diamond < int.Parse(globalValueConfig.Value))
+                int globalValueConfig = GlobalValueConfigCategory.Instance.Value_132;
+                if (userInfoComponent.UserInfo.Diamond < globalValueConfig)
                 {
                     response.Error = ErrorCode.ERR_GoldNotEnoughError;
                     return;
                 }
-                userInfoComponent.UpdateRoleMoneySub( UserDataType.Diamond, (int.Parse(globalValueConfig.Value) * -1).ToString(), true, ItemGetWay.HappyMove);
+                userInfoComponent.UpdateRoleMoneySub( UserDataType.Diamond, (globalValueConfig * -1).ToString(), true, ItemGetWay.HappyMove);
                 
                 singleHappyDungeonComponent.OnTimer(unit);
             }

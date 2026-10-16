@@ -405,7 +405,7 @@ namespace ET
         //获取家园开启仓库格子消耗
         public static string GetOpenJiaYuanWarehouse(int page) {
 
-            string costItems = GlobalValueConfigCategory.Instance.Get(86).Value;
+            string costItems = GlobalValueConfigCategory.Instance.Value_86;
             string[] costItemsList = costItems.Split('@');
             return costItemsList[page - 1];
             

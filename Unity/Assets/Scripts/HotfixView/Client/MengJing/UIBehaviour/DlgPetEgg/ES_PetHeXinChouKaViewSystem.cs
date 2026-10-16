@@ -27,14 +27,13 @@ namespace ET.Client
         public static void UpdateMoney(this ES_PetHeXinChouKa self)
         {
             ResourcesLoaderComponent resourcesLoaderComponent = self.Root().GetComponent<ResourcesLoaderComponent>();
-            string[] itemInfo10 = GlobalValueConfigCategory.Instance.Get(111).Value.Split('@')[0].Split(';');
+            string[] itemInfo10 = GlobalValueConfigCategory.Instance.Value_111.Split('@')[0].Split(';');
             string path1 = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemIcon, ItemConfigCategory.Instance.Get(int.Parse(itemInfo10[0])).Icon);
             Sprite sp1 = resourcesLoaderComponent.LoadAssetSync<Sprite>(path1);
 
             self.E_ItemImageIcon10Image.sprite = sp1;
-            int exlporeNumber = UnitHelper.GetMyUnitFromClientScene(self.Root()).GetComponent<NumericComponentC>()
-                    .GetAsInt(NumericType.PetHeXinExploreNumber);
-            string[] set = GlobalValueConfigCategory.Instance.Get(112).Value.Split(';');
+            int exlporeNumber = UnitHelper.GetMyUnitFromClientScene(self.Root()).GetComponent<NumericComponentC>().GetAsInt(NumericType.PetHeXinExploreNumber);
+            string[] set = GlobalValueConfigCategory.Instance.Value_112.Split(';');
             float discount;
             if (exlporeNumber < int.Parse(set[0]))
             {
@@ -53,7 +52,7 @@ namespace ET.Client
 
             self.E_Text_DiamondNumberText.color = haveNumber10 >= (int)(int.Parse(itemInfo10[1]) * discount) ? Color.white : Color.red;
 
-            string[] itemInfo1 = GlobalValueConfigCategory.Instance.Get(110).Value.Split('@')[0].Split(';');
+            string[] itemInfo1 = GlobalValueConfigCategory.Instance.Value_110.Split('@')[0].Split(';');
             string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemIcon, ItemConfigCategory.Instance.Get(int.Parse(itemInfo1[0])).Icon);
             Sprite sp = resourcesLoaderComponent.LoadAssetSync<Sprite>(path);
 
@@ -87,17 +86,17 @@ namespace ET.Client
                 return;
             }
 
-            string needItems = GlobalValueConfigCategory.Instance.Get(110).Value.Split('@')[0];
+            string needItems = GlobalValueConfigCategory.Instance.Value_110.Split('@')[0];
             if (choukaType == 1 && !self.Root().GetComponent<BagComponentC>().CheckNeedItem(needItems))
             {
                 HintHelp.ShowErrorHint(self.Root(), ErrorCode.ERR_ItemNotEnoughError);
                 return;
             }
 
-            string[] itemInfo10 = GlobalValueConfigCategory.Instance.Get(111).Value.Split('@')[0].Split(';');
+            string[] itemInfo10 = GlobalValueConfigCategory.Instance.Value_111.Split('@')[0].Split(';');
             int exlporeNumber = UnitHelper.GetMyUnitFromClientScene(self.Root()).GetComponent<NumericComponentC>()
                     .GetAsInt(NumericType.PetExploreNumber);
-            string[] set = GlobalValueConfigCategory.Instance.Get(112).Value.Split(';');
+            string[] set = GlobalValueConfigCategory.Instance.Value_112.Split(';');
             float discount;
             if (exlporeNumber < int.Parse(set[0]))
             {

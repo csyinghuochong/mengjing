@@ -57,7 +57,7 @@ namespace ET.Client
 
         public static async ETTask OnButtonTransferButton(this ES_RoleXiLianTransfer self)
         {
-            string costItem = GlobalValueConfigCategory.Instance.Get(51).Value;
+            string costItem = GlobalValueConfigCategory.Instance.Value_51;
             if (!self.Root().GetComponent<BagComponentC>().CheckNeedItem(costItem))
             {
                 FlyTipComponent.Instance.ShowFlyTip("材料不足！");
@@ -133,7 +133,7 @@ namespace ET.Client
 
         public static void UpdateCost(this ES_RoleXiLianTransfer self)
         {
-            string[] costItem = GlobalValueConfigCategory.Instance.Get(51).Value.Split(';');
+            string[] costItem = GlobalValueConfigCategory.Instance.Value_51.Split(';');
             self.ES_CostItem.UpdateItem(int.Parse(costItem[0]), int.Parse(costItem[1]));
         }
 

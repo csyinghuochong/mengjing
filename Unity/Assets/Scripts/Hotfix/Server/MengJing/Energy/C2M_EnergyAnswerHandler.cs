@@ -18,8 +18,7 @@
             energyComponent.QuestionIndex++;
             if (request.AnswerIndex == 1)
             {
-                GlobalValueConfig globalValueConfig = GlobalValueConfigCategory.Instance.Get(15);
-                unit.GetComponent<BagComponentS>().OnAddItemData(globalValueConfig.Value, $"{ItemGetWay.Energy}_{TimeHelper.ServerNow()}");
+                unit.GetComponent<BagComponentS>().OnAddItemData(GlobalValueConfigCategory.Instance.Value_15, $"{ItemGetWay.Energy}_{TimeHelper.ServerNow()}");
             }
             
             await ETTask.CompletedTask;

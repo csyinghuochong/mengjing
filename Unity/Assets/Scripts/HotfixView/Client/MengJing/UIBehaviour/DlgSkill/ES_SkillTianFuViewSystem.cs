@@ -198,7 +198,7 @@ namespace ET.Client
 
             using (zstring.Block())
             {
-                string tip = zstring.Format("消耗{0}钻石可以重置天赋", GlobalValueConfigCategory.Instance.Get(139).Value.Split(';')[1]);
+                string tip = zstring.Format("消耗{0}钻石可以重置天赋", GlobalValueConfigCategory.Instance.Value_139.Split(';')[1]);
                 PopupTipHelp.OpenPopupTip(self.Root(), "重置天赋", tip, () => { Request().Coroutine(); }).Coroutine();
             }
 

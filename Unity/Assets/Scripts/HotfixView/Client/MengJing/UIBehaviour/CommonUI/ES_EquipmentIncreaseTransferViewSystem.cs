@@ -37,7 +37,7 @@ namespace ET.Client
 
         public static async ETTask OnButtonTransferButton(this ES_EquipmentIncreaseTransfer self)
         {
-            string costItem = GlobalValueConfigCategory.Instance.Get(51).Value;
+            string costItem = GlobalValueConfigCategory.Instance.Value_51;
             if (!self.Root().GetComponent<BagComponentC>().CheckNeedItem(costItem))
             {
                 FlyTipComponent.Instance.ShowFlyTip("材料不足！");
@@ -96,7 +96,7 @@ namespace ET.Client
 
         public static void UpdateCost(this ES_EquipmentIncreaseTransfer self)
         {
-            self.ES_CostList.Refresh(GlobalValueConfigCategory.Instance.Get(51).Value);
+            self.ES_CostList.Refresh(GlobalValueConfigCategory.Instance.Value_51);
         }
 
         public static void ResetSelect(this ES_EquipmentIncreaseTransfer self)

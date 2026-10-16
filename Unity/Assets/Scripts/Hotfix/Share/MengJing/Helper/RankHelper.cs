@@ -8,20 +8,20 @@ namespace ET
 
         public static bool HaveReward(int rankType, int day)
         {
-            GlobalValueConfig globalValueConfig = null;
+            string globalValueConfig = null;
             if (rankType == 1)
             {
-                globalValueConfig = GlobalValueConfigCategory.Instance.Get(66);
+                globalValueConfig = GlobalValueConfigCategory.Instance.Value_66;
             }
             if (rankType == 2)
             {
-                globalValueConfig = GlobalValueConfigCategory.Instance.Get(67);
+                globalValueConfig = GlobalValueConfigCategory.Instance.Value_67;
             }
             if (day == 0)
             {
                 day = 7;
             }
-            return globalValueConfig.Value.Contains(day.ToString());
+            return globalValueConfig.Contains(day.ToString());
         }
 
         public static List<RankRewardConfig> GetTypeRankRewards( int rankType)

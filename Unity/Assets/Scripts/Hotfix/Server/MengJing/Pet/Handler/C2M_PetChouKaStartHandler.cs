@@ -16,7 +16,7 @@ namespace ET.Server
             NumericComponentS numericComponent = unit.GetComponent<NumericComponentS>();
             if (numericComponent.GetAsInt(NumericType.PetChouKaRewardItemId) == 0)
             {
-                if (!unit.GetComponent<BagComponentS>().OnCostItemData(GlobalValueConfigCategory.Instance.Get(137).Value))
+                if (!unit.GetComponent<BagComponentS>().OnCostItemData(GlobalValueConfigCategory.Instance.Value_137))
                 {
                     response.Error = ErrorCode.ERR_ItemNotEnoughError;
                     return;

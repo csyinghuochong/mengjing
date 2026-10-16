@@ -19,7 +19,7 @@ namespace ET.Server
             }
 
             ItemConfig itemConfig = ItemConfigCategory.Instance.Get(bagInfo.ItemID);
-            string costitem = GlobalValueConfigCategory.Instance.Get(88).Value;
+            string costitem = GlobalValueConfigCategory.Instance.Value_88;
             BagComponentS bagComponent = unit.GetComponent<BagComponentS>();
             if (!bagComponent.CheckCostItem(costitem))
             {

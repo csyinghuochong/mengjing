@@ -83,8 +83,7 @@ namespace ET.Client
 
 		private static void OnButtonReset(this ES_SkillAugment self, int operation)
 		{
-			GlobalValueConfig globalValueConfig = GlobalValueConfigCategory.Instance.Get(20);
-			int needGold = int.Parse(globalValueConfig.Value);
+			int needGold = GlobalValueConfigCategory.Instance.Value_20;
 			UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
 			if (userInfoComponent.UserInfo.Gold < needGold)
 			{

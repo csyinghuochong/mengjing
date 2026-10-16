@@ -13,7 +13,7 @@ namespace ET.Server
         {
             self.CheckAllItemList();
 
-            self.OnAddItemData(GlobalValueConfigCategory.Instance.Get(9).Value, $"{ItemGetWay.System}_{TimeHelper.ServerNow()}", false);
+            self.OnAddItemData(GlobalValueConfigCategory.Instance.InitYaoJi, $"{ItemGetWay.System}_{TimeHelper.ServerNow()}", false);
         }
 
         [EntitySystem]

@@ -15,8 +15,18 @@
             }
             
             int configId = request.OperateId;
-            GlobalValueConfig globalValueConfig = GlobalValueConfigCategory.Instance.Get(configId);
-            string[] configInfo = globalValueConfig.Value.Split('@');
+            string globalValueConfig = null;
+            if (configId == 39)
+            {
+                globalValueConfig = GlobalValueConfigCategory.Instance.Value_39;
+            }
+
+            if (configId == 40)
+            {
+                globalValueConfig = GlobalValueConfigCategory.Instance.Value_40;
+            }
+            
+            string[] configInfo = globalValueConfig.Split('@');
             if(configInfo.Length < 2)
             {
                 response.Error = ErrorCode.ERR_ModifyData;

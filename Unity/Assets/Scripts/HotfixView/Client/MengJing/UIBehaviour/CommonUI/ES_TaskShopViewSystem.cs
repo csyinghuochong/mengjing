@@ -75,7 +75,7 @@ namespace ET.Client
 
         public static void OnInitUI(this ES_TaskShop self)
         {
-            int shopSellid = int.Parse( GlobalValueConfigCategory.Instance.Get(120).Value);
+            int shopSellid = GlobalValueConfigCategory.Instance.Value_120;
             int playLv = self.Root().GetComponent<UserInfoComponentC>().UserInfo.Lv;
             self.ShowStoreSellConfigs.Clear();
             while (shopSellid != 0)

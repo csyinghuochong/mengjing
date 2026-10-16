@@ -33,7 +33,7 @@ namespace ET.Client
 
             using (zstring.Block())
             {
-                self.E_NeedDiamondText.text = zstring.Format("x {0}", GlobalValueConfigCategory.Instance.Get(73).Value);
+                self.E_NeedDiamondText.text = zstring.Format("x {0}", GlobalValueConfigCategory.Instance.Value_73);
             }
 
             self.EG_XiLianInfoRectTransform.gameObject.SetActive(false);
@@ -1011,10 +1011,10 @@ namespace ET.Client
 
             if (times > 1)
             {
-                int needDimanond = int.Parse(GlobalValueConfigCategory.Instance.Get(73).Value.Split('@')[0]);
+                int needDimanond = int.Parse(GlobalValueConfigCategory.Instance.Value_73.Split('@')[0]);
                 int itemXiLianNumber = UnitHelper.GetMyUnitFromClientScene(self.Root()).GetComponent<NumericComponentC>()
                         .GetAsInt(NumericType.ItemXiLianNumber);
-                string[] set = GlobalValueConfigCategory.Instance.Get(116).Value.Split(';');
+                string[] set = GlobalValueConfigCategory.Instance.Value_116.Split(';');
                 float discount;
                 if (itemXiLianNumber < int.Parse(set[0]))
                 {

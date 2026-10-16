@@ -130,8 +130,8 @@ namespace ET
 		{
 			List<MysteryItemInfo> mysteryItemInfos = new List<MysteryItemInfo>();
 
-			GlobalValueConfig globalValueConfig = GlobalValueConfigCategory.Instance.Get(11);
-			string[] itemList =  globalValueConfig.Value.Split('@');
+			string globalValueConfig = GlobalValueConfigCategory.Instance.ShenMiItem;
+			string[] itemList =  globalValueConfig.Split('@');
 
 			for (int i = 0; i < itemList.Length; i++)
 			{
@@ -146,8 +146,8 @@ namespace ET
 		{
 			List<MysteryItemInfo> mysteryItemInfos = new List<MysteryItemInfo>();
 
-			GlobalValueConfig globalValueConfig = GlobalValueConfigCategory.Instance.Get(92);
-			string[] itemList = globalValueConfig.Value.Split('@');
+			string globalValueConfig = GlobalValueConfigCategory.Instance.Value_92;
+			string[] itemList = globalValueConfig.Split('@');
 
 			for (int i = 0; i < itemList.Length; i++)
 			{

@@ -1245,7 +1245,7 @@ namespace ET.Client
 
             random = RandomHelper.RandomNumber(0, equips.Count);
 
-            int maxInheritTimes =int.Parse( GlobalValueConfigCategory.Instance.Get(117).Value);
+            int maxInheritTimes = GlobalValueConfigCategory.Instance.ItemInheritTime;
             if (equips[random].InheritTimes >= maxInheritTimes)
             {
                 // 该装备不可再进行传承鉴定！
@@ -1337,18 +1337,18 @@ namespace ET.Client
                 return;
             }
 
-            string needItems = GlobalValueConfigCategory.Instance.Get(39).Value.Split('@')[0];
+            string needItems = GlobalValueConfigCategory.Instance.Value_39.Split('@')[0];
             if (choukaType == 1 && !bagComponent.CheckNeedItem(needItems))
             {
                 // ErrorCode.ERR_ItemNotEnoughError);
                 return;
             }
 
-            int needDimanond = int.Parse(GlobalValueConfigCategory.Instance.Get(40).Value.Split('@')[0]);
+            int needDimanond = int.Parse(GlobalValueConfigCategory.Instance.Value_40.Split('@')[0]);
             UserInfo userInfo = root.GetComponent<UserInfoComponentC>().UserInfo;
             int exlporeNumber = UnitHelper.GetMyUnitFromClientScene(root).GetComponent<NumericComponentC>()
                     .GetAsInt(NumericType.PetExploreNumber);
-            string[] set = GlobalValueConfigCategory.Instance.Get(107).Value.Split(';');
+            string[] set = GlobalValueConfigCategory.Instance.Value_107.Split(';');
             float discount;
             if (exlporeNumber < int.Parse(set[0])) // 超过300次打8折
             {
@@ -1381,17 +1381,16 @@ namespace ET.Client
                 return;
             }
 
-            needItems = GlobalValueConfigCategory.Instance.Get(110).Value.Split('@')[0];
+            needItems = GlobalValueConfigCategory.Instance.Value_110.Split('@')[0];
             if (choukaType == 1 && !bagComponent.CheckNeedItem(needItems))
             {
                 // ErrorCode.ERR_ItemNotEnoughError
                 return;
             }
 
-            string[] itemInfo10 = GlobalValueConfigCategory.Instance.Get(111).Value.Split('@')[0].Split(';');
-            exlporeNumber = UnitHelper.GetMyUnitFromClientScene(root).GetComponent<NumericComponentC>()
-                    .GetAsInt(NumericType.PetExploreNumber);
-            set = GlobalValueConfigCategory.Instance.Get(112).Value.Split(';');
+            string[] itemInfo10 = GlobalValueConfigCategory.Instance.Value_111.Split('@')[0].Split(';');
+            exlporeNumber = UnitHelper.GetMyUnitFromClientScene(root).GetComponent<NumericComponentC>().GetAsInt(NumericType.PetExploreNumber);
+            set = GlobalValueConfigCategory.Instance.Value_112.Split(';');
 
             if (exlporeNumber < int.Parse(set[0]))
             {
@@ -1449,7 +1448,7 @@ namespace ET.Client
             UserInfoComponentC userInfoComponent = root.GetComponent<UserInfoComponentC>();
             int playeLv = userInfoComponent.UserInfo.Lv;
             Dictionary<int, EquipMakeConfig> keyValuePairs = EquipMakeConfigCategory.Instance.GetAll();
-            string initMakeList = GlobalValueConfigCategory.Instance.Get(43).Value;
+            string initMakeList = GlobalValueConfigCategory.Instance.Value_43;
             List<int> showMakeLearns = new List<int>();
             foreach (var item in keyValuePairs)
             {
@@ -1569,7 +1568,7 @@ namespace ET.Client
                     continue;
                 }
 
-                if (response.PaiMaiItemInfos.Count >= int.Parse( GlobalValueConfigCategory.Instance.Get(50).Value))
+                if (response.PaiMaiItemInfos.Count >= GlobalValueConfigCategory.Instance.MaxAuctionQuantity)
                 {
                     // 已经达到最大上架数量！
                     continue;

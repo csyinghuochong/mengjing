@@ -8,7 +8,7 @@
             UserInfoComponentS userInfoComponentS = unit.GetComponent<UserInfoComponentS>();
             SkillSetComponentS skillSetComponentS = unit.GetComponent<SkillSetComponentS>();
 
-            if (!unit.GetComponent<BagComponentS>().OnCostItemData(GlobalValueConfigCategory.Instance.Get(139).Value))
+            if (!unit.GetComponent<BagComponentS>().OnCostItemData(GlobalValueConfigCategory.Instance.Value_139))
             {
                 response.Error = ErrorCode.ERR_ItemNotEnoughError;
                 return;

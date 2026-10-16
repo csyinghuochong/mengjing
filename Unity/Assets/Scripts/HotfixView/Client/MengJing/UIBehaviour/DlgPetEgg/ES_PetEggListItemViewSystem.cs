@@ -128,7 +128,7 @@ namespace ET.Client
             if (rolePetEgg.Value3 == 0)
             {
                 self.EG_Node0RectTransform.gameObject.SetActive(true);
-                string[] costItemsList = GlobalValueConfigCategory.Instance.Get(135).Value.Split('@');
+                string[] costItemsList = GlobalValueConfigCategory.Instance.Value_135.Split('@');
                 string[] costItems = costItemsList[index].Split(';');
                 string itemName = ItemConfigCategory.Instance.Get(int.Parse(costItems[0])).ItemName;
                 string itemNum = costItems[1];

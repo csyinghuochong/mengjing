@@ -143,7 +143,7 @@ namespace ET.Client
                 return 0;
             }
 
-            string[] petInfos = GlobalValueConfigCategory.Instance.Get(34).Value.Split('@');
+            string[] petInfos = GlobalValueConfigCategory.Instance.PetMaxNumber.Split('@');
             for (int i = 0; i < petInfos.Length; i++)
             {
                 string[] petNumber = petInfos[i].Split(';');

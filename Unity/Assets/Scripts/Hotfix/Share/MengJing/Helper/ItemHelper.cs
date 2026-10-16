@@ -133,7 +133,7 @@ namespace ET
 
         public static string GetInheritCost(int number)
         {
-            string[] costitem = GlobalValueConfigCategory.Instance.Get(88).Value.Split('@');
+            string[] costitem = GlobalValueConfigCategory.Instance.Value_88.Split('@');
             if (number >= costitem.Length)
             {
                 return costitem[costitem.Length - 1];

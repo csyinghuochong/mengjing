@@ -6,7 +6,7 @@
 
         protected override async ETTask Run(Unit unit, C2M_YueKaOpenRequest request, M2C_YueKaOpenResponse response)
         {
-            int cost = int.Parse( GlobalValueConfigCategory.Instance.Get(37).Value );
+            int cost = GlobalValueConfigCategory.Instance.Value_37;
             //判定是否是月卡用户
             if (unit.IsYueKaStates())
             {

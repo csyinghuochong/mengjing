@@ -930,21 +930,21 @@ namespace  ET
         
         public static int GetHappyDropId( int openDay, int gid)
         {
-            string dropinfo = GlobalValueConfigCategory.Instance.Get(gid).Value;
+            string dropinfo = GlobalValueConfigCategory.Instance.Value_96;
             string[] dropList = dropinfo.Split('@');
-
+        
             for (int i = dropList.Length - 1; i >= 0; i--)
             {
                 string[] dropitem = dropList[i].Split(';');
                 int day = int.Parse(dropitem[0]);
                 int dropid = int.Parse((dropitem[1]));
-
+        
                 if (openDay >= day)
                 {
                     return dropid;
                 }
             }
-
+        
             return int.Parse(dropList[0].Split(';')[1]);
         }
         

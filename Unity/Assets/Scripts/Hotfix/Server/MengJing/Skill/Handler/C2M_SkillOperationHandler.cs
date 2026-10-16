@@ -13,8 +13,8 @@ namespace ET.Server
             switch (request.OperationType)
             {
                 case 1:
-                    GlobalValueConfig globalValueConfig = GlobalValueConfigCategory.Instance.Get(20);
-                    int needGold = int.Parse(globalValueConfig.Value);
+                    int globalValueConfig = GlobalValueConfigCategory.Instance.Value_20;
+                    int needGold = globalValueConfig;
                     userInfoComponent = unit.GetComponent<UserInfoComponentS>();
                     if (userInfoComponent.GetGold() < needGold)
                     {
@@ -27,8 +27,8 @@ namespace ET.Server
                     unit.GetComponent<SkillSetComponentS>().OnSkillReset();
                     break;
                 case 2:
-                    globalValueConfig = GlobalValueConfigCategory.Instance.Get(29);
-                    needGold = int.Parse(globalValueConfig.Value);
+                    globalValueConfig = GlobalValueConfigCategory.Instance.Value_20;
+                    needGold = globalValueConfig;
         
                     if (userInfoComponent.GetDiamond() < needGold)
                     {

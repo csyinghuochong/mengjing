@@ -18,7 +18,7 @@
                 return;
             }
 
-            string[] costItemsList = GlobalValueConfigCategory.Instance.Get(135).Value.Split('@');
+            string[] costItemsList = GlobalValueConfigCategory.Instance.Value_135.Split('@');
             string costItems = costItemsList[request.Index];
             if (!unit.GetComponent<BagComponentS>().OnCostItemData(costItems))
             {

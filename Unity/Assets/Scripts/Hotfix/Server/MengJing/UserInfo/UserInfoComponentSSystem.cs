@@ -77,7 +77,7 @@ namespace ET.Server
             userInfo.ServerMailIdCur = -1;
             userInfo.PiLao = GlobalValueConfigCategory.Instance.MaxPiLao; //初始化疲劳
             userInfo.Vitality = GlobalValueConfigCategory.Instance.MaxPiLao;
-            userInfo.MakeList.AddRange(CommonHelp.StringArrToIntList(GlobalValueConfigCategory.Instance.Get(18).Value.Split(';')));
+            userInfo.MakeList.AddRange(CommonHelp.StringArrToIntList(GlobalValueConfigCategory.Instance.Value_18.Split(';')));
             userInfo.CreateTime = TimeHelper.ServerNow();
             userInfo.RobotId = createRoleInfo.RobotId;
             userInfo.SeasonLevel = 1;

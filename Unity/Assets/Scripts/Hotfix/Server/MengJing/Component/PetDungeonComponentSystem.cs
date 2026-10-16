@@ -59,8 +59,7 @@ namespace ET.Server
             m2C_FubenSettlement.BattleResult = allMonsterDead ? CombatResultEnum.Win : CombatResultEnum.Fail;
             if (m2C_FubenSettlement.BattleResult == CombatResultEnum.Win)
             {
-                GlobalValueConfig globalValueConfig = GlobalValueConfigCategory.Instance.Get(69);
-                int dropId = int.Parse(globalValueConfig.Value);
+                int dropId = GlobalValueConfigCategory.Instance.Value_69;
                 List<RewardItem> rewardItems = new List<RewardItem>();
             
                 DropHelper.DropIDToDropItem(dropId, rewardItems);

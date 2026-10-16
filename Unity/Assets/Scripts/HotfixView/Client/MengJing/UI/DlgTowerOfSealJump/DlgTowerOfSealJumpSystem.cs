@@ -32,8 +32,7 @@
             int needGold;
             if (self.CostType == 0)
             {
-                GlobalValueConfig globalValueConfig = GlobalValueConfigCategory.Instance.Get(89);
-                needGold = int.Parse(globalValueConfig.Value) + 350;
+                needGold = GlobalValueConfigCategory.Instance.Value_89 + 350;
             }
             else
             {

@@ -10,7 +10,7 @@ namespace ET.Server
             MapComponent mapComponent = unit.Scene().GetComponent<MapComponent>();
             if (request.Revive)
             {
-                string reviveCost = GlobalValueConfigCategory.Instance.Get(5).Value;
+                string reviveCost = GlobalValueConfigCategory.Instance.FuBenFuHuoCost;
                 bool success = unit.GetComponent<BagComponentS>().OnCostItemData(reviveCost);
                 if (!success)
                 {

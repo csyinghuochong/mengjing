@@ -15,7 +15,7 @@
             {
                 return;
             }
-            string reward = GlobalValueConfigCategory.Instance.Get(28).Value;
+            string reward = GlobalValueConfigCategory.Instance.Value_28;
             int itemNumber = reward.Split('@').Length;
             if (unit.GetComponent<BagComponentS>().GetBagLeftCell(ItemLocType.ItemLocBag) < itemNumber)
             {

@@ -111,7 +111,7 @@ namespace ET.Client
 
         private static void OnClickImage_Lock(this DlgJiaYuanWarehouse self)
         {
-            string costitems = GlobalValueConfigCategory.Instance.Get(83).Value;
+            string costitems = GlobalValueConfigCategory.Instance.Value_83;
             using (zstring.Block())
             {
                 PopupTipHelp.OpenPopupTip(self.Root(), "购买格子",

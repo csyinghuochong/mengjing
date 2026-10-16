@@ -196,8 +196,8 @@ namespace ET.Client
             long curTime = TimeHelper.ServerNow();
             long passTime_1 = curTime - numericComponent.GetAsLong(NumericType.ChouKaOneTime);
             long passTime_2 = curTime - numericComponent.GetAsLong(NumericType.ChouKaTenTime);
-            long cdTime_1 = long.Parse(GlobalValueConfigCategory.Instance.Get(35).Value) * 1000;
-            long cdTime_2 = long.Parse(GlobalValueConfigCategory.Instance.Get(36).Value) * 1000;
+            long cdTime_1 = GlobalValueConfigCategory.Instance.Value_35 * 1000;
+            long cdTime_2 = GlobalValueConfigCategory.Instance.Value_36 * 1000;
             self.View.E_Text_MianFeiTime_1Text.text = passTime_1 > cdTime_1 ? "免费抽卡" : TimeHelper.ShowLeftTime(cdTime_1 - passTime_1);
             self.View.E_Text_MianFeiTime_2Text.text = passTime_2 > cdTime_2 ? "免费抽卡" : TimeHelper.ShowLeftTime(cdTime_2 - passTime_2);
         }

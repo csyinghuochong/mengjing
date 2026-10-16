@@ -47,8 +47,7 @@ namespace ET.Server
             //答题列表
             self.QuestionList.Clear();
             List<QuestionBankConfig> questionBankConfigs = QuestionBankConfigCategory.Instance.GetAll().Values.ToList();
-            GlobalValueConfig globalValueConfig = GlobalValueConfigCategory.Instance.Get(12);
-            int questionNumber = int.Parse(globalValueConfig.Value);
+            int questionNumber = GlobalValueConfigCategory.Instance.Value_12;
             int startIndex = RandomHelper.RandomNumber(0, questionBankConfigs.Count - questionNumber);
             for (int i = startIndex; i < startIndex + questionNumber; i++)
             {

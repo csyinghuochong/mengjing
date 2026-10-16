@@ -818,11 +818,11 @@ namespace ET.Client
                 return;
             }
 
-            GlobalValueConfig globalValueConfig = GlobalValueConfigCategory.Instance.Get(70);
+            string globalValueConfig = GlobalValueConfigCategory.Instance.Value_70;
             BagComponentC bagComponent = self.Root().GetComponent<BagComponentC>();
-            if (!bagComponent.CheckNeedItem(globalValueConfig.Value))
+            if (!bagComponent.CheckNeedItem(globalValueConfig))
             {
-                string needItem = CommonViewHelper.GetNeedItemDesc(globalValueConfig.Value);
+                string needItem = CommonViewHelper.GetNeedItemDesc(globalValueConfig);
                 using (zstring.Block())
                 {
                     FlyTipComponent.Instance.ShowFlyTip(zstring.Format("需要 {0}", needItem));

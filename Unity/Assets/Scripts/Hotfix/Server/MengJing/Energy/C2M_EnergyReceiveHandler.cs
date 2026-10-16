@@ -38,9 +38,9 @@
 
             string rewardItems = "";
             if (request.RewardType == 0)
-                rewardItems = GlobalValueConfigCategory.Instance.Get(13).Value;
+                rewardItems = GlobalValueConfigCategory.Instance.Value_13;
             else if (request.RewardType == 1)
-                rewardItems = GlobalValueConfigCategory.Instance.Get(14).Value;
+                rewardItems = GlobalValueConfigCategory.Instance.Value_14;
             else
                 rewardItems = "";
 

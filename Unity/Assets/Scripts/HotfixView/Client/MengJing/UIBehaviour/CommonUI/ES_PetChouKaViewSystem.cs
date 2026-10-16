@@ -39,7 +39,7 @@ namespace ET.Client
 
         private static void UpdateCostItemNum(this ES_PetChouKa self)
         {
-            string[] itemInfo = GlobalValueConfigCategory.Instance.Get(137).Value.Split(';');
+            string[] itemInfo = GlobalValueConfigCategory.Instance.Value_137.Split(';');
             ItemConfig itemConfig = ItemConfigCategory.Instance.Get(int.Parse(itemInfo[0]));
             self.E_OpenCostItemIconImage.overrideSprite = self.Root().GetComponent<ResourcesLoaderComponent>()
                     .LoadAssetSync<Sprite>(ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemIcon, itemConfig.Icon));

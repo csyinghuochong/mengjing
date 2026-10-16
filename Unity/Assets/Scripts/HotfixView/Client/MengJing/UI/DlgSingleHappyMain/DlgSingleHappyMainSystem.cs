@@ -39,7 +39,7 @@ namespace ET.Client
 			self.View.E_ButtonExplain.AddListener( self.OnButtonExplain );
 
 
-			self.View.E_TextTip_2Text.text = GlobalValueConfigCategory.Instance.Get(132).Value;
+			self.View.E_TextTip_2Text.text = GlobalValueConfigCategory.Instance.Value_132.ToString();
 			self.View.E_TextTip_3Text.text = GlobalValueConfigCategory.Instance.SingleHappyBuyCost.ToString();
 
 			self.ShowTimes();
@@ -132,14 +132,14 @@ namespace ET.Client
 		
 		private static  void OnuttonMove_2Button(this DlgSingleHappyMain self)
 		{
-			GlobalValueConfig globalValueConfig = GlobalValueConfigCategory.Instance.Get(132);
+			int globalValueConfig = GlobalValueConfigCategory.Instance.Value_132;
 			UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
-			if (userInfoComponent.UserInfo.Diamond < int.Parse(globalValueConfig.Value))
+			if (userInfoComponent.UserInfo.Diamond < globalValueConfig)
 			{
 				FlyTipComponent.Instance.ShowFlyTip("钻石不足!");
 				return;
 			}
-			PopupTipHelp.OpenPopupTip(self.Root(), "系统提示", $"是否花费{globalValueConfig.Value}钻石刷新奖励？", () =>
+			PopupTipHelp.OpenPopupTip(self.Root(), "系统提示", $"是否花费{globalValueConfig}钻石刷新奖励？", () =>
 			{
 				self.SingleHappyRequestRefresh().Coroutine();
 			}, null).Coroutine();

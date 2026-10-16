@@ -62,7 +62,7 @@ namespace ET.Client
 
             self.BegingTimer().Coroutine();
 
-            string reviveCost = GlobalValueConfigCategory.Instance.Get(5).Value;
+            string reviveCost = GlobalValueConfigCategory.Instance.FuBenFuHuoCost;
             string[] needList = reviveCost.Split(';');
 
             ItemConfig itemConfig = ItemConfigCategory.Instance.Get(int.Parse(needList[0]));
@@ -149,7 +149,7 @@ namespace ET.Client
 
         public static void OnButton_ReviveButton(this DlgCellDungeonRevive self)
         {
-            string reviveCost = GlobalValueConfigCategory.Instance.Get(5).Value;
+            string reviveCost = GlobalValueConfigCategory.Instance.FuBenFuHuoCost;
             BagComponentC bagComponent = self.Root().GetComponent<BagComponentC>();
             bool success = bagComponent.CheckNeedItem(reviveCost);
             if (!success)

@@ -50,7 +50,7 @@ namespace ET.Server
                 }
             }
 
-            string costItem = GlobalValueConfigCategory.Instance.Get(51).Value;
+            string costItem = GlobalValueConfigCategory.Instance.Value_51;
             if (!unit.GetComponent<BagComponentS>().OnCostItemData(costItem))
             {
                 response.Error = ErrorCode.ERR_ItemNotEnoughError;

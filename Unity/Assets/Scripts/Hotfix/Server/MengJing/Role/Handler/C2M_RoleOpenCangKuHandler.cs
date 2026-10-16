@@ -12,7 +12,7 @@
                 return;
             }
 
-            string costItems = GlobalValueConfigCategory.Instance.Get(38).Value;
+            string costItems = GlobalValueConfigCategory.Instance.Value_38;
             if (!unit.GetComponent<BagComponentS>().OnCostItemData(costItems))
             {
                 response.Error = ErrorCode.ERR_ItemNotEnoughError;

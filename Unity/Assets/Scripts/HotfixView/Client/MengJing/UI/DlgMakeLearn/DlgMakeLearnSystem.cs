@@ -170,7 +170,7 @@ namespace ET.Client
             UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
             int playeLv = userInfoComponent.UserInfo.Lv;
             Dictionary<int, EquipMakeConfig> keyValuePairs = EquipMakeConfigCategory.Instance.GetAll();
-            string initMakeList = GlobalValueConfigCategory.Instance.Get(43).Value;
+            string initMakeList = GlobalValueConfigCategory.Instance.Value_43;
             self.ShowMakeLearns.Clear();
             foreach (var item in keyValuePairs)
             {

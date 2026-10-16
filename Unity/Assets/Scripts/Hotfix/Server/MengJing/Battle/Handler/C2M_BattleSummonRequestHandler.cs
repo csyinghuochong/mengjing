@@ -54,7 +54,7 @@ namespace ET.Server
 
             //判断人口上限
             int cursummonnumber = BattleHelper.GetSummonNumber( BattleSummonList );
-            if (cursummonnumber + battleSummonConfig.MonsterNumber > int.Parse( GlobalValueConfigCategory.Instance.Get(91).Value ))
+            if (cursummonnumber + battleSummonConfig.MonsterNumber > GlobalValueConfigCategory.Instance.BattlefieldSummonLimit)
             {
                 response.Error = ErrorCode.ERR_PeopleNumber;
                 return;

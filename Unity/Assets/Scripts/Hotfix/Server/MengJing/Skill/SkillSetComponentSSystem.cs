@@ -33,7 +33,7 @@ namespace ET.Server
                     }
                 }
 
-                string initItem = GlobalValueConfigCategory.Instance.Get(9).Value;
+                string initItem = GlobalValueConfigCategory.Instance.InitYaoJi;
                 string[] needList = initItem.Split('@');
                 self.InitSkillPro(int.Parse(needList[0].Split(';')[0]), 9, SkillSetEnum.Item, SkillSourceEnum.Skill);
 

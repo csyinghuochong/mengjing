@@ -41,7 +41,15 @@ namespace ET.Server
             }
 
             bool mianfei = false;
-            long cdTime = long.Parse(GlobalValueConfigCategory.Instance.Get(request.ChouKaType == 1 ? 35:36).Value) * 1000;
+            long cdTime = 0;
+            if (request.ChouKaType == 1)
+            {
+                cdTime = GlobalValueConfigCategory.Instance.Value_35 * 1000;
+            }
+            else
+            {
+                cdTime = GlobalValueConfigCategory.Instance.Value_36 * 1000;
+            }
             
             long lastTime = unit.GetComponent<NumericComponentS>().GetAsLong(request.ChouKaType == 1 ? NumericType.ChouKaOneTime: NumericType.ChouKaTenTime);
             mianfei = TimeHelper.ServerNow() - lastTime >= cdTime;

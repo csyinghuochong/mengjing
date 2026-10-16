@@ -14,8 +14,8 @@ namespace ET.Client
             self.E_ButtonSelect_2Button.AddListener(() => { self.OnButtonSelect(FubenDifficulty.TiaoZhan); });
             self.E_ButtonSelect_1Button.AddListener(() => { self.OnButtonSelect(FubenDifficulty.Normal); });
             self.E_Btn_EnterButton.AddListenerAsync(self.OnBtn_EnterButton);
-            GlobalValueConfig globalValueConfig = GlobalValueConfigCategory.Instance.Get(63);
-            string[] jianyiLevel = globalValueConfig.Value.Split(';');
+            string globalValueConfig = GlobalValueConfigCategory.Instance.Value_63;
+            string[] jianyiLevel = globalValueConfig.Split(';');
             using (zstring.Block())
             {
                 self.E_TextLevelJianyi_1Text.text = zstring.Format("建议等级达到{0}级后进行挑战", jianyiLevel[0]);
@@ -23,8 +23,8 @@ namespace ET.Client
                 self.E_TextLevelJianyi_3Text.text = zstring.Format("建议等级达到{0}级后进行挑战", jianyiLevel[2]);
             }
 
-            globalValueConfig = GlobalValueConfigCategory.Instance.Get(61);
-            self.ES_RewardList.Refresh(globalValueConfig.Value, 1f, false);
+            globalValueConfig = GlobalValueConfigCategory.Instance.Value_61;
+            self.ES_RewardList.Refresh(globalValueConfig, 1f, false);
             self.OnButtonSelect(FubenDifficulty.Normal);
         }
 
@@ -47,8 +47,8 @@ namespace ET.Client
         public static async ETTask OnBtn_EnterButton(this ES_TowerDungeon self)
         {
             UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
-            GlobalValueConfig globalValueConfig = GlobalValueConfigCategory.Instance.Get(62);
-            string[] jianyiLevel = globalValueConfig.Value.Split(';');
+            string globalValueConfig = GlobalValueConfigCategory.Instance.Value_62;
+            string[] jianyiLevel = globalValueConfig.Split(';');
             if (userInfoComponent.UserInfo.Lv < int.Parse(jianyiLevel[self.FubenDifficulty - 1]))
             {
                 using (zstring.Block())

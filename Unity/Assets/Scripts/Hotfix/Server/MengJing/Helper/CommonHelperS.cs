@@ -63,7 +63,7 @@ namespace ET.Server
        public static int GetWorldLv(int openserverDay)
         {
             int worldLv = 0;
-            string[] lvlist = GlobalValueConfigCategory.Instance.Get(42).Value.Split('@');
+            string[] lvlist = GlobalValueConfigCategory.Instance.Value_42.Split('@');
             for (int i = 0; i < lvlist.Length; i++)
             {
                 string[] levelinfo = lvlist[i].Split(';');

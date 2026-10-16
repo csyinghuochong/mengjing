@@ -13,8 +13,7 @@ namespace ET.Client
 
             self.E_ButtonEnterButton.AddListenerAsync(self.OnButtonEnterButton);
 
-            GlobalValueConfig globalValue = GlobalValueConfigCategory.Instance.Get(56);
-            self.ES_RewardList.Refresh(globalValue.Value);
+            self.ES_RewardList.Refresh(GlobalValueConfigCategory.Instance.Value_56);
         }
 
         [EntitySystem]

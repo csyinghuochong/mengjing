@@ -146,8 +146,23 @@ namespace ET.Client
 
         public static string ShowDuiHuanPet(int configId)
         {
-            GlobalValueConfig globalValue = GlobalValueConfigCategory.Instance.Get(configId);
-            string[] configInfo = globalValue.Value.Split('@');
+            string globalValue = null;
+            if (configId == 52)
+            {
+                globalValue = GlobalValueConfigCategory.Instance.Value_52;
+            }
+
+            if (configId == 53)
+            {
+                globalValue = GlobalValueConfigCategory.Instance.Value_53;
+            }
+
+            if (configId == 54)
+            {
+                globalValue = GlobalValueConfigCategory.Instance.Value_54;
+            }
+            
+            string[] configInfo = globalValue.Split('@');
             string[] iteminfo = configInfo[0].Split(';');
             
             ItemConfig itemConfig = ItemConfigCategory.Instance.Get(int.Parse(iteminfo[0]));

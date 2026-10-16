@@ -22,8 +22,7 @@
         public static void OnCostDiamondBtn(this DlgTowerOfSealCost self)
         {
             // 客户端先判断一边道具数量是否足够
-            GlobalValueConfig globalValueConfig = GlobalValueConfigCategory.Instance.Get(89);
-            int needGold = int.Parse(globalValueConfig.Value);
+            int needGold = GlobalValueConfigCategory.Instance.Value_89;
             UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
             if (userInfoComponent.UserInfo.Diamond < needGold)
             {
@@ -44,8 +43,7 @@
         public static void OnCostTicketBtn(this DlgTowerOfSealCost self)
         {
             // 客户端先判断一边道具数量是否足够
-            GlobalValueConfig globalValueConfig = GlobalValueConfigCategory.Instance.Get(90);
-            int itemConfigID = int.Parse(globalValueConfig.Value);
+            int itemConfigID = GlobalValueConfigCategory.Instance.Value_90;
             long itemNum = self.Root().GetComponent<BagComponentC>().GetItemNumber(itemConfigID);
             if (itemNum <= 0)
             {

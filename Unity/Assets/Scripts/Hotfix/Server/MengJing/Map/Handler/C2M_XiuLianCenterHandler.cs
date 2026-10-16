@@ -20,7 +20,7 @@ namespace ET.Server
             
                 unit.GetComponent<NumericComponentS>().ApplyValue(NumericType.XiuLian_ExpNumber, xiulianNumber+1);
                 unit.GetComponent<NumericComponentS>().ApplyValue(NumericType.XiuLian_ExpTime, TimeHelper.ServerNow());
-                float coefficient = float.Parse(GlobalValueConfigCategory.Instance.Get(29).Value);
+                float coefficient = GlobalValueConfigCategory.Instance.Value_29;
                 int addValue = (int)math.ceil(coefficient * level);
                 unit.GetComponent<UserInfoComponentS>().UpdateRoleMoneyAdd( UserDataType.Exp, addValue.ToString(), true, ItemGetWay.XiuLian);
             }
@@ -33,7 +33,7 @@ namespace ET.Server
                 }
                 unit.GetComponent<NumericComponentS>().ApplyValue(NumericType.XiuLian_CoinNumber, xiulianNumber + 1);
                 unit.GetComponent<NumericComponentS>().ApplyValue(NumericType.XiuLian_CoinTime, TimeHelper.ServerNow());
-                float coefficient = float.Parse(GlobalValueConfigCategory.Instance.Get(30).Value);
+                float coefficient = GlobalValueConfigCategory.Instance.Value_30;
                 int addValue = (int)math.ceil(coefficient * level);
                 unit.GetComponent<UserInfoComponentS>().UpdateRoleMoneyAdd(UserDataType.Gold, addValue.ToString(), true, 37);// ItemGetWay.XiuLian);
             }

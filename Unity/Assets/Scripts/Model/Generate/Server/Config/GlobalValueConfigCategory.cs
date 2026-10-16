@@ -15,47 +15,574 @@ namespace ET
     [Config]
     public partial class GlobalValueConfigCategory : Singleton<GlobalValueConfigCategory>, IConfig
     {
-        private readonly Dictionary<int, GlobalValueConfig> _dataMap;
-        private readonly List<GlobalValueConfig> _dataList;
+
+        private readonly GlobalValueConfig _data;
 
         public GlobalValueConfigCategory(ByteBuf _buf)
         {
-            _dataMap = new Dictionary<int, GlobalValueConfig>();
-            _dataList = new List<GlobalValueConfig>();
-
-            for (int n = _buf.ReadSize(); n > 0; --n)
-            {
-                GlobalValueConfig _v;
-                _v = global::ET.GlobalValueConfig.DeserializeGlobalValueConfig(_buf);
-                _dataList.Add(_v);
-                _dataMap.Add(_v.Id, _v);
-            }
-
-            PostInit();
+            int n = _buf.ReadSize();
+            if (n != 1) throw new SerializationException("table mode=one, but size != 1");
+            _data = global::ET.GlobalValueConfig.DeserializeGlobalValueConfig(_buf);
         }
 
-        public Dictionary<int, GlobalValueConfig> DataMap => _dataMap;
-        public List<GlobalValueConfig> DataList => _dataList;
-        public Dictionary<int, GlobalValueConfig> GetAll() => _dataMap;
-        public bool Contain(int key) => _dataMap.ContainsKey(key);
 
-        public GlobalValueConfig GetOrDefault(int key) => _dataMap.GetValueOrDefault(key);
-        public GlobalValueConfig Get(int key)
-        {
-            if (_dataMap.TryGetValue(key,out var v))
-            {
-                return v;
-            }
-            ConfigLog.Error(this,key);
-            return null;
-        }
-
+        /// <summary>
+        /// 初始化任务
+        /// </summary>
+        public int InitTaskId => _data.InitTaskId;
+        /// <summary>
+        /// 前冲技能ID
+        /// </summary>
+        public int FangunSkillId => _data.FangunSkillId;
+        /// <summary>
+        /// 背包最大格子数量
+        /// </summary>
+        public int BagInitCapacity => _data.BagInitCapacity;
+        /// <summary>
+        /// 每个仓库最大格子数量
+        /// </summary>
+        public int HourseInitCapacity => _data.HourseInitCapacity;
+        /// <summary>
+        /// 副本复活消耗道具
+        /// </summary>
+        public string FuBenFuHuoCost => _data.FuBenFuHuoCost;
+        /// <summary>
+        /// 实名认证奖励
+        /// </summary>
+        public string ShiMinReward => _data.ShiMinReward;
+        /// <summary>
+        /// 升星石
+        /// </summary>
+        public string ShenXin => _data.ShenXin;
+        /// <summary>
+        /// 每日活跃任务
+        /// </summary>
+        public string DayHuoyueTask => _data.DayHuoyueTask;
+        /// <summary>
+        /// 初始化药剂
+        /// </summary>
+        public string InitYaoJi => _data.InitYaoJi;
+        /// <summary>
+        /// 疲劳值上限
+        /// </summary>
+        public int MaxPiLao => _data.MaxPiLao;
+        /// <summary>
+        /// 神秘商人每天出现的道具数量
+        /// </summary>
+        public string ShenMiItem => _data.ShenMiItem;
+        /// <summary>
+        /// 正能量答题数量
+        /// </summary>
+        public int Value_12 => _data.Value_12;
+        /// <summary>
+        /// 正能量早起奖励
+        /// </summary>
+        public string Value_13 => _data.Value_13;
+        /// <summary>
+        /// 正能量早睡奖励
+        /// </summary>
+        public string Value_14 => _data.Value_14;
+        /// <summary>
+        /// 正能量答题奖励
+        /// </summary>
+        public string Value_15 => _data.Value_15;
+        /// <summary>
+        /// 兑换宠物道具消耗
+        /// </summary>
+        public string Value_16 => _data.Value_16;
+        /// <summary>
+        /// 兑换宠物钻石消耗
+        /// </summary>
+        public int RolePetChouKa_2 => _data.RolePetChouKa_2;
+        /// <summary>
+        /// 初始化学习制造列表
+        /// </summary>
+        public string Value_18 => _data.Value_18;
+        /// <summary>
+        /// 组队副本每日次数
+        /// </summary>
+        public int MaxTeamDungeonsPerDay => _data.MaxTeamDungeonsPerDay;
+        /// <summary>
+        /// 技能点重置消耗金币
+        /// </summary>
+        public int Value_20 => _data.Value_20;
+        /// <summary>
+        /// 创建家族需要等级
+        /// </summary>
+        public int UnionCreateNeedLv => _data.UnionCreateNeedLv;
+        /// <summary>
+        /// 创建家族需要钻石
+        /// </summary>
+        public int UnionCreateNeedDiamond => _data.UnionCreateNeedDiamond;
+        /// <summary>
+        /// 家族最多人数
+        /// </summary>
+        public string Value_23 => _data.Value_23;
+        /// <summary>
+        /// 月卡天数
+        /// </summary>
+        public string Value_24 => _data.Value_24;
+        /// <summary>
+        /// 服务器同时在线人数
+        /// </summary>
+        public int OnLineLimit => _data.OnLineLimit;
+        /// <summary>
+        /// 初始化疲劳值月卡用户
+        /// </summary>
+        public int MaxPiLaoYuKaUser => _data.MaxPiLaoYuKaUser;
+        /// <summary>
+        /// 每日洗练最大次数
+        /// </summary>
+        public string Value_27 => _data.Value_27;
+        /// <summary>
+        /// 月卡奖励
+        /// </summary>
+        public string Value_28 => _data.Value_28;
+        /// <summary>
+        /// 经验修炼系数
+        /// </summary>
+        public float Value_29 => _data.Value_29;
+        /// <summary>
+        /// 金币修炼系数
+        /// </summary>
+        public float Value_30 => _data.Value_30;
+        /// <summary>
+        /// 宠物蛋开启消耗钻石
+        /// </summary>
+        public string Value_31 => _data.Value_31;
+        /// <summary>
+        /// 宠物蛋开启孵化消耗
+        /// </summary>
+        public string Value_33 => _data.Value_33;
+        /// <summary>
+        /// 宠物最大数量
+        /// </summary>
+        public string PetMaxNumber => _data.PetMaxNumber;
+        /// <summary>
+        /// 抽卡一次免费时间
+        /// </summary>
+        public long Value_35 => _data.Value_35;
+        /// <summary>
+        /// 抽卡十次免费时间
+        /// </summary>
+        public long Value_36 => _data.Value_36;
+        /// <summary>
+        /// 开启月卡消耗钻石
+        /// </summary>
+        public int Value_37 => _data.Value_37;
+        /// <summary>
+        /// 开启仓库消耗道具
+        /// </summary>
+        public string Value_38 => _data.Value_38;
+        /// <summary>
+        /// 兑换宠物蛋一次消耗
+        /// </summary>
+        public string Value_39 => _data.Value_39;
+        /// <summary>
+        /// 兑换宠物蛋十次消耗
+        /// </summary>
+        public string Value_40 => _data.Value_40;
+        /// <summary>
+        /// 玩家最高等级
+        /// </summary>
+        public int MaxLevel => _data.MaxLevel;
+        /// <summary>
+        /// 世界等级
+        /// </summary>
+        public string Value_42 => _data.Value_42;
+        /// <summary>
+        /// 初始制造列表
+        /// </summary>
+        public string Value_43 => _data.Value_43;
+        /// <summary>
+        /// 购买鉴定符初始品质
+        /// </summary>
+        public int JianDingFuQulity => _data.JianDingFuQulity;
+        /// <summary>
+        /// 最大熟练度
+        /// </summary>
+        public int MaxShuLianDu => _data.MaxShuLianDu;
+        /// <summary>
+        /// 生活技能重置消耗
+        /// </summary>
+        public int MakeResetCost => _data.MakeResetCost;
+        /// <summary>
+        /// 主城地图ID
+        /// </summary>
+        public int MainCityID => _data.MainCityID;
+        /// <summary>
+        /// 重置专精
+        /// </summary>
+        public string Value_48 => _data.Value_48;
+        /// <summary>
+        /// 装备洗练度
+        /// </summary>
+        public string Value_49 => _data.Value_49;
+        /// <summary>
+        /// 最大拍卖数量
+        /// </summary>
+        public int MaxAuctionQuantity => _data.MaxAuctionQuantity;
+        /// <summary>
+        /// 转移消耗
+        /// </summary>
+        public string Value_51 => _data.Value_51;
+        /// <summary>
+        /// 神兽:精灵麋鹿
+        /// </summary>
+        public string Value_52 => _data.Value_52;
+        /// <summary>
+        /// 神兽:幽光晴晴
+        /// </summary>
+        public string Value_53 => _data.Value_53;
+        /// <summary>
+        /// 神兽:仙界魔龙
+        /// </summary>
+        public string Value_54 => _data.Value_54;
+        /// <summary>
+        /// 战场商店ID
+        /// </summary>
+        public int BattleShopId => _data.BattleShopId;
+        /// <summary>
+        /// 战场获胜奖励
+        /// </summary>
+        public string Value_56 => _data.Value_56;
+        /// <summary>
+        /// 战场胜利条件(击败人数)
+        /// </summary>
+        public string Value_57 => _data.Value_57;
+        /// <summary>
+        /// 赏金任务每日次数
+        /// </summary>
+        public int MaxDailyTaskLimit => _data.MaxDailyTaskLimit;
+        /// <summary>
+        /// 战场最大怪物数量
+        /// </summary>
+        public int BattlefieldMonsterLimit => _data.BattlefieldMonsterLimit;
+        /// <summary>
+        /// 宠物天梯时间限制
+        /// </summary>
+        public int MaxPetLadderTime => _data.MaxPetLadderTime;
+        /// <summary>
+        /// 挑战之地奖励展示
+        /// </summary>
+        public string Value_61 => _data.Value_61;
+        /// <summary>
+        /// 挑战之地进入等级限制
+        /// </summary>
+        public string Value_62 => _data.Value_62;
+        /// <summary>
+        /// 挑战之地进入等级建议
+        /// </summary>
+        public string Value_63 => _data.Value_63;
+        /// <summary>
+        /// 挑战之地商店
+        /// </summary>
+        public int TowerShopId => _data.TowerShopId;
+        /// <summary>
+        /// 挑战等级进入起始波数
+        /// </summary>
+        public string Value_65 => _data.Value_65;
+        /// <summary>
+        /// 战力排行每周领取时间
+        /// </summary>
+        public string Value_66 => _data.Value_66;
+        /// <summary>
+        /// 宠物排行每周领取时间
+        /// </summary>
+        public string Value_67 => _data.Value_67;
+        /// <summary>
+        /// 宠物天梯对战奖励掉落ID
+        /// </summary>
+        public int Value_68 => _data.Value_68;
+        /// <summary>
+        /// 宠物闯关对战奖励掉落ID
+        /// </summary>
+        public int Value_69 => _data.Value_69;
+        /// <summary>
+        /// 重命名消耗道具
+        /// </summary>
+        public string Value_70 => _data.Value_70;
+        /// <summary>
+        /// 挑战等级进入结束波数
+        /// </summary>
+        public string Value_71 => _data.Value_71;
+        /// <summary>
+        /// 活力上限值
+        /// </summary>
+        public int MaxHuoLi => _data.MaxHuoLi;
+        /// <summary>
+        /// 五连洗炼钻石消耗
+        /// </summary>
+        public string Value_73 => _data.Value_73;
+        /// <summary>
+        /// 组队副本协助每日次数
+        /// </summary>
+        public int MaxDailyXieZhuFubens => _data.MaxDailyXieZhuFubens;
+        /// <summary>
+        /// 协助副本BOSS额外掉落ID
+        /// </summary>
+        public int XieZhuFubenDropId => _data.XieZhuFubenDropId;
+        /// <summary>
+        /// 组队副本商店
+        /// </summary>
+        public int TeamDungeonShopId => _data.TeamDungeonShopId;
+        /// <summary>
+        /// 深渊副本BOSS额外掉落
+        /// </summary>
+        public int ShenYuanFubenDropId => _data.ShenYuanFubenDropId;
+        /// <summary>
+        /// 宝藏之地最大怪物数量限制
+        /// </summary>
+        public int Value_78 => _data.Value_78;
+        /// <summary>
+        /// 剧情副本刷新
+        /// </summary>
+        public string DayMonsterList_Str => _data.DayMonsterList_Str;
+        /// <summary>
+        /// 剧情副本怪物刷新
+        /// </summary>
+        public string DayJingLingList_Str => _data.DayJingLingList_Str;
+        /// <summary>
+        /// 经验兑换道具
+        /// </summary>
+        public string Value_81 => _data.Value_81;
+        /// <summary>
+        /// 抓捕道具
+        /// </summary>
+        public string ZhuaPuItem_Str => _data.ZhuaPuItem_Str;
+        /// <summary>
+        /// 购买格子消耗
+        /// </summary>
+        public string Value_83 => _data.Value_83;
+        /// <summary>
+        /// 可购买背包格子数
+        /// </summary>
+        public int BuyBagCellMaxNum => _data.BuyBagCellMaxNum;
+        /// <summary>
+        /// 可购买仓库格子数
+        /// </summary>
+        public int BuyHourseCellMaxNum => _data.BuyHourseCellMaxNum;
+        /// <summary>
+        /// 开启家园仓库消耗道具
+        /// </summary>
+        public string Value_86 => _data.Value_86;
+        /// <summary>
+        /// 家园神秘商人起始ID
+        /// </summary>
+        public string Value_87 => _data.Value_87;
+        /// <summary>
+        /// 传承道具消耗
+        /// </summary>
+        public string Value_88 => _data.Value_88;
+        /// <summary>
+        /// 封印之塔消耗钻石
+        /// </summary>
+        public int Value_89 => _data.Value_89;
+        /// <summary>
+        /// 封印之塔挑战凭证ConfigID
+        /// </summary>
+        public int Value_90 => _data.Value_90;
+        /// <summary>
+        /// 战场召唤上限
+        /// </summary>
+        public int BattlefieldSummonLimit => _data.BattlefieldSummonLimit;
+        /// <summary>
+        /// 神秘商人每天出现的道具数量
+        /// </summary>
+        public string Value_92 => _data.Value_92;
+        /// <summary>
+        /// 喜从天降免费刷新时间（S）
+        /// </summary>
+        public int HappyMoveFreeRefreshTime => _data.HappyMoveFreeRefreshTime;
+        /// <summary>
+        /// 喜从天降金币刷新消耗
+        /// </summary>
+        public int Value_94 => _data.Value_94;
+        /// <summary>
+        /// 喜从天降钻石刷新消耗
+        /// </summary>
+        public int Value_95 => _data.Value_95;
+        /// <summary>
+        /// 喜从天降掉落ID
+        /// </summary>
+        public string Value_96 => _data.Value_96;
+        /// <summary>
+        /// 小龟大赛竞猜奖励
+        /// </summary>
+        public string Value_97 => _data.Value_97;
+        /// <summary>
+        /// 小龟大赛支持消耗金币
+        /// </summary>
+        public int TurtleSupportCost => _data.TurtleSupportCost;
+        /// <summary>
+        /// 小龟大赛随机奖励
+        /// </summary>
+        public int TurtleDropId => _data.TurtleDropId;
+        /// <summary>
+        /// 恶魔活动阵营胜利奖励
+        /// </summary>
+        public string Value_100 => _data.Value_100;
+        /// <summary>
+        /// 恶魔活动阵营参与奖励
+        /// </summary>
+        public string Value_101 => _data.Value_101;
+        /// <summary>
+        /// 个人副本喜从天降掉落ID
+        /// </summary>
+        public string Value_102 => _data.Value_102;
+        /// <summary>
+        /// 赛季商店
+        /// </summary>
+        public int SeasonStoreId => _data.SeasonStoreId;
+        /// <summary>
+        /// 拍卖行每页数量
+        /// </summary>
+        public int PaiMaiPageNum => _data.PaiMaiPageNum;
+        /// <summary>
+        /// 加速科技每小时消耗钻石
+        /// </summary>
+        public int AcceleKeJiCostDiamond => _data.AcceleKeJiCostDiamond;
+        /// <summary>
+        /// 家族商店ID
+        /// </summary>
+        public int UnionMystery_BId => _data.UnionMystery_BId;
+        /// <summary>
+        /// 宠物蛋抽奖折扣
+        /// </summary>
+        public string Value_107 => _data.Value_107;
+        /// <summary>
+        /// 家族每日次数
+        /// </summary>
+        public int UnionTaskLimit => _data.UnionTaskLimit;
+        /// <summary>
+        /// 周任务次数
+        /// </summary>
+        public int WeeklyTaskLimit => _data.WeeklyTaskLimit;
+        /// <summary>
+        /// 兑换宠物之核一次消耗
+        /// </summary>
+        public string Value_110 => _data.Value_110;
+        /// <summary>
+        /// 兑换宠物之核十次消耗
+        /// </summary>
+        public string Value_111 => _data.Value_111;
+        /// <summary>
+        /// 宠物之核抽奖折扣
+        /// </summary>
+        public string Value_112 => _data.Value_112;
+        /// <summary>
+        /// 生活技能开启第二页需要充值数量
+        /// </summary>
+        public int OpenSkillMakeSlotCost => _data.OpenSkillMakeSlotCost;
+        /// <summary>
+        /// 活动1商店ID
+        /// </summary>
+        public string Value_114 => _data.Value_114;
+        /// <summary>
+        /// 账号仓库最大格子数量
+        /// </summary>
+        public int AccountBagMax => _data.AccountBagMax;
+        /// <summary>
+        /// 洗练折扣
+        /// </summary>
+        public string Value_116 => _data.Value_116;
+        /// <summary>
+        /// 传承鉴定次数
+        /// </summary>
+        public int ItemInheritTime => _data.ItemInheritTime;
+        /// <summary>
+        /// 宝石仓库格子数量
+        /// </summary>
+        public int GemStoreInitCapacity => _data.GemStoreInitCapacity;
+        public int GemStoreMaxCapacity => _data.GemStoreMaxCapacity;
+        /// <summary>
+        /// 宠物背包数量
+        /// </summary>
+        public int RolePetBagNum => _data.RolePetBagNum;
+        /// <summary>
+        /// 新商店ID
+        /// </summary>
+        public int Value_120 => _data.Value_120;
+        /// <summary>
+        /// 召唤宠物消耗魔力
+        /// </summary>
+        public int PetMeleeCostMoLi => _data.PetMeleeCostMoLi;
+        /// <summary>
+        /// 每日游戏抽奖次数上限
+        /// </summary>
+        public int ChouKaLimit => _data.ChouKaLimit;
+        /// <summary>
+        /// 每日宠物抽奖次数上限
+        /// </summary>
+        public int PetEggChouKaLimit => _data.PetEggChouKaLimit;
+        /// <summary>
+        /// 宝宝刷新概率
+        /// </summary>
+        public float BabyRefreshChance => _data.BabyRefreshChance;
+        /// <summary>
+        /// 变异宝宝刷新概率
+        /// </summary>
+        public float BabyBianYiRefreshChance => _data.BabyBianYiRefreshChance;
+        /// <summary>
+        /// 每日最多刷新宝宝数量
+        /// </summary>
+        public int BabyRefreshMaxNum => _data.BabyRefreshMaxNum;
+        /// <summary>
+        /// 默认抓捕成功率(野生;宝宝;变异)
+        /// </summary>
+        public string ZhuaByGaiLvInit_Str => _data.ZhuaByGaiLvInit_Str;
+        /// <summary>
+        /// 赛季捐选道具ID
+        /// </summary>
+        public int CommonSeasonDonateItemId => _data.CommonSeasonDonateItemId;
+        /// <summary>
+        /// 捐选随机获得道具
+        /// </summary>
+        public int CommonSeasonDonateGetItem => _data.CommonSeasonDonateGetItem;
+        /// <summary>
+        /// 单人模式喜从天降初始次数
+        /// </summary>
+        public int SingleHappyInitTimes => _data.SingleHappyInitTimes;
+        /// <summary>
+        /// 单人模式喜从天降恢复时间
+        /// </summary>
+        public long SingleHappyrecoverTime => _data.SingleHappyrecoverTime;
+        /// <summary>
+        /// 单人模式喜从天降刷新消耗
+        /// </summary>
+        public int Value_132 => _data.Value_132;
+        /// <summary>
+        /// 单人模式喜从天降购买次数消耗
+        /// </summary>
+        public string SingleHappyBuy_Str => _data.SingleHappyBuy_Str;
+        /// <summary>
+        /// 单人模式喜从天降掉落
+        /// </summary>
+        public string SingleHappyDrops_Str => _data.SingleHappyDrops_Str;
+        /// <summary>
+        /// 宠物孵化开启格子消耗
+        /// </summary>
+        public string Value_135 => _data.Value_135;
+        /// <summary>
+        /// 藏宝图任务每日领取数量
+        /// </summary>
+        public int TreasureTaskLimit => _data.TreasureTaskLimit;
+        /// <summary>
+        /// 宠物抽奖消耗
+        /// </summary>
+        public string Value_137 => _data.Value_137;
+        /// <summary>
+        /// 宠物抽奖掉落ConfigId
+        /// </summary>
+        public int PetChouKaDropId => _data.PetChouKaDropId;
+        /// <summary>
+        /// 重置天赋
+        /// </summary>
+        public string Value_139 => _data.Value_139;
+        
         public void ResolveRef()
         {
-            foreach(var _v in _dataList)
-            {
-                _v.ResolveRef();
-            }
+            _data.ResolveRef();
         }
 
         partial void PostInit();

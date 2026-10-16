@@ -31,7 +31,7 @@ namespace ET.Server
                 mailInfo.Title = "小龟竞猜奖励";
                 mailInfo.MailId = IdGenerater.Instance.GenerateId();
 
-                string[] needList = GlobalValueConfigCategory.Instance.Get(97).Value.Split('@');
+                string[] needList = GlobalValueConfigCategory.Instance.Value_97.Split('@');
                 for (int k = 0; k < needList.Length; k++)
                 {
                     string[] itemInfo = needList[k].Split(';');

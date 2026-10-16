@@ -670,7 +670,7 @@ namespace ET.Server
                 case TaskTypeEnum.Weekly:
                     int weekTaskNumber = numericComponent.GetAsInt(NumericType.WeeklyTaskNumber) + 1;
 
-                    if (weekTaskNumber <int.Parse( GlobalValueConfigCategory.Instance.Get(109).Value))
+                    if (weekTaskNumber < GlobalValueConfigCategory.Instance.WeeklyTaskLimit)
                     {
                         numericComponent.ApplyValue(NumericType.WeeklyTaskId, TaskHelper.GetTaskIdByType(TaskTypeEnum.Weekly, roleLv), true);
                         numericComponent.ApplyValue(NumericType.WeeklyTaskNumber, weekTaskNumber, true);

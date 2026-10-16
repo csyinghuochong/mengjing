@@ -30,7 +30,7 @@ namespace ET.Server
             
             int dropId = 0;
             int exlporeNumber = unit.GetComponent<NumericComponentS>().GetAsInt(NumericType.PetExploreNumber);
-            string[] set = GlobalValueConfigCategory.Instance.Get(107).Value.Split(';');
+            string[] set = GlobalValueConfigCategory.Instance.Value_107.Split(';');
             float discount;
             if (exlporeNumber < int.Parse(set[0])) // 超过300次打8折
             {
@@ -43,8 +43,8 @@ namespace ET.Server
 
             if (request.ChouKaType == 1)
             {
-                string needItems = GlobalValueConfigCategory.Instance.Get(39).Value.Split('@')[0];
-                dropId = int.Parse(GlobalValueConfigCategory.Instance.Get(39).Value.Split('@')[1]);
+                string needItems = GlobalValueConfigCategory.Instance.Value_39.Split('@')[0];
+                dropId = int.Parse(GlobalValueConfigCategory.Instance.Value_39.Split('@')[1]);
                 bool sucess = unit.GetComponent<BagComponentS>().OnCostItemData(needItems);
                 if (!sucess)
                 {
@@ -56,8 +56,8 @@ namespace ET.Server
             }
             else if (request.ChouKaType == 10)
             {
-                int needDimanond = int.Parse(GlobalValueConfigCategory.Instance.Get(40).Value.Split('@')[0]);
-                dropId = int.Parse(GlobalValueConfigCategory.Instance.Get(40).Value.Split('@')[1]);
+                int needDimanond = int.Parse(GlobalValueConfigCategory.Instance.Value_40.Split('@')[0]);
+                dropId = int.Parse(GlobalValueConfigCategory.Instance.Value_40.Split('@')[1]);
                 if (unit.GetComponent<UserInfoComponentS>().GetDiamond() < (int)(needDimanond * discount))
                 {
                     response.Error = ErrorCode.ERR_DiamondNotEnoughError;

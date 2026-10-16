@@ -118,7 +118,7 @@ namespace ET
         public static int GetPetMaxNumber( int level, int petExtendNumber)
         {
             int petNumber = 1;
-            string[] petInfos = GlobalValueConfigCategory.Instance.Get(34).Value.Split('@');
+            string[] petInfos = GlobalValueConfigCategory.Instance.PetMaxNumber.Split('@');
             for (int i = 0; i < petInfos.Length; i++)
             {
                 string[] numberInfos = petInfos[i].Split(';');

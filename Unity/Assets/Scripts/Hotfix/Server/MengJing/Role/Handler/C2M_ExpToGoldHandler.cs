@@ -24,9 +24,9 @@ namespace ET.Server
             }
 
             //满级经验兑换效验等级
-            GlobalValueConfig globalCof = GlobalValueConfigCategory.Instance.Get(41);
+            int globalCof = GlobalValueConfigCategory.Instance.MaxLevel;
             if (request.OperateType == 2) {
-                if (userInfo.Lv < int.Parse(globalCof.Value)) {
+                if (userInfo.Lv < globalCof) {
                     response.Error = ErrorCode.ERR_ExpNoEnough;
                     return;
                 }
@@ -54,7 +54,7 @@ namespace ET.Server
                      Log.Debug($"Gold:  {userInfoComponent.Id} {sendGold} excharge");
                     break;
                 case 2:
-                    string[] droplist = GlobalValueConfigCategory.Instance.Get(81).Value.Split(';');
+                    string[] droplist = GlobalValueConfigCategory.Instance.Value_81.Split(';');
                     int dropid = int.Parse(droplist[0]);
                     List<RewardItem> rewardItems = new List<RewardItem>();
                     DropHelper.DropIDToDropItem_2(dropid, rewardItems);

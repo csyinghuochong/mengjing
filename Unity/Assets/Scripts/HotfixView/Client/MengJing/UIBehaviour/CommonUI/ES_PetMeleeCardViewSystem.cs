@@ -86,8 +86,8 @@ namespace ET.Client
                             .LoadAssetSync<Sprite>(ABPathHelper.GetAtlasPath_2(ABAtlasTypes.OtherIcon, "Image_163"));
                     self.E_BackImage.sprite = self.Root().GetComponent<ResourcesLoaderComponent>()
                             .LoadAssetSync<Sprite>(ABPathHelper.GetAtlasPath_2(ABAtlasTypes.OtherIcon, "Image_157"));
-                    self.E_Cost_ActiveText.text = GlobalValueConfigCategory.Instance.Get(121).Value;
-                    self.E_Cost_InactiveText.text = GlobalValueConfigCategory.Instance.Get(121).Value;
+                    self.E_Cost_ActiveText.text = GlobalValueConfigCategory.Instance.PetMeleeCostMoLi.ToString();
+                    self.E_Cost_InactiveText.text = GlobalValueConfigCategory.Instance.PetMeleeCostMoLi.ToString();
                     self.E_TypeText.text = "辅战卡";
                     self.E_NameText.text = petTuJianConfig.PetName;
 

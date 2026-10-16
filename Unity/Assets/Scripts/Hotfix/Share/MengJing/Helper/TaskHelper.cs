@@ -170,7 +170,7 @@ namespace ET
         {
             //活跃任务
             List<int> taskCountryList = new List<int>();
-            string[] dayTaskID = GlobalValueConfigCategory.Instance.Get(8).Value.Split(';');
+            string[] dayTaskID = GlobalValueConfigCategory.Instance.DayHuoyueTask.Split(';');
             for (int i = 0; i < dayTaskID.Length; i++)
             {
                 //获取任务概率

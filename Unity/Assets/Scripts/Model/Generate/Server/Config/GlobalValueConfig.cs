@@ -21,8 +21,145 @@ namespace ET
 
         public GlobalValueConfig(ByteBuf _buf)
         {
-            Id = _buf.ReadInt();
-            Value = _buf.ReadString();
+            InitTaskId = _buf.ReadInt();
+            FangunSkillId = _buf.ReadInt();
+            BagInitCapacity = _buf.ReadInt();
+            HourseInitCapacity = _buf.ReadInt();
+            FuBenFuHuoCost = _buf.ReadString();
+            ShiMinReward = _buf.ReadString();
+            ShenXin = _buf.ReadString();
+            DayHuoyueTask = _buf.ReadString();
+            InitYaoJi = _buf.ReadString();
+            MaxPiLao = _buf.ReadInt();
+            ShenMiItem = _buf.ReadString();
+            Value_12 = _buf.ReadInt();
+            Value_13 = _buf.ReadString();
+            Value_14 = _buf.ReadString();
+            Value_15 = _buf.ReadString();
+            Value_16 = _buf.ReadString();
+            RolePetChouKa_2 = _buf.ReadInt();
+            Value_18 = _buf.ReadString();
+            MaxTeamDungeonsPerDay = _buf.ReadInt();
+            Value_20 = _buf.ReadInt();
+            UnionCreateNeedLv = _buf.ReadInt();
+            UnionCreateNeedDiamond = _buf.ReadInt();
+            Value_23 = _buf.ReadString();
+            Value_24 = _buf.ReadString();
+            OnLineLimit = _buf.ReadInt();
+            MaxPiLaoYuKaUser = _buf.ReadInt();
+            Value_27 = _buf.ReadString();
+            Value_28 = _buf.ReadString();
+            Value_29 = _buf.ReadFloat();
+            Value_30 = _buf.ReadFloat();
+            Value_31 = _buf.ReadString();
+            Value_33 = _buf.ReadString();
+            PetMaxNumber = _buf.ReadString();
+            Value_35 = _buf.ReadLong();
+            Value_36 = _buf.ReadLong();
+            Value_37 = _buf.ReadInt();
+            Value_38 = _buf.ReadString();
+            Value_39 = _buf.ReadString();
+            Value_40 = _buf.ReadString();
+            MaxLevel = _buf.ReadInt();
+            Value_42 = _buf.ReadString();
+            Value_43 = _buf.ReadString();
+            JianDingFuQulity = _buf.ReadInt();
+            MaxShuLianDu = _buf.ReadInt();
+            MakeResetCost = _buf.ReadInt();
+            MainCityID = _buf.ReadInt();
+            Value_48 = _buf.ReadString();
+            Value_49 = _buf.ReadString();
+            MaxAuctionQuantity = _buf.ReadInt();
+            Value_51 = _buf.ReadString();
+            Value_52 = _buf.ReadString();
+            Value_53 = _buf.ReadString();
+            Value_54 = _buf.ReadString();
+            BattleShopId = _buf.ReadInt();
+            Value_56 = _buf.ReadString();
+            Value_57 = _buf.ReadString();
+            MaxDailyTaskLimit = _buf.ReadInt();
+            BattlefieldMonsterLimit = _buf.ReadInt();
+            MaxPetLadderTime = _buf.ReadInt();
+            Value_61 = _buf.ReadString();
+            Value_62 = _buf.ReadString();
+            Value_63 = _buf.ReadString();
+            TowerShopId = _buf.ReadInt();
+            Value_65 = _buf.ReadString();
+            Value_66 = _buf.ReadString();
+            Value_67 = _buf.ReadString();
+            Value_68 = _buf.ReadInt();
+            Value_69 = _buf.ReadInt();
+            Value_70 = _buf.ReadString();
+            Value_71 = _buf.ReadString();
+            MaxHuoLi = _buf.ReadInt();
+            Value_73 = _buf.ReadString();
+            MaxDailyXieZhuFubens = _buf.ReadInt();
+            XieZhuFubenDropId = _buf.ReadInt();
+            TeamDungeonShopId = _buf.ReadInt();
+            ShenYuanFubenDropId = _buf.ReadInt();
+            Value_78 = _buf.ReadInt();
+            DayMonsterList_Str = _buf.ReadString();
+            DayJingLingList_Str = _buf.ReadString();
+            Value_81 = _buf.ReadString();
+            ZhuaPuItem_Str = _buf.ReadString();
+            Value_83 = _buf.ReadString();
+            BuyBagCellMaxNum = _buf.ReadInt();
+            BuyHourseCellMaxNum = _buf.ReadInt();
+            Value_86 = _buf.ReadString();
+            Value_87 = _buf.ReadString();
+            Value_88 = _buf.ReadString();
+            Value_89 = _buf.ReadInt();
+            Value_90 = _buf.ReadInt();
+            BattlefieldSummonLimit = _buf.ReadInt();
+            Value_92 = _buf.ReadString();
+            HappyMoveFreeRefreshTime = _buf.ReadInt();
+            Value_94 = _buf.ReadInt();
+            Value_95 = _buf.ReadInt();
+            Value_96 = _buf.ReadString();
+            Value_97 = _buf.ReadString();
+            TurtleSupportCost = _buf.ReadInt();
+            TurtleDropId = _buf.ReadInt();
+            Value_100 = _buf.ReadString();
+            Value_101 = _buf.ReadString();
+            Value_102 = _buf.ReadString();
+            SeasonStoreId = _buf.ReadInt();
+            PaiMaiPageNum = _buf.ReadInt();
+            AcceleKeJiCostDiamond = _buf.ReadInt();
+            UnionMystery_BId = _buf.ReadInt();
+            Value_107 = _buf.ReadString();
+            UnionTaskLimit = _buf.ReadInt();
+            WeeklyTaskLimit = _buf.ReadInt();
+            Value_110 = _buf.ReadString();
+            Value_111 = _buf.ReadString();
+            Value_112 = _buf.ReadString();
+            OpenSkillMakeSlotCost = _buf.ReadInt();
+            Value_114 = _buf.ReadString();
+            AccountBagMax = _buf.ReadInt();
+            Value_116 = _buf.ReadString();
+            ItemInheritTime = _buf.ReadInt();
+            GemStoreInitCapacity = _buf.ReadInt();
+            GemStoreMaxCapacity = _buf.ReadInt();
+            RolePetBagNum = _buf.ReadInt();
+            Value_120 = _buf.ReadInt();
+            PetMeleeCostMoLi = _buf.ReadInt();
+            ChouKaLimit = _buf.ReadInt();
+            PetEggChouKaLimit = _buf.ReadInt();
+            BabyRefreshChance = _buf.ReadFloat();
+            BabyBianYiRefreshChance = _buf.ReadFloat();
+            BabyRefreshMaxNum = _buf.ReadInt();
+            ZhuaByGaiLvInit_Str = _buf.ReadString();
+            CommonSeasonDonateItemId = _buf.ReadInt();
+            CommonSeasonDonateGetItem = _buf.ReadInt();
+            SingleHappyInitTimes = _buf.ReadInt();
+            SingleHappyrecoverTime = _buf.ReadLong();
+            Value_132 = _buf.ReadInt();
+            SingleHappyBuy_Str = _buf.ReadString();
+            SingleHappyDrops_Str = _buf.ReadString();
+            Value_135 = _buf.ReadString();
+            TreasureTaskLimit = _buf.ReadInt();
+            Value_137 = _buf.ReadString();
+            PetChouKaDropId = _buf.ReadInt();
+            Value_139 = _buf.ReadString();
 
             PostInit();
         }
@@ -33,14 +170,696 @@ namespace ET
         }
 
         /// <summary>
-        /// Id
+        /// 初始化任务
         /// </summary>
-        public int Id;
+        public int InitTaskId;
 
         /// <summary>
-        /// 值
+        /// 前冲技能ID
         /// </summary>
-        public string Value;
+        public int FangunSkillId;
+
+        /// <summary>
+        /// 背包最大格子数量
+        /// </summary>
+        public int BagInitCapacity;
+
+        /// <summary>
+        /// 每个仓库最大格子数量
+        /// </summary>
+        public int HourseInitCapacity;
+
+        /// <summary>
+        /// 副本复活消耗道具
+        /// </summary>
+        public string FuBenFuHuoCost;
+
+        /// <summary>
+        /// 实名认证奖励
+        /// </summary>
+        public string ShiMinReward;
+
+        /// <summary>
+        /// 升星石
+        /// </summary>
+        public string ShenXin;
+
+        /// <summary>
+        /// 每日活跃任务
+        /// </summary>
+        public string DayHuoyueTask;
+
+        /// <summary>
+        /// 初始化药剂
+        /// </summary>
+        public string InitYaoJi;
+
+        /// <summary>
+        /// 疲劳值上限
+        /// </summary>
+        public int MaxPiLao;
+
+        /// <summary>
+        /// 神秘商人每天出现的道具数量
+        /// </summary>
+        public string ShenMiItem;
+
+        /// <summary>
+        /// 正能量答题数量
+        /// </summary>
+        public int Value_12;
+
+        /// <summary>
+        /// 正能量早起奖励
+        /// </summary>
+        public string Value_13;
+
+        /// <summary>
+        /// 正能量早睡奖励
+        /// </summary>
+        public string Value_14;
+
+        /// <summary>
+        /// 正能量答题奖励
+        /// </summary>
+        public string Value_15;
+
+        /// <summary>
+        /// 兑换宠物道具消耗
+        /// </summary>
+        public string Value_16;
+
+        /// <summary>
+        /// 兑换宠物钻石消耗
+        /// </summary>
+        public int RolePetChouKa_2;
+
+        /// <summary>
+        /// 初始化学习制造列表
+        /// </summary>
+        public string Value_18;
+
+        /// <summary>
+        /// 组队副本每日次数
+        /// </summary>
+        public int MaxTeamDungeonsPerDay;
+
+        /// <summary>
+        /// 技能点重置消耗金币
+        /// </summary>
+        public int Value_20;
+
+        /// <summary>
+        /// 创建家族需要等级
+        /// </summary>
+        public int UnionCreateNeedLv;
+
+        /// <summary>
+        /// 创建家族需要钻石
+        /// </summary>
+        public int UnionCreateNeedDiamond;
+
+        /// <summary>
+        /// 家族最多人数
+        /// </summary>
+        public string Value_23;
+
+        /// <summary>
+        /// 月卡天数
+        /// </summary>
+        public string Value_24;
+
+        /// <summary>
+        /// 服务器同时在线人数
+        /// </summary>
+        public int OnLineLimit;
+
+        /// <summary>
+        /// 初始化疲劳值月卡用户
+        /// </summary>
+        public int MaxPiLaoYuKaUser;
+
+        /// <summary>
+        /// 每日洗练最大次数
+        /// </summary>
+        public string Value_27;
+
+        /// <summary>
+        /// 月卡奖励
+        /// </summary>
+        public string Value_28;
+
+        /// <summary>
+        /// 经验修炼系数
+        /// </summary>
+        public float Value_29;
+
+        /// <summary>
+        /// 金币修炼系数
+        /// </summary>
+        public float Value_30;
+
+        /// <summary>
+        /// 宠物蛋开启消耗钻石
+        /// </summary>
+        public string Value_31;
+
+        /// <summary>
+        /// 宠物蛋开启孵化消耗
+        /// </summary>
+        public string Value_33;
+
+        /// <summary>
+        /// 宠物最大数量
+        /// </summary>
+        public string PetMaxNumber;
+
+        /// <summary>
+        /// 抽卡一次免费时间
+        /// </summary>
+        public long Value_35;
+
+        /// <summary>
+        /// 抽卡十次免费时间
+        /// </summary>
+        public long Value_36;
+
+        /// <summary>
+        /// 开启月卡消耗钻石
+        /// </summary>
+        public int Value_37;
+
+        /// <summary>
+        /// 开启仓库消耗道具
+        /// </summary>
+        public string Value_38;
+
+        /// <summary>
+        /// 兑换宠物蛋一次消耗
+        /// </summary>
+        public string Value_39;
+
+        /// <summary>
+        /// 兑换宠物蛋十次消耗
+        /// </summary>
+        public string Value_40;
+
+        /// <summary>
+        /// 玩家最高等级
+        /// </summary>
+        public int MaxLevel;
+
+        /// <summary>
+        /// 世界等级
+        /// </summary>
+        public string Value_42;
+
+        /// <summary>
+        /// 初始制造列表
+        /// </summary>
+        public string Value_43;
+
+        /// <summary>
+        /// 购买鉴定符初始品质
+        /// </summary>
+        public int JianDingFuQulity;
+
+        /// <summary>
+        /// 最大熟练度
+        /// </summary>
+        public int MaxShuLianDu;
+
+        /// <summary>
+        /// 生活技能重置消耗
+        /// </summary>
+        public int MakeResetCost;
+
+        /// <summary>
+        /// 主城地图ID
+        /// </summary>
+        public int MainCityID;
+
+        /// <summary>
+        /// 重置专精
+        /// </summary>
+        public string Value_48;
+
+        /// <summary>
+        /// 装备洗练度
+        /// </summary>
+        public string Value_49;
+
+        /// <summary>
+        /// 最大拍卖数量
+        /// </summary>
+        public int MaxAuctionQuantity;
+
+        /// <summary>
+        /// 转移消耗
+        /// </summary>
+        public string Value_51;
+
+        /// <summary>
+        /// 神兽:精灵麋鹿
+        /// </summary>
+        public string Value_52;
+
+        /// <summary>
+        /// 神兽:幽光晴晴
+        /// </summary>
+        public string Value_53;
+
+        /// <summary>
+        /// 神兽:仙界魔龙
+        /// </summary>
+        public string Value_54;
+
+        /// <summary>
+        /// 战场商店ID
+        /// </summary>
+        public int BattleShopId;
+
+        /// <summary>
+        /// 战场获胜奖励
+        /// </summary>
+        public string Value_56;
+
+        /// <summary>
+        /// 战场胜利条件(击败人数)
+        /// </summary>
+        public string Value_57;
+
+        /// <summary>
+        /// 赏金任务每日次数
+        /// </summary>
+        public int MaxDailyTaskLimit;
+
+        /// <summary>
+        /// 战场最大怪物数量
+        /// </summary>
+        public int BattlefieldMonsterLimit;
+
+        /// <summary>
+        /// 宠物天梯时间限制
+        /// </summary>
+        public int MaxPetLadderTime;
+
+        /// <summary>
+        /// 挑战之地奖励展示
+        /// </summary>
+        public string Value_61;
+
+        /// <summary>
+        /// 挑战之地进入等级限制
+        /// </summary>
+        public string Value_62;
+
+        /// <summary>
+        /// 挑战之地进入等级建议
+        /// </summary>
+        public string Value_63;
+
+        /// <summary>
+        /// 挑战之地商店
+        /// </summary>
+        public int TowerShopId;
+
+        /// <summary>
+        /// 挑战等级进入起始波数
+        /// </summary>
+        public string Value_65;
+
+        /// <summary>
+        /// 战力排行每周领取时间
+        /// </summary>
+        public string Value_66;
+
+        /// <summary>
+        /// 宠物排行每周领取时间
+        /// </summary>
+        public string Value_67;
+
+        /// <summary>
+        /// 宠物天梯对战奖励掉落ID
+        /// </summary>
+        public int Value_68;
+
+        /// <summary>
+        /// 宠物闯关对战奖励掉落ID
+        /// </summary>
+        public int Value_69;
+
+        /// <summary>
+        /// 重命名消耗道具
+        /// </summary>
+        public string Value_70;
+
+        /// <summary>
+        /// 挑战等级进入结束波数
+        /// </summary>
+        public string Value_71;
+
+        /// <summary>
+        /// 活力上限值
+        /// </summary>
+        public int MaxHuoLi;
+
+        /// <summary>
+        /// 五连洗炼钻石消耗
+        /// </summary>
+        public string Value_73;
+
+        /// <summary>
+        /// 组队副本协助每日次数
+        /// </summary>
+        public int MaxDailyXieZhuFubens;
+
+        /// <summary>
+        /// 协助副本BOSS额外掉落ID
+        /// </summary>
+        public int XieZhuFubenDropId;
+
+        /// <summary>
+        /// 组队副本商店
+        /// </summary>
+        public int TeamDungeonShopId;
+
+        /// <summary>
+        /// 深渊副本BOSS额外掉落
+        /// </summary>
+        public int ShenYuanFubenDropId;
+
+        /// <summary>
+        /// 宝藏之地最大怪物数量限制
+        /// </summary>
+        public int Value_78;
+
+        /// <summary>
+        /// 剧情副本刷新
+        /// </summary>
+        public string DayMonsterList_Str;
+
+        /// <summary>
+        /// 剧情副本怪物刷新
+        /// </summary>
+        public string DayJingLingList_Str;
+
+        /// <summary>
+        /// 经验兑换道具
+        /// </summary>
+        public string Value_81;
+
+        /// <summary>
+        /// 抓捕道具
+        /// </summary>
+        public string ZhuaPuItem_Str;
+
+        /// <summary>
+        /// 购买格子消耗
+        /// </summary>
+        public string Value_83;
+
+        /// <summary>
+        /// 可购买背包格子数
+        /// </summary>
+        public int BuyBagCellMaxNum;
+
+        /// <summary>
+        /// 可购买仓库格子数
+        /// </summary>
+        public int BuyHourseCellMaxNum;
+
+        /// <summary>
+        /// 开启家园仓库消耗道具
+        /// </summary>
+        public string Value_86;
+
+        /// <summary>
+        /// 家园神秘商人起始ID
+        /// </summary>
+        public string Value_87;
+
+        /// <summary>
+        /// 传承道具消耗
+        /// </summary>
+        public string Value_88;
+
+        /// <summary>
+        /// 封印之塔消耗钻石
+        /// </summary>
+        public int Value_89;
+
+        /// <summary>
+        /// 封印之塔挑战凭证ConfigID
+        /// </summary>
+        public int Value_90;
+
+        /// <summary>
+        /// 战场召唤上限
+        /// </summary>
+        public int BattlefieldSummonLimit;
+
+        /// <summary>
+        /// 神秘商人每天出现的道具数量
+        /// </summary>
+        public string Value_92;
+
+        /// <summary>
+        /// 喜从天降免费刷新时间（S）
+        /// </summary>
+        public int HappyMoveFreeRefreshTime;
+
+        /// <summary>
+        /// 喜从天降金币刷新消耗
+        /// </summary>
+        public int Value_94;
+
+        /// <summary>
+        /// 喜从天降钻石刷新消耗
+        /// </summary>
+        public int Value_95;
+
+        /// <summary>
+        /// 喜从天降掉落ID
+        /// </summary>
+        public string Value_96;
+
+        /// <summary>
+        /// 小龟大赛竞猜奖励
+        /// </summary>
+        public string Value_97;
+
+        /// <summary>
+        /// 小龟大赛支持消耗金币
+        /// </summary>
+        public int TurtleSupportCost;
+
+        /// <summary>
+        /// 小龟大赛随机奖励
+        /// </summary>
+        public int TurtleDropId;
+
+        /// <summary>
+        /// 恶魔活动阵营胜利奖励
+        /// </summary>
+        public string Value_100;
+
+        /// <summary>
+        /// 恶魔活动阵营参与奖励
+        /// </summary>
+        public string Value_101;
+
+        /// <summary>
+        /// 个人副本喜从天降掉落ID
+        /// </summary>
+        public string Value_102;
+
+        /// <summary>
+        /// 赛季商店
+        /// </summary>
+        public int SeasonStoreId;
+
+        /// <summary>
+        /// 拍卖行每页数量
+        /// </summary>
+        public int PaiMaiPageNum;
+
+        /// <summary>
+        /// 加速科技每小时消耗钻石
+        /// </summary>
+        public int AcceleKeJiCostDiamond;
+
+        /// <summary>
+        /// 家族商店ID
+        /// </summary>
+        public int UnionMystery_BId;
+
+        /// <summary>
+        /// 宠物蛋抽奖折扣
+        /// </summary>
+        public string Value_107;
+
+        /// <summary>
+        /// 家族每日次数
+        /// </summary>
+        public int UnionTaskLimit;
+
+        /// <summary>
+        /// 周任务次数
+        /// </summary>
+        public int WeeklyTaskLimit;
+
+        /// <summary>
+        /// 兑换宠物之核一次消耗
+        /// </summary>
+        public string Value_110;
+
+        /// <summary>
+        /// 兑换宠物之核十次消耗
+        /// </summary>
+        public string Value_111;
+
+        /// <summary>
+        /// 宠物之核抽奖折扣
+        /// </summary>
+        public string Value_112;
+
+        /// <summary>
+        /// 生活技能开启第二页需要充值数量
+        /// </summary>
+        public int OpenSkillMakeSlotCost;
+
+        /// <summary>
+        /// 活动1商店ID
+        /// </summary>
+        public string Value_114;
+
+        /// <summary>
+        /// 账号仓库最大格子数量
+        /// </summary>
+        public int AccountBagMax;
+
+        /// <summary>
+        /// 洗练折扣
+        /// </summary>
+        public string Value_116;
+
+        /// <summary>
+        /// 传承鉴定次数
+        /// </summary>
+        public int ItemInheritTime;
+
+        /// <summary>
+        /// 宝石仓库格子数量
+        /// </summary>
+        public int GemStoreInitCapacity;
+
+        public int GemStoreMaxCapacity;
+
+        /// <summary>
+        /// 宠物背包数量
+        /// </summary>
+        public int RolePetBagNum;
+
+        /// <summary>
+        /// 新商店ID
+        /// </summary>
+        public int Value_120;
+
+        /// <summary>
+        /// 召唤宠物消耗魔力
+        /// </summary>
+        public int PetMeleeCostMoLi;
+
+        /// <summary>
+        /// 每日游戏抽奖次数上限
+        /// </summary>
+        public int ChouKaLimit;
+
+        /// <summary>
+        /// 每日宠物抽奖次数上限
+        /// </summary>
+        public int PetEggChouKaLimit;
+
+        /// <summary>
+        /// 宝宝刷新概率
+        /// </summary>
+        public float BabyRefreshChance;
+
+        /// <summary>
+        /// 变异宝宝刷新概率
+        /// </summary>
+        public float BabyBianYiRefreshChance;
+
+        /// <summary>
+        /// 每日最多刷新宝宝数量
+        /// </summary>
+        public int BabyRefreshMaxNum;
+
+        /// <summary>
+        /// 默认抓捕成功率(野生;宝宝;变异)
+        /// </summary>
+        public string ZhuaByGaiLvInit_Str;
+
+        /// <summary>
+        /// 赛季捐选道具ID
+        /// </summary>
+        public int CommonSeasonDonateItemId;
+
+        /// <summary>
+        /// 捐选随机获得道具
+        /// </summary>
+        public int CommonSeasonDonateGetItem;
+
+        /// <summary>
+        /// 单人模式喜从天降初始次数
+        /// </summary>
+        public int SingleHappyInitTimes;
+
+        /// <summary>
+        /// 单人模式喜从天降恢复时间
+        /// </summary>
+        public long SingleHappyrecoverTime;
+
+        /// <summary>
+        /// 单人模式喜从天降刷新消耗
+        /// </summary>
+        public int Value_132;
+
+        /// <summary>
+        /// 单人模式喜从天降购买次数消耗
+        /// </summary>
+        public string SingleHappyBuy_Str;
+
+        /// <summary>
+        /// 单人模式喜从天降掉落
+        /// </summary>
+        public string SingleHappyDrops_Str;
+
+        /// <summary>
+        /// 宠物孵化开启格子消耗
+        /// </summary>
+        public string Value_135;
+
+        /// <summary>
+        /// 藏宝图任务每日领取数量
+        /// </summary>
+        public int TreasureTaskLimit;
+
+        /// <summary>
+        /// 宠物抽奖消耗
+        /// </summary>
+        public string Value_137;
+
+        /// <summary>
+        /// 宠物抽奖掉落ConfigId
+        /// </summary>
+        public int PetChouKaDropId;
+
+        /// <summary>
+        /// 重置天赋
+        /// </summary>
+        public string Value_139;
 
 
         public const int __ID__ = -2026784688;
@@ -50,13 +869,287 @@ namespace ET
         {
             
             
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
         }
 
         public override string ToString()
         {
             return "{ "
-            + "Id:" + Id + ","
-            + "Value:" + Value + ","
+            + "InitTaskId:" + InitTaskId + ","
+            + "FangunSkillId:" + FangunSkillId + ","
+            + "BagInitCapacity:" + BagInitCapacity + ","
+            + "HourseInitCapacity:" + HourseInitCapacity + ","
+            + "FuBenFuHuoCost:" + FuBenFuHuoCost + ","
+            + "ShiMinReward:" + ShiMinReward + ","
+            + "ShenXin:" + ShenXin + ","
+            + "DayHuoyueTask:" + DayHuoyueTask + ","
+            + "InitYaoJi:" + InitYaoJi + ","
+            + "MaxPiLao:" + MaxPiLao + ","
+            + "ShenMiItem:" + ShenMiItem + ","
+            + "Value_12:" + Value_12 + ","
+            + "Value_13:" + Value_13 + ","
+            + "Value_14:" + Value_14 + ","
+            + "Value_15:" + Value_15 + ","
+            + "Value_16:" + Value_16 + ","
+            + "RolePetChouKa_2:" + RolePetChouKa_2 + ","
+            + "Value_18:" + Value_18 + ","
+            + "MaxTeamDungeonsPerDay:" + MaxTeamDungeonsPerDay + ","
+            + "Value_20:" + Value_20 + ","
+            + "UnionCreateNeedLv:" + UnionCreateNeedLv + ","
+            + "UnionCreateNeedDiamond:" + UnionCreateNeedDiamond + ","
+            + "Value_23:" + Value_23 + ","
+            + "Value_24:" + Value_24 + ","
+            + "OnLineLimit:" + OnLineLimit + ","
+            + "MaxPiLaoYuKaUser:" + MaxPiLaoYuKaUser + ","
+            + "Value_27:" + Value_27 + ","
+            + "Value_28:" + Value_28 + ","
+            + "Value_29:" + Value_29 + ","
+            + "Value_30:" + Value_30 + ","
+            + "Value_31:" + Value_31 + ","
+            + "Value_33:" + Value_33 + ","
+            + "PetMaxNumber:" + PetMaxNumber + ","
+            + "Value_35:" + Value_35 + ","
+            + "Value_36:" + Value_36 + ","
+            + "Value_37:" + Value_37 + ","
+            + "Value_38:" + Value_38 + ","
+            + "Value_39:" + Value_39 + ","
+            + "Value_40:" + Value_40 + ","
+            + "MaxLevel:" + MaxLevel + ","
+            + "Value_42:" + Value_42 + ","
+            + "Value_43:" + Value_43 + ","
+            + "JianDingFuQulity:" + JianDingFuQulity + ","
+            + "MaxShuLianDu:" + MaxShuLianDu + ","
+            + "MakeResetCost:" + MakeResetCost + ","
+            + "MainCityID:" + MainCityID + ","
+            + "Value_48:" + Value_48 + ","
+            + "Value_49:" + Value_49 + ","
+            + "MaxAuctionQuantity:" + MaxAuctionQuantity + ","
+            + "Value_51:" + Value_51 + ","
+            + "Value_52:" + Value_52 + ","
+            + "Value_53:" + Value_53 + ","
+            + "Value_54:" + Value_54 + ","
+            + "BattleShopId:" + BattleShopId + ","
+            + "Value_56:" + Value_56 + ","
+            + "Value_57:" + Value_57 + ","
+            + "MaxDailyTaskLimit:" + MaxDailyTaskLimit + ","
+            + "BattlefieldMonsterLimit:" + BattlefieldMonsterLimit + ","
+            + "MaxPetLadderTime:" + MaxPetLadderTime + ","
+            + "Value_61:" + Value_61 + ","
+            + "Value_62:" + Value_62 + ","
+            + "Value_63:" + Value_63 + ","
+            + "TowerShopId:" + TowerShopId + ","
+            + "Value_65:" + Value_65 + ","
+            + "Value_66:" + Value_66 + ","
+            + "Value_67:" + Value_67 + ","
+            + "Value_68:" + Value_68 + ","
+            + "Value_69:" + Value_69 + ","
+            + "Value_70:" + Value_70 + ","
+            + "Value_71:" + Value_71 + ","
+            + "MaxHuoLi:" + MaxHuoLi + ","
+            + "Value_73:" + Value_73 + ","
+            + "MaxDailyXieZhuFubens:" + MaxDailyXieZhuFubens + ","
+            + "XieZhuFubenDropId:" + XieZhuFubenDropId + ","
+            + "TeamDungeonShopId:" + TeamDungeonShopId + ","
+            + "ShenYuanFubenDropId:" + ShenYuanFubenDropId + ","
+            + "Value_78:" + Value_78 + ","
+            + "DayMonsterList_Str:" + DayMonsterList_Str + ","
+            + "DayJingLingList_Str:" + DayJingLingList_Str + ","
+            + "Value_81:" + Value_81 + ","
+            + "ZhuaPuItem_Str:" + ZhuaPuItem_Str + ","
+            + "Value_83:" + Value_83 + ","
+            + "BuyBagCellMaxNum:" + BuyBagCellMaxNum + ","
+            + "BuyHourseCellMaxNum:" + BuyHourseCellMaxNum + ","
+            + "Value_86:" + Value_86 + ","
+            + "Value_87:" + Value_87 + ","
+            + "Value_88:" + Value_88 + ","
+            + "Value_89:" + Value_89 + ","
+            + "Value_90:" + Value_90 + ","
+            + "BattlefieldSummonLimit:" + BattlefieldSummonLimit + ","
+            + "Value_92:" + Value_92 + ","
+            + "HappyMoveFreeRefreshTime:" + HappyMoveFreeRefreshTime + ","
+            + "Value_94:" + Value_94 + ","
+            + "Value_95:" + Value_95 + ","
+            + "Value_96:" + Value_96 + ","
+            + "Value_97:" + Value_97 + ","
+            + "TurtleSupportCost:" + TurtleSupportCost + ","
+            + "TurtleDropId:" + TurtleDropId + ","
+            + "Value_100:" + Value_100 + ","
+            + "Value_101:" + Value_101 + ","
+            + "Value_102:" + Value_102 + ","
+            + "SeasonStoreId:" + SeasonStoreId + ","
+            + "PaiMaiPageNum:" + PaiMaiPageNum + ","
+            + "AcceleKeJiCostDiamond:" + AcceleKeJiCostDiamond + ","
+            + "UnionMystery_BId:" + UnionMystery_BId + ","
+            + "Value_107:" + Value_107 + ","
+            + "UnionTaskLimit:" + UnionTaskLimit + ","
+            + "WeeklyTaskLimit:" + WeeklyTaskLimit + ","
+            + "Value_110:" + Value_110 + ","
+            + "Value_111:" + Value_111 + ","
+            + "Value_112:" + Value_112 + ","
+            + "OpenSkillMakeSlotCost:" + OpenSkillMakeSlotCost + ","
+            + "Value_114:" + Value_114 + ","
+            + "AccountBagMax:" + AccountBagMax + ","
+            + "Value_116:" + Value_116 + ","
+            + "ItemInheritTime:" + ItemInheritTime + ","
+            + "GemStoreInitCapacity:" + GemStoreInitCapacity + ","
+            + "GemStoreMaxCapacity:" + GemStoreMaxCapacity + ","
+            + "RolePetBagNum:" + RolePetBagNum + ","
+            + "Value_120:" + Value_120 + ","
+            + "PetMeleeCostMoLi:" + PetMeleeCostMoLi + ","
+            + "ChouKaLimit:" + ChouKaLimit + ","
+            + "PetEggChouKaLimit:" + PetEggChouKaLimit + ","
+            + "BabyRefreshChance:" + BabyRefreshChance + ","
+            + "BabyBianYiRefreshChance:" + BabyBianYiRefreshChance + ","
+            + "BabyRefreshMaxNum:" + BabyRefreshMaxNum + ","
+            + "ZhuaByGaiLvInit_Str:" + ZhuaByGaiLvInit_Str + ","
+            + "CommonSeasonDonateItemId:" + CommonSeasonDonateItemId + ","
+            + "CommonSeasonDonateGetItem:" + CommonSeasonDonateGetItem + ","
+            + "SingleHappyInitTimes:" + SingleHappyInitTimes + ","
+            + "SingleHappyrecoverTime:" + SingleHappyrecoverTime + ","
+            + "Value_132:" + Value_132 + ","
+            + "SingleHappyBuy_Str:" + SingleHappyBuy_Str + ","
+            + "SingleHappyDrops_Str:" + SingleHappyDrops_Str + ","
+            + "Value_135:" + Value_135 + ","
+            + "TreasureTaskLimit:" + TreasureTaskLimit + ","
+            + "Value_137:" + Value_137 + ","
+            + "PetChouKaDropId:" + PetChouKaDropId + ","
+            + "Value_139:" + Value_139 + ","
             + "}";
         }
 

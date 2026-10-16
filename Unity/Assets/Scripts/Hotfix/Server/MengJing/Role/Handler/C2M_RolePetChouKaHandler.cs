@@ -11,7 +11,7 @@ namespace ET.Server
         {
             if (request.ChouKaType == 1)
             {
-                string needItems = GlobalValueConfigCategory.Instance.Get(16).Value;
+                string needItems = GlobalValueConfigCategory.Instance.Value_16;
                 bool  sucess = unit.GetComponent<BagComponentS>().OnCostItemData(needItems);
                 if (!sucess)
                 {

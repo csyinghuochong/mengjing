@@ -10,7 +10,7 @@ namespace ET.Server
         {
             long accid = unit.GetComponent<UserInfoComponentS>().UserInfo.AccInfoID;
            
-            string globalValueConfig = GlobalValueConfigCategory.Instance.Get(6).Value;
+            string globalValueConfig = GlobalValueConfigCategory.Instance.ShiMinReward;
             string[] itemCost = globalValueConfig.Split('@');
             List<RewardItem> rewardItems = new List<RewardItem>();
             for (int i = 0; i < itemCost.Length; i++)

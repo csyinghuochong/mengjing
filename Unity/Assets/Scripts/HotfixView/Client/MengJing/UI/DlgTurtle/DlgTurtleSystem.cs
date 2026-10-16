@@ -54,7 +54,7 @@ namespace ET.Client
 
             using (zstring.Block())
             {
-                PopupTipHelp.OpenPopupTip(self.Root(), $"小龟大赛", zstring.Format("是否消耗{0}金币支持该小龟?", GlobalValueConfigCategory.Instance.Get(98).Value),
+                PopupTipHelp.OpenPopupTip(self.Root(), $"小龟大赛", zstring.Format("是否消耗{0}金币支持该小龟?", GlobalValueConfigCategory.Instance.TurtleSupportCost),
                     async () =>
                     {
                         int error = await ActivityNetHelper.TurtleSupportRequest(self.Root(), supportId);
@@ -86,8 +86,7 @@ namespace ET.Client
 
         public static void ShowRewards(this DlgTurtle self)
         {
-            GlobalValueConfig globalValueConfig = GlobalValueConfigCategory.Instance.Get(97);
-            self.View.ES_RewardList.Refresh(globalValueConfig.Value, 0.9f);
+            self.View.ES_RewardList.Refresh(GlobalValueConfigCategory.Instance.Value_97, 0.9f);
         }
 
         public static async ETTask InitInfo(this DlgTurtle self)
