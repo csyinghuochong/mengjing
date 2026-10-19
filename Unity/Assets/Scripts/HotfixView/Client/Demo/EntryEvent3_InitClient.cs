@@ -7,12 +7,15 @@ namespace ET.Client
     {
         protected override async ETTask Run(Scene root, EntryEvent3 args)
         {
-            GameObject.Find("Global").AddComponent<RenderScaleController>();
-            GameObject.Find("Global/MainCamera").AddComponent<MyCamera_1>().enabled = false;
-            GameObject.Find("Global/UI/NormalRoot").AddComponent<CanvasAdjust>();
-            GameObject.Find("Global/UI/MidRoot").AddComponent<CanvasAdjust>();
-            GameObject.Find("Global/UI/FixedRoot").AddComponent<CanvasAdjust>();
-            GameObject.Find("Global/UI/PopUpRoot").AddComponent<CanvasAdjust>();
+            FPSManager.Initialize();
+            GraphicsQualityManager.Initialize();
+
+            GameObject.Find("Global").GetOrAddComponent<RenderScaleController>();
+            GameObject.Find("Global/MainCamera").GetOrAddComponent<MyCamera_1>().enabled = false;
+            GameObject.Find("Global/UI/NormalRoot").GetOrAddComponent<CanvasAdjust>();
+            GameObject.Find("Global/UI/MidRoot").GetOrAddComponent<CanvasAdjust>();
+            GameObject.Find("Global/UI/FixedRoot").GetOrAddComponent<CanvasAdjust>();
+            GameObject.Find("Global/UI/PopUpRoot").GetOrAddComponent<CanvasAdjust>();
             
             GlobalComponent globalComponent = root.AddComponent<GlobalComponent>();
             root.AddComponent<ResourcesLoaderComponent>();

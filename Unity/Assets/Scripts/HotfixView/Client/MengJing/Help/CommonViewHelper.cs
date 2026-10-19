@@ -8,6 +8,17 @@ namespace ET.Client
 {
     public static class CommonViewHelper
     {
+        public static T GetOrAddComponent<T>(this GameObject gameObject) where T : Component
+        {
+            if (gameObject == null)
+            {
+                Log.Error($"添加组件失败，找不到目标物体：{typeof(T).Name}");
+                return null;
+            }
+
+            return gameObject.TryGetComponent(out T component) ? component : gameObject.AddComponent<T>();
+        }
+
         public static string StringToAB(this string value)
         {
             string result =  $"Assets/Bundles/UI/Dlg/{value}.prefab";

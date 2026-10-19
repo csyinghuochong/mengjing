@@ -99,6 +99,10 @@ namespace ET.Client
 
             self.EG_HighFpsRectTransform.Find("Btn_Click").GetComponent<Button>().AddListener(self.OnHighFps);
 
+            self.EG_GraphicsQualityRectTransform.Find("Btn_High").GetComponent<Button>().AddListener(() => { self.OnGraphicsQuality(GraphicsQualityLevel.High); });
+            self.EG_GraphicsQualityRectTransform.Find("Btn_Medium").GetComponent<Button>().AddListener(() => { self.OnGraphicsQuality(GraphicsQualityLevel.Medium); });
+            self.EG_GraphicsQualityRectTransform.Find("Btn_Low").GetComponent<Button>().AddListener(() => { self.OnGraphicsQuality(GraphicsQualityLevel.Low); });
+
             self.EG_SmoothRectTransform.Find("Btn_Click").GetComponent<Button>().AddListener(self.OnSmooth);
 
             self.EG_NoShowOtherRectTransform.Find("Btn_Click").GetComponent<Button>().AddListener(self.OnNoShowOther);
@@ -204,6 +208,8 @@ namespace ET.Client
             self.OnReSetCameraBtnButton();
 
             PlayerPrefsHelp.SetInt(PlayerPrefsHelp.ZhuBo, 0);
+
+            GraphicsQualityManager.ResetToDefault();
             
             self.InitUI();
         }
@@ -554,6 +560,7 @@ namespace ET.Client
             self.UpdateYaoGan();
             self.UpdateShadow();
             self.UpdateHighFps();
+            self.UpdateGraphicsQuality();
             self.UpdateSmooth();
             self.UpdateNoShowOther();
             self.UpdateAttackMode();
@@ -678,6 +685,12 @@ namespace ET.Client
             }
         }
 
+        public static void OnGraphicsQuality(this ES_SettingGame self, GraphicsQualityLevel level)
+        {
+            GraphicsQualityManager.SetManualQuality(level);
+            self.UpdateGraphicsQuality();
+        }
+
         public static void OnSmooth(this ES_SettingGame self)
         {
             string oldValue = self.UserInfoComponent.GetGameSettingValue(GameSettingEnum.Smooth);
@@ -756,6 +769,14 @@ namespace ET.Client
             self.EG_HighFpsRectTransform.Find("On").gameObject.SetActive(oldValue == "1");
             self.EG_HighFpsRectTransform.Find("Off").gameObject.SetActive(oldValue != "1");
             CommonViewHelper.TargetFrameRate(oldValue == "1" ? 60 : 30);
+        }
+
+        public static void UpdateGraphicsQuality(this ES_SettingGame self)
+        {
+            GraphicsQualityLevel level = GraphicsQualityManager.CurrentLevel;
+            self.EG_GraphicsQualityRectTransform.Find("High").gameObject.SetActive(level == GraphicsQualityLevel.High);
+            self.EG_GraphicsQualityRectTransform.Find("Medium").gameObject.SetActive(level == GraphicsQualityLevel.Medium);
+            self.EG_GraphicsQualityRectTransform.Find("Low").gameObject.SetActive(level == GraphicsQualityLevel.Low);
         }
 
         public static void UpdateSmooth(this ES_SettingGame self)

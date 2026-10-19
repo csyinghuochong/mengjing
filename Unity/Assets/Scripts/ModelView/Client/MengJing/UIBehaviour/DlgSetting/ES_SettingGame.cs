@@ -572,6 +572,23 @@ namespace ET.Client
      		}
      	}
 
+		public UnityEngine.RectTransform EG_GraphicsQualityRectTransform
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_EG_GraphicsQualityRectTransform == null )
+     			{
+		    		this.m_EG_GraphicsQualityRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"Right/E_ScrollView_1/Viewport/Content/SettingItem_11/EG_GraphicsQuality");
+     			}
+     			return this.m_EG_GraphicsQualityRectTransform;
+     		}
+     	}
+
 		public UnityEngine.UI.ScrollRect E_ScrollView_2ScrollRect
      	{
      		get
@@ -1282,6 +1299,7 @@ namespace ET.Client
 			this.m_E_ReSetCameraBtnImage = null;
 			this.m_EG_YinYingRectTransform = null;
 			this.m_EG_FirstUnionNameRectTransform = null;
+			this.m_EG_GraphicsQualityRectTransform = null;
 			this.m_E_ScrollView_2ScrollRect = null;
 			this.m_E_ScrollView_2Image = null;
 			this.m_EG_ActTargetSelectRectTransform = null;
@@ -1357,6 +1375,7 @@ namespace ET.Client
 		private UnityEngine.UI.Image m_E_ReSetCameraBtnImage = null;
 		private UnityEngine.RectTransform m_EG_YinYingRectTransform = null;
 		private UnityEngine.RectTransform m_EG_FirstUnionNameRectTransform = null;
+		private UnityEngine.RectTransform m_EG_GraphicsQualityRectTransform = null;
 		private UnityEngine.UI.ScrollRect m_E_ScrollView_2ScrollRect = null;
 		private UnityEngine.UI.Image m_E_ScrollView_2Image = null;
 		private UnityEngine.RectTransform m_EG_ActTargetSelectRectTransform = null;
