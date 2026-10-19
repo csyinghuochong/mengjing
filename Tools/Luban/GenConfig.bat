@@ -10,9 +10,12 @@ if not "!EXPORT_EXIT_CODE!"=="0" (
     echo.
     echo ==================== Luban export FAILED [exit code !EXPORT_EXIT_CODE!] ====================
     echo Please check the error messages above.
+    echo.
+    pause
+    exit /b !EXPORT_EXIT_CODE!
 )
 echo.
-pause
+if /I not "%~1"=="--no-pause" pause
 exit /b !EXPORT_EXIT_CODE!
 
 :Export

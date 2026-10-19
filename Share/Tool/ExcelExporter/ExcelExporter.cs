@@ -23,7 +23,7 @@ namespace ET
 
             try
             {
-                string shellFilePath = RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? ".\\GenConfig.bat" : "./GenConfig.sh";
+                string shellFilePath = RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? ".\\GenConfig.bat --no-pause" : "./GenConfig.sh";
                 using Process configProcess = CreateProcess(shellFilePath, "../Tools/Luban/");
                 configProcess.Start();
                 configProcess.WaitForExit();
@@ -38,10 +38,13 @@ namespace ET
             }
 
             CopyClientBytesToUnity();
+            VerifyClientBytesSynchronized();
             RemoveUnusedMetaFiles(UnityClientBytesDir);
             RemoveUnusedMetaFiles(ClientGeneratedCodeDir);
             RemoveUnusedMetaFiles(ServerGeneratedCodeDir);
             RemoveUnusedMetaFiles(ClientServerGeneratedCodeDir);
+
+            Console.WriteLine("Luban export and Unity client config sync finished.");
         }
 
         private static Dictionary<string, byte[]> BackupMetaFiles(params string[] directories)
@@ -87,6 +90,26 @@ namespace ET
         {
             RemoveAllFilesExceptMeta(UnityClientBytesDir);
             FileHelper.CopyDirectory(ClientGeneratedBytesDir, UnityClientBytesDir);
+        }
+
+        private static void VerifyClientBytesSynchronized()
+        {
+            foreach (string sourcePath in Directory.GetFiles(ClientGeneratedBytesDir, "*.bytes", SearchOption.AllDirectories))
+            {
+                string relativePath = Path.GetRelativePath(ClientGeneratedBytesDir, sourcePath);
+                string destinationPath = Path.Combine(UnityClientBytesDir, relativePath);
+                if (!File.Exists(destinationPath))
+                {
+                    throw new FileNotFoundException($"Unity client config was not copied: {relativePath}", destinationPath);
+                }
+
+                byte[] sourceBytes = File.ReadAllBytes(sourcePath);
+                byte[] destinationBytes = File.ReadAllBytes(destinationPath);
+                if (!sourceBytes.AsSpan().SequenceEqual(destinationBytes))
+                {
+                    throw new InvalidDataException($"Unity client config differs after copy: {relativePath}");
+                }
+            }
         }
 
         private static void RemoveAllFilesExceptMeta(string directory)
