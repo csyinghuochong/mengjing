@@ -466,12 +466,33 @@ namespace ET.Client
                 main.Root().GetComponent<SceneUnitManagerComponent>().InitMainHero(main.Position, main.Id);
                 MapViewHelper.OnMainHeroInit(main.Root(), topTf, mainTf, sceneType);
 
+                if (sceneType == MapTypeEnum.LocalDungeon && !GraphicsQualityManager.HasManualSetting)
+                {
+                    DetectGraphicsQuality(self.Root().GetComponent<TimerComponent>()).Coroutine();
+                }
+                
                 self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_Loading);
             }
             catch (Exception ex)
             {
                 Log.Error("UILoading1: " + ex.ToString());
             }
+        }
+
+        private static async ETTask DetectGraphicsQuality(TimerComponent timerComponent)
+        {
+            await timerComponent.WaitAsync(TimeHelper.Second * 3);
+
+            if (GraphicsQualityManager.HasManualSetting)
+            {
+                return;
+            }
+
+            float fps = FPSManager.CurrentFps;
+            GraphicsQualityLevel level = fps > 45f ? GraphicsQualityLevel.High : fps > 25f ? GraphicsQualityLevel.Medium : GraphicsQualityLevel.Low;
+
+            Log.Warning($"检测帧数: {fps:F1}, 自动设置画质: {level}");
+            GraphicsQualityManager.SetManualQuality(level);
         }
     }
 }
