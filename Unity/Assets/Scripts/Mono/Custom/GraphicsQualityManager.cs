@@ -10,7 +10,7 @@ namespace ET
         private static GraphicsQualityManager instance;
         private static bool initialized;
 
-        public static GraphicsQualityLevel CurrentLevel { get; private set; } = GraphicsQualityLevel.Medium;
+        public static GraphicsQualityLevel CurrentLevel { get; private set; } = GraphicsQualityLevel.High;
 
         public static event Action<GraphicsQualityLevel> QualityChanged;
 
@@ -35,7 +35,7 @@ namespace ET
                 return;
             }
 
-            ApplyQuality(GraphicsQualityLevel.Medium);
+            ApplyQuality(GraphicsQualityLevel.High);
         }
 
         private static GraphicsQualityManager EnsureInstance()
@@ -97,7 +97,7 @@ namespace ET
             EnsureInitialized();
             PlayerPrefs.DeleteKey(PlayerPrefsKey);
             PlayerPrefs.Save();
-            ApplyQuality(GraphicsQualityLevel.Medium);
+            ApplyQuality(GraphicsQualityLevel.High);
         }
 
         public static void ApplyQuality(GraphicsQualityLevel level)
@@ -110,7 +110,7 @@ namespace ET
 
         private static bool TryGetManualLevel(out GraphicsQualityLevel level)
         {
-            level = GraphicsQualityLevel.Medium;
+            level = GraphicsQualityLevel.High;
             if (!PlayerPrefs.HasKey(PlayerPrefsKey))
             {
                 return false;
