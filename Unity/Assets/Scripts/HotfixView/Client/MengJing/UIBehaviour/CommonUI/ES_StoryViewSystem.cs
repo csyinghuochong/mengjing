@@ -215,7 +215,6 @@ namespace ET.Client
             self.SelectedChoiceId = storyInfo?.ChoiceId ?? 0;
             self.RefreshChoiceItems();
             self.RefreshStoryReply(storyInfo);
-            self.E_ConfirmChoiceButton.interactable = storyInfo == null && self.SelectedChoiceId != 0;
         }
 
         private static void RefreshChoiceItems(this ES_Story self)
@@ -265,8 +264,6 @@ namespace ET.Client
                     item.SetSelected(choiceId);
                 }
             }
-
-            self.E_ConfirmChoiceButton.interactable = true;
         }
 
         private static async ETTask OnConfirmChoice(this ES_Story self)
@@ -341,6 +338,7 @@ namespace ET.Client
             self.E_StoryReplyText.text = showReply ? choiceConfig.ReplyText : string.Empty;
             self.E_StoryReplyText.gameObject.SetActive(showReply);
             self.E_StoryChoiceListScrollRect.gameObject.SetActive(!showReply);
+            self.E_ConfirmChoiceButton.gameObject.SetActive(!showReply);
         }
 
         private static bool IsChapterUnlocked(this ES_Story self, StoryChapterConfig config)
@@ -417,7 +415,6 @@ namespace ET.Client
             self.E_StoryItemsScrollRect.gameObject.SetActive(true);
             self.RefreshStoryItems();
             self.RefreshChoiceItems();
-            self.E_ConfirmChoiceButton.interactable = false;
         }
     }
 }
