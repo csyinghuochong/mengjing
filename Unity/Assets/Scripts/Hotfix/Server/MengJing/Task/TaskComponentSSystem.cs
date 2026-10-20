@@ -101,6 +101,12 @@ namespace ET.Server
                 return ErrorCode.ERR_ModifyData;
             }
 
+            StoryChoiceConfig choiceConfig = StoryChoiceConfigCategory.Instance.GetOrDefault(choiceId);
+            if (choiceConfig == null)
+            {
+                return ErrorCode.ERR_ModifyData;
+            }
+
             StoryChapterConfig storyChapterConfig = null;
             foreach (StoryChapterConfig config in StoryChapterConfigCategory.Instance.GetAll().Values)
             {
@@ -131,13 +137,20 @@ namespace ET.Server
                 return ErrorCode.ERR_ModifyData;
             }
 
+            if (!string.IsNullOrEmpty(choiceConfig.Reward))
+            {
+                Unit unit = self.GetParent<Unit>();
+                if (!unit.GetComponent<BagComponentS>().OnAddItemData(choiceConfig.Reward, $"{ItemGetWay.TaskReward}_{TimeHelper.ServerNow()}"))
+                {
+                    return ErrorCode.ERR_BagIsFull;
+                }
+            }
+
             StoryInfo storyInfo = StoryInfo.Create();
             storyInfo.StroryId = storyId;
             storyInfo.ChoiceId = choiceId;
             self.StoryInfoList.Add(storyInfo);
-            
-            // 获得选项奖励
-            
+
             return ErrorCode.ERR_Success;
         }
 
