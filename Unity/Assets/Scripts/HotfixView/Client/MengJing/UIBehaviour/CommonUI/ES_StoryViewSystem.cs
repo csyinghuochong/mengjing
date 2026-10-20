@@ -222,6 +222,10 @@ namespace ET.Client
             Transform content = self.E_StoryChoiceListScrollRect.content;
             GameObject prefab = self.LoadItemPrefab(StoryChoiceItemPrefabPath);
 
+            StoryInfo storyInfo = self.SelectedStoryId == 0 ? null : self.GetStoryInfo(self.SelectedStoryId);
+            int chosenChoiceId = storyInfo?.ChoiceId ?? 0;
+            bool hasChosen = chosenChoiceId != 0;
+
             for (int i = 0; i < self.ShowStoryChoiceConfigs.Count; i++)
             {
                 if (!self.ScrollItemStoryChoiceItems.TryGetValue(i, out EntityRef<Scroll_Item_StoryChoiceItem> itemRef))
@@ -234,9 +238,12 @@ namespace ET.Client
                 }
 
                 Scroll_Item_StoryChoiceItem item = itemRef;
-                item.OnUpdateUI(self.ShowStoryChoiceConfigs[i], self.OnSelectChoice);
-                item.SetSelected(self.SelectedChoiceId);
-                item.uiTransform.gameObject.SetActive(true);
+                StoryChoiceConfig choiceConfig = self.ShowStoryChoiceConfigs[i];
+                item.OnUpdateUI(choiceConfig, self.OnSelectChoice);
+                item.SetSelected(hasChosen ? chosenChoiceId : self.SelectedChoiceId);
+
+                // 已选择的剧情只显示被选中的那个选项，并保持其高亮
+                item.uiTransform.gameObject.SetActive(!hasChosen || choiceConfig.Id == chosenChoiceId);
             }
 
             for (int i = self.ShowStoryChoiceConfigs.Count; i < self.ScrollItemStoryChoiceItems.Count; i++)
@@ -291,6 +298,7 @@ namespace ET.Client
                 self.SelectedChoiceId = storyInfo.ChoiceId;
             }
             self.RefreshStoryItems();
+            self.RefreshChoiceItems();
             self.RefreshStoryReply(storyInfo);
             self.RefreshStoryValueBars();
         }
@@ -337,8 +345,7 @@ namespace ET.Client
 
             self.E_StoryReplyText.text = showReply ? choiceConfig.ReplyText : string.Empty;
             self.E_StoryReplyText.gameObject.SetActive(showReply);
-            self.E_StoryChoiceListScrollRect.gameObject.SetActive(!showReply);
-            self.E_ConfirmChoiceButton.gameObject.SetActive(!showReply);
+            self.E_ConfirmChoiceButton.gameObject.SetActive(storyInfo == null);
         }
 
         private static bool IsChapterUnlocked(this ES_Story self, StoryChapterConfig config)
