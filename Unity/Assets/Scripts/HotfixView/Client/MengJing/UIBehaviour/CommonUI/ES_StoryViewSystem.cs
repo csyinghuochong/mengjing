@@ -21,6 +21,7 @@ namespace ET.Client
             self.E_ConfirmChoiceButton.AddListenerAsync(self.OnConfirmChoice);
 
             self.InitializeStoryView();
+            self.RefreshStoryValueBars();
             self.E_PageTypeSetToggleGroup.OnSelectIndex(0);
         }
 
@@ -294,6 +295,42 @@ namespace ET.Client
             }
             self.RefreshStoryItems();
             self.RefreshStoryReply(storyInfo);
+            self.RefreshStoryValueBars();
+        }
+
+        private static void RefreshStoryValueBars(this ES_Story self)
+        {
+            TaskComponentC taskComponent = self.Root().GetComponent<TaskComponentC>();
+            int affinity = 0;
+            int fun = 0;
+            int violence = 0;
+            for (int i = 0; i < taskComponent.StoryInfoList.Count; i++)
+            {
+                StoryChoiceConfig choiceConfig = StoryChoiceConfigCategory.Instance.GetOrDefault(taskComponent.StoryInfoList[i].ChoiceId);
+                if (choiceConfig == null)
+                {
+                    continue;
+                }
+
+                affinity += choiceConfig.Affinity;
+                fun += choiceConfig.Fun;
+                violence += choiceConfig.Violence;
+            }
+
+            GlobalValueConfigCategory globalValueConfig = GlobalValueConfigCategory.Instance;
+            self.E_LodingValue_AffinityImage.fillAmount = GetValueProgress(affinity, globalValueConfig.AffinityMax);
+            self.E_LodingValue_FunImage.fillAmount = GetValueProgress(fun, globalValueConfig.Fun);
+            self.E_LodingValue_ViolenceImage.fillAmount = GetValueProgress(violence, globalValueConfig.Violence);
+        }
+
+        private static float GetValueProgress(int value, int max)
+        {
+            if (max <= 0)
+            {
+                return 0f;
+            }
+
+            return Mathf.Clamp01((float)value / max);
         }
 
         private static void RefreshStoryReply(this ES_Story self, StoryInfo storyInfo)

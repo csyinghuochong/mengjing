@@ -160,6 +160,9 @@ namespace ET
             Value_137 = _buf.ReadString();
             PetChouKaDropId = _buf.ReadInt();
             Value_139 = _buf.ReadString();
+            AffinityMax = _buf.ReadInt();
+            Fun = _buf.ReadInt();
+            Violence = _buf.ReadInt();
 
             PostInit();
         }
@@ -861,12 +864,30 @@ namespace ET
         /// </summary>
         public string Value_139;
 
+        /// <summary>
+        /// 最大亲和值
+        /// </summary>
+        public int AffinityMax;
+
+        /// <summary>
+        /// 最大趣味值
+        /// </summary>
+        public int Fun;
+
+        /// <summary>
+        /// 最大暴力值
+        /// </summary>
+        public int Violence;
+
 
         public const int __ID__ = -2026784688;
         public override int GetTypeId() => __ID__;
 
         public  void ResolveRef()
         {
+            
+            
+            
             
             
             
@@ -1150,6 +1171,9 @@ namespace ET
             + "Value_137:" + Value_137 + ","
             + "PetChouKaDropId:" + PetChouKaDropId + ","
             + "Value_139:" + Value_139 + ","
+            + "AffinityMax:" + AffinityMax + ","
+            + "Fun:" + Fun + ","
+            + "Violence:" + Violence + ","
             + "}";
         }
 

@@ -579,6 +579,18 @@ namespace ET
         /// 重置天赋
         /// </summary>
         public string Value_139 => _data.Value_139;
+        /// <summary>
+        /// 最大亲和值
+        /// </summary>
+        public int AffinityMax => _data.AffinityMax;
+        /// <summary>
+        /// 最大趣味值
+        /// </summary>
+        public int Fun => _data.Fun;
+        /// <summary>
+        /// 最大暴力值
+        /// </summary>
+        public int Violence => _data.Violence;
         
         public void ResolveRef()
         {
