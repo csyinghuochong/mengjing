@@ -14,6 +14,8 @@ namespace ET.Client
 		public readonly Dictionary<int, EntityRef<Scroll_Item_StoryChapterItem>> ScrollItemStoryChapterItems = new();
 		public readonly Dictionary<int, EntityRef<Scroll_Item_StoryItem>> ScrollItemStoryItems = new();
 		public Dictionary<int, EntityRef<Scroll_Item_StoryChoiceItem>> ScrollItemStoryChoiceItems = new();
+		public readonly List<EntityRef<ItemInfo>> ShowEndingRewardItems = new();
+		public readonly Dictionary<int, EntityRef<Scroll_Item_CommonItem>> ScrollItemEndingRewardItems = new();
 		public readonly List<string> AssetList = new();
 		public int SelectedChapterId;
 		public int SelectedStoryId;

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace ET.Client
@@ -7,6 +8,7 @@ namespace ET.Client
     [FriendOf(typeof(Scroll_Item_StoryChapterItem))]
     [FriendOf(typeof(Scroll_Item_StoryItem))]
     [FriendOf(typeof(Scroll_Item_StoryChoiceItem))]
+    [FriendOf(typeof(Scroll_Item_CommonItem))]
     public static partial class ES_StorySystem
     {
         private const string StoryChapterItemPrefabPath = "Assets/Bundles/UI/Item/Item_StoryChapterItem.prefab";
@@ -19,6 +21,7 @@ namespace ET.Client
             self.uiTransform = transform;
             self.E_PageTypeSetToggleGroup.AddListener(self.OnPageTypeSet);
             self.E_ConfirmChoiceButton.AddListenerAsync(self.OnConfirmChoice);
+            self.E_StoryEndingReceiveButton.AddListener(self.OnStoryEndingReceive);
 
             self.InitializeStoryView();
             self.RefreshStoryValueBars();
@@ -38,9 +41,11 @@ namespace ET.Client
             self.ShowStoryChapterConfigs.Clear();
             self.ShowStoryConfigs.Clear();
             self.ShowStoryChoiceConfigs.Clear();
+            self.ShowEndingRewardItems.Clear();
             self.ScrollItemStoryChapterItems.Clear();
             self.ScrollItemStoryItems.Clear();
             self.ScrollItemStoryChoiceItems.Clear();
+            self.ScrollItemEndingRewardItems.Clear();
             self.DestroyWidget();
         }
 
@@ -305,10 +310,23 @@ namespace ET.Client
 
         private static void RefreshStoryValueBars(this ES_Story self)
         {
+            GetStoryValues(self, out int affinity, out int fun, out int violence);
+
+            GlobalValueConfigCategory globalValueConfig = GlobalValueConfigCategory.Instance;
+            self.E_LodingValue_AffinityImage.fillAmount = GetValueProgress(affinity, globalValueConfig.AffinityMax);
+            self.E_LodingValue_FunImage.fillAmount = GetValueProgress(fun, globalValueConfig.Fun);
+            self.E_LodingValue_ViolenceImage.fillAmount = GetValueProgress(violence, globalValueConfig.Violence);
+
+            self.RefreshStoryEnding(affinity, fun, violence);
+        }
+
+        private static void GetStoryValues(this ES_Story self, out int affinity, out int fun, out int violence)
+        {
+            affinity = 0;
+            fun = 0;
+            violence = 0;
+
             TaskComponentC taskComponent = self.Root().GetComponent<TaskComponentC>();
-            int affinity = 0;
-            int fun = 0;
-            int violence = 0;
             for (int i = 0; i < taskComponent.StoryInfoList.Count; i++)
             {
                 StoryChoiceConfig choiceConfig = StoryChoiceConfigCategory.Instance.GetOrDefault(taskComponent.StoryInfoList[i].ChoiceId);
@@ -321,11 +339,6 @@ namespace ET.Client
                 fun += choiceConfig.Fun;
                 violence += choiceConfig.Violence;
             }
-
-            GlobalValueConfigCategory globalValueConfig = GlobalValueConfigCategory.Instance;
-            self.E_LodingValue_AffinityImage.fillAmount = GetValueProgress(affinity, globalValueConfig.AffinityMax);
-            self.E_LodingValue_FunImage.fillAmount = GetValueProgress(fun, globalValueConfig.Fun);
-            self.E_LodingValue_ViolenceImage.fillAmount = GetValueProgress(violence, globalValueConfig.Violence);
         }
 
         private static float GetValueProgress(int value, int max)
@@ -336,6 +349,153 @@ namespace ET.Client
             }
 
             return Mathf.Clamp01((float)value / max);
+        }
+
+        /// <summary>
+        /// 所有剧情都选择完成后才显示右侧结局，并根据当前属性值匹配结局。
+        /// </summary>
+        private static void RefreshStoryEnding(this ES_Story self, int affinity, int fun, int violence)
+        {
+            bool showEnding = self.IsAllStoryChosen();
+            self.EG_MainRightRectTransform.gameObject.SetActive(showEnding);
+            if (!showEnding)
+            {
+                return;
+            }
+
+            StoryEndingConfig endingConfig = GetStoryEndingConfig(affinity, fun, violence);
+            if (endingConfig == null)
+            {
+                self.E_StoryEndingText.text = string.Empty;
+                self.E_StoryEndingRewardListLoopVerticalScrollRect.SetVisible(false, 0);
+                return;
+            }
+
+            self.E_StoryEndingText.text = $"{endingConfig.Name}\n{endingConfig.Des}";
+            self.RefreshEndingRewards(endingConfig.Reward);
+        }
+
+        private static bool IsAllStoryChosen(this ES_Story self)
+        {
+            List<StoryConfig> storyConfigs = StoryConfigCategory.Instance.DataList;
+            if (storyConfigs.Count == 0)
+            {
+                return false;
+            }
+
+            for (int i = 0; i < storyConfigs.Count; i++)
+            {
+                if (self.GetStoryInfo(storyConfigs[i].Id) == null)
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        private static StoryEndingConfig GetStoryEndingConfig(int affinity, int fun, int violence)
+        {
+            List<StoryEndingConfig> endingConfigs = StoryEndingConfigCategory.Instance.DataList;
+            for (int i = 0; i < endingConfigs.Count; i++)
+            {
+                StoryEndingConfig config = endingConfigs[i];
+                if (affinity < config.AffinityMin || affinity > config.AffinityMax)
+                {
+                    continue;
+                }
+                if (fun < config.FunMin || fun > config.FunMax)
+                {
+                    continue;
+                }
+                if (violence < config.ViolenceMin || violence > config.ViolenceMax)
+                {
+                    continue;
+                }
+
+                return config;
+            }
+
+            return endingConfigs.Count > 0 ? endingConfigs[endingConfigs.Count - 1] : null;
+        }
+
+        private static void RefreshEndingRewards(this ES_Story self, string reward)
+        {
+            self.ShowEndingRewardItems.Clear();
+            if (!CommonHelp.IfNull(reward))
+            {
+                string[] rewards = reward.Split('@');
+                for (int i = 0; i < rewards.Length; i++)
+                {
+                    if (CommonHelp.IfNull(rewards[i]))
+                    {
+                        continue;
+                    }
+
+                    string[] itemInfo = rewards[i].Split(';');
+                    if (itemInfo.Length < 2 || !int.TryParse(itemInfo[0], out int itemId) || !int.TryParse(itemInfo[1], out int itemNum))
+                    {
+                        continue;
+                    }
+                    if (!ItemConfigCategory.Instance.Contain(itemId))
+                    {
+                        continue;
+                    }
+
+                    self.ShowEndingRewardItems.Add(new ItemInfo { ItemID = itemId, ItemNum = itemNum });
+                }
+            }
+
+            self.E_StoryEndingRewardListLoopVerticalScrollRect.AddItemRefreshListener(self.OnEndingRewardItemRefresh);
+            self.AddEndingRewardItems(self.ShowEndingRewardItems.Count);
+            self.E_StoryEndingRewardListLoopVerticalScrollRect.SetVisible(self.ShowEndingRewardItems.Count > 0, self.ShowEndingRewardItems.Count);
+        }
+
+        private static void AddEndingRewardItems(this ES_Story self, int count)
+        {
+            foreach (EntityRef<Scroll_Item_CommonItem> itemRef in self.ScrollItemEndingRewardItems.Values)
+            {
+                Scroll_Item_CommonItem item = itemRef;
+                item?.Dispose();
+            }
+            self.ScrollItemEndingRewardItems.Clear();
+
+            for (int i = 0; i < count; i++)
+            {
+                Scroll_Item_CommonItem item = self.AddChild<Scroll_Item_CommonItem>(true);
+                self.ScrollItemEndingRewardItems.Add(i, item);
+            }
+        }
+
+        private static void OnEndingRewardItemRefresh(this ES_Story self, Transform transform, int index)
+        {
+            if (index < 0 || index >= self.ShowEndingRewardItems.Count)
+            {
+                return;
+            }
+
+            foreach (EntityRef<Scroll_Item_CommonItem> itemRef in self.ScrollItemEndingRewardItems.Values)
+            {
+                Scroll_Item_CommonItem item = itemRef;
+                if (item.uiTransform == transform)
+                {
+                    item.uiTransform = null;
+                }
+            }
+
+            Scroll_Item_CommonItem rewardItem = self.ScrollItemEndingRewardItems[index].BindTrans(transform);
+            rewardItem.Refresh(self.ShowEndingRewardItems[index], ItemOperateEnum.None);
+        }
+
+        private static void OnStoryEndingReceive(this ES_Story self)
+        {
+            FlyTipComponent flyTipComponent = FlyTipComponent.Instance;
+            if (flyTipComponent == null)
+            {
+                return;
+            }
+
+            flyTipComponent.ShowFlyTip("结局奖励领取暂未开放");
         }
 
         private static void RefreshStoryReply(this ES_Story self, StoryInfo storyInfo)
