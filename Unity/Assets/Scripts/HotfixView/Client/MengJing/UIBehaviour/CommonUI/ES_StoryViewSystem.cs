@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace ET.Client
@@ -21,7 +20,7 @@ namespace ET.Client
             self.uiTransform = transform;
             self.E_PageTypeSetToggleGroup.AddListener(self.OnPageTypeSet);
             self.E_ConfirmChoiceButton.AddListenerAsync(self.OnConfirmChoice);
-            self.E_StoryEndingReceiveButton.AddListener(self.OnStoryEndingReceive);
+            self.E_StoryEndingReceiveButton.AddListenerAsync(self.OnStoryEndingReceive);
 
             self.InitializeStoryView();
             self.RefreshStoryValueBars();
@@ -310,7 +309,8 @@ namespace ET.Client
 
         private static void RefreshStoryValueBars(this ES_Story self)
         {
-            GetStoryValues(self, out int affinity, out int fun, out int violence);
+            TaskComponentC taskComponent = self.Root().GetComponent<TaskComponentC>();
+            StoryHelper.GetStoryValues(taskComponent.StoryInfoList, out int affinity, out int fun, out int violence);
 
             GlobalValueConfigCategory globalValueConfig = GlobalValueConfigCategory.Instance;
             self.E_LodingValue_AffinityImage.fillAmount = GetValueProgress(affinity, globalValueConfig.AffinityMax);
@@ -318,27 +318,6 @@ namespace ET.Client
             self.E_LodingValue_ViolenceImage.fillAmount = GetValueProgress(violence, globalValueConfig.Violence);
 
             self.RefreshStoryEnding(affinity, fun, violence);
-        }
-
-        private static void GetStoryValues(this ES_Story self, out int affinity, out int fun, out int violence)
-        {
-            affinity = 0;
-            fun = 0;
-            violence = 0;
-
-            TaskComponentC taskComponent = self.Root().GetComponent<TaskComponentC>();
-            for (int i = 0; i < taskComponent.StoryInfoList.Count; i++)
-            {
-                StoryChoiceConfig choiceConfig = StoryChoiceConfigCategory.Instance.GetOrDefault(taskComponent.StoryInfoList[i].ChoiceId);
-                if (choiceConfig == null)
-                {
-                    continue;
-                }
-
-                affinity += choiceConfig.Affinity;
-                fun += choiceConfig.Fun;
-                violence += choiceConfig.Violence;
-            }
         }
 
         private static float GetValueProgress(int value, int max)
@@ -356,14 +335,17 @@ namespace ET.Client
         /// </summary>
         private static void RefreshStoryEnding(this ES_Story self, int affinity, int fun, int violence)
         {
-            bool showEnding = self.IsAllStoryChosen();
+            TaskComponentC taskComponent = self.Root().GetComponent<TaskComponentC>();
+            bool showEnding = StoryHelper.IsAllStoryChosen(taskComponent.StoryInfoList);
             self.EG_MainRightRectTransform.gameObject.SetActive(showEnding);
             if (!showEnding)
             {
                 return;
             }
 
-            StoryEndingConfig endingConfig = GetStoryEndingConfig(affinity, fun, violence);
+            self.RefreshStoryEndingButton();
+
+            StoryEndingConfig endingConfig = StoryHelper.GetStoryEndingConfig(affinity, fun, violence);
             if (endingConfig == null)
             {
                 self.E_StoryEndingText.text = string.Empty;
@@ -375,48 +357,16 @@ namespace ET.Client
             self.RefreshEndingRewards(endingConfig.Reward);
         }
 
-        private static bool IsAllStoryChosen(this ES_Story self)
+        private static void RefreshStoryEndingButton(this ES_Story self)
         {
-            List<StoryConfig> storyConfigs = StoryConfigCategory.Instance.DataList;
-            if (storyConfigs.Count == 0)
+            bool rewarded = self.Root().GetComponent<TaskComponentC>().StoryEndingRewardId != 0;
+            self.E_StoryEndingReceiveButton.interactable = !rewarded;
+
+            UnityEngine.UI.Text label = self.E_StoryEndingReceiveButton.GetComponentInChildren<UnityEngine.UI.Text>(true);
+            if (label != null)
             {
-                return false;
+                label.text = rewarded ? "已领取" : "领取奖励";
             }
-
-            for (int i = 0; i < storyConfigs.Count; i++)
-            {
-                if (self.GetStoryInfo(storyConfigs[i].Id) == null)
-                {
-                    return false;
-                }
-            }
-
-            return true;
-        }
-
-        private static StoryEndingConfig GetStoryEndingConfig(int affinity, int fun, int violence)
-        {
-            List<StoryEndingConfig> endingConfigs = StoryEndingConfigCategory.Instance.DataList;
-            for (int i = 0; i < endingConfigs.Count; i++)
-            {
-                StoryEndingConfig config = endingConfigs[i];
-                if (affinity < config.AffinityMin || affinity > config.AffinityMax)
-                {
-                    continue;
-                }
-                if (fun < config.FunMin || fun > config.FunMax)
-                {
-                    continue;
-                }
-                if (violence < config.ViolenceMin || violence > config.ViolenceMax)
-                {
-                    continue;
-                }
-
-                return config;
-            }
-
-            return endingConfigs.Count > 0 ? endingConfigs[endingConfigs.Count - 1] : null;
         }
 
         private static void RefreshEndingRewards(this ES_Story self, string reward)
@@ -487,15 +437,32 @@ namespace ET.Client
             rewardItem.Refresh(self.ShowEndingRewardItems[index], ItemOperateEnum.None);
         }
 
-        private static void OnStoryEndingReceive(this ES_Story self)
+        private static async ETTask OnStoryEndingReceive(this ES_Story self)
         {
-            FlyTipComponent flyTipComponent = FlyTipComponent.Instance;
-            if (flyTipComponent == null)
+            TaskComponentC taskComponent = self.Root().GetComponent<TaskComponentC>();
+            if (taskComponent.StoryEndingRewardId != 0)
             {
                 return;
             }
 
-            flyTipComponent.ShowFlyTip("结局奖励领取暂未开放");
+            int errorCode = await TaskClientNetHelper.StoryEndingRewardRequest(self.Root());
+            if (self.IsDisposed)
+            {
+                return;
+            }
+            if (errorCode == ErrorCode.ERR_AlreadyReceived)
+            {
+                self.RefreshStoryEndingButton();
+                return;
+            }
+            if (errorCode != ErrorCode.ERR_Success)
+            {
+                HintHelp.ShowErrorHint(self.Root(), errorCode);
+                return;
+            }
+
+            self.RefreshStoryEndingButton();
+            HintHelp.ShowHint(self.Root(), "领取成功");
         }
 
         private static void RefreshStoryReply(this ES_Story self, StoryInfo storyInfo)

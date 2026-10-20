@@ -16,5 +16,10 @@ namespace ET.Server
         public List<int> RoleComoleteTaskList { get; set; } = new List<int>();
 
         public List<StoryInfo> StoryInfoList = new();
+
+        /// <summary>
+        /// 已领取奖励的结局Id，0表示未领取
+        /// </summary>
+        public int StoryEndingRewardId { get; set; }
     }
 }

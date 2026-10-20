@@ -17,6 +17,7 @@ namespace ET.Client
             taskComponentC.StoryInfoList = response.StoryInfoList;
             taskComponentC.ReceiveHuoYueIds = response.ReceiveHuoYueIds;
             taskComponentC.ReceiveGrowUpRewardIds = response.ReceiveGrowUpRewardIds;
+            taskComponentC.StoryEndingRewardId = response.StoryEndingRewardId;
             return response.Error;
         }
 
@@ -38,6 +39,18 @@ namespace ET.Client
             if (response.Error == ErrorCode.ERR_Success)
             {
                 root.GetComponent<TaskComponentC>().StoryInfoList = response.StoryInfoList;
+            }
+
+            return response.Error;
+        }
+
+        public static async ETTask<int> StoryEndingRewardRequest(Scene root)
+        {
+            C2M_StoryEndingRewardRequest request = C2M_StoryEndingRewardRequest.Create();
+            M2C_StoryEndingRewardResponse response = (M2C_StoryEndingRewardResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            if (response.StoryEndingId != 0)
+            {
+                root.GetComponent<TaskComponentC>().StoryEndingRewardId = response.StoryEndingId;
             }
 
             return response.Error;

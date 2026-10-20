@@ -21,6 +21,7 @@ namespace ET.Server
             response.RoleTaskList .AddRange(taskComponent.RoleTaskList); 
             response.RoleComoleteTaskList .AddRange(taskComponent.RoleComoleteTaskList); 
             response.StoryInfoList.AddRange(taskComponent.StoryInfoList);
+            response.StoryEndingRewardId = taskComponent.StoryEndingRewardId;
             response.ReceiveHuoYueIds .AddRange(taskComponent.ReceiveHuoYueIds); 
             response.ReceiveGrowUpRewardIds.AddRange(taskComponent.ReceiveGrowUpRewardIds); 
             Console.WriteLine($"C2M_TaskInitRequest:  {taskComponent.RoleTaskList.Count}");

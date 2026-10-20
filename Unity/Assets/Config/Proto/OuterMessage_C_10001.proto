@@ -2249,6 +2249,7 @@ message M2C_TaskInitResponse    // ILocationResponse
 	repeated StoryInfo StoryInfoList = 3;
 	repeated int32 ReceiveHuoYueIds = 4;
 	repeated int32 ReceiveGrowUpRewardIds = 5;
+	int32 StoryEndingRewardId = 6;
 }
 
 //任务通知【目前用于对话完成】
@@ -7932,4 +7933,19 @@ message M2C_StoryChoiceResponse // ILocationResponse
 	int32 Error = 91;
 	string Message = 92;
 	repeated StoryInfo StoryInfoList = 1;
+}
+
+//剧情结局奖励
+//ResponseType M2C_StoryEndingRewardResponse
+message C2M_StoryEndingRewardRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+}
+
+message M2C_StoryEndingRewardResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+	int32 StoryEndingId = 1;
 }
