@@ -294,7 +294,6 @@ namespace ET.Client
             }
             self.RefreshStoryItems();
             self.RefreshStoryReply(storyInfo);
-            self.E_ConfirmChoiceButton.interactable = false;
         }
 
         private static void RefreshStoryReply(this ES_Story self, StoryInfo storyInfo)
@@ -304,6 +303,7 @@ namespace ET.Client
 
             self.E_StoryReplyText.text = showReply ? choiceConfig.ReplyText : string.Empty;
             self.E_StoryReplyText.gameObject.SetActive(showReply);
+            self.E_StoryChoiceListScrollRect.gameObject.SetActive(!showReply);
         }
 
         private static bool IsChapterUnlocked(this ES_Story self, StoryChapterConfig config)
@@ -377,6 +377,7 @@ namespace ET.Client
             self.E_StoryDesText.text = string.Empty;
             self.E_StoryReplyText.text = string.Empty;
             self.E_StoryReplyText.gameObject.SetActive(false);
+            self.E_StoryItemsScrollRect.gameObject.SetActive(true);
             self.RefreshStoryItems();
             self.RefreshChoiceItems();
             self.E_ConfirmChoiceButton.interactable = false;
