@@ -161,10 +161,10 @@ namespace ET.Client
                 throw new RpcException(response.Error, $"Rpc error: {request}, response: {response}");
             }
             
-            if (response.Error != 0)
-            {
-                EventSystem.Instance.Publish(self.Root(), new CommonHintError() { ErrorValue = response.Error });
-            }
+            // if (response.Error != 0)
+            // {
+            //     EventSystem.Instance.Publish(self.Root(), new CommonHintError() { ErrorValue = response.Error });
+            // }
             
             if (response.Error == ErrorCode.ERR_SessionDisconnect)
             {
