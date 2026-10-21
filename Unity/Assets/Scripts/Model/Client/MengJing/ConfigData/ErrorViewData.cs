@@ -212,6 +212,7 @@ namespace ET.Client
             { ErrorCode.ERR_LongYinNotActivePreId, "未激活前置龙印" },
             { ErrorCode.ERR_LongYinMaxLevel, "龙印已达最大等级" },
             { ErrorCode.ERR_LongYinNotKillBoss, "未击杀解锁龙印所需的Boss" },
+            { ErrorCode.ERR_LongYinPointNotEnough, "龙印点不足" },
         };
     }
 }

@@ -74,6 +74,14 @@ namespace ET.Client
             return self.GetLongYinLevel(longYinId) > 0;
         }
 
+        /// <summary>
+        /// 剩余龙印点，由玩家等级和已激活龙印等级换算，不单独存变量
+        /// </summary>
+        public static int GetLongYinPointLeft(this SkillSetComponentC self, int playerLv)
+        {
+            return LongYinHelper.GetPointLeft(self.LongYinList, playerLv);
+        }
+
         public static int HaveSameTianFu(this SkillSetComponentC self, int tianfuId)
         {
             TalentConfig talentConfig = TalentConfigCategory.Instance.Get(tianfuId);

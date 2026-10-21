@@ -141,6 +141,14 @@ namespace ET.Server
         }
 
         /// <summary>
+        /// 剩余龙印点，由玩家等级和已激活龙印等级换算，不单独存变量
+        /// </summary>
+        public static int GetLongYinPointLeft(this SkillSetComponentS self, int playerLv)
+        {
+            return LongYinHelper.GetPointLeft(self.LongYinList, playerLv);
+        }
+
+        /// <summary>
         /// 记录龙印等级，等级小于等于0时移除记录
         /// </summary>
         public static void SetLongYinLevel(this SkillSetComponentS self, int longYinId, int level)
@@ -187,6 +195,12 @@ namespace ET.Server
             if (curLevel >= longYinConfig.Lv)
             {
                 return ErrorCode.ERR_LongYinMaxLevel;
+            }
+
+            //激活/升级各消耗1点龙印点，龙印点由玩家等级换算
+            if (!LongYinHelper.CheckPointEnough(self.LongYinList, userInfoComponent.UserInfo.Lv))
+            {
+                return ErrorCode.ERR_LongYinPointNotEnough;
             }
 
             //前置龙印只需激活其中一个

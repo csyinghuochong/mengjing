@@ -51,6 +51,8 @@ namespace ET.Client
             int occ = self.Root().GetComponent<UserInfoComponentC>().UserInfo.Occ;
             SkillSetComponentC skillSetComponent = self.Root().GetComponent<SkillSetComponentC>();
 
+            self.RefreshLongYinPoint(skillSetComponent);
+
             foreach (ES_SkillLongYinItem item in self.Items)
             {
                 item.Refresh(occ, self.SelectLongYinId);
@@ -96,6 +98,23 @@ namespace ET.Client
             }
 
             self.SelectLongYinItem(selectItem);
+        }
+
+        /// <summary>
+        /// 刷新龙印点显示：龙印点不存变量，由玩家等级和已激活龙印等级实时换算
+        /// </summary>
+        private static void RefreshLongYinPoint(this ES_SkillLongYin self, SkillSetComponentC skillSetComponent)
+        {
+            int playerLv = self.Root().GetComponent<UserInfoComponentC>().UserInfo.Lv;
+
+            int maxPoint = LongYinHelper.GetPointMax(playerLv);
+            int leftPoint = skillSetComponent.GetLongYinPointLeft(playerLv);
+            if (leftPoint < 0)
+            {
+                leftPoint = 0;
+            }
+
+            self.E_LongYinPointText.text = $"龙印点：{leftPoint}";
         }
 
         /// <summary>
