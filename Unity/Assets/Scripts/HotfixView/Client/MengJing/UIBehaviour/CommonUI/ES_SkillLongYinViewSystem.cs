@@ -153,7 +153,7 @@ namespace ET.Client
 
         private static void ShowLongYinInfo(this ES_SkillLongYin self, ES_SkillLongYinItem item)
         {
-            LongYinConfig longYinConfig = LongYinHelper.GetConfig(item.LongYinId);
+            LongYinConfig longYinConfig = LongYinConfigCategory.Instance.GetOrDefault(item.LongYinId);
             if (longYinConfig == null)
             {
                 self.EG_LongYinRectTransform.gameObject.SetActive(false);

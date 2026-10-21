@@ -9,10 +9,5 @@ namespace ET
         {
             return occ * 10000 + index;
         }
-
-        public static LongYinConfig GetConfig(int longYinId)
-        {
-            return LongYinConfigCategory.Instance.GetOrDefault(longYinId);
-        }
     }
 }

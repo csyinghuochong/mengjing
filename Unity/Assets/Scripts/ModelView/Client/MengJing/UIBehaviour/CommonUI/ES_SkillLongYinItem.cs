@@ -8,7 +8,7 @@ namespace ET.Client
     {
         public Transform uiTransform;
 
-        /// <summary>
+        /// <summary> 
         /// 预制体节点编号(如1001)
         /// </summary>
         public int Index;
@@ -20,8 +20,7 @@ namespace ET.Client
 
         public bool Visible;
 
-        public GameObject ImageActive;
-        public GameObject ImageSelect;
+        public GameObject ImageKuang;
         public Image ImageIcon;
         public Button Button;
     }
