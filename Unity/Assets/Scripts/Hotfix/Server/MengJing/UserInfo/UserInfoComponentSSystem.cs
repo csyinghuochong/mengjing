@@ -897,6 +897,19 @@ namespace ET.Server
             return 0;
         }
 
+        /// <summary>
+        /// 是否击杀过指定Boss
+        /// </summary>
+        public static bool HaveKillBoss(this UserInfoComponentS self, int bossId)
+        {
+            if (self.UserInfo.DefeatedBossIds.Contains(bossId))
+            {
+                return true;
+            }
+
+            return self.GetMonsterKillNumber(bossId) > 0;
+        }
+
         public static void OnAddRevive(this UserInfoComponentS self, int monsterId, long reviveTime)
         {
             bool have = false;
@@ -1307,7 +1320,8 @@ namespace ET.Server
             }
 
             // 纪录击败的Boss
-            if (beKill.IsBoss() && ConfigData.DefeatedBossIds.ContainsKey(beKill.ConfigId))
+            // if (beKill.IsBoss() && ConfigData.DefeatedBossIds.ContainsKey(beKill.ConfigId))
+            if (beKill.IsBoss())
             {
                 if (!self.UserInfo.DefeatedBossIds.Contains(beKill.ConfigId))
                 {

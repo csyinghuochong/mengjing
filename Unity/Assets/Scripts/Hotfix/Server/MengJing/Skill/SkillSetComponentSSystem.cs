@@ -177,7 +177,8 @@ namespace ET.Server
             }
 
             Unit unit = self.GetParent<Unit>();
-            if (longYinConfig.Occ != unit.GetComponent<UserInfoComponentS>().UserInfo.Occ)
+            UserInfoComponentS userInfoComponent = unit.GetComponent<UserInfoComponentS>();
+            if (longYinConfig.Occ != userInfoComponent.UserInfo.Occ)
             {
                 return ErrorCode.ERR_ModifyData;
             }
@@ -210,6 +211,21 @@ namespace ET.Server
             if (havePreId && !preIdActivated)
             {
                 return ErrorCode.ERR_LongYinNotActivePreId;
+            }
+
+            //解锁需要击杀过指定Boss
+            for (int i = 0; i < longYinConfig.NeedKillBoss.Length; i++)
+            {
+                int bossId = longYinConfig.NeedKillBoss[i];
+                if (bossId == 0)
+                {
+                    continue;
+                }
+
+                if (!userInfoComponent.HaveKillBoss(bossId))
+                {
+                    return ErrorCode.ERR_LongYinNotKillBoss;
+                }
             }
 
             self.SetLongYinLevel(longYinId, curLevel + 1);

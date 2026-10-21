@@ -209,8 +209,6 @@ namespace ET.Client
             { ErrorCode.ERR_PetMelee_PetNumMax, "宠物数量达到上限" },
             { ErrorCode.ERR_PetMelee_MainPetNumMax, "主战宠物数量达到上限" },
             { ErrorCode.ERR_SingleHappy_Fresh, "当空位小于10个时 无法刷新当前掉落" },
-            { ErrorCode.ERR_LongYinNotActivePreId, "未激活前置龙印" },
-            { ErrorCode.ERR_LongYinMaxLevel, "龙印已达最大等级" },
             
         };
     }

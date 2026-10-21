@@ -58,6 +58,7 @@ namespace ET
         public const int ERR_SingleHappy_Fresh = 200043;
         public const int ERR_LongYinNotActivePreId = 200044;                        //未激活前置龙印
         public const int ERR_LongYinMaxLevel = 200045;                              //龙印已达最大等级
+        public const int ERR_LongYinNotKillBoss = 200046;                           //未击杀解锁龙印所需的Boss
 
         //登录
         public const int ERR_AccountAlreadyRegister = 200101;                       //表示账号已经被注册
