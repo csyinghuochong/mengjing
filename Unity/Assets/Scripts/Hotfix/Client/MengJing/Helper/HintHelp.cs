@@ -1,4 +1,4 @@
-﻿namespace ET.Client
+namespace ET.Client
 {
     public static class HintHelp
     {
@@ -6,11 +6,15 @@
         {
             if (code == 0)
             {
-                return "";
+                return string.Empty;
             }
 
-            string hintStr = code.ToString();
-            ErrorViewData.ErrorHints.TryGetValue(code, out hintStr);
+            //命中时零分配，只有未配置的错误码才回退成数字字符串
+            if (!ErrorViewData.ErrorHints.TryGetValue(code, out string hintStr) || string.IsNullOrEmpty(hintStr))
+            {
+                hintStr = code.ToString();
+            }
+
             return hintStr;
         }
 
@@ -20,17 +24,17 @@
             {
                 return;
             }
-            if (code == ErrorCode.ERR_CanNotMove_NetWait 
+
+            //移动相关错误不弹提示
+            if (code == ErrorCode.ERR_CanNotMove_NetWait
                 || code == ErrorCode.ERR_CanNotMove_Rigidity
                 || code == ErrorCode.ERR_CanNotMove_Speed
                 || code == ErrorCode.ERR_CanNotUseSkill_NetWait)
             {
-                return ;
+                return;
             }
 
-            string hintStr = code.ToString();
-            ErrorViewData.ErrorHints.TryGetValue(code, out hintStr);
-            EventSystem.Instance.Publish(root, new ShowFlyTip() { Type = 1, Str = string.IsNullOrEmpty(hintStr) ? code.ToString() : hintStr });
+            ShowHint(root, GetErrorHint(code), 1);
         }
 
         public static void ShowHint(Scene root, string str, int type = 0)
