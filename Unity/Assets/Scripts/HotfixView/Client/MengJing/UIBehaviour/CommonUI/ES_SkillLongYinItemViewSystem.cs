@@ -54,10 +54,7 @@ namespace ET.Client
             bool active = skillSetComponent.GetLongYinLevel(self.LongYinId) > 0;
 
             //选中显示选择框
-            if (self.ImageKuang != null)
-            {
-                self.ImageKuang.SetActive(selectId == self.LongYinId);
-            }
+            self.ImageKuang.SetActive(selectId == self.LongYinId);
 
             //前置激活后显示连线
             for (int i = 0; i < longYinConfig.PreId.Length; i++)

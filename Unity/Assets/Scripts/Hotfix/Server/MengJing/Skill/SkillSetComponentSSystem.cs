@@ -188,13 +188,28 @@ namespace ET.Server
                 return ErrorCode.ERR_LongYinMaxLevel;
             }
 
+            //前置龙印只需激活其中一个
+            bool havePreId = false;
+            bool preIdActivated = false;
             for (int i = 0; i < longYinConfig.PreId.Length; i++)
             {
                 int preId = longYinConfig.PreId[i];
-                if (preId != 0 && !self.HaveLongYin(preId))
+                if (preId == 0)
                 {
-                    return ErrorCode.ERR_LongYinNotActivePreId;
+                    continue;
                 }
+
+                havePreId = true;
+                if (self.HaveLongYin(preId))
+                {
+                    preIdActivated = true;
+                    break;
+                }
+            }
+
+            if (havePreId && !preIdActivated)
+            {
+                return ErrorCode.ERR_LongYinNotActivePreId;
             }
 
             self.SetLongYinLevel(longYinId, curLevel + 1);
