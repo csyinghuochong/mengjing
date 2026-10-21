@@ -180,6 +180,26 @@ namespace ET.Client
 		        return this.m_es_skillAugment;
 	        }
         }
+        
+        public ES_SkillLongYin ES_SkillLongYin
+        {
+	        get
+	        {
+		        ES_SkillLongYin es = m_es_skillLongYin;
+		        if (es == null)
+		        {
+			        string path = "Assets/Bundles/UI/Common/ES_SkillLongYin.prefab";
+			        GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
+			        GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewNodeRectTransform);
+			        go.SetActive(true);
+			        this.AssetList.Add(path);
+			        this.m_es_skillLongYin = this.AddChild<ES_SkillLongYin, Transform>(go.transform);
+			        go.SetActive(false);
+		        }
+
+		        return this.m_es_skillLongYin;
+	        }
+        }
 		
 		public void DestroyWidget()
 		{
@@ -192,6 +212,7 @@ namespace ET.Client
 			this.m_es_skillmake = null;
 			this.m_es_skilllifeshield = null;
 			this.m_es_skillAugment = null;
+			this.m_es_skillLongYin = null;
 			this.uiTransform = null;
 			
 			ResourcesLoaderComponent resourcesLoaderComponent = this.Root().GetComponent<ResourcesLoaderComponent>();
@@ -212,6 +233,7 @@ namespace ET.Client
 		private EntityRef<ES_SkillMake> m_es_skillmake = null;
 		private EntityRef<ES_SkillLifeShield> m_es_skilllifeshield = null;
 		private EntityRef<ES_SkillAugment> m_es_skillAugment = null;
+		private EntityRef<ES_SkillLongYin> m_es_skillLongYin = null;
 		public Transform uiTransform = null;
 	}
 }

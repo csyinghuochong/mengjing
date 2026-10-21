@@ -68,6 +68,7 @@ namespace ET.Client
     [FriendOf(typeof(ES_SkillTianFu))]
     [FriendOf(typeof(ES_SkillLifeShield))]
     [FriendOf(typeof(ES_SkillAugment))]
+    [FriendOf(typeof(ES_SkillLongYin))]
     [FriendOf(typeof(DlgSkill))]
     public static class DlgSkillSystem
     {
@@ -119,6 +120,9 @@ namespace ET.Client
                 case 5:
                     self.View.ES_SkillAugment.uiTransform.gameObject.SetActive(true);
 					self.View.ES_SkillAugment.RefreshSkillAugmentItems();
+                    break;
+                case 6:
+                    self.View.ES_SkillLongYin.uiTransform.gameObject.SetActive(true);
                     break;
             }
         }
