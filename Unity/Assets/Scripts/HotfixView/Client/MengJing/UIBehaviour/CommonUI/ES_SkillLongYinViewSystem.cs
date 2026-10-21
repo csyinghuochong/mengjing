@@ -180,6 +180,43 @@ namespace ET.Client
 
             self.E_LongYinLevelText.text = $"龙印等级：{curLevel}/{maxLevel}";
 
+            //未激活时显示解锁需要击杀的Boss，没有则隐藏
+            string needKillBossNames = string.Empty;
+            if (curLevel <= 0)
+            {
+                UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
+                for (int i = 0; i < longYinConfig.NeedKillBoss.Length; i++)
+                {
+                    int bossId = longYinConfig.NeedKillBoss[i];
+                    if (bossId == 0)
+                    {
+                        continue;
+                    }
+
+                    //击杀过的Boss不再提示
+                    if (userInfoComponent.UserInfo.DefeatedBossIds.Contains(bossId) || userInfoComponent.GetMonsterKillNumber(bossId) > 0)
+                    {
+                        continue;
+                    }
+
+                    MonsterConfig monsterConfig = MonsterConfigCategory.Instance.GetOrDefault(bossId);
+                    string bossName = monsterConfig == null ? bossId.ToString() : monsterConfig.MonsterName;
+
+                    if (needKillBossNames.Length > 0)
+                    {
+                        needKillBossNames += "、";
+                    }
+
+                    needKillBossNames += bossName;
+                }
+            }
+
+            self.E_NeedKillBossText.gameObject.SetActive(needKillBossNames.Length > 0);
+            if (needKillBossNames.Length > 0)
+            {
+                self.E_NeedKillBossText.text = $"需击杀：{needKillBossNames}";
+            }
+
             string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.RoleSkillIcon, longYinConfig.Icon.ToString());
             Sprite sprite = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
             self.E_LongYinIconImage.sprite = sprite;
@@ -206,11 +243,14 @@ namespace ET.Client
             }
 
             int error = await SkillNetHelper.LongYinActiveRequest(self.Root(), self.SelectLongYinId);
-            if (error == ErrorCode.ERR_Success)
+            if (error != ErrorCode.ERR_Success)
             {
-                FlyTipComponent.Instance.ShowFlyTip("激活成功");
-                self.RefreshLongYinList();
+                HintHelp.ShowErrorHint(self.Root(), error);
+                return;
             }
+
+            FlyTipComponent.Instance.ShowFlyTip("激活成功");
+            self.RefreshLongYinList();
         }
     }
 }

@@ -113,6 +113,23 @@ namespace ET.Client
      		}
      	}
 
+		public UnityEngine.UI.Text E_NeedKillBossText
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_NeedKillBossText == null )
+     			{
+		    		this.m_E_NeedKillBossText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"EG_LongYin/E_NeedKillBoss");
+     			}
+     			return this.m_E_NeedKillBossText;
+     		}
+     	}
+
 		public UnityEngine.UI.Button E_ActiveLongYinButton
      	{
      		get
@@ -280,14 +297,13 @@ namespace ET.Client
 
 		public void DestroyWidget()
 		{
-			this.Items.Clear();
-			this.SelectLongYinId = 0;
 			this.m_EG_LongYinContentRectTransform = null;
 			this.m_EG_LongYinRectTransform = null;
 			this.m_E_LongYinIconImage = null;
 			this.m_E_LongYinNameText = null;
 			this.m_E_LongYinDescText = null;
 			this.m_E_LongYinLevelText = null;
+			this.m_E_NeedKillBossText = null;
 			this.m_E_ActiveLongYinButton = null;
 			this.m_E_ActiveLongYinImage = null;
 			this.m_E_ReSetTianFuButton = null;
@@ -306,6 +322,7 @@ namespace ET.Client
 		private UnityEngine.UI.Text m_E_LongYinNameText = null;
 		private UnityEngine.UI.Text m_E_LongYinDescText = null;
 		private UnityEngine.UI.Text m_E_LongYinLevelText = null;
+		private UnityEngine.UI.Text m_E_NeedKillBossText = null;
 		private UnityEngine.UI.Button m_E_ActiveLongYinButton = null;
 		private UnityEngine.UI.Image m_E_ActiveLongYinImage = null;
 		private UnityEngine.UI.Button m_E_ReSetTianFuButton = null;
