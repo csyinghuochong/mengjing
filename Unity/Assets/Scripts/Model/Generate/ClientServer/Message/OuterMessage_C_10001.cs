@@ -34660,6 +34660,70 @@ namespace ET
         }
     }
 
+    // 龙印激活
+    [MemoryPackable]
+    [Message(OuterMessage.C2M_LongYinActiveRequest)]
+    [ResponseType(nameof(M2C_LongYinActiveResponse))]
+    public partial class C2M_LongYinActiveRequest : MessageObject, ILocationRequest
+    {
+        public static C2M_LongYinActiveRequest Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(C2M_LongYinActiveRequest), isFromPool) as C2M_LongYinActiveRequest;
+        }
+
+        [MemoryPackOrder(89)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(0)]
+        public int LongYinId { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.LongYinId = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
+    [Message(OuterMessage.M2C_LongYinActiveResponse)]
+    public partial class M2C_LongYinActiveResponse : MessageObject, ILocationResponse
+    {
+        public static M2C_LongYinActiveResponse Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(M2C_LongYinActiveResponse), isFromPool) as M2C_LongYinActiveResponse;
+        }
+
+        [MemoryPackOrder(89)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(90)]
+        public int Error { get; set; }
+
+        [MemoryPackOrder(91)]
+        public string Message { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.Error = default;
+            this.Message = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
     public static class OuterMessage
     {
         public const ushort HttpGetRouterResponse = 10002;
@@ -35581,5 +35645,7 @@ namespace ET
         public const ushort M2C_StoryChoiceResponse = 10918;
         public const ushort C2M_StoryEndingRewardRequest = 10919;
         public const ushort M2C_StoryEndingRewardResponse = 10920;
+        public const ushort C2M_LongYinActiveRequest = 10921;
+        public const ushort M2C_LongYinActiveResponse = 10922;
     }
 }

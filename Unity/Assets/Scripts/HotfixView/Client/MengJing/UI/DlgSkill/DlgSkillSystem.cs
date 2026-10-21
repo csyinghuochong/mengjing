@@ -123,6 +123,7 @@ namespace ET.Client
                     break;
                 case 6:
                     self.View.ES_SkillLongYin.uiTransform.gameObject.SetActive(true);
+                    self.View.ES_SkillLongYin.RefreshLongYinList();
                     break;
             }
         }
@@ -183,6 +184,11 @@ namespace ET.Client
             if (self.View.ES_SkillAugment.uiTransform.gameObject.activeSelf)
             {
                 self.View.ES_SkillAugment.RefreshSkillAugmentItems();
+            }
+
+            if (self.View.ES_SkillLongYin.uiTransform.gameObject.activeSelf)
+            {
+                self.View.ES_SkillLongYin.RefreshLongYinList();
             }
         }
 

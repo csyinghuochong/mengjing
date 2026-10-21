@@ -7950,3 +7950,18 @@ message M2C_StoryEndingRewardResponse // ILocationResponse
 	string Message = 92;
 	int32 StoryEndingId = 1;
 }
+
+//龙印激活
+//ResponseType M2C_LongYinActiveResponse
+message C2M_LongYinActiveRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int32 LongYinId = 1;
+}
+
+message M2C_LongYinActiveResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}

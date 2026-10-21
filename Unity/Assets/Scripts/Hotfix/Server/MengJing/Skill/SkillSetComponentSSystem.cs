@@ -165,6 +165,43 @@ namespace ET.Server
             longYin.Value = level;
         }
 
+        /// <summary>
+        /// 校验并激活/升级龙印，只记录数据，属性效果暂不处理
+        /// </summary>
+        public static int OnActiveLongYin(this SkillSetComponentS self, int longYinId)
+        {
+            LongYinConfig longYinConfig = LongYinConfigCategory.Instance.GetOrDefault(longYinId);
+            if (longYinConfig == null)
+            {
+                return ErrorCode.ERR_ModifyData;
+            }
+
+            Unit unit = self.GetParent<Unit>();
+            if (longYinConfig.Occ != unit.GetComponent<UserInfoComponentS>().UserInfo.Occ)
+            {
+                return ErrorCode.ERR_ModifyData;
+            }
+
+            int curLevel = self.GetLongYinLevel(longYinId);
+            if (curLevel >= longYinConfig.Lv)
+            {
+                return ErrorCode.ERR_LongYinMaxLevel;
+            }
+
+            for (int i = 0; i < longYinConfig.PreId.Length; i++)
+            {
+                int preId = longYinConfig.PreId[i];
+                if (preId != 0 && !self.HaveLongYin(preId))
+                {
+                    return ErrorCode.ERR_LongYinNotActivePreId;
+                }
+            }
+
+            self.SetLongYinLevel(longYinId, curLevel + 1);
+            self.UpdateSkillSet();
+            return ErrorCode.ERR_Success;
+        }
+
         public static int HaveSameTianFu(this SkillSetComponentS self, int tianfuId)
         {
             int tifuId = 0;

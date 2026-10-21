@@ -1,4 +1,5 @@
 ﻿
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 namespace ET.Client
@@ -7,56 +8,8 @@ namespace ET.Client
 	[EnableMethod]
 	public  class ES_SkillLongYin : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy 
 	{
-		public UnityEngine.UI.ToggleGroup E_TitleSetToggleGroup
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_TitleSetToggleGroup == null )
-     			{
-		    		this.m_E_TitleSetToggleGroup = UIFindHelper.FindDeepChild<UnityEngine.UI.ToggleGroup>(this.uiTransform.gameObject,"Left/E_TitleSet");
-     			}
-     			return this.m_E_TitleSetToggleGroup;
-     		}
-     	}
-
-		public UnityEngine.UI.Toggle E_Btn_TianFu_1Toggle
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_Btn_TianFu_1Toggle == null )
-     			{
-		    		this.m_E_Btn_TianFu_1Toggle = UIFindHelper.FindDeepChild<UnityEngine.UI.Toggle>(this.uiTransform.gameObject,"Left/E_TitleSet/E_Btn_TianFu_1");
-     			}
-     			return this.m_E_Btn_TianFu_1Toggle;
-     		}
-     	}
-
-		public UnityEngine.UI.Toggle E_Btn_TianFu_2Toggle
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_Btn_TianFu_2Toggle == null )
-     			{
-		    		this.m_E_Btn_TianFu_2Toggle = UIFindHelper.FindDeepChild<UnityEngine.UI.Toggle>(this.uiTransform.gameObject,"Left/E_TitleSet/E_Btn_TianFu_2");
-     			}
-     			return this.m_E_Btn_TianFu_2Toggle;
-     		}
-     	}
+		public List<EntityRef<ES_SkillLongYinItem>> Items = new();
+		public int SelectLongYinId;
 
 		public UnityEngine.RectTransform EG_LongYinContentRectTransform
      	{
@@ -327,9 +280,8 @@ namespace ET.Client
 
 		public void DestroyWidget()
 		{
-			this.m_E_TitleSetToggleGroup = null;
-			this.m_E_Btn_TianFu_1Toggle = null;
-			this.m_E_Btn_TianFu_2Toggle = null;
+			this.Items.Clear();
+			this.SelectLongYinId = 0;
 			this.m_EG_LongYinContentRectTransform = null;
 			this.m_EG_LongYinRectTransform = null;
 			this.m_E_LongYinIconImage = null;
@@ -348,9 +300,6 @@ namespace ET.Client
 			this.uiTransform = null;
 		}
 
-		private UnityEngine.UI.ToggleGroup m_E_TitleSetToggleGroup = null;
-		private UnityEngine.UI.Toggle m_E_Btn_TianFu_1Toggle = null;
-		private UnityEngine.UI.Toggle m_E_Btn_TianFu_2Toggle = null;
 		private UnityEngine.RectTransform m_EG_LongYinContentRectTransform = null;
 		private UnityEngine.RectTransform m_EG_LongYinRectTransform = null;
 		private UnityEngine.UI.Image m_E_LongYinIconImage = null;
