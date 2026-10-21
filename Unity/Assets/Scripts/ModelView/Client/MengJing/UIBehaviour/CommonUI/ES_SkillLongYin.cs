@@ -164,6 +164,23 @@ namespace ET.Client
      		}
      	}
 
+		public UnityEngine.UI.Text E_LongYinPointText
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_LongYinPointText == null )
+     			{
+		    		this.m_E_LongYinPointText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"EG_LongYin/E_LongYinPoint");
+     			}
+     			return this.m_E_LongYinPointText;
+     		}
+     	}
+
 		public UnityEngine.UI.Button E_ReSetTianFuButton
      	{
      		get
@@ -306,6 +323,7 @@ namespace ET.Client
 			this.m_E_NeedKillBossText = null;
 			this.m_E_ActiveLongYinButton = null;
 			this.m_E_ActiveLongYinImage = null;
+			this.m_E_LongYinPointText = null;
 			this.m_E_ReSetTianFuButton = null;
 			this.m_E_ReSetTianFuImage = null;
 			this.m_EG_LongYinNumRectTransform = null;
@@ -325,6 +343,7 @@ namespace ET.Client
 		private UnityEngine.UI.Text m_E_NeedKillBossText = null;
 		private UnityEngine.UI.Button m_E_ActiveLongYinButton = null;
 		private UnityEngine.UI.Image m_E_ActiveLongYinImage = null;
+		private UnityEngine.UI.Text m_E_LongYinPointText = null;
 		private UnityEngine.UI.Button m_E_ReSetTianFuButton = null;
 		private UnityEngine.UI.Image m_E_ReSetTianFuImage = null;
 		private UnityEngine.RectTransform m_EG_LongYinNumRectTransform = null;
