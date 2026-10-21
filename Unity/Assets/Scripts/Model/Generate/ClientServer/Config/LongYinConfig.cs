@@ -27,7 +27,6 @@ namespace ET
             Lv = _buf.ReadInt();
             {int __n0 = _buf.ReadSize(); PreId = new int[__n0];for(var __index0 = 0 ; __index0 < __n0 ; __index0++) { int __e0;__e0 = _buf.ReadInt(); PreId[__index0] = __e0;}}
             {int __n0 = _buf.ReadSize(); NeedKillBoss = new int[__n0];for(var __index0 = 0 ; __index0 < __n0 ; __index0++) { int __e0;__e0 = _buf.ReadInt(); NeedKillBoss[__index0] = __e0;}}
-            NeedUseNumber = _buf.ReadInt();
             Icon = _buf.ReadInt();
             Des = _buf.ReadString();
             AddPropreListStr = _buf.ReadString();
@@ -71,11 +70,6 @@ namespace ET
         public int[] NeedKillBoss;
 
         /// <summary>
-        /// 需要当前类型已使用天赋点
-        /// </summary>
-        public int NeedUseNumber;
-
-        /// <summary>
         /// Icon
         /// </summary>
         public int Icon;
@@ -105,7 +99,6 @@ namespace ET
             
             
             
-            
         }
 
         public override string ToString()
@@ -117,7 +110,6 @@ namespace ET
             + "Lv:" + Lv + ","
             + "PreId:" + Luban.StringUtil.CollectionToString(PreId) + ","
             + "NeedKillBoss:" + Luban.StringUtil.CollectionToString(NeedKillBoss) + ","
-            + "NeedUseNumber:" + NeedUseNumber + ","
             + "Icon:" + Icon + ","
             + "Des:" + Des + ","
             + "AddPropreListStr:" + AddPropreListStr + ","
