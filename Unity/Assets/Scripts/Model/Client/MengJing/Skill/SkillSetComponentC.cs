@@ -12,6 +12,11 @@ namespace ET.Client
         public List<KeyValuePairInt> TianFuList2 { get; set; } = new(); //第二套天賦方案
 
         public List<KeyValuePairInt> TianFuAddition { get; set; } = new(); //附加天赋
+
+        /// <summary>
+        /// 已激活的龙印 记录龙印id->等级
+        /// </summary>
+        public List<KeyValuePairInt> LongYinList { get; set; } = new();
         
         /// <summary>
         /// 玩家携带的技能列表

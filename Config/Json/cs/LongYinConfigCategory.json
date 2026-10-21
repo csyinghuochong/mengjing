@@ -1,0 +1,1172 @@
+[
+  {
+    "Id": 11001,
+    "Name": "焚心",
+    "Occ": 1,
+    "Lv": 1,
+    "PreId": [],
+    "NeedUseNumber": 1,
+    "Icon": 10001,
+    "Des": "",
+    "AddPropreListStr": "RolePropertyAdd;100402;0.01#RolePropertyAdd;100402;0.02#RolePropertyAdd;100402;0.03"
+  },
+  {
+    "Id": 11002,
+    "Name": "焚心",
+    "Occ": 1,
+    "Lv": 1,
+    "PreId": [
+      11001
+    ],
+    "NeedUseNumber": 1,
+    "Icon": 10002,
+    "Des": "",
+    "AddPropreListStr": "SkillPropertyAdd;1110002,1110003,1110004,1110005,1110006;6;11100010"
+  },
+  {
+    "Id": 11003,
+    "Name": "焚心",
+    "Occ": 1,
+    "Lv": 1,
+    "PreId": [
+      11001
+    ],
+    "NeedUseNumber": 1,
+    "Icon": 10003,
+    "Des": "",
+    "AddPropreListStr": ""
+  },
+  {
+    "Id": 11004,
+    "Name": "焚心",
+    "Occ": 1,
+    "Lv": 1,
+    "PreId": [
+      11002,
+      11003
+    ],
+    "NeedUseNumber": 1,
+    "Icon": 10004,
+    "Des": "",
+    "AddPropreListStr": "SkillPropertyAdd;1110002,1110003,1110004,1110005,1110006;6;11100011"
+  },
+  {
+    "Id": 11005,
+    "Name": "焚心",
+    "Occ": 1,
+    "Lv": 1,
+    "PreId": [
+      11004
+    ],
+    "NeedUseNumber": 1,
+    "Icon": 10005,
+    "Des": "",
+    "AddPropreListStr": "SkillPropertyAdd;1110012,1110013,1110014,1110015,1110016;2;0.3#SkillPropertyAdd;1110012,1110013,1110014,1110015,1110016;2;0.6#SkillPropertyAdd;1110012,1110013,1110014,1110015,1110016;2;1"
+  },
+  {
+    "Id": 11006,
+    "Name": "焚心",
+    "Occ": 1,
+    "Lv": 1,
+    "PreId": [
+      11005
+    ],
+    "NeedUseNumber": 1,
+    "Icon": 10006,
+    "Des": "",
+    "AddPropreListStr": "SkillPropertyAdd;1110002,1110003,1110004,1110005,1110006;6;11100012#SkillPropertyAdd;1110002,1110003,1110004,1110005,1110006;6;11100013#SkillPropertyAdd;1110002,1110003,1110004,1110005,1110006;6;11100014"
+  },
+  {
+    "Id": 11007,
+    "Name": "焚心",
+    "Occ": 1,
+    "Lv": 1,
+    "PreId": [
+      11005
+    ],
+    "NeedUseNumber": 1,
+    "Icon": 10007,
+    "Des": "",
+    "AddPropreListStr": "SkillPropertyAdd;1110022,1110023,1110024,1110025,1110026;6;11100010"
+  },
+  {
+    "Id": 11008,
+    "Name": "焚心",
+    "Occ": 1,
+    "Lv": 1,
+    "PreId": [
+      11005
+    ],
+    "NeedUseNumber": 1,
+    "Icon": 10008,
+    "Des": "",
+    "AddPropreListStr": "RolePropertyAdd;223103;0.02#RolePropertyAdd;223103;0.04#RolePropertyAdd;223103;0.06#RolePropertyAdd;223103;0.08#RolePropertyAdd;223103;0.1"
+  },
+  {
+    "Id": 12001,
+    "Name": "焚心",
+    "Occ": 1,
+    "Lv": 1,
+    "PreId": [],
+    "NeedUseNumber": 1,
+    "Icon": 10009,
+    "Des": "",
+    "AddPropreListStr": "SkillIdAdd;1301002"
+  },
+  {
+    "Id": 12002,
+    "Name": "焚心",
+    "Occ": 1,
+    "Lv": 1,
+    "PreId": [
+      12001
+    ],
+    "NeedUseNumber": 1,
+    "Icon": 10010,
+    "Des": "",
+    "AddPropreListStr": "RolePropertyAdd;200303;0.01#RolePropertyAdd;200303;0.02#RolePropertyAdd;200303;0.03#RolePropertyAdd;200303;0.04#RolePropertyAdd;200303;0.05"
+  },
+  {
+    "Id": 12003,
+    "Name": "焚心",
+    "Occ": 1,
+    "Lv": 1,
+    "PreId": [
+      12001
+    ],
+    "NeedUseNumber": 1,
+    "Icon": 10011,
+    "Des": "",
+    "AddPropreListStr": "SkillIdAdd;1301003"
+  },
+  {
+    "Id": 12004,
+    "Name": "焚心",
+    "Occ": 1,
+    "Lv": 1,
+    "PreId": [
+      12002,
+      12003
+    ],
+    "NeedUseNumber": 1,
+    "Icon": 10012,
+    "Des": "",
+    "AddPropreListStr": "SkillPropertyAdd;1110022,1110023,1110024,1110025,1110026;2;0.08#SkillPropertyAdd;1110022,1110023,1110024,1110025,1110026;2;0.16#SkillPropertyAdd;1110022,1110023,1110024,1110025,1110026;2;0.24#SkillPropertyAdd;1110022,1110023,1110024,1110025,1110026;2;0.32#SkillPropertyAdd;1110022,1110023,1110024,1110025,1110026;2;0.4"
+  },
+  {
+    "Id": 12005,
+    "Name": "焚心",
+    "Occ": 1,
+    "Lv": 1,
+    "PreId": [
+      12004
+    ],
+    "NeedUseNumber": 1,
+    "Icon": 10013,
+    "Des": "",
+    "AddPropreListStr": "SkillIdAdd;1301006#SkillIdAdd;1301007#SkillIdAdd;1301008#SkillIdAdd;1301009#SkillIdAdd;1301010"
+  },
+  {
+    "Id": 12006,
+    "Name": "焚心",
+    "Occ": 1,
+    "Lv": 1,
+    "PreId": [
+      12005
+    ],
+    "NeedUseNumber": 1,
+    "Icon": 10014,
+    "Des": "",
+    "AddPropreListStr": "SkillPropertyAdd;1110032,1110033,1110034,1110035,1110036;4;2"
+  },
+  {
+    "Id": 12007,
+    "Name": "焚心",
+    "Occ": 1,
+    "Lv": 1,
+    "PreId": [
+      12005
+    ],
+    "NeedUseNumber": 1,
+    "Icon": 10015,
+    "Des": "",
+    "AddPropreListStr": "RolePropertyAdd;200103;0.01#RolePropertyAdd;200103;0.02#RolePropertyAdd;200103;0.03#RolePropertyAdd;200103;0.04#RolePropertyAdd;200103;0.05"
+  },
+  {
+    "Id": 12008,
+    "Name": "焚心",
+    "Occ": 1,
+    "Lv": 1,
+    "PreId": [
+      12005
+    ],
+    "NeedUseNumber": 1,
+    "Icon": 10016,
+    "Des": "",
+    "AddPropreListStr": "RolePropertyAdd;205603;0.1"
+  },
+  {
+    "Id": 13001,
+    "Name": "焚心",
+    "Occ": 1,
+    "Lv": 1,
+    "PreId": [],
+    "NeedUseNumber": 1,
+    "Icon": 10017,
+    "Des": "",
+    "AddPropreListStr": "RolePropertyAdd;203603;0.01#RolePropertyAdd;203603;0.02#RolePropertyAdd;203603;0.03#RolePropertyAdd;203603;0.04#RolePropertyAdd;203603;0.05"
+  },
+  {
+    "Id": 13002,
+    "Name": "焚心",
+    "Occ": 1,
+    "Lv": 1,
+    "PreId": [
+      13001
+    ],
+    "NeedUseNumber": 1,
+    "Icon": 10018,
+    "Des": "",
+    "AddPropreListStr": "SkillPropertyAdd;1110012,1110013,1110014,1110015,1110016;4;2"
+  },
+  {
+    "Id": 13003,
+    "Name": "焚心",
+    "Occ": 1,
+    "Lv": 1,
+    "PreId": [
+      13001
+    ],
+    "NeedUseNumber": 1,
+    "Icon": 10019,
+    "Des": "",
+    "AddPropreListStr": "SkillPropertyAdd;1110032,1110033,1110034,1110035,1110036;2;0.2#SkillPropertyAdd;1110032,1110033,1110034,1110035,1110036;2;0.4#SkillPropertyAdd;1110032,1110033,1110034,1110035,1110036;2;0.6#SkillPropertyAdd;1110032,1110033,1110034,1110035,1110036;2;0.8#SkillPropertyAdd;1110032,1110033,1110034,1110035,1110036;2;1"
+  },
+  {
+    "Id": 13004,
+    "Name": "焚心",
+    "Occ": 1,
+    "Lv": 1,
+    "PreId": [
+      13002,
+      13003
+    ],
+    "NeedUseNumber": 1,
+    "Icon": 10020,
+    "Des": "",
+    "AddPropreListStr": "RolePropertyAdd;204003;0.1"
+  },
+  {
+    "Id": 13005,
+    "Name": "焚心",
+    "Occ": 1,
+    "Lv": 1,
+    "PreId": [
+      13004
+    ],
+    "NeedUseNumber": 1,
+    "Icon": 10021,
+    "Des": "",
+    "AddPropreListStr": "SkillPropertyAdd;1200001,1200002,1200003;2;0.08#SkillPropertyAdd;1200001,1200002,1200003;2;0.16#SkillPropertyAdd;1200001,1200002,1200003;2;0.24#SkillPropertyAdd;1200001,1200002,1200003;2;0.32#SkillPropertyAdd;1200001,1200002,1200003;2;0.4"
+  },
+  {
+    "Id": 13006,
+    "Name": "焚心",
+    "Occ": 1,
+    "Lv": 1,
+    "PreId": [
+      13005
+    ],
+    "NeedUseNumber": 1,
+    "Icon": 10001,
+    "Des": "",
+    "AddPropreListStr": ""
+  },
+  {
+    "Id": 13007,
+    "Name": "焚心",
+    "Occ": 1,
+    "Lv": 1,
+    "PreId": [
+      13005
+    ],
+    "NeedUseNumber": 1,
+    "Icon": 10002,
+    "Des": "",
+    "AddPropreListStr": ""
+  },
+  {
+    "Id": 13008,
+    "Name": "焚心",
+    "Occ": 1,
+    "Lv": 1,
+    "PreId": [
+      13005
+    ],
+    "NeedUseNumber": 1,
+    "Icon": 10003,
+    "Des": "",
+    "AddPropreListStr": ""
+  },
+  {
+    "Id": 14001,
+    "Name": "焚心",
+    "Occ": 1,
+    "Lv": 1,
+    "PreId": [],
+    "NeedUseNumber": 1,
+    "Icon": 10004,
+    "Des": "",
+    "AddPropreListStr": ""
+  },
+  {
+    "Id": 14002,
+    "Name": "焚心",
+    "Occ": 1,
+    "Lv": 1,
+    "PreId": [
+      14001
+    ],
+    "NeedUseNumber": 1,
+    "Icon": 10005,
+    "Des": "",
+    "AddPropreListStr": ""
+  },
+  {
+    "Id": 14003,
+    "Name": "焚心",
+    "Occ": 1,
+    "Lv": 1,
+    "PreId": [
+      14001
+    ],
+    "NeedUseNumber": 1,
+    "Icon": 10006,
+    "Des": "",
+    "AddPropreListStr": ""
+  },
+  {
+    "Id": 14004,
+    "Name": "焚心",
+    "Occ": 1,
+    "Lv": 1,
+    "PreId": [
+      14002,
+      14003
+    ],
+    "NeedUseNumber": 1,
+    "Icon": 10007,
+    "Des": "",
+    "AddPropreListStr": ""
+  },
+  {
+    "Id": 14005,
+    "Name": "焚心",
+    "Occ": 1,
+    "Lv": 1,
+    "PreId": [
+      14004
+    ],
+    "NeedUseNumber": 1,
+    "Icon": 10008,
+    "Des": "",
+    "AddPropreListStr": ""
+  },
+  {
+    "Id": 14006,
+    "Name": "焚心",
+    "Occ": 1,
+    "Lv": 1,
+    "PreId": [
+      14005
+    ],
+    "NeedUseNumber": 1,
+    "Icon": 10009,
+    "Des": "",
+    "AddPropreListStr": ""
+  },
+  {
+    "Id": 14007,
+    "Name": "焚心",
+    "Occ": 1,
+    "Lv": 1,
+    "PreId": [
+      14005
+    ],
+    "NeedUseNumber": 1,
+    "Icon": 10010,
+    "Des": "",
+    "AddPropreListStr": ""
+  },
+  {
+    "Id": 14008,
+    "Name": "焚心",
+    "Occ": 1,
+    "Lv": 1,
+    "PreId": [
+      14005
+    ],
+    "NeedUseNumber": 1,
+    "Icon": 10011,
+    "Des": "",
+    "AddPropreListStr": ""
+  },
+  {
+    "Id": 15001,
+    "Name": "焚心",
+    "Occ": 1,
+    "Lv": 1,
+    "PreId": [],
+    "NeedUseNumber": 1,
+    "Icon": 10012,
+    "Des": "",
+    "AddPropreListStr": ""
+  },
+  {
+    "Id": 15002,
+    "Name": "焚心",
+    "Occ": 1,
+    "Lv": 1,
+    "PreId": [
+      15001
+    ],
+    "NeedUseNumber": 1,
+    "Icon": 10013,
+    "Des": "",
+    "AddPropreListStr": ""
+  },
+  {
+    "Id": 15003,
+    "Name": "焚心",
+    "Occ": 1,
+    "Lv": 1,
+    "PreId": [
+      15001
+    ],
+    "NeedUseNumber": 1,
+    "Icon": 10014,
+    "Des": "",
+    "AddPropreListStr": ""
+  },
+  {
+    "Id": 15004,
+    "Name": "焚心",
+    "Occ": 1,
+    "Lv": 1,
+    "PreId": [
+      15002,
+      15003
+    ],
+    "NeedUseNumber": 1,
+    "Icon": 10015,
+    "Des": "",
+    "AddPropreListStr": ""
+  },
+  {
+    "Id": 15005,
+    "Name": "焚心",
+    "Occ": 1,
+    "Lv": 1,
+    "PreId": [
+      15004
+    ],
+    "NeedUseNumber": 1,
+    "Icon": 10016,
+    "Des": "",
+    "AddPropreListStr": ""
+  },
+  {
+    "Id": 15006,
+    "Name": "焚心",
+    "Occ": 1,
+    "Lv": 1,
+    "PreId": [
+      15005
+    ],
+    "NeedUseNumber": 1,
+    "Icon": 10017,
+    "Des": "",
+    "AddPropreListStr": ""
+  },
+  {
+    "Id": 15007,
+    "Name": "焚心",
+    "Occ": 1,
+    "Lv": 1,
+    "PreId": [
+      15005
+    ],
+    "NeedUseNumber": 1,
+    "Icon": 10018,
+    "Des": "",
+    "AddPropreListStr": ""
+  },
+  {
+    "Id": 15008,
+    "Name": "焚心",
+    "Occ": 1,
+    "Lv": 1,
+    "PreId": [
+      15005
+    ],
+    "NeedUseNumber": 1,
+    "Icon": 10019,
+    "Des": "",
+    "AddPropreListStr": ""
+  },
+  {
+    "Id": 16001,
+    "Name": "焚心",
+    "Occ": 1,
+    "Lv": 1,
+    "PreId": [
+      11004,
+      12004
+    ],
+    "NeedUseNumber": 1,
+    "Icon": 10020,
+    "Des": "",
+    "AddPropreListStr": ""
+  },
+  {
+    "Id": 16002,
+    "Name": "焚心",
+    "Occ": 1,
+    "Lv": 1,
+    "PreId": [
+      12004,
+      13004
+    ],
+    "NeedUseNumber": 1,
+    "Icon": 10021,
+    "Des": "",
+    "AddPropreListStr": ""
+  },
+  {
+    "Id": 16003,
+    "Name": "焚心",
+    "Occ": 1,
+    "Lv": 1,
+    "PreId": [
+      13004,
+      14004
+    ],
+    "NeedUseNumber": 1,
+    "Icon": 10021,
+    "Des": "",
+    "AddPropreListStr": ""
+  },
+  {
+    "Id": 16004,
+    "Name": "焚心",
+    "Occ": 1,
+    "Lv": 1,
+    "PreId": [
+      14004,
+      15004
+    ],
+    "NeedUseNumber": 1,
+    "Icon": 10021,
+    "Des": "",
+    "AddPropreListStr": ""
+  },
+  {
+    "Id": 16005,
+    "Name": "焚心",
+    "Occ": 1,
+    "Lv": 1,
+    "PreId": [
+      15004,
+      11004
+    ],
+    "NeedUseNumber": 1,
+    "Icon": 10021,
+    "Des": "",
+    "AddPropreListStr": ""
+  },
+  {
+    "Id": 21001,
+    "Name": "焚心",
+    "Occ": 2,
+    "Lv": 1,
+    "PreId": [],
+    "NeedUseNumber": 1,
+    "Icon": 10001,
+    "Des": "攻击永久提升1%/2%/3%。",
+    "AddPropreListStr": "RolePropertyAdd;100402;0.01#RolePropertyAdd;100402;0.02#RolePropertyAdd;100402;0.03"
+  },
+  {
+    "Id": 21002,
+    "Name": "焚心",
+    "Occ": 2,
+    "Lv": 1,
+    "PreId": [
+      21001
+    ],
+    "NeedUseNumber": 1,
+    "Icon": 10002,
+    "Des": "冰封冲击技能冷却时间缩减2秒。",
+    "AddPropreListStr": "SkillPropertyAdd;1120002,1120003,1120004,1120005,1120006;4;2"
+  },
+  {
+    "Id": 21003,
+    "Name": "焚心",
+    "Occ": 2,
+    "Lv": 1,
+    "PreId": [
+      21001
+    ],
+    "NeedUseNumber": 1,
+    "Icon": 10003,
+    "Des": "冰封冲击伤害提升30%/60%/100%。",
+    "AddPropreListStr": "SkillPropertyAdd;1120002,1120003,1120004,1120005,1120006;2;0.3#SkillPropertyAdd;1120002,1120003,1120004,1120005,1120006;2;0.6#SkillPropertyAdd;1120002,1120003,1120004,1120005,1120006;2;1"
+  },
+  {
+    "Id": 21004,
+    "Name": "焚心",
+    "Occ": 2,
+    "Lv": 1,
+    "PreId": [
+      21002,
+      21003
+    ],
+    "NeedUseNumber": 1,
+    "Icon": 10004,
+    "Des": "普攻使目标移动速度降低30%,持续3秒。",
+    "AddPropreListStr": "SkillPropertyAdd;1200101,1200102;6;1000001"
+  },
+  {
+    "Id": 21005,
+    "Name": "焚心",
+    "Occ": 2,
+    "Lv": 1,
+    "PreId": [
+      21004
+    ],
+    "NeedUseNumber": 1,
+    "Icon": 10005,
+    "Des": "破冰飞弹伤害提升30%,60%,100%。",
+    "AddPropreListStr": "SkillPropertyAdd;1120012,1120013,1120014,1120015,1120016;2;0.3#SkillPropertyAdd;1120012,1120013,1120014,1120015,1120016;2;0.6#SkillPropertyAdd;1120012,1120013,1120014,1120015,1120016;2;1"
+  },
+  {
+    "Id": 21006,
+    "Name": "焚心",
+    "Occ": 2,
+    "Lv": 1,
+    "PreId": [
+      21005
+    ],
+    "NeedUseNumber": 1,
+    "Icon": 10006,
+    "Des": "破冰飞弹使目标受到伤害增加10%/20%/30%。",
+    "AddPropreListStr": "SkillPropertyAdd;1120012,1120013,1120014,1120015,1120016;6;11200110#SkillPropertyAdd;1120012,1120013,1120014,1120015,1120016;6;11200111#SkillPropertyAdd;1120012,1120013,1120014,1120015,1120016;6;11200112"
+  },
+  {
+    "Id": 21007,
+    "Name": "焚心",
+    "Occ": 2,
+    "Lv": 1,
+    "PreId": [
+      21005
+    ],
+    "NeedUseNumber": 1,
+    "Icon": 10007,
+    "Des": "每次暴击有30%概率对目标附加伤害加深状态,使其受到伤害增加25%,持续3秒。",
+    "AddPropreListStr": "SkillIdAdd;1302001"
+  },
+  {
+    "Id": 21008,
+    "Name": "焚心",
+    "Occ": 2,
+    "Lv": 1,
+    "PreId": [
+      21005
+    ],
+    "NeedUseNumber": 1,
+    "Icon": 10008,
+    "Des": "重击概率提升1%/2%/3%/4%/5%。",
+    "AddPropreListStr": "RolePropertyAdd;202103;0.01#RolePropertyAdd;202103;0.02#RolePropertyAdd;202103;0.03#RolePropertyAdd;202103;0.04#RolePropertyAdd;202103;0.05"
+  },
+  {
+    "Id": 22001,
+    "Name": "焚心",
+    "Occ": 2,
+    "Lv": 1,
+    "PreId": [],
+    "NeedUseNumber": 1,
+    "Icon": 10009,
+    "Des": "普通攻击有10%概率触发破冰飞弹。",
+    "AddPropreListStr": "SkillIdAdd;1302003"
+  },
+  {
+    "Id": 22002,
+    "Name": "焚心",
+    "Occ": 2,
+    "Lv": 1,
+    "PreId": [
+      22001
+    ],
+    "NeedUseNumber": 1,
+    "Icon": 10010,
+    "Des": "普通伤害提升3%/6%/9%/12%/15%。",
+    "AddPropreListStr": "SkillPropertyAdd;1200101,1200102;2;0.03#SkillPropertyAdd;1200101,1200102;2;0.06#SkillPropertyAdd;1200101,1200102;2;0.09#SkillPropertyAdd;1200101,1200102;2;0.12#SkillPropertyAdd;1200101,1200102;2;0.15"
+  },
+  {
+    "Id": 22003,
+    "Name": "焚心",
+    "Occ": 2,
+    "Lv": 1,
+    "PreId": [
+      22001
+    ],
+    "NeedUseNumber": 1,
+    "Icon": 10011,
+    "Des": "攻击目标有10%概率提升自身25%伤害,持续3秒。",
+    "AddPropreListStr": "SkillPropertyAdd;1200101,1200102;6;12001010"
+  },
+  {
+    "Id": 22004,
+    "Name": "焚心",
+    "Occ": 2,
+    "Lv": 1,
+    "PreId": [
+      22002,
+      22003
+    ],
+    "NeedUseNumber": 1,
+    "Icon": 10012,
+    "Des": "圣御之击伤害提升20%/40%/60%/80%100%。",
+    "AddPropreListStr": "SkillPropertyAdd;1120022,1120023,1120024,1120025,1120026;2;0.2#SkillPropertyAdd;1120022,1120023,1120024,1120025,1120026;2;0.4#SkillPropertyAdd;1120022,1120023,1120024,1120025,1120026;2;0.6#SkillPropertyAdd;1120022,1120023,1120024,1120025,1120026;2;0.8#SkillPropertyAdd;1120022,1120023,1120024,1120025,1120026;2;1"
+  },
+  {
+    "Id": 22005,
+    "Name": "焚心",
+    "Occ": 2,
+    "Lv": 1,
+    "PreId": [
+      22004
+    ],
+    "NeedUseNumber": 1,
+    "Icon": 10013,
+    "Des": "暴击上限永久提升1%/2%/3%/4%/5%。",
+    "AddPropreListStr": "RolePropertyAdd;200103;0.01#RolePropertyAdd;200103;0.02#RolePropertyAdd;200103;0.03#RolePropertyAdd;200103;0.04#RolePropertyAdd;200103;0.05"
+  },
+  {
+    "Id": 22006,
+    "Name": "焚心",
+    "Occ": 2,
+    "Lv": 1,
+    "PreId": [
+      22005
+    ],
+    "NeedUseNumber": 1,
+    "Icon": 10014,
+    "Des": "圣御之击冷却时间降低1秒。",
+    "AddPropreListStr": "SkillPropertyAdd;1120022,1120023,1120024,1120025,1120026;4;1"
+  },
+  {
+    "Id": 22007,
+    "Name": "焚心",
+    "Occ": 2,
+    "Lv": 1,
+    "PreId": [
+      22005
+    ],
+    "NeedUseNumber": 1,
+    "Icon": 10015,
+    "Des": "技能有1%/2%/3%/4%/5%概率造成双倍伤害。",
+    "AddPropreListStr": "RolePropertyAdd;204103;0.01#RolePropertyAdd;204103;0.02#RolePropertyAdd;204103;0.03#RolePropertyAdd;204103;0.04#RolePropertyAdd;204103;0.05"
+  },
+  {
+    "Id": 22008,
+    "Name": "焚心",
+    "Occ": 2,
+    "Lv": 1,
+    "PreId": [
+      22005
+    ],
+    "NeedUseNumber": 1,
+    "Icon": 10016,
+    "Des": "受到攻击有10%概率对目标释放圣御之击。",
+    "AddPropreListStr": "SkillIdAdd;1302004"
+  },
+  {
+    "Id": 23001,
+    "Name": "焚心",
+    "Occ": 2,
+    "Lv": 1,
+    "PreId": [],
+    "NeedUseNumber": 1,
+    "Icon": 10017,
+    "Des": "技能攻击怪物伤害提升2%/4%/6%/8%/10%。",
+    "AddPropreListStr": "RolePropertyAdd;223103;0.02#RolePropertyAdd;223103;0.04#RolePropertyAdd;223103;0.06#RolePropertyAdd;223103;0.08#RolePropertyAdd;223103;0.1"
+  },
+  {
+    "Id": 23002,
+    "Name": "焚心",
+    "Occ": 2,
+    "Lv": 1,
+    "PreId": [
+      23001
+    ],
+    "NeedUseNumber": 1,
+    "Icon": 10018,
+    "Des": "释放技能有5%概率不触发任何冷却时间。",
+    "AddPropreListStr": "RolePropertyAdd;204003;0.05"
+  },
+  {
+    "Id": 23003,
+    "Name": "焚心",
+    "Occ": 2,
+    "Lv": 1,
+    "PreId": [
+      23001
+    ],
+    "NeedUseNumber": 1,
+    "Icon": 10019,
+    "Des": "巨岩震击伤害提升20%/40%/60%/80%100%。",
+    "AddPropreListStr": "SkillPropertyAdd;1120032,1120033,1120034,1120035,1120036;2;0.2#SkillPropertyAdd;1120032,1120033,1120034,1120035,1120036;2;0.4#SkillPropertyAdd;1120032,1120033,1120034,1120035,1120036;2;0.6#SkillPropertyAdd;1120032,1120033,1120034,1120035,1120036;2;0.8#SkillPropertyAdd;1120032,1120033,1120034,1120035,1120036;2;1"
+  },
+  {
+    "Id": 23004,
+    "Name": "焚心",
+    "Occ": 2,
+    "Lv": 1,
+    "PreId": [
+      23002,
+      23003
+    ],
+    "NeedUseNumber": 1,
+    "Icon": 10020,
+    "Des": "新增技能熔岩爆裂,对目标造成350%伤害,并使目标眩晕2秒。",
+    "AddPropreListStr": "SkillIdAdd;1302005"
+  },
+  {
+    "Id": 23005,
+    "Name": "焚心",
+    "Occ": 2,
+    "Lv": 1,
+    "PreId": [
+      23004
+    ],
+    "NeedUseNumber": 1,
+    "Icon": 10021,
+    "Des": "移动速度提升2%/4%/6%/8%/10%。",
+    "AddPropreListStr": "RolePropertyAdd;100902;0.02#RolePropertyAdd;100902;0.04#RolePropertyAdd;100902;0.06#RolePropertyAdd;100902;0.08#RolePropertyAdd;100902;0.1"
+  },
+  {
+    "Id": 23006,
+    "Name": "焚心",
+    "Occ": 2,
+    "Lv": 1,
+    "PreId": [
+      23005
+    ],
+    "NeedUseNumber": 1,
+    "Icon": 10001,
+    "Des": "攻击永久提升1%/2%/3%。",
+    "AddPropreListStr": ""
+  },
+  {
+    "Id": 23007,
+    "Name": "焚心",
+    "Occ": 2,
+    "Lv": 1,
+    "PreId": [
+      23005
+    ],
+    "NeedUseNumber": 1,
+    "Icon": 10002,
+    "Des": "冰封冲击技能冷却时间缩减2秒。",
+    "AddPropreListStr": ""
+  },
+  {
+    "Id": 23008,
+    "Name": "焚心",
+    "Occ": 2,
+    "Lv": 1,
+    "PreId": [
+      23005
+    ],
+    "NeedUseNumber": 1,
+    "Icon": 10003,
+    "Des": "冰封冲击伤害提升30%/60%/100%。",
+    "AddPropreListStr": ""
+  },
+  {
+    "Id": 24001,
+    "Name": "焚心",
+    "Occ": 2,
+    "Lv": 1,
+    "PreId": [],
+    "NeedUseNumber": 1,
+    "Icon": 10004,
+    "Des": "普攻使目标移动速度降低30%,持续3秒。",
+    "AddPropreListStr": ""
+  },
+  {
+    "Id": 24002,
+    "Name": "焚心",
+    "Occ": 2,
+    "Lv": 1,
+    "PreId": [
+      24001
+    ],
+    "NeedUseNumber": 1,
+    "Icon": 10005,
+    "Des": "破冰飞弹伤害提升30%,60%,100%。",
+    "AddPropreListStr": ""
+  },
+  {
+    "Id": 24003,
+    "Name": "焚心",
+    "Occ": 2,
+    "Lv": 1,
+    "PreId": [
+      24001
+    ],
+    "NeedUseNumber": 1,
+    "Icon": 10006,
+    "Des": "破冰飞弹使目标防御和魔御降低10%/20%/30%。",
+    "AddPropreListStr": ""
+  },
+  {
+    "Id": 24004,
+    "Name": "焚心",
+    "Occ": 2,
+    "Lv": 1,
+    "PreId": [
+      24002,
+      24003
+    ],
+    "NeedUseNumber": 1,
+    "Icon": 10007,
+    "Des": "每次暴击有30%概率对目标附加伤害加深状态,使其受到伤害增加25%,持续3秒。",
+    "AddPropreListStr": ""
+  },
+  {
+    "Id": 24005,
+    "Name": "焚心",
+    "Occ": 2,
+    "Lv": 1,
+    "PreId": [
+      24004
+    ],
+    "NeedUseNumber": 1,
+    "Icon": 10008,
+    "Des": "重击概率提升1%/2%/3%/4%/5%。",
+    "AddPropreListStr": ""
+  },
+  {
+    "Id": 24006,
+    "Name": "焚心",
+    "Occ": 2,
+    "Lv": 1,
+    "PreId": [
+      24005
+    ],
+    "NeedUseNumber": 1,
+    "Icon": 10009,
+    "Des": "普通攻击有10%概率触发破冰飞弹。",
+    "AddPropreListStr": ""
+  },
+  {
+    "Id": 24007,
+    "Name": "焚心",
+    "Occ": 2,
+    "Lv": 1,
+    "PreId": [
+      24005
+    ],
+    "NeedUseNumber": 1,
+    "Icon": 10010,
+    "Des": "普通伤害提升3%/6%/9%/12%/15%。",
+    "AddPropreListStr": ""
+  },
+  {
+    "Id": 24008,
+    "Name": "焚心",
+    "Occ": 2,
+    "Lv": 1,
+    "PreId": [
+      24005
+    ],
+    "NeedUseNumber": 1,
+    "Icon": 10011,
+    "Des": "攻击目标有10%概率提升自身25%伤害,持续3秒。",
+    "AddPropreListStr": ""
+  },
+  {
+    "Id": 25001,
+    "Name": "焚心",
+    "Occ": 2,
+    "Lv": 1,
+    "PreId": [],
+    "NeedUseNumber": 1,
+    "Icon": 10012,
+    "Des": "圣御之击伤害提升20%/40%/60%/80%100%。",
+    "AddPropreListStr": ""
+  },
+  {
+    "Id": 25002,
+    "Name": "焚心",
+    "Occ": 2,
+    "Lv": 1,
+    "PreId": [
+      25001
+    ],
+    "NeedUseNumber": 1,
+    "Icon": 10013,
+    "Des": "暴击上限永久提升1%/2%/3%/4%/5%。",
+    "AddPropreListStr": ""
+  },
+  {
+    "Id": 25003,
+    "Name": "焚心",
+    "Occ": 2,
+    "Lv": 1,
+    "PreId": [
+      25001
+    ],
+    "NeedUseNumber": 1,
+    "Icon": 10014,
+    "Des": "圣御之击冷却时间降低1秒,并使目标移动速度降低50%,持续3秒。",
+    "AddPropreListStr": ""
+  },
+  {
+    "Id": 25004,
+    "Name": "焚心",
+    "Occ": 2,
+    "Lv": 1,
+    "PreId": [
+      25002,
+      25003
+    ],
+    "NeedUseNumber": 1,
+    "Icon": 10015,
+    "Des": "巨岩震击有20%/40%/60%/80%/100%概率眩晕目标2秒。",
+    "AddPropreListStr": ""
+  },
+  {
+    "Id": 25005,
+    "Name": "焚心",
+    "Occ": 2,
+    "Lv": 1,
+    "PreId": [
+      25004
+    ],
+    "NeedUseNumber": 1,
+    "Icon": 10016,
+    "Des": "受到攻击有10%概率对目标释放圣御之击。",
+    "AddPropreListStr": ""
+  },
+  {
+    "Id": 25006,
+    "Name": "焚心",
+    "Occ": 2,
+    "Lv": 1,
+    "PreId": [
+      25005
+    ],
+    "NeedUseNumber": 1,
+    "Icon": 10017,
+    "Des": "技能伤害提升2%/4%/6%/8%/10%。",
+    "AddPropreListStr": ""
+  },
+  {
+    "Id": 25007,
+    "Name": "焚心",
+    "Occ": 2,
+    "Lv": 1,
+    "PreId": [
+      25005
+    ],
+    "NeedUseNumber": 1,
+    "Icon": 10018,
+    "Des": "受到伤害有5%概率给自己释放一个护盾,护盾可以抵抗50%伤害,最大承受生命的30%,持续20秒。",
+    "AddPropreListStr": ""
+  },
+  {
+    "Id": 25008,
+    "Name": "焚心",
+    "Occ": 2,
+    "Lv": 1,
+    "PreId": [
+      25005
+    ],
+    "NeedUseNumber": 1,
+    "Icon": 10019,
+    "Des": "巨岩震击伤害提升20%/40%/60%/80%100%。",
+    "AddPropreListStr": ""
+  },
+  {
+    "Id": 26001,
+    "Name": "焚心",
+    "Occ": 2,
+    "Lv": 1,
+    "PreId": [
+      21004,
+      22004
+    ],
+    "NeedUseNumber": 1,
+    "Icon": 10020,
+    "Des": "新增技能熔岩爆裂,对目标造成350%伤害,并使目标眩晕2秒。",
+    "AddPropreListStr": ""
+  },
+  {
+    "Id": 26002,
+    "Name": "焚心",
+    "Occ": 2,
+    "Lv": 1,
+    "PreId": [
+      22004,
+      23004
+    ],
+    "NeedUseNumber": 1,
+    "Icon": 10021,
+    "Des": "移动速度提升2%/4%/6%/8%/10%。",
+    "AddPropreListStr": ""
+  },
+  {
+    "Id": 26003,
+    "Name": "焚心",
+    "Occ": 2,
+    "Lv": 1,
+    "PreId": [
+      23004,
+      24004
+    ],
+    "NeedUseNumber": 1,
+    "Icon": 10021,
+    "Des": "",
+    "AddPropreListStr": ""
+  },
+  {
+    "Id": 26004,
+    "Name": "焚心",
+    "Occ": 2,
+    "Lv": 1,
+    "PreId": [
+      24004,
+      25004
+    ],
+    "NeedUseNumber": 1,
+    "Icon": 10021,
+    "Des": "",
+    "AddPropreListStr": ""
+  },
+  {
+    "Id": 26005,
+    "Name": "焚心",
+    "Occ": 2,
+    "Lv": 1,
+    "PreId": [
+      25004,
+      21004
+    ],
+    "NeedUseNumber": 1,
+    "Icon": 10021,
+    "Des": "",
+    "AddPropreListStr": ""
+  }
+]

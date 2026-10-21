@@ -8438,6 +8438,9 @@ namespace ET
         [MemoryPackOrder(5)]
         public List<SkillAugmentInfo> SkillAugmentList { get; set; } = new();
 
+        [MemoryPackOrder(6)]
+        public List<KeyValuePairInt> LongYinList { get; set; } = new();
+
         public override void Dispose()
         {
             if (!this.IsFromPool)
@@ -8451,6 +8454,7 @@ namespace ET
             this.LifeShieldList.Clear();
             this.TianFuPlan = default;
             this.SkillAugmentList.Clear();
+            this.LongYinList.Clear();
 
             ObjectPool.Instance.Recycle(this);
         }

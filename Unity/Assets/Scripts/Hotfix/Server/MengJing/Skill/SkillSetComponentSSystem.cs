@@ -17,6 +17,7 @@ namespace ET.Server
             self.TianFuPlan = 0;
             self.TianFuList1.Clear();
             self.TianFuList2.Clear();
+            self.LongYinList.Clear();
 
             if (self.SkillList.Count == 0)
             {
@@ -113,6 +114,55 @@ namespace ET.Server
 
             list.AddRange(self.TianFuAddition);
             return list;
+        }
+
+        /// <summary>
+        /// 获取龙印等级，未激活返回0
+        /// </summary>
+        public static int GetLongYinLevel(this SkillSetComponentS self, int longYinId)
+        {
+            for (int i = 0; i < self.LongYinList.Count; i++)
+            {
+                if (self.LongYinList[i].KeyId == longYinId)
+                {
+                    return (int)self.LongYinList[i].Value;
+                }
+            }
+
+            return 0;
+        }
+
+        /// <summary>
+        /// 龙印是否已激活
+        /// </summary>
+        public static bool HaveLongYin(this SkillSetComponentS self, int longYinId)
+        {
+            return self.GetLongYinLevel(longYinId) > 0;
+        }
+
+        /// <summary>
+        /// 记录龙印等级，等级小于等于0时移除记录
+        /// </summary>
+        public static void SetLongYinLevel(this SkillSetComponentS self, int longYinId, int level)
+        {
+            KeyValuePairInt longYin = self.LongYinList.Find(item => item.KeyId == longYinId);
+            if (level <= 0)
+            {
+                if (longYin != null)
+                {
+                    self.LongYinList.Remove(longYin);
+                }
+
+                return;
+            }
+
+            if (longYin == null)
+            {
+                self.LongYinList.Add(new KeyValuePairInt() { KeyId = longYinId, Value = level });
+                return;
+            }
+
+            longYin.Value = level;
         }
 
         public static int HaveSameTianFu(this SkillSetComponentS self, int tianfuId)
@@ -1688,6 +1738,7 @@ namespace ET.Server
             SkillSetInfo.SkillList = self.SkillList;
             SkillSetInfo.LifeShieldList = self.LifeShieldList;
             SkillSetInfo.SkillAugmentList = self.SkillAugmentList;
+            SkillSetInfo.LongYinList = self.LongYinList;
             MapMessageHelper.SendToClient(unit, M2C_SkillSetMessage);
         }
         

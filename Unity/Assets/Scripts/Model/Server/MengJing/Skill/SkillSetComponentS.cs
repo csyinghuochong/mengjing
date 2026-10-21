@@ -16,6 +16,11 @@ namespace ET.Server
         public List<KeyValuePairInt> TianFuAddition = new List<KeyValuePairInt>();      //附加天赋
 
         /// <summary>
+        /// 已激活的龙印 记录龙印id->等级
+        /// </summary>
+        public List<KeyValuePairInt> LongYinList { get; set; } = new();
+
+        /// <summary>
         /// 玩家携带的技能列表
         /// </summary>
         public List<SkillPro> SkillList { get; set; } = new List<SkillPro>();

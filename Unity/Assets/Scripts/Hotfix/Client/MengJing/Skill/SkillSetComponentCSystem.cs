@@ -25,6 +25,7 @@ namespace ET.Client
             self.TianFuList2 = skillSetInfo.TianFuList2;
             self.TianFuPlan = skillSetInfo.TianFuPlan;
             self.SkillAugmentList = skillSetInfo.SkillAugmentList;
+            self.LongYinList = skillSetInfo.LongYinList;
         }
 
         public static void UpdateSkillAugment(this SkillSetComponentC self, SkillAugmentInfo skillAugmentInfo)
@@ -47,6 +48,30 @@ namespace ET.Client
         public static List<KeyValuePairInt> TianFuList(this SkillSetComponentC self)
         {
             return self.TianFuPlan == 0 ? self.TianFuList1 : self.TianFuList2;
+        }
+
+        /// <summary>
+        /// 获取龙印等级，未激活返回0
+        /// </summary>
+        public static int GetLongYinLevel(this SkillSetComponentC self, int longYinId)
+        {
+            for (int i = 0; i < self.LongYinList.Count; i++)
+            {
+                if (self.LongYinList[i].KeyId == longYinId)
+                {
+                    return (int)self.LongYinList[i].Value;
+                }
+            }
+
+            return 0;
+        }
+
+        /// <summary>
+        /// 龙印是否已激活
+        /// </summary>
+        public static bool HaveLongYin(this SkillSetComponentC self, int longYinId)
+        {
+            return self.GetLongYinLevel(longYinId) > 0;
         }
 
         public static int HaveSameTianFu(this SkillSetComponentC self, int tianfuId)
