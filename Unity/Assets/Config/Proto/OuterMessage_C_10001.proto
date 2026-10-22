@@ -7965,3 +7965,17 @@ message M2C_LongYinActiveResponse // ILocationResponse
 	int32 Error = 91;
 	string Message = 92;
 }
+
+//龙印重置
+//ResponseType M2C_LongYinReSetResponse
+message C2M_LongYinReSetRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+}
+
+message M2C_LongYinReSetResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}

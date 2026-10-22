@@ -299,6 +299,21 @@ namespace ET.Server
             return ErrorCode.ERR_Success;
         }
 
+        /// <summary>
+        /// 龙印重置：清空所有已激活的龙印(含自动解锁的觉醒)，龙印点由等级换算所以会全部返还
+        /// </summary>
+        public static int OnResetLongYin(this SkillSetComponentS self)
+        {
+            if (self.LongYinList.Count == 0)
+            {
+                return ErrorCode.ERR_Success;
+            }
+
+            self.LongYinList.Clear();
+            self.UpdateSkillSet();
+            return ErrorCode.ERR_Success;
+        }
+
         public static int HaveSameTianFu(this SkillSetComponentS self, int tianfuId)
         {
             int tifuId = 0;

@@ -34724,6 +34724,66 @@ namespace ET
         }
     }
 
+    // 龙印重置
+    [MemoryPackable]
+    [Message(OuterMessage.C2M_LongYinReSetRequest)]
+    [ResponseType(nameof(M2C_LongYinReSetResponse))]
+    public partial class C2M_LongYinReSetRequest : MessageObject, ILocationRequest
+    {
+        public static C2M_LongYinReSetRequest Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(C2M_LongYinReSetRequest), isFromPool) as C2M_LongYinReSetRequest;
+        }
+
+        [MemoryPackOrder(89)]
+        public int RpcId { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
+    [Message(OuterMessage.M2C_LongYinReSetResponse)]
+    public partial class M2C_LongYinReSetResponse : MessageObject, ILocationResponse
+    {
+        public static M2C_LongYinReSetResponse Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(M2C_LongYinReSetResponse), isFromPool) as M2C_LongYinReSetResponse;
+        }
+
+        [MemoryPackOrder(89)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(90)]
+        public int Error { get; set; }
+
+        [MemoryPackOrder(91)]
+        public string Message { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.Error = default;
+            this.Message = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
     public static class OuterMessage
     {
         public const ushort HttpGetRouterResponse = 10002;
@@ -35647,5 +35707,7 @@ namespace ET
         public const ushort M2C_StoryEndingRewardResponse = 10920;
         public const ushort C2M_LongYinActiveRequest = 10921;
         public const ushort M2C_LongYinActiveResponse = 10922;
+        public const ushort C2M_LongYinReSetRequest = 10923;
+        public const ushort M2C_LongYinReSetResponse = 10924;
     }
 }

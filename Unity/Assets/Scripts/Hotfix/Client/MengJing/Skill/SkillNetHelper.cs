@@ -272,5 +272,14 @@ namespace ET.Client
 
             return response.Error;
         }
+
+        public static async ETTask<int> LongYinReSetRequest(Scene root)
+        {
+            C2M_LongYinReSetRequest request = C2M_LongYinReSetRequest.Create();
+
+            M2C_LongYinReSetResponse response = (M2C_LongYinReSetResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+
+            return response.Error;
+        }
     }
 }

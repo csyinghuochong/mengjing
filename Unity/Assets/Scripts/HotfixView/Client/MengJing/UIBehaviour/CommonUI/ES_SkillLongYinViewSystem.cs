@@ -14,9 +14,7 @@ namespace ET.Client
             self.uiTransform = transform;
 
             self.E_ActiveLongYinButton.AddListenerAsync(self.OnBtn_ActiveLongYinButton);
-
-            //重置功能暂未开放
-            self.E_ReSetTianFuButton.gameObject.SetActive(false);
+            self.E_ReSetButton.AddListenerAsync(self.OnBtn_ReSetLongYinButton);
 
             //觉醒信息默认不显示
             self.EG_LongYinAwakenRectTransform.gameObject.SetActive(false);
@@ -397,6 +395,31 @@ namespace ET.Client
             }
 
             FlyTipComponent.Instance.ShowFlyTip("激活成功");
+            self.RefreshLongYinList();
+        }
+
+        private static async ETTask OnBtn_ReSetLongYinButton(this ES_SkillLongYin self)
+        {
+            PopupTipHelp.OpenPopupTip(self.Root(), "重置龙印",
+                "重置后所有已激活的龙印都会被清空，已消耗的龙印点全部返还，是否继续？",
+                () => { self.ReSetLongYin().Coroutine(); }).Coroutine();
+
+            await ETTask.CompletedTask;
+        }
+
+        private static async ETTask ReSetLongYin(this ES_SkillLongYin self)
+        {
+            int error = await SkillNetHelper.LongYinReSetRequest(self.Root());
+            if (error != ErrorCode.ERR_Success)
+            {
+                HintHelp.ShowErrorHint(self.Root(), error);
+                return;
+            }
+
+            FlyTipComponent.Instance.ShowFlyTip("重置成功");
+
+            //觉醒也一起被清掉了，收起觉醒信息回到普通龙印信息
+            self.HideLongYinAwaken();
             self.RefreshLongYinList();
         }
     }

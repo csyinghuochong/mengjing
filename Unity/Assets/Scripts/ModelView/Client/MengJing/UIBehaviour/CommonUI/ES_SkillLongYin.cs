@@ -1,4 +1,4 @@
-
+﻿
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -30,6 +30,40 @@ namespace ET.Client
 		    		this.m_EG_LongYinContentRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"Left/Scroll View/Viewport/EG_LongYinContent");
      			}
      			return this.m_EG_LongYinContentRectTransform;
+     		}
+     	}
+
+		public UnityEngine.UI.Button E_ReSetButton
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_ReSetButton == null )
+     			{
+		    		this.m_E_ReSetButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Left/E_ReSet");
+     			}
+     			return this.m_E_ReSetButton;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_ReSetImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_ReSetImage == null )
+     			{
+		    		this.m_E_ReSetImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Left/E_ReSet");
+     			}
+     			return this.m_E_ReSetImage;
      		}
      	}
 
@@ -186,40 +220,6 @@ namespace ET.Client
      		}
      	}
 
-		public UnityEngine.UI.Button E_ReSetTianFuButton
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_ReSetTianFuButton == null )
-     			{
-		    		this.m_E_ReSetTianFuButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"EG_LongYin/E_ReSetTianFu");
-     			}
-     			return this.m_E_ReSetTianFuButton;
-     		}
-     	}
-
-		public UnityEngine.UI.Image E_ReSetTianFuImage
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_ReSetTianFuImage == null )
-     			{
-		    		this.m_E_ReSetTianFuImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_LongYin/E_ReSetTianFu");
-     			}
-     			return this.m_E_ReSetTianFuImage;
-     		}
-     	}
-
 		public UnityEngine.RectTransform EG_LongYinAwakenRectTransform
      	{
      		get
@@ -303,6 +303,8 @@ namespace ET.Client
 		public void DestroyWidget()
 		{
 			this.m_EG_LongYinContentRectTransform = null;
+			this.m_E_ReSetButton = null;
+			this.m_E_ReSetImage = null;
 			this.m_EG_LongYinRectTransform = null;
 			this.m_E_LongYinIconImage = null;
 			this.m_E_LongYinNameText = null;
@@ -312,8 +314,6 @@ namespace ET.Client
 			this.m_E_ActiveLongYinButton = null;
 			this.m_E_ActiveLongYinImage = null;
 			this.m_E_LongYinPointText = null;
-			this.m_E_ReSetTianFuButton = null;
-			this.m_E_ReSetTianFuImage = null;
 			this.m_EG_LongYinAwakenRectTransform = null;
 			this.m_E_LongYinAwakenNameText = null;
 			this.m_E_LongYinAwakenDescText = null;
@@ -322,6 +322,8 @@ namespace ET.Client
 		}
 
 		private UnityEngine.RectTransform m_EG_LongYinContentRectTransform = null;
+		private UnityEngine.UI.Button m_E_ReSetButton = null;
+		private UnityEngine.UI.Image m_E_ReSetImage = null;
 		private UnityEngine.RectTransform m_EG_LongYinRectTransform = null;
 		private UnityEngine.UI.Image m_E_LongYinIconImage = null;
 		private UnityEngine.UI.Text m_E_LongYinNameText = null;
@@ -331,8 +333,6 @@ namespace ET.Client
 		private UnityEngine.UI.Button m_E_ActiveLongYinButton = null;
 		private UnityEngine.UI.Image m_E_ActiveLongYinImage = null;
 		private UnityEngine.UI.Text m_E_LongYinPointText = null;
-		private UnityEngine.UI.Button m_E_ReSetTianFuButton = null;
-		private UnityEngine.UI.Image m_E_ReSetTianFuImage = null;
 		private UnityEngine.RectTransform m_EG_LongYinAwakenRectTransform = null;
 		private UnityEngine.UI.Text m_E_LongYinAwakenNameText = null;
 		private UnityEngine.UI.Text m_E_LongYinAwakenDescText = null;
