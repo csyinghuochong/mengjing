@@ -26,4 +26,15 @@
             <option name="constructor" value="ExternalTypeUtil.NewVector4"/>
         </mapper>
     </bean>
+    <enum name="LongYinType" comment="龙印类型" unique="TRUE" flags="FALSE">
+        <var name="None" alias="" value="0"/>
+        <var name="Type_1" alias="炽焰龙印" value="1"/>
+        <var name="Type_2" alias="风暴龙印" value="2"/>
+        <var name="Type_3" alias="幽影龙印" value="3"/>
+        <var name="Type_4" alias="翡翠龙印" value="4"/>
+        <var name="Type_5" alias="潮汐龙印" value="5"/>
+        <var name="DoubleLong" alias="双龙觉醒" value="6"/>
+        <var name="ThreeLong" alias="三龙觉醒" value="7"/>
+        <var name="FiveLong" alias="五龙觉醒" value="8"/>
+    </enum>
 </module>

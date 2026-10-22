@@ -25,6 +25,7 @@ namespace ET
             Name = _buf.ReadString();
             Occ = _buf.ReadInt();
             Lv = _buf.ReadInt();
+            Type = (LongYinType)_buf.ReadInt();
             {int __n0 = _buf.ReadSize(); PreId = new int[__n0];for(var __index0 = 0 ; __index0 < __n0 ; __index0++) { int __e0;__e0 = _buf.ReadInt(); PreId[__index0] = __e0;}}
             {int __n0 = _buf.ReadSize(); NeedKillBoss = new int[__n0];for(var __index0 = 0 ; __index0 < __n0 ; __index0++) { int __e0;__e0 = _buf.ReadInt(); NeedKillBoss[__index0] = __e0;}}
             Icon = _buf.ReadInt();
@@ -58,6 +59,11 @@ namespace ET
         /// 等级
         /// </summary>
         public int Lv;
+
+        /// <summary>
+        /// 类型
+        /// </summary>
+        public LongYinType Type;
 
         /// <summary>
         /// 前置id
@@ -99,6 +105,7 @@ namespace ET
             
             
             
+            
         }
 
         public override string ToString()
@@ -108,6 +115,7 @@ namespace ET
             + "Name:" + Name + ","
             + "Occ:" + Occ + ","
             + "Lv:" + Lv + ","
+            + "Type:" + Type + ","
             + "PreId:" + Luban.StringUtil.CollectionToString(PreId) + ","
             + "NeedKillBoss:" + Luban.StringUtil.CollectionToString(NeedKillBoss) + ","
             + "Icon:" + Icon + ","
