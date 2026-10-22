@@ -118,23 +118,34 @@ namespace ET.Client
         }
 
         /// <summary>
-        /// 刷新5个龙印分支的激活状态显示
+        /// 刷新5个龙印分支的觉醒状态显示：分支下的龙印全部激活才算觉醒，显示Active，否则显示Inactive
         /// </summary>
         private static void RefreshLongYinBranchState(this ES_SkillLongYin self, int occ, SkillSetComponentC skillSetComponent)
         {
             Transform content = self.EG_LongYinContentRectTransform;
             for (int branch = 1; branch <= 5; branch++)
             {
-                bool active = false;
+                int nodeCount = 0;
+                bool allActive = true;
                 for (int node = 1; node <= 8; node++)
                 {
                     int longYinId = LongYinHelper.GetLongYinId(occ, branch * 1000 + node);
-                    if (LongYinConfigCategory.Instance.GetOrDefault(longYinId) != null
-                        && skillSetComponent.GetLongYinLevel(longYinId) > 0)
+                    if (LongYinConfigCategory.Instance.GetOrDefault(longYinId) == null)
                     {
-                        active = true;
-                        break;
+                        continue;
                     }
+
+                    nodeCount++;
+                    if (skillSetComponent.GetLongYinLevel(longYinId) <= 0)
+                    {
+                        allActive = false;
+                    }
+                }
+
+                //该分支没有任何龙印配置时不显示觉醒
+                if (nodeCount == 0)
+                {
+                    allActive = false;
                 }
 
                 Transform branchTrans = content.Find($"LongYinActive_{branch}");
@@ -143,9 +154,8 @@ namespace ET.Client
                     continue;
                 }
 
-                branchTrans.Find("Active")?.gameObject.SetActive(active);
-                branchTrans.Find("Inactive")?.gameObject.SetActive(!active);
-                branchTrans.Find("Highlight")?.gameObject.SetActive(active);
+                branchTrans.Find("Active")?.gameObject.SetActive(allActive);
+                branchTrans.Find("Inactive")?.gameObject.SetActive(!allActive);
             }
         }
 

@@ -215,7 +215,7 @@ namespace ET.Client
      		}
      	}
 
-		public UnityEngine.RectTransform EG_LongYinNumRectTransform
+		public UnityEngine.RectTransform EG_LongYinAwakenRectTransform
      	{
      		get
      		{
@@ -224,15 +224,15 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_EG_LongYinNumRectTransform == null )
+     			if( this.m_EG_LongYinAwakenRectTransform == null )
      			{
-		    		this.m_EG_LongYinNumRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_LongYinNum");
+		    		this.m_EG_LongYinAwakenRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_LongYinAwaken");
      			}
-     			return this.m_EG_LongYinNumRectTransform;
+     			return this.m_EG_LongYinAwakenRectTransform;
      		}
      	}
 
-		public UnityEngine.UI.Text E_LongYinNumNameText
+		public UnityEngine.UI.Text E_LongYinAwakenNameText
      	{
      		get
      		{
@@ -241,15 +241,15 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_E_LongYinNumNameText == null )
+     			if( this.m_E_LongYinAwakenNameText == null )
      			{
-		    		this.m_E_LongYinNumNameText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"EG_LongYinNum/E_LongYinNumName");
+		    		this.m_E_LongYinAwakenNameText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"EG_LongYinAwaken/E_LongYinAwakenName");
      			}
-     			return this.m_E_LongYinNumNameText;
+     			return this.m_E_LongYinAwakenNameText;
      		}
      	}
 
-		public UnityEngine.UI.Text E_LongYinNumDescText
+		public UnityEngine.UI.Text E_LongYinAwakenDescText
      	{
      		get
      		{
@@ -258,15 +258,15 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_E_LongYinNumDescText == null )
+     			if( this.m_E_LongYinAwakenDescText == null )
      			{
-		    		this.m_E_LongYinNumDescText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"EG_LongYinNum/E_LongYinNumDesc");
+		    		this.m_E_LongYinAwakenDescText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"EG_LongYinAwaken/E_LongYinAwakenDesc");
      			}
-     			return this.m_E_LongYinNumDescText;
+     			return this.m_E_LongYinAwakenDescText;
      		}
      	}
 
-		public UnityEngine.UI.Button E_ActiveLongYinNumButton
+		public UnityEngine.UI.Text E_YinAwakenStateText
      	{
      		get
      		{
@@ -275,28 +275,11 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_E_ActiveLongYinNumButton == null )
+     			if( this.m_E_YinAwakenStateText == null )
      			{
-		    		this.m_E_ActiveLongYinNumButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"EG_LongYinNum/E_ActiveLongYinNum");
+		    		this.m_E_YinAwakenStateText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"EG_LongYinAwaken/E_YinAwakenState");
      			}
-     			return this.m_E_ActiveLongYinNumButton;
-     		}
-     	}
-
-		public UnityEngine.UI.Image E_ActiveLongYinNumImage
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_ActiveLongYinNumImage == null )
-     			{
-		    		this.m_E_ActiveLongYinNumImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_LongYinNum/E_ActiveLongYinNum");
-     			}
-     			return this.m_E_ActiveLongYinNumImage;
+     			return this.m_E_YinAwakenStateText;
      		}
      	}
 
@@ -326,11 +309,10 @@ namespace ET.Client
 			this.m_E_LongYinPointText = null;
 			this.m_E_ReSetTianFuButton = null;
 			this.m_E_ReSetTianFuImage = null;
-			this.m_EG_LongYinNumRectTransform = null;
-			this.m_E_LongYinNumNameText = null;
-			this.m_E_LongYinNumDescText = null;
-			this.m_E_ActiveLongYinNumButton = null;
-			this.m_E_ActiveLongYinNumImage = null;
+			this.m_EG_LongYinAwakenRectTransform = null;
+			this.m_E_LongYinAwakenNameText = null;
+			this.m_E_LongYinAwakenDescText = null;
+			this.m_E_YinAwakenStateText = null;
 			this.uiTransform = null;
 		}
 
@@ -346,11 +328,10 @@ namespace ET.Client
 		private UnityEngine.UI.Text m_E_LongYinPointText = null;
 		private UnityEngine.UI.Button m_E_ReSetTianFuButton = null;
 		private UnityEngine.UI.Image m_E_ReSetTianFuImage = null;
-		private UnityEngine.RectTransform m_EG_LongYinNumRectTransform = null;
-		private UnityEngine.UI.Text m_E_LongYinNumNameText = null;
-		private UnityEngine.UI.Text m_E_LongYinNumDescText = null;
-		private UnityEngine.UI.Button m_E_ActiveLongYinNumButton = null;
-		private UnityEngine.UI.Image m_E_ActiveLongYinNumImage = null;
+		private UnityEngine.RectTransform m_EG_LongYinAwakenRectTransform = null;
+		private UnityEngine.UI.Text m_E_LongYinAwakenNameText = null;
+		private UnityEngine.UI.Text m_E_LongYinAwakenDescText = null;
+		private UnityEngine.UI.Text m_E_YinAwakenStateText = null;
 		public Transform uiTransform = null;
 	}
 }
