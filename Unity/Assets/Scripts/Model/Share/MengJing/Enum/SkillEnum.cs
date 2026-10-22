@@ -1,4 +1,4 @@
-﻿using Unity.Mathematics;
+using Unity.Mathematics;
 
 namespace ET
 {
@@ -148,6 +148,7 @@ namespace ET
         public const int Buff = 6;
         public const int Task = 7;
         public const int PetEcho = 8;
+        public const int LongYin = 9;
     }
 
     //1.增加范围

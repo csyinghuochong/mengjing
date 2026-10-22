@@ -191,10 +191,12 @@ namespace ET.Server
         }
 
         /// <summary>
-        /// 记录龙印等级，等级小于等于0时移除记录
+        /// 记录龙印等级，等级小于等于0时移除记录，并同步该龙印的属性效果
         /// </summary>
         public static void SetLongYinLevel(this SkillSetComponentS self, int longYinId, int level)
         {
+            int oldLevel = self.GetLongYinLevel(longYinId);
+
             KeyValuePairInt longYin = self.LongYinList.Find(item => item.KeyId == longYinId);
             if (level <= 0)
             {
@@ -202,21 +204,189 @@ namespace ET.Server
                 {
                     self.LongYinList.Remove(longYin);
                 }
-
-                return;
             }
-
-            if (longYin == null)
+            else if (longYin == null)
             {
                 self.LongYinList.Add(new KeyValuePairInt() { KeyId = longYinId, Value = level });
+            }
+            else
+            {
+                longYin.Value = level;
+            }
+
+            if (oldLevel == level)
+            {
                 return;
             }
 
-            longYin.Value = level;
+            //属性按等级取配置，升级时先扣掉旧等级的效果再加上新等级的效果
+            self.AddLongYinAttribute(longYinId, false, oldLevel);
+            self.AddLongYinAttribute(longYinId, true, level);
         }
 
         /// <summary>
-        /// 校验并激活/升级龙印，只记录数据，属性效果暂不处理
+        /// 取龙印指定等级生效的属性段(以@分隔的多条属性)，没有配置返回null
+        /// </summary>
+        private static string[] GetLongYinPropreList(this SkillSetComponentS self, int longYinId, int level)
+        {
+            if (longYinId == 0 || level <= 0)
+            {
+                return null;
+            }
+
+            LongYinConfig longYinConfig = LongYinConfigCategory.Instance.GetOrDefault(longYinId);
+            if (longYinConfig == null || string.IsNullOrEmpty(longYinConfig.AddPropreListStr))
+            {
+                return null;
+            }
+
+            //AddPropreListStr按等级用#分隔，取第level段，和天赋的规则一致
+            string[] propreByLv = longYinConfig.AddPropreListStr.Split("#");
+            if (propreByLv.Length < level)
+            {
+                return null;
+            }
+
+            return propreByLv[level - 1].Split("@");
+        }
+
+        /// <summary>
+        /// 龙印属性变化，add为true时加属性，false时扣掉属性，level为生效的龙印等级
+        /// </summary>
+        public static void AddLongYinAttribute(this SkillSetComponentS self, int longYinId, bool add, int level)
+        {
+            string[] addPropreListStr = self.GetLongYinPropreList(longYinId, level);
+            if (addPropreListStr == null)
+            {
+                return;
+            }
+
+            for (int k = 0; k < addPropreListStr.Length; k++)
+            {
+                string[] properInfo = addPropreListStr[k].Split(";");
+                if (properInfo.Length < 2)
+                {
+                    continue;
+                }
+
+                switch (properInfo[0])
+                {
+                    case TianFuProEnum.SkillIdAdd:
+                        self.OnLongYinSkillIdAdd(properInfo, add);
+                        break;
+                    //技能属性在释放技能时通过GetSkillPropertyAdd读取，这里不用处理
+                    case TianFuProEnum.SkillPropertyAdd:
+                        break;
+                    case TianFuProEnum.RolePropertyAdd:
+                        self.OnRolePropertyAdd(properInfo, add ? 1 : -1);
+                        break;
+                }
+            }
+        }
+
+        /// <summary>
+        /// 龙印附加的技能，激活时加进技能列表，重置或降级时移除
+        /// </summary>
+        public static void OnLongYinSkillIdAdd(this SkillSetComponentS self, string[] properInfo, bool add)
+        {
+            if (!int.TryParse(properInfo[1], out int skillId))
+            {
+                return;
+            }
+
+            if (add)
+            {
+                if (self.GetBySkillID(skillId) == null)
+                {
+                    self.OnAddkillId(skillId, 0, SkillSetEnum.Skill, SkillSourceEnum.LongYin, false);
+                }
+
+                return;
+            }
+
+            self.OnRemoveSkillId(skillId, SkillSourceEnum.LongYin, false);
+        }
+
+        /// <summary>
+        /// 收集所有已激活龙印当前等级中指定类型的属性，格式和天赋的AddPropreListStr一致
+        /// </summary>
+        public static List<string[]> GetLongYinProperties(this SkillSetComponentS self, string proType)
+        {
+            List<string[]> properties = new List<string[]>();
+            for (int i = 0; i < self.LongYinList.Count; i++)
+            {
+                KeyValuePairInt longYin = self.LongYinList[i];
+                string[] addPropreListStr = self.GetLongYinPropreList(longYin.KeyId, (int)longYin.Value);
+                if (addPropreListStr == null)
+                {
+                    continue;
+                }
+
+                for (int k = 0; k < addPropreListStr.Length; k++)
+                {
+                    string[] properInfo = addPropreListStr[k].Split(";");
+                    if (properInfo.Length < 2 || properInfo[0] != proType)
+                    {
+                        continue;
+                    }
+
+                    properties.Add(properInfo);
+                }
+            }
+
+            return properties;
+        }
+
+        /// <summary>
+        /// 龙印里指定类型的属性是否有作用于该id(技能id或buff id)的条目
+        /// </summary>
+        private static bool HaveLongYinProperty(this SkillSetComponentS self, string proType, int id)
+        {
+            List<string[]> longYinProperties = self.GetLongYinProperties(proType);
+            for (int i = 0; i < longYinProperties.Count; i++)
+            {
+                string[] properInfo = longYinProperties[i];
+                if (properInfo.Length < 2 || !properInfo[1].Contains(id.ToString()))
+                {
+                    continue;
+                }
+
+                return true;
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// 龙印提供的角色属性，供Function_Fight计算属性时使用
+        /// </summary>
+        public static List<PropertyValue> GetLongYinRoleProLists(this SkillSetComponentS self)
+        {
+            List<PropertyValue> proList = new List<PropertyValue>();
+            List<string[]> longYinProperties = self.GetLongYinProperties(TianFuProEnum.RolePropertyAdd);
+            for (int i = 0; i < longYinProperties.Count; i++)
+            {
+                string[] properInfo = longYinProperties[i];
+                if (properInfo.Length < 3 || !int.TryParse(properInfo[1], out int numericKey))
+                {
+                    continue;
+                }
+
+                if (NumericHelp.GetNumericValueType(numericKey) == 1)
+                {
+                    proList.Add(new PropertyValue() { HideID = numericKey, HideValue = long.Parse(properInfo[2]) });
+                }
+                else
+                {
+                    proList.Add(new PropertyValue() { HideID = numericKey, HideValue = (int)(float.Parse(properInfo[2]) * 10000) });
+                }
+            }
+
+            return proList;
+        }
+
+        /// <summary>
+        /// 校验并激活/升级龙印，属性效果按配置的AddPropreListStr生效
         /// </summary>
         public static int OnActiveLongYin(this SkillSetComponentS self, int longYinId)
         {
@@ -296,11 +466,12 @@ namespace ET.Server
             self.RefreshLongYinAwaken();
 
             self.UpdateSkillSet();
+            self.GetParent<Unit>().GetComponent<SkillPassiveComponent>().UpdatePassiveSkill();
             return ErrorCode.ERR_Success;
         }
 
         /// <summary>
-        /// 龙印重置：清空所有已激活的龙印(含自动解锁的觉醒)，龙印点由等级换算所以会全部返还
+        /// 龙印重置：清空所有已激活的龙印(含自动解锁的觉醒)，并移除对应的属性效果，龙印点由等级换算所以会全部返还
         /// </summary>
         public static int OnResetLongYin(this SkillSetComponentS self)
         {
@@ -309,8 +480,14 @@ namespace ET.Server
                 return ErrorCode.ERR_Success;
             }
 
+            for (int i = 0; i < self.LongYinList.Count; i++)
+            {
+                self.AddLongYinAttribute(self.LongYinList[i].KeyId, false, (int)self.LongYinList[i].Value);
+            }
+
             self.LongYinList.Clear();
             self.UpdateSkillSet();
+            self.GetParent<Unit>().GetComponent<SkillPassiveComponent>().UpdatePassiveSkill();
             return ErrorCode.ERR_Success;
         }
 
@@ -738,7 +915,8 @@ namespace ET.Server
         {
             List<KeyValuePairInt> tianfuids = self.GetTianFuIdsByType(TianFuProEnum.SkillPropertyAdd);
             List<string[]> augmentProperties = self.GetSkillAugmentProperties(skillId, SkillAugmentProEnum.SkillPropertyAdd);
-            if (tianfuids.Count == 0 && augmentProperties.Count == 0)
+            List<string[]> longYinProperties = self.GetLongYinProperties(TianFuProEnum.SkillPropertyAdd);
+            if (tianfuids.Count == 0 && augmentProperties.Count == 0 && longYinProperties.Count == 0)
                 return null;
 
             Dictionary<int, float> HideProList = new Dictionary<int, float>();
@@ -794,6 +972,32 @@ namespace ET.Server
                 }
             }
 
+            //龙印的技能属性
+            for (int i = 0; i < longYinProperties.Count; i++)
+            {
+                string[] propertyInfo = longYinProperties[i];
+                if (propertyInfo.Length < 4)
+                {
+                    continue;
+                }
+
+                if (!propertyInfo[1].Contains(skillId.ToString()))
+                {
+                    continue;
+                }
+
+                int key = int.Parse(propertyInfo[2]);
+                float value = float.Parse(propertyInfo[3]);
+                if (HideProList.ContainsKey(key))
+                {
+                    HideProList[key] += value;
+                }
+                else
+                {
+                    HideProList.Add(key, value);
+                }
+            }
+
             return HideProList;
         }
 
@@ -826,7 +1030,7 @@ namespace ET.Server
         {
             List<KeyValuePairInt> tianfuids = self.GetTianFuIdsByType(TianFuProEnum.SkillSingingCancel);
             if (tianfuids.Count == 0)
-                return false;
+                return self.HaveLongYinProperty(TianFuProEnum.SkillSingingCancel, skillId);
 
             foreach (KeyValuePairInt keyValuePairInt in tianfuids)
             {
@@ -849,14 +1053,15 @@ namespace ET.Server
                 }
             }
 
-            return false;
+            return self.HaveLongYinProperty(TianFuProEnum.SkillSingingCancel, skillId);
         }
 
         public static List<int> GetBuffIdAdd(this SkillSetComponentS self, int skillId)
         {
             List<KeyValuePairInt> tianfuids = self.GetTianFuIdsByType(TianFuProEnum.BuffIdAdd);
             List<string[]> augmentProperties = self.GetSkillAugmentProperties(skillId, SkillAugmentProEnum.BuffIdAdd);
-            if (tianfuids.Count == 0 && augmentProperties.Count == 0)
+            List<string[]> longYinProperties = self.GetLongYinProperties(TianFuProEnum.BuffIdAdd);
+            if (tianfuids.Count == 0 && augmentProperties.Count == 0 && longYinProperties.Count == 0)
                 return null;
 
             List<int> addBuffs = new List<int>();
@@ -892,6 +1097,18 @@ namespace ET.Server
                 addBuffs.Add(int.Parse(augmentProperties[i][1]));
             }
 
+            //龙印
+            for (int i = 0; i < longYinProperties.Count; i++)
+            {
+                string[] propertyInfo = longYinProperties[i];
+                if (propertyInfo.Length < 3 || !propertyInfo[1].Contains(skillId.ToString()))
+                {
+                    continue;
+                }
+
+                addBuffs.Add(int.Parse(propertyInfo[2]));
+            }
+
             return addBuffs;
         }
 
@@ -899,7 +1116,8 @@ namespace ET.Server
         {
             List<KeyValuePairInt> tianfuids = self.GetTianFuIdsByType(TianFuProEnum.BuffInitIdAdd);
             List<string[]> augmentProperties = self.GetSkillAugmentProperties(skillId, SkillAugmentProEnum.BuffInitIdAdd);
-            if (tianfuids.Count == 0 && augmentProperties.Count == 0)
+            List<string[]> longYinProperties = self.GetLongYinProperties(TianFuProEnum.BuffInitIdAdd);
+            if (tianfuids.Count == 0 && augmentProperties.Count == 0 && longYinProperties.Count == 0)
                 return null;
 
             List<int> addBuffs = new List<int>();
@@ -935,13 +1153,26 @@ namespace ET.Server
                 addBuffs.Add(int.Parse(augmentProperties[i][1]));
             }
 
+            //龙印
+            for (int i = 0; i < longYinProperties.Count; i++)
+            {
+                string[] propertyInfo = longYinProperties[i];
+                if (propertyInfo.Length < 3 || !propertyInfo[1].Contains(skillId.ToString()))
+                {
+                    continue;
+                }
+
+                addBuffs.Add(int.Parse(propertyInfo[2]));
+            }
+
             return addBuffs;
         }
 
         public static int GetReplaceSkillId(this SkillSetComponentS self, int skillId)
         {
             List<KeyValuePairInt> tianfuids = self.GetTianFuIdsByType(TianFuProEnum.ReplaceSkillId);
-            if (tianfuids.Count == 0)
+            List<string[]> longYinProperties = self.GetLongYinProperties(TianFuProEnum.ReplaceSkillId);
+            if (tianfuids.Count == 0 && longYinProperties.Count == 0)
                 return 0;
 
             foreach (KeyValuePairInt keyValuePairInt in tianfuids)
@@ -971,13 +1202,26 @@ namespace ET.Server
                 }
             }
 
+            //龙印
+            for (int i = 0; i < longYinProperties.Count; i++)
+            {
+                string[] propertyInfo = longYinProperties[i];
+                if (propertyInfo.Length < 3 || propertyInfo[1] != skillId.ToString())
+                {
+                    continue;
+                }
+
+                return int.Parse(propertyInfo[2]);
+            }
+
             return 0;
         }
 
         public static Dictionary<int, float> GetBuffPropertyAdd(this SkillSetComponentS self, int buffId)
         {
             List<KeyValuePairInt> tianfuids = self.GetTianFuIdsByType(TianFuProEnum.BuffPropertyAdd);
-            if (tianfuids.Count == 0)
+            List<string[]> longYinProperties = self.GetLongYinProperties(TianFuProEnum.BuffPropertyAdd);
+            if (tianfuids.Count == 0 && longYinProperties.Count == 0)
                 return null;
 
             Dictionary<int, float> HideProList = new Dictionary<int, float>();
@@ -1016,6 +1260,34 @@ namespace ET.Server
                     {
                         Log.Error($"GetBuffPropertyAdd: {keyValuePairInt.KeyId}: " + ex.ToString());
                     }
+                }
+            }
+
+            //龙印
+            for (int i = 0; i < longYinProperties.Count; i++)
+            {
+                string[] propertyInfo = longYinProperties[i];
+                if (propertyInfo.Length < 4 || !propertyInfo[1].Contains(buffId.ToString()))
+                {
+                    continue;
+                }
+
+                try
+                {
+                    int key = int.Parse(propertyInfo[2]);
+                    float value = float.Parse(propertyInfo[3]);
+                    if (HideProList.ContainsKey(key))
+                    {
+                        HideProList[key] += value;
+                    }
+                    else
+                    {
+                        HideProList.Add(key, value);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Log.Error("GetBuffPropertyAdd LongYin: " + ex.ToString());
                 }
             }
 

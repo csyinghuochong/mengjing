@@ -2310,6 +2310,13 @@ namespace ET.Server
                 AddUpdateProDicList(tianfuProList[i].HideID, tianfuProList[i].HideValue, UpdateProDicList);
             }
 
+            //龙印系统
+            List<PropertyValue> longYinProList = unit.GetComponent<SkillSetComponentS>().GetLongYinRoleProLists();
+            for (int i = 0; i < longYinProList.Count; i++)
+            {
+                AddUpdateProDicList(longYinProList[i].HideID, longYinProList[i].HideValue, UpdateProDicList);
+            }
+
             List<PropertyValue> skillProList_8 = unit.GetComponent<SkillSetComponentS>().GetSkillRoleProLists_8();
             for (int i = 0; i < skillProList_8.Count; i++)
             {
