@@ -22,8 +22,6 @@ namespace ET
         public StoryChoiceConfig(ByteBuf _buf)
         {
             Id = _buf.ReadInt();
-            ChoiceText = _buf.ReadString();
-            ReplyText = _buf.ReadString();
             Affinity = _buf.ReadInt();
             Fun = _buf.ReadInt();
             Violence = _buf.ReadInt();
@@ -41,16 +39,6 @@ namespace ET
         /// Id
         /// </summary>
         public int Id;
-
-        /// <summary>
-        /// 选项文本
-        /// </summary>
-        public string ChoiceText;
-
-        /// <summary>
-        /// 回复
-        /// </summary>
-        public string ReplyText;
 
         /// <summary>
         /// 亲和值
@@ -83,16 +71,12 @@ namespace ET
             
             
             
-            
-            
         }
 
         public override string ToString()
         {
             return "{ "
             + "Id:" + Id + ","
-            + "ChoiceText:" + ChoiceText + ","
-            + "ReplyText:" + ReplyText + ","
             + "Affinity:" + Affinity + ","
             + "Fun:" + Fun + ","
             + "Violence:" + Violence + ","

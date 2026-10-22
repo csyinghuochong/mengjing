@@ -28,8 +28,6 @@ namespace ET
             Type = (LongYinType)_buf.ReadInt();
             {int __n0 = _buf.ReadSize(); PreId = new int[__n0];for(var __index0 = 0 ; __index0 < __n0 ; __index0++) { int __e0;__e0 = _buf.ReadInt(); PreId[__index0] = __e0;}}
             {int __n0 = _buf.ReadSize(); NeedKillBoss = new int[__n0];for(var __index0 = 0 ; __index0 < __n0 ; __index0++) { int __e0;__e0 = _buf.ReadInt(); NeedKillBoss[__index0] = __e0;}}
-            Icon = _buf.ReadInt();
-            Des = _buf.ReadString();
             AddPropreListStr = _buf.ReadString();
 
             PostInit();
@@ -76,16 +74,6 @@ namespace ET
         public int[] NeedKillBoss;
 
         /// <summary>
-        /// Icon
-        /// </summary>
-        public int Icon;
-
-        /// <summary>
-        /// 描述
-        /// </summary>
-        public string Des;
-
-        /// <summary>
         /// 附加
         /// </summary>
         public string AddPropreListStr;
@@ -96,8 +84,6 @@ namespace ET
 
         public  void ResolveRef()
         {
-            
-            
             
             
             
@@ -118,8 +104,6 @@ namespace ET
             + "Type:" + Type + ","
             + "PreId:" + Luban.StringUtil.CollectionToString(PreId) + ","
             + "NeedKillBoss:" + Luban.StringUtil.CollectionToString(NeedKillBoss) + ","
-            + "Icon:" + Icon + ","
-            + "Des:" + Des + ","
             + "AddPropreListStr:" + AddPropreListStr + ","
             + "}";
         }

@@ -22,8 +22,6 @@ namespace ET
         public StoryEndingConfig(ByteBuf _buf)
         {
             Id = _buf.ReadInt();
-            Name = _buf.ReadString();
-            Des = _buf.ReadString();
             AffinityMin = _buf.ReadInt();
             AffinityMax = _buf.ReadInt();
             FunMin = _buf.ReadInt();
@@ -44,16 +42,6 @@ namespace ET
         /// Id
         /// </summary>
         public int Id;
-
-        /// <summary>
-        /// 名称
-        /// </summary>
-        public string Name;
-
-        /// <summary>
-        /// 描述
-        /// </summary>
-        public string Des;
 
         /// <summary>
         /// 亲和下限
@@ -104,16 +92,12 @@ namespace ET
             
             
             
-            
-            
         }
 
         public override string ToString()
         {
             return "{ "
             + "Id:" + Id + ","
-            + "Name:" + Name + ","
-            + "Des:" + Des + ","
             + "AffinityMin:" + AffinityMin + ","
             + "AffinityMax:" + AffinityMax + ","
             + "FunMin:" + FunMin + ","

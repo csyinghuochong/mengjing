@@ -22,7 +22,6 @@ namespace ET
         public StoryChapterConfig(ByteBuf _buf)
         {
             Id = _buf.ReadInt();
-            Name = _buf.ReadString();
             {int __n0 = _buf.ReadSize(); Stories = new int[__n0];for(var __index0 = 0 ; __index0 < __n0 ; __index0++) { int __e0;__e0 = _buf.ReadInt(); Stories[__index0] = __e0;}}
             EntryTaskId = _buf.ReadInt();
             EntryTaskId_Ref = null;
@@ -39,11 +38,6 @@ namespace ET
         /// Id
         /// </summary>
         public int Id;
-
-        /// <summary>
-        /// 名称
-        /// </summary>
-        public string Name;
 
         /// <summary>
         /// 选项
@@ -65,7 +59,6 @@ namespace ET
         {
             
             
-            
             EntryTaskId_Ref = TaskConfigCategory.Instance.GetOrDefault(EntryTaskId);
         }
 
@@ -73,7 +66,6 @@ namespace ET
         {
             return "{ "
             + "Id:" + Id + ","
-            + "Name:" + Name + ","
             + "Stories:" + Luban.StringUtil.CollectionToString(Stories) + ","
             + "EntryTaskId:" + EntryTaskId + ","
             + "}";

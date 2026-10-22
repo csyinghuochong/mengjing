@@ -22,8 +22,6 @@ namespace ET
         public StoryConfig(ByteBuf _buf)
         {
             Id = _buf.ReadInt();
-            Name = _buf.ReadString();
-            Des = _buf.ReadString();
             {int __n0 = _buf.ReadSize(); Choice = new int[__n0];for(var __index0 = 0 ; __index0 < __n0 ; __index0++) { int __e0;__e0 = _buf.ReadInt(); Choice[__index0] = __e0;}}
 
             PostInit();
@@ -40,16 +38,6 @@ namespace ET
         public int Id;
 
         /// <summary>
-        /// 名称
-        /// </summary>
-        public string Name;
-
-        /// <summary>
-        /// 描述
-        /// </summary>
-        public string Des;
-
-        /// <summary>
         /// 选项
         /// </summary>
         public int[] Choice;
@@ -62,16 +50,12 @@ namespace ET
         {
             
             
-            
-            
         }
 
         public override string ToString()
         {
             return "{ "
             + "Id:" + Id + ","
-            + "Name:" + Name + ","
-            + "Des:" + Des + ","
             + "Choice:" + Luban.StringUtil.CollectionToString(Choice) + ","
             + "}";
         }
