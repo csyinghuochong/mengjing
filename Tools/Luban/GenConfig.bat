@@ -23,9 +23,9 @@ set WORKSPACE=..\..
 set LUBAN_DLL=%WORKSPACE%\Tools\Luban\LubanRelease\Luban.dll
 set CONF_ROOT=%WORKSPACE%\Unity\Assets\Config\Excel
 
-call :GenerateMain all Client c
+call :GenerateMain client Client c
 if errorlevel 1 exit /b %errorlevel%
-call :GenerateMain all Server s
+call :GenerateMain server Server s
 if errorlevel 1 exit /b %errorlevel%
 call :GenerateMain all ClientServer cs
 if errorlevel 1 exit /b %errorlevel%

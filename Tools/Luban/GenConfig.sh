@@ -33,8 +33,8 @@ generate_start_data() {
     -x json.outputDataDir="$WORKSPACE/Config/Json/$data_group/$environment"
 }
 
-generate_main all Client c
-generate_main all Server s
+generate_main client Client c
+generate_main server Server s
 generate_main all ClientServer cs
 generate_start_code Release s Server
 generate_start_code Release cs ClientServer
