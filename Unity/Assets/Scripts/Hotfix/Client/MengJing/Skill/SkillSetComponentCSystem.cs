@@ -82,6 +82,14 @@ namespace ET.Client
             return LongYinHelper.GetCompleteTypeCount(self.LongYinList, occ);
         }
 
+        /// <summary>
+        /// 指定类型(LongYinType_1~Type_5)的龙印是否已全部激活且升到满级
+        /// </summary>
+        public static bool IsLongYinTypeComplete(this SkillSetComponentC self, int occ, int type)
+        {
+            return LongYinHelper.IsTypeComplete(self.LongYinList, occ, type);
+        }
+
         public static int HaveSameTianFu(this SkillSetComponentC self, int tianfuId)
         {
             TalentConfig talentConfig = TalentConfigCategory.Instance.Get(tianfuId);
