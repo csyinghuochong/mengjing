@@ -121,15 +121,7 @@ namespace ET.Server
         /// </summary>
         public static int GetLongYinLevel(this SkillSetComponentS self, int longYinId)
         {
-            for (int i = 0; i < self.LongYinList.Count; i++)
-            {
-                if (self.LongYinList[i].KeyId == longYinId)
-                {
-                    return (int)self.LongYinList[i].Value;
-                }
-            }
-
-            return 0;
+            return LongYinHelper.GetLevel(self.LongYinList, longYinId);
         }
 
         /// <summary>
@@ -146,6 +138,56 @@ namespace ET.Server
         public static int GetLongYinPointLeft(this SkillSetComponentS self, int playerLv)
         {
             return LongYinHelper.GetPointLeft(self.LongYinList, playerLv);
+        }
+
+        /// <summary>
+        /// 已完全解锁(全部激活且满级)的龙印类型数量
+        /// </summary>
+        public static int GetCompleteLongYinTypeCount(this SkillSetComponentS self)
+        {
+            int occ = self.GetParent<Unit>().GetComponent<UserInfoComponentS>().UserInfo.Occ;
+            return LongYinHelper.GetCompleteTypeCount(self.LongYinList, occ);
+        }
+
+        /// <summary>
+        /// 按各类型龙印的完成情况自动解锁双龙/三龙/五龙觉醒，返回本次新解锁的龙印id
+        /// </summary>
+        public static void RefreshLongYinAwaken(this SkillSetComponentS self)
+        {
+            UserInfoComponentS userInfoComponent = self.GetParent<Unit>().GetComponent<UserInfoComponentS>();
+            if (userInfoComponent == null)
+            {
+                return;
+            }
+
+            int occ = userInfoComponent.UserInfo.Occ;
+            int completeTypeCount = LongYinHelper.GetCompleteTypeCount(self.LongYinList, occ);
+            if (completeTypeCount <= 0)
+            {
+                return;
+            }
+
+            List<LongYinConfig> configList = LongYinConfigCategory.Instance.DataList;
+            for (int i = 0; i < configList.Count; i++)
+            {
+                LongYinConfig longYinConfig = configList[i];
+                if (longYinConfig.Occ != occ || !LongYinHelper.IsAwakenType(longYinConfig.Type))
+                {
+                    continue;
+                }
+
+                if (!LongYinHelper.IsAwakenUnlocked(longYinConfig.Type, completeTypeCount))
+                {
+                    continue;
+                }
+
+                if (self.HaveLongYin(longYinConfig.Id))
+                {
+                    continue;
+                }
+
+                self.SetLongYinLevel(longYinConfig.Id, 1);
+            }
         }
 
         /// <summary>
@@ -180,6 +222,12 @@ namespace ET.Server
         {
             LongYinConfig longYinConfig = LongYinConfigCategory.Instance.GetOrDefault(longYinId);
             if (longYinConfig == null)
+            {
+                return ErrorCode.ERR_ModifyData;
+            }
+
+            //觉醒龙印由其他龙印满级后自动解锁，不能手动激活
+            if (LongYinHelper.IsAwakenType(longYinConfig.Type))
             {
                 return ErrorCode.ERR_ModifyData;
             }
@@ -243,6 +291,10 @@ namespace ET.Server
             }
 
             self.SetLongYinLevel(longYinId, curLevel + 1);
+
+            //满级后可能满足觉醒解锁条件，一并在本次同步里下发给客户端
+            self.RefreshLongYinAwaken();
+
             self.UpdateSkillSet();
             return ErrorCode.ERR_Success;
         }

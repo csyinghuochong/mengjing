@@ -55,15 +55,7 @@ namespace ET.Client
         /// </summary>
         public static int GetLongYinLevel(this SkillSetComponentC self, int longYinId)
         {
-            for (int i = 0; i < self.LongYinList.Count; i++)
-            {
-                if (self.LongYinList[i].KeyId == longYinId)
-                {
-                    return (int)self.LongYinList[i].Value;
-                }
-            }
-
-            return 0;
+            return LongYinHelper.GetLevel(self.LongYinList, longYinId);
         }
 
         /// <summary>
