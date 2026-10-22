@@ -115,6 +115,31 @@ namespace ET
         }
 
         /// <summary>
+        /// 获取指定职业的觉醒龙印配置(双龙/三龙/五龙)，没有配置返回null
+        /// </summary>
+        public static LongYinConfig GetAwakenConfig(int occ, LongYinType type)
+        {
+            if (!IsAwakenType(type))
+            {
+                return null;
+            }
+
+            List<LongYinConfig> configList = LongYinConfigCategory.Instance.DataList;
+            for (int i = 0; i < configList.Count; i++)
+            {
+                LongYinConfig longYinConfig = configList[i];
+                if (longYinConfig.Occ != occ || longYinConfig.Type != type)
+                {
+                    continue;
+                }
+
+                return longYinConfig;
+            }
+
+            return null;
+        }
+
+        /// <summary>
         /// 按已完全解锁的龙印类型数量判断该觉醒是否满足解锁条件
         /// </summary>
         public static bool IsAwakenUnlocked(LongYinType type, int completeTypeCount)

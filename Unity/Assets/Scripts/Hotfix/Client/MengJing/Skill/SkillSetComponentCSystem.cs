@@ -74,6 +74,14 @@ namespace ET.Client
             return LongYinHelper.GetPointLeft(self.LongYinList, playerLv);
         }
 
+        /// <summary>
+        /// 已完全解锁(全部激活且满级)的龙印类型数量
+        /// </summary>
+        public static int GetCompleteLongYinTypeCount(this SkillSetComponentC self, int occ)
+        {
+            return LongYinHelper.GetCompleteTypeCount(self.LongYinList, occ);
+        }
+
         public static int HaveSameTianFu(this SkillSetComponentC self, int tianfuId)
         {
             TalentConfig talentConfig = TalentConfigCategory.Instance.Get(tianfuId);

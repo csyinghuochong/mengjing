@@ -1,4 +1,4 @@
-﻿
+
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,6 +10,11 @@ namespace ET.Client
 	{
 		public List<EntityRef<ES_SkillLongYinItem>> Items = new();
 		public int SelectLongYinId;
+
+		/// <summary>
+		/// 当前查看的觉醒类型(LongYinType)，0表示没有查看觉醒信息
+		/// </summary>
+		public int SelectLongYinAwakenType;
 
 		public UnityEngine.RectTransform EG_LongYinContentRectTransform
      	{

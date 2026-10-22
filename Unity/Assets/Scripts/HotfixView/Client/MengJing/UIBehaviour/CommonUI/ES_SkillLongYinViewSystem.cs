@@ -18,6 +18,9 @@ namespace ET.Client
             //重置功能暂未开放
             self.E_ReSetTianFuButton.gameObject.SetActive(false);
 
+            //觉醒信息默认不显示
+            self.EG_LongYinAwakenRectTransform.gameObject.SetActive(false);
+
             Transform content = self.EG_LongYinContentRectTransform;
             for (int i = 0; i < content.childCount; i++)
             {
@@ -37,7 +40,38 @@ namespace ET.Client
                 self.Items.Add(item);
             }
 
+            self.InitLongYinAwakenNodes();
+
             self.RefreshLongYinList();
+        }
+
+        /// <summary>
+        /// 绑定双龙/三龙/五龙觉醒节点的点击，节点名后缀为需要的龙印类型数量
+        /// </summary>
+        private static void InitLongYinAwakenNodes(this ES_SkillLongYin self)
+        {
+            Transform content = self.EG_LongYinContentRectTransform;
+            for (int i = 0; i < content.childCount; i++)
+            {
+                Transform subTrans = content.GetChild(i);
+                if (!subTrans.name.StartsWith("LongYinAwaken_"))
+                {
+                    continue;
+                }
+
+                if (!int.TryParse(subTrans.name.Substring("LongYinAwaken_".Length), out int awakenType))
+                {
+                    continue;
+                }
+
+                Button button = subTrans.GetComponentInChildren<Button>(true);
+                if (button == null)
+                {
+                    continue;
+                }
+
+                button.AddListenerWithParam(self.OnClickLongYinAwaken, awakenType);
+            }
         }
 
         [EntitySystem]
@@ -59,6 +93,18 @@ namespace ET.Client
             }
 
             self.RefreshLongYinBranchState(occ, skillSetComponent);
+            self.RefreshLongYinAwakenNodeState(occ, skillSetComponent);
+
+            //正在查看觉醒信息时保持觉醒面板，不切回普通龙印信息
+            if (self.SelectLongYinAwakenType != 0)
+            {
+                if (self.ShowLongYinAwaken(self.SelectLongYinAwakenType))
+                {
+                    return;
+                }
+
+                self.SelectLongYinAwakenType = 0;
+            }
 
             ES_SkillLongYinItem selectItem = null;
             if (self.SelectLongYinId != 0)
@@ -159,6 +205,96 @@ namespace ET.Client
             }
         }
 
+        /// <summary>
+        /// 刷新双龙/三龙/五龙觉醒节点的解锁状态显示
+        /// </summary>
+        private static void RefreshLongYinAwakenNodeState(this ES_SkillLongYin self, int occ, SkillSetComponentC skillSetComponent)
+        {
+            Transform content = self.EG_LongYinContentRectTransform;
+            foreach (LongYinConfig longYinConfig in LongYinConfigCategory.Instance.DataList)
+            {
+                if (longYinConfig.Occ != occ || !LongYinHelper.IsAwakenType(longYinConfig.Type))
+                {
+                    continue;
+                }
+
+                int needTypeCount = LongYinHelper.GetAwakenNeedTypeCount(longYinConfig.Type);
+                Transform awakenTrans = content.Find($"LongYinAwaken_{needTypeCount}");
+                if (awakenTrans == null)
+                {
+                    continue;
+                }
+
+                awakenTrans.Find("Highlight")?.gameObject.SetActive(skillSetComponent.HaveLongYin(longYinConfig.Id));
+            }
+        }
+
+        public static void OnClickLongYinAwaken(this ES_SkillLongYin self, int awakenType)
+        {
+            //再次点击同一个觉醒节点则收起，回到普通龙印信息
+            if (self.SelectLongYinAwakenType == awakenType)
+            {
+                self.HideLongYinAwaken();
+                self.RefreshLongYinList();
+                return;
+            }
+
+            self.SelectLongYinId = 0;
+            self.SelectLongYinAwakenType = awakenType;
+            self.RefreshLongYinList();
+        }
+
+        /// <summary>
+        /// 显示双龙/三龙/五龙觉醒信息，没有配置返回false
+        /// </summary>
+        private static bool ShowLongYinAwaken(this ES_SkillLongYin self, int awakenType)
+        {
+            int occ = self.Root().GetComponent<UserInfoComponentC>().UserInfo.Occ;
+            LongYinConfig longYinConfig = LongYinHelper.GetAwakenConfig(occ, (LongYinType)awakenType);
+            if (longYinConfig == null)
+            {
+                self.HideLongYinAwaken();
+                return false;
+            }
+
+            SkillSetComponentC skillSetComponent = self.Root().GetComponent<SkillSetComponentC>();
+            int needTypeCount = LongYinHelper.GetAwakenNeedTypeCount(longYinConfig.Type);
+            int completeTypeCount = skillSetComponent.GetCompleteLongYinTypeCount(occ);
+            bool unlocked = skillSetComponent.HaveLongYin(longYinConfig.Id);
+
+            self.EG_LongYinRectTransform.gameObject.SetActive(false);
+            self.EG_LongYinAwakenRectTransform.gameObject.SetActive(true);
+
+            self.E_LongYinAwakenNameText.text = longYinConfig.Name;
+
+            string desc = longYinConfig.Des ?? string.Empty;
+            desc = desc.Replace("\\n", "\n");
+
+            self.E_LongYinAwakenDescText.text = desc;
+            TextFitTip textFitTip = self.E_LongYinAwakenDescText.GetComponent<TextFitTip>();
+            if (textFitTip != null)
+            {
+                textFitTip.SetText(desc);
+            }
+
+            self.E_YinAwakenStateText.text = unlocked ? "已解锁" : "未解锁";
+
+            Image icon = UIFindHelper.FindDeepChild<Image>(self.uiTransform.gameObject, "EG_LongYinAwaken/Icon");
+            if (icon != null)
+            {
+                string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.RoleSkillIcon, longYinConfig.Icon.ToString());
+                icon.sprite = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
+            }
+
+            return true;
+        }
+
+        private static void HideLongYinAwaken(this ES_SkillLongYin self)
+        {
+            self.SelectLongYinAwakenType = 0;
+            self.EG_LongYinAwakenRectTransform.gameObject.SetActive(false);
+        }
+
         public static void OnClickLongYinItem(this ES_SkillLongYin self, ES_SkillLongYinItem item)
         {
             if (item == null || !item.Visible)
@@ -171,6 +307,9 @@ namespace ET.Client
 
         private static void SelectLongYinItem(this ES_SkillLongYin self, ES_SkillLongYinItem item)
         {
+            self.HideLongYinAwaken();
+            self.EG_LongYinRectTransform.gameObject.SetActive(true);
+
             self.SelectLongYinId = item.LongYinId;
             foreach (ES_SkillLongYinItem longYinItem in self.Items)
             {
