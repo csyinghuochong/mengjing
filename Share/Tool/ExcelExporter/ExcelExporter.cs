@@ -1,148 +1,21 @@
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO;
 using System.Runtime.InteropServices;
 
 namespace ET
 {
     public static class ExcelExporter
     {
-        private const string ClientGeneratedBytesDir = "../Config/Excel/c";
-        private const string UnityClientBytesDir = "../Unity/Assets/Bundles/Config";
-        private const string ClientGeneratedCodeDir = "../Unity/Assets/Scripts/Model/Generate/Client/Config";
-        private const string ServerGeneratedCodeDir = "../Unity/Assets/Scripts/Model/Generate/Server/Config";
-        private const string ClientServerGeneratedCodeDir = "../Unity/Assets/Scripts/Model/Generate/ClientServer/Config";
-
+        /// <summary>
+        /// 只负责启动导表脚本；备份 .meta、导表、同步 Unity 客户端配置、清理 .meta 都在
+        /// Tools/Luban/GenConfig.bat (Windows) 与 GenConfig.sh (Linux) 里完成。
+        /// </summary>
         public static void Export()
         {
-            Dictionary<string, byte[]> metaFiles = BackupMetaFiles(
-                ClientGeneratedCodeDir,
-                ServerGeneratedCodeDir,
-                ClientServerGeneratedCodeDir);
-
-            try
-            {
-                string shellFilePath = RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? ".\\GenConfig.bat --no-pause" : "./GenConfig.sh";
-                using Process configProcess = CreateProcess(shellFilePath, "../Tools/Luban/");
-                configProcess.Start();
-                configProcess.WaitForExit();
-                if (configProcess.ExitCode != 0)
-                {
-                    throw new Exception($"Luban export failed with exit code {configProcess.ExitCode}");
-                }
-            }
-            finally
-            {
-                RestoreMetaFiles(metaFiles);
-            }
-
-            CopyClientBytesToUnity();
-            VerifyClientBytesSynchronized();
-            RemoveUnusedMetaFiles(UnityClientBytesDir);
-            RemoveUnusedMetaFiles(ClientGeneratedCodeDir);
-            RemoveUnusedMetaFiles(ServerGeneratedCodeDir);
-            RemoveUnusedMetaFiles(ClientServerGeneratedCodeDir);
-
-            Console.WriteLine("Luban export and Unity client config sync finished.");
-        }
-
-        private static Dictionary<string, byte[]> BackupMetaFiles(params string[] directories)
-        {
-            Dictionary<string, byte[]> metaFiles = new(StringComparer.OrdinalIgnoreCase);
-            foreach (string directory in directories)
-            {
-                if (!Directory.Exists(directory))
-                {
-                    continue;
-                }
-
-                foreach (FileInfo info in new DirectoryInfo(directory).GetFiles("*.meta", SearchOption.AllDirectories))
-                {
-                    metaFiles[info.FullName] = File.ReadAllBytes(info.FullName);
-                }
-            }
-
-            return metaFiles;
-        }
-
-        private static void RestoreMetaFiles(Dictionary<string, byte[]> metaFiles)
-        {
-            foreach ((string metaPath, byte[] bytes) in metaFiles)
-            {
-                string assetPath = metaPath[..metaPath.LastIndexOf(".meta", StringComparison.Ordinal)];
-                if (!File.Exists(assetPath) && !Directory.Exists(assetPath))
-                {
-                    continue;
-                }
-
-                string directory = Path.GetDirectoryName(metaPath);
-                if (!string.IsNullOrEmpty(directory))
-                {
-                    Directory.CreateDirectory(directory);
-                }
-
-                File.WriteAllBytes(metaPath, bytes);
-            }
-        }
-
-        private static void CopyClientBytesToUnity()
-        {
-            RemoveAllFilesExceptMeta(UnityClientBytesDir);
-            FileHelper.CopyDirectory(ClientGeneratedBytesDir, UnityClientBytesDir);
-        }
-
-        private static void VerifyClientBytesSynchronized()
-        {
-            foreach (string sourcePath in Directory.GetFiles(ClientGeneratedBytesDir, "*.bytes", SearchOption.AllDirectories))
-            {
-                string relativePath = Path.GetRelativePath(ClientGeneratedBytesDir, sourcePath);
-                string destinationPath = Path.Combine(UnityClientBytesDir, relativePath);
-                if (!File.Exists(destinationPath))
-                {
-                    throw new FileNotFoundException($"Unity client config was not copied: {relativePath}", destinationPath);
-                }
-
-                byte[] sourceBytes = File.ReadAllBytes(sourcePath);
-                byte[] destinationBytes = File.ReadAllBytes(destinationPath);
-                if (!sourceBytes.AsSpan().SequenceEqual(destinationBytes))
-                {
-                    throw new InvalidDataException($"Unity client config differs after copy: {relativePath}");
-                }
-            }
-        }
-
-        private static void RemoveAllFilesExceptMeta(string directory)
-        {
-            if (!Directory.Exists(directory))
-            {
-                return;
-            }
-
-            foreach (FileInfo info in new DirectoryInfo(directory).GetFiles("*", SearchOption.AllDirectories))
-            {
-                if (!info.Name.EndsWith(".meta"))
-                {
-                    info.Delete();
-                }
-            }
-        }
-
-        private static void RemoveUnusedMetaFiles(string directory)
-        {
-            if (!Directory.Exists(directory))
-            {
-                return;
-            }
-
-            foreach (FileInfo info in new DirectoryInfo(directory).GetFiles("*.meta", SearchOption.AllDirectories))
-            {
-                string pathWithoutMeta = info.FullName[..info.FullName.LastIndexOf(".meta", StringComparison.Ordinal)];
-                if (!File.Exists(pathWithoutMeta) && !Directory.Exists(pathWithoutMeta))
-                {
-                    info.Delete();
-                }
-            }
+            // 不带 --no-pause：导表结束（成功或失败）后脚本会 pause，窗口保留下来方便看日志。
+            string shellFilePath = RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? ".\\GenConfig.bat" : "./GenConfig.sh";
+            using Process configProcess = CreateProcess(shellFilePath, "../Tools/Luban/");
+            configProcess.Start();
+            configProcess.WaitForExit();
         }
 
         private static Process CreateProcess(string command, string workingDirectory)
