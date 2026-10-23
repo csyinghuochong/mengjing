@@ -388,7 +388,7 @@ namespace ET.Client
                 Text buttonText = self.E_ActiveLongYinButton.GetComponentInChildren<Text>();
                 if (buttonText != null)
                 {
-                    buttonText.text = curLevel <= 0 ? "激活" : "升级";
+                    buttonText.text = curLevel <= 0 ? "点亮" : "升级";
                 }
             }
         }
@@ -407,7 +407,6 @@ namespace ET.Client
                 return;
             }
 
-            FlyTipComponent.Instance.ShowFlyTip("激活成功");
             self.RefreshLongYinList();
         }
 
