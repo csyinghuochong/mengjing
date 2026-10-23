@@ -5,6 +5,11 @@ namespace ET
     public static class LongYinHelper
     {
         /// <summary>
+        /// 龙印类型总数：Type_1~Type_5
+        /// </summary>
+        public const int TypeCount = (int)LongYinType.Type_5;
+
+        /// <summary>
         /// 双龙觉醒需要的已完全解锁龙印类型数量
         /// </summary>
         public const int DoubleLongNeedTypeCount = 2;

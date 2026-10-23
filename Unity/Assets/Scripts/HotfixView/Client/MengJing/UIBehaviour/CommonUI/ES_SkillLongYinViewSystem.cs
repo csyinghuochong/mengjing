@@ -84,6 +84,7 @@ namespace ET.Client
             SkillSetComponentC skillSetComponent = self.Root().GetComponent<SkillSetComponentC>();
 
             self.RefreshLongYinPoint(skillSetComponent);
+            self.RefreshLongYinAwakenNum(occ, skillSetComponent);
 
             foreach (ES_SkillLongYinItem item in self.Items)
             {
@@ -159,6 +160,15 @@ namespace ET.Client
             }
 
             self.E_LongYinPointText.text = $"龙印点：{leftPoint}";
+        }
+
+        /// <summary>
+        /// 刷新已觉醒数量显示：龙印类型全部激活且满级算觉醒1个，最多TypeCount个
+        /// </summary>
+        private static void RefreshLongYinAwakenNum(this ES_SkillLongYin self, int occ, SkillSetComponentC skillSetComponent)
+        {
+            int awakenNum = skillSetComponent.GetCompleteLongYinTypeCount(occ);
+            self.E_LongYinAwakenNumText.text = $"已觉醒：{awakenNum}/{LongYinHelper.TypeCount}";
         }
 
         /// <summary>
