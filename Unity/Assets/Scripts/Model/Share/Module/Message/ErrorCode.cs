@@ -60,6 +60,11 @@ namespace ET
         public const int ERR_LongYinMaxLevel = 200045;                              //龙印已达最大等级
         public const int ERR_LongYinNotKillBoss = 200046;                           //未击杀解锁龙印所需的Boss
         public const int ERR_LongYinPointNotEnough = 200047;                        //龙印点不足
+        public const int ERR_GemTalentNotExist = 200048;                            //宝石天赋节点不存在
+        public const int ERR_GemTalentActivated = 200049;                           //该宝石天赋已激活
+        public const int ERR_GemTalentAreaLock = 200050;                            //宝石天赋区域未解锁
+        public const int ERR_GemTalentPointNotEnough = 200051;                      //宝石点数不足
+        public const int ERR_GemTalentNoneActivated = 200052;                       //没有已激活的宝石天赋
 
         //登录
         public const int ERR_AccountAlreadyRegister = 200101;                       //表示账号已经被注册

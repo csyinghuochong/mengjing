@@ -213,6 +213,11 @@ namespace ET.Client
             { ErrorCode.ERR_LongYinMaxLevel, "龙印已达最大等级" },
             { ErrorCode.ERR_LongYinNotKillBoss, "未击杀解锁龙印所需的Boss" },
             { ErrorCode.ERR_LongYinPointNotEnough, "龙印点不足" },
+            { ErrorCode.ERR_GemTalentNotExist, "宝石天赋节点不存在" },
+            { ErrorCode.ERR_GemTalentActivated, "该宝石天赋已激活" },
+            { ErrorCode.ERR_GemTalentAreaLock, "宝石点数不足，区域未解锁" },
+            { ErrorCode.ERR_GemTalentPointNotEnough, "可用宝石点数不足" },
+            { ErrorCode.ERR_GemTalentNoneActivated, "没有已激活的宝石天赋" },
         };
     }
 }

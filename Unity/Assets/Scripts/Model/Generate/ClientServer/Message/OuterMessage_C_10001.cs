@@ -34788,6 +34788,130 @@ namespace ET
         }
     }
 
+    // 宝石天赋激活
+    [MemoryPackable]
+    [Message(OuterMessage.C2M_GemTalentActiveRequest)]
+    [ResponseType(nameof(M2C_GemTalentActiveResponse))]
+    public partial class C2M_GemTalentActiveRequest : MessageObject, ILocationRequest
+    {
+        public static C2M_GemTalentActiveRequest Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(C2M_GemTalentActiveRequest), isFromPool) as C2M_GemTalentActiveRequest;
+        }
+
+        [MemoryPackOrder(89)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(0)]
+        public int GemTalentId { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.GemTalentId = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
+    [Message(OuterMessage.M2C_GemTalentActiveResponse)]
+    public partial class M2C_GemTalentActiveResponse : MessageObject, ILocationResponse
+    {
+        public static M2C_GemTalentActiveResponse Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(M2C_GemTalentActiveResponse), isFromPool) as M2C_GemTalentActiveResponse;
+        }
+
+        [MemoryPackOrder(89)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(90)]
+        public int Error { get; set; }
+
+        [MemoryPackOrder(91)]
+        public string Message { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.Error = default;
+            this.Message = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    // 宝石天赋重置
+    [MemoryPackable]
+    [Message(OuterMessage.C2M_GemTalentReSetRequest)]
+    [ResponseType(nameof(M2C_GemTalentReSetResponse))]
+    public partial class C2M_GemTalentReSetRequest : MessageObject, ILocationRequest
+    {
+        public static C2M_GemTalentReSetRequest Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(C2M_GemTalentReSetRequest), isFromPool) as C2M_GemTalentReSetRequest;
+        }
+
+        [MemoryPackOrder(89)]
+        public int RpcId { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
+    [Message(OuterMessage.M2C_GemTalentReSetResponse)]
+    public partial class M2C_GemTalentReSetResponse : MessageObject, ILocationResponse
+    {
+        public static M2C_GemTalentReSetResponse Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(M2C_GemTalentReSetResponse), isFromPool) as M2C_GemTalentReSetResponse;
+        }
+
+        [MemoryPackOrder(89)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(90)]
+        public int Error { get; set; }
+
+        [MemoryPackOrder(91)]
+        public string Message { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.Error = default;
+            this.Message = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
     public static class OuterMessage
     {
         public const ushort HttpGetRouterResponse = 10002;
@@ -35713,5 +35837,9 @@ namespace ET
         public const ushort M2C_LongYinActiveResponse = 10922;
         public const ushort C2M_LongYinReSetRequest = 10923;
         public const ushort M2C_LongYinReSetResponse = 10924;
+        public const ushort C2M_GemTalentActiveRequest = 10925;
+        public const ushort M2C_GemTalentActiveResponse = 10926;
+        public const ushort C2M_GemTalentReSetRequest = 10927;
+        public const ushort M2C_GemTalentReSetResponse = 10928;
     }
 }

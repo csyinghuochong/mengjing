@@ -2317,6 +2317,13 @@ namespace ET.Server
                 AddUpdateProDicList(longYinProList[i].HideID, longYinProList[i].HideValue, UpdateProDicList);
             }
 
+            //宝石天赋系统
+            List<PropertyValue> gemTalentProList = unit.GetComponent<SkillSetComponentS>().GetGemTalentRoleProLists();
+            for (int i = 0; i < gemTalentProList.Count; i++)
+            {
+                AddUpdateProDicList(gemTalentProList[i].HideID, gemTalentProList[i].HideValue, UpdateProDicList);
+            }
+
             List<PropertyValue> skillProList_8 = unit.GetComponent<SkillSetComponentS>().GetSkillRoleProLists_8();
             for (int i = 0; i < skillProList_8.Count; i++)
             {

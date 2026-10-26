@@ -7980,3 +7980,32 @@ message M2C_LongYinReSetResponse // ILocationResponse
 	int32 Error = 91;
 	string Message = 92;
 }
+
+//宝石天赋激活
+//ResponseType M2C_GemTalentActiveResponse
+message C2M_GemTalentActiveRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int32 GemTalentId = 1;
+}
+
+message M2C_GemTalentActiveResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}
+
+//宝石天赋重置
+//ResponseType M2C_GemTalentReSetResponse
+message C2M_GemTalentReSetRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+}
+
+message M2C_GemTalentReSetResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}
