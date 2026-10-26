@@ -163,6 +163,7 @@ namespace ET
             AffinityMax = _buf.ReadInt();
             Fun = _buf.ReadInt();
             Violence = _buf.ReadInt();
+            GemTalentResetCostDiamond = _buf.ReadInt();
 
             PostInit();
         }
@@ -879,12 +880,18 @@ namespace ET
         /// </summary>
         public int Violence;
 
+        /// <summary>
+        /// 宝石天赋重置消耗钻石
+        /// </summary>
+        public int GemTalentResetCostDiamond;
+
 
         public const int __ID__ = -2026784688;
         public override int GetTypeId() => __ID__;
 
         public  void ResolveRef()
         {
+            
             
             
             
@@ -1174,6 +1181,7 @@ namespace ET
             + "AffinityMax:" + AffinityMax + ","
             + "Fun:" + Fun + ","
             + "Violence:" + Violence + ","
+            + "GemTalentResetCostDiamond:" + GemTalentResetCostDiamond + ","
             + "}";
         }
 

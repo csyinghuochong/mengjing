@@ -591,6 +591,10 @@ namespace ET
         /// 最大暴力值
         /// </summary>
         public int Violence => _data.Violence;
+        /// <summary>
+        /// 宝石天赋重置消耗钻石
+        /// </summary>
+        public int GemTalentResetCostDiamond => _data.GemTalentResetCostDiamond;
         
         public void ResolveRef()
         {
