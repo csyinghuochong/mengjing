@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Gel_Deposits_Cyan
+  m_Shader: {fileID: 4800000, guid: 69dcf0e90c0a4c248b390ee68af6a2f9, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: 3010
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs: []
+    m_Ints: []
+    m_Floats:
+    - _FlowSpeed: 0.15
+    - _RippleStrength: 0.055
+    - _Smoothness: 0.88
+    m_Colors:
+    - _BaseColor: {r: 0.16, g: 0.56, b: 0.68, a: 0.82}
+    - _EmissionColor: {r: 0.0068, g: 0.04845, b: 0.0663, a: 0.085}
+  m_BuildTextureStacks: []
