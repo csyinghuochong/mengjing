@@ -26,6 +26,7 @@ namespace ET.Client
             self.TianFuPlan = skillSetInfo.TianFuPlan;
             self.SkillAugmentList = skillSetInfo.SkillAugmentList;
             self.LongYinList = skillSetInfo.LongYinList;
+            self.GemTalentList = skillSetInfo.GemTalentList;
         }
 
         public static void UpdateSkillAugment(this SkillSetComponentC self, SkillAugmentInfo skillAugmentInfo)

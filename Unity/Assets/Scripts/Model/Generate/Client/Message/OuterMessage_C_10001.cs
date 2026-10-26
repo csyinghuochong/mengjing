@@ -8441,6 +8441,9 @@ namespace ET
         [MemoryPackOrder(6)]
         public List<KeyValuePairInt> LongYinList { get; set; } = new();
 
+        [MemoryPackOrder(7)]
+        public List<int> GemTalentList { get; set; } = new();
+
         public override void Dispose()
         {
             if (!this.IsFromPool)
@@ -8455,6 +8458,7 @@ namespace ET
             this.TianFuPlan = default;
             this.SkillAugmentList.Clear();
             this.LongYinList.Clear();
+            this.GemTalentList.Clear();
 
             ObjectPool.Instance.Recycle(this);
         }

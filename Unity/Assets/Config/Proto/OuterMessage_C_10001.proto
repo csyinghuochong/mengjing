@@ -1943,6 +1943,7 @@ message SkillSetInfo
 	int32 TianFuPlan = 5;
 	repeated SkillAugmentInfo SkillAugmentList = 6;
 	repeated KeyValuePairInt LongYinList = 7;
+	repeated int32 GemTalentList = 8;
 }
 
 //技能天赋更新

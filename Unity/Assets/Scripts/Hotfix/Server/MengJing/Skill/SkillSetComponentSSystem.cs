@@ -2160,6 +2160,7 @@ namespace ET.Server
             SkillSetInfo.LifeShieldList = self.LifeShieldList;
             SkillSetInfo.SkillAugmentList = self.SkillAugmentList;
             SkillSetInfo.LongYinList = self.LongYinList;
+            SkillSetInfo.GemTalentList = self.GemTalentList;
             MapMessageHelper.SendToClient(unit, M2C_SkillSetMessage);
         }
         

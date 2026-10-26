@@ -17,6 +17,11 @@ namespace ET.Client
         /// 已激活的龙印 记录龙印id->等级
         /// </summary>
         public List<KeyValuePairInt> LongYinList { get; set; } = new();
+
+        /// <summary>
+        /// 已激活的宝石天赋节点id（GemTalentConfig.Id）
+        /// </summary>
+        public List<int> GemTalentList { get; set; } = new();
         
         /// <summary>
         /// 玩家携带的技能列表

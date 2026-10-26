@@ -21,6 +21,11 @@ namespace ET.Server
         public List<KeyValuePairInt> LongYinList { get; set; } = new();
 
         /// <summary>
+        /// 已激活的宝石天赋节点id
+        /// </summary>
+        public List<int> GemTalentList { get; set; } = new();
+
+        /// <summary>
         /// 玩家携带的技能列表
         /// </summary>
         public List<SkillPro> SkillList { get; set; } = new List<SkillPro>();
