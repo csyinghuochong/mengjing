@@ -23,8 +23,6 @@ namespace ET
         {
             Id = _buf.ReadInt();
             {int __n0 = _buf.ReadSize(); Stories = new int[__n0];for(var __index0 = 0 ; __index0 < __n0 ; __index0++) { int __e0;__e0 = _buf.ReadInt(); Stories[__index0] = __e0;}}
-            EntryTaskId = _buf.ReadInt();
-            EntryTaskId_Ref = null;
 
             PostInit();
         }
@@ -40,16 +38,9 @@ namespace ET
         public int Id;
 
         /// <summary>
-        /// 选项
+        /// 故事
         /// </summary>
         public int[] Stories;
-
-        /// <summary>
-        /// 解锁剧情系统的主线任务ID
-        /// </summary>
-        public int EntryTaskId;
-
-        public TaskConfig EntryTaskId_Ref { get; private set; }
 
 
         public const int __ID__ = -447699174;
@@ -59,7 +50,6 @@ namespace ET
         {
             
             
-            EntryTaskId_Ref = TaskConfigCategory.Instance.GetOrDefault(EntryTaskId);
         }
 
         public override string ToString()
@@ -67,7 +57,6 @@ namespace ET
             return "{ "
             + "Id:" + Id + ","
             + "Stories:" + Luban.StringUtil.CollectionToString(Stories) + ","
-            + "EntryTaskId:" + EntryTaskId + ","
             + "}";
         }
 

@@ -22,6 +22,8 @@ namespace ET
         public StoryConfig(ByteBuf _buf)
         {
             Id = _buf.ReadInt();
+            EntryTaskId = _buf.ReadInt();
+            EntryTaskId_Ref = null;
             {int __n0 = _buf.ReadSize(); Choice = new int[__n0];for(var __index0 = 0 ; __index0 < __n0 ; __index0++) { int __e0;__e0 = _buf.ReadInt(); Choice[__index0] = __e0;}}
 
             PostInit();
@@ -38,6 +40,13 @@ namespace ET
         public int Id;
 
         /// <summary>
+        /// 解锁剧情系统的主线任务ID
+        /// </summary>
+        public int EntryTaskId;
+
+        public TaskConfig EntryTaskId_Ref { get; private set; }
+
+        /// <summary>
         /// 选项
         /// </summary>
         public int[] Choice;
@@ -49,6 +58,7 @@ namespace ET
         public  void ResolveRef()
         {
             
+            EntryTaskId_Ref = TaskConfigCategory.Instance.GetOrDefault(EntryTaskId);
             
         }
 
@@ -56,6 +66,7 @@ namespace ET
         {
             return "{ "
             + "Id:" + Id + ","
+            + "EntryTaskId:" + EntryTaskId + ","
             + "Choice:" + Luban.StringUtil.CollectionToString(Choice) + ","
             + "}";
         }

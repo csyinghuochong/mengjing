@@ -107,22 +107,7 @@ namespace ET.Server
                 return ErrorCode.ERR_ModifyData;
             }
 
-            StoryChapterConfig storyChapterConfig = null;
-            foreach (StoryChapterConfig config in StoryChapterConfigCategory.Instance.GetAll().Values)
-            {
-                if (Array.IndexOf(config.Stories, storyId) >= 0)
-                {
-                    storyChapterConfig = config;
-                    break;
-                }
-            }
-
-            if (storyChapterConfig == null)
-            {
-                return ErrorCode.ERR_ModifyData;
-            }
-
-            if (storyChapterConfig.EntryTaskId != 0 && !self.IsHaveTask(storyChapterConfig.EntryTaskId))
+            if (storyConfig.EntryTaskId != 0 && !self.IsHaveTask(storyConfig.EntryTaskId))
             {
                 return ErrorCode.Pre_Condition_Error;
             }
