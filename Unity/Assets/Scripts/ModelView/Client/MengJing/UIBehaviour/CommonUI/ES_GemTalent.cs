@@ -1,4 +1,5 @@
 ﻿
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 namespace ET.Client
@@ -7,6 +8,23 @@ namespace ET.Client
 	[EnableMethod]
 	public  class ES_GemTalent : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy 
 	{
+		/// <summary>
+		/// 天赋树上的节点，按 Left 下的 GemTalentItem_xxxxx 静态节点创建
+		/// </summary>
+		public List<EntityRef<ES_GemTalentItem>> GemTalentItems = new();
+		/// <summary>
+		/// 当前选中的天赋节点id（GemTalentConfig.Id），0表示未选中
+		/// </summary>
+		public int SelectGemTalentId;
+		/// <summary>
+		/// 区域遮罩节点，按区域id-1索引
+		/// </summary>
+		public RectTransform[] AreaLockRectTransforms = new RectTransform[3];
+		/// <summary>
+		/// 区域遮罩上的解锁条件文本（累计N宝石点数解锁）
+		/// </summary>
+		public Text[] AreaLockNameTexts = new Text[3];
+
 		public UnityEngine.UI.Button E_ReturnButton
      	{
      		get

@@ -276,6 +276,7 @@ namespace ET.Client
         public static void OpenGemTalent(this DlgRole self)
         {
             self.View.ES_GemTalent.uiTransform.gameObject.SetActive(true);
+            self.View.ES_GemTalent.OnUpdateUI();
         }
 
         public static void CloseGemTalent(this DlgRole self)
