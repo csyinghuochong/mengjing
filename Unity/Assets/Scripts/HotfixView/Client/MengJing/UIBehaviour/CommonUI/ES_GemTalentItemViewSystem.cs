@@ -7,11 +7,18 @@ namespace ET.Client
     [FriendOfAttribute(typeof(ES_GemTalentItem))]
     public static partial class ES_GemTalentItemSystem
     {
+        /// <summary>
+        /// 未解锁/未激活时节点底图的透明度
+        /// </summary>
+        private const float InactiveAlpha = 0.4f;
+
         [EntitySystem]
         private static void Awake(this ES_GemTalentItem self, Transform transform)
         {
             self.uiTransform = transform;
 
+            self.E_ImageBGImage = UIFindHelper.FindDeepChild<Image>(transform.gameObject, "ImageBG");
+            self.ImageBGColor = self.E_ImageBGImage.color;
             self.E_ImageIconImage = UIFindHelper.FindDeepChild<Image>(transform.gameObject, "ImageIcon");
             self.E_ImageIconButton = UIFindHelper.FindDeepChild<Button>(transform.gameObject, "ImageIcon");
             self.E_ImageSelectImage = UIFindHelper.FindDeepChild<Image>(transform.gameObject, "ImageSelect");
@@ -25,6 +32,7 @@ namespace ET.Client
         {
             self.GemTalentId = 0;
             self.uiTransform = null;
+            self.E_ImageBGImage = null;
             self.E_ImageIconImage = null;
             self.E_ImageIconButton = null;
             self.E_ImageSelectImage = null;
@@ -49,13 +57,16 @@ namespace ET.Client
         }
 
         /// <summary>
-        /// unlocked：所在区域是否已解锁（未解锁不能选择）；active：是否已激活（未激活图标置灰）；selected：是否当前选中
+        /// unlocked：所在区域是否已解锁（未解锁不能选择）；active：是否已激活（未激活底图变淡）；selected：是否当前选中
         /// </summary>
         public static void OnUpdateUI(this ES_GemTalentItem self, bool unlocked, bool active, bool selected)
         {
-            //未解锁区域内的天赋不能选择，未解锁或未激活的图标都置灰
+            //未解锁区域内的天赋不能选择，未解锁或未激活的底图降低透明度
             self.E_ImageIconButton.interactable = unlocked;
-            CommonViewHelper.SetImageGray(self.Root(), self.E_ImageIconImage.gameObject, !unlocked || !active);
+
+            Color bgColor = self.ImageBGColor;
+            bgColor.a = !unlocked || !active ? InactiveAlpha : self.ImageBGColor.a;
+            self.E_ImageBGImage.color = bgColor;
 
             self.E_ImageSelectImage.gameObject.SetActive(selected);
         }

@@ -16,6 +16,16 @@ namespace ET.Client
 
         public Transform uiTransform;
 
+        /// <summary>
+        /// 节点底图，未解锁/未激活时降低它的透明度
+        /// </summary>
+        public Image E_ImageBGImage;
+
+        /// <summary>
+        /// 底图原始颜色，恢复激活状态时用
+        /// </summary>
+        public Color ImageBGColor;
+
         public Image E_ImageIconImage;
         public Button E_ImageIconButton;
         public Image E_ImageSelectImage;
