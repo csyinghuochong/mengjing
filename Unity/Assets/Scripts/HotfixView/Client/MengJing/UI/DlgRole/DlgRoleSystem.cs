@@ -67,6 +67,7 @@ namespace ET.Client
     }
 
     [FriendOf(typeof(ES_RoleZodiac))]
+    [FriendOf(typeof(ES_GemTalent))]
     [FriendOf(typeof(ES_RoleQiangHua))]
     [FriendOf(typeof(ES_RoleHuiShou))]
     [FriendOf(typeof(ES_EquipSet))]
@@ -270,6 +271,16 @@ namespace ET.Client
             {
                 self.View.ES_RoleZodiac.OnUpdate();
             }
+        }
+
+        public static void OpenGemTalent(this DlgRole self)
+        {
+            self.View.ES_GemTalent.uiTransform.gameObject.SetActive(true);
+        }
+
+        public static void CloseGemTalent(this DlgRole self)
+        {
+            self.View.ES_GemTalent.uiTransform.gameObject.SetActive(false);
         }
     }
 }

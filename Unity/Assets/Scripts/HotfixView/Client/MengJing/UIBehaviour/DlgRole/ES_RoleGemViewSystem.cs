@@ -27,6 +27,7 @@ namespace ET.Client
 
             self.E_ItemTypeSetToggleGroup.AddListener(self.OnItemTypeSet);
             self.E_BagItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnBagItemsRefresh);
+            self.E_GemTalentButton.AddListener(self.OnGemTalentButton);
             self.E_ItemTypeSetToggleGroup.OnSelectIndex(0);
             self.XiangQianIndex = -1;
         }
@@ -175,6 +176,11 @@ namespace ET.Client
                 ES_RoleGemHole esRoleGemHole = self.GemHoleList[i];
                 esRoleGemHole.SetSelected(i == index);
             }
+        }
+
+        private static void OnGemTalentButton(this ES_RoleGem self)
+        {
+            self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgRole>()?.OpenGemTalent();
         }
     }
 }

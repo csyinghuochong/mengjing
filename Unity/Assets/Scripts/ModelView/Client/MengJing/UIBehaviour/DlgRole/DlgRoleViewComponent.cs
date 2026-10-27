@@ -258,6 +258,27 @@ namespace ET.Client
 		        return this.m_es_roleZodiac;
 	        }
         }
+
+        public ES_GemTalent ES_GemTalent
+        {
+	        get
+	        {
+		        ES_GemTalent es = this.m_es_gemTalent;
+		        if (es == null)
+		        {
+			        string path = "Assets/Bundles/UI/Common/ES_GemTalent.prefab";
+			        GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>()
+					        .LoadAssetSync<GameObject>(path);
+			        GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
+			        go.SetActive(true);
+			        this.AssetList.Add(path);
+			        this.m_es_gemTalent = this.AddChild<ES_GemTalent, Transform>(go.transform);
+			        go.SetActive(false);
+		        }
+
+		        return this.m_es_gemTalent;
+	        }
+        }
 		
 		public void DestroyWidget()
 		{
@@ -274,6 +295,7 @@ namespace ET.Client
 			this.m_es_rolehuishou = null;
 			this.m_es_roleqianghua = null;
 			this.m_es_roleZodiac = null;
+			this.m_es_gemTalent = null;
 			this.uiTransform = null;
 			
 			ResourcesLoaderComponent resourcesLoaderComponent = this.Root().GetComponent<ResourcesLoaderComponent>();
@@ -298,6 +320,7 @@ namespace ET.Client
 		private EntityRef<ES_RoleHuiShou> m_es_rolehuishou = null;
 		private EntityRef<ES_RoleQiangHua> m_es_roleqianghua = null;
 		private EntityRef<ES_RoleZodiac> m_es_roleZodiac = null;
+		private EntityRef<ES_GemTalent> m_es_gemTalent = null;
 		public Transform uiTransform = null;
 	}
 }
