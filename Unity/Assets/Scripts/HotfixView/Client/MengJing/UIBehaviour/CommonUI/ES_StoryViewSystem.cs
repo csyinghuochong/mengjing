@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace ET.Client
@@ -127,19 +128,7 @@ namespace ET.Client
                 }
             }
 
-            self.ShowStoryConfigs.Clear();
-            if (chapterConfig.Stories != null)
-            {
-                for (int i = 0; i < chapterConfig.Stories.Length; i++)
-                {
-                    StoryConfig storyConfig = StoryConfigCategory.Instance.GetOrDefault(chapterConfig.Stories[i]);
-                    if (storyConfig != null)
-                    {
-                        self.ShowStoryConfigs.Add(storyConfig);
-                    }
-                }
-            }
-
+            self.RefreshShowStoryConfigs();
             self.RefreshStoryItems();
             if (self.ShowStoryConfigs.Count > 0)
             {
@@ -148,6 +137,28 @@ namespace ET.Client
             else
             {
                 self.ClearStoryDetails();
+            }
+        }
+
+        /// <summary>
+        /// 只显示 EntryTaskId 已接取，且前面全部剧情都已完成选择的剧情。
+        /// </summary>
+        private static void RefreshShowStoryConfigs(this ES_Story self)
+        {
+            self.ShowStoryConfigs.Clear();
+            StoryChapterConfig chapterConfig = StoryChapterConfigCategory.Instance.GetOrDefault(self.SelectedChapterId);
+            if (chapterConfig == null || chapterConfig.Stories == null)
+            {
+                return;
+            }
+
+            for (int i = 0; i < chapterConfig.Stories.Length; i++)
+            {
+                StoryConfig storyConfig = StoryConfigCategory.Instance.GetOrDefault(chapterConfig.Stories[i]);
+                if (storyConfig != null && self.IsStoryEntryTaskAccepted(storyConfig) && self.IsPreviousStoriesChosen(storyConfig.Id))
+                {
+                    self.ShowStoryConfigs.Add(storyConfig);
+                }
             }
         }
 
@@ -301,6 +312,8 @@ namespace ET.Client
             {
                 self.SelectedChoiceId = storyInfo.ChoiceId;
             }
+            self.RefreshChapterItems();
+            self.RefreshShowStoryConfigs();
             self.RefreshStoryItems();
             self.RefreshChoiceItems();
             self.RefreshStoryReply(storyInfo);
@@ -475,7 +488,49 @@ namespace ET.Client
             self.E_ConfirmChoiceButton.gameObject.SetActive(storyInfo == null);
         }
 
+        /// <summary>
+        /// 章节是否解锁：章节中第一个剧情的 EntryTaskId 已接取，且它前面的全部剧情都已完成选择。
+        /// </summary>
         private static bool IsChapterUnlocked(this ES_Story self, StoryChapterConfig config)
+        {
+            if (config.Stories == null || config.Stories.Length == 0)
+            {
+                return false;
+            }
+
+            StoryConfig firstStoryConfig = StoryConfigCategory.Instance.GetOrDefault(config.Stories[0]);
+            return firstStoryConfig != null
+                   && self.IsStoryEntryTaskAccepted(firstStoryConfig)
+                   && self.IsPreviousStoriesChosen(firstStoryConfig.Id);
+        }
+
+        /// <summary>
+        /// 当前剧情之前的全部剧情是否都已完成选择。
+        /// </summary>
+        private static bool IsPreviousStoriesChosen(this ES_Story self, int storyId)
+        {
+            TaskComponentC taskComponent = self.Root().GetComponent<TaskComponentC>();
+            List<StoryConfig> storyConfigs = StoryConfigCategory.Instance.DataList;
+            for (int i = 0; i < storyConfigs.Count; i++)
+            {
+                if (storyConfigs[i].Id == storyId)
+                {
+                    return true;
+                }
+
+                if (!StoryHelper.ContainsStory(taskComponent.StoryInfoList, storyConfigs[i].Id))
+                {
+                    return false;
+                }
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// 剧情的 EntryTaskId 是否已接取（EntryTaskId 为 0 表示无需接取）。
+        /// </summary>
+        private static bool IsStoryEntryTaskAccepted(this ES_Story self, StoryConfig config)
         {
             if (config.EntryTaskId == 0)
             {

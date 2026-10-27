@@ -112,6 +112,31 @@ namespace ET.Server
                 return ErrorCode.Pre_Condition_Error;
             }
 
+            // 当前剧情之前的全部剧情都需要已完成选择
+            List<StoryConfig> storyConfigs = StoryConfigCategory.Instance.DataList;
+            int storyIndex = -1;
+            for (int i = 0; i < storyConfigs.Count; i++)
+            {
+                if (storyConfigs[i].Id == storyId)
+                {
+                    storyIndex = i;
+                    break;
+                }
+            }
+
+            if (storyIndex < 0)
+            {
+                return ErrorCode.ERR_ModifyData;
+            }
+
+            for (int i = 0; i < storyIndex; i++)
+            {
+                if (!StoryHelper.ContainsStory(self.StoryInfoList, storyConfigs[i].Id))
+                {
+                    return ErrorCode.Pre_Condition_Error;
+                }
+            }
+
             for (int i = 0; i < self.StoryInfoList.Count; i++)
             {
                 if (self.StoryInfoList[i].StroryId != storyId)
