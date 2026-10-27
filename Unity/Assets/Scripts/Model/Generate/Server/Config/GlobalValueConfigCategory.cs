@@ -23,6 +23,8 @@ namespace ET
             int n = _buf.ReadSize();
             if (n != 1) throw new SerializationException("table mode=one, but size != 1");
             _data = global::ET.GlobalValueConfig.DeserializeGlobalValueConfig(_buf);
+
+            PostInit();
         }
 
 

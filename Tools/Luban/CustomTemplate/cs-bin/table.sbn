@@ -177,6 +177,8 @@ using System.Collections.Generic;
             int n = _buf.ReadSize();
             if (n != 1) throw new SerializationException("table mode=one, but size != 1");
             {{deserialize '_buf' '_data' value_type}}
+
+            PostInit();
         }
 
 
