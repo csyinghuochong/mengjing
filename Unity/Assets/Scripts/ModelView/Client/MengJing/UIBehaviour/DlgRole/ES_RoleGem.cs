@@ -254,6 +254,40 @@ namespace ET.Client
      		}
      	}
 
+		public UnityEngine.UI.Button E_GemTalentButton
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_GemTalentButton == null )
+     			{
+		    		this.m_E_GemTalentButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Left/E_GemTalent");
+     			}
+     			return this.m_E_GemTalentButton;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_GemTalentImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_GemTalentImage == null )
+     			{
+		    		this.m_E_GemTalentImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Left/E_GemTalent");
+     			}
+     			return this.m_E_GemTalentImage;
+     		}
+     	}
+
 		public UnityEngine.UI.ToggleGroup E_ItemTypeSetToggleGroup
      	{
      		get
@@ -332,6 +366,8 @@ namespace ET.Client
 			this.m_es_rolegemhole_2 = null;
 			this.m_es_rolegemhole_3 = null;
 			this.m_es_commonitem = null;
+			this.m_E_GemTalentButton = null;
+			this.m_E_GemTalentImage = null;
 			this.m_E_ItemTypeSetToggleGroup = null;
 			this.m_E_BagItemsImage = null;
 			this.m_E_BagItemsLoopVerticalScrollRect = null;
@@ -351,6 +387,8 @@ namespace ET.Client
 		private EntityRef<ES_RoleGemHole> m_es_rolegemhole_2 = null;
 		private EntityRef<ES_RoleGemHole> m_es_rolegemhole_3 = null;
 		private EntityRef<ES_CommonItem> m_es_commonitem = null;
+		private UnityEngine.UI.Button m_E_GemTalentButton = null;
+		private UnityEngine.UI.Image m_E_GemTalentImage = null;
 		private UnityEngine.UI.ToggleGroup m_E_ItemTypeSetToggleGroup = null;
 		private UnityEngine.UI.Image m_E_BagItemsImage = null;
 		private UnityEngine.UI.LoopVerticalScrollRect m_E_BagItemsLoopVerticalScrollRect = null;
