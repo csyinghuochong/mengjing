@@ -172,24 +172,67 @@ namespace ET.Client
         }
 
         /// <summary>
-        /// 刷新5个龙印分支的觉醒状态显示：分支下的龙印全部激活且升到满级才算觉醒，显示Active，否则显示Inactive
+        /// 刷新5个龙印分支的激活状态显示：分支第一个龙印需要击杀的Boss击杀过，显示Active，否则显示Inactive
         /// </summary>
         private static void RefreshLongYinBranchState(this ES_SkillLongYin self, int occ, SkillSetComponentC skillSetComponent)
         {
+            UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
+
             Transform content = self.EG_LongYinContentRectTransform;
             for (int branch = 1; branch <= 5; branch++)
             {
-                bool complete = skillSetComponent.IsLongYinTypeComplete(occ, branch);
-
                 Transform branchTrans = content.Find($"LongYinActive_{branch}");
                 if (branchTrans == null)
                 {
                     continue;
                 }
 
-                branchTrans.Find("Active")?.gameObject.SetActive(complete);
-                branchTrans.Find("Inactive")?.gameObject.SetActive(!complete);
+                bool activated = self.IsLongYinBranchActivated(occ, branch, skillSetComponent, userInfoComponent);
+
+                branchTrans.Find("Active")?.gameObject.SetActive(activated);
+                branchTrans.Find("Inactive")?.gameObject.SetActive(!activated);
             }
+        }
+
+        /// <summary>
+        /// 分支是否已激活：按分支第一个龙印配置的需要击杀Boss判断，全部击杀过才算激活；
+        /// 该龙印没有配置Boss时，退回"分支龙印全部激活且满级"的判断
+        /// </summary>
+        private static bool IsLongYinBranchActivated(this ES_SkillLongYin self, int occ, int branch,
+            SkillSetComponentC skillSetComponent, UserInfoComponentC userInfoComponent)
+        {
+            LongYinConfig firstConfig = LongYinHelper.GetFirstConfig(occ, branch);
+            if (firstConfig == null)
+            {
+                return false;
+            }
+
+            bool haveBoss = false;
+            for (int i = 0; i < firstConfig.NeedKillBoss.Length; i++)
+            {
+                int bossId = firstConfig.NeedKillBoss[i];
+                if (bossId == 0)
+                {
+                    continue;
+                }
+
+                haveBoss = true;
+
+                //击杀过的Boss不再提示，但击杀数可能为0，两个都要判断
+                if (userInfoComponent.UserInfo.DefeatedBossIds.Contains(bossId) || userInfoComponent.GetMonsterKillNumber(bossId) > 0)
+                {
+                    continue;
+                }
+
+                return false;
+            }
+
+            if (!haveBoss)
+            {
+                return skillSetComponent.IsLongYinTypeComplete(occ, branch);
+            }
+
+            return true;
         }
 
         /// <summary>
@@ -271,6 +314,13 @@ namespace ET.Client
             }
 
             self.E_YinAwakenStateText.text = unlocked ? "已解锁" : "未解锁";
+
+            //未解锁时显示解锁条件：需要几条分支全部点满
+            self.E_YinAwakenConditionText.gameObject.SetActive(!unlocked);
+            if (!unlocked)
+            {
+                self.E_YinAwakenConditionText.text = $"{needTypeCount}条分支全部点满";
+            }
 
             Image icon = UIFindHelper.FindDeepChild<Image>(self.uiTransform.gameObject, "EG_LongYinAwaken/Icon");
             if (icon != null)

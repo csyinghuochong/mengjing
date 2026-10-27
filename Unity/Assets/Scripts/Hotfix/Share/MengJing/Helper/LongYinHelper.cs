@@ -120,6 +120,30 @@ namespace ET
         }
 
         /// <summary>
+        /// 获取指定职业、指定类型的第一个龙印配置(Id最小的那个)，没有配置返回null
+        /// </summary>
+        public static LongYinConfig GetFirstConfig(int occ, int type)
+        {
+            LongYinConfig firstConfig = null;
+            List<LongYinConfig> configList = LongYinConfigCategory.Instance.DataList;
+            for (int i = 0; i < configList.Count; i++)
+            {
+                LongYinConfig longYinConfig = configList[i];
+                if (longYinConfig.Occ != occ || (int)longYinConfig.Type != type)
+                {
+                    continue;
+                }
+
+                if (firstConfig == null || longYinConfig.Id < firstConfig.Id)
+                {
+                    firstConfig = longYinConfig;
+                }
+            }
+
+            return firstConfig;
+        }
+
+        /// <summary>
         /// 获取指定职业的觉醒龙印配置(双龙/三龙/五龙)，没有配置返回null
         /// </summary>
         public static LongYinConfig GetAwakenConfig(int occ, LongYinType type)

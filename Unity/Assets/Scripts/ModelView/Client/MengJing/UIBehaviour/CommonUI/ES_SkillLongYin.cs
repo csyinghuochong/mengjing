@@ -288,6 +288,23 @@ namespace ET.Client
      		}
      	}
 
+		public UnityEngine.UI.Text E_YinAwakenConditionText
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_YinAwakenConditionText == null )
+     			{
+		    		this.m_E_YinAwakenConditionText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"EG_LongYinAwaken/E_YinAwakenCondition");
+     			}
+     			return this.m_E_YinAwakenConditionText;
+     		}
+     	}
+
 		public UnityEngine.UI.Text E_YinAwakenStateText
      	{
      		get
@@ -335,6 +352,7 @@ namespace ET.Client
 			this.m_EG_LongYinAwakenRectTransform = null;
 			this.m_E_LongYinAwakenNameText = null;
 			this.m_E_LongYinAwakenDescText = null;
+			this.m_E_YinAwakenConditionText = null;
 			this.m_E_YinAwakenStateText = null;
 			this.uiTransform = null;
 		}
@@ -355,6 +373,7 @@ namespace ET.Client
 		private UnityEngine.RectTransform m_EG_LongYinAwakenRectTransform = null;
 		private UnityEngine.UI.Text m_E_LongYinAwakenNameText = null;
 		private UnityEngine.UI.Text m_E_LongYinAwakenDescText = null;
+		private UnityEngine.UI.Text m_E_YinAwakenConditionText = null;
 		private UnityEngine.UI.Text m_E_YinAwakenStateText = null;
 		public Transform uiTransform = null;
 	}
