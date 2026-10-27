@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace ET.Client
@@ -380,10 +381,29 @@ namespace ET.Client
                 if (show)
                 {
                     item.OnUpdateUI(skillIds[i], ABAtlasTypes.RoleSkillIcon);
+                    self.BindSkillItemScrollDrag(item);
                 }
             }
 
             self.E_CommonSkillItemsScrollRect.verticalNormalizedPosition = 1f;
+        }
+
+        /// <summary>
+        /// 技能图标上挂有 EventTrigger（点击弹出技能tips），它会拦截拖拽事件导致列表无法滑动。
+        /// 这里把拖拽事件转发给父级 ScrollRect，使在技能图标上上下拖动也能滑动列表。
+        /// </summary>
+        private static void BindSkillItemScrollDrag(this ES_MonsterTuJian self, Scroll_Item_CommonSkillItem item)
+        {
+            ScrollRect scrollRect = self.E_CommonSkillItemsScrollRect;
+            EventTrigger eventTrigger = item.E_ImageIconEventTrigger;
+
+            // OnUpdateUI 可能因配置缺失提前返回而没有清空事件，先移除旧的拖拽事件避免重复注册。
+            eventTrigger.triggers.RemoveAll(entry => entry.eventID == EventTriggerType.BeginDrag ||
+                                                    entry.eventID == EventTriggerType.Drag ||
+                                                    entry.eventID == EventTriggerType.EndDrag);
+            eventTrigger.RegisterEvent(EventTriggerType.BeginDrag, pdata => scrollRect.OnBeginDrag(pdata as PointerEventData));
+            eventTrigger.RegisterEvent(EventTriggerType.Drag, pdata => scrollRect.OnDrag(pdata as PointerEventData));
+            eventTrigger.RegisterEvent(EventTriggerType.EndDrag, pdata => scrollRect.OnEndDrag(pdata as PointerEventData));
         }
 
         private static void RefreshRewards(this ES_MonsterTuJian self, int monsterId)
