@@ -1943,7 +1943,6 @@ message SkillSetInfo
 	int32 TianFuPlan = 5;
 	repeated SkillAugmentInfo SkillAugmentList = 6;
 	repeated KeyValuePairInt LongYinList = 7;
-	repeated int32 GemTalentList = 8;
 }
 
 //技能天赋更新
@@ -7994,6 +7993,7 @@ message M2C_GemTalentActiveResponse // ILocationResponse
 	int32 RpcId = 90;
 	int32 Error = 91;
 	string Message = 92;
+	GemTalentInfo Info = 1;
 }
 
 //宝石天赋重置
@@ -8008,4 +8008,33 @@ message M2C_GemTalentReSetResponse // ILocationResponse
 	int32 RpcId = 90;
 	int32 Error = 91;
 	string Message = 92;
+	GemTalentInfo Info = 1;
+}
+
+//宝石天赋数据
+message GemTalentInfo
+{
+	repeated int32 GemTalentList = 1;
+	int32 GemTalentMaxPoint = 2;
+}
+
+//请求宝石天赋数据
+//ResponseType M2C_GemTalentInfoResponse
+message C2M_GemTalentInfoRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+}
+
+message M2C_GemTalentInfoResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+	GemTalentInfo Info = 1;
+}
+
+//宝石天赋数据变更
+message M2C_GemTalentMessage	// IMessage
+{
+	GemTalentInfo Info = 1;
 }

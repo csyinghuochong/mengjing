@@ -105,6 +105,8 @@ namespace ET.Server
                 //消耗宝石
                 unit.GetComponent<BagComponentS>().OnCostItemData(useBagInfo.BagInfoID, 1);
                 Function_Fight.UnitUpdateProperty_Base(unit, true, true);
+                //镶嵌宝石会改变宝石点数，刷新宝石天赋的区域解锁依据并下发给客户端
+                unit.GetComponent<GemTalentComponent>().UpdateMaxPointAndSync();
             }
 
             //卸下宝石
@@ -147,6 +149,8 @@ namespace ET.Server
                 {
                     unit.GetComponent<BagComponentS    >().OnAddItemData($"{gemItemId};1", $"{ItemGetWay.GemHuiShou}_{TimeHelper.ServerNow()}");
                     Function_Fight.UnitUpdateProperty_Base(unit, true, true);
+                    //卸下宝石会改变宝石点数，刷新宝石天赋的区域解锁依据并下发给客户端
+                    unit.GetComponent<GemTalentComponent>().UpdateMaxPointAndSync();
                 }
             }
             MapMessageHelper.SendToClient(unit, m2c_bagUpdate);

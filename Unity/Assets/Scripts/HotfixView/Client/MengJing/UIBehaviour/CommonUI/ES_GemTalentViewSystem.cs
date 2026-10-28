@@ -1,5 +1,4 @@
 ﻿
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -90,19 +89,17 @@ namespace ET.Client
 		/// </summary>
 		public static void OnUpdateUI(this ES_GemTalent self)
 		{
-			SkillSetComponentC skillSetComponent = self.Root().GetComponent<SkillSetComponentC>();
-			if (skillSetComponent == null)
+			GemTalentComponentC gemTalentComponent = self.Root().GetComponent<GemTalentComponentC>();
+			if (gemTalentComponent == null)
 			{
 				return;
 			}
 
-			List<int> activeList = skillSetComponent.GemTalentList;
-			int totalPoint = skillSetComponent.GetGemTalentTotalPoint();
+			//总宝石点数由服务端算好下发，客户端不再统计装备上的宝石
+			int maxPoint = gemTalentComponent.GetMaxPoint();
 
-			self.E_AllPointText.text = $"总宝石点数：{totalPoint}";
-			//换装导致总点数低于已消耗点数时会算出负数，这里只影响显示，负数一律显示0
-			int leftPoint = GemTalentHelper.GetLeftPoint(activeList, totalPoint);
-			self.E_LeftPointText.text = $"可用宝石点数：{(leftPoint < 0 ? 0 : leftPoint)}";
+			self.E_AllPointText.text = $"总宝石点数：{maxPoint}";
+			self.E_LeftPointText.text = $"可用宝石点数：{gemTalentComponent.GetLeftPoint()}";
 
 			//区域解锁后整块遮罩直接隐藏，未解锁时显示该区域的解锁条件
 			for (int i = 0; i < self.AreaLockRectTransforms.Length; i++)
@@ -116,14 +113,14 @@ namespace ET.Client
 					lockNameText.text = $"累计{(areaConfig == null ? 0 : areaConfig.NeedTotalPoint)}宝石点数解锁";
 				}
 
-				self.AreaLockRectTransforms[i].gameObject.SetActive(!GemTalentHelper.IsAreaUnlocked(area, totalPoint));
+				self.AreaLockRectTransforms[i].gameObject.SetActive(!GemTalentHelper.IsAreaUnlocked(area, maxPoint));
 			}
 
-			//换装导致总点数下降时，已选中的节点可能重新被锁住，此时退回默认选中
+			//区域始终按总宝石点数判断，这里只防御配置变动导致的无效选中
 			if (self.SelectGemTalentId != 0)
 			{
 				GemTalentConfig selectConfig = GemTalentConfigCategory.Instance.GetOrDefault(self.SelectGemTalentId);
-				if (selectConfig == null || !GemTalentHelper.IsAreaUnlocked(selectConfig.Area, totalPoint))
+				if (selectConfig == null || !GemTalentHelper.IsAreaUnlocked(selectConfig.Area, maxPoint))
 				{
 					self.SelectGemTalentId = 0;
 				}
@@ -132,7 +129,7 @@ namespace ET.Client
 			//没有选中节点时默认选中第一个已解锁的节点
 			if (self.SelectGemTalentId == 0)
 			{
-				self.SelectGemTalentId = self.GetDefaultSelectGemTalentId(totalPoint);
+				self.SelectGemTalentId = self.GetDefaultSelectGemTalentId(maxPoint);
 			}
 
 			for (int i = 0; i < self.GemTalentItems.Count; i++)
@@ -145,15 +142,15 @@ namespace ET.Client
 					continue;
 				}
 
-				bool unlocked = GemTalentHelper.IsAreaUnlocked(gemTalentConfig.Area, totalPoint);
-				bool active = activeList.Contains(item.GemTalentId);
+				bool unlocked = GemTalentHelper.IsAreaUnlocked(gemTalentConfig.Area, maxPoint);
+				bool active = gemTalentComponent.HaveGemTalent(item.GemTalentId);
 				item.OnUpdateUI(unlocked, active, self.SelectGemTalentId == item.GemTalentId);
 			}
 
 			self.RefreshGemTalentInfo();
 		}
 
-		private static int GetDefaultSelectGemTalentId(this ES_GemTalent self, int totalPoint)
+		private static int GetDefaultSelectGemTalentId(this ES_GemTalent self, int maxPoint)
 		{
 			for (int i = 0; i < self.GemTalentItems.Count; i++)
 			{
@@ -164,7 +161,7 @@ namespace ET.Client
 					continue;
 				}
 
-				if (GemTalentHelper.IsAreaUnlocked(gemTalentConfig.Area, totalPoint))
+				if (GemTalentHelper.IsAreaUnlocked(gemTalentConfig.Area, maxPoint))
 				{
 					return gemTalentConfig.Id;
 				}
@@ -184,8 +181,8 @@ namespace ET.Client
 				return;
 			}
 
-			SkillSetComponentC skillSetComponent = self.Root().GetComponent<SkillSetComponentC>();
-			if (!GemTalentHelper.IsAreaUnlocked(gemTalentConfig.Area, skillSetComponent.GetGemTalentTotalPoint()))
+			GemTalentComponentC gemTalentComponent = self.Root().GetComponent<GemTalentComponentC>();
+			if (!GemTalentHelper.IsAreaUnlocked(gemTalentConfig.Area, gemTalentComponent.GetMaxPoint()))
 			{
 				return;
 			}
@@ -212,9 +209,8 @@ namespace ET.Client
 			self.E_GemTalentDescText.text = gemTalentConfig.Des;
 			self.E_CostPointText.text = $"消耗宝石点数：{gemTalentConfig.CostPoint}";
 
-			SkillSetComponentC skillSetComponent = self.Root().GetComponent<SkillSetComponentC>();
-			List<int> activeList = skillSetComponent.GemTalentList;
-			if (activeList.Contains(gemTalentConfig.Id))
+			GemTalentComponentC gemTalentComponent = self.Root().GetComponent<GemTalentComponentC>();
+			if (gemTalentComponent.HaveGemTalent(gemTalentConfig.Id))
 			{
 				self.E_ActiveGemTalentButton.gameObject.SetActive(false);
 				return;
@@ -222,7 +218,7 @@ namespace ET.Client
 
 			self.E_ActiveGemTalentButton.gameObject.SetActive(true);
 
-			int leftPoint = GemTalentHelper.GetLeftPoint(activeList, skillSetComponent.GetGemTalentTotalPoint());
+			int leftPoint = gemTalentComponent.GetLeftPoint();
 			bool canActive = leftPoint >= gemTalentConfig.CostPoint;
 			self.E_ActiveGemTalentButton.interactable = canActive;
 			CommonViewHelper.SetImageGray(self.Root(), self.E_ActiveGemTalentButton.gameObject, !canActive);

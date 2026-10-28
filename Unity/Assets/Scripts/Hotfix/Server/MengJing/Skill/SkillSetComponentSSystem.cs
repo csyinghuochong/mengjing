@@ -1753,6 +1753,9 @@ namespace ET.Server
 
             EquipConfig equipConfig = EquipConfigCategory.Instance.Get(itemConfig.ItemEquipID);
             self.TianFuRemove(equipConfig.TianFuId);
+
+            //卸下装备会带走上面的宝石点数，刷新宝石天赋的区域解锁依据并下发给客户端
+            self.GetParent<Unit>().GetComponent<GemTalentComponent>()?.UpdateMaxPointAndSync();
         }
 
         /// <summary>
@@ -1778,6 +1781,9 @@ namespace ET.Server
 
             EquipConfig equipConfig = EquipConfigCategory.Instance.Get(itemConfig.ItemEquipID);
             self.TianFuAdd(equipConfig.TianFuId);
+
+            //穿上装备会带来上面的宝石点数，刷新宝石天赋的区域解锁依据并下发给客户端
+            self.GetParent<Unit>().GetComponent<GemTalentComponent>()?.UpdateMaxPointAndSync();
         }
 
         public static int SetSkillIdByPosition(this SkillSetComponentS self, C2M_SkillSet request)
@@ -2160,7 +2166,6 @@ namespace ET.Server
             SkillSetInfo.LifeShieldList = self.LifeShieldList;
             SkillSetInfo.SkillAugmentList = self.SkillAugmentList;
             SkillSetInfo.LongYinList = self.LongYinList;
-            SkillSetInfo.GemTalentList = self.GemTalentList;
             MapMessageHelper.SendToClient(unit, M2C_SkillSetMessage);
         }
         
@@ -2169,160 +2174,6 @@ namespace ET.Server
             return self.SkillList;
         }
 
-        #region GemTalent
-
-        /// <summary>
-        /// 身上装备镶嵌的宝石提供的总点数（两套装备都算）
-        /// </summary>
-        public static int GetGemTalentTotalPoint(this SkillSetComponentS self)
-        {
-            BagComponentS bagComponent = self.GetParent<Unit>().GetComponent<BagComponentS>();
-            if (bagComponent == null)
-            {
-                return 0;
-            }
-
-            int totalPoint = GemTalentHelper.GetTotalPoint(bagComponent.GetItemByLoc(ItemLocType.ItemLocEquip));
-            totalPoint += GemTalentHelper.GetTotalPoint(bagComponent.GetItemByLoc(ItemLocType.ItemLocEquip_2));
-            return totalPoint;
-        }
-
-        /// <summary>
-        /// 已消耗的宝石点数
-        /// </summary>
-        public static int GetGemTalentUsedPoint(this SkillSetComponentS self)
-        {
-            return GemTalentHelper.GetUsedPoint(self.GemTalentList);
-        }
-
-        /// <summary>
-        /// 可用宝石点数
-        /// </summary>
-        public static int GetGemTalentLeftPoint(this SkillSetComponentS self)
-        {
-            return GemTalentHelper.GetLeftPoint(self.GemTalentList, self.GetGemTalentTotalPoint());
-        }
-
-        /// <summary>
-        /// 该宝石天赋节点是否已激活
-        /// </summary>
-        public static bool HaveGemTalent(this SkillSetComponentS self, int gemTalentId)
-        {
-            return self.GemTalentList.Contains(gemTalentId);
-        }
-
-        /// <summary>
-        /// 激活宝石天赋节点：校验区域解锁与可用点数，激活后永久生效
-        /// </summary>
-        public static int OnActiveGemTalent(this SkillSetComponentS self, int gemTalentId)
-        {
-            GemTalentConfig gemTalentConfig = GemTalentConfigCategory.Instance.GetOrDefault(gemTalentId);
-            if (gemTalentConfig == null)
-            {
-                return ErrorCode.ERR_GemTalentNotExist;
-            }
-
-            if (self.GemTalentList.Contains(gemTalentId))
-            {
-                return ErrorCode.ERR_GemTalentActivated;
-            }
-
-            int totalPoint = self.GetGemTalentTotalPoint();
-            if (!GemTalentHelper.IsAreaUnlocked(gemTalentConfig.Area, totalPoint))
-            {
-                return ErrorCode.ERR_GemTalentAreaLock;
-            }
-
-            // 只校验本次激活。已激活节点在换装导致总点数下降时不会被清掉，避免战力无声下降
-            if (self.GetGemTalentUsedPoint() + gemTalentConfig.CostPoint > totalPoint)
-            {
-                return ErrorCode.ERR_GemTalentPointNotEnough;
-            }
-
-            self.GemTalentList.Add(gemTalentId);
-
-            self.UpdateSkillSet();
-            Function_Fight.UnitUpdateProperty_Base(self.GetParent<Unit>(), true, true);
-            return ErrorCode.ERR_Success;
-        }
-
-        /// <summary>
-        /// 重置宝石天赋：消耗钻石清空所有已激活节点。
-        /// 宝石点数由装备上的宝石换算，清空节点即等同于全部返还，不需要额外退还
-        /// </summary>
-        public static int OnResetGemTalent(this SkillSetComponentS self)
-        {
-            if (self.GemTalentList.Count == 0)
-            {
-                return ErrorCode.ERR_GemTalentNoneActivated;
-            }
-
-            Unit unit = self.GetParent<Unit>();
-            BagComponentS bagComponent = unit.GetComponent<BagComponentS>();
-            if (bagComponent == null)
-            {
-                return ErrorCode.ERR_ModifyData;
-            }
-
-            List<RewardItem> costItems = new List<RewardItem>();
-            costItems.Add(new RewardItem() { ItemID = UserDataType.Diamond, ItemNum = GlobalValueConfigCategory.Instance.GemTalentResetCostDiamond });
-            if (!bagComponent.OnCostItemData(costItems))
-            {
-                return ErrorCode.ERR_DiamondNotEnoughError;
-            }
-
-            self.GemTalentList.Clear();
-
-            self.UpdateSkillSet();
-            Function_Fight.UnitUpdateProperty_Base(unit, true, true);
-            return ErrorCode.ERR_Success;
-        }
-
-        /// <summary>
-        /// 宝石天赋提供的角色属性，供 Function_Fight 计算属性时使用
-        /// </summary>
-        public static List<PropertyValue> GetGemTalentRoleProLists(this SkillSetComponentS self)
-        {
-            List<PropertyValue> proList = new List<PropertyValue>();
-            for (int i = 0; i < self.GemTalentList.Count; i++)
-            {
-                GemTalentConfig gemTalentConfig = GemTalentConfigCategory.Instance.GetOrDefault(self.GemTalentList[i]);
-                if (gemTalentConfig == null || string.IsNullOrEmpty(gemTalentConfig.AddPropreListStr))
-                {
-                    continue;
-                }
-
-                // AddPropreListStr 形如 RolePropertyAdd;100402;0.01，宝石天赋没有等级，只取第一段
-                string[] properInfo = gemTalentConfig.AddPropreListStr.Split('#')[0].Split(';');
-                if (properInfo.Length < 3)
-                {
-                    continue;
-                }
-
-                if (!properInfo[0].Equals(TianFuProEnum.RolePropertyAdd))
-                {
-                    continue;
-                }
-
-                if (!int.TryParse(properInfo[1], out int numericKey))
-                {
-                    continue;
-                }
-
-                if (NumericHelp.GetNumericValueType(numericKey) == 1)
-                {
-                    proList.Add(new PropertyValue() { HideID = numericKey, HideValue = long.Parse(properInfo[2]) });
-                }
-                else
-                {
-                    proList.Add(new PropertyValue() { HideID = numericKey, HideValue = (int)(float.Parse(properInfo[2]) * 10000) });
-                }
-            }
-
-            return proList;
-        }
-
-        #endregion
     }
 
 }

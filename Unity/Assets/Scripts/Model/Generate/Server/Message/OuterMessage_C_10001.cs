@@ -8441,9 +8441,6 @@ namespace ET
         [MemoryPackOrder(6)]
         public List<KeyValuePairInt> LongYinList { get; set; } = new();
 
-        [MemoryPackOrder(7)]
-        public List<int> GemTalentList { get; set; } = new();
-
         public override void Dispose()
         {
             if (!this.IsFromPool)
@@ -8458,7 +8455,6 @@ namespace ET
             this.TianFuPlan = default;
             this.SkillAugmentList.Clear();
             this.LongYinList.Clear();
-            this.GemTalentList.Clear();
 
             ObjectPool.Instance.Recycle(this);
         }
@@ -34837,6 +34833,9 @@ namespace ET
         [MemoryPackOrder(91)]
         public string Message { get; set; }
 
+        [MemoryPackOrder(0)]
+        public GemTalentInfo Info { get; set; }
+
         public override void Dispose()
         {
             if (!this.IsFromPool)
@@ -34847,6 +34846,7 @@ namespace ET
             this.RpcId = default;
             this.Error = default;
             this.Message = default;
+            this.Info = default;
 
             ObjectPool.Instance.Recycle(this);
         }
@@ -34897,6 +34897,9 @@ namespace ET
         [MemoryPackOrder(91)]
         public string Message { get; set; }
 
+        [MemoryPackOrder(0)]
+        public GemTalentInfo Info { get; set; }
+
         public override void Dispose()
         {
             if (!this.IsFromPool)
@@ -34907,6 +34910,127 @@ namespace ET
             this.RpcId = default;
             this.Error = default;
             this.Message = default;
+            this.Info = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    // 宝石天赋数据
+    [MemoryPackable]
+    [Message(OuterMessage.GemTalentInfo)]
+    public partial class GemTalentInfo : MessageObject
+    {
+        public static GemTalentInfo Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(GemTalentInfo), isFromPool) as GemTalentInfo;
+        }
+
+        [MemoryPackOrder(0)]
+        public List<int> GemTalentList { get; set; } = new();
+
+        [MemoryPackOrder(1)]
+        public int GemTalentMaxPoint { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.GemTalentList.Clear();
+            this.GemTalentMaxPoint = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    // 请求宝石天赋数据
+    [MemoryPackable]
+    [Message(OuterMessage.C2M_GemTalentInfoRequest)]
+    [ResponseType(nameof(M2C_GemTalentInfoResponse))]
+    public partial class C2M_GemTalentInfoRequest : MessageObject, ILocationRequest
+    {
+        public static C2M_GemTalentInfoRequest Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(C2M_GemTalentInfoRequest), isFromPool) as C2M_GemTalentInfoRequest;
+        }
+
+        [MemoryPackOrder(89)]
+        public int RpcId { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
+    [Message(OuterMessage.M2C_GemTalentInfoResponse)]
+    public partial class M2C_GemTalentInfoResponse : MessageObject, ILocationResponse
+    {
+        public static M2C_GemTalentInfoResponse Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(M2C_GemTalentInfoResponse), isFromPool) as M2C_GemTalentInfoResponse;
+        }
+
+        [MemoryPackOrder(89)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(90)]
+        public int Error { get; set; }
+
+        [MemoryPackOrder(91)]
+        public string Message { get; set; }
+
+        [MemoryPackOrder(0)]
+        public GemTalentInfo Info { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.Error = default;
+            this.Message = default;
+            this.Info = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    // 宝石天赋数据变更
+    [MemoryPackable]
+    [Message(OuterMessage.M2C_GemTalentMessage)]
+    public partial class M2C_GemTalentMessage : MessageObject, IMessage
+    {
+        public static M2C_GemTalentMessage Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(M2C_GemTalentMessage), isFromPool) as M2C_GemTalentMessage;
+        }
+
+        [MemoryPackOrder(0)]
+        public GemTalentInfo Info { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.Info = default;
 
             ObjectPool.Instance.Recycle(this);
         }
@@ -35841,5 +35965,9 @@ namespace ET
         public const ushort M2C_GemTalentActiveResponse = 10926;
         public const ushort C2M_GemTalentReSetRequest = 10927;
         public const ushort M2C_GemTalentReSetResponse = 10928;
+        public const ushort GemTalentInfo = 10929;
+        public const ushort C2M_GemTalentInfoRequest = 10930;
+        public const ushort M2C_GemTalentInfoResponse = 10931;
+        public const ushort M2C_GemTalentMessage = 10932;
     }
 }

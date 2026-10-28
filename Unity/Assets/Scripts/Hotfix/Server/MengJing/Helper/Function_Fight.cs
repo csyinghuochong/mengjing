@@ -2318,7 +2318,7 @@ namespace ET.Server
             }
 
             //宝石天赋系统
-            List<PropertyValue> gemTalentProList = unit.GetComponent<SkillSetComponentS>().GetGemTalentRoleProLists();
+            List<PropertyValue> gemTalentProList = unit.GetComponent<GemTalentComponent>().GetRoleProLists();
             for (int i = 0; i < gemTalentProList.Count; i++)
             {
                 AddUpdateProDicList(gemTalentProList[i].HideID, gemTalentProList[i].HideValue, UpdateProDicList);

@@ -26,7 +26,6 @@ namespace ET.Client
             self.TianFuPlan = skillSetInfo.TianFuPlan;
             self.SkillAugmentList = skillSetInfo.SkillAugmentList;
             self.LongYinList = skillSetInfo.LongYinList;
-            self.GemTalentList = skillSetInfo.GemTalentList;
         }
 
         public static void UpdateSkillAugment(this SkillSetComponentC self, SkillAugmentInfo skillAugmentInfo)
@@ -512,23 +511,6 @@ namespace ET.Client
             return 0;
         }
         
-        /// <summary>
-        /// 总宝石点数：主副两套装备上已镶嵌宝石的等级之和，换装后实时变化，不单独存档
-        /// </summary>
-        public static int GetGemTalentTotalPoint(this SkillSetComponentC self)
-        {
-            BagComponentC bagComponentC = self.Root().GetComponent<BagComponentC>();
-            if (bagComponentC == null)
-            {
-                return 0;
-            }
-
-            List<ItemInfo> equipList = new List<ItemInfo>();
-            equipList.AddRange(bagComponentC.GetItemsByLoc(ItemLocType.ItemLocEquip));
-            equipList.AddRange(bagComponentC.GetItemsByLoc(ItemLocType.ItemLocEquip_2));
-
-            return GemTalentHelper.GetTotalPoint(equipList);
-        }
 
         //和GetSkillRoleProLists方法一致 主要是获取类型为8的被动技能,8的被动技能不加战斗力
         public static List<PropertyValue> GetSkillRoleProLists_8(this SkillSetComponentC self)

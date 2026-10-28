@@ -123,6 +123,7 @@ namespace ET.Client
                     await PetNetHelper.RequestPetInfo(root);
                     await TaskClientNetHelper.RequestTaskInit(root);
                     await SkillNetHelper.RequestSkillSet(root);
+                    await GemTalentNetHelper.RequestGemTalentInfo(root);
                     await FriendNetHelper.RequestFriendInfo(root);
                     await ActivityNetHelper.RequestActivityInfo(root);
                     await ActivityNetHelper.RequestZhanQuInfo(root);

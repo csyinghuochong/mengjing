@@ -27,7 +27,7 @@ namespace ET
         }
 
         /// <summary>
-        /// 总宝石点数：身上装备上已镶嵌的所有宝石等级之和
+        /// 总宝石点数：传入的装备列表上已镶嵌的所有宝石等级之和
         /// </summary>
         public static int GetTotalPoint(List<ItemInfo> equipList)
         {
@@ -81,17 +81,18 @@ namespace ET
         }
 
         /// <summary>
-        /// 可用宝石点数。换装导致总点数下降时可能为负数，负数只表示不能再激活新节点
+        /// 可用宝石点数 = 宝石总点数 - 已消耗点数
         /// </summary>
-        public static int GetLeftPoint(List<int> activeTalentIds, int totalPoint)
+        public static int GetLeftPoint(List<int> activeTalentIds, int gemTalentPoint)
         {
-            return totalPoint - GetUsedPoint(activeTalentIds);
+            return gemTalentPoint - GetUsedPoint(activeTalentIds);
         }
 
         /// <summary>
-        /// 区域是否已解锁：累计总点数达到区域要求后自动解锁
+        /// 区域是否已解锁：历史最大宝石点数达到区域要求即解锁。
+        /// 传的是历史最大点数而不是当前点数，所以卸下宝石让当前点数下降后区域依然保持解锁
         /// </summary>
-        public static bool IsAreaUnlocked(int area, int totalPoint)
+        public static bool IsAreaUnlocked(int area, int maxGemTalentPoint)
         {
             GemTalentAreaConfig areaConfig = GemTalentAreaConfigCategory.Instance.GetOrDefault(area);
             if (areaConfig == null)
@@ -99,7 +100,7 @@ namespace ET
                 return false;
             }
 
-            return totalPoint >= areaConfig.NeedTotalPoint;
+            return maxGemTalentPoint >= areaConfig.NeedTotalPoint;
         }
     }
 }

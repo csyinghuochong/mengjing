@@ -150,7 +150,6 @@ namespace ET.Server
             response.SkillSetInfo.TianFuList1.AddRange(tianfulist1);
             response.SkillSetInfo.TianFuList2.AddRange(tianfulist2);
             response.SkillSetInfo.LongYinList.AddRange(skillSetComponent.LongYinList);
-            response.SkillSetInfo.GemTalentList.AddRange(skillSetComponent.GemTalentList);
             await ETTask.CompletedTask;
 
         }

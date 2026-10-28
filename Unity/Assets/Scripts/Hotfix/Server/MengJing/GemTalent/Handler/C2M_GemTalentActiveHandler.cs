@@ -1,13 +1,14 @@
-namespace ET.Server
+﻿namespace ET.Server
 {
     [MessageHandler(SceneType.Map)]
     public class C2M_GemTalentActiveHandler : MessageLocationHandler<Unit, C2M_GemTalentActiveRequest, M2C_GemTalentActiveResponse>
     {
         protected override async ETTask Run(Unit unit, C2M_GemTalentActiveRequest request, M2C_GemTalentActiveResponse response)
         {
-            SkillSetComponentS skillSetComponent = unit.GetComponent<SkillSetComponentS>();
+            GemTalentComponent gemTalentComponent = unit.GetComponent<GemTalentComponent>();
 
-            response.Error = skillSetComponent.OnActiveGemTalent(request.GemTalentId);
+            response.Error = gemTalentComponent.OnActiveGemTalent(request.GemTalentId);
+            response.Info = gemTalentComponent.GetInfo();
             await ETTask.CompletedTask;
         }
     }

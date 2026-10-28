@@ -59,6 +59,7 @@ namespace ET.Server
                     unit.AddDataComponent<BagComponentS>();
                     unit.AddDataComponent<PetComponentS>();
                     unit.AddDataComponent<SkillSetComponentS>();
+                    unit.AddDataComponent<GemTalentComponent>();
                     unit.AddDataComponent<RechargeComponent>();
                     unit.AddDataComponent<ReddotComponentS>();
                     unit.AddDataComponent<TitleComponentS>();

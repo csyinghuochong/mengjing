@@ -25,6 +25,7 @@ namespace ET.Client
             root.AddComponent<MapComponent>();
             root.AddComponent<PetComponentC>();
             root.AddComponent<SkillSetComponentC>();
+            root.AddComponent<GemTalentComponentC>();
             root.AddComponent<ChengJiuComponentC>();
             root.AddComponent<MailComponentC>();
             root.AddComponent<ShoujiComponentC>();
