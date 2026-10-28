@@ -263,11 +263,9 @@ namespace ET.Server
                     case SkillIdAdd effect:
                         self.OnLongYinSkillIdAdd(effect.SkillId, add);
                         break;
-                    //技能属性在释放技能时通过GetSkillPropertyAdd读取，这里不用处理
+                    //角色属性由Function_Fight按配置重算，技能属性在释放技能时通过GetSkillPropertyAdd读取，这里都不用处理
+                    case RolePropertyAdd:
                     case SkillPropertyAdd:
-                        break;
-                    case RolePropertyAdd effect:
-                        self.OnRolePropertyAdd(effect, add ? 1 : -1);
                         break;
                 }
             }
@@ -414,6 +412,8 @@ namespace ET.Server
             //满级后可能满足觉醒解锁条件，一并在本次同步里下发给客户端
             self.RefreshLongYinAwaken();
 
+            //龙印效果由Function_Fight按配置重算，等级变化后必须整体刷新属性和战力
+            Function_Fight.UnitUpdateProperty_Base(self.GetParent<Unit>(), true, true);
             self.UpdateSkillSet();
             self.GetParent<Unit>().GetComponent<SkillPassiveComponent>().UpdatePassiveSkill();
             return ErrorCode.ERR_Success;
@@ -435,6 +435,9 @@ namespace ET.Server
             }
 
             self.LongYinList.Clear();
+
+            //龙印效果由Function_Fight按配置重算，清空后必须整体刷新属性和战力
+            Function_Fight.UnitUpdateProperty_Base(self.GetParent<Unit>(), true, true);
             self.UpdateSkillSet();
             self.GetParent<Unit>().GetComponent<SkillPassiveComponent>().UpdatePassiveSkill();
             return ErrorCode.ERR_Success;
@@ -520,6 +523,9 @@ namespace ET.Server
                 self.TianFuAddition.Add(tianFu);
                 self.AddTianFuAttribute(tianFu.KeyId, false, (int)tianFu.Value);
             }
+
+            //被动技能附带的天赋也由Function_Fight按配置重算
+            Function_Fight.UnitUpdateProperty_Base(self.GetParent<Unit>(), true, true);
         }
 
 
@@ -539,6 +545,8 @@ namespace ET.Server
                 self.AddTianFuAttribute(keyValuePairInt.KeyId, true, (int)keyValuePairInt.Value);
             }
 
+            //天赋效果由Function_Fight按配置重算，切换方案后必须整体刷新属性和战力
+            Function_Fight.UnitUpdateProperty_Base(self.GetParent<Unit>(), true, true);
 
             self.GetParent<Unit>().GetComponent<SkillPassiveComponent>().UpdatePassiveSkill();
             self.UpdateSkillSet();
@@ -570,10 +578,8 @@ namespace ET.Server
                     case SkillIdAdd effect:
                         self.OnSkillIdAdd(effect.SkillId, add);
                         break;
-                    case RolePropertyAdd effect:
-                        self.OnRolePropertyAdd(effect, add ? 1 : -1);
-                        break;
-                    //技能属性、Buff、替换技能等在释放技能或读取属性时按需读取，这里不用处理
+                    //角色属性、技能属性、Buff、替换技能等在读取属性或释放技能时按需读取，这里不用处理
+                    case RolePropertyAdd:
                     case SkillPropertyAdd:
                     case BuffIdAdd:
                     case BuffInitIdAdd:
@@ -601,20 +607,6 @@ namespace ET.Server
             if (!add && index >= 0)
             {
                 self.SkillList.RemoveAt(index);
-            }
-        }
-
-        public static void OnRolePropertyAdd(this SkillSetComponentS self, RolePropertyAdd effect, int rate)
-        {
-            int numericKey = effect.NumericKey;
-            int valueType = NumericHelp.GetNumericValueType(numericKey);
-            if (valueType == 1)
-            {
-                self.GetParent<Unit>().GetComponent<HeroDataComponentS>().BuffPropertyUpdate_Long(numericKey, (long)effect.Value * rate);
-            }
-            else
-            {
-                self.GetParent<Unit>().GetComponent<HeroDataComponentS>().BuffPropertyUpdate_Float(numericKey, (float)effect.Value * rate);
             }
         }
 
@@ -1120,6 +1112,8 @@ namespace ET.Server
                 self.AddTianFuAttribute(keyValuePairInt.KeyId, true, (int)keyValuePairInt.Value);
             }
 
+            //天赋效果由Function_Fight按配置重算，加点后必须整体刷新属性和战力
+            Function_Fight.UnitUpdateProperty_Base(self.GetParent<Unit>(), true, true);
             self.UpdateSkillSet();
             self.GetParent<Unit>().GetComponent<SkillPassiveComponent>().UpdatePassiveSkill();
         }
