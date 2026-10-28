@@ -2,51 +2,103 @@
   {
     "Id": 111000111,
     "Name": "扩域",
-    "AddPropreListStr": "SkillPropertyAdd;1;2"
+    "AddPropreList": [
+      {
+        "$type": "AugmentSkillPropertyAdd",
+        "Attribute": 1,
+        "Value": 2
+      }
+    ]
   },
   {
     "Id": 111000112,
     "Name": "雷击",
-    "AddPropreListStr": "SkillIdAdd;2200030"
+    "AddPropreList": [
+      {
+        "$type": "AugmentSkillIdAdd",
+        "SkillId": 2200030
+      }
+    ]
   },
   {
     "Id": 111000121,
     "Name": "灼烧",
-    "AddPropreListStr": "BuffIdAdd;30204040"
+    "AddPropreList": [
+      {
+        "$type": "AugmentBuffIdAdd",
+        "BuffId": 30204040
+      }
+    ]
   },
   {
     "Id": 111000122,
     "Name": "眩晕",
-    "AddPropreListStr": "BuffIdAdd;20000103"
+    "AddPropreList": [
+      {
+        "$type": "AugmentBuffIdAdd",
+        "BuffId": 20000103
+      }
+    ]
   },
   {
     "Id": 111000123,
     "Name": "恢复",
-    "AddPropreListStr": "BuffInitIdAdd;40000010"
+    "AddPropreList": [
+      {
+        "$type": "AugmentBuffInitIdAdd",
+        "BuffId": 40000010
+      }
+    ]
   },
   {
     "Id": 111001111,
     "Name": "扩域2",
-    "AddPropreListStr": "SkillPropertyAdd;1;2"
+    "AddPropreList": [
+      {
+        "$type": "AugmentSkillPropertyAdd",
+        "Attribute": 1,
+        "Value": 2
+      }
+    ]
   },
   {
     "Id": 111001112,
     "Name": "雷击2",
-    "AddPropreListStr": "SkillIdAdd;2200030"
+    "AddPropreList": [
+      {
+        "$type": "AugmentSkillIdAdd",
+        "SkillId": 2200030
+      }
+    ]
   },
   {
     "Id": 111001121,
     "Name": "灼烧2",
-    "AddPropreListStr": "BuffIdAdd;30204040"
+    "AddPropreList": [
+      {
+        "$type": "AugmentBuffIdAdd",
+        "BuffId": 30204040
+      }
+    ]
   },
   {
     "Id": 111001122,
     "Name": "眩晕2",
-    "AddPropreListStr": "BuffIdAdd;20000103"
+    "AddPropreList": [
+      {
+        "$type": "AugmentBuffIdAdd",
+        "BuffId": 20000103
+      }
+    ]
   },
   {
     "Id": 111001123,
     "Name": "恢复",
-    "AddPropreListStr": "BuffInitIdAdd;40000010"
+    "AddPropreList": [
+      {
+        "$type": "AugmentBuffInitIdAdd",
+        "BuffId": 40000010
+      }
+    ]
   }
 ]

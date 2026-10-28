@@ -25,7 +25,7 @@ namespace ET
             Name = _buf.ReadString();
             Icon = _buf.ReadString();
             Des = _buf.ReadString();
-            AddPropreListStr = _buf.ReadString();
+            {int n0 = _buf.ReadSize(); AddPropreList = new System.Collections.Generic.List<SkillAugmentEffect>(n0);for(var i0 = 0 ; i0 < n0 ; i0++) { SkillAugmentEffect _e0;  _e0 = global::ET.SkillAugmentEffect.DeserializeSkillAugmentEffect(_buf); AddPropreList.Add(_e0);}}
 
             PostInit();
         }
@@ -58,7 +58,7 @@ namespace ET
         /// <summary>
         /// 附加
         /// </summary>
-        public string AddPropreListStr;
+        public System.Collections.Generic.List<SkillAugmentEffect> AddPropreList;
 
 
         public const int __ID__ = -1162302846;
@@ -70,7 +70,7 @@ namespace ET
             
             
             
-            
+            foreach (var _e in AddPropreList) { _e?.ResolveRef(); }
         }
 
         public override string ToString()
@@ -80,7 +80,7 @@ namespace ET
             + "Name:" + Name + ","
             + "Icon:" + Icon + ","
             + "Des:" + Des + ","
-            + "AddPropreListStr:" + AddPropreListStr + ","
+            + "AddPropreList:" + Luban.StringUtil.CollectionToString(AddPropreList) + ","
             + "}";
         }
 

@@ -13,7 +13,29 @@
     "LearnRoseLv": 0,
     "Icon": 10001,
     "talentDes": "攻击永久提升1%/2%/3%。",
-    "AddPropreListStr": "RolePropertyAdd;100402;0.01#RolePropertyAdd;100402;0.02#RolePropertyAdd;100402;0.03"
+    "AddPropreList": [
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 100402,
+          "Value": 0.01
+        }
+      ],
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 100402,
+          "Value": 0.02
+        }
+      ],
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 100402,
+          "Value": 0.03
+        }
+      ]
+    ]
   },
   {
     "Id": 1100201,
@@ -29,7 +51,22 @@
     "LearnRoseLv": 0,
     "Icon": 10002,
     "talentDes": "魔焰地裂会对目标释放爆裂状态,3秒后对范围内造成200%爆炸伤害。",
-    "AddPropreListStr": "SkillPropertyAdd;1110002,1110003,1110004,1110005,1110006;6;11100010"
+    "AddPropreList": [
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1110002,
+            1110003,
+            1110004,
+            1110005,
+            1110006
+          ],
+          "Attribute": 6,
+          "Value": 11100010
+        }
+      ]
+    ]
   },
   {
     "Id": 1100202,
@@ -45,7 +82,7 @@
     "LearnRoseLv": 0,
     "Icon": 10003,
     "talentDes": "前冲距离延长2码/4码/6码距离。",
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 1100203,
@@ -61,7 +98,22 @@
     "LearnRoseLv": 0,
     "Icon": 10004,
     "talentDes": "魔焰地裂会使目标受到伤害提升10%,持续5秒。",
-    "AddPropreListStr": "SkillPropertyAdd;1110002,1110003,1110004,1110005,1110006;6;11100011"
+    "AddPropreList": [
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1110002,
+            1110003,
+            1110004,
+            1110005,
+            1110006
+          ],
+          "Attribute": 6,
+          "Value": 11100011
+        }
+      ]
+    ]
   },
   {
     "Id": 1100301,
@@ -77,7 +129,50 @@
     "LearnRoseLv": 0,
     "Icon": 10005,
     "talentDes": "幻影跃击伤害提升30%/60%/100%。",
-    "AddPropreListStr": "SkillPropertyAdd;1110012,1110013,1110014,1110015,1110016;2;0.3#SkillPropertyAdd;1110012,1110013,1110014,1110015,1110016;2;0.6#SkillPropertyAdd;1110012,1110013,1110014,1110015,1110016;2;1"
+    "AddPropreList": [
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1110012,
+            1110013,
+            1110014,
+            1110015,
+            1110016
+          ],
+          "Attribute": 2,
+          "Value": 0.3
+        }
+      ],
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1110012,
+            1110013,
+            1110014,
+            1110015,
+            1110016
+          ],
+          "Attribute": 2,
+          "Value": 0.6
+        }
+      ],
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1110012,
+            1110013,
+            1110014,
+            1110015,
+            1110016
+          ],
+          "Attribute": 2,
+          "Value": 1
+        }
+      ]
+    ]
   },
   {
     "Id": 1100302,
@@ -93,7 +188,50 @@
     "LearnRoseLv": 0,
     "Icon": 10006,
     "talentDes": "魔焰地裂使目标移动速度降低30%/45%/60%，持续3秒。",
-    "AddPropreListStr": "SkillPropertyAdd;1110002,1110003,1110004,1110005,1110006;6;11100012#SkillPropertyAdd;1110002,1110003,1110004,1110005,1110006;6;11100013#SkillPropertyAdd;1110002,1110003,1110004,1110005,1110006;6;11100014"
+    "AddPropreList": [
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1110002,
+            1110003,
+            1110004,
+            1110005,
+            1110006
+          ],
+          "Attribute": 6,
+          "Value": 11100012
+        }
+      ],
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1110002,
+            1110003,
+            1110004,
+            1110005,
+            1110006
+          ],
+          "Attribute": 6,
+          "Value": 11100013
+        }
+      ],
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1110002,
+            1110003,
+            1110004,
+            1110005,
+            1110006
+          ],
+          "Attribute": 6,
+          "Value": 11100014
+        }
+      ]
+    ]
   },
   {
     "Id": 1100401,
@@ -110,7 +248,22 @@
     "LearnRoseLv": 0,
     "Icon": 10007,
     "talentDes": "释放旋舞之影使自身的移动速度提升50%,持续3秒。",
-    "AddPropreListStr": "SkillPropertyAdd;1110022,1110023,1110024,1110025,1110026;6;11100010"
+    "AddPropreList": [
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1110022,
+            1110023,
+            1110024,
+            1110025,
+            1110026
+          ],
+          "Attribute": 6,
+          "Value": 11100010
+        }
+      ]
+    ]
   },
   {
     "Id": 1100402,
@@ -126,7 +279,43 @@
     "LearnRoseLv": 0,
     "Icon": 10008,
     "talentDes": "技能攻击怪物伤害提升2%/4%/6%/8%/10%。",
-    "AddPropreListStr": "RolePropertyAdd;223103;0.02#RolePropertyAdd;223103;0.04#RolePropertyAdd;223103;0.06#RolePropertyAdd;223103;0.08#RolePropertyAdd;223103;0.1"
+    "AddPropreList": [
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 223103,
+          "Value": 0.02
+        }
+      ],
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 223103,
+          "Value": 0.04
+        }
+      ],
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 223103,
+          "Value": 0.06
+        }
+      ],
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 223103,
+          "Value": 0.08
+        }
+      ],
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 223103,
+          "Value": 0.1
+        }
+      ]
+    ]
   },
   {
     "Id": 1100403,
@@ -142,7 +331,14 @@
     "LearnRoseLv": 0,
     "Icon": 10009,
     "talentDes": "攻击有一定概率触发魔焰地裂。",
-    "AddPropreListStr": "SkillIdAdd;1301002"
+    "AddPropreList": [
+      [
+        {
+          "$type": "SkillIdAdd",
+          "SkillId": 1301002
+        }
+      ]
+    ]
   },
   {
     "Id": 1100404,
@@ -158,7 +354,43 @@
     "LearnRoseLv": 0,
     "Icon": 10010,
     "talentDes": "闪避上限永久提升1%/2%/3%/4%/5%。",
-    "AddPropreListStr": "RolePropertyAdd;200303;0.01#RolePropertyAdd;200303;0.02#RolePropertyAdd;200303;0.03#RolePropertyAdd;200303;0.04#RolePropertyAdd;200303;0.05"
+    "AddPropreList": [
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 200303,
+          "Value": 0.01
+        }
+      ],
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 200303,
+          "Value": 0.02
+        }
+      ],
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 200303,
+          "Value": 0.03
+        }
+      ],
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 200303,
+          "Value": 0.04
+        }
+      ],
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 200303,
+          "Value": 0.05
+        }
+      ]
+    ]
   },
   {
     "Id": 1100405,
@@ -174,7 +406,14 @@
     "LearnRoseLv": 0,
     "Icon": 10011,
     "talentDes": "在生命值低于10%时,立即恢复自身20%最大生命,并使自身造成伤害提升25%,持续6秒，60秒冷却时间。",
-    "AddPropreListStr": "SkillIdAdd;1301003"
+    "AddPropreList": [
+      [
+        {
+          "$type": "SkillIdAdd",
+          "SkillId": 1301003
+        }
+      ]
+    ]
   },
   {
     "Id": 1100501,
@@ -190,7 +429,78 @@
     "LearnRoseLv": 0,
     "Icon": 10012,
     "talentDes": "旋舞之影技能伤害提升8%/16%/24%/32%/40。",
-    "AddPropreListStr": "SkillPropertyAdd;1110022,1110023,1110024,1110025,1110026;2;0.08#SkillPropertyAdd;1110022,1110023,1110024,1110025,1110026;2;0.16#SkillPropertyAdd;1110022,1110023,1110024,1110025,1110026;2;0.24#SkillPropertyAdd;1110022,1110023,1110024,1110025,1110026;2;0.32#SkillPropertyAdd;1110022,1110023,1110024,1110025,1110026;2;0.4"
+    "AddPropreList": [
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1110022,
+            1110023,
+            1110024,
+            1110025,
+            1110026
+          ],
+          "Attribute": 2,
+          "Value": 0.08
+        }
+      ],
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1110022,
+            1110023,
+            1110024,
+            1110025,
+            1110026
+          ],
+          "Attribute": 2,
+          "Value": 0.16
+        }
+      ],
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1110022,
+            1110023,
+            1110024,
+            1110025,
+            1110026
+          ],
+          "Attribute": 2,
+          "Value": 0.24
+        }
+      ],
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1110022,
+            1110023,
+            1110024,
+            1110025,
+            1110026
+          ],
+          "Attribute": 2,
+          "Value": 0.32
+        }
+      ],
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1110022,
+            1110023,
+            1110024,
+            1110025,
+            1110026
+          ],
+          "Attribute": 2,
+          "Value": 0.4
+        }
+      ]
+    ]
   },
   {
     "Id": 1100502,
@@ -206,7 +516,38 @@
     "LearnRoseLv": 0,
     "Icon": 10013,
     "talentDes": "每次闪避恢复自身最大血量的0.5%/1%/1.5%/2%/2.5%。",
-    "AddPropreListStr": "SkillIdAdd;1301006#SkillIdAdd;1301007#SkillIdAdd;1301008#SkillIdAdd;1301009#SkillIdAdd;1301010"
+    "AddPropreList": [
+      [
+        {
+          "$type": "SkillIdAdd",
+          "SkillId": 1301006
+        }
+      ],
+      [
+        {
+          "$type": "SkillIdAdd",
+          "SkillId": 1301007
+        }
+      ],
+      [
+        {
+          "$type": "SkillIdAdd",
+          "SkillId": 1301008
+        }
+      ],
+      [
+        {
+          "$type": "SkillIdAdd",
+          "SkillId": 1301009
+        }
+      ],
+      [
+        {
+          "$type": "SkillIdAdd",
+          "SkillId": 1301010
+        }
+      ]
+    ]
   },
   {
     "Id": 1100601,
@@ -223,7 +564,22 @@
     "LearnRoseLv": 0,
     "Icon": 10014,
     "talentDes": "炎龙咆哮冷却时间降低2秒。",
-    "AddPropreListStr": "SkillPropertyAdd;1110032,1110033,1110034,1110035,1110036;4;2"
+    "AddPropreList": [
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1110032,
+            1110033,
+            1110034,
+            1110035,
+            1110036
+          ],
+          "Attribute": 4,
+          "Value": 2
+        }
+      ]
+    ]
   },
   {
     "Id": 1100602,
@@ -239,7 +595,43 @@
     "LearnRoseLv": 0,
     "Icon": 10015,
     "talentDes": "暴击概率永久提升1%/2%/3%/4%/5%。",
-    "AddPropreListStr": "RolePropertyAdd;200103;0.01#RolePropertyAdd;200103;0.02#RolePropertyAdd;200103;0.03#RolePropertyAdd;200103;0.04#RolePropertyAdd;200103;0.05"
+    "AddPropreList": [
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 200103,
+          "Value": 0.01
+        }
+      ],
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 200103,
+          "Value": 0.02
+        }
+      ],
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 200103,
+          "Value": 0.03
+        }
+      ],
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 200103,
+          "Value": 0.04
+        }
+      ],
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 200103,
+          "Value": 0.05
+        }
+      ]
+    ]
   },
   {
     "Id": 1100603,
@@ -255,7 +647,15 @@
     "LearnRoseLv": 0,
     "Icon": 10016,
     "talentDes": "受到技能攻击有10%概率对目标造成对等伤害。",
-    "AddPropreListStr": "RolePropertyAdd;205603;0.1"
+    "AddPropreList": [
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 205603,
+          "Value": 0.1
+        }
+      ]
+    ]
   },
   {
     "Id": 1100604,
@@ -271,7 +671,43 @@
     "LearnRoseLv": 0,
     "Icon": 10017,
     "talentDes": "技能冷却时间降低1%/2%/3%/4%/5%。",
-    "AddPropreListStr": "RolePropertyAdd;203603;0.01#RolePropertyAdd;203603;0.02#RolePropertyAdd;203603;0.03#RolePropertyAdd;203603;0.04#RolePropertyAdd;203603;0.05"
+    "AddPropreList": [
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 203603,
+          "Value": 0.01
+        }
+      ],
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 203603,
+          "Value": 0.02
+        }
+      ],
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 203603,
+          "Value": 0.03
+        }
+      ],
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 203603,
+          "Value": 0.04
+        }
+      ],
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 203603,
+          "Value": 0.05
+        }
+      ]
+    ]
   },
   {
     "Id": 1100605,
@@ -287,7 +723,22 @@
     "LearnRoseLv": 0,
     "Icon": 10018,
     "talentDes": "幻影跃击冷却时间降低2秒。",
-    "AddPropreListStr": "SkillPropertyAdd;1110012,1110013,1110014,1110015,1110016;4;2"
+    "AddPropreList": [
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1110012,
+            1110013,
+            1110014,
+            1110015,
+            1110016
+          ],
+          "Attribute": 4,
+          "Value": 2
+        }
+      ]
+    ]
   },
   {
     "Id": 1100701,
@@ -303,7 +754,78 @@
     "LearnRoseLv": 0,
     "Icon": 10019,
     "talentDes": "炎龙咆哮伤害提升20%/40%/60%/80%/100%。",
-    "AddPropreListStr": "SkillPropertyAdd;1110032,1110033,1110034,1110035,1110036;2;0.2#SkillPropertyAdd;1110032,1110033,1110034,1110035,1110036;2;0.4#SkillPropertyAdd;1110032,1110033,1110034,1110035,1110036;2;0.6#SkillPropertyAdd;1110032,1110033,1110034,1110035,1110036;2;0.8#SkillPropertyAdd;1110032,1110033,1110034,1110035,1110036;2;1"
+    "AddPropreList": [
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1110032,
+            1110033,
+            1110034,
+            1110035,
+            1110036
+          ],
+          "Attribute": 2,
+          "Value": 0.2
+        }
+      ],
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1110032,
+            1110033,
+            1110034,
+            1110035,
+            1110036
+          ],
+          "Attribute": 2,
+          "Value": 0.4
+        }
+      ],
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1110032,
+            1110033,
+            1110034,
+            1110035,
+            1110036
+          ],
+          "Attribute": 2,
+          "Value": 0.6
+        }
+      ],
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1110032,
+            1110033,
+            1110034,
+            1110035,
+            1110036
+          ],
+          "Attribute": 2,
+          "Value": 0.8
+        }
+      ],
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1110032,
+            1110033,
+            1110034,
+            1110035,
+            1110036
+          ],
+          "Attribute": 2,
+          "Value": 1
+        }
+      ]
+    ]
   },
   {
     "Id": 1100702,
@@ -319,7 +841,15 @@
     "LearnRoseLv": 0,
     "Icon": 10020,
     "talentDes": "释放技能有10%概率不进入冷却时间。",
-    "AddPropreListStr": "RolePropertyAdd;204003;0.1"
+    "AddPropreList": [
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 204003,
+          "Value": 0.1
+        }
+      ]
+    ]
   },
   {
     "Id": 1100703,
@@ -336,7 +866,68 @@
     "LearnRoseLv": 0,
     "Icon": 10021,
     "talentDes": "自身普攻伤害提升8%/16%/24%/32%/40%。",
-    "AddPropreListStr": "SkillPropertyAdd;1200001,1200002,1200003;2;0.08#SkillPropertyAdd;1200001,1200002,1200003;2;0.16#SkillPropertyAdd;1200001,1200002,1200003;2;0.24#SkillPropertyAdd;1200001,1200002,1200003;2;0.32#SkillPropertyAdd;1200001,1200002,1200003;2;0.4"
+    "AddPropreList": [
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1200001,
+            1200002,
+            1200003
+          ],
+          "Attribute": 2,
+          "Value": 0.08
+        }
+      ],
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1200001,
+            1200002,
+            1200003
+          ],
+          "Attribute": 2,
+          "Value": 0.16
+        }
+      ],
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1200001,
+            1200002,
+            1200003
+          ],
+          "Attribute": 2,
+          "Value": 0.24
+        }
+      ],
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1200001,
+            1200002,
+            1200003
+          ],
+          "Attribute": 2,
+          "Value": 0.32
+        }
+      ],
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1200001,
+            1200002,
+            1200003
+          ],
+          "Attribute": 2,
+          "Value": 0.4
+        }
+      ]
+    ]
   },
   {
     "Id": 1200101,
@@ -352,7 +943,7 @@
     "LearnRoseLv": 0,
     "Icon": 10001,
     "talentDes": "造成的伤害加成提升1%/2%/3%。",
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 1200201,
@@ -368,7 +959,7 @@
     "LearnRoseLv": 0,
     "Icon": 10002,
     "talentDes": "魔焰地裂可以使目标眩晕1秒。",
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 1200202,
@@ -384,7 +975,7 @@
     "LearnRoseLv": 0,
     "Icon": 10003,
     "talentDes": "使用药剂恢复效果提升10%/20%/30%。",
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 1200203,
@@ -400,7 +991,7 @@
     "LearnRoseLv": 0,
     "Icon": 10004,
     "talentDes": "受到怪物伤害降低10%。",
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 1200301,
@@ -416,7 +1007,7 @@
     "LearnRoseLv": 0,
     "Icon": 10005,
     "talentDes": "魔焰地裂冷却时间降低1秒/2秒/3秒。",
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 1200302,
@@ -432,7 +1023,7 @@
     "LearnRoseLv": 0,
     "Icon": 10006,
     "talentDes": "命中概率提升2%/4%/6%。",
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 1200401,
@@ -449,7 +1040,7 @@
     "LearnRoseLv": 0,
     "Icon": 10007,
     "talentDes": "每次暴击恢复自身生命的3%。",
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 1200402,
@@ -465,7 +1056,7 @@
     "LearnRoseLv": 0,
     "Icon": 10008,
     "talentDes": "技能伤害提升1%/2%/3%/4%/5%。",
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 1200403,
@@ -481,7 +1072,7 @@
     "LearnRoseLv": 0,
     "Icon": 10009,
     "talentDes": "普通攻击有一定概率将目标的防御将至0，持续5秒。",
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 1200404,
@@ -497,7 +1088,7 @@
     "LearnRoseLv": 0,
     "Icon": 10010,
     "talentDes": "重击概率永久提升1%/2%/3%/4%/5%。",
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 1200405,
@@ -513,7 +1104,7 @@
     "LearnRoseLv": 0,
     "Icon": 10011,
     "talentDes": "炎龙咆哮眩晕目标1秒。",
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 1200501,
@@ -529,7 +1120,7 @@
     "LearnRoseLv": 0,
     "Icon": 10012,
     "talentDes": "旋影之舞的技能暴击概率提升10%/20%/30%/40%/50%。",
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 1200502,
@@ -545,7 +1136,7 @@
     "LearnRoseLv": 0,
     "Icon": 10013,
     "talentDes": "受到伤害降低1%/2%/3%/4%/5%。",
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 1200601,
@@ -562,7 +1153,7 @@
     "LearnRoseLv": 0,
     "Icon": 10014,
     "talentDes": "当生命降低50%时,自身受到的伤害降低50%,持续6秒，90秒冷却时间。",
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 1200602,
@@ -578,7 +1169,7 @@
     "LearnRoseLv": 0,
     "Icon": 10015,
     "talentDes": "物理穿透提升2%/4%/6%/8%/10%。",
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 1200603,
@@ -594,7 +1185,7 @@
     "LearnRoseLv": 0,
     "Icon": 10016,
     "talentDes": "释放技能时,有概率对命中的目标额外释放闪击技能,对目标额外造成200%伤害。",
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 1200604,
@@ -610,7 +1201,7 @@
     "LearnRoseLv": 0,
     "Icon": 10017,
     "talentDes": "魔法穿透提升2%/4%/6%/8%/10%。",
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 1200605,
@@ -626,7 +1217,7 @@
     "LearnRoseLv": 0,
     "Icon": 10018,
     "talentDes": "受到攻击有20%概率对目标造成1秒眩晕,此效果20秒触发一次。",
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 1200701,
@@ -642,7 +1233,7 @@
     "LearnRoseLv": 0,
     "Icon": 10019,
     "talentDes": "生命降低至0时有1%/2%/3%/4%/5%概率恢复己方全部生命值。",
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 1200702,
@@ -658,7 +1249,7 @@
     "LearnRoseLv": 0,
     "Icon": 10020,
     "talentDes": "使自身的技能附带恢复,每次释放技能伤害可以恢复自身3%的生命。",
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 1200703,
@@ -675,7 +1266,7 @@
     "LearnRoseLv": 0,
     "Icon": 10021,
     "talentDes": "受到伤害有2%/4%/6%/8%/10%概率直接触发旋风之击,对自身范围造成250%伤害。",
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 2100101,
@@ -691,7 +1282,29 @@
     "LearnRoseLv": 0,
     "Icon": 10001,
     "talentDes": "攻击永久提升1%/2%/3%。",
-    "AddPropreListStr": "RolePropertyAdd;100402;0.01#RolePropertyAdd;100402;0.02#RolePropertyAdd;100402;0.03"
+    "AddPropreList": [
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 100402,
+          "Value": 0.01
+        }
+      ],
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 100402,
+          "Value": 0.02
+        }
+      ],
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 100402,
+          "Value": 0.03
+        }
+      ]
+    ]
   },
   {
     "Id": 2100201,
@@ -707,7 +1320,22 @@
     "LearnRoseLv": 0,
     "Icon": 10002,
     "talentDes": "冰封冲击技能冷却时间缩减2秒。",
-    "AddPropreListStr": "SkillPropertyAdd;1120002,1120003,1120004,1120005,1120006;4;2"
+    "AddPropreList": [
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1120002,
+            1120003,
+            1120004,
+            1120005,
+            1120006
+          ],
+          "Attribute": 4,
+          "Value": 2
+        }
+      ]
+    ]
   },
   {
     "Id": 2100202,
@@ -723,7 +1351,50 @@
     "LearnRoseLv": 0,
     "Icon": 10003,
     "talentDes": "冰封冲击伤害提升30%/60%/100%。",
-    "AddPropreListStr": "SkillPropertyAdd;1120002,1120003,1120004,1120005,1120006;2;0.3#SkillPropertyAdd;1120002,1120003,1120004,1120005,1120006;2;0.6#SkillPropertyAdd;1120002,1120003,1120004,1120005,1120006;2;1"
+    "AddPropreList": [
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1120002,
+            1120003,
+            1120004,
+            1120005,
+            1120006
+          ],
+          "Attribute": 2,
+          "Value": 0.3
+        }
+      ],
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1120002,
+            1120003,
+            1120004,
+            1120005,
+            1120006
+          ],
+          "Attribute": 2,
+          "Value": 0.6
+        }
+      ],
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1120002,
+            1120003,
+            1120004,
+            1120005,
+            1120006
+          ],
+          "Attribute": 2,
+          "Value": 1
+        }
+      ]
+    ]
   },
   {
     "Id": 2100203,
@@ -739,7 +1410,19 @@
     "LearnRoseLv": 0,
     "Icon": 10004,
     "talentDes": "普攻使目标移动速度降低30%,持续3秒。",
-    "AddPropreListStr": "SkillPropertyAdd;1200101,1200102;6;1000001"
+    "AddPropreList": [
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1200101,
+            1200102
+          ],
+          "Attribute": 6,
+          "Value": 1000001
+        }
+      ]
+    ]
   },
   {
     "Id": 2100301,
@@ -755,7 +1438,50 @@
     "LearnRoseLv": 0,
     "Icon": 10005,
     "talentDes": "破冰飞弹伤害提升30%,60%,100%。",
-    "AddPropreListStr": "SkillPropertyAdd;1120012,1120013,1120014,1120015,1120016;2;0.3#SkillPropertyAdd;1120012,1120013,1120014,1120015,1120016;2;0.6#SkillPropertyAdd;1120012,1120013,1120014,1120015,1120016;2;1"
+    "AddPropreList": [
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1120012,
+            1120013,
+            1120014,
+            1120015,
+            1120016
+          ],
+          "Attribute": 2,
+          "Value": 0.3
+        }
+      ],
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1120012,
+            1120013,
+            1120014,
+            1120015,
+            1120016
+          ],
+          "Attribute": 2,
+          "Value": 0.6
+        }
+      ],
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1120012,
+            1120013,
+            1120014,
+            1120015,
+            1120016
+          ],
+          "Attribute": 2,
+          "Value": 1
+        }
+      ]
+    ]
   },
   {
     "Id": 2100302,
@@ -771,7 +1497,50 @@
     "LearnRoseLv": 0,
     "Icon": 10006,
     "talentDes": "破冰飞弹使目标受到伤害增加10%/20%/30%。",
-    "AddPropreListStr": "SkillPropertyAdd;1120012,1120013,1120014,1120015,1120016;6;11200110#SkillPropertyAdd;1120012,1120013,1120014,1120015,1120016;6;11200111#SkillPropertyAdd;1120012,1120013,1120014,1120015,1120016;6;11200112"
+    "AddPropreList": [
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1120012,
+            1120013,
+            1120014,
+            1120015,
+            1120016
+          ],
+          "Attribute": 6,
+          "Value": 11200110
+        }
+      ],
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1120012,
+            1120013,
+            1120014,
+            1120015,
+            1120016
+          ],
+          "Attribute": 6,
+          "Value": 11200111
+        }
+      ],
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1120012,
+            1120013,
+            1120014,
+            1120015,
+            1120016
+          ],
+          "Attribute": 6,
+          "Value": 11200112
+        }
+      ]
+    ]
   },
   {
     "Id": 2100401,
@@ -788,7 +1557,14 @@
     "LearnRoseLv": 0,
     "Icon": 10007,
     "talentDes": "每次暴击有30%概率对目标附加伤害加深状态,使其受到伤害增加25%,持续3秒。",
-    "AddPropreListStr": "SkillIdAdd;1302001"
+    "AddPropreList": [
+      [
+        {
+          "$type": "SkillIdAdd",
+          "SkillId": 1302001
+        }
+      ]
+    ]
   },
   {
     "Id": 2100402,
@@ -804,7 +1580,43 @@
     "LearnRoseLv": 0,
     "Icon": 10008,
     "talentDes": "重击概率提升1%/2%/3%/4%/5%。",
-    "AddPropreListStr": "RolePropertyAdd;202103;0.01#RolePropertyAdd;202103;0.02#RolePropertyAdd;202103;0.03#RolePropertyAdd;202103;0.04#RolePropertyAdd;202103;0.05"
+    "AddPropreList": [
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 202103,
+          "Value": 0.01
+        }
+      ],
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 202103,
+          "Value": 0.02
+        }
+      ],
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 202103,
+          "Value": 0.03
+        }
+      ],
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 202103,
+          "Value": 0.04
+        }
+      ],
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 202103,
+          "Value": 0.05
+        }
+      ]
+    ]
   },
   {
     "Id": 2100403,
@@ -820,7 +1632,14 @@
     "LearnRoseLv": 0,
     "Icon": 10009,
     "talentDes": "普通攻击有10%概率触发破冰飞弹。",
-    "AddPropreListStr": "SkillIdAdd;1302003"
+    "AddPropreList": [
+      [
+        {
+          "$type": "SkillIdAdd",
+          "SkillId": 1302003
+        }
+      ]
+    ]
   },
   {
     "Id": 2100404,
@@ -836,7 +1655,63 @@
     "LearnRoseLv": 0,
     "Icon": 10010,
     "talentDes": "普通伤害提升3%/6%/9%/12%/15%。",
-    "AddPropreListStr": "SkillPropertyAdd;1200101,1200102;2;0.03#SkillPropertyAdd;1200101,1200102;2;0.06#SkillPropertyAdd;1200101,1200102;2;0.09#SkillPropertyAdd;1200101,1200102;2;0.12#SkillPropertyAdd;1200101,1200102;2;0.15"
+    "AddPropreList": [
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1200101,
+            1200102
+          ],
+          "Attribute": 2,
+          "Value": 0.03
+        }
+      ],
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1200101,
+            1200102
+          ],
+          "Attribute": 2,
+          "Value": 0.06
+        }
+      ],
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1200101,
+            1200102
+          ],
+          "Attribute": 2,
+          "Value": 0.09
+        }
+      ],
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1200101,
+            1200102
+          ],
+          "Attribute": 2,
+          "Value": 0.12
+        }
+      ],
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1200101,
+            1200102
+          ],
+          "Attribute": 2,
+          "Value": 0.15
+        }
+      ]
+    ]
   },
   {
     "Id": 2100405,
@@ -852,7 +1727,19 @@
     "LearnRoseLv": 0,
     "Icon": 10011,
     "talentDes": "攻击目标有10%概率提升自身25%伤害,持续3秒。",
-    "AddPropreListStr": "SkillPropertyAdd;1200101,1200102;6;12001010"
+    "AddPropreList": [
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1200101,
+            1200102
+          ],
+          "Attribute": 6,
+          "Value": 12001010
+        }
+      ]
+    ]
   },
   {
     "Id": 2100501,
@@ -868,7 +1755,78 @@
     "LearnRoseLv": 0,
     "Icon": 10012,
     "talentDes": "圣御之击伤害提升20%/40%/60%/80%100%。",
-    "AddPropreListStr": "SkillPropertyAdd;1120022,1120023,1120024,1120025,1120026;2;0.2#SkillPropertyAdd;1120022,1120023,1120024,1120025,1120026;2;0.4#SkillPropertyAdd;1120022,1120023,1120024,1120025,1120026;2;0.6#SkillPropertyAdd;1120022,1120023,1120024,1120025,1120026;2;0.8#SkillPropertyAdd;1120022,1120023,1120024,1120025,1120026;2;1"
+    "AddPropreList": [
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1120022,
+            1120023,
+            1120024,
+            1120025,
+            1120026
+          ],
+          "Attribute": 2,
+          "Value": 0.2
+        }
+      ],
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1120022,
+            1120023,
+            1120024,
+            1120025,
+            1120026
+          ],
+          "Attribute": 2,
+          "Value": 0.4
+        }
+      ],
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1120022,
+            1120023,
+            1120024,
+            1120025,
+            1120026
+          ],
+          "Attribute": 2,
+          "Value": 0.6
+        }
+      ],
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1120022,
+            1120023,
+            1120024,
+            1120025,
+            1120026
+          ],
+          "Attribute": 2,
+          "Value": 0.8
+        }
+      ],
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1120022,
+            1120023,
+            1120024,
+            1120025,
+            1120026
+          ],
+          "Attribute": 2,
+          "Value": 1
+        }
+      ]
+    ]
   },
   {
     "Id": 2100502,
@@ -884,7 +1842,43 @@
     "LearnRoseLv": 0,
     "Icon": 10013,
     "talentDes": "暴击上限永久提升1%/2%/3%/4%/5%。",
-    "AddPropreListStr": "RolePropertyAdd;200103;0.01#RolePropertyAdd;200103;0.02#RolePropertyAdd;200103;0.03#RolePropertyAdd;200103;0.04#RolePropertyAdd;200103;0.05"
+    "AddPropreList": [
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 200103,
+          "Value": 0.01
+        }
+      ],
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 200103,
+          "Value": 0.02
+        }
+      ],
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 200103,
+          "Value": 0.03
+        }
+      ],
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 200103,
+          "Value": 0.04
+        }
+      ],
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 200103,
+          "Value": 0.05
+        }
+      ]
+    ]
   },
   {
     "Id": 2100601,
@@ -901,7 +1895,22 @@
     "LearnRoseLv": 0,
     "Icon": 10014,
     "talentDes": "圣御之击冷却时间降低1秒。",
-    "AddPropreListStr": "SkillPropertyAdd;1120022,1120023,1120024,1120025,1120026;4;1"
+    "AddPropreList": [
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1120022,
+            1120023,
+            1120024,
+            1120025,
+            1120026
+          ],
+          "Attribute": 4,
+          "Value": 1
+        }
+      ]
+    ]
   },
   {
     "Id": 2100602,
@@ -917,7 +1926,43 @@
     "LearnRoseLv": 0,
     "Icon": 10015,
     "talentDes": "技能有1%/2%/3%/4%/5%概率造成双倍伤害。",
-    "AddPropreListStr": "RolePropertyAdd;204103;0.01#RolePropertyAdd;204103;0.02#RolePropertyAdd;204103;0.03#RolePropertyAdd;204103;0.04#RolePropertyAdd;204103;0.05"
+    "AddPropreList": [
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 204103,
+          "Value": 0.01
+        }
+      ],
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 204103,
+          "Value": 0.02
+        }
+      ],
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 204103,
+          "Value": 0.03
+        }
+      ],
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 204103,
+          "Value": 0.04
+        }
+      ],
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 204103,
+          "Value": 0.05
+        }
+      ]
+    ]
   },
   {
     "Id": 2100603,
@@ -933,7 +1978,14 @@
     "LearnRoseLv": 0,
     "Icon": 10016,
     "talentDes": "受到攻击有10%概率对目标释放圣御之击。",
-    "AddPropreListStr": "SkillIdAdd;1302004"
+    "AddPropreList": [
+      [
+        {
+          "$type": "SkillIdAdd",
+          "SkillId": 1302004
+        }
+      ]
+    ]
   },
   {
     "Id": 2100604,
@@ -949,7 +2001,43 @@
     "LearnRoseLv": 0,
     "Icon": 10017,
     "talentDes": "技能攻击怪物伤害提升2%/4%/6%/8%/10%。",
-    "AddPropreListStr": "RolePropertyAdd;223103;0.02#RolePropertyAdd;223103;0.04#RolePropertyAdd;223103;0.06#RolePropertyAdd;223103;0.08#RolePropertyAdd;223103;0.1"
+    "AddPropreList": [
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 223103,
+          "Value": 0.02
+        }
+      ],
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 223103,
+          "Value": 0.04
+        }
+      ],
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 223103,
+          "Value": 0.06
+        }
+      ],
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 223103,
+          "Value": 0.08
+        }
+      ],
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 223103,
+          "Value": 0.1
+        }
+      ]
+    ]
   },
   {
     "Id": 2100605,
@@ -965,7 +2053,15 @@
     "LearnRoseLv": 0,
     "Icon": 10018,
     "talentDes": "释放技能有5%概率不触发任何冷却时间。",
-    "AddPropreListStr": "RolePropertyAdd;204003;0.05"
+    "AddPropreList": [
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 204003,
+          "Value": 0.05
+        }
+      ]
+    ]
   },
   {
     "Id": 2100701,
@@ -981,7 +2077,78 @@
     "LearnRoseLv": 0,
     "Icon": 10019,
     "talentDes": "巨岩震击伤害提升20%/40%/60%/80%100%。",
-    "AddPropreListStr": "SkillPropertyAdd;1120032,1120033,1120034,1120035,1120036;2;0.2#SkillPropertyAdd;1120032,1120033,1120034,1120035,1120036;2;0.4#SkillPropertyAdd;1120032,1120033,1120034,1120035,1120036;2;0.6#SkillPropertyAdd;1120032,1120033,1120034,1120035,1120036;2;0.8#SkillPropertyAdd;1120032,1120033,1120034,1120035,1120036;2;1"
+    "AddPropreList": [
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1120032,
+            1120033,
+            1120034,
+            1120035,
+            1120036
+          ],
+          "Attribute": 2,
+          "Value": 0.2
+        }
+      ],
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1120032,
+            1120033,
+            1120034,
+            1120035,
+            1120036
+          ],
+          "Attribute": 2,
+          "Value": 0.4
+        }
+      ],
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1120032,
+            1120033,
+            1120034,
+            1120035,
+            1120036
+          ],
+          "Attribute": 2,
+          "Value": 0.6
+        }
+      ],
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1120032,
+            1120033,
+            1120034,
+            1120035,
+            1120036
+          ],
+          "Attribute": 2,
+          "Value": 0.8
+        }
+      ],
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1120032,
+            1120033,
+            1120034,
+            1120035,
+            1120036
+          ],
+          "Attribute": 2,
+          "Value": 1
+        }
+      ]
+    ]
   },
   {
     "Id": 2100702,
@@ -997,7 +2164,14 @@
     "LearnRoseLv": 0,
     "Icon": 10020,
     "talentDes": "新增技能熔岩爆裂,对目标造成350%伤害,并使目标眩晕2秒。",
-    "AddPropreListStr": "SkillIdAdd;1302005"
+    "AddPropreList": [
+      [
+        {
+          "$type": "SkillIdAdd",
+          "SkillId": 1302005
+        }
+      ]
+    ]
   },
   {
     "Id": 2100703,
@@ -1014,7 +2188,43 @@
     "LearnRoseLv": 0,
     "Icon": 10021,
     "talentDes": "移动速度提升2%/4%/6%/8%/10%。",
-    "AddPropreListStr": "RolePropertyAdd;100902;0.02#RolePropertyAdd;100902;0.04#RolePropertyAdd;100902;0.06#RolePropertyAdd;100902;0.08#RolePropertyAdd;100902;0.1"
+    "AddPropreList": [
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 100902,
+          "Value": 0.02
+        }
+      ],
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 100902,
+          "Value": 0.04
+        }
+      ],
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 100902,
+          "Value": 0.06
+        }
+      ],
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 100902,
+          "Value": 0.08
+        }
+      ],
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 100902,
+          "Value": 0.1
+        }
+      ]
+    ]
   },
   {
     "Id": 2200101,
@@ -1030,7 +2240,7 @@
     "LearnRoseLv": 0,
     "Icon": 10001,
     "talentDes": "攻击永久提升1%/2%/3%。",
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 2200201,
@@ -1046,7 +2256,7 @@
     "LearnRoseLv": 0,
     "Icon": 10002,
     "talentDes": "冰封冲击技能冷却时间缩减2秒。",
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 2200202,
@@ -1062,7 +2272,7 @@
     "LearnRoseLv": 0,
     "Icon": 10003,
     "talentDes": "冰封冲击伤害提升30%/60%/100%。",
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 2200203,
@@ -1078,7 +2288,7 @@
     "LearnRoseLv": 0,
     "Icon": 10004,
     "talentDes": "普攻使目标移动速度降低30%,持续3秒。",
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 2200301,
@@ -1094,7 +2304,7 @@
     "LearnRoseLv": 0,
     "Icon": 10005,
     "talentDes": "破冰飞弹伤害提升30%,60%,100%。",
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 2200302,
@@ -1110,7 +2320,7 @@
     "LearnRoseLv": 0,
     "Icon": 10006,
     "talentDes": "破冰飞弹使目标防御和魔御降低10%/20%/30%。",
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 2200401,
@@ -1127,7 +2337,7 @@
     "LearnRoseLv": 0,
     "Icon": 10007,
     "talentDes": "每次暴击有30%概率对目标附加伤害加深状态,使其受到伤害增加25%,持续3秒。",
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 2200402,
@@ -1143,7 +2353,7 @@
     "LearnRoseLv": 0,
     "Icon": 10008,
     "talentDes": "重击概率提升1%/2%/3%/4%/5%。",
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 2200403,
@@ -1159,7 +2369,7 @@
     "LearnRoseLv": 0,
     "Icon": 10009,
     "talentDes": "普通攻击有10%概率触发破冰飞弹。",
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 2200404,
@@ -1175,7 +2385,7 @@
     "LearnRoseLv": 0,
     "Icon": 10010,
     "talentDes": "普通伤害提升3%/6%/9%/12%/15%。",
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 2200405,
@@ -1191,7 +2401,7 @@
     "LearnRoseLv": 0,
     "Icon": 10011,
     "talentDes": "攻击目标有10%概率提升自身25%伤害,持续3秒。",
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 2200501,
@@ -1207,7 +2417,7 @@
     "LearnRoseLv": 0,
     "Icon": 10012,
     "talentDes": "圣御之击伤害提升20%/40%/60%/80%100%。",
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 2200502,
@@ -1223,7 +2433,7 @@
     "LearnRoseLv": 0,
     "Icon": 10013,
     "talentDes": "暴击上限永久提升1%/2%/3%/4%/5%。",
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 2200601,
@@ -1240,7 +2450,7 @@
     "LearnRoseLv": 0,
     "Icon": 10014,
     "talentDes": "圣御之击冷却时间降低1秒,并使目标移动速度降低50%,持续3秒。",
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 2200602,
@@ -1256,7 +2466,7 @@
     "LearnRoseLv": 0,
     "Icon": 10015,
     "talentDes": "巨岩震击有20%/40%/60%/80%/100%概率眩晕目标2秒。",
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 2200603,
@@ -1272,7 +2482,7 @@
     "LearnRoseLv": 0,
     "Icon": 10016,
     "talentDes": "受到攻击有10%概率对目标释放圣御之击。",
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 2200604,
@@ -1288,7 +2498,7 @@
     "LearnRoseLv": 0,
     "Icon": 10017,
     "talentDes": "技能伤害提升2%/4%/6%/8%/10%。",
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 2200605,
@@ -1304,7 +2514,7 @@
     "LearnRoseLv": 0,
     "Icon": 10018,
     "talentDes": "受到伤害有5%概率给自己释放一个护盾,护盾可以抵抗50%伤害,最大承受生命的30%,持续20秒。",
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 2200701,
@@ -1320,7 +2530,7 @@
     "LearnRoseLv": 0,
     "Icon": 10019,
     "talentDes": "巨岩震击伤害提升20%/40%/60%/80%100%。",
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 2200702,
@@ -1336,7 +2546,7 @@
     "LearnRoseLv": 0,
     "Icon": 10020,
     "talentDes": "新增技能熔岩爆裂,对目标造成350%伤害,并使目标眩晕2秒。",
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 2200703,
@@ -1353,7 +2563,7 @@
     "LearnRoseLv": 0,
     "Icon": 10021,
     "talentDes": "移动速度提升2%/4%/6%/8%/10%。",
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 3100101,
@@ -1369,7 +2579,14 @@
     "LearnRoseLv": 15,
     "Icon": 10001,
     "talentDes": "新增技能生命恢复,可以立即回复自身20%生命",
-    "AddPropreListStr": "SkillIdAdd;62000001"
+    "AddPropreList": [
+      [
+        {
+          "$type": "SkillIdAdd",
+          "SkillId": 62000001
+        }
+      ]
+    ]
   },
   {
     "Id": 3100102,
@@ -1385,7 +2602,7 @@
     "LearnRoseLv": 16,
     "Icon": 10001,
     "talentDes": "",
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 3100103,
@@ -1401,7 +2618,7 @@
     "LearnRoseLv": 17,
     "Icon": 10001,
     "talentDes": "",
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 3100201,
@@ -1419,7 +2636,14 @@
     "LearnRoseLv": 15,
     "Icon": 10001,
     "talentDes": "新增强击技能,立即对目标造成300%伤害",
-    "AddPropreListStr": "SkillIdAdd;62000002"
+    "AddPropreList": [
+      [
+        {
+          "$type": "SkillIdAdd",
+          "SkillId": 62000002
+        }
+      ]
+    ]
   },
   {
     "Id": 3100202,
@@ -1437,7 +2661,7 @@
     "LearnRoseLv": 15,
     "Icon": 10001,
     "talentDes": "新增强击技能,立即对目标造成300%伤害",
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 3100203,
@@ -1455,7 +2679,7 @@
     "LearnRoseLv": 15,
     "Icon": 10001,
     "talentDes": "新增强击技能,立即对目标造成300%伤害",
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 3200101,
@@ -1471,7 +2695,14 @@
     "LearnRoseLv": 15,
     "Icon": 10001,
     "talentDes": "新增技能生命恢复,可以立即回复自身20%生命",
-    "AddPropreListStr": "SkillIdAdd;62000001"
+    "AddPropreList": [
+      [
+        {
+          "$type": "SkillIdAdd",
+          "SkillId": 62000001
+        }
+      ]
+    ]
   },
   {
     "Id": 3200102,
@@ -1487,7 +2718,7 @@
     "LearnRoseLv": 16,
     "Icon": 10001,
     "talentDes": "",
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 3200103,
@@ -1503,7 +2734,7 @@
     "LearnRoseLv": 17,
     "Icon": 10001,
     "talentDes": "",
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 3200201,
@@ -1521,7 +2752,14 @@
     "LearnRoseLv": 15,
     "Icon": 10001,
     "talentDes": "新增强击技能,立即对目标造成300%伤害",
-    "AddPropreListStr": "SkillIdAdd;62000002"
+    "AddPropreList": [
+      [
+        {
+          "$type": "SkillIdAdd",
+          "SkillId": 62000002
+        }
+      ]
+    ]
   },
   {
     "Id": 3200202,
@@ -1539,7 +2777,7 @@
     "LearnRoseLv": 15,
     "Icon": 10001,
     "talentDes": "新增强击技能,立即对目标造成300%伤害",
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 3200203,
@@ -1557,6 +2795,6 @@
     "LearnRoseLv": 15,
     "Icon": 10001,
     "talentDes": "新增强击技能,立即对目标造成300%伤害",
-    "AddPropreListStr": ""
+    "AddPropreList": []
   }
 ]

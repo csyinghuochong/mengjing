@@ -11,7 +11,15 @@
     ],
     "Icon": 10001,
     "Des": "攻击永久提升1%。",
-    "AddPropreListStr": "RolePropertyAdd;100402;0.01"
+    "AddPropreList": [
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 100402,
+          "Value": 0.01
+        }
+      ]
+    ]
   },
   {
     "Id": 11002,
@@ -25,7 +33,22 @@
     "NeedKillBoss": [],
     "Icon": 10002,
     "Des": "魔焰地裂会对目标释放爆裂状态,3秒后对范围内造成200%爆炸伤害。",
-    "AddPropreListStr": "SkillPropertyAdd;1110002,1110003,1110004,1110005,1110006;6;11100010"
+    "AddPropreList": [
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1110002,
+            1110003,
+            1110004,
+            1110005,
+            1110006
+          ],
+          "Attribute": 6,
+          "Value": 11100010
+        }
+      ]
+    ]
   },
   {
     "Id": 11003,
@@ -39,7 +62,7 @@
     "NeedKillBoss": [],
     "Icon": 10003,
     "Des": "前冲距离延长2码/。",
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 11004,
@@ -54,7 +77,22 @@
     "NeedKillBoss": [],
     "Icon": 10004,
     "Des": "魔焰地裂会使目标受到伤害提升10%,持续5秒。",
-    "AddPropreListStr": "SkillPropertyAdd;1110002,1110003,1110004,1110005,1110006;6;11100011"
+    "AddPropreList": [
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1110002,
+            1110003,
+            1110004,
+            1110005,
+            1110006
+          ],
+          "Attribute": 6,
+          "Value": 11100011
+        }
+      ]
+    ]
   },
   {
     "Id": 11005,
@@ -68,7 +106,50 @@
     "NeedKillBoss": [],
     "Icon": 10005,
     "Des": "幻影跃击伤害提升30%/60%/100%。",
-    "AddPropreListStr": "SkillPropertyAdd;1110012,1110013,1110014,1110015,1110016;2;0.3#SkillPropertyAdd;1110012,1110013,1110014,1110015,1110016;2;0.6#SkillPropertyAdd;1110012,1110013,1110014,1110015,1110016;2;1"
+    "AddPropreList": [
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1110012,
+            1110013,
+            1110014,
+            1110015,
+            1110016
+          ],
+          "Attribute": 2,
+          "Value": 0.3
+        }
+      ],
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1110012,
+            1110013,
+            1110014,
+            1110015,
+            1110016
+          ],
+          "Attribute": 2,
+          "Value": 0.6
+        }
+      ],
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1110012,
+            1110013,
+            1110014,
+            1110015,
+            1110016
+          ],
+          "Attribute": 2,
+          "Value": 1
+        }
+      ]
+    ]
   },
   {
     "Id": 11006,
@@ -82,7 +163,22 @@
     "NeedKillBoss": [],
     "Icon": 10006,
     "Des": "魔焰地裂使目标移动速度降低30%，持续3秒。",
-    "AddPropreListStr": "SkillPropertyAdd;1110002,1110003,1110004,1110005,1110006;6;11100012"
+    "AddPropreList": [
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1110002,
+            1110003,
+            1110004,
+            1110005,
+            1110006
+          ],
+          "Attribute": 6,
+          "Value": 11100012
+        }
+      ]
+    ]
   },
   {
     "Id": 11007,
@@ -96,7 +192,22 @@
     "NeedKillBoss": [],
     "Icon": 10007,
     "Des": "释放旋舞之影使自身的移动速度提升50%,持续3秒。",
-    "AddPropreListStr": "SkillPropertyAdd;1110022,1110023,1110024,1110025,1110026;6;11100010"
+    "AddPropreList": [
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1110022,
+            1110023,
+            1110024,
+            1110025,
+            1110026
+          ],
+          "Attribute": 6,
+          "Value": 11100010
+        }
+      ]
+    ]
   },
   {
     "Id": 11008,
@@ -110,7 +221,15 @@
     "NeedKillBoss": [],
     "Icon": 10008,
     "Des": "技能攻击怪物伤害提升2%。",
-    "AddPropreListStr": "RolePropertyAdd;223103;0.02"
+    "AddPropreList": [
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 223103,
+          "Value": 0.02
+        }
+      ]
+    ]
   },
   {
     "Id": 12001,
@@ -124,7 +243,14 @@
     ],
     "Icon": 10009,
     "Des": "描述。。。。",
-    "AddPropreListStr": "SkillIdAdd;1301002"
+    "AddPropreList": [
+      [
+        {
+          "$type": "SkillIdAdd",
+          "SkillId": 1301002
+        }
+      ]
+    ]
   },
   {
     "Id": 12002,
@@ -138,7 +264,43 @@
     "NeedKillBoss": [],
     "Icon": 10010,
     "Des": "描述。。。。",
-    "AddPropreListStr": "RolePropertyAdd;200303;0.01#RolePropertyAdd;200303;0.02#RolePropertyAdd;200303;0.03#RolePropertyAdd;200303;0.04#RolePropertyAdd;200303;0.05"
+    "AddPropreList": [
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 200303,
+          "Value": 0.01
+        }
+      ],
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 200303,
+          "Value": 0.02
+        }
+      ],
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 200303,
+          "Value": 0.03
+        }
+      ],
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 200303,
+          "Value": 0.04
+        }
+      ],
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 200303,
+          "Value": 0.05
+        }
+      ]
+    ]
   },
   {
     "Id": 12003,
@@ -152,7 +314,14 @@
     "NeedKillBoss": [],
     "Icon": 10011,
     "Des": "描述。。。。",
-    "AddPropreListStr": "SkillIdAdd;1301003"
+    "AddPropreList": [
+      [
+        {
+          "$type": "SkillIdAdd",
+          "SkillId": 1301003
+        }
+      ]
+    ]
   },
   {
     "Id": 12004,
@@ -167,7 +336,78 @@
     "NeedKillBoss": [],
     "Icon": 10012,
     "Des": "描述。。。。",
-    "AddPropreListStr": "SkillPropertyAdd;1110022,1110023,1110024,1110025,1110026;2;0.08#SkillPropertyAdd;1110022,1110023,1110024,1110025,1110026;2;0.16#SkillPropertyAdd;1110022,1110023,1110024,1110025,1110026;2;0.24#SkillPropertyAdd;1110022,1110023,1110024,1110025,1110026;2;0.32#SkillPropertyAdd;1110022,1110023,1110024,1110025,1110026;2;0.4"
+    "AddPropreList": [
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1110022,
+            1110023,
+            1110024,
+            1110025,
+            1110026
+          ],
+          "Attribute": 2,
+          "Value": 0.08
+        }
+      ],
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1110022,
+            1110023,
+            1110024,
+            1110025,
+            1110026
+          ],
+          "Attribute": 2,
+          "Value": 0.16
+        }
+      ],
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1110022,
+            1110023,
+            1110024,
+            1110025,
+            1110026
+          ],
+          "Attribute": 2,
+          "Value": 0.24
+        }
+      ],
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1110022,
+            1110023,
+            1110024,
+            1110025,
+            1110026
+          ],
+          "Attribute": 2,
+          "Value": 0.32
+        }
+      ],
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1110022,
+            1110023,
+            1110024,
+            1110025,
+            1110026
+          ],
+          "Attribute": 2,
+          "Value": 0.4
+        }
+      ]
+    ]
   },
   {
     "Id": 12005,
@@ -181,7 +421,38 @@
     "NeedKillBoss": [],
     "Icon": 10013,
     "Des": "描述。。。。",
-    "AddPropreListStr": "SkillIdAdd;1301006#SkillIdAdd;1301007#SkillIdAdd;1301008#SkillIdAdd;1301009#SkillIdAdd;1301010"
+    "AddPropreList": [
+      [
+        {
+          "$type": "SkillIdAdd",
+          "SkillId": 1301006
+        }
+      ],
+      [
+        {
+          "$type": "SkillIdAdd",
+          "SkillId": 1301007
+        }
+      ],
+      [
+        {
+          "$type": "SkillIdAdd",
+          "SkillId": 1301008
+        }
+      ],
+      [
+        {
+          "$type": "SkillIdAdd",
+          "SkillId": 1301009
+        }
+      ],
+      [
+        {
+          "$type": "SkillIdAdd",
+          "SkillId": 1301010
+        }
+      ]
+    ]
   },
   {
     "Id": 12006,
@@ -195,7 +466,22 @@
     "NeedKillBoss": [],
     "Icon": 10014,
     "Des": "描述。。。。",
-    "AddPropreListStr": "SkillPropertyAdd;1110032,1110033,1110034,1110035,1110036;4;2"
+    "AddPropreList": [
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1110032,
+            1110033,
+            1110034,
+            1110035,
+            1110036
+          ],
+          "Attribute": 4,
+          "Value": 2
+        }
+      ]
+    ]
   },
   {
     "Id": 12007,
@@ -209,7 +495,43 @@
     "NeedKillBoss": [],
     "Icon": 10015,
     "Des": "描述。。。。",
-    "AddPropreListStr": "RolePropertyAdd;200103;0.01#RolePropertyAdd;200103;0.02#RolePropertyAdd;200103;0.03#RolePropertyAdd;200103;0.04#RolePropertyAdd;200103;0.05"
+    "AddPropreList": [
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 200103,
+          "Value": 0.01
+        }
+      ],
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 200103,
+          "Value": 0.02
+        }
+      ],
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 200103,
+          "Value": 0.03
+        }
+      ],
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 200103,
+          "Value": 0.04
+        }
+      ],
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 200103,
+          "Value": 0.05
+        }
+      ]
+    ]
   },
   {
     "Id": 12008,
@@ -223,7 +545,15 @@
     "NeedKillBoss": [],
     "Icon": 10016,
     "Des": "描述。。。。",
-    "AddPropreListStr": "RolePropertyAdd;205603;0.1"
+    "AddPropreList": [
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 205603,
+          "Value": 0.1
+        }
+      ]
+    ]
   },
   {
     "Id": 13001,
@@ -237,7 +567,43 @@
     ],
     "Icon": 10017,
     "Des": "描述。。。。",
-    "AddPropreListStr": "RolePropertyAdd;203603;0.01#RolePropertyAdd;203603;0.02#RolePropertyAdd;203603;0.03#RolePropertyAdd;203603;0.04#RolePropertyAdd;203603;0.05"
+    "AddPropreList": [
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 203603,
+          "Value": 0.01
+        }
+      ],
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 203603,
+          "Value": 0.02
+        }
+      ],
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 203603,
+          "Value": 0.03
+        }
+      ],
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 203603,
+          "Value": 0.04
+        }
+      ],
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 203603,
+          "Value": 0.05
+        }
+      ]
+    ]
   },
   {
     "Id": 13002,
@@ -251,7 +617,22 @@
     "NeedKillBoss": [],
     "Icon": 10018,
     "Des": "描述。。。。",
-    "AddPropreListStr": "SkillPropertyAdd;1110012,1110013,1110014,1110015,1110016;4;2"
+    "AddPropreList": [
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1110012,
+            1110013,
+            1110014,
+            1110015,
+            1110016
+          ],
+          "Attribute": 4,
+          "Value": 2
+        }
+      ]
+    ]
   },
   {
     "Id": 13003,
@@ -265,7 +646,78 @@
     "NeedKillBoss": [],
     "Icon": 10019,
     "Des": "描述。。。。",
-    "AddPropreListStr": "SkillPropertyAdd;1110032,1110033,1110034,1110035,1110036;2;0.2#SkillPropertyAdd;1110032,1110033,1110034,1110035,1110036;2;0.4#SkillPropertyAdd;1110032,1110033,1110034,1110035,1110036;2;0.6#SkillPropertyAdd;1110032,1110033,1110034,1110035,1110036;2;0.8#SkillPropertyAdd;1110032,1110033,1110034,1110035,1110036;2;1"
+    "AddPropreList": [
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1110032,
+            1110033,
+            1110034,
+            1110035,
+            1110036
+          ],
+          "Attribute": 2,
+          "Value": 0.2
+        }
+      ],
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1110032,
+            1110033,
+            1110034,
+            1110035,
+            1110036
+          ],
+          "Attribute": 2,
+          "Value": 0.4
+        }
+      ],
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1110032,
+            1110033,
+            1110034,
+            1110035,
+            1110036
+          ],
+          "Attribute": 2,
+          "Value": 0.6
+        }
+      ],
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1110032,
+            1110033,
+            1110034,
+            1110035,
+            1110036
+          ],
+          "Attribute": 2,
+          "Value": 0.8
+        }
+      ],
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1110032,
+            1110033,
+            1110034,
+            1110035,
+            1110036
+          ],
+          "Attribute": 2,
+          "Value": 1
+        }
+      ]
+    ]
   },
   {
     "Id": 13004,
@@ -280,7 +732,15 @@
     "NeedKillBoss": [],
     "Icon": 10020,
     "Des": "描述。。。。",
-    "AddPropreListStr": "RolePropertyAdd;204003;0.1"
+    "AddPropreList": [
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 204003,
+          "Value": 0.1
+        }
+      ]
+    ]
   },
   {
     "Id": 13005,
@@ -294,7 +754,68 @@
     "NeedKillBoss": [],
     "Icon": 10021,
     "Des": "描述。。。。",
-    "AddPropreListStr": "SkillPropertyAdd;1200001,1200002,1200003;2;0.08#SkillPropertyAdd;1200001,1200002,1200003;2;0.16#SkillPropertyAdd;1200001,1200002,1200003;2;0.24#SkillPropertyAdd;1200001,1200002,1200003;2;0.32#SkillPropertyAdd;1200001,1200002,1200003;2;0.4"
+    "AddPropreList": [
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1200001,
+            1200002,
+            1200003
+          ],
+          "Attribute": 2,
+          "Value": 0.08
+        }
+      ],
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1200001,
+            1200002,
+            1200003
+          ],
+          "Attribute": 2,
+          "Value": 0.16
+        }
+      ],
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1200001,
+            1200002,
+            1200003
+          ],
+          "Attribute": 2,
+          "Value": 0.24
+        }
+      ],
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1200001,
+            1200002,
+            1200003
+          ],
+          "Attribute": 2,
+          "Value": 0.32
+        }
+      ],
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1200001,
+            1200002,
+            1200003
+          ],
+          "Attribute": 2,
+          "Value": 0.4
+        }
+      ]
+    ]
   },
   {
     "Id": 13006,
@@ -308,7 +829,7 @@
     "NeedKillBoss": [],
     "Icon": 10001,
     "Des": "描述。。。。",
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 13007,
@@ -322,7 +843,7 @@
     "NeedKillBoss": [],
     "Icon": 10002,
     "Des": "描述。。。。",
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 13008,
@@ -336,7 +857,7 @@
     "NeedKillBoss": [],
     "Icon": 10003,
     "Des": "描述。。。。",
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 14001,
@@ -350,7 +871,7 @@
     ],
     "Icon": 10004,
     "Des": "描述。。。。",
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 14002,
@@ -364,7 +885,7 @@
     "NeedKillBoss": [],
     "Icon": 10005,
     "Des": "描述。。。。",
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 14003,
@@ -378,7 +899,7 @@
     "NeedKillBoss": [],
     "Icon": 10006,
     "Des": "描述。。。。",
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 14004,
@@ -393,7 +914,7 @@
     "NeedKillBoss": [],
     "Icon": 10007,
     "Des": "描述。。。。",
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 14005,
@@ -407,7 +928,7 @@
     "NeedKillBoss": [],
     "Icon": 10008,
     "Des": "描述。。。。",
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 14006,
@@ -421,7 +942,7 @@
     "NeedKillBoss": [],
     "Icon": 10009,
     "Des": "描述。。。。",
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 14007,
@@ -435,7 +956,7 @@
     "NeedKillBoss": [],
     "Icon": 10010,
     "Des": "描述。。。。",
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 14008,
@@ -449,7 +970,7 @@
     "NeedKillBoss": [],
     "Icon": 10011,
     "Des": "描述。。。。",
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 15001,
@@ -463,7 +984,7 @@
     ],
     "Icon": 10012,
     "Des": "描述。。。。",
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 15002,
@@ -477,7 +998,7 @@
     "NeedKillBoss": [],
     "Icon": 10013,
     "Des": "描述。。。。",
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 15003,
@@ -491,7 +1012,7 @@
     "NeedKillBoss": [],
     "Icon": 10014,
     "Des": "描述。。。。",
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 15004,
@@ -506,7 +1027,7 @@
     "NeedKillBoss": [],
     "Icon": 10015,
     "Des": "描述。。。。",
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 15005,
@@ -520,7 +1041,7 @@
     "NeedKillBoss": [],
     "Icon": 10016,
     "Des": "描述。。。。",
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 15006,
@@ -534,7 +1055,7 @@
     "NeedKillBoss": [],
     "Icon": 10017,
     "Des": "描述。。。。",
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 15007,
@@ -548,7 +1069,7 @@
     "NeedKillBoss": [],
     "Icon": 10018,
     "Des": "描述。。。。",
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 15008,
@@ -562,7 +1083,7 @@
     "NeedKillBoss": [],
     "Icon": 10019,
     "Des": "描述。。。。",
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 16001,
@@ -577,7 +1098,7 @@
     "NeedKillBoss": [],
     "Icon": 10020,
     "Des": "描述。。。。",
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 16002,
@@ -592,7 +1113,7 @@
     "NeedKillBoss": [],
     "Icon": 10021,
     "Des": "描述。。。。",
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 16003,
@@ -607,7 +1128,7 @@
     "NeedKillBoss": [],
     "Icon": 10021,
     "Des": "描述。。。。",
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 16004,
@@ -622,7 +1143,7 @@
     "NeedKillBoss": [],
     "Icon": 10021,
     "Des": "描述。。。。",
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 16005,
@@ -637,7 +1158,7 @@
     "NeedKillBoss": [],
     "Icon": 10021,
     "Des": "描述。。。。",
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 17001,
@@ -649,7 +1170,7 @@
     "NeedKillBoss": [],
     "Icon": 10021,
     "Des": "双龙觉醒很牛逼",
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 17002,
@@ -661,7 +1182,7 @@
     "NeedKillBoss": [],
     "Icon": 10021,
     "Des": "三龙觉醒很牛逼",
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 17003,
@@ -673,7 +1194,7 @@
     "NeedKillBoss": [],
     "Icon": 10021,
     "Des": "五龙觉醒很牛逼",
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 21001,
@@ -687,7 +1208,29 @@
     ],
     "Icon": 10001,
     "Des": "攻击永久提升1%/2%/3%。",
-    "AddPropreListStr": "RolePropertyAdd;100402;0.01#RolePropertyAdd;100402;0.02#RolePropertyAdd;100402;0.03"
+    "AddPropreList": [
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 100402,
+          "Value": 0.01
+        }
+      ],
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 100402,
+          "Value": 0.02
+        }
+      ],
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 100402,
+          "Value": 0.03
+        }
+      ]
+    ]
   },
   {
     "Id": 21002,
@@ -701,7 +1244,22 @@
     "NeedKillBoss": [],
     "Icon": 10002,
     "Des": "冰封冲击技能冷却时间缩减2秒。",
-    "AddPropreListStr": "SkillPropertyAdd;1120002,1120003,1120004,1120005,1120006;4;2"
+    "AddPropreList": [
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1120002,
+            1120003,
+            1120004,
+            1120005,
+            1120006
+          ],
+          "Attribute": 4,
+          "Value": 2
+        }
+      ]
+    ]
   },
   {
     "Id": 21003,
@@ -715,7 +1273,50 @@
     "NeedKillBoss": [],
     "Icon": 10003,
     "Des": "冰封冲击伤害提升30%/60%/100%。",
-    "AddPropreListStr": "SkillPropertyAdd;1120002,1120003,1120004,1120005,1120006;2;0.3#SkillPropertyAdd;1120002,1120003,1120004,1120005,1120006;2;0.6#SkillPropertyAdd;1120002,1120003,1120004,1120005,1120006;2;1"
+    "AddPropreList": [
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1120002,
+            1120003,
+            1120004,
+            1120005,
+            1120006
+          ],
+          "Attribute": 2,
+          "Value": 0.3
+        }
+      ],
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1120002,
+            1120003,
+            1120004,
+            1120005,
+            1120006
+          ],
+          "Attribute": 2,
+          "Value": 0.6
+        }
+      ],
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1120002,
+            1120003,
+            1120004,
+            1120005,
+            1120006
+          ],
+          "Attribute": 2,
+          "Value": 1
+        }
+      ]
+    ]
   },
   {
     "Id": 21004,
@@ -730,7 +1331,19 @@
     "NeedKillBoss": [],
     "Icon": 10004,
     "Des": "普攻使目标移动速度降低30%,持续3秒。",
-    "AddPropreListStr": "SkillPropertyAdd;1200101,1200102;6;1000001"
+    "AddPropreList": [
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1200101,
+            1200102
+          ],
+          "Attribute": 6,
+          "Value": 1000001
+        }
+      ]
+    ]
   },
   {
     "Id": 21005,
@@ -744,7 +1357,50 @@
     "NeedKillBoss": [],
     "Icon": 10005,
     "Des": "破冰飞弹伤害提升30%,60%,100%。",
-    "AddPropreListStr": "SkillPropertyAdd;1120012,1120013,1120014,1120015,1120016;2;0.3#SkillPropertyAdd;1120012,1120013,1120014,1120015,1120016;2;0.6#SkillPropertyAdd;1120012,1120013,1120014,1120015,1120016;2;1"
+    "AddPropreList": [
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1120012,
+            1120013,
+            1120014,
+            1120015,
+            1120016
+          ],
+          "Attribute": 2,
+          "Value": 0.3
+        }
+      ],
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1120012,
+            1120013,
+            1120014,
+            1120015,
+            1120016
+          ],
+          "Attribute": 2,
+          "Value": 0.6
+        }
+      ],
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1120012,
+            1120013,
+            1120014,
+            1120015,
+            1120016
+          ],
+          "Attribute": 2,
+          "Value": 1
+        }
+      ]
+    ]
   },
   {
     "Id": 21006,
@@ -758,7 +1414,50 @@
     "NeedKillBoss": [],
     "Icon": 10006,
     "Des": "破冰飞弹使目标受到伤害增加10%/20%/30%。",
-    "AddPropreListStr": "SkillPropertyAdd;1120012,1120013,1120014,1120015,1120016;6;11200110#SkillPropertyAdd;1120012,1120013,1120014,1120015,1120016;6;11200111#SkillPropertyAdd;1120012,1120013,1120014,1120015,1120016;6;11200112"
+    "AddPropreList": [
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1120012,
+            1120013,
+            1120014,
+            1120015,
+            1120016
+          ],
+          "Attribute": 6,
+          "Value": 11200110
+        }
+      ],
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1120012,
+            1120013,
+            1120014,
+            1120015,
+            1120016
+          ],
+          "Attribute": 6,
+          "Value": 11200111
+        }
+      ],
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1120012,
+            1120013,
+            1120014,
+            1120015,
+            1120016
+          ],
+          "Attribute": 6,
+          "Value": 11200112
+        }
+      ]
+    ]
   },
   {
     "Id": 21007,
@@ -772,7 +1471,14 @@
     "NeedKillBoss": [],
     "Icon": 10007,
     "Des": "每次暴击有30%概率对目标附加伤害加深状态,使其受到伤害增加25%,持续3秒。",
-    "AddPropreListStr": "SkillIdAdd;1302001"
+    "AddPropreList": [
+      [
+        {
+          "$type": "SkillIdAdd",
+          "SkillId": 1302001
+        }
+      ]
+    ]
   },
   {
     "Id": 21008,
@@ -786,7 +1492,43 @@
     "NeedKillBoss": [],
     "Icon": 10008,
     "Des": "重击概率提升1%/2%/3%/4%/5%。",
-    "AddPropreListStr": "RolePropertyAdd;202103;0.01#RolePropertyAdd;202103;0.02#RolePropertyAdd;202103;0.03#RolePropertyAdd;202103;0.04#RolePropertyAdd;202103;0.05"
+    "AddPropreList": [
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 202103,
+          "Value": 0.01
+        }
+      ],
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 202103,
+          "Value": 0.02
+        }
+      ],
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 202103,
+          "Value": 0.03
+        }
+      ],
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 202103,
+          "Value": 0.04
+        }
+      ],
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 202103,
+          "Value": 0.05
+        }
+      ]
+    ]
   },
   {
     "Id": 22001,
@@ -798,7 +1540,14 @@
     "NeedKillBoss": [],
     "Icon": 10009,
     "Des": "普通攻击有10%概率触发破冰飞弹。",
-    "AddPropreListStr": "SkillIdAdd;1302003"
+    "AddPropreList": [
+      [
+        {
+          "$type": "SkillIdAdd",
+          "SkillId": 1302003
+        }
+      ]
+    ]
   },
   {
     "Id": 22002,
@@ -812,7 +1561,63 @@
     "NeedKillBoss": [],
     "Icon": 10010,
     "Des": "普通伤害提升3%/6%/9%/12%/15%。",
-    "AddPropreListStr": "SkillPropertyAdd;1200101,1200102;2;0.03#SkillPropertyAdd;1200101,1200102;2;0.06#SkillPropertyAdd;1200101,1200102;2;0.09#SkillPropertyAdd;1200101,1200102;2;0.12#SkillPropertyAdd;1200101,1200102;2;0.15"
+    "AddPropreList": [
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1200101,
+            1200102
+          ],
+          "Attribute": 2,
+          "Value": 0.03
+        }
+      ],
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1200101,
+            1200102
+          ],
+          "Attribute": 2,
+          "Value": 0.06
+        }
+      ],
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1200101,
+            1200102
+          ],
+          "Attribute": 2,
+          "Value": 0.09
+        }
+      ],
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1200101,
+            1200102
+          ],
+          "Attribute": 2,
+          "Value": 0.12
+        }
+      ],
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1200101,
+            1200102
+          ],
+          "Attribute": 2,
+          "Value": 0.15
+        }
+      ]
+    ]
   },
   {
     "Id": 22003,
@@ -826,7 +1631,19 @@
     "NeedKillBoss": [],
     "Icon": 10011,
     "Des": "攻击目标有10%概率提升自身25%伤害,持续3秒。",
-    "AddPropreListStr": "SkillPropertyAdd;1200101,1200102;6;12001010"
+    "AddPropreList": [
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1200101,
+            1200102
+          ],
+          "Attribute": 6,
+          "Value": 12001010
+        }
+      ]
+    ]
   },
   {
     "Id": 22004,
@@ -841,7 +1658,78 @@
     "NeedKillBoss": [],
     "Icon": 10012,
     "Des": "圣御之击伤害提升20%/40%/60%/80%100%。",
-    "AddPropreListStr": "SkillPropertyAdd;1120022,1120023,1120024,1120025,1120026;2;0.2#SkillPropertyAdd;1120022,1120023,1120024,1120025,1120026;2;0.4#SkillPropertyAdd;1120022,1120023,1120024,1120025,1120026;2;0.6#SkillPropertyAdd;1120022,1120023,1120024,1120025,1120026;2;0.8#SkillPropertyAdd;1120022,1120023,1120024,1120025,1120026;2;1"
+    "AddPropreList": [
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1120022,
+            1120023,
+            1120024,
+            1120025,
+            1120026
+          ],
+          "Attribute": 2,
+          "Value": 0.2
+        }
+      ],
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1120022,
+            1120023,
+            1120024,
+            1120025,
+            1120026
+          ],
+          "Attribute": 2,
+          "Value": 0.4
+        }
+      ],
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1120022,
+            1120023,
+            1120024,
+            1120025,
+            1120026
+          ],
+          "Attribute": 2,
+          "Value": 0.6
+        }
+      ],
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1120022,
+            1120023,
+            1120024,
+            1120025,
+            1120026
+          ],
+          "Attribute": 2,
+          "Value": 0.8
+        }
+      ],
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1120022,
+            1120023,
+            1120024,
+            1120025,
+            1120026
+          ],
+          "Attribute": 2,
+          "Value": 1
+        }
+      ]
+    ]
   },
   {
     "Id": 22005,
@@ -855,7 +1743,43 @@
     "NeedKillBoss": [],
     "Icon": 10013,
     "Des": "暴击上限永久提升1%/2%/3%/4%/5%。",
-    "AddPropreListStr": "RolePropertyAdd;200103;0.01#RolePropertyAdd;200103;0.02#RolePropertyAdd;200103;0.03#RolePropertyAdd;200103;0.04#RolePropertyAdd;200103;0.05"
+    "AddPropreList": [
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 200103,
+          "Value": 0.01
+        }
+      ],
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 200103,
+          "Value": 0.02
+        }
+      ],
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 200103,
+          "Value": 0.03
+        }
+      ],
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 200103,
+          "Value": 0.04
+        }
+      ],
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 200103,
+          "Value": 0.05
+        }
+      ]
+    ]
   },
   {
     "Id": 22006,
@@ -869,7 +1793,22 @@
     "NeedKillBoss": [],
     "Icon": 10014,
     "Des": "圣御之击冷却时间降低1秒。",
-    "AddPropreListStr": "SkillPropertyAdd;1120022,1120023,1120024,1120025,1120026;4;1"
+    "AddPropreList": [
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1120022,
+            1120023,
+            1120024,
+            1120025,
+            1120026
+          ],
+          "Attribute": 4,
+          "Value": 1
+        }
+      ]
+    ]
   },
   {
     "Id": 22007,
@@ -883,7 +1822,43 @@
     "NeedKillBoss": [],
     "Icon": 10015,
     "Des": "技能有1%/2%/3%/4%/5%概率造成双倍伤害。",
-    "AddPropreListStr": "RolePropertyAdd;204103;0.01#RolePropertyAdd;204103;0.02#RolePropertyAdd;204103;0.03#RolePropertyAdd;204103;0.04#RolePropertyAdd;204103;0.05"
+    "AddPropreList": [
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 204103,
+          "Value": 0.01
+        }
+      ],
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 204103,
+          "Value": 0.02
+        }
+      ],
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 204103,
+          "Value": 0.03
+        }
+      ],
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 204103,
+          "Value": 0.04
+        }
+      ],
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 204103,
+          "Value": 0.05
+        }
+      ]
+    ]
   },
   {
     "Id": 22008,
@@ -897,7 +1872,14 @@
     "NeedKillBoss": [],
     "Icon": 10016,
     "Des": "受到攻击有10%概率对目标释放圣御之击。",
-    "AddPropreListStr": "SkillIdAdd;1302004"
+    "AddPropreList": [
+      [
+        {
+          "$type": "SkillIdAdd",
+          "SkillId": 1302004
+        }
+      ]
+    ]
   },
   {
     "Id": 23001,
@@ -911,7 +1893,43 @@
     ],
     "Icon": 10017,
     "Des": "技能攻击怪物伤害提升2%/4%/6%/8%/10%。",
-    "AddPropreListStr": "RolePropertyAdd;223103;0.02#RolePropertyAdd;223103;0.04#RolePropertyAdd;223103;0.06#RolePropertyAdd;223103;0.08#RolePropertyAdd;223103;0.1"
+    "AddPropreList": [
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 223103,
+          "Value": 0.02
+        }
+      ],
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 223103,
+          "Value": 0.04
+        }
+      ],
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 223103,
+          "Value": 0.06
+        }
+      ],
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 223103,
+          "Value": 0.08
+        }
+      ],
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 223103,
+          "Value": 0.1
+        }
+      ]
+    ]
   },
   {
     "Id": 23002,
@@ -925,7 +1943,15 @@
     "NeedKillBoss": [],
     "Icon": 10018,
     "Des": "释放技能有5%概率不触发任何冷却时间。",
-    "AddPropreListStr": "RolePropertyAdd;204003;0.05"
+    "AddPropreList": [
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 204003,
+          "Value": 0.05
+        }
+      ]
+    ]
   },
   {
     "Id": 23003,
@@ -939,7 +1965,78 @@
     "NeedKillBoss": [],
     "Icon": 10019,
     "Des": "巨岩震击伤害提升20%/40%/60%/80%100%。",
-    "AddPropreListStr": "SkillPropertyAdd;1120032,1120033,1120034,1120035,1120036;2;0.2#SkillPropertyAdd;1120032,1120033,1120034,1120035,1120036;2;0.4#SkillPropertyAdd;1120032,1120033,1120034,1120035,1120036;2;0.6#SkillPropertyAdd;1120032,1120033,1120034,1120035,1120036;2;0.8#SkillPropertyAdd;1120032,1120033,1120034,1120035,1120036;2;1"
+    "AddPropreList": [
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1120032,
+            1120033,
+            1120034,
+            1120035,
+            1120036
+          ],
+          "Attribute": 2,
+          "Value": 0.2
+        }
+      ],
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1120032,
+            1120033,
+            1120034,
+            1120035,
+            1120036
+          ],
+          "Attribute": 2,
+          "Value": 0.4
+        }
+      ],
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1120032,
+            1120033,
+            1120034,
+            1120035,
+            1120036
+          ],
+          "Attribute": 2,
+          "Value": 0.6
+        }
+      ],
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1120032,
+            1120033,
+            1120034,
+            1120035,
+            1120036
+          ],
+          "Attribute": 2,
+          "Value": 0.8
+        }
+      ],
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1120032,
+            1120033,
+            1120034,
+            1120035,
+            1120036
+          ],
+          "Attribute": 2,
+          "Value": 1
+        }
+      ]
+    ]
   },
   {
     "Id": 23004,
@@ -954,7 +2051,14 @@
     "NeedKillBoss": [],
     "Icon": 10020,
     "Des": "新增技能熔岩爆裂,对目标造成350%伤害,并使目标眩晕2秒。",
-    "AddPropreListStr": "SkillIdAdd;1302005"
+    "AddPropreList": [
+      [
+        {
+          "$type": "SkillIdAdd",
+          "SkillId": 1302005
+        }
+      ]
+    ]
   },
   {
     "Id": 23005,
@@ -968,7 +2072,43 @@
     "NeedKillBoss": [],
     "Icon": 10021,
     "Des": "移动速度提升2%/4%/6%/8%/10%。",
-    "AddPropreListStr": "RolePropertyAdd;100902;0.02#RolePropertyAdd;100902;0.04#RolePropertyAdd;100902;0.06#RolePropertyAdd;100902;0.08#RolePropertyAdd;100902;0.1"
+    "AddPropreList": [
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 100902,
+          "Value": 0.02
+        }
+      ],
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 100902,
+          "Value": 0.04
+        }
+      ],
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 100902,
+          "Value": 0.06
+        }
+      ],
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 100902,
+          "Value": 0.08
+        }
+      ],
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 100902,
+          "Value": 0.1
+        }
+      ]
+    ]
   },
   {
     "Id": 23006,
@@ -982,7 +2122,7 @@
     "NeedKillBoss": [],
     "Icon": 10001,
     "Des": "攻击永久提升1%/2%/3%。",
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 23007,
@@ -996,7 +2136,7 @@
     "NeedKillBoss": [],
     "Icon": 10002,
     "Des": "冰封冲击技能冷却时间缩减2秒。",
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 23008,
@@ -1010,7 +2150,7 @@
     "NeedKillBoss": [],
     "Icon": 10003,
     "Des": "冰封冲击伤害提升30%/60%/100%。",
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 24001,
@@ -1024,7 +2164,7 @@
     ],
     "Icon": 10004,
     "Des": "普攻使目标移动速度降低30%,持续3秒。",
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 24002,
@@ -1038,7 +2178,7 @@
     "NeedKillBoss": [],
     "Icon": 10005,
     "Des": "破冰飞弹伤害提升30%,60%,100%。",
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 24003,
@@ -1052,7 +2192,7 @@
     "NeedKillBoss": [],
     "Icon": 10006,
     "Des": "破冰飞弹使目标防御和魔御降低10%/20%/30%。",
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 24004,
@@ -1067,7 +2207,7 @@
     "NeedKillBoss": [],
     "Icon": 10007,
     "Des": "每次暴击有30%概率对目标附加伤害加深状态,使其受到伤害增加25%,持续3秒。",
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 24005,
@@ -1081,7 +2221,7 @@
     "NeedKillBoss": [],
     "Icon": 10008,
     "Des": "重击概率提升1%/2%/3%/4%/5%。",
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 24006,
@@ -1095,7 +2235,7 @@
     "NeedKillBoss": [],
     "Icon": 10009,
     "Des": "普通攻击有10%概率触发破冰飞弹。",
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 24007,
@@ -1109,7 +2249,7 @@
     "NeedKillBoss": [],
     "Icon": 10010,
     "Des": "普通伤害提升3%/6%/9%/12%/15%。",
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 24008,
@@ -1123,7 +2263,7 @@
     "NeedKillBoss": [],
     "Icon": 10011,
     "Des": "攻击目标有10%概率提升自身25%伤害,持续3秒。",
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 25001,
@@ -1137,7 +2277,7 @@
     ],
     "Icon": 10012,
     "Des": "圣御之击伤害提升20%/40%/60%/80%100%。",
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 25002,
@@ -1151,7 +2291,7 @@
     "NeedKillBoss": [],
     "Icon": 10013,
     "Des": "暴击上限永久提升1%/2%/3%/4%/5%。",
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 25003,
@@ -1165,7 +2305,7 @@
     "NeedKillBoss": [],
     "Icon": 10014,
     "Des": "圣御之击冷却时间降低1秒,并使目标移动速度降低50%,持续3秒。",
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 25004,
@@ -1180,7 +2320,7 @@
     "NeedKillBoss": [],
     "Icon": 10015,
     "Des": "巨岩震击有20%/40%/60%/80%/100%概率眩晕目标2秒。",
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 25005,
@@ -1194,7 +2334,7 @@
     "NeedKillBoss": [],
     "Icon": 10016,
     "Des": "受到攻击有10%概率对目标释放圣御之击。",
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 25006,
@@ -1208,7 +2348,7 @@
     "NeedKillBoss": [],
     "Icon": 10017,
     "Des": "技能伤害提升2%/4%/6%/8%/10%。",
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 25007,
@@ -1222,7 +2362,7 @@
     "NeedKillBoss": [],
     "Icon": 10018,
     "Des": "受到伤害有5%概率给自己释放一个护盾,护盾可以抵抗50%伤害,最大承受生命的30%,持续20秒。",
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 25008,
@@ -1236,7 +2376,7 @@
     "NeedKillBoss": [],
     "Icon": 10019,
     "Des": "巨岩震击伤害提升20%/40%/60%/80%100%。",
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 26001,
@@ -1251,7 +2391,7 @@
     "NeedKillBoss": [],
     "Icon": 10020,
     "Des": "新增技能熔岩爆裂,对目标造成350%伤害,并使目标眩晕2秒。",
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 26002,
@@ -1266,7 +2406,7 @@
     "NeedKillBoss": [],
     "Icon": 10021,
     "Des": "移动速度提升2%/4%/6%/8%/10%。",
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 26003,
@@ -1281,7 +2421,7 @@
     "NeedKillBoss": [],
     "Icon": 10021,
     "Des": "",
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 26004,
@@ -1296,7 +2436,7 @@
     "NeedKillBoss": [],
     "Icon": 10021,
     "Des": "",
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 26005,
@@ -1311,7 +2451,7 @@
     "NeedKillBoss": [],
     "Icon": 10021,
     "Des": "",
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 27001,
@@ -1323,7 +2463,7 @@
     "NeedKillBoss": [],
     "Icon": 10021,
     "Des": "双龙觉醒很牛逼",
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 27002,
@@ -1335,7 +2475,7 @@
     "NeedKillBoss": [],
     "Icon": 10021,
     "Des": "三龙觉醒很牛逼",
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 27003,
@@ -1347,6 +2487,6 @@
     "NeedKillBoss": [],
     "Icon": 10021,
     "Des": "五龙觉醒很牛逼",
-    "AddPropreListStr": ""
+    "AddPropreList": []
   }
 ]

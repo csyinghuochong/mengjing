@@ -26,6 +26,74 @@
             <option name="constructor" value="ExternalTypeUtil.NewVector4"/>
         </mapper>
     </bean>
+    <!-- ==================== 附加效果 ==================== -->
+    <!-- TalentConfig / LongYinConfig / GemTalentConfig 的 AddPropreList 共用。 -->
+    <!-- 一条效果写成「子类名;字段1;字段2」，多条效果用 @ 分隔，等级段用 # 分隔。 -->
+    <!-- 例：RolePropertyAdd;100402;0.01@SkillIdAdd;1001010#RolePropertyAdd;100402;0.02 -->
+    <bean name="PropEffect" comment="一条附加效果"/>
+
+    <bean name="RolePropertyAdd" parent="PropEffect" sep=";" comment="角色属性">
+        <var name="NumericKey" type="int" comment="属性ID"/>
+        <var name="Value" type="double" comment="数值：整数属性或百分比，由 NumericHelp 判定"/>
+    </bean>
+
+    <bean name="SkillPropertyAdd" parent="PropEffect" sep=";" comment="技能属性">
+        <var name="SkillIds" type="(list#sep=,),int" comment="作用的技能ID"/>
+        <var name="Attribute" type="int" comment="SkillAttributeEnum"/>
+        <var name="Value" type="double" comment="Attribute=AddSkillBuffID 时这里是 BuffID"/>
+    </bean>
+
+    <bean name="BuffPropertyAdd" parent="PropEffect" sep=";" comment="Buff属性">
+        <var name="BuffIds" type="(list#sep=,),int" comment="作用的BuffID"/>
+        <var name="Attribute" type="int" comment="BuffAttributeEnum"/>
+        <var name="Value" type="double" comment="数值"/>
+    </bean>
+
+    <bean name="SkillIdAdd" parent="PropEffect" sep=";" comment="附加技能">
+        <var name="SkillId" type="int" comment="技能ID"/>
+    </bean>
+
+    <bean name="BuffIdAdd" parent="PropEffect" sep=";" comment="附加Buff">
+        <var name="SkillIds" type="(list#sep=,),int" comment="作用的技能ID"/>
+        <var name="BuffId" type="int" comment="BuffID"/>
+    </bean>
+
+    <bean name="BuffInitIdAdd" parent="PropEffect" sep=";" comment="初始Buff">
+        <var name="SkillIds" type="(list#sep=,),int" comment="作用的技能ID"/>
+        <var name="BuffId" type="int" comment="BuffID"/>
+    </bean>
+
+    <bean name="ReplaceSkillId" parent="PropEffect" sep=";" comment="替换技能">
+        <var name="SkillId" type="int" comment="原技能ID"/>
+        <var name="NewSkillId" type="int" comment="替换后的技能ID"/>
+    </bean>
+
+    <bean name="SkillSingingCancel" parent="PropEffect" sep=";" comment="施法可移动">
+        <var name="SkillIds" type="(list#sep=,),int" comment="作用的技能ID"/>
+    </bean>
+
+    <!-- ==================== 技能附魔效果 ==================== -->
+    <!-- SkillAugmentConfig 的 AddPropreList 使用。附魔作用于自身技能，不带技能ID列表。 -->
+    <!-- 例：AugmentSkillPropertyAdd;1;2@AugmentBuffIdAdd;30204040 -->
+    <bean name="SkillAugmentEffect" comment="技能附魔的一条效果"/>
+
+    <bean name="AugmentSkillPropertyAdd" parent="SkillAugmentEffect" sep=";" comment="技能属性">
+        <var name="Attribute" type="int" comment="SkillAttributeEnum"/>
+        <var name="Value" type="double" comment="数值"/>
+    </bean>
+
+    <bean name="AugmentSkillIdAdd" parent="SkillAugmentEffect" sep=";" comment="附加技能">
+        <var name="SkillId" type="int" comment="技能ID"/>
+    </bean>
+
+    <bean name="AugmentBuffIdAdd" parent="SkillAugmentEffect" sep=";" comment="附加Buff">
+        <var name="BuffId" type="int" comment="BuffID"/>
+    </bean>
+
+    <bean name="AugmentBuffInitIdAdd" parent="SkillAugmentEffect" sep=";" comment="初始Buff">
+        <var name="BuffId" type="int" comment="BuffID"/>
+    </bean>
+
     <enum name="LongYinType" comment="龙印类型" unique="TRUE" flags="FALSE">
         <var name="None" alias="" value="0"/>
         <var name="Type_1" alias="炽焰龙印" value="1"/>

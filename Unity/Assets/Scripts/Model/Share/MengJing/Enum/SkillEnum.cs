@@ -175,26 +175,6 @@ namespace ET
         AddBuffTime = 2,
     }
 
-    public static class TianFuProEnum
-    {
-        public const string SkillIdAdd = "SkillIdAdd";
-        public const string SkillPropertyAdd = "SkillPropertyAdd";
-        public const string BuffIdAdd = "BuffIdAdd";
-        public const string BuffInitIdAdd = "BuffInitIdAdd";
-        public const string RolePropertyAdd = "RolePropertyAdd";
-        public const string ReplaceSkillId = "ReplaceSkillId";
-        public const string BuffPropertyAdd = "BuffPropertyAdd";
-        public const string SkillSingingCancel = "SkillSingingCancel";
-    }
-
-    public static class SkillAugmentProEnum
-    {
-        public const string SkillIdAdd = "SkillIdAdd";
-        public const string SkillPropertyAdd = "SkillPropertyAdd";
-        public const string BuffIdAdd = "BuffIdAdd";
-        public const string BuffInitIdAdd = "BuffInitIdAdd";
-    }
-
     [EnableClass]
     public class SkillCDItem
     {

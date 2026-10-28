@@ -225,9 +225,9 @@ namespace ET.Server
         }
 
         /// <summary>
-        /// 取龙印指定等级生效的属性段(以@分隔的多条属性)，没有配置返回null
+        /// 取龙印指定等级生效的效果列表，没有配置返回null
         /// </summary>
-        private static string[] GetLongYinPropreList(this SkillSetComponentS self, int longYinId, int level)
+        private static List<PropEffect> GetLongYinPropreList(this SkillSetComponentS self, int longYinId, int level)
         {
             if (longYinId == 0 || level <= 0)
             {
@@ -235,19 +235,14 @@ namespace ET.Server
             }
 
             LongYinConfig longYinConfig = LongYinConfigCategory.Instance.GetOrDefault(longYinId);
-            if (longYinConfig == null || string.IsNullOrEmpty(longYinConfig.AddPropreListStr))
+            if (longYinConfig == null)
             {
                 return null;
             }
 
-            //AddPropreListStr按等级用#分隔，取第level段，和天赋的规则一致
-            string[] propreByLv = longYinConfig.AddPropreListStr.Split("#");
-            if (propreByLv.Length < level)
-            {
-                return null;
-            }
-
-            return propreByLv[level - 1].Split("@");
+            //配置按等级分段，取第level段，和天赋的规则一致
+            List<PropEffect> effects = longYinConfig.AddPropreList.GetLevelEffects(level);
+            return effects.Count == 0 ? null : effects;
         }
 
         /// <summary>
@@ -255,30 +250,24 @@ namespace ET.Server
         /// </summary>
         public static void AddLongYinAttribute(this SkillSetComponentS self, int longYinId, bool add, int level)
         {
-            string[] addPropreListStr = self.GetLongYinPropreList(longYinId, level);
-            if (addPropreListStr == null)
+            List<PropEffect> effects = self.GetLongYinPropreList(longYinId, level);
+            if (effects == null)
             {
                 return;
             }
 
-            for (int k = 0; k < addPropreListStr.Length; k++)
+            for (int k = 0; k < effects.Count; k++)
             {
-                string[] properInfo = addPropreListStr[k].Split(";");
-                if (properInfo.Length < 2)
+                switch (effects[k])
                 {
-                    continue;
-                }
-
-                switch (properInfo[0])
-                {
-                    case TianFuProEnum.SkillIdAdd:
-                        self.OnLongYinSkillIdAdd(properInfo, add);
+                    case SkillIdAdd effect:
+                        self.OnLongYinSkillIdAdd(effect.SkillId, add);
                         break;
                     //技能属性在释放技能时通过GetSkillPropertyAdd读取，这里不用处理
-                    case TianFuProEnum.SkillPropertyAdd:
+                    case SkillPropertyAdd:
                         break;
-                    case TianFuProEnum.RolePropertyAdd:
-                        self.OnRolePropertyAdd(properInfo, add ? 1 : -1);
+                    case RolePropertyAdd effect:
+                        self.OnRolePropertyAdd(effect, add ? 1 : -1);
                         break;
                 }
             }
@@ -287,9 +276,9 @@ namespace ET.Server
         /// <summary>
         /// 龙印附加的技能，激活时加进技能列表，重置或降级时移除
         /// </summary>
-        public static void OnLongYinSkillIdAdd(this SkillSetComponentS self, string[] properInfo, bool add)
+        public static void OnLongYinSkillIdAdd(this SkillSetComponentS self, int skillId, bool add)
         {
-            if (!int.TryParse(properInfo[1], out int skillId))
+            if (skillId == 0)
             {
                 return;
             }
@@ -308,71 +297,33 @@ namespace ET.Server
         }
 
         /// <summary>
-        /// 收集所有已激活龙印当前等级中指定类型的属性，格式和天赋的AddPropreListStr一致
+        /// 收集所有已激活龙印当前等级生效的效果
         /// </summary>
-        public static List<string[]> GetLongYinProperties(this SkillSetComponentS self, string proType)
+        public static List<PropEffect> GetLongYinEffects(this SkillSetComponentS self)
         {
-            List<string[]> properties = new List<string[]>();
+            List<PropEffect> effects = new List<PropEffect>();
             for (int i = 0; i < self.LongYinList.Count; i++)
             {
                 KeyValuePairInt longYin = self.LongYinList[i];
-                string[] addPropreListStr = self.GetLongYinPropreList(longYin.KeyId, (int)longYin.Value);
-                if (addPropreListStr == null)
+                List<PropEffect> longYinEffects = self.GetLongYinPropreList(longYin.KeyId, (int)longYin.Value);
+                if (longYinEffects == null)
                 {
                     continue;
                 }
 
-                for (int k = 0; k < addPropreListStr.Length; k++)
-                {
-                    string[] properInfo = addPropreListStr[k].Split(";");
-                    if (properInfo.Length < 2 || properInfo[0] != proType)
-                    {
-                        continue;
-                    }
-
-                    properties.Add(properInfo);
-                }
+                effects.AddRange(longYinEffects);
             }
 
-            return properties;
+            return effects;
         }
 
         /// <summary>
-        /// 龙印里指定类型的属性是否有作用于该id(技能id或buff id)的条目
+        /// 已激活宝石天赋提供的效果
         /// </summary>
-        private static bool HaveLongYinProperty(this SkillSetComponentS self, string proType, int id)
-        {
-            List<string[]> longYinProperties = self.GetLongYinProperties(proType);
-            for (int i = 0; i < longYinProperties.Count; i++)
-            {
-                string[] properInfo = longYinProperties[i];
-                if (properInfo.Length < 2 || !properInfo[1].Contains(id.ToString()))
-                {
-                    continue;
-                }
-
-                return true;
-            }
-
-            return false;
-        }
-
-        /// <summary>
-        /// 宝石天赋里指定类型的属性是否有作用于该id(技能id或buff id)的条目
-        /// </summary>
-        private static bool HaveGemTalentProperty(this SkillSetComponentS self, string proType, int id)
+        private static List<PropEffect> GetGemTalentEffects(this SkillSetComponentS self)
         {
             GemTalentComponent gemTalentComponent = self.GetParent<Unit>().GetComponent<GemTalentComponent>();
-            return gemTalentComponent != null && gemTalentComponent.HaveProperty(proType, id);
-        }
-
-        /// <summary>
-        /// 已激活宝石天赋里指定类型的配置段，格式和天赋、龙印的AddPropreListStr一致
-        /// </summary>
-        private static List<string[]> GetGemTalentProperties(this SkillSetComponentS self, string proType)
-        {
-            GemTalentComponent gemTalentComponent = self.GetParent<Unit>().GetComponent<GemTalentComponent>();
-            return gemTalentComponent == null ? new List<string[]>() : gemTalentComponent.GetProperties(proType);
+            return gemTalentComponent == null ? new List<PropEffect>() : gemTalentComponent.GetEffects();
         }
 
         /// <summary>
@@ -380,31 +331,11 @@ namespace ET.Server
         /// </summary>
         public static List<PropertyValue> GetLongYinRoleProLists(this SkillSetComponentS self)
         {
-            List<PropertyValue> proList = new List<PropertyValue>();
-            List<string[]> longYinProperties = self.GetLongYinProperties(TianFuProEnum.RolePropertyAdd);
-            for (int i = 0; i < longYinProperties.Count; i++)
-            {
-                string[] properInfo = longYinProperties[i];
-                if (properInfo.Length < 3 || !int.TryParse(properInfo[1], out int numericKey))
-                {
-                    continue;
-                }
-
-                if (NumericHelp.GetNumericValueType(numericKey) == 1)
-                {
-                    proList.Add(new PropertyValue() { HideID = numericKey, HideValue = long.Parse(properInfo[2]) });
-                }
-                else
-                {
-                    proList.Add(new PropertyValue() { HideID = numericKey, HideValue = (int)(float.Parse(properInfo[2]) * 10000) });
-                }
-            }
-
-            return proList;
+            return PropEffectHelper.CollectRoleProperties(self.GetLongYinEffects());
         }
 
         /// <summary>
-        /// 校验并激活/升级龙印，属性效果按配置的AddPropreListStr生效
+        /// 校验并激活/升级龙印，属性效果按配置的AddPropreList生效
         /// </summary>
         public static int OnActiveLongYin(this SkillSetComponentS self, int longYinId)
         {
@@ -630,44 +561,31 @@ namespace ET.Server
                 return;
             }
 
-            string[] propreByLv = TalentConfigCategory.Instance.Get(tianfuId).AddPropreListStr.Split("#");
-            if (propreByLv.Length < lv)
+            List<PropEffect> effects = TalentConfigCategory.Instance.Get(tianfuId).AddPropreList.GetLevelEffects(lv);
+
+            for (int k = 0; k < effects.Count; k++)
             {
-                return;
-            }
-
-            string[] addPropreListStr = propreByLv[lv - 1].Split("@");
-
-            for (int k = 0; k < addPropreListStr.Length; k++)
-            {
-                string[] properInfo = addPropreListStr[k].Split(";");
-
-                switch (properInfo[0])
+                switch (effects[k])
                 {
-                    case TianFuProEnum.SkillIdAdd:
-                        self.OnSkillIdAdd(properInfo, add);
+                    case SkillIdAdd effect:
+                        self.OnSkillIdAdd(effect.SkillId, add);
                         break;
-                    case TianFuProEnum.SkillPropertyAdd:
+                    case RolePropertyAdd effect:
+                        self.OnRolePropertyAdd(effect, add ? 1 : -1);
                         break;
-                    case TianFuProEnum.BuffIdAdd:
-                        break;
-                    case TianFuProEnum.BuffInitIdAdd:
-                        break;
-                    case TianFuProEnum.RolePropertyAdd:
-                        self.OnRolePropertyAdd(properInfo, add ? 1 : -1);
-                        break;
-                    case TianFuProEnum.ReplaceSkillId:
-                        break;
-                    case TianFuProEnum.BuffPropertyAdd:
+                    //技能属性、Buff、替换技能等在释放技能或读取属性时按需读取，这里不用处理
+                    case SkillPropertyAdd:
+                    case BuffIdAdd:
+                    case BuffInitIdAdd:
+                    case ReplaceSkillId:
+                    case BuffPropertyAdd:
                         break;
                 }
             }
         }
 
-        public static void OnSkillIdAdd(this SkillSetComponentS self, string[] properInfo, bool add)
+        public static void OnSkillIdAdd(this SkillSetComponentS self, int skillId, bool add)
         {
-            int skillId = int.Parse(properInfo[1]);
-
             int index = -1;
             for (int i = self.SkillList.Count - 1; i >= 0; i--)
             {
@@ -686,59 +604,23 @@ namespace ET.Server
             }
         }
 
-        public static void OnRolePropertyAdd(this SkillSetComponentS self, string[] properInfo, int rate)
+        public static void OnRolePropertyAdd(this SkillSetComponentS self, RolePropertyAdd effect, int rate)
         {
-            int numericKey = int.Parse(properInfo[1]);
+            int numericKey = effect.NumericKey;
             int valueType = NumericHelp.GetNumericValueType(numericKey);
             if (valueType == 1)
             {
-                self.GetParent<Unit>().GetComponent<HeroDataComponentS>().BuffPropertyUpdate_Long(numericKey, long.Parse(properInfo[2]) * rate);
+                self.GetParent<Unit>().GetComponent<HeroDataComponentS>().BuffPropertyUpdate_Long(numericKey, (long)effect.Value * rate);
             }
             else
             {
-                self.GetParent<Unit>().GetComponent<HeroDataComponentS>().BuffPropertyUpdate_Float(numericKey, float.Parse(properInfo[2]) * rate);
+                self.GetParent<Unit>().GetComponent<HeroDataComponentS>().BuffPropertyUpdate_Float(numericKey, (float)effect.Value * rate);
             }
         }
 
         public static List<PropertyValue> GetTianfuRoleProLists(this SkillSetComponentS self)
         {
-            List<PropertyValue> proList = new List<PropertyValue>();
-            List<KeyValuePairInt> tianfuids = self.TianFuListAll();
-            foreach (var keyValuePairInt in tianfuids)
-            {
-                TalentConfig talentConfig = TalentConfigCategory.Instance.Get(keyValuePairInt.KeyId);
-                if (!string.IsNullOrEmpty(talentConfig.AddPropreListStr))
-                {
-                    string[] propreByLv = talentConfig.AddPropreListStr.Split("#");
-                    if (propreByLv.Length < keyValuePairInt.Value)
-                    {
-                        continue;
-                    }
-
-                    string[] addPropreListStr = propreByLv[(int)keyValuePairInt.Value - 1].Split("@");
-
-                    for (int k = 0; k < addPropreListStr.Length; k++)
-                    {
-                        string[] properInfo = addPropreListStr[k].Split(";");
-
-                        if (!properInfo[0].Equals(TianFuProEnum.RolePropertyAdd))
-                        {
-                            continue;
-                        }
-
-                        if (NumericHelp.GetNumericValueType(int.Parse(properInfo[1])) == 1)
-                        {
-                            proList.Add(new PropertyValue() { HideID = int.Parse(properInfo[1]), HideValue = long.Parse(properInfo[2]) });
-                        }
-                        else
-                        {
-                            proList.Add(new PropertyValue() { HideID = int.Parse(properInfo[1]), HideValue = (int)(float.Parse(properInfo[2]) * 10000) });
-                        }
-                    }
-                }
-            }
-
-            return proList;
+            return PropEffectHelper.CollectRoleProperties(self.GetTianFuEffects());
         }
 
         public static List<PropertyValue> GetSkillRoleProLists(this SkillSetComponentS self)
@@ -849,56 +731,53 @@ namespace ET.Server
             return proList;
         }
 
-        public static List<KeyValuePairInt> GetTianFuIdsByType(this SkillSetComponentS self, string proType)
+        /// <summary>
+        /// 收集当前方案下所有天赋当前等级生效的效果
+        /// </summary>
+        private static List<PropEffect> GetTianFuEffects(this SkillSetComponentS self)
         {
-            List<KeyValuePairInt> typeTianfus = new List<KeyValuePairInt>();
+            List<PropEffect> effects = new List<PropEffect>();
             List<KeyValuePairInt> tianfuIds = self.TianFuListAll();
 
-            foreach (KeyValuePairInt keyValuePairInt in tianfuIds)
+            for (int i = 0; i < tianfuIds.Count; i++)
             {
-                string[] propreByLv = TalentConfigCategory.Instance.Get(keyValuePairInt.KeyId).AddPropreListStr.Split("#");
-                if (propreByLv.Length < keyValuePairInt.Value)
-                {
-                    continue;
-                }
-
-                string[] addPropreListStr = propreByLv[(int)keyValuePairInt.Value - 1].Split("@");
-                
-                for (int k = 0; k < addPropreListStr.Length; k++)
-                {
-                    string[] properInfo = addPropreListStr[k].Split(";");
-
-                    if (properInfo[0] != proType)
-                    {
-                        continue;
-                    }
-
-                    if (!typeTianfus.Contains(keyValuePairInt))
-                    {
-                        typeTianfus.Add(keyValuePairInt);
-                    }
-                }
+                TalentConfig talentConfig = TalentConfigCategory.Instance.Get(tianfuIds[i].KeyId);
+                effects.AddRange(talentConfig.AddPropreList.GetLevelEffects((int)tianfuIds[i].Value));
             }
 
-            return typeTianfus;
+            return effects;
         }
 
-        private static List<string[]> GetSkillAugmentProperties(this SkillSetComponentS self, int skillId, string proType)
+        /// <summary>
+        /// 收集天赋、龙印、宝石天赋当前生效的全部效果
+        /// </summary>
+        private static List<PropEffect> GetAllEffects(this SkillSetComponentS self)
         {
-            List<string[]> properties = new();
-            
+            List<PropEffect> effects = self.GetTianFuEffects();
+            effects.AddRange(self.GetLongYinEffects());
+            effects.AddRange(self.GetGemTalentEffects());
+            return effects;
+        }
+
+        /// <summary>
+        /// 收集当前技能已激活附魔的效果
+        /// </summary>
+        private static List<SkillAugmentEffect> GetSkillAugmentEffects(this SkillSetComponentS self, int skillId)
+        {
+            List<SkillAugmentEffect> effects = new List<SkillAugmentEffect>();
+
             if (self.SkillAugmentList == null || self.SkillAugmentList.Count == 0)
             {
-                return properties;
+                return effects;
             }
 
             int baseSkillId = SkillConfigCategory.Instance.GetInitSkill(skillId);
             SkillAugmentInfo augmentInfo = self.SkillAugmentList.Find(info => info.BaseSkillId == baseSkillId);
             if (augmentInfo == null || augmentInfo.ActiveAugmentIds == null)
             {
-                return properties;
+                return effects;
             }
-            
+
             for (int i = 0; i < augmentInfo.ActiveAugmentIds.Count; i++)
             {
                 int augmentId = augmentInfo.ActiveAugmentIds[i];
@@ -908,159 +787,56 @@ namespace ET.Server
                 }
 
                 SkillAugmentConfig augmentConfig = SkillAugmentConfigCategory.Instance.GetOrDefault(augmentId);
-                if (augmentConfig == null || string.IsNullOrEmpty(augmentConfig.AddPropreListStr))
+                if (augmentConfig == null)
                 {
                     continue;
                 }
 
-                string[] addPropertyList = augmentConfig.AddPropreListStr.Split("@");
-                for (int k = 0; k < addPropertyList.Length; k++)
-                {
-                    string[] propertyInfo = addPropertyList[k].Split(";");
-                    if (propertyInfo[0] != proType)
-                    {
-                        continue;
-                    }
-
-                    properties.Add(propertyInfo);
-                }
+                effects.AddRange(augmentConfig.AddPropreList);
             }
 
-            return properties;
+            return effects;
         }
 
         public static Dictionary<int, float> GetSkillPropertyAdd(this SkillSetComponentS self, int skillId)
         {
-            List<KeyValuePairInt> tianfuids = self.GetTianFuIdsByType(TianFuProEnum.SkillPropertyAdd);
-            List<string[]> augmentProperties = self.GetSkillAugmentProperties(skillId, SkillAugmentProEnum.SkillPropertyAdd);
-            List<string[]> longYinProperties = self.GetLongYinProperties(TianFuProEnum.SkillPropertyAdd);
-            List<string[]> gemTalentProperties = self.GetGemTalentProperties(TianFuProEnum.SkillPropertyAdd);
-            if (tianfuids.Count == 0 && augmentProperties.Count == 0 && longYinProperties.Count == 0 && gemTalentProperties.Count == 0)
-                return null;
+            List<PropEffect> effects = self.GetAllEffects();
+            List<SkillAugmentEffect> augmentEffects = self.GetSkillAugmentEffects(skillId);
 
             Dictionary<int, float> HideProList = new Dictionary<int, float>();
 
-            foreach (KeyValuePairInt keyValuePairInt in tianfuids)
+            //天赋、龙印、宝石天赋的技能属性
+            for (int i = 0; i < effects.Count; i++)
             {
-                string[] propreByLv = TalentConfigCategory.Instance.Get(keyValuePairInt.KeyId).AddPropreListStr.Split("#");
-                if (propreByLv.Length < keyValuePairInt.Value)
+                if (effects[i] is SkillPropertyAdd effect && effect.SkillIds.Contains(skillId))
                 {
-                    continue;
-                }
-
-                string[] addPropreListStr = propreByLv[(int)keyValuePairInt.Value - 1].Split("@");
-                
-                for (int k = 0; k < addPropreListStr.Length; k++)
-                {
-                    string[] properInfo = addPropreListStr[k].Split(";");
-                    if (!properInfo[0].Equals(TianFuProEnum.SkillPropertyAdd))
-                    {
-                        continue;
-                    }
-
-                    if (!properInfo[1].Contains(skillId.ToString()))
-                    {
-                        continue;
-                    }
-
-                    int key = int.Parse(properInfo[2]);
-                    float value = float.Parse(properInfo[3]);
-                    if (HideProList.ContainsKey(key))
-                    {
-                        HideProList[key] += value;
-                    }
-                    else
-                    {
-                        HideProList.Add(key, value);
-                    }
+                    PropEffectHelper.AddOrMerge(HideProList, effect.Attribute, (float)effect.Value);
                 }
             }
 
-            for (int i = 0; i < augmentProperties.Count; i++)
+            //增幅的技能属性
+            for (int i = 0; i < augmentEffects.Count; i++)
             {
-                string[] propertyInfo = augmentProperties[i];
-                int key = int.Parse(propertyInfo[1]);
-                float value = float.Parse(propertyInfo[2]);
-                if (HideProList.ContainsKey(key))
+                if (augmentEffects[i] is AugmentSkillPropertyAdd augmentEffect)
                 {
-                    HideProList[key] += value;
-                }
-                else
-                {
-                    HideProList.Add(key, value);
+                    PropEffectHelper.AddOrMerge(HideProList, augmentEffect.Attribute, (float)augmentEffect.Value);
                 }
             }
 
-            //龙印的技能属性
-            for (int i = 0; i < longYinProperties.Count; i++)
-            {
-                string[] propertyInfo = longYinProperties[i];
-                if (propertyInfo.Length < 4)
-                {
-                    continue;
-                }
-
-                if (!propertyInfo[1].Contains(skillId.ToString()))
-                {
-                    continue;
-                }
-
-                int key = int.Parse(propertyInfo[2]);
-                float value = float.Parse(propertyInfo[3]);
-                if (HideProList.ContainsKey(key))
-                {
-                    HideProList[key] += value;
-                }
-                else
-                {
-                    HideProList.Add(key, value);
-                }
-            }
-
-            //宝石天赋的技能属性
-            for (int i = 0; i < gemTalentProperties.Count; i++)
-            {
-                string[] propertyInfo = gemTalentProperties[i];
-                if (propertyInfo.Length < 4 || !propertyInfo[1].Contains(skillId.ToString()))
-                {
-                    continue;
-                }
-
-                int key = int.Parse(propertyInfo[2]);
-                float value = float.Parse(propertyInfo[3]);
-                if (HideProList.ContainsKey(key))
-                {
-                    HideProList[key] += value;
-                }
-                else
-                {
-                    HideProList.Add(key, value);
-                }
-            }
-
-            return HideProList;
+            return HideProList.Count == 0 ? null : HideProList;
         }
 
         public static List<int> GetSkillIdAdd(this SkillSetComponentS self, int skillId)
         {
             List<int> addSkills = new List<int>();
 
-            List<string[]> augmentProperties = self.GetSkillAugmentProperties(skillId, SkillAugmentProEnum.SkillIdAdd);
-            if (augmentProperties.Count == 0)
+            List<SkillAugmentEffect> augmentEffects = self.GetSkillAugmentEffects(skillId);
+            for (int i = 0; i < augmentEffects.Count; i++)
             {
-                return addSkills;
-            }
-
-            for (int i = 0; i < augmentProperties.Count; i++)
-            {
-                string[] propertyInfo = augmentProperties[i];
-                if (propertyInfo.Length < 2 || !int.TryParse(propertyInfo[1], out int addSkillId))
+                if (augmentEffects[i] is AugmentSkillIdAdd augmentEffect)
                 {
-                    Log.Error($"SkillAugment SkillIdAdd配置错误: {string.Join(';', propertyInfo)}");
-                    continue;
+                    addSkills.Add(augmentEffect.SkillId);
                 }
-
-                addSkills.Add(addSkillId);
             }
 
             return addSkills;
@@ -1068,231 +844,79 @@ namespace ET.Server
 
         public static bool IsSkillSingingCancel(this SkillSetComponentS self, int skillId)
         {
-            List<KeyValuePairInt> tianfuids = self.GetTianFuIdsByType(TianFuProEnum.SkillSingingCancel);
-            if (tianfuids.Count == 0)
-                return self.HaveLongYinProperty(TianFuProEnum.SkillSingingCancel, skillId)
-                    || self.HaveGemTalentProperty(TianFuProEnum.SkillSingingCancel, skillId);
-
-            foreach (KeyValuePairInt keyValuePairInt in tianfuids)
+            List<PropEffect> effects = self.GetAllEffects();
+            for (int i = 0; i < effects.Count; i++)
             {
-                string[] propreByLv = TalentConfigCategory.Instance.Get(keyValuePairInt.KeyId).AddPropreListStr.Split("#");
-                if (propreByLv.Length < keyValuePairInt.Value)
+                if (effects[i] is SkillSingingCancel effect && effect.SkillIds.Contains(skillId))
                 {
-                    continue;
-                }
-
-                string[] addPropreListStr = propreByLv[(int)keyValuePairInt.Value - 1].Split("@");
-                
-                for (int k = 0; k < addPropreListStr.Length; k++)
-                {
-                    string[] properInfo = addPropreListStr[k].Split(";");
-
-                    if (!properInfo[1].Contains(skillId.ToString()))
-                    {
-                        return true;
-                    }
+                    return true;
                 }
             }
 
-            return self.HaveLongYinProperty(TianFuProEnum.SkillSingingCancel, skillId)
-                || self.HaveGemTalentProperty(TianFuProEnum.SkillSingingCancel, skillId);
+            return false;
         }
 
         public static List<int> GetBuffIdAdd(this SkillSetComponentS self, int skillId)
         {
-            List<KeyValuePairInt> tianfuids = self.GetTianFuIdsByType(TianFuProEnum.BuffIdAdd);
-            List<string[]> augmentProperties = self.GetSkillAugmentProperties(skillId, SkillAugmentProEnum.BuffIdAdd);
-            List<string[]> longYinProperties = self.GetLongYinProperties(TianFuProEnum.BuffIdAdd);
-            List<string[]> gemTalentProperties = self.GetGemTalentProperties(TianFuProEnum.BuffIdAdd);
-            if (tianfuids.Count == 0 && augmentProperties.Count == 0 && longYinProperties.Count == 0 && gemTalentProperties.Count == 0)
-                return null;
+            List<PropEffect> effects = self.GetAllEffects();
+            List<SkillAugmentEffect> augmentEffects = self.GetSkillAugmentEffects(skillId);
 
             List<int> addBuffs = new List<int>();
-            foreach (KeyValuePairInt keyValuePairInt in tianfuids)
+            for (int i = 0; i < effects.Count; i++)
             {
-                string[] propreByLv = TalentConfigCategory.Instance.Get(keyValuePairInt.KeyId).AddPropreListStr.Split("#");
-                if (propreByLv.Length < keyValuePairInt.Value)
+                if (effects[i] is BuffIdAdd effect && effect.SkillIds.Contains(skillId))
                 {
-                    continue;
-                }
-
-                string[] addPropreListStr = propreByLv[(int)keyValuePairInt.Value - 1].Split("@");
-                
-                for (int k = 0; k < addPropreListStr.Length; k++)
-                {
-                    string[] properInfo = addPropreListStr[k].Split(";");
-                    if (!properInfo[0].Equals(TianFuProEnum.BuffIdAdd))
-                    {
-                        continue;
-                    }
-
-                    if (!properInfo[1].Contains(skillId.ToString()))
-                    {
-                        continue;
-                    }
-
-                    addBuffs.Add(int.Parse(properInfo[2]));
+                    addBuffs.Add(effect.BuffId);
                 }
             }
 
-            for (int i = 0; i < augmentProperties.Count; i++)
+            //增幅
+            for (int i = 0; i < augmentEffects.Count; i++)
             {
-                addBuffs.Add(int.Parse(augmentProperties[i][1]));
-            }
-
-            //龙印
-            for (int i = 0; i < longYinProperties.Count; i++)
-            {
-                string[] propertyInfo = longYinProperties[i];
-                if (propertyInfo.Length < 3 || !propertyInfo[1].Contains(skillId.ToString()))
+                if (augmentEffects[i] is AugmentBuffIdAdd augmentEffect)
                 {
-                    continue;
+                    addBuffs.Add(augmentEffect.BuffId);
                 }
-
-                addBuffs.Add(int.Parse(propertyInfo[2]));
             }
 
-            //宝石天赋
-            for (int i = 0; i < gemTalentProperties.Count; i++)
-            {
-                string[] propertyInfo = gemTalentProperties[i];
-                if (propertyInfo.Length < 3 || !propertyInfo[1].Contains(skillId.ToString()))
-                {
-                    continue;
-                }
-
-                addBuffs.Add(int.Parse(propertyInfo[2]));
-            }
-
-            return addBuffs;
+            return addBuffs.Count == 0 ? null : addBuffs;
         }
 
         public static List<int> GetBuffInitIdAdd(this SkillSetComponentS self, int skillId)
         {
-            List<KeyValuePairInt> tianfuids = self.GetTianFuIdsByType(TianFuProEnum.BuffInitIdAdd);
-            List<string[]> augmentProperties = self.GetSkillAugmentProperties(skillId, SkillAugmentProEnum.BuffInitIdAdd);
-            List<string[]> longYinProperties = self.GetLongYinProperties(TianFuProEnum.BuffInitIdAdd);
-            List<string[]> gemTalentProperties = self.GetGemTalentProperties(TianFuProEnum.BuffInitIdAdd);
-            if (tianfuids.Count == 0 && augmentProperties.Count == 0 && longYinProperties.Count == 0 && gemTalentProperties.Count == 0)
-                return null;
+            List<PropEffect> effects = self.GetAllEffects();
+            List<SkillAugmentEffect> augmentEffects = self.GetSkillAugmentEffects(skillId);
 
             List<int> addBuffs = new List<int>();
-            foreach (KeyValuePairInt keyValuePairInt in tianfuids)
+            for (int i = 0; i < effects.Count; i++)
             {
-                string[] propreByLv = TalentConfigCategory.Instance.Get(keyValuePairInt.KeyId).AddPropreListStr.Split("#");
-                if (propreByLv.Length < keyValuePairInt.Value)
+                if (effects[i] is BuffInitIdAdd effect && effect.SkillIds.Contains(skillId))
                 {
-                    continue;
-                }
-
-                string[] addPropreListStr = propreByLv[(int)keyValuePairInt.Value - 1].Split("@");
-                
-                for (int k = 0; k < addPropreListStr.Length; k++)
-                {
-                    string[] properInfo = addPropreListStr[k].Split(";");
-                    if (!properInfo[0].Equals(TianFuProEnum.BuffInitIdAdd))
-                    {
-                        continue;
-                    }
-
-                    if (!properInfo[1].Contains(skillId.ToString()))
-                    {
-                        continue;
-                    }
-
-                    addBuffs.Add(int.Parse(properInfo[2]));
+                    addBuffs.Add(effect.BuffId);
                 }
             }
 
-            for (int i = 0; i < augmentProperties.Count; i++)
+            //增幅
+            for (int i = 0; i < augmentEffects.Count; i++)
             {
-                addBuffs.Add(int.Parse(augmentProperties[i][1]));
-            }
-
-            //龙印
-            for (int i = 0; i < longYinProperties.Count; i++)
-            {
-                string[] propertyInfo = longYinProperties[i];
-                if (propertyInfo.Length < 3 || !propertyInfo[1].Contains(skillId.ToString()))
+                if (augmentEffects[i] is AugmentBuffInitIdAdd augmentEffect)
                 {
-                    continue;
+                    addBuffs.Add(augmentEffect.BuffId);
                 }
-
-                addBuffs.Add(int.Parse(propertyInfo[2]));
             }
 
-            //宝石天赋
-            for (int i = 0; i < gemTalentProperties.Count; i++)
-            {
-                string[] propertyInfo = gemTalentProperties[i];
-                if (propertyInfo.Length < 3 || !propertyInfo[1].Contains(skillId.ToString()))
-                {
-                    continue;
-                }
-
-                addBuffs.Add(int.Parse(propertyInfo[2]));
-            }
-
-            return addBuffs;
+            return addBuffs.Count == 0 ? null : addBuffs;
         }
 
         public static int GetReplaceSkillId(this SkillSetComponentS self, int skillId)
         {
-            List<KeyValuePairInt> tianfuids = self.GetTianFuIdsByType(TianFuProEnum.ReplaceSkillId);
-            List<string[]> longYinProperties = self.GetLongYinProperties(TianFuProEnum.ReplaceSkillId);
-            List<string[]> gemTalentProperties = self.GetGemTalentProperties(TianFuProEnum.ReplaceSkillId);
-            if (tianfuids.Count == 0 && longYinProperties.Count == 0 && gemTalentProperties.Count == 0)
-                return 0;
-
-            foreach (KeyValuePairInt keyValuePairInt in tianfuids)
+            List<PropEffect> effects = self.GetAllEffects();
+            for (int i = 0; i < effects.Count; i++)
             {
-                string[] propreByLv = TalentConfigCategory.Instance.Get(keyValuePairInt.KeyId).AddPropreListStr.Split("#");
-                if (propreByLv.Length < keyValuePairInt.Value)
+                if (effects[i] is ReplaceSkillId effect && effect.SkillId == skillId)
                 {
-                    continue;
+                    return effect.NewSkillId;
                 }
-
-                string[] addPropreListStr = propreByLv[(int)keyValuePairInt.Value - 1].Split("@");
-                
-                for (int k = 0; k < addPropreListStr.Length; k++)
-                {
-                    string[] properInfo = addPropreListStr[k].Split(";");
-                    if (!properInfo[0].Equals(TianFuProEnum.ReplaceSkillId))
-                    {
-                        continue;
-                    }
-
-                    if (properInfo[1] != skillId.ToString())
-                    {
-                        continue;
-                    }
-
-                    return int.Parse(properInfo[2]);
-                }
-            }
-
-            //龙印
-            for (int i = 0; i < longYinProperties.Count; i++)
-            {
-                string[] propertyInfo = longYinProperties[i];
-                if (propertyInfo.Length < 3 || propertyInfo[1] != skillId.ToString())
-                {
-                    continue;
-                }
-
-                return int.Parse(propertyInfo[2]);
-            }
-
-            //宝石天赋
-            for (int i = 0; i < gemTalentProperties.Count; i++)
-            {
-                string[] propertyInfo = gemTalentProperties[i];
-                if (propertyInfo.Length < 3 || propertyInfo[1] != skillId.ToString())
-                {
-                    continue;
-                }
-
-                return int.Parse(propertyInfo[2]);
             }
 
             return 0;
@@ -1300,108 +924,18 @@ namespace ET.Server
 
         public static Dictionary<int, float> GetBuffPropertyAdd(this SkillSetComponentS self, int buffId)
         {
-            List<KeyValuePairInt> tianfuids = self.GetTianFuIdsByType(TianFuProEnum.BuffPropertyAdd);
-            List<string[]> longYinProperties = self.GetLongYinProperties(TianFuProEnum.BuffPropertyAdd);
-            List<string[]> gemTalentProperties = self.GetGemTalentProperties(TianFuProEnum.BuffPropertyAdd);
-            if (tianfuids.Count == 0 && longYinProperties.Count == 0 && gemTalentProperties.Count == 0)
-                return null;
+            List<PropEffect> effects = self.GetAllEffects();
 
             Dictionary<int, float> HideProList = new Dictionary<int, float>();
-
-            foreach (KeyValuePairInt keyValuePairInt in tianfuids)
+            for (int i = 0; i < effects.Count; i++)
             {
-                string[] addPropreListStr =
-                        TalentConfigCategory.Instance.Get(keyValuePairInt.KeyId).AddPropreListStr.Split("#")[keyValuePairInt.Value - 1].Split("@");
-                for (int k = 0; k < addPropreListStr.Length; k++)
+                if (effects[i] is BuffPropertyAdd effect && effect.BuffIds.Contains(buffId))
                 {
-                    string[] properInfo = addPropreListStr[k].Split(";");
-                    if (!properInfo[0].Equals(TianFuProEnum.BuffPropertyAdd))
-                    {
-                        continue;
-                    }
-
-                    if (!properInfo[1].Contains(buffId.ToString()))
-                    {
-                        continue;
-                    }
-
-                    try
-                    {
-                        int key = int.Parse(properInfo[2]);
-                        float value = float.Parse(properInfo[3]);
-                        if (HideProList.ContainsKey(key))
-                        {
-                            HideProList[key] += value;
-                        }
-                        else
-                        {
-                            HideProList.Add(key, value);
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        Log.Error($"GetBuffPropertyAdd: {keyValuePairInt.KeyId}: " + ex.ToString());
-                    }
+                    PropEffectHelper.AddOrMerge(HideProList, effect.Attribute, (float)effect.Value);
                 }
             }
 
-            //龙印
-            for (int i = 0; i < longYinProperties.Count; i++)
-            {
-                string[] propertyInfo = longYinProperties[i];
-                if (propertyInfo.Length < 4 || !propertyInfo[1].Contains(buffId.ToString()))
-                {
-                    continue;
-                }
-
-                try
-                {
-                    int key = int.Parse(propertyInfo[2]);
-                    float value = float.Parse(propertyInfo[3]);
-                    if (HideProList.ContainsKey(key))
-                    {
-                        HideProList[key] += value;
-                    }
-                    else
-                    {
-                        HideProList.Add(key, value);
-                    }
-                }
-                catch (Exception ex)
-                {
-                    Log.Error("GetBuffPropertyAdd LongYin: " + ex.ToString());
-                }
-            }
-
-            //宝石天赋
-            for (int i = 0; i < gemTalentProperties.Count; i++)
-            {
-                string[] propertyInfo = gemTalentProperties[i];
-                if (propertyInfo.Length < 4 || !propertyInfo[1].Contains(buffId.ToString()))
-                {
-                    continue;
-                }
-
-                try
-                {
-                    int key = int.Parse(propertyInfo[2]);
-                    float value = float.Parse(propertyInfo[3]);
-                    if (HideProList.ContainsKey(key))
-                    {
-                        HideProList[key] += value;
-                    }
-                    else
-                    {
-                        HideProList.Add(key, value);
-                    }
-                }
-                catch (Exception ex)
-                {
-                    Log.Error("GetBuffPropertyAdd GemTalent: " + ex.ToString());
-                }
-            }
-
-            return HideProList;
+            return HideProList.Count == 0 ? null : HideProList;
         }
 
         public static SkillPro InitSkillPro(this SkillSetComponentS self, int skillid, int position, int skillsetenum, int skillsource)

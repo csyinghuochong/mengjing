@@ -9,7 +9,15 @@
     "NeedKillBoss": [
       310160
     ],
-    "AddPropreListStr": "RolePropertyAdd;100402;0.01"
+    "AddPropreList": [
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 100402,
+          "Value": 0.01
+        }
+      ]
+    ]
   },
   {
     "Id": 11002,
@@ -21,7 +29,22 @@
       11001
     ],
     "NeedKillBoss": [],
-    "AddPropreListStr": "SkillPropertyAdd;1110002,1110003,1110004,1110005,1110006;6;11100010"
+    "AddPropreList": [
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1110002,
+            1110003,
+            1110004,
+            1110005,
+            1110006
+          ],
+          "Attribute": 6,
+          "Value": 11100010
+        }
+      ]
+    ]
   },
   {
     "Id": 11003,
@@ -33,7 +56,7 @@
       11001
     ],
     "NeedKillBoss": [],
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 11004,
@@ -46,7 +69,22 @@
       11003
     ],
     "NeedKillBoss": [],
-    "AddPropreListStr": "SkillPropertyAdd;1110002,1110003,1110004,1110005,1110006;6;11100011"
+    "AddPropreList": [
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1110002,
+            1110003,
+            1110004,
+            1110005,
+            1110006
+          ],
+          "Attribute": 6,
+          "Value": 11100011
+        }
+      ]
+    ]
   },
   {
     "Id": 11005,
@@ -58,7 +96,50 @@
       11004
     ],
     "NeedKillBoss": [],
-    "AddPropreListStr": "SkillPropertyAdd;1110012,1110013,1110014,1110015,1110016;2;0.3#SkillPropertyAdd;1110012,1110013,1110014,1110015,1110016;2;0.6#SkillPropertyAdd;1110012,1110013,1110014,1110015,1110016;2;1"
+    "AddPropreList": [
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1110012,
+            1110013,
+            1110014,
+            1110015,
+            1110016
+          ],
+          "Attribute": 2,
+          "Value": 0.3
+        }
+      ],
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1110012,
+            1110013,
+            1110014,
+            1110015,
+            1110016
+          ],
+          "Attribute": 2,
+          "Value": 0.6
+        }
+      ],
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1110012,
+            1110013,
+            1110014,
+            1110015,
+            1110016
+          ],
+          "Attribute": 2,
+          "Value": 1
+        }
+      ]
+    ]
   },
   {
     "Id": 11006,
@@ -70,7 +151,22 @@
       11005
     ],
     "NeedKillBoss": [],
-    "AddPropreListStr": "SkillPropertyAdd;1110002,1110003,1110004,1110005,1110006;6;11100012"
+    "AddPropreList": [
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1110002,
+            1110003,
+            1110004,
+            1110005,
+            1110006
+          ],
+          "Attribute": 6,
+          "Value": 11100012
+        }
+      ]
+    ]
   },
   {
     "Id": 11007,
@@ -82,7 +178,22 @@
       11005
     ],
     "NeedKillBoss": [],
-    "AddPropreListStr": "SkillPropertyAdd;1110022,1110023,1110024,1110025,1110026;6;11100010"
+    "AddPropreList": [
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1110022,
+            1110023,
+            1110024,
+            1110025,
+            1110026
+          ],
+          "Attribute": 6,
+          "Value": 11100010
+        }
+      ]
+    ]
   },
   {
     "Id": 11008,
@@ -94,7 +205,15 @@
       11005
     ],
     "NeedKillBoss": [],
-    "AddPropreListStr": "RolePropertyAdd;223103;0.02"
+    "AddPropreList": [
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 223103,
+          "Value": 0.02
+        }
+      ]
+    ]
   },
   {
     "Id": 12001,
@@ -106,7 +225,14 @@
     "NeedKillBoss": [
       310161
     ],
-    "AddPropreListStr": "SkillIdAdd;1301002"
+    "AddPropreList": [
+      [
+        {
+          "$type": "SkillIdAdd",
+          "SkillId": 1301002
+        }
+      ]
+    ]
   },
   {
     "Id": 12002,
@@ -118,7 +244,43 @@
       12001
     ],
     "NeedKillBoss": [],
-    "AddPropreListStr": "RolePropertyAdd;200303;0.01#RolePropertyAdd;200303;0.02#RolePropertyAdd;200303;0.03#RolePropertyAdd;200303;0.04#RolePropertyAdd;200303;0.05"
+    "AddPropreList": [
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 200303,
+          "Value": 0.01
+        }
+      ],
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 200303,
+          "Value": 0.02
+        }
+      ],
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 200303,
+          "Value": 0.03
+        }
+      ],
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 200303,
+          "Value": 0.04
+        }
+      ],
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 200303,
+          "Value": 0.05
+        }
+      ]
+    ]
   },
   {
     "Id": 12003,
@@ -130,7 +292,14 @@
       12001
     ],
     "NeedKillBoss": [],
-    "AddPropreListStr": "SkillIdAdd;1301003"
+    "AddPropreList": [
+      [
+        {
+          "$type": "SkillIdAdd",
+          "SkillId": 1301003
+        }
+      ]
+    ]
   },
   {
     "Id": 12004,
@@ -143,7 +312,78 @@
       12003
     ],
     "NeedKillBoss": [],
-    "AddPropreListStr": "SkillPropertyAdd;1110022,1110023,1110024,1110025,1110026;2;0.08#SkillPropertyAdd;1110022,1110023,1110024,1110025,1110026;2;0.16#SkillPropertyAdd;1110022,1110023,1110024,1110025,1110026;2;0.24#SkillPropertyAdd;1110022,1110023,1110024,1110025,1110026;2;0.32#SkillPropertyAdd;1110022,1110023,1110024,1110025,1110026;2;0.4"
+    "AddPropreList": [
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1110022,
+            1110023,
+            1110024,
+            1110025,
+            1110026
+          ],
+          "Attribute": 2,
+          "Value": 0.08
+        }
+      ],
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1110022,
+            1110023,
+            1110024,
+            1110025,
+            1110026
+          ],
+          "Attribute": 2,
+          "Value": 0.16
+        }
+      ],
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1110022,
+            1110023,
+            1110024,
+            1110025,
+            1110026
+          ],
+          "Attribute": 2,
+          "Value": 0.24
+        }
+      ],
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1110022,
+            1110023,
+            1110024,
+            1110025,
+            1110026
+          ],
+          "Attribute": 2,
+          "Value": 0.32
+        }
+      ],
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1110022,
+            1110023,
+            1110024,
+            1110025,
+            1110026
+          ],
+          "Attribute": 2,
+          "Value": 0.4
+        }
+      ]
+    ]
   },
   {
     "Id": 12005,
@@ -155,7 +395,38 @@
       12004
     ],
     "NeedKillBoss": [],
-    "AddPropreListStr": "SkillIdAdd;1301006#SkillIdAdd;1301007#SkillIdAdd;1301008#SkillIdAdd;1301009#SkillIdAdd;1301010"
+    "AddPropreList": [
+      [
+        {
+          "$type": "SkillIdAdd",
+          "SkillId": 1301006
+        }
+      ],
+      [
+        {
+          "$type": "SkillIdAdd",
+          "SkillId": 1301007
+        }
+      ],
+      [
+        {
+          "$type": "SkillIdAdd",
+          "SkillId": 1301008
+        }
+      ],
+      [
+        {
+          "$type": "SkillIdAdd",
+          "SkillId": 1301009
+        }
+      ],
+      [
+        {
+          "$type": "SkillIdAdd",
+          "SkillId": 1301010
+        }
+      ]
+    ]
   },
   {
     "Id": 12006,
@@ -167,7 +438,22 @@
       12005
     ],
     "NeedKillBoss": [],
-    "AddPropreListStr": "SkillPropertyAdd;1110032,1110033,1110034,1110035,1110036;4;2"
+    "AddPropreList": [
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1110032,
+            1110033,
+            1110034,
+            1110035,
+            1110036
+          ],
+          "Attribute": 4,
+          "Value": 2
+        }
+      ]
+    ]
   },
   {
     "Id": 12007,
@@ -179,7 +465,43 @@
       12005
     ],
     "NeedKillBoss": [],
-    "AddPropreListStr": "RolePropertyAdd;200103;0.01#RolePropertyAdd;200103;0.02#RolePropertyAdd;200103;0.03#RolePropertyAdd;200103;0.04#RolePropertyAdd;200103;0.05"
+    "AddPropreList": [
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 200103,
+          "Value": 0.01
+        }
+      ],
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 200103,
+          "Value": 0.02
+        }
+      ],
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 200103,
+          "Value": 0.03
+        }
+      ],
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 200103,
+          "Value": 0.04
+        }
+      ],
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 200103,
+          "Value": 0.05
+        }
+      ]
+    ]
   },
   {
     "Id": 12008,
@@ -191,7 +513,15 @@
       12005
     ],
     "NeedKillBoss": [],
-    "AddPropreListStr": "RolePropertyAdd;205603;0.1"
+    "AddPropreList": [
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 205603,
+          "Value": 0.1
+        }
+      ]
+    ]
   },
   {
     "Id": 13001,
@@ -203,7 +533,43 @@
     "NeedKillBoss": [
       310162
     ],
-    "AddPropreListStr": "RolePropertyAdd;203603;0.01#RolePropertyAdd;203603;0.02#RolePropertyAdd;203603;0.03#RolePropertyAdd;203603;0.04#RolePropertyAdd;203603;0.05"
+    "AddPropreList": [
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 203603,
+          "Value": 0.01
+        }
+      ],
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 203603,
+          "Value": 0.02
+        }
+      ],
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 203603,
+          "Value": 0.03
+        }
+      ],
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 203603,
+          "Value": 0.04
+        }
+      ],
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 203603,
+          "Value": 0.05
+        }
+      ]
+    ]
   },
   {
     "Id": 13002,
@@ -215,7 +581,22 @@
       13001
     ],
     "NeedKillBoss": [],
-    "AddPropreListStr": "SkillPropertyAdd;1110012,1110013,1110014,1110015,1110016;4;2"
+    "AddPropreList": [
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1110012,
+            1110013,
+            1110014,
+            1110015,
+            1110016
+          ],
+          "Attribute": 4,
+          "Value": 2
+        }
+      ]
+    ]
   },
   {
     "Id": 13003,
@@ -227,7 +608,78 @@
       13001
     ],
     "NeedKillBoss": [],
-    "AddPropreListStr": "SkillPropertyAdd;1110032,1110033,1110034,1110035,1110036;2;0.2#SkillPropertyAdd;1110032,1110033,1110034,1110035,1110036;2;0.4#SkillPropertyAdd;1110032,1110033,1110034,1110035,1110036;2;0.6#SkillPropertyAdd;1110032,1110033,1110034,1110035,1110036;2;0.8#SkillPropertyAdd;1110032,1110033,1110034,1110035,1110036;2;1"
+    "AddPropreList": [
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1110032,
+            1110033,
+            1110034,
+            1110035,
+            1110036
+          ],
+          "Attribute": 2,
+          "Value": 0.2
+        }
+      ],
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1110032,
+            1110033,
+            1110034,
+            1110035,
+            1110036
+          ],
+          "Attribute": 2,
+          "Value": 0.4
+        }
+      ],
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1110032,
+            1110033,
+            1110034,
+            1110035,
+            1110036
+          ],
+          "Attribute": 2,
+          "Value": 0.6
+        }
+      ],
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1110032,
+            1110033,
+            1110034,
+            1110035,
+            1110036
+          ],
+          "Attribute": 2,
+          "Value": 0.8
+        }
+      ],
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1110032,
+            1110033,
+            1110034,
+            1110035,
+            1110036
+          ],
+          "Attribute": 2,
+          "Value": 1
+        }
+      ]
+    ]
   },
   {
     "Id": 13004,
@@ -240,7 +692,15 @@
       13003
     ],
     "NeedKillBoss": [],
-    "AddPropreListStr": "RolePropertyAdd;204003;0.1"
+    "AddPropreList": [
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 204003,
+          "Value": 0.1
+        }
+      ]
+    ]
   },
   {
     "Id": 13005,
@@ -252,7 +712,68 @@
       13004
     ],
     "NeedKillBoss": [],
-    "AddPropreListStr": "SkillPropertyAdd;1200001,1200002,1200003;2;0.08#SkillPropertyAdd;1200001,1200002,1200003;2;0.16#SkillPropertyAdd;1200001,1200002,1200003;2;0.24#SkillPropertyAdd;1200001,1200002,1200003;2;0.32#SkillPropertyAdd;1200001,1200002,1200003;2;0.4"
+    "AddPropreList": [
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1200001,
+            1200002,
+            1200003
+          ],
+          "Attribute": 2,
+          "Value": 0.08
+        }
+      ],
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1200001,
+            1200002,
+            1200003
+          ],
+          "Attribute": 2,
+          "Value": 0.16
+        }
+      ],
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1200001,
+            1200002,
+            1200003
+          ],
+          "Attribute": 2,
+          "Value": 0.24
+        }
+      ],
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1200001,
+            1200002,
+            1200003
+          ],
+          "Attribute": 2,
+          "Value": 0.32
+        }
+      ],
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1200001,
+            1200002,
+            1200003
+          ],
+          "Attribute": 2,
+          "Value": 0.4
+        }
+      ]
+    ]
   },
   {
     "Id": 13006,
@@ -264,7 +785,7 @@
       13005
     ],
     "NeedKillBoss": [],
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 13007,
@@ -276,7 +797,7 @@
       13005
     ],
     "NeedKillBoss": [],
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 13008,
@@ -288,7 +809,7 @@
       13005
     ],
     "NeedKillBoss": [],
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 14001,
@@ -300,7 +821,7 @@
     "NeedKillBoss": [
       310163
     ],
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 14002,
@@ -312,7 +833,7 @@
       14001
     ],
     "NeedKillBoss": [],
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 14003,
@@ -324,7 +845,7 @@
       14001
     ],
     "NeedKillBoss": [],
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 14004,
@@ -337,7 +858,7 @@
       14003
     ],
     "NeedKillBoss": [],
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 14005,
@@ -349,7 +870,7 @@
       14004
     ],
     "NeedKillBoss": [],
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 14006,
@@ -361,7 +882,7 @@
       14005
     ],
     "NeedKillBoss": [],
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 14007,
@@ -373,7 +894,7 @@
       14005
     ],
     "NeedKillBoss": [],
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 14008,
@@ -385,7 +906,7 @@
       14005
     ],
     "NeedKillBoss": [],
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 15001,
@@ -397,7 +918,7 @@
     "NeedKillBoss": [
       310164
     ],
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 15002,
@@ -409,7 +930,7 @@
       15001
     ],
     "NeedKillBoss": [],
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 15003,
@@ -421,7 +942,7 @@
       15001
     ],
     "NeedKillBoss": [],
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 15004,
@@ -434,7 +955,7 @@
       15003
     ],
     "NeedKillBoss": [],
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 15005,
@@ -446,7 +967,7 @@
       15004
     ],
     "NeedKillBoss": [],
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 15006,
@@ -458,7 +979,7 @@
       15005
     ],
     "NeedKillBoss": [],
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 15007,
@@ -470,7 +991,7 @@
       15005
     ],
     "NeedKillBoss": [],
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 15008,
@@ -482,7 +1003,7 @@
       15005
     ],
     "NeedKillBoss": [],
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 16001,
@@ -495,7 +1016,7 @@
       12004
     ],
     "NeedKillBoss": [],
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 16002,
@@ -508,7 +1029,7 @@
       13004
     ],
     "NeedKillBoss": [],
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 16003,
@@ -521,7 +1042,7 @@
       14004
     ],
     "NeedKillBoss": [],
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 16004,
@@ -534,7 +1055,7 @@
       15004
     ],
     "NeedKillBoss": [],
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 16005,
@@ -547,7 +1068,7 @@
       11004
     ],
     "NeedKillBoss": [],
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 17001,
@@ -557,7 +1078,7 @@
     "Type": 6,
     "PreId": [],
     "NeedKillBoss": [],
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 17002,
@@ -567,7 +1088,7 @@
     "Type": 7,
     "PreId": [],
     "NeedKillBoss": [],
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 17003,
@@ -577,7 +1098,7 @@
     "Type": 8,
     "PreId": [],
     "NeedKillBoss": [],
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 21001,
@@ -589,7 +1110,29 @@
     "NeedKillBoss": [
       310160
     ],
-    "AddPropreListStr": "RolePropertyAdd;100402;0.01#RolePropertyAdd;100402;0.02#RolePropertyAdd;100402;0.03"
+    "AddPropreList": [
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 100402,
+          "Value": 0.01
+        }
+      ],
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 100402,
+          "Value": 0.02
+        }
+      ],
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 100402,
+          "Value": 0.03
+        }
+      ]
+    ]
   },
   {
     "Id": 21002,
@@ -601,7 +1144,22 @@
       21001
     ],
     "NeedKillBoss": [],
-    "AddPropreListStr": "SkillPropertyAdd;1120002,1120003,1120004,1120005,1120006;4;2"
+    "AddPropreList": [
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1120002,
+            1120003,
+            1120004,
+            1120005,
+            1120006
+          ],
+          "Attribute": 4,
+          "Value": 2
+        }
+      ]
+    ]
   },
   {
     "Id": 21003,
@@ -613,7 +1171,50 @@
       21001
     ],
     "NeedKillBoss": [],
-    "AddPropreListStr": "SkillPropertyAdd;1120002,1120003,1120004,1120005,1120006;2;0.3#SkillPropertyAdd;1120002,1120003,1120004,1120005,1120006;2;0.6#SkillPropertyAdd;1120002,1120003,1120004,1120005,1120006;2;1"
+    "AddPropreList": [
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1120002,
+            1120003,
+            1120004,
+            1120005,
+            1120006
+          ],
+          "Attribute": 2,
+          "Value": 0.3
+        }
+      ],
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1120002,
+            1120003,
+            1120004,
+            1120005,
+            1120006
+          ],
+          "Attribute": 2,
+          "Value": 0.6
+        }
+      ],
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1120002,
+            1120003,
+            1120004,
+            1120005,
+            1120006
+          ],
+          "Attribute": 2,
+          "Value": 1
+        }
+      ]
+    ]
   },
   {
     "Id": 21004,
@@ -626,7 +1227,19 @@
       21003
     ],
     "NeedKillBoss": [],
-    "AddPropreListStr": "SkillPropertyAdd;1200101,1200102;6;1000001"
+    "AddPropreList": [
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1200101,
+            1200102
+          ],
+          "Attribute": 6,
+          "Value": 1000001
+        }
+      ]
+    ]
   },
   {
     "Id": 21005,
@@ -638,7 +1251,50 @@
       21004
     ],
     "NeedKillBoss": [],
-    "AddPropreListStr": "SkillPropertyAdd;1120012,1120013,1120014,1120015,1120016;2;0.3#SkillPropertyAdd;1120012,1120013,1120014,1120015,1120016;2;0.6#SkillPropertyAdd;1120012,1120013,1120014,1120015,1120016;2;1"
+    "AddPropreList": [
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1120012,
+            1120013,
+            1120014,
+            1120015,
+            1120016
+          ],
+          "Attribute": 2,
+          "Value": 0.3
+        }
+      ],
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1120012,
+            1120013,
+            1120014,
+            1120015,
+            1120016
+          ],
+          "Attribute": 2,
+          "Value": 0.6
+        }
+      ],
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1120012,
+            1120013,
+            1120014,
+            1120015,
+            1120016
+          ],
+          "Attribute": 2,
+          "Value": 1
+        }
+      ]
+    ]
   },
   {
     "Id": 21006,
@@ -650,7 +1306,50 @@
       21005
     ],
     "NeedKillBoss": [],
-    "AddPropreListStr": "SkillPropertyAdd;1120012,1120013,1120014,1120015,1120016;6;11200110#SkillPropertyAdd;1120012,1120013,1120014,1120015,1120016;6;11200111#SkillPropertyAdd;1120012,1120013,1120014,1120015,1120016;6;11200112"
+    "AddPropreList": [
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1120012,
+            1120013,
+            1120014,
+            1120015,
+            1120016
+          ],
+          "Attribute": 6,
+          "Value": 11200110
+        }
+      ],
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1120012,
+            1120013,
+            1120014,
+            1120015,
+            1120016
+          ],
+          "Attribute": 6,
+          "Value": 11200111
+        }
+      ],
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1120012,
+            1120013,
+            1120014,
+            1120015,
+            1120016
+          ],
+          "Attribute": 6,
+          "Value": 11200112
+        }
+      ]
+    ]
   },
   {
     "Id": 21007,
@@ -662,7 +1361,14 @@
       21005
     ],
     "NeedKillBoss": [],
-    "AddPropreListStr": "SkillIdAdd;1302001"
+    "AddPropreList": [
+      [
+        {
+          "$type": "SkillIdAdd",
+          "SkillId": 1302001
+        }
+      ]
+    ]
   },
   {
     "Id": 21008,
@@ -674,7 +1380,43 @@
       21005
     ],
     "NeedKillBoss": [],
-    "AddPropreListStr": "RolePropertyAdd;202103;0.01#RolePropertyAdd;202103;0.02#RolePropertyAdd;202103;0.03#RolePropertyAdd;202103;0.04#RolePropertyAdd;202103;0.05"
+    "AddPropreList": [
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 202103,
+          "Value": 0.01
+        }
+      ],
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 202103,
+          "Value": 0.02
+        }
+      ],
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 202103,
+          "Value": 0.03
+        }
+      ],
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 202103,
+          "Value": 0.04
+        }
+      ],
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 202103,
+          "Value": 0.05
+        }
+      ]
+    ]
   },
   {
     "Id": 22001,
@@ -684,7 +1426,14 @@
     "Type": 2,
     "PreId": [],
     "NeedKillBoss": [],
-    "AddPropreListStr": "SkillIdAdd;1302003"
+    "AddPropreList": [
+      [
+        {
+          "$type": "SkillIdAdd",
+          "SkillId": 1302003
+        }
+      ]
+    ]
   },
   {
     "Id": 22002,
@@ -696,7 +1445,63 @@
       22001
     ],
     "NeedKillBoss": [],
-    "AddPropreListStr": "SkillPropertyAdd;1200101,1200102;2;0.03#SkillPropertyAdd;1200101,1200102;2;0.06#SkillPropertyAdd;1200101,1200102;2;0.09#SkillPropertyAdd;1200101,1200102;2;0.12#SkillPropertyAdd;1200101,1200102;2;0.15"
+    "AddPropreList": [
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1200101,
+            1200102
+          ],
+          "Attribute": 2,
+          "Value": 0.03
+        }
+      ],
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1200101,
+            1200102
+          ],
+          "Attribute": 2,
+          "Value": 0.06
+        }
+      ],
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1200101,
+            1200102
+          ],
+          "Attribute": 2,
+          "Value": 0.09
+        }
+      ],
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1200101,
+            1200102
+          ],
+          "Attribute": 2,
+          "Value": 0.12
+        }
+      ],
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1200101,
+            1200102
+          ],
+          "Attribute": 2,
+          "Value": 0.15
+        }
+      ]
+    ]
   },
   {
     "Id": 22003,
@@ -708,7 +1513,19 @@
       22001
     ],
     "NeedKillBoss": [],
-    "AddPropreListStr": "SkillPropertyAdd;1200101,1200102;6;12001010"
+    "AddPropreList": [
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1200101,
+            1200102
+          ],
+          "Attribute": 6,
+          "Value": 12001010
+        }
+      ]
+    ]
   },
   {
     "Id": 22004,
@@ -721,7 +1538,78 @@
       22003
     ],
     "NeedKillBoss": [],
-    "AddPropreListStr": "SkillPropertyAdd;1120022,1120023,1120024,1120025,1120026;2;0.2#SkillPropertyAdd;1120022,1120023,1120024,1120025,1120026;2;0.4#SkillPropertyAdd;1120022,1120023,1120024,1120025,1120026;2;0.6#SkillPropertyAdd;1120022,1120023,1120024,1120025,1120026;2;0.8#SkillPropertyAdd;1120022,1120023,1120024,1120025,1120026;2;1"
+    "AddPropreList": [
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1120022,
+            1120023,
+            1120024,
+            1120025,
+            1120026
+          ],
+          "Attribute": 2,
+          "Value": 0.2
+        }
+      ],
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1120022,
+            1120023,
+            1120024,
+            1120025,
+            1120026
+          ],
+          "Attribute": 2,
+          "Value": 0.4
+        }
+      ],
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1120022,
+            1120023,
+            1120024,
+            1120025,
+            1120026
+          ],
+          "Attribute": 2,
+          "Value": 0.6
+        }
+      ],
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1120022,
+            1120023,
+            1120024,
+            1120025,
+            1120026
+          ],
+          "Attribute": 2,
+          "Value": 0.8
+        }
+      ],
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1120022,
+            1120023,
+            1120024,
+            1120025,
+            1120026
+          ],
+          "Attribute": 2,
+          "Value": 1
+        }
+      ]
+    ]
   },
   {
     "Id": 22005,
@@ -733,7 +1621,43 @@
       22004
     ],
     "NeedKillBoss": [],
-    "AddPropreListStr": "RolePropertyAdd;200103;0.01#RolePropertyAdd;200103;0.02#RolePropertyAdd;200103;0.03#RolePropertyAdd;200103;0.04#RolePropertyAdd;200103;0.05"
+    "AddPropreList": [
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 200103,
+          "Value": 0.01
+        }
+      ],
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 200103,
+          "Value": 0.02
+        }
+      ],
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 200103,
+          "Value": 0.03
+        }
+      ],
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 200103,
+          "Value": 0.04
+        }
+      ],
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 200103,
+          "Value": 0.05
+        }
+      ]
+    ]
   },
   {
     "Id": 22006,
@@ -745,7 +1669,22 @@
       22005
     ],
     "NeedKillBoss": [],
-    "AddPropreListStr": "SkillPropertyAdd;1120022,1120023,1120024,1120025,1120026;4;1"
+    "AddPropreList": [
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1120022,
+            1120023,
+            1120024,
+            1120025,
+            1120026
+          ],
+          "Attribute": 4,
+          "Value": 1
+        }
+      ]
+    ]
   },
   {
     "Id": 22007,
@@ -757,7 +1696,43 @@
       22005
     ],
     "NeedKillBoss": [],
-    "AddPropreListStr": "RolePropertyAdd;204103;0.01#RolePropertyAdd;204103;0.02#RolePropertyAdd;204103;0.03#RolePropertyAdd;204103;0.04#RolePropertyAdd;204103;0.05"
+    "AddPropreList": [
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 204103,
+          "Value": 0.01
+        }
+      ],
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 204103,
+          "Value": 0.02
+        }
+      ],
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 204103,
+          "Value": 0.03
+        }
+      ],
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 204103,
+          "Value": 0.04
+        }
+      ],
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 204103,
+          "Value": 0.05
+        }
+      ]
+    ]
   },
   {
     "Id": 22008,
@@ -769,7 +1744,14 @@
       22005
     ],
     "NeedKillBoss": [],
-    "AddPropreListStr": "SkillIdAdd;1302004"
+    "AddPropreList": [
+      [
+        {
+          "$type": "SkillIdAdd",
+          "SkillId": 1302004
+        }
+      ]
+    ]
   },
   {
     "Id": 23001,
@@ -781,7 +1763,43 @@
     "NeedKillBoss": [
       310161
     ],
-    "AddPropreListStr": "RolePropertyAdd;223103;0.02#RolePropertyAdd;223103;0.04#RolePropertyAdd;223103;0.06#RolePropertyAdd;223103;0.08#RolePropertyAdd;223103;0.1"
+    "AddPropreList": [
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 223103,
+          "Value": 0.02
+        }
+      ],
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 223103,
+          "Value": 0.04
+        }
+      ],
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 223103,
+          "Value": 0.06
+        }
+      ],
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 223103,
+          "Value": 0.08
+        }
+      ],
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 223103,
+          "Value": 0.1
+        }
+      ]
+    ]
   },
   {
     "Id": 23002,
@@ -793,7 +1811,15 @@
       23001
     ],
     "NeedKillBoss": [],
-    "AddPropreListStr": "RolePropertyAdd;204003;0.05"
+    "AddPropreList": [
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 204003,
+          "Value": 0.05
+        }
+      ]
+    ]
   },
   {
     "Id": 23003,
@@ -805,7 +1831,78 @@
       23001
     ],
     "NeedKillBoss": [],
-    "AddPropreListStr": "SkillPropertyAdd;1120032,1120033,1120034,1120035,1120036;2;0.2#SkillPropertyAdd;1120032,1120033,1120034,1120035,1120036;2;0.4#SkillPropertyAdd;1120032,1120033,1120034,1120035,1120036;2;0.6#SkillPropertyAdd;1120032,1120033,1120034,1120035,1120036;2;0.8#SkillPropertyAdd;1120032,1120033,1120034,1120035,1120036;2;1"
+    "AddPropreList": [
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1120032,
+            1120033,
+            1120034,
+            1120035,
+            1120036
+          ],
+          "Attribute": 2,
+          "Value": 0.2
+        }
+      ],
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1120032,
+            1120033,
+            1120034,
+            1120035,
+            1120036
+          ],
+          "Attribute": 2,
+          "Value": 0.4
+        }
+      ],
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1120032,
+            1120033,
+            1120034,
+            1120035,
+            1120036
+          ],
+          "Attribute": 2,
+          "Value": 0.6
+        }
+      ],
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1120032,
+            1120033,
+            1120034,
+            1120035,
+            1120036
+          ],
+          "Attribute": 2,
+          "Value": 0.8
+        }
+      ],
+      [
+        {
+          "$type": "SkillPropertyAdd",
+          "SkillIds": [
+            1120032,
+            1120033,
+            1120034,
+            1120035,
+            1120036
+          ],
+          "Attribute": 2,
+          "Value": 1
+        }
+      ]
+    ]
   },
   {
     "Id": 23004,
@@ -818,7 +1915,14 @@
       23003
     ],
     "NeedKillBoss": [],
-    "AddPropreListStr": "SkillIdAdd;1302005"
+    "AddPropreList": [
+      [
+        {
+          "$type": "SkillIdAdd",
+          "SkillId": 1302005
+        }
+      ]
+    ]
   },
   {
     "Id": 23005,
@@ -830,7 +1934,43 @@
       23004
     ],
     "NeedKillBoss": [],
-    "AddPropreListStr": "RolePropertyAdd;100902;0.02#RolePropertyAdd;100902;0.04#RolePropertyAdd;100902;0.06#RolePropertyAdd;100902;0.08#RolePropertyAdd;100902;0.1"
+    "AddPropreList": [
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 100902,
+          "Value": 0.02
+        }
+      ],
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 100902,
+          "Value": 0.04
+        }
+      ],
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 100902,
+          "Value": 0.06
+        }
+      ],
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 100902,
+          "Value": 0.08
+        }
+      ],
+      [
+        {
+          "$type": "RolePropertyAdd",
+          "NumericKey": 100902,
+          "Value": 0.1
+        }
+      ]
+    ]
   },
   {
     "Id": 23006,
@@ -842,7 +1982,7 @@
       23005
     ],
     "NeedKillBoss": [],
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 23007,
@@ -854,7 +1994,7 @@
       23005
     ],
     "NeedKillBoss": [],
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 23008,
@@ -866,7 +2006,7 @@
       23005
     ],
     "NeedKillBoss": [],
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 24001,
@@ -878,7 +2018,7 @@
     "NeedKillBoss": [
       310162
     ],
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 24002,
@@ -890,7 +2030,7 @@
       24001
     ],
     "NeedKillBoss": [],
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 24003,
@@ -902,7 +2042,7 @@
       24001
     ],
     "NeedKillBoss": [],
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 24004,
@@ -915,7 +2055,7 @@
       24003
     ],
     "NeedKillBoss": [],
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 24005,
@@ -927,7 +2067,7 @@
       24004
     ],
     "NeedKillBoss": [],
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 24006,
@@ -939,7 +2079,7 @@
       24005
     ],
     "NeedKillBoss": [],
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 24007,
@@ -951,7 +2091,7 @@
       24005
     ],
     "NeedKillBoss": [],
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 24008,
@@ -963,7 +2103,7 @@
       24005
     ],
     "NeedKillBoss": [],
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 25001,
@@ -975,7 +2115,7 @@
     "NeedKillBoss": [
       310163
     ],
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 25002,
@@ -987,7 +2127,7 @@
       25001
     ],
     "NeedKillBoss": [],
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 25003,
@@ -999,7 +2139,7 @@
       25001
     ],
     "NeedKillBoss": [],
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 25004,
@@ -1012,7 +2152,7 @@
       25003
     ],
     "NeedKillBoss": [],
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 25005,
@@ -1024,7 +2164,7 @@
       25004
     ],
     "NeedKillBoss": [],
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 25006,
@@ -1036,7 +2176,7 @@
       25005
     ],
     "NeedKillBoss": [],
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 25007,
@@ -1048,7 +2188,7 @@
       25005
     ],
     "NeedKillBoss": [],
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 25008,
@@ -1060,7 +2200,7 @@
       25005
     ],
     "NeedKillBoss": [],
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 26001,
@@ -1073,7 +2213,7 @@
       22004
     ],
     "NeedKillBoss": [],
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 26002,
@@ -1086,7 +2226,7 @@
       23004
     ],
     "NeedKillBoss": [],
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 26003,
@@ -1099,7 +2239,7 @@
       24004
     ],
     "NeedKillBoss": [],
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 26004,
@@ -1112,7 +2252,7 @@
       25004
     ],
     "NeedKillBoss": [],
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 26005,
@@ -1125,7 +2265,7 @@
       21004
     ],
     "NeedKillBoss": [],
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 27001,
@@ -1135,7 +2275,7 @@
     "Type": 6,
     "PreId": [],
     "NeedKillBoss": [],
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 27002,
@@ -1145,7 +2285,7 @@
     "Type": 7,
     "PreId": [],
     "NeedKillBoss": [],
-    "AddPropreListStr": ""
+    "AddPropreList": []
   },
   {
     "Id": 27003,
@@ -1155,6 +2295,6 @@
     "Type": 8,
     "PreId": [],
     "NeedKillBoss": [],
-    "AddPropreListStr": ""
+    "AddPropreList": []
   }
 ]

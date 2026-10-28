@@ -32,7 +32,7 @@ namespace ET
             LearnRoseLv = _buf.ReadInt();
             Icon = _buf.ReadInt();
             talentDes = _buf.ReadString();
-            AddPropreListStr = _buf.ReadString();
+            {int n0 = _buf.ReadSize(); AddPropreList = new System.Collections.Generic.List<System.Collections.Generic.List<PropEffect>>(n0);for(var i0 = 0 ; i0 < n0 ; i0++) { System.Collections.Generic.List<PropEffect> _e0;  {int n1 = _buf.ReadSize(); _e0 = new System.Collections.Generic.List<PropEffect>(n1);for(var i1 = 0 ; i1 < n1 ; i1++) { PropEffect _e1;  _e1 = global::ET.PropEffect.DeserializePropEffect(_buf); _e0.Add(_e1);}} AddPropreList.Add(_e0);}}
 
             PostInit();
         }
@@ -100,7 +100,7 @@ namespace ET
         /// <summary>
         /// 附加
         /// </summary>
-        public string AddPropreListStr;
+        public System.Collections.Generic.List<System.Collections.Generic.List<PropEffect>> AddPropreList;
 
 
         public const int __ID__ = -1834609810;
@@ -136,7 +136,7 @@ namespace ET
             + "LearnRoseLv:" + LearnRoseLv + ","
             + "Icon:" + Icon + ","
             + "talentDes:" + talentDes + ","
-            + "AddPropreListStr:" + AddPropreListStr + ","
+            + "AddPropreList:" + Luban.StringUtil.CollectionToString(AddPropreList) + ","
             + "}";
         }
 

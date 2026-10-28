@@ -156,43 +156,20 @@ namespace ET.Client
                 return;
             }
 
-            string[] propreByLv = TalentConfigCategory.Instance.Get(tianfuId).AddPropreListStr.Split("#");
-            if (propreByLv.Length < lv)
+            List<PropEffect> effects = TalentConfigCategory.Instance.Get(tianfuId).AddPropreList.GetLevelEffects(lv);
+
+            for (int k = 0; k < effects.Count; k++)
             {
-                return;
-            }
-
-            string[] addPropreListStr = propreByLv[lv - 1].Split("@");
-
-            for (int k = 0; k < addPropreListStr.Length; k++)
-            {
-                string[] properInfo = addPropreListStr[k].Split(';');
-
-                switch (properInfo[0])
+                //客户端只处理需要出现在技能栏里的附加技能，属性统一由服务端下发
+                if (effects[k] is SkillIdAdd effect)
                 {
-                    case TianFuProEnum.SkillIdAdd:
-                        self.OnSkillIdAdd(properInfo, add);
-                        break;
-                    case TianFuProEnum.SkillPropertyAdd:
-                        break;
-                    case TianFuProEnum.BuffIdAdd:
-                        break;
-                    case TianFuProEnum.BuffInitIdAdd:
-                        break;
-                    case TianFuProEnum.RolePropertyAdd:
-                        break;
-                    case TianFuProEnum.ReplaceSkillId:
-                        break;
-                    case TianFuProEnum.BuffPropertyAdd:
-                        break;
+                    self.OnSkillIdAdd(effect.SkillId, add);
                 }
             }
         }
 
-        public static void OnSkillIdAdd(this SkillSetComponentC self, string[] properInfo, bool add)
+        public static void OnSkillIdAdd(this SkillSetComponentC self, int skillId, bool add)
         {
-            int skillId = int.Parse(properInfo[1]);
-
             int index = -1;
             for (int i = self.SkillList.Count - 1; i >= 0; i--)
             {
@@ -216,61 +193,16 @@ namespace ET.Client
             }
         }
 
-        public static List<KeyValuePairInt> GetTianFuIdsByType(this SkillSetComponentC self, string proType)
-        {
-            List<KeyValuePairInt> typeTianfus = new List<KeyValuePairInt>();
-            List<KeyValuePairInt> tianfuIds = self.TianFuList();
-
-            foreach (KeyValuePairInt keyValuePairInt in tianfuIds)
-            {
-                string[] propreByLv = TalentConfigCategory.Instance.Get(keyValuePairInt.KeyId).AddPropreListStr.Split("#");
-                if (propreByLv.Length < keyValuePairInt.Value)
-                {
-                    continue;
-                }
-
-                string[] addPropreListStr = propreByLv[(int)keyValuePairInt.Value - 1].Split("@");
-                
-                for (int k = 0; k < addPropreListStr.Length; k++)
-                {
-                    string[] properInfo = addPropreListStr[k].Split(";");
-
-                    if (properInfo[0] != proType)
-                    {
-                        continue;
-                    }
-
-                    if (!typeTianfus.Contains(keyValuePairInt))
-                    {
-                        typeTianfus.Add(keyValuePairInt);
-                    }
-                }
-            }
-
-            return typeTianfus;
-        }
-
         public static bool IsSkillSingingCancel(this SkillSetComponentC self, int skillId)
         {
-            List<KeyValuePairInt> tianfuids = self.GetTianFuIdsByType(TianFuProEnum.SkillSingingCancel);
-            if (tianfuids.Count == 0)
-                return false;
-
-            foreach (KeyValuePairInt keyValuePairInt in tianfuids)
+            List<KeyValuePairInt> tianfuIds = self.TianFuList();
+            for (int i = 0; i < tianfuIds.Count; i++)
             {
-                string[] propreByLv = TalentConfigCategory.Instance.Get(keyValuePairInt.KeyId).AddPropreListStr.Split("#");
-                if (propreByLv.Length < keyValuePairInt.Value)
+                TalentConfig talentConfig = TalentConfigCategory.Instance.Get(tianfuIds[i].KeyId);
+                List<PropEffect> effects = talentConfig.AddPropreList.GetLevelEffects((int)tianfuIds[i].Value);
+                for (int k = 0; k < effects.Count; k++)
                 {
-                    continue;
-                }
-
-                string[] addPropreListStr = propreByLv[(int)keyValuePairInt.Value - 1].Split("@");
-                
-                for (int k = 0; k < addPropreListStr.Length; k++)
-                {
-                    string[] properInfo = addPropreListStr[k].Split(";");
-
-                    if (!properInfo[1].Contains(skillId.ToString()))
+                    if (effects[k] is SkillSingingCancel effect && effect.SkillIds.Contains(skillId))
                     {
                         return true;
                     }
