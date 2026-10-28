@@ -27,7 +27,7 @@ namespace ET
             Area_Ref = null;
             CostPoint = _buf.ReadInt();
             AddPropreType = _buf.ReadInt();
-            {int n0 = _buf.ReadSize(); AddPropreList = new System.Collections.Generic.List<System.Collections.Generic.List<PropEffect>>(n0);for(var i0 = 0 ; i0 < n0 ; i0++) { System.Collections.Generic.List<PropEffect> _e0;  {int n1 = _buf.ReadSize(); _e0 = new System.Collections.Generic.List<PropEffect>(n1);for(var i1 = 0 ; i1 < n1 ; i1++) { PropEffect _e1;  _e1 = global::ET.PropEffect.DeserializePropEffect(_buf); _e0.Add(_e1);}} AddPropreList.Add(_e0);}}
+            {int n0 = _buf.ReadSize(); AddPropreList = new System.Collections.Generic.List<PropEffect>(n0);for(var i0 = 0 ; i0 < n0 ; i0++) { PropEffect _e0;  _e0 = global::ET.PropEffect.DeserializePropEffect(_buf); AddPropreList.Add(_e0);}}
 
             PostInit();
         }
@@ -67,7 +67,7 @@ namespace ET
         /// <summary>
         /// 附加
         /// </summary>
-        public System.Collections.Generic.List<System.Collections.Generic.List<PropEffect>> AddPropreList;
+        public System.Collections.Generic.List<PropEffect> AddPropreList;
 
 
         public const int __ID__ = 684383261;
@@ -80,7 +80,7 @@ namespace ET
             Area_Ref = GemTalentAreaConfigCategory.Instance.GetOrDefault(Area);
             
             
-            
+            foreach (var _e in AddPropreList) { _e?.ResolveRef(); }
         }
 
         public override string ToString()

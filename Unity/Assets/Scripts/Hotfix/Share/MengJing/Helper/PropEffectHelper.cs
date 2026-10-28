@@ -3,7 +3,7 @@ using System.Collections.Generic;
 namespace ET
 {
     /// <summary>
-    /// 附加效果(TalentConfig / LongYinConfig / GemTalentConfig 的 AddPropreList)的通用读取方法
+    /// 附加效果(TalentConfig / LongYinConfig 的 AddPropreList)的通用读取方法
     /// </summary>
     public static class PropEffectHelper
     {

@@ -100,7 +100,7 @@ namespace ET.Server
         }
 
         /// <summary>
-        /// 已激活宝石天赋提供的效果：宝石天赋没有等级，只取配置的第一段
+        /// 已激活宝石天赋提供的效果（宝石天赋没有等级，AddPropreList 本身就是一维的效果列表）
         /// </summary>
         public static List<PropEffect> GetEffects(this GemTalentComponent self)
         {
@@ -113,7 +113,7 @@ namespace ET.Server
                     continue;
                 }
 
-                effects.AddRange(gemTalentConfig.AddPropreList.GetLevelEffects(1));
+                effects.AddRange(gemTalentConfig.AddPropreList);
             }
 
             return effects;
@@ -131,7 +131,7 @@ namespace ET.Server
                 return;
             }
 
-            List<PropEffect> effects = gemTalentConfig.AddPropreList.GetLevelEffects(1);
+            List<PropEffect> effects = gemTalentConfig.AddPropreList;
             for (int k = 0; k < effects.Count; k++)
             {
                 if (effects[k] is SkillIdAdd effect)
