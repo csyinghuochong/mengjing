@@ -212,6 +212,23 @@ namespace ET.Client
      		}
      	}
 
+		public UnityEngine.RectTransform EG_ActiveInfoRectTransform
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_EG_ActiveInfoRectTransform == null )
+     			{
+		    		this.m_EG_ActiveInfoRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"Right/EG_ActiveInfo");
+     			}
+     			return this.m_EG_ActiveInfoRectTransform;
+     		}
+     	}
+
 		public UnityEngine.UI.Text E_CostPointText
      	{
      		get
@@ -223,7 +240,7 @@ namespace ET.Client
      			}
      			if( this.m_E_CostPointText == null )
      			{
-		    		this.m_E_CostPointText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Right/E_CostPoint");
+		    		this.m_E_CostPointText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Right/EG_ActiveInfo/E_CostPoint");
      			}
      			return this.m_E_CostPointText;
      		}
@@ -240,7 +257,7 @@ namespace ET.Client
      			}
      			if( this.m_E_ActiveGemTalentButton == null )
      			{
-		    		this.m_E_ActiveGemTalentButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Right/E_ActiveGemTalent");
+		    		this.m_E_ActiveGemTalentButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Right/EG_ActiveInfo/E_ActiveGemTalent");
      			}
      			return this.m_E_ActiveGemTalentButton;
      		}
@@ -257,7 +274,7 @@ namespace ET.Client
      			}
      			if( this.m_E_ActiveGemTalentImage == null )
      			{
-		    		this.m_E_ActiveGemTalentImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Right/E_ActiveGemTalent");
+		    		this.m_E_ActiveGemTalentImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Right/EG_ActiveInfo/E_ActiveGemTalent");
      			}
      			return this.m_E_ActiveGemTalentImage;
      		}
@@ -322,6 +339,7 @@ namespace ET.Client
 			this.m_E_GemTalentNameText = null;
 			this.m_E_GemTalentDescText = null;
 			this.m_E_AddPropreTypeText = null;
+			this.m_EG_ActiveInfoRectTransform = null;
 			this.m_E_CostPointText = null;
 			this.m_E_ActiveGemTalentButton = null;
 			this.m_E_ActiveGemTalentImage = null;
@@ -341,6 +359,7 @@ namespace ET.Client
 		private UnityEngine.UI.Text m_E_GemTalentNameText = null;
 		private UnityEngine.UI.Text m_E_GemTalentDescText = null;
 		private UnityEngine.UI.Text m_E_AddPropreTypeText = null;
+		private UnityEngine.RectTransform m_EG_ActiveInfoRectTransform = null;
 		private UnityEngine.UI.Text m_E_CostPointText = null;
 		private UnityEngine.UI.Button m_E_ActiveGemTalentButton = null;
 		private UnityEngine.UI.Image m_E_ActiveGemTalentImage = null;

@@ -30,7 +30,7 @@ namespace ET.Client
 			self.E_ReturnButton.AddListener(self.OnReturnButton);
 			self.E_ActiveGemTalentButton.AddListenerAsync(self.OnActiveGemTalentButton);
 			self.E_ReSetButton.AddListener(self.OnReSetButton);
-			self.E_ActiveGemTalentButton.gameObject.SetActive(false);
+			self.EG_ActiveInfoRectTransform.gameObject.SetActive(false);
 
 			self.AreaLockRectTransforms[0] = self.EG_AreaLock_1RectTransform;
 			self.AreaLockRectTransforms[1] = self.EG_AreaLock_2RectTransform;
@@ -200,14 +200,14 @@ namespace ET.Client
 		}
 
 		/// <summary>
-		/// 刷新右侧天赋详情：已激活不显示激活按钮，点数不足按钮置灰
+		/// 刷新右侧天赋详情：已激活隐藏整个激活区(消耗点数和激活按钮)，点数不足时按钮置灰
 		/// </summary>
 		private static void RefreshGemTalentInfo(this ES_GemTalent self)
 		{
 			GemTalentConfig gemTalentConfig = GemTalentConfigCategory.Instance.GetOrDefault(self.SelectGemTalentId);
 			if (gemTalentConfig == null)
 			{
-				self.E_ActiveGemTalentButton.gameObject.SetActive(false);
+				self.EG_ActiveInfoRectTransform.gameObject.SetActive(false);
 				return;
 			}
 
@@ -221,11 +221,11 @@ namespace ET.Client
 			GemTalentComponentC gemTalentComponent = self.Root().GetComponent<GemTalentComponentC>();
 			if (gemTalentComponent.HaveGemTalent(gemTalentConfig.Id))
 			{
-				self.E_ActiveGemTalentButton.gameObject.SetActive(false);
+				self.EG_ActiveInfoRectTransform.gameObject.SetActive(false);
 				return;
 			}
 
-			self.E_ActiveGemTalentButton.gameObject.SetActive(true);
+			self.EG_ActiveInfoRectTransform.gameObject.SetActive(true);
 
 			int leftPoint = gemTalentComponent.GetLeftPoint();
 			bool canActive = leftPoint >= gemTalentConfig.CostPoint;
