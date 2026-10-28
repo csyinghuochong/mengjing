@@ -195,6 +195,23 @@ namespace ET.Client
      		}
      	}
 
+		public UnityEngine.UI.Text E_AddPropreTypeText
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_AddPropreTypeText == null )
+     			{
+		    		this.m_E_AddPropreTypeText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Right/E_AddPropreType");
+     			}
+     			return this.m_E_AddPropreTypeText;
+     		}
+     	}
+
 		public UnityEngine.UI.Text E_CostPointText
      	{
      		get
@@ -304,6 +321,7 @@ namespace ET.Client
 			this.m_E_GemTalentIconImage = null;
 			this.m_E_GemTalentNameText = null;
 			this.m_E_GemTalentDescText = null;
+			this.m_E_AddPropreTypeText = null;
 			this.m_E_CostPointText = null;
 			this.m_E_ActiveGemTalentButton = null;
 			this.m_E_ActiveGemTalentImage = null;
@@ -322,6 +340,7 @@ namespace ET.Client
 		private UnityEngine.UI.Image m_E_GemTalentIconImage = null;
 		private UnityEngine.UI.Text m_E_GemTalentNameText = null;
 		private UnityEngine.UI.Text m_E_GemTalentDescText = null;
+		private UnityEngine.UI.Text m_E_AddPropreTypeText = null;
 		private UnityEngine.UI.Text m_E_CostPointText = null;
 		private UnityEngine.UI.Button m_E_ActiveGemTalentButton = null;
 		private UnityEngine.UI.Image m_E_ActiveGemTalentImage = null;

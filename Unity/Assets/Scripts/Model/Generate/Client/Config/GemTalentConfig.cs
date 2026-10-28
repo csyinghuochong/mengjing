@@ -27,6 +27,7 @@ namespace ET
             Area = _buf.ReadInt();
             Area_Ref = null;
             CostPoint = _buf.ReadInt();
+            AddPropreType = _buf.ReadInt();
             Des = _buf.ReadString();
             AddPropreListStr = _buf.ReadString();
 
@@ -66,6 +67,11 @@ namespace ET
         public int CostPoint;
 
         /// <summary>
+        /// 效果类型
+        /// </summary>
+        public int AddPropreType;
+
+        /// <summary>
         /// 描述
         /// </summary>
         public string Des;
@@ -88,6 +94,7 @@ namespace ET
             
             
             
+            
         }
 
         public override string ToString()
@@ -98,6 +105,7 @@ namespace ET
             + "Icon:" + Icon + ","
             + "Area:" + Area + ","
             + "CostPoint:" + CostPoint + ","
+            + "AddPropreType:" + AddPropreType + ","
             + "Des:" + Des + ","
             + "AddPropreListStr:" + AddPropreListStr + ","
             + "}";

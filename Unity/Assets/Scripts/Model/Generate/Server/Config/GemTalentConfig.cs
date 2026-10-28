@@ -26,6 +26,7 @@ namespace ET
             Area = _buf.ReadInt();
             Area_Ref = null;
             CostPoint = _buf.ReadInt();
+            AddPropreType = _buf.ReadInt();
             AddPropreListStr = _buf.ReadString();
 
             PostInit();
@@ -59,6 +60,11 @@ namespace ET
         public int CostPoint;
 
         /// <summary>
+        /// 效果类型
+        /// </summary>
+        public int AddPropreType;
+
+        /// <summary>
         /// 附加
         /// </summary>
         public string AddPropreListStr;
@@ -74,6 +80,7 @@ namespace ET
             Area_Ref = GemTalentAreaConfigCategory.Instance.GetOrDefault(Area);
             
             
+            
         }
 
         public override string ToString()
@@ -83,6 +90,7 @@ namespace ET
             + "Name:" + Name + ","
             + "Area:" + Area + ","
             + "CostPoint:" + CostPoint + ","
+            + "AddPropreType:" + AddPropreType + ","
             + "AddPropreListStr:" + AddPropreListStr + ","
             + "}";
         }

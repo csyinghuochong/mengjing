@@ -14,6 +14,14 @@ namespace ET.Client
 		/// </summary>
 		private const string GemTalentItemPrefix = "GemTalentItem_";
 
+		/// <summary>
+		/// 配置 AddPropreType 的取值：0=属性效果，1=技能效果
+		/// </summary>
+		private const int AddPropreTypeSkill = 1;
+
+		private const string PropertyEffectName = "属性效果";
+		private const string SkillEffectName = "技能效果";
+
 		[EntitySystem]
 		private static void Awake(this ES_GemTalent self,Transform transform)
 		{
@@ -206,6 +214,7 @@ namespace ET.Client
 			string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.RoleSkillIcon, gemTalentConfig.Icon.ToString());
 			self.E_GemTalentIconImage.sprite = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
 			self.E_GemTalentNameText.text = gemTalentConfig.Name;
+			self.E_AddPropreTypeText.text = gemTalentConfig.AddPropreType == AddPropreTypeSkill ? SkillEffectName : PropertyEffectName;
 			self.E_GemTalentDescText.text = gemTalentConfig.Des;
 			self.E_CostPointText.text = $"消耗宝石点数：{gemTalentConfig.CostPoint}";
 
