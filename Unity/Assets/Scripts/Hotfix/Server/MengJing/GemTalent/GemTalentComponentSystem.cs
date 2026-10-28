@@ -100,6 +100,135 @@ namespace ET.Server
         }
 
         /// <summary>
+        /// 取某个宝石天赋配置里生效的配置段：宝石天赋没有等级，按#分隔的等级段只取第一段
+        /// </summary>
+        private static string[] GetPropreList(this GemTalentComponent self, int gemTalentId)
+        {
+            GemTalentConfig gemTalentConfig = GemTalentConfigCategory.Instance.GetOrDefault(gemTalentId);
+            if (gemTalentConfig == null || string.IsNullOrEmpty(gemTalentConfig.AddPropreListStr))
+            {
+                return null;
+            }
+
+            //AddPropreListStr 形如 RolePropertyAdd;100402;0.01@SkillIdAdd;1001010，多条用@分隔
+            return gemTalentConfig.AddPropreListStr.Split('#')[0].Split('@');
+        }
+
+        /// <summary>
+        /// 收集所有已激活宝石天赋里指定类型的配置段，格式和天赋、龙印的AddPropreListStr一致
+        /// </summary>
+        public static List<string[]> GetProperties(this GemTalentComponent self, string proType)
+        {
+            List<string[]> properties = new List<string[]>();
+            for (int i = 0; i < self.GemTalentList.Count; i++)
+            {
+                string[] addPropreListStr = self.GetPropreList(self.GemTalentList[i]);
+                if (addPropreListStr == null)
+                {
+                    continue;
+                }
+
+                for (int k = 0; k < addPropreListStr.Length; k++)
+                {
+                    string[] properInfo = addPropreListStr[k].Split(';');
+                    if (properInfo.Length < 2 || properInfo[0] != proType)
+                    {
+                        continue;
+                    }
+
+                    properties.Add(properInfo);
+                }
+            }
+
+            return properties;
+        }
+
+        /// <summary>
+        /// 宝石天赋里指定类型的配置是否有作用于该id(技能id或buff id)的条目
+        /// </summary>
+        public static bool HaveProperty(this GemTalentComponent self, string proType, int id)
+        {
+            List<string[]> properties = self.GetProperties(proType);
+            for (int i = 0; i < properties.Count; i++)
+            {
+                string[] properInfo = properties[i];
+                if (properInfo.Length < 2 || !properInfo[1].Contains(id.ToString()))
+                {
+                    continue;
+                }
+
+                return true;
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// 宝石天赋的效果变化，add为true时生效，false时移除。
+        /// 技能属性、buff属性等只在释放技能时通过SkillSetComponentS读取，这里只处理需要进技能列表的SkillIdAdd
+        /// </summary>
+        public static void AddGemTalentAttribute(this GemTalentComponent self, int gemTalentId, bool add)
+        {
+            string[] addPropreListStr = self.GetPropreList(gemTalentId);
+            if (addPropreListStr == null)
+            {
+                return;
+            }
+
+            for (int k = 0; k < addPropreListStr.Length; k++)
+            {
+                string[] properInfo = addPropreListStr[k].Split(';');
+                if (properInfo.Length < 2)
+                {
+                    continue;
+                }
+
+                if (properInfo[0] != TianFuProEnum.SkillIdAdd)
+                {
+                    continue;
+                }
+
+                self.OnGemTalentSkillIdAdd(properInfo, add);
+            }
+        }
+
+        /// <summary>
+        /// 宝石天赋附加的技能，激活时加进技能列表，重置时移除
+        /// </summary>
+        private static void OnGemTalentSkillIdAdd(this GemTalentComponent self, string[] properInfo, bool add)
+        {
+            if (!int.TryParse(properInfo[1], out int skillId))
+            {
+                return;
+            }
+
+            SkillSetComponentS skillSetComponent = self.GetParent<Unit>().GetComponent<SkillSetComponentS>();
+            if (skillSetComponent == null)
+            {
+                return;
+            }
+
+            if (add)
+            {
+                skillSetComponent.OnAddkillId(skillId, 0, SkillSetEnum.Skill, SkillSourceEnum.GemTalent, false);
+                return;
+            }
+
+            skillSetComponent.OnRemoveSkillId(skillId, SkillSourceEnum.GemTalent, false);
+        }
+
+        /// <summary>
+        /// 宝石天赋变化后刷新属性、被动技能和技能列表：附加技能变化时客户端要重新收到技能列表
+        /// </summary>
+        private static void RefreshGemTalentEffect(this GemTalentComponent self)
+        {
+            Unit unit = self.GetParent<Unit>();
+            Function_Fight.UnitUpdateProperty_Base(unit, true, true);
+            unit.GetComponent<SkillPassiveComponent>()?.UpdatePassiveSkill();
+            unit.GetComponent<SkillSetComponentS>()?.UpdateSkillSet();
+        }
+
+        /// <summary>
         /// 激活宝石天赋节点：校验区域解锁与可用点数，激活后永久生效
         /// </summary>
         public static int OnActiveGemTalent(this GemTalentComponent self, int gemTalentId)
@@ -127,7 +256,9 @@ namespace ET.Server
 
             self.GemTalentList.Add(gemTalentId);
 
-            Function_Fight.UnitUpdateProperty_Base(self.GetParent<Unit>(), true, true);
+            //AddPropreListStr 里可能配了附加技能，激活时一并生效
+            self.AddGemTalentAttribute(gemTalentId, true);
+            self.RefreshGemTalentEffect();
             return ErrorCode.ERR_Success;
         }
 
@@ -156,9 +287,15 @@ namespace ET.Server
                 return ErrorCode.ERR_DiamondNotEnoughError;
             }
 
+            //先移除附加技能，再清空激活列表，避免重置后技能残留在技能列表里
+            for (int i = 0; i < self.GemTalentList.Count; i++)
+            {
+                self.AddGemTalentAttribute(self.GemTalentList[i], false);
+            }
+
             self.GemTalentList.Clear();
 
-            Function_Fight.UnitUpdateProperty_Base(unit, true, true);
+            self.RefreshGemTalentEffect();
             return ErrorCode.ERR_Success;
         }
 
@@ -168,27 +305,11 @@ namespace ET.Server
         public static List<PropertyValue> GetRoleProLists(this GemTalentComponent self)
         {
             List<PropertyValue> proList = new List<PropertyValue>();
-            for (int i = 0; i < self.GemTalentList.Count; i++)
+            List<string[]> properties = self.GetProperties(TianFuProEnum.RolePropertyAdd);
+            for (int i = 0; i < properties.Count; i++)
             {
-                GemTalentConfig gemTalentConfig = GemTalentConfigCategory.Instance.GetOrDefault(self.GemTalentList[i]);
-                if (gemTalentConfig == null || string.IsNullOrEmpty(gemTalentConfig.AddPropreListStr))
-                {
-                    continue;
-                }
-
-                // AddPropreListStr 形如 RolePropertyAdd;100402;0.01，宝石天赋没有等级，只取第一段
-                string[] properInfo = gemTalentConfig.AddPropreListStr.Split('#')[0].Split(';');
-                if (properInfo.Length < 3)
-                {
-                    continue;
-                }
-
-                if (!properInfo[0].Equals(TianFuProEnum.RolePropertyAdd))
-                {
-                    continue;
-                }
-
-                if (!int.TryParse(properInfo[1], out int numericKey))
+                string[] properInfo = properties[i];
+                if (properInfo.Length < 3 || !int.TryParse(properInfo[1], out int numericKey))
                 {
                     continue;
                 }

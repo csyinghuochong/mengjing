@@ -149,6 +149,7 @@ namespace ET
         public const int Task = 7;
         public const int PetEcho = 8;
         public const int LongYin = 9;
+        public const int GemTalent = 10;
     }
 
     //1.增加范围

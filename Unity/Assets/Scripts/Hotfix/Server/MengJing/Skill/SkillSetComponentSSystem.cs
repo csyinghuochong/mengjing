@@ -358,6 +358,24 @@ namespace ET.Server
         }
 
         /// <summary>
+        /// 宝石天赋里指定类型的属性是否有作用于该id(技能id或buff id)的条目
+        /// </summary>
+        private static bool HaveGemTalentProperty(this SkillSetComponentS self, string proType, int id)
+        {
+            GemTalentComponent gemTalentComponent = self.GetParent<Unit>().GetComponent<GemTalentComponent>();
+            return gemTalentComponent != null && gemTalentComponent.HaveProperty(proType, id);
+        }
+
+        /// <summary>
+        /// 已激活宝石天赋里指定类型的配置段，格式和天赋、龙印的AddPropreListStr一致
+        /// </summary>
+        private static List<string[]> GetGemTalentProperties(this SkillSetComponentS self, string proType)
+        {
+            GemTalentComponent gemTalentComponent = self.GetParent<Unit>().GetComponent<GemTalentComponent>();
+            return gemTalentComponent == null ? new List<string[]>() : gemTalentComponent.GetProperties(proType);
+        }
+
+        /// <summary>
         /// 龙印提供的角色属性，供Function_Fight计算属性时使用
         /// </summary>
         public static List<PropertyValue> GetLongYinRoleProLists(this SkillSetComponentS self)
@@ -916,7 +934,8 @@ namespace ET.Server
             List<KeyValuePairInt> tianfuids = self.GetTianFuIdsByType(TianFuProEnum.SkillPropertyAdd);
             List<string[]> augmentProperties = self.GetSkillAugmentProperties(skillId, SkillAugmentProEnum.SkillPropertyAdd);
             List<string[]> longYinProperties = self.GetLongYinProperties(TianFuProEnum.SkillPropertyAdd);
-            if (tianfuids.Count == 0 && augmentProperties.Count == 0 && longYinProperties.Count == 0)
+            List<string[]> gemTalentProperties = self.GetGemTalentProperties(TianFuProEnum.SkillPropertyAdd);
+            if (tianfuids.Count == 0 && augmentProperties.Count == 0 && longYinProperties.Count == 0 && gemTalentProperties.Count == 0)
                 return null;
 
             Dictionary<int, float> HideProList = new Dictionary<int, float>();
@@ -998,6 +1017,27 @@ namespace ET.Server
                 }
             }
 
+            //宝石天赋的技能属性
+            for (int i = 0; i < gemTalentProperties.Count; i++)
+            {
+                string[] propertyInfo = gemTalentProperties[i];
+                if (propertyInfo.Length < 4 || !propertyInfo[1].Contains(skillId.ToString()))
+                {
+                    continue;
+                }
+
+                int key = int.Parse(propertyInfo[2]);
+                float value = float.Parse(propertyInfo[3]);
+                if (HideProList.ContainsKey(key))
+                {
+                    HideProList[key] += value;
+                }
+                else
+                {
+                    HideProList.Add(key, value);
+                }
+            }
+
             return HideProList;
         }
 
@@ -1030,7 +1070,8 @@ namespace ET.Server
         {
             List<KeyValuePairInt> tianfuids = self.GetTianFuIdsByType(TianFuProEnum.SkillSingingCancel);
             if (tianfuids.Count == 0)
-                return self.HaveLongYinProperty(TianFuProEnum.SkillSingingCancel, skillId);
+                return self.HaveLongYinProperty(TianFuProEnum.SkillSingingCancel, skillId)
+                    || self.HaveGemTalentProperty(TianFuProEnum.SkillSingingCancel, skillId);
 
             foreach (KeyValuePairInt keyValuePairInt in tianfuids)
             {
@@ -1053,7 +1094,8 @@ namespace ET.Server
                 }
             }
 
-            return self.HaveLongYinProperty(TianFuProEnum.SkillSingingCancel, skillId);
+            return self.HaveLongYinProperty(TianFuProEnum.SkillSingingCancel, skillId)
+                || self.HaveGemTalentProperty(TianFuProEnum.SkillSingingCancel, skillId);
         }
 
         public static List<int> GetBuffIdAdd(this SkillSetComponentS self, int skillId)
@@ -1061,7 +1103,8 @@ namespace ET.Server
             List<KeyValuePairInt> tianfuids = self.GetTianFuIdsByType(TianFuProEnum.BuffIdAdd);
             List<string[]> augmentProperties = self.GetSkillAugmentProperties(skillId, SkillAugmentProEnum.BuffIdAdd);
             List<string[]> longYinProperties = self.GetLongYinProperties(TianFuProEnum.BuffIdAdd);
-            if (tianfuids.Count == 0 && augmentProperties.Count == 0 && longYinProperties.Count == 0)
+            List<string[]> gemTalentProperties = self.GetGemTalentProperties(TianFuProEnum.BuffIdAdd);
+            if (tianfuids.Count == 0 && augmentProperties.Count == 0 && longYinProperties.Count == 0 && gemTalentProperties.Count == 0)
                 return null;
 
             List<int> addBuffs = new List<int>();
@@ -1109,6 +1152,18 @@ namespace ET.Server
                 addBuffs.Add(int.Parse(propertyInfo[2]));
             }
 
+            //宝石天赋
+            for (int i = 0; i < gemTalentProperties.Count; i++)
+            {
+                string[] propertyInfo = gemTalentProperties[i];
+                if (propertyInfo.Length < 3 || !propertyInfo[1].Contains(skillId.ToString()))
+                {
+                    continue;
+                }
+
+                addBuffs.Add(int.Parse(propertyInfo[2]));
+            }
+
             return addBuffs;
         }
 
@@ -1117,7 +1172,8 @@ namespace ET.Server
             List<KeyValuePairInt> tianfuids = self.GetTianFuIdsByType(TianFuProEnum.BuffInitIdAdd);
             List<string[]> augmentProperties = self.GetSkillAugmentProperties(skillId, SkillAugmentProEnum.BuffInitIdAdd);
             List<string[]> longYinProperties = self.GetLongYinProperties(TianFuProEnum.BuffInitIdAdd);
-            if (tianfuids.Count == 0 && augmentProperties.Count == 0 && longYinProperties.Count == 0)
+            List<string[]> gemTalentProperties = self.GetGemTalentProperties(TianFuProEnum.BuffInitIdAdd);
+            if (tianfuids.Count == 0 && augmentProperties.Count == 0 && longYinProperties.Count == 0 && gemTalentProperties.Count == 0)
                 return null;
 
             List<int> addBuffs = new List<int>();
@@ -1165,6 +1221,18 @@ namespace ET.Server
                 addBuffs.Add(int.Parse(propertyInfo[2]));
             }
 
+            //宝石天赋
+            for (int i = 0; i < gemTalentProperties.Count; i++)
+            {
+                string[] propertyInfo = gemTalentProperties[i];
+                if (propertyInfo.Length < 3 || !propertyInfo[1].Contains(skillId.ToString()))
+                {
+                    continue;
+                }
+
+                addBuffs.Add(int.Parse(propertyInfo[2]));
+            }
+
             return addBuffs;
         }
 
@@ -1172,7 +1240,8 @@ namespace ET.Server
         {
             List<KeyValuePairInt> tianfuids = self.GetTianFuIdsByType(TianFuProEnum.ReplaceSkillId);
             List<string[]> longYinProperties = self.GetLongYinProperties(TianFuProEnum.ReplaceSkillId);
-            if (tianfuids.Count == 0 && longYinProperties.Count == 0)
+            List<string[]> gemTalentProperties = self.GetGemTalentProperties(TianFuProEnum.ReplaceSkillId);
+            if (tianfuids.Count == 0 && longYinProperties.Count == 0 && gemTalentProperties.Count == 0)
                 return 0;
 
             foreach (KeyValuePairInt keyValuePairInt in tianfuids)
@@ -1214,6 +1283,18 @@ namespace ET.Server
                 return int.Parse(propertyInfo[2]);
             }
 
+            //宝石天赋
+            for (int i = 0; i < gemTalentProperties.Count; i++)
+            {
+                string[] propertyInfo = gemTalentProperties[i];
+                if (propertyInfo.Length < 3 || propertyInfo[1] != skillId.ToString())
+                {
+                    continue;
+                }
+
+                return int.Parse(propertyInfo[2]);
+            }
+
             return 0;
         }
 
@@ -1221,7 +1302,8 @@ namespace ET.Server
         {
             List<KeyValuePairInt> tianfuids = self.GetTianFuIdsByType(TianFuProEnum.BuffPropertyAdd);
             List<string[]> longYinProperties = self.GetLongYinProperties(TianFuProEnum.BuffPropertyAdd);
-            if (tianfuids.Count == 0 && longYinProperties.Count == 0)
+            List<string[]> gemTalentProperties = self.GetGemTalentProperties(TianFuProEnum.BuffPropertyAdd);
+            if (tianfuids.Count == 0 && longYinProperties.Count == 0 && gemTalentProperties.Count == 0)
                 return null;
 
             Dictionary<int, float> HideProList = new Dictionary<int, float>();
@@ -1288,6 +1370,34 @@ namespace ET.Server
                 catch (Exception ex)
                 {
                     Log.Error("GetBuffPropertyAdd LongYin: " + ex.ToString());
+                }
+            }
+
+            //宝石天赋
+            for (int i = 0; i < gemTalentProperties.Count; i++)
+            {
+                string[] propertyInfo = gemTalentProperties[i];
+                if (propertyInfo.Length < 4 || !propertyInfo[1].Contains(buffId.ToString()))
+                {
+                    continue;
+                }
+
+                try
+                {
+                    int key = int.Parse(propertyInfo[2]);
+                    float value = float.Parse(propertyInfo[3]);
+                    if (HideProList.ContainsKey(key))
+                    {
+                        HideProList[key] += value;
+                    }
+                    else
+                    {
+                        HideProList.Add(key, value);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Log.Error("GetBuffPropertyAdd GemTalent: " + ex.ToString());
                 }
             }
 
