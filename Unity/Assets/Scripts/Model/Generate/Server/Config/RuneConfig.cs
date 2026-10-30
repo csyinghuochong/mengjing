@@ -23,6 +23,7 @@ namespace ET
         {
             Id = _buf.ReadInt();
             Name = _buf.ReadString();
+            NextId = _buf.ReadInt();
             Lv = _buf.ReadInt();
             RuneType = (RuneType)_buf.ReadInt();
             {int n0 = _buf.ReadSize(); AddPropreList = new System.Collections.Generic.List<PropEffect>(n0);for(var i0 = 0 ; i0 < n0 ; i0++) { PropEffect _e0;  _e0 = global::ET.PropEffect.DeserializePropEffect(_buf); AddPropreList.Add(_e0);}}
@@ -46,6 +47,11 @@ namespace ET
         /// 名称
         /// </summary>
         public string Name;
+
+        /// <summary>
+        /// 下一级
+        /// </summary>
+        public int NextId;
 
         /// <summary>
         /// 等级
@@ -82,6 +88,7 @@ namespace ET
             
             
             
+            
             foreach (var _e in AddPropreList) { _e?.ResolveRef(); }
             
             
@@ -92,6 +99,7 @@ namespace ET
             return "{ "
             + "Id:" + Id + ","
             + "Name:" + Name + ","
+            + "NextId:" + NextId + ","
             + "Lv:" + Lv + ","
             + "RuneType:" + RuneType + ","
             + "AddPropreList:" + Luban.StringUtil.CollectionToString(AddPropreList) + ","

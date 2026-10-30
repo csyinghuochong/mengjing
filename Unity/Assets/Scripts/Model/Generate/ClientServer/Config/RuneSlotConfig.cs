@@ -45,6 +45,9 @@ namespace ET
 
         public int Index;
 
+        /// <summary>
+        /// 类型
+        /// </summary>
         public RuneType RuneType;
 
         /// <summary>

@@ -24,6 +24,7 @@ namespace ET
             Id = _buf.ReadInt();
             Name = _buf.ReadString();
             Icon = _buf.ReadInt();
+            NextId = _buf.ReadInt();
             Lv = _buf.ReadInt();
             RuneType = (RuneType)_buf.ReadInt();
             Des = _buf.ReadString();
@@ -53,6 +54,11 @@ namespace ET
         /// Icon
         /// </summary>
         public int Icon;
+
+        /// <summary>
+        /// 下一级
+        /// </summary>
+        public int NextId;
 
         /// <summary>
         /// 等级
@@ -96,6 +102,7 @@ namespace ET
             
             
             
+            
             foreach (var _e in AddPropreList) { _e?.ResolveRef(); }
             
             
@@ -107,6 +114,7 @@ namespace ET
             + "Id:" + Id + ","
             + "Name:" + Name + ","
             + "Icon:" + Icon + ","
+            + "NextId:" + NextId + ","
             + "Lv:" + Lv + ","
             + "RuneType:" + RuneType + ","
             + "Des:" + Des + ","
