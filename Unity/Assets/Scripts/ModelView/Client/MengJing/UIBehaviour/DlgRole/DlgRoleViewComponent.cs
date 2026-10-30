@@ -279,6 +279,27 @@ namespace ET.Client
 		        return this.m_es_gemTalent;
 	        }
         }
+        
+        public ES_Rune ES_Rune
+        {
+	        get
+	        {
+		        ES_Rune es = this.m_es_rune;
+		        if (es == null)
+		        {
+			        string path = "Assets/Bundles/UI/Common/ES_Rune.prefab";
+			        GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>()
+					        .LoadAssetSync<GameObject>(path);
+			        GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
+			        go.SetActive(true);
+			        this.AssetList.Add(path);
+			        this.m_es_rune = this.AddChild<ES_Rune, Transform>(go.transform);
+			        go.SetActive(false);
+		        }
+
+		        return this.m_es_rune;
+	        }
+        }
 		
 		public void DestroyWidget()
 		{
@@ -296,6 +317,7 @@ namespace ET.Client
 			this.m_es_roleqianghua = null;
 			this.m_es_roleZodiac = null;
 			this.m_es_gemTalent = null;
+			this.m_es_rune = null;
 			this.uiTransform = null;
 			
 			ResourcesLoaderComponent resourcesLoaderComponent = this.Root().GetComponent<ResourcesLoaderComponent>();
@@ -321,6 +343,7 @@ namespace ET.Client
 		private EntityRef<ES_RoleQiangHua> m_es_roleqianghua = null;
 		private EntityRef<ES_RoleZodiac> m_es_roleZodiac = null;
 		private EntityRef<ES_GemTalent> m_es_gemTalent = null;
+		private EntityRef<ES_Rune> m_es_rune = null;
 		public Transform uiTransform = null;
 	}
 }

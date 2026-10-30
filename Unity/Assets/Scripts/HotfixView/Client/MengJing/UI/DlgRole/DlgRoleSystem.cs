@@ -66,6 +66,7 @@ namespace ET.Client
         }
     }
 
+    [FriendOf(typeof(ES_Rune))]
     [FriendOf(typeof(ES_RoleZodiac))]
     [FriendOf(typeof(ES_GemTalent))]
     [FriendOf(typeof(ES_RoleQiangHua))]
@@ -177,6 +178,9 @@ namespace ET.Client
                     self.View.ES_RoleZodiac.uiTransform.gameObject.SetActive(true);
                     self.View.ES_EquipSet.uiTransform.gameObject.SetActive(false);
                     self.View.ES_EquipSet.EquipSetHide(true);
+                    break;
+                case 6:
+                    self.View.ES_Rune.uiTransform.gameObject.SetActive(true);
                     break;
             }
 
