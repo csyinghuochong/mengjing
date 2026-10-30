@@ -218,6 +218,17 @@ namespace ET.Client
             { ErrorCode.ERR_GemTalentAreaLock, "宝石点数不足，区域未解锁" },
             { ErrorCode.ERR_GemTalentPointNotEnough, "可用宝石点数不足" },
             { ErrorCode.ERR_GemTalentNoneActivated, "没有已激活的宝石天赋" },
+            { ErrorCode.ERR_RuneNotExist, "符文不存在" },
+            { ErrorCode.ERR_RuneShardNotEnough, "符文碎片不足" },
+            { ErrorCode.ERR_RuneMaxLv, "符文已达最大等级" },
+            { ErrorCode.ERR_RuneSlotNotExist, "符文槽位不存在" },
+            { ErrorCode.ERR_RuneSlotLock, "符文槽位未解锁" },
+            { ErrorCode.ERR_RuneSlotOccupied, "该槽位已镶嵌符文" },
+            { ErrorCode.ERR_RuneTypeError, "符文类型和槽位不符" },
+            { ErrorCode.ERR_RuneEquipped, "符文已镶嵌，请先卸下" },
+            { ErrorCode.ERR_RuneSlotLevel, "玩家等级不足，槽位无法解锁" },
+            { ErrorCode.ERR_RuneSlotTotalLv, "符文总等级不足，槽位无法解锁" },
+            { ErrorCode.ERR_RuneSlotEmpty, "该槽位没有镶嵌符文" },
         };
     }
 }

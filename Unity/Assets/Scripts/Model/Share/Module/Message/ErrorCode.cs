@@ -66,6 +66,19 @@ namespace ET
         public const int ERR_GemTalentPointNotEnough = 200051;                      //宝石点数不足
         public const int ERR_GemTalentNoneActivated = 200052;                       //没有已激活的宝石天赋
 
+        //符文
+        public const int ERR_RuneNotExist = 200053;                                 //符文不存在
+        public const int ERR_RuneShardNotEnough = 200054;                           //符文碎片不足
+        public const int ERR_RuneMaxLv = 200055;                                    //符文已达最大等级
+        public const int ERR_RuneSlotNotExist = 200056;                             //符文槽位不存在
+        public const int ERR_RuneSlotLock = 200057;                                 //符文槽位未解锁
+        public const int ERR_RuneSlotOccupied = 200058;                             //该槽位已镶嵌符文
+        public const int ERR_RuneTypeError = 200059;                                //符文类型和槽位不符
+        public const int ERR_RuneEquipped = 200060;                                 //符文已镶嵌，请先卸下
+        public const int ERR_RuneSlotLevel = 200061;                                //玩家等级不足，槽位无法解锁
+        public const int ERR_RuneSlotTotalLv = 200062;                              //符文总等级不足，槽位无法解锁
+        public const int ERR_RuneSlotEmpty = 200063;                                //槽位没有镶嵌符文
+
         //登录
         public const int ERR_AccountAlreadyRegister = 200101;                       //表示账号已经被注册
         public const int ERR_AccountOrPasswordError = 200102;                       //登录时,表示密码错误

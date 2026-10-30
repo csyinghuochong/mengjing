@@ -8038,3 +8038,123 @@ message M2C_GemTalentMessage	// IMessage
 {
 	GemTalentInfo Info = 1;
 }
+
+//符文信息
+//ResponseType M2C_RuneInfoResponse
+message C2M_RuneInfoRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+}
+
+message M2C_RuneInfoResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+	RuneInfo Info = 1;
+}
+
+//开启孔位
+//ResponseType M2C_RuneUnlockSlotResponse
+message C2M_RuneUnlockSlotRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int32 SlotId = 1;	//RuneSlotConfig.Id
+}
+
+message M2C_RuneUnlockSlotResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+	RuneInfo Info = 1;
+}
+
+//镶嵌符文
+//ResponseType M2C_RuneSocketResponse
+message C2M_RuneSocketRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int32 SlotId = 1;	//RuneSlotConfig.Id
+	int64 RuneId = 2;	//RuneData.Id，要镶进去的那枚符文
+}
+
+message M2C_RuneSocketResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+	RuneInfo Info = 1;
+}
+
+//拆卸符文
+//ResponseType M2C_RuneUnsocketResponse
+message C2M_RuneUnsocketRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int32 SlotId = 1;	//RuneSlotConfig.Id
+}
+
+message M2C_RuneUnsocketResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+	RuneInfo Info = 1;
+}
+
+//升级符文
+//ResponseType M2C_RuneUpgradeResponse
+message C2M_RuneUpgradeRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int64 RuneId = 1;	//RuneData.Id，镶嵌中的也能升
+}
+
+message M2C_RuneUpgradeResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+	RuneInfo Info = 1;
+}
+
+//分解符文
+//ResponseType M2C_RuneDecomposeResponse
+message C2M_RuneDecomposeRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int64 RuneId = 1;	//RuneData.Id，只能分解背包里的
+}
+
+message M2C_RuneDecomposeResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+	RuneInfo Info = 1;
+}
+
+//符文数据
+message RuneInfo
+{
+	int32 Shard = 1;				//符文碎片
+	repeated RuneData RuneList = 2;	//拥有的符文，含已镶嵌的
+	repeated RuneSlotInfo SlotList = 3;
+	int32 TotalRuneLv = 4;			//符文总等级（只算已镶嵌的符文）
+}
+
+//槽位数据
+message RuneSlotInfo
+{
+	int32 SlotId = 1;		//RuneSlotConfig.Id
+	bool Unlocked = 2;		//是否已解锁
+	int64 RuneId = 3;		//镶嵌的符文（RuneData.Id），0 表示空槽
+}
+
+//符文实例
+message RuneData
+{
+	int64 Id = 1;			//符文唯一 id
+	int32 ConfigId = 2;		//RuneConfig.Id，当前等级那一行
+}

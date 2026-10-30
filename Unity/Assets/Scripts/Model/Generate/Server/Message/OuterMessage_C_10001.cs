@@ -35036,6 +35036,558 @@ namespace ET
         }
     }
 
+    // 符文信息
+    [MemoryPackable]
+    [Message(OuterMessage.C2M_RuneInfoRequest)]
+    [ResponseType(nameof(M2C_RuneInfoResponse))]
+    public partial class C2M_RuneInfoRequest : MessageObject, ILocationRequest
+    {
+        public static C2M_RuneInfoRequest Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(C2M_RuneInfoRequest), isFromPool) as C2M_RuneInfoRequest;
+        }
+
+        [MemoryPackOrder(89)]
+        public int RpcId { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
+    [Message(OuterMessage.M2C_RuneInfoResponse)]
+    public partial class M2C_RuneInfoResponse : MessageObject, ILocationResponse
+    {
+        public static M2C_RuneInfoResponse Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(M2C_RuneInfoResponse), isFromPool) as M2C_RuneInfoResponse;
+        }
+
+        [MemoryPackOrder(89)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(90)]
+        public int Error { get; set; }
+
+        [MemoryPackOrder(91)]
+        public string Message { get; set; }
+
+        [MemoryPackOrder(0)]
+        public RuneInfo Info { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.Error = default;
+            this.Message = default;
+            this.Info = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    // 开启孔位
+    [MemoryPackable]
+    [Message(OuterMessage.C2M_RuneUnlockSlotRequest)]
+    [ResponseType(nameof(M2C_RuneUnlockSlotResponse))]
+    public partial class C2M_RuneUnlockSlotRequest : MessageObject, ILocationRequest
+    {
+        public static C2M_RuneUnlockSlotRequest Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(C2M_RuneUnlockSlotRequest), isFromPool) as C2M_RuneUnlockSlotRequest;
+        }
+
+        [MemoryPackOrder(89)]
+        public int RpcId { get; set; }
+
+        /// <summary>
+        /// RuneSlotConfig.Id
+        /// </summary>
+        [MemoryPackOrder(0)]
+        public int SlotId { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.SlotId = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
+    [Message(OuterMessage.M2C_RuneUnlockSlotResponse)]
+    public partial class M2C_RuneUnlockSlotResponse : MessageObject, ILocationResponse
+    {
+        public static M2C_RuneUnlockSlotResponse Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(M2C_RuneUnlockSlotResponse), isFromPool) as M2C_RuneUnlockSlotResponse;
+        }
+
+        [MemoryPackOrder(89)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(90)]
+        public int Error { get; set; }
+
+        [MemoryPackOrder(91)]
+        public string Message { get; set; }
+
+        [MemoryPackOrder(0)]
+        public RuneInfo Info { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.Error = default;
+            this.Message = default;
+            this.Info = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    // 镶嵌符文
+    [MemoryPackable]
+    [Message(OuterMessage.C2M_RuneSocketRequest)]
+    [ResponseType(nameof(M2C_RuneSocketResponse))]
+    public partial class C2M_RuneSocketRequest : MessageObject, ILocationRequest
+    {
+        public static C2M_RuneSocketRequest Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(C2M_RuneSocketRequest), isFromPool) as C2M_RuneSocketRequest;
+        }
+
+        [MemoryPackOrder(89)]
+        public int RpcId { get; set; }
+
+        /// <summary>
+        /// RuneSlotConfig.Id
+        /// </summary>
+        [MemoryPackOrder(0)]
+        public int SlotId { get; set; }
+
+        /// <summary>
+        /// RuneData.Id，要镶进去的那枚符文
+        /// </summary>
+        [MemoryPackOrder(1)]
+        public long RuneId { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.SlotId = default;
+            this.RuneId = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
+    [Message(OuterMessage.M2C_RuneSocketResponse)]
+    public partial class M2C_RuneSocketResponse : MessageObject, ILocationResponse
+    {
+        public static M2C_RuneSocketResponse Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(M2C_RuneSocketResponse), isFromPool) as M2C_RuneSocketResponse;
+        }
+
+        [MemoryPackOrder(89)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(90)]
+        public int Error { get; set; }
+
+        [MemoryPackOrder(91)]
+        public string Message { get; set; }
+
+        [MemoryPackOrder(0)]
+        public RuneInfo Info { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.Error = default;
+            this.Message = default;
+            this.Info = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    // 拆卸符文
+    [MemoryPackable]
+    [Message(OuterMessage.C2M_RuneUnsocketRequest)]
+    [ResponseType(nameof(M2C_RuneUnsocketResponse))]
+    public partial class C2M_RuneUnsocketRequest : MessageObject, ILocationRequest
+    {
+        public static C2M_RuneUnsocketRequest Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(C2M_RuneUnsocketRequest), isFromPool) as C2M_RuneUnsocketRequest;
+        }
+
+        [MemoryPackOrder(89)]
+        public int RpcId { get; set; }
+
+        /// <summary>
+        /// RuneSlotConfig.Id
+        /// </summary>
+        [MemoryPackOrder(0)]
+        public int SlotId { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.SlotId = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
+    [Message(OuterMessage.M2C_RuneUnsocketResponse)]
+    public partial class M2C_RuneUnsocketResponse : MessageObject, ILocationResponse
+    {
+        public static M2C_RuneUnsocketResponse Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(M2C_RuneUnsocketResponse), isFromPool) as M2C_RuneUnsocketResponse;
+        }
+
+        [MemoryPackOrder(89)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(90)]
+        public int Error { get; set; }
+
+        [MemoryPackOrder(91)]
+        public string Message { get; set; }
+
+        [MemoryPackOrder(0)]
+        public RuneInfo Info { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.Error = default;
+            this.Message = default;
+            this.Info = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    // 升级符文
+    [MemoryPackable]
+    [Message(OuterMessage.C2M_RuneUpgradeRequest)]
+    [ResponseType(nameof(M2C_RuneUpgradeResponse))]
+    public partial class C2M_RuneUpgradeRequest : MessageObject, ILocationRequest
+    {
+        public static C2M_RuneUpgradeRequest Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(C2M_RuneUpgradeRequest), isFromPool) as C2M_RuneUpgradeRequest;
+        }
+
+        [MemoryPackOrder(89)]
+        public int RpcId { get; set; }
+
+        /// <summary>
+        /// RuneData.Id，镶嵌中的也能升
+        /// </summary>
+        [MemoryPackOrder(0)]
+        public long RuneId { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.RuneId = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
+    [Message(OuterMessage.M2C_RuneUpgradeResponse)]
+    public partial class M2C_RuneUpgradeResponse : MessageObject, ILocationResponse
+    {
+        public static M2C_RuneUpgradeResponse Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(M2C_RuneUpgradeResponse), isFromPool) as M2C_RuneUpgradeResponse;
+        }
+
+        [MemoryPackOrder(89)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(90)]
+        public int Error { get; set; }
+
+        [MemoryPackOrder(91)]
+        public string Message { get; set; }
+
+        [MemoryPackOrder(0)]
+        public RuneInfo Info { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.Error = default;
+            this.Message = default;
+            this.Info = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    // 分解符文
+    [MemoryPackable]
+    [Message(OuterMessage.C2M_RuneDecomposeRequest)]
+    [ResponseType(nameof(M2C_RuneDecomposeResponse))]
+    public partial class C2M_RuneDecomposeRequest : MessageObject, ILocationRequest
+    {
+        public static C2M_RuneDecomposeRequest Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(C2M_RuneDecomposeRequest), isFromPool) as C2M_RuneDecomposeRequest;
+        }
+
+        [MemoryPackOrder(89)]
+        public int RpcId { get; set; }
+
+        /// <summary>
+        /// RuneData.Id，只能分解背包里的
+        /// </summary>
+        [MemoryPackOrder(0)]
+        public long RuneId { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.RuneId = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
+    [Message(OuterMessage.M2C_RuneDecomposeResponse)]
+    public partial class M2C_RuneDecomposeResponse : MessageObject, ILocationResponse
+    {
+        public static M2C_RuneDecomposeResponse Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(M2C_RuneDecomposeResponse), isFromPool) as M2C_RuneDecomposeResponse;
+        }
+
+        [MemoryPackOrder(89)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(90)]
+        public int Error { get; set; }
+
+        [MemoryPackOrder(91)]
+        public string Message { get; set; }
+
+        [MemoryPackOrder(0)]
+        public RuneInfo Info { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.Error = default;
+            this.Message = default;
+            this.Info = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    // 符文数据
+    [MemoryPackable]
+    [Message(OuterMessage.RuneInfo)]
+    public partial class RuneInfo : MessageObject
+    {
+        public static RuneInfo Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(RuneInfo), isFromPool) as RuneInfo;
+        }
+
+        /// <summary>
+        /// 符文碎片
+        /// </summary>
+        [MemoryPackOrder(0)]
+        public int Shard { get; set; }
+
+        /// <summary>
+        /// 拥有的符文，含已镶嵌的
+        /// </summary>
+        [MemoryPackOrder(1)]
+        public List<RuneData> RuneList { get; set; } = new();
+
+        [MemoryPackOrder(2)]
+        public List<RuneSlotInfo> SlotList { get; set; } = new();
+
+        /// <summary>
+        /// 符文总等级（只算已镶嵌的符文）
+        /// </summary>
+        [MemoryPackOrder(3)]
+        public int TotalRuneLv { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.Shard = default;
+            this.RuneList.Clear();
+            this.SlotList.Clear();
+            this.TotalRuneLv = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    // 槽位数据
+    [MemoryPackable]
+    [Message(OuterMessage.RuneSlotInfo)]
+    public partial class RuneSlotInfo : MessageObject
+    {
+        public static RuneSlotInfo Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(RuneSlotInfo), isFromPool) as RuneSlotInfo;
+        }
+
+        /// <summary>
+        /// RuneSlotConfig.Id
+        /// </summary>
+        [MemoryPackOrder(0)]
+        public int SlotId { get; set; }
+
+        /// <summary>
+        /// 是否已解锁
+        /// </summary>
+        [MemoryPackOrder(1)]
+        public bool Unlocked { get; set; }
+
+        /// <summary>
+        /// 镶嵌的符文（RuneData.Id），0 表示空槽
+        /// </summary>
+        [MemoryPackOrder(2)]
+        public long RuneId { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.SlotId = default;
+            this.Unlocked = default;
+            this.RuneId = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    // 符文实例
+    [MemoryPackable]
+    [Message(OuterMessage.RuneData)]
+    public partial class RuneData : MessageObject
+    {
+        public static RuneData Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(RuneData), isFromPool) as RuneData;
+        }
+
+        /// <summary>
+        /// 符文唯一 id
+        /// </summary>
+        [MemoryPackOrder(0)]
+        public long Id { get; set; }
+
+        /// <summary>
+        /// RuneConfig.Id，当前等级那一行
+        /// </summary>
+        [MemoryPackOrder(1)]
+        public int ConfigId { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.Id = default;
+            this.ConfigId = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
     public static class OuterMessage
     {
         public const ushort HttpGetRouterResponse = 10002;
@@ -35969,5 +36521,20 @@ namespace ET
         public const ushort C2M_GemTalentInfoRequest = 10930;
         public const ushort M2C_GemTalentInfoResponse = 10931;
         public const ushort M2C_GemTalentMessage = 10932;
+        public const ushort C2M_RuneInfoRequest = 10933;
+        public const ushort M2C_RuneInfoResponse = 10934;
+        public const ushort C2M_RuneUnlockSlotRequest = 10935;
+        public const ushort M2C_RuneUnlockSlotResponse = 10936;
+        public const ushort C2M_RuneSocketRequest = 10937;
+        public const ushort M2C_RuneSocketResponse = 10938;
+        public const ushort C2M_RuneUnsocketRequest = 10939;
+        public const ushort M2C_RuneUnsocketResponse = 10940;
+        public const ushort C2M_RuneUpgradeRequest = 10941;
+        public const ushort M2C_RuneUpgradeResponse = 10942;
+        public const ushort C2M_RuneDecomposeRequest = 10943;
+        public const ushort M2C_RuneDecomposeResponse = 10944;
+        public const ushort RuneInfo = 10945;
+        public const ushort RuneSlotInfo = 10946;
+        public const ushort RuneData = 10947;
     }
 }
