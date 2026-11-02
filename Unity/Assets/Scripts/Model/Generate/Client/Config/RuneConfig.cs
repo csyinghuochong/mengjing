@@ -23,7 +23,7 @@ namespace ET
         {
             Id = _buf.ReadInt();
             Name = _buf.ReadString();
-            Icon = _buf.ReadInt();
+            Icon = _buf.ReadString();
             NextId = _buf.ReadInt();
             Lv = _buf.ReadInt();
             RuneType = (RuneType)_buf.ReadInt();
@@ -53,7 +53,7 @@ namespace ET
         /// <summary>
         /// Icon
         /// </summary>
-        public int Icon;
+        public string Icon;
 
         /// <summary>
         /// 下一级
