@@ -65,31 +65,8 @@ namespace ET.Client
             }
         }
 
-        /// <summary>
-        /// 开启条件面板里的文本和进度条没有 E_ 前缀的部分生成代码绑不到，这里按节点名手动取
-        /// </summary>
         private static void InitUnlockSlotPanel(this ES_Rune self)
         {
-            Transform panel = self.uiTransform.Find(UnlockSlotPanelName);
-            if (panel == null)
-            {
-                Log.Error("ES_Rune 预制体缺少 EG_UnlockSlot 节点");
-                return;
-            }
-
-            self.EG_UnlockSlotRectTransform = panel.GetComponent<RectTransform>();
-
-            GameObject panelGo = panel.gameObject;
-            self.E_RuneSlotType_UnlockSlotText = UIFindHelper.FindDeepChild<Text>(panelGo, "E_RuneSlotType_UnlockSlot");
-            self.E_PlayerLvText = UIFindHelper.FindDeepChild<Text>(panelGo, "E_PlayerLv");
-            self.E_PlayerLvTargetText = UIFindHelper.FindDeepChild<Text>(panelGo, "E_PlayerLvTarget");
-            self.E_LodingValue_PlayerLvImage = UIFindHelper.FindDeepChild<Image>(panelGo, "E_LodingValue_PlayerLv");
-            self.E_RuneLvText = UIFindHelper.FindDeepChild<Text>(panelGo, "E_RuneLv");
-            self.E_RuneLvTargetText = UIFindHelper.FindDeepChild<Text>(panelGo, "E_RuneLvTarget");
-            self.E_LodingValue_RuneLvImage = UIFindHelper.FindDeepChild<Image>(panelGo, "E_LodingValue_RuneLv");
-            self.E_RuneSlotDesText = UIFindHelper.FindDeepChild<Text>(panelGo, "E_RuneSlotDes");
-            self.E_UnlockSlotButton = UIFindHelper.FindDeepChild<Button>(panelGo, "E_UnlockSlot");
-
             self.E_UnlockSlotButton.AddListenerAsync(self.OnUnlockSlotButton);
             self.EG_UnlockSlotRectTransform.gameObject.SetActive(false);
         }
