@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -439,8 +439,8 @@ namespace ET.Client
             runeBag.uiTransform.gameObject.SetActive(true);
             runeBag.uiTransform.SetAsLastSibling();
 
-            //每次打开都按最新数据刷一遍列表
-            runeBag.OnUpdateUI();
+            //每次打开都清掉选中，并按最新数据刷一遍列表
+            runeBag.OnOpenBag();
         }
 
         /// <summary>

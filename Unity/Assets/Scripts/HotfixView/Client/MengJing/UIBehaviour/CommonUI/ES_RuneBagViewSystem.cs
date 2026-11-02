@@ -21,6 +21,7 @@ namespace ET.Client
 
 			self.E_ReturnButton.AddListener(self.OnReturnButton);
 			self.InitRuneTypeToggles();
+			self.InitUpgradePanel();
 		}
 
 		[EntitySystem]
@@ -86,6 +87,15 @@ namespace ET.Client
 		{
 			self.RefreshRuneItems();
 			self.RefreshSelect();
+		}
+
+		/// <summary>
+		/// 每次打开背包时清掉上次的选中，回到列表初始状态
+		/// </summary>
+		public static void OnOpenBag(this ES_RuneBag self)
+		{
+			self.SelectRuneId = 0;
+			self.OnUpdateUI();
 		}
 
 		private static void RefreshRuneItems(this ES_RuneBag self)
@@ -174,16 +184,104 @@ namespace ET.Client
 
 				bagItem.SetSelected(bagItem.DataId == self.SelectRuneId);
 			}
+
+			self.RefreshUpgradePanel();
 		}
 
 		/// <summary>
-		/// 点列表里的符文：先只记下选中，右侧升级/分解面板后面再补
+		/// 点列表里的符文：记下选中，右侧显示这枚符文的升级面板
 		/// </summary>
 		public static void OnClickRuneItem(this ES_RuneBag self, long runeId)
 		{
 			self.SelectRuneId = runeId;
 			self.RefreshSelect();
 		}
+
+		#region 升级
+
+		private static void InitUpgradePanel(this ES_RuneBag self)
+		{
+			self.E_UpgradeButton.AddListenerAsync(self.OnUpgradeButton);
+			self.EG_RuneUpgradeRectTransform.gameObject.SetActive(false);
+		}
+
+		/// <summary>
+		/// 升级面板：图标、名字、等级、类型，当前效果和下一级效果，以及消耗的符文碎片；
+		/// 满级或者碎片不够时升级按钮置灰
+		/// </summary>
+		private static void RefreshUpgradePanel(this ES_RuneBag self)
+		{
+			RuneComponentC runeComponent = self.Root().GetComponent<RuneComponentC>();
+			RuneData rune = runeComponent == null ? null : runeComponent.GetRune(self.SelectRuneId);
+			RuneConfig runeConfig = runeComponent == null ? null : runeComponent.GetRuneConfig(rune);
+			if (runeConfig == null)
+			{
+				self.EG_RuneUpgradeRectTransform.gameObject.SetActive(false);
+				return;
+			}
+
+			self.EG_RuneUpgradeRectTransform.gameObject.SetActive(true);
+			//升级和分解面板在同一个位置，同时只显示一个
+			self.EG_RuneDecomposeRectTransform.gameObject.SetActive(false);
+
+			Sprite iconSprite = self.LoadRuneIcon(runeConfig.Icon);
+			if (iconSprite != null)
+			{
+				self.E_RuneIconImage.sprite = iconSprite;
+			}
+
+			self.E_RuneNameText.text = runeConfig.Name;
+			self.E_RuneLvText.text = $"Lv.{runeConfig.Lv}";
+			self.E_RuneTypeText.text = $"{GetRuneTypeDesc(runeConfig.RuneType)}符文";
+			self.E_RuneDesc_CurrentText.text = runeConfig.Des;
+
+			//NextId 为 0 表示已经是这条符文的最高级
+			RuneConfig nextConfig = RuneConfigCategory.Instance.GetOrDefault(runeConfig.NextId);
+			bool isMaxLv = nextConfig == null;
+			self.E_RuneDesc_NextText.text = isMaxLv ? "已满级" : nextConfig.Des;
+
+			int upgradeCost = isMaxLv ? 0 : runeConfig.UpgradeCost;
+			self.E_ShardNumText.text = isMaxLv ? $"已满级  {runeComponent.Shard}" : $"{runeComponent.Shard}/{upgradeCost}";
+
+			bool canUpgrade = !isMaxLv && runeComponent.Shard >= upgradeCost;
+			self.E_UpgradeButton.interactable = canUpgrade;
+			CommonViewHelper.SetImageGray(self.Root(), self.E_UpgradeButton.gameObject, !canUpgrade);
+		}
+
+		private static async ETTask OnUpgradeButton(this ES_RuneBag self)
+		{
+			if (self.SelectRuneId == 0)
+			{
+				return;
+			}
+
+			int error = await RuneNetHelper.UpgradeRune(self.Root(), self.SelectRuneId);
+			if (error != ErrorCode.ERR_Success)
+			{
+				HintHelp.ShowErrorHint(self.Root(), error);
+				return;
+			}
+
+			FlyTipComponent.Instance.ShowFlyTip("升级成功");
+			self.OnUpdateUI();
+		}
+
+		private static string GetRuneTypeDesc(RuneType runeType)
+		{
+			switch (runeType)
+			{
+				case RuneType.Skill:
+					return "技能";
+				case RuneType.Attack:
+					return "攻击";
+				case RuneType.Defense:
+					return "防御";
+				default:
+					return string.Empty;
+			}
+		}
+
+		#endregion
 
 		/// <summary>
 		/// 符文图标：RuneConfig.Icon 就是 RoleSkillIcon 图集下的图标名
