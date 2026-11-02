@@ -28,6 +28,7 @@ namespace ET.Client
             self.InitRuneSlotItems();
             self.InitUnlockSlotPanel();
             self.InitSocketPanel();
+            self.InitUnsocketPanel();
         }
 
         [EntitySystem]
@@ -94,13 +95,19 @@ namespace ET.Client
             self.EG_SocketRectTransform.gameObject.SetActive(false);
         }
 
+        private static void InitUnsocketPanel(this ES_Rune self)
+        {
+            self.E_UnsocketButton.AddListenerAsync(self.OnUnsocketButton);
+            self.EG_UnsocketRectTransform.gameObject.SetActive(false);
+        }
+
         /// <summary>
         /// 刷新孔位状态：没解锁的孔位显示锁，选中的孔位显示选中框；
-        /// 同时按选中孔位的状态切换开启条件面板和镶嵌面板
+        /// 同时按选中孔位的状态切换开启条件、镶嵌、拆卸三个面板
         /// </summary>
         public static void OnUpdateUI(this ES_Rune self)
         {
-            if (self.EG_UnlockSlotRectTransform == null || self.EG_SocketRectTransform == null)
+            if (self.EG_UnlockSlotRectTransform == null || self.EG_SocketRectTransform == null || self.EG_UnsocketRectTransform == null)
             {
                 return;
             }
@@ -137,10 +144,18 @@ namespace ET.Client
             {
                 self.RefreshSocketPanel(runeComponent);
             }
+
+            //已经镶了符文的孔位显示拆卸面板
+            bool showUnsocket = hasSelect && unlocked && occupied;
+            self.EG_UnsocketRectTransform.gameObject.SetActive(showUnsocket);
+            if (showUnsocket)
+            {
+                self.RefreshUnsocketPanel(runeComponent);
+            }
         }
 
         /// <summary>
-        /// 点击孔位：显示选中框，再按解锁状态弹开启条件或者镶嵌面板
+        /// 点击孔位：显示选中框，再按孔位状态弹开启条件、镶嵌或者拆卸面板
         /// </summary>
         public static void OnClickRuneSlot(this ES_Rune self, int slotId)
         {
@@ -329,6 +344,51 @@ namespace ET.Client
             }
 
             FlyTipComponent.Instance.ShowFlyTip("镶嵌成功");
+            self.SelectSocketRuneId = 0;
+            self.OnUpdateUI();
+        }
+
+        #endregion
+
+        #region 拆卸
+
+        /// <summary>
+        /// 拆卸面板：显示孔位里那枚符文的图标、名字、等级、类型和当前效果
+        /// </summary>
+        private static void RefreshUnsocketPanel(this ES_Rune self, RuneComponentC runeComponent)
+        {
+            RuneData rune = runeComponent.GetSlotRune(self.SelectSlotId);
+            RuneConfig runeConfig = runeComponent.GetRuneConfig(rune);
+            if (runeConfig == null)
+            {
+                self.EG_UnsocketRectTransform.gameObject.SetActive(false);
+                return;
+            }
+
+            //RuneConfig 的 Icon 还没对应的图集资源，图标先留着预制体上的占位图
+            self.E_RuneNameText.text = runeConfig.Name;
+            self.E_RuneLv_UnsocketText.text = $"Lv.{runeConfig.Lv}";
+            self.E_RuneTypeText.text = $"{GetRuneTypeDesc(runeConfig.RuneType)}属性槽";
+            self.E_RuneDescText.text = runeConfig.Des;
+        }
+
+        private static async ETTask OnUnsocketButton(this ES_Rune self)
+        {
+            if (self.SelectSlotId == 0)
+            {
+                return;
+            }
+
+            int error = await RuneNetHelper.UnsocketRune(self.Root(), self.SelectSlotId);
+            if (error != ErrorCode.ERR_Success)
+            {
+                HintHelp.ShowErrorHint(self.Root(), error);
+                return;
+            }
+
+            FlyTipComponent.Instance.ShowFlyTip("拆卸成功");
+
+            //符文回到背包，面板会切到镶嵌列表，之前挑的符文清掉
             self.SelectSocketRuneId = 0;
             self.OnUpdateUI();
         }
