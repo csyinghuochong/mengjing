@@ -438,6 +438,16 @@ namespace ET.Server
             return info;
         }
 
+        /// <summary>
+        /// 主动把最新的符文数据下发给客户端：GM 加符文这类不是客户端发起的变化
+        /// </summary>
+        public static void SyncToClient(this RuneComponent self)
+        {
+            M2C_RuneInfoMessage message = M2C_RuneInfoMessage.Create();
+            message.Info = self.GetInfo();
+            MapMessageHelper.SendToClient(self.GetParent<Unit>(), message);
+        }
+
         #endregion
 
         #region 属性
