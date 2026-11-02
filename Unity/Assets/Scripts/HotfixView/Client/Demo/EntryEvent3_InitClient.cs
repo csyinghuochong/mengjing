@@ -38,6 +38,7 @@ namespace ET.Client
             root.AddComponent<PetComponentC>();
             root.AddComponent<SkillSetComponentC>();
             root.AddComponent<GemTalentComponentC>();
+            root.AddComponent<RuneComponentC>();
             root.AddComponent<ChengJiuComponentC>();
             root.AddComponent<GameObjectLoadComponent>();
             root.AddComponent<LockTargetComponent>();
