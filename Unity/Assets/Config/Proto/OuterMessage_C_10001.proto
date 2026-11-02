@@ -8158,3 +8158,9 @@ message RuneData
 	int64 Id = 1;			//符文唯一 id
 	int32 ConfigId = 2;		//RuneConfig.Id，当前等级那一行
 }
+
+//符文数据变更
+message M2C_RuneInfoMessage	// IMessage
+{
+	RuneInfo Info = 1;
+}

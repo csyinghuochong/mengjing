@@ -281,7 +281,7 @@ namespace ET.Server
                     unit.GetComponent<NumericComponentS>().ApplyValue(NumericType.Now_Hp, 999999999);
                     return;
                 }
-                
+
                 switch (int.Parse(commands[0]))
                 {
                     case 1: //新增道具1#12000003#200 【添加道具/道具id/道具数量】
@@ -393,6 +393,42 @@ namespace ET.Server
                         int addtype = int.Parse(commands[1]);
                         int addpoint = int.Parse(commands[2]);
                         unit.GetComponent<PetComponentS>().OnPetQiangHua(addtype, addpoint);
+                        break;
+                    case 17:
+                        // 17#0	12种符文各一枚1级
+                        // 17#10101	一枚指定配置的符文
+                        // 17#10105#3	3枚指定配置的符文（这里 10105 是技能符文的 5 级）
+                        RuneComponent runeComponent = unit.GetComponent<RuneComponent>();
+                        if (runeComponent == null)
+                        {
+                            Log.Error($"角色没有符文组件，unitId: {unit.Id}");
+                            break;
+                        }
+
+                        int runeConfigId = int.Parse(commands[1]);
+                        if (runeConfigId == 0)
+                        {
+                            //Lv 为 1 的是每种符文最低级那一行
+                            foreach (RuneConfig runeConfig in RuneConfigCategory.Instance.GetAll().Values)
+                            {
+                                if (runeConfig.Lv != 1)
+                                {
+                                    continue;
+                                }
+
+                                runeComponent.AddRune(runeConfig.Id);
+                            }
+                        }
+                        else
+                        {
+                            int runeCount = commands.Length > 2 ? int.Parse(commands[2]) : 1;
+                            for (int i = 0; i < runeCount; i++)
+                            {
+                                runeComponent.AddRune(runeConfigId);
+                            }
+                        }
+
+                        runeComponent.SyncToClient();
                         break;
                     default:
                         break;

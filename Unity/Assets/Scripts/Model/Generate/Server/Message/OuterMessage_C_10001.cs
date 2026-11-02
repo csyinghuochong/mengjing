@@ -35588,6 +35588,32 @@ namespace ET
         }
     }
 
+    // 符文数据变更
+    [MemoryPackable]
+    [Message(OuterMessage.M2C_RuneInfoMessage)]
+    public partial class M2C_RuneInfoMessage : MessageObject, IMessage
+    {
+        public static M2C_RuneInfoMessage Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(M2C_RuneInfoMessage), isFromPool) as M2C_RuneInfoMessage;
+        }
+
+        [MemoryPackOrder(0)]
+        public RuneInfo Info { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.Info = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
     public static class OuterMessage
     {
         public const ushort HttpGetRouterResponse = 10002;
@@ -36536,5 +36562,6 @@ namespace ET
         public const ushort RuneInfo = 10945;
         public const ushort RuneSlotInfo = 10946;
         public const ushort RuneData = 10947;
+        public const ushort M2C_RuneInfoMessage = 10948;
     }
 }
