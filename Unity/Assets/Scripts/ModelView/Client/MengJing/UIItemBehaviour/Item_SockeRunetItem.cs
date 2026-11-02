@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 namespace ET.Client
 {
+	[ChildOf]
 	[EnableMethod]
 	public  class Scroll_Item_SockeRunetItem : Entity,IAwake,IDestroy,IUIScrollItem<Scroll_Item_SockeRunetItem> 
 	{
@@ -115,6 +116,30 @@ namespace ET.Client
      		}
      	}
 
+		public UnityEngine.UI.Image E_SelectImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if (this.isCacheNode)
+     			{
+     				if( this.m_E_SelectImage == null )
+     				{
+		    			this.m_E_SelectImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Select");
+     				}
+     				return this.m_E_SelectImage;
+     			}
+     			else
+     			{
+		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Select");
+     			}
+     		}
+     	}
+
 		public UnityEngine.UI.Button E_ClickButton
      	{
      		get
@@ -145,6 +170,7 @@ namespace ET.Client
 			this.m_E_NameText = null;
 			this.m_E_LvText = null;
 			this.m_E_DesText = null;
+			this.m_E_SelectImage = null;
 			this.m_E_ClickButton = null;
 			this.uiTransform = null;
 			this.DataId = 0;
@@ -154,6 +180,7 @@ namespace ET.Client
 		private UnityEngine.UI.Text m_E_NameText = null;
 		private UnityEngine.UI.Text m_E_LvText = null;
 		private UnityEngine.UI.Text m_E_DesText = null;
+		private UnityEngine.UI.Image m_E_SelectImage = null;
 		private UnityEngine.UI.Button m_E_ClickButton = null;
 		public Transform uiTransform = null;
 	}

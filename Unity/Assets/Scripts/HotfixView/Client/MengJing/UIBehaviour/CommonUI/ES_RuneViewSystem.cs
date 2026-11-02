@@ -1,9 +1,11 @@
-﻿using UnityEngine;
+using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace ET.Client
 {
     [FriendOfAttribute(typeof(ES_RuneSlotItem))]
+    [FriendOfAttribute(typeof(Scroll_Item_SockeRunetItem))]
     [EntitySystemOf(typeof(ES_Rune))]
     [FriendOfAttribute(typeof(ES_Rune))]
     public static partial class ES_RuneSystem
@@ -14,9 +16,9 @@ namespace ET.Client
         private const string SlotItemPrefix = "RuneSlotItem_";
 
         /// <summary>
-        /// 孔位开启条件面板的节点名
+        /// 镶嵌面板里可用符文条目的预制体
         /// </summary>
-        private const string UnlockSlotPanelName = "EG_UnlockSlot";
+        private const string SocketItemPrefabPath = "Assets/Bundles/UI/Item/Item_SockeRunetItem.prefab";
 
         [EntitySystem]
         private static void Awake(this ES_Rune self, Transform transform)
@@ -25,11 +27,26 @@ namespace ET.Client
 
             self.InitRuneSlotItems();
             self.InitUnlockSlotPanel();
+            self.InitSocketPanel();
         }
 
         [EntitySystem]
         private static void Destroy(this ES_Rune self)
         {
+            if (self.AssetList != null)
+            {
+                ResourcesLoaderComponent resourcesLoaderComponent = self.Root()?.GetComponent<ResourcesLoaderComponent>();
+                if (resourcesLoaderComponent != null)
+                {
+                    for (int i = 0; i < self.AssetList.Count; i++)
+                    {
+                        resourcesLoaderComponent.UnLoadAsset(self.AssetList[i]);
+                    }
+                }
+
+                self.AssetList.Clear();
+            }
+
             self.DestroyWidget();
         }
 
@@ -71,12 +88,19 @@ namespace ET.Client
             self.EG_UnlockSlotRectTransform.gameObject.SetActive(false);
         }
 
+        private static void InitSocketPanel(this ES_Rune self)
+        {
+            self.E_SocketButton.AddListenerAsync(self.OnSocketButton);
+            self.EG_SocketRectTransform.gameObject.SetActive(false);
+        }
+
         /// <summary>
-        /// 刷新孔位状态和开启条件面板：没解锁的孔位显示锁，选中的孔位显示选中框
+        /// 刷新孔位状态：没解锁的孔位显示锁，选中的孔位显示选中框；
+        /// 同时按选中孔位的状态切换开启条件面板和镶嵌面板
         /// </summary>
         public static void OnUpdateUI(this ES_Rune self)
         {
-            if (self.EG_UnlockSlotRectTransform == null)
+            if (self.EG_UnlockSlotRectTransform == null || self.EG_SocketRectTransform == null)
             {
                 return;
             }
@@ -90,25 +114,42 @@ namespace ET.Client
             for (int i = 0; i < self.SlotItems.Count; i++)
             {
                 ES_RuneSlotItem item = self.SlotItems[i];
-                bool unlocked = runeComponent.IsSlotUnlocked(item.SlotId);
-                bool hasRune = runeComponent.GetSlotRuneId(item.SlotId) != 0;
-                item.OnUpdateUI(unlocked, hasRune, self.SelectSlotId == item.SlotId);
+                bool itemUnlocked = runeComponent.IsSlotUnlocked(item.SlotId);
+                bool itemHasRune = runeComponent.GetSlotRuneId(item.SlotId) != 0;
+                item.OnUpdateUI(itemUnlocked, itemHasRune, self.SelectSlotId == item.SlotId);
             }
 
-            //只有选中的孔位还没解锁时才弹开启条件面板
-            bool showUnlockSlot = self.SelectSlotId != 0 && !runeComponent.IsSlotUnlocked(self.SelectSlotId);
+            bool hasSelect = self.SelectSlotId != 0;
+            bool unlocked = hasSelect && runeComponent.IsSlotUnlocked(self.SelectSlotId);
+            bool occupied = hasSelect && runeComponent.GetSlotRuneId(self.SelectSlotId) != 0;
+
+            //没解锁的孔位显示开启条件，已解锁且空着的孔位显示镶嵌面板
+            bool showUnlockSlot = hasSelect && !unlocked;
             self.EG_UnlockSlotRectTransform.gameObject.SetActive(showUnlockSlot);
             if (showUnlockSlot)
             {
                 self.RefreshUnlockSlot(runeComponent);
             }
+
+            bool showSocket = hasSelect && unlocked && !occupied;
+            self.EG_SocketRectTransform.gameObject.SetActive(showSocket);
+            if (showSocket)
+            {
+                self.RefreshSocketPanel(runeComponent);
+            }
         }
 
         /// <summary>
-        /// 点击孔位：显示选中框，没解锁的孔位同时弹出开启条件面板
+        /// 点击孔位：显示选中框，再按解锁状态弹开启条件或者镶嵌面板
         /// </summary>
         public static void OnClickRuneSlot(this ES_Rune self, int slotId)
         {
+            //换孔位时之前挑的符文就不算了
+            if (self.SelectSlotId != slotId)
+            {
+                self.SelectSocketRuneId = 0;
+            }
+
             self.SelectSlotId = slotId;
             self.OnUpdateUI();
         }
@@ -165,6 +206,134 @@ namespace ET.Client
             FlyTipComponent.Instance.ShowFlyTip("孔位已开启");
             self.OnUpdateUI();
         }
+
+        #region 镶嵌
+
+        /// <summary>
+        /// 镶嵌面板：列出背包里和孔位同类型、还没镶的符文，选中一枚后点确认镶嵌
+        /// </summary>
+        private static void RefreshSocketPanel(this ES_Rune self, RuneComponentC runeComponent)
+        {
+            RuneSlotConfig slotConfig = RuneSlotConfigCategory.Instance.GetOrDefault(self.SelectSlotId);
+            if (slotConfig == null)
+            {
+                return;
+            }
+
+            self.E_RuneSlotType_SocketText.text = $"{GetRuneTypeDesc(slotConfig.RuneType)}属性槽";
+
+            List<RuneData> candidateList = new List<RuneData>();
+            List<RuneData> bagRuneList = runeComponent.GetBagRuneList();
+            for (int i = 0; i < bagRuneList.Count; i++)
+            {
+                RuneConfig runeConfig = RuneConfigCategory.Instance.GetOrDefault(bagRuneList[i].ConfigId);
+                if (runeConfig == null || runeConfig.RuneType != slotConfig.RuneType)
+                {
+                    continue;
+                }
+
+                candidateList.Add(bagRuneList[i]);
+            }
+
+            //选中的符文已经不在列表里了（镶掉了或者换了孔位），清掉选中
+            bool selectExist = false;
+            for (int i = 0; i < candidateList.Count; i++)
+            {
+                if (candidateList[i].Id == self.SelectSocketRuneId)
+                {
+                    selectExist = true;
+                    break;
+                }
+            }
+
+            if (!selectExist)
+            {
+                self.SelectSocketRuneId = 0;
+            }
+
+            Transform contentTrans = self.E_SockeRunetItemsScrollRect.transform.Find("Content");
+            if (contentTrans == null)
+            {
+                Log.Error("ES_Rune 预制体缺少 EG_Socket/E_SockeRunetItems/Content 节点");
+                return;
+            }
+
+            ResourcesLoaderComponent resourcesLoaderComponent = self.Root().GetComponent<ResourcesLoaderComponent>();
+            for (int i = 0; i < candidateList.Count; i++)
+            {
+                if (!self.SocketItems.ContainsKey(i))
+                {
+                    Scroll_Item_SockeRunetItem item = self.AddChild<Scroll_Item_SockeRunetItem>();
+                    if (!self.AssetList.Contains(SocketItemPrefabPath))
+                    {
+                        self.AssetList.Add(SocketItemPrefabPath);
+                    }
+
+                    GameObject prefab = resourcesLoaderComponent.LoadAssetSync<GameObject>(SocketItemPrefabPath);
+                    GameObject go = UnityEngine.Object.Instantiate(prefab, contentTrans);
+                    item.BindTrans(go.transform);
+                    self.SocketItems.Add(i, item);
+                }
+
+                Scroll_Item_SockeRunetItem socketItem = self.SocketItems[i];
+                socketItem.uiTransform.gameObject.SetActive(true);
+                socketItem.OnInitUI(candidateList[i]);
+                socketItem.SetSelected(self.SelectSocketRuneId == candidateList[i].Id);
+            }
+
+            //多出来的条目复用隐藏
+            for (int i = candidateList.Count; i < self.SocketItems.Count; i++)
+            {
+                Scroll_Item_SockeRunetItem item = self.SocketItems[i];
+                item.uiTransform.gameObject.SetActive(false);
+            }
+
+            self.RefreshSocketButton();
+        }
+
+        /// <summary>
+        /// 点击可用符文条目：记住选中的符文，刷新高亮和确认按钮
+        /// </summary>
+        public static void OnClickSocketRune(this ES_Rune self, long runeId)
+        {
+            self.SelectSocketRuneId = runeId;
+
+            for (int i = 0; i < self.SocketItems.Count; i++)
+            {
+                Scroll_Item_SockeRunetItem item = self.SocketItems[i];
+                item.SetSelected(item.DataId == runeId);
+            }
+
+            self.RefreshSocketButton();
+        }
+
+        private static void RefreshSocketButton(this ES_Rune self)
+        {
+            bool canSocket = self.SelectSocketRuneId != 0;
+            self.E_SocketButton.interactable = canSocket;
+            CommonViewHelper.SetImageGray(self.Root(), self.E_SocketButton.gameObject, !canSocket);
+        }
+
+        private static async ETTask OnSocketButton(this ES_Rune self)
+        {
+            if (self.SelectSlotId == 0 || self.SelectSocketRuneId == 0)
+            {
+                return;
+            }
+
+            int error = await RuneNetHelper.SocketRune(self.Root(), self.SelectSlotId, self.SelectSocketRuneId);
+            if (error != ErrorCode.ERR_Success)
+            {
+                HintHelp.ShowErrorHint(self.Root(), error);
+                return;
+            }
+
+            FlyTipComponent.Instance.ShowFlyTip("镶嵌成功");
+            self.SelectSocketRuneId = 0;
+            self.OnUpdateUI();
+        }
+
+        #endregion
 
         /// <summary>
         /// 进度条填充比例，要求为 0 时算满

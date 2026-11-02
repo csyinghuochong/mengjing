@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 namespace ET.Client
@@ -16,6 +16,21 @@ namespace ET.Client
 		/// 当前选中的孔位id（RuneSlotConfig.Id），0 表示没选中
 		/// </summary>
 		public int SelectSlotId;
+
+		/// <summary>
+		/// 镶嵌面板的符文列表，key 是列表序号，多出来的复用隐藏，和 DlgChouKaReward 一个套路
+		/// </summary>
+		public Dictionary<int, EntityRef<Scroll_Item_SockeRunetItem>> SocketItems = new Dictionary<int, EntityRef<Scroll_Item_SockeRunetItem>>();
+
+		/// <summary>
+		/// 镶嵌面板里当前选中的符文id（RuneData.Id），0 表示没选中
+		/// </summary>
+		public long SelectSocketRuneId;
+
+		/// <summary>
+		/// 镶嵌面板加载过的资源，面板销毁时统一卸载
+		/// </summary>
+		public List<string> AssetList = new List<string>();
 		
 		public UnityEngine.RectTransform EG_SocketRectTransform
      	{
