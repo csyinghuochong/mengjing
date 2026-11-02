@@ -31,6 +31,11 @@ namespace ET.Client
 		/// 镶嵌面板加载过的资源，面板销毁时统一卸载
 		/// </summary>
 		public List<string> AssetList = new List<string>();
+
+		/// <summary>
+		/// 符文背包（ES_RuneBag），点 E_Bag 时第一次创建，之后复用
+		/// </summary>
+		public EntityRef<ES_RuneBag> RuneBag;
 		
 		public UnityEngine.RectTransform EG_SocketRectTransform
      	{

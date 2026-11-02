@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
+    [FriendOf(typeof(ES_RuneBag))]
     [FriendOfAttribute(typeof(ES_RuneSlotItem))]
     [FriendOfAttribute(typeof(Scroll_Item_SockeRunetItem))]
     [EntitySystemOf(typeof(ES_Rune))]
@@ -20,6 +21,11 @@ namespace ET.Client
         /// </summary>
         private const string SocketItemPrefabPath = "Assets/Bundles/UI/Item/Item_SockeRunetItem.prefab";
 
+        /// <summary>
+        /// 符文背包预制体
+        /// </summary>
+        private const string RuneBagPrefabPath = "Assets/Bundles/UI/Common/ES_RuneBag.prefab";
+
         [EntitySystem]
         private static void Awake(this ES_Rune self, Transform transform)
         {
@@ -29,6 +35,7 @@ namespace ET.Client
             self.InitUnlockSlotPanel();
             self.InitSocketPanel();
             self.InitUnsocketPanel();
+            self.InitBagPanel();
         }
 
         [EntitySystem]
@@ -101,6 +108,11 @@ namespace ET.Client
             self.EG_UnsocketRectTransform.gameObject.SetActive(false);
         }
 
+        private static void InitBagPanel(this ES_Rune self)
+        {
+            self.E_BagButton.AddListener(self.OnClickBagButton);
+        }
+
         /// <summary>
         /// 刷新孔位状态：没解锁的孔位显示锁，选中的孔位显示选中框；
         /// 同时按选中孔位的状态切换开启条件、镶嵌、拆卸三个面板
@@ -111,6 +123,9 @@ namespace ET.Client
             {
                 return;
             }
+
+            //回到符文主界面时收起符文背包
+            self.HideRuneBag();
 
             RuneComponentC runeComponent = self.Root().GetComponent<RuneComponentC>();
             if (runeComponent == null)
@@ -399,6 +414,82 @@ namespace ET.Client
             //符文回到背包，面板会切到镶嵌列表，之前挑的符文清掉
             self.SelectSocketRuneId = 0;
             self.OnUpdateUI();
+        }
+
+        #endregion
+
+        #region 符文背包
+
+        private static void OnClickBagButton(this ES_Rune self)
+        {
+            self.OpenRuneBag();
+        }
+
+        /// <summary>
+        /// 打开符文背包：背包挂在 ES_Rune 下面，放到最后盖住符文主界面
+        /// </summary>
+        public static void OpenRuneBag(this ES_Rune self)
+        {
+            ES_RuneBag runeBag = self.GetOrCreateRuneBag();
+            if (runeBag == null)
+            {
+                return;
+            }
+
+            runeBag.uiTransform.gameObject.SetActive(true);
+            runeBag.uiTransform.SetAsLastSibling();
+        }
+
+        /// <summary>
+        /// ES_RuneBag 里点 E_Return 回到符文主界面
+        /// </summary>
+        public static void CloseRuneBag(this ES_Rune self)
+        {
+            self.HideRuneBag();
+            self.OnUpdateUI();
+        }
+
+        private static void HideRuneBag(this ES_Rune self)
+        {
+            ES_RuneBag runeBag = self.RuneBag;
+            if (runeBag == null)
+            {
+                return;
+            }
+
+            runeBag.uiTransform.gameObject.SetActive(false);
+        }
+
+        /// <summary>
+        /// 第一次点 E_Bag 才加载预制体，之后复用同一个
+        /// </summary>
+        private static ES_RuneBag GetOrCreateRuneBag(this ES_Rune self)
+        {
+            ES_RuneBag runeBag = self.RuneBag;
+            if (runeBag != null)
+            {
+                return runeBag;
+            }
+
+            ResourcesLoaderComponent resourcesLoaderComponent = self.Root().GetComponent<ResourcesLoaderComponent>();
+            GameObject prefab = resourcesLoaderComponent.LoadAssetSync<GameObject>(RuneBagPrefabPath);
+            if (prefab == null)
+            {
+                Log.Error($"符文背包预制体加载失败：{RuneBagPrefabPath}");
+                return null;
+            }
+
+            GameObject go = UnityEngine.Object.Instantiate(prefab, self.uiTransform);
+            go.SetActive(false);
+
+            if (!self.AssetList.Contains(RuneBagPrefabPath))
+            {
+                self.AssetList.Add(RuneBagPrefabPath);
+            }
+
+            runeBag = self.AddChild<ES_RuneBag, Transform>(go.transform);
+            self.RuneBag = runeBag;
+            return runeBag;
         }
 
         #endregion
