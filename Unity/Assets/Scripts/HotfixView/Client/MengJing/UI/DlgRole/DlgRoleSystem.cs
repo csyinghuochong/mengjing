@@ -181,6 +181,7 @@ namespace ET.Client
                     break;
                 case 6:
                     self.View.ES_Rune.uiTransform.gameObject.SetActive(true);
+                    self.View.ES_Rune.OnUpdateUI();
                     break;
             }
 
