@@ -438,6 +438,9 @@ namespace ET.Client
 
             runeBag.uiTransform.gameObject.SetActive(true);
             runeBag.uiTransform.SetAsLastSibling();
+
+            //每次打开都按最新数据刷一遍列表
+            runeBag.OnUpdateUI();
         }
 
         /// <summary>

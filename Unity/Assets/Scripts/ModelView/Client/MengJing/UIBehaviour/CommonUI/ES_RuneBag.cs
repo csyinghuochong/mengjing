@@ -1,4 +1,5 @@
 ﻿
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 namespace ET.Client
@@ -7,6 +8,26 @@ namespace ET.Client
 	[EnableMethod]
 	public  class ES_RuneBag : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy 
 	{
+		/// <summary>
+		/// 符文列表条目，按序号复用，多出来的隐藏
+		/// </summary>
+		public List<EntityRef<Scroll_Item_RuneBagItem>> BagItems = new();
+
+		/// <summary>
+		/// 加载过的资源，面板销毁时统一卸载
+		/// </summary>
+		public List<string> AssetList = new List<string>();
+
+		/// <summary>
+		/// 当前筛选的类型，0 表示全部，其余对应 RuneType
+		/// </summary>
+		public int SelectRuneType;
+
+		/// <summary>
+		/// 当前选中的符文id（RuneData.Id），0 表示没选中
+		/// </summary>
+		public long SelectRuneId;
+
 		public UnityEngine.UI.Button E_ReturnButton
      	{
      		get
