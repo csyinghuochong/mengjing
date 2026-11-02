@@ -45,8 +45,7 @@ namespace ET.Client
 
 			self.E_NameText.text = runeConfig.Name;
 			self.E_LvText.text = $"Lv.{runeConfig.Lv}";
-			//列表里不显示描述，描述留给拆卸面板
-			self.E_DesText.text = string.Empty;
+			self.E_DesText.text = runeConfig.Des;
 		}
 
 		/// <summary>
