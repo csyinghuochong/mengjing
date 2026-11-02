@@ -62,6 +62,40 @@ namespace ET.Client
      		}
      	}
 
+		public UnityEngine.UI.Button E_StartDecomposeButton
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_StartDecomposeButton == null )
+     			{
+		    		this.m_E_StartDecomposeButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Left/E_StartDecompose");
+     			}
+     			return this.m_E_StartDecomposeButton;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_StartDecomposeImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_StartDecomposeImage == null )
+     			{
+		    		this.m_E_StartDecomposeImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Left/E_StartDecompose");
+     			}
+     			return this.m_E_StartDecomposeImage;
+     		}
+     	}
+
 		public UnityEngine.UI.ToggleGroup E_RuneTypeSetToggleGroup
      	{
      		get
@@ -418,6 +452,8 @@ namespace ET.Client
 		{
 			this.m_E_ReturnButton = null;
 			this.m_E_ReturnImage = null;
+			this.m_E_StartDecomposeButton = null;
+			this.m_E_StartDecomposeImage = null;
 			this.m_E_RuneTypeSetToggleGroup = null;
 			this.m_E_RuneBagItemsScrollRect = null;
 			this.m_E_RuneBagItemsImage = null;
@@ -443,6 +479,8 @@ namespace ET.Client
 
 		private UnityEngine.UI.Button m_E_ReturnButton = null;
 		private UnityEngine.UI.Image m_E_ReturnImage = null;
+		private UnityEngine.UI.Button m_E_StartDecomposeButton = null;
+		private UnityEngine.UI.Image m_E_StartDecomposeImage = null;
 		private UnityEngine.UI.ToggleGroup m_E_RuneTypeSetToggleGroup = null;
 		private UnityEngine.UI.ScrollRect m_E_RuneBagItemsScrollRect = null;
 		private UnityEngine.UI.Image m_E_RuneBagItemsImage = null;
