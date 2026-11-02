@@ -37,9 +37,15 @@ namespace ET.Client
 				return;
 			}
 
+			Sprite iconSprite = self.GetParent<ES_Rune>().LoadRuneIcon(runeConfig.Icon);
+			if (iconSprite != null)
+			{
+				self.E_IconImage.sprite = iconSprite;
+			}
+
 			self.E_NameText.text = runeConfig.Name;
 			self.E_LvText.text = $"Lv.{runeConfig.Lv}";
-			//RuneConfig 还没有描述列，AddPropreList 现在是空的，先不显示描述
+			//列表里不显示描述，描述留给拆卸面板
 			self.E_DesText.text = string.Empty;
 		}
 

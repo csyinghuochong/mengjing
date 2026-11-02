@@ -123,7 +123,9 @@ namespace ET.Client
                 ES_RuneSlotItem item = self.SlotItems[i];
                 bool itemUnlocked = runeComponent.IsSlotUnlocked(item.SlotId);
                 bool itemHasRune = runeComponent.GetSlotRuneId(item.SlotId) != 0;
-                item.OnUpdateUI(itemUnlocked, itemHasRune, self.SelectSlotId == item.SlotId);
+                RuneConfig slotRuneConfig = runeComponent.GetRuneConfig(runeComponent.GetSlotRune(item.SlotId));
+                string iconName = slotRuneConfig == null ? string.Empty : slotRuneConfig.Icon;
+                item.OnUpdateUI(itemUnlocked, itemHasRune, self.SelectSlotId == item.SlotId, iconName);
             }
 
             bool hasSelect = self.SelectSlotId != 0;
@@ -365,7 +367,13 @@ namespace ET.Client
                 return;
             }
 
-            //RuneConfig 的 Icon 还没对应的图集资源，图标先留着预制体上的占位图
+            //RuneConfig 的 Icon 是 RoleSkillIcon 图集下的图标id
+            Sprite iconSprite = self.LoadRuneIcon(runeConfig.Icon);
+            if (iconSprite != null)
+            {
+                self.E_RuneIconImage.sprite = iconSprite;
+            }
+
             self.E_RuneNameText.text = runeConfig.Name;
             self.E_RuneLv_UnsocketText.text = $"Lv.{runeConfig.Lv}";
             self.E_RuneTypeText.text = $"{GetRuneTypeDesc(runeConfig.RuneType)}属性槽";
@@ -394,6 +402,21 @@ namespace ET.Client
         }
 
         #endregion
+
+        /// <summary>
+        /// 符文图标：RuneConfig.Icon 就是 RoleSkillIcon 图集下的图标id，
+        /// 资源由 ResourcesLoaderComponent 按路径缓存，不用自己卸载
+        /// </summary>
+        public static Sprite LoadRuneIcon(this ES_Rune self, string icon)
+        {
+            if (string.IsNullOrEmpty(icon))
+            {
+                return null;
+            }
+
+            string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.RoleSkillIcon, icon);
+            return self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
+        }
 
         /// <summary>
         /// 进度条填充比例，要求为 0 时算满

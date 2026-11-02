@@ -47,15 +47,27 @@ namespace ET.Client
         }
 
         /// <summary>
-        /// unlocked：孔位是否已解锁；hasRune：孔位里是否镶了符文；selected：是否当前选中。
+        /// unlocked：孔位是否已解锁；hasRune：孔位里是否镶了符文；selected：是否当前选中；
+        /// runeIconName：孔位里那枚符文的图标名（RuneConfig.Icon）。
         /// 未解锁只显示锁，解锁后空槽显示加号，镶了符文显示图标
         /// </summary>
-        public static void OnUpdateUI(this ES_RuneSlotItem self, bool unlocked, bool hasRune, bool selected)
+        public static void OnUpdateUI(this ES_RuneSlotItem self, bool unlocked, bool hasRune, bool selected, string runeIconName = null)
         {
             self.E_ImageLockImage.gameObject.SetActive(!unlocked);
             self.E_ImageAddImage.gameObject.SetActive(unlocked && !hasRune);
             self.E_ImageIconImage.gameObject.SetActive(hasRune);
             self.E_ImageSelectImage.gameObject.SetActive(selected);
+
+            if (!hasRune)
+            {
+                return;
+            }
+
+            Sprite iconSprite = self.GetParent<ES_Rune>().LoadRuneIcon(runeIconName);
+            if (iconSprite != null)
+            {
+                self.E_ImageIconImage.sprite = iconSprite;
+            }
         }
 
         private static void OnImageClickButton(this ES_RuneSlotItem self)
