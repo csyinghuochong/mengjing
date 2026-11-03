@@ -28,6 +28,21 @@ namespace ET.Client
 		/// </summary>
 		public long SelectRuneId;
 
+		/// <summary>
+		/// 是否在批量分解模式：主列表改成勾选，右侧显示分解面板
+		/// </summary>
+		public bool IsDecomposeMode;
+
+		/// <summary>
+		/// 分解模式里勾选的符文id，可以多选
+		/// </summary>
+		public List<long> SelectRuneIds = new();
+
+		/// <summary>
+		/// 分解面板里已选符文的条目，按序号复用
+		/// </summary>
+		public List<EntityRef<Scroll_Item_RuneBagItem>> SelectItems = new();
+
 		public UnityEngine.UI.Button E_ReturnButton
      	{
      		get

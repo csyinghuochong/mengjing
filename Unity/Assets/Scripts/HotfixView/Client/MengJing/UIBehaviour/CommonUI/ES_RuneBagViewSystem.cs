@@ -22,6 +22,7 @@ namespace ET.Client
 			self.E_ReturnButton.AddListener(self.OnReturnButton);
 			self.InitRuneTypeToggles();
 			self.InitUpgradePanel();
+			self.InitDecomposePanel();
 		}
 
 		[EntitySystem]
@@ -45,10 +46,16 @@ namespace ET.Client
 		}
 
 		/// <summary>
-		/// 点 E_Return 回到符文主界面
+		/// 点 E_Return：分解模式下先退出分解模式回列表，再点才回到符文主界面
 		/// </summary>
 		private static void OnReturnButton(this ES_RuneBag self)
 		{
+			if (self.IsDecomposeMode)
+			{
+				self.ExitDecomposeMode();
+				return;
+			}
+
 			self.GetParent<ES_Rune>().CloseRuneBag();
 		}
 
@@ -90,11 +97,14 @@ namespace ET.Client
 		}
 
 		/// <summary>
-		/// 每次打开背包时清掉上次的选中，回到列表初始状态
+		/// 每次打开背包时清掉上次的选中和分解模式，回到列表初始状态
 		/// </summary>
 		public static void OnOpenBag(this ES_RuneBag self)
 		{
+			self.IsDecomposeMode = false;
 			self.SelectRuneId = 0;
+			self.SelectRuneIds.Clear();
+			self.EG_RuneDecomposeRectTransform.gameObject.SetActive(false);
 			self.OnUpdateUI();
 		}
 
@@ -182,17 +192,38 @@ namespace ET.Client
 					continue;
 				}
 
-				bagItem.SetSelected(bagItem.DataId == self.SelectRuneId);
+				bool isChecked = self.SelectRuneIds.Contains(bagItem.DataId);
+				bagItem.SetSelected(!self.IsDecomposeMode && bagItem.DataId == self.SelectRuneId);
+				bagItem.SetCheck(self.IsDecomposeMode && isChecked);
 			}
 
+			if (self.IsDecomposeMode)
+			{
+				self.RefreshDecomposePanel();
+				return;
+			}
+
+			self.EG_RuneDecomposeRectTransform.gameObject.SetActive(false);
 			self.RefreshUpgradePanel();
 		}
 
 		/// <summary>
-		/// 点列表里的符文：记下选中，右侧显示这枚符文的升级面板
+		/// 点列表里的符文：普通模式选中看升级，分解模式勾选/取消勾选
 		/// </summary>
 		public static void OnClickRuneItem(this ES_RuneBag self, long runeId)
 		{
+			if (self.IsDecomposeMode)
+			{
+				//Remove 返回 true 说明本来选中了，再点就是取消
+				if (!self.SelectRuneIds.Remove(runeId))
+				{
+					self.SelectRuneIds.Add(runeId);
+				}
+
+				self.RefreshSelect();
+				return;
+			}
+
 			self.SelectRuneId = runeId;
 			self.RefreshSelect();
 		}
@@ -278,6 +309,125 @@ namespace ET.Client
 					return "防御";
 				default:
 					return string.Empty;
+			}
+		}
+
+		#endregion
+
+		#region 分解
+
+		private static void InitDecomposePanel(this ES_RuneBag self)
+		{
+			self.E_StartDecomposeButton.AddListener(self.OnStartDecomposeButton);
+			self.EG_RuneDecomposeRectTransform.gameObject.SetActive(false);
+		}
+
+		/// <summary>
+		/// 点批量分解：清掉之前的勾选，进入分解模式
+		/// </summary>
+		private static void OnStartDecomposeButton(this ES_RuneBag self)
+		{
+			self.EnterDecomposeMode();
+		}
+
+		/// <summary>
+		/// 进入分解模式：主列表改成勾选，右侧换成分解面板
+		/// </summary>
+		public static void EnterDecomposeMode(this ES_RuneBag self)
+		{
+			self.IsDecomposeMode = true;
+			self.SelectRuneId = 0;
+			self.SelectRuneIds.Clear();
+			self.OnUpdateUI();
+		}
+
+		/// <summary>
+		/// 退出分解模式，勾选清掉回到普通列表
+		/// </summary>
+		public static void ExitDecomposeMode(this ES_RuneBag self)
+		{
+			self.IsDecomposeMode = false;
+			self.SelectRuneIds.Clear();
+			self.OnUpdateUI();
+		}
+
+		/// <summary>
+		/// 分解面板：已选数量和返还碎片总数，以及已选符文列表
+		/// </summary>
+		private static void RefreshDecomposePanel(this ES_RuneBag self)
+		{
+			self.EG_RuneDecomposeRectTransform.gameObject.SetActive(true);
+			self.EG_RuneUpgradeRectTransform.gameObject.SetActive(false);
+
+			RuneComponentC runeComponent = self.Root().GetComponent<RuneComponentC>();
+			List<RuneData> selectedList = new List<RuneData>();
+			int totalShard = 0;
+			for (int i = 0; i < self.SelectRuneIds.Count; i++)
+			{
+				RuneData rune = runeComponent == null ? null : runeComponent.GetRune(self.SelectRuneIds[i]);
+				RuneConfig runeConfig = runeComponent == null ? null : runeComponent.GetRuneConfig(rune);
+				if (runeConfig == null)
+				{
+					continue;
+				}
+
+				selectedList.Add(rune);
+				totalShard += runeConfig.DecomposeShard;
+			}
+
+			self.E_DecomposeRuneNumText.text = $"已选择{selectedList.Count}枚符文";
+			self.E_DecomposeShardNumText.text = $"x{totalShard}";
+
+			self.RefreshSelectItems(selectedList);
+		}
+
+		/// <summary>
+		/// 已选符文列表：和主列表一样按格子排，点一下就是取消勾选
+		/// </summary>
+		private static void RefreshSelectItems(this ES_RuneBag self, List<RuneData> selectedList)
+		{
+			ScrollRect selectScrollRect = self.E_RuneBagItems_SelectScrollRect;
+			Transform contentTrans = selectScrollRect == null ? null : selectScrollRect.transform.Find("Content");
+			if (contentTrans == null)
+			{
+				Log.Error("ES_RuneBag 预制体缺少 EG_RuneDecompose/E_RuneBagItems_Select/Content");
+				return;
+			}
+
+			ResourcesLoaderComponent resourcesLoaderComponent = self.Root().GetComponent<ResourcesLoaderComponent>();
+			for (int i = 0; i < selectedList.Count; i++)
+			{
+				if (i >= self.SelectItems.Count)
+				{
+					if (!self.AssetList.Contains(RuneBagItemPrefabPath))
+					{
+						self.AssetList.Add(RuneBagItemPrefabPath);
+					}
+
+					GameObject prefab = resourcesLoaderComponent.LoadAssetSync<GameObject>(RuneBagItemPrefabPath);
+					if (prefab == null)
+					{
+						Log.Error($"符文背包条目预制体加载失败：{RuneBagItemPrefabPath}");
+						return;
+					}
+
+					GameObject go = UnityEngine.Object.Instantiate(prefab, contentTrans);
+					Scroll_Item_RuneBagItem item = self.AddChild<Scroll_Item_RuneBagItem>();
+					item.BindTrans(go.transform);
+					self.SelectItems.Add(item);
+				}
+
+				Scroll_Item_RuneBagItem selectItem = self.SelectItems[i];
+				selectItem.uiTransform.gameObject.SetActive(true);
+				selectItem.OnInitUI(selectedList[i]);
+				selectItem.SetCheck(true);
+			}
+
+			//多出来的条目复用隐藏
+			for (int i = selectedList.Count; i < self.SelectItems.Count; i++)
+			{
+				Scroll_Item_RuneBagItem selectItem = self.SelectItems[i];
+				selectItem.uiTransform.gameObject.SetActive(false);
 			}
 		}
 
