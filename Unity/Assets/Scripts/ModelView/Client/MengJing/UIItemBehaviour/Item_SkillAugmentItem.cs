@@ -1,4 +1,4 @@
-﻿
+
 using System;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,8 +8,8 @@ namespace ET.Client
 	[EnableMethod]
 	public  class Scroll_Item_SkillAugmentItem : Entity,IAwake,IDestroy,IUIScrollItem<Scroll_Item_SkillAugmentItem> 
 	{
-		public SkillAugmentInfo SkillAugmentInfo;
-		public Action<SkillAugmentInfo> ClickHandler;
+		public int BaseSkillId;
+		public Action<int> ClickHandler;
 
 		public long DataId {get;set;}
 		private bool isCacheNode = false;

@@ -36,6 +36,7 @@ namespace ET
                 case SkillPropertyAdd.__ID__: return new SkillPropertyAdd(_buf);
                 case BuffPropertyAdd.__ID__: return new BuffPropertyAdd(_buf);
                 case SkillIdAdd.__ID__: return new SkillIdAdd(_buf);
+                case SkillCastAdd.__ID__: return new SkillCastAdd(_buf);
                 case BuffIdAdd.__ID__: return new BuffIdAdd(_buf);
                 case BuffInitIdAdd.__ID__: return new BuffInitIdAdd(_buf);
                 case ReplaceSkillId.__ID__: return new ReplaceSkillId(_buf);

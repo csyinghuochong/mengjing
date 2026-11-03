@@ -1,4 +1,4 @@
-﻿
+
 using System;
 using DG.Tweening;
 using System.Collections.Generic;
@@ -140,17 +140,7 @@ namespace ET.Client
 
 		public static void RefreshSkillAugmentItems(this ES_SkillAugment self)
 		{
-			List<SkillAugmentInfo> allSkillAugments = self.Root().GetComponent<SkillSetComponentC>().SkillAugmentList;
-			List<SkillAugmentInfo> skillAugmentList = new();
-			HashSet<int> weaponSkillBaseIds = self.GetWeaponSkillBaseIds();
-			for (int i = 0; i < allSkillAugments.Count; i++)
-			{
-				SkillAugmentInfo skillAugmentInfo = allSkillAugments[i];
-				if (self.SelectedWeaponType == ItemEquipType.Common || weaponSkillBaseIds.Contains(skillAugmentInfo.BaseSkillId))
-				{
-					skillAugmentList.Add(skillAugmentInfo);
-				}
-			}
+			List<int> skillAugmentList = self.GetAugmentableBaseSkillIds();
 
 			ResourcesLoaderComponent resourcesLoaderComponent = self.Root().GetComponent<ResourcesLoaderComponent>();
 			Transform content = self.E_SkillAugmentItemsScrollRect.content;
@@ -194,13 +184,14 @@ namespace ET.Client
 				return;
 			}
 
-			SkillAugmentInfo selectedSkillAugment = skillAugmentList.Find(info => info.BaseSkillId == self.SelectedBaseSkillId);
-			self.OnSelectSkillAugment(selectedSkillAugment ?? skillAugmentList[0]);
+			int selectedBaseSkillId = skillAugmentList.Contains(self.SelectedBaseSkillId) ? self.SelectedBaseSkillId : skillAugmentList[0];
+			self.OnSelectSkillAugment(selectedBaseSkillId);
 		}
 
-		private static HashSet<int> GetWeaponSkillBaseIds(this ES_SkillAugment self)
+		private static List<int> GetAugmentableBaseSkillIds(this ES_SkillAugment self)
 		{
-			HashSet<int> weaponSkillBaseIds = new();
+			List<int> baseSkillIds = new();
+			HashSet<int> added = new();
 			List<SkillPro> skillList = self.Root().GetComponent<SkillSetComponentC>().SkillList;
 			for (int i = 0; i < skillList.Count; i++)
 			{
@@ -218,13 +209,15 @@ namespace ET.Client
 				}
 
 				int baseSkillId = SkillConfigCategory.Instance.GetInitSkill(weaponSkillId);
-				if (baseSkillId != 0)
+				if (baseSkillId == 0 || !SkillAugmentHelper.HasAugment(baseSkillId) || !added.Add(baseSkillId))
 				{
-					weaponSkillBaseIds.Add(baseSkillId);
+					continue;
 				}
+
+				baseSkillIds.Add(baseSkillId);
 			}
 
-			return weaponSkillBaseIds;
+			return baseSkillIds;
 		}
 
 		private static void InitializeWeaponTypeSet(this ES_SkillAugment self)
@@ -376,14 +369,14 @@ namespace ET.Client
 			self.E_SkillLearnButton.interactable = true;
 		}
 
-		private static void OnSelectSkillAugment(this ES_SkillAugment self, SkillAugmentInfo skillAugmentInfo)
+		private static void OnSelectSkillAugment(this ES_SkillAugment self, int baseSkillId)
 		{
-			if (skillAugmentInfo == null)
+			if (baseSkillId == 0)
 			{
 				return;
 			}
 
-			self.SelectedBaseSkillId = skillAugmentInfo.BaseSkillId;
+			self.SelectedBaseSkillId = baseSkillId;
 			foreach (EntityRef<Scroll_Item_SkillAugmentItem> itemRef in self.ScrollItemSkillAugmentItems.Values)
 			{
 				Scroll_Item_SkillAugmentItem item = itemRef;
@@ -394,27 +387,28 @@ namespace ET.Client
 			}
 
 			self.SetSkillAugmentDescription(0);
-			self.SyncWheelSkills(skillAugmentInfo);
+			self.SyncWheelSkills(baseSkillId);
 			self.UpdateSkillLearnPanel();
 		}
 
-		private static void SyncWheelSkills(this ES_SkillAugment self, SkillAugmentInfo skillAugmentInfo)
+		private static void SyncWheelSkills(this ES_SkillAugment self, int baseSkillId)
 		{
-			SkillAugmentOptionsConfig augmentOptions = SkillAugmentOptionsConfigCategory.Instance.GetOrDefault(skillAugmentInfo.BaseSkillId);
-			if (augmentOptions == null)
+			int[] augmentIds1 = SkillAugmentHelper.GetAugmentIds(baseSkillId, 2);
+			int[] augmentIds2 = SkillAugmentHelper.GetAugmentIds(baseSkillId, 3);
+			if (augmentIds1.Length == 0 && augmentIds2.Length == 0)
 			{
 				self.ClearWheelSkills();
 				return;
 			}
 
-			self.SetBaseSkillIcon(skillAugmentInfo.BaseSkillId);
+			self.SetBaseSkillIcon(baseSkillId);
 
-			int selectedAugment1 = self.GetSelectedAugmentId(skillAugmentInfo, 0);
-			int selectedAugment2 = self.GetSelectedAugmentId(skillAugmentInfo, 1);
+			int selectedAugment1 = self.GetSelectedAugmentId(baseSkillId, 0);
+			int selectedAugment2 = self.GetSelectedAugmentId(baseSkillId, 1);
 			bool slot1Unlocked = self.IsAugmentSlotUnlocked(0);
 			bool slot2Unlocked = self.IsAugmentSlotUnlocked(1);
-			self.SetWheelAugmentItems(self.EG_RotatingRoot_1RectTransform, self.EG_ItemList_1RectTransform, augmentOptions.SkillAugmentIds1, selectedAugment1, 0, slot1Unlocked);
-			self.SetWheelAugmentItems(self.EG_RotatingRoot_2RectTransform, self.EG_ItemList_2RectTransform, augmentOptions.SkillAugmentIds2, selectedAugment2, 1, slot2Unlocked);
+			self.SetWheelAugmentItems(self.EG_RotatingRoot_1RectTransform, self.EG_ItemList_1RectTransform, augmentIds1, selectedAugment1, 0, slot1Unlocked);
+			self.SetWheelAugmentItems(self.EG_RotatingRoot_2RectTransform, self.EG_ItemList_2RectTransform, augmentIds2, selectedAugment2, 1, slot2Unlocked);
 		}
 
 		private static bool IsAugmentSlotUnlocked(this ES_SkillAugment self, int tierIndex)
@@ -428,9 +422,10 @@ namespace ET.Client
 			return SkillHelp.GetSkillLevelByAugmentBaseSkill(skillList, baseSkillId, self.SelectedWeaponType);
 		}
 
-		private static int GetSelectedAugmentId(this ES_SkillAugment self, SkillAugmentInfo skillAugmentInfo, int tierIndex)
+		private static int GetSelectedAugmentId(this ES_SkillAugment self, int baseSkillId, int tierIndex)
 		{
-			return skillAugmentInfo.ActiveAugmentIds != null && tierIndex < skillAugmentInfo.ActiveAugmentIds.Count ? skillAugmentInfo.ActiveAugmentIds[tierIndex] : 0;
+			List<int> augmentIds = self.Root().GetComponent<SkillSetComponentC>().SkillAugmentList;
+			return SkillAugmentHelper.GetSelectedAugmentId(augmentIds, baseSkillId, tierIndex + 2);
 		}
 
 		private static void SetBaseSkillIcon(this ES_SkillAugment self, int baseSkillId)
@@ -804,28 +799,19 @@ namespace ET.Client
 				return;
 			}
 
-			SkillAugmentOptionsConfig augmentOptions = SkillAugmentOptionsConfigCategory.Instance.GetOrDefault(self.SelectedBaseSkillId);
-			int[] augmentIds = tierIndex switch
-			{
-				0 => augmentOptions?.SkillAugmentIds1,
-				1 => augmentOptions?.SkillAugmentIds2,
-				_ => null,
-			};
-
-			if (augmentIds == null || itemIndex < 0 || itemIndex >= augmentIds.Length)
+			int[] augmentIds = SkillAugmentHelper.GetAugmentIds(self.SelectedBaseSkillId, tierIndex + 2);
+			if (augmentIds.Length == 0 || itemIndex < 0 || itemIndex >= augmentIds.Length)
 			{
 				return;
 			}
 
 			int augmentId = augmentIds[itemIndex];
-			SkillAugmentInfo augmentInfo = self.Root().GetComponent<SkillSetComponentC>().SkillAugmentList
-				.Find(info => info.BaseSkillId == self.SelectedBaseSkillId);
-			if (augmentId == 0 || augmentInfo == null || self.GetSelectedAugmentId(augmentInfo, tierIndex) == augmentId)
+			if (augmentId == 0 || self.GetSelectedAugmentId(self.SelectedBaseSkillId, tierIndex) == augmentId)
 			{
 				return;
 			}
 
-			await SkillNetHelper.SetSkillAugment(self.Root(), self.SelectedBaseSkillId, tierIndex, augmentId);
+			await SkillNetHelper.SetSkillAugment(self.Root(), augmentId);
 		}
 
 		private static bool TryGetPointerAngle(this ES_SkillAugment self, RectTransform hitArea, PointerEventData pointerEventData,

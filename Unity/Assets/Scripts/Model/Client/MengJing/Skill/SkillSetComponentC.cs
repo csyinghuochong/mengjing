@@ -26,7 +26,9 @@ namespace ET.Client
         //生命之盾
         public List<LifeShieldInfo> LifeShieldList { get; set; } = new();
 
-        // 技能增幅
-        public List<SkillAugmentInfo> SkillAugmentList { get; set; } = new();
+        /// <summary>
+        /// 已激活的技能增幅Id（SkillAugmentConfig.Id）
+        /// </summary>
+        public List<int> SkillAugmentList { get; set; } = new();
     }
 }

@@ -2,11 +2,18 @@
   {
     "Id": 111000111,
     "Name": "扩域",
+    "BaseSkillId": 1110001,
+    "Level": 2,
     "Icon": "2102020",
     "Des": "增大技能范围",
     "AddPropreList": [
       {
-        "$type": "AugmentSkillPropertyAdd",
+        "$type": "SkillPropertyAdd",
+        "SkillIds": [
+          1110002,
+          1110003,
+          1110004
+        ],
         "Attribute": 1,
         "Value": 2
       }
@@ -15,11 +22,18 @@
   {
     "Id": 111000112,
     "Name": "雷击",
+    "BaseSkillId": 1110001,
+    "Level": 2,
     "Icon": "2102010",
     "Des": "追加一个技能",
     "AddPropreList": [
       {
-        "$type": "AugmentSkillIdAdd",
+        "$type": "SkillCastAdd",
+        "SkillIds": [
+          1110002,
+          1110003,
+          1110004
+        ],
         "SkillId": 2200030
       }
     ]
@@ -27,11 +41,18 @@
   {
     "Id": 111000121,
     "Name": "灼烧",
+    "BaseSkillId": 1110001,
+    "Level": 3,
     "Icon": "2200010",
     "Des": "给对方挂个灼烧Buff",
     "AddPropreList": [
       {
-        "$type": "AugmentBuffIdAdd",
+        "$type": "BuffIdAdd",
+        "SkillIds": [
+          1110002,
+          1110003,
+          1110004
+        ],
         "BuffId": 30204040
       }
     ]
@@ -39,11 +60,18 @@
   {
     "Id": 111000122,
     "Name": "眩晕",
+    "BaseSkillId": 1110001,
+    "Level": 3,
     "Icon": "2304070",
     "Des": "给对方挂个眩晕Buff",
     "AddPropreList": [
       {
-        "$type": "AugmentBuffIdAdd",
+        "$type": "BuffIdAdd",
+        "SkillIds": [
+          1110002,
+          1110003,
+          1110004
+        ],
         "BuffId": 20000103
       }
     ]
@@ -51,11 +79,18 @@
   {
     "Id": 111000123,
     "Name": "恢复",
+    "BaseSkillId": 1110001,
+    "Level": 3,
     "Icon": "2304030",
     "Des": "使用技能时回口血",
     "AddPropreList": [
       {
-        "$type": "AugmentBuffInitIdAdd",
+        "$type": "BuffInitIdAdd",
+        "SkillIds": [
+          1110002,
+          1110003,
+          1110004
+        ],
         "BuffId": 40000010
       }
     ]
@@ -63,11 +98,18 @@
   {
     "Id": 111001111,
     "Name": "扩域2",
+    "BaseSkillId": 1110011,
+    "Level": 2,
     "Icon": "2102020",
     "Des": "增大技能范围",
     "AddPropreList": [
       {
-        "$type": "AugmentSkillPropertyAdd",
+        "$type": "SkillPropertyAdd",
+        "SkillIds": [
+          1110012,
+          1110013,
+          1110014
+        ],
         "Attribute": 1,
         "Value": 2
       }
@@ -76,11 +118,18 @@
   {
     "Id": 111001112,
     "Name": "雷击2",
+    "BaseSkillId": 1110011,
+    "Level": 2,
     "Icon": "2102010",
     "Des": "追加一个技能",
     "AddPropreList": [
       {
-        "$type": "AugmentSkillIdAdd",
+        "$type": "SkillCastAdd",
+        "SkillIds": [
+          1110012,
+          1110013,
+          1110014
+        ],
         "SkillId": 2200030
       }
     ]
@@ -88,11 +137,18 @@
   {
     "Id": 111001121,
     "Name": "灼烧2",
+    "BaseSkillId": 1110011,
+    "Level": 3,
     "Icon": "2200010",
     "Des": "给对方挂个灼烧Buff",
     "AddPropreList": [
       {
-        "$type": "AugmentBuffIdAdd",
+        "$type": "BuffIdAdd",
+        "SkillIds": [
+          1110012,
+          1110013,
+          1110014
+        ],
         "BuffId": 30204040
       }
     ]
@@ -100,11 +156,18 @@
   {
     "Id": 111001122,
     "Name": "眩晕2",
+    "BaseSkillId": 1110011,
+    "Level": 3,
     "Icon": "2304070",
     "Des": "给对方挂个眩晕Buff",
     "AddPropreList": [
       {
-        "$type": "AugmentBuffIdAdd",
+        "$type": "BuffIdAdd",
+        "SkillIds": [
+          1110012,
+          1110013,
+          1110014
+        ],
         "BuffId": 20000103
       }
     ]
@@ -112,11 +175,594 @@
   {
     "Id": 111001123,
     "Name": "恢复",
+    "BaseSkillId": 1110011,
+    "Level": 3,
     "Icon": "2304030",
     "Des": "使用技能时回口血",
     "AddPropreList": [
       {
-        "$type": "AugmentBuffInitIdAdd",
+        "$type": "BuffInitIdAdd",
+        "SkillIds": [
+          1110012,
+          1110013,
+          1110014
+        ],
+        "BuffId": 40000010
+      }
+    ]
+  },
+  {
+    "Id": 111002111,
+    "Name": "扩域",
+    "BaseSkillId": 1110021,
+    "Level": 2,
+    "Icon": "2102020",
+    "Des": "增大技能范围",
+    "AddPropreList": [
+      {
+        "$type": "SkillPropertyAdd",
+        "SkillIds": [
+          1110022,
+          1110023,
+          1110024
+        ],
+        "Attribute": 1,
+        "Value": 2
+      }
+    ]
+  },
+  {
+    "Id": 111002112,
+    "Name": "雷击",
+    "BaseSkillId": 1110021,
+    "Level": 2,
+    "Icon": "2102010",
+    "Des": "追加一个技能",
+    "AddPropreList": [
+      {
+        "$type": "SkillCastAdd",
+        "SkillIds": [
+          1110022,
+          1110023,
+          1110024
+        ],
+        "SkillId": 2200030
+      }
+    ]
+  },
+  {
+    "Id": 111002121,
+    "Name": "灼烧",
+    "BaseSkillId": 1110021,
+    "Level": 3,
+    "Icon": "2200010",
+    "Des": "给对方挂个灼烧Buff",
+    "AddPropreList": [
+      {
+        "$type": "BuffIdAdd",
+        "SkillIds": [
+          1110022,
+          1110023,
+          1110024
+        ],
+        "BuffId": 30204040
+      }
+    ]
+  },
+  {
+    "Id": 111002122,
+    "Name": "眩晕",
+    "BaseSkillId": 1110021,
+    "Level": 3,
+    "Icon": "2304070",
+    "Des": "给对方挂个眩晕Buff",
+    "AddPropreList": [
+      {
+        "$type": "BuffIdAdd",
+        "SkillIds": [
+          1110022,
+          1110023,
+          1110024
+        ],
+        "BuffId": 20000103
+      }
+    ]
+  },
+  {
+    "Id": 111002123,
+    "Name": "恢复",
+    "BaseSkillId": 1110021,
+    "Level": 3,
+    "Icon": "2304030",
+    "Des": "使用技能时回口血",
+    "AddPropreList": [
+      {
+        "$type": "BuffInitIdAdd",
+        "SkillIds": [
+          1110022,
+          1110023,
+          1110024
+        ],
+        "BuffId": 40000010
+      }
+    ]
+  },
+  {
+    "Id": 111003111,
+    "Name": "扩域",
+    "BaseSkillId": 1110031,
+    "Level": 2,
+    "Icon": "2102020",
+    "Des": "增大技能范围",
+    "AddPropreList": [
+      {
+        "$type": "SkillPropertyAdd",
+        "SkillIds": [
+          1110032,
+          1110033,
+          1110034
+        ],
+        "Attribute": 1,
+        "Value": 2
+      }
+    ]
+  },
+  {
+    "Id": 111003112,
+    "Name": "雷击",
+    "BaseSkillId": 1110031,
+    "Level": 2,
+    "Icon": "2102010",
+    "Des": "追加一个技能",
+    "AddPropreList": [
+      {
+        "$type": "SkillCastAdd",
+        "SkillIds": [
+          1110032,
+          1110033,
+          1110034
+        ],
+        "SkillId": 2200030
+      }
+    ]
+  },
+  {
+    "Id": 111003121,
+    "Name": "灼烧",
+    "BaseSkillId": 1110031,
+    "Level": 3,
+    "Icon": "2200010",
+    "Des": "给对方挂个灼烧Buff",
+    "AddPropreList": [
+      {
+        "$type": "BuffIdAdd",
+        "SkillIds": [
+          1110032,
+          1110033,
+          1110034
+        ],
+        "BuffId": 30204040
+      }
+    ]
+  },
+  {
+    "Id": 111003122,
+    "Name": "眩晕",
+    "BaseSkillId": 1110031,
+    "Level": 3,
+    "Icon": "2304070",
+    "Des": "给对方挂个眩晕Buff",
+    "AddPropreList": [
+      {
+        "$type": "BuffIdAdd",
+        "SkillIds": [
+          1110032,
+          1110033,
+          1110034
+        ],
+        "BuffId": 20000103
+      }
+    ]
+  },
+  {
+    "Id": 111003123,
+    "Name": "恢复",
+    "BaseSkillId": 1110031,
+    "Level": 3,
+    "Icon": "2304030",
+    "Des": "使用技能时回口血",
+    "AddPropreList": [
+      {
+        "$type": "BuffInitIdAdd",
+        "SkillIds": [
+          1110032,
+          1110033,
+          1110034
+        ],
+        "BuffId": 40000010
+      }
+    ]
+  },
+  {
+    "Id": 112000111,
+    "Name": "扩域",
+    "BaseSkillId": 1120001,
+    "Level": 2,
+    "Icon": "2102020",
+    "Des": "增大技能范围",
+    "AddPropreList": [
+      {
+        "$type": "SkillPropertyAdd",
+        "SkillIds": [
+          1120002,
+          1120003,
+          1120004
+        ],
+        "Attribute": 1,
+        "Value": 2
+      }
+    ]
+  },
+  {
+    "Id": 112000112,
+    "Name": "雷击",
+    "BaseSkillId": 1120001,
+    "Level": 2,
+    "Icon": "2102010",
+    "Des": "追加一个技能",
+    "AddPropreList": [
+      {
+        "$type": "SkillCastAdd",
+        "SkillIds": [
+          1120002,
+          1120003,
+          1120004
+        ],
+        "SkillId": 2200030
+      }
+    ]
+  },
+  {
+    "Id": 112000121,
+    "Name": "灼烧",
+    "BaseSkillId": 1120001,
+    "Level": 3,
+    "Icon": "2200010",
+    "Des": "给对方挂个灼烧Buff",
+    "AddPropreList": [
+      {
+        "$type": "BuffIdAdd",
+        "SkillIds": [
+          1120002,
+          1120003,
+          1120004
+        ],
+        "BuffId": 30204040
+      }
+    ]
+  },
+  {
+    "Id": 112000122,
+    "Name": "眩晕",
+    "BaseSkillId": 1120001,
+    "Level": 3,
+    "Icon": "2304070",
+    "Des": "给对方挂个眩晕Buff",
+    "AddPropreList": [
+      {
+        "$type": "BuffIdAdd",
+        "SkillIds": [
+          1120002,
+          1120003,
+          1120004
+        ],
+        "BuffId": 20000103
+      }
+    ]
+  },
+  {
+    "Id": 112000123,
+    "Name": "恢复",
+    "BaseSkillId": 1120001,
+    "Level": 3,
+    "Icon": "2304030",
+    "Des": "使用技能时回口血",
+    "AddPropreList": [
+      {
+        "$type": "BuffInitIdAdd",
+        "SkillIds": [
+          1120002,
+          1120003,
+          1120004
+        ],
+        "BuffId": 40000010
+      }
+    ]
+  },
+  {
+    "Id": 112001111,
+    "Name": "扩域",
+    "BaseSkillId": 1120011,
+    "Level": 2,
+    "Icon": "2102020",
+    "Des": "增大技能范围",
+    "AddPropreList": [
+      {
+        "$type": "SkillPropertyAdd",
+        "SkillIds": [
+          1120012,
+          1120013,
+          1120014
+        ],
+        "Attribute": 1,
+        "Value": 2
+      }
+    ]
+  },
+  {
+    "Id": 112001112,
+    "Name": "雷击",
+    "BaseSkillId": 1120011,
+    "Level": 2,
+    "Icon": "2102010",
+    "Des": "追加一个技能",
+    "AddPropreList": [
+      {
+        "$type": "SkillCastAdd",
+        "SkillIds": [
+          1120012,
+          1120013,
+          1120014
+        ],
+        "SkillId": 2200030
+      }
+    ]
+  },
+  {
+    "Id": 112001121,
+    "Name": "灼烧",
+    "BaseSkillId": 1120011,
+    "Level": 3,
+    "Icon": "2200010",
+    "Des": "给对方挂个灼烧Buff",
+    "AddPropreList": [
+      {
+        "$type": "BuffIdAdd",
+        "SkillIds": [
+          1120012,
+          1120013,
+          1120014
+        ],
+        "BuffId": 30204040
+      }
+    ]
+  },
+  {
+    "Id": 112001122,
+    "Name": "眩晕",
+    "BaseSkillId": 1120011,
+    "Level": 3,
+    "Icon": "2304070",
+    "Des": "给对方挂个眩晕Buff",
+    "AddPropreList": [
+      {
+        "$type": "BuffIdAdd",
+        "SkillIds": [
+          1120012,
+          1120013,
+          1120014
+        ],
+        "BuffId": 20000103
+      }
+    ]
+  },
+  {
+    "Id": 112001123,
+    "Name": "恢复",
+    "BaseSkillId": 1120011,
+    "Level": 3,
+    "Icon": "2304030",
+    "Des": "使用技能时回口血",
+    "AddPropreList": [
+      {
+        "$type": "BuffInitIdAdd",
+        "SkillIds": [
+          1120012,
+          1120013,
+          1120014
+        ],
+        "BuffId": 40000010
+      }
+    ]
+  },
+  {
+    "Id": 112002111,
+    "Name": "扩域",
+    "BaseSkillId": 1120021,
+    "Level": 2,
+    "Icon": "2102020",
+    "Des": "增大技能范围",
+    "AddPropreList": [
+      {
+        "$type": "SkillPropertyAdd",
+        "SkillIds": [
+          1120022,
+          1120023,
+          1120024
+        ],
+        "Attribute": 1,
+        "Value": 2
+      }
+    ]
+  },
+  {
+    "Id": 112002112,
+    "Name": "雷击",
+    "BaseSkillId": 1120021,
+    "Level": 2,
+    "Icon": "2102010",
+    "Des": "追加一个技能",
+    "AddPropreList": [
+      {
+        "$type": "SkillCastAdd",
+        "SkillIds": [
+          1120022,
+          1120023,
+          1120024
+        ],
+        "SkillId": 2200030
+      }
+    ]
+  },
+  {
+    "Id": 112002121,
+    "Name": "灼烧",
+    "BaseSkillId": 1120021,
+    "Level": 3,
+    "Icon": "2200010",
+    "Des": "给对方挂个灼烧Buff",
+    "AddPropreList": [
+      {
+        "$type": "BuffIdAdd",
+        "SkillIds": [
+          1120022,
+          1120023,
+          1120024
+        ],
+        "BuffId": 30204040
+      }
+    ]
+  },
+  {
+    "Id": 112002122,
+    "Name": "眩晕",
+    "BaseSkillId": 1120021,
+    "Level": 3,
+    "Icon": "2304070",
+    "Des": "给对方挂个眩晕Buff",
+    "AddPropreList": [
+      {
+        "$type": "BuffIdAdd",
+        "SkillIds": [
+          1120022,
+          1120023,
+          1120024
+        ],
+        "BuffId": 20000103
+      }
+    ]
+  },
+  {
+    "Id": 112002123,
+    "Name": "恢复",
+    "BaseSkillId": 1120021,
+    "Level": 3,
+    "Icon": "2304030",
+    "Des": "使用技能时回口血",
+    "AddPropreList": [
+      {
+        "$type": "BuffInitIdAdd",
+        "SkillIds": [
+          1120022,
+          1120023,
+          1120024
+        ],
+        "BuffId": 40000010
+      }
+    ]
+  },
+  {
+    "Id": 112003111,
+    "Name": "扩域",
+    "BaseSkillId": 1120031,
+    "Level": 2,
+    "Icon": "2102020",
+    "Des": "增大技能范围",
+    "AddPropreList": [
+      {
+        "$type": "SkillPropertyAdd",
+        "SkillIds": [
+          1120032,
+          1120033,
+          1120034
+        ],
+        "Attribute": 1,
+        "Value": 2
+      }
+    ]
+  },
+  {
+    "Id": 112003112,
+    "Name": "雷击",
+    "BaseSkillId": 1120031,
+    "Level": 2,
+    "Icon": "2102010",
+    "Des": "追加一个技能",
+    "AddPropreList": [
+      {
+        "$type": "SkillCastAdd",
+        "SkillIds": [
+          1120032,
+          1120033,
+          1120034
+        ],
+        "SkillId": 2200030
+      }
+    ]
+  },
+  {
+    "Id": 112003121,
+    "Name": "灼烧",
+    "BaseSkillId": 1120031,
+    "Level": 3,
+    "Icon": "2200010",
+    "Des": "给对方挂个灼烧Buff",
+    "AddPropreList": [
+      {
+        "$type": "BuffIdAdd",
+        "SkillIds": [
+          1120032,
+          1120033,
+          1120034
+        ],
+        "BuffId": 30204040
+      }
+    ]
+  },
+  {
+    "Id": 112003122,
+    "Name": "眩晕",
+    "BaseSkillId": 1120031,
+    "Level": 3,
+    "Icon": "2304070",
+    "Des": "给对方挂个眩晕Buff",
+    "AddPropreList": [
+      {
+        "$type": "BuffIdAdd",
+        "SkillIds": [
+          1120032,
+          1120033,
+          1120034
+        ],
+        "BuffId": 20000103
+      }
+    ]
+  },
+  {
+    "Id": 112003123,
+    "Name": "恢复",
+    "BaseSkillId": 1120031,
+    "Level": 3,
+    "Icon": "2304030",
+    "Des": "使用技能时回口血",
+    "AddPropreList": [
+      {
+        "$type": "BuffInitIdAdd",
+        "SkillIds": [
+          1120032,
+          1120033,
+          1120034
+        ],
         "BuffId": 40000010
       }
     ]

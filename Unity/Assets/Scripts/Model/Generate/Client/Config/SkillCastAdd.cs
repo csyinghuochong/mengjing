@@ -12,46 +12,54 @@ using Luban;
 namespace ET
 {
     /// <summary>
-    /// 附加技能
+    /// 释放技能时追加释放
     /// </summary>
     [EnableClass]
-    public sealed partial class AugmentSkillIdAdd : SkillAugmentEffect
+    public sealed partial class SkillCastAdd : PropEffect
     {
-        public AugmentSkillIdAdd()
+        public SkillCastAdd()
         {
         }
 
 
-        public AugmentSkillIdAdd(ByteBuf _buf) : base(_buf) 
+        public SkillCastAdd(ByteBuf _buf) : base(_buf) 
         {
+            {int n0 = _buf.ReadSize(); SkillIds = new System.Collections.Generic.List<int>(n0);for(var i0 = 0 ; i0 < n0 ; i0++) { int _e0;  _e0 = _buf.ReadInt(); SkillIds.Add(_e0);}}
             SkillId = _buf.ReadInt();
 
             PostInit();
         }
 
-        public static AugmentSkillIdAdd DeserializeAugmentSkillIdAdd(ByteBuf _buf)
+        public static SkillCastAdd DeserializeSkillCastAdd(ByteBuf _buf)
         {
-            return new AugmentSkillIdAdd(_buf);
+            return new SkillCastAdd(_buf);
         }
 
         /// <summary>
-        /// 技能ID
+        /// 作用的技能ID
+        /// </summary>
+        public System.Collections.Generic.List<int> SkillIds;
+
+        /// <summary>
+        /// 追加释放的技能ID
         /// </summary>
         public int SkillId;
 
 
-        public const int __ID__ = -1701903610;
+        public const int __ID__ = -797024911;
         public override int GetTypeId() => __ID__;
 
         public override void ResolveRef()
         {
             base.ResolveRef();
             
+            
         }
 
         public override string ToString()
         {
             return "{ "
+            + "SkillIds:" + Luban.StringUtil.CollectionToString(SkillIds) + ","
             + "SkillId:" + SkillId + ","
             + "}";
         }

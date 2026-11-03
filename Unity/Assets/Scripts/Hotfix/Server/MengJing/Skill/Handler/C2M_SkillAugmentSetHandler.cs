@@ -6,10 +6,10 @@ namespace ET.Server
         protected override async ETTask Run(Unit unit, C2M_SkillAugmentSetRequest request, M2C_SkillAugmentSetResponse response)
         {
             SkillSetComponentS skillSetComponent = unit.GetComponent<SkillSetComponentS>();
-            response.Error = skillSetComponent.SetSkillAugment(request.BaseSkillId, request.TierIndex, request.AugmentId);
+            response.Error = skillSetComponent.SetSkillAugment(request.AugmentId);
             if (response.Error == ErrorCode.ERR_Success)
             {
-                response.SkillAugmentInfo = skillSetComponent.SkillAugmentList.Find( info => info.BaseSkillId == request.BaseSkillId);
+                response.SkillAugmentList.AddRange(skillSetComponent.SkillAugmentList);
             }
 
             await ETTask.CompletedTask;

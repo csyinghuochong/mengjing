@@ -1,5 +1,6 @@
-﻿
+
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 namespace ET.Client
@@ -16,17 +17,17 @@ namespace ET.Client
 		[EntitySystem]
 		private static void Destroy(this Scroll_Item_SkillAugmentItem self )
 		{
-			self.SkillAugmentInfo = null;
+			self.BaseSkillId = 0;
 			self.ClickHandler = null;
 			self.DestroyWidget();
 		}
 
-		public static void OnUpdateUI(this Scroll_Item_SkillAugmentItem self, SkillAugmentInfo skillAugmentInfo)
+		public static void OnUpdateUI(this Scroll_Item_SkillAugmentItem self, int baseSkillId)
 		{
-			self.SkillAugmentInfo = skillAugmentInfo;
+			self.BaseSkillId = baseSkillId;
 			self.E_ClickButton.AddListener(self.OnClick);
 
-			SkillConfig skillConfig = SkillConfigCategory.Instance.GetOrDefault(skillAugmentInfo.BaseSkillId);
+			SkillConfig skillConfig = SkillConfigCategory.Instance.GetOrDefault(baseSkillId);
 			if (skillConfig == null)
 			{
 				self.E_SkillIconImage.gameObject.SetActive(false);
@@ -41,34 +42,29 @@ namespace ET.Client
 			}
 
 			self.E_HighlightImage.gameObject.SetActive(false);
-			self.SetAugmentIcon(self.EG_SkillAugment_1RectTransform.Find("Mask/Icon").transform.GetComponent<Image>(), skillAugmentInfo, 0);
-			self.SetAugmentIcon(self.EG_SkillAugment_2RectTransform.Find("Mask/Icon").transform.GetComponent<Image>(), skillAugmentInfo, 1);
+			self.SetAugmentIcon(self.EG_SkillAugment_1RectTransform.Find("Mask/Icon").transform.GetComponent<Image>(), baseSkillId, 0);
+			self.SetAugmentIcon(self.EG_SkillAugment_2RectTransform.Find("Mask/Icon").transform.GetComponent<Image>(), baseSkillId, 1);
 		}
 
-		public static void SetClickHandler(this Scroll_Item_SkillAugmentItem self, Action<SkillAugmentInfo> clickHandler)
+		public static void SetClickHandler(this Scroll_Item_SkillAugmentItem self, Action<int> clickHandler)
 		{
 			self.ClickHandler = clickHandler;
 		}
 
 		public static void OnSetSelected(this Scroll_Item_SkillAugmentItem self, int baseSkillId)
 		{
-			self.E_HighlightImage.gameObject.SetActive(self.SkillAugmentInfo != null && self.SkillAugmentInfo.BaseSkillId == baseSkillId);
+			self.E_HighlightImage.gameObject.SetActive(self.BaseSkillId != 0 && self.BaseSkillId == baseSkillId);
 		}
 
 		private static void OnClick(this Scroll_Item_SkillAugmentItem self)
 		{
-			self.ClickHandler?.Invoke(self.SkillAugmentInfo);
+			self.ClickHandler?.Invoke(self.BaseSkillId);
 		}
 
-		private static void SetAugmentIcon(this Scroll_Item_SkillAugmentItem self, Image image, SkillAugmentInfo skillAugmentInfo, int tierIndex)
+		private static void SetAugmentIcon(this Scroll_Item_SkillAugmentItem self, Image image, int baseSkillId, int tierIndex)
 		{
-			if (skillAugmentInfo.ActiveAugmentIds == null || tierIndex >= skillAugmentInfo.ActiveAugmentIds.Count)
-			{
-				image.gameObject.SetActive(false);
-				return;
-			}
-
-			int augmentId = skillAugmentInfo.ActiveAugmentIds[tierIndex];
+			List<int> augmentIds = self.Root().GetComponent<SkillSetComponentC>().SkillAugmentList;
+			int augmentId = SkillAugmentHelper.GetSelectedAugmentId(augmentIds, baseSkillId, tierIndex + 2);
 			SkillAugmentConfig augmentConfig = SkillAugmentConfigCategory.Instance.GetOrDefault(augmentId);
 			if (augmentId == 0 || augmentConfig == null || string.IsNullOrEmpty(augmentConfig.Icon))
 			{

@@ -23,7 +23,10 @@ namespace ET
         {
             Id = _buf.ReadInt();
             Name = _buf.ReadString();
-            {int n0 = _buf.ReadSize(); AddPropreList = new System.Collections.Generic.List<SkillAugmentEffect>(n0);for(var i0 = 0 ; i0 < n0 ; i0++) { SkillAugmentEffect _e0;  _e0 = global::ET.SkillAugmentEffect.DeserializeSkillAugmentEffect(_buf); AddPropreList.Add(_e0);}}
+            BaseSkillId = _buf.ReadInt();
+            BaseSkillId_Ref = null;
+            Level = _buf.ReadInt();
+            {int n0 = _buf.ReadSize(); AddPropreList = new System.Collections.Generic.List<PropEffect>(n0);for(var i0 = 0 ; i0 < n0 ; i0++) { PropEffect _e0;  _e0 = global::ET.PropEffect.DeserializePropEffect(_buf); AddPropreList.Add(_e0);}}
 
             PostInit();
         }
@@ -44,9 +47,21 @@ namespace ET
         public string Name;
 
         /// <summary>
+        /// 属于那个技能
+        /// </summary>
+        public int BaseSkillId;
+
+        public SkillConfig BaseSkillId_Ref { get; private set; }
+
+        /// <summary>
+        /// 技能多少级解锁
+        /// </summary>
+        public int Level;
+
+        /// <summary>
         /// 附加
         /// </summary>
-        public System.Collections.Generic.List<SkillAugmentEffect> AddPropreList;
+        public System.Collections.Generic.List<PropEffect> AddPropreList;
 
 
         public const int __ID__ = -1162302846;
@@ -56,6 +71,8 @@ namespace ET
         {
             
             
+            BaseSkillId_Ref = SkillConfigCategory.Instance.GetOrDefault(BaseSkillId);
+            
             foreach (var _e in AddPropreList) { _e?.ResolveRef(); }
         }
 
@@ -64,6 +81,8 @@ namespace ET
             return "{ "
             + "Id:" + Id + ","
             + "Name:" + Name + ","
+            + "BaseSkillId:" + BaseSkillId + ","
+            + "Level:" + Level + ","
             + "AddPropreList:" + Luban.StringUtil.CollectionToString(AddPropreList) + ","
             + "}";
         }

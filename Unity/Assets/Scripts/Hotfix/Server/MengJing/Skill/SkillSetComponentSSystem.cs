@@ -750,7 +750,7 @@ namespace ET.Server
         }
 
         /// <summary>
-        /// 收集天赋、龙印、宝石天赋、符文当前生效的全部效果
+        /// 收集天赋、龙印、宝石天赋、符文、技能增幅当前生效的全部效果
         /// </summary>
         private static List<PropEffect> GetAllEffects(this SkillSetComponentS self)
         {
@@ -758,43 +758,29 @@ namespace ET.Server
             effects.AddRange(self.GetLongYinEffects());
             effects.AddRange(self.GetGemTalentEffects());
             effects.AddRange(self.GetRuneEffects());
+            effects.AddRange(self.GetSkillAugmentEffects());
             return effects;
         }
 
         /// <summary>
-        /// 收集当前技能已激活附魔的效果
+        /// 收集已激活的技能增幅效果，具体作用在哪个技能由效果里的 SkillIds 过滤
         /// </summary>
-        private static List<SkillAugmentEffect> GetSkillAugmentEffects(this SkillSetComponentS self, int skillId)
+        private static List<PropEffect> GetSkillAugmentEffects(this SkillSetComponentS self)
         {
-            List<SkillAugmentEffect> effects = new List<SkillAugmentEffect>();
+            List<PropEffect> effects = new List<PropEffect>();
 
             if (self.SkillAugmentList == null || self.SkillAugmentList.Count == 0)
             {
                 return effects;
             }
 
-            int baseSkillId = SkillConfigCategory.Instance.GetInitSkill(skillId);
-            SkillAugmentInfo augmentInfo = self.SkillAugmentList.Find(info => info.BaseSkillId == baseSkillId);
-            if (augmentInfo == null || augmentInfo.ActiveAugmentIds == null)
+            for (int i = 0; i < self.SkillAugmentList.Count; i++)
             {
-                return effects;
-            }
-
-            for (int i = 0; i < augmentInfo.ActiveAugmentIds.Count; i++)
-            {
-                int augmentId = augmentInfo.ActiveAugmentIds[i];
-                if (augmentId == 0)
+                SkillAugmentConfig augmentConfig = SkillAugmentConfigCategory.Instance.GetOrDefault(self.SkillAugmentList[i]);
+                if (augmentConfig != null)
                 {
-                    continue;
+                    effects.AddRange(augmentConfig.AddPropreList);
                 }
-
-                SkillAugmentConfig augmentConfig = SkillAugmentConfigCategory.Instance.GetOrDefault(augmentId);
-                if (augmentConfig == null)
-                {
-                    continue;
-                }
-
-                effects.AddRange(augmentConfig.AddPropreList);
             }
 
             return effects;
@@ -803,11 +789,10 @@ namespace ET.Server
         public static Dictionary<int, float> GetSkillPropertyAdd(this SkillSetComponentS self, int skillId)
         {
             List<PropEffect> effects = self.GetAllEffects();
-            List<SkillAugmentEffect> augmentEffects = self.GetSkillAugmentEffects(skillId);
 
             Dictionary<int, float> HideProList = new Dictionary<int, float>();
 
-            //天赋、龙印、宝石天赋的技能属性
+            //天赋、龙印、宝石天赋、符文以及已激活增幅的技能属性
             for (int i = 0; i < effects.Count; i++)
             {
                 if (effects[i] is SkillPropertyAdd effect && effect.SkillIds.Contains(skillId))
@@ -816,28 +801,19 @@ namespace ET.Server
                 }
             }
 
-            //增幅的技能属性
-            for (int i = 0; i < augmentEffects.Count; i++)
-            {
-                if (augmentEffects[i] is AugmentSkillPropertyAdd augmentEffect)
-                {
-                    PropEffectHelper.AddOrMerge(HideProList, augmentEffect.Attribute, (float)augmentEffect.Value);
-                }
-            }
-
             return HideProList.Count == 0 ? null : HideProList;
         }
 
-        public static List<int> GetSkillIdAdd(this SkillSetComponentS self, int skillId)
+        public static List<int> GetSkillCastAdd(this SkillSetComponentS self, int skillId)
         {
-            List<int> addSkills = new List<int>();
+            List<PropEffect> effects = self.GetAllEffects();
 
-            List<SkillAugmentEffect> augmentEffects = self.GetSkillAugmentEffects(skillId);
-            for (int i = 0; i < augmentEffects.Count; i++)
+            List<int> addSkills = new List<int>();
+            for (int i = 0; i < effects.Count; i++)
             {
-                if (augmentEffects[i] is AugmentSkillIdAdd augmentEffect)
+                if (effects[i] is SkillCastAdd effect && effect.SkillIds.Contains(skillId))
                 {
-                    addSkills.Add(augmentEffect.SkillId);
+                    addSkills.Add(effect.SkillId);
                 }
             }
 
@@ -861,7 +837,6 @@ namespace ET.Server
         public static List<int> GetBuffIdAdd(this SkillSetComponentS self, int skillId)
         {
             List<PropEffect> effects = self.GetAllEffects();
-            List<SkillAugmentEffect> augmentEffects = self.GetSkillAugmentEffects(skillId);
 
             List<int> addBuffs = new List<int>();
             for (int i = 0; i < effects.Count; i++)
@@ -872,22 +847,12 @@ namespace ET.Server
                 }
             }
 
-            //增幅
-            for (int i = 0; i < augmentEffects.Count; i++)
-            {
-                if (augmentEffects[i] is AugmentBuffIdAdd augmentEffect)
-                {
-                    addBuffs.Add(augmentEffect.BuffId);
-                }
-            }
-
             return addBuffs.Count == 0 ? null : addBuffs;
         }
 
         public static List<int> GetBuffInitIdAdd(this SkillSetComponentS self, int skillId)
         {
             List<PropEffect> effects = self.GetAllEffects();
-            List<SkillAugmentEffect> augmentEffects = self.GetSkillAugmentEffects(skillId);
 
             List<int> addBuffs = new List<int>();
             for (int i = 0; i < effects.Count; i++)
@@ -895,15 +860,6 @@ namespace ET.Server
                 if (effects[i] is BuffInitIdAdd effect && effect.SkillIds.Contains(skillId))
                 {
                     addBuffs.Add(effect.BuffId);
-                }
-            }
-
-            //增幅
-            for (int i = 0; i < augmentEffects.Count; i++)
-            {
-                if (augmentEffects[i] is AugmentBuffInitIdAdd augmentEffect)
-                {
-                    addBuffs.Add(augmentEffect.BuffId);
                 }
             }
 
@@ -1157,12 +1113,13 @@ namespace ET.Server
         }
 
         /// <summary>
-        /// 根据当前技能列表初始化技能增幅选项。
-        /// ActiveAugmentIds 的下标对应增幅层级，0 表示该层级尚未激活增幅。
+        /// 根据当前技能列表刷新技能增幅，并清掉已不在技能列表里的增幅 Id。
         /// </summary>
-        private static void InitSkillAugments(this SkillSetComponentS self, int occ)
+        public static void RefreshSkillAugments(this SkillSetComponentS self)
         {
-            self.SkillAugmentList ??= new List<SkillAugmentInfo>();
+            self.SkillAugmentList ??= new List<int>();
+
+            int occ = self.GetParent<Unit>().GetComponent<UserInfoComponentS>().GetOcc();
 
             HashSet<int> baseSkillIds = new HashSet<int>();
             for (int i = 0; i < self.SkillList.Count; i++)
@@ -1196,31 +1153,13 @@ namespace ET.Server
                 }
             }
 
-            // 删除已不在技能列表中或没有增幅选项配置的技能记录
+            // 删除已不在技能列表中的增幅
             for (int i = self.SkillAugmentList.Count - 1; i >= 0; i--)
             {
-                SkillAugmentInfo skillAugmentInfo = self.SkillAugmentList[i];
-                if (!baseSkillIds.Contains(skillAugmentInfo.BaseSkillId))
+                SkillAugmentConfig augmentConfig = SkillAugmentConfigCategory.Instance.GetOrDefault(self.SkillAugmentList[i]);
+                if (augmentConfig == null || !baseSkillIds.Contains(augmentConfig.BaseSkillId))
                 {
                     self.SkillAugmentList.RemoveAt(i);
-                }
-            }
-
-            foreach (int baseSkillId in baseSkillIds)
-            {
-                SkillAugmentInfo skillAugmentInfo = self.SkillAugmentList.Find(info => info.BaseSkillId == baseSkillId);
-
-                if (skillAugmentInfo == null)
-                {
-                    skillAugmentInfo = SkillAugmentInfo.Create();
-                    skillAugmentInfo.BaseSkillId = baseSkillId;
-                    self.SkillAugmentList.Add(skillAugmentInfo);
-                }
-
-                // 为两个增幅孔位预留当前激活项
-                while (skillAugmentInfo.ActiveAugmentIds.Count < SkillAugmentSlotCount)
-                {
-                    skillAugmentInfo.ActiveAugmentIds.Add(0);
                 }
             }
         }
@@ -1233,16 +1172,10 @@ namespace ET.Server
             }
 
             int baseSkillId = SkillConfigCategory.Instance.GetInitSkill(skillId);
-            if (SkillAugmentOptionsConfigCategory.Instance.Contain(baseSkillId))
+            if (SkillAugmentHelper.HasAugment(baseSkillId))
             {
                 baseSkillIds.Add(baseSkillId);
             }
-        }
-
-        public static void RefreshSkillAugments(this SkillSetComponentS self)
-        {
-            int occ = self.GetParent<Unit>().GetComponent<UserInfoComponentS>().GetOcc();
-            self.InitSkillAugments(occ);
         }
 
         public static void OnLogin(this SkillSetComponentS self, int occ)
@@ -1291,52 +1224,43 @@ namespace ET.Server
                 }
             }
 
-            self.InitSkillAugments(occ);
+            self.RefreshSkillAugments();
         }
 
-        public static int SetSkillAugment(this SkillSetComponentS self, int baseSkillId, int tierIndex, int augmentId)
+        public static int SetSkillAugment(this SkillSetComponentS self, int augmentId)
         {
+            SkillAugmentConfig augmentConfig = SkillAugmentConfigCategory.Instance.GetOrDefault(augmentId);
+            if (augmentConfig == null)
+            {
+                return ErrorCode.ERR_ModifyData;
+            }
+
+            // Level 2/3 分别对应第 1/2 个增幅孔，增幅属于哪个技能也由配置决定。
+            int tierIndex = augmentConfig.Level - 2;
             if (tierIndex < 0 || tierIndex >= SkillAugmentSlotCount)
             {
                 return ErrorCode.ERR_ModifyData;
             }
 
-			// 第一个增幅孔要求技能达到 2 级，第二个增幅孔要求达到 3 级。
-			if (self.GetLearnedSkillLevel(baseSkillId) < tierIndex + 2)
-			{
-				return ErrorCode.ERR_ModifyData;
-			}
-
-            SkillAugmentOptionsConfig augmentOptions = SkillAugmentOptionsConfigCategory.Instance.GetOrDefault(baseSkillId);
-            SkillAugmentInfo augmentInfo = self.SkillAugmentList?.Find(info => info.BaseSkillId == baseSkillId);
-            if (augmentOptions == null || augmentInfo == null)
+            // 技能达到对应等级才能选该增幅。
+            if (self.GetLearnedSkillLevel(augmentConfig.BaseSkillId) < augmentConfig.Level)
             {
                 return ErrorCode.ERR_ModifyData;
             }
 
-            int[] allowedAugmentIds = tierIndex switch
-            {
-                0 => augmentOptions.SkillAugmentIds1,
-                1 => augmentOptions.SkillAugmentIds2,
-                _ => null,
-            };
+            self.SkillAugmentList ??= new List<int>();
 
-            if (augmentId == 0 || allowedAugmentIds == null || !allowedAugmentIds.Contains(augmentId))
+            // 同一技能同一孔位只保留一个增幅
+            for (int i = self.SkillAugmentList.Count - 1; i >= 0; i--)
             {
-                return ErrorCode.ERR_ModifyData;
+                SkillAugmentConfig oldConfig = SkillAugmentConfigCategory.Instance.GetOrDefault(self.SkillAugmentList[i]);
+                if (oldConfig != null && oldConfig.BaseSkillId == augmentConfig.BaseSkillId && oldConfig.Level == augmentConfig.Level)
+                {
+                    self.SkillAugmentList.RemoveAt(i);
+                }
             }
 
-            while (augmentInfo.ActiveAugmentIds.Count < SkillAugmentSlotCount)
-            {
-                augmentInfo.ActiveAugmentIds.Add(0);
-            }
-
-            if (augmentInfo.ActiveAugmentIds[tierIndex] == augmentId)
-            {
-                return ErrorCode.ERR_Success;
-            }
-
-            augmentInfo.ActiveAugmentIds[tierIndex] = augmentId;
+            self.SkillAugmentList.Add(augmentId);
             return ErrorCode.ERR_Success;
         }
 
@@ -1356,19 +1280,7 @@ namespace ET.Server
 
 		private static void ResetSkillAugments(this SkillSetComponentS self)
 		{
-			if (self.SkillAugmentList == null)
-			{
-				return;
-			}
-
-			for (int i = 0; i < self.SkillAugmentList.Count; i++)
-			{
-				List<int> activeAugmentIds = self.SkillAugmentList[i].ActiveAugmentIds;
-				for (int j = 0; j < activeAugmentIds.Count; j++)
-				{
-					activeAugmentIds[j] = 0;
-				}
-			}
+			self.SkillAugmentList?.Clear();
 		}
 
         public static void OnChangeEquipIndex(this SkillSetComponentS self, int equipIndex)

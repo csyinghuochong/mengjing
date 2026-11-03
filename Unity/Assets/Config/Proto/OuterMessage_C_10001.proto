@@ -1006,6 +1006,7 @@ message SkillPro
     int32 SkillSource = 5; //1职业技能 2装备技能 3天赋技能 4 精灵技能 5 套装技能
 }
 
+// 已废弃：技能增幅改为只存 SkillAugmentConfig.Id，保留消息定义避免后续消息的 opcode 整体偏移
 message SkillAugmentInfo
 {
 	int32 BaseSkillId = 1;
@@ -1941,7 +1942,7 @@ message SkillSetInfo
 	repeated KeyValuePairInt TianFuList2 = 3;
 	repeated LifeShieldInfo LifeShieldList = 4;
 	int32 TianFuPlan = 5;
-	repeated SkillAugmentInfo SkillAugmentList = 6;
+	repeated int32 SkillAugmentList = 6;	//已激活的增幅Id（SkillAugmentConfig.Id）
 	repeated KeyValuePairInt LongYinList = 7;
 }
 
@@ -7900,9 +7901,7 @@ message M2C_SingleHappyOperateResponse // ILocationResponse
 message C2M_SkillAugmentSetRequest // ILocationRequest
 {
 	int32 RpcId = 90;
-	int32 BaseSkillId = 1;
-	int32 TierIndex = 2;
-	int32 AugmentId = 3;
+	int32 AugmentId = 1;
 }
 
 message M2C_SkillAugmentSetResponse // ILocationResponse
@@ -7910,7 +7909,7 @@ message M2C_SkillAugmentSetResponse // ILocationResponse
 	int32 RpcId = 90;
 	int32 Error = 91;
 	string Message = 92;
-	SkillAugmentInfo SkillAugmentInfo = 1;
+	repeated int32 SkillAugmentList = 1;	//设置后玩家已激活的增幅Id
 }
 
 message StoryInfo

@@ -710,12 +710,25 @@ namespace ET.Server
               }
           }
 
+          /// <summary>
+          /// 为追加释放创建独立的施法指令，只继承目标信息，避免改写原请求影响延迟的双重施法。
+          /// </summary>
+          private static C2M_SkillCmd CreateCastCmd(C2M_SkillCmd source, int skillId)
+          {
+              C2M_SkillCmd cmd = C2M_SkillCmd.Create();
+              cmd.SkillID = skillId;
+              cmd.TargetID = source.TargetID;
+              cmd.TargetAngle = source.TargetAngle;
+              cmd.TargetDistance = source.TargetDistance;
+              return cmd;
+          }
+
           public static async ETTask TriggerAddSkill(this SkillManagerComponentS self, C2M_SkillCmd c2M_SkillCmd, int skillId)
           {
               SkillConfig skillConfig = SkillConfigCategory.Instance.Get(skillId);
               SkillSetComponentS skillset = self.GetParent<Unit>().GetComponent<SkillSetComponentS>();
-              List<int> augmentAddSkills = skillset != null ? skillset.GetSkillIdAdd(skillId) : null;
-              if (skillConfig.AddSkillID == 0 && (augmentAddSkills == null || augmentAddSkills.Count == 0))
+              List<int> skillCastAddSkills = skillset != null ? skillset.GetSkillCastAdd(skillId) : null;
+              if (skillConfig.AddSkillID == 0 && (skillCastAddSkills == null || skillCastAddSkills.Count == 0))
               {
                   return;
               }
@@ -733,24 +746,22 @@ namespace ET.Server
                   }
                   else
                   {
-                      c2M_SkillCmd.SkillID = addSkillId;
-                      self.OnUseSkill(c2M_SkillCmd, false);
+                      self.OnUseSkill(CreateCastCmd(c2M_SkillCmd, addSkillId), false);
                   }
               }
 
-              if (augmentAddSkills != null)
+              if (skillCastAddSkills != null)
               {
-                  for (int i = 0; i < augmentAddSkills.Count; i++)
+                  for (int i = 0; i < skillCastAddSkills.Count; i++)
                   {
-                      int augmentAddSkillId = augmentAddSkills[i];
-                      if (!SkillConfigCategory.Instance.Contain(augmentAddSkillId))
+                      int skillCastAddSkillId = skillCastAddSkills[i];
+                      if (!SkillConfigCategory.Instance.Contain(skillCastAddSkillId))
                       {
-                          Log.Error($"SkillAugment SkillIdAdd无效：  {skillId} {augmentAddSkillId}");
+                          Log.Error($"SkillCastAdd无效：  {skillId} {skillCastAddSkillId}");
                           continue;
                       }
 
-                      c2M_SkillCmd.SkillID = augmentAddSkillId;
-                      self.OnUseSkill(c2M_SkillCmd, false);
+                      self.OnUseSkill(CreateCastCmd(c2M_SkillCmd, skillCastAddSkillId), false);
                   }
               }
 
@@ -775,8 +786,7 @@ namespace ET.Server
                   {
                       continue;
                   }
-                  c2M_SkillCmd.SkillID = selfSkillId;
-                  self.OnUseSkill(c2M_SkillCmd, false);
+                  self.OnUseSkill(CreateCastCmd(c2M_SkillCmd, selfSkillId), false);
               }
           }
 

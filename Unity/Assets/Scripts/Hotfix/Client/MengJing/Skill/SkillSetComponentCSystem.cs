@@ -28,21 +28,13 @@ namespace ET.Client
             self.LongYinList = skillSetInfo.LongYinList;
         }
 
-        public static void UpdateSkillAugment(this SkillSetComponentC self, SkillAugmentInfo skillAugmentInfo)
+        public static void UpdateSkillAugment(this SkillSetComponentC self, List<int> augmentIds)
         {
-            if (skillAugmentInfo == null)
+            self.SkillAugmentList.Clear();
+            if (augmentIds != null)
             {
-                return;
+                self.SkillAugmentList.AddRange(augmentIds);
             }
-
-            int index = self.SkillAugmentList.FindIndex(info => info.BaseSkillId == skillAugmentInfo.BaseSkillId);
-            if (index >= 0)
-            {
-                self.SkillAugmentList[index] = skillAugmentInfo;
-                return;
-            }
-
-            self.SkillAugmentList.Add(skillAugmentInfo);
         }
 
         public static List<KeyValuePairInt> TianFuList(this SkillSetComponentC self)

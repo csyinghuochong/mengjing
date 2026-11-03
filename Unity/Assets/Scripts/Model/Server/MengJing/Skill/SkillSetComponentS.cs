@@ -30,7 +30,9 @@ namespace ET.Server
         /// </summary>
         public List<LifeShieldInfo> LifeShieldList = new List<LifeShieldInfo>();
         
-        // 技能增幅
-        public List<SkillAugmentInfo> SkillAugmentList { get; set; } = new();
+        /// <summary>
+        /// 已激活的技能增幅Id（SkillAugmentConfig.Id）
+        /// </summary>
+        public List<int> SkillAugmentList { get; set; } = new();
     }
 }

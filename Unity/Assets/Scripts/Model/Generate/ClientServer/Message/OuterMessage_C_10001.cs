@@ -4351,6 +4351,7 @@ namespace ET
         }
     }
 
+    // 已废弃：技能增幅改为只存 SkillAugmentConfig.Id，保留消息定义避免后续消息的 opcode 整体偏移
     [MemoryPackable]
     [Message(OuterMessage.SkillAugmentInfo)]
     public partial class SkillAugmentInfo : MessageObject
@@ -8435,8 +8436,11 @@ namespace ET
         [MemoryPackOrder(4)]
         public int TianFuPlan { get; set; }
 
+        /// <summary>
+        /// 已激活的增幅Id（SkillAugmentConfig.Id）
+        /// </summary>
         [MemoryPackOrder(5)]
-        public List<SkillAugmentInfo> SkillAugmentList { get; set; } = new();
+        public List<int> SkillAugmentList { get; set; } = new();
 
         [MemoryPackOrder(6)]
         public List<KeyValuePairInt> LongYinList { get; set; } = new();
@@ -34434,12 +34438,6 @@ namespace ET
         public int RpcId { get; set; }
 
         [MemoryPackOrder(0)]
-        public int BaseSkillId { get; set; }
-
-        [MemoryPackOrder(1)]
-        public int TierIndex { get; set; }
-
-        [MemoryPackOrder(2)]
         public int AugmentId { get; set; }
 
         public override void Dispose()
@@ -34450,8 +34448,6 @@ namespace ET
             }
 
             this.RpcId = default;
-            this.BaseSkillId = default;
-            this.TierIndex = default;
             this.AugmentId = default;
 
             ObjectPool.Instance.Recycle(this);
@@ -34476,8 +34472,11 @@ namespace ET
         [MemoryPackOrder(91)]
         public string Message { get; set; }
 
+        /// <summary>
+        /// 设置后玩家已激活的增幅Id
+        /// </summary>
         [MemoryPackOrder(0)]
-        public SkillAugmentInfo SkillAugmentInfo { get; set; }
+        public List<int> SkillAugmentList { get; set; } = new();
 
         public override void Dispose()
         {
@@ -34489,7 +34488,7 @@ namespace ET
             this.RpcId = default;
             this.Error = default;
             this.Message = default;
-            this.SkillAugmentInfo = default;
+            this.SkillAugmentList.Clear();
 
             ObjectPool.Instance.Recycle(this);
         }
