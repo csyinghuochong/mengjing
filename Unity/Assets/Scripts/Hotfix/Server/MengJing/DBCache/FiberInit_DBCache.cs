@@ -11,7 +11,8 @@ namespace ET.Server
             root.AddComponent<MessageSender>();
             root.AddComponent<CoroutineLockComponent>();
             root.AddComponent<UnitCacheComponent>();
-            root.AddComponent<DBManagerComponent>();
+            DBManagerComponent dbManagerComponent = root.AddComponent<DBManagerComponent>();
+            await SkillAugmentLegacyCleaner.Clear(dbManagerComponent, root.Zone());
             root.AddComponent<TimerComponent>();
             root.AddComponent<LocationProxyComponent>();
             root.AddComponent<MessageLocationSenderComponent>();
