@@ -194,7 +194,7 @@ namespace ET.Client
 
 				bool isChecked = self.SelectRuneIds.Contains(bagItem.DataId);
 				bagItem.SetSelected(!self.IsDecomposeMode && bagItem.DataId == self.SelectRuneId);
-				bagItem.SetCheck(self.IsDecomposeMode && isChecked);
+				bagItem.SetCheck(self.IsDecomposeMode, self.IsDecomposeMode && isChecked);
 			}
 
 			if (self.IsDecomposeMode)
@@ -420,7 +420,7 @@ namespace ET.Client
 				Scroll_Item_RuneBagItem selectItem = self.SelectItems[i];
 				selectItem.uiTransform.gameObject.SetActive(true);
 				selectItem.OnInitUI(selectedList[i]);
-				selectItem.SetCheck(true);
+				selectItem.SetCheck(true, true);
 			}
 
 			//多出来的条目复用隐藏

@@ -58,12 +58,12 @@ namespace ET.Client
 		}
 
 		/// <summary>
-		/// 勾选状态（分解模式，多选）
+		/// 勾选状态（分解模式，多选）：勾选框底图一直显示，勾中了才显示里面的对勾
 		/// </summary>
-		public static void SetCheck(this Scroll_Item_RuneBagItem self, bool isChecked)
+		public static void SetCheck(this Scroll_Item_RuneBagItem self, bool showBg, bool isChecked)
 		{
-			self.E_GouXuanBGImage.gameObject.SetActive(isChecked);
-			self.E_GouXuanImage.gameObject.SetActive(isChecked);
+			self.E_GouXuanBGImage.gameObject.SetActive(showBg);
+			self.E_GouXuanImage.gameObject.SetActive(showBg && isChecked);
 		}
 
 		private static void OnClick(this Scroll_Item_RuneBagItem self)
