@@ -144,8 +144,8 @@ namespace ET.Client
 				runeList.Add(rune);
 			}
 
-			//按配置id排，同一条成长线就是按等级从上往下
-			runeList.Sort((a, b) => a.ConfigId.CompareTo(b.ConfigId));
+			//按等级从高到低排，同级的再按配置id排
+			runeList.Sort(CompareByLv);
 
 			ResourcesLoaderComponent resourcesLoaderComponent = self.Root().GetComponent<ResourcesLoaderComponent>();
 			for (int i = 0; i < runeList.Count; i++)
@@ -396,6 +396,9 @@ namespace ET.Client
 				totalShard += runeConfig.DecomposeShard;
 			}
 
+			//已选列表也按等级从高到低排
+			selectedList.Sort(CompareByLv);
+
 			self.E_DecomposeRuneNumText.text = $"已选择{selectedList.Count}枚符文";
 			self.E_DecomposeShardNumText.text = $"x{totalShard}";
 
@@ -497,6 +500,23 @@ namespace ET.Client
 		}
 
 		#endregion
+
+		/// <summary>
+		/// 按符文等级从高到低排，同级的再按配置id排
+		/// </summary>
+		private static int CompareByLv(RuneData a, RuneData b)
+		{
+			RuneConfig configA = RuneConfigCategory.Instance.GetOrDefault(a.ConfigId);
+			RuneConfig configB = RuneConfigCategory.Instance.GetOrDefault(b.ConfigId);
+			int lvA = configA == null ? 0 : configA.Lv;
+			int lvB = configB == null ? 0 : configB.Lv;
+			if (lvA != lvB)
+			{
+				return lvB.CompareTo(lvA);
+			}
+
+			return a.ConfigId.CompareTo(b.ConfigId);
+		}
 
 		/// <summary>
 		/// 符文图标：RuneConfig.Icon 就是 RoleSkillIcon 图集下的图标名
