@@ -46,16 +46,10 @@ namespace ET.Client
 		}
 
 		/// <summary>
-		/// 点 E_Return：分解模式下先退出分解模式回列表，再点才回到符文主界面
+		/// 点 E_Return 回到符文主界面（分解模式由 E_EndDecompose 负责退出）
 		/// </summary>
 		private static void OnReturnButton(this ES_RuneBag self)
 		{
-			if (self.IsDecomposeMode)
-			{
-				self.ExitDecomposeMode();
-				return;
-			}
-
 			self.GetParent<ES_Rune>().CloseRuneBag();
 		}
 
@@ -92,6 +86,7 @@ namespace ET.Client
 		/// </summary>
 		public static void OnUpdateUI(this ES_RuneBag self)
 		{
+			self.RefreshDecomposeButtons();
 			self.RefreshRuneItems();
 			self.RefreshSelect();
 		}
@@ -319,7 +314,18 @@ namespace ET.Client
 		private static void InitDecomposePanel(this ES_RuneBag self)
 		{
 			self.E_StartDecomposeButton.AddListener(self.OnStartDecomposeButton);
+			self.E_EndDecomposeButton.AddListener(self.OnEndDecomposeButton);
 			self.EG_RuneDecomposeRectTransform.gameObject.SetActive(false);
+			self.RefreshDecomposeButtons();
+		}
+
+		/// <summary>
+		/// 普通模式显示批量分解，分解模式显示结束分解
+		/// </summary>
+		private static void RefreshDecomposeButtons(this ES_RuneBag self)
+		{
+			self.E_StartDecomposeButton.gameObject.SetActive(!self.IsDecomposeMode);
+			self.E_EndDecomposeButton.gameObject.SetActive(self.IsDecomposeMode);
 		}
 
 		/// <summary>
@@ -328,6 +334,14 @@ namespace ET.Client
 		private static void OnStartDecomposeButton(this ES_RuneBag self)
 		{
 			self.EnterDecomposeMode();
+		}
+
+		/// <summary>
+		/// 点结束分解：退出分解模式
+		/// </summary>
+		private static void OnEndDecomposeButton(this ES_RuneBag self)
+		{
+			self.ExitDecomposeMode();
 		}
 
 		/// <summary>
