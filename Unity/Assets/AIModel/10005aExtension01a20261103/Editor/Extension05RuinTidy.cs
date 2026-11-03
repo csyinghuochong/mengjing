@@ -1,0 +1,12 @@
+#if UNITY_EDITOR
+using System;using System.IO;using System.Linq;using UnityEngine;using UnityEditor;using UnityEditor.SceneManagement;
+public static partial class Extension05Tools{
+static Bounds MeshBounds(GameObject g){var rr=g.GetComponentsInChildren<MeshRenderer>();var b=rr[0].bounds;foreach(var r in rr)b.Encapsulate(r.bounds);return b;}
+static void MoveGround(Transform t,float x,float z){var b=MeshBounds(t.gameObject);var p=G(x,z,.01f);t.position+=new Vector3(p.x-b.center.x,p.y-b.min.y,p.z-b.center.z);}
+static void RuinTidy(){var s=Load("10005a");var all=All(s);ground=all.Select(t=>t.GetComponent<Terrain>()).First(t=>t&&t.gameObject.activeInHierarchy);var root=all.First(t=>t.name=="10005a_Ruin_Identity_Pass");art=root;var fire=all.First(t=>t.name=="Entry_Camp_Lit_Fire");var b=MeshBounds(fire.gameObject);fire.localScale*=1.3f/b.size.x;MoveGround(fire,18.2f,27.2f);var l=fire.GetComponentInChildren<Light>();if(l)l.transform.position=G(18.2f,27.2f,.8f);foreach(var ps in fire.GetComponentsInChildren<ParticleSystem>()){ps.Simulate(2,true,true);ps.Play();}
+var east=all.First(t=>t.name=="Guardian_Statue_East");b=MeshBounds(east.gameObject);east.localScale*=3.4f/b.size.y;MoveGround(east,88.6f,80.8f);var court=all.First(t=>t.name=="Weathered_Courtyard_Statue");b=MeshBounds(court.gameObject);court.localScale*=3.1f/b.size.y;MoveGround(court,27.5f,48.8f);
+foreach(var t in all.Where(t=>t.name=="Entry_Camp_Supply_Crates"||t.name=="Eastern_Ruin_Supply_Crates")){var cb=MeshBounds(t.gameObject);t.localScale*=.72f;MoveGround(t,cb.center.x,cb.center.z);}all.First(t=>t.name=="Eastern_Ruin_Broken_Barrel").gameObject.SetActive(false);
+var barrels=all.First(t=>t.name=="Eastern_Ruin_Supply_Barrels");barrels.localScale*=.7f;MoveGround(barrels,84.7f,51.7f);
+EditorSceneManager.SaveScene(s);RuinShots();Shot(s,"Ruins_Camp_Close",new Vector3(28,17,15),new Vector3(18.3f,3.5f,28.8f),7.5f);Shot(s,"Ruins_Sanctuary_Front",new Vector3(74,20,65),new Vector3(82,5,85),14);EditorSceneManager.SaveScene(s);var lines=new System.Collections.Generic.List<string>();lines.Add("Active Trailing_Ruin_Vine="+All(s).Count(t=>t.name=="Trailing_Ruin_Vine"&&t.gameObject.activeInHierarchy));lines.Add("Added statues="+root.GetComponentsInChildren<Transform>().Count(t=>t.name.Contains("Statue")));lines.Add("Campfire mesh width="+MeshBounds(fire.gameObject).size.x);lines.Add("Scene saved="+!s.isDirty);lines.Add("Terrain data="+AssetDatabase.GetAssetPath(ground.terrainData));File.WriteAllLines(W+"/outputs/RuinsPass/Validation.txt",lines);ValidateExtension();}
+}
+#endif
