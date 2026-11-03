@@ -8124,7 +8124,7 @@ message M2C_RuneUpgradeResponse // ILocationResponse
 message C2M_RuneDecomposeRequest // ILocationRequest
 {
 	int32 RpcId = 90;
-	int64 RuneId = 1;	//RuneData.Id，只能分解背包里的
+	repeated int64 RuneIds = 1;	//RuneData.Id，只能分解背包里的
 }
 
 message M2C_RuneDecomposeResponse // ILocationResponse

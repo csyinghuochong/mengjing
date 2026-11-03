@@ -380,24 +380,33 @@ namespace ET.Server
         }
 
         /// <summary>
-        /// 分解：按当前等级那一行的 DecomposeShard 返还碎片。镶嵌中的要先卸下
+        /// 批量分解：一次把列表里能分解的都分解掉，按每枚当前等级那一行的 DecomposeShard 返还碎片。
+        /// 镶嵌中的要先卸下，跳过并返回对应错误，其余照常分解
         /// </summary>
-        public static int OnDecomposeRune(this RuneComponent self, long runeId)
+        public static int OnDecomposeRunes(this RuneComponent self, List<long> runeIds)
         {
-            RuneConfig config = self.GetRuneConfig(runeId);
-            if (config == null)
+            int result = ErrorCode.ERR_Success;
+            for (int i = 0; i < runeIds.Count; i++)
             {
-                return ErrorCode.ERR_RuneNotExist;
+                long runeId = runeIds[i];
+                RuneConfig config = self.GetRuneConfig(runeId);
+                if (config == null)
+                {
+                    result = ErrorCode.ERR_RuneNotExist;
+                    continue;
+                }
+
+                if (self.GetSocketedSlot(runeId) != null)
+                {
+                    result = ErrorCode.ERR_RuneEquipped;
+                    continue;
+                }
+
+                self.RemoveRune(runeId);
+                self.AddShard(config.DecomposeShard);
             }
 
-            if (self.GetSocketedSlot(runeId) != null)
-            {
-                return ErrorCode.ERR_RuneEquipped;
-            }
-
-            self.RemoveRune(runeId);
-            self.AddShard(config.DecomposeShard);
-            return ErrorCode.ERR_Success;
+            return result;
         }
 
         #endregion

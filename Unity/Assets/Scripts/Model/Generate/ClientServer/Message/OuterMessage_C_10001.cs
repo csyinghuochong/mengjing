@@ -35409,7 +35409,7 @@ namespace ET
         /// RuneData.Id，只能分解背包里的
         /// </summary>
         [MemoryPackOrder(0)]
-        public long RuneId { get; set; }
+        public List<long> RuneIds { get; set; } = new();
 
         public override void Dispose()
         {
@@ -35419,7 +35419,7 @@ namespace ET
             }
 
             this.RpcId = default;
-            this.RuneId = default;
+            this.RuneIds.Clear();
 
             ObjectPool.Instance.Recycle(this);
         }

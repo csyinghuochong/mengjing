@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace ET.Client
 {
     public static class RuneNetHelper
@@ -73,12 +75,12 @@ namespace ET.Client
         }
 
         /// <summary>
-        /// 分解符文，只能分解背包里的，响应里带回最新的符文数据
+        /// 批量分解符文，一次可以分解多枚，只能分解背包里的，响应里带回最新的符文数据
         /// </summary>
-        public static async ETTask<int> DecomposeRune(Scene root, long runeId)
+        public static async ETTask<int> DecomposeRunes(Scene root, List<long> runeIds)
         {
             C2M_RuneDecomposeRequest request = C2M_RuneDecomposeRequest.Create();
-            request.RuneId = runeId;
+            request.RuneIds.AddRange(runeIds);
 
             M2C_RuneDecomposeResponse response = (M2C_RuneDecomposeResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
 

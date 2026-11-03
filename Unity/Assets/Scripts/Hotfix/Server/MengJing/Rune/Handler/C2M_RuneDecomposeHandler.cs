@@ -1,7 +1,7 @@
 namespace ET.Server
 {
     /// <summary>
-    /// 分解符文：只能分解背包里的，镶嵌中的要先卸下
+    /// 批量分解符文：一次可以分解多枚，只能分解背包里的，镶嵌中的要先卸下
     /// </summary>
     [MessageHandler(SceneType.Map)]
     public class C2M_RuneDecomposeHandler : MessageLocationHandler<Unit, C2M_RuneDecomposeRequest, M2C_RuneDecomposeResponse>
@@ -10,7 +10,7 @@ namespace ET.Server
         {
             RuneComponent runeComponent = unit.GetComponent<RuneComponent>();
 
-            response.Error = runeComponent.OnDecomposeRune(request.RuneId);
+            response.Error = runeComponent.OnDecomposeRunes(request.RuneIds);
             response.Info = runeComponent.GetInfo();
             await ETTask.CompletedTask;
         }

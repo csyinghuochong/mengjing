@@ -315,6 +315,7 @@ namespace ET.Client
 		{
 			self.E_StartDecomposeButton.AddListener(self.OnStartDecomposeButton);
 			self.E_EndDecomposeButton.AddListener(self.OnEndDecomposeButton);
+			self.E_DecomposeButton.AddListenerAsync(self.OnDecomposeButton);
 			self.EG_RuneDecomposeRectTransform.gameObject.SetActive(false);
 			self.RefreshDecomposeButtons();
 		}
@@ -392,7 +393,51 @@ namespace ET.Client
 			self.E_DecomposeRuneNumText.text = $"已选择{selectedList.Count}枚符文";
 			self.E_DecomposeShardNumText.text = $"x{totalShard}";
 
+			//没勾选符文时不能点确认分解
+			bool canDecompose = selectedList.Count > 0;
+			self.E_DecomposeButton.interactable = canDecompose;
+			CommonViewHelper.SetImageGray(self.Root(), self.E_DecomposeButton.gameObject, !canDecompose);
+
 			self.RefreshSelectItems(selectedList);
+		}
+
+		/// <summary>
+		/// 确认分解：勾选的符文id一次性打包发给服务端，回包里带最新的碎片和符文列表
+		/// </summary>
+		private static async ETTask OnDecomposeButton(this ES_RuneBag self)
+		{
+			if (self.SelectRuneIds.Count == 0)
+			{
+				return;
+			}
+
+			RuneComponentC runeComponent = self.Root().GetComponent<RuneComponentC>();
+			if (runeComponent == null)
+			{
+				return;
+			}
+
+			//等回包期间先锁住按钮，避免连点重复发
+			self.E_DecomposeButton.interactable = false;
+
+			int beforeShard = runeComponent.Shard;
+			int error = await RuneNetHelper.DecomposeRunes(self.Root(), self.SelectRuneIds);
+
+			self.SelectRuneIds.Clear();
+
+			if (error != ErrorCode.ERR_Success)
+			{
+				HintHelp.ShowErrorHint(self.Root(), error);
+			}
+
+			//实际返还的碎片按服务端回来的总数算，避免勾选里有分解失败的
+			int gainShard = runeComponent.Shard - beforeShard;
+			if (gainShard > 0)
+			{
+				FlyTipComponent.Instance.ShowFlyTip($"分解成功，获得符文碎片x{gainShard}");
+			}
+
+			self.OnUpdateUI();
 		}
 
 		/// <summary>
