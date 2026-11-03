@@ -135,6 +135,12 @@ namespace ET.Client
 					continue;
 				}
 
+				//分解模式下镶嵌中的符文不能分解，直接不显示
+				if (self.IsDecomposeMode && runeComponent.IsRuneSocketed(rune.Id))
+				{
+					continue;
+				}
+
 				runeList.Add(rune);
 			}
 
