@@ -246,8 +246,14 @@
     "NextId": 20102,
     "Lv": 1,
     "RuneType": 2,
-    "Des": "攻击力提升",
-    "AddPropreList": [],
+    "Des": "攻击力+20",
+    "AddPropreList": [
+      {
+        "$type": "RolePropertyAdd",
+        "NumericKey": 100401,
+        "Value": 20
+      }
+    ],
     "UpgradeCost": 100,
     "DecomposeShard": 50
   },
@@ -258,8 +264,14 @@
     "NextId": 20103,
     "Lv": 2,
     "RuneType": 2,
-    "Des": "攻击力提升",
-    "AddPropreList": [],
+    "Des": "攻击力+40",
+    "AddPropreList": [
+      {
+        "$type": "RolePropertyAdd",
+        "NumericKey": 100401,
+        "Value": 40
+      }
+    ],
     "UpgradeCost": 200,
     "DecomposeShard": 100
   },
@@ -270,8 +282,14 @@
     "NextId": 20104,
     "Lv": 3,
     "RuneType": 2,
-    "Des": "攻击力提升",
-    "AddPropreList": [],
+    "Des": "攻击力+60",
+    "AddPropreList": [
+      {
+        "$type": "RolePropertyAdd",
+        "NumericKey": 100401,
+        "Value": 60
+      }
+    ],
     "UpgradeCost": 300,
     "DecomposeShard": 150
   },
@@ -282,8 +300,14 @@
     "NextId": 20105,
     "Lv": 4,
     "RuneType": 2,
-    "Des": "攻击力提升",
-    "AddPropreList": [],
+    "Des": "攻击力+80",
+    "AddPropreList": [
+      {
+        "$type": "RolePropertyAdd",
+        "NumericKey": 100401,
+        "Value": 80
+      }
+    ],
     "UpgradeCost": 400,
     "DecomposeShard": 200
   },
@@ -294,8 +318,14 @@
     "NextId": 20106,
     "Lv": 5,
     "RuneType": 2,
-    "Des": "攻击力提升",
-    "AddPropreList": [],
+    "Des": "攻击力+100",
+    "AddPropreList": [
+      {
+        "$type": "RolePropertyAdd",
+        "NumericKey": 100401,
+        "Value": 100
+      }
+    ],
     "UpgradeCost": 500,
     "DecomposeShard": 250
   },
@@ -306,8 +336,14 @@
     "NextId": 20107,
     "Lv": 6,
     "RuneType": 2,
-    "Des": "攻击力提升",
-    "AddPropreList": [],
+    "Des": "攻击力+120",
+    "AddPropreList": [
+      {
+        "$type": "RolePropertyAdd",
+        "NumericKey": 100401,
+        "Value": 120
+      }
+    ],
     "UpgradeCost": 600,
     "DecomposeShard": 300
   },
@@ -318,8 +354,14 @@
     "NextId": 20108,
     "Lv": 7,
     "RuneType": 2,
-    "Des": "攻击力提升",
-    "AddPropreList": [],
+    "Des": "攻击力+140",
+    "AddPropreList": [
+      {
+        "$type": "RolePropertyAdd",
+        "NumericKey": 100401,
+        "Value": 140
+      }
+    ],
     "UpgradeCost": 700,
     "DecomposeShard": 350
   },
@@ -330,8 +372,14 @@
     "NextId": 20109,
     "Lv": 8,
     "RuneType": 2,
-    "Des": "攻击力提升",
-    "AddPropreList": [],
+    "Des": "攻击力+160",
+    "AddPropreList": [
+      {
+        "$type": "RolePropertyAdd",
+        "NumericKey": 100401,
+        "Value": 160
+      }
+    ],
     "UpgradeCost": 800,
     "DecomposeShard": 400
   },
@@ -342,8 +390,14 @@
     "NextId": 20110,
     "Lv": 9,
     "RuneType": 2,
-    "Des": "攻击力提升",
-    "AddPropreList": [],
+    "Des": "攻击力+180",
+    "AddPropreList": [
+      {
+        "$type": "RolePropertyAdd",
+        "NumericKey": 100401,
+        "Value": 180
+      }
+    ],
     "UpgradeCost": 900,
     "DecomposeShard": 450
   },
@@ -354,8 +408,14 @@
     "NextId": 0,
     "Lv": 10,
     "RuneType": 2,
-    "Des": "攻击力提升",
-    "AddPropreList": [],
+    "Des": "攻击力+200",
+    "AddPropreList": [
+      {
+        "$type": "RolePropertyAdd",
+        "NumericKey": 100401,
+        "Value": 200
+      }
+    ],
     "UpgradeCost": 0,
     "DecomposeShard": 500
   },
@@ -366,8 +426,14 @@
     "NextId": 20202,
     "Lv": 1,
     "RuneType": 2,
-    "Des": "攻击力提升",
-    "AddPropreList": [],
+    "Des": "攻击力+1%",
+    "AddPropreList": [
+      {
+        "$type": "RolePropertyAdd",
+        "NumericKey": 100402,
+        "Value": 0.01
+      }
+    ],
     "UpgradeCost": 100,
     "DecomposeShard": 50
   },
@@ -378,8 +444,14 @@
     "NextId": 20203,
     "Lv": 2,
     "RuneType": 2,
-    "Des": "攻击力提升",
-    "AddPropreList": [],
+    "Des": "攻击力+2%",
+    "AddPropreList": [
+      {
+        "$type": "RolePropertyAdd",
+        "NumericKey": 100402,
+        "Value": 0.02
+      }
+    ],
     "UpgradeCost": 200,
     "DecomposeShard": 100
   },
@@ -390,8 +462,14 @@
     "NextId": 20204,
     "Lv": 3,
     "RuneType": 2,
-    "Des": "攻击力提升",
-    "AddPropreList": [],
+    "Des": "攻击力+3%",
+    "AddPropreList": [
+      {
+        "$type": "RolePropertyAdd",
+        "NumericKey": 100402,
+        "Value": 0.03
+      }
+    ],
     "UpgradeCost": 300,
     "DecomposeShard": 150
   },
@@ -402,8 +480,14 @@
     "NextId": 20205,
     "Lv": 4,
     "RuneType": 2,
-    "Des": "攻击力提升",
-    "AddPropreList": [],
+    "Des": "攻击力+4%",
+    "AddPropreList": [
+      {
+        "$type": "RolePropertyAdd",
+        "NumericKey": 100402,
+        "Value": 0.04
+      }
+    ],
     "UpgradeCost": 400,
     "DecomposeShard": 200
   },
@@ -414,8 +498,14 @@
     "NextId": 20206,
     "Lv": 5,
     "RuneType": 2,
-    "Des": "攻击力提升",
-    "AddPropreList": [],
+    "Des": "攻击力+5%",
+    "AddPropreList": [
+      {
+        "$type": "RolePropertyAdd",
+        "NumericKey": 100402,
+        "Value": 0.05
+      }
+    ],
     "UpgradeCost": 500,
     "DecomposeShard": 250
   },
@@ -426,8 +516,14 @@
     "NextId": 20207,
     "Lv": 6,
     "RuneType": 2,
-    "Des": "攻击力提升",
-    "AddPropreList": [],
+    "Des": "攻击力+6%",
+    "AddPropreList": [
+      {
+        "$type": "RolePropertyAdd",
+        "NumericKey": 100402,
+        "Value": 0.06
+      }
+    ],
     "UpgradeCost": 600,
     "DecomposeShard": 300
   },
@@ -438,8 +534,14 @@
     "NextId": 20208,
     "Lv": 7,
     "RuneType": 2,
-    "Des": "攻击力提升",
-    "AddPropreList": [],
+    "Des": "攻击力+7%",
+    "AddPropreList": [
+      {
+        "$type": "RolePropertyAdd",
+        "NumericKey": 100402,
+        "Value": 0.07
+      }
+    ],
     "UpgradeCost": 700,
     "DecomposeShard": 350
   },
@@ -450,8 +552,14 @@
     "NextId": 20209,
     "Lv": 8,
     "RuneType": 2,
-    "Des": "攻击力提升",
-    "AddPropreList": [],
+    "Des": "攻击力+8%",
+    "AddPropreList": [
+      {
+        "$type": "RolePropertyAdd",
+        "NumericKey": 100402,
+        "Value": 0.08
+      }
+    ],
     "UpgradeCost": 800,
     "DecomposeShard": 400
   },
@@ -462,8 +570,14 @@
     "NextId": 20210,
     "Lv": 9,
     "RuneType": 2,
-    "Des": "攻击力提升",
-    "AddPropreList": [],
+    "Des": "攻击力+9%",
+    "AddPropreList": [
+      {
+        "$type": "RolePropertyAdd",
+        "NumericKey": 100402,
+        "Value": 0.09
+      }
+    ],
     "UpgradeCost": 900,
     "DecomposeShard": 450
   },
@@ -474,8 +588,14 @@
     "NextId": 0,
     "Lv": 10,
     "RuneType": 2,
-    "Des": "攻击力提升",
-    "AddPropreList": [],
+    "Des": "攻击力+10%",
+    "AddPropreList": [
+      {
+        "$type": "RolePropertyAdd",
+        "NumericKey": 100402,
+        "Value": 0.1
+      }
+    ],
     "UpgradeCost": 0,
     "DecomposeShard": 500
   },
@@ -486,8 +606,14 @@
     "NextId": 20302,
     "Lv": 1,
     "RuneType": 2,
-    "Des": "暴击概率提升",
-    "AddPropreList": [],
+    "Des": "暴击概率+0.5%",
+    "AddPropreList": [
+      {
+        "$type": "RolePropertyAdd",
+        "NumericKey": 200102,
+        "Value": 0.005
+      }
+    ],
     "UpgradeCost": 100,
     "DecomposeShard": 50
   },
@@ -498,8 +624,14 @@
     "NextId": 20303,
     "Lv": 2,
     "RuneType": 2,
-    "Des": "暴击概率提升",
-    "AddPropreList": [],
+    "Des": "暴击概率+1%",
+    "AddPropreList": [
+      {
+        "$type": "RolePropertyAdd",
+        "NumericKey": 200102,
+        "Value": 0.01
+      }
+    ],
     "UpgradeCost": 200,
     "DecomposeShard": 100
   },
@@ -510,8 +642,14 @@
     "NextId": 20304,
     "Lv": 3,
     "RuneType": 2,
-    "Des": "暴击概率提升",
-    "AddPropreList": [],
+    "Des": "暴击概率+1.5%",
+    "AddPropreList": [
+      {
+        "$type": "RolePropertyAdd",
+        "NumericKey": 200102,
+        "Value": 0.015
+      }
+    ],
     "UpgradeCost": 300,
     "DecomposeShard": 150
   },
@@ -522,8 +660,14 @@
     "NextId": 20305,
     "Lv": 4,
     "RuneType": 2,
-    "Des": "暴击概率提升",
-    "AddPropreList": [],
+    "Des": "暴击概率+2%",
+    "AddPropreList": [
+      {
+        "$type": "RolePropertyAdd",
+        "NumericKey": 200102,
+        "Value": 0.02
+      }
+    ],
     "UpgradeCost": 400,
     "DecomposeShard": 200
   },
@@ -534,8 +678,14 @@
     "NextId": 20306,
     "Lv": 5,
     "RuneType": 2,
-    "Des": "暴击概率提升",
-    "AddPropreList": [],
+    "Des": "暴击概率+2.5%",
+    "AddPropreList": [
+      {
+        "$type": "RolePropertyAdd",
+        "NumericKey": 200102,
+        "Value": 0.025
+      }
+    ],
     "UpgradeCost": 500,
     "DecomposeShard": 250
   },
@@ -546,8 +696,14 @@
     "NextId": 20307,
     "Lv": 6,
     "RuneType": 2,
-    "Des": "暴击概率提升",
-    "AddPropreList": [],
+    "Des": "暴击概率+3%",
+    "AddPropreList": [
+      {
+        "$type": "RolePropertyAdd",
+        "NumericKey": 200102,
+        "Value": 0.03
+      }
+    ],
     "UpgradeCost": 600,
     "DecomposeShard": 300
   },
@@ -558,8 +714,14 @@
     "NextId": 20308,
     "Lv": 7,
     "RuneType": 2,
-    "Des": "暴击概率提升",
-    "AddPropreList": [],
+    "Des": "暴击概率+3.5%",
+    "AddPropreList": [
+      {
+        "$type": "RolePropertyAdd",
+        "NumericKey": 200102,
+        "Value": 0.035
+      }
+    ],
     "UpgradeCost": 700,
     "DecomposeShard": 350
   },
@@ -570,8 +732,14 @@
     "NextId": 20309,
     "Lv": 8,
     "RuneType": 2,
-    "Des": "暴击概率提升",
-    "AddPropreList": [],
+    "Des": "暴击概率+4%",
+    "AddPropreList": [
+      {
+        "$type": "RolePropertyAdd",
+        "NumericKey": 200102,
+        "Value": 0.04
+      }
+    ],
     "UpgradeCost": 800,
     "DecomposeShard": 400
   },
@@ -582,8 +750,14 @@
     "NextId": 20310,
     "Lv": 9,
     "RuneType": 2,
-    "Des": "暴击概率提升",
-    "AddPropreList": [],
+    "Des": "暴击概率+4.5%",
+    "AddPropreList": [
+      {
+        "$type": "RolePropertyAdd",
+        "NumericKey": 200102,
+        "Value": 0.045
+      }
+    ],
     "UpgradeCost": 900,
     "DecomposeShard": 450
   },
@@ -594,8 +768,14 @@
     "NextId": 0,
     "Lv": 10,
     "RuneType": 2,
-    "Des": "暴击概率提升",
-    "AddPropreList": [],
+    "Des": "暴击概率+5%",
+    "AddPropreList": [
+      {
+        "$type": "RolePropertyAdd",
+        "NumericKey": 200102,
+        "Value": 0.05
+      }
+    ],
     "UpgradeCost": 0,
     "DecomposeShard": 500
   },
@@ -606,8 +786,14 @@
     "NextId": 20402,
     "Lv": 1,
     "RuneType": 2,
-    "Des": "伤害加成提升",
-    "AddPropreList": [],
+    "Des": "伤害加成+1%",
+    "AddPropreList": [
+      {
+        "$type": "RolePropertyAdd",
+        "NumericKey": 200902,
+        "Value": 0.01
+      }
+    ],
     "UpgradeCost": 100,
     "DecomposeShard": 50
   },
@@ -618,8 +804,14 @@
     "NextId": 20403,
     "Lv": 2,
     "RuneType": 2,
-    "Des": "伤害加成提升",
-    "AddPropreList": [],
+    "Des": "伤害加成+2%",
+    "AddPropreList": [
+      {
+        "$type": "RolePropertyAdd",
+        "NumericKey": 200902,
+        "Value": 0.02
+      }
+    ],
     "UpgradeCost": 200,
     "DecomposeShard": 100
   },
@@ -630,8 +822,14 @@
     "NextId": 20404,
     "Lv": 3,
     "RuneType": 2,
-    "Des": "伤害加成提升",
-    "AddPropreList": [],
+    "Des": "伤害加成+3%",
+    "AddPropreList": [
+      {
+        "$type": "RolePropertyAdd",
+        "NumericKey": 200902,
+        "Value": 0.03
+      }
+    ],
     "UpgradeCost": 300,
     "DecomposeShard": 150
   },
@@ -642,8 +840,14 @@
     "NextId": 20405,
     "Lv": 4,
     "RuneType": 2,
-    "Des": "伤害加成提升",
-    "AddPropreList": [],
+    "Des": "伤害加成+4%",
+    "AddPropreList": [
+      {
+        "$type": "RolePropertyAdd",
+        "NumericKey": 200902,
+        "Value": 0.04
+      }
+    ],
     "UpgradeCost": 400,
     "DecomposeShard": 200
   },
@@ -654,8 +858,14 @@
     "NextId": 20406,
     "Lv": 5,
     "RuneType": 2,
-    "Des": "伤害加成提升",
-    "AddPropreList": [],
+    "Des": "伤害加成+5%",
+    "AddPropreList": [
+      {
+        "$type": "RolePropertyAdd",
+        "NumericKey": 200902,
+        "Value": 0.05
+      }
+    ],
     "UpgradeCost": 500,
     "DecomposeShard": 250
   },
@@ -666,8 +876,14 @@
     "NextId": 20407,
     "Lv": 6,
     "RuneType": 2,
-    "Des": "伤害加成提升",
-    "AddPropreList": [],
+    "Des": "伤害加成+6%",
+    "AddPropreList": [
+      {
+        "$type": "RolePropertyAdd",
+        "NumericKey": 200902,
+        "Value": 0.06
+      }
+    ],
     "UpgradeCost": 600,
     "DecomposeShard": 300
   },
@@ -678,8 +894,14 @@
     "NextId": 20408,
     "Lv": 7,
     "RuneType": 2,
-    "Des": "伤害加成提升",
-    "AddPropreList": [],
+    "Des": "伤害加成+7%",
+    "AddPropreList": [
+      {
+        "$type": "RolePropertyAdd",
+        "NumericKey": 200902,
+        "Value": 0.07
+      }
+    ],
     "UpgradeCost": 700,
     "DecomposeShard": 350
   },
@@ -690,8 +912,14 @@
     "NextId": 20409,
     "Lv": 8,
     "RuneType": 2,
-    "Des": "伤害加成提升",
-    "AddPropreList": [],
+    "Des": "伤害加成+8%",
+    "AddPropreList": [
+      {
+        "$type": "RolePropertyAdd",
+        "NumericKey": 200902,
+        "Value": 0.08
+      }
+    ],
     "UpgradeCost": 800,
     "DecomposeShard": 400
   },
@@ -702,8 +930,14 @@
     "NextId": 20410,
     "Lv": 9,
     "RuneType": 2,
-    "Des": "伤害加成提升",
-    "AddPropreList": [],
+    "Des": "伤害加成+9%",
+    "AddPropreList": [
+      {
+        "$type": "RolePropertyAdd",
+        "NumericKey": 200902,
+        "Value": 0.09
+      }
+    ],
     "UpgradeCost": 900,
     "DecomposeShard": 450
   },
@@ -714,8 +948,14 @@
     "NextId": 0,
     "Lv": 10,
     "RuneType": 2,
-    "Des": "伤害加成提升",
-    "AddPropreList": [],
+    "Des": "伤害加成+10%",
+    "AddPropreList": [
+      {
+        "$type": "RolePropertyAdd",
+        "NumericKey": 200902,
+        "Value": 0.1
+      }
+    ],
     "UpgradeCost": 0,
     "DecomposeShard": 500
   },
@@ -726,8 +966,14 @@
     "NextId": 30102,
     "Lv": 1,
     "RuneType": 3,
-    "Des": "物理防御提升",
-    "AddPropreList": [],
+    "Des": "物理防御+15",
+    "AddPropreList": [
+      {
+        "$type": "RolePropertyAdd",
+        "NumericKey": 100601,
+        "Value": 15
+      }
+    ],
     "UpgradeCost": 100,
     "DecomposeShard": 50
   },
@@ -738,8 +984,14 @@
     "NextId": 30103,
     "Lv": 2,
     "RuneType": 3,
-    "Des": "物理防御提升",
-    "AddPropreList": [],
+    "Des": "物理防御+30",
+    "AddPropreList": [
+      {
+        "$type": "RolePropertyAdd",
+        "NumericKey": 100601,
+        "Value": 30
+      }
+    ],
     "UpgradeCost": 200,
     "DecomposeShard": 100
   },
@@ -750,8 +1002,14 @@
     "NextId": 30104,
     "Lv": 3,
     "RuneType": 3,
-    "Des": "物理防御提升",
-    "AddPropreList": [],
+    "Des": "物理防御+45",
+    "AddPropreList": [
+      {
+        "$type": "RolePropertyAdd",
+        "NumericKey": 100601,
+        "Value": 45
+      }
+    ],
     "UpgradeCost": 300,
     "DecomposeShard": 150
   },
@@ -762,8 +1020,14 @@
     "NextId": 30105,
     "Lv": 4,
     "RuneType": 3,
-    "Des": "物理防御提升",
-    "AddPropreList": [],
+    "Des": "物理防御+60",
+    "AddPropreList": [
+      {
+        "$type": "RolePropertyAdd",
+        "NumericKey": 100601,
+        "Value": 60
+      }
+    ],
     "UpgradeCost": 400,
     "DecomposeShard": 200
   },
@@ -774,8 +1038,14 @@
     "NextId": 30106,
     "Lv": 5,
     "RuneType": 3,
-    "Des": "物理防御提升",
-    "AddPropreList": [],
+    "Des": "物理防御+75",
+    "AddPropreList": [
+      {
+        "$type": "RolePropertyAdd",
+        "NumericKey": 100601,
+        "Value": 75
+      }
+    ],
     "UpgradeCost": 500,
     "DecomposeShard": 250
   },
@@ -786,8 +1056,14 @@
     "NextId": 30107,
     "Lv": 6,
     "RuneType": 3,
-    "Des": "物理防御提升",
-    "AddPropreList": [],
+    "Des": "物理防御+90",
+    "AddPropreList": [
+      {
+        "$type": "RolePropertyAdd",
+        "NumericKey": 100601,
+        "Value": 90
+      }
+    ],
     "UpgradeCost": 600,
     "DecomposeShard": 300
   },
@@ -798,8 +1074,14 @@
     "NextId": 30108,
     "Lv": 7,
     "RuneType": 3,
-    "Des": "物理防御提升",
-    "AddPropreList": [],
+    "Des": "物理防御+105",
+    "AddPropreList": [
+      {
+        "$type": "RolePropertyAdd",
+        "NumericKey": 100601,
+        "Value": 105
+      }
+    ],
     "UpgradeCost": 700,
     "DecomposeShard": 350
   },
@@ -810,8 +1092,14 @@
     "NextId": 30109,
     "Lv": 8,
     "RuneType": 3,
-    "Des": "物理防御提升",
-    "AddPropreList": [],
+    "Des": "物理防御+120",
+    "AddPropreList": [
+      {
+        "$type": "RolePropertyAdd",
+        "NumericKey": 100601,
+        "Value": 120
+      }
+    ],
     "UpgradeCost": 800,
     "DecomposeShard": 400
   },
@@ -822,8 +1110,14 @@
     "NextId": 30110,
     "Lv": 9,
     "RuneType": 3,
-    "Des": "物理防御提升",
-    "AddPropreList": [],
+    "Des": "物理防御+135",
+    "AddPropreList": [
+      {
+        "$type": "RolePropertyAdd",
+        "NumericKey": 100601,
+        "Value": 135
+      }
+    ],
     "UpgradeCost": 900,
     "DecomposeShard": 450
   },
@@ -834,8 +1128,14 @@
     "NextId": 0,
     "Lv": 10,
     "RuneType": 3,
-    "Des": "物理防御提升",
-    "AddPropreList": [],
+    "Des": "物理防御+150",
+    "AddPropreList": [
+      {
+        "$type": "RolePropertyAdd",
+        "NumericKey": 100601,
+        "Value": 150
+      }
+    ],
     "UpgradeCost": 0,
     "DecomposeShard": 500
   },
@@ -846,8 +1146,14 @@
     "NextId": 30202,
     "Lv": 1,
     "RuneType": 3,
-    "Des": "魔法防御提升",
-    "AddPropreList": [],
+    "Des": "魔法防御+15",
+    "AddPropreList": [
+      {
+        "$type": "RolePropertyAdd",
+        "NumericKey": 100801,
+        "Value": 15
+      }
+    ],
     "UpgradeCost": 100,
     "DecomposeShard": 50
   },
@@ -858,8 +1164,14 @@
     "NextId": 30203,
     "Lv": 2,
     "RuneType": 3,
-    "Des": "魔法防御提升",
-    "AddPropreList": [],
+    "Des": "魔法防御+30",
+    "AddPropreList": [
+      {
+        "$type": "RolePropertyAdd",
+        "NumericKey": 100801,
+        "Value": 30
+      }
+    ],
     "UpgradeCost": 200,
     "DecomposeShard": 100
   },
@@ -870,8 +1182,14 @@
     "NextId": 30204,
     "Lv": 3,
     "RuneType": 3,
-    "Des": "魔法防御提升",
-    "AddPropreList": [],
+    "Des": "魔法防御+45",
+    "AddPropreList": [
+      {
+        "$type": "RolePropertyAdd",
+        "NumericKey": 100801,
+        "Value": 45
+      }
+    ],
     "UpgradeCost": 300,
     "DecomposeShard": 150
   },
@@ -882,8 +1200,14 @@
     "NextId": 30205,
     "Lv": 4,
     "RuneType": 3,
-    "Des": "魔法防御提升",
-    "AddPropreList": [],
+    "Des": "魔法防御+60",
+    "AddPropreList": [
+      {
+        "$type": "RolePropertyAdd",
+        "NumericKey": 100801,
+        "Value": 60
+      }
+    ],
     "UpgradeCost": 400,
     "DecomposeShard": 200
   },
@@ -894,8 +1218,14 @@
     "NextId": 30206,
     "Lv": 5,
     "RuneType": 3,
-    "Des": "魔法防御提升",
-    "AddPropreList": [],
+    "Des": "魔法防御+75",
+    "AddPropreList": [
+      {
+        "$type": "RolePropertyAdd",
+        "NumericKey": 100801,
+        "Value": 75
+      }
+    ],
     "UpgradeCost": 500,
     "DecomposeShard": 250
   },
@@ -906,8 +1236,14 @@
     "NextId": 30207,
     "Lv": 6,
     "RuneType": 3,
-    "Des": "魔法防御提升",
-    "AddPropreList": [],
+    "Des": "魔法防御+90",
+    "AddPropreList": [
+      {
+        "$type": "RolePropertyAdd",
+        "NumericKey": 100801,
+        "Value": 90
+      }
+    ],
     "UpgradeCost": 600,
     "DecomposeShard": 300
   },
@@ -918,8 +1254,14 @@
     "NextId": 30208,
     "Lv": 7,
     "RuneType": 3,
-    "Des": "魔法防御提升",
-    "AddPropreList": [],
+    "Des": "魔法防御+105",
+    "AddPropreList": [
+      {
+        "$type": "RolePropertyAdd",
+        "NumericKey": 100801,
+        "Value": 105
+      }
+    ],
     "UpgradeCost": 700,
     "DecomposeShard": 350
   },
@@ -930,8 +1272,14 @@
     "NextId": 30209,
     "Lv": 8,
     "RuneType": 3,
-    "Des": "魔法防御提升",
-    "AddPropreList": [],
+    "Des": "魔法防御+120",
+    "AddPropreList": [
+      {
+        "$type": "RolePropertyAdd",
+        "NumericKey": 100801,
+        "Value": 120
+      }
+    ],
     "UpgradeCost": 800,
     "DecomposeShard": 400
   },
@@ -942,8 +1290,14 @@
     "NextId": 30210,
     "Lv": 9,
     "RuneType": 3,
-    "Des": "魔法防御提升",
-    "AddPropreList": [],
+    "Des": "魔法防御+135",
+    "AddPropreList": [
+      {
+        "$type": "RolePropertyAdd",
+        "NumericKey": 100801,
+        "Value": 135
+      }
+    ],
     "UpgradeCost": 900,
     "DecomposeShard": 450
   },
@@ -954,8 +1308,14 @@
     "NextId": 0,
     "Lv": 10,
     "RuneType": 3,
-    "Des": "魔法防御提升",
-    "AddPropreList": [],
+    "Des": "魔法防御+150",
+    "AddPropreList": [
+      {
+        "$type": "RolePropertyAdd",
+        "NumericKey": 100801,
+        "Value": 150
+      }
+    ],
     "UpgradeCost": 0,
     "DecomposeShard": 500
   },
@@ -966,8 +1326,14 @@
     "NextId": 30302,
     "Lv": 1,
     "RuneType": 3,
-    "Des": "生命上限提升",
-    "AddPropreList": [],
+    "Des": "生命上限+100",
+    "AddPropreList": [
+      {
+        "$type": "RolePropertyAdd",
+        "NumericKey": 100201,
+        "Value": 100
+      }
+    ],
     "UpgradeCost": 100,
     "DecomposeShard": 50
   },
@@ -978,8 +1344,14 @@
     "NextId": 30303,
     "Lv": 2,
     "RuneType": 3,
-    "Des": "生命上限提升",
-    "AddPropreList": [],
+    "Des": "生命上限+200",
+    "AddPropreList": [
+      {
+        "$type": "RolePropertyAdd",
+        "NumericKey": 100201,
+        "Value": 200
+      }
+    ],
     "UpgradeCost": 200,
     "DecomposeShard": 100
   },
@@ -990,8 +1362,14 @@
     "NextId": 30304,
     "Lv": 3,
     "RuneType": 3,
-    "Des": "生命上限提升",
-    "AddPropreList": [],
+    "Des": "生命上限+300",
+    "AddPropreList": [
+      {
+        "$type": "RolePropertyAdd",
+        "NumericKey": 100201,
+        "Value": 300
+      }
+    ],
     "UpgradeCost": 300,
     "DecomposeShard": 150
   },
@@ -1002,8 +1380,14 @@
     "NextId": 30305,
     "Lv": 4,
     "RuneType": 3,
-    "Des": "生命上限提升",
-    "AddPropreList": [],
+    "Des": "生命上限+400",
+    "AddPropreList": [
+      {
+        "$type": "RolePropertyAdd",
+        "NumericKey": 100201,
+        "Value": 400
+      }
+    ],
     "UpgradeCost": 400,
     "DecomposeShard": 200
   },
@@ -1014,8 +1398,14 @@
     "NextId": 30306,
     "Lv": 5,
     "RuneType": 3,
-    "Des": "生命上限提升",
-    "AddPropreList": [],
+    "Des": "生命上限+500",
+    "AddPropreList": [
+      {
+        "$type": "RolePropertyAdd",
+        "NumericKey": 100201,
+        "Value": 500
+      }
+    ],
     "UpgradeCost": 500,
     "DecomposeShard": 250
   },
@@ -1026,8 +1416,14 @@
     "NextId": 30307,
     "Lv": 6,
     "RuneType": 3,
-    "Des": "生命上限提升",
-    "AddPropreList": [],
+    "Des": "生命上限+600",
+    "AddPropreList": [
+      {
+        "$type": "RolePropertyAdd",
+        "NumericKey": 100201,
+        "Value": 600
+      }
+    ],
     "UpgradeCost": 600,
     "DecomposeShard": 300
   },
@@ -1038,8 +1434,14 @@
     "NextId": 30308,
     "Lv": 7,
     "RuneType": 3,
-    "Des": "生命上限提升",
-    "AddPropreList": [],
+    "Des": "生命上限+700",
+    "AddPropreList": [
+      {
+        "$type": "RolePropertyAdd",
+        "NumericKey": 100201,
+        "Value": 700
+      }
+    ],
     "UpgradeCost": 700,
     "DecomposeShard": 350
   },
@@ -1050,8 +1452,14 @@
     "NextId": 30309,
     "Lv": 8,
     "RuneType": 3,
-    "Des": "生命上限提升",
-    "AddPropreList": [],
+    "Des": "生命上限+800",
+    "AddPropreList": [
+      {
+        "$type": "RolePropertyAdd",
+        "NumericKey": 100201,
+        "Value": 800
+      }
+    ],
     "UpgradeCost": 800,
     "DecomposeShard": 400
   },
@@ -1062,8 +1470,14 @@
     "NextId": 30310,
     "Lv": 9,
     "RuneType": 3,
-    "Des": "生命上限提升",
-    "AddPropreList": [],
+    "Des": "生命上限+900",
+    "AddPropreList": [
+      {
+        "$type": "RolePropertyAdd",
+        "NumericKey": 100201,
+        "Value": 900
+      }
+    ],
     "UpgradeCost": 900,
     "DecomposeShard": 450
   },
@@ -1074,8 +1488,14 @@
     "NextId": 0,
     "Lv": 10,
     "RuneType": 3,
-    "Des": "生命上限提升",
-    "AddPropreList": [],
+    "Des": "生命上限+1000",
+    "AddPropreList": [
+      {
+        "$type": "RolePropertyAdd",
+        "NumericKey": 100201,
+        "Value": 1000
+      }
+    ],
     "UpgradeCost": 0,
     "DecomposeShard": 500
   },
@@ -1086,8 +1506,14 @@
     "NextId": 30402,
     "Lv": 1,
     "RuneType": 3,
-    "Des": "伤害减免提升",
-    "AddPropreList": [],
+    "Des": "伤害减免+0.5%",
+    "AddPropreList": [
+      {
+        "$type": "RolePropertyAdd",
+        "NumericKey": 201002,
+        "Value": 0.005
+      }
+    ],
     "UpgradeCost": 100,
     "DecomposeShard": 50
   },
@@ -1098,8 +1524,14 @@
     "NextId": 30403,
     "Lv": 2,
     "RuneType": 3,
-    "Des": "伤害减免提升",
-    "AddPropreList": [],
+    "Des": "伤害减免+1%",
+    "AddPropreList": [
+      {
+        "$type": "RolePropertyAdd",
+        "NumericKey": 201002,
+        "Value": 0.01
+      }
+    ],
     "UpgradeCost": 200,
     "DecomposeShard": 100
   },
@@ -1110,8 +1542,14 @@
     "NextId": 30404,
     "Lv": 3,
     "RuneType": 3,
-    "Des": "伤害减免提升",
-    "AddPropreList": [],
+    "Des": "伤害减免+1.5%",
+    "AddPropreList": [
+      {
+        "$type": "RolePropertyAdd",
+        "NumericKey": 201002,
+        "Value": 0.015
+      }
+    ],
     "UpgradeCost": 300,
     "DecomposeShard": 150
   },
@@ -1122,8 +1560,14 @@
     "NextId": 30405,
     "Lv": 4,
     "RuneType": 3,
-    "Des": "伤害减免提升",
-    "AddPropreList": [],
+    "Des": "伤害减免+2%",
+    "AddPropreList": [
+      {
+        "$type": "RolePropertyAdd",
+        "NumericKey": 201002,
+        "Value": 0.02
+      }
+    ],
     "UpgradeCost": 400,
     "DecomposeShard": 200
   },
@@ -1134,8 +1578,14 @@
     "NextId": 30406,
     "Lv": 5,
     "RuneType": 3,
-    "Des": "伤害减免提升",
-    "AddPropreList": [],
+    "Des": "伤害减免+2.5%",
+    "AddPropreList": [
+      {
+        "$type": "RolePropertyAdd",
+        "NumericKey": 201002,
+        "Value": 0.025
+      }
+    ],
     "UpgradeCost": 500,
     "DecomposeShard": 250
   },
@@ -1146,8 +1596,14 @@
     "NextId": 30407,
     "Lv": 6,
     "RuneType": 3,
-    "Des": "伤害减免提升",
-    "AddPropreList": [],
+    "Des": "伤害减免+3%",
+    "AddPropreList": [
+      {
+        "$type": "RolePropertyAdd",
+        "NumericKey": 201002,
+        "Value": 0.03
+      }
+    ],
     "UpgradeCost": 600,
     "DecomposeShard": 300
   },
@@ -1158,8 +1614,14 @@
     "NextId": 30408,
     "Lv": 7,
     "RuneType": 3,
-    "Des": "伤害减免提升",
-    "AddPropreList": [],
+    "Des": "伤害减免+3.5%",
+    "AddPropreList": [
+      {
+        "$type": "RolePropertyAdd",
+        "NumericKey": 201002,
+        "Value": 0.035
+      }
+    ],
     "UpgradeCost": 700,
     "DecomposeShard": 350
   },
@@ -1170,8 +1632,14 @@
     "NextId": 30409,
     "Lv": 8,
     "RuneType": 3,
-    "Des": "伤害减免提升",
-    "AddPropreList": [],
+    "Des": "伤害减免+4%",
+    "AddPropreList": [
+      {
+        "$type": "RolePropertyAdd",
+        "NumericKey": 201002,
+        "Value": 0.04
+      }
+    ],
     "UpgradeCost": 800,
     "DecomposeShard": 400
   },
@@ -1182,8 +1650,14 @@
     "NextId": 30410,
     "Lv": 9,
     "RuneType": 3,
-    "Des": "伤害减免提升",
-    "AddPropreList": [],
+    "Des": "伤害减免+4.5%",
+    "AddPropreList": [
+      {
+        "$type": "RolePropertyAdd",
+        "NumericKey": 201002,
+        "Value": 0.045
+      }
+    ],
     "UpgradeCost": 900,
     "DecomposeShard": 450
   },
@@ -1194,8 +1668,14 @@
     "NextId": 0,
     "Lv": 10,
     "RuneType": 3,
-    "Des": "伤害减免提升",
-    "AddPropreList": [],
+    "Des": "伤害减免+5%",
+    "AddPropreList": [
+      {
+        "$type": "RolePropertyAdd",
+        "NumericKey": 201002,
+        "Value": 0.05
+      }
+    ],
     "UpgradeCost": 0,
     "DecomposeShard": 500
   }
