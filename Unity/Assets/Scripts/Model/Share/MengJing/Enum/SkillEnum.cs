@@ -150,6 +150,7 @@ namespace ET
         public const int PetEcho = 8;
         public const int LongYin = 9;
         public const int GemTalent = 10;
+        public const int Rune = 11;
     }
 
     //1.增加范围

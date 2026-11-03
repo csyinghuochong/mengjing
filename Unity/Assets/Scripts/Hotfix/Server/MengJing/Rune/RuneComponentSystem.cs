@@ -314,6 +314,9 @@ namespace ET.Server
             }
 
             slotData.RuneId = runeId;
+            //符文的属性只算镶嵌中的，附带的技能也要进技能列表
+            self.AddRuneSkillId(runeId, true);
+            self.UpdateRuneEffect();
             return ErrorCode.ERR_Success;
         }
 
@@ -333,7 +336,11 @@ namespace ET.Server
                 return ErrorCode.ERR_RuneSlotEmpty;
             }
 
+            //卸下前先把这枚符文附带的技能移掉
+            self.AddRuneSkillId(slotData.RuneId, false);
             slotData.RuneId = 0;
+            //卸下后这枚符文的属性和技能效果都不再生效
+            self.UpdateRuneEffect();
             return ErrorCode.ERR_Success;
         }
 
@@ -375,7 +382,21 @@ namespace ET.Server
                 return ErrorCode.ERR_RuneShardNotEnough;
             }
 
+            //镶嵌中的符文升级后属性和附带技能都可能变，先按旧等级移掉附带技能，换完配置再加回来
+            bool socketed = self.GetSocketedSlot(runeId) != null;
+            if (socketed)
+            {
+                self.AddRuneSkillId(runeId, false);
+            }
+
             rune.ConfigId = nextConfig.Id;
+
+            if (socketed)
+            {
+                self.AddRuneSkillId(runeId, true);
+                self.UpdateRuneEffect();
+            }
+
             return ErrorCode.ERR_Success;
         }
 
@@ -462,8 +483,59 @@ namespace ET.Server
         #region 属性
 
         /// <summary>
-        /// 已镶嵌符文提供的效果。属性只算镶进槽位的，背包里的不生效。
-        /// RuneConfig.AddPropreList 现在还是空的，配了才会有内容
+        /// 符文效果变化后重算角色属性/战力，并刷新被动技能和技能列表：
+        /// 符文可能带 SkillIdAdd（附赠技能），技能属性、附加 buff 等则是释放技能时按需读 GetAllEffects
+        /// </summary>
+        private static void UpdateRuneEffect(this RuneComponent self)
+        {
+            Unit unit = self.GetParent<Unit>();
+            if (unit == null)
+            {
+                return;
+            }
+
+            Function_Fight.UnitUpdateProperty_Base(unit, true, true);
+            unit.GetComponent<SkillPassiveComponent>()?.UpdatePassiveSkill();
+            unit.GetComponent<SkillSetComponentS>()?.UpdateSkillSet();
+        }
+
+        /// <summary>
+        /// 符文附赠的技能：镶上时加进技能列表，卸下时移除（AddPropreList 里的 SkillIdAdd）
+        /// </summary>
+        private static void AddRuneSkillId(this RuneComponent self, long runeId, bool add)
+        {
+            RuneConfig runeConfig = self.GetRuneConfig(runeId);
+            if (runeConfig == null || runeConfig.AddPropreList == null)
+            {
+                return;
+            }
+
+            SkillSetComponentS skillSetComponent = self.GetParent<Unit>().GetComponent<SkillSetComponentS>();
+            if (skillSetComponent == null)
+            {
+                return;
+            }
+
+            for (int i = 0; i < runeConfig.AddPropreList.Count; i++)
+            {
+                if (!(runeConfig.AddPropreList[i] is SkillIdAdd effect) || effect.SkillId == 0)
+                {
+                    continue;
+                }
+
+                if (add)
+                {
+                    skillSetComponent.OnAddkillId(effect.SkillId, 0, SkillSetEnum.Skill, SkillSourceEnum.Rune, false);
+                }
+                else
+                {
+                    skillSetComponent.OnRemoveSkillId(effect.SkillId, SkillSourceEnum.Rune, false);
+                }
+            }
+        }
+
+        /// <summary>
+        /// 已镶嵌符文提供的效果。属性只算镶进槽位的，背包里的不生效
         /// </summary>
         public static List<PropEffect> GetEffects(this RuneComponent self)
         {
@@ -488,7 +560,7 @@ namespace ET.Server
         }
 
         /// <summary>
-        /// 符文提供的角色属性，供 Function_Fight 计算属性时使用（还没接进去）
+        /// 符文提供的角色属性，Function_Fight 算属性时会汇总这一份
         /// </summary>
         public static List<PropertyValue> GetRoleProLists(this RuneComponent self)
         {

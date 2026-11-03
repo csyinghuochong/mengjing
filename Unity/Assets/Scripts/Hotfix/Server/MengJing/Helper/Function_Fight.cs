@@ -2324,6 +2324,17 @@ namespace ET.Server
                 AddUpdateProDicList(gemTalentProList[i].HideID, gemTalentProList[i].HideValue, UpdateProDicList);
             }
 
+            //符文系统：只算镶嵌在槽位里的符文
+            RuneComponent runeComponent = unit.GetComponent<RuneComponent>();
+            if (runeComponent != null)
+            {
+                List<PropertyValue> runeProList = runeComponent.GetRoleProLists();
+                for (int i = 0; i < runeProList.Count; i++)
+                {
+                    AddUpdateProDicList(runeProList[i].HideID, runeProList[i].HideValue, UpdateProDicList);
+                }
+            }
+
             List<PropertyValue> skillProList_8 = unit.GetComponent<SkillSetComponentS>().GetSkillRoleProLists_8();
             for (int i = 0; i < skillProList_8.Count; i++)
             {

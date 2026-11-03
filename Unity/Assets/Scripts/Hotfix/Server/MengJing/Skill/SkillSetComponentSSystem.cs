@@ -325,6 +325,15 @@ namespace ET.Server
         }
 
         /// <summary>
+        /// 已镶嵌符文提供的效果（符文里的技能属性、附加buff、替换技能等在这里被技能读走）
+        /// </summary>
+        private static List<PropEffect> GetRuneEffects(this SkillSetComponentS self)
+        {
+            RuneComponent runeComponent = self.GetParent<Unit>().GetComponent<RuneComponent>();
+            return runeComponent == null ? new List<PropEffect>() : runeComponent.GetEffects();
+        }
+
+        /// <summary>
         /// 龙印提供的角色属性，供Function_Fight计算属性时使用
         /// </summary>
         public static List<PropertyValue> GetLongYinRoleProLists(this SkillSetComponentS self)
@@ -741,13 +750,14 @@ namespace ET.Server
         }
 
         /// <summary>
-        /// 收集天赋、龙印、宝石天赋当前生效的全部效果
+        /// 收集天赋、龙印、宝石天赋、符文当前生效的全部效果
         /// </summary>
         private static List<PropEffect> GetAllEffects(this SkillSetComponentS self)
         {
             List<PropEffect> effects = self.GetTianFuEffects();
             effects.AddRange(self.GetLongYinEffects());
             effects.AddRange(self.GetGemTalentEffects());
+            effects.AddRange(self.GetRuneEffects());
             return effects;
         }
 
