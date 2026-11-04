@@ -41,11 +41,8 @@ namespace ET.Client
             self.E_Button_WatchEquipButton.AddListenerAsync(self.OnButtonWatch);
             self.RankingInfo = rankingInfo;
 
-            using (zstring.Block())
-            {
-                self.E_Text_CombatText.text = zstring.Format("{0}金币", rankingInfo.Combat);
-                self.E_Text_DonationText.text = zstring.Format("{0}级", rankingInfo.PlayerLv);
-            }
+            self.E_Text_CombatText.text = string.Format("{0}金币", rankingInfo.Combat);
+            self.E_Text_DonationText.text = string.Format("{0}级", rankingInfo.PlayerLv);
 
             self.E_Text_NameText.text = rankingInfo.PlayerName;
             self.E_Text_RankText.text = rank.ToString();

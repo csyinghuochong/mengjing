@@ -82,10 +82,7 @@ namespace ET.Client
                 self.ES_CommonSkillItem_2.SetImageGray(true);
             }
 
-            using (zstring.Block())
-            {
-                self.E_TextProgressText.text = zstring.Format("{0}/{1}", completeNum, keyids[3 * index + 2]);
-            }
+            self.E_TextProgressText.text = string.Format("{0}/{1}", completeNum, keyids[3 * index + 2]);
 
             self.E_Img_LodingValueImage.fillAmount = (float)completeNum / (float)keyids[3 * index + 2];  
         }
@@ -285,19 +282,13 @@ namespace ET.Client
                     taskConfig.TargetType == (int)TaskTargetType.JianDingAttrNumber_43 ||
                     taskConfig.TargetType == (int)TaskTargetType.MakeQulityNumber_29)
                 {
-                    using (zstring.Block())
-                    {
-                        self.E_ProgressTextText.text = "1/1";
-                        self.E_Img_LodingValue_22Image.fillAmount = 1;   
-                    }
+                    self.E_ProgressTextText.text = "1/1";
+                    self.E_Img_LodingValue_22Image.fillAmount = 1;   
                 }
                 else
                 {
-                    using (zstring.Block())
-                    {
-                        self.E_ProgressTextText.text = zstring.Format("{0}/{1}",taskConfig.TargetValue[0], taskConfig.TargetValue[0]);
-                        self.E_Img_LodingValue_22Image.fillAmount = taskConfig.TargetValue[0] * 1f/taskConfig.TargetValue[0] ;   
-                    }
+                    self.E_ProgressTextText.text = string.Format("{0}/{1}",taskConfig.TargetValue[0], taskConfig.TargetValue[0]);
+                    self.E_Img_LodingValue_22Image.fillAmount = taskConfig.TargetValue[0] * 1f/taskConfig.TargetValue[0] ;   
                 }
 
                 self.E_AcvityedImgImage.gameObject.SetActive(true);
@@ -309,11 +300,8 @@ namespace ET.Client
                 // 进行中
                 if (taskConfig.TargetType == (int)TaskTargetType.GiveItem_10 || taskConfig.TargetType == (int)TaskTargetType.GivePet_25)
                 {
-                    using (zstring.Block())
-                    {
-                        self.E_ProgressTextText.text = "0/1";
-                        self.E_Img_LodingValue_22Image.fillAmount = 0f;   
-                    }
+                    self.E_ProgressTextText.text = "0/1";
+                    self.E_Img_LodingValue_22Image.fillAmount = 0f;   
 
                     self.E_GetBtnButton.gameObject.SetActive(false);
                     self.E_GiveBtnButton.gameObject.SetActive(true);
@@ -324,22 +312,16 @@ namespace ET.Client
                 {
                     if (self.TaskPro.taskStatus == (int)TaskStatuEnum.Completed)
                     {
-                        using (zstring.Block())
-                        {
-                            self.E_ProgressTextText.text = "1/1";
-                            self.E_Img_LodingValue_22Image.fillAmount = 1f;   
-                        }
+                        self.E_ProgressTextText.text = "1/1";
+                        self.E_Img_LodingValue_22Image.fillAmount = 1f;   
 
                         self.E_GetBtnButton.gameObject.SetActive(true);
                         self.E_GiveBtnButton.gameObject.SetActive(false);
                     }
                     else
                     {
-                        using (zstring.Block())
-                        {
-                            self.E_ProgressTextText.text = "0/1";
-                            self.E_Img_LodingValue_22Image.fillAmount = 0f;   
-                        }
+                        self.E_ProgressTextText.text = "0/1";
+                        self.E_Img_LodingValue_22Image.fillAmount = 0f;   
 
                         self.E_GetBtnButton.gameObject.SetActive(true);
                         self.E_GiveBtnButton.gameObject.SetActive(false);
@@ -347,11 +329,8 @@ namespace ET.Client
                 }
                 else
                 {
-                    using (zstring.Block())
-                    {
-                        self.E_ProgressTextText.text = zstring.Format("{0}/{1}",self.TaskPro.taskTargetNum_1, taskConfig.TargetValue[0]);
-                        self.E_Img_LodingValue_22Image.fillAmount = self.TaskPro.taskTargetNum_1 * 1f/taskConfig.TargetValue[0];   
-                    }
+                    self.E_ProgressTextText.text = string.Format("{0}/{1}",self.TaskPro.taskTargetNum_1, taskConfig.TargetValue[0]);
+                    self.E_Img_LodingValue_22Image.fillAmount = self.TaskPro.taskTargetNum_1 * 1f/taskConfig.TargetValue[0];   
 
                     self.E_GetBtnButton.gameObject.SetActive(true);
                     self.E_GiveBtnButton.gameObject.SetActive(false);

@@ -93,10 +93,7 @@ namespace ET.Client
 
             self.E_ImageSkillIconImage.sprite = sp;
 
-            using (zstring.Block())
-            {
-                self.E_Text_GoldText.text = zstring.Format("消耗：{0}金币", occupationJueXingConfig.costGold);
-            }
+            self.E_Text_GoldText.text = string.Format("消耗：{0}金币", occupationJueXingConfig.costGold);
 
             self.E_TextSkillNameText.GetComponentInChildren<Text>().text = skillConfig.SkillName;
 
@@ -109,10 +106,7 @@ namespace ET.Client
             float value = 1f * juexingexp / occupationJueXingConfig.costExp;
             value = Math.Max(value, 1f);
 
-            using (zstring.Block())
-            {
-                self.E_Text_JueXingExpText.text = zstring.Format("{0}/{1}", juexingexp, occupationJueXingConfig.costExp);
-            }
+            self.E_Text_JueXingExpText.text = string.Format("{0}/{1}", juexingexp, occupationJueXingConfig.costExp);
 
             self.E_ImageJueXingExpImage.fillAmount = Math.Min(value, 1f);
 

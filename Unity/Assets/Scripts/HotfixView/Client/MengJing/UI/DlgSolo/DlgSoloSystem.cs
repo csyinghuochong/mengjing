@@ -67,11 +67,8 @@ namespace ET.Client
                 ReferenceCollector rc = gameObject.GetComponent<ReferenceCollector>();
                 rc.Get<GameObject>("Text_Name").GetComponent<Text>().text = response.SoloPlayerResultInfoList[i].Name;
                 rc.Get<GameObject>("Text_Rank").GetComponent<Text>().text = (i + 1).ToString();
-                using (zstring.Block())
-                {
-                    rc.Get<GameObject>("Text_Combat").GetComponent<Text>().text =
-                            zstring.Format("{0}胜{1}败", response.SoloPlayerResultInfoList[i].WinNum, response.SoloPlayerResultInfoList[i].FailNum);
-                }
+                rc.Get<GameObject>("Text_Combat").GetComponent<Text>().text =
+                        string.Format("{0}胜{1}败", response.SoloPlayerResultInfoList[i].WinNum, response.SoloPlayerResultInfoList[i].FailNum);
 
                 rc.Get<GameObject>("Text_JiFen").GetComponent<Text>().text = response.SoloPlayerResultInfoList[i].Combat.ToString();
                 rc.Get<GameObject>("ImageHeadIcon").GetComponent<Image>().sprite =

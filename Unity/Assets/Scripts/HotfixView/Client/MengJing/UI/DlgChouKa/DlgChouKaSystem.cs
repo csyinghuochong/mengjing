@@ -27,10 +27,7 @@ namespace ET.Client
             }
             catch (Exception e)
             {
-                using (zstring.Block())
-                {
-                    Log.Error(zstring.Format("move timer error: {0}\n{1}", self.Id, e.ToString()));
-                }
+                Log.Error(string.Format("move timer error: {0}\n{1}", self.Id, e.ToString()));
             }
         }
     }
@@ -101,10 +98,7 @@ namespace ET.Client
         public static void UpdateRewardShowList(this DlgChouKa self)
         {
             int cindex = self.TakeCardId % 1000;
-            using (zstring.Block())
-            {
-                self.View.E_Text_ChapterText.text = zstring.Format("第{0}章探宝", cindex);
-            }
+            self.View.E_Text_ChapterText.text = string.Format("第{0}章探宝", cindex);
 
             TakeCardConfig takeCardConfig = TakeCardConfigCategory.Instance.Get(self.TakeCardId);
             string dropShow = takeCardConfig.DropShow;
@@ -183,10 +177,7 @@ namespace ET.Client
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
             NumericComponentC numericComponent = unit.GetComponent<NumericComponentC>();
             int totalTimes = numericComponent.GetAsInt(NumericType.ChouKa);
-            using (zstring.Block())
-            {
-                self.View.E_Text_TotalNumberText.text = zstring.Format("次数：{0}/{1}", totalTimes, GlobalValueConfigCategory.Instance.ChouKaLimit);
-            }
+            self.View.E_Text_TotalNumberText.text = string.Format("次数：{0}/{1}", totalTimes, GlobalValueConfigCategory.Instance.ChouKaLimit);
         }
 
         public static void OnUpdateMianFeiTime(this DlgChouKa self)

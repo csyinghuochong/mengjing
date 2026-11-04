@@ -43,15 +43,12 @@ namespace ET.Client
 
             self.E_ImageIcon.sprite = sp;
 
-            using (zstring.Block())
-            {
-                self.E_TextMine.text = zstring.Format("{0}{1}", mineBattleConfig.Name, (hexin ? "(核心矿)" : string.Empty));
-                
-                int openDay = TimeHelper.GetServeOpenDay(self.Root().GetComponent<PlayerInfoComponent>().ServerItem.ServerOpenTime);
-                float coffi = CommonHelp.GetMineCoefficient(openDay, mingType, index, petMineExtend);
-                int chanchu = (int)(mineBattleConfig.GoldOutPut * coffi);
-                self.E_TextChanChu.text = zstring.Format("{0}/小时", chanchu);
-            }
+            self.E_TextMine.text = string.Format("{0}{1}", mineBattleConfig.Name, (hexin ? "(核心矿)" : string.Empty));
+
+            int openDay = TimeHelper.GetServeOpenDay(self.Root().GetComponent<PlayerInfoComponent>().ServerItem.ServerOpenTime);
+            float coffi = CommonHelp.GetMineCoefficient(openDay, mingType, index, petMineExtend);
+            int chanchu = (int)(mineBattleConfig.GoldOutPut * coffi);
+            self.E_TextChanChu.text = string.Format("{0}/小时", chanchu);
         }
 
         /// <summary>
@@ -70,10 +67,7 @@ namespace ET.Client
 
             if (petMingPlayerInfo != null)
             {
-                using (zstring.Block())
-                {
-                    playerName = zstring.Format("拥有者：{0}", petMingPlayerInfo.PlayerName);
-                }
+                playerName = string.Format("拥有者：{0}", petMingPlayerInfo.PlayerName);
 
                 confids = petMingPlayerInfo.PetConfig;
 

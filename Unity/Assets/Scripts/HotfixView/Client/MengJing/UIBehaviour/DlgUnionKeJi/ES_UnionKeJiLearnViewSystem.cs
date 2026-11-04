@@ -66,33 +66,30 @@ namespace ET.Client
             
             string keJiName = nowUnionKeJiConfig.EquipSpaceName.Substring(0, Regex.Match(nowUnionKeJiConfig.EquipSpaceName, @"\d").Index);
             self.E_NameTextText.text = keJiName;
-            using (zstring.Block())
+            self.E_LvTextText.text = string.Format("当前科技等级：{0}", nowUnionKeJiConfig.QiangHuaLv.ToString());
+            self.E_MaxLvTextText.text = string.Format("{0}可以提升至{1}级", keJiName, UnionKeJiConfigCategory.Instance.Get(self.UnionMyInfo.UnionKeJiList[position]).QiangHuaLv);
+            if (nowUnionKeJiConfig.PreId.Length == 0 || nowUnionKeJiConfig.PreId[0] == 0)
             {
-                self.E_LvTextText.text = zstring.Format("当前科技等级：{0}", nowUnionKeJiConfig.QiangHuaLv.ToString());
-                self.E_MaxLvTextText.text = zstring.Format("{0}可以提升至{1}级", keJiName, UnionKeJiConfigCategory.Instance.Get(self.UnionMyInfo.UnionKeJiList[position]).QiangHuaLv);
-                if (nowUnionKeJiConfig.PreId.Length == 0 || nowUnionKeJiConfig.PreId[0] == 0)
-                {
-                    self.E_PreTextText.text = "";
-                }
-                else
-                {
-                    string preInfo = "需要";
-                    for (int i = 0; i < nowUnionKeJiConfig.PreId.Length; i++)
-                    {
-                        if (i != 0)
-                        {
-                            preInfo += "或";
-                        }
-                        
-                        UnionKeJiConfig config = UnionKeJiConfigCategory.Instance.Get(nowUnionKeJiConfig.PreId[i]);
-                        preInfo += nowUnionKeJiConfig.EquipSpaceName.Substring(0, Regex.Match(nowUnionKeJiConfig.EquipSpaceName, @"\d").Index);
-                        preInfo += "达到" + config.QiangHuaLv + "级";
-                    }
-                    self.E_PreTextText.text = preInfo;
-                }
-
-                self.E_CostPointTextText.text = zstring.Format("科技点数：{0}点", nowUnionKeJiConfig.Point);
+                self.E_PreTextText.text = "";
             }
+            else
+            {
+                string preInfo = "需要";
+                for (int i = 0; i < nowUnionKeJiConfig.PreId.Length; i++)
+                {
+                    if (i != 0)
+                    {
+                        preInfo += "或";
+                    }
+
+                    UnionKeJiConfig config = UnionKeJiConfigCategory.Instance.Get(nowUnionKeJiConfig.PreId[i]);
+                    preInfo += nowUnionKeJiConfig.EquipSpaceName.Substring(0, Regex.Match(nowUnionKeJiConfig.EquipSpaceName, @"\d").Index);
+                    preInfo += "达到" + config.QiangHuaLv + "级";
+                }
+                self.E_PreTextText.text = preInfo;
+            }
+
+            self.E_CostPointTextText.text = string.Format("科技点数：{0}点", nowUnionKeJiConfig.Point);
             
             // if (nowUnionKeJiConfig.QiangHuaLv == 0)
             // {

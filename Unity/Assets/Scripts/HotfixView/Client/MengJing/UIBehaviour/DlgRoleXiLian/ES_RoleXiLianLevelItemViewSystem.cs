@@ -69,29 +69,26 @@ namespace ET.Client
             bool actived = shuliandu >= equipXiLianConfig.NeedShuLianDu;
             self.E_Image_AcvityedImage.gameObject.SetActive(userInfo.XiuLianRewardIds.Contains(xilianId));
             self.E_ButtonGetButton.gameObject.SetActive(actived && !userInfo.XiuLianRewardIds.Contains(xilianId));
-            using (zstring.Block())
-            {
-                self.E_TextShuLianDuText.text = actived ? zstring.Format("{0}/{1}", equipXiLianConfig.NeedShuLianDu, equipXiLianConfig.NeedShuLianDu)
-                        : zstring.Format("{0}/{1}", shuliandu, equipXiLianConfig.NeedShuLianDu);
-                float progress = shuliandu * 1f / equipXiLianConfig.NeedShuLianDu;
-                self.E_ImageExpImage.fillAmount = Mathf.Min(progress, 1f);
-                self.E_TextTitleText.text = equipXiLianConfig.Title;
-                self.E_TextLevelTipText.text = zstring.Format("获得{0}，洗练获得高品质属性概率提升。", equipXiLianConfig.Title);
+            self.E_TextShuLianDuText.text = actived ? string.Format("{0}/{1}", equipXiLianConfig.NeedShuLianDu, equipXiLianConfig.NeedShuLianDu)
+                    : string.Format("{0}/{1}", shuliandu, equipXiLianConfig.NeedShuLianDu);
+            float progress = shuliandu * 1f / equipXiLianConfig.NeedShuLianDu;
+            self.E_ImageExpImage.fillAmount = Mathf.Min(progress, 1f);
+            self.E_TextTitleText.text = equipXiLianConfig.Title;
+            self.E_TextLevelTipText.text = string.Format("获得{0}，洗练获得高品质属性概率提升。", equipXiLianConfig.Title);
 
-                if (equipXiLianConfig.ProList_Type[0] != 0)
+            if (equipXiLianConfig.ProList_Type[0] != 0)
+            {
+                if (NumericHelp.GetNumericValueType(equipXiLianConfig.ProList_Type[0]) == 2)
                 {
-                    if (NumericHelp.GetNumericValueType(equipXiLianConfig.ProList_Type[0]) == 2)
-                    {
-                        float fvalue = equipXiLianConfig.ProList_Value[0] * 0.001f;
-                        string svalue = fvalue.ToString("0.#####");
-                        self.E_TextAttributeText.text =
-                                zstring.Format("{0} +{1}%", ItemViewHelp.GetAttributeName(equipXiLianConfig.ProList_Type[0]), svalue);
-                    }
-                    else
-                    {
-                        self.E_TextAttributeText.text = zstring.Format("{0} +{1}", ItemViewHelp.GetAttributeName(equipXiLianConfig.ProList_Type[0]),
-                            equipXiLianConfig.ProList_Value[0]);
-                    }
+                    float fvalue = equipXiLianConfig.ProList_Value[0] * 0.001f;
+                    string svalue = fvalue.ToString("0.#####");
+                    self.E_TextAttributeText.text =
+                            string.Format("{0} +{1}%", ItemViewHelp.GetAttributeName(equipXiLianConfig.ProList_Type[0]), svalue);
+                }
+                else
+                {
+                    self.E_TextAttributeText.text = string.Format("{0} +{1}", ItemViewHelp.GetAttributeName(equipXiLianConfig.ProList_Type[0]),
+                        equipXiLianConfig.ProList_Value[0]);
                 }
             }
         }

@@ -57,10 +57,7 @@ namespace ET.Client
             self.AddUIScrollItems(ref self.ScrollItemStoreItems, self.ShowStores.Count);
             self.View.E_StoreItemsLoopVerticalScrollRect.SetVisible(true, self.ShowStores.Count);
 
-            using (zstring.Block())
-            {
-                self.View.ES_ModelShow.ShowOtherModel(zstring.Format("Npc/{0}", npcConfig.Asset)).Coroutine();
-            }
+            self.View.ES_ModelShow.ShowOtherModel(string.Format("Npc/{0}", npcConfig.Asset)).Coroutine();
         }
 
         private static void OnStoreItemsRefresh(this DlgStore self, Transform transform, int index)

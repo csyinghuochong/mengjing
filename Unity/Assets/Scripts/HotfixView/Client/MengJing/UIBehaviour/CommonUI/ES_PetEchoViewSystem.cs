@@ -69,10 +69,7 @@ namespace ET.Client
 			if(nextCombat > 0)
 			{
 				self.E_NextNeedCombatText.gameObject.SetActive(true);
-				using (zstring.Block())
-				{
-					self.E_NextNeedCombatText.text = zstring.Format("距离激活下一级战力还差{0}点", nextCombat - curCombat);
-				}
+				self.E_NextNeedCombatText.text = string.Format("距离激活下一级战力还差{0}点", nextCombat - curCombat);
 			}
 			else
 			{
@@ -85,10 +82,7 @@ namespace ET.Client
 			//PetComponentC petComponentC = self.Root().GetComponent<PetComponentC>();
 			SkillSetComponentC skillSetComponentC = self.Root().GetComponent<SkillSetComponentC>();
 			int activeNumber = skillSetComponentC.GetPetEchoSkillList().Count;
-			using (zstring.Block())
-			{
-				self.E_ActiveNumberText.text = zstring.Format("激活({0}/{1})", activeNumber, ConfigData.PetEchoSkill.Count);
-			}
+			self.E_ActiveNumberText.text = string.Format("激活({0}/{1})", activeNumber, ConfigData.PetEchoSkill.Count);
 		}
 
 		private static async ETTask OnClickOpenButton(this ES_PetEcho self)
@@ -230,11 +224,8 @@ namespace ET.Client
 			string[] openlist = keyValuePair.Value2.Split("&");
             string pname = ItemViewHelp.GetAttributeName(ConfigData.PetEchoAttri[self.Index].KeyId);
 
-            using (zstring.Block())
-            {
-	            self.E_Text_NeedLvText.text = zstring.Format("开启等级：{0}级", openlist[0]);
-                			self.E_Text_AttributeText.text = zstring.Format("开启此位置可以提升{0}效果", pname);
-            }
+                self.E_Text_NeedLvText.text = string.Format("开启等级：{0}级", openlist[0]);
+                self.E_Text_AttributeText.text = string.Format("开启此位置可以提升{0}效果", pname);
             
             self.ES_CostList.Refresh(openlist[1]);
             self.E_Text_NameText.text = keyValuePair.Value;
@@ -269,21 +260,15 @@ namespace ET.Client
 	        
 	        PetConfig petConfig = PetConfigCategory.Instance.Get(rolePetInfo.ConfigId);
 	        self.ES_ModelShow.SetShow(true);
-	        using (zstring.Block())
-	        {
-		        self.ES_ModelShow.ShowOtherModel(zstring.Format("Pet/{0}", petConfig.PetModel)).Coroutine();
-	        }
+		        self.ES_ModelShow.ShowOtherModel(string.Format("Pet/{0}", petConfig.PetModel)).Coroutine();
 
 	        self.ES_ModelShow.SetCameraPosition(new Vector3(0f, 100f, 450f));
 	        self.ES_ModelShow.Camera.fieldOfView = 40;
 	        // self.ES_ModelShow.SetRootPosition(new Vector2(self.Index * 1000 + 10000, 0));
 	        self.ES_ModelShow.SetModelParentRotation(Quaternion.Euler(0f, -45f, 0f));
 	        
-	        using (zstring.Block())
-	        {
-		        self.E_Text_Name_Pet_ComabtText.text = zstring.Format("战力：{0}", rolePetInfo.PetPingFen);
-		        self.E_Text_Attribute_OpenedText.text = zstring.Format("{0}提升+{1}%",pname, (CommonHelp.GetPetShouHuPro(rolePetInfo.PetPingFen, fightNum) * 100).ToString("F2"));
-	        }
+		        self.E_Text_Name_Pet_ComabtText.text = string.Format("战力：{0}", rolePetInfo.PetPingFen);
+		        self.E_Text_Attribute_OpenedText.text = string.Format("{0}提升+{1}%",pname, (CommonHelp.GetPetShouHuPro(rolePetInfo.PetPingFen, fightNum) * 100).ToString("F2"));
         }
 
         [EntitySystem]

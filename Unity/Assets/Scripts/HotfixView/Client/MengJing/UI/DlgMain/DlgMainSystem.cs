@@ -393,10 +393,7 @@ namespace ET.Client
             }
             catch (Exception e)
             {
-                using (zstring.Block())
-                {
-                    Log.Error(zstring.Format("move timer error: {0}\n{1}", self.Id, e.ToString()));
-                }
+                Log.Error(string.Format("move timer error: {0}\n{1}", self.Id, e.ToString()));
             }
         }
     }
@@ -412,10 +409,7 @@ namespace ET.Client
             }
             catch (Exception e)
             {
-                using (zstring.Block())
-                {
-                    Log.Error(zstring.Format("move timer error: {0}\n{1}", self.Id, e.ToString()));
-                }
+                Log.Error(string.Format("move timer error: {0}\n{1}", self.Id, e.ToString()));
             }
         }
     }
@@ -763,10 +757,7 @@ namespace ET.Client
 
             long userid = self.Root().GetComponent<UserInfoComponentC>().UserInfo.UserId;
             string positonlist;
-            using (zstring.Block())
-            {
-                positonlist = PlayerPrefsHelp.GetString(zstring.Format("PlayerPrefsHelp.SkillPostion_{0}", userid));
-            }
+            positonlist = PlayerPrefsHelp.GetString(string.Format("PlayerPrefsHelp.SkillPostion_{0}", userid));
 
             string[] vector2list = positonlist.Split('@');
 
@@ -1022,11 +1013,8 @@ namespace ET.Client
             }
 
             string fubenName;
-            using (zstring.Block())
-            {
-                fubenName = zstring.Format("请前往{0} {1} 出接取任务", DungeonConfigCategory.Instance.Get(fubenId).ChapterName,
-                    NpcConfigCategory.Instance.Get(getNpc).Name);
-            }
+            fubenName = string.Format("请前往{0} {1} 出接取任务", DungeonConfigCategory.Instance.Get(fubenId).ChapterName,
+                NpcConfigCategory.Instance.Get(getNpc).Name);
 
             MapComponent mapComponent = self.Root().GetComponent<MapComponent>();
             FlyTipComponent flyTipComponent = self.Root().GetComponent<FlyTipComponent>();
@@ -1306,10 +1294,7 @@ namespace ET.Client
                 return;
             }
 
-            using (zstring.Block())
-            {
-                self.View.E_ExpValueText.text = zstring.Format("{0}/{1}", userInfo.Exp, ExpConfigCategory.Instance.Get(userInfo.Lv).UpExp);
-            }
+            self.View.E_ExpValueText.text = string.Format("{0}/{1}", userInfo.Exp, ExpConfigCategory.Instance.Get(userInfo.Lv).UpExp);
 
             //self.View.E_ExpProImage.fillAmount = (float)userInfo.Exp / (float)ExpConfigCategory.Instance.Get(userInfo.Lv).UpExp;
             float ratevalue = (float)userInfo.Exp / (float)ExpConfigCategory.Instance.Get(userInfo.Lv).UpExp;
@@ -1441,10 +1426,7 @@ namespace ET.Client
             else
             {
                 self.View.E_TextPetSwitchTitleText.gameObject.SetActive(true);
-                using (zstring.Block())
-                {
-                    self.View.E_TextPetSwitchText.text = zstring.Format("{0}", leftTime);
-                }
+                self.View.E_TextPetSwitchText.text = string.Format("{0}", leftTime);
             }
         }
 
@@ -1701,12 +1683,9 @@ namespace ET.Client
                     color = "C4FF00";
                 }
 
-                using (zstring.Block())
-                {
-                    rc.Get<GameObject>("LvText (1)").GetComponent<Text>().text = zstring.Format("<color=#{0}>击败怪物</color>", color);
-                    rc.Get<GameObject>("LvText").GetComponent<Text>().text =
-                            zstring.Format("<color=#{0}>{1}/{2}</color>", color, numericComponent.GetAsInt(NumericType.KillMonsterNumber), newNum);
-                }
+                rc.Get<GameObject>("LvText (1)").GetComponent<Text>().text = string.Format("<color=#{0}>击败怪物</color>", color);
+                rc.Get<GameObject>("LvText").GetComponent<Text>().text =
+                        string.Format("<color=#{0}>{1}/{2}</color>", color, numericComponent.GetAsInt(NumericType.KillMonsterNumber), newNum);
 
                 // self.View.EG_Btn_KillMonsterRewardRectTransform.gameObject.SetActive(true);
                 self.View.EG_Btn_KillMonsterRewardRectTransform.gameObject.SetActive(false);
@@ -1825,11 +1804,8 @@ namespace ET.Client
                     color = "C4FF00";
                 }
 
-                using (zstring.Block())
-                {
-                    rc.Get<GameObject>("LvText (1)").GetComponent<Text>().text = zstring.Format("<color=#{0}>等级奖励</color>", color);
-                    rc.Get<GameObject>("LvText").GetComponent<Text>().text = zstring.Format("<color=#{0}>{1}级领取</color>", color, newLv);
-                }
+                rc.Get<GameObject>("LvText (1)").GetComponent<Text>().text = string.Format("<color=#{0}>等级奖励</color>", color);
+                rc.Get<GameObject>("LvText").GetComponent<Text>().text = string.Format("<color=#{0}>{1}级领取</color>", color, newLv);
 
                 // self.View.EG_Btn_LvRewardRectTransform.gameObject.SetActive(true);
                 self.View.EG_Btn_LvRewardRectTransform.gameObject.SetActive(false);

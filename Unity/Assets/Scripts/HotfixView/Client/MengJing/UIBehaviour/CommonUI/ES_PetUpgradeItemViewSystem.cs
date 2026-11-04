@@ -23,10 +23,7 @@ namespace ET.Client
         {
             PetBarConfig petBarConfig = PetBarConfigCategory.Instance.Get(petBarConfigId);
             self.E_PetBarNameText.text = petBarConfig.Name;
-            using (zstring.Block())
-            {
-                self.E_PetBarLvText.text = zstring.Format("等级:{0}", petBarConfig.Level);
-            }
+            self.E_PetBarLvText.text = string.Format("等级:{0}", petBarConfig.Level);
         }
     }
 }

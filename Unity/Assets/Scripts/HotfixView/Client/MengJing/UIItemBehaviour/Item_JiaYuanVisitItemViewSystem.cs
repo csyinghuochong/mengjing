@@ -22,11 +22,8 @@ namespace ET.Client
             self.E_ButtonVisitButton.AddListener(self.OnButtonVisit);
             self.JiaYuanVisit = jiaYuanVisit;
 
-            using (zstring.Block())
-            {
-                self.E_TextTimes_2Text.text = zstring.Format("×{0}", jiaYuanVisit.Rubbish);
-                self.E_TextTimes_1Text.text = zstring.Format("×{0}", jiaYuanVisit.Gather);
-            }
+            self.E_TextTimes_2Text.text = string.Format("×{0}", jiaYuanVisit.Rubbish);
+            self.E_TextTimes_1Text.text = string.Format("×{0}", jiaYuanVisit.Gather);
 
             self.E_TextNameText.text = jiaYuanVisit.PlayerName;
             self.E_ImageIconImage.sprite = self.Root().GetComponent<ResourcesLoaderComponent>()

@@ -140,10 +140,7 @@ namespace ET.Client
             {
                 self.View.E_NameText.text = self.SeletRoleInfo.PlayerName;
                 self.View.E_NameText.gameObject.SetActive(true);
-                using (zstring.Block())
-                {
-                    self.View.E_LvText.text = zstring.Format("{0}级", self.SeletRoleInfo.PlayerLv);
-                }
+                self.View.E_LvText.text = string.Format("{0}级", self.SeletRoleInfo.PlayerLv);
                 self.View.E_LvText.gameObject.SetActive(true);
 
                 // self.View.ES_ModelShow.SetCameraPosition(new Vector3(0f, 70f, 150f));

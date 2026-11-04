@@ -53,10 +53,7 @@ namespace ET.Client
             string atrname = ItemViewHelp.GetAttributeName(int.Parse(proinfo[0]));
             self.E_Text_NameText.text = atrname;
             string curvalue = keyValuePair != null ? keyValuePair.Value : "0";
-            using (zstring.Block())
-            {
-                self.E_Text_ProgessText.text = zstring.Format("{0}/{1}", curvalue, proinfo[1]);
-            }
+            self.E_Text_ProgessText.text = string.Format("{0}/{1}", curvalue, proinfo[1]);
 
             self.E_ImageTo_1ValueImage.fillAmount = float.Parse(curvalue) / float.Parse(proinfo[1]);
 

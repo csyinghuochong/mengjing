@@ -60,12 +60,9 @@ namespace ET.Client
 
             if (playerLv < skillBaseConfig.LearnRoseLv && skillBaseConfig.SkillLv == 0)
             {
-                using (zstring.Block())
-                {
-                    self.E_NullImage.gameObject.SetActive(true);
-                    self.E_LearnLvText.gameObject.SetActive(true);
-                    self.E_LearnLvText.text = zstring.Format("{0}级以后学习", skillBaseConfig.LearnRoseLv);
-                }
+                self.E_NullImage.gameObject.SetActive(true);
+                self.E_LearnLvText.gameObject.SetActive(true);
+                self.E_LearnLvText.text = string.Format("{0}级以后学习", skillBaseConfig.LearnRoseLv);
             }
             else
             {
@@ -76,11 +73,8 @@ namespace ET.Client
                 self.E_SkillNameText.text = skillConfig.SkillName;
                 self.E_SkillIconImage.gameObject.SetActive(true);
                 self.E_SkillIconImage.sprite = sp;
-                using (zstring.Block())
-                {
-                    self.E_SkillLvText.gameObject.SetActive(true);
-                    self.E_SkillLvText.text = zstring.Format("{0}{1}", LanguageComponent.Instance.LoadLocalization("等级 "), skillConfig.SkillLv);
-                }
+                self.E_SkillLvText.gameObject.SetActive(true);
+                self.E_SkillLvText.text = string.Format("{0}{1}", LanguageComponent.Instance.LoadLocalization("等级 "), skillConfig.SkillLv);
             }
         }
     }

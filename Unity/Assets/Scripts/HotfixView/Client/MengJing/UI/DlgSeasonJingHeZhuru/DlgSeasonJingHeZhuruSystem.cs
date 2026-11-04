@@ -35,10 +35,7 @@ namespace ET.Client
             self.MaxAdd = 0;
             self.CostIds.Clear();
             self.UpdateItemList();
-            using (zstring.Block())
-            {
-                self.View.E_NowQualityTextText.text = zstring.Format("当前品质:{0}", self.MainBagInfo.ItemPar);
-            }
+            self.View.E_NowQualityTextText.text = string.Format("当前品质:{0}", self.MainBagInfo.ItemPar);
         }
 
         public static void InitInfo(this DlgSeasonJingHeZhuru self, ItemInfo bagInfo)
@@ -47,10 +44,7 @@ namespace ET.Client
             self.View.ES_CommonItem.UpdateItem(bagInfo, ItemOperateEnum.None);
             ItemConfig itemConfig = ItemConfigCategory.Instance.Get(bagInfo.ItemID);
             self.View.E_ItemNameTextText.text = itemConfig.ItemName;
-            using (zstring.Block())
-            {
-                self.View.E_NowQualityTextText.text = zstring.Format("当前品质:{0}", bagInfo.ItemPar);
-            }
+            self.View.E_NowQualityTextText.text = string.Format("当前品质:{0}", bagInfo.ItemPar);
 
             self.View.E_AddQualityTextText.text = "";
 

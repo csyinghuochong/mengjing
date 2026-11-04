@@ -43,10 +43,7 @@ namespace ET.Client
             rewardItems.AddRange(TaskHelper.GetTaskRewards(taskPro.taskID));
             self.ES_RewardList.Refresh(rewardItems, 0.8f);
 
-            using (zstring.Block())
-            {
-                self.E_TaskProgressText.text = zstring.Format("{0}/{1}", taskPro.taskTargetNum_1, taskConfig.TargetValue[0]);
-            }
+            self.E_TaskProgressText.text = string.Format("{0}/{1}", taskPro.taskTargetNum_1, taskConfig.TargetValue[0]);
 
             self.E_ReceiveBtnButton.gameObject.SetActive(taskPro.taskStatus != (int)TaskStatuEnum.Commited);
             self.E_ReceivedImgImage.gameObject.SetActive(taskPro.taskStatus == (int)TaskStatuEnum.Commited);

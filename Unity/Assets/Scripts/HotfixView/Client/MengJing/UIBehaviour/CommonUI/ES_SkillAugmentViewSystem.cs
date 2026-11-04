@@ -91,11 +91,8 @@ namespace ET.Client
 				return;
 			}
 
-			using (zstring.Block())
-			{
-				PopupTipHelp.OpenPopupTip(self.Root(), "技能点重置", zstring.Format("是否花费{0}金币重置技能点", needGold),
-					() => self.RequestReset(operation).Coroutine()).Coroutine();
-			}
+			PopupTipHelp.OpenPopupTip(self.Root(), "技能点重置", string.Format("是否花费{0}金币重置技能点", needGold),
+				() => self.RequestReset(operation).Coroutine()).Coroutine();
 		}
 
 		private static async ETTask RequestReset(this ES_SkillAugment self, int operation)
@@ -361,11 +358,8 @@ namespace ET.Client
 			}
 
 			UserInfo userInfo = self.Root().GetComponent<UserInfoComponentC>().UserInfo;
-			using (zstring.Block())
-			{
-				self.E_SkillLvText.text = LanguageComponent.Instance.LoadLocalization("等级 ") + weaponSkillConfig.SkillLv;
-				self.E_SkillPointText.text = zstring.Format("技能点数：{0}/{1}", skillConfig.CostSPValue, userInfo.Sp);
-			}
+			self.E_SkillLvText.text = LanguageComponent.Instance.LoadLocalization("等级 ") + weaponSkillConfig.SkillLv;
+			self.E_SkillPointText.text = string.Format("技能点数：{0}/{1}", skillConfig.CostSPValue, userInfo.Sp);
 			self.E_SkillLearnButton.interactable = true;
 		}
 

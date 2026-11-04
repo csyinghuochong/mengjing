@@ -27,10 +27,7 @@ namespace ET.Client
 
             CommonViewHelper.SetImageGray(self.Root(), self.E_ImageIconImage.gameObject, petZhuangJiaConfig.Lv == 0);
             self.E_NameText.text = petZhuangJiaConfig.Name;
-            using (zstring.Block())
-            {
-                self.E_LvText.text = zstring.Format("{0}级", petZhuangJiaConfig.Lv);
-            }
+            self.E_LvText.text = string.Format("{0}级", petZhuangJiaConfig.Lv);
         }
     }
 }

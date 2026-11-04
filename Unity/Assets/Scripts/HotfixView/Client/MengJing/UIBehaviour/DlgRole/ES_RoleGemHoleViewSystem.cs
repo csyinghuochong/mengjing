@@ -68,18 +68,15 @@ namespace ET.Client
 
             self.uiTransform.gameObject.SetActive(true);
 
-            using (zstring.Block())
-            {
-                string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemQualityIcon, ItemViewData.GemHoleBack[holeId]);
-                Sprite sp = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
-                self.E_HoleBackImage.sprite = sp;
-                self.E_HoleNameText.text = ItemViewData.GemHoleName[holeId];
+            string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemQualityIcon, ItemViewData.GemHoleBack[holeId]);
+            Sprite sp = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
+            self.E_HoleBackImage.sprite = sp;
+            self.E_HoleNameText.text = ItemViewData.GemHoleName[holeId];
 
-                if (gemId == 0)
-                {
-                    self.E_ItemIconImage.gameObject.SetActive(false);
-                    return;
-                }
+            if (gemId == 0)
+            {
+                self.E_ItemIconImage.gameObject.SetActive(false);
+                return;
             }
 
             self.E_ItemIconImage.gameObject.SetActive(true);

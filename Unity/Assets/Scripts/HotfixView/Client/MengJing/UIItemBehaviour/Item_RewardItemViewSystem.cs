@@ -31,10 +31,7 @@ namespace ET.Client
             self.E_ItemIconImage.overrideSprite =
                     resourcesLoaderComponent.LoadAssetSync<Sprite>(ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemIcon, itemConfig.Icon));
 
-            using (zstring.Block())
-            {
-                self.E_ItemNumText.text = zstring.Format("x{0}", ItemViewHelp.ReturnNumStr(bagInfo.ItemNum));
-            }
+            self.E_ItemNumText.text = string.Format("x{0}", ItemViewHelp.ReturnNumStr(bagInfo.ItemNum));
 
             self.E_ItemNameText.text = itemConfig.ItemName;
             self.E_ItemNameText.color = FunctionUI.QualityReturnColorDi(itemConfig.ItemQuality);
@@ -75,10 +72,7 @@ namespace ET.Client
                     return;
                 }
 
-                using (zstring.Block())
-                {
-                    path = zstring.Format("Assets/Bundles/Effect/UIEffect/UIEffect_Quaity_{0}", itemConfig.ItemQuality);
-                }
+                path = string.Format("Assets/Bundles/Effect/UIEffect/UIEffect_Quaity_{0}", itemConfig.ItemQuality);
             }
 
             UIParticle.gameObject.SetActive(true);

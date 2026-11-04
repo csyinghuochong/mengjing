@@ -240,8 +240,8 @@ namespace ET.Client
             }
 
             // 获取卷轴的传承和非传承的技能与属性
-            zstring reelCanTransfAttribute = "传承增幅:";
-            zstring reelNoTransfAttribute = "增幅:";
+            string reelCanTransfAttribute = "传承增幅:";
+            string reelNoTransfAttribute = "增幅:";
             for (int i = 0; i < self.ReelBagInfo.IncreaseProLists.Count; i++)
             {
                 HideProList hide = self.ReelBagInfo.IncreaseProLists[i];
@@ -249,27 +249,24 @@ namespace ET.Client
                 string proName = ItemViewHelp.GetAttributeName(hideProListConfig.PropertyType);
                 int showType = NumericHelp.GetNumericValueType(hideProListConfig.PropertyType);
 
-                using (zstring.Block())
+                string str = "";
+                if (showType == 2)
                 {
-                    string str = "";
-                    if (showType == 2)
-                    {
-                        float value = (float)hide.HideValue / 100f;
-                        str = zstring.Format("{0} {1}% }", proName, value.ToString("0.##"));
-                    }
-                    else
-                    {
-                        str = zstring.Format("{0} {1} ", proName, hide.HideValue);
-                    }
+                    float value = (float)hide.HideValue / 100f;
+                    str = string.Format("{0} {1}% }", proName, value.ToString("0.##"));
+                }
+                else
+                {
+                    str = string.Format("{0} {1} ", proName, hide.HideValue);
+                }
 
-                    if (hideProListConfig.IfMove == 1)
-                    {
-                        reelCanTransfAttribute += str;
-                    }
-                    else
-                    {
-                        reelNoTransfAttribute += str;
-                    }
+                if (hideProListConfig.IfMove == 1)
+                {
+                    reelCanTransfAttribute += str;
+                }
+                else
+                {
+                    reelNoTransfAttribute += str;
                 }
             }
 
@@ -280,22 +277,19 @@ namespace ET.Client
                 SkillConfig skillConfig = SkillConfigCategory.Instance.Get(hideProListConfig.PropertyType);
                 string skillName = skillConfig.SkillName;
 
-                using (zstring.Block())
+                if (hideProListConfig.IfMove == 1)
                 {
-                    if (hideProListConfig.IfMove == 1)
-                    {
-                        reelCanTransfAttribute += zstring.Format("{0} ", skillName);
-                    }
-                    else
-                    {
-                        reelNoTransfAttribute += zstring.Format("{0} ", skillName);
-                    }
+                    reelCanTransfAttribute += string.Format("{0} ", skillName);
+                }
+                else
+                {
+                    reelNoTransfAttribute += string.Format("{0} ", skillName);
                 }
             }
 
             // 获取装备的传承和非传承的技能与属性
-            zstring equipmentCanTransfAttribute = "传承增幅:";
-            zstring equipmentNoTransfAttribute = "增幅:";
+            string equipmentCanTransfAttribute = "传承增幅:";
+            string equipmentNoTransfAttribute = "增幅:";
             for (int i = 0; i < self.EquipmentBagInfo.IncreaseProLists.Count; i++)
             {
                 HideProList hide = self.EquipmentBagInfo.IncreaseProLists[i];
@@ -303,27 +297,24 @@ namespace ET.Client
                 string proName = ItemViewHelp.GetAttributeName(hideProListConfig.PropertyType);
                 int showType = NumericHelp.GetNumericValueType(hideProListConfig.PropertyType);
 
-                using (zstring.Block())
+                string str = "";
+                if (showType == 2)
                 {
-                    string str = "";
-                    if (showType == 2)
-                    {
-                        float value = (float)hide.HideValue / 100f;
-                        str = zstring.Format("{0} {1}% ", proName, value.ToString("0.##"));
-                    }
-                    else
-                    {
-                        str = zstring.Format("{0} {1} ", proName, hide.HideValue);
-                    }
+                    float value = (float)hide.HideValue / 100f;
+                    str = string.Format("{0} {1}% ", proName, value.ToString("0.##"));
+                }
+                else
+                {
+                    str = string.Format("{0} {1} ", proName, hide.HideValue);
+                }
 
-                    if (hideProListConfig.IfMove == 1)
-                    {
-                        equipmentCanTransfAttribute += str;
-                    }
-                    else
-                    {
-                        equipmentNoTransfAttribute += str;
-                    }
+                if (hideProListConfig.IfMove == 1)
+                {
+                    equipmentCanTransfAttribute += str;
+                }
+                else
+                {
+                    equipmentNoTransfAttribute += str;
                 }
             }
 
@@ -334,36 +325,30 @@ namespace ET.Client
                 SkillConfig skillConfig = SkillConfigCategory.Instance.Get(hideProListConfig.PropertyType);
                 string skillName = skillConfig.SkillName;
 
-                using (zstring.Block())
+                if (hideProListConfig.IfMove == 1)
                 {
-                    if (hideProListConfig.IfMove == 1)
-                    {
-                        equipmentCanTransfAttribute += zstring.Format("{0} ", skillName);
-                    }
-                    else
-                    {
-                        equipmentNoTransfAttribute += zstring.Format("{0} ", skillName);
-                    }
+                    equipmentCanTransfAttribute += string.Format("{0} ", skillName);
+                }
+                else
+                {
+                    equipmentNoTransfAttribute += string.Format("{0} ", skillName);
                 }
             }
 
             // 当前装备已经存在传承增幅
-            zstring tipStr = "";
+            string tipStr = "";
             bool isTip = false;
-            using (zstring.Block())
+            if (reelCanTransfAttribute != "传承增幅:" && equipmentCanTransfAttribute != "传承增幅:")
             {
-                if (reelCanTransfAttribute != "传承增幅:" && equipmentCanTransfAttribute != "传承增幅:")
-                {
-                    tipStr += zstring.Format("当前<color=#BEFF34>{0}</color> \n是否覆盖已有\n{1}\n", reelCanTransfAttribute, equipmentCanTransfAttribute);
-                    isTip = true;
-                }
+                tipStr += string.Format("当前<color=#BEFF34>{0}</color> \n是否覆盖已有\n{1}\n", reelCanTransfAttribute, equipmentCanTransfAttribute);
+                isTip = true;
+            }
 
-                // 当前装备已经存在非传承增幅
-                if (reelNoTransfAttribute != "增幅:" && equipmentNoTransfAttribute != "增幅:")
-                {
-                    tipStr += zstring.Format("当前<color=#BEFF34>{0}</color> \n是否覆盖已有\n{1}\n", reelNoTransfAttribute, equipmentNoTransfAttribute);
-                    isTip = true;
-                }
+            // 当前装备已经存在非传承增幅
+            if (reelNoTransfAttribute != "增幅:" && equipmentNoTransfAttribute != "增幅:")
+            {
+                tipStr += string.Format("当前<color=#BEFF34>{0}</color> \n是否覆盖已有\n{1}\n", reelNoTransfAttribute, equipmentNoTransfAttribute);
+                isTip = true;
             }
 
             // 是否弹出提示框

@@ -59,10 +59,7 @@ namespace ET.Client
 
             MysteryConfig mysteryConfig = MysteryConfigCategory.Instance.Get(mysteryItemInfo.MysteryId);
             self.MysteryItemInfo = mysteryItemInfo;
-            using (zstring.Block())
-            {
-                self.E_Text_NumberText.text = zstring.Format("剩余 {0}件", mysteryItemInfo.ItemNumber);
-            }
+            self.E_Text_NumberText.text = string.Format("剩余 {0}件", mysteryItemInfo.ItemNumber);
 
             self.E_Text_valueText.text = mysteryConfig.SellValue.ToString();
 

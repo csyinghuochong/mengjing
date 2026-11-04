@@ -86,11 +86,8 @@ namespace ET.Client
         {
             if (!self.m_ReddotNodeDic.TryGetValue(key, out ReddotNode reddotNode))
             {
-                using (zstring.Block())
-                {
-                    throw new Exception(zstring.Format(
-                        "[Reddot System] there is no node which key is '{0}' in reddot tree，please add node to reddot tree or modify key", key));
-                }
+                throw new Exception(string.Format(
+                    "[Reddot System] there is no node which key is '{0}' in reddot tree，please add node to reddot tree or modify key", key));
             }
 
             reddotNode.ChangeCount(changeValue);
@@ -110,11 +107,8 @@ namespace ET.Client
             }
             else
             {
-                using (zstring.Block())
-                {
-                    throw new Exception(zstring.Format(
-                        "[Reddot System] there is no node which key is '{0}' in reddot tree，please add node to reddot tree or modify key", key));
-                }
+                throw new Exception(string.Format(
+                    "[Reddot System] there is no node which key is '{0}' in reddot tree，please add node to reddot tree or modify key", key));
             }
         }
 
@@ -131,11 +125,8 @@ namespace ET.Client
             }
             else
             {
-                using (zstring.Block())
-                {
-                    throw new Exception(zstring.Format(
-                        "[Reddot System] there is no node which key is '{0}' in reddot tree，please add node to reddot tree or modify key", key));
-                }
+                throw new Exception(string.Format(
+                    "[Reddot System] there is no node which key is '{0}' in reddot tree，please add node to reddot tree or modify key", key));
             }
         }
 
@@ -152,11 +143,8 @@ namespace ET.Client
             }
             else
             {
-                using (zstring.Block())
-                {
-                    throw new Exception(zstring.Format(
-                        "[Reddot System] there is no node which key is '{0}' in reddot tree，please add node to reddot tree or modify key", key));
-                }
+                throw new Exception(string.Format(
+                    "[Reddot System] there is no node which key is '{0}' in reddot tree，please add node to reddot tree or modify key", key));
             }
         }
     }

@@ -40,10 +40,7 @@ namespace ET.Client
                 }
             }
 
-            using (zstring.Block())
-            {
-                self.View.E_NumTextText.text = zstring.Format("可种植地数量:{0}/{1}", self.Lands.Count, jiaYuanComponent.PlanOpenList_7.Count);
-            }
+            self.View.E_NumTextText.text = string.Format("可种植地数量:{0}/{1}", self.Lands.Count, jiaYuanComponent.PlanOpenList_7.Count);
 
             self.SeedToggles.Clear();
             BagComponentC bagComponent = self.Root().GetComponent<BagComponentC>();

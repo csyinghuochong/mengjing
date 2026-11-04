@@ -24,11 +24,8 @@ namespace ET.Client
 
             self.TeamPlayerInfo = teamPlayerInfo;
             self.E_TextNameText.text = teamPlayerInfo.PlayerName;
-            using (zstring.Block())
-            {
-                self.E_TextCombatText.text = zstring.Format("战力：{0}", teamPlayerInfo.Combat);
-                self.E_TextLevelText.text = zstring.Format("等级：{0}", teamPlayerInfo.PlayerLv);
-            }
+            self.E_TextCombatText.text = string.Format("战力：{0}", teamPlayerInfo.Combat);
+            self.E_TextLevelText.text = string.Format("等级：{0}", teamPlayerInfo.PlayerLv);
 
             string occName = "";
             if (teamPlayerInfo.OccTwo != 0)

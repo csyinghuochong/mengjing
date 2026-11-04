@@ -14,10 +14,7 @@ namespace ET.Client
             }
             catch (Exception e)
             {
-                using (zstring.Block())
-                {
-                    Log.Error(zstring.Format("move timer error: {0}\n{1}", self.Id, e.ToString()));
-                }
+                Log.Error(string.Format("move timer error: {0}\n{1}", self.Id, e.ToString()));
             }
         }
     }
@@ -69,12 +66,9 @@ namespace ET.Client
 
             if (needzijin > 0)
             {
-                using (zstring.Block())
-                {
-                    PopupTipHelp.OpenPopupTip(self.Root(), "家园刷新", zstring.Format("是否花费{0}家园资金刷新", needzijin),
-                                () => { self.RquestFresh().Coroutine(); }, null)
-                            .Coroutine();
-                }
+                PopupTipHelp.OpenPopupTip(self.Root(), "家园刷新", string.Format("是否花费{0}家园资金刷新", needzijin),
+                            () => { self.RquestFresh().Coroutine(); }, null)
+                        .Coroutine();
             }
             else
             {

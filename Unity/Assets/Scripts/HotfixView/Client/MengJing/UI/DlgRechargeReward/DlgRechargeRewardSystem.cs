@@ -95,10 +95,7 @@ namespace ET.Client
                 self.View.E_ImageReceivedImage.gameObject.SetActive(userInfoComponent.UserInfo.RechargeReward.Contains(rechargeNumber));
             }
 
-            using (zstring.Block())
-            {
-                self.View.E_TextTipText.text = zstring.Format("累冲{0}元， 获得以下奖励。", rechargeNumber);
-            }
+            self.View.E_TextTipText.text = string.Format("累冲{0}元， 获得以下奖励。", rechargeNumber);
 
             string reward = ConfigData.RechargeReward[rechargeNumber];
             List<RewardItem> Recharge = ItemHelper.GetRewardItems(reward);

@@ -27,11 +27,8 @@ namespace ET.Client
             int hideId = HideProListConfigCategory.Instance.PetSkillToHideProId[skillId];
             HideProListConfig hideProListConfig = HideProListConfigCategory.Instance.Get(hideId);
             SkillConfig skillConfig = SkillConfigCategory.Instance.Get(skillId);
-            using (zstring.Block())
-            {
-                self.View.E_Lab_SkillNameText.text = zstring.Format("{0}{1}/{2}", skillConfig.SkillName, skillNum, hideProListConfig.NeedNumber);
-                self.View.E_TextTip2Text.text = zstring.Format("套装技能穿戴{0}个时激活此技能", hideProListConfig.NeedNumber);
-            }
+            self.View.E_Lab_SkillNameText.text = string.Format("{0}{1}/{2}", skillConfig.SkillName, skillNum, hideProListConfig.NeedNumber);
+            self.View.E_TextTip2Text.text = string.Format("套装技能穿戴{0}个时激活此技能", hideProListConfig.NeedNumber);
         }
 
         public static void OnUpdateData(this DlgSkillTips self, int skillId, Vector3 vector3,

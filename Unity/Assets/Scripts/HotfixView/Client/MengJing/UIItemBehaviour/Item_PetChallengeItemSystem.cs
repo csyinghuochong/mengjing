@@ -55,10 +55,7 @@ namespace ET.Client
             self.E_ImageLine_1.gameObject.SetActive(index % 2 == 0);
             self.E_ImageLine_2.gameObject.SetActive(index % 2 != 0);
             self.E_TextLevel.text = petfubenConf.Name;
-            using (zstring.Block())
-            {
-                self.E_TextCombat.text = zstring.Format("建议最低队伍等级： {0}级", petfubenConf.Lv);
-            }
+            self.E_TextCombat.text = string.Format("建议最低队伍等级： {0}级", petfubenConf.Lv);
 
             self.E_Node_2.gameObject.SetActive(locked);
             self.E_StartNode.gameObject.SetActive(!locked);

@@ -95,10 +95,7 @@ namespace ET.Client
             SceneConfig sceneConfig = SceneConfigCategory.Instance.Get(sceneid);
 
             int useTime = (int)self.Root().GetComponent<UserInfoComponentC>().GetSceneFubenTimes(sceneid);
-            using (zstring.Block())
-            {
-                self.View.E_TextChallengeTimeText.text = zstring.Format("挑战剩余次数:{0}/10", sceneConfig.DayEnterNum - useTime);
-            }
+            self.View.E_TextChallengeTimeText.text = string.Format("挑战剩余次数:{0}/10", sceneConfig.DayEnterNum - useTime);
         }
 
         public static async ETTask RequestPetInfo(this DlgPetMiningChallenge self, int index)
@@ -166,20 +163,14 @@ namespace ET.Client
             float coffi = CommonHelp.GetMineCoefficient(openDay, mineType, position, uIPetMining.PetMineExtend);
             int chanchu = (int)(mineBattleConfig.GoldOutPut * coffi);
 
-            using (zstring.Block())
-            {
-                self.View.E_Text_chanchuText.text = zstring.Format("产出:{0}小时", chanchu);
-            }
+            self.View.E_Text_chanchuText.text = string.Format("产出:{0}小时", chanchu);
 
             self.PetMingPlayerInfo = petMingPlayerInfo;
             string playerName = string.Empty;
             List<int> confids = new List<int>();
             if (petMingPlayerInfo != null)
             {
-                using (zstring.Block())
-                {
-                    playerName = zstring.Format("占领者:{0}", petMingPlayerInfo.PlayerName);
-                }
+                playerName = string.Format("占领者:{0}", petMingPlayerInfo.PlayerName);
 
                 confids = petMingPlayerInfo.PetConfig;
             }

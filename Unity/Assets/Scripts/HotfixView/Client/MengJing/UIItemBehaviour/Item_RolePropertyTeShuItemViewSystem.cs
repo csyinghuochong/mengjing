@@ -99,16 +99,13 @@ namespace ET.Client
                     //value += ComHelp.LvProChange(numericComponent.GetAsLong(NumericType.Now_SkillCDTimeCostPro), self.UserInfoComponent.UserInfo.Lv) * 100f;
                 }
 
-                using (zstring.Block())
+                if (value.ToString().Contains("."))
                 {
-                    if (value.ToString().Contains("."))
-                    {
-                        self.E_ProTypeValueText.text = zstring.Format("{0}%", value.ToString("F2"));
-                    }
-                    else
-                    {
-                        self.E_ProTypeValueText.text = zstring.Format("{0}%", value.ToString());
-                    }
+                    self.E_ProTypeValueText.text = string.Format("{0}%", value.ToString("F2"));
+                }
+                else
+                {
+                    self.E_ProTypeValueText.text = string.Format("{0}%", value.ToString());
                 }
             }
         }

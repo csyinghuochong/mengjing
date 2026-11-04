@@ -41,11 +41,8 @@ namespace ET.Client
         {
             int shopid = GlobalValueConfigCategory.Instance.TowerShopId;
             int playLv = self.Root().GetComponent<UserInfoComponentC>().UserInfo.Lv;
-            using (zstring.Block())
-            {
-                self.E_Lab_NumText.text = zstring.Format("当前拥有数量:{0}",
-                    self.Root().GetComponent<BagComponentC>().GetItemNumber(StoreSellConfigCategory.Instance.Get(shopid).SellType).ToString());
-            }
+            self.E_Lab_NumText.text = string.Format("当前拥有数量:{0}",
+                self.Root().GetComponent<BagComponentC>().GetItemNumber(StoreSellConfigCategory.Instance.Get(shopid).SellType).ToString());
 
             self.ShowItems.Clear();
             while (shopid > 0)

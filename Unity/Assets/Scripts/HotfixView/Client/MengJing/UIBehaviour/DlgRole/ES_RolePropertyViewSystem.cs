@@ -224,19 +224,13 @@ namespace ET.Client
 
             int maxPiLao = numericComponentC.GetAsInt(NumericType.YueKaRemainTimes) > 0 ? GlobalValueConfigCategory.Instance.MaxPiLaoYuKaUser : GlobalValueConfigCategory.Instance.MaxPiLao;
             self.E_PiLaoImgImage.fillAmount = (float)userInfoComponentC.UserInfo.PiLao / maxPiLao;
-            using (zstring.Block())
-            {
-                self.E_PiLaoTextText.text = zstring.Format("{0}/{1}", userInfoComponentC.UserInfo.PiLao, maxPiLao);
-            }
+            self.E_PiLaoTextText.text = string.Format("{0}/{1}", userInfoComponentC.UserInfo.PiLao, maxPiLao);
             
             NumericComponentC numericComponent = unit.GetComponent<NumericComponentC>();
             int skillNumber = 1 + numericComponent.GetAsInt(NumericType.MakeType_2) > 0 ? 1 : 0;
             
             self.E_BaoShiDuImgImage.fillAmount = (float)userInfoComponentC.UserInfo.Vitality / unit.GetMaxHuoLi(skillNumber);
-            using (zstring.Block())
-            {
-                self.E_BaoShiDuTextText.text = zstring.Format("{0}/{1}", userInfoComponentC.UserInfo.Vitality, unit.GetMaxHuoLi(skillNumber));
-            }
+            self.E_BaoShiDuTextText.text = string.Format("{0}/{1}", userInfoComponentC.UserInfo.Vitality, unit.GetMaxHuoLi(skillNumber));
 
             if (self.PropertyType == 0)
             {

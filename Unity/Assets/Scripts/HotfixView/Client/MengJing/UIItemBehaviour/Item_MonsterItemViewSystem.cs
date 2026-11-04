@@ -24,10 +24,7 @@ namespace ET.Client
             Sprite sp = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
             self.E_IconImage.sprite = sp;
             self.E_NameText.text = monsterConfig.MonsterName;
-            using (zstring.Block())
-            {
-                self.E_LvText.text = zstring.Format("等级:{0}", monsterConfig.Lv);
-            }
+            self.E_LvText.text = string.Format("等级:{0}", monsterConfig.Lv);
         }
     }
 }

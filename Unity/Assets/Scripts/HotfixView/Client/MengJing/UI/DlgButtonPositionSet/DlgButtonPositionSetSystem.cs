@@ -118,10 +118,7 @@ namespace ET.Client
         {
             long userid = self.Root().GetComponent<UserInfoComponentC>().UserInfo.UserId;
             string positonlist;
-            using (zstring.Block())
-            {
-                positonlist = PlayerPrefsHelp.GetString(zstring.Format("PlayerPrefsHelp.SkillPostion_{0}", userid));
-            }
+            positonlist = PlayerPrefsHelp.GetString(string.Format("PlayerPrefsHelp.SkillPostion_{0}", userid));
 
             string[] vector2list = positonlist.Split('@');
 
@@ -231,10 +228,7 @@ namespace ET.Client
 
             positonlist = positonlist.Substring(0, positonlist.Length - 1);
             long userid = self.Root().GetComponent<UserInfoComponentC>().UserInfo.UserId;
-            using (zstring.Block())
-            {
-                PlayerPrefsHelp.SetString(zstring.Format("PlayerPrefsHelp.SkillPostion_{0}", userid), positonlist);
-            }
+            PlayerPrefsHelp.SetString(string.Format("PlayerPrefsHelp.SkillPostion_{0}", userid), positonlist);
 
             self.HideEventTrigger();
         }

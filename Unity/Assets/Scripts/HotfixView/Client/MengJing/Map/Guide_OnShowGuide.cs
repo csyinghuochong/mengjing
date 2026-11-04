@@ -114,10 +114,7 @@ namespace ET.Client
                     scene.GetComponent<GuideComponent>().OnNext(args.GroupId);
 
                     UserInfo userInfo = scene.GetComponent<UserInfoComponentC>().UserInfo;
-                    using (zstring.Block())
-                    {
-                        PlayerPrefsHelp.SetInt(zstring.Format("{0}_{1}", PlayerPrefsHelp.LastGuide, userInfo.UserId), args.GuideId);
-                    }
+                    PlayerPrefsHelp.SetInt(string.Format("{0}_{1}", PlayerPrefsHelp.LastGuide, userInfo.UserId), args.GuideId);
 
                     break;
             }

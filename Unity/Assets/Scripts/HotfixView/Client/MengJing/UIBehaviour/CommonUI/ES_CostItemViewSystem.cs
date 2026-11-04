@@ -32,11 +32,8 @@ namespace ET.Client
           
 
             //显示字
-            using (zstring.Block())
-            {
-                self.E_ItemNumText.text = zstring.Format("{0}/{1}", CommonViewHelper.NumToWString(bagComponent.GetItemNumber(itemId)),
-                    CommonViewHelper.NumToWString(itemNum));
-            }
+            self.E_ItemNumText.text = string.Format("{0}/{1}", CommonViewHelper.NumToWString(bagComponent.GetItemNumber(itemId)),
+                CommonViewHelper.NumToWString(itemNum));
 
             //显示颜色
             self.E_ItemNumText.color = (itemNum < bagComponent.GetItemNumber(itemId)) ? Color.green : new Color(255f / 255f, 135f / 255f, 81f / 255f);

@@ -31,10 +31,7 @@ namespace ET.Client
             int dungeonid = SceneConfigHelper.GetFubenByMonster(monsterConfig.Id);
             if (dungeonid > 0)
             {
-                using (zstring.Block())
-                {
-                    self.E_MapText.text = zstring.Format("({0})", DungeonConfigCategory.Instance.Get(dungeonid).ChapterName);
-                }
+                self.E_MapText.text = string.Format("({0})", DungeonConfigCategory.Instance.Get(dungeonid).ChapterName);
             }
 
             self.RefreshTime();

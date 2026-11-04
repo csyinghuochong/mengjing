@@ -22,18 +22,15 @@ namespace ET.Client
             self.ES_RewardList.uiTransform.gameObject.SetActive(false);
 
             self.E_Text_NameText.text = teamPlayerInfo.PlayerName;
-            using (zstring.Block())
-            {
-                self.E_Text_LevelText.text = zstring.Format("等级：{0}", teamPlayerInfo.PlayerLv);
-                self.E_Text_DamageText.text = zstring.Format("伤害：{0}", teamPlayerInfo.Damage);
-                CommonViewHelper.ShowOccIcon(self.Root(), self.E_ImageIconImage.gameObject, teamPlayerInfo.Occ);
+            self.E_Text_LevelText.text = string.Format("等级：{0}", teamPlayerInfo.PlayerLv);
+            self.E_Text_DamageText.text = string.Format("伤害：{0}", teamPlayerInfo.Damage);
+            CommonViewHelper.ShowOccIcon(self.Root(), self.E_ImageIconImage.gameObject, teamPlayerInfo.Occ);
 
-                self.ES_RewardList.uiTransform.gameObject.SetActive(rewardItems != null);
-                if (rewardItems != null)
-                {
-                    string itemList = zstring.Format("{0};{1}", rewardItems[0].ItemID, rewardItems[0].ItemNum);
-                    self.ES_RewardList.Refresh(itemList, 0.6f);
-                }
+            self.ES_RewardList.uiTransform.gameObject.SetActive(rewardItems != null);
+            if (rewardItems != null)
+            {
+                string itemList = string.Format("{0};{1}", rewardItems[0].ItemID, rewardItems[0].ItemNum);
+                self.ES_RewardList.Refresh(itemList, 0.6f);
             }
         }
     }

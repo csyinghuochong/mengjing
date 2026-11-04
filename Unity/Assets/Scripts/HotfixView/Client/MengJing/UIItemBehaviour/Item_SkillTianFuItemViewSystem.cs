@@ -69,10 +69,7 @@ namespace ET.Client
             self.E_ImageIcon3Image.sprite = sp3;
             self.E_TextName3Text.text = skillConfig.Name;
 
-            using (zstring.Block())
-            {
-                self.E_TextLvText.text = zstring.Format("{0}级激活此天赋", skillConfig.LearnRoseLv);
-            }
+            self.E_TextLvText.text = string.Format("{0}级激活此天赋", skillConfig.LearnRoseLv);
         }
 
         public static void OnActiveTianFu(this Scroll_Item_SkillTianFuItem self)

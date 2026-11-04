@@ -152,12 +152,9 @@ namespace ET.Client
             BagComponentC bagComponent = self.Root().GetComponent<BagComponentC>();
             BuyCellCost buyCellCost = ConfigData.BuyBagCellCosts[bagComponent.BagBuyCellNumber[0]];
 
-            using (zstring.Block())
-            {
-                PopupTipHelp.OpenPopupTip(self.Root(), "购买格子",
-                    zstring.Format("是否花费{0}购买一个背包格子?", CommonViewHelper.GetNeedItemDesc(buyCellCost.Cost)),
-                    () => { BagClientNetHelper.RequestBuyBagCell(self.Root(), 0).Coroutine(); }, null).Coroutine();
-            }
+            PopupTipHelp.OpenPopupTip(self.Root(), "购买格子",
+                string.Format("是否花费{0}购买一个背包格子?", CommonViewHelper.GetNeedItemDesc(buyCellCost.Cost)),
+                () => { BagClientNetHelper.RequestBuyBagCell(self.Root(), 0).Coroutine(); }, null).Coroutine();
 
             return;
         }
@@ -263,12 +260,9 @@ namespace ET.Client
                 return;
             }
 
-            using (zstring.Block())
-            {
-                PopupTipHelp.OpenPopupTip(self.Root(), "合成宝石", zstring.Format("一键合成消耗{0}金币", costgold),
-                            () => { BagClientNetHelper.RquestGemHeCheng(self.Root(), 0).Coroutine(); }, null)
-                        .Coroutine();
-            }
+            PopupTipHelp.OpenPopupTip(self.Root(), "合成宝石", string.Format("一键合成消耗{0}金币", costgold),
+                        () => { BagClientNetHelper.RquestGemHeCheng(self.Root(), 0).Coroutine(); }, null)
+                    .Coroutine();
         }
 
         private static async ETTask OnZhengLiButton(this ES_RoleBag self)

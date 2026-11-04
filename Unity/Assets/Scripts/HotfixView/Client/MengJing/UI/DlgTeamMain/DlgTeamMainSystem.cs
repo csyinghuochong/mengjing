@@ -14,10 +14,7 @@ namespace ET.Client
             }
             catch (Exception e)
             {
-                using (zstring.Block())
-                {
-                    Log.Error(zstring.Format("move timer error: {0}\n{1}", self.Id, e.ToString()));
-                }
+                Log.Error(string.Format("move timer error: {0}\n{1}", self.Id, e.ToString()));
             }
         }
     }
@@ -79,10 +76,7 @@ namespace ET.Client
                 ItemID = unitDrop.GetComponent<NumericComponentC>().GetAsInt(NumericType.DropItemId),
                 ItemNum = unitDrop.GetComponent<NumericComponentC>().GetAsInt(NumericType.DropItemNum)
             }, ItemOperateEnum.None);
-            using (zstring.Block())
-            {
-                Log.Debug(zstring.Format("self.DropInfos {0}", self.DropInfos.Count));
-            }
+            Log.Debug(string.Format("self.DropInfos {0}", self.DropInfos.Count));
         }
 
         public static void SendTeamPick(this DlgTeamMain self, Unit dropInfo, int needType)

@@ -113,25 +113,19 @@ namespace ET.Client
                     }
                 }
 
-                using (zstring.Block())
+                if (minExp == maxExp)
                 {
-                    if (minExp == maxExp)
-                    {
-                        self.E_Text_Zhuru_ExpText.text = zstring.Format("本次注入预计获得{0}经验", minExp);
-                    }
-                    else
-                    {
-                        self.E_Text_Zhuru_ExpText.text = zstring.Format("本次注入预计获得{0}-{1}经验", minExp, maxExp);
-                    }
+                    self.E_Text_Zhuru_ExpText.text = string.Format("本次注入预计获得{0}经验", minExp);
+                }
+                else
+                {
+                    self.E_Text_Zhuru_ExpText.text = string.Format("本次注入预计获得{0}-{1}经验", minExp, maxExp);
                 }
             }
 
             int total = LifeShieldConfigCategory.Instance.GetAll().Count;
             int cur = self.GetOtherLifeShieldLevel(new List<int>(){1,2,3,4,5,6,7});
-            using (zstring.Block())
-            {
-                self.E_Text_TotalLevel.text = zstring.Format("{0}/{1}", cur, total);   
-            }
+            self.E_Text_TotalLevel.text = string.Format("{0}/{1}", cur, total);   
         }
 
         public static void UpdateHuiShouInfo(this ES_SkillLifeShield self, string dataparams)
@@ -200,10 +194,7 @@ namespace ET.Client
             }
             else
             {
-                using (zstring.Block())
-                {
-                    self.E_Text_ProgessText.text = zstring.Format("{0}/{1}", curExp, lifeShieldConfig.ShieldExp);
-                }
+                self.E_Text_ProgessText.text = string.Format("{0}/{1}", curExp, lifeShieldConfig.ShieldExp);
 
                 self.E_ImageProgessImage.fillAmount = (float)(curExp) / (float)(lifeShieldConfig.ShieldExp);
             }

@@ -70,10 +70,7 @@ namespace ET.Client
                 itemTypename = "家园烹饪";
             }
 
-            using (zstring.Block())
-            {
-                self.View.E_ItemTypeText.text = zstring.Format("类型:{0}", itemTypename);
-            }
+            self.View.E_ItemTypeText.text = string.Format("类型:{0}", itemTypename);
 
             //显示是否绑定
             if (bagInfo.isBinging)
@@ -122,27 +119,21 @@ namespace ET.Client
             //鉴定品质符
             if (itemConfig.ItemSubType == 121)
             {
-                using (zstring.Block())
-                {
-                    string itempar = string.IsNullOrEmpty(bagInfo.ItemPar) ? " " : $"鉴定符品质:{bagInfo.ItemPar}"; 
-                    itemDes =zstring.Format("{0}\n{1}\n品质越高，鉴定出极品的概率越高。\n鉴定符品质与制造者技巧值相关。", itemDes, itempar);
-                }
+                string itempar = string.IsNullOrEmpty(bagInfo.ItemPar) ? " " : $"鉴定符品质:{bagInfo.ItemPar}"; 
+                itemDes =string.Format("{0}\n{1}\n品质越高，鉴定出极品的概率越高。\n鉴定符品质与制造者技巧值相关。", itemDes, itempar);
             }
 
             //鉴定品质符
             if (itemConfig.ItemType == 1 && itemConfig.ItemSubType == 131)
             {
                 string[] addList = itemConfig.ItemUsePar.Split(';')[0].Split(',');
-                using (zstring.Block())
+                if (string.IsNullOrEmpty(bagInfo.ItemPar))
                 {
-                    if (string.IsNullOrEmpty(bagInfo.ItemPar))
-                    {
-                        itemDes = zstring.Format("{0}\n烹饪品质:无？？", itemDes);
-                    }
-                    else
-                    {
-                        itemDes = zstring.Format("{0}\n烹饪品质:{1}", itemDes, bagInfo.ItemPar);
-                    }
+                    itemDes = string.Format("{0}\n烹饪品质:无？？", itemDes);
+                }
+                else
+                {
+                    itemDes = string.Format("{0}\n烹饪品质:{1}", itemDes, bagInfo.ItemPar);
                 }
             }
 
@@ -150,21 +141,15 @@ namespace ET.Client
             if (itemConfig.ItemType == 2 && itemConfig.ItemSubType == 122)
             {
                 SkillConfig skillCof = SkillConfigCategory.Instance.Get(int.Parse(itemConfig.ItemUsePar));
-                using (zstring.Block())
-                {
-                    itemDes = zstring.Format("{0}\n技能描述:{1}", itemDes, skillCof.SkillDescribe);
-                }
+                itemDes = string.Format("{0}\n技能描述:{1}", itemDes, skillCof.SkillDescribe);
             }
 
             //藏宝图
             if (itemConfig.ItemSubType == 127 && !string.IsNullOrEmpty(self.BagInfo.ItemPar))
             {
                 int sceneID = int.Parse(self.BagInfo.ItemPar.Split('@')[0]);
-                using (zstring.Block())
-                {
-                    itemDes = zstring.Format("{0}\n前往地图:{1}开启藏宝图!", itemConfig.ItemDes,
-                        DungeonConfigCategory.Instance.Get(sceneID).ChapterName);
-                }
+                itemDes = string.Format("{0}\n前往地图:{1}开启藏宝图!", itemConfig.ItemDes,
+                    DungeonConfigCategory.Instance.Get(sceneID).ChapterName);
             }
 
             string langStr = LanguageComponent.Instance.LoadLocalization("使用等级");
@@ -370,19 +355,16 @@ namespace ET.Client
                 }
 
                 string[] getIdNew = dlgRole.View.ES_RoleGem.XiangQianItem.GemIDNew.Split('_');
-                using (zstring.Block())
-                {
-                    usrPar = zstring.Format("{0}_{1}", dlgRole.View.ES_RoleGem.XiangQianItem.BagInfoID, dlgRole.View.ES_RoleGem.XiangQianIndex);
+                usrPar = string.Format("{0}_{1}", dlgRole.View.ES_RoleGem.XiangQianItem.BagInfoID, dlgRole.View.ES_RoleGem.XiangQianIndex);
 
-                    if (getIdNew[dlgRole.View.ES_RoleGem.XiangQianIndex] != "0")
-                    {
-                        PopupTipHelp.OpenPopupTip(self.Root(), "镶嵌宝石", "是否需要覆盖宝石?\n覆盖后原有位置得宝石会自动销毁哦!", () => { self.RequestXiangQianGem(usrPar); })
-                                .Coroutine();
-                    }
-                    else
-                    {
-                        self.RequestXiangQianGem(usrPar);
-                    }
+                if (getIdNew[dlgRole.View.ES_RoleGem.XiangQianIndex] != "0")
+                {
+                    PopupTipHelp.OpenPopupTip(self.Root(), "镶嵌宝石", "是否需要覆盖宝石?\n覆盖后原有位置得宝石会自动销毁哦!", () => { self.RequestXiangQianGem(usrPar); })
+                            .Coroutine();
+                }
+                else
+                {
+                    self.RequestXiangQianGem(usrPar);
                 }
 
                 return;
@@ -596,10 +578,7 @@ namespace ET.Client
             {
                 OccupationConfig occupationConfig = OccupationConfigCategory.Instance.Get(itemConfig.UseOcc);
                 string tip;
-                using (zstring.Block())
-                {
-                    tip = zstring.Format(HintHelp.GetErrorHint(ErrorCode.ERR_ItemOnlyUseOcc), occupationConfig.OccupationName);
-                }
+                tip = string.Format(HintHelp.GetErrorHint(ErrorCode.ERR_ItemOnlyUseOcc), occupationConfig.OccupationName);
 
                 FlyTipComponent.Instance.ShowFlyTip(LanguageComponent.Instance.LoadLocalization(tip));
             }
@@ -646,10 +625,7 @@ namespace ET.Client
             {
                 string equipfumo = ItemViewHelp.GetFumpProDesc(equipinfo.FumoProLists);
                 string fumopro;
-                using (zstring.Block())
-                {
-                    fumopro = zstring.Format("当前附魔属性<color=#BEFF34>{0}</color> \n是否覆盖已有属性\n{1}\n此附魔道具已消耗", equipfumo, itemfumo);
-                }
+                fumopro = string.Format("当前附魔属性<color=#BEFF34>{0}</color> \n是否覆盖已有属性\n{1}\n此附魔道具已消耗", equipfumo, itemfumo);
 
                 BagClientNetHelper.SendFumoUse(self.Root(), self.BagInfo, hideProLists).Coroutine();
                 PopupTipHelp.OpenPopupTip(self.Root(), "装备附魔", fumopro, () =>
@@ -717,20 +693,14 @@ namespace ET.Client
 
         private static void OnHuiShouButton(this DlgItemTips self)
         {
-            using (zstring.Block())
-            {
-                EventSystem.Instance.Publish(self.Root(), new HuiShouSelect() { DataParamString = zstring.Format("1_{0}", self.BagInfo.BagInfoID) });
-            }
+            EventSystem.Instance.Publish(self.Root(), new HuiShouSelect() { DataParamString = string.Format("1_{0}", self.BagInfo.BagInfoID) });
 
             self.OnCloseTips();
         }
 
         private static void OnHuiShouCancleButton(this DlgItemTips self)
         {
-            using (zstring.Block())
-            {
-                EventSystem.Instance.Publish(self.Root(), new HuiShouSelect() { DataParamString = zstring.Format("0_{0}", self.BagInfo.BagInfoID) });
-            }
+            EventSystem.Instance.Publish(self.Root(), new HuiShouSelect() { DataParamString = string.Format("0_{0}", self.BagInfo.BagInfoID) });
 
             self.OnCloseTips();
         }

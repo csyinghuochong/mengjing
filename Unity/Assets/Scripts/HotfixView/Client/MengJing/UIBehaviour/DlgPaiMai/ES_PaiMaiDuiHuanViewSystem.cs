@@ -101,10 +101,7 @@ namespace ET.Client
                 return;
             }
 
-            using (zstring.Block())
-            {
-                FlyTipComponent.Instance.ShowFlyTipDi(zstring.Format("获得{0}金币", self.E_DuiHuan_GoldText.text));
-            }
+            FlyTipComponent.Instance.ShowFlyTipDi(string.Format("获得{0}金币", self.E_DuiHuan_GoldText.text));
         }
     }
 }

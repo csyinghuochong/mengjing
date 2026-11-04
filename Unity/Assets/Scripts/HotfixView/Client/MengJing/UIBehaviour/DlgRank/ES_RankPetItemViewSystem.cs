@@ -82,10 +82,7 @@ namespace ET.Client
             }
             else
             {
-                using (zstring.Block())
-                {
-                    self.E_Lab_TeamNameText.text = zstring.Format("{0}的队伍", rankPetInfo.PlayerName);
-                }
+                self.E_Lab_TeamNameText.text = string.Format("{0}的队伍", rankPetInfo.PlayerName);
 
                 self.E_Lab_OwnerText.text = rankPetInfo.PlayerName;
             }

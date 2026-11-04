@@ -439,10 +439,7 @@ namespace ET.Client
                 int skillid = SkillHelp.GetWeaponSkill(skillpro.SkillID, UnitHelper.GetEquipType(self.Root()), skillSetComponent.SkillList);
                 if (!SkillConfigCategory.Instance.Contain(skillid))
                 {
-                    using (zstring.Block())
-                    {
-                        Log.Error(zstring.Format("skillid == null: {0} {1}", skillpro.SkillID, skillid));
-                    }
+                    Log.Error(string.Format("skillid == null: {0} {1}", skillpro.SkillID, skillid));
 
                     self.SkillPro = null;
                     return;
@@ -470,10 +467,7 @@ namespace ET.Client
                     if (!SkillConfigCategory.Instance.Contain(skillid))
                     {
                         self.SkillPro = null;
-                        using (zstring.Block())
-                        {
-                            Log.Error(zstring.Format("skillid == null: {0} {1}", skillpro.SkillID, skillid));
-                        }
+                        Log.Error(string.Format("skillid == null: {0} {1}", skillpro.SkillID, skillid));
 
                         return;
                     }

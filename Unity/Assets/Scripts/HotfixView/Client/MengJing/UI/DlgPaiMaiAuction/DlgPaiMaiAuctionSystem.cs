@@ -13,10 +13,7 @@ namespace ET.Client
             }
             catch (Exception e)
             {
-                using (zstring.Block())
-                {
-                    Log.Error(zstring.Format("move timer error: {0}\n{1}", self.Id, e.ToString()));
-                }
+                Log.Error(string.Format("move timer error: {0}\n{1}", self.Id, e.ToString()));
             }
         }
     }
@@ -144,11 +141,8 @@ namespace ET.Client
                 return;
             }
 
-            using (zstring.Block())
-            {
-                PopupTipHelp.OpenPopupTip(self.Root(), "参与竞拍", zstring.Format("扣除{0}金币的保证金", returngold), () => { self.RquestCanYu().Coroutine(); },
-                    null).Coroutine();
-            }
+            PopupTipHelp.OpenPopupTip(self.Root(), "参与竞拍", string.Format("扣除{0}金币的保证金", returngold), () => { self.RquestCanYu().Coroutine(); },
+                null).Coroutine();
         }
 
         public static async ETTask RquestCanYu(this DlgPaiMaiAuction self)
@@ -181,10 +175,7 @@ namespace ET.Client
             }
 
             self.OnUpdateUI(response.AuctionItem, response.AuctionNumber, response.AuctionPrice);
-            using (zstring.Block())
-            {
-                self.View.E_TextAuctionPlayerText.text = zstring.Format("出价玩家:{0}", response.AuctionPlayer);
-            }
+            self.View.E_TextAuctionPlayerText.text = string.Format("出价玩家:{0}", response.AuctionPlayer);
 
             self.View.ES_CommonItem.E_ItemNumText.text = response.AuctionNumber.ToString();
             self.AuctionStart = response.AuctionStart;
@@ -195,11 +186,8 @@ namespace ET.Client
             if (response.AuctionJoin)
             {
                 int returngold = (int)(response.AuctionStart * 0.1f);
-                using (zstring.Block())
-                {
-                    string text = zstring.Format("已经缴纳{0}保证金", returngold);
-                    self.View.E_TextBaoZhenJinText.text = text;
-                }
+                string text = string.Format("已经缴纳{0}保证金", returngold);
+                self.View.E_TextBaoZhenJinText.text = text;
             }
             else
             {
@@ -225,10 +213,7 @@ namespace ET.Client
             int itmenumber = int.Parse(infos[1]);
             long price = long.Parse(infos[2]);
             self.OnUpdateUI(itmeid, itmenumber, price);
-            using (zstring.Block())
-            {
-                self.View.E_TextAuctionPlayerText.text = zstring.Format("出价玩家:{0}", infos[3]);
-            }
+            self.View.E_TextAuctionPlayerText.text = string.Format("出价玩家:{0}", infos[3]);
         }
     }
 }

@@ -40,10 +40,7 @@ namespace ET.Client
             self.EG_Node_1RectTransform.gameObject.SetActive(shouhulist.Contains(rolePetInfo.Id));
             self.EG_Node_2RectTransform.gameObject.SetActive(!shouhulist.Contains(rolePetInfo.Id));
 
-            using (zstring.Block())
-            {
-                self.E_Lab_PinFenText.text = zstring.Format("评分: {0}", rolePetInfo.PetPingFen);
-            }
+            self.E_Lab_PinFenText.text = string.Format("评分: {0}", rolePetInfo.PetPingFen);
 
             if (PetHelper.IsShenShou(rolePetInfo.ConfigId))
             {
@@ -54,12 +51,9 @@ namespace ET.Client
                 self.E_Lab_ShouHuText.text = ConfigData.PetShouHuAttri[rolePetInfo.ShouHuPos - 1].Value;
             }
 
-            using (zstring.Block())
-            {
-                string path2 = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.OtherIcon, zstring.Format("ShouHu_{0}", rolePetInfo.ShouHuPos - 1));
-                Sprite sp2 = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path2);
-                self.E_Img_ShouHuIconImage.sprite = sp2;
-            }
+            string path2 = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.OtherIcon, string.Format("ShouHu_{0}", rolePetInfo.ShouHuPos - 1));
+            Sprite sp2 = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path2);
+            self.E_Img_ShouHuIconImage.sprite = sp2;
 
             self.E_ButtonShouHuButton.AddListener(() => { self.ButtonShouHuHandler(self.RolePetInfo.Id); });
         }

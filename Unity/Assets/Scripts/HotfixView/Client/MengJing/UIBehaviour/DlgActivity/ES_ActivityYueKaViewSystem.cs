@@ -37,10 +37,7 @@ namespace ET.Client
                 self.E_Btn_OpenYueKaButton.gameObject.SetActive(false);
 
                 int leftDay = unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.YueKaRemainTimes);
-                using (zstring.Block())
-                {
-                    self.E_Text_RemainingtimesText.text = zstring.Format("{0}/7", leftDay);
-                }
+                self.E_Text_RemainingtimesText.text = string.Format("{0}/7", leftDay);
             }
             else
             {
@@ -117,11 +114,8 @@ namespace ET.Client
         {
             // 判断自身是否有钻石
             string cost = GlobalValueConfigCategory.Instance.Value_37.ToString();
-            using (zstring.Block())
-            {
-                PopupTipHelp.OpenPopupTip(self.Root(), "开启月卡", zstring.Format("是否花费{0}钻石开启月卡?", cost), () => { self.ReqestOnBtn_OpenYueKaButton().Coroutine(); },
-                    null).Coroutine();
-            }
+            PopupTipHelp.OpenPopupTip(self.Root(), "开启月卡", string.Format("是否花费{0}钻石开启月卡?", cost), () => { self.ReqestOnBtn_OpenYueKaButton().Coroutine(); },
+                null).Coroutine();
         }
         public static void OnBtn_GoPayButton(this ES_ActivityYueKa self)
         {

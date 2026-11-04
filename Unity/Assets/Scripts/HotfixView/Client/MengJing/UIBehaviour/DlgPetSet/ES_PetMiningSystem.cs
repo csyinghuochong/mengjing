@@ -26,19 +26,16 @@ namespace ET.Client
             ReferenceCollector rc = self.uiTransform.GetComponent<ReferenceCollector>();
             for (int i = 0; i < 3; i++)
             {
-                using (zstring.Block())
-                {
-                    GameObject gamego = rc.Get<GameObject>($"Team_tip_{i}");
-                    self.TeamTipList.Add(gamego.GetComponent<Text>());
+                GameObject gamego = rc.Get<GameObject>($"Team_tip_{i}");
+                self.TeamTipList.Add(gamego.GetComponent<Text>());
 
-                    GameObject gameicon = rc.Get<GameObject>($"PetTeam_{i}");
+                GameObject gameicon = rc.Get<GameObject>($"PetTeam_{i}");
 
-                    self.TeamIconList.Add(gameicon.transform.GetChild(0).Find("Icon").GetComponent<Image>());
-                    self.TeamIconList.Add(gameicon.transform.GetChild(1).Find("Icon").GetComponent<Image>());
-                    self.TeamIconList.Add(gameicon.transform.GetChild(2).Find("Icon").GetComponent<Image>());
-                    self.TeamIconList.Add(gameicon.transform.GetChild(3).Find("Icon").GetComponent<Image>());
-                    self.TeamIconList.Add(gameicon.transform.GetChild(4).Find("Icon").GetComponent<Image>());
-                }
+                self.TeamIconList.Add(gameicon.transform.GetChild(0).Find("Icon").GetComponent<Image>());
+                self.TeamIconList.Add(gameicon.transform.GetChild(1).Find("Icon").GetComponent<Image>());
+                self.TeamIconList.Add(gameicon.transform.GetChild(2).Find("Icon").GetComponent<Image>());
+                self.TeamIconList.Add(gameicon.transform.GetChild(3).Find("Icon").GetComponent<Image>());
+                self.TeamIconList.Add(gameicon.transform.GetChild(4).Find("Icon").GetComponent<Image>());
             }
 
             self.E_FunctionSetBtnToggleGroup.AddListener(self.OnClickPageButton);
@@ -100,10 +97,7 @@ namespace ET.Client
             for (int i = 0; i < self.TeamTipList.Count; i++)
             {
                 int openLv = ConfigData.PetMiningTeamOpenLevel[i];
-                using (zstring.Block())
-                {
-                    self.TeamTipList[i].text = zstring.Format("{0}级开启", openLv);
-                }
+                self.TeamTipList[i].text = string.Format("{0}级开启", openLv);
 
                 self.TeamTipList[i].gameObject.SetActive(openLv > userInfo.Lv);
             }
@@ -223,10 +217,7 @@ namespace ET.Client
 
             self.E_BuildingList.gameObject.SetActive(false);
             self.E_BuildingList.gameObject.SetActive(true);
-            using (zstring.Block())
-            {
-                self.E_Text_Chanchu_1.text = zstring.Format("{0}/小时", chatchun);
-            }
+            self.E_Text_Chanchu_1.text = string.Format("{0}/小时", chatchun);
         }
 
         public static List<PetMingPlayerInfo> GetSelfPetMing(this ES_PetMining self)
@@ -305,10 +296,7 @@ namespace ET.Client
             var path = ABPathHelper.GetJpgPath(baginfs[page]);
             Sprite atlas = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
             self.E_ImageMineDi.sprite = atlas;
-            using (zstring.Block())
-            {
-                self.E_Text_OccNumber.text = zstring.Format("当前占领{0}/{1}", occNumber, ConfigData.PetMiningList[mineType].Count);
-            }
+            self.E_Text_OccNumber.text = string.Format("当前占领{0}/{1}", occNumber, ConfigData.PetMiningList[mineType].Count);
 
             //self.PetMiningNode.GetComponent<RectTransform>().sizeDelta = new Vector2(maxWidth, self.PetMiningNode.GetComponent<RectTransform>().sizeDelta.y);
         }

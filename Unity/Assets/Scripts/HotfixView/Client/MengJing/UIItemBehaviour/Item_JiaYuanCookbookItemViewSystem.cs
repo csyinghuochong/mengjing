@@ -41,11 +41,8 @@ namespace ET.Client
                 return;
             }
 
-            using (zstring.Block())
-            {
-                PopupTipHelp.OpenPopupTip(self.Root(), "学习食谱", zstring.Format("是否消耗{0}家园资金学习该食谱?", needcost),
-                    () => { self.RequestLearn(self.MakeItemId).Coroutine(); }, null).Coroutine();
-            }
+            PopupTipHelp.OpenPopupTip(self.Root(), "学习食谱", string.Format("是否消耗{0}家园资金学习该食谱?", needcost),
+                () => { self.RequestLearn(self.MakeItemId).Coroutine(); }, null).Coroutine();
         }
 
         public static async ETTask RequestLearn(this Scroll_Item_JiaYuanCookbookItem self, int itemid)

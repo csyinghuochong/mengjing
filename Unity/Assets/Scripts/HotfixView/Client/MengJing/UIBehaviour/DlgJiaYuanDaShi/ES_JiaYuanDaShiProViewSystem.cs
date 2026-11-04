@@ -186,13 +186,10 @@ namespace ET.Client
             }
 
             string asstips = "增加属性： ";
-            using (zstring.Block())
+            for (int i = 0; i < response.JiaYuanProAdd.Count; i++)
             {
-                for (int i = 0; i < response.JiaYuanProAdd.Count; i++)
-                {
-                    string pname = ItemViewHelp.GetAttributeName(response.JiaYuanProAdd[i].KeyId);
-                    asstips += zstring.Format("{0}: +{1} ", pname, response.JiaYuanProAdd[i].Value);
-                }
+                string pname = ItemViewHelp.GetAttributeName(response.JiaYuanProAdd[i].KeyId);
+                asstips += string.Format("{0}: +{1} ", pname, response.JiaYuanProAdd[i].Value);
             }
 
             FlyTipComponent.Instance.ShowFlyTip(asstips);

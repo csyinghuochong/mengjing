@@ -23,10 +23,7 @@
             UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
 
 
-            using (zstring.Block())
-            {
-                self.E_ConsumeNumTextText.text = zstring.Format("单笔充值{0}元", activityConfig.Par_1);
-            }
+            self.E_ConsumeNumTextText.text = string.Format("单笔充值{0}元", activityConfig.Par_1);
 
             self.E_ReddotImage.gameObject.SetActive(userInfoComponent.UserInfo.SingleRechargeIds.Contains(activityConfig.Id) &&
                 !userInfoComponent.UserInfo.SingleRewardIds.Contains(activityConfig.Id));

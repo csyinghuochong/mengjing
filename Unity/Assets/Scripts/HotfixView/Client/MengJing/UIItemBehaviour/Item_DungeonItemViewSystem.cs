@@ -47,10 +47,7 @@ namespace ET.Client
             if (selfLv < openlv)
             {
                 self.EG_UnLockRectTransform.gameObject.SetActive(true);
-                using (zstring.Block())
-                {
-                    self.E_Text_UnlockLevelText.text = zstring.Format("{0}级解锁", openlv);
-                }
+                self.E_Text_UnlockLevelText.text = string.Format("{0}级解锁", openlv);
             }
             else
             {

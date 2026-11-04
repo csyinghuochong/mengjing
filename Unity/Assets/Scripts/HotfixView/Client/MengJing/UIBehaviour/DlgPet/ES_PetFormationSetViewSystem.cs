@@ -48,10 +48,7 @@ namespace ET.Client
                 if (uIRolePetItemComponent == null)
                 {
                     GameObject go = GameObject.Instantiate(bundleGameObject);
-                    using (zstring.Block())
-                    {
-                        CommonViewHelper.SetParent(go, transform.Find(zstring.Format("FormationSet{0}", i)).gameObject);
-                    }
+                    CommonViewHelper.SetParent(go, transform.Find(string.Format("FormationSet{0}", i)).gameObject);
 
                     uIRolePetItemComponent = self.AddChild<Scroll_Item_PetFormationItem>();
                     uIRolePetItemComponent.uiTransform = go.transform;

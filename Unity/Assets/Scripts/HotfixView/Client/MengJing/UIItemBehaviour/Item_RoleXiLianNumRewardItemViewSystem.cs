@@ -73,11 +73,8 @@ namespace ET.Client
 
             self.ES_RewardList.Refresh(rewardItems, 0.8f);
             string[] diamond = reward[1].Split(';')[1].Split(',');
-            using (zstring.Block())
-            {
-                self.E_TextZuanshiText.text = zstring.Format("{0}-{1}", diamond[0], diamond[1]);
-                self.E_TextNeedTimesText.text = zstring.Format("洗练次数达到{0}次", key);
-            }
+            self.E_TextZuanshiText.text = string.Format("{0}-{1}", diamond[0], diamond[1]);
+            self.E_TextNeedTimesText.text = string.Format("洗练次数达到{0}次", key);
 
             self.UpdateButton();
         }

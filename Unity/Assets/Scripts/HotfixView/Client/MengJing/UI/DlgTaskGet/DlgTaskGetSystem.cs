@@ -193,11 +193,8 @@ namespace ET.Client
                     string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemIcon, itemConfig.Icon);
                     self.View.E_EnergySkillImageImage.sprite = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
                     //获取
-                    using (zstring.Block())
-                    {
-                        self.View.E_Lab_MoNnengHintText.text =
-                                zstring.Format("{0}  {1}/5", ItemConfigCategory.Instance.Get(costItemID).ItemName, itemNum);
-                    }
+                    self.View.E_Lab_MoNnengHintText.text =
+                            string.Format("{0}  {1}/5", ItemConfigCategory.Instance.Get(costItemID).ItemName, itemNum);
 
                     break;
                 case 5: //补偿大师
@@ -241,11 +238,8 @@ namespace ET.Client
                         ActivityConfig activityConfig = ActivityConfigCategory.Instance.Get(nextid);
                         string[] riqi = activityConfig.Par_1.Split(';');
                         string speek = self.View.E_Lab_NpcSpeakText.text;
-                        using (zstring.Block())
-                        {
-                            self.View.E_Lab_NpcSpeakText.text =
-                                    zstring.Format("{0} 下次领取时间:{1}月{2}日 {3}", speek, riqi[0], riqi[1], activityConfig.Par_4);
-                        }
+                        self.View.E_Lab_NpcSpeakText.text =
+                                string.Format("{0} 下次领取时间:{1}月{2}日 {3}", speek, riqi[0], riqi[1], activityConfig.Par_4);
                     }
 
                     break;
@@ -301,11 +295,8 @@ namespace ET.Client
             }
 
             ItemConfig itemConfig = ItemConfigCategory.Instance.Get(ConfigData.PetFramgeItemId);
-            using (zstring.Block())
-            {
-                PopupTipHelp.OpenPopupTip(self.Root(), "碎片兑换", zstring.Format("是否消耗一个神兽碎片兑换一个{0}", itemConfig.ItemName),
-                    () => { self.RequestFramegeDuiHuan().Coroutine(); }, null).Coroutine();
-            }
+            PopupTipHelp.OpenPopupTip(self.Root(), "碎片兑换", string.Format("是否消耗一个神兽碎片兑换一个{0}", itemConfig.ItemName),
+                () => { self.RequestFramegeDuiHuan().Coroutine(); }, null).Coroutine();
         }
 
         public static async ETTask RequestFramegeDuiHuan(this DlgTaskGet self)
@@ -345,16 +336,13 @@ namespace ET.Client
             {
                 SceneConfig sceneConfig = SceneConfigCategory.Instance.Get(configId);
 
-                using (zstring.Block())
+                string desStr = string.Format("是否进入{0}?", sceneConfig.Name);
+                if (sceneConfig.DayEnterNum >= 1)
                 {
-                    zstring desStr = zstring.Format("是否进入{0}?", sceneConfig.Name);
-                    if (sceneConfig.DayEnterNum >= 1)
-                    {
-                        desStr += zstring.Format("\n提示:每天只能进入{0}次", sceneConfig.DayEnterNum);
-                    }
-
-                    PopupTipHelp.OpenPopupTip(self.Root(), "进入地图", desStr, () => { self.RequestEnterFuben(configId).Coroutine(); }).Coroutine();
+                    desStr += string.Format("\n提示:每天只能进入{0}次", sceneConfig.DayEnterNum);
                 }
+
+                PopupTipHelp.OpenPopupTip(self.Root(), "进入地图", desStr, () => { self.RequestEnterFuben(configId).Coroutine(); }).Coroutine();
             }
         }
 
@@ -607,18 +595,12 @@ namespace ET.Client
             int taskCoin = (int)(taskConfig.TaskCoin * 1);
             if (CommonHelp.IfNull(rewardStr))
             {
-                using (zstring.Block())
-                {
-                    rewardStr = zstring.Format("1;{0}@2;{1}", taskCoin, taskExp);
-                }
+                rewardStr = string.Format("1;{0}@2;{1}", taskCoin, taskExp);
             }
             else
             {
-                using (zstring.Block())
-                {
-                    //rewardStr = 
-                    rewardStr = zstring.Format("1;{0}@2;{1}@{2}", taskCoin, taskExp, rewardStr);
-                }
+                //rewardStr = 
+                rewardStr = string.Format("1;{0}@2;{1}@{2}", taskCoin, taskExp, rewardStr);
             }
             List<RewardItem> rewardItems = ItemHelper.GetRewardItems(rewardStr);
             self.ShowBagInfos.Clear();

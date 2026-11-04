@@ -16,10 +16,7 @@ namespace ET.Client
             }
             catch (Exception e)
             {
-                using (zstring.Block())
-                {
-                    Log.Error(zstring.Format("move timer error: {0}\n{1}", self.Id, e.ToString()));
-                }
+                Log.Error(string.Format("move timer error: {0}\n{1}", self.Id, e.ToString()));
             }
         }
     }
@@ -121,10 +118,7 @@ namespace ET.Client
 
             //显示消耗活力
             self.View.E_TextVitalityText.text = equipMakeConfig.MakeNeedGold.ToString();
-            using (zstring.Block())
-            {
-                self.View.E_Text_CurrentText.text = zstring.Format("当前金币:  {0}", self.Root().GetComponent<UserInfoComponentC>().UserInfo.Gold);
-            }
+            self.View.E_Text_CurrentText.text = string.Format("当前金币:  {0}", self.Root().GetComponent<UserInfoComponentC>().UserInfo.Gold);
         }
 
         public static void OnUpdate(this DlgPetEquipMake self)

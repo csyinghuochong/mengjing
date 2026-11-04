@@ -199,11 +199,8 @@ namespace ET.Client
 
         public static void OnInitUI(this ES_UnionShow self)
         {
-            using (zstring.Block())
-            {
-                self.E_Text_Contion1Text.text = zstring.Format("1. 角色等级达到{0}级", GlobalValueConfigCategory.Instance.UnionCreateNeedLv);
-                self.E_Text_Contion2Text.text = zstring.Format("2. 消耗{0}钻石", GlobalValueConfigCategory.Instance.UnionCreateNeedDiamond);
-            }
+            self.E_Text_Contion1Text.text = string.Format("1. 角色等级达到{0}级", GlobalValueConfigCategory.Instance.UnionCreateNeedLv);
+            self.E_Text_Contion2Text.text = string.Format("2. 消耗{0}钻石", GlobalValueConfigCategory.Instance.UnionCreateNeedDiamond);
             
         }
 

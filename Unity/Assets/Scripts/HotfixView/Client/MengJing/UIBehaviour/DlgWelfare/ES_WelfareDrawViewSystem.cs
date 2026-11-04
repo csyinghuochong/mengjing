@@ -37,11 +37,8 @@ namespace ET.Client
                 {
                     UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
                     int weaponId = CommonHelp.GetWelfareWeapon(userInfoComponent.UserInfo.Occ, userInfoComponent.UserInfo.OccTwo);
-                    using (zstring.Block())
-                    {
-                        string reward = zstring.Format("{0};1", weaponId);
-                        rewardItems = ItemHelper.GetRewardItems(reward);
-                    }
+                    string reward = string.Format("{0};1", weaponId);
+                    rewardItems = ItemHelper.GetRewardItems(reward);
                 }
                 else
                 {

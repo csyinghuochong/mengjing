@@ -171,10 +171,7 @@ namespace ET.Client
                     return;
                 }
 
-                using (zstring.Block())
-                {
-                    path = zstring.Format("Assets/Bundles/Effect/UIEffect/UIEffect_Quaity_{0}", itemConfig.ItemQuality);
-                }
+                path = string.Format("Assets/Bundles/Effect/UIEffect/UIEffect_Quaity_{0}", itemConfig.ItemQuality);
             }
 
             UIParticle.gameObject.SetActive(true);

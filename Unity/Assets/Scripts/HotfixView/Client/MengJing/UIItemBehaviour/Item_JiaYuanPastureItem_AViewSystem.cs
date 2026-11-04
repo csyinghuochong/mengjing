@@ -40,19 +40,13 @@ namespace ET.Client
             JiaYuanConfig jiayuanCof = JiaYuanConfigCategory.Instance.Get(jiayuanid);
             if (jiaYuanPastureConfig.BuyJiaYuanLv <= jiayuanCof.Lv)
             {
-                using (zstring.Block())
-                {
-                    self.E_Text_RenKouText.text = zstring.Format("人口：{0}", jiaYuanPastureConfig.PeopleNum);
-                }
+                self.E_Text_RenKouText.text = string.Format("人口：{0}", jiaYuanPastureConfig.PeopleNum);
 
                 self.E_Text_NameText.text = jiaYuanPastureConfig.Name;
                 self.E_Text_value2Text.text = ((int)(jiaYuanPastureConfig.BuyGold * 1.5f)).ToString();
 
                 int hour = jiaYuanPastureConfig.UpTime[3] / 3600;
-                using (zstring.Block())
-                {
-                    self.E_Text_valueText.text = zstring.Format("{0}小时", hour);
-                }
+                self.E_Text_valueText.text = string.Format("{0}小时", hour);
             }
             else
             {
@@ -66,10 +60,7 @@ namespace ET.Client
                 self.E_Text_value2Text.gameObject.SetActive(false);
                 self.E_Text_valueText.gameObject.SetActive(false);
                 self.E_Text_TipText.gameObject.SetActive(true);
-                using (zstring.Block())
-                {
-                    self.E_Text_TipText.text = zstring.Format("家园{0}级开启", jiaYuanPastureConfig.BuyJiaYuanLv);
-                }
+                self.E_Text_TipText.text = string.Format("家园{0}级开启", jiaYuanPastureConfig.BuyJiaYuanLv);
             }
         }
 
@@ -98,13 +89,10 @@ namespace ET.Client
             }
 
             JiaYuanPastureConfig mysteryConfig = JiaYuanPastureConfigCategory.Instance.Get(self.MysteryItemInfo.MysteryId);
-            using (zstring.Block())
+            if (!self.Root().GetComponent<BagComponentC>().CheckNeedItem(string.Format("13;{0}", mysteryConfig.BuyGold)))
             {
-                if (!self.Root().GetComponent<BagComponentC>().CheckNeedItem(zstring.Format("13;{0}", mysteryConfig.BuyGold)))
-                {
-                    HintHelp.ShowErrorHint(self.Root(), ErrorCode.ERR_HouBiNotEnough);
-                    return;
-                }
+                HintHelp.ShowErrorHint(self.Root(), ErrorCode.ERR_HouBiNotEnough);
+                return;
             }
 
             M2C_JiaYuanPastureBuyResponse response =

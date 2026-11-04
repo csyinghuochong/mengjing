@@ -25,10 +25,7 @@ namespace ET.Client
             self.E_TextButton.AddListener(self.OnText_TMP);
             for (int i = 0; i < ChannelEnum.Number; i++)
             {
-                using (zstring.Block())
-                {
-                    self.TitleList[i] = self.uiTransform.Find(zstring.Format("EG_Node1/{0}", i)).gameObject;
-                }
+                self.TitleList[i] = self.uiTransform.Find(string.Format("EG_Node1/{0}", i)).gameObject;
 
                 self.TitleList[i].SetActive(false);
             }

@@ -40,12 +40,9 @@ namespace ET.Client
                 gameObject.SetActive(true);
 
                 MineBattleConfig mineBattleConfig = MineBattleConfigCategory.Instance.Get(petMingRecord.MineType);
-                using (zstring.Block())
-                {
-                    string content = zstring.Format("玩家 {0} {1} 占领了你的{2}",
-                        response.PetMingRecords[i].WinPlayer, TimeInfo.Instance.ToDateTime(petMingRecord.Time).ToString(), mineBattleConfig.Name);
-                    gameObject.transform.Find("Text").GetComponent<Text>().text = content;
-                }
+                string content = string.Format("玩家 {0} {1} 占领了你的{2}",
+                    response.PetMingRecords[i].WinPlayer, TimeInfo.Instance.ToDateTime(petMingRecord.Time).ToString(), mineBattleConfig.Name);
+                gameObject.transform.Find("Text").GetComponent<Text>().text = content;
 
                 CommonViewHelper.SetParent(gameObject, self.View.EG_BuildingList2RectTransform.gameObject);
             }

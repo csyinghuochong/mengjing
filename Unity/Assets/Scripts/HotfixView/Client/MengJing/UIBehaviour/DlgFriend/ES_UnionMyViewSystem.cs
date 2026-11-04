@@ -16,10 +16,7 @@ namespace ET.Client
             }
             catch (Exception e)
             {
-                using (zstring.Block())
-                {
-                    Log.Error(zstring.Format("move timer error: {0}\n{1}", self.Id, e.ToString()));
-                }
+                Log.Error(string.Format("move timer error: {0}\n{1}", self.Id, e.ToString()));
             }
         }
     }
@@ -236,35 +233,29 @@ namespace ET.Client
             UnionConfig unionConfig = UnionConfigCategory.Instance.Get(unionlevel);
             bool leader = userInfoComponent.UserInfo.UserId == self.UnionInfo.LeaderId;
             self.E_Text_LevelText.text =  self.UnionInfo.Level.ToString();
-            using (zstring.Block())
+            if (UnionConfigCategory.Instance.Contain(unionlevel + 1))
             {
-                if (UnionConfigCategory.Instance.Contain(unionlevel + 1))
+                self.E_Text_ExpText.text = string.Format("{0}/{1}", self.UnionInfo.Exp, unionConfig.Exp);
+                if (self.UnionInfo.UnionGold <= unionConfig.UnionGoldLimit)
                 {
-                    self.E_Text_ExpText.text = zstring.Format("{0}/{1}", self.UnionInfo.Exp, unionConfig.Exp);
-                    if (self.UnionInfo.UnionGold <= unionConfig.UnionGoldLimit)
-                    {
-                        self.E_Text_UnionGoldText.text = zstring.Format("{0}万/{1}万", (self.UnionInfo.UnionGold / 10000f).ToString("0.#"),
-                            (unionConfig.UnionGoldLimit / 10000f).ToString("0.#"));
-                    }
-                    else
-                    {
-                        self.E_Text_UnionGoldText.text = zstring.Format("{0}万/{1}万", (unionConfig.UnionGoldLimit / 10000f).ToString("0.#"),
-                            (unionConfig.UnionGoldLimit / 10000f).ToString("0.#"));
-                    }
+                    self.E_Text_UnionGoldText.text = string.Format("{0}万/{1}万", (self.UnionInfo.UnionGold / 10000f).ToString("0.#"),
+                        (unionConfig.UnionGoldLimit / 10000f).ToString("0.#"));
                 }
                 else
                 {
-                    self.E_Text_ExpText.text = string.Empty;
-                    self.E_Text_UnionGoldText.text = string.Empty;
+                    self.E_Text_UnionGoldText.text = string.Format("{0}万/{1}万", (unionConfig.UnionGoldLimit / 10000f).ToString("0.#"),
+                        (unionConfig.UnionGoldLimit / 10000f).ToString("0.#"));
                 }
             }
-            
-            using (zstring.Block())
+            else
             {
-                self.E_Text_OnLineText.text = zstring.Format("在线人数 {0}", self.OnLinePlayer.Count);
-                self.E_Text_PurposeText.text = self.UnionInfo.UnionPurpose;
-                self.E_Text_NumberText.text = zstring.Format("{0}/{1}", self.UnionInfo.UnionPlayerList.Count, unionConfig.PeopleNum);
+                self.E_Text_ExpText.text = string.Empty;
+                self.E_Text_UnionGoldText.text = string.Empty;
             }
+            
+            self.E_Text_OnLineText.text = string.Format("在线人数 {0}", self.OnLinePlayer.Count);
+            self.E_Text_PurposeText.text = self.UnionInfo.UnionPurpose;
+            self.E_Text_NumberText.text = string.Format("{0}/{1}", self.UnionInfo.UnionPlayerList.Count, unionConfig.PeopleNum);
 
             self.E_Text_LeaderText.text = self.UnionInfo.LeaderName;
             self.E_Text_UnionNameText.text = self.UnionInfo.UnionName;

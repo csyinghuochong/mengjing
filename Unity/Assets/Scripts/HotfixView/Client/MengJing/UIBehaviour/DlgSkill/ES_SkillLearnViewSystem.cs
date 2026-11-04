@@ -89,11 +89,8 @@ namespace ET.Client
                 return;
             }
 
-            using (zstring.Block())
-            {
-                PopupTipHelp.OpenPopupTip(self.Root(), "技能点重置", zstring.Format("是否花费{0}金币重置技能点", needGold),
-                    () => { self.RequestReset(operation).Coroutine(); }).Coroutine();
-            }
+            PopupTipHelp.OpenPopupTip(self.Root(), "技能点重置", string.Format("是否花费{0}金币重置技能点", needGold),
+                () => { self.RequestReset(operation).Coroutine(); }).Coroutine();
         }
 
         private static async ETTask RequestReset(this ES_SkillLearn self, int operation)
@@ -260,39 +257,36 @@ namespace ET.Client
             string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.RoleSkillIcon, skillWeaponConfig.SkillIcon);
             Sprite sp = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
             self.E_SkillIconImage.sprite = sp;
-            using (zstring.Block())
-            {
-                self.E_SkillLvText.text = LanguageComponent.Instance.LoadLocalization("等级 ") + skillWeaponConfig.SkillLv;
-                self.E_SkillNameText.text = skillWeaponConfig.SkillName;
-                self.E_SkillTypeText.text = self.IsZhuDongSkill(skillBaseConfig.SkillType) ? "主动技能" : "被动技能";
+            self.E_SkillLvText.text = LanguageComponent.Instance.LoadLocalization("等级 ") + skillWeaponConfig.SkillLv;
+            self.E_SkillNameText.text = skillWeaponConfig.SkillName;
+            self.E_SkillTypeText.text = self.IsZhuDongSkill(skillBaseConfig.SkillType) ? "主动技能" : "被动技能";
 
-                int itemEquipType = UnitHelper.GetEquipType(self.Root());
-                SkillConfig skillConfig_base = SkillConfigCategory.Instance.Get(baseskill);
+            int itemEquipType = UnitHelper.GetEquipType(self.Root());
+            SkillConfig skillConfig_base = SkillConfigCategory.Instance.Get(baseskill);
 
-                // self.E_SkillDesText.text = skillConfig_base.SkillDescribe.Replace("\\n", "\n");
-                self.E_SkillDesText.GetComponent<TextFitTip>().SetText(skillConfig_base.SkillDescribe.Replace("\\n", "\n"));
-                
-                // string[] skillDesc = skillConfig_base.SkillDescribe.Split(new[] { "\\n\\n" }, StringSplitOptions.None);
-                //
-                // if (skillDesc.Length == 1)
-                // {
-                //     self.E_SkillDesText.text = skillDesc[0].Replace("\\n", "\n");
-                // }
-                // else
-                // {
-                //     if (itemEquipType == ItemEquipType.Sword || itemEquipType == ItemEquipType.Wand)
-                //     {
-                //         self.E_SkillDesText.text = skillDesc[0].Replace("\\n", "\n");
-                //     }
-                //     else
-                //     {
-                //         self.E_SkillDesText.text = skillDesc[1].Replace("\\n", "\n");
-                //     }
-                // }
+            // self.E_SkillDesText.text = skillConfig_base.SkillDescribe.Replace("\\n", "\n");
+            self.E_SkillDesText.GetComponent<TextFitTip>().SetText(skillConfig_base.SkillDescribe.Replace("\\n", "\n"));
 
-                self.E_SkillCoinText.text = zstring.Format("需要金币：{0}", skillBaseConfig.CostGoldValue);
-                self.E_SkillPointText.text = zstring.Format("技能点数：{0}/{1}", skillBaseConfig.CostSPValue, userInfo.Sp);
-            }
+            // string[] skillDesc = skillConfig_base.SkillDescribe.Split(new[] { "\\n\\n" }, StringSplitOptions.None);
+            //
+            // if (skillDesc.Length == 1)
+            // {
+            //     self.E_SkillDesText.text = skillDesc[0].Replace("\\n", "\n");
+            // }
+            // else
+            // {
+            //     if (itemEquipType == ItemEquipType.Sword || itemEquipType == ItemEquipType.Wand)
+            //     {
+            //         self.E_SkillDesText.text = skillDesc[0].Replace("\\n", "\n");
+            //     }
+            //     else
+            //     {
+            //         self.E_SkillDesText.text = skillDesc[1].Replace("\\n", "\n");
+            //     }
+            // }
+
+            self.E_SkillCoinText.text = string.Format("需要金币：{0}", skillBaseConfig.CostGoldValue);
+            self.E_SkillPointText.text = string.Format("技能点数：{0}/{1}", skillBaseConfig.CostSPValue, userInfo.Sp);
         }
 
         public static void OnSkillUpgrade(this ES_SkillLearn self, string dataparams)

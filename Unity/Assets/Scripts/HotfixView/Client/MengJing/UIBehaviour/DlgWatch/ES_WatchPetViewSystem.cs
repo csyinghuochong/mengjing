@@ -161,10 +161,7 @@ namespace ET.Client
             //     (pdata) => { self.OnEndDrag(pdata as PointerEventData, index); });
             // scrollItemPetListItem.E_ImageDiEventTriggerEventTrigger.gameObject.SetActive(true);
 
-            using (zstring.Block())
-            {
-                scrollItemPetListItem.uiTransform.gameObject.name = zstring.Format("UIPetListItem_{0}", index);
-            }
+            scrollItemPetListItem.uiTransform.gameObject.name = string.Format("UIPetListItem_{0}", index);
 
             scrollItemPetListItem.OnInitData(self.ShowRolePetInfos[index], self.NextPetNumber());
         }
@@ -216,10 +213,7 @@ namespace ET.Client
             PetSkinConfig petConfig = PetSkinConfigCategory.Instance.Get(skinId);
 
             self.ES_ModelShow.SetCameraPosition(new Vector3(0f, 115, 257f));
-            using (zstring.Block())
-            {
-                self.ES_ModelShow.ShowOtherModel(zstring.Format("Pet/{0}", petConfig.SkinID.ToString()), true).Coroutine();
-            }
+            self.ES_ModelShow.ShowOtherModel(string.Format("Pet/{0}", petConfig.SkinID.ToString()), true).Coroutine();
 
             self.E_SkinJiHuoImage.gameObject.SetActive(self.LastSelectItem.SkinId == self.PetSkinId);
             self.E_SkinWeiJiHuoImage.gameObject.SetActive(!self.E_SkinJiHuoImage.gameObject.activeSelf);
@@ -228,11 +222,8 @@ namespace ET.Client
             if (petConfig.PripertyShow != "" && petConfig.PripertyShow != "0")
             {
                 self.E_PropertyShowTextText.gameObject.SetActive(true);
-                using (zstring.Block())
-                {
-                    self.E_PropertyShowTextText.text =
-                            zstring.Format("{0}:{1}", LanguageComponent.Instance.LoadLocalization("激活属性"), petConfig.PripertyShow);
-                }
+                self.E_PropertyShowTextText.text =
+                        string.Format("{0}:{1}", LanguageComponent.Instance.LoadLocalization("激活属性"), petConfig.PripertyShow);
             }
             else
             {
@@ -277,10 +268,7 @@ namespace ET.Client
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
             UserInfo userInfo = self.Root().GetComponent<UserInfoComponentC>().UserInfo;
             int maxNum = PetHelper.GetPetMaxNumber(userInfo.Lv, unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.PetExtendNumber));
-            using (zstring.Block())
-            {
-                self.E_Text_PetNumberText.text = zstring.Format("{0}/{1}", PetHelper.GetBagPetNum(rolePetInfos), maxNum);
-            }
+            self.E_Text_PetNumberText.text = string.Format("{0}/{1}", PetHelper.GetBagPetNum(rolePetInfos), maxNum);
             
             self.uiTransform.Find("EG_Right/PetShowDi").gameObject.SetActive(self.ShowRolePetInfos.Count > 0);
             self.uiTransform.Find("EG_Right/PetTip").gameObject.SetActive(self.ShowRolePetInfos.Count > 0);
@@ -355,10 +343,7 @@ namespace ET.Client
                 Transform itemTransform = self.PetHeXinItemList[i].transform;
                 itemTransform.Find("Node_2").gameObject.SetActive(true);
                 itemTransform.Find("Node_2/TextName").gameObject.GetComponent<Text>().text = itemConfig.ItemName;
-                using (zstring.Block())
-                {
-                    itemTransform.Find("Node_2/TextIcon").gameObject.GetComponent<Text>().text = zstring.Format("等级 {0}", itemConfig.UseLv);
-                }
+                itemTransform.Find("Node_2/TextIcon").gameObject.GetComponent<Text>().text = string.Format("等级 {0}", itemConfig.UseLv);
 
                 Image ImageIcon = itemTransform.Find("Node_2/ImageIcon").gameObject.GetComponent<Image>();
                 string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemIcon, itemConfig.Icon);
@@ -502,10 +487,7 @@ namespace ET.Client
             ItemConfig itemConfig = ItemConfigCategory.Instance.Get(bagInfo.ItemID);
             self.E_TextNameText.text = itemConfig.ItemName;
 
-            using (zstring.Block())
-            {
-                self.E_TextLevelText.text = zstring.Format("等级: {0}", itemConfig.UseLv);
-            }
+            self.E_TextLevelText.text = string.Format("等级: {0}", itemConfig.UseLv);
 
             string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemIcon, itemConfig.Icon);
             Sprite sp = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
@@ -548,17 +530,11 @@ namespace ET.Client
                 string attribute;
                 if (showType == 2)
                 {
-                    using (zstring.Block())
-                    {
-                        attribute = zstring.Format("{0} + {1}%", ItemViewHelp.GetAttributeName(numberType), numberValue * 100);
-                    }
+                    attribute = string.Format("{0} + {1}%", ItemViewHelp.GetAttributeName(numberType), (numberValue * 100).ToString("0.000"));
                 }
                 else
                 {
-                    using (zstring.Block())
-                    {
-                        attribute = zstring.Format("{0} + {1}", ItemViewHelp.GetAttributeName(numberType), numberValue);
-                    }
+                    attribute = string.Format("{0} + {1}", ItemViewHelp.GetAttributeName(numberType), numberValue.ToString("0.000"));
                 }
 
                 gameObject.transform.Find("Lab_ProTypeValue").GetComponent<Text>().text = attribute;
@@ -599,10 +575,7 @@ namespace ET.Client
             scrollItemCommonItem.Refresh(self.ShowBagInfos[index], ItemOperateEnum.PetHeXinBag);
             scrollItemCommonItem.SetClickHandler(self.SelectItemHandlder);
             ItemConfig itemConfig = ItemConfigCategory.Instance.Get(self.ShowBagInfos[index].ItemID);
-            using (zstring.Block())
-            {
-                scrollItemCommonItem.E_ItemNumText.text = zstring.Format("{0}级", itemConfig.UseLv);
-            }
+            scrollItemCommonItem.E_ItemNumText.text = string.Format("{0}级", itemConfig.UseLv);
         }
 
         private static void SelectItemHandlder(this ES_WatchPet self, ItemInfo bagInfo)
@@ -885,10 +858,7 @@ namespace ET.Client
         {
             self.E_Text_PetLevelText.text = rolePetInfo.PetLv.ToString() + LanguageComponent.Instance.LoadLocalization("级");
             ExpConfig expConfig = ExpConfigCategory.Instance.Get(rolePetInfo.PetLv);
-            using (zstring.Block())
-            {
-                self.E_Text_PetExpText.text = zstring.Format("{0}/{1}", rolePetInfo.PetExp, expConfig.PetUpExp);
-            }
+            self.E_Text_PetExpText.text = string.Format("{0}/{1}", rolePetInfo.PetExp, expConfig.PetUpExp);
 
             self.E_ImageExpValueImage.transform.localScale = new Vector3(Mathf.Clamp(rolePetInfo.PetExp * 1f / expConfig.PetUpExp, 0f, 1f), 1f, 1f);
         }
@@ -902,23 +872,20 @@ namespace ET.Client
 
             PetConfig petConfig = PetConfigCategory.Instance.Get(rolePetInfo.ConfigId);
 
-            using (zstring.Block())
-            {
-                self.PetZiZhiItemList[0].transform.Find("Text_ZiZhiValue").GetComponent<Text>().text =
-                        zstring.Format("{0}/{1}", rolePetInfo.ZiZhi_Hp, petConfig.ZiZhi_Hp_Max);
-                self.PetZiZhiItemList[1].transform.Find("Text_ZiZhiValue").GetComponent<Text>().text =
-                        zstring.Format("{0}/{1}", rolePetInfo.ZiZhi_Act, petConfig.ZiZhi_Act_Max);
-                self.PetZiZhiItemList[2].transform.Find("Text_ZiZhiValue").GetComponent<Text>().text =
-                        zstring.Format("{0}/{1}", rolePetInfo.ZiZhi_Def, petConfig.ZiZhi_Def_Max);
-                self.PetZiZhiItemList[3].transform.Find("Text_ZiZhiValue").GetComponent<Text>().text =
-                        zstring.Format("{0}/{1}", rolePetInfo.ZiZhi_Adf, petConfig.ZiZhi_Adf_Max);
-                self.PetZiZhiItemList[4].transform.Find("Text_ZiZhiValue").GetComponent<Text>().text =
-                        zstring.Format("{0}/{1}",
-                            CommonViewHelper.ShowFloatValue(rolePetInfo.ZiZhi_ChengZhang),
-                            CommonViewHelper.ShowFloatValue((float)petConfig.ZiZhi_ChengZhang_Max));
-                self.PetZiZhiItemList[5].transform.Find("Text_ZiZhiValue").GetComponent<Text>().text =
-                        zstring.Format("{0}/{1}", rolePetInfo.ZiZhi_MageAct, petConfig.ZiZhi_MageAct_Max);
-            }
+            self.PetZiZhiItemList[0].transform.Find("Text_ZiZhiValue").GetComponent<Text>().text =
+                    string.Format("{0}/{1}", rolePetInfo.ZiZhi_Hp, petConfig.ZiZhi_Hp_Max);
+            self.PetZiZhiItemList[1].transform.Find("Text_ZiZhiValue").GetComponent<Text>().text =
+                    string.Format("{0}/{1}", rolePetInfo.ZiZhi_Act, petConfig.ZiZhi_Act_Max);
+            self.PetZiZhiItemList[2].transform.Find("Text_ZiZhiValue").GetComponent<Text>().text =
+                    string.Format("{0}/{1}", rolePetInfo.ZiZhi_Def, petConfig.ZiZhi_Def_Max);
+            self.PetZiZhiItemList[3].transform.Find("Text_ZiZhiValue").GetComponent<Text>().text =
+                    string.Format("{0}/{1}", rolePetInfo.ZiZhi_Adf, petConfig.ZiZhi_Adf_Max);
+            self.PetZiZhiItemList[4].transform.Find("Text_ZiZhiValue").GetComponent<Text>().text =
+                    string.Format("{0}/{1}",
+                        CommonViewHelper.ShowFloatValue(rolePetInfo.ZiZhi_ChengZhang),
+                        CommonViewHelper.ShowFloatValue((float)petConfig.ZiZhi_ChengZhang_Max));
+            self.PetZiZhiItemList[5].transform.Find("Text_ZiZhiValue").GetComponent<Text>().text =
+                    string.Format("{0}/{1}", rolePetInfo.ZiZhi_MageAct, petConfig.ZiZhi_MageAct_Max);
 
          
             //小于80%不显示拖尾
@@ -1087,18 +1054,12 @@ namespace ET.Client
                 float fvalue = (NumericHelp.GetAttributeValue(rolePetInfo, numericType)) * 0.01f + addValue * 100;
                 //string svalue = string.Format("{0:F}", fvalue);
                 string svalue = fvalue.ToString("0.#####");
-                using (zstring.Block())
-                {
-                    return zstring.Format("{0} {1}%", ItemViewHelp.GetAttributeName(numericType), svalue);
-                }
+                return string.Format("{0} {1}%", ItemViewHelp.GetAttributeName(numericType), svalue);
             }
             else
             {
-                using (zstring.Block())
-                {
-                    return zstring.Format("{0} {1}", ItemViewHelp.GetAttributeName(numericType),
-                        (long)(NumericHelp.GetAttributeValue(rolePetInfo, numericType) + addValue));
-                }
+                return string.Format("{0} {1}", ItemViewHelp.GetAttributeName(numericType),
+                    (long)(NumericHelp.GetAttributeValue(rolePetInfo, numericType) + addValue));
             }
         }
 

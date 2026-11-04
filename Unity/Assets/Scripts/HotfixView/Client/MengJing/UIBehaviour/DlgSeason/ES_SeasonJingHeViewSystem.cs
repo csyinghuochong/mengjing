@@ -160,16 +160,13 @@ namespace ET.Client
                             if (hideProList.HideID == 0) continue;
                             string proName = ItemViewHelp.GetAttributeName(hideProList.HideID);
                             int showType = NumericHelp.GetNumericValueType(hideProList.HideID);
-                            using (zstring.Block())
+                            if (showType == 2)
                             {
-                                if (showType == 2)
-                                {
-                                    attribute = zstring.Format("当前附加 {0}:{1}%\n", proName, (hideProList.HideValue / 100f).ToString("0.##"));
-                                }
-                                else
-                                {
-                                    attribute = zstring.Format("当前附加 {0}:{1}\n", proName, hideProList.HideValue);
-                                }
+                                attribute = string.Format("当前附加 {0}:{1}%\n", proName, (hideProList.HideValue / 100f).ToString("0.##"));
+                            }
+                            else
+                            {
+                                attribute = string.Format("当前附加 {0}:{1}\n", proName, hideProList.HideValue);
                             }
                         }
                     }
@@ -180,10 +177,7 @@ namespace ET.Client
                         {
                             int skillID = nowItem.BagInfo.HideSkillLists[i];
                             SkillConfig skillCof = SkillConfigCategory.Instance.Get(skillID);
-                            using (zstring.Block())
-                            {
-                                attribute = zstring.Format("当前附加技能:{0}\n", skillCof.SkillName);
-                            }
+                            attribute = string.Format("当前附加技能:{0}\n", skillCof.SkillName);
                         }
                     }
 

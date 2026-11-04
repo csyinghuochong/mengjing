@@ -125,28 +125,25 @@ namespace ET.Client
             self.E_Reward4EventTrigger.triggers.Clear();
             self.E_Reward4EventTrigger.RegisterEvent(EventTriggerType.PointerDown, (pdata) => { self.OnPointerDown(list[3].Id, pdata as PointerEventData); });
             self.E_Reward4EventTrigger.RegisterEvent(EventTriggerType.PointerUp, (pdata) => { self.OnPointerUp(list[3].Id, pdata as PointerEventData).Coroutine(); });
-            using (zstring.Block())
-            {
-                string[] itemInfo = list[0].Par_2.Split(';');
-                self.E_Reward1EventTrigger.transform.Find("ItemIcon").GetComponent<Image>().sprite = resourcesLoaderComponent.LoadAssetSync<Sprite>(ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemIcon, itemInfo[0]));
-                self.E_Reward1EventTrigger.transform.Find("ItemNum").GetComponent<Text>().text = itemInfo[1];
-                self.E_Reward1EventTrigger.transform.Find("Text").GetComponent<Text>().text = zstring.Format("累计签到{0}天", list[0].Par_1);
+            string[] itemInfo = list[0].Par_2.Split(';');
+            self.E_Reward1EventTrigger.transform.Find("ItemIcon").GetComponent<Image>().sprite = resourcesLoaderComponent.LoadAssetSync<Sprite>(ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemIcon, itemInfo[0]));
+            self.E_Reward1EventTrigger.transform.Find("ItemNum").GetComponent<Text>().text = itemInfo[1];
+            self.E_Reward1EventTrigger.transform.Find("Text").GetComponent<Text>().text = string.Format("累计签到{0}天", list[0].Par_1);
 
-                itemInfo = list[1].Par_2.Split(';');
-                self.E_Reward2EventTrigger.transform.Find("ItemIcon").GetComponent<Image>().sprite = resourcesLoaderComponent.LoadAssetSync<Sprite>(ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemIcon, itemInfo[0]));
-                self.E_Reward2EventTrigger.transform.Find("ItemNum").GetComponent<Text>().text = itemInfo[1];
-                self.E_Reward2EventTrigger.transform.Find("Text").GetComponent<Text>().text = zstring.Format("累计签到{0}天", list[1].Par_1);
+            itemInfo = list[1].Par_2.Split(';');
+            self.E_Reward2EventTrigger.transform.Find("ItemIcon").GetComponent<Image>().sprite = resourcesLoaderComponent.LoadAssetSync<Sprite>(ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemIcon, itemInfo[0]));
+            self.E_Reward2EventTrigger.transform.Find("ItemNum").GetComponent<Text>().text = itemInfo[1];
+            self.E_Reward2EventTrigger.transform.Find("Text").GetComponent<Text>().text = string.Format("累计签到{0}天", list[1].Par_1);
 
-                itemInfo = list[2].Par_2.Split(';');
-                self.E_Reward3EventTrigger.transform.Find("ItemIcon").GetComponent<Image>().sprite = resourcesLoaderComponent.LoadAssetSync<Sprite>(ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemIcon, itemInfo[0]));
-                self.E_Reward3EventTrigger.transform.Find("ItemNum").GetComponent<Text>().text = itemInfo[1];
-                self.E_Reward3EventTrigger.transform.Find("Text").GetComponent<Text>().text = zstring.Format("累计签到{0}天", list[2].Par_1);
+            itemInfo = list[2].Par_2.Split(';');
+            self.E_Reward3EventTrigger.transform.Find("ItemIcon").GetComponent<Image>().sprite = resourcesLoaderComponent.LoadAssetSync<Sprite>(ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemIcon, itemInfo[0]));
+            self.E_Reward3EventTrigger.transform.Find("ItemNum").GetComponent<Text>().text = itemInfo[1];
+            self.E_Reward3EventTrigger.transform.Find("Text").GetComponent<Text>().text = string.Format("累计签到{0}天", list[2].Par_1);
 
-                itemInfo = list[3].Par_2.Split(';');
-                self.E_Reward4EventTrigger.transform.Find("ItemIcon").GetComponent<Image>().sprite = resourcesLoaderComponent.LoadAssetSync<Sprite>(ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemIcon, itemInfo[0]));
-                self.E_Reward4EventTrigger.transform.Find("ItemNum").GetComponent<Text>().text = itemInfo[1];
-                self.E_Reward4EventTrigger.transform.Find("Text").GetComponent<Text>().text = zstring.Format("累计签到{0}天", list[3].Par_1);
-            }
+            itemInfo = list[3].Par_2.Split(';');
+            self.E_Reward4EventTrigger.transform.Find("ItemIcon").GetComponent<Image>().sprite = resourcesLoaderComponent.LoadAssetSync<Sprite>(ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemIcon, itemInfo[0]));
+            self.E_Reward4EventTrigger.transform.Find("ItemNum").GetComponent<Text>().text = itemInfo[1];
+            self.E_Reward4EventTrigger.transform.Find("Text").GetComponent<Text>().text = string.Format("累计签到{0}天", list[3].Par_1);
 
             self.UpdateProgress();
         }
@@ -300,10 +297,7 @@ namespace ET.Client
         {
             ActivityComponentC activityComponent = self.Root().GetComponent<ActivityComponentC>();
             int TotalSignNumber = self.LeiJiSingInActivityType == ActivityEnum.Type_26 ? activityComponent.TotalSignNumber : activityComponent.TotalSignNumber_VIP;
-            using (zstring.Block())
-            {
-                self.E_AlreadySingInDayText.text = zstring.Format("{0}天", TotalSignNumber);
-            }
+            self.E_AlreadySingInDayText.text = string.Format("{0}天", TotalSignNumber);
 
             if (self.ShowActivityConfigs.Count > 0)
             {

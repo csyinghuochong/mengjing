@@ -38,10 +38,7 @@ namespace ET.Client
                 number += chengJiuComponent.ChengJiuCompleteList.Contains(ids[i]) ? 1 : 0;
             }
 
-            using (zstring.Block())
-            {
-                self.E_Lab_TaskNum.GetComponent<Text>().text = zstring.Format(" ({0}/{1})", number, ids.Count);
-            }
+            self.E_Lab_TaskNum.GetComponent<Text>().text = string.Format(" ({0}/{1})", number, ids.Count);
 
             self.E_Lab_TaskName.GetComponent<Text>().text = ChengJiuData.ChapterIndexText[chapter];
             self.E_Ima_Progress.transform.localScale = new Vector3(number * 1f / ids.Count, 1f, 1f);

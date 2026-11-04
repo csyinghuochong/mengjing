@@ -54,11 +54,8 @@ namespace ET.Client
             self.E_ItemNameText.text = itemconfig.ItemName;
             self.E_ItemNameText.color = FunctionUI.QualityReturnColorDi(itemconfig.ItemQuality);
 
-            using (zstring.Block())
-            {
-                self.E_ItemWordText.text = zstring.Format("隐藏词条：{0}",
-                    bagInfo.XiLianHideProLists.Count + bagInfo.HideSkillLists.Count + bagInfo.XiLianHideTeShuProLists.Count);
-            }
+            self.E_ItemWordText.text = string.Format("隐藏词条：{0}",
+                bagInfo.XiLianHideProLists.Count + bagInfo.HideSkillLists.Count + bagInfo.XiLianHideTeShuProLists.Count);
         }
 
         private static void OnEquipButton(this Scroll_Item_XiLianShowEquipItem self)

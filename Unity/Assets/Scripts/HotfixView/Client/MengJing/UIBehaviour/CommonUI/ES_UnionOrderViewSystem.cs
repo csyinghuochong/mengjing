@@ -22,10 +22,7 @@ namespace ET.Client
 				}
 				catch (Exception e)
 				{
-					using (zstring.Block())
-					{
-						Log.Error(zstring.Format("move timer error: {0}\n{1}", self.Id, e.ToString()));
-					}
+					Log.Error(string.Format("move timer error: {0}\n{1}", self.Id, e.ToString()));
 				}
 			}
 		}
@@ -126,11 +123,8 @@ namespace ET.Client
 				int neednum = taskConfig.TargetValue[0];
 				long havenum = bagComponentC.GetItemNumber(itemInfo.ItemID);
 
-				using (zstring.Block())
-				{
-					self.E_Text_NeedText.text = zstring.Format("需求:{0}", neednum);
-					self.E_Text_HaveText.text = zstring.Format("拥有:{0}", havenum);
-				}
+				self.E_Text_NeedText.text = string.Format("需求:{0}", neednum);
+				self.E_Text_HaveText.text = string.Format("拥有:{0}", havenum);
 			}
 			else
 			{
@@ -231,10 +225,7 @@ namespace ET.Client
 		{
 			Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
 			NumericComponentC numericComponentC = unit.GetComponent<NumericComponentC>();
-			using (zstring.Block())
-			{
-				self.E_Text_TodayNumber.text = zstring.Format("今日已完成{0}/10次", numericComponentC.GetAsInt(NumericType.OrderTaskCompNumber));	
-			}
+			self.E_Text_TodayNumber.text = string.Format("今日已完成{0}/10次", numericComponentC.GetAsInt(NumericType.OrderTaskCompNumber));	
 		}
         
 		private static void UpdateTaskList(this ES_UnionOrder self)

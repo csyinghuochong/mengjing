@@ -92,11 +92,8 @@ namespace ET.Client
                 }
             }
 
-            using (zstring.Block())
-            {
-                self.View.E_CurrentNumberTextText.text = zstring.Format("当前召唤人口:{0}/{1}", BattleHelper.GetSummonNumber(response.BattleSummonList),
-                    GlobalValueConfigCategory.Instance.BattlefieldSummonLimit);
-            }
+            self.View.E_CurrentNumberTextText.text = string.Format("当前召唤人口:{0}/{1}", BattleHelper.GetSummonNumber(response.BattleSummonList),
+                GlobalValueConfigCategory.Instance.BattlefieldSummonLimit);
 
             // 开启定时刷新
             self.UpdateUI().Coroutine();
@@ -169,11 +166,8 @@ namespace ET.Client
                 }
             }
 
-            using (zstring.Block())
-            {
-                self.View.E_CurrentNumberTextText.text = zstring.Format("当前召唤人口:{0}/{1}", BattleHelper.GetSummonNumber(response.BattleSummonList),
-                    GlobalValueConfigCategory.Instance.BattlefieldSummonLimit);
-            }
+            self.View.E_CurrentNumberTextText.text = string.Format("当前召唤人口:{0}/{1}", BattleHelper.GetSummonNumber(response.BattleSummonList),
+                GlobalValueConfigCategory.Instance.BattlefieldSummonLimit);
 
             for (int i = 0; i < response.BattleSummonList.Count; i++)
             {

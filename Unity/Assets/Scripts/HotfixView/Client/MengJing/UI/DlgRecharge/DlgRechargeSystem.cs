@@ -190,10 +190,7 @@ namespace ET.Client
             }
             catch (Exception ex)
             {
-                using (zstring.Block())
-                {
-                    Log.Debug(zstring.Format("UIRecharge ex:{0}", ex.ToString()));
-                }
+                Log.Debug(string.Format("UIRecharge ex:{0}", ex.ToString()));
             }
 
 #endif

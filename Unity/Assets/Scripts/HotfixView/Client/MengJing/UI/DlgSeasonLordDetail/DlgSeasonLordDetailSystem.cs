@@ -69,10 +69,7 @@ namespace ET.Client
 
             int fubenid = numericComponent.GetAsInt(NumericType.SeasonBossFuben);;
             DungeonConfig dungeonConfig = DungeonConfigCategory.Instance.Get(fubenid);
-            using (zstring.Block())
-            {
-                self.View.E_PositionTextText.text = zstring.Format("即将出现在{0}中...", dungeonConfig.ChapterName);
-            }
+            self.View.E_PositionTextText.text = string.Format("即将出现在{0}中...", dungeonConfig.ChapterName);
 
             int bossId = ConfigData.SeasonBossId;
             MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(bossId);

@@ -23,10 +23,7 @@ namespace ET.Client
         {
             self.SceneId = sceneId;
             self.E_SelectedImage.gameObject.SetActive(false);
-            using (zstring.Block())
-            {
-                self.E_NameText.text = zstring.Format("第{0}关", index + 1);
-            }
+            self.E_NameText.text = string.Format("第{0}关", index + 1);
 
             PetComponentC petComponentC = self.Root().GetComponent<PetComponentC>();
             int star = 0;
@@ -41,10 +38,7 @@ namespace ET.Client
 
             for (int i = 1; i <= 3; i++)
             {
-                using (zstring.Block())
-                {
-                    self.uiTransform.Find(zstring.Format("Start_Show_{0}", i)).gameObject.SetActive(i <= star);
-                }
+                self.uiTransform.Find(string.Format("Start_Show_{0}", i)).gameObject.SetActive(i <= star);
             }
 
             //SceneConfig sceneConfig = SceneConfigCategory.Instance.Get(sceneId);

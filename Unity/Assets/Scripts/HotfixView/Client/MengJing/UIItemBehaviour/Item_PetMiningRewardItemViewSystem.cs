@@ -39,10 +39,7 @@
             TaskConfig taskCountryConfig = TaskConfigCategory.Instance.Get(taskPro.taskID);
 
             self.E_Text_tipText.text = taskCountryConfig.TaskDes;
-            using (zstring.Block())
-            {
-                self.E_Text_progressText.text = zstring.Format("{0}/{1}", taskPro.taskTargetNum_1, taskCountryConfig.TargetValue[0]);
-            }
+            self.E_Text_progressText.text = string.Format("{0}/{1}", taskPro.taskTargetNum_1, taskCountryConfig.TargetValue[0]);
 
             self.E_ImageReceivedImage.gameObject.SetActive(taskPro.taskStatus == (int)TaskStatuEnum.Commited);
             self.E_ButtonRewardButton.gameObject.SetActive(taskPro.taskStatus != (int)TaskStatuEnum.Commited);

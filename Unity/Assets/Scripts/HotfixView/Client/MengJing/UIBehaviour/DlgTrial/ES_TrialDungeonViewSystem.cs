@@ -98,17 +98,11 @@ namespace ET.Client
 
             int monsterId = int.Parse(towerConfig.MonsterSet.Split(';')[2]);
             MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(monsterId);
-            using (zstring.Block())
-            {
-                self.E_TextLayerText.text = zstring.Format("第{0}层", towerConfig.CengNum);
-                self.E_TextMonsterHPText.text = zstring.Format("怪物生命：{0}", monsterConfig.Hp);
-            }
+            self.E_TextLayerText.text = string.Format("第{0}层", towerConfig.CengNum);
+            self.E_TextMonsterHPText.text = string.Format("怪物生命：{0}", monsterConfig.Hp);
 
             self.ES_ModelShow.SetCameraPosition(new Vector3(0f, 115, 380f));
-            using (zstring.Block())
-            {
-                self.ES_ModelShow.ShowOtherModel(zstring.Format("Monster/{0}", monsterConfig.MonsterModelID)).Coroutine();
-            }
+            self.ES_ModelShow.ShowOtherModel(string.Format("Monster/{0}", monsterConfig.MonsterModelID)).Coroutine();
 
             self.UpdateButtons();
             self.ShowRewardList();

@@ -28,17 +28,11 @@ namespace ET.Client
         {
             self.ChapterId = chapterId;
 
-            using (zstring.Block())
-            {
-                self.View.E_ChapterImage.sprite = self.Root().GetComponent<ResourcesLoaderComponent>()
-                        .LoadAssetSync<Sprite>(ABPathHelper.GetAtlasPath_2(ABAtlasTypes.OtherIcon, zstring.Format("mapText{0}", chapterId)));
-            }
+            self.View.E_ChapterImage.sprite = self.Root().GetComponent<ResourcesLoaderComponent>()
+                    .LoadAssetSync<Sprite>(ABPathHelper.GetAtlasPath_2(ABAtlasTypes.OtherIcon, string.Format("mapText{0}", chapterId)));
 
-            using (zstring.Block())
-            {
-                UserInfo userinfo = self.Root().GetComponent<UserInfoComponentC>().UserInfo;
-                self.OnNanDu_Button(PlayerPrefsHelp.GetChapterDifficulty(zstring.Format("{0}{1}", userinfo.UserId, self.ChapterId)));
-            }
+            UserInfo userinfo = self.Root().GetComponent<UserInfoComponentC>().UserInfo;
+            self.OnNanDu_Button(PlayerPrefsHelp.GetChapterDifficulty(string.Format("{0}{1}", userinfo.UserId, self.ChapterId)));
 
             self.UpdateLevelList();
         }
@@ -67,11 +61,8 @@ namespace ET.Client
 
                 self.ShowLevel.Add(i);
 
-                using (zstring.Block())
-                {
-                    self.View.E_OpenNumShowText.text = zstring.Format("({0}：{1}/{2})", LanguageComponent.Instance.LoadLocalization("冒险进度"),
-                        (i + 1).ToString(), dungeonSectionConfig.RandomArea.Length.ToString());
-                }
+                self.View.E_OpenNumShowText.text = string.Format("({0}：{1}/{2})", LanguageComponent.Instance.LoadLocalization("冒险进度"),
+                    (i + 1).ToString(), dungeonSectionConfig.RandomArea.Length.ToString());
             }
 
             self.AddUIScrollItems(ref self.ScrollItemDungeonMapLevelItems, self.ShowLevel.Count);
@@ -106,10 +97,7 @@ namespace ET.Client
             self.View.E_NanDu_3_SelectImage.gameObject.SetActive(diff == 3);
 
             UserInfo userinfo = self.Root().GetComponent<UserInfoComponentC>().UserInfo;
-            using (zstring.Block())
-            {
-                PlayerPrefsHelp.SetChapterDifficulty(zstring.Format("{0}{1}", userinfo.UserId, self.ChapterId), diff);
-            }
+            PlayerPrefsHelp.SetChapterDifficulty(string.Format("{0}{1}", userinfo.UserId, self.ChapterId), diff);
 
             // if (self.ScrollItemDungeonMapLevelItems != null)
             // {
@@ -135,10 +123,7 @@ namespace ET.Client
 
             self.View.E_LevelNameText.text = dungeonConfig.ChapterName;
             self.View.E_LevelDesText.text = dungeonConfig.ChapterDes;
-            using (zstring.Block())
-            {
-                self.View.E_EnterLevelText.text = zstring.Format("挑战等级：{0}", dungeonConfig.EnterLv);
-            }
+            self.View.E_EnterLevelText.text = string.Format("挑战等级：{0}", dungeonConfig.EnterLv);
 
             UserInfo userInfo = self.Root().GetComponent<UserInfoComponentC>().UserInfo;
             self.View.E_IsMetImage.gameObject.SetActive(userInfo.Lv >= dungeonConfig.EnterLv);
@@ -159,10 +144,7 @@ namespace ET.Client
 
         private static async ETTask OnEnterMapButtonClick(this DlgDungeonMapLevel self)
         {
-            using (zstring.Block())
-            {
-                //FlyTipComponent.Instance.ShowFlyTip(zstring.Format("请求传送 副本Id:{0} 副本难度：{1}", self.LevelId, self.Difficulty));
-            }
+            //FlyTipComponent.Instance.ShowFlyTip(zstring.Format("请求传送 副本Id:{0} 副本难度：{1}", self.LevelId, self.Difficulty));
 
             int errorCode = await EnterMapHelper.RequestTransfer(self.Root(), MapTypeEnum.LocalDungeon, self.LevelId, self.Difficulty);
 

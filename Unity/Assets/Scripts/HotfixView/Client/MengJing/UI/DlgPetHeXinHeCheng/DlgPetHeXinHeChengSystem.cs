@@ -81,12 +81,9 @@ namespace ET.Client
             ItemConfig itemConfig = ItemConfigCategory.Instance.Get(self.ShowBagInfos[index].ItemID);
             scrollItemCommonItem.HideItemName();
             scrollItemCommonItem.SetEventTrigger(true);
-            using (zstring.Block())
-            {
-                scrollItemCommonItem.E_ItemNumText.text = zstring.Format("{0}级", itemConfig.UseLv);
-                scrollItemCommonItem.uiTransform.GetChild(0).name =
-                        zstring.Format("PetHeXinHeCheng_Image_ItemButton@{0}", self.ShowBagInfos[index].BagInfoID);
-            }
+            scrollItemCommonItem.E_ItemNumText.text = string.Format("{0}级", itemConfig.UseLv);
+            scrollItemCommonItem.uiTransform.GetChild(0).name =
+                    string.Format("PetHeXinHeCheng_Image_ItemButton@{0}", self.ShowBagInfos[index].BagInfoID);
         }
 
         private static async ETTask PointerDown(this DlgPetHeXinHeCheng self, ItemInfo binfo, PointerEventData pdata)

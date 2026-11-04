@@ -177,10 +177,7 @@ namespace ET.Client
 
         public static void UpdateNextTransformTime(this DlgRunRaceMain self, M2C_RunRaceBattleInfo message)
         {
-            using (zstring.Block())
-            {
-                Log.Debug(zstring.Format("下次变身时间:  {0}", message.NextTransforTime - TimeHelper.ServerNow()));
-            }
+            Log.Debug(string.Format("下次变身时间:  {0}", message.NextTransforTime - TimeHelper.ServerNow()));
 
             self.NextTransformTime = message.NextTransforTime;
         }
@@ -221,20 +218,14 @@ namespace ET.Client
         {
             if (rankingInfo.PlayerLv < 0)
             {
-                using (zstring.Block())
-                {
-                    gameObject.GetComponentInChildren<Text>().text = zstring.Format("第{0}名 {1}  还剩:{2}", i + 1, rankingInfo.PlayerName,
-                        (rankingInfo.Combat * 0.01).ToString());
-                }
+                gameObject.GetComponentInChildren<Text>().text = string.Format("第{0}名 {1}  还剩:{2}", i + 1, rankingInfo.PlayerName,
+                    (rankingInfo.Combat * 0.01).ToString());
             }
             else
             {
                 DateTime dateTime = TimeInfo.Instance.ToDateTime(rankingInfo.Combat);
-                using (zstring.Block())
-                {
-                    string showTime = zstring.Format("{0}:{1}:{2}", dateTime.Hour, dateTime.Minute, dateTime.Second);
-                    gameObject.GetComponentInChildren<Text>().text = zstring.Format("第{0}名 {1}  时间:{2}", i + 1, rankingInfo.PlayerName, showTime);
-                }
+                string showTime = string.Format("{0}:{1}:{2}", dateTime.Hour, dateTime.Minute, dateTime.Second);
+                gameObject.GetComponentInChildren<Text>().text = string.Format("第{0}名 {1}  时间:{2}", i + 1, rankingInfo.PlayerName, showTime);
             }
         }
 

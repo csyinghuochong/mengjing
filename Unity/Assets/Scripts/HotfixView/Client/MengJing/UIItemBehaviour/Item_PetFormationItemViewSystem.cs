@@ -73,10 +73,7 @@ namespace ET.Client
 
             self.E_ImageIconImage.sprite = sp;
             self.E_ImageFightImage.gameObject.SetActive(fighting);
-            using (zstring.Block())
-            {
-                self.E_TextLvText.text = zstring.Format("等级: {0}", rolePetInfo.PetLv);
-            }
+            self.E_TextLvText.text = string.Format("等级: {0}", rolePetInfo.PetLv);
 
             self.E_TextNameText.text = rolePetInfo.PetName;
         }

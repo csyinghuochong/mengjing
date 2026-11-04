@@ -26,10 +26,7 @@ namespace ET.Client
             }
             catch (Exception e)
             {
-                using (zstring.Block())
-                {
-                    Log.Error(zstring.Format("move timer error: {0}\n{1}", self.Id, e.ToString()));
-                }
+                Log.Error(string.Format("move timer error: {0}\n{1}", self.Id, e.ToString()));
             }
         }
     }
@@ -214,11 +211,8 @@ namespace ET.Client
 
             if (!self.MyJiaYuan)
             {
-                using (zstring.Block())
-                {
-                    self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgMain>().View.ES_MapMini
-                            .ShowMapName(zstring.Format("{0}的家园", response.MasterName));
-                }
+                self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgMain>().View.ES_MapMini
+                        .ShowMapName(string.Format("{0}的家园", response.MasterName));
             }
         }
 
@@ -228,11 +222,8 @@ namespace ET.Client
             UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
             self.JiaYuanLv = userInfoComponent.UserInfo.JiaYuanLv;
             JiaYuanConfig jiayuanCof = JiaYuanConfigCategory.Instance.Get(self.JiaYuanLv);
-            using (zstring.Block())
-            {
-                self.View.E_RenKouTextText.text = zstring.Format("{0}/{1}", jiaYuanComponentC.GetPeopleNumber(), jiayuanCof.PeopleNumMax);
-                self.View.E_GengDiTextText.text = zstring.Format("{0}/{1}", jiaYuanComponentC.GetOpenPlanNumber(), jiayuanCof.FarmNumMax);
-            }
+            self.View.E_RenKouTextText.text = string.Format("{0}/{1}", jiaYuanComponentC.GetPeopleNumber(), jiayuanCof.PeopleNumMax);
+            self.View.E_GengDiTextText.text = string.Format("{0}/{1}", jiaYuanComponentC.GetOpenPlanNumber(), jiayuanCof.FarmNumMax);
         }
 
         public static async ETTask OnGatherSelf(this DlgJiaYuanMain self)
@@ -583,12 +574,9 @@ namespace ET.Client
             }
 
             int costnumber = ConfigData.JiaYuanFarmOpen[index];
-            using (zstring.Block())
-            {
-                string consttip = CommonViewHelper.GetNeedItemDesc(zstring.Format("13;{0}", costnumber));
-                PopupTipHelp.OpenPopupTip(self.Root(), "系统提示", zstring.Format("是否花费 {0} 开启一块土地", consttip),
-                    () => { self.RequestPlanOpen(index).Coroutine(); }, null).Coroutine();
-            }
+            string consttip = CommonViewHelper.GetNeedItemDesc(string.Format("13;{0}", costnumber));
+            PopupTipHelp.OpenPopupTip(self.Root(), "系统提示", string.Format("是否花费 {0} 开启一块土地", consttip),
+                () => { self.RequestPlanOpen(index).Coroutine(); }, null).Coroutine();
         }
 
         public static void OnOpenPlan(this DlgJiaYuanMain self, int index)

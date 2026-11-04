@@ -72,11 +72,8 @@ namespace ET.Client
         {
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
             NumericComponentC numericComponent = unit.GetComponent<NumericComponentC>();
-            using (zstring.Block())
-            {
-                self.E_TextLimitText.text = zstring.Format("采摘:{0}/5\r\n打扫:{1}/5", numericComponent.GetAsInt(NumericType.JiaYuanGatherOther),
-                    numericComponent.GetAsInt(NumericType.JiaYuanPickOther));
-            }
+            self.E_TextLimitText.text = string.Format("采摘:{0}/5\r\n打扫:{1}/5", numericComponent.GetAsInt(NumericType.JiaYuanGatherOther),
+                numericComponent.GetAsInt(NumericType.JiaYuanPickOther));
         }
     }
 }

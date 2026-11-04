@@ -35,10 +35,7 @@ namespace ET.Client
 
             self.E_ItemNameText.text = itemConfig.ItemName;
             
-            using (zstring.Block())
-            {
-                self.E_ItemNumText.text = zstring.Format("数量:{0}", num);
-            }
+            self.E_ItemNumText.text = string.Format("数量:{0}", num);
         }
 
         private static void OnClickPetItem(this Scroll_Item_PetEggSelectItem self)

@@ -264,11 +264,8 @@ namespace ET.Client
 
             value = $"{setvalues[0]}@{setvalues[1]}@{setvalues[2]}@{setvalues[3]}";
 
-            using (zstring.Block())
-            {
-                self.EG_OneSellSetRectTransform.Find(zstring.Format("Image_Click_{0}", index)).gameObject.SetActive(setvalues[index] == "1");
-                self.EG_OneSellSetRectTransform.Find(zstring.Format("Text_{0}", index)).gameObject.SetActive(setvalues[index] != "1");
-            }
+            self.EG_OneSellSetRectTransform.Find(string.Format("Image_Click_{0}", index)).gameObject.SetActive(setvalues[index] == "1");
+            self.EG_OneSellSetRectTransform.Find(string.Format("Text_{0}", index)).gameObject.SetActive(setvalues[index] != "1");
 
             self.SaveSettings(GameSettingEnum.OneSellSet, value);
         }
@@ -280,11 +277,8 @@ namespace ET.Client
             setvalues[index] = setvalues[index] == "1" ? "0" : "1";
             value = $"{setvalues[0]}@{setvalues[1]}";
 
-            using (zstring.Block())
-            {
-                self.EG_PickSetRectTransform.Find(zstring.Format("Image_Click_{0}", index)).gameObject.SetActive(setvalues[index] == "1");
-                self.EG_PickSetRectTransform.Find(zstring.Format("Text_{0}", index)).gameObject.SetActive(setvalues[index] != "1");
-            }
+            self.EG_PickSetRectTransform.Find(string.Format("Image_Click_{0}", index)).gameObject.SetActive(setvalues[index] == "1");
+            self.EG_PickSetRectTransform.Find(string.Format("Text_{0}", index)).gameObject.SetActive(setvalues[index] != "1");
 
             self.SaveSettings(GameSettingEnum.PickSet, value);
             self.UserInfoComponent.PickSet = value.Split('@');

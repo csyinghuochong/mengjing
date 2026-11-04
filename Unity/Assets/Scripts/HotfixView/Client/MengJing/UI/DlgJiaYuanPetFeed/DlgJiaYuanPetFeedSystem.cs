@@ -67,10 +67,7 @@ namespace ET.Client
             JiaYuanPet jiaYuanPet = jiaYuanComponent.GetJiaYuanPet(self.JiaYuanPet.unitId);
             if (jiaYuanPet == null)
             {
-                using (zstring.Block())
-                {
-                    Log.Error(zstring.Format("UIJiaYuanPetFeed:  {0}", self.Root().GetComponent<PlayerInfoComponent>().CurrentRoleId));
-                }
+                Log.Error(string.Format("UIJiaYuanPetFeed:  {0}", self.Root().GetComponent<PlayerInfoComponent>().CurrentRoleId));
 
                 return;
             }
@@ -81,10 +78,7 @@ namespace ET.Client
             }
 
             int addExp = CommonHelp.GetJiaYuanPetExp(jiaYuanPet.PetLv, jiaYuanPet.MoodValue);
-            using (zstring.Block())
-            {
-                self.View.E_Text_HourExpText.text = zstring.Format("经验收益: {0}/小时", addExp);
-            }
+            self.View.E_Text_HourExpText.text = string.Format("经验收益: {0}/小时", addExp);
 
             self.View.E_Text_PetNameText.text = jiaYuanPet.PetName;
         }
@@ -270,10 +264,7 @@ namespace ET.Client
             }
 
             self.IsHoldDown = true;
-            using (zstring.Block())
-            {
-                EventSystem.Instance.Publish(self.Root(), new HuiShouSelect() { DataParamString = zstring.Format("1_{0}", binfo.BagInfoID) });
-            }
+            EventSystem.Instance.Publish(self.Root(), new HuiShouSelect() { DataParamString = string.Format("1_{0}", binfo.BagInfoID) });
 
             await self.Root().GetComponent<TimerComponent>().WaitAsync(500);
             if (!self.IsHoldDown)

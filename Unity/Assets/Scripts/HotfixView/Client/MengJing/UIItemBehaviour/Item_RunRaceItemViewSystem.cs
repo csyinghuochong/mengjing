@@ -16,16 +16,13 @@
 
         public static void OnUpdate(this Scroll_Item_RunRaceItem self, RankRewardConfig rewardConfig)
         {
-            using (zstring.Block())
+            if (rewardConfig.NeedPoint[0] == rewardConfig.NeedPoint[1])
             {
-                if (rewardConfig.NeedPoint[0] == rewardConfig.NeedPoint[1])
-                {
-                    self.E_TextTipText.text = zstring.Format("第{0}名奖励", rewardConfig.NeedPoint[0]);
-                }
-                else
-                {
-                    self.E_TextTipText.text = zstring.Format("第{0}-{1}名奖励", rewardConfig.NeedPoint[0], rewardConfig.NeedPoint[1]);
-                }
+                self.E_TextTipText.text = string.Format("第{0}名奖励", rewardConfig.NeedPoint[0]);
+            }
+            else
+            {
+                self.E_TextTipText.text = string.Format("第{0}-{1}名奖励", rewardConfig.NeedPoint[0], rewardConfig.NeedPoint[1]);
             }
 
             self.ES_RewardList.Refresh(rewardConfig.RewardItems, 0.9f);

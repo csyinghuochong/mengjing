@@ -36,20 +36,14 @@ namespace ET.Client
 
             if (raceopen && curTime < opentime)
             {
-                using (zstring.Block())
-                {
-                    self.E_Text_Open_TimeText.text = zstring.Format("{0}月{1}日 21点30开启", dateTime.Month, dateTime.Day);
-                }
+                self.E_Text_Open_TimeText.text = string.Format("{0}月{1}日 21点30开启", dateTime.Month, dateTime.Day);
             }
             else
             {
                 long addTime = (7 - (int)dateTime.DayOfWeek) * TimeHelper.OneDay + (opentime - curTime) * TimeHelper.Second;
                 serverTime += addTime;
                 dateTime = TimeInfo.Instance.ToDateTime(serverTime);
-                using (zstring.Block())
-                {
-                    self.E_Text_Open_TimeText.text = zstring.Format("{0}月{1}日 21点30开启", dateTime.Month, dateTime.Day);
-                }
+                self.E_Text_Open_TimeText.text = string.Format("{0}月{1}日 21点30开启", dateTime.Month, dateTime.Day);
             }
         }
 
@@ -117,10 +111,7 @@ namespace ET.Client
         {
             U2C_UnionRaceInfoResponse response = await UnionNetHelper.UnionRaceInfoRequest(self.Root());
             self.UnionListItems = response.UnionInfoList;
-            using (zstring.Block())
-            {
-                self.E_Text_BonusText.text = zstring.Format("累计总奖金： {0}", response.TotalDonation);
-            }
+            self.E_Text_BonusText.text = string.Format("累计总奖金： {0}", response.TotalDonation);
 
             string unionnamelist = "已报名公会: ";
             for (int i = 0; i < self.UnionListItems.Count; i++)

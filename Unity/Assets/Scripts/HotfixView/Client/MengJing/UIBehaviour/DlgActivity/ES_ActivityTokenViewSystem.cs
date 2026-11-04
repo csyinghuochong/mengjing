@@ -65,10 +65,7 @@ namespace ET.Client
 
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
             int selfRechage = unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.RechargeNumber);
-            using (zstring.Block())
-            {
-                self.E_TextRechargeText.text = zstring.Format("当前额度：{0}/298", selfRechage);
-            }
+            self.E_TextRechargeText.text = string.Format("当前额度：{0}/298", selfRechage);
 
             self.E_TextRechargeText.gameObject.SetActive(selfRechage < 298);
             

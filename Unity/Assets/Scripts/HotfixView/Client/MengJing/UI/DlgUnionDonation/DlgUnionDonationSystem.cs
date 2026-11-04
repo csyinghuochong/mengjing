@@ -19,13 +19,10 @@
         public static async ETTask OnUpdateUI(this DlgUnionDonation self)
         {
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
-            using (zstring.Block())
-            {
-                self.View.E_Text_Tip_4Text.text = zstring.Format("捐献次数： {0}/5次",
-                    unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.UnionDonationNumber));
-                self.View.E_Text_Tip_6Text.text = zstring.Format("捐献次数： {0}/10次",
-                    unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.UnionDiamondDonationNumber));
-            }
+            self.View.E_Text_Tip_4Text.text = string.Format("捐献次数： {0}/5次",
+                unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.UnionDonationNumber));
+            self.View.E_Text_Tip_6Text.text = string.Format("捐献次数： {0}/10次",
+                unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.UnionDiamondDonationNumber));
 
             //客户端获取公会等级
             U2C_UnionMyInfoResponse respose = await UnionNetHelper.UnionMyInfo(self.Root());
@@ -37,11 +34,8 @@
             UnionConfig unionCof = UnionConfigCategory.Instance.Get(respose.UnionMyInfo.Level);
 
             self.UnionLevel = respose.UnionMyInfo.Level;
-            using (zstring.Block())
-            {
-                self.View.E_Text_Tip_3Text.text = zstring.Format("消耗:{0}金币", unionCof.DonateGold);
-                self.View.E_Text_Tip_5Text.text = zstring.Format("消耗:{0}钻石", unionCof.DonateDiamond);
-            }
+            self.View.E_Text_Tip_3Text.text = string.Format("消耗:{0}金币", unionCof.DonateGold);
+            self.View.E_Text_Tip_5Text.text = string.Format("消耗:{0}钻石", unionCof.DonateDiamond);
         }
 
         public static void OnButton_Record(this DlgUnionDonation self)

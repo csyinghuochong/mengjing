@@ -39,10 +39,7 @@ namespace ET.Client
                 rankingInfo.FubenId = 20001;
             }
 
-            using (zstring.Block())
-            {
-                self.E_Text_CombatText.text = zstring.Format(" {0}层({1}/秒)", rankingInfo.FubenId % 20000, rankingInfo.Hurt);
-            }
+            self.E_Text_CombatText.text = string.Format(" {0}层({1}/秒)", rankingInfo.FubenId % 20000, rankingInfo.Hurt);
 
             self.E_Text_LevelText.text = rankingInfo.PlayerLv.ToString();
             self.E_Text_NameText.text = rankingInfo.PlayerName;

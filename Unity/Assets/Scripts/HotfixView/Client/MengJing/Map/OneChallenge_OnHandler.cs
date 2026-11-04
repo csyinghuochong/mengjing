@@ -7,11 +7,8 @@ namespace ET.Client
         {
             if (args.m2C_OneChallenge.Operatate == 1)
             {
-                using (zstring.Block())
-                {
-                    PopupTipHelp.OpenPopupTip(scene, "挑战", zstring.Format("{0}向你发起挑战，是否接受?", args.m2C_OneChallenge.OtherName),
-                        () => { RunAsync(scene, args).Coroutine(); }, null).Coroutine();
-                }
+                PopupTipHelp.OpenPopupTip(scene, "挑战", string.Format("{0}向你发起挑战，是否接受?", args.m2C_OneChallenge.OtherName),
+                    () => { RunAsync(scene, args).Coroutine(); }, null).Coroutine();
             }
 
             if (args.m2C_OneChallenge.Operatate == 2)

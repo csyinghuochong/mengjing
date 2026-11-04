@@ -176,10 +176,7 @@ namespace ET.Client
 
 
             self.E_NameText.text = jingLingConfig.Name;
-            using (zstring.Block())
-            {
-                self.E_LvText.text = zstring.Format("境界：{0}", jingLingConfig.Lv);
-            }
+            self.E_LvText.text = string.Format("境界：{0}", jingLingConfig.Lv);
 
             self.E_ProDesText.text = jingLingConfig.ProDes;
 
@@ -202,12 +199,9 @@ namespace ET.Client
                     }
                 }
 
-                using (zstring.Block())
-                {
-                    self.E_GetWayText.text = zstring.Format("获取方式：击败{0}", name);
-                    self.E_ProbabilityText.gameObject.SetActive(true);
-                    self.E_ProbabilityText.text = zstring.Format("直接激活概率：{0}%", jingLingConfig.ActivePro.ToString());
-                }
+                self.E_GetWayText.text = string.Format("获取方式：击败{0}", name);
+                self.E_ProbabilityText.gameObject.SetActive(true);
+                self.E_ProbabilityText.text = string.Format("直接激活概率：{0}%", jingLingConfig.ActivePro.ToString());
             }
 
             ChengJiuComponentC chengJiuComponent = self.Root().GetComponent<ChengJiuComponentC>();
@@ -215,16 +209,10 @@ namespace ET.Client
 
             int num = chengJiuComponent.GetActiveJingLing(2).Count;
             
-            using (zstring.Block())
-            {
-                self.E_TotalProgressText.text = zstring.Format("总进度：{0}/{1}", num, PetHelper.GetJingLingByGetWay(2).Count);
-            }
+            self.E_TotalProgressText.text = string.Format("总进度：{0}/{1}", num, PetHelper.GetJingLingByGetWay(2).Count);
 
-            using (zstring.Block())
-            {
-                self.E_ProgressTxtText.text = zstring.Format("{0}/{1}",
-                    jingLingInfo.Progess > jingLingConfig.NeedPoint ? jingLingConfig.NeedPoint : jingLingInfo.Progess, jingLingConfig.NeedPoint);
-            }
+            self.E_ProgressTxtText.text = string.Format("{0}/{1}",
+                jingLingInfo.Progess > jingLingConfig.NeedPoint ? jingLingConfig.NeedPoint : jingLingInfo.Progess, jingLingConfig.NeedPoint);
 
             self.E_ProgressImgImage.fillAmount = jingLingInfo.Progess * 1f / jingLingConfig.NeedPoint;
 

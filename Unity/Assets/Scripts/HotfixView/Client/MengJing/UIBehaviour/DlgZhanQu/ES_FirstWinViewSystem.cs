@@ -105,11 +105,8 @@ namespace ET.Client
                     });
                 }
 
-                using (zstring.Block())
-                {
-                    typeButtonInfos.Add(new TypeButtonInfo()
-                            { TypeId = item.Key, TypeName = zstring.Format("第{0}章", item.Key), typeButtonItems = typeButtonItems });
-                }
+                typeButtonInfos.Add(new TypeButtonInfo()
+                        { TypeId = item.Key, TypeName = string.Format("第{0}章", item.Key), typeButtonItems = typeButtonItems });
             }
 
             return typeButtonInfos;
@@ -170,42 +167,36 @@ namespace ET.Client
             int bossId = FirstWinConfigCategory.Instance.Get(firstwinId).BossID;
             MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(bossId);
             self.E_Text_BossNameText.text = monsterConfig.MonsterName;
-            using (zstring.Block())
-            {
-                self.E_Text_LvText.text = zstring.Format("等级:{0}", monsterConfig.Lv);
-            }
+            self.E_Text_LvText.text = string.Format("等级:{0}", monsterConfig.Lv);
 
             int[] skillIds = monsterConfig.SkillID;
             for (int i = 0; i < skillIds.Length; i++)
             {
                 SkillConfig skillConfig = SkillConfigCategory.Instance.Get(skillIds[i]);
-                using (zstring.Block())
-                {
-                    string str = zstring.Format("{0}:{1}", skillConfig.SkillName, skillConfig.SkillDescribe);
-                    float height = (str.Length / 30 + 1) * 40; // 16个字一行
+                string str = string.Format("{0}:{1}", skillConfig.SkillName, skillConfig.SkillDescribe);
+                float height = (str.Length / 30 + 1) * 40; // 16个字一行
 
-                    if (i == 0)
+                if (i == 0)
+                {
+                    self.SkillDescriptionList[i].GetComponent<RectTransform>().sizeDelta = new Vector2(750, height);
+                    self.SkillDescriptionList[i].GetComponent<Text>().text = str;
+                }
+                else
+                {
+                    if (self.SkillDescriptionList.Count > i)
                     {
                         self.SkillDescriptionList[i].GetComponent<RectTransform>().sizeDelta = new Vector2(750, height);
                         self.SkillDescriptionList[i].GetComponent<Text>().text = str;
+                        self.SkillDescriptionList[i].SetActive(true);
                     }
                     else
                     {
-                        if (self.SkillDescriptionList.Count > i)
-                        {
-                            self.SkillDescriptionList[i].GetComponent<RectTransform>().sizeDelta = new Vector2(750, height);
-                            self.SkillDescriptionList[i].GetComponent<Text>().text = str;
-                            self.SkillDescriptionList[i].SetActive(true);
-                        }
-                        else
-                        {
-                            GameObject obj = UnityEngine.Object.Instantiate(self.E_SkillDescriptionItemTextText.gameObject);
-                            obj.SetActive(true);
-                            CommonViewHelper.SetParent(obj, self.EG_SkillDescriptionListNodeRectTransform.gameObject);
-                            self.SkillDescriptionList.Add(obj);
-                            obj.GetComponent<RectTransform>().sizeDelta = new Vector2(750, height);
-                            obj.GetComponent<Text>().text = str;
-                        }
+                        GameObject obj = UnityEngine.Object.Instantiate(self.E_SkillDescriptionItemTextText.gameObject);
+                        obj.SetActive(true);
+                        CommonViewHelper.SetParent(obj, self.EG_SkillDescriptionListNodeRectTransform.gameObject);
+                        self.SkillDescriptionList.Add(obj);
+                        obj.GetComponent<RectTransform>().sizeDelta = new Vector2(750, height);
+                        obj.GetComponent<Text>().text = str;
                     }
                 }
             }
@@ -248,20 +239,14 @@ namespace ET.Client
                 }
 
                 SkillConfig skillConfig = SkillConfigCategory.Instance.Get(skilllist[i]);
-                using (zstring.Block())
-                {
-                    skilldesc += zstring.Format("{1} {2}\n", skillConfig.SkillName, skillConfig.SkillDescribe);
-                }
+                skilldesc += string.Format("{1} {2}\n", skillConfig.SkillName, skillConfig.SkillDescribe);
             }
 
             self.E_Text_SkillJieShaoText.text = skilldesc;
             UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
             bool noupdatestatus = userInfoComponent.GetReviveTime(bossId) > TimeHelper.ServerNow();
             DateTime dateTime = TimeInfo.Instance.ToDateTime(userInfoComponent.GetReviveTime(bossId));
-            using (zstring.Block())
-            {
-                self.E_Text_UpdateStatusText.text = noupdatestatus ? zstring.Format("下次刷新时间\n{0}", dateTime.ToString()) : "(已刷新)";
-            }
+            self.E_Text_UpdateStatusText.text = noupdatestatus ? string.Format("下次刷新时间\n{0}", dateTime.ToString()) : "(已刷新)";
 
             self.E_Text_UpdateStatusText.color =
                     noupdatestatus ? new Color(164f / 255, 66f / 255f, 8f / 255f) : new Color(25f / 255, 180f / 255f, 25f / 255f);
@@ -271,26 +256,20 @@ namespace ET.Client
             BossDevelopment bossDevelopmentNext = ConfigHelper.GetBossDevelopmentById(self.ChapterId, bossDevelopment.Level + 1);
             if (bossDevelopmentNext == null)
             {
-                using (zstring.Block())
-                {
-                    self.E_Text_BossDevpText.text = zstring.Format("{0}", bossDevelopment.Name);
-                }
+                self.E_Text_BossDevpText.text = string.Format("{0}", bossDevelopment.Name);
 
                 self.E_ImageProgressImage.fillAmount = 1f;
             }
             else
             {
-                using (zstring.Block())
-                {
-                    self.E_Text_BossDevpText.text = zstring.Format("领主升级: {0}/{1}", killNumber, bossDevelopmentNext.KillNumber);
-                }
+                self.E_Text_BossDevpText.text = string.Format("领主升级: {0}/{1}", killNumber, bossDevelopmentNext.KillNumber);
 
                 self.E_ImageProgressImage.fillAmount = killNumber * 1f / bossDevelopmentNext.KillNumber;
             }
 
             using (zstring.Block())
             {
-                self.E_Text_BossExpText.text = zstring.Format("怪物经验:{0}", 1f * bossDevelopment.ExpAdd * monsterConfig.Exp);
+                self.E_Text_BossExpText.text = string.Format("怪物经验:{0}", (1f * bossDevelopment.ExpAdd * monsterConfig.Exp).ToString("0.000"));
                 self.E_Text_BossDevpNameText.text = bossDevelopment.Name;
                 long cdTime = (long)(monsterConfig.ReviveTime * 1000 * bossDevelopment.ReviveTimeAdd);
                 self.E_Text_BossFreshTImeText.text = zstring.Format("冷却时间:{0}", TimeHelper.ShowLeftTime(cdTime));
@@ -337,14 +316,11 @@ namespace ET.Client
         {
             if (firstWinInfo != null)
             {
-                using (zstring.Block())
-                {
-                    DateTime dateTime = TimeInfo.Instance.ToDateTime(firstWinInfo.KillTime);
-                    string str_1 = dateTime.ToString("HH:mm:ss");
-                    string str_2 = zstring.Format("{0}年{1}月{2}日 {3}", dateTime.Year, dateTime.Month, dateTime.Day, str_1);
-                    Text_JiSha_1.GetComponent<Text>().text =
-                            zstring.Format("{0} ({1})", firstWinInfo.PlayerName, str_2);
-                }
+                DateTime dateTime = TimeInfo.Instance.ToDateTime(firstWinInfo.KillTime);
+                string str_1 = dateTime.ToString("HH:mm:ss");
+                string str_2 = string.Format("{0}年{1}月{2}日 {3}", dateTime.Year, dateTime.Month, dateTime.Day, str_1);
+                Text_JiSha_1.GetComponent<Text>().text =
+                        string.Format("{0} ({1})", firstWinInfo.PlayerName, str_2);
             }
             else
             {

@@ -55,11 +55,8 @@
             self.TakeCardRewardConfig = takeCardRewardConfig;
             self.ES_RewardList.Refresh(takeCardRewardConfig.RewardItems, 0.8f);
 
-            using (zstring.Block())
-            {
-                self.E_TextZuanshiText.text = zstring.Format("{0}-{1}", takeCardRewardConfig.RewardDiamond[0], takeCardRewardConfig.RewardDiamond[1]);
-                self.E_TextNeedTimesText.text = zstring.Format("抽卡次数达到{0}次", takeCardRewardConfig.RoseLvLimit);
-            }
+            self.E_TextZuanshiText.text = string.Format("{0}-{1}", takeCardRewardConfig.RewardDiamond[0], takeCardRewardConfig.RewardDiamond[1]);
+            self.E_TextNeedTimesText.text = string.Format("抽卡次数达到{0}次", takeCardRewardConfig.RoseLvLimit);
 
             self.UpdateButton();
         }

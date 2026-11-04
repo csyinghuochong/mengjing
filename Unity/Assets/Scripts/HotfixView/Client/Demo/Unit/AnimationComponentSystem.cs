@@ -61,10 +61,7 @@ namespace ET.Client
 
                 if (animData.AnimGroup.AnimInfos.Length == 0)
                 {
-                    using (zstring.Block())
-                    {
-                        Log.Warning(zstring.Format("{0} 没有添加动画片段！！！", animData.AnimGroup.name));
-                    }
+                    Log.Warning(string.Format("{0} 没有添加动画片段！！！", animData.AnimGroup.name));
 
                     return;
                 }
@@ -102,20 +99,14 @@ namespace ET.Client
 
                 if (animInfo == null)
                 {
-                    using (zstring.Block())
-                    {
-                        Log.Debug(zstring.Format("动画 {0} 未加载", name));
-                    }
+                    Log.Debug(string.Format("动画 {0} 未加载", name));
 
                     continue;
                 }
 
                 if (animInfo.AnimationClip == null)
                 {
-                    using (zstring.Block())
-                    {
-                        Log.Debug(zstring.Format("动画片段 {0} 未加载", name));
-                    }
+                    Log.Debug(string.Format("动画片段 {0} 未加载", name));
 
                     continue;
                 }
@@ -123,19 +114,13 @@ namespace ET.Client
                 self.CurrentAnimation = name;
                 self.Animancer[i].Playable.Speed = speed != 0 ? speed : animInfo.Speed;
 
-                using (zstring.Block())
-                {
-                    Log.Debug(zstring.Format("播放动画 {0}", name));
-                }
+                Log.Debug(string.Format("播放动画 {0}", name));
 
                 if (!string.IsNullOrEmpty(animInfo.NextStateName))
                 {
                     self.Animancer[i].Play(animInfo.AnimationClip, 0.25f, fadeMode).Events.OnEnd = () =>
                     {
-                        using (zstring.Block())
-                        {
-                            Log.Debug(zstring.Format("{0} 播放完毕，自动切换为 {1}", animInfo.StateName, animInfo.NextStateName));
-                        }
+                        Log.Debug(string.Format("{0} 播放完毕，自动切换为 {1}", animInfo.StateName, animInfo.NextStateName));
 
                         self.Play(animInfo.NextStateName);
                     };

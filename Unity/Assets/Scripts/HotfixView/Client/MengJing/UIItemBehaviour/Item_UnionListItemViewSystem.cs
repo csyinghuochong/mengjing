@@ -37,10 +37,7 @@ namespace ET.Client
             int peopleMax = UnionConfigCategory.Instance.Get(unionListItem.UnionLevel).PeopleNum;
             self.E_ButtonImageDI.AddListener(self.OnClick);
 
-            using (zstring.Block())
-            {
-                self.E_Text_NumberText.text = zstring.Format("人数 {0}/{1}", unionListItem.PlayerNumber, peopleMax);
-            }
+            self.E_Text_NumberText.text = string.Format("人数 {0}/{1}", unionListItem.PlayerNumber, peopleMax);
 
             self.E_Text_NameText.text = unionListItem.UnionName;
             self.E_Text_LeaderText.text = unionListItem.UnionLeader;

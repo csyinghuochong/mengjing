@@ -52,11 +52,8 @@ namespace ET.Client
             if (cangkuNumber <= page)
             {
                 string costItems = GlobalValueConfigCategory.Instance.Value_38;
-                using (zstring.Block())
-                {
-                    PopupTipHelp.OpenPopupTip(self.Root(), "开启仓库", zstring.Format("是否消耗{0}开启一个仓库", CommonViewHelper.GetNeedItemDesc(costItems)),
-                        () => { self.RequestOpenCangKu().Coroutine(); }, null).Coroutine();
-                }
+                PopupTipHelp.OpenPopupTip(self.Root(), "开启仓库", string.Format("是否消耗{0}开启一个仓库", CommonViewHelper.GetNeedItemDesc(costItems)),
+                    () => { self.RequestOpenCangKu().Coroutine(); }, null).Coroutine();
 
                 return false;
             }
@@ -99,18 +96,15 @@ namespace ET.Client
             BagComponentC bagComponent = self.Root().GetComponent<BagComponentC>();
             int addcell = bagComponent.BagBuyCellNumber[self.E_ItemTypeSetToggleGroup.GetCurrentIndex()];
             BuyCellCost buyCellCost = ConfigData.BuyStoreCellCosts[self.E_ItemTypeSetToggleGroup.GetCurrentIndex() * 10 + addcell];
-            using (zstring.Block())
-            {
-                PopupTipHelp.OpenPopupTip(self.Root(), "购买格子",
-                    zstring.Format("是否花费{0}购买一个背包格子?", CommonViewHelper.GetNeedItemDesc(buyCellCost.Cost)),
-                    () =>
-                    {
-                        BagClientNetHelper
-                                .RequestBuyBagCell(self.Root(), self.E_ItemTypeSetToggleGroup.GetCurrentIndex() + (int)ItemLocType.ItemWareHouse1)
-                                .Coroutine();
-                    },
-                    null).Coroutine();
-            }
+            PopupTipHelp.OpenPopupTip(self.Root(), "购买格子",
+                string.Format("是否花费{0}购买一个背包格子?", CommonViewHelper.GetNeedItemDesc(buyCellCost.Cost)),
+                () =>
+                {
+                    BagClientNetHelper
+                            .RequestBuyBagCell(self.Root(), self.E_ItemTypeSetToggleGroup.GetCurrentIndex() + (int)ItemLocType.ItemWareHouse1)
+                            .Coroutine();
+                },
+                null).Coroutine();
         }
 
         public static void Refresh(this ES_WarehouseRole self)

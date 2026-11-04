@@ -71,10 +71,7 @@ namespace ET.Client
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
             NumericComponentC numericComponent = unit.GetComponent<NumericComponentC>();
             int totalTimes = numericComponent.GetAsInt(NumericType.PetExploreNumber);
-            using (zstring.Block())
-            {
-                self.E_Text_TotalNumberText.text = zstring.Format("次数：{0}/{1}", totalTimes, GlobalValueConfigCategory.Instance.PetEggChouKaLimit);
-            }
+            self.E_Text_TotalNumberText.text = string.Format("次数：{0}/{1}", totalTimes, GlobalValueConfigCategory.Instance.PetEggChouKaLimit);
 
             self.E_Text_PetExploreLucklyText.text = numericComponent.GetAsInt(NumericType.PetExploreLuckly).ToString();
         }
@@ -95,10 +92,7 @@ namespace ET.Client
                 discount = float.Parse(set[1]);
             }
 
-            using (zstring.Block())
-            {
-                self.E_Text_DiamondNumberText.text = zstring.Format("x {0}", ((int)(needDimanond * discount)).ToString());
-            }
+            self.E_Text_DiamondNumberText.text = string.Format("x {0}", ((int)(needDimanond * discount)).ToString());
 
             string[] itemInfo = GlobalValueConfigCategory.Instance.Value_39.Split('@')[0].Split(';');
             string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemIcon, ItemConfigCategory.Instance.Get(int.Parse(itemInfo[0])).Icon);
@@ -106,10 +100,7 @@ namespace ET.Client
 
             self.E_ItemImageIconImage.sprite = sp;
             long haveNumber = self.Root().GetComponent<BagComponentC>().GetItemNumber(int.Parse(itemInfo[0]));
-            using (zstring.Block())
-            {
-                self.E_Text_CostNumberText.text = zstring.Format("{0}/{1}", haveNumber, itemInfo[1]);
-            }
+            self.E_Text_CostNumberText.text = string.Format("{0}/{1}", haveNumber, itemInfo[1]);
 
             self.E_Text_CostNumberText.color = haveNumber >= int.Parse(itemInfo[1]) ? Color.white : Color.red;
         }

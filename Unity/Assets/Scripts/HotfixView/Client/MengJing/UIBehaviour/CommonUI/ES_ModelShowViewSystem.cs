@@ -119,30 +119,27 @@ namespace ET.Client
 
             self.ReSetTexture();
 
-            using (zstring.Block())
+            string path = ABPathHelper.GetUnitPath(string.Format("Player/{0}", OccupationConfigCategory.Instance.Get(occ).ModelAsset));
+            GameObject prefab = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
+
+            GameObject go = UnityEngine.Object.Instantiate(prefab, self.ModelParent, true);
+            ChangeEquipHelper changeEquipHelper = self.GetComponent<ChangeEquipHelper>();
+            changeEquipHelper.WeaponId = self.GetWeaponId(bagInfo, occ);
+            changeEquipHelper.EquipIndex = equipIndex;
+            changeEquipHelper.UseLayer = true;
+            changeEquipHelper.LoadEquipment(go, fashionids, occ);
+            Animator animator = go.GetComponentInChildren<Animator>();
+            if (animator != null && playAnim)
             {
-                string path = ABPathHelper.GetUnitPath(zstring.Format("Player/{0}", OccupationConfigCategory.Instance.Get(occ).ModelAsset));
-                GameObject prefab = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
-
-                GameObject go = UnityEngine.Object.Instantiate(prefab, self.ModelParent, true);
-                ChangeEquipHelper changeEquipHelper = self.GetComponent<ChangeEquipHelper>();
-                changeEquipHelper.WeaponId = self.GetWeaponId(bagInfo, occ);
-                changeEquipHelper.EquipIndex = equipIndex;
-                changeEquipHelper.UseLayer = true;
-                changeEquipHelper.LoadEquipment(go, fashionids, occ);
-                Animator animator = go.GetComponentInChildren<Animator>();
-                if (animator != null && playAnim)
-                {
-                    animator.Play("ShowIdel");
-                }
-
-                LayerHelp.ChangeLayerAll(go.transform, LayerEnum.RenderTexture);
-                go.transform.localScale = Vector3.one;
-                go.transform.localPosition = Vector3.zero;
-                go.transform.localEulerAngles = Vector3.zero;
-
-                self.Model.Add(go);
+                animator.Play("ShowIdel");
             }
+
+            LayerHelp.ChangeLayerAll(go.transform, LayerEnum.RenderTexture);
+            go.transform.localScale = Vector3.one;
+            go.transform.localPosition = Vector3.zero;
+            go.transform.localEulerAngles = Vector3.zero;
+
+            self.Model.Add(go);
         }
 
         public static void ShowPlayerPreviewModel(this ES_ModelShow self, ItemInfo bagInfo, List<int> fashionids, int occ, bool canDrag = true)
@@ -159,30 +156,27 @@ namespace ET.Client
 
             self.ReSetTexture();
 
-            using (zstring.Block())
+            var path = ABPathHelper.GetUnitPath(string.Format("Player/{0}", OccupationConfigCategory.Instance.Get(occ).ModelAsset));
+            GameObject prefab = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
+            GameObject go = UnityEngine.Object.Instantiate(prefab, self.ModelParent, true);
+            ChangeEquipHelper changeEquipHelper = self.GetComponent<ChangeEquipHelper>();
+            changeEquipHelper.WeaponId = self.GetWeaponId(bagInfo, occ);
+            changeEquipHelper.EquipIndex = 0;
+            changeEquipHelper.UseLayer = true;
+            changeEquipHelper.LoadEquipment(go, fashionids, occ);
+
+            Animator animator = go.GetComponentInChildren<Animator>();
+            if (animator != null)
             {
-                var path = ABPathHelper.GetUnitPath(zstring.Format("Player/{0}", OccupationConfigCategory.Instance.Get(occ).ModelAsset));
-                GameObject prefab = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
-                GameObject go = UnityEngine.Object.Instantiate(prefab, self.ModelParent, true);
-                ChangeEquipHelper changeEquipHelper = self.GetComponent<ChangeEquipHelper>();
-                changeEquipHelper.WeaponId = self.GetWeaponId(bagInfo, occ);
-                changeEquipHelper.EquipIndex = 0;
-                changeEquipHelper.UseLayer = true;
-                changeEquipHelper.LoadEquipment(go, fashionids, occ);
-
-                Animator animator = go.GetComponentInChildren<Animator>();
-                if (animator != null)
-                {
-                    animator.Play("ShowIdel");
-                }
-
-                LayerHelp.ChangeLayerAll(go.transform, LayerEnum.RenderTexture);
-                go.transform.localScale = Vector3.one;
-                go.transform.localPosition = Vector3.zero;
-                go.transform.localEulerAngles = Vector3.zero;
-
-                self.Model.Add(go);
+                animator.Play("ShowIdel");
             }
+
+            LayerHelp.ChangeLayerAll(go.transform, LayerEnum.RenderTexture);
+            go.transform.localScale = Vector3.one;
+            go.transform.localPosition = Vector3.zero;
+            go.transform.localEulerAngles = Vector3.zero;
+
+            self.Model.Add(go);
         }
 
         private static int GetWeaponId(this ES_ModelShow self, ItemInfo bagInfo, int occ)
@@ -214,10 +208,7 @@ namespace ET.Client
             GameObject prefab = await self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetAsync<GameObject>(path);
             if (prefab == null)
             {
-                using (zstring.Block())
-                {
-                    Log.Error(zstring.Format("prefab == null: {0}", path));
-                }
+                Log.Error(string.Format("prefab == null: {0}", path));
             }
 
             GameObject go = UnityEngine.Object.Instantiate(prefab, self.ModelParent, true);

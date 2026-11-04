@@ -85,13 +85,10 @@ namespace ET.Client
             self.E_DonationShowItemsLoopVerticalScrollRect.SetVisible(true, self.ShowRankingInfos.Count);
 
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
-            using (zstring.Block())
-            {
-                self.E_Text_MyDonationText.text =
-                        zstring.Format("我已捐献{0}金币", unit.GetComponent<NumericComponentC>().GetAsLong(NumericType.RaceDonationNumber));
-                self.E_TextMyDonationText.text =
-                        zstring.Format("我已捐献{0}金币", unit.GetComponent<NumericComponentC>().GetAsLong(NumericType.RaceDonationNumber));
-            }
+            self.E_Text_MyDonationText.text =
+                    string.Format("我已捐献{0}金币", unit.GetComponent<NumericComponentC>().GetAsLong(NumericType.RaceDonationNumber));
+            self.E_TextMyDonationText.text =
+                    string.Format("我已捐献{0}金币", unit.GetComponent<NumericComponentC>().GetAsLong(NumericType.RaceDonationNumber));
 
             await ETTask.CompletedTask;
         }

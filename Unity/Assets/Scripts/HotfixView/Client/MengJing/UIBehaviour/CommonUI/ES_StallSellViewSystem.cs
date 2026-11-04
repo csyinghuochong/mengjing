@@ -310,10 +310,7 @@ namespace ET.Client
 			self.AddUIScrollItems(ref self.ScrollItemPaiMaiSellItems, self.ShowPaiMaiItemInfos.Count);
 			self.E_PaiMaiSellItemsLoopVerticalScrollRect.SetVisible(true, self.ShowPaiMaiItemInfos.Count);
 			int maxNum = GlobalValueConfigCategory.Instance.MaxAuctionQuantity;
-			using (zstring.Block())
-			{
-				self.E_ShangJiaNumberText.text = zstring.Format("已上架:{0}/{1}", self.PaiMaiItemInfos.Count, maxNum);
-			}
+			self.E_ShangJiaNumberText.text = string.Format("已上架:{0}/{1}", self.PaiMaiItemInfos.Count, maxNum);
 		}
 		
 		private static void OnItemTypeSet(this ES_StallSell self, int index)

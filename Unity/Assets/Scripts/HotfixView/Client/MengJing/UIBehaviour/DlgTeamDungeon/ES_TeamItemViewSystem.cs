@@ -64,12 +64,9 @@ namespace ET.Client
                 self.E_TextCombatText.gameObject.SetActive(true);
                 self.E_TextOccText.gameObject.SetActive(true);
                 self.E_Image_Add.gameObject.SetActive(false);
-                using (zstring.Block())
-                {
-                    self.E_TextLevelText.text = zstring.Format("{0} 级", teamPlayerInfo.PlayerLv);
-                    self.E_TextNameText.text = teamPlayerInfo.PlayerName;
-                    self.E_TextCombatText.text = zstring.Format("战力: {0}", teamPlayerInfo.Combat);
-                }
+                self.E_TextLevelText.text = string.Format("{0} 级", teamPlayerInfo.PlayerLv);
+                self.E_TextNameText.text = teamPlayerInfo.PlayerName;
+                self.E_TextCombatText.text = string.Format("战力: {0}", teamPlayerInfo.Combat);
 
                 self.E_TextOccText.gameObject.SetActive(teamPlayerInfo.Occ != 0 || teamPlayerInfo.OccTwo != 0);
                 if (teamPlayerInfo.Occ != 0)

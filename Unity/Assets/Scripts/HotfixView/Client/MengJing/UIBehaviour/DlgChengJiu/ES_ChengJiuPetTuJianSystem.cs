@@ -126,10 +126,7 @@ namespace ET.Client
             self.ES_ModelShow.SetModelParentRotation(Quaternion.Euler(0f, -45f, 0f));
 
             self.E_NameText.text = jingLingConfig.Name;
-            using (zstring.Block())
-            {
-                self.E_LvText.text = zstring.Format("境界：{0}", jingLingConfig.Lv);
-            }
+            self.E_LvText.text = string.Format("境界：{0}", jingLingConfig.Lv);
 
             self.E_ProDesText.text = jingLingConfig.ProDes;
 
@@ -140,18 +137,12 @@ namespace ET.Client
 
             int num = chengJiuComponent.GetActiveJingLing(1).Count;
 
-            using (zstring.Block())
-            {
-                self.E_TotalProgressText.text = zstring.Format("总进度：{0}/{1}", num, PetHelper.GetJingLingByGetWay(1).Count);
-            }
+            self.E_TotalProgressText.text = string.Format("总进度：{0}/{1}", num, PetHelper.GetJingLingByGetWay(1).Count);
 
 
             int progress = chengJiuComponent.IsActiveJingLing(jingLingId) ? 1 : 0;
-            using (zstring.Block())
-            {
-                // self.E_ProgressTxtText.text = zstring.Format("{0}/{1}", progress, jingLingConfig.NeedPoint);
-                self.E_ProgressTxtText.text = zstring.Format("{0}/{1}", progress, 1);
-            }
+            // self.E_ProgressTxtText.text = zstring.Format("{0}/{1}", progress, jingLingConfig.NeedPoint);
+            self.E_ProgressTxtText.text = string.Format("{0}/{1}", progress, 1);
 
             // self.E_ProgressImgImage.fillAmount =progress * 1f / jingLingConfig.NeedPoint;
             self.E_ProgressImgImage.fillAmount = progress * 1f / 1;

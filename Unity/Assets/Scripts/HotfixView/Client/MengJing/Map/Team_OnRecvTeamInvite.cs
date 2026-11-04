@@ -11,11 +11,8 @@ namespace ET.Client
                 return;
             }
 
-            using (zstring.Block())
-            {
-                PopupTipHelp.OpenPopupTip(scene, "组队邀请", zstring.Format("{0}邀请你组队", args.m2C_TeamInviteResult.TeamPlayerInfo.PlayerName),
-                    () => { TeamNetHelper.AgreeTeamInvite(scene, args.m2C_TeamInviteResult).Coroutine(); }).Coroutine();
-            }
+            PopupTipHelp.OpenPopupTip(scene, "组队邀请", string.Format("{0}邀请你组队", args.m2C_TeamInviteResult.TeamPlayerInfo.PlayerName),
+                () => { TeamNetHelper.AgreeTeamInvite(scene, args.m2C_TeamInviteResult).Coroutine(); }).Coroutine();
 
             await ETTask.CompletedTask;
         }

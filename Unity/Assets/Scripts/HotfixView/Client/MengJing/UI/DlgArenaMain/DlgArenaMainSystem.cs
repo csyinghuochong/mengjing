@@ -28,10 +28,7 @@ namespace ET.Client
             }
             else
             {
-                using (zstring.Block())
-                {
-                    self.View.E_TextVSText.text = zstring.Format("剩余人数： {0}", message.LeftPlayer);
-                }
+                self.View.E_TextVSText.text = string.Format("剩余人数： {0}", message.LeftPlayer);
             }
         }
 

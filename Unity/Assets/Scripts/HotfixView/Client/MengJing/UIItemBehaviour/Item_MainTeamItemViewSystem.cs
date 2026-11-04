@@ -21,15 +21,12 @@ namespace ET.Client
         {
             long value = teamPlayerInfo.Damage;
             string str = value.ToString();
-            using (zstring.Block())
+            if (value >= 10000)
             {
-                if (value >= 10000)
-                {
-                    str = zstring.Format("{0}万", ((float)value / 10000.0f).ToString("F2"));
-                }
-
-                self.E_DamageValueText.text = zstring.Format("输出:{0}", str);
+                str = string.Format("{0}万", ((float)value / 10000.0f).ToString("F2"));
             }
+
+            self.E_DamageValueText.text = string.Format("输出:{0}", str);
         }
 
         public static void OnReset(this Scroll_Item_MainTeamItem self)
@@ -62,10 +59,7 @@ namespace ET.Client
             self.TeamPlayerInfo = teamPlayerInfo;
             self.UnitId = teamPlayerInfo.UserID;
             self.E_PlayerNameText.text = teamPlayerInfo.PlayerName;
-            using (zstring.Block())
-            {
-                self.E_PlayerLvText.text = zstring.Format("{0}级", teamPlayerInfo.PlayerLv);
-            }
+            self.E_PlayerLvText.text = string.Format("{0}级", teamPlayerInfo.PlayerLv);
 
             self.OnUpdateDamage(teamPlayerInfo);
             ResourcesLoaderComponent resourcesLoaderComponent = self.Root().GetComponent<ResourcesLoaderComponent>();

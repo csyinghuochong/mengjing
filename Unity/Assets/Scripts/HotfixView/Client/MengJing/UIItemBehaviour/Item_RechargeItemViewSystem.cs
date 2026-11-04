@@ -23,10 +23,7 @@ namespace ET.Client
             self.E_ButtonChargeButton.AddListener(self.OnImageButton);
             self.RechargeNumber = recharge;
 
-            using (zstring.Block())
-            {
-                self.E_Text_giveText.text = zstring.Format("{0} {1}", LanguageComponent.Instance.LoadLocalization("赠送"), giveNumber);
-            }
+            self.E_Text_giveText.text = string.Format("{0} {1}", LanguageComponent.Instance.LoadLocalization("赠送"), giveNumber);
 
             self.EG_ZengSongRectTransform.gameObject.SetActive(giveNumber > 0);
             self.E_Text_ZuanShiText.text = (recharge * 100).ToString();

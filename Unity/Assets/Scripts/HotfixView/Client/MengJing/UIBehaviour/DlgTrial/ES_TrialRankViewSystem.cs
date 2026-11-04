@@ -177,10 +177,7 @@ namespace ET.Client
                 rank++;
             }
 
-            using (zstring.Block())
-            {
-                self.E_Text_MyRankText.text = myRank == -1 ? "我的排名: 未上榜" : zstring.Format("我的排名: {0}", myRank);
-            }
+            self.E_Text_MyRankText.text = myRank == -1 ? "我的排名: 未上榜" : string.Format("我的排名: {0}", myRank);
 
             self.AddUIScrollItems(ref self.ScrollItemRankItems, self.ShowRankingTrialInfos.Count);
             self.E_RankItemsLoopVerticalScrollRect.SetVisible(true, self.ShowRankingTrialInfos.Count);

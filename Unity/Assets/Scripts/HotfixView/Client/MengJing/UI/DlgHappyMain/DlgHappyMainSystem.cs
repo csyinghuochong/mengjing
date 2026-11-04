@@ -14,10 +14,7 @@ namespace ET.Client
             }
             catch (Exception e)
             {
-                using (zstring.Block())
-                {
-                    Log.Error(zstring.Format("move timer error: {0}\n{1}", self.Id, e.ToString()));
-                }
+                Log.Error(string.Format("move timer error: {0}\n{1}", self.Id, e.ToString()));
             }
         }
     }
@@ -72,10 +69,7 @@ namespace ET.Client
                 leftTime /= 1000;
                 int minute = (int)(leftTime / 60);
                 int second = (int)(leftTime % 60);
-                using (zstring.Block())
-                {
-                    self.View.E_TextCoundownText.text = zstring.Format("下次道具刷新: {0}:{1}", minute, second);
-                }
+                self.View.E_TextCoundownText.text = string.Format("下次道具刷新: {0}:{1}", minute, second);
             }
             else
             {
@@ -127,14 +121,11 @@ namespace ET.Client
             long lastmovetime = unit.GetComponent<NumericComponentC>().GetAsLong(NumericType.HappyMoveTime);
             self.NextMoveTime = lastmovetime;
 
-            using (zstring.Block())
-            {
-                //金币消耗
-                self.View.E_TextTip_2Text.text = zstring.Format("金币消耗:{0}", GlobalValueConfigCategory.Instance.Value_94);
+            //金币消耗
+            self.View.E_TextTip_2Text.text = string.Format("金币消耗:{0}", GlobalValueConfigCategory.Instance.Value_94);
 
-                //钻石消耗
-                self.View.E_TextTip_3Text.text = zstring.Format("钻石消耗:{0}", GlobalValueConfigCategory.Instance.Value_95);
-            }
+            //钻石消耗
+            self.View.E_TextTip_3Text.text = string.Format("钻石消耗:{0}", GlobalValueConfigCategory.Instance.Value_95);
         }
 
         public static void OnButtonPick(this DlgHappyMain self)
@@ -182,25 +173,22 @@ namespace ET.Client
                     return;
                 }
 
-                using (zstring.Block())
+                PopupTipHelp.OpenPopupTip(self.Root(), "喜从天降", string.Format("是否消耗{0}金币?",globalValueConfig), async () =>
                 {
-                    PopupTipHelp.OpenPopupTip(self.Root(), "喜从天降", zstring.Format("是否消耗{0}金币?",globalValueConfig), async () =>
+                    long instanceId = self.InstanceId;
+                    int error = await ActivityNetHelper.HappyMoveRequest(self.Root(), moveType);
+                    if (instanceId != self.InstanceId || error != ErrorCode.ERR_Success)
                     {
-                        long instanceId = self.InstanceId;
-                        int error = await ActivityNetHelper.HappyMoveRequest(self.Root(), moveType);
-                        if (instanceId != self.InstanceId || error != ErrorCode.ERR_Success)
-                        {
-                            return;
-                        }
+                        return;
+                    }
 
-                        Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
+                    Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
 
-                        FunctionEffect.PlayDropEffect(unit, 30000003);
-                        self.OnButtonPick();
+                    FunctionEffect.PlayDropEffect(unit, 30000003);
+                    self.OnButtonPick();
 
-                        self.OnUpdateMoney();
-                    }).Coroutine();
-                }
+                    self.OnUpdateMoney();
+                }).Coroutine();
 
                 return;
             }
@@ -214,25 +202,22 @@ namespace ET.Client
                     return;
                 }
 
-                using (zstring.Block())
+                PopupTipHelp.OpenPopupTip(self.Root(), "喜从天降", string.Format("是否消耗{0}钻石?", globalValueConfig), async () =>
                 {
-                    PopupTipHelp.OpenPopupTip(self.Root(), "喜从天降", zstring.Format("是否消耗{0}钻石?", globalValueConfig), async () =>
+                    long instanceId = self.InstanceId;
+                    int error = await ActivityNetHelper.HappyMoveRequest(self.Root(), moveType);
+                    if (instanceId != self.InstanceId || error != ErrorCode.ERR_Success)
                     {
-                        long instanceId = self.InstanceId;
-                        int error = await ActivityNetHelper.HappyMoveRequest(self.Root(), moveType);
-                        if (instanceId != self.InstanceId || error != ErrorCode.ERR_Success)
-                        {
-                            return;
-                        }
+                        return;
+                    }
 
-                        Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
+                    Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
 
-                        FunctionEffect.PlayDropEffect(unit, 30000003);
-                        self.OnButtonPick();
+                    FunctionEffect.PlayDropEffect(unit, 30000003);
+                    self.OnButtonPick();
 
-                        self.OnUpdateMoney();
-                    }).Coroutine();
-                }
+                    self.OnUpdateMoney();
+                }).Coroutine();
 
                 return;
             }

@@ -79,19 +79,13 @@ namespace ET.Client
             long needNum = int.Parse(needList[1]);
             if (selfNum >= needNum)
             {
-                using (zstring.Block())
-                {
-                    self.View.E_Text_CostText.text = zstring.Format("{0}/{1}", selfNum, needNum);
-                }
+                self.View.E_Text_CostText.text = string.Format("{0}/{1}", selfNum, needNum);
 
                 self.View.E_Text_CostText.color = Color.green;
             }
             else
             {
-                using (zstring.Block())
-                {
-                    self.View.E_Text_CostText.text = zstring.Format("{0}/{1}(道具不足)", selfNum, needNum);
-                }
+                self.View.E_Text_CostText.text = string.Format("{0}/{1}(道具不足)", selfNum, needNum);
 
                 self.View.E_Text_CostText.color = Color.yellow;
             }
@@ -122,20 +116,17 @@ namespace ET.Client
             {
                 DamageValueInfo damageValueInfo = damageValueListResponse.DamageValueList[damageValueListResponse.DamageValueList.Count - 1];
                 
-                using (zstring.Block())
+                switch (damageValueInfo.UnitType)
                 {
-                    switch (damageValueInfo.UnitType)
-                    {
-                        case UnitType.Monster:
-                            self.View.E_Text_Damage_Record_0Text.text = zstring.Format("被击杀怪物:{0}",  MonsterConfigCategory.Instance.Get(damageValueInfo.ConfigId).MonsterName);
-                            break;  
-                        default:
-                            self.View.E_Text_Damage_Record_0Text.text = zstring.Format("被击杀玩家:{0}", damageValueInfo.UnitName);
-                            break;
-                    }
-                    self.View.E_Text_Damage_Record_1Text.text = zstring.Format("最后一击技能:{0}", SkillConfigCategory.Instance.Get(damageValueInfo.SkillId).SkillName);
-                    self.View.E_Text_Damage_Record_2Text.text = zstring.Format("最后一击伤害:{0}",  damageValueInfo.DamageValue);
+                    case UnitType.Monster:
+                        self.View.E_Text_Damage_Record_0Text.text = string.Format("被击杀怪物:{0}",  MonsterConfigCategory.Instance.Get(damageValueInfo.ConfigId).MonsterName);
+                        break;  
+                    default:
+                        self.View.E_Text_Damage_Record_0Text.text = string.Format("被击杀玩家:{0}", damageValueInfo.UnitName);
+                        break;
                 }
+                self.View.E_Text_Damage_Record_1Text.text = string.Format("最后一击技能:{0}", SkillConfigCategory.Instance.Get(damageValueInfo.SkillId).SkillName);
+                self.View.E_Text_Damage_Record_2Text.text = string.Format("最后一击伤害:{0}",  damageValueInfo.DamageValue);
             }
             self.M2C_DamageValueListResponse = damageValueListResponse; 
         }

@@ -36,11 +36,8 @@ namespace ET.Client
             self.ActivityConfig = activityConfig;
             self.ClickHandler = action;
 
-            using (zstring.Block())
-            {
-                int index = int.Parse(activityConfig.Par_1);
-                self.E_DayText.text = zstring.Format("第{0}天", index);
-            }
+            int index = int.Parse(activityConfig.Par_1);
+            self.E_DayText.text = string.Format("第{0}天", index);
 
             string[] itemInfo = activityConfig.Par_2.Split(';');
             int itemId = int.Parse(itemInfo[0]);    

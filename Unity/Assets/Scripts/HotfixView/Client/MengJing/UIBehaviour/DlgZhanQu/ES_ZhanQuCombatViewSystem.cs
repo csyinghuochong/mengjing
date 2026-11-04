@@ -40,11 +40,8 @@ namespace ET.Client
                 self.ShowActivityConfigs.Add(activityConfigs[i]);
             }
 
-            using (zstring.Block())
-            {
-                self.E_MyCombatText.GetComponent<Text>().text =
-                        zstring.Format("我的战力：{0}", self.Root().GetComponent<UserInfoComponentC>().UserInfo.Combat);
-            }
+            self.E_MyCombatText.GetComponent<Text>().text =
+                    string.Format("我的战力：{0}", self.Root().GetComponent<UserInfoComponentC>().UserInfo.Combat);
 
             self.AddUIScrollItems(ref self.ScrollItemZhanQuCombatItems, self.ShowActivityConfigs.Count);
             self.E_ZhanQuCombatItemsLoopVerticalScrollRect.SetVisible(true, self.ShowActivityConfigs.Count);

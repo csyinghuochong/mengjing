@@ -84,10 +84,7 @@ namespace ET.Client
             CellGenerateConfig cellGenerateConfig = CellGenerateConfigCategory.Instance.Get(levelId);
             self.View.E_LevelNameText.text = cellGenerateConfig.ChapterName;
             self.View.E_LevelDesText.text = cellGenerateConfig.ChapterDes;
-            using (zstring.Block())
-            {
-                self.View.E_EnterLevelText.text = zstring.Format("进入等级：{0}", cellGenerateConfig.EnterLv);
-            }
+            self.View.E_EnterLevelText.text = string.Format("进入等级：{0}", cellGenerateConfig.EnterLv);
         }
 
         private static bool CanOpen(this DlgCellChapterSelect self, int chapterId)
@@ -169,10 +166,7 @@ namespace ET.Client
                 self.View.EG_MapPanelRectTransform.gameObject.SetActive(false);
 
                 UserInfo userinfo = self.Root().GetComponent<UserInfoComponentC>().UserInfo;
-                using (zstring.Block())
-                {
-                    self.OnNanDu_Button(PlayerPrefsHelp.GetChapterDifficulty(zstring.Format("{0}{1}", userinfo.UserId, self.ChapterId)));
-                }
+                self.OnNanDu_Button(PlayerPrefsHelp.GetChapterDifficulty(string.Format("{0}{1}", userinfo.UserId, self.ChapterId)));
 
                 self.View.EG_LevelPanelRectTransform.gameObject.SetActive(true);
                 self.View.E_CloseButton.gameObject.SetActive(false);
@@ -231,10 +225,7 @@ namespace ET.Client
             }
 
             UserInfo userinfo = self.Root().GetComponent<UserInfoComponentC>().UserInfo;
-            using (zstring.Block())
-            {
-                PlayerPrefsHelp.SetChapterDifficulty(zstring.Format("{0}{1}", userinfo.UserId, self.ChapterId), diff);
-            }
+            PlayerPrefsHelp.SetChapterDifficulty(string.Format("{0}{1}", userinfo.UserId, self.ChapterId), diff);
         }
 
         public static async ETTask OnEnterMapButtonClick(this DlgCellChapterSelect self)

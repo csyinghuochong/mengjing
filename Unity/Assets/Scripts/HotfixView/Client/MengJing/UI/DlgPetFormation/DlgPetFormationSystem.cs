@@ -38,10 +38,7 @@ namespace ET.Client
                 number += (pets[i] != 0 ? 1 : 0);
             }
 
-            using (zstring.Block())
-            {
-                self.View.E_TextNumberText.text = zstring.Format("阵容限制：{0}/{1}", number, self.PetNumberLimit);
-            }
+            self.View.E_TextNumberText.text = string.Format("阵容限制：{0}/{1}", number, self.PetNumberLimit);
         }
 
         public static void UpdateFighting(this DlgPetFormation self, int sceneType)

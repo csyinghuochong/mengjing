@@ -530,10 +530,7 @@ namespace ET.Client
                         }
                     }
 
-                    using (zstring.Block())
-                    {
-                        scrollItemPetbarSetSkillItem.E_LvText.text = zstring.Format("{0}级激活", lv);
-                    }
+                    scrollItemPetbarSetSkillItem.E_LvText.text = string.Format("{0}级激活", lv);
                 }
 
                 // 被动技能不能拖

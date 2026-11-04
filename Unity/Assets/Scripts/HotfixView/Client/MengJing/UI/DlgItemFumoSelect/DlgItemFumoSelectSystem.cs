@@ -92,7 +92,7 @@ namespace ET.Client
                 string equipfumo = ItemViewHelp.GetFumpProDesc(equipinfo.FumoProLists);
                 using (zstring.Block())
                 {
-                    string fumopro = zstring.Format("当前附魔属性<color=#BEFF34>{0}</color> \n是否覆盖已有属性\n{1}\n此附魔道具已消耗", equipfumo, itemfumo);
+                    string fumopro = string.Format("当前附魔属性<color=#BEFF34>{0}</color> \n是否覆盖已有属性\n{1}\n此附魔道具已消耗", equipfumo, itemfumo);
                     BagClientNetHelper.SendFumoUse(self.Root(), self.FumoItemInfo, hideProLists).Coroutine();
                     PopupTipHelp.OpenPopupTip(self.Root(), "装备附魔", fumopro, async () =>
                     {

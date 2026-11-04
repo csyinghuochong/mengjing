@@ -21,10 +21,7 @@
 
             self.Day = day;
 
-            using (zstring.Block())
-            {
-                self.E_DayTextText.text = zstring.Format("第{0}天", day + 1);
-            }
+            self.E_DayTextText.text = string.Format("第{0}天", day + 1);
 
             ItemConfig itemConfig = ItemConfigCategory.Instance.Get(int.Parse(ConfigData.WelfareInvestList[day].Value.Split(';')[0]));
 
@@ -33,10 +30,7 @@
             bagInfo.ItemNum = 1;
             self.ES_CommonItem.UpdateItem(bagInfo, ItemOperateEnum.None);
 
-            using (zstring.Block())
-            {
-                self.E_InvestTextText.text = zstring.Format("投资{0}金币", ConfigData.WelfareInvestList[day].KeyId);
-            }
+            self.E_InvestTextText.text = string.Format("投资{0}金币", ConfigData.WelfareInvestList[day].KeyId);
 
             if (self.Root().GetComponent<UserInfoComponentC>().UserInfo.WelfareInvestList.Contains(day))
             {

@@ -103,10 +103,7 @@ namespace ET.Client
             int id = petComponentC.PetZhuangJiaList[self.Position];
             PetZhuangJiaConfig petZhuangJiaConfig = PetZhuangJiaConfigCategory.Instance.Get(id);
             self.E_NameText.text = petZhuangJiaConfig.Name;
-            using (zstring.Block())
-            {
-                self.E_NowLvText.text = zstring.Format("当前等级：{0}", petZhuangJiaConfig.Lv);
-            }
+            self.E_NowLvText.text = string.Format("当前等级：{0}", petZhuangJiaConfig.Lv);
 
             CommonViewHelper.DestoryChild(self.EG_ProListRectTransform.gameObject);
             if (!CommonHelp.IfNull(petZhuangJiaConfig.PropreAdd))

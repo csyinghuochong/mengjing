@@ -94,10 +94,7 @@ namespace ET.Client
 
             if (response.Error == 0)
             {
-                using (zstring.Block())
-                {
-                    self.View.E_Text_OnLineNumberText.text = zstring.Format("玩家:{0}机器人:{1}", response.OnLineNumber, response.OnLineRobot);
-                }
+                self.View.E_Text_OnLineNumberText.text = string.Format("玩家:{0}机器人:{1}", response.OnLineNumber, response.OnLineRobot);
             }
             else
             {

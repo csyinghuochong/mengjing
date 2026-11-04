@@ -32,11 +32,8 @@ namespace ET.Client
             self.E_TextTaskDescText.text = taskConfig.TaskDes;
 
             taskPro.taskTargetNum_1 = taskPro.taskTargetNum_1 > taskConfig.TargetValue[0] ? taskConfig.TargetValue[0] : taskPro.taskTargetNum_1;
-            using (zstring.Block())
-            {
-                self.E_TextTaskProgressText.text = zstring.Format("{0}: {1}/{2}", LanguageComponent.Instance.LoadLocalization("进度值"),
-                    taskPro.taskTargetNum_1, taskConfig.TargetValue[0]);
-            }
+            self.E_TextTaskProgressText.text = string.Format("{0}: {1}/{2}", LanguageComponent.Instance.LoadLocalization("进度值"),
+                taskPro.taskTargetNum_1, taskConfig.TargetValue[0]);
 
             if (!string.IsNullOrEmpty(taskConfig.TaskIcon))
             {
@@ -45,12 +42,9 @@ namespace ET.Client
                 self.E_ImageIconImage.sprite = sp;
             }
 
-            using (zstring.Block())
-            {
-                self.E_ItemNumberText.text = zstring.Format(" +{0}", taskConfig.TaskCoin);
-                self.E_TextHuoyueValueText.text =
-                        zstring.Format("{0} +{1}", LanguageComponent.Instance.LoadLocalization("活跃度"), taskConfig.EveryTaskRewardNum);
-            }
+            self.E_ItemNumberText.text = string.Format(" +{0}", taskConfig.TaskCoin);
+            self.E_TextHuoyueValueText.text =
+                    string.Format("{0} +{1}", LanguageComponent.Instance.LoadLocalization("活跃度"), taskConfig.EveryTaskRewardNum);
 
             self.E_ButtonCompleteButton.gameObject.SetActive(taskPro.taskStatus == (int)TaskStatuEnum.Commited);
             self.E_ButtonReceiveButton.gameObject.SetActive(taskPro.taskStatus != (int)TaskStatuEnum.Commited);

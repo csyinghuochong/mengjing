@@ -191,10 +191,7 @@ namespace ET.Client
             }
 
             int gailv = CommonHelp.GetZhuPuType2_GaiLv(self.MonsterId,self.BabyType , self.ItemId, 1);
-            using (zstring.Block())
-            {
-                self.View.E_TextGaiLvText.text = zstring.Format("抓捕成功率： {0}%", gailv * 0.01f);
-            }
+            self.View.E_TextGaiLvText.text = string.Format("抓捕成功率： {0}%", (gailv * 0.01f).ToString("0.000"));
         }
         
         #endregion
@@ -208,10 +205,7 @@ namespace ET.Client
             }
 
             int gailv = CommonHelp.GetZhuPuType1_GaiLv(self.MonsterId, self.ItemId, 1);
-            using (zstring.Block())
-            {
-                self.View.E_TextGaiLvText.text = zstring.Format("抓捕成功率： {0}%", gailv * 0.01f);
-            }
+            self.View.E_TextGaiLvText.text = string.Format("抓捕成功率： {0}%", (gailv * 0.01f).ToString("0.000"));
         }
         
         public static void InitType1_Itemlist(this DlgZhuaPu self)

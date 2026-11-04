@@ -103,18 +103,12 @@ namespace ET.Client
                     taskPro.taskID = tasks[i];
                     taskPro.taskTargetNum_1 = taskConfig.TargetValue[0];
                     taskPro.taskStatus = (int)TaskStatuEnum.Commited;
-                    using (zstring.Block())
-                    {
-                        Log.Debug(zstring.Format("已完成的任务 {0}", tasks[i]));
-                    }
+                    Log.Debug(string.Format("已完成的任务 {0}", tasks[i]));
                 }
 
                 if (taskPro == null)
                 {
-                    using (zstring.Block())
-                    {
-                        Log.Error(zstring.Format("未领取的任务 {0}", tasks[i]));
-                    }
+                    Log.Error(string.Format("未领取的任务 {0}", tasks[i]));
 
                     taskPro = TaskPro.Create();
                     taskPro.taskID = tasks[i];
@@ -133,10 +127,7 @@ namespace ET.Client
             self.AddUIScrollItems(ref self.ScrollItemWelfareTaskItems, self.ShowTaskPros.Count);
             self.E_WelfareTaskItemsLoopVerticalScrollRect.SetVisible(true, self.ShowTaskPros.Count);
 
-            using (zstring.Block())
-            {
-                self.E_CompletenessTextText.text = zstring.Format("当天完成度:{0}/{1}", commited, tasks.Count);
-            }
+            self.E_CompletenessTextText.text = string.Format("当天完成度:{0}/{1}", commited, tasks.Count);
 
             self.ES_RewardList.Refresh(ConfigData.WelfareTaskReward[day]);
             if (self.Root().GetComponent<UserInfoComponentC>().UserInfo.WelfareTaskRewards.Contains(day))

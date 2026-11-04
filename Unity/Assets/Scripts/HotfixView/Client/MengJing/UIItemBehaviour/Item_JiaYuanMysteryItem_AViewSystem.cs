@@ -98,10 +98,7 @@ namespace ET.Client
             else
             {
                 self.E_Text_TipText.gameObject.SetActive(true);
-                using (zstring.Block())
-                {
-                    self.E_Text_TipText.text = zstring.Format("家园{0}级开启", mysteryConfig.JiaYuanLv);
-                }
+                self.E_Text_TipText.text = string.Format("家园{0}级开启", mysteryConfig.JiaYuanLv);
 
                 Material mat = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Material>(ABPathHelper.GetMaterialPath("UI_Hui"));
                 self.ES_CommonItem.E_ItemIconImage.material = mat;

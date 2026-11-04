@@ -133,10 +133,7 @@ namespace ET.Client
 
             if (message.BoxIndex < 0 || message.BoxIndex >= self.RewardUIList.Count)
             {
-                using (zstring.Block())
-                {
-                    Log.Error(zstring.Format("message.BoxIndex : {0}", message.BoxIndex));
-                }
+                Log.Error(string.Format("message.BoxIndex : {0}", message.BoxIndex));
 
                 return;
             }

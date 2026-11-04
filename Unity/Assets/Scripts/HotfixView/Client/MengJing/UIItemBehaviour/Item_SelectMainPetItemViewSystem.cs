@@ -29,10 +29,7 @@ namespace ET.Client
             Sprite sprite = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
             self.E_IconImage.sprite = sprite;
             self.E_NameText.text = rolePetInfo.PetName;
-            using (zstring.Block())
-            {
-                self.E_LvText.text = zstring.Format("{0}级", rolePetInfo.PetLv);
-            }
+            self.E_LvText.text = string.Format("{0}级", rolePetInfo.PetLv);
         }
 
         private static void OnTouch(this Scroll_Item_SelectMainPetItem self)

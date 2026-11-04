@@ -63,10 +63,7 @@ namespace ET.Client
 
             //显示人口
             self.E_MonsterNumberTextText.text = battleSummonConfig.MonsterNumber.ToString();
-            using (zstring.Block())
-            {
-                self.E_CostTextText.text = zstring.Format("{0}金币", self.CostGold);
-            }
+            self.E_CostTextText.text = string.Format("{0}金币", self.CostGold);
         }
 
         public static void UpdateUI(this Scroll_Item_BattleRecruitItem self, long nowTime)

@@ -51,10 +51,7 @@ namespace ET.Client
                 TeamPlayerInfo teamPlayerInfo = teamInfo.PlayerList[i];
                 self.ImagePlayerList[i].SetActive(true);
                 self.ImagePlayerNullList[i].SetActive(false);
-                using (zstring.Block())
-                {
-                    self.ImagePlayerList[i].transform.Find("Text_Level").GetComponent<Text>().text = zstring.Format("{0}级", teamPlayerInfo.PlayerLv);
-                }
+                self.ImagePlayerList[i].transform.Find("Text_Level").GetComponent<Text>().text = string.Format("{0}级", teamPlayerInfo.PlayerLv);
 
                 self.ImagePlayerList[i].transform.Find("ImageMask/ImageHead").GetComponent<Image>().sprite = self.Root()
                         .GetComponent<ResourcesLoaderComponent>()
@@ -65,10 +62,7 @@ namespace ET.Client
             {
                 case MapTypeEnum.TeamDungeon:
                     SceneConfig teamDungeonConfig = SceneConfigCategory.Instance.Get(teamInfo.SceneId);
-                    using (zstring.Block())
-                    {
-                        self.E_Text_ConditionText.text = zstring.Format("进入条件: {0}级", teamDungeonConfig.EnterLv);
-                    }
+                    self.E_Text_ConditionText.text = string.Format("进入条件: {0}级", teamDungeonConfig.EnterLv);
 
                     string addStr = "";
 
@@ -86,18 +80,12 @@ namespace ET.Client
                         addStr = "(深渊模式)";
                     }
 
-                    using (zstring.Block())
-                    {
-                        self.E_Text_NameText.text = zstring.Format("{0}{1}", teamDungeonConfig.Name, addStr);
-                        self.E_Text_TuijianText.text = zstring.Format("推荐等级： {0}-{1}级", teamDungeonConfig.TuiJianLv[0], teamDungeonConfig.TuiJianLv[1]);
-                    }
+                    self.E_Text_NameText.text = string.Format("{0}{1}", teamDungeonConfig.Name, addStr);
+                    self.E_Text_TuijianText.text = string.Format("推荐等级： {0}-{1}级", teamDungeonConfig.TuiJianLv[0], teamDungeonConfig.TuiJianLv[1]);
                     break;
                 case MapTypeEnum.DragonDungeon:
                     CellGenerateConfig cellGenerateConfig = CellGenerateConfigCategory.Instance.Get(teamInfo.SceneId);
-                    using (zstring.Block())
-                    {
-                        self.E_Text_ConditionText.text = zstring.Format("进入条件: {0}级", cellGenerateConfig.EnterLv);
-                    }
+                    self.E_Text_ConditionText.text = string.Format("进入条件: {0}级", cellGenerateConfig.EnterLv);
 
                     addStr = "";
 
@@ -119,11 +107,8 @@ namespace ET.Client
                     Sprite sp = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
                     self.E_ImageIcon.sprite = sp;
                     
-                    using (zstring.Block())
-                    {
-                        self.E_Text_NameText.text = zstring.Format("{0}{1}", cellGenerateConfig.ChapterName, addStr);
-                        self.E_Text_TuijianText.text = zstring.Format("推荐等级： {0}-{1}级", cellGenerateConfig.EnterLv, cellGenerateConfig.EnterLv);
-                    }
+                    self.E_Text_NameText.text = string.Format("{0}{1}", cellGenerateConfig.ChapterName, addStr);
+                    self.E_Text_TuijianText.text = string.Format("推荐等级： {0}-{1}级", cellGenerateConfig.EnterLv, cellGenerateConfig.EnterLv);
                     break;
                 default:
                                        

@@ -40,11 +40,8 @@ namespace ET.Client
             string costitem = ConfigData.PetOpenCangKu[self.Index - 1];
 
             string costdesc = CommonViewHelper.GetNeedItemDesc(costitem);
-            using (zstring.Block())
-            {
-                PopupTipHelp.OpenPopupTip(self.Root(), "宠物仓库", zstring.Format("是否花费{0}开启宠物仓库?", costdesc),
-                    () => { self.RequestOpenCangKu().Coroutine(); }, null).Coroutine();
-            }
+            PopupTipHelp.OpenPopupTip(self.Root(), "宠物仓库", string.Format("是否花费{0}开启宠物仓库?", costdesc),
+                () => { self.RequestOpenCangKu().Coroutine(); }, null).Coroutine();
         }
 
         public static async ETTask RequestOpenCangKu(this Scroll_Item_PetCangKuDefend self)
@@ -121,10 +118,7 @@ namespace ET.Client
             if (petNum < index || !petComponent.PetCangKuOpen.Contains(index - 1))
             {
                 int openlv = PetHelper.GetCangKuOpenLv(index);
-                using (zstring.Block())
-                {
-                    self.E_Text_NameText.text = zstring.Format("{0}级开启", JiaYuanConfigCategory.Instance.Get(openlv).Lv);
-                }
+                self.E_Text_NameText.text = string.Format("{0}级开启", JiaYuanConfigCategory.Instance.Get(openlv).Lv);
 
                 self.E_ButtonOpenButton.gameObject.SetActive(true);
                 self.E_ButtonQuHuiButton.gameObject.SetActive(false);

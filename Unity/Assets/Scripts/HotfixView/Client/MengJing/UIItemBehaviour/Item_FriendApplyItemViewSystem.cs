@@ -29,10 +29,7 @@ namespace ET.Client
                 self.E_PlayerOnLineText.color = new Color(0.62f, 0.62f, 0.62f);
             }
 
-            using (zstring.Block())
-            {
-                self.E_PlayerLevelText.text = zstring.Format("等级:{0}", friendInfo.PlayerLevel);
-            }
+            self.E_PlayerLevelText.text = string.Format("等级:{0}", friendInfo.PlayerLevel);
 
             self.E_PlayerNameText.text = friendInfo.PlayerName;
             self.E_PlayerOccText.text = OccupationConfigCategory.Instance.Get(friendInfo.Occ).OccupationName;

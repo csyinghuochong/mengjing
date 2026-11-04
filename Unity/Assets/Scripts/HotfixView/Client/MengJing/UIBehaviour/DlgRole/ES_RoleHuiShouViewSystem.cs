@@ -168,10 +168,7 @@ namespace ET.Client
         private static async ETTask OnPointerDown(this ES_RoleHuiShou self, ItemInfo binfo, PointerEventData pdata)
         {
             self.IsHoldDown = true;
-            using (zstring.Block())
-            {
-                EventSystem.Instance.Publish(self.Root(), new HuiShouSelect() { DataParamString = zstring.Format("1_{0}", binfo.BagInfoID) });
-            }
+            EventSystem.Instance.Publish(self.Root(), new HuiShouSelect() { DataParamString = string.Format("1_{0}", binfo.BagInfoID) });
 
             await self.Root().GetComponent<TimerComponent>().WaitAsync(500);
             if (!self.IsHoldDown)
@@ -303,64 +300,61 @@ namespace ET.Client
 
         private static void OnHuiShouButton(this ES_RoleHuiShou self)
         {
-            using (zstring.Block())
+            List<long> huishouList = new List<long>();
+            string tip = "";
+            bool petHeXin8 = false;
+            for (int i = 0; i < self.HuiShouInfos.Length; i++)
             {
-                List<long> huishouList = new List<long>();
-                zstring tip = "";
-                bool petHeXin8 = false;
-                for (int i = 0; i < self.HuiShouInfos.Length; i++)
+                if (self.HuiShouInfos[i] != null)
                 {
-                    if (self.HuiShouInfos[i] != null)
+                    ItemConfig itemConfig = ItemConfigCategory.Instance.Get(self.HuiShouInfos[i].ItemID);
+                    string gemStr = self.HuiShouInfos[i].GemIDNew;
+                    string[] gem = gemStr.Split('_');
+                    for (int j = 0; j < gem.Length; j++)
                     {
-                        ItemConfig itemConfig = ItemConfigCategory.Instance.Get(self.HuiShouInfos[i].ItemID);
-                        string gemStr = self.HuiShouInfos[i].GemIDNew;
-                        string[] gem = gemStr.Split('_');
-                        for (int j = 0; j < gem.Length; j++)
+                        if (gem[j] != "0")
                         {
-                            if (gem[j] != "0")
-                            {
-                                tip += " ";
-                                tip += ItemConfigCategory.Instance.Get(self.HuiShouInfos[i].ItemID).ItemName;
-                                break;
-                            }
+                            tip += " ";
+                            tip += ItemConfigCategory.Instance.Get(self.HuiShouInfos[i].ItemID).ItemName;
+                            break;
                         }
-
-                        if (itemConfig.ItemType == ItemTypeEnum.PetHeXin && itemConfig.UseLv >= 8)
-                        {
-                            petHeXin8 = true;
-                        }
-
-                        huishouList.Add(self.HuiShouInfos[i].BagInfoID);
                     }
-                }
 
-                if (huishouList.Count == 0)
-                {
-                    return;
-                }
-
-                if (tip != "")
-                {
-                    tip += " 中镶嵌宝石，分解会导致宝石消失!\n";
-                }
-
-                if (petHeXin8)
-                {
-                    tip += "请问确实需要分解高级的宠物之核嘛？";
-                }
-
-                if (tip != "")
-                {
-                    PopupTipHelp.OpenPopupTip(self.Root(), "分解", tip, async () =>
+                    if (itemConfig.ItemType == ItemTypeEnum.PetHeXin && itemConfig.UseLv >= 8)
                     {
-                        await BagClientNetHelper.RequestHuiShou(self.Root(), huishouList);
-                        FlyTipComponent.Instance.ShowFlyTip("分解成功");
-                    }, () => { }).Coroutine();
+                        petHeXin8 = true;
+                    }
+
+                    huishouList.Add(self.HuiShouInfos[i].BagInfoID);
                 }
-                else
+            }
+
+            if (huishouList.Count == 0)
+            {
+                return;
+            }
+
+            if (tip != "")
+            {
+                tip += " 中镶嵌宝石，分解会导致宝石消失!\n";
+            }
+
+            if (petHeXin8)
+            {
+                tip += "请问确实需要分解高级的宠物之核嘛？";
+            }
+
+            if (tip != "")
+            {
+                PopupTipHelp.OpenPopupTip(self.Root(), "分解", tip, async () =>
                 {
-                    BagClientNetHelper.RequestHuiShou(self.Root(), huishouList).Coroutine();
-                }
+                    await BagClientNetHelper.RequestHuiShou(self.Root(), huishouList);
+                    FlyTipComponent.Instance.ShowFlyTip("分解成功");
+                }, () => { }).Coroutine();
+            }
+            else
+            {
+                BagClientNetHelper.RequestHuiShou(self.Root(), huishouList).Coroutine();
             }
         }
     }

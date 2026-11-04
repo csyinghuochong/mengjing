@@ -116,10 +116,7 @@ namespace ET.Client
                     self.ImageMood_List[i].SetActive(i < ET.JiaYuanHelper.GetPetMoodStar(jiaYuanPet.MoodValue));
                 }
 
-                using (zstring.Block())
-                {
-                    self.E_Text_LevelText.text = zstring.Format("等级：{0}", rolePetInfo.PetLv);
-                }
+                self.E_Text_LevelText.text = string.Format("等级：{0}", rolePetInfo.PetLv);
 
                 self.E_Text_NameText.text = rolePetInfo.PetName;
 
@@ -130,19 +127,13 @@ namespace ET.Client
                 self.E_ImagePetIconImage.sprite = sp;
 
                 long walkTime = jiaYuanPet.StartTime > 0 ? TimeHelper.ServerNow() - jiaYuanPet.StartTime : 0;
-                using (zstring.Block())
-                {
-                    self.E_Text_Tip_121Text.text = zstring.Format("已经散步:{0}", TimeHelper.ShowLeftTime(walkTime));
-                }
+                self.E_Text_Tip_121Text.text = string.Format("已经散步:{0}", TimeHelper.ShowLeftTime(walkTime));
 
                 self.E_Button_WalkButton.gameObject.SetActive(self.RolePetInfo.PetStatus == 0);
                 self.E_Button_StopButton.gameObject.SetActive(self.RolePetInfo.PetStatus == 2);
 
-                using (zstring.Block())
-                {
-                    self.E_Text_TotalExpHourText.text =
-                            zstring.Format("{0}/小时", CommonHelp.GetJiaYuanPetExp(rolePetInfo.PetLv, jiaYuanPet.MoodValue));
-                }
+                self.E_Text_TotalExpHourText.text =
+                        string.Format("{0}/小时", CommonHelp.GetJiaYuanPetExp(rolePetInfo.PetLv, jiaYuanPet.MoodValue));
             }
         }
     }

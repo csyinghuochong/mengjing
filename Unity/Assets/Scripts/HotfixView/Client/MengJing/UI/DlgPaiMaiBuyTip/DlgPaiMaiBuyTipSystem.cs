@@ -33,11 +33,8 @@ namespace ET.Client
             self.View.ES_CommonItem.UpdateItem(itemInfo, ItemOperateEnum.None);
             self.BuyNum = 1;
             self.View.E_Lab_RmbNumInputField.text = self.BuyNum.ToString();
-            using (zstring.Block())
-            {
-                self.View.E_UnitPriceTextText.text = zstring.Format("单价：{0}", self.PaiMaiItemInfo.Price);
-                self.View.E_TotalPriceTextText.text = zstring.Format("总价：{0}", self.PaiMaiItemInfo.Price * self.BuyNum);
-            }
+            self.View.E_UnitPriceTextText.text = string.Format("单价：{0}", self.PaiMaiItemInfo.Price);
+            self.View.E_TotalPriceTextText.text = string.Format("总价：{0}", self.PaiMaiItemInfo.Price * self.BuyNum);
         }
 
         public static void OnClickChangeBuyNum(this DlgPaiMaiBuyTip self, int num)
@@ -54,10 +51,7 @@ namespace ET.Client
             }
 
             self.View.E_Lab_RmbNumInputField.text = self.BuyNum.ToString();
-            using (zstring.Block())
-            {
-                self.View.E_TotalPriceTextText.text = zstring.Format("总价：{0}", self.PaiMaiItemInfo.Price * self.BuyNum);
-            }
+            self.View.E_TotalPriceTextText.text = string.Format("总价：{0}", self.PaiMaiItemInfo.Price * self.BuyNum);
         }
 
         public static async ETTask OnBtn_BuyButton(this DlgPaiMaiBuyTip self)

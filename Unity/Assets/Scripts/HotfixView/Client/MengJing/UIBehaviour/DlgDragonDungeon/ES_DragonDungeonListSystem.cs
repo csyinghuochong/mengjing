@@ -68,17 +68,11 @@ namespace ET.Client
             int totalTimes = GlobalValueConfigCategory.Instance.MaxTeamDungeonsPerDay;
             int times = UnitHelper.GetMyUnitFromClientScene(self.Root()).GetTeamDungeonTimes();
             self.E_Text_LeftTimeText.gameObject.SetActive(true);
-            using (zstring.Block())
-            {
-                self.E_Text_LeftTimeText.text = zstring.Format("副本次数：{0}/{1}", totalTimes - times, totalTimes);
-            }
+            self.E_Text_LeftTimeText.text = string.Format("副本次数：{0}/{1}", totalTimes - times, totalTimes);
 
             totalTimes = GlobalValueConfigCategory.Instance.MaxDailyXieZhuFubens;
             times = UnitHelper.GetMyUnitFromClientScene(self.Root()).GetTeamDungeonXieZhu();
-            using (zstring.Block())
-            {
-                self.E_Text_XieZhuNumText.text = zstring.Format("帮助次数：{0}/{1}", totalTimes - times, totalTimes);
-            }
+            self.E_Text_XieZhuNumText.text = string.Format("帮助次数：{0}/{1}", totalTimes - times, totalTimes);
         }
     }
 

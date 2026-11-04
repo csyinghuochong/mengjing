@@ -29,17 +29,14 @@ namespace ET.Client
             if (taskPro.taskStatus == (int)TaskStatuEnum.Completed)
             {
                 self.E_TaskTargetDesText.color = Color.green;
-                using (zstring.Block())
+                if (taskConfig.TargetType == TaskTargetType.LookingFor_3)
                 {
-                    if (taskConfig.TargetType == TaskTargetType.LookingFor_3)
-                    {
-                        self.E_TaskTargetDesText.text = self.E_TaskTargetDesText.text;
-                    }
-                    else
-                    {
-                        self.E_TaskTargetDesText.text = zstring.Format("{0}({1})", self.E_TaskTargetDesText.text,
-                            LanguageComponent.Instance.LoadLocalization("已完成"));
-                    }
+                    self.E_TaskTargetDesText.text = self.E_TaskTargetDesText.text;
+                }
+                else
+                {
+                    self.E_TaskTargetDesText.text = string.Format("{0}({1})", self.E_TaskTargetDesText.text,
+                        LanguageComponent.Instance.LoadLocalization("已完成"));
                 }
             }
             else

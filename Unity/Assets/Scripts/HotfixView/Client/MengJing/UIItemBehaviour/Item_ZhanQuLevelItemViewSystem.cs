@@ -43,11 +43,8 @@
 
             leftNumber = int.Parse(activityInfo.Par_2) - receiveNum;
 
-            using (zstring.Block())
-            {
-                self.E_TextLeftText.text = zstring.Format("{0}/{1}", leftNumber, activityInfo.Par_2);
-                self.E_Text_levelText.text = zstring.Format("等级达到{0}级", activityInfo.Par_1);
-            }
+            self.E_TextLeftText.text = string.Format("{0}/{1}", leftNumber, activityInfo.Par_2);
+            self.E_Text_levelText.text = string.Format("等级达到{0}级", activityInfo.Par_1);
 
             self.E_Img_LodingValue.fillAmount = (float)leftNumber / int.Parse(activityInfo.Par_2);  
             self.EG_YiLingQuSetRectTransform.gameObject.SetActive(activityComponent.ZhanQuReceiveIds.Contains(activityInfo.Id) && leftNumber > 0);

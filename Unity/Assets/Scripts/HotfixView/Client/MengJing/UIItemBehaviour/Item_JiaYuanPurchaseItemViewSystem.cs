@@ -75,10 +75,7 @@ namespace ET.Client
             self.ES_CommonItem.UpdateItem(bagInfo, ItemOperateEnum.None);
             self.ES_RewardList.Refresh(equipMakeConfig.NeedItems);
 
-            using (zstring.Block())
-            {
-                self.E_Text_PriceText.text = zstring.Format("资金:{0}", jiaYuanPurchaseItem.BuyZiJin.ToString());
-            }
+            self.E_Text_PriceText.text = string.Format("资金:{0}", jiaYuanPurchaseItem.BuyZiJin.ToString());
 
             self.UpdateLeftTime();
         }

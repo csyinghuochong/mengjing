@@ -44,10 +44,7 @@ namespace ET.Client
         
         public static void OnUpdateUI(this Scroll_Item_RankRewardItem self, RankRewardConfig rankRewardConfig)
         {
-            using (zstring.Block())
-            {
-                self.E_Text_RankText.text = zstring.Format("{0}-{1}名", rankRewardConfig.NeedPoint[0], rankRewardConfig.NeedPoint[1]);
-            }
+            self.E_Text_RankText.text = string.Format("{0}-{1}名", rankRewardConfig.NeedPoint[0], rankRewardConfig.NeedPoint[1]);
             self.EG_LastNo.gameObject.SetActive(false);
             self.EG_PlayerInfo.gameObject.SetActive(false);
             self.E_Text_RankText.gameObject.SetActive(true);

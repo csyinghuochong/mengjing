@@ -40,13 +40,10 @@ namespace ET.Client
                 CommonViewHelper.SetParent(gameObject, self.View.EG_BuildingListRectTransform.gameObject);
                 ReferenceCollector rc = gameObject.GetComponent<ReferenceCollector>();
                 DateTime dateTime = TimeInfo.Instance.ToDateTime(response.RecordList[i].Time);
-                using (zstring.Block())
-                {
-                    rc.Get<GameObject>("TextContent").GetComponent<Text>().text =
-                            zstring.Format("玩家 <color=#{0}>{1}</color> {2} 出价： <color=#{3}>{4}</color>", CommonHelp.QualityReturnColor(4),
-                                response.RecordList[i].PlayerName, dateTime.ToShortTimeString(), CommonHelp.QualityReturnColor(2),
-                                response.RecordList[i].Price);
-                }
+                rc.Get<GameObject>("TextContent").GetComponent<Text>().text =
+                        string.Format("玩家 <color=#{0}>{1}</color> {2} 出价： <color=#{3}>{4}</color>", CommonHelp.QualityReturnColor(4),
+                            response.RecordList[i].PlayerName, dateTime.ToShortTimeString(), CommonHelp.QualityReturnColor(2),
+                            response.RecordList[i].Price);
             }
         }
     }

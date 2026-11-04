@@ -40,10 +40,7 @@ namespace ET.Client
         public static void OnUpdateCombat(this ES_RoleHead self)
         {
             long combat = self.UserInfoComponent.UserInfo.Combat;
-            using (zstring.Block())
-            {
-                self.E_CombatText.text = zstring.Format("战力: {0}", combat);
-            }
+            self.E_CombatText.text = string.Format("战力: {0}", combat);
         }
 
         public static void OnImagePetHeadIconButton(this ES_RoleHead self)
@@ -83,10 +80,7 @@ namespace ET.Client
             self.E_ImagePetHeadIconImage.sprite = sp;
             self.E_Lab_PetNameText.text = rolePetInfo.PetName;
             Unit pet = self.Root().CurrentScene().GetComponent<UnitComponent>().Get(rolePetInfo.Id);
-            using (zstring.Block())
-            {
-                self.E_Lab_PetLvText.text = zstring.Format("{0}:{1}", LanguageComponent.Instance.LoadLocalization("等级"), rolePetInfo.PetLv);
-            }
+            self.E_Lab_PetLvText.text = string.Format("{0}:{1}", LanguageComponent.Instance.LoadLocalization("等级"), rolePetInfo.PetLv);
 
             self.OnUpdatePetHP(pet);
         }
@@ -108,11 +102,8 @@ namespace ET.Client
         {
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
             int maxPiLao = unit.GetMaxPiLao();
-            using (zstring.Block())
-            {
-                self.E_RolePiLaoText.text = zstring.Format("{0}{1}/{2}", LanguageComponent.Instance.LoadLocalization("体力:"),
-                    self.UserInfoComponent.UserInfo.PiLao, maxPiLao);
-            }
+            self.E_RolePiLaoText.text = string.Format("{0}{1}/{2}", LanguageComponent.Instance.LoadLocalization("体力:"),
+                self.UserInfoComponent.UserInfo.PiLao, maxPiLao);
 
             self.E_RolePiLaoImgImage.fillAmount = 1f * self.UserInfoComponent.UserInfo.PiLao / maxPiLao;
         }
@@ -125,11 +116,8 @@ namespace ET.Client
             int skillNumber = 1 + numericComponent.GetAsInt(NumericType.MakeType_2) > 0 ? 1 : 0;
             int maxPiLao = unit.GetMaxHuoLi(skillNumber);
 
-            using (zstring.Block())
-            {
-                self.E_RoleHuoLiText.text = zstring.Format("{0}{1}/{2}", LanguageComponent.Instance.LoadLocalization("活力:"),
-                    self.UserInfoComponent.UserInfo.Vitality, maxPiLao);
-            }
+            self.E_RoleHuoLiText.text = string.Format("{0}{1}/{2}", LanguageComponent.Instance.LoadLocalization("活力:"),
+                self.UserInfoComponent.UserInfo.Vitality, maxPiLao);
 
             self.E_RoleHuoLiImgImage.fillAmount = 1f * self.UserInfoComponent.UserInfo.Vitality / maxPiLao;
         }

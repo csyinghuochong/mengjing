@@ -33,18 +33,12 @@
                     taskConfig.TargetType == (int)TaskTargetType.JianDingAttrNumber_43 ||
                     taskConfig.TargetType == (int)TaskTargetType.MakeQulityNumber_29)
                 {
-                    using (zstring.Block())
-                    {
-                        self.E_ProgressTextText.text = zstring.Format("{0}:1/1", LanguageComponent.Instance.LoadLocalization("进度"));
-                    }
+                    self.E_ProgressTextText.text = string.Format("{0}:1/1", LanguageComponent.Instance.LoadLocalization("进度"));
                 }
                 else
                 {
-                    using (zstring.Block())
-                    {
-                        self.E_ProgressTextText.text = zstring.Format("{0}:{1}/{2}", LanguageComponent.Instance.LoadLocalization("进度"),
-                            taskPro.taskTargetNum_1, taskConfig.TargetValue[0]);
-                    }
+                    self.E_ProgressTextText.text = string.Format("{0}:{1}/{2}", LanguageComponent.Instance.LoadLocalization("进度"),
+                        taskPro.taskTargetNum_1, taskConfig.TargetValue[0]);
                 }
 
                 self.E_AcvityedImgImage.gameObject.SetActive(true);
@@ -54,10 +48,7 @@
                 // 进行中
                 if (taskConfig.TargetType == (int)TaskTargetType.GiveItem_10 || taskConfig.TargetType == (int)TaskTargetType.GivePet_25)
                 {
-                    using (zstring.Block())
-                    {
-                        self.E_ProgressTextText.text = zstring.Format("{0}:0/1", LanguageComponent.Instance.LoadLocalization("进度"));
-                    }
+                    self.E_ProgressTextText.text = string.Format("{0}:0/1", LanguageComponent.Instance.LoadLocalization("进度"));
                 }
                 else if (taskConfig.TargetType == (int)TaskTargetType.JianDingAttrNumber_43 ||
                          taskConfig.TargetType == (int)TaskTargetType.TeamDungeonHurt_136 ||
@@ -65,26 +56,17 @@
                 {
                     if (self.TaskPro.taskStatus == (int)TaskStatuEnum.Completed)
                     {
-                        using (zstring.Block())
-                        {
-                            self.E_ProgressTextText.text = zstring.Format("{0}:1/1", LanguageComponent.Instance.LoadLocalization("进度"));
-                        }
+                        self.E_ProgressTextText.text = string.Format("{0}:1/1", LanguageComponent.Instance.LoadLocalization("进度"));
                     }
                     else
                     {
-                        using (zstring.Block())
-                        {
-                            self.E_ProgressTextText.text = zstring.Format("{0}:0/1", LanguageComponent.Instance.LoadLocalization("进度"));
-                        }
+                        self.E_ProgressTextText.text = string.Format("{0}:0/1", LanguageComponent.Instance.LoadLocalization("进度"));
                     }
                 }
                 else
                 {
-                    using (zstring.Block())
-                    {
-                        self.E_ProgressTextText.text = zstring.Format("{0}:{1}/{2}", LanguageComponent.Instance.LoadLocalization("进度"),
-                            self.TaskPro.taskTargetNum_1, taskConfig.TargetValue[0]);
-                    }
+                    self.E_ProgressTextText.text = string.Format("{0}:{1}/{2}", LanguageComponent.Instance.LoadLocalization("进度"),
+                        self.TaskPro.taskTargetNum_1, taskConfig.TargetValue[0]);
                 }
 
                 self.E_AcvityedImgImage.gameObject.SetActive(false);

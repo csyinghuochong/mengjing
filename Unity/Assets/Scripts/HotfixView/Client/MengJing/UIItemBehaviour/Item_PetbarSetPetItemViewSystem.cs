@@ -33,10 +33,7 @@ namespace ET.Client
             Sprite sp = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
             self.E_IconImage.sprite = sp;
             self.E_NameText.text = rolePetInfo.PetName;
-            using (zstring.Block())
-            {
-                self.E_LvText.text = zstring.Format("等级:{0}", rolePetInfo.PetLv);
-            }
+            self.E_LvText.text = string.Format("等级:{0}", rolePetInfo.PetLv);
             self.E_XuanZhongImage.gameObject.SetActive(false);
         }
     }

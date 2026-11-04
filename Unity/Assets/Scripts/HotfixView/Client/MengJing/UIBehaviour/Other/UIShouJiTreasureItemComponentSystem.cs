@@ -44,10 +44,7 @@ namespace ET.Client
             ShouJiItemConfig shouJiItemConfig = ShouJiItemConfigCategory.Instance.Get(self.ShoujiId);
             KeyValuePairInt keyValuePairInt = self.Root().GetComponent<ShoujiComponentC>().GetTreasureInfo(self.ShoujiId);
             int haveNumber = keyValuePairInt != null ? (int)keyValuePairInt.Value : 0;
-            using (zstring.Block())
-            {
-                self.TextNumber.GetComponent<Text>().text = zstring.Format("激活:{0}/{1}", haveNumber, shouJiItemConfig.AcitveNum);
-            }
+            self.TextNumber.GetComponent<Text>().text = string.Format("激活:{0}/{1}", haveNumber, shouJiItemConfig.AcitveNum);
 
             bool actived = haveNumber >= shouJiItemConfig.AcitveNum;
 
@@ -99,10 +96,7 @@ namespace ET.Client
 
             KeyValuePairInt keyValuePairInt = self.Root().GetComponent<ShoujiComponentC>().GetTreasureInfo(shouijId);
             int haveNumber = keyValuePairInt != null ? (int)keyValuePairInt.Value : 0;
-            using (zstring.Block())
-            {
-                self.TextNumber.GetComponent<Text>().text = zstring.Format("激活:{0}/{1}", haveNumber, shouJiItemConfig.AcitveNum);
-            }
+            self.TextNumber.GetComponent<Text>().text = string.Format("激活:{0}/{1}", haveNumber, shouJiItemConfig.AcitveNum);
 
             CommonViewHelper.SetImageGray(self.Root(), self.UIItemComponent.E_ItemIconImage.gameObject, haveNumber == 0);
             CommonViewHelper.SetImageGray(self.Root(), self.UIItemComponent.E_ItemQualityImage.gameObject, haveNumber == 0);

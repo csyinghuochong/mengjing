@@ -35,19 +35,13 @@ namespace ET.Client
             self.OnInitUI(jiaYuanPastureConfig, index);
             self.MysteryItemInfo = mysteryItemInfo;
 
-            using (zstring.Block())
-            {
-                self.E_Text_RenKouText.text = zstring.Format("人口：{0}", jiaYuanPastureConfig.PeopleNum);
-            }
+            self.E_Text_RenKouText.text = string.Format("人口：{0}", jiaYuanPastureConfig.PeopleNum);
 
             self.E_Text_NameText.text = jiaYuanPastureConfig.Name;
             self.E_Text_value2Text.text = jiaYuanPastureConfig.BuyGold.ToString();
 
             int hour = jiaYuanPastureConfig.UpTime[3] / 3600;
-            using (zstring.Block())
-            {
-                self.E_Text_valueText.text = zstring.Format("{0}小时", hour);
-            }
+            self.E_Text_valueText.text = string.Format("{0}小时", hour);
         }
 
         public static async ETTask OnButtonBuy(this Scroll_Item_JiaYuanPastureItem self)
@@ -60,13 +54,10 @@ namespace ET.Client
             }
 
             JiaYuanPastureConfig mysteryConfig = JiaYuanPastureConfigCategory.Instance.Get(self.MysteryItemInfo.MysteryId);
-            using (zstring.Block())
+            if (!self.Root().GetComponent<BagComponentC>().CheckNeedItem(string.Format("13;{0}", mysteryConfig.BuyGold)))
             {
-                if (!self.Root().GetComponent<BagComponentC>().CheckNeedItem(zstring.Format("13;{0}", mysteryConfig.BuyGold)))
-                {
-                    HintHelp.ShowErrorHint(self.Root(), ErrorCode.ERR_HouBiNotEnough);
-                    return;
-                }
+                HintHelp.ShowErrorHint(self.Root(), ErrorCode.ERR_HouBiNotEnough);
+                return;
             }
 
             M2C_JiaYuanPastureBuyResponse response =

@@ -83,10 +83,7 @@ namespace ET.Client
 
             self.ShowSkillList(unit);
             self.View.E_NameTextText.text = MonsterConfigCategory.Instance.Get(unit.ConfigId).MonsterName;
-            using (zstring.Block())
-            {
-                self.View.E_LvTextText.text = zstring.Format("当前等级：{0}", numericComponent.GetAsInt(NumericType.Now_Lv).ToString());
-            }
+            self.View.E_LvTextText.text = string.Format("当前等级：{0}", numericComponent.GetAsInt(NumericType.Now_Lv).ToString());
 
             for (int i = 0; i < self.ShowPropertyList.Count; i++)
             {
@@ -121,17 +118,11 @@ namespace ET.Client
                     float value = numericComponent.GetAsFloat(showList.NumericType) * 100.0f;
                     if (value.ToString().Contains("."))
                     {
-                        using (zstring.Block())
-                        {
-                            rc.Get<GameObject>("Lab_ProTypeValue").GetComponent<Text>().text = zstring.Format("{0}%", value.ToString("F2"));
-                        }
+                        rc.Get<GameObject>("Lab_ProTypeValue").GetComponent<Text>().text = string.Format("{0}%", value.ToString("F2"));
                     }
                     else
                     {
-                        using (zstring.Block())
-                        {
-                            rc.Get<GameObject>("Lab_ProTypeValue").GetComponent<Text>().text = zstring.Format("{0}%", value.ToString());
-                        }
+                        rc.Get<GameObject>("Lab_ProTypeValue").GetComponent<Text>().text = string.Format("{0}%", value.ToString());
                     }
                 }
             }

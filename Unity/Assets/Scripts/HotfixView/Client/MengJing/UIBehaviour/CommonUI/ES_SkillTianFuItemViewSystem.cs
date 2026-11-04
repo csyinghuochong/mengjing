@@ -59,10 +59,7 @@ namespace ET.Client
                     havePre = true;
                 }
 
-                using (zstring.Block())
-                {
-                    self.uiTransform.Find(zstring.Format("Img_line_{0}", i))?.gameObject.SetActive(havePre);
-                }
+                self.uiTransform.Find(string.Format("Img_line_{0}", i))?.gameObject.SetActive(havePre);
             }
 
             int curlv = 0;

@@ -90,13 +90,10 @@ namespace ET.Client
             BattleMessageComponent battleMessageComponent = self.Root().GetComponent<BattleMessageComponent>();
             if (battleMessageComponent.CanShout())
             {
-                using (zstring.Block())
-                {
-                    string text = zstring.Format(" 副本:{0}开启冒险，现邀请你的加入！<color=#B5FF28>点击申请加入</color> <link=team_{1}_{2}_{3}_{4}_{5}></link>。",
-                        SceneConfigCategory.Instance.Get(teamInfo.SceneId).Name, teamInfo.TeamId, teamInfo.SceneId, teamInfo.FubenType,
-                        teamInfo.PlayerList[0].PlayerLv, MapTypeEnum.TeamDungeon);
-                    ChatNetHelper.RequestSendChat(self.Root(), ChannelEnum.Word, text).Coroutine();
-                }
+                string text = string.Format(" 副本:{0}开启冒险，现邀请你的加入！<color=#B5FF28>点击申请加入</color> <link=team_{1}_{2}_{3}_{4}_{5}></link>。",
+                    SceneConfigCategory.Instance.Get(teamInfo.SceneId).Name, teamInfo.TeamId, teamInfo.SceneId, teamInfo.FubenType,
+                    teamInfo.PlayerList[0].PlayerLv, MapTypeEnum.TeamDungeon);
+                ChatNetHelper.RequestSendChat(self.Root(), ChannelEnum.Word, text).Coroutine();
 
                 FlyTipComponent.Instance.ShowFlyTip("已发送！");
             }
@@ -175,12 +172,9 @@ namespace ET.Client
                 addStr = "(深渊模式)";
             }
 
-            using (zstring.Block())
-            {
-                self.E_Lab_FuBenNameText.text = zstring.Format("{0}{1}", sceneConfig.Name, addStr);
-                self.E_Lab_FuBenLvText.text =
-                        zstring.Format("{0}: {1} - 50", LanguageComponent.Instance.LoadLocalization("等级"), sceneConfig.EnterLv);
-            }
+            self.E_Lab_FuBenNameText.text = string.Format("{0}{1}", sceneConfig.Name, addStr);
+            self.E_Lab_FuBenLvText.text =
+                    string.Format("{0}: {1} - 50", LanguageComponent.Instance.LoadLocalization("等级"), sceneConfig.EnterLv);
         }
     }
 }

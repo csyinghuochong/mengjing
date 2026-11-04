@@ -17,10 +17,7 @@ namespace ET.Client
             }
             catch (Exception e)
             {
-                using (zstring.Block())
-                {
-                    Log.Error(zstring.Format("move timer error: {0}\n{1}", self.Id, e.ToString()));
-                }
+                Log.Error(string.Format("move timer error: {0}\n{1}", self.Id, e.ToString()));
             }
         }
     }
@@ -437,10 +434,7 @@ namespace ET.Client
                 self.CurrentMap.transform.Find("Levels").gameObject.SetActive(true);
 
                 UserInfo userinfo = self.Root().GetComponent<UserInfoComponentC>().UserInfo;
-                using (zstring.Block())
-                {
-                    self.OnNanDu_Button(PlayerPrefsHelp.GetChapterDifficulty(zstring.Format("{0}{1}", userinfo.UserId, self.ChapterId)));
-                }
+                self.OnNanDu_Button(PlayerPrefsHelp.GetChapterDifficulty(string.Format("{0}{1}", userinfo.UserId, self.ChapterId)));
                 
                 self.View.EG_MapPanelRectTransform.gameObject.SetActive(false);
                 self.View.EG_LevelPanelRectTransform.gameObject.SetActive(true);
@@ -462,10 +456,7 @@ namespace ET.Client
             self.View.E_LevelNameText.text = dungeonConfig.ChapterName;
             self.View.E_LevelDesText.text = dungeonConfig.ChapterDes;
             
-            using (zstring.Block())
-            {
-                self.View.E_EnterLevelText.text = zstring.Format("进入等级：{0}", dungeonConfig.EnterLv);
-            }
+            self.View.E_EnterLevelText.text = string.Format("进入等级：{0}", dungeonConfig.EnterLv);
 
         }
 
@@ -543,10 +534,7 @@ namespace ET.Client
             }
 
             UserInfo userinfo = self.Root().GetComponent<UserInfoComponentC>().UserInfo;
-            using (zstring.Block())
-            {
-                PlayerPrefsHelp.SetChapterDifficulty(zstring.Format("{0}{1}", userinfo.UserId, self.ChapterId), diff);
-            }
+            PlayerPrefsHelp.SetChapterDifficulty(string.Format("{0}{1}", userinfo.UserId, self.ChapterId), diff);
         }
 
         public static async ETTask OnEnterMapButtonClick(this DlgDungeonMap self)

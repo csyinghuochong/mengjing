@@ -69,11 +69,8 @@ namespace ET.Client
         public static void OnUpdateSelfKill(this DlgBattleMain self)
         {
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
-            using (zstring.Block())
-            {
-                self.View.E_TextVS_KillText.text =
-                        zstring.Format("自身已战胜{0}个玩家", unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.BattleTodayKill));
-            }
+            self.View.E_TextVS_KillText.text =
+                    string.Format("自身已战胜{0}个玩家", unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.BattleTodayKill));
         }
     }
 }

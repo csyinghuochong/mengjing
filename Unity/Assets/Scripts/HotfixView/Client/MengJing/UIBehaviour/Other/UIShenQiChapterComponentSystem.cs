@@ -88,10 +88,7 @@ namespace ET.Client
             }
             else
             {
-                using (zstring.Block())
-                {
-                    self.Text_Name.GetComponent<Text>().text = zstring.Format("第{0}章", chaptet);
-                }
+                self.Text_Name.GetComponent<Text>().text = string.Format("第{0}章", chaptet);
             }
         }
 

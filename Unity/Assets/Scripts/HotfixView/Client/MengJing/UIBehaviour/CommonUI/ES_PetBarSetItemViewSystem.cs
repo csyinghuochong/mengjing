@@ -33,10 +33,7 @@ namespace ET.Client
                 self.E_PetBarSetIconImage.gameObject.SetActive(true);
                 self.E_LockImage.gameObject.SetActive(false);
                 self.E_PetBarSetIconImage.sprite = sp;
-                using (zstring.Block())
-                {
-                    self.E_LvText.text = zstring.Format("等级:{0}", rolePetInfo.PetLv);
-                }
+                self.E_LvText.text = string.Format("等级:{0}", rolePetInfo.PetLv);
             }
             else
             {

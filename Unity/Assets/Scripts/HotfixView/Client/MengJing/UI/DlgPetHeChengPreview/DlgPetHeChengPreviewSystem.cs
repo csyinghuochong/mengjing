@@ -78,22 +78,19 @@ namespace ET.Client
             RolePetInfo rolePetInfoMax = new();
             (rolePetInfoMin, rolePetInfoMax) = PetHelper.GetPetHeChengZiZhiPreview(rolePetA, rolePetB);
 
-            using (zstring.Block())
-            {
-                self.PetZiZhiItemList[0].transform.Find("Text_ZiZhiValue").GetComponent<Text>().text =
-                        zstring.Format("{0}-{1}", rolePetInfoMin.ZiZhi_Hp, rolePetInfoMax.ZiZhi_Hp);
-                self.PetZiZhiItemList[1].transform.Find("Text_ZiZhiValue").GetComponent<Text>().text =
-                        zstring.Format("{0}-{1}", rolePetInfoMin.ZiZhi_Act, rolePetInfoMax.ZiZhi_Act);
-                self.PetZiZhiItemList[2].transform.Find("Text_ZiZhiValue").GetComponent<Text>().text =
-                        zstring.Format("{0}-{1}", rolePetInfoMin.ZiZhi_Def, rolePetInfoMax.ZiZhi_Def);
-                self.PetZiZhiItemList[3].transform.Find("Text_ZiZhiValue").GetComponent<Text>().text =
-                        zstring.Format("{0}-{1}", rolePetInfoMin.ZiZhi_Adf, rolePetInfoMax.ZiZhi_Adf);
-                self.PetZiZhiItemList[4].transform.Find("Text_ZiZhiValue").GetComponent<Text>().text =
-                        zstring.Format("{0}-{1}", rolePetInfoMin.ZiZhi_MageAct, rolePetInfoMax.ZiZhi_MageAct);
-                self.PetZiZhiItemList[5].transform.Find("Text_ZiZhiValue").GetComponent<Text>().text =
-                        zstring.Format("{0}-{1}", CommonViewHelper.ShowFloatValue(rolePetInfoMin.ZiZhi_ChengZhang),
-                            CommonViewHelper.ShowFloatValue(rolePetInfoMax.ZiZhi_ChengZhang));
-            }
+            self.PetZiZhiItemList[0].transform.Find("Text_ZiZhiValue").GetComponent<Text>().text =
+                    string.Format("{0}-{1}", rolePetInfoMin.ZiZhi_Hp, rolePetInfoMax.ZiZhi_Hp);
+            self.PetZiZhiItemList[1].transform.Find("Text_ZiZhiValue").GetComponent<Text>().text =
+                    string.Format("{0}-{1}", rolePetInfoMin.ZiZhi_Act, rolePetInfoMax.ZiZhi_Act);
+            self.PetZiZhiItemList[2].transform.Find("Text_ZiZhiValue").GetComponent<Text>().text =
+                    string.Format("{0}-{1}", rolePetInfoMin.ZiZhi_Def, rolePetInfoMax.ZiZhi_Def);
+            self.PetZiZhiItemList[3].transform.Find("Text_ZiZhiValue").GetComponent<Text>().text =
+                    string.Format("{0}-{1}", rolePetInfoMin.ZiZhi_Adf, rolePetInfoMax.ZiZhi_Adf);
+            self.PetZiZhiItemList[4].transform.Find("Text_ZiZhiValue").GetComponent<Text>().text =
+                    string.Format("{0}-{1}", rolePetInfoMin.ZiZhi_MageAct, rolePetInfoMax.ZiZhi_MageAct);
+            self.PetZiZhiItemList[5].transform.Find("Text_ZiZhiValue").GetComponent<Text>().text =
+                    string.Format("{0}-{1}", CommonViewHelper.ShowFloatValue(rolePetInfoMin.ZiZhi_ChengZhang),
+                        CommonViewHelper.ShowFloatValue(rolePetInfoMax.ZiZhi_ChengZhang));
 
             self.PetZiZhiItemList[0].transform.Find("ImageExpMinValue").GetComponent<Image>().fillAmount =
                     Mathf.Clamp((float)rolePetInfoMin.ZiZhi_Hp / 3000, 0f, 1f);

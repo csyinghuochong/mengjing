@@ -61,11 +61,8 @@ namespace ET.Client
             if (cangkuNumber <= page)
             {
                 string costItems = ET.JiaYuanHelper.GetOpenJiaYuanWarehouse(cangkuNumber);
-                using (zstring.Block())
-                {
-                    PopupTipHelp.OpenPopupTip(self.Root(), "开启仓库", zstring.Format("是否消耗{0}开启一个仓库", CommonViewHelper.GetNeedItemDesc(costItems)),
-                        () => { self.RequestOpenCangKu().Coroutine(); }, null).Coroutine();
-                }
+                PopupTipHelp.OpenPopupTip(self.Root(), "开启仓库", string.Format("是否消耗{0}开启一个仓库", CommonViewHelper.GetNeedItemDesc(costItems)),
+                    () => { self.RequestOpenCangKu().Coroutine(); }, null).Coroutine();
 
                 return false;
             }
@@ -112,13 +109,10 @@ namespace ET.Client
         private static void OnClickImage_Lock(this DlgJiaYuanWarehouse self)
         {
             string costitems = GlobalValueConfigCategory.Instance.Value_83;
-            using (zstring.Block())
-            {
-                PopupTipHelp.OpenPopupTip(self.Root(), "购买格子",
-                    zstring.Format("是否花费{0}购买一个背包格子?", CommonViewHelper.GetNeedItemDesc(costitems)),
-                    () => { },
-                    null).Coroutine();
-            }
+            PopupTipHelp.OpenPopupTip(self.Root(), "购买格子",
+                string.Format("是否花费{0}购买一个背包格子?", CommonViewHelper.GetNeedItemDesc(costitems)),
+                () => { },
+                null).Coroutine();
         }
 
         public static void Refresh(this DlgJiaYuanWarehouse self)

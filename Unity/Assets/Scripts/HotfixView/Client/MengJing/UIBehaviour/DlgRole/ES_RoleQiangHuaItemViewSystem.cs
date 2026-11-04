@@ -60,10 +60,7 @@ namespace ET.Client
 
         public static void OnUpateUI(this ES_RoleQiangHuaItem self, int qianghuaLevel)
         {
-            using (zstring.Block())
-            {
-                self.E_QiangHuaText.text = zstring.Format("共鸣+{0}", qianghuaLevel);
-            }
+            self.E_QiangHuaText.text = string.Format("共鸣+{0}", qianghuaLevel);
         }
     }
 }

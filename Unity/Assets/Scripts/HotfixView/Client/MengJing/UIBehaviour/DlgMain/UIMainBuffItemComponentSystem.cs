@@ -46,10 +46,7 @@ namespace ET.Client
 
             if (self.BuffID == 0)
             {
-                using (zstring.Block())
-                {
-                    Log.Error(zstring.Format("UIMainBuffItemComponent {0}", self.BuffID == 0));
-                }
+                Log.Error(string.Format("UIMainBuffItemComponent {0}", self.BuffID == 0));
 
                 return;
             }

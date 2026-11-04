@@ -33,17 +33,14 @@ namespace ET.Client
             self.View.E_Lab_SkillNameText.text = skillBufConfig.BuffName;
             self.View.E_Lab_SkillDesText.text = skillBufConfig.BuffDescribe;
 
-            using (zstring.Block())
+            self.View.EG_PositionNodeRectTransform.localPosition = vector3 + new Vector3(100, 0f, 0f);
+            if (!string.IsNullOrEmpty(spellcast))
             {
-                self.View.EG_PositionNodeRectTransform.localPosition = vector3 + new Vector3(100, 0f, 0f);
-                if (!string.IsNullOrEmpty(spellcast))
-                {
-                    self.View.E_Lab_SpellcasterText.text = zstring.Format("施法者：{0}", spellcast);
-                }
-                else
-                {
-                    self.View.E_Lab_SpellcasterText.text = "";
-                }
+                self.View.E_Lab_SpellcasterText.text = string.Format("施法者：{0}", spellcast);
+            }
+            else
+            {
+                self.View.E_Lab_SpellcasterText.text = "";
             }
         }
     }

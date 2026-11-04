@@ -43,17 +43,11 @@ namespace ET.Client
             }
             else
             {
-                using (zstring.Block())
-                {
-                    self.E_PropertyTextText.text = zstring.Format("下一级:\n{0}",
-                        ItemViewHelp.GetAttributeDesc(PublicQiangHuaConfigCategory.Instance.Get(publicQiangHuaConfig.NextID).EquipPropreAdd));
-                }
+                self.E_PropertyTextText.text = string.Format("下一级:\n{0}",
+                    ItemViewHelp.GetAttributeDesc(PublicQiangHuaConfigCategory.Instance.Get(publicQiangHuaConfig.NextID).EquipPropreAdd));
             }
 
-            using (zstring.Block())
-            {
-                self.ES_CostList.Refresh(zstring.Format("1;{0}@{1}", publicQiangHuaConfig.CostGold, publicQiangHuaConfig.CostItem));
-            }
+            self.ES_CostList.Refresh(string.Format("1;{0}@{1}", publicQiangHuaConfig.CostGold, publicQiangHuaConfig.CostItem));
         }
 
         public static async ETTask OnUpBtnButton(this ES_UnionBloodStone self)
@@ -78,13 +72,10 @@ namespace ET.Client
             }
 
             BagComponentC bagComponent = self.Root().GetComponent<BagComponentC>();
-            using (zstring.Block())
+            if (!bagComponent.CheckNeedItem(string.Format("1;{0}@{1}", publicQiangHuaConfig.CostGold, publicQiangHuaConfig.CostItem)))
             {
-                if (!bagComponent.CheckNeedItem(zstring.Format("1;{0}@{1}", publicQiangHuaConfig.CostGold, publicQiangHuaConfig.CostItem)))
-                {
-                    FlyTipComponent.Instance.ShowFlyTip("道具不足！");
-                    return;
-                }
+                FlyTipComponent.Instance.ShowFlyTip("道具不足！");
+                return;
             }
 
             M2C_BloodstoneQiangHuaResponse response = await UnionNetHelper.BloodstoneQiangHuaRequest(self.Root());

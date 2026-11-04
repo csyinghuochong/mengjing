@@ -31,10 +31,7 @@ namespace ET.Client
                 self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_RoleXiLianExplain).Coroutine();
             });
 
-            using (zstring.Block())
-            {
-                self.E_NeedDiamondText.text = zstring.Format("x {0}", GlobalValueConfigCategory.Instance.Value_73);
-            }
+            self.E_NeedDiamondText.text = string.Format("x {0}", GlobalValueConfigCategory.Instance.Value_73);
 
             self.EG_XiLianInfoRectTransform.gameObject.SetActive(false);
         }
@@ -965,20 +962,14 @@ namespace ET.Client
             self.E_CostItemIconImage.sprite =
                     resourcesLoaderComponent.LoadAssetSync<Sprite>(ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemIcon, itemCost[0].ToString()));
 
-            using (zstring.Block())
-            {
-                self.E_Text_CostValueText.text = zstring.Format("x {0}", itemCost[1]);
-            }
+            self.E_Text_CostValueText.text = string.Format("x {0}", itemCost[1]);
         }
 
         private static void UpdateCombat(this ES_RoleXiLianShow self)
         {
             long combatChange = self.EquipCombatChangeDic[self.XilianBagInfo.BagInfoID].Item2;
             
-            using (zstring.Block())
-            {
-                self.E_BatAddText.text = zstring.Format("预计战力增长：{0}", combatChange);
-            }
+            self.E_BatAddText.text = string.Format("预计战力增长：{0}", combatChange);
 
             self.E_CombatUpImage.gameObject.SetActive(combatChange > 0);
             self.E_CombatDownImage.gameObject.SetActive(combatChange < 0);

@@ -292,10 +292,7 @@ namespace ET.Client
 
             self.OnUpdateSelectMainPetItem();
 
-            using (zstring.Block())
-            {
-                self.E_SelectMainPetItemNumText.text = zstring.Format("已经选择数量：{0}/{1}", self.SelectMainPets.Count, maxNum);
-            }
+            self.E_SelectMainPetItemNumText.text = string.Format("已经选择数量：{0}/{1}", self.SelectMainPets.Count, maxNum);
         }
 
         private static void OnUpdateSelectMainPetItem(this ES_PetMeleeSet self)
@@ -408,10 +405,7 @@ namespace ET.Client
 
             self.OnUpdateSelectAssistPetItem();
 
-            using (zstring.Block())
-            {
-                self.E_SelectAssistPetItemNumText.text = zstring.Format("已经选择数量：{0}/{1}", self.SelectAssistPets.Count, maxNum);
-            }
+            self.E_SelectAssistPetItemNumText.text = string.Format("已经选择数量：{0}/{1}", self.SelectAssistPets.Count, maxNum);
         }
 
         private static void OnUpdateSelectAssistPetItem(this ES_PetMeleeSet self)
@@ -515,10 +509,7 @@ namespace ET.Client
 
             self.OnUpdateSelectSkillItem();
 
-            using (zstring.Block())
-            {
-                self.E_SelectMagicItemNumText.text = zstring.Format("已经选择数量：{0}/{1}", self.SelectMagics.Count, maxNum);
-            }
+            self.E_SelectMagicItemNumText.text = string.Format("已经选择数量：{0}/{1}", self.SelectMagics.Count, maxNum);
         }
 
         private static void OnUpdateSelectSkillItem(this ES_PetMeleeSet self)

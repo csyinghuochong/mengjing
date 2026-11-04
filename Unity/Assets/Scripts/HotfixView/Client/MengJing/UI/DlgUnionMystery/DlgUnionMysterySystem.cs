@@ -24,10 +24,7 @@
 
             self.View.ES_ModelShow.SetCameraPosition(new(0f, 115, 257f));
             NpcConfig npcConfig = NpcConfigCategory.Instance.Get(self.Root().GetComponent<UIComponent>().CurrentNpcId);
-            using (zstring.Block())
-            {
-                self.View.ES_ModelShow.ShowOtherModel(zstring.Format("Npc/{0}", npcConfig.Asset)).Coroutine();
-            }
+            self.View.ES_ModelShow.ShowOtherModel(string.Format("Npc/{0}", npcConfig.Asset)).Coroutine();
         }
 
         public static void ShowWindow(this DlgUnionMystery self, Entity contextData = null)

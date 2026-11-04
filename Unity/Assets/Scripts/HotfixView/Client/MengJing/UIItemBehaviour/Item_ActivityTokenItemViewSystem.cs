@@ -84,10 +84,7 @@ namespace ET.Client
             self.E_Btn_LingQu_1Button.AddListener(() => { self.On_Btn_LingQu(1).Coroutine(); });
 
             self.ActivityConfig = activityConfig;
-            using (zstring.Block())
-            {
-                self.E_TextNameText.text = zstring.Format("{0}级", activityConfig.Par_1);
-            }
+            self.E_TextNameText.text = string.Format("{0}级", activityConfig.Par_1);
 
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
             int selfRechage = unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.RechargeNumber);

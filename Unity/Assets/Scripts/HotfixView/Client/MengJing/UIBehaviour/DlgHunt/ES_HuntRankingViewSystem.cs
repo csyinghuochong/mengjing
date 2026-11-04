@@ -69,21 +69,18 @@ namespace ET.Client
             self.E_NameText_No1Text.gameObject.SetActive(true);
             self.E_HuntNumText_No1Text.gameObject.SetActive(true);
             self.E_NameText_No1Text.text = response.RankList[0].PlayerName;
-            using (zstring.Block())
-            {
-                self.E_HuntNumText_No1Text.text = zstring.Format("狩猎数量:{0}", response.RankList[0].KillNumber);
-                self.E_HeadImage_No1Image.sprite = self.Root().GetComponent<ResourcesLoaderComponent>()
-                        .LoadAssetSync<Sprite>(ABPathHelper.GetAtlasPath_2(ABAtlasTypes.PlayerIcon, response.RankList[0].Occ.ToString()));
+            self.E_HuntNumText_No1Text.text = string.Format("狩猎数量:{0}", response.RankList[0].KillNumber);
+            self.E_HeadImage_No1Image.sprite = self.Root().GetComponent<ResourcesLoaderComponent>()
+                    .LoadAssetSync<Sprite>(ABPathHelper.GetAtlasPath_2(ABAtlasTypes.PlayerIcon, response.RankList[0].Occ.ToString()));
 
-                for (int i = 1; i < response.RankList.Count; i++)
-                {
-                    GameObject go = UnityEngine.Object.Instantiate(self.EG_UIHuntRankingPlayerInfoItemRectTransform.gameObject);
-                    go.SetActive(true);
-                    CommonViewHelper.SetParent(go, self.EG_HuntRankingListNodeRectTransform.gameObject);
-                    ReferenceCollector rc = go.GetComponent<ReferenceCollector>();
-                    rc.Get<GameObject>("NameText").GetComponent<Text>().text = zstring.Format("   {0}    {1}", i + 1, response.RankList[i].PlayerName);
-                    rc.Get<GameObject>("HuntNumText").GetComponent<Text>().text = zstring.Format("狩猎数量:{0}", response.RankList[i].KillNumber);
-                }
+            for (int i = 1; i < response.RankList.Count; i++)
+            {
+                GameObject go = UnityEngine.Object.Instantiate(self.EG_UIHuntRankingPlayerInfoItemRectTransform.gameObject);
+                go.SetActive(true);
+                CommonViewHelper.SetParent(go, self.EG_HuntRankingListNodeRectTransform.gameObject);
+                ReferenceCollector rc = go.GetComponent<ReferenceCollector>();
+                rc.Get<GameObject>("NameText").GetComponent<Text>().text = string.Format("   {0}    {1}", i + 1, response.RankList[i].PlayerName);
+                rc.Get<GameObject>("HuntNumText").GetComponent<Text>().text = string.Format("狩猎数量:{0}", response.RankList[i].KillNumber);
             }
         }
 

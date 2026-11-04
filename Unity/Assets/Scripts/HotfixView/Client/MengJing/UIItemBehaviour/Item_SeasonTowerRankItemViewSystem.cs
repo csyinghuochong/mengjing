@@ -18,12 +18,9 @@
         {
             self.E_NuTextText.text = rank.ToString();
             self.E_NameTextText.text = info.PlayerName;
-            using (zstring.Block())
-            {
-                self.E_LayerTextText.text = zstring.Format("{0}层", info.FubenId % 250000);
-                self.E_TimeTextText.text = zstring.Format("{0}小时{1}分{2}秒", info.TotalTime / 3600000, info.TotalTime % 3600000 / 60000,
-                    info.TotalTime % 3600000 % 60000 / 1000);
-            }
+            self.E_LayerTextText.text = string.Format("{0}层", info.FubenId % 250000);
+            self.E_TimeTextText.text = string.Format("{0}小时{1}分{2}秒", info.TotalTime / 3600000, info.TotalTime % 3600000 / 60000,
+                info.TotalTime % 3600000 % 60000 / 1000);
 
             if (rank >= 4)
             {

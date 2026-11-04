@@ -28,10 +28,7 @@ namespace ET.Client
             else
             {
                 int leftsecond = Mathf.FloorToInt(cdTime * 0.001f);
-                using (zstring.Block())
-                {
-                    self.E_TexTCdText.text = zstring.Format("{0}秒", leftsecond);
-                }
+                self.E_TexTCdText.text = string.Format("{0}秒", leftsecond);
             }
         }
 

@@ -116,10 +116,7 @@ namespace ET.Client
 
             UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
             int useTimes = (int)userInfoComponent.GetSceneFubenTimes(sceneId);
-            using (zstring.Block())
-            {
-                self.E_Text_LeftTimeText.GetComponent<Text>().text = zstring.Format("{0}/{1}", totalTimes - useTimes, totalTimes);
-            }
+            self.E_Text_LeftTimeText.GetComponent<Text>().text = string.Format("{0}/{1}", totalTimes - useTimes, totalTimes);
         }
 
         private static void OnButton_AddButton(this ES_RankPet self)

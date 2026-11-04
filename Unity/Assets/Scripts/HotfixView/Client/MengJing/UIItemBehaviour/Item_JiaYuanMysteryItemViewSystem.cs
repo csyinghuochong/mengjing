@@ -41,14 +41,11 @@ namespace ET.Client
                 return;
             }
 
-            using (zstring.Block())
+            if (!self.Root().GetComponent<BagComponentC>()
+                        .CheckNeedItem(string.Format("{0};{1}", mysteryConfig.SellType, mysteryConfig.SellValue)))
             {
-                if (!self.Root().GetComponent<BagComponentC>()
-                            .CheckNeedItem(zstring.Format("{0};{1}", mysteryConfig.SellType, mysteryConfig.SellValue)))
-                {
-                    HintHelp.ShowErrorHint(self.Root(), ErrorCode.ERR_HouBiNotEnough);
-                    return;
-                }
+                HintHelp.ShowErrorHint(self.Root(), ErrorCode.ERR_HouBiNotEnough);
+                return;
             }
 
             await JiaYuanNetHelper.JiaYuanMysteryBuyRequest(self.Root(), self.MysteryItemInfo.MysteryId, self.MysteryItemInfo.ProductId);
@@ -61,10 +58,7 @@ namespace ET.Client
 
             MysteryConfig mysteryConfig = MysteryConfigCategory.Instance.Get(mysteryItemInfo.MysteryId);
             self.MysteryItemInfo = mysteryItemInfo;
-            using (zstring.Block())
-            {
-                self.E_Text_NumberText.text = zstring.Format("剩余 {0}件", mysteryItemInfo.ItemNumber);
-            }
+            self.E_Text_NumberText.text = string.Format("剩余 {0}件", mysteryItemInfo.ItemNumber);
 
             self.E_Text_valueText.text = mysteryConfig.SellValue.ToString();
 

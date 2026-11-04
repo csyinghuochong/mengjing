@@ -33,10 +33,7 @@ namespace ET.Client
             self.RankingInfo = rankingInfo;
 
             self.E_Text_CombatText.text = rankingInfo.Combat.ToString();
-            using (zstring.Block())
-            {
-                self.E_Text_LevelText.text = zstring.Format("等级：{0}", rankingInfo.PlayerLv.ToString());
-            }
+            self.E_Text_LevelText.text = string.Format("等级：{0}", rankingInfo.PlayerLv.ToString());
 
             self.E_Text_NameText.text = rankingInfo.PlayerName;
             self.E_Text_RankText.text = rank.ToString();

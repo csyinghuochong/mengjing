@@ -110,12 +110,9 @@ namespace ET.Client
 
             string addStr = havepetHexin ? "当前放入的宠物身上穿戴了宠物之核，融合后会消失，" : " ";
 
-            using (zstring.Block())
-            {
-                PopupTipHelp.OpenPopupTip(self.Root(), "宠物合成",
-                    zstring.Format("合成后将随机保留一个宠物，另外一个宠物会销毁，<color=#ff0000>{0}</color> 请确认是否执行合成。", addStr),
-                    () => { self.ReqestHeCheng().Coroutine(); }).Coroutine();
-            }
+            PopupTipHelp.OpenPopupTip(self.Root(), "宠物合成",
+                string.Format("合成后将随机保留一个宠物，另外一个宠物会销毁，<color=#ff0000>{0}</color> 请确认是否执行合成。", addStr),
+                () => { self.ReqestHeCheng().Coroutine(); }).Coroutine();
         }
 
         private static async ETTask OnBtn_PreviewButton(this ES_PetHeCheng self)

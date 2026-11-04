@@ -37,11 +37,8 @@ namespace ET.Client
             string[] monsterInfo = monsterSet.Split(';');
             int monster = int.Parse(monsterInfo[2]);
             MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(monster);
-            using (zstring.Block())
-            {
-                self.E_Lab_LvText.text = zstring.Format("等级: {0}", monsterConfig.Lv);
-                self.E_Lab_HPText.text = zstring.Format("生命: {0}", monsterConfig.Hp);
-            }
+            self.E_Lab_LvText.text = string.Format("等级: {0}", monsterConfig.Lv);
+            self.E_Lab_HPText.text = string.Format("生命: {0}", monsterConfig.Hp);
 
             UserInfo userInfo = self.Root().GetComponent<UserInfoComponentC>().UserInfo;
             NumericComponentC numcom = UnitHelper.GetMyUnitFromClientScene(self.Root()).GetComponent<NumericComponentC>();

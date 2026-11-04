@@ -39,10 +39,7 @@ namespace ET.Client
 
                 //更新显示
                 ReferenceCollector rcSon = item.GetComponent<ReferenceCollector>();
-                using (zstring.Block())
-                {
-                    rcSon.Get<GameObject>("Lab_Lv").GetComponent<Text>().text = zstring.Format("进入等级:{0}级", sceneConfig[i].EnterLv);
-                }
+                rcSon.Get<GameObject>("Lab_Lv").GetComponent<Text>().text = string.Format("进入等级:{0}级", sceneConfig[i].EnterLv);
 
                 rcSon.Get<GameObject>("Lab_Name").GetComponent<Text>().text = sceneConfig[i].Name;
 
@@ -128,10 +125,7 @@ namespace ET.Client
             self.View.ES_RewardList.Refresh(rewardItems);
 
             self.View.E_TextLevelLimitText.text = sceneConfig.EnterLv.ToString();
-            using (zstring.Block())
-            {
-                self.View.E_TextPlayerLimitText.text = zstring.Format("{0}-3人", sceneConfig.PlayerLimit);
-            }
+            self.View.E_TextPlayerLimitText.text = string.Format("{0}-3人", sceneConfig.PlayerLimit);
 
             self.View.E_TextFubenDescText.text = sceneConfig.ChapterDes;
             self.View.E_TextFubenName2Text.text = sceneConfig.Name;

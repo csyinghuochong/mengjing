@@ -21,12 +21,9 @@ namespace ET.Client
             for (int i = 0; i < keys.Count; i++)
             {
                 int keyid = keys[i];
-                using (zstring.Block())
-                {
-                    GameObject Button_key = rc.Get<GameObject>(zstring.Format("Button_{0}", keyid));
-                    Button_key.GetComponent<Button>().AddListener(() => { self.OnClickSubButton(keyid); });
-                    self.ButtonList.Add(keyid, Button_key);
-                }
+                GameObject Button_key = rc.Get<GameObject>(string.Format("Button_{0}", keyid));
+                Button_key.GetComponent<Button>().AddListener(() => { self.OnClickSubButton(keyid); });
+                self.ButtonList.Add(keyid, Button_key);
             }
 
             self.OnClickSubButton(keys[0]);

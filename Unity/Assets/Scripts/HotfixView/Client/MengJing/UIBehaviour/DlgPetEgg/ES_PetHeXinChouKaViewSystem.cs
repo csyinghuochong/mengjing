@@ -45,10 +45,7 @@ namespace ET.Client
             }
 
             long haveNumber10 = self.Root().GetComponent<BagComponentC>().GetItemNumber(int.Parse(itemInfo10[0]));
-            using (zstring.Block())
-            {
-                self.E_Text_DiamondNumberText.text = zstring.Format("{0}/{1}", haveNumber10, (int)(int.Parse(itemInfo10[1]) * discount));
-            }
+            self.E_Text_DiamondNumberText.text = string.Format("{0}/{1}", haveNumber10, (int)(int.Parse(itemInfo10[1]) * discount));
 
             self.E_Text_DiamondNumberText.color = haveNumber10 >= (int)(int.Parse(itemInfo10[1]) * discount) ? Color.white : Color.red;
 
@@ -58,10 +55,7 @@ namespace ET.Client
 
             self.E_ItemImageIconImage.sprite = sp;
             long haveNumber1 = self.Root().GetComponent<BagComponentC>().GetItemNumber(int.Parse(itemInfo1[0]));
-            using (zstring.Block())
-            {
-                self.E_Text_CostNumberText.text = zstring.Format("{0}/{1}", haveNumber1, itemInfo1[1]);
-            }
+            self.E_Text_CostNumberText.text = string.Format("{0}/{1}", haveNumber1, itemInfo1[1]);
 
             self.E_Text_CostNumberText.color = (haveNumber1 >= int.Parse(itemInfo1[1])) ? Color.white : Color.red;
         }

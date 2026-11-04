@@ -43,17 +43,11 @@ namespace ET.Client
             }
             else
             {
-                using (zstring.Block())
-                {
-                    self.View.E_Text_ResultText.text = zstring.Format("你当前成功完成挑战{0}波，获得奖励如下:", towerConfig.CengNum);
-                }
+                self.View.E_Text_ResultText.text = string.Format("你当前成功完成挑战{0}波，获得奖励如下:", towerConfig.CengNum);
             }
 
-            using (zstring.Block())
-            {
-                string rewardList = zstring.Format("1;{0}@2;{1}", message.RewardGold, message.RewardExp);
-                self.View.ES_RewardList.Refresh(rewardList);
-            }
+            string rewardList = string.Format("1;{0}@2;{1}", message.RewardGold, message.RewardExp);
+            self.View.ES_RewardList.Refresh(rewardList);
         }
 
         public static void OnBtn_Return(this DlgTowerFightReward self)

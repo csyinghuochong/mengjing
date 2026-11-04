@@ -43,11 +43,8 @@ namespace ET.Client
             self.View.ES_CommonItem_1.UpdateItem(bagInfo, ItemOperateEnum.None);
             ItemConfig itemConfig_app = ItemConfigCategory.Instance.Get(self.AppraisalItemConfigId);
             self.View.ES_CommonItem_2.uiTransform.gameObject.SetActive(false);
-            using (zstring.Block())
-            {
-                self.View.E_Tip_1Text.text = zstring.Format("需要消耗：{0}", itemConfig_app.ItemName);
-                self.View.E_EquipLevelText.text = zstring.Format("{0}级", itemConfig.UseLv);
-            }
+            self.View.E_Tip_1Text.text = string.Format("需要消耗：{0}", itemConfig_app.ItemName);
+            self.View.E_EquipLevelText.text = string.Format("{0}级", itemConfig.UseLv);
 
             self.RefreshCommonItems();
         }
@@ -73,10 +70,7 @@ namespace ET.Client
             self.View.ES_CommonItem_2.UpdateItem(bagInfo, ItemOperateEnum.None);
             self.View.ES_CommonItem_2.uiTransform.gameObject.SetActive(true);
             self.View.ES_CommonItem_2.E_ItemNumText.gameObject.SetActive(false);
-            using (zstring.Block())
-            {
-                self.View.E_JianDingQualityText.text = zstring.Format("品质:{0}", bagInfo.ItemPar);
-            }
+            self.View.E_JianDingQualityText.text = string.Format("品质:{0}", bagInfo.ItemPar);
 
             string jianDingStr = "大海捞针";
             int chaValue = 0;
@@ -134,10 +128,7 @@ namespace ET.Client
             }
 
             JianDingDate jiandingDate = ItemHelper.GetEquipZhuanJingPro(equipCof.Id, bagInfo.ItemID, zizhi, true);
-            using (zstring.Block())
-            {
-                self.View.E_JianDingShowProText.text = zstring.Format("范围:{0}-{1}", jiandingDate.MinNum, jiandingDate.MaxNum);
-            }
+            self.View.E_JianDingShowProText.text = string.Format("范围:{0}-{1}", jiandingDate.MinNum, jiandingDate.MaxNum);
 
             self.UpdateSelect(bagInfo);
         }

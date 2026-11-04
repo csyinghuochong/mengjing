@@ -32,21 +32,15 @@ namespace ET.Client
             int monsterId = FunctionHelp.GetUnionBossId(openDay);
             MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(monsterId);
             self.ES_ModelShow.SetCameraPosition(new Vector3(0f, 115, 380f));
-            using (zstring.Block())
-            {
-                self.ES_ModelShow.ShowOtherModel(zstring.Format("Monster/{0}", monsterConfig.MonsterModelID)).Coroutine();
-            }
+            self.ES_ModelShow.ShowOtherModel(string.Format("Monster/{0}", monsterConfig.MonsterModelID)).Coroutine();
 
-            using (zstring.Block())
-            {
-                FuntionConfig funtionConfig = FuntionConfigCategory.Instance.Get(1043);
-                string[] openTimes = funtionConfig.OpenTime.Split('@');
-                int openTime_1 = int.Parse(openTimes[0].Split(';')[0]);
-                int openTime_2 = int.Parse(openTimes[0].Split(';')[1]);
-                int closeTime_1 = int.Parse(openTimes[1].Split(';')[0]);
-                int closeTime_2 = int.Parse(openTimes[1].Split(';')[1]);
-                self.E_DesText.text = zstring.Format("每天{0}:{1}点在公会地图刷新领主怪物，怪物会携带大量的财宝，请各位少侠一定要准时参加哦！", openTime_1, openTime_2);
-            }
+            FuntionConfig funtionConfig = FuntionConfigCategory.Instance.Get(1043);
+            string[] openTimes = funtionConfig.OpenTime.Split('@');
+            int openTime_1 = int.Parse(openTimes[0].Split(';')[0]);
+            int openTime_2 = int.Parse(openTimes[0].Split(';')[1]);
+            int closeTime_1 = int.Parse(openTimes[1].Split(';')[0]);
+            int closeTime_2 = int.Parse(openTimes[1].Split(';')[1]);
+            self.E_DesText.text = string.Format("每天{0}:{1}点在公会地图刷新领主怪物，怪物会携带大量的财宝，请各位少侠一定要准时参加哦！", openTime_1, openTime_2);
         }
 
         private static void OnEnter(this ES_UnionBoss self)

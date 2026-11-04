@@ -41,10 +41,7 @@ namespace ET.Client
 
             for (int i = 0; i < self.FormationItemComponents.Length; i++)
             {
-                using (zstring.Block())
-                {
-                    self.PetIcon_di_List[i] = self.uiTransform.Find(zstring.Format("PetIcon_di_{0}", i)).gameObject;
-                }
+                self.PetIcon_di_List[i] = self.uiTransform.Find(string.Format("PetIcon_di_{0}", i)).gameObject;
 
                 self.FormationItemComponents[i] = null;
             }
@@ -56,19 +53,13 @@ namespace ET.Client
             self.ButtonSet.GetComponent<Button>().onClick.AddListener(() => { self.OnButtonSet().Coroutine(); });
 
             self.TeamId = position;
-            using (zstring.Block())
-            {
-                self.TextTip11.GetComponent<Text>().text = zstring.Format("{0}队", position + 1);
-            }
+            self.TextTip11.GetComponent<Text>().text = string.Format("{0}队", position + 1);
 
             int playerLv = self.Root().GetComponent<UserInfoComponentC>().UserInfo.Lv;
             int openLv = ConfigData.PetMiningTeamOpenLevel[position];
             if (playerLv < openLv)
             {
-                using (zstring.Block())
-                {
-                    self.TextTip12.GetComponent<Text>().text = zstring.Format("{0}级开启", openLv);
-                }
+                self.TextTip12.GetComponent<Text>().text = string.Format("{0}级开启", openLv);
             }
             else
             {

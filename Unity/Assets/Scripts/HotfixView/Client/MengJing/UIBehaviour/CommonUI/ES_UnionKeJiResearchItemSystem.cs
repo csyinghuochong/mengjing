@@ -37,19 +37,13 @@ namespace ET.Client
             {
                 bool havePre = UnionKeJiConfigCategory.Instance.HavePreId(nowUnionKeJiConfig.PreId[i], self.GetParent<ES_UnionKeJiResearch>().UnionMyInfo.UnionKeJiList);
 
-                using (zstring.Block())
-                {
-                    self.uiTransform.Find(zstring.Format("Img_line_{0}", i))?.gameObject.SetActive(havePre);
-                }
+                self.uiTransform.Find(string.Format("Img_line_{0}", i))?.gameObject.SetActive(havePre);
             }
 
             int curlv = nowUnionKeJiConfig.QiangHuaLv;
             int maxlv = UnionKeJiConfigCategory.Instance.Get(UnionKeJiConfigCategory.Instance.GetMaxId(self.Position)).QiangHuaLv;
 
-            using (zstring.Block())
-            {
-                self.E_PointText.text = zstring.Format("{0}/{1}", curlv, maxlv);
-            }
+            self.E_PointText.text = string.Format("{0}/{1}", curlv, maxlv);
 
             self.E_NameText.text =  nowUnionKeJiConfig.EquipSpaceName.Substring(0, Regex.Match(nowUnionKeJiConfig.EquipSpaceName, @"\d").Index);            
             string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.OtherIcon, nowUnionKeJiConfig.Icon);

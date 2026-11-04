@@ -45,11 +45,8 @@ namespace ET.Client
             if (rolePetInfo == null)
             {
                 self.ES_ModelShow.SetShow(false);
-                using (zstring.Block())
-                {
-                    self.E_Text_ComabtText.text = "战力：0";
-                    self.E_Text_AttriText.text = zstring.Format("{0}提升+0%", pname);
-                }
+                self.E_Text_ComabtText.text = "战力：0";
+                self.E_Text_AttriText.text = string.Format("{0}提升+0%", pname);
                 return;
             }
 
@@ -65,21 +62,15 @@ namespace ET.Client
 
             PetConfig petConfig = PetConfigCategory.Instance.Get(rolePetInfo.ConfigId);
             self.ES_ModelShow.SetShow(true);
-            using (zstring.Block())
-            {
-                self.ES_ModelShow.ShowOtherModel(zstring.Format("Pet/{0}", petConfig.PetModel)).Coroutine();
-            }
+            self.ES_ModelShow.ShowOtherModel(string.Format("Pet/{0}", petConfig.PetModel)).Coroutine();
 
             self.ES_ModelShow.SetCameraPosition(new Vector3(0f, 100f, 450f));
             self.ES_ModelShow.Camera.fieldOfView = 40;
             // self.ES_ModelShow.SetRootPosition(new Vector2(self.Index * 1000 + 10000, 0));
             self.ES_ModelShow.SetModelParentRotation(Quaternion.Euler(0f, -45f, 0f));
 
-            using (zstring.Block())
-            {
-                self.E_Text_ComabtText.text = zstring.Format("战力：{0}", rolePetInfo.PetPingFen);
-                self.E_Text_AttriText.text  = zstring.Format("{0}提升+{1}%",pname, (CommonHelp.GetPetShouHuPro(rolePetInfo.PetPingFen, fightNum) * 100).ToString("F2"));
-            }
+            self.E_Text_ComabtText.text = string.Format("战力：{0}", rolePetInfo.PetPingFen);
+            self.E_Text_AttriText.text  = string.Format("{0}提升+{1}%",pname, (CommonHelp.GetPetShouHuPro(rolePetInfo.PetPingFen, fightNum) * 100).ToString("F2"));
         }
 
         public static void UpdateOpenStatus(this Scroll_Item_PetEchoItem self)

@@ -364,10 +364,7 @@ namespace ET.Client
         {
             TaskPositionConfig taskPositionConfig = TaskPositionConfigCategory.Instance.Get(taskPositionId);
             GameObject gameObject;
-            using (zstring.Block())
-            {
-                gameObject = GameObject.Find((zstring)"ScenceRosePositionSet/" + taskPositionConfig.PositionName);
-            }
+            gameObject = GameObject.Find("ScenceRosePositionSet/" + taskPositionConfig.PositionName);
 
             if (gameObject == null)
             {
@@ -445,18 +442,12 @@ namespace ET.Client
                 string text1 = "";
                 if (i == 0)
                 {
-                    using (zstring.Block())
-                    {
-                        text1 = zstring.Format(progress, monsterConfig.MonsterName, taskPro.taskTargetNum_1, taskConfig.TargetValue[i], fubenName);
-                    }
+                    text1 = string.Format(progress, monsterConfig.MonsterName, taskPro.taskTargetNum_1, taskConfig.TargetValue[i], fubenName);
                 }
 
                 if (i == 1)
                 {
-                    using (zstring.Block())
-                    {
-                        text1 = zstring.Format(progress, monsterConfig.MonsterName, taskPro.taskTargetNum_2, taskConfig.TargetValue[i], fubenName);
-                    }
+                    text1 = string.Format(progress, monsterConfig.MonsterName, taskPro.taskTargetNum_2, taskConfig.TargetValue[i], fubenName);
                 }
 
                 desc = desc + text1 + "\n";
@@ -476,10 +467,7 @@ namespace ET.Client
             int itemId = taskConfig.Target[0];
             ItemConfig itemConfig = ItemConfigCategory.Instance.Get(itemId);
             string text1;
-            using (zstring.Block())
-            {
-                text1 = zstring.Format(progress, itemConfig.ItemName, taskPro.taskTargetNum_1, taskConfig.TargetValue[0]);
-            }
+            text1 = string.Format(progress, itemConfig.ItemName, taskPro.taskTargetNum_1, taskConfig.TargetValue[0]);
 
             return text1;
         }
@@ -504,10 +492,7 @@ namespace ET.Client
 
             NpcConfig npcConfig = NpcConfigCategory.Instance.Get(taskConfig.Target[0]);
             string text1;
-            using (zstring.Block())
-            {
-                text1 = zstring.Format(progress, npcConfig.Name, fubenName);
-            }
+            text1 = string.Format(progress, npcConfig.Name, fubenName);
 
             return text1;
         }
@@ -522,10 +507,7 @@ namespace ET.Client
         {
             string progress = LanguageComponent.Instance.LoadLocalization("等级提升至{0}级 {1}/{2}");
             string text1;
-            using (zstring.Block())
-            {
-                text1 = zstring.Format(progress, taskConfig.TargetValue[0], taskPro.taskTargetNum_1, taskConfig.TargetValue[0]);
-            }
+            text1 = string.Format(progress, taskConfig.TargetValue[0], taskPro.taskTargetNum_1, taskConfig.TargetValue[0]);
 
             return text1;
         }
@@ -539,10 +521,7 @@ namespace ET.Client
         {
             string progress = LanguageComponent.Instance.LoadLocalization("击败任意怪物 {0}/{1}");
             string text1;
-            using (zstring.Block())
-            {
-                text1 = zstring.Format(progress, taskPro.taskTargetNum_1, taskConfig.TargetValue[0]);
-            }
+            text1 = string.Format(progress, taskPro.taskTargetNum_1, taskConfig.TargetValue[0]);
 
             return text1;
         }
@@ -551,10 +530,7 @@ namespace ET.Client
         {
             string progress = LanguageComponent.Instance.LoadLocalization("击败任意领主级怪物 {0}/{1}");
             string text1;
-            using (zstring.Block())
-            {
-                text1 = zstring.Format(progress, taskPro.taskTargetNum_1, taskConfig.TargetValue[0]);
-            }
+            text1 = string.Format(progress, taskPro.taskTargetNum_1, taskConfig.TargetValue[0]);
 
             return text1;
         }
@@ -564,10 +540,7 @@ namespace ET.Client
             string progress = LanguageComponent.Instance.LoadLocalization("通关副本{0} {1}/{2}");
             string fubenName = CellGenerateConfigCategory.Instance.Get(taskConfig.Target[0]).ChapterName;
             string text1;
-            using (zstring.Block())
-            {
-                text1 = zstring.Format(progress, fubenName, taskPro.taskTargetNum_1, taskConfig.TargetValue[0]);
-            }
+            text1 = string.Format(progress, fubenName, taskPro.taskTargetNum_1, taskConfig.TargetValue[0]);
 
             return text1;
         }
@@ -577,10 +550,7 @@ namespace ET.Client
             string progress = LanguageComponent.Instance.LoadLocalization("进行转职{0} {1}/{2}");
             string fubenName = "";
             string text1;
-            using (zstring.Block())
-            {
-                text1 = zstring.Format(progress, fubenName, taskPro.taskTargetNum_1, taskConfig.TargetValue[0]);
-            }
+            text1 = string.Format(progress, fubenName, taskPro.taskTargetNum_1, taskConfig.TargetValue[0]);
 
             return text1;
         }
@@ -644,10 +614,7 @@ namespace ET.Client
             string progress = LanguageComponent.Instance.LoadLocalization("给予符合要求的道具 {0}/{1}");
 
             string text1;
-            using (zstring.Block())
-            {
-                text1 = zstring.Format(progress, taskPro.taskTargetNum_1, 1);
-            }
+            text1 = string.Format(progress, taskPro.taskTargetNum_1, 1);
 
             return text1;
         }
@@ -656,10 +623,7 @@ namespace ET.Client
         {
             string progress = LanguageComponent.Instance.LoadLocalization("获得宠物数量 {0}/{1}");
             string text1;
-            using (zstring.Block())
-            {
-                text1 = zstring.Format(progress, taskPro.taskTargetNum_1, 1);
-            }
+            text1 = string.Format(progress, taskPro.taskTargetNum_1, 1);
 
             return text1;
         }
@@ -668,10 +632,7 @@ namespace ET.Client
         {
             string progress = LanguageComponent.Instance.LoadLocalization("制造道具数量 {0}/{1}");
             string text1;
-            using (zstring.Block())
-            {
-                text1 = zstring.Format(progress, taskPro.taskTargetNum_1, 1);
-            }
+            text1 = string.Format(progress, taskPro.taskTargetNum_1, 1);
 
             return text1;
         }
@@ -680,10 +641,7 @@ namespace ET.Client
         {
             string progress = LanguageComponent.Instance.LoadLocalization("装备洗练次数 {0}/{1}");
             string text1;
-            using (zstring.Block())
-            {
-                text1 = zstring.Format(progress, taskPro.taskTargetNum_1, 1);
-            }
+            text1 = string.Format(progress, taskPro.taskTargetNum_1, 1);
 
             return text1;
         }
@@ -692,10 +650,7 @@ namespace ET.Client
         {
             string progress = LanguageComponent.Instance.LoadLocalization("宠物天梯次数 {0}/{1}");
             string text1;
-            using (zstring.Block())
-            {
-                text1 = zstring.Format(progress, taskPro.taskTargetNum_1, 1);
-            }
+            text1 = string.Format(progress, taskPro.taskTargetNum_1, 1);
 
             return text1;
         }
@@ -704,10 +659,7 @@ namespace ET.Client
         {
             string progress = LanguageComponent.Instance.LoadLocalization("兑换金币次数 {0}/{1}");
             string text1;
-            using (zstring.Block())
-            {
-                text1 = zstring.Format(progress, taskPro.taskTargetNum_1, 1);
-            }
+            text1 = string.Format(progress, taskPro.taskTargetNum_1, 1);
 
             return text1;
         }
@@ -716,10 +668,7 @@ namespace ET.Client
         {
             string progress = LanguageComponent.Instance.LoadLocalization("装备回收次数 {0}/{1}");
             string text1;
-            using (zstring.Block())
-            {
-                text1 = zstring.Format(progress, taskPro.taskTargetNum_1, 1);
-            }
+            text1 = string.Format(progress, taskPro.taskTargetNum_1, 1);
 
             return text1;
         }
@@ -728,10 +677,7 @@ namespace ET.Client
         {
             string progress = LanguageComponent.Instance.LoadLocalization("最大强化等级 {0}/{1}");
             string text1;
-            using (zstring.Block())
-            {
-                text1 = zstring.Format(progress, taskPro.taskTargetNum_1, 1);
-            }
+            text1 = string.Format(progress, taskPro.taskTargetNum_1, 1);
 
             return text1;
         }
@@ -740,10 +686,7 @@ namespace ET.Client
         {
             string progress = LanguageComponent.Instance.LoadLocalization(taskConfig.TargetValue[0] + "技能宠物 {0}/{1}");
             string text1;
-            using (zstring.Block())
-            {
-                text1 = zstring.Format(progress, taskPro.taskTargetNum_1, 1);
-            }
+            text1 = string.Format(progress, taskPro.taskTargetNum_1, 1);
 
             return text1;
         }
@@ -752,10 +695,7 @@ namespace ET.Client
         {
             string progress = LanguageComponent.Instance.LoadLocalization("宠物探险通关{0} {1}/{2}");
             string text1;
-            using (zstring.Block())
-            {
-                text1 = zstring.Format(progress, taskConfig.TargetValue[0], taskPro.taskTargetNum_1, 1);
-            }
+            text1 = string.Format(progress, taskConfig.TargetValue[0], taskPro.taskTargetNum_1, 1);
 
             return text1;
         }
@@ -764,10 +704,7 @@ namespace ET.Client
         {
             string progress = LanguageComponent.Instance.LoadLocalization("消耗金币 {0}/{1}");
             string text1;
-            using (zstring.Block())
-            {
-                text1 = zstring.Format(progress, taskPro.taskTargetNum_1, 1);
-            }
+            text1 = string.Format(progress, taskPro.taskTargetNum_1, 1);
 
             return text1;
         }
@@ -776,10 +713,7 @@ namespace ET.Client
         {
             string progress = LanguageComponent.Instance.LoadLocalization("击杀玩家数量 {0}/{1}");
             string text1;
-            using (zstring.Block())
-            {
-                text1 = zstring.Format(progress, taskPro.taskTargetNum_1, 1);
-            }
+            text1 = string.Format(progress, taskPro.taskTargetNum_1, 1);
 
             return text1;
         }
@@ -788,10 +722,7 @@ namespace ET.Client
         {
             string progress = LanguageComponent.Instance.LoadLocalization("家园等级 {0}/{1}");
             string text1;
-            using (zstring.Block())
-            {
-                text1 = zstring.Format(progress, taskPro.taskTargetNum_1, 1);
-            }
+            text1 = string.Format(progress, taskPro.taskTargetNum_1, 1);
 
             return text1;
         }
@@ -800,10 +731,7 @@ namespace ET.Client
         {
             string progress = LanguageComponent.Instance.LoadLocalization("宠物合成次数 {0}/{1}");
             string text1;
-            using (zstring.Block())
-            {
-                text1 = zstring.Format(progress, taskPro.taskTargetNum_1, 1);
-            }
+            text1 = string.Format(progress, taskPro.taskTargetNum_1, 1);
 
             return text1;
         }
@@ -812,10 +740,7 @@ namespace ET.Client
         {
             string progress = LanguageComponent.Instance.LoadLocalization("拥有宠物数量 {0}/{1}");
             string text1;
-            using (zstring.Block())
-            {
-                text1 = zstring.Format(progress, taskPro.taskTargetNum_1, 1);
-            }
+            text1 = string.Format(progress, taskPro.taskTargetNum_1, 1);
 
             return text1;
         }
@@ -838,10 +763,7 @@ namespace ET.Client
         {
             string progress = LanguageComponent.Instance.LoadLocalization("给予一个宠物 {0}/{1}");
             string text1;
-            using (zstring.Block())
-            {
-                text1 = zstring.Format(progress, taskPro.taskTargetNum_1, 1);
-            }
+            text1 = string.Format(progress, taskPro.taskTargetNum_1, 1);
 
             return text1;
         }
@@ -850,10 +772,7 @@ namespace ET.Client
         {
             string progress = LanguageComponent.Instance.LoadLocalization("使用普通藏宝图 {0}/{1}");
             string text1;
-            using (zstring.Block())
-            {
-                text1 = zstring.Format(progress, taskPro.taskTargetNum_1, 1);
-            }
+            text1 = string.Format(progress, taskPro.taskTargetNum_1, 1);
 
             return text1;
         }
@@ -862,10 +781,7 @@ namespace ET.Client
         {
             string progress = LanguageComponent.Instance.LoadLocalization("使用高级藏宝图 {0}/{1}");
             string text1;
-            using (zstring.Block())
-            {
-                text1 = zstring.Format(progress, taskPro.taskTargetNum_1, 1);
-            }
+            text1 = string.Format(progress, taskPro.taskTargetNum_1, 1);
 
             return text1;
         }
@@ -874,10 +790,7 @@ namespace ET.Client
         {
             string progress = LanguageComponent.Instance.LoadLocalization("封印之塔挑战 {0}/{1}");
             string text1;
-            using (zstring.Block())
-            {
-                text1 = zstring.Format(progress, taskPro.taskTargetNum_1, 1);
-            }
+            text1 = string.Format(progress, taskPro.taskTargetNum_1, 1);
 
             return text1;
         }
@@ -886,10 +799,7 @@ namespace ET.Client
         {
             string progress = LanguageComponent.Instance.LoadLocalization("制造道具数量 {0}/{1}");
             string text1;
-            using (zstring.Block())
-            {
-                text1 = zstring.Format(progress, taskPro.taskTargetNum_1, 1);
-            }
+            text1 = string.Format(progress, taskPro.taskTargetNum_1, 1);
 
             return text1;
         }
@@ -898,10 +808,7 @@ namespace ET.Client
         {
             string progress = LanguageComponent.Instance.LoadLocalization("使用药剂或者合剂次数 {0}/{1}");
             string text1;
-            using (zstring.Block())
-            {
-                text1 = zstring.Format(progress, taskPro.taskTargetNum_1, 1);
-            }
+            text1 = string.Format(progress, taskPro.taskTargetNum_1, 1);
 
             return text1;
         }
@@ -910,10 +817,7 @@ namespace ET.Client
         {
             string progress = LanguageComponent.Instance.LoadLocalization("获得X只新的宠物 {0}/{1}");
             string text1;
-            using (zstring.Block())
-            {
-                text1 = zstring.Format(progress, taskPro.taskTargetNum_1, 1);
-            }
+            text1 = string.Format(progress, taskPro.taskTargetNum_1, 1);
 
             return text1;
         }
@@ -922,10 +826,7 @@ namespace ET.Client
         {
             string progress = LanguageComponent.Instance.LoadLocalization("合成1只战力达到X点的宠物 {0}/{1}");
             string text1;
-            using (zstring.Block())
-            {
-                text1 = zstring.Format(progress, taskPro.taskTargetNum_1, 1);
-            }
+            text1 = string.Format(progress, taskPro.taskTargetNum_1, 1);
 
             return text1;
         }
@@ -934,10 +835,7 @@ namespace ET.Client
         {
             string progress = LanguageComponent.Instance.LoadLocalization("宠物使用宠之晶洗练宠物次数 {0}/{1}");
             string text1;
-            using (zstring.Block())
-            {
-                text1 = zstring.Format(progress, taskPro.taskTargetNum_1, 1);
-            }
+            text1 = string.Format(progress, taskPro.taskTargetNum_1, 1);
 
             return text1;
         }
@@ -946,10 +844,7 @@ namespace ET.Client
         {
             string progress = LanguageComponent.Instance.LoadLocalization("在孵化系统中孵化成功宠物 {0}/{1}");
             string text1;
-            using (zstring.Block())
-            {
-                text1 = zstring.Format(progress, taskPro.taskTargetNum_1, 1);
-            }
+            text1 = string.Format(progress, taskPro.taskTargetNum_1, 1);
 
             return text1;
         }
@@ -958,10 +853,7 @@ namespace ET.Client
         {
             string progress = LanguageComponent.Instance.LoadLocalization("在孵化系统中孵化指定的宠物蛋成功 {0}/{1}");
             string text1;
-            using (zstring.Block())
-            {
-                text1 = zstring.Format(progress, taskPro.taskTargetNum_1, 1);
-            }
+            text1 = string.Format(progress, taskPro.taskTargetNum_1, 1);
 
             return text1;
         }
@@ -970,10 +862,7 @@ namespace ET.Client
         {
             string progress = LanguageComponent.Instance.LoadLocalization("宠物使用技能书次数 {0}/{1}");
             string text1;
-            using (zstring.Block())
-            {
-                text1 = zstring.Format(progress, taskPro.taskTargetNum_1, 1);
-            }
+            text1 = string.Format(progress, taskPro.taskTargetNum_1, 1);
 
             return text1;
         }
@@ -982,10 +871,7 @@ namespace ET.Client
         {
             string progress = LanguageComponent.Instance.LoadLocalization("宠物天梯战斗胜利次数 {0}/{1}");
             string text1;
-            using (zstring.Block())
-            {
-                text1 = zstring.Format(progress, taskPro.taskTargetNum_1, 1);
-            }
+            text1 = string.Format(progress, taskPro.taskTargetNum_1, 1);
 
             return text1;
         }
@@ -994,10 +880,7 @@ namespace ET.Client
         {
             string progress = LanguageComponent.Instance.LoadLocalization("使用N点品质的鉴定附魔道具给装备附魔 {0}/{1}");
             string text1;
-            using (zstring.Block())
-            {
-                text1 = zstring.Format(progress, taskPro.taskTargetNum_1, 1);
-            }
+            text1 = string.Format(progress, taskPro.taskTargetNum_1, 1);
 
             return text1;
         }
@@ -1006,10 +889,7 @@ namespace ET.Client
         {
             string progress = LanguageComponent.Instance.LoadLocalization("使用N点品质的鉴定道具给装备鉴定 {0}/{1}");
             string text1;
-            using (zstring.Block())
-            {
-                text1 = zstring.Format(progress, taskPro.taskTargetNum_1, 1);
-            }
+            text1 = string.Format(progress, taskPro.taskTargetNum_1, 1);
 
             return text1;
         }
@@ -1018,10 +898,7 @@ namespace ET.Client
         {
             string progress = LanguageComponent.Instance.LoadLocalization("鉴定装备时出一个大于N条属性的装备 {0}/{1}");
             string text1;
-            using (zstring.Block())
-            {
-                text1 = zstring.Format(progress, taskPro.taskTargetNum_1, 1);
-            }
+            text1 = string.Format(progress, taskPro.taskTargetNum_1, 1);
 
             return text1;
         }
@@ -1030,10 +907,7 @@ namespace ET.Client
         {
             string progress = LanguageComponent.Instance.LoadLocalization("洗练出带有任何隐藏技能的装备 {0}/{1}");
             string text1;
-            using (zstring.Block())
-            {
-                text1 = zstring.Format(progress, taskPro.taskTargetNum_1, 1);
-            }
+            text1 = string.Format(progress, taskPro.taskTargetNum_1, 1);
 
             return text1;
         }
@@ -1042,10 +916,7 @@ namespace ET.Client
         {
             string progress = LanguageComponent.Instance.LoadLocalization("洗练出带有指定属性的装备 {0}/{1}");
             string text1;
-            using (zstring.Block())
-            {
-                text1 = zstring.Format(progress, taskPro.taskTargetNum_1, 1);
-            }
+            text1 = string.Format(progress, taskPro.taskTargetNum_1, 1);
 
             return text1;
         }
@@ -1054,10 +925,7 @@ namespace ET.Client
         {
             string progress = LanguageComponent.Instance.LoadLocalization("增幅装备次数 {0}/{1}");
             string text1;
-            using (zstring.Block())
-            {
-                text1 = zstring.Format(progress, taskPro.taskTargetNum_1, 1);
-            }
+            text1 = string.Format(progress, taskPro.taskTargetNum_1, 1);
 
             return text1;
         }
@@ -1066,10 +934,7 @@ namespace ET.Client
         {
             string progress = LanguageComponent.Instance.LoadLocalization("试炼之地的输出排行榜进入前 {0}/{1}");
             string text1;
-            using (zstring.Block())
-            {
-                text1 = zstring.Format(progress, taskPro.taskTargetNum_1, 1);
-            }
+            text1 = string.Format(progress, taskPro.taskTargetNum_1, 1);
 
             return text1;
         }
@@ -1078,10 +943,7 @@ namespace ET.Client
         {
             string progress = LanguageComponent.Instance.LoadLocalization("宠物天梯进入排行榜前 {0}/{1}");
             string text1;
-            using (zstring.Block())
-            {
-                text1 = zstring.Format(progress, taskPro.taskTargetNum_1, 1);
-            }
+            text1 = string.Format(progress, taskPro.taskTargetNum_1, 1);
 
             return text1;
         }
@@ -1090,10 +952,7 @@ namespace ET.Client
         {
             string progress = LanguageComponent.Instance.LoadLocalization("战力排行榜进入前 {0}/{1}");
             string text1;
-            using (zstring.Block())
-            {
-                text1 = zstring.Format(progress, taskPro.taskTargetNum_1, 1);
-            }
+            text1 = string.Format(progress, taskPro.taskTargetNum_1, 1);
 
             return text1;
         }
@@ -1102,10 +961,7 @@ namespace ET.Client
         {
             string progress = LanguageComponent.Instance.LoadLocalization("家园烹饪次数 {0}/{1}");
             string text1;
-            using (zstring.Block())
-            {
-                text1 = zstring.Format(progress, taskPro.taskTargetNum_1, 1);
-            }
+            text1 = string.Format(progress, taskPro.taskTargetNum_1, 1);
 
             return text1;
         }
@@ -1114,10 +970,7 @@ namespace ET.Client
         {
             string progress = LanguageComponent.Instance.LoadLocalization("家园种地种植次数 {0}/{1}");
             string text1;
-            using (zstring.Block())
-            {
-                text1 = zstring.Format(progress, taskPro.taskTargetNum_1, 1);
-            }
+            text1 = string.Format(progress, taskPro.taskTargetNum_1, 1);
 
             return text1;
         }
@@ -1126,10 +979,7 @@ namespace ET.Client
         {
             string progress = LanguageComponent.Instance.LoadLocalization("家园种地收获次数 {0}/{1}");
             string text1;
-            using (zstring.Block())
-            {
-                text1 = zstring.Format(progress, taskPro.taskTargetNum_1, 1);
-            }
+            text1 = string.Format(progress, taskPro.taskTargetNum_1, 1);
 
             return text1;
         }
@@ -1138,10 +988,7 @@ namespace ET.Client
         {
             string progress = LanguageComponent.Instance.LoadLocalization("家园牧场饲养次数 {0}/{1}");
             string text1;
-            using (zstring.Block())
-            {
-                text1 = zstring.Format(progress, taskPro.taskTargetNum_1, 1);
-            }
+            text1 = string.Format(progress, taskPro.taskTargetNum_1, 1);
 
             return text1;
         }
@@ -1150,10 +997,7 @@ namespace ET.Client
         {
             string progress = LanguageComponent.Instance.LoadLocalization("家园牧场收货次数 {0}/{1}");
             string text1;
-            using (zstring.Block())
-            {
-                text1 = zstring.Format(progress, taskPro.taskTargetNum_1, 1);
-            }
+            text1 = string.Format(progress, taskPro.taskTargetNum_1, 1);
 
             return text1;
         }
@@ -1162,10 +1006,7 @@ namespace ET.Client
         {
             string progress = LanguageComponent.Instance.LoadLocalization("家园美味品尝次数 {0}/{1}");
             string text1;
-            using (zstring.Block())
-            {
-                text1 = zstring.Format(progress, taskPro.taskTargetNum_1, 1);
-            }
+            text1 = string.Format(progress, taskPro.taskTargetNum_1, 1);
 
             return text1;
         }
@@ -1174,10 +1015,7 @@ namespace ET.Client
         {
             string progress = LanguageComponent.Instance.LoadLocalization("加入公会 {0}/{1}");
             string text1;
-            using (zstring.Block())
-            {
-                text1 = zstring.Format(progress, taskPro.taskTargetNum_1, taskConfig.TargetValue[0]);
-            }
+            text1 = string.Format(progress, taskPro.taskTargetNum_1, taskConfig.TargetValue[0]);
 
             return text1;
         }
@@ -1187,10 +1025,7 @@ namespace ET.Client
             string progress = LanguageComponent.Instance.LoadLocalization("击败挑战级的 {0} {1}/{2}");
             string monsterName = MonsterConfigCategory.Instance.Get(taskConfig.Target[0]).MonsterName;
             string text1;
-            using (zstring.Block())
-            {
-                text1 = zstring.Format(progress, monsterName, taskPro.taskTargetNum_1, taskConfig.TargetValue[0]);
-            }
+            text1 = string.Format(progress, monsterName, taskPro.taskTargetNum_1, taskConfig.TargetValue[0]);
 
             return text1;
         }
@@ -1200,10 +1035,7 @@ namespace ET.Client
             string progress = LanguageComponent.Instance.LoadLocalization("击败地狱级的 {0} {1}/{2}");
             string monsterName = MonsterConfigCategory.Instance.Get(taskConfig.Target[0]).MonsterName;
             string text1;
-            using (zstring.Block())
-            {
-                text1 = zstring.Format(progress, monsterName, taskPro.taskTargetNum_1, taskConfig.TargetValue[0]);
-            }
+            text1 = string.Format(progress, monsterName, taskPro.taskTargetNum_1, taskConfig.TargetValue[0]);
 
             return text1;
         }
@@ -1213,10 +1045,7 @@ namespace ET.Client
             string progress = LanguageComponent.Instance.LoadLocalization("通关挑战级-{0}副本 {1}/{2}");
             string chapterName = CellGenerateConfigCategory.Instance.Get(taskConfig.Target[0]).ChapterName;
             string text1;
-            using (zstring.Block())
-            {
-                text1 = zstring.Format(progress, chapterName, taskPro.taskTargetNum_1, taskConfig.TargetValue[0]);
-            }
+            text1 = string.Format(progress, chapterName, taskPro.taskTargetNum_1, taskConfig.TargetValue[0]);
 
             return text1;
         }
@@ -1226,10 +1055,7 @@ namespace ET.Client
             string progress = LanguageComponent.Instance.LoadLocalization("通关地狱级-{0}副本 {1}/{2}");
             string chapterName = CellGenerateConfigCategory.Instance.Get(taskConfig.Target[0]).ChapterName;
             string text1;
-            using (zstring.Block())
-            {
-                text1 = zstring.Format(progress, chapterName, taskPro.taskTargetNum_1, taskConfig.TargetValue[0]);
-            }
+            text1 = string.Format(progress, chapterName, taskPro.taskTargetNum_1, taskConfig.TargetValue[0]);
 
             return text1;
         }
@@ -1238,10 +1064,7 @@ namespace ET.Client
         {
             string progress = LanguageComponent.Instance.LoadLocalization("击败挑战级任意怪物{0}/{1}");
             string text1;
-            using (zstring.Block())
-            {
-                text1 = zstring.Format(progress, taskPro.taskTargetNum_1, taskConfig.TargetValue[0]);
-            }
+            text1 = string.Format(progress, taskPro.taskTargetNum_1, taskConfig.TargetValue[0]);
 
             return text1;
         }
@@ -1250,10 +1073,7 @@ namespace ET.Client
         {
             string progress = LanguageComponent.Instance.LoadLocalization("击败地狱级任意怪物{0}/{1}");
             string text1;
-            using (zstring.Block())
-            {
-                text1 = zstring.Format(progress, taskPro.taskTargetNum_1, taskConfig.TargetValue[0]);
-            }
+            text1 = string.Format(progress, taskPro.taskTargetNum_1, taskConfig.TargetValue[0]);
 
             return text1;
         }
@@ -1262,10 +1082,7 @@ namespace ET.Client
         {
             string progress = LanguageComponent.Instance.LoadLocalization("击败挑战级任意领主怪物{0}/{1}");
             string text1;
-            using (zstring.Block())
-            {
-                text1 = zstring.Format(progress, taskPro.taskTargetNum_1, taskConfig.TargetValue[0]);
-            }
+            text1 = string.Format(progress, taskPro.taskTargetNum_1, taskConfig.TargetValue[0]);
 
             return text1;
         }
@@ -1274,10 +1091,7 @@ namespace ET.Client
         {
             string progress = LanguageComponent.Instance.LoadLocalization("战力提升至{0}/{1}");
             string text1;
-            using (zstring.Block())
-            {
-                text1 = zstring.Format(progress, taskPro.taskTargetNum_1, taskConfig.TargetValue[0]);
-            }
+            text1 = string.Format(progress, taskPro.taskTargetNum_1, taskConfig.TargetValue[0]);
 
             return text1;
         }
@@ -1286,10 +1100,7 @@ namespace ET.Client
         {
             string progress = LanguageComponent.Instance.LoadLocalization("通关试练塔{0}/{1}");
             string text1;
-            using (zstring.Block())
-            {
-                text1 = zstring.Format(progress, taskPro.taskTargetNum_1, taskConfig.TargetValue[0]);
-            }
+            text1 = string.Format(progress, taskPro.taskTargetNum_1, taskConfig.TargetValue[0]);
 
             return text1;
         }
@@ -1298,10 +1109,7 @@ namespace ET.Client
         {
             string progress = LanguageComponent.Instance.LoadLocalization("挑战深渊模式的副本 {0}/{1}");
             string text1;
-            using (zstring.Block())
-            {
-                text1 = zstring.Format(progress, taskPro.taskTargetNum_1, taskConfig.TargetValue[0]);
-            }
+            text1 = string.Format(progress, taskPro.taskTargetNum_1, taskConfig.TargetValue[0]);
 
             return text1;
         }
@@ -1310,10 +1118,7 @@ namespace ET.Client
         {
             string progress = LanguageComponent.Instance.LoadLocalization("组队副本伤害值 {0}/{1}");
             string text1;
-            using (zstring.Block())
-            {
-                text1 = zstring.Format(progress, taskPro.taskTargetNum_1, taskConfig.TargetValue[0]);
-            }
+            text1 = string.Format(progress, taskPro.taskTargetNum_1, taskConfig.TargetValue[0]);
 
             return text1;
         }
@@ -1322,10 +1127,7 @@ namespace ET.Client
         {
             string progress = LanguageComponent.Instance.LoadLocalization("矿场占领次数 {0}/{1}");
             string text1;
-            using (zstring.Block())
-            {
-                text1 = zstring.Format(progress, taskPro.taskTargetNum_1, taskConfig.TargetValue[0]);
-            }
+            text1 = string.Format(progress, taskPro.taskTargetNum_1, taskConfig.TargetValue[0]);
 
             return text1;
         }
@@ -1334,10 +1136,7 @@ namespace ET.Client
         {
             string progress = LanguageComponent.Instance.LoadLocalization("击败地狱级任意领主怪物{0}/{1}");
             string text1;
-            using (zstring.Block())
-            {
-                text1 = zstring.Format(progress, taskPro.taskTargetNum_1, taskConfig.TargetValue[0]);
-            }
+            text1 = string.Format(progress, taskPro.taskTargetNum_1, taskConfig.TargetValue[0]);
 
             return text1;
         }

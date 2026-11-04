@@ -121,27 +121,24 @@ namespace ET.Client
                 }
             }
 
-            using (zstring.Block())
+            self.E_Text_Reward_1Text.text = string.Format("金币： {0}", goldReward);
+            self.E_Text_Reward_2Text.text = string.Format("钻石： {0}", diamondReward);
+            self.E_ButtonGetButton.gameObject.SetActive(rewardlist.Count > 0);
+
+            // 测试数据
+            // response.MyPopularizeList.Add(new PopularizeInfo() { Nmae = "测试角色1", Level = 20 });
+            // response.MyPopularizeList.Add(new PopularizeInfo() { Nmae = "测试角色2", Level = 30 });
+
+            for (int i = 0; i < response.MyPopularizeList.Count; i++)
             {
-                self.E_Text_Reward_1Text.text = zstring.Format("金币： {0}", goldReward);
-                self.E_Text_Reward_2Text.text = zstring.Format("钻石： {0}", diamondReward);
-                self.E_ButtonGetButton.gameObject.SetActive(rewardlist.Count > 0);
+                GameObject go = UnityEngine.Object.Instantiate(self.EG_UIPopularizeItemRectTransform.gameObject);
+                go.SetActive(true);
+                CommonViewHelper.SetParent(go, self.EG_BuildingListRectTransform.gameObject);
 
-                // 测试数据
-                // response.MyPopularizeList.Add(new PopularizeInfo() { Nmae = "测试角色1", Level = 20 });
-                // response.MyPopularizeList.Add(new PopularizeInfo() { Nmae = "测试角色2", Level = 30 });
+                ReferenceCollector rc = go.GetComponent<ReferenceCollector>();
+                rc.Get<GameObject>("Text_Name").GetComponent<Text>().text = response.MyPopularizeList[i].Nmae;
 
-                for (int i = 0; i < response.MyPopularizeList.Count; i++)
-                {
-                    GameObject go = UnityEngine.Object.Instantiate(self.EG_UIPopularizeItemRectTransform.gameObject);
-                    go.SetActive(true);
-                    CommonViewHelper.SetParent(go, self.EG_BuildingListRectTransform.gameObject);
-
-                    ReferenceCollector rc = go.GetComponent<ReferenceCollector>();
-                    rc.Get<GameObject>("Text_Name").GetComponent<Text>().text = response.MyPopularizeList[i].Nmae;
-
-                    rc.Get<GameObject>("Text_Level").GetComponent<Text>().text = zstring.Format("等级:{0}", response.MyPopularizeList[i].Level);
-                }
+                rc.Get<GameObject>("Text_Level").GetComponent<Text>().text = string.Format("等级:{0}", response.MyPopularizeList[i].Level);
             }
         }
     }

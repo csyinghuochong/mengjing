@@ -42,10 +42,7 @@ namespace ET.Client
             self.View.E_NanDu_3_SelectImage.gameObject.SetActive(diff == 3);
 
             UserInfo userinfo = self.Root().GetComponent<UserInfoComponentC>().UserInfo;
-            using (zstring.Block())
-            {
-                PlayerPrefsHelp.SetChapterDifficulty(zstring.Format("{0}{1}", userinfo.UserId, self.ChapterId), diff);
-            }
+            PlayerPrefsHelp.SetChapterDifficulty(string.Format("{0}{1}", userinfo.UserId, self.ChapterId), diff);
         }
 
         public static void OnClickHandler(this DlgDungeonLevel self, int chapterId)
@@ -71,15 +68,12 @@ namespace ET.Client
             self.ChapterId = chapterId;
 
             int[] openLv = DungeonSectionConfigCategory.Instance.Get(self.ChapterId).OpenLevel;
-            using (zstring.Block())
-            {
-                self.View.E_NanDu_1_ButtonButton.transform.Find("TextOpenLevel").GetComponent<Text>().text = zstring.Format("激活等级:{0}级", openLv[0]);
-                self.View.E_NanDu_2_ButtonButton.transform.Find("TextOpenLevel").GetComponent<Text>().text = zstring.Format("激活等级:{0}级", openLv[1]);
-                self.View.E_NanDu_3_ButtonButton.transform.Find("TextOpenLevel").GetComponent<Text>().text = zstring.Format("激活等级:{0}级", openLv[2]);
+            self.View.E_NanDu_1_ButtonButton.transform.Find("TextOpenLevel").GetComponent<Text>().text = string.Format("激活等级:{0}级", openLv[0]);
+            self.View.E_NanDu_2_ButtonButton.transform.Find("TextOpenLevel").GetComponent<Text>().text = string.Format("激活等级:{0}级", openLv[1]);
+            self.View.E_NanDu_3_ButtonButton.transform.Find("TextOpenLevel").GetComponent<Text>().text = string.Format("激活等级:{0}级", openLv[2]);
 
-                UserInfo userinfo = self.Root().GetComponent<UserInfoComponentC>().UserInfo;
-                self.OnNanDu_Button(PlayerPrefsHelp.GetChapterDifficulty(zstring.Format("{0}{1}", userinfo.UserId, self.ChapterId)));
-            }
+            UserInfo userinfo = self.Root().GetComponent<UserInfoComponentC>().UserInfo;
+            self.OnNanDu_Button(PlayerPrefsHelp.GetChapterDifficulty(string.Format("{0}{1}", userinfo.UserId, self.ChapterId)));
 
             self.UpdateLevelList(chapterId).Coroutine();
         }
@@ -122,11 +116,8 @@ namespace ET.Client
                 self.ShowLevel.Add(i);
 
                 self.View.E_Lab_LevelNameText.text = dungeonSectionConfig.Name;
-                using (zstring.Block())
-                {
-                    self.View.E_Lab_OpenNumShowText.text = zstring.Format("({0}：{1}/{2})", LanguageComponent.Instance.LoadLocalization("冒险进度"),
-                        (i + 1).ToString(), dungeonSectionConfig.RandomArea.Length.ToString());
-                }
+                self.View.E_Lab_OpenNumShowText.text = string.Format("({0}：{1}/{2})", LanguageComponent.Instance.LoadLocalization("冒险进度"),
+                    (i + 1).ToString(), dungeonSectionConfig.RandomArea.Length.ToString());
             }
 
             self.AddUIScrollItems(ref self.ScrollItemDungeonLevelItems, self.ShowLevel.Count);

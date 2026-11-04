@@ -27,10 +27,7 @@ namespace ET.Client
         {
             string phoneNum = self.View.E_PhoneNumberInputField.text;
             // GlobalHelp.OnButtonGetCode(phoneNum);
-            using (zstring.Block())
-            {
-                self.View.E_TextYanzhengText.text = zstring.Format("已向手机号{0}发送短信验证", phoneNum);
-            }
+            self.View.E_TextYanzhengText.text = string.Format("已向手机号{0}发送短信验证", phoneNum);
 
             self.View.EG_SendYanzhengRectTransform.gameObject.SetActive(false);
             self.View.EG_YanZhengRectTransform.gameObject.SetActive(true);
@@ -52,10 +49,7 @@ namespace ET.Client
         {
             string phoneNum = self.View.E_PhoneNumberInputField.text;
             // GlobalHelp.OnButtonGetCode(phoneNum);
-            using (zstring.Block())
-            {
-                self.View.E_TextYanzhengText.text = zstring.Format("已向手机号{0}发送短信验证", phoneNum);
-            }
+            self.View.E_TextYanzhengText.text = string.Format("已向手机号{0}发送短信验证", phoneNum);
 
             self.View.EG_SendYanzhengRectTransform.gameObject.SetActive(false);
             self.View.EG_YanZhengRectTransform.gameObject.SetActive(true);

@@ -140,16 +140,13 @@ namespace ET.Client
 
             self.E_Lab_SkillNameText.text = talentConfig.Name;
 
-            using (zstring.Block())
+            if (active)
             {
-                if (active)
-                {
-                    self.E_Lab_TianFuLevelText.text = zstring.Format("天赋等级：{0}/{1}", curlv, maxlv);
-                }
-                else
-                {
-                    self.E_Lab_TianFuLevelText.text = zstring.Format("天赋等级：{0}/{1}", 0, maxlv);
-                }
+                self.E_Lab_TianFuLevelText.text = string.Format("天赋等级：{0}/{1}", curlv, maxlv);
+            }
+            else
+            {
+                self.E_Lab_TianFuLevelText.text = string.Format("天赋等级：{0}/{1}", 0, maxlv);
             }
 
             if (curlv >= maxlv)
@@ -196,11 +193,8 @@ namespace ET.Client
                 return;
             }
 
-            using (zstring.Block())
-            {
-                string tip = zstring.Format("消耗{0}钻石可以重置天赋", GlobalValueConfigCategory.Instance.Value_139.Split(';')[1]);
-                PopupTipHelp.OpenPopupTip(self.Root(), "重置天赋", tip, () => { Request().Coroutine(); }).Coroutine();
-            }
+            string tip = string.Format("消耗{0}钻石可以重置天赋", GlobalValueConfigCategory.Instance.Value_139.Split(';')[1]);
+            PopupTipHelp.OpenPopupTip(self.Root(), "重置天赋", tip, () => { Request().Coroutine(); }).Coroutine();
 
             return;
 

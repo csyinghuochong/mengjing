@@ -51,10 +51,7 @@ namespace ET.Client
         {
             self.ClickHandler2 = action;
             self.UserId = 0;
-            using (zstring.Block())
-            {
-                self.E_TextFubenNameText.text = zstring.Format("补偿金额:{0}", number);
-            }
+            self.E_TextFubenNameText.text = string.Format("补偿金额:{0}", number);
 
             self.E_ImageButtonButton.AddListener(() => { self.ClickHandler2(self.UserId); });
         }

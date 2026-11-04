@@ -126,10 +126,7 @@ namespace ET.Client
             else
             {
                 string[] costitem = fashionConfig.ActiveCost.Split(';');
-                using (zstring.Block())
-                {
-                    self.E_Text_222Text.text = zstring.Format("需要:{0}个", int.Parse(costitem[1]));
-                }
+                self.E_Text_222Text.text = string.Format("需要:{0}个", int.Parse(costitem[1]));
 
                 int havenumber = (int)bagComponent.GetItemNumber(int.Parse(costitem[0]));
                 ItemInfo bagInfo = new ItemInfo();
@@ -155,11 +152,8 @@ namespace ET.Client
             }
 
             List<string> assetList = FashionConfigCategory.Instance.GetModelList(fashionid);
-            using (zstring.Block())
-            {
-                string initPath = isbasefashion ? zstring.Format("Parts/{0}/", occ) : "Parts/Fashion/";
-                self.ES_ModelShow.ShowModelList(initPath, assetList).Coroutine();
-            }
+            string initPath = isbasefashion ? string.Format("Parts/{0}/", occ) : "Parts/Fashion/";
+            self.ES_ModelShow.ShowModelList(initPath, assetList).Coroutine();
 
             self.ES_ModelShow.SetCameraPosition(new Vector3((float)fashionConfig.Camera[0], (float)fashionConfig.Camera[1], (float)fashionConfig.Camera[2]));
             self.ES_ModelShow.Camera.fieldOfView = (float)fashionConfig.Camera[3];

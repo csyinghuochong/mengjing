@@ -64,11 +64,8 @@ namespace ET.Client
             int sceneId = BattleHelper.GetSceneIdByType(MapTypeEnum.PetDungeon);
             SceneConfig sceneConfig = SceneConfigCategory.Instance.Get(sceneId);
             UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
-            using (zstring.Block())
-            {
-                self.E_TextTimes.GetComponent<Text>().text =
-                        zstring.Format("{0}/{1}", userInfoComponent.GetSceneFubenTimes(sceneId), sceneConfig.DayEnterNum);
-            }
+            self.E_TextTimes.GetComponent<Text>().text =
+                    string.Format("{0}/{1}", userInfoComponent.GetSceneFubenTimes(sceneId), sceneConfig.DayEnterNum);
         }
 
         public static async ETTask BeginDrag(this ES_PetChallenge self, PointerEventData pdata)
@@ -207,10 +204,7 @@ namespace ET.Client
             {
                 self.ShowReward = rewardid;
                 PetFubenRewardConfig petFubenRewardConfig = PetFubenRewardConfigCategory.Instance.Get(rewardid);
-                using (zstring.Block())
-                {
-                    self.E_TextStar.GetComponent<Text>().text = zstring.Format("{0}/{1}", petComponent.GetTotalStar(), petFubenRewardConfig.NeedStar);
-                }
+                self.E_TextStar.GetComponent<Text>().text = string.Format("{0}/{1}", petComponent.GetTotalStar(), petFubenRewardConfig.NeedStar);
             }
         }
 
@@ -219,10 +213,7 @@ namespace ET.Client
             PetComponentC petComponentC = self.Root().GetComponent<PetComponentC>();
             int petfubenId = petComponentC.GetPetFuben();
 
-            using (zstring.Block())
-            {
-                Log.Debug(zstring.Format("self.uiTransform != null:  {0}", self.ShowPetFubenConfig[index].Id));
-            }
+            Log.Debug(string.Format("self.uiTransform != null:  {0}", self.ShowPetFubenConfig[index].Id));
 
             foreach (Scroll_Item_PetChallengeItem item in self.ScrollItemPetChallengeItems.Values)
             {

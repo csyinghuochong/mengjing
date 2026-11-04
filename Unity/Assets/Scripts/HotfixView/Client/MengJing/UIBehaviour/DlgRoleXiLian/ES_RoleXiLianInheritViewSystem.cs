@@ -82,10 +82,7 @@ namespace ET.Client
             self.ES_CommonItem_Cost.E_ItemNumText.gameObject.SetActive(false);
 
             BagComponentC bagComponent = self.Root().GetComponent<BagComponentC>();
-            using (zstring.Block())
-            {
-                self.E_Text_CostValueText.text = zstring.Format("{0}/{1}", bagComponent.GetItemNumber(costitemid), constitemnumber);
-            }
+            self.E_Text_CostValueText.text = string.Format("{0}/{1}", bagComponent.GetItemNumber(costitemid), constitemnumber);
 
             self.E_Text_CostValueText.color = bagComponent.GetItemNumber(int.Parse(costitem[0])) >= int.Parse(costitem[1]) ? Color.green : Color.red;
 
@@ -98,10 +95,7 @@ namespace ET.Client
 
             int maxTimes = GlobalValueConfigCategory.Instance.ItemInheritTime;
             self.E_ProgressBarImgImage.fillAmount = bagInfo.InheritTimes * 1f / maxTimes;
-            using (zstring.Block())
-            {
-                self.E_InheritTimesTextText.text = zstring.Format("{0}/{1}次", bagInfo.InheritTimes, maxTimes);
-            }
+            self.E_InheritTimesTextText.text = string.Format("{0}/{1}次", bagInfo.InheritTimes, maxTimes);
         }
 
         public static void OnXiLianReturn(this ES_RoleXiLianInherit self)
@@ -225,12 +219,9 @@ namespace ET.Client
             int skillid = response.InheritSkills[0];
             SkillConfig skillConfig = SkillConfigCategory.Instance.Get(skillid);
             // 二次确认框
-            using (zstring.Block())
-            {
-                PopupTipHelp.OpenPopupTip(self.Root(), "传承鉴定",
-                    zstring.Format("传承鉴定效果：{0}\n传承装备只有{1}次重新鉴定传承的机会\n请问是否覆盖原始传承鉴定效果?", skillConfig.SkillDescribe, maxInheritTimes),
-                    () => { self.RequestInheritSelect().Coroutine(); }, () => { self.OnXiLianReturn(); }).Coroutine();
-            }
+            PopupTipHelp.OpenPopupTip(self.Root(), "传承鉴定",
+                string.Format("传承鉴定效果：{0}\n传承装备只有{1}次重新鉴定传承的机会\n请问是否覆盖原始传承鉴定效果?", skillConfig.SkillDescribe, maxInheritTimes),
+                () => { self.RequestInheritSelect().Coroutine(); }, () => { self.OnXiLianReturn(); }).Coroutine();
         }
 
         public static async ETTask RequestInheritSelect(this ES_RoleXiLianInherit self)

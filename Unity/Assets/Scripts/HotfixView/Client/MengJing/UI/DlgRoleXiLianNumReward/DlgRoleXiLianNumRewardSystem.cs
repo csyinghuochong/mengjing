@@ -22,11 +22,8 @@ namespace ET.Client
         private static void OnInitUI(this DlgRoleXiLianNumReward self)
         {
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
-            using (zstring.Block())
-            {
-                self.View.E_TextTitleText.text =
-                        zstring.Format("今日洗练次数:{0}", unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.ItemXiLianNumber));
-            }
+            self.View.E_TextTitleText.text =
+                    string.Format("今日洗练次数:{0}", unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.ItemXiLianNumber));
 
             self.ShowInfo.Clear();
             foreach (KeyValuePair<int, string> keyValuePair in ConfigData.ItemXiLianNumReward)

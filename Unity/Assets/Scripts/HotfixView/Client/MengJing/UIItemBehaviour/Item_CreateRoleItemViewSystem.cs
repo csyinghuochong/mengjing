@@ -25,26 +25,17 @@ namespace ET.Client
             if (createRoleInfo != null)
             {
                 self.E_RoleNameText.text = createRoleInfo.PlayerName;
-                using (zstring.Block())
-                {
-                    self.E_RoleLvText.text = zstring.Format("{0}{1}", LanguageComponent.Instance.LoadLocalization("等级:"), createRoleInfo.PlayerLv);
-                }
+                self.E_RoleLvText.text = string.Format("{0}{1}", LanguageComponent.Instance.LoadLocalization("等级:"), createRoleInfo.PlayerLv);
 
                 if (createRoleInfo.OccTwo > 0)
                 {
                     OccupationTwoConfig occupationTwo = OccupationTwoConfigCategory.Instance.Get(createRoleInfo.OccTwo);
-                    using (zstring.Block())
-                    {
-                        self.E_RoleOccText.text = zstring.Format("职业:{0}", occupationTwo.OccupationName);
-                    }
+                    self.E_RoleOccText.text = string.Format("职业:{0}", occupationTwo.OccupationName);
                 }
                 else
                 {
                     OccupationConfig occupationConfig = OccupationConfigCategory.Instance.Get(createRoleInfo.PlayerOcc);
-                    using (zstring.Block())
-                    {
-                        self.E_RoleOccText.text = zstring.Format("职业:{0}", occupationConfig.OccupationName);
-                    }
+                    self.E_RoleOccText.text = string.Format("职业:{0}", occupationConfig.OccupationName);
                 }
 
                 self.E_RoleHeadIconImage.sprite = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(ABPathHelper.GetAtlasPath_2(ABAtlasTypes.PlayerIcon, createRoleInfo.PlayerOcc.ToString()));

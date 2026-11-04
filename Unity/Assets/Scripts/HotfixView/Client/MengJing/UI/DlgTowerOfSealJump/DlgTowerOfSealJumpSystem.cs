@@ -20,10 +20,7 @@
 
             Unit myUnit = UnitHelper.GetMyUnitFromClientScene(self.Root());
             self.Finished = myUnit.GetComponent<NumericComponentC>().GetAsInt(NumericType.SealTowerFinished);
-            using (zstring.Block())
-            {
-                self.View.E_TipTextText.text = zstring.Format("是否花费350钻石去到第{0}层", (self.Finished + diceResult) / 10 * 10);
-            }
+            self.View.E_TipTextText.text = string.Format("是否花费350钻石去到第{0}层", (self.Finished + diceResult) / 10 * 10);
         }
 
         public static async ETTask OnYesBtn(this DlgTowerOfSealJump self)

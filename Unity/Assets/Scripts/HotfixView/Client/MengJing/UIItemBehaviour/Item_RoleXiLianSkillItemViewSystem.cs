@@ -26,11 +26,8 @@ namespace ET.Client
 
             var bundleGameObject = self.Root().GetComponent<ResourcesLoaderComponent>()
                     .LoadAssetSync<GameObject>("Assets/Bundles/UI/Item/Item_CommonSkillItem.prefab");
-            using (zstring.Block())
-            {
-                self.E_Text_XiLianNameText.text = zstring.Format("{0}{1}", equipXiLianConfig.Title,
-                    LanguageComponent.Instance.LoadLocalization("额外增加概率出现的特殊属性"));
-            }
+            self.E_Text_XiLianNameText.text = string.Format("{0}{1}", equipXiLianConfig.Title,
+                LanguageComponent.Instance.LoadLocalization("额外增加概率出现的特殊属性"));
 
             List<KeyValuePairInt> xilianSkill = XiLianHelper.GetLevelSkill(equipXiLianConfig.XiLianLevel);
 
@@ -46,10 +43,7 @@ namespace ET.Client
                 ui_item.uiTransform = bagSpace.transform;
                 ui_item.OnUpdateUI((int)xilianSkill[i].Value, ABAtlasTypes.RoleSkillIcon, false, ItemViewHelp.XiLianWeiZhiTip(xilianSkill[i].KeyId));
 
-                using (zstring.Block())
-                {
-                    Log.Info(zstring.Format("xilianSkill[i] = {0}", xilianSkill[i].ToString()));
-                }
+                Log.Info(string.Format("xilianSkill[i] = {0}", xilianSkill[i].ToString()));
 
                 SkillConfig skillcof = SkillConfigCategory.Instance.Get((int)xilianSkill[i].Value);
                 ui_item.E_TextSkillNameText.text = skillcof.SkillName;

@@ -88,11 +88,8 @@ namespace ET.Client
             float sellgold_1 = sellgold * 0.0001f;
             float todayGold_1 = todayGold * 0.0001f;
 
-            using (zstring.Block())
-            {
-                self.E_PaiMaiGoldTextText.text = zstring.Format("今日获利:{0}万/{1}万", CommonViewHelper.ShowFloatValue(sellgold_1),
-                    CommonViewHelper.ShowFloatValue(todayGold_1));
-            }
+            self.E_PaiMaiGoldTextText.text = string.Format("今日获利:{0}万/{1}万", CommonViewHelper.ShowFloatValue(sellgold_1),
+                CommonViewHelper.ShowFloatValue(todayGold_1));
 
             self.UpdateSellItemUILIist(self.CurrentItemType);
         }
@@ -276,10 +273,7 @@ namespace ET.Client
             self.E_PaiMaiSellItemsLoopVerticalScrollRect.SetVisible(true, self.ShowPaiMaiItemInfos.Count);
 
             int maxNum = GlobalValueConfigCategory.Instance.MaxAuctionQuantity;
-            using (zstring.Block())
-            {
-                self.E_Text_SellTimeText.text = zstring.Format("已上架:{0}/{1}", self.PaiMaiItemInfos.Count, maxNum);
-            }
+            self.E_Text_SellTimeText.text = string.Format("已上架:{0}/{1}", self.PaiMaiItemInfos.Count, maxNum);
         }
     }
 }

@@ -55,10 +55,7 @@ namespace ET.Client
                     eggNum++;
                 }
             }
-            using (zstring.Block())
-            {
-                self.E_PetEggNumText.text = zstring.Format("{0}个", eggNum);
-            }
+            self.E_PetEggNumText.text = string.Format("{0}个", eggNum);
             
             PetComponentC petComponent = self.Root().GetComponent<PetComponentC>();
             for (int i = 0; i < self.PetList.Count; i++)
@@ -98,24 +95,18 @@ namespace ET.Client
             string[] costItems = costItemsList[index].Split(';');
             string itemName = ItemConfigCategory.Instance.Get(int.Parse(costItems[0])).ItemName;
             string itemNum = costItems[1];
-            using (zstring.Block())
+            string tip = string.Format("开启新的位置需要{0}{1}，是否继续？", itemNum, itemName);
+            PopupTipHelp.OpenPopupTip(self.Root(), "提示", tip, async () =>
             {
-                string tip = zstring.Format("开启新的位置需要{0}{1}，是否继续？", itemNum, itemName);
-                using (zstring.Block())
+                int error = await PetNetHelper.RequestPetEggOpenSlot(self.Root(), index);
+                if (error != ErrorCode.ERR_Success)
                 {
-                    PopupTipHelp.OpenPopupTip(self.Root(), "提示", tip, async () =>
-                    {
-                        int error = await PetNetHelper.RequestPetEggOpenSlot(self.Root(), index);
-                        if (error != ErrorCode.ERR_Success)
-                        {
-                            return;
-                        }
-
-                        self.OnUpdateUI();
-
-                    }, null).Coroutine();
+                    return;
                 }
-            }
+
+                self.OnUpdateUI();
+
+            }, null).Coroutine();
         }
         
         public static void ShowPetEggSelectList(this ES_PetEggList self, int index)
@@ -191,11 +182,8 @@ namespace ET.Client
             }
 
             int costValue = CommonHelp.ReturnPetOpenTimeDiamond((int)rolePetEgg.KeyId, rolePetEgg.Value);
-            using (zstring.Block())
-            {
-                PopupTipHelp.OpenPopupTip(self.Root(), "开启宠物蛋", zstring.Format("开启需要花费 {0}钻石", costValue),
-                    () => { self.OnButtonGetButton(index).Coroutine(); }).Coroutine();
-            }
+            PopupTipHelp.OpenPopupTip(self.Root(), "开启宠物蛋", string.Format("开启需要花费 {0}钻石", costValue),
+                () => { self.OnButtonGetButton(index).Coroutine(); }).Coroutine();
         }
 
         public static async ETTask OnButtonFuHuaButton(this ES_PetEggList self, int index)

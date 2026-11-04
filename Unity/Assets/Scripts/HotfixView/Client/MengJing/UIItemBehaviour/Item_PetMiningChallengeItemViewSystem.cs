@@ -57,10 +57,7 @@ namespace ET.Client
 
             int playerLv = self.Root().GetComponent<UserInfoComponentC>().UserInfo.Lv;
             int openLv = ConfigData.PetMiningTeamOpenLevel[self.TeamId];
-            using (zstring.Block())
-            {
-                self.TextTip12.GetComponent<Text>().text = zstring.Format("{0}级开启", openLv);
-            }
+            self.TextTip12.GetComponent<Text>().text = string.Format("{0}级开启", openLv);
 
             bool isopen = playerLv >= openLv;
 

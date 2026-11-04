@@ -15,10 +15,7 @@ namespace ET.Client
             }
             catch (Exception e)
             {
-                using (zstring.Block())
-                {
-                    Log.Error(zstring.Format("move timer error: {0}\n{1}", self.Id, e.ToString()));
-                }
+                Log.Error(string.Format("move timer error: {0}\n{1}", self.Id, e.ToString()));
             }
         }
     }
@@ -123,10 +120,7 @@ namespace ET.Client
             }
             else
             {
-                using (zstring.Block())
-                {
-                    textMeshProUGUI.text = zstring.Format("{0}{1}", self.MyUnit.GetComponent<NumericComponentC>().GetAsInt(NumericType.DropItemNum), itemConfig.ItemName);
-                }
+                textMeshProUGUI.text = string.Format("{0}{1}", self.MyUnit.GetComponent<NumericComponentC>().GetAsInt(NumericType.DropItemNum), itemConfig.ItemName);
             }
 
             //显示品质

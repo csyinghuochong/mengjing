@@ -108,11 +108,8 @@ namespace ET.Client
             self.View.E_CountdownTimeText.text = ((int)ConfigData.PetMeleeBattleMaxTime / 1000).ToString();
 
             self.OranginScale = self.View.E_DiRenHpImgImage.GetComponent<RectTransform>().rect.width;
-            using (zstring.Block())
-            {
-                self.View.E_JiFanNumText.text = zstring.Format("召唤宠物数量：0/{0}", ConfigData.PetMeleeMaxPetsInLine);
-                self.View.E_DiRenNumText.text = "召唤怪物数量：0";
-            }
+            self.View.E_JiFanNumText.text = string.Format("召唤宠物数量：0/{0}", ConfigData.PetMeleeMaxPetsInLine);
+            self.View.E_DiRenNumText.text = "召唤怪物数量：0";
 
             GameObject GridCanvas = GameObject.Find("/GridCanvas");
             GameObject BackgroundImage = GridCanvas.transform.Find("Background Image").gameObject;
@@ -134,10 +131,7 @@ namespace ET.Client
             //int num = numericComponentS.GetAsInt(NumericType.PetMeleeMoLi);
             int add = ConfigData.PetMeleeMoLiRPS * (int)(1 + numericComponentS.GetAsFloat(NumericType.PetMeleeMoLiAdd));
 
-            using (zstring.Block())
-            {
-                self.View.E_MoLiRPSText.text = zstring.Format("恢复值：{0}点/每秒", add);
-            }
+            self.View.E_MoLiRPSText.text = string.Format("恢复值：{0}点/每秒", add);
         }
 
         public static void BeforeUnload(this DlgPetMeleeMain self)
@@ -169,23 +163,17 @@ namespace ET.Client
                     int maxHp = numericComponentC.GetAsInt(NumericType.Now_MaxHp);
                     if (monsterConfig.MonsterCamp == CampEnum.CampPlayer_1) // 
                     {
-                        using (zstring.Block())
-                        {
-                            self.View.E_JiFanHpTxtText.text = zstring.Format("{0}/{1}", nowHp, maxHp);
-                            Vector2 size = self.View.E_JiFanHpImgImage.GetComponent<RectTransform>().sizeDelta;
-                            size.x = nowHp * 1f / maxHp * self.OranginScale;
-                            self.View.E_JiFanHpImgImage.GetComponent<RectTransform>().sizeDelta = size;
-                        }
+                        self.View.E_JiFanHpTxtText.text = string.Format("{0}/{1}", nowHp, maxHp);
+                        Vector2 size = self.View.E_JiFanHpImgImage.GetComponent<RectTransform>().sizeDelta;
+                        size.x = nowHp * 1f / maxHp * self.OranginScale;
+                        self.View.E_JiFanHpImgImage.GetComponent<RectTransform>().sizeDelta = size;
                     }
                     else 
                     {
-                        using (zstring.Block())
-                        {
-                            self.View.E_DiRenHpTxtText.text = zstring.Format("{0}/{1}", nowHp, maxHp);
-                            Vector2 size = self.View.E_DiRenHpImgImage.GetComponent<RectTransform>().sizeDelta;
-                            size.x = nowHp * 1f / maxHp * self.OranginScale;
-                            self.View.E_DiRenHpImgImage.GetComponent<RectTransform>().sizeDelta = size;
-                        }
+                        self.View.E_DiRenHpTxtText.text = string.Format("{0}/{1}", nowHp, maxHp);
+                        Vector2 size = self.View.E_DiRenHpImgImage.GetComponent<RectTransform>().sizeDelta;
+                        size.x = nowHp * 1f / maxHp * self.OranginScale;
+                        self.View.E_DiRenHpImgImage.GetComponent<RectTransform>().sizeDelta = size;
                     }
                 }
             }
@@ -231,18 +219,15 @@ namespace ET.Client
                 }
             }
 
-            using (zstring.Block())
+            if (self.BattleCamp == CampEnum.CampPlayer_1)
             {
-                if (self.BattleCamp == CampEnum.CampPlayer_1)
-                {
-                    self.View.E_JiFanNumText.text = zstring.Format("召唤宠物数量：{0}/{1}", JiFanNum, ConfigData.PetMeleeMaxPetsInLine);
-                    self.View.E_DiRenNumText.text = zstring.Format("召唤{0}数量：{1}", self.MapTypeEnum == MapTypeEnum.PetMelee ? "怪物" :"宠物",  DiRenNum);
-                }
-                else
-                {
-                    self.View.E_JiFanNumText.text = zstring.Format("召唤宠物数量：{0}", DiRenNum);
-                    self.View.E_DiRenNumText.text = zstring.Format("召唤宠物数量：{0}/{1}", JiFanNum,  ConfigData.PetMeleeMaxPetsInLine);
-                }
+                self.View.E_JiFanNumText.text = string.Format("召唤宠物数量：{0}/{1}", JiFanNum, ConfigData.PetMeleeMaxPetsInLine);
+                self.View.E_DiRenNumText.text = string.Format("召唤{0}数量：{1}", self.MapTypeEnum == MapTypeEnum.PetMelee ? "怪物" :"宠物",  DiRenNum);
+            }
+            else
+            {
+                self.View.E_JiFanNumText.text = string.Format("召唤宠物数量：{0}", DiRenNum);
+                self.View.E_DiRenNumText.text = string.Format("召唤宠物数量：{0}/{1}", JiFanNum,  ConfigData.PetMeleeMaxPetsInLine);
             }
         }
 
@@ -432,11 +417,8 @@ namespace ET.Client
         {
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
             NumericComponentC numericComponentC = unit.GetComponent<NumericComponentC>();
-            using (zstring.Block())
-            {
-                self.View.E_MoLiTxtText.text =
-                        zstring.Format("{0}/{1}", numericComponentC.GetAsInt(NumericType.PetMeleeMoLi), ConfigData.PetMeleeMoLiMax);
-            }
+            self.View.E_MoLiTxtText.text =
+                    string.Format("{0}/{1}", numericComponentC.GetAsInt(NumericType.PetMeleeMoLi), ConfigData.PetMeleeMoLiMax);
 
             self.View.E_MoLiImgImage.fillAmount = numericComponentC.GetAsInt(NumericType.PetMeleeMoLi) * 1f / ConfigData.PetMeleeMoLiMax;
 

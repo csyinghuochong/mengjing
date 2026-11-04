@@ -39,24 +39,21 @@ namespace ET.Client
             List<Sprite> Sprites = new List<Sprite>();
             for (int i = 0; i < titleConfig.AnimatorNumber; i++)
             {
-                using (zstring.Block())
+                var path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ChengHaoIcon, string.Format("{0}/{1}", 10001, i + 1));
+                Sprite sprite = await self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetAsync<Sprite>(path);
+                if (instanceId != self.InstanceId)
                 {
-                    var path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ChengHaoIcon, zstring.Format("{0}/{1}", 10001, i + 1));
-                    Sprite sprite = await self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetAsync<Sprite>(path);
-                    if (instanceId != self.InstanceId)
-                    {
-                        return;
-                    }
-
-                    if (i == 0)
-                    {
-                        self.XuLieZhen.SetSize(sprite, Vector2.one * (float)titleConfig.size,
-                            new Vector3((float)titleConfig.MoveX, 75 + (float)titleConfig.MoveY, self.GameObject.transform.localPosition.z));
-                        self.XuLieZhen.Index = 0;
-                    }
-
-                    Sprites.Add(sprite);
+                    return;
                 }
+
+                if (i == 0)
+                {
+                    self.XuLieZhen.SetSize(sprite, Vector2.one * (float)titleConfig.size,
+                        new Vector3((float)titleConfig.MoveX, 75 + (float)titleConfig.MoveY, self.GameObject.transform.localPosition.z));
+                    self.XuLieZhen.Index = 0;
+                }
+
+                Sprites.Add(sprite);
             }
 
             self.XuLieZhen.SetSprites(Sprites);

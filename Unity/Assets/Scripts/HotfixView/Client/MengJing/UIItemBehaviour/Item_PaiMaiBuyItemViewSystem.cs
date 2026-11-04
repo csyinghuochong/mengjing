@@ -134,13 +134,10 @@
             {
                 if (self.PaiMaiItemInfo.Price * self.PaiMaiItemInfo.BagInfo.ItemNum >= 500000)
                 {
-                    using (zstring.Block())
-                    {
-                        PopupTipHelp.OpenPopupTip(self.Root(), "购买道具",
-                            zstring.Format("你购买的道具需要花费{0}金币，是否购买？", self.PaiMaiItemInfo.Price * self.PaiMaiItemInfo.BagInfo.ItemNum),
-                            () => { self.RequestBuy().Coroutine(); },
-                            null).Coroutine();
-                    }
+                    PopupTipHelp.OpenPopupTip(self.Root(), "购买道具",
+                        string.Format("你购买的道具需要花费{0}金币，是否购买？", self.PaiMaiItemInfo.Price * self.PaiMaiItemInfo.BagInfo.ItemNum),
+                        () => { self.RequestBuy().Coroutine(); },
+                        null).Coroutine();
                 }
                 else
                 {
@@ -174,10 +171,7 @@
             if (itemCof.ItemType == 3)
             {
                 self.ES_CommonItem.E_ItemNumText.gameObject.SetActive(true);
-                using (zstring.Block())
-                {
-                    self.ES_CommonItem.E_ItemNumText.text = zstring.Format("{0}级", itemCof.UseLv);
-                }
+                self.ES_CommonItem.E_ItemNumText.text = string.Format("{0}级", itemCof.UseLv);
             }
         }
     }

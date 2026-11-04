@@ -32,11 +32,8 @@ namespace ET.Client
 
             Match match = Regex.Match(unionKeJiConfig.EquipSpaceName, @"\d");
             self.E_NameTextText.text = unionKeJiConfig.EquipSpaceName.Substring(0, match.Index);
-            using (zstring.Block())
-            {
-                self.E_LvTextText.text = zstring.Format("等级：{0}/{1}", unionKeJiConfig.QiangHuaLv.ToString(),
-                    UnionKeJiConfigCategory.Instance.Get(maxConfigId).QiangHuaLv);
-            }
+            self.E_LvTextText.text = string.Format("等级：{0}/{1}", unionKeJiConfig.QiangHuaLv.ToString(),
+                UnionKeJiConfigCategory.Instance.Get(maxConfigId).QiangHuaLv);
 
             CommonViewHelper.SetImageGray(self.Root(), self.E_IconImgImage.gameObject, unionKeJiConfig.QiangHuaLv == 0);
         }

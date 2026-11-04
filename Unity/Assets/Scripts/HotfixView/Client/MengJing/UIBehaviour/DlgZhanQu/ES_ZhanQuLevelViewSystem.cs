@@ -53,10 +53,7 @@ namespace ET.Client
                 self.ShowActivityConfigs.Add(activityConfigs[i]);
             }
 
-            using (zstring.Block())
-            {
-                self.E_Lab_MyLvText.text = zstring.Format("我的等级：{0}", self.Root().GetComponent<UserInfoComponentC>().UserInfo.Lv);
-            }
+            self.E_Lab_MyLvText.text = string.Format("我的等级：{0}", self.Root().GetComponent<UserInfoComponentC>().UserInfo.Lv);
 
             self.AddUIScrollItems(ref self.ScrollItemZhanQuLevelItems, self.ShowActivityConfigs.Count);
             self.E_ZhanQuLevelItemsLoopVerticalScrollRect.SetVisible(true, self.ShowActivityConfigs.Count);

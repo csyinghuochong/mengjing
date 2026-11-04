@@ -202,10 +202,7 @@ namespace ET.Client
 
             self.E_ImageProgressImage.fillAmount = progress;
             self.E_Text_NameText.text = shouJiConfig.ChapterDes;
-            using (zstring.Block())
-            {
-                self.E_Text_StarNumText.text = zstring.Format("{0}/{1}", starNum, shouJiConfig.ProList3_StartNum);
-            }
+            self.E_Text_StarNumText.text = string.Format("{0}/{1}", starNum, shouJiConfig.ProList3_StartNum);
 
             self.E_Text_Star1Text.text = shouJiConfig.ProList1_StartNum.ToString();
             self.E_Text_Star2Text.text = shouJiConfig.ProList2_StartNum.ToString();

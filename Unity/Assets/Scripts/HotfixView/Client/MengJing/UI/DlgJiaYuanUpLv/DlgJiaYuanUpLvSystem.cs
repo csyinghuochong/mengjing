@@ -93,29 +93,26 @@ namespace ET.Client
             int jiayuanid = userInfoCom.UserInfo.JiaYuanLv;
 
             JiaYuanConfig jiayuanCof = JiaYuanConfigCategory.Instance.Get(jiayuanid);
-            using (zstring.Block())
+            self.View.E_JiaYuanNameText.text = string.Format("{0}的家园", userInfoCom.UserInfo.Name);
+            self.View.E_Text_ZiZhiValueText.text = string.Format("{0}/{1}", userInfoCom.UserInfo.JiaYuanExp, jiayuanCof.Exp);
+            self.View.E_ImageExpValueImage.fillAmount = (float)userInfoCom.UserInfo.JiaYuanExp / (float)jiayuanCof.Exp;
+
+            self.View.E_Lab_GengDiText.text = jiayuanCof.FarmNumMax.ToString();
+            self.View.E_Lab_RenKouText.text = jiayuanCof.PeopleNumMax.ToString();
+
+            self.View.E_JiaYuanLvText.text = string.Format("等级:{0}", jiayuanCof.Lv);
+
+            //提示描述
+            int hour = (int)((float)(jiayuanCof.Exp - (int)userInfoCom.UserInfo.JiaYuanExp) / jiayuanCof.JiaYuanAddExp) + 1;
+            if (hour < 0)
             {
-                self.View.E_JiaYuanNameText.text = zstring.Format("{0}的家园", userInfoCom.UserInfo.Name);
-                self.View.E_Text_ZiZhiValueText.text = zstring.Format("{0}/{1}", userInfoCom.UserInfo.JiaYuanExp, jiayuanCof.Exp);
-                self.View.E_ImageExpValueImage.fillAmount = (float)userInfoCom.UserInfo.JiaYuanExp / (float)jiayuanCof.Exp;
-
-                self.View.E_Lab_GengDiText.text = jiayuanCof.FarmNumMax.ToString();
-                self.View.E_Lab_RenKouText.text = jiayuanCof.PeopleNumMax.ToString();
-
-                self.View.E_JiaYuanLvText.text = zstring.Format("等级:{0}", jiayuanCof.Lv);
-
-                //提示描述
-                int hour = (int)((float)(jiayuanCof.Exp - (int)userInfoCom.UserInfo.JiaYuanExp) / jiayuanCof.JiaYuanAddExp) + 1;
-                if (hour < 0)
-                {
-                    hour = 0;
-                }
-
-                self.View.E_JiaYuanUpHintText.text = zstring.Format("提示:经验产出{0}/小时，预计{1}小时后可升级家园。", jiayuanCof.JiaYuanAddExp, hour);
-
-                self.View.E_ZiJinDuiHuanTextText.text = zstring.Format("兑换次数:10/{0}", numericComponent.GetAsInt(NumericType.JiaYuanExchangeZiJin));
-                self.View.E_ExpDuiHuanTextText.text = zstring.Format("兑换次数:10/{0}", numericComponent.GetAsInt(NumericType.JiaYuanExchangeExp));
+                hour = 0;
             }
+
+            self.View.E_JiaYuanUpHintText.text = string.Format("提示:经验产出{0}/小时，预计{1}小时后可升级家园。", jiayuanCof.JiaYuanAddExp, hour);
+
+            self.View.E_ZiJinDuiHuanTextText.text = string.Format("兑换次数:10/{0}", numericComponent.GetAsInt(NumericType.JiaYuanExchangeZiJin));
+            self.View.E_ExpDuiHuanTextText.text = string.Format("兑换次数:10/{0}", numericComponent.GetAsInt(NumericType.JiaYuanExchangeExp));
 
             string[] upgets = jiayuanCof.JiaYuanDes.Split(';');
             for (int i = 0; i < self.View.EG_UpdateGetRectTransform.childCount; i++)

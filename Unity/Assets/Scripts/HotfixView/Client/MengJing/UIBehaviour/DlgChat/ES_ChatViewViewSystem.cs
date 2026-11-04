@@ -51,10 +51,7 @@ namespace ET.Client
         public static void Refresh(this ES_ChatView self, FriendInfo friendInfo)
         {
             self.FriendInfo = friendInfo;
-            using (zstring.Block())
-            {
-                self.E_ChatPlayNameText.text = zstring.Format("与{0}私聊中...", friendInfo.PlayerName);
-            }
+            self.E_ChatPlayNameText.text = string.Format("与{0}私聊中...", friendInfo.PlayerName);
 
             self.RefreshFriendChatItems();
         }

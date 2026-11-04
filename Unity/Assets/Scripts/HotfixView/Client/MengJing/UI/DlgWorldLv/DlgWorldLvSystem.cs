@@ -29,10 +29,7 @@
 
             if (rankingInfo != null)
             {
-                using (zstring.Block())
-                {
-                    self.View.E_Lab_GanDiNameText.text = zstring.Format("{0}({1}级)", rankingInfo.PlayerName, rankingInfo.PlayerLv);
-                }
+                self.View.E_Lab_GanDiNameText.text = string.Format("{0}({1}级)", rankingInfo.PlayerName, rankingInfo.PlayerLv);
             }
             else
             {
@@ -40,15 +37,12 @@
             }
 
             UserInfo userInfo = self.Root().GetComponent<UserInfoComponentC>().UserInfo;
-            using (zstring.Block())
-            {
-                self.View.E_Lab_MyLv1Text.text = zstring.Format("你当前的等级：{0}", userInfo.Lv);
-                self.View.E_Lab_MyLv2Text.text = zstring.Format("你当前的等级：{0}", userInfo.Lv);
+            self.View.E_Lab_MyLv1Text.text = string.Format("你当前的等级：{0}", userInfo.Lv);
+            self.View.E_Lab_MyLv2Text.text = string.Format("你当前的等级：{0}", userInfo.Lv);
 
-                float expAdd = CommonHelp.GetExpAdd(userInfo.Lv, response.ServerInfo);
-                self.View.E_Lab_ExpRateText.text = zstring.Format("可以获得经验加成:{0}%", (int)(expAdd * 100));
-                self.View.E_Lab_ExpAddProText.text = zstring.Format("可以获得经验加成:{0}%", (int)(expAdd * 100));
-            }
+            float expAdd = CommonHelp.GetExpAdd(userInfo.Lv, response.ServerInfo);
+            self.View.E_Lab_ExpRateText.text = string.Format("可以获得经验加成:{0}%", (int)(expAdd * 100));
+            self.View.E_Lab_ExpAddProText.text = string.Format("可以获得经验加成:{0}%", (int)(expAdd * 100));
 
             self.UpdateDuiHuanTimes();
         }
@@ -78,22 +72,16 @@
             // }
 
             int sendGold = 10000;/// + expCof.RoseGoldPro * 10;
-            using (zstring.Block())
-            {
-                PopupTipHelp.OpenPopupTip(self.Root(), "兑换金币", zstring.Format("是否消耗{0}经验兑换{1}金币", 1, sendGold),
-                            () => { self.RequestExpToGold().Coroutine(); }, null)
-                        .Coroutine();
-            }
+            PopupTipHelp.OpenPopupTip(self.Root(), "兑换金币", string.Format("是否消耗{0}经验兑换{1}金币", 1, sendGold),
+                        () => { self.RequestExpToGold().Coroutine(); }, null)
+                    .Coroutine();
         }
 
         public static void UpdateDuiHuanTimes(this DlgWorldLv self)
         {
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
             int times = unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.ExpToGoldTimes);
-            using (zstring.Block())
-            {
-                self.View.E_Lab_DuiHuanTimesText.text = zstring.Format("今日兑换次数:{0}", times);
-            }
+            self.View.E_Lab_DuiHuanTimesText.text = string.Format("今日兑换次数:{0}", times);
         }
 
         public static async ETTask RequestExpToGold(this DlgWorldLv self)

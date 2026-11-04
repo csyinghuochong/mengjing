@@ -16,12 +16,9 @@ namespace ET.Client
             self.E_Btn_EnterButton.AddListenerAsync(self.OnBtn_EnterButton);
             string globalValueConfig = GlobalValueConfigCategory.Instance.Value_63;
             string[] jianyiLevel = globalValueConfig.Split(';');
-            using (zstring.Block())
-            {
-                self.E_TextLevelJianyi_1Text.text = zstring.Format("建议等级达到{0}级后进行挑战", jianyiLevel[0]);
-                self.E_TextLevelJianyi_2Text.text = zstring.Format("建议等级达到{0}级后进行挑战", jianyiLevel[1]);
-                self.E_TextLevelJianyi_3Text.text = zstring.Format("建议等级达到{0}级后进行挑战", jianyiLevel[2]);
-            }
+            self.E_TextLevelJianyi_1Text.text = string.Format("建议等级达到{0}级后进行挑战", jianyiLevel[0]);
+            self.E_TextLevelJianyi_2Text.text = string.Format("建议等级达到{0}级后进行挑战", jianyiLevel[1]);
+            self.E_TextLevelJianyi_3Text.text = string.Format("建议等级达到{0}级后进行挑战", jianyiLevel[2]);
 
             globalValueConfig = GlobalValueConfigCategory.Instance.Value_61;
             self.ES_RewardList.Refresh(globalValueConfig, 1f, false);

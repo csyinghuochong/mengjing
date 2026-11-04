@@ -138,12 +138,9 @@ namespace ET.Client
             if (itemConfig.ItemQuality >= 4 && response.PaiMaiItemInfo != null)
             {
                 long paimaiItemId = response.PaiMaiItemInfo.Id;
-                using (zstring.Block())
-                {
-                    string text = zstring.Format("在拍卖行上架道具<color=#{0}>{1}</color>！<color=#00FF00>点击前往拍卖行 </color><link=paimai_{2}_{3}></link>",
-                        CommonHelp.QualityReturnColor(4), itemConfig.ItemName, itemConfig.ItemType, paimaiItemId);
-                    ChatNetHelper.RequestSendChat(self.Root(), ChannelEnum.PaiMai, text).Coroutine();
-                }
+                string text = string.Format("在拍卖行上架道具<color=#{0}>{1}</color>！<color=#00FF00>点击前往拍卖行 </color><link=paimai_{2}_{3}></link>",
+                    CommonHelp.QualityReturnColor(4), itemConfig.ItemName, itemConfig.ItemType, paimaiItemId);
+                ChatNetHelper.RequestSendChat(self.Root(), ChannelEnum.PaiMai, text).Coroutine();
             }
 
             dlgPaiMai.View.ES_PaiMaiSell.OnPaiBuyShangJia(response.PaiMaiItemInfo);

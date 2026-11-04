@@ -83,10 +83,7 @@ namespace ET.Client
             int shulianduNumeric = self.Plan == 1 ? NumericType.MakeShuLianDu_1 : NumericType.MakeShuLianDu_2;
             int curValue = unit.GetComponent<NumericComponentC>().GetAsInt(shulianduNumeric);
 
-            using (zstring.Block())
-            {
-                self.View.E_Lab_ShuLianDuText.text = zstring.Format("{0}/{1}", curValue, maxValue);
-            }
+            self.View.E_Lab_ShuLianDuText.text = string.Format("{0}/{1}", curValue, maxValue);
 
             self.View.E_Img_ShuLianProImage.fillAmount = curValue * 1f / maxValue;
         }
@@ -253,20 +250,17 @@ namespace ET.Client
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
             int shulianduNumeric = self.Plan == 1 ? NumericType.MakeShuLianDu_1 : NumericType.MakeShuLianDu_2;
             int nowShuLianDu = unit.GetComponent<NumericComponentC>().GetAsInt(shulianduNumeric);
-            using (zstring.Block())
+            if (unit.GetComponent<NumericComponentC>().GetAsInt(shulianduNumeric) < equipMakeConfig.NeedProficiencyValue)
             {
-                if (unit.GetComponent<NumericComponentC>().GetAsInt(shulianduNumeric) < equipMakeConfig.NeedProficiencyValue)
-                {
-                    //不满足显示红色,满足显示绿色
-                    self.View.E_LabNeedShuLianText.text = zstring.Format("{0}/{1}(技巧值不足)", nowShuLianDu, equipMakeConfig.NeedProficiencyValue);
-                    self.View.E_LabNeedShuLianText.color = new Color(236f / 255f, 101f / 255f, 110f / 255f);
-                }
-                else
-                {
-                    //满足显示绿色,满足显示绿色
-                    self.View.E_LabNeedShuLianText.text = zstring.Format("{0}/{1}(可学习)", nowShuLianDu, equipMakeConfig.NeedProficiencyValue);
-                    self.View.E_LabNeedShuLianText.color = new Color(217f / 255f, 255f / 255f, 134f / 255f);
-                }
+                //不满足显示红色,满足显示绿色
+                self.View.E_LabNeedShuLianText.text = string.Format("{0}/{1}(技巧值不足)", nowShuLianDu, equipMakeConfig.NeedProficiencyValue);
+                self.View.E_LabNeedShuLianText.color = new Color(236f / 255f, 101f / 255f, 110f / 255f);
+            }
+            else
+            {
+                //满足显示绿色,满足显示绿色
+                self.View.E_LabNeedShuLianText.text = string.Format("{0}/{1}(可学习)", nowShuLianDu, equipMakeConfig.NeedProficiencyValue);
+                self.View.E_LabNeedShuLianText.color = new Color(217f / 255f, 255f / 255f, 134f / 255f);
             }
 
             self.View.ES_RewardList.Refresh(equipMakeConfig.NeedItems);

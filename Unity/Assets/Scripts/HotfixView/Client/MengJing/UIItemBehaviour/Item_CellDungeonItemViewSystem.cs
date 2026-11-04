@@ -25,10 +25,7 @@ namespace ET.Client
 
             CellGenerateConfig cellGenerateConfig = CellGenerateConfigCategory.Instance.Get(levelId);
             self.E_Lab_ChapSonNameOutText.text = cellGenerateConfig.ChapterName;
-            using (zstring.Block())
-            {
-                self.E_Lab_EnterLevelText.text = zstring.Format("挑战等级：{0}", cellGenerateConfig.EnterLv);
-            }
+            self.E_Lab_EnterLevelText.text = string.Format("挑战等级：{0}", cellGenerateConfig.EnterLv);
 
             // FubenPassInfo fubenPassInfo = self.Root().GetComponent<UserInfoComponentC>().GetPassInfoByID(levelId);
             // self.ImagePutong.SetActive(self.Root().GetComponent<UserInfoComponentC>().UserInfo.Lv >= cellGenerateConfig.EnterLv);

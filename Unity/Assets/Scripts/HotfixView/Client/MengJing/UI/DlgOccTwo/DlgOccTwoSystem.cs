@@ -40,11 +40,8 @@ namespace ET.Client
             }
 
             OccupationTwoConfig occupationTwoConfig = OccupationTwoConfigCategory.Instance.Get(self.OccTwoId);
-            using (zstring.Block())
-            {
-                PopupTipHelp.OpenPopupTip(self.Root(), "转职", zstring.Format("是否转职为：{0}", occupationTwoConfig.OccupationName),
-                    () => { self.RequestChangeOcc().Coroutine(); }).Coroutine();
-            }
+            PopupTipHelp.OpenPopupTip(self.Root(), "转职", string.Format("是否转职为：{0}", occupationTwoConfig.OccupationName),
+                () => { self.RequestChangeOcc().Coroutine(); }).Coroutine();
         }
 
         public static async ETTask RequestChangeOcc(this DlgOccTwo self)
@@ -143,35 +140,29 @@ namespace ET.Client
 
             ResourcesLoaderComponent resourcesLoaderComponent = self.Root().GetComponent<ResourcesLoaderComponent>();
 
-            using (zstring.Block())
-            {
-                string path1 = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.OtherIcon, zstring.Format("HuJia_{0}", occupationTwoConfig.ArmorMastery));
-                Sprite sp1 = resourcesLoaderComponent.LoadAssetSync<Sprite>(path1);
+            string path1 = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.OtherIcon, string.Format("HuJia_{0}", occupationTwoConfig.ArmorMastery));
+            Sprite sp1 = resourcesLoaderComponent.LoadAssetSync<Sprite>(path1);
 
-                self.View.E_Image_WuQi_ZhuanImage.sprite = sp1;
+            self.View.E_Image_WuQi_ZhuanImage.sprite = sp1;
 
-                path1 = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.OtherIcon, zstring.Format("WuQi_{0}", occupationTwoConfig.WeaponType));
-                sp1 = resourcesLoaderComponent.LoadAssetSync<Sprite>(path1);
+            path1 = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.OtherIcon, string.Format("WuQi_{0}", occupationTwoConfig.WeaponType));
+            sp1 = resourcesLoaderComponent.LoadAssetSync<Sprite>(path1);
 
-                self.View.E_Image_WuQi_TypeImage.sprite = sp1;
+            self.View.E_Image_WuQi_TypeImage.sprite = sp1;
 
-                self.View.E_Lab_HuJiaText.text = zstring.Format("{0}专精", self.showType[occupationTwoConfig.ArmorMastery]);
-                self.View.E_Lab_WuQiText.text = zstring.Format("{0}专精", self.showType[occupationTwoConfig.WeaponType]);
+            self.View.E_Lab_HuJiaText.text = string.Format("{0}专精", self.showType[occupationTwoConfig.ArmorMastery]);
+            self.View.E_Lab_WuQiText.text = string.Format("{0}专精", self.showType[occupationTwoConfig.WeaponType]);
 
-                path1 = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.OtherIcon, zstring.Format("OccTwo_{0}", occupationTwoConfig.Id));
-                sp1 = resourcesLoaderComponent.LoadAssetSync<Sprite>(path1);
+            path1 = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.OtherIcon, string.Format("OccTwo_{0}", occupationTwoConfig.Id));
+            sp1 = resourcesLoaderComponent.LoadAssetSync<Sprite>(path1);
 
-                self.View.E_Image_ZhiYe_4Image.sprite = sp1;
-            }
+            self.View.E_Image_ZhiYe_4Image.sprite = sp1;
 
             self.View.EG_OccNengLi_1RectTransform.Find("Text_NengLiValue").GetComponent<Text>().text = occupationTwoConfig.Capacitys[0].ToString();
             self.View.EG_OccNengLi_2RectTransform.Find("Text_NengLiValue").GetComponent<Text>().text = occupationTwoConfig.Capacitys[1].ToString();
             self.View.EG_OccNengLi_3RectTransform.Find("Text_NengLiValue").GetComponent<Text>().text = occupationTwoConfig.Capacitys[2].ToString();
 
-            using (zstring.Block())
-            {
-                Log.Info(zstring.Format("(float)occupationTwoConfig.Capacitys[0] * 1f / 100f = {0}", occupationTwoConfig.Capacitys[0] * 1f / 100f));
-            }
+            Log.Info(string.Format("(float)occupationTwoConfig.Capacitys[0] * 1f / 100f = {0}", occupationTwoConfig.Capacitys[0] * 1f / 100f));
 
             self.View.EG_OccNengLi_1RectTransform.Find("ImageProgress").GetComponent<Image>().fillAmount =
                     occupationTwoConfig.Capacitys[0] * 1f / 100f;
@@ -206,11 +197,8 @@ namespace ET.Client
             }
 
             string costitem = CommonViewHelper.GetNeedItemDesc(ConfigData.ChangeOccItem);
-            using (zstring.Block())
-            {
-                PopupTipHelp.OpenPopupTip(self.Root(), "技能点重置", zstring.Format("是否花费{0}重置技能点", costitem), () => { self.RequestReset(2).Coroutine(); })
-                        .Coroutine();
-            }
+            PopupTipHelp.OpenPopupTip(self.Root(), "技能点重置", string.Format("是否花费{0}重置技能点", costitem), () => { self.RequestReset(2).Coroutine(); })
+                    .Coroutine();
         }
 
         public static async ETTask RequestReset(this DlgOccTwo self, int operation)

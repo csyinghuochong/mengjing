@@ -79,17 +79,14 @@ namespace ET.Client
 
             response.RankList.Sort((x, y) => (int)(y.KillNumber - x.KillNumber));
 
-            using (zstring.Block())
+            for (int i = 0; i < response.RankList.Count; i++)
             {
-                for (int i = 0; i < response.RankList.Count; i++)
-                {
-                    GameObject go = UnityEngine.Object.Instantiate(self.EG_UIRankUnionItemRectTransform.gameObject);
-                    CommonViewHelper.SetParent(go, self.EG_RankingListNodeRectTransform.gameObject);
-                    go.SetActive(true);
-                    ReferenceCollector rc = go.GetComponent<ReferenceCollector>();
-                    rc.Get<GameObject>("NameText").GetComponent<Text>().text = zstring.Format("   {0}    {1}", i + 1, response.RankList[i].PlayerName);
-                    rc.Get<GameObject>("NumText").GetComponent<Text>().text = response.RankList[i].KillNumber.ToString();
-                }
+                GameObject go = UnityEngine.Object.Instantiate(self.EG_UIRankUnionItemRectTransform.gameObject);
+                CommonViewHelper.SetParent(go, self.EG_RankingListNodeRectTransform.gameObject);
+                go.SetActive(true);
+                ReferenceCollector rc = go.GetComponent<ReferenceCollector>();
+                rc.Get<GameObject>("NameText").GetComponent<Text>().text = string.Format("   {0}    {1}", i + 1, response.RankList[i].PlayerName);
+                rc.Get<GameObject>("NumText").GetComponent<Text>().text = response.RankList[i].KillNumber.ToString();
             }
         }
 

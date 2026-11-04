@@ -27,10 +27,7 @@ namespace ET.Client
 
             self.E_Img_PetHeroIonImage.sprite = sp;
             self.E_Lab_PetNameText.text = rolePetInfo.PetName;
-            using (zstring.Block())
-            {
-                self.E_Lab_PetLvText.text = zstring.Format("{0}{1}", rolePetInfo.PetLv, LanguageComponent.Instance.LoadLocalization("级"));
-            }
+            self.E_Lab_PetLvText.text = string.Format("{0}{1}", rolePetInfo.PetLv, LanguageComponent.Instance.LoadLocalization("级"));
 
             self.E_Image_ProtectImage.gameObject.SetActive(rolePetInfo.IsProtect);
 
@@ -45,11 +42,8 @@ namespace ET.Client
                 return;
             }
 
-            using (zstring.Block())
-            {
-                EventSystem.Instance.Publish(self.Root(),
-                    new PetItemSelect { DataParamString = zstring.Format("{0}@{1}", self.OperationType.ToString(), self.RolePetInfo.Id) });
-            }
+            EventSystem.Instance.Publish(self.Root(),
+                new PetItemSelect { DataParamString = string.Format("{0}@{1}", self.OperationType.ToString(), self.RolePetInfo.Id) });
 
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_PetSelect);
         }

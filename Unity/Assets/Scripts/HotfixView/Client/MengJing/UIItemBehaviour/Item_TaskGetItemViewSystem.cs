@@ -34,10 +34,7 @@ namespace ET.Client
             }
             else
             {
-                using (zstring.Block())
-                {
-                    self.E_TextTaskNameText.text = zstring.Format("{0}(已完成)", taskConfig.TaskName);
-                }
+                self.E_TextTaskNameText.text = string.Format("{0}(已完成)", taskConfig.TaskName);
 
                 self.E_TextTaskNameText.color = new Color(131f / 255f, 255f / 255f, 83f / 255f);
             }

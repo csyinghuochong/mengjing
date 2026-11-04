@@ -14,10 +14,7 @@ namespace ET.Client
             }
             catch (Exception e)
             {
-                using (zstring.Block())
-                {
-                    Log.Error(zstring.Format("move timer error: {0}\n{1}", self.Id, e.ToString()));
-                }
+                Log.Error(string.Format("move timer error: {0}\n{1}", self.Id, e.ToString()));
             }
         }
     }
@@ -122,10 +119,7 @@ namespace ET.Client
                 numMax = 50;
             }
 
-            using (zstring.Block())
-            {
-                self.View.E_TextTipText.text = zstring.Format("勇者之境：{0}/{1}", TowerConfigCategory.Instance.Get(towerId).CengNum, numMax);
-            }
+            self.View.E_TextTipText.text = string.Format("勇者之境：{0}/{1}", TowerConfigCategory.Instance.Get(towerId).CengNum, numMax);
         }
     }
 }

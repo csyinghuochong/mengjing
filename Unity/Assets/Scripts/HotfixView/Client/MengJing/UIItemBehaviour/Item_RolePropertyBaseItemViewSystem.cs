@@ -67,27 +67,18 @@ namespace ET.Client
             {
                 if (showPropertyList.NumericType == NumericType.Now_MaxAct)
                 {
-                    using (zstring.Block())
-                    {
-                        self.E_ProTypeValueText.text = zstring.Format("{0}-{1}", numericComponentC.GetAsLong(NumericType.Now_MinAct),
-                            numericComponentC.GetAsLong(NumericType.Now_MaxAct));
-                    }
+                    self.E_ProTypeValueText.text = string.Format("{0}-{1}", numericComponentC.GetAsLong(NumericType.Now_MinAct),
+                        numericComponentC.GetAsLong(NumericType.Now_MaxAct));
                 }
                 else if (showPropertyList.NumericType == NumericType.Now_MaxDef)
                 {
-                    using (zstring.Block())
-                    {
-                        self.E_ProTypeValueText.text = zstring.Format("{0}-{1}", numericComponentC.GetAsLong(NumericType.Now_MinDef),
-                            numericComponentC.GetAsLong(NumericType.Now_MaxDef));
-                    }
+                    self.E_ProTypeValueText.text = string.Format("{0}-{1}", numericComponentC.GetAsLong(NumericType.Now_MinDef),
+                        numericComponentC.GetAsLong(NumericType.Now_MaxDef));
                 }
                 else if (showPropertyList.NumericType == NumericType.Now_MaxAdf)
                 {
-                    using (zstring.Block())
-                    {
-                        self.E_ProTypeValueText.text = zstring.Format("{0}-{1}", numericComponentC.GetAsLong(NumericType.Now_MinAdf),
-                            numericComponentC.GetAsLong(NumericType.Now_MaxAdf));
-                    }
+                    self.E_ProTypeValueText.text = string.Format("{0}-{1}", numericComponentC.GetAsLong(NumericType.Now_MinAdf),
+                        numericComponentC.GetAsLong(NumericType.Now_MaxAdf));
                 }
                 else if (showPropertyList.NumericType == NumericType.Now_Mage)
                 {

@@ -41,19 +41,16 @@ namespace ET.Client
             for (int i = 0; i < skillIds.Length; i++)
             {
                 SkillConfig skillConfig = SkillConfigCategory.Instance.Get(skillIds[i]);
-                using (zstring.Block())
-                {
-                    string str = zstring.Format("{0}:{1}", skillConfig.SkillName, skillConfig.SkillDescribe);
-                   
-                    GameObject obj = UnityEngine.Object.Instantiate(self.View.E_SkillDescriptionItemTextText.gameObject);
-                    obj.SetActive(true);
-                    CommonViewHelper.SetParent(obj, self.View.EG_SkillDescriptionListNodeRectTransform.gameObject);
+                string str = string.Format("{0}:{1}", skillConfig.SkillName, skillConfig.SkillDescribe);
 
-                    obj.GetComponent<Text>().text = str;
-                    //float height = (str.Length / 30 + 1) * 40; // 16个字一行
-                    float height = obj.GetComponent<Text>().preferredHeight;
-                    obj.GetComponent<RectTransform>().sizeDelta = new Vector2(1000, height);
-                }
+                GameObject obj = UnityEngine.Object.Instantiate(self.View.E_SkillDescriptionItemTextText.gameObject);
+                obj.SetActive(true);
+                CommonViewHelper.SetParent(obj, self.View.EG_SkillDescriptionListNodeRectTransform.gameObject);
+
+                obj.GetComponent<Text>().text = str;
+                //float height = (str.Length / 30 + 1) * 40; // 16个字一行
+                float height = obj.GetComponent<Text>().preferredHeight;
+                obj.GetComponent<RectTransform>().sizeDelta = new Vector2(1000, height);
             }
             
             string skilldesc = "";
@@ -66,10 +63,7 @@ namespace ET.Client
                 }
 
                 SkillConfig skillConfig = SkillConfigCategory.Instance.Get(skilllist[i]);
-                using (zstring.Block())
-                {
-                    skilldesc += zstring.Format("{1} {2}\n", skillConfig.SkillName, skillConfig.SkillDescribe);
-                }
+                skilldesc += string.Format("{1} {2}\n", skillConfig.SkillName, skillConfig.SkillDescribe);
             }
 
             //self.E_Text_SkillJieShaoText.text = skilldesc;

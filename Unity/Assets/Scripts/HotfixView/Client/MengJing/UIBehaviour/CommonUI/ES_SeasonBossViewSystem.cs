@@ -63,42 +63,39 @@ namespace ET.Client
 
 			Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
 			NumericComponentC numericComponentC = unit.GetComponent<NumericComponentC>();
-			using (zstring.Block())
+			if (self.LastSeasonBossLevel != bosslv)
 			{
-				if (self.LastSeasonBossLevel != bosslv)
+				int bossid = keyValuePairInt.KeyId;
+				MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(bossid);
+
+				string[] strs = null;
+				if (!CommonHelp.IfNull(monsterConfig.ModelShowPosi))
 				{
-					int bossid = keyValuePairInt.KeyId;
-					MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(bossid);
-					
-					string[] strs = null;
-					if (!CommonHelp.IfNull(monsterConfig.ModelShowPosi))
-					{
-						strs = monsterConfig.ModelShowPosi.Split(',');
-					}
-					if (strs != null && strs.Length >= 5)
-					{
-						self.ES_ModelShow.Camera.fieldOfView = float.Parse(strs[3]);
-						self.ES_ModelShow.SetCameraPosition(new Vector3(float.Parse(strs[0]), float.Parse(strs[1]), float.Parse(strs[2])));
-						self.ES_ModelShow.RotationY = float.Parse(strs[4]); 
-					}
-					else
-					{
-						self.ES_ModelShow.SetCameraPosition(new Vector3(0f, 40f, 150f));
-					}
-					
-					self.ES_ModelShow.ShowOtherModel(zstring.Format("Monster/{0}", monsterConfig.MonsterModelID)).Coroutine();
+					strs = monsterConfig.ModelShowPosi.Split(',');
+				}
+				if (strs != null && strs.Length >= 5)
+				{
+					self.ES_ModelShow.Camera.fieldOfView = float.Parse(strs[3]);
+					self.ES_ModelShow.SetCameraPosition(new Vector3(float.Parse(strs[0]), float.Parse(strs[1]), float.Parse(strs[2])));
+					self.ES_ModelShow.RotationY = float.Parse(strs[4]); 
+				}
+				else
+				{
+					self.ES_ModelShow.SetCameraPosition(new Vector3(0f, 40f, 150f));
 				}
 
-				self.E_SeasonExperienceTextText.text = zstring.Format("{0}/{1}", bossexp, keyValuePairInt.Value);
-
-				if (bosslv >= ConfigData.CommonSeasonBossList.Count - 1 && bossexp >=keyValuePairInt.Value )
-				{
-					self.E_SeasonExperienceTextText.text = "已满级";
-				}
-
-				self.E_SeasonBossLevelText.text = zstring.Format("{0}级", bosslv + 1);
-				self.E_SeasonDonateTimesText.text = zstring.Format("当前您已捐献<color=#C7FF40>{0}</color>次", numericComponentC.GetAsInt(NumericType.CommonSeasonDonateTimes));
+				self.ES_ModelShow.ShowOtherModel(string.Format("Monster/{0}", monsterConfig.MonsterModelID)).Coroutine();
 			}
+
+			self.E_SeasonExperienceTextText.text = string.Format("{0}/{1}", bossexp, keyValuePairInt.Value);
+
+			if (bosslv >= ConfigData.CommonSeasonBossList.Count - 1 && bossexp >=keyValuePairInt.Value )
+			{
+				self.E_SeasonExperienceTextText.text = "已满级";
+			}
+
+			self.E_SeasonBossLevelText.text = string.Format("{0}级", bosslv + 1);
+			self.E_SeasonDonateTimesText.text = string.Format("当前您已捐献<color=#C7FF40>{0}</color>次", numericComponentC.GetAsInt(NumericType.CommonSeasonDonateTimes));
 
 			self.ES_CostItem.UpdateItem( GlobalValueConfigCategory.Instance.CommonSeasonDonateItemId, 1, true );
 			

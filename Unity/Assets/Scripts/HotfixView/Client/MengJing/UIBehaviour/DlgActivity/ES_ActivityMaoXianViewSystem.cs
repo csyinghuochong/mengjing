@@ -102,10 +102,7 @@ namespace ET.Client
             float value = rechargeNum * 1f / needNumber;
             value = Mathf.Clamp01(value);
             self.E_ImageProgressImage.fillAmount = value;
-            using (zstring.Block())
-            {
-                self.E_Text_ProgressText.text = zstring.Format("{0}/{1}", rechargeNum, needNumber);
-            }
+            self.E_Text_ProgressText.text = string.Format("{0}/{1}", rechargeNum, needNumber);
 
             self.E_Btn_GetRewardButton.gameObject.SetActive(!activityComponent.ActivityReceiveIds.Contains(self.CurActivityId));
             self.E_ImageReceivedImage.gameObject.SetActive(activityComponent.ActivityReceiveIds.Contains(self.CurActivityId));

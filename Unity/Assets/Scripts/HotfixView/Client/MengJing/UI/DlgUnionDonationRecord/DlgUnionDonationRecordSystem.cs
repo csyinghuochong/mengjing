@@ -48,22 +48,19 @@ namespace ET.Client
                 GameObject HeadIcon = rc.Get<GameObject>("HeadIcon");
                 DonationRecord donationRecord = response.DonationRecords[i];
                 DateTime dateTime = TimeInfo.Instance.ToDateTime(donationRecord.Time);
-                using (zstring.Block())
+                if (donationRecord.Gold > 0)
                 {
-                    if (donationRecord.Gold > 0)
-                    {
-                        TextContent.GetComponent<Text>().text =
-                                zstring.Format("玩家 <color=#{0}>{1}</color> {2} 捐献： <color=#{3}>{4}</color>金币",
-                                    CommonHelp.QualityReturnColor(4), donationRecord.Name, dateTime.ToShortTimeString(),
-                                    CommonHelp.QualityReturnColor(2), donationRecord.Gold);
-                    }
-                    else
-                    {
-                        TextContent.GetComponent<Text>().text =
-                                zstring.Format("玩家 <color=#{0}>{1}</color> {2} 捐献： <color=#{3}>{4}</color>钻石",
-                                    CommonHelp.QualityReturnColor(4), donationRecord.Name, dateTime.ToShortTimeString(),
-                                    CommonHelp.QualityReturnColor(2), donationRecord.Diamond);
-                    }
+                    TextContent.GetComponent<Text>().text =
+                            string.Format("玩家 <color=#{0}>{1}</color> {2} 捐献： <color=#{3}>{4}</color>金币",
+                                CommonHelp.QualityReturnColor(4), donationRecord.Name, dateTime.ToShortTimeString(),
+                                CommonHelp.QualityReturnColor(2), donationRecord.Gold);
+                }
+                else
+                {
+                    TextContent.GetComponent<Text>().text =
+                            string.Format("玩家 <color=#{0}>{1}</color> {2} 捐献： <color=#{3}>{4}</color>钻石",
+                                CommonHelp.QualityReturnColor(4), donationRecord.Name, dateTime.ToShortTimeString(),
+                                CommonHelp.QualityReturnColor(2), donationRecord.Diamond);
                 }
 
                 HeadIcon.GetComponent<Image>().sprite = self.Root().GetComponent<ResourcesLoaderComponent>()

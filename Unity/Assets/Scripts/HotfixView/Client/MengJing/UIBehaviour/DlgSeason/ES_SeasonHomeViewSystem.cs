@@ -64,10 +64,7 @@ namespace ET.Client
                 seasonExp = seasonLevelConfig.UpExp;
             }
 
-            using (zstring.Block())
-            {
-                self.E_SeasonExperienceTextText.text = zstring.Format("赛季经验:{0}/{1}", seasonExp, seasonLevelConfig.UpExp);
-            }
+            self.E_SeasonExperienceTextText.text = string.Format("赛季经验:{0}/{1}", seasonExp, seasonLevelConfig.UpExp);
 
             self.E_SeasonExperienceImgImage.fillAmount = 1f * seasonExp / seasonLevelConfig.UpExp;
 
@@ -90,10 +87,7 @@ namespace ET.Client
             else
             {
                 DungeonConfig dungeonConfig = DungeonConfigCategory.Instance.Get(fubenid);
-                using (zstring.Block())
-                {
-                    self.E_MonsterPositionTextText.text = zstring.Format("出现位置:{0}", dungeonConfig.ChapterName);
-                }
+                self.E_MonsterPositionTextText.text = string.Format("出现位置:{0}", dungeonConfig.ChapterName);
             }
 
             self.UpdateSeasonReward();
@@ -118,10 +112,7 @@ namespace ET.Client
                 self.E_GetBtnButton.gameObject.SetActive(true);
             }
 
-            using (zstring.Block())
-            {
-                self.E_SeasonRewardTextText.text = zstring.Format("{0}级赛季奖励", nowReward);
-            }
+            self.E_SeasonRewardTextText.text = string.Format("{0}级赛季奖励", nowReward);
 
             self.ES_RewardList.Refresh(SeasonLevelConfigCategory.Instance.Get(nowReward).Reward, 0.9f);
         }

@@ -16,10 +16,7 @@ namespace ET.Client
             }
             catch (Exception e)
             {
-                using (zstring.Block())
-                {
-                    Log.Error(zstring.Format("move timer error: {0}\n{1}", self.Id, e.ToString()));
-                }
+                Log.Error(string.Format("move timer error: {0}\n{1}", self.Id, e.ToString()));
             }
         }
     }
@@ -238,10 +235,7 @@ namespace ET.Client
         public static void OnUpdateMiniMapTime(this ES_MapMini self)
         {
             DateTime serverTime = TimeInfo.Instance.ToDateTime(TimeHelper.ServerNow());
-            using (zstring.Block())
-            {
-                self.E_TimeText.text = zstring.Format("{0}:{1}", serverTime.Hour, serverTime.Minute);
-            }
+            self.E_TimeText.text = string.Format("{0}:{1}", serverTime.Hour, serverTime.Minute);
         }
 
         private static GameObject GetTeamPointObj(this ES_MapMini self, long unitid)
@@ -354,10 +348,7 @@ namespace ET.Client
             //self.MapMiniTimer = self.Root().GetComponent<TimerComponent>().NewRepeatedTimer(1000, TimerInvokeType.MapMiniTimer, self);
 
             DateTime serverTime = TimeInfo.Instance.ToDateTime(TimeHelper.ServerNow());
-            using (zstring.Block())
-            {
-                self.E_TimeText.text = zstring.Format("{0}:{1}", serverTime.Hour, serverTime.Minute);
-            }
+            self.E_TimeText.text = string.Format("{0}:{1}", serverTime.Hour, serverTime.Minute);
         }
 
         public static void UpdateMapName(this ES_MapMini self)
@@ -366,70 +357,67 @@ namespace ET.Client
             int difficulty = self.Root().GetComponent<MapComponent>().FubenDifficulty;
             int sceneId = self.Root().GetComponent<MapComponent>().SceneId;
 
-            using (zstring.Block())
+            //显示地图名称
+            switch (sceneTypeEnum)
             {
-                //显示地图名称
-                switch (sceneTypeEnum)
-                {
-                    case MapTypeEnum.CellDungeon:
-                        self.EG_MainCityShowRectTransform.gameObject.SetActive(false);
-                        self.E_MapNameText.text = CellGenerateConfigCategory.Instance.Get(sceneId).ChapterName;
-                        break;
-                    case MapTypeEnum.DragonDungeon:
-                        self.EG_MainCityShowRectTransform.gameObject.SetActive(false);
-                        self.E_MapNameText.text = CellGenerateConfigCategory.Instance.Get(sceneId).ChapterName;
-                        break;
-                    case MapTypeEnum.LocalDungeon:
-                        string str = string.Empty;
-                        if (difficulty == FubenDifficulty.Normal)
-                        {
-                            str = "(普通)";
-                        }
+                case MapTypeEnum.CellDungeon:
+                    self.EG_MainCityShowRectTransform.gameObject.SetActive(false);
+                    self.E_MapNameText.text = CellGenerateConfigCategory.Instance.Get(sceneId).ChapterName;
+                    break;
+                case MapTypeEnum.DragonDungeon:
+                    self.EG_MainCityShowRectTransform.gameObject.SetActive(false);
+                    self.E_MapNameText.text = CellGenerateConfigCategory.Instance.Get(sceneId).ChapterName;
+                    break;
+                case MapTypeEnum.LocalDungeon:
+                    string str = string.Empty;
+                    if (difficulty == FubenDifficulty.Normal)
+                    {
+                        str = "(普通)";
+                    }
 
-                        if (difficulty == FubenDifficulty.TiaoZhan)
-                        {
-                            str = "(挑战)";
-                        }
+                    if (difficulty == FubenDifficulty.TiaoZhan)
+                    {
+                        str = "(挑战)";
+                    }
 
-                        if (difficulty == FubenDifficulty.DiYu)
-                        {
-                            str = "(地狱)";
-                        }
+                    if (difficulty == FubenDifficulty.DiYu)
+                    {
+                        str = "(地狱)";
+                    }
 
-                        if (DungeonSectionConfigCategory.Instance.MysteryDungeonList.Contains(sceneId))
-                        {
-                            str = string.Empty;
-                        }
+                    if (DungeonSectionConfigCategory.Instance.MysteryDungeonList.Contains(sceneId))
+                    {
+                        str = string.Empty;
+                    }
 
-                        self.E_MapNameText.text = zstring.Format("{0}{1}", DungeonConfigCategory.Instance.Get(sceneId).ChapterName, str);
-                        break;
-                    case MapTypeEnum.TeamDungeon:
-                        str = "";
-                        if (difficulty == TeamFubenType.XieZhu)
-                        {
-                            str = "(协助)";
-                        }
+                    self.E_MapNameText.text = string.Format("{0}{1}", DungeonConfigCategory.Instance.Get(sceneId).ChapterName, str);
+                    break;
+                case MapTypeEnum.TeamDungeon:
+                    str = "";
+                    if (difficulty == TeamFubenType.XieZhu)
+                    {
+                        str = "(协助)";
+                    }
 
-                        if (difficulty == TeamFubenType.ShenYuan)
-                        {
-                            str = "(深渊)";
-                        }
+                    if (difficulty == TeamFubenType.ShenYuan)
+                    {
+                        str = "(深渊)";
+                    }
 
-                        self.E_MapNameText.text = zstring.Format("{0}{1}", SceneConfigCategory.Instance.Get(sceneId).Name, str);
-                        break;
-                    case MapTypeEnum.Union:
-                        UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
-                        self.E_MapNameText.text = zstring.Format("{0} 公会地图", userInfoComponent.UserInfo.UnionName);
-                        break;
-                    case MapTypeEnum.SealTower:
-                        self.E_MapNameText.text = zstring.Format("{0}{1}", SceneConfigCategory.Instance.Get(sceneId).Name,
-                            UnitHelper.GetMyUnitFromClientScene(self.Root()).GetComponent<NumericComponentC>().GetAsInt(NumericType.SealTowerArrived));
-                        break;
-                    default:
-                        //显示地图名称
-                        self.E_MapNameText.text = SceneConfigCategory.Instance.Get(sceneId).Name;
-                        break;
-                }
+                    self.E_MapNameText.text = string.Format("{0}{1}", SceneConfigCategory.Instance.Get(sceneId).Name, str);
+                    break;
+                case MapTypeEnum.Union:
+                    UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
+                    self.E_MapNameText.text = string.Format("{0} 公会地图", userInfoComponent.UserInfo.UnionName);
+                    break;
+                case MapTypeEnum.SealTower:
+                    self.E_MapNameText.text = string.Format("{0}{1}", SceneConfigCategory.Instance.Get(sceneId).Name,
+                        UnitHelper.GetMyUnitFromClientScene(self.Root()).GetComponent<NumericComponentC>().GetAsInt(NumericType.SealTowerArrived));
+                    break;
+                default:
+                    //显示地图名称
+                    self.E_MapNameText.text = SceneConfigCategory.Instance.Get(sceneId).Name;
+                    break;
             }
         }
     }

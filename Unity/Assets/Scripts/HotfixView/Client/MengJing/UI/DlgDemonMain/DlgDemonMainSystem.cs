@@ -85,31 +85,22 @@ namespace ET.Client
             {
                 if (i == 0)
                 {
-                    using (zstring.Block())
-                    {
-                        self.View.EG_PlayerInfoItem_1RectTransform.GetComponentInChildren<Text>().text =
-                                zstring.Format("第{0}名 {1}", i + 1, response.RankList[i].PlayerName);
-                    }
+                    self.View.EG_PlayerInfoItem_1RectTransform.GetComponentInChildren<Text>().text =
+                            string.Format("第{0}名 {1}", i + 1, response.RankList[i].PlayerName);
 
                     self.View.EG_PlayerInfoItem_1RectTransform.gameObject.SetActive(true);
                 }
                 else if (i == 1)
                 {
-                    using (zstring.Block())
-                    {
-                        self.View.EG_PlayerInfoItem_2RectTransform.GetComponentInChildren<Text>().text =
-                                zstring.Format("第{0}名 {1}", i + 1, response.RankList[i].PlayerName);
-                    }
+                    self.View.EG_PlayerInfoItem_2RectTransform.GetComponentInChildren<Text>().text =
+                            string.Format("第{0}名 {1}", i + 1, response.RankList[i].PlayerName);
 
                     self.View.EG_PlayerInfoItem_2RectTransform.gameObject.SetActive(true);
                 }
                 else if (i == 2)
                 {
-                    using (zstring.Block())
-                    {
-                        self.View.EG_PlayerInfoItem_3RectTransform.GetComponentInChildren<Text>().text =
-                                zstring.Format("第{0}名 {1}", i + 1, response.RankList[i].PlayerName);
-                    }
+                    self.View.EG_PlayerInfoItem_3RectTransform.GetComponentInChildren<Text>().text =
+                            string.Format("第{0}名 {1}", i + 1, response.RankList[i].PlayerName);
 
                     self.View.EG_PlayerInfoItem_3RectTransform.gameObject.SetActive(true);
                 }
@@ -118,19 +109,13 @@ namespace ET.Client
                     if (num < self.Rankings.Count)
                     {
                         self.Rankings[i].SetActive(true);
-                        using (zstring.Block())
-                        {
-                            self.Rankings[i].GetComponentInChildren<Text>().text =
-                                    zstring.Format("第{0}名 {1}", i + 1, response.RankList[i].PlayerName);
-                        }
+                        self.Rankings[i].GetComponentInChildren<Text>().text =
+                                string.Format("第{0}名 {1}", i + 1, response.RankList[i].PlayerName);
                     }
                     else
                     {
                         GameObject go = UnityEngine.Object.Instantiate(self.View.EG_PlayerInfoItem_OtherRectTransform.gameObject);
-                        using (zstring.Block())
-                        {
-                            go.GetComponentInChildren<Text>().text = zstring.Format("第{0}名 {1}", i + 1, response.RankList[i].PlayerName);
-                        }
+                        go.GetComponentInChildren<Text>().text = string.Format("第{0}名 {1}", i + 1, response.RankList[i].PlayerName);
 
                         go.SetActive(true);
                         CommonViewHelper.SetParent(go, self.View.EG_RankingListNodeRectTransform.gameObject);
@@ -156,31 +141,22 @@ namespace ET.Client
             {
                 if (i == 0)
                 {
-                    using (zstring.Block())
-                    {
-                        self.View.EG_PlayerInfoItem_1RectTransform.GetComponentInChildren<Text>().text =
-                                zstring.Format("第{0}名 {1}", i + 1, message.RankList[i].PlayerName);
-                    }
+                    self.View.EG_PlayerInfoItem_1RectTransform.GetComponentInChildren<Text>().text =
+                            string.Format("第{0}名 {1}", i + 1, message.RankList[i].PlayerName);
 
                     self.View.EG_PlayerInfoItem_1RectTransform.gameObject.SetActive(true);
                 }
                 else if (i == 1)
                 {
-                    using (zstring.Block())
-                    {
-                        self.View.EG_PlayerInfoItem_2RectTransform.GetComponentInChildren<Text>().text =
-                                zstring.Format("第{0}名 {1}", i + 1, message.RankList[i].PlayerName);
-                    }
+                    self.View.EG_PlayerInfoItem_2RectTransform.GetComponentInChildren<Text>().text =
+                            string.Format("第{0}名 {1}", i + 1, message.RankList[i].PlayerName);
 
                     self.View.EG_PlayerInfoItem_2RectTransform.gameObject.SetActive(true);
                 }
                 else if (i == 2)
                 {
-                    using (zstring.Block())
-                    {
-                        self.View.EG_PlayerInfoItem_3RectTransform.GetComponentInChildren<Text>().text =
-                                zstring.Format("第{0}名 {1}", i + 1, message.RankList[i].PlayerName);
-                    }
+                    self.View.EG_PlayerInfoItem_3RectTransform.GetComponentInChildren<Text>().text =
+                            string.Format("第{0}名 {1}", i + 1, message.RankList[i].PlayerName);
 
                     self.View.EG_PlayerInfoItem_3RectTransform.gameObject.SetActive(true);
                 }
@@ -189,19 +165,13 @@ namespace ET.Client
                     if (num < self.Rankings.Count)
                     {
                         self.Rankings[i].SetActive(true);
-                        using (zstring.Block())
-                        {
-                            self.Rankings[i].GetComponentInChildren<Text>().text =
-                                    zstring.Format("第{0}名 {1}", i + 1, message.RankList[i].PlayerName);
-                        }
+                        self.Rankings[i].GetComponentInChildren<Text>().text =
+                                string.Format("第{0}名 {1}", i + 1, message.RankList[i].PlayerName);
                     }
                     else
                     {
                         GameObject go = GameObject.Instantiate(self.View.EG_PlayerInfoItem_OtherRectTransform.gameObject);
-                        using (zstring.Block())
-                        {
-                            go.GetComponentInChildren<Text>().text = zstring.Format("第{0}名 {1}", i + 1, message.RankList[i].PlayerName);
-                        }
+                        go.GetComponentInChildren<Text>().text = string.Format("第{0}名 {1}", i + 1, message.RankList[i].PlayerName);
 
                         go.SetActive(true);
                         CommonViewHelper.SetParent(go, self.View.EG_RankingListNodeRectTransform.gameObject);

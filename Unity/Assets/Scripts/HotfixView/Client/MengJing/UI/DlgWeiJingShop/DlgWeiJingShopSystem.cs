@@ -116,10 +116,7 @@ namespace ET.Client
 
         public static void OnUpdateNumShow(this DlgWeiJingShop self)
         {
-            using (zstring.Block())
-            {
-                self.View.E_Lab_NumText.text = zstring.Format("当前拥有数量:{0}", self.Root().GetComponent<BagComponentC>().GetItemNumber(36));
-            }
+            self.View.E_Lab_NumText.text = string.Format("当前拥有数量:{0}", self.Root().GetComponent<BagComponentC>().GetItemNumber(36));
         }
 
         public static void OnBtn_BuyNum_jia(this DlgWeiJingShop self, int num)
