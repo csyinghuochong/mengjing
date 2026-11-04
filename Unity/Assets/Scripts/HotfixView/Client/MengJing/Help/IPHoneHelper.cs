@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using UnityEngine;
 
 namespace ET.Client
@@ -121,37 +121,35 @@ namespace ET.Client
         {
             //https://blog.csdn.net/qq_39162826/article/details/121654464
             //https://gitee.com/ldr123/HybridCLRXlua/blob/master/Assets/Scripts/Utils/Fps.cs
-#if !UNITY_EDITOR && UNITY_IOS
-        string modelStr = UnityEngine.SystemInfo.deviceModel;
-        Log.ILog.Debug("deviceModel:  " + modelStr);
-
-        if (IsIphoneSE())
+            if (Define.IsEditor || Application.platform != RuntimePlatform.IPhonePlayer)
             {
                 return false;
             }
 
+            string modelStr = UnityEngine.SystemInfo.deviceModel;
+            Log.Debug("deviceModel:  " + modelStr);
 
-        if (IsHaveLiuHai())
-        { 
-            return true;
-        }
-        if (modelStr == "iPhone10,3" || modelStr == "iPhone10,6" || modelStr == "iPhone11,2" || modelStr == "iPhone11,6" || modelStr == "iPhone11,8"
-         || modelStr == "iPhone12,1"|| modelStr == "iPhone12,3"|| modelStr == "iPhone12,5"|| modelStr == "iPhone12,8" || modelStr == "iPhone15,2" || modelStr == "iPhone15,3" || modelStr == "iPhone15,4"
-         || modelStr == "iPhone19,4" //iphone duo
-         || modelStr.Contains("iPhone12")||modelStr.Contains("iPhone13")||modelStr.Contains("iPhone14")||modelStr.Contains("iPhone15")||modelStr.Contains("iPhone16")||modelStr.Contains("iPhone17")
-         || modelStr.Contains("iPhone18")||modelStr.Contains("iPhone19"))
-        {
-            //需要适配
-            return true;
-        }
-          
-        return false;
-#else
+            if (IsIphoneSE())
+            {
+                return false;
+            }
 
+            if (IsHaveLiuHai())
+            {
+                return true;
+            }
+
+            if (modelStr == "iPhone10,3" || modelStr == "iPhone10,6" || modelStr == "iPhone11,2" || modelStr == "iPhone11,6" || modelStr == "iPhone11,8"
+             || modelStr == "iPhone12,1" || modelStr == "iPhone12,3" || modelStr == "iPhone12,5" || modelStr == "iPhone12,8" || modelStr == "iPhone15,2" || modelStr == "iPhone15,3" || modelStr == "iPhone15,4"
+             || modelStr == "iPhone19,4" //iphone duo
+             || modelStr.Contains("iPhone12") || modelStr.Contains("iPhone13") || modelStr.Contains("iPhone14") || modelStr.Contains("iPhone15") || modelStr.Contains("iPhone16") || modelStr.Contains("iPhone17")
+             || modelStr.Contains("iPhone18") || modelStr.Contains("iPhone19"))
+            {
+                //需要适配
+                return true;
+            }
 
             return false;
-            //return true;
-#endif
         }
     }
 
