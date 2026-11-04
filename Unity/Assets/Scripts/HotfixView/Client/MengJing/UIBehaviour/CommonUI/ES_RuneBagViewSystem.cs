@@ -233,7 +233,7 @@ namespace ET.Client
 
 		private static void InitUpgradePanel(this ES_RuneBag self)
 		{
-			self.E_UpgradeButton.AddListenerAsync(self.OnUpgradeButton);
+			self.E_UpgradeButton.AddListener(self.OnUpgradeButton);
 			self.EG_RuneUpgradeRectTransform.gameObject.SetActive(false);
 		}
 
@@ -280,14 +280,38 @@ namespace ET.Client
 			CommonViewHelper.SetImageGray(self.Root(), self.E_UpgradeButton.gameObject, !canUpgrade);
 		}
 
-		private static async ETTask OnUpgradeButton(this ES_RuneBag self)
+		/// <summary>
+		/// 点升级：先弹二次确认框，确认后才发升级请求
+		/// </summary>
+		private static void OnUpgradeButton(this ES_RuneBag self)
 		{
-			if (self.SelectRuneId == 0)
+			RuneComponentC runeComponent = self.Root().GetComponent<RuneComponentC>();
+			RuneData rune = runeComponent == null ? null : runeComponent.GetRune(self.SelectRuneId);
+			RuneConfig runeConfig = runeComponent == null ? null : runeComponent.GetRuneConfig(rune);
+			if (runeConfig == null)
 			{
 				return;
 			}
 
-			int error = await RuneNetHelper.UpgradeRune(self.Root(), self.SelectRuneId);
+			RuneConfig nextConfig = RuneConfigCategory.Instance.GetOrDefault(runeConfig.NextId);
+			if (nextConfig == null)
+			{
+				return;
+			}
+
+			string content = $"确定消耗 {runeConfig.UpgradeCost} 个符文碎片，把【{runeConfig.Name}】从 Lv.{runeConfig.Lv} 升到 Lv.{nextConfig.Lv} 吗？";
+			long runeId = self.SelectRuneId;
+			PopupTipHelp.OpenPopupTipWithButtonText(self.Root(), "符文升级", content, () => self.UpgradeConfirm(runeId).Coroutine(), null, "确定", "取消").Coroutine();
+		}
+
+		private static async ETTask UpgradeConfirm(this ES_RuneBag self, long runeId)
+		{
+			if (runeId == 0)
+			{
+				return;
+			}
+
+			int error = await RuneNetHelper.UpgradeRune(self.Root(), runeId);
 			if (error != ErrorCode.ERR_Success)
 			{
 				HintHelp.ShowErrorHint(self.Root(), error);
@@ -321,7 +345,7 @@ namespace ET.Client
 		{
 			self.E_StartDecomposeButton.AddListener(self.OnStartDecomposeButton);
 			self.E_EndDecomposeButton.AddListener(self.OnEndDecomposeButton);
-			self.E_DecomposeButton.AddListenerAsync(self.OnDecomposeButton);
+			self.E_DecomposeButton.AddListener(self.OnDecomposeButton);
 			self.EG_RuneDecomposeRectTransform.gameObject.SetActive(false);
 			self.RefreshDecomposeButtons();
 		}
@@ -411,11 +435,40 @@ namespace ET.Client
 		}
 
 		/// <summary>
+		/// 点确认分解：先弹二次确认框，确认后才把勾选的符文id一次性打包发给服务端
+		/// </summary>
+		private static void OnDecomposeButton(this ES_RuneBag self)
+		{
+			RuneComponentC runeComponent = self.Root().GetComponent<RuneComponentC>();
+			if (runeComponent == null || self.SelectRuneIds.Count == 0)
+			{
+				return;
+			}
+
+			int totalShard = 0;
+			List<long> decomposeIds = new List<long>(self.SelectRuneIds);
+			for (int i = 0; i < decomposeIds.Count; i++)
+			{
+				RuneData rune = runeComponent.GetRune(decomposeIds[i]);
+				RuneConfig runeConfig = runeComponent.GetRuneConfig(rune);
+				if (runeConfig == null)
+				{
+					continue;
+				}
+
+				totalShard += runeConfig.DecomposeShard;
+			}
+
+			string content = $"确定分解已选择的 {decomposeIds.Count} 枚符文吗？分解后可获得符文碎片 x{totalShard}。";
+			PopupTipHelp.OpenPopupTipWithButtonText(self.Root(), "符文分解", content, () => self.DecomposeConfirm(decomposeIds).Coroutine(), null, "确定", "取消").Coroutine();
+		}
+
+		/// <summary>
 		/// 确认分解：勾选的符文id一次性打包发给服务端，回包里带最新的碎片和符文列表
 		/// </summary>
-		private static async ETTask OnDecomposeButton(this ES_RuneBag self)
+		private static async ETTask DecomposeConfirm(this ES_RuneBag self, List<long> runeIds)
 		{
-			if (self.SelectRuneIds.Count == 0)
+			if (runeIds.Count == 0)
 			{
 				return;
 			}
@@ -430,7 +483,7 @@ namespace ET.Client
 			self.E_DecomposeButton.interactable = false;
 
 			int beforeShard = runeComponent.Shard;
-			int error = await RuneNetHelper.DecomposeRunes(self.Root(), self.SelectRuneIds);
+			int error = await RuneNetHelper.DecomposeRunes(self.Root(), runeIds);
 
 			self.SelectRuneIds.Clear();
 
