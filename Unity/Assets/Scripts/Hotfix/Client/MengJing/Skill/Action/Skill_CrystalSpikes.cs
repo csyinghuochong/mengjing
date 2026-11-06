@@ -6,10 +6,10 @@ namespace ET.Client
     // 与服务端同名，分别由各自的 SkillDispatcher 注册。
     public class Skill_CrystalSpikes : Skill_Action_Common
     {
-        private static int GetAngle(SkillC skill, int index, int spread, int count)
+        private static int[] GetAngles(SkillC skill, int spread, int count)
         {
-            return count == 1 ? skill.SkillInfo.TargetAngle
-                    : skill.SkillInfo.TargetAngle - spread / 2 + index * spread / (count - 1);
+            return Directions.Build(skill.SkillInfo.SkillBeginTime, skill.TheUnitFrom.Id,
+                    skill.SkillConf.Id, skill.SkillInfo.TargetAngle, spread, count);
         }
 
         private static void ReadParameters(SkillC skill, out int spread, out int count)
@@ -38,10 +38,11 @@ namespace ET.Client
         public override void OnExecute(SkillC skill)
         {
             ReadParameters(skill, out int spread, out int count);
+            int[] angles = GetAngles(skill, spread, count);
             for (int i = 0; i < count; i++)
             {
                 SkillInfo indicator = CommonHelp.DeepCopy<SkillInfo>(skill.SkillInfo);
-                indicator.TargetAngle = GetAngle(skill, i, spread, count);
+                indicator.TargetAngle = angles[i];
                 skill.OnShowSkillIndicator(indicator);
             }
             this.OnUpdate(skill);
@@ -54,10 +55,11 @@ namespace ET.Client
                 && now >= skill.SkillExcuteHurtTime && now < skill.SkillInfo.SkillEndTime)
             {
                 ReadParameters(skill, out int spread, out int count);
+                int[] angles = GetAngles(skill, spread, count);
                 float distance = (float)skill.SkillConf.DamgeRange[1] * 0.5f;
                 for (int i = 0; i < count; i++)
                 {
-                    int angle = GetAngle(skill, i, spread, count);
+                    int angle = angles[i];
                     float3 forward = math.mul(quaternion.Euler(0, math.radians(angle), 0), math.forward());
                     // 每个地刺组放在对应矩形伤害区域的中点，位置固定，不追踪目标。
                     // 通用特效加载器把0角度视为“沿用TargetAngle”，用等价的360度保留真正的0方向。
@@ -65,6 +67,47 @@ namespace ET.Client
                 }
             }
             skill.BaseOnUpdate();
+        }
+
+        // 此算法在两端保持完全相同，不依赖Share新增文件。
+        private static class Directions
+        {
+            public static int[] Build(long beginTime, long casterId, int skillId,
+                    int centerAngle, int spread, int count)
+            {
+                if (spread < 0 || spread > 180 || count < 1 || count > 16 || count > spread + 1)
+                {
+                    throw new ArgumentException("地刺方向参数无效：数量不能超过扇面中可用的整数角度数量。");
+                }
+
+                uint state;
+                unchecked
+                {
+                    state = (uint)beginTime ^ (uint)((ulong)beginTime >> 32);
+                    state = (state ^ (uint)casterId) * 16777619u;
+                    state = (state ^ (uint)((ulong)casterId >> 32)) * 16777619u;
+                    state = (state ^ (uint)skillId) * 16777619u;
+                }
+                if (state == 0) state = 0x9E3779B9u;
+
+                // 部分Fisher-Yates抽样，恰好选择count个不同的方向，允许覆盖区域重叠。
+                int[] offsets = new int[spread + 1];
+                for (int i = 0; i < offsets.Length; i++) offsets[i] = i - spread / 2;
+                int[] angles = new int[count];
+                for (int i = 0; i < count; i++)
+                {
+                    state ^= state << 13;
+                    state ^= state >> 17;
+                    state ^= state << 5;
+                    int index = i + (int)(state % (uint)(offsets.Length - i));
+                    int offset = offsets[index];
+                    offsets[index] = offsets[i];
+                    offsets[i] = offset;
+                    angles[i] = centerAngle + offset;
+                }
+                Array.Sort(angles);
+                return angles;
+            }
         }
     }
 }
