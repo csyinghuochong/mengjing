@@ -7,7 +7,7 @@ public static class AIMonsterSetBuilder {
  [MenuItem("Tools/AI Monster Set/Generate")]
  public static void Generate(){
  ConfigureMaterials();
- foreach(var pair in new[]{new[]{"Dragon","LavaDragon"},new[]{"Troll","FrostArmoredTroll"}}){
+ foreach(var pair in new[]{new[]{"Dragon","LavaDragon"}}){
  string path=Root+"/"+pair[1]+".prefab";
  // Existing variants retain their bone attachments and prefab identity.
  if(AssetDatabase.LoadAssetAtPath<GameObject>(path))continue;
@@ -19,7 +19,7 @@ public static class AIMonsterSetBuilder {
  }
  public static void ConfigureMaterials(){
  var shader=Shader.Find("Universal Render Pipeline/Lit");if(!shader)throw new System.Exception("URP Lit shader missing");
- foreach(var name in new[]{"LavaDragon","FrostArmoredTroll"}){
+ foreach(var name in new[]{"LavaDragon"}){
  string texPath=Root+"/Textures/"+name+"_BaseColor.png";
  var tex=AssetDatabase.LoadAssetAtPath<Texture2D>(texPath);if(!tex)continue;
  var importer=AssetImporter.GetAtPath(texPath) as TextureImporter;if(importer && (importer.maxTextureSize<2048 || !importer.sRGBTexture)){importer.maxTextureSize=2048;importer.sRGBTexture=true;importer.SaveAndReimport();}

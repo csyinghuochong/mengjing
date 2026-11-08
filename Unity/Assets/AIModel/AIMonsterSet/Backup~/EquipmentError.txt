@@ -1,5 +1,0 @@
-UnityEngine.MissingReferenceException: The object of type 'Mesh' has been destroyed but you are still trying to access it.
-Your script should either check if it is null or you should not destroy the object.
-  at (wrapper managed-to-native) UnityEngine.Mesh.get_bounds_Injected(UnityEngine.Mesh,UnityEngine.Bounds&)
-  at UnityEngine.Mesh.get_bounds () [0x00000] in <8cdc7e7e8a17404287a8b220eb9eec72>:0 
-  at FrostTrollEquipmentBuilder.Build () [0x008fc] in H:\GitMengJing\Unity\Assets\AIModel\AIMonsterSet\Editor\FrostTrollEquipmentBuilder.cs:49 

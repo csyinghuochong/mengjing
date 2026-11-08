@@ -7,7 +7,7 @@ using System.Text;
  [MenuItem("Tools/AI Monster Set/Repair Appearance")]
  public static void Repair(){
  var report=new StringBuilder();bool ok=true;
- foreach(var name in new[]{"LavaDragon","FrostArmoredTroll"}){
+ foreach(var name in new[]{"LavaDragon"}){
  var path=AIMonsterSetBuilder.Root+"/Textures/"+name+"_BaseColor.png";
  AssetDatabase.ImportAsset(path,ImportAssetOptions.ForceUpdate|ImportAssetOptions.ForceSynchronousImport);
  var importer=AssetImporter.GetAtPath(path) as TextureImporter;
@@ -17,7 +17,7 @@ using System.Text;
  if(!tex)ok=false;
  }
  AIMonsterSetBuilder.ConfigureMaterials();
- foreach(var name in new[]{"LavaDragon","FrostArmoredTroll"}){
+ foreach(var name in new[]{"LavaDragon"}){
  var mat=AssetDatabase.LoadAssetAtPath<Material>(AIMonsterSetBuilder.Root+"/Materials/"+name+"Skin.mat");
  var texture=mat?mat.GetTexture("_BaseMap"):null;
  report.AppendLine(name+": shader="+(mat?mat.shader.name:"NULL")+" BaseMap="+(texture?AssetDatabase.GetAssetPath(texture):"NULL"));
