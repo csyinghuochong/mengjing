@@ -40,9 +40,11 @@ namespace ET.Server
         {
             await self.InitServerInfo();
 
-            //self.Timer = self.Root().GetComponent<TimerComponent>().NewRepeatedTimer(TimeHelper.Minute * 30 + RandomHelper.RandomNumber(1000, 10000),
-            //    TimerInvokeType.UnionTimer, self);
-            self.Timer = self.Root().GetComponent<TimerComponent>().NewRepeatedTimer(TimeHelper.Second * 30 + RandomHelper.RandomNumber(1000, 10000),
+            // 本地(Localhost)调试用 30 秒的短间隔，Beta/正式服仍走 30 分钟
+            long interval = ServerHelper.IsLocalhost()
+                    ? TimeHelper.Second * 30 + RandomHelper.RandomNumber(1000, 10000)
+                    : TimeHelper.Minute * 30 + RandomHelper.RandomNumber(1000, 10000);
+            self.Timer = self.Root().GetComponent<TimerComponent>().NewRepeatedTimer(interval,
                 TimerInvokeType.UnionTimer, self);
         }
 

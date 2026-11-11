@@ -5,7 +5,21 @@ namespace ET
 {
     public static class ServerHelper
     {
-      
+        /// <summary>
+        /// 是否用 Localhost 配置启动（本地调试）。
+        /// 本地跑用更短的定时器间隔，Beta/正式服仍然用长间隔。
+        /// </summary>
+        public static bool IsLocalhost()
+        {
+            string startConfig = Options.Instance.StartConfig;
+            if (string.IsNullOrEmpty(startConfig))
+            {
+                return false;
+            }
+
+            return startConfig.IndexOf("Localhost", StringComparison.OrdinalIgnoreCase) >= 0;
+        }
+
         public const string LogicServer = "weijinggameserver.weijinggame.com";//"weijinggameserver.weijinggame.com"
         public const string LogicServerBanHao = "47.94.107.92";
 

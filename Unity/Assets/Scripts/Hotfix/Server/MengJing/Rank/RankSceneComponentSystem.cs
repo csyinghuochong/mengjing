@@ -31,9 +31,11 @@ namespace ET.Server
             self.InitServerInfo().Coroutine();
             self.InitDBRankInfo().Coroutine();
 
-            //self.Timer = self.Root().GetComponent<TimerComponent>().NewRepeatedTimer(TimeHelper.Minute * 30 + RandomHelper.RandomNumber(1000, 10000),
-           //     TimerInvokeType.RankeTimer, self);
-            self.Timer = self.Root().GetComponent<TimerComponent>().NewRepeatedTimer(RandomHelper.RandomNumber(1000, 10000),
+            // 本地(Localhost)调试用几秒一次的短间隔，Beta/正式服仍走 30 分钟
+            long interval = ServerHelper.IsLocalhost()
+                    ? RandomHelper.RandomNumber(1000, 10000)
+                    : TimeHelper.Minute * 30 + RandomHelper.RandomNumber(1000, 10000);
+            self.Timer = self.Root().GetComponent<TimerComponent>().NewRepeatedTimer(interval,
                 TimerInvokeType.RankeTimer, self);
         }
 
