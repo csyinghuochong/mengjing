@@ -61,6 +61,7 @@ namespace ET.Server
                     unit.AddDataComponent<SkillSetComponentS>();
                     unit.AddDataComponent<GemTalentComponent>();
                     unit.AddDataComponent<RuneComponent>();
+                    unit.AddDataComponent<SkillRuneComponent>();
                     unit.AddDataComponent<RechargeComponent>();
                     unit.AddDataComponent<ReddotComponentS>();
                     unit.AddDataComponent<TitleComponentS>();

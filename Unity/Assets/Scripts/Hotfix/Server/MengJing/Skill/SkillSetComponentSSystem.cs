@@ -978,6 +978,7 @@ namespace ET.Server
         {
             Unit unit = self.GetParent<Unit>();
             SkillPassiveComponent skillPassiveComponent = unit.GetComponent<SkillPassiveComponent>();
+            bool removed = false;
             for (int k = self.SkillList.Count - 1; k >= 0; k--)
             {
                 
@@ -986,8 +987,15 @@ namespace ET.Server
                     skillPassiveComponent.RemovePassiveSkill(skillId);
                     self.CheckSkillTianFu(skillId, false);
                     self.SkillList.RemoveAt(k);
+                    removed = true;
                     break;
                 }
+            }
+
+            //技能被收回后，这个技能上的技能符文要回到背包
+            if (removed)
+            {
+                unit.GetComponent<SkillRuneComponent>()?.OnRemoveSkill(skillId);
             }
 
             if (notice)

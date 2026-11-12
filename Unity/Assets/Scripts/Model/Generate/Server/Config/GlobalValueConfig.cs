@@ -164,6 +164,7 @@ namespace ET
             Fun = _buf.ReadInt();
             Violence = _buf.ReadInt();
             GemTalentResetCostDiamond = _buf.ReadInt();
+            SkillRuneSlotCount = _buf.ReadInt();
 
             PostInit();
         }
@@ -885,12 +886,18 @@ namespace ET
         /// </summary>
         public int GemTalentResetCostDiamond;
 
+        /// <summary>
+        /// 技能符文孔位数量
+        /// </summary>
+        public int SkillRuneSlotCount;
+
 
         public const int __ID__ = -2026784688;
         public override int GetTypeId() => __ID__;
 
         public  void ResolveRef()
         {
+            
             
             
             
@@ -1182,6 +1189,7 @@ namespace ET
             + "Fun:" + Fun + ","
             + "Violence:" + Violence + ","
             + "GemTalentResetCostDiamond:" + GemTalentResetCostDiamond + ","
+            + "SkillRuneSlotCount:" + SkillRuneSlotCount + ","
             + "}";
         }
 

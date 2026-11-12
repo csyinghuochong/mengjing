@@ -597,6 +597,10 @@ namespace ET
         /// 宝石天赋重置消耗钻石
         /// </summary>
         public int GemTalentResetCostDiamond => _data.GemTalentResetCostDiamond;
+        /// <summary>
+        /// 技能符文孔位数量
+        /// </summary>
+        public int SkillRuneSlotCount => _data.SkillRuneSlotCount;
         
         public void ResolveRef()
         {
