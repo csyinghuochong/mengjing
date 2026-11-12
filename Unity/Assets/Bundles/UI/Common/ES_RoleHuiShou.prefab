@@ -269,6 +269,7 @@ MonoBehaviour:
   moveDistance: -1000
   isLoop: 0
   MoveToTime: 0
+  ShouldPlay: 1
 --- !u!1 &537801062873478976
 GameObject:
   m_ObjectHideFlags: 0
@@ -1503,7 +1504,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -415, y: 412}
+  m_AnchoredPosition: {x: -421, y: 412}
   m_SizeDelta: {x: 186, y: 130}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3819084326091699822
@@ -2227,7 +2228,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 14.4, y: -0.5}
+  m_AnchoredPosition: {x: -0.8999939, y: -0.5}
   m_SizeDelta: {x: -0.00012207031, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1275774007943258990
@@ -3365,6 +3366,7 @@ MonoBehaviour:
   moveDistance: 10
   isLoop: 1
   MoveToTime: 0.3
+  ShouldPlay: 1
 --- !u!1 &1753450749001416670
 GameObject:
   m_ObjectHideFlags: 0
@@ -5476,6 +5478,7 @@ MonoBehaviour:
   moveDistance: 10
   isLoop: 1
   MoveToTime: 0.3
+  ShouldPlay: 1
 --- !u!1 &3263717034469958908
 GameObject:
   m_ObjectHideFlags: 0
@@ -6818,6 +6821,7 @@ MonoBehaviour:
   moveDistance: 10
   isLoop: 1
   MoveToTime: 0.3
+  ShouldPlay: 1
 --- !u!1 &3565833359494307113
 GameObject:
   m_ObjectHideFlags: 0
@@ -7225,6 +7229,7 @@ MonoBehaviour:
   moveDistance: 10
   isLoop: 1
   MoveToTime: 0.3
+  ShouldPlay: 1
 --- !u!1 &3972685455820266681
 GameObject:
   m_ObjectHideFlags: 0
@@ -9412,6 +9417,7 @@ MonoBehaviour:
   moveDistance: 10
   isLoop: 1
   MoveToTime: 0.3
+  ShouldPlay: 1
 --- !u!1 &5162173090271658582
 GameObject:
   m_ObjectHideFlags: 0
@@ -10156,6 +10162,7 @@ MonoBehaviour:
   moveDistance: 10
   isLoop: 1
   MoveToTime: 0.3
+  ShouldPlay: 1
 --- !u!1 &5549123350491825675
 GameObject:
   m_ObjectHideFlags: 0
@@ -10929,6 +10936,7 @@ MonoBehaviour:
   moveDistance: 2000
   isLoop: 0
   MoveToTime: 0
+  ShouldPlay: 1
 --- !u!1 &5942879410818502112
 GameObject:
   m_ObjectHideFlags: 0
@@ -11228,8 +11236,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -415, y: 339.6}
-  m_SizeDelta: {x: 600, y: 14}
+  m_AnchoredPosition: {x: -434, y: 339.6}
+  m_SizeDelta: {x: 700, y: 14}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8055710279856533201
 CanvasRenderer:
@@ -11420,7 +11428,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5155125474367058777
 RectTransform:
   m_ObjectHideFlags: 0
@@ -11513,7 +11521,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -414, y: 373}
+  m_AnchoredPosition: {x: -420, y: 373}
   m_SizeDelta: {x: 300, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &681233284571076265
@@ -14424,6 +14432,7 @@ MonoBehaviour:
   moveDistance: 10
   isLoop: 1
   MoveToTime: 0.3
+  ShouldPlay: 1
 --- !u!1 &8662826382165306980
 GameObject:
   m_ObjectHideFlags: 0
@@ -14516,6 +14525,7 @@ MonoBehaviour:
   moveDistance: 10
   isLoop: 1
   MoveToTime: 0.3
+  ShouldPlay: 1
 --- !u!1 &8771324198967841034
 GameObject:
   m_ObjectHideFlags: 0
