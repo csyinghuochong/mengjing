@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 
 namespace ET.Server
 {
@@ -14,8 +14,8 @@ namespace ET.Server
         [EntitySystem]
         private static void Awake(this SkillRuneComponent self)
         {
-            self.RuneList ??= new List<SkillRuneData>();
-            self.SlotList ??= new List<SkillRuneSlotData>();
+            self.RuneList ??= new List<SkillRuneInfo>();
+            self.SlotList ??= new List<SkillRuneSlotInfo>();
 
             NormalizeSlotList(self);
         }
@@ -28,8 +28,8 @@ namespace ET.Server
         [EntitySystem]
         private static void Deserialize(this SkillRuneComponent self)
         {
-            self.RuneList ??= new List<SkillRuneData>();
-            self.SlotList ??= new List<SkillRuneSlotData>();
+            self.RuneList ??= new List<SkillRuneInfo>();
+            self.SlotList ??= new List<SkillRuneSlotInfo>();
 
             NormalizeSlotList(self);
         }
@@ -43,7 +43,7 @@ namespace ET.Server
             int slotCount = GlobalValueConfigCategory.Instance.SkillRuneSlotCount;
             for (int i = 0; i < self.SlotList.Count; i++)
             {
-                SkillRuneSlotData slotData = self.SlotList[i];
+                SkillRuneSlotInfo slotData = self.SlotList[i];
                 slotData.RuneIds ??= new List<long>();
                 while (slotData.RuneIds.Count < slotCount)
                 {
@@ -59,12 +59,12 @@ namespace ET.Server
 
         #region 技能符文背包
 
-        public static List<SkillRuneData> GetRuneList(this SkillRuneComponent self)
+        public static List<SkillRuneInfo> GetRuneList(this SkillRuneComponent self)
         {
             return self.RuneList;
         }
 
-        public static SkillRuneData GetRune(this SkillRuneComponent self, long runeId)
+        public static SkillRuneInfo GetRune(this SkillRuneComponent self, long runeId)
         {
             if (runeId == 0)
             {
@@ -87,7 +87,7 @@ namespace ET.Server
         /// </summary>
         public static SkillRuneConfig GetRuneConfig(this SkillRuneComponent self, long runeId)
         {
-            SkillRuneData rune = self.GetRune(runeId);
+            SkillRuneInfo rune = self.GetRune(runeId);
             if (rune == null)
             {
                 return null;
@@ -105,7 +105,7 @@ namespace ET.Server
         /// <summary>
         /// 获得一枚技能符文，configId 传 SkillRuneConfig 里该符文 1 级那一行的 Id
         /// </summary>
-        public static SkillRuneData AddRune(this SkillRuneComponent self, int configId)
+        public static SkillRuneInfo AddRune(this SkillRuneComponent self, int configId)
         {
             SkillRuneConfig config = SkillRuneConfigCategory.Instance.GetOrDefault(configId);
             if (config == null)
@@ -113,7 +113,7 @@ namespace ET.Server
                 return null;
             }
 
-            SkillRuneData rune = new SkillRuneData();
+            SkillRuneInfo rune = new SkillRuneInfo();
             rune.Id = IdGenerater.Instance.GenerateId();
             rune.ConfigId = config.Id;
             self.RuneList.Add(rune);
@@ -125,7 +125,7 @@ namespace ET.Server
         /// </summary>
         public static bool RemoveRune(this SkillRuneComponent self, long runeId)
         {
-            SkillRuneData rune = self.GetRune(runeId);
+            SkillRuneInfo rune = self.GetRune(runeId);
             if (rune == null)
             {
                 return false;
@@ -139,11 +139,11 @@ namespace ET.Server
         /// <summary>
         /// 技能符文背包：没有被任何技能孔位引用的符文
         /// </summary>
-        public static List<SkillRuneData> GetBagRuneList(this SkillRuneComponent self)
+        public static List<SkillRuneInfo> GetBagRuneList(this SkillRuneComponent self)
         {
             HashSet<long> equippedRuneIds = self.GetEquippedRuneIdSet();
 
-            List<SkillRuneData> bagRuneList = new List<SkillRuneData>();
+            List<SkillRuneInfo> bagRuneList = new List<SkillRuneInfo>();
             for (int i = 0; i < self.RuneList.Count; i++)
             {
                 if (!equippedRuneIds.Contains(self.RuneList[i].Id))
@@ -158,9 +158,9 @@ namespace ET.Server
         /// <summary>
         /// 已经镶嵌在技能孔位上的符文
         /// </summary>
-        public static List<SkillRuneData> GetEquippedRuneList(this SkillRuneComponent self)
+        public static List<SkillRuneInfo> GetEquippedRuneList(this SkillRuneComponent self)
         {
-            List<SkillRuneData> runeList = new List<SkillRuneData>();
+            List<SkillRuneInfo> runeList = new List<SkillRuneInfo>();
             HashSet<long> equippedRuneIds = self.GetEquippedRuneIdSet();
             for (int i = 0; i < self.RuneList.Count; i++)
             {
@@ -239,7 +239,7 @@ namespace ET.Server
             return baseSkillId == 0 ? skillId : baseSkillId;
         }
 
-        public static List<SkillRuneSlotData> GetSlotList(this SkillRuneComponent self)
+        public static List<SkillRuneSlotInfo> GetSlotList(this SkillRuneComponent self)
         {
             return self.SlotList;
         }
@@ -247,7 +247,7 @@ namespace ET.Server
         /// <summary>
         /// 取某个技能的孔位数据，没有记录返回 null（= 全是空孔）
         /// </summary>
-        public static SkillRuneSlotData GetSlotData(this SkillRuneComponent self, int skillId)
+        public static SkillRuneSlotInfo GetSlotData(this SkillRuneComponent self, int skillId)
         {
             int baseSkillId = self.ToBaseSkillId(skillId);
             if (baseSkillId == 0)
@@ -269,7 +269,7 @@ namespace ET.Server
         /// <summary>
         /// 取某个技能的孔位数据，没有记录就补一条全空孔的数据
         /// </summary>
-        public static SkillRuneSlotData GetOrCreateSlotData(this SkillRuneComponent self, int skillId)
+        public static SkillRuneSlotInfo GetOrCreateSlotData(this SkillRuneComponent self, int skillId)
         {
             int baseSkillId = self.ToBaseSkillId(skillId);
             if (baseSkillId == 0)
@@ -277,13 +277,13 @@ namespace ET.Server
                 return null;
             }
 
-            SkillRuneSlotData slotData = self.GetSlotData(baseSkillId);
+            SkillRuneSlotInfo slotData = self.GetSlotData(baseSkillId);
             if (slotData != null)
             {
                 return slotData;
             }
 
-            slotData = new SkillRuneSlotData();
+            slotData = new SkillRuneSlotInfo();
             slotData.SkillId = baseSkillId;
             int slotCount = GlobalValueConfigCategory.Instance.SkillRuneSlotCount;
             while (slotData.RuneIds.Count < slotCount)
@@ -305,7 +305,7 @@ namespace ET.Server
                 return 0;
             }
 
-            SkillRuneSlotData slotData = self.GetSlotData(skillId);
+            SkillRuneSlotInfo slotData = self.GetSlotData(skillId);
             if (slotData == null || slotIndex >= slotData.RuneIds.Count)
             {
                 return 0;
@@ -321,7 +321,7 @@ namespace ET.Server
         {
             int slotCount = GlobalValueConfigCategory.Instance.SkillRuneSlotCount;
             List<long> runeIds = new List<long>(slotCount);
-            SkillRuneSlotData slotData = self.GetSlotData(skillId);
+            SkillRuneSlotInfo slotData = self.GetSlotData(skillId);
             for (int i = 0; i < slotCount; i++)
             {
                 long runeId = 0;
@@ -339,10 +339,10 @@ namespace ET.Server
         /// <summary>
         /// 某个技能上已经镶嵌的符文，按孔位顺序
         /// </summary>
-        public static List<SkillRuneData> GetSkillRuneList(this SkillRuneComponent self, int skillId)
+        public static List<SkillRuneInfo> GetSkillRuneList(this SkillRuneComponent self, int skillId)
         {
-            List<SkillRuneData> runeList = new List<SkillRuneData>();
-            SkillRuneSlotData slotData = self.GetSlotData(skillId);
+            List<SkillRuneInfo> runeList = new List<SkillRuneInfo>();
+            SkillRuneSlotInfo slotData = self.GetSlotData(skillId);
             if (slotData == null)
             {
                 return runeList;
@@ -350,7 +350,7 @@ namespace ET.Server
 
             for (int i = 0; i < slotData.RuneIds.Count; i++)
             {
-                SkillRuneData rune = self.GetRune(slotData.RuneIds[i]);
+                SkillRuneInfo rune = self.GetRune(slotData.RuneIds[i]);
                 if (rune != null)
                 {
                     runeList.Add(rune);
@@ -367,7 +367,7 @@ namespace ET.Server
         public static List<SkillRuneConfig> GetSkillRuneConfigs(this SkillRuneComponent self, int skillId)
         {
             List<SkillRuneConfig> configs = new List<SkillRuneConfig>();
-            SkillRuneSlotData slotData = self.GetSlotData(skillId);
+            SkillRuneSlotInfo slotData = self.GetSlotData(skillId);
             if (slotData == null)
             {
                 return configs;
@@ -425,7 +425,7 @@ namespace ET.Server
                 return ErrorCode.ERR_RuneEquipped;
             }
 
-            SkillRuneSlotData slotData = self.GetOrCreateSlotData(baseSkillId);
+            SkillRuneSlotInfo slotData = self.GetOrCreateSlotData(baseSkillId);
             slotData.RuneIds[slotIndex] = runeId;
             return ErrorCode.ERR_Success;
         }
@@ -446,7 +446,7 @@ namespace ET.Server
                 return ErrorCode.ERR_RuneSlotNotExist;
             }
 
-            SkillRuneSlotData slotData = self.GetSlotData(baseSkillId);
+            SkillRuneSlotInfo slotData = self.GetSlotData(baseSkillId);
             if (slotData == null || slotIndex >= slotData.RuneIds.Count || slotData.RuneIds[slotIndex] == 0)
             {
                 return ErrorCode.ERR_RuneSlotEmpty;
@@ -463,7 +463,7 @@ namespace ET.Server
         /// </summary>
         public static bool OnRemoveSkill(this SkillRuneComponent self, int skillId)
         {
-            SkillRuneSlotData slotData = self.GetSlotData(skillId);
+            SkillRuneSlotInfo slotData = self.GetSlotData(skillId);
             if (slotData == null)
             {
                 return false;
@@ -531,7 +531,7 @@ namespace ET.Server
         {
             for (int i = self.SlotList.Count - 1; i >= 0; i--)
             {
-                SkillRuneSlotData slotData = self.SlotList[i];
+                SkillRuneSlotInfo slotData = self.SlotList[i];
                 bool changed = false;
                 for (int j = 0; j < slotData.RuneIds.Count; j++)
                 {
@@ -551,7 +551,7 @@ namespace ET.Server
             }
         }
 
-        private static bool IsSlotEmpty(SkillRuneSlotData slotData)
+        private static bool IsSlotEmpty(SkillRuneSlotInfo slotData)
         {
             for (int i = 0; i < slotData.RuneIds.Count; i++)
             {
@@ -567,12 +567,74 @@ namespace ET.Server
         /// <summary>
         /// 孔位全空了就把这条技能孔位记录删掉，避免存档里堆积空记录
         /// </summary>
-        private static void RemoveSlotIfEmpty(this SkillRuneComponent self, SkillRuneSlotData slotData)
+        private static void RemoveSlotIfEmpty(this SkillRuneComponent self, SkillRuneSlotInfo slotData)
         {
             if (IsSlotEmpty(slotData))
             {
                 self.SlotList.Remove(slotData);
             }
+        }
+
+        #endregion
+
+        #region 存档/协议转换
+
+        /// <summary>
+        /// 存档结构转协议结构：把全部符文实例和孔位记录填到协议列表里
+        /// </summary>
+        public static void ToMessage(this SkillRuneComponent self, List<SkillRuneInfoProto> runeList, List<SkillRuneSlotInfoProto> slotList)
+        {
+            runeList.Clear();
+            for (int i = 0; i < self.RuneList.Count; i++)
+            {
+                runeList.Add(self.RuneList[i].ToMessage());
+            }
+
+            slotList.Clear();
+            for (int i = 0; i < self.SlotList.Count; i++)
+            {
+                slotList.Add(self.SlotList[i].ToMessage());
+            }
+        }
+
+        /// <summary>
+        /// 协议结构整体覆盖存档：清掉现有数据再按协议重建，谨慎使用
+        /// </summary>
+        public static void FromMessage(this SkillRuneComponent self, List<SkillRuneInfoProto> runeList, List<SkillRuneSlotInfoProto> slotList)
+        {
+            self.RuneList.Clear();
+            if (runeList != null)
+            {
+                for (int i = 0; i < runeList.Count; i++)
+                {
+                    SkillRuneInfo rune = new SkillRuneInfo();
+                    rune.FromMessage(runeList[i]);
+                    self.RuneList.Add(rune);
+                }
+            }
+
+            self.SlotList.Clear();
+            if (slotList != null)
+            {
+                for (int i = 0; i < slotList.Count; i++)
+                {
+                    SkillRuneSlotInfo slotInfo = new SkillRuneSlotInfo();
+                    slotInfo.FromMessage(slotList[i]);
+                    self.SlotList.Add(slotInfo);
+                }
+            }
+
+            NormalizeSlotList(self);
+        }
+
+        /// <summary>
+        /// 主动把最新技能符文数据下发给客户端：GM 加符文这类不是客户端发起的变化
+        /// </summary>
+        public static void SyncToClient(this SkillRuneComponent self)
+        {
+            M2C_SkillRuneInfoMessage message = M2C_SkillRuneInfoMessage.Create();
+            self.ToMessage(message.RuneList, message.SlotList);
+            MapMessageHelper.SendToClient(self.GetParent<Unit>(), message);
         }
 
         #endregion

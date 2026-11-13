@@ -430,6 +430,42 @@ namespace ET.Server
 
                         runeComponent.SyncToClient();
                         break;
+                    case 18:
+                        // 18#0	所有技能符文1级各一枚
+                        // 18#10011	一枚指定配置的技能符文
+                        // 18#10011#3	3枚指定配置的技能符文
+                        SkillRuneComponent skillRuneComponent = unit.GetComponent<SkillRuneComponent>();
+                        if (skillRuneComponent == null)
+                        {
+                            Log.Error($"角色没有技能符文组件，unitId: {unit.Id}");
+                            break;
+                        }
+
+                        int skillRuneConfigId = int.Parse(commands[1]);
+                        if (skillRuneConfigId == 0)
+                        {
+                            //Level 为 1 的是每种技能符文最低级那一行
+                            foreach (SkillRuneConfig skillRuneConfig in SkillRuneConfigCategory.Instance.GetAll().Values)
+                            {
+                                if (skillRuneConfig.Level != 1)
+                                {
+                                    continue;
+                                }
+
+                                skillRuneComponent.AddRune(skillRuneConfig.Id);
+                            }
+                        }
+                        else
+                        {
+                            int skillRuneCount = commands.Length > 2 ? int.Parse(commands[2]) : 1;
+                            for (int i = 0; i < skillRuneCount; i++)
+                            {
+                                skillRuneComponent.AddRune(skillRuneConfigId);
+                            }
+                        }
+
+                        skillRuneComponent.SyncToClient();
+                        break;
                     default:
                         break;
                 }

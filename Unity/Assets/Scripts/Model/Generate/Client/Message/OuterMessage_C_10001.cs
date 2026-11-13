@@ -35613,6 +35613,342 @@ namespace ET
         }
     }
 
+    // 技能符文协议结构，服务端对应的存档结构是 SkillRuneInfo / SkillRuneSlotInfo
+    // 技能孔位数据
+    [MemoryPackable]
+    [Message(OuterMessage.SkillRuneSlotInfoProto)]
+    public partial class SkillRuneSlotInfoProto : MessageObject
+    {
+        public static SkillRuneSlotInfoProto Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(SkillRuneSlotInfoProto), isFromPool) as SkillRuneSlotInfoProto;
+        }
+
+        /// <summary>
+        /// 基础技能 id
+        /// </summary>
+        [MemoryPackOrder(0)]
+        public int SkillId { get; set; }
+
+        /// <summary>
+        /// 孔位顺序，0 表示空孔
+        /// </summary>
+        [MemoryPackOrder(1)]
+        public List<long> RuneIds { get; set; } = new();
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.SkillId = default;
+            this.RuneIds.Clear();
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    // 技能符文实例
+    [MemoryPackable]
+    [Message(OuterMessage.SkillRuneInfoProto)]
+    public partial class SkillRuneInfoProto : MessageObject
+    {
+        public static SkillRuneInfoProto Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(SkillRuneInfoProto), isFromPool) as SkillRuneInfoProto;
+        }
+
+        /// <summary>
+        /// 技能符文唯一 id
+        /// </summary>
+        [MemoryPackOrder(0)]
+        public long Id { get; set; }
+
+        /// <summary>
+        /// SkillRuneConfig.Id，当前等级那一行
+        /// </summary>
+        [MemoryPackOrder(1)]
+        public int ConfigId { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.Id = default;
+            this.ConfigId = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    // 技能符文数据请求
+    [MemoryPackable]
+    [Message(OuterMessage.C2M_SkillRuneInfoRequest)]
+    [ResponseType(nameof(M2C_SkillRuneInfoResponse))]
+    public partial class C2M_SkillRuneInfoRequest : MessageObject, ILocationRequest
+    {
+        public static C2M_SkillRuneInfoRequest Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(C2M_SkillRuneInfoRequest), isFromPool) as C2M_SkillRuneInfoRequest;
+        }
+
+        [MemoryPackOrder(89)]
+        public int RpcId { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
+    [Message(OuterMessage.M2C_SkillRuneInfoResponse)]
+    public partial class M2C_SkillRuneInfoResponse : MessageObject, ILocationResponse
+    {
+        public static M2C_SkillRuneInfoResponse Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(M2C_SkillRuneInfoResponse), isFromPool) as M2C_SkillRuneInfoResponse;
+        }
+
+        [MemoryPackOrder(89)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(90)]
+        public int Error { get; set; }
+
+        [MemoryPackOrder(91)]
+        public string Message { get; set; }
+
+        [MemoryPackOrder(0)]
+        public List<SkillRuneInfoProto> RuneList { get; set; } = new();
+
+        [MemoryPackOrder(1)]
+        public List<SkillRuneSlotInfoProto> SlotList { get; set; } = new();
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.Error = default;
+            this.Message = default;
+            this.RuneList.Clear();
+            this.SlotList.Clear();
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    // 镶嵌技能符文
+    [MemoryPackable]
+    [Message(OuterMessage.C2M_SkillRuneEquipRequest)]
+    [ResponseType(nameof(M2C_SkillRuneEquipResponse))]
+    public partial class C2M_SkillRuneEquipRequest : MessageObject, ILocationRequest
+    {
+        public static C2M_SkillRuneEquipRequest Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(C2M_SkillRuneEquipRequest), isFromPool) as C2M_SkillRuneEquipRequest;
+        }
+
+        [MemoryPackOrder(89)]
+        public int RpcId { get; set; }
+
+        /// <summary>
+        /// 技能 id，服务端会换算成基础技能 id
+        /// </summary>
+        [MemoryPackOrder(0)]
+        public int SkillId { get; set; }
+
+        /// <summary>
+        /// 孔位下标，0 开始
+        /// </summary>
+        [MemoryPackOrder(1)]
+        public int SlotIndex { get; set; }
+
+        /// <summary>
+        /// SkillRuneInfoProto.Id
+        /// </summary>
+        [MemoryPackOrder(2)]
+        public long RuneId { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.SkillId = default;
+            this.SlotIndex = default;
+            this.RuneId = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
+    [Message(OuterMessage.M2C_SkillRuneEquipResponse)]
+    public partial class M2C_SkillRuneEquipResponse : MessageObject, ILocationResponse
+    {
+        public static M2C_SkillRuneEquipResponse Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(M2C_SkillRuneEquipResponse), isFromPool) as M2C_SkillRuneEquipResponse;
+        }
+
+        [MemoryPackOrder(89)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(90)]
+        public int Error { get; set; }
+
+        [MemoryPackOrder(91)]
+        public string Message { get; set; }
+
+        [MemoryPackOrder(0)]
+        public List<SkillRuneInfoProto> RuneList { get; set; } = new();
+
+        [MemoryPackOrder(1)]
+        public List<SkillRuneSlotInfoProto> SlotList { get; set; } = new();
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.Error = default;
+            this.Message = default;
+            this.RuneList.Clear();
+            this.SlotList.Clear();
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    // 卸下技能符文
+    [MemoryPackable]
+    [Message(OuterMessage.C2M_SkillRuneUnequipRequest)]
+    [ResponseType(nameof(M2C_SkillRuneUnequipResponse))]
+    public partial class C2M_SkillRuneUnequipRequest : MessageObject, ILocationRequest
+    {
+        public static C2M_SkillRuneUnequipRequest Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(C2M_SkillRuneUnequipRequest), isFromPool) as C2M_SkillRuneUnequipRequest;
+        }
+
+        [MemoryPackOrder(89)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(0)]
+        public int SkillId { get; set; }
+
+        [MemoryPackOrder(1)]
+        public int SlotIndex { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.SkillId = default;
+            this.SlotIndex = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
+    [Message(OuterMessage.M2C_SkillRuneUnequipResponse)]
+    public partial class M2C_SkillRuneUnequipResponse : MessageObject, ILocationResponse
+    {
+        public static M2C_SkillRuneUnequipResponse Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(M2C_SkillRuneUnequipResponse), isFromPool) as M2C_SkillRuneUnequipResponse;
+        }
+
+        [MemoryPackOrder(89)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(90)]
+        public int Error { get; set; }
+
+        [MemoryPackOrder(91)]
+        public string Message { get; set; }
+
+        [MemoryPackOrder(0)]
+        public List<SkillRuneInfoProto> RuneList { get; set; } = new();
+
+        [MemoryPackOrder(1)]
+        public List<SkillRuneSlotInfoProto> SlotList { get; set; } = new();
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.Error = default;
+            this.Message = default;
+            this.RuneList.Clear();
+            this.SlotList.Clear();
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    // 技能符文数据变更
+    [MemoryPackable]
+    [Message(OuterMessage.M2C_SkillRuneInfoMessage)]
+    public partial class M2C_SkillRuneInfoMessage : MessageObject, IMessage
+    {
+        public static M2C_SkillRuneInfoMessage Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(M2C_SkillRuneInfoMessage), isFromPool) as M2C_SkillRuneInfoMessage;
+        }
+
+        [MemoryPackOrder(0)]
+        public List<SkillRuneInfoProto> RuneList { get; set; } = new();
+
+        [MemoryPackOrder(1)]
+        public List<SkillRuneSlotInfoProto> SlotList { get; set; } = new();
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RuneList.Clear();
+            this.SlotList.Clear();
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
     public static class OuterMessage
     {
         public const ushort HttpGetRouterResponse = 10002;
@@ -36562,5 +36898,14 @@ namespace ET
         public const ushort RuneSlotInfo = 10946;
         public const ushort RuneData = 10947;
         public const ushort M2C_RuneInfoMessage = 10948;
+        public const ushort SkillRuneSlotInfoProto = 10949;
+        public const ushort SkillRuneInfoProto = 10950;
+        public const ushort C2M_SkillRuneInfoRequest = 10951;
+        public const ushort M2C_SkillRuneInfoResponse = 10952;
+        public const ushort C2M_SkillRuneEquipRequest = 10953;
+        public const ushort M2C_SkillRuneEquipResponse = 10954;
+        public const ushort C2M_SkillRuneUnequipRequest = 10955;
+        public const ushort M2C_SkillRuneUnequipResponse = 10956;
+        public const ushort M2C_SkillRuneInfoMessage = 10957;
     }
 }

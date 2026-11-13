@@ -8163,3 +8163,78 @@ message M2C_RuneInfoMessage	// IMessage
 {
 	RuneInfo Info = 1;
 }
+
+// 技能符文协议结构，服务端对应的存档结构是 SkillRuneInfo / SkillRuneSlotInfo
+// 技能孔位数据
+message SkillRuneSlotInfoProto
+{
+	int32 SkillId = 1;				// 基础技能 id
+	repeated int64 RuneIds = 2;		// 孔位顺序，0 表示空孔
+}
+
+// 技能符文实例
+message SkillRuneInfoProto
+{
+	int64 Id = 1;			// 技能符文唯一 id
+	int32 ConfigId = 2;		// SkillRuneConfig.Id，当前等级那一行
+}
+
+// 技能符文数据请求
+//ResponseType M2C_SkillRuneInfoResponse
+message C2M_SkillRuneInfoRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+}
+
+message M2C_SkillRuneInfoResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+	repeated SkillRuneInfoProto RuneList = 1;
+	repeated SkillRuneSlotInfoProto SlotList = 2;
+}
+
+// 镶嵌技能符文
+//ResponseType M2C_SkillRuneEquipResponse
+message C2M_SkillRuneEquipRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int32 SkillId = 1;		// 技能 id，服务端会换算成基础技能 id
+	int32 SlotIndex = 2;	// 孔位下标，0 开始
+	int64 RuneId = 3;		// SkillRuneInfoProto.Id
+}
+
+message M2C_SkillRuneEquipResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+	repeated SkillRuneInfoProto RuneList = 1;
+	repeated SkillRuneSlotInfoProto SlotList = 2;
+}
+
+// 卸下技能符文
+//ResponseType M2C_SkillRuneUnequipResponse
+message C2M_SkillRuneUnequipRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int32 SkillId = 1;
+	int32 SlotIndex = 2;
+}
+
+message M2C_SkillRuneUnequipResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+	repeated SkillRuneInfoProto RuneList = 1;
+	repeated SkillRuneSlotInfoProto SlotList = 2;
+}
+
+// 技能符文数据变更
+message M2C_SkillRuneInfoMessage // IMessage
+{
+	repeated SkillRuneInfoProto RuneList = 1;
+	repeated SkillRuneSlotInfoProto SlotList = 2;
+}

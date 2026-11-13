@@ -125,6 +125,7 @@ namespace ET.Client
                     await SkillNetHelper.RequestSkillSet(root);
                     await GemTalentNetHelper.RequestGemTalentInfo(root);
                     await RuneNetHelper.RequestRuneInfo(root);
+                    await SkillRuneNetHelper.RequestSkillRuneInfo(root);
                     await FriendNetHelper.RequestFriendInfo(root);
                     await ActivityNetHelper.RequestActivityInfo(root);
                     await ActivityNetHelper.RequestZhanQuInfo(root);
