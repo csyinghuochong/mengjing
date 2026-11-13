@@ -229,7 +229,12 @@ namespace ET.Client
 			self.E_RuneDesText.gameObject.SetActive(true);
 			self.E_RuneNameText.text = runeConfig.Name;
 			self.E_RuneLvText.text = CommonViewHelper.GetRomanLevel(runeConfig.Level);
-			self.E_RuneDesText.text = runeConfig.Des.Replace("\\n", "\n");
+
+			//描述长短差别比较大，自动缩放保证在文本框里显示完整
+			self.E_RuneDesText.resizeTextForBestFit = true;
+			self.E_RuneDesText.resizeTextMinSize = 16;
+			self.E_RuneDesText.resizeTextMaxSize = 34;
+			self.E_RuneDesText.text = (runeConfig.Des ?? string.Empty).Replace("\\n", "\n");
 		}
 
 		private static void HideRuneInfo(this ES_SkillRune self)
