@@ -9,6 +9,9 @@
         protected override async ETTask Run(Scene root, M2C_SkillRuneInfoMessage message)
         {
             root.GetComponent<SkillRuneComponentC>().UpdateInfo(message.RuneList, message.SlotList);
+
+            //通知界面按最新数据刷新
+            EventSystem.Instance.Publish(root, new SkillRuneUpdate());
             await ETTask.CompletedTask;
         }
     }

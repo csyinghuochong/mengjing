@@ -23,6 +23,16 @@ namespace ET.Client
     }
 
     [Event(SceneType.Demo)]
+    public class DataUpdate_SkillRuneUpdate_Refresh : AEvent<Scene, SkillRuneUpdate>
+    {
+        protected override async ETTask Run(Scene scene, SkillRuneUpdate args)
+        {
+            scene.GetComponent<UIComponent>().GetDlgLogic<DlgSkill>()?.OnSkillRuneUpdate();
+            await ETTask.CompletedTask;
+        }
+    }
+
+    [Event(SceneType.Demo)]
     public class DataUpdate_SkillSetting_Refresh : AEvent<Scene, SkillSetting>
     {
         protected override async ETTask Run(Scene scene, SkillSetting args)
@@ -198,6 +208,20 @@ namespace ET.Client
             {
                 self.View.ES_SkillAugment.RefreshSkillAugmentItems();
             }
+        }
+
+        /// <summary>
+        /// 服务端推送技能符文变化：列表项上的孔位和正开着的符文背包都按最新数据刷一遍
+        /// </summary>
+        public static void OnSkillRuneUpdate(this DlgSkill self)
+        {
+            if (!self.View.ES_SkillLearn.uiTransform.gameObject.activeSelf)
+            {
+                return;
+            }
+
+            self.View.ES_SkillLearn.RefreshSkillRuneItems();
+            self.View.ES_SkillLearn.RefreshSkillRunePanel();
         }
 
         public static void OnHuiShouSelect(this DlgSkill self, string dataParams)

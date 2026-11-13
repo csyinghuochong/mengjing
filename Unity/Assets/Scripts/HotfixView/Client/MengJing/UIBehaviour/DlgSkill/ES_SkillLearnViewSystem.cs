@@ -7,8 +7,14 @@ namespace ET.Client
     [FriendOf(typeof(Scroll_Item_SkillLearnSkillItem))]
     [EntitySystemOf(typeof(ES_SkillLearn))]
     [FriendOfAttribute(typeof(ES_SkillLearn))]
+    [FriendOf(typeof(ES_SkillRune))]
     public static partial class ES_SkillLearnSystem
     {
+        /// <summary>
+        /// 技能符文背包预制体
+        /// </summary>
+        private const string SkillRunePrefabPath = "Assets/Bundles/UI/Common/ES_SkillRune.prefab";
+
         [EntitySystem]
         private static void Awake(this ES_SkillLearn self, Transform transform)
         {
@@ -203,6 +209,7 @@ namespace ET.Client
 
                 Scroll_Item_SkillLearnItem scrollItemSkillLearnItem = self.ScrollItemSkillLearnItems[i];
                 scrollItemSkillLearnItem.SetClickHander((SkillPro skillpro) => { self.OnSelectSkill(skillpro); });
+                scrollItemSkillLearnItem.SetSkillRuneClickHandler(self.OnClickSkillRune);
                 scrollItemSkillLearnItem.OnUpdateUI(self.ShowLearnSkillPros[i]);
                 scrollItemSkillLearnItem.uiTransform.gameObject.SetActive(true);
             }
@@ -316,5 +323,145 @@ namespace ET.Client
 
             self.UpdateRightPanel();
         }
+
+        #region 技能符文
+
+        private static void OnClickSkillRune(this ES_SkillLearn self, int skillId, int slotIndex)
+        {
+            self.OpenSkillRune(skillId, slotIndex);
+        }
+
+        /// <summary>
+        /// 打开技能符文背包：面板挂在技能界面下面，放到最后盖住整个界面
+        /// </summary>
+        public static void OpenSkillRune(this ES_SkillLearn self, int skillId, int slotIndex)
+        {
+            //列表项没来得及刷新时，这里再挡一次：孔位不存在或者技能等级不够都不打开
+            if (slotIndex < 0 || slotIndex >= GlobalValueConfigCategory.Instance.SkillRuneSlotCount)
+            {
+                return;
+            }
+
+            int unlockLevel = SkillRuneComponentCSystem.GetSlotUnlockLevel(slotIndex);
+            if (!self.IsSkillRuneSlotUnlocked(skillId, unlockLevel))
+            {
+                FlyTipComponent.Instance.ShowFlyTip($"技能达到{unlockLevel}级解锁");
+                return;
+            }
+
+            ES_SkillRune skillRune = self.GetOrCreateSkillRune();
+            if (skillRune == null)
+            {
+                return;
+            }
+
+            skillRune.uiTransform.gameObject.SetActive(true);
+            skillRune.uiTransform.SetAsLastSibling();
+            skillRune.OnOpen(skillId, slotIndex);
+        }
+
+        /// <summary>
+        /// 技能当前等级（和技能界面显示的等级一致）是否达到孔位要求
+        /// </summary>
+        private static bool IsSkillRuneSlotUnlocked(this ES_SkillLearn self, int skillId, int unlockLevel)
+        {
+            if (skillId == 0)
+            {
+                return false;
+            }
+
+            SkillSetComponentC skillSetComponent = self.Root().GetComponent<SkillSetComponentC>();
+            int weaponSkillId = SkillHelp.GetWeaponSkill(skillId, UnitHelper.GetEquipType(self.Root()), skillSetComponent.SkillList);
+            SkillConfig skillConfig = SkillConfigCategory.Instance.GetOrDefault(weaponSkillId);
+            return skillConfig != null && skillConfig.SkillLv >= unlockLevel;
+        }
+
+        /// <summary>
+        /// ES_SkillRune 点 E_Close 关闭，回到技能列表
+        /// </summary>
+        public static void CloseSkillRune(this ES_SkillLearn self)
+        {
+            ES_SkillRune skillRune = self.SkillRune;
+            if (skillRune == null)
+            {
+                return;
+            }
+
+            skillRune.uiTransform.gameObject.SetActive(false);
+            self.RefreshSkillRuneItems();
+        }
+
+        /// <summary>
+        /// 镶嵌/卸下成功后刷新列表项上的孔位显示
+        /// </summary>
+        public static void RefreshSkillRuneItems(this ES_SkillLearn self)
+        {
+            for (int i = 0; i < self.ScrollItemSkillLearnItems.Count; i++)
+            {
+                Scroll_Item_SkillLearnItem item = self.ScrollItemSkillLearnItems[i];
+                if (item.uiTransform == null || !item.uiTransform.gameObject.activeSelf || item.SkillPro == null)
+                {
+                    continue;
+                }
+
+                item.OnUpdateUI(item.SkillPro);
+            }
+        }
+
+        /// <summary>
+        /// 符文背包开着的时候，按最新数据刷一遍
+        /// </summary>
+        public static void RefreshSkillRunePanel(this ES_SkillLearn self)
+        {
+            ES_SkillRune skillRune = self.SkillRune;
+            if (skillRune == null || !skillRune.uiTransform.gameObject.activeSelf)
+            {
+                return;
+            }
+
+            skillRune.RefreshUI();
+        }
+
+        /// <summary>
+        /// 第一次点孔位才加载预制体，之后复用同一个。
+        /// 挂在 ES_SkillLearn 的父节点下（和技能页同级），切换技能页时会被一起藏起来
+        /// </summary>
+        private static ES_SkillRune GetOrCreateSkillRune(this ES_SkillLearn self)
+        {
+            ES_SkillRune skillRune = self.SkillRune;
+            if (skillRune != null)
+            {
+                return skillRune;
+            }
+
+            Transform parentTrans = self.uiTransform.parent;
+            if (parentTrans == null)
+            {
+                Log.Error("ES_SkillLearn 没有父节点，无法挂载技能符文背包");
+                return null;
+            }
+
+            ResourcesLoaderComponent resourcesLoaderComponent = self.Root().GetComponent<ResourcesLoaderComponent>();
+            GameObject prefab = resourcesLoaderComponent.LoadAssetSync<GameObject>(SkillRunePrefabPath);
+            if (prefab == null)
+            {
+                Log.Error($"技能符文背包预制体加载失败：{SkillRunePrefabPath}");
+                return null;
+            }
+
+            GameObject go = UnityEngine.Object.Instantiate(prefab, parentTrans);
+            go.SetActive(false);
+
+            if (!self.AssetList.Contains(SkillRunePrefabPath))
+            {
+                self.AssetList.Add(SkillRunePrefabPath);
+            }
+
+            skillRune = self.AddChild<ES_SkillRune, Transform>(go.transform);
+            self.SkillRune = skillRune;
+            return skillRune;
+        }
+
+        #endregion
     }
 }

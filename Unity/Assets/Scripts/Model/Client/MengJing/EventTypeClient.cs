@@ -163,6 +163,13 @@ namespace ET.Client
         public string DataParamString;
     }
 
+    /// <summary>
+    /// 技能符文数据变化（服务端主动推送，例如 GM 加符文）
+    /// </summary>
+    public struct SkillRuneUpdate
+    {
+    }
+
     public struct OnActiveTianFu
     {
     }

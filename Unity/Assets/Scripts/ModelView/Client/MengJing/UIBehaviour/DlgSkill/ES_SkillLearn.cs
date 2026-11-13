@@ -13,6 +13,11 @@ namespace ET.Client
 		public List<SkillPro> ShowLearnSkillPros = new();
 		public Dictionary<int, EntityRef<Scroll_Item_SkillLearnItem>> ScrollItemSkillLearnItems = new();
 		public List<string> AssetList { get; set; } = new();
+
+		/// <summary>
+		/// 技能符文背包（ES_SkillRune），第一次点符文孔位时加载，之后复用
+		/// </summary>
+		public EntityRef<ES_SkillRune> SkillRune;
 		
 		public ToggleGroup E_BtnItemTypeSetToggleGroup
      	{

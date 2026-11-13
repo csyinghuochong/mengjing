@@ -8,6 +8,38 @@ namespace ET.Client
 {
     public static class CommonViewHelper
     {
+        /// <summary>
+        /// 符文/孔位等级显示成罗马数字，0 或负数返回空串，超过 10 级退回普通数字
+        /// </summary>
+        public static string GetRomanLevel(int level)
+        {
+            switch (level)
+            {
+                case 1:
+                    return "Ⅰ";
+                case 2:
+                    return "Ⅱ";
+                case 3:
+                    return "Ⅲ";
+                case 4:
+                    return "Ⅳ";
+                case 5:
+                    return "Ⅴ";
+                case 6:
+                    return "Ⅵ";
+                case 7:
+                    return "Ⅶ";
+                case 8:
+                    return "Ⅷ";
+                case 9:
+                    return "Ⅸ";
+                case 10:
+                    return "Ⅹ";
+                default:
+                    return level <= 0 ? string.Empty : level.ToString();
+            }
+        }
+        
         public static T GetOrAddComponent<T>(this GameObject gameObject) where T : Component
         {
             if (gameObject == null)
