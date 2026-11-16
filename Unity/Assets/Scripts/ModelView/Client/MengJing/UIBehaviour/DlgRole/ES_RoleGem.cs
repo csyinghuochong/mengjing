@@ -17,6 +17,7 @@ namespace ET.Client
 		private EntityRef<ItemInfo> xiangQianItem;
 		public ItemInfo XiangQianItem { get => this.xiangQianItem; set => this.xiangQianItem = value; }
 		public int XiangQianIndex;
+		public EntityRef<ES_GemTalent> GemTalent;
 		
 		public UnityEngine.UI.Button E_ItemDi_1Button
      	{
@@ -366,6 +367,7 @@ namespace ET.Client
 			this.m_es_rolegemhole_2 = null;
 			this.m_es_rolegemhole_3 = null;
 			this.m_es_commonitem = null;
+			this.GemTalent = null;
 			this.m_E_GemTalentButton = null;
 			this.m_E_GemTalentImage = null;
 			this.m_E_ItemTypeSetToggleGroup = null;

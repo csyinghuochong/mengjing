@@ -52,7 +52,7 @@ namespace ET.Client
 
 		private static void OnReturnButton(this ES_GemTalent self)
 		{
-			self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgRole>()?.CloseGemTalent();
+			self.uiTransform.gameObject.SetActive(false);
 		}
 
 		/// <summary>

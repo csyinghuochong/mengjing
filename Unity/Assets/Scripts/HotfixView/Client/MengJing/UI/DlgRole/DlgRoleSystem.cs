@@ -66,9 +66,9 @@ namespace ET.Client
         }
     }
 
+    [FriendOf(typeof(ES_ModelShow))]
     [FriendOf(typeof(ES_Rune))]
     [FriendOf(typeof(ES_RoleZodiac))]
-    [FriendOf(typeof(ES_GemTalent))]
     [FriendOf(typeof(ES_RoleQiangHua))]
     [FriendOf(typeof(ES_RoleHuiShou))]
     [FriendOf(typeof(ES_EquipSet))]
@@ -136,6 +136,7 @@ namespace ET.Client
         private static void OnFunctionSetBtn(this DlgRole self, int index)
         {
             CommonViewHelper.HideChildren(self.View.EG_SubViewRectTransform);
+            self.View.ES_ModelShow.uiTransform.gameObject.SetActive(true);
             switch (index)
             {
                 case 0:
@@ -156,6 +157,7 @@ namespace ET.Client
                     self.View.ES_RoleGem.uiTransform.gameObject.SetActive(true);
                     self.View.ES_RoleGem.OnUpdateUI();
                     // self.View.E_ZodiacButton.gameObject.SetActive(false);
+                    self.View.ES_ModelShow.uiTransform.gameObject.SetActive(false);
                     self.View.ES_EquipSet.uiTransform.gameObject.SetActive(true);
                     self.View.ES_EquipSet.PlayShowIdelAnimate(null);
                     self.View.ES_EquipSet.EquipSetHide(false);
@@ -276,17 +278,6 @@ namespace ET.Client
             {
                 self.View.ES_RoleZodiac.OnUpdate();
             }
-        }
-
-        public static void OpenGemTalent(this DlgRole self)
-        {
-            self.View.ES_GemTalent.uiTransform.gameObject.SetActive(true);
-            self.View.ES_GemTalent.OnUpdateUI();
-        }
-
-        public static void CloseGemTalent(this DlgRole self)
-        {
-            self.View.ES_GemTalent.uiTransform.gameObject.SetActive(false);
         }
     }
 }
