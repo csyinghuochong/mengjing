@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace ET.Client
 {
@@ -24,6 +25,13 @@ namespace ET.Client
 
             self.E_BtnItemTypeSetToggleGroup.AddListener(self.OnItemTypeSet);
             self.E_SkillLearnButton.AddListener(self.OnSkillLearn);
+
+            RectTransform[] runeSlots = self.GetSkillRuneSlots();
+            for (int i = 0; i < runeSlots.Length; i++)
+            {
+                Button button = runeSlots[i]?.Find("Button_Click")?.GetComponent<Button>();
+                button?.AddListenerWithId(self.OpenSkillRune, i);
+            }
 
             self.E_BtnItemTypeSetToggleGroup.OnSelectIndex(0);
             
@@ -226,7 +234,6 @@ namespace ET.Client
 
                 Scroll_Item_SkillLearnItem scrollItemSkillLearnItem = self.ScrollItemSkillLearnItems[i];
                 scrollItemSkillLearnItem.SetClickHander((SkillPro skillpro) => { self.OnSelectSkill(skillpro); });
-                scrollItemSkillLearnItem.SetSkillRuneClickHandler(self.OnClickSkillRune);
                 scrollItemSkillLearnItem.OnUpdateUI(self.ShowLearnSkillPros[i]);
                 scrollItemSkillLearnItem.uiTransform.gameObject.SetActive(true);
             }
@@ -289,10 +296,8 @@ namespace ET.Client
             UserInfo userInfo = self.Root().GetComponent<UserInfoComponentC>().UserInfo;
             SkillConfig skillBaseConfig = SkillConfigCategory.Instance.Get(self.SkillPro.SkillID);
 
-            int weaponskill = SkillHelp.GetWeaponSkill(self.SkillPro.SkillID, UnitHelper.GetEquipType(self.Root()),
-                self.Root().GetComponent<SkillSetComponentC>().SkillList);
-            SkillConfig skillWeaponConfig = SkillConfigCategory.Instance.Get(weaponskill);
-            int baseskill = SkillHelp.GetBaseSkill(weaponskill);
+            SkillConfig skillWeaponConfig = self.GetSelectedWeaponSkill();
+            int baseskill = SkillHelp.GetBaseSkill(skillWeaponConfig.Id);
             string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.RoleSkillIcon, skillWeaponConfig.SkillIcon);
             Sprite sp = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
             self.E_SkillIconImage.sprite = sp;
@@ -326,6 +331,7 @@ namespace ET.Client
 
             self.E_SkillCoinText.text = string.Format("需要金币：{0}", skillBaseConfig.CostGoldValue);
             self.E_SkillPointText.text = string.Format("技能点数：{0}/{1}", skillBaseConfig.CostSPValue, userInfo.Sp);
+            self.RefreshSkillRuneSlots(skillWeaponConfig);
         }
 
         public static void OnSkillUpgrade(this ES_SkillLearn self, string dataparams)
@@ -358,25 +364,100 @@ namespace ET.Client
 
         #region 技能符文
 
-        private static void OnClickSkillRune(this ES_SkillLearn self, int skillId, int slotIndex)
+        private static RectTransform[] GetSkillRuneSlots(this ES_SkillLearn self)
         {
-            self.OpenSkillRune(skillId, slotIndex);
+            return new[]
+            {
+                self.EG_SkillRune_1RectTransform,
+                self.EG_SkillRune_2RectTransform,
+                self.EG_SkillRune_3RectTransform,
+                self.EG_SkillRune_4RectTransform
+            };
+        }
+
+        private static SkillConfig GetSelectedWeaponSkill(this ES_SkillLearn self)
+        {
+            Scene root = self.Root();
+            int skillId = SkillHelp.GetWeaponSkill(self.SkillPro.SkillID, UnitHelper.GetEquipType(root),
+                root.GetComponent<SkillSetComponentC>().SkillList);
+            return SkillConfigCategory.Instance.Get(skillId);
+        }
+
+        private static void RefreshSkillRuneSlots(this ES_SkillLearn self, SkillConfig skillConfig)
+        {
+            RectTransform[] runeSlots = self.GetSkillRuneSlots();
+            Scene root = self.Root();
+            SkillRuneComponentC skillRuneComponent = root.GetComponent<SkillRuneComponentC>();
+            int slotCount = GlobalValueConfigCategory.Instance.SkillRuneSlotCount;
+            bool showSlots = self.IsZhuDongSkill(skillConfig.SkillType);
+            for (int slotIndex = 0; slotIndex < runeSlots.Length; slotIndex++)
+            {
+                RectTransform slot = runeSlots[slotIndex];
+                if (slot == null)
+                {
+                    continue;
+                }
+
+                bool show = showSlots && slotIndex < slotCount;
+                slot.gameObject.SetActive(show);
+                if (!show)
+                {
+                    continue;
+                }
+
+                bool unlocked = skillConfig.SkillLv >= SkillHelp.GetSkillRuneSlotUnlockLevel(slotIndex);
+                SkillRuneConfig runeConfig = null;
+                if (unlocked && skillRuneComponent != null)
+                {
+                    long runeId = skillRuneComponent.GetSlotRuneId(skillConfig.Id, slotIndex);
+                    runeConfig = skillRuneComponent.GetRuneConfig(skillRuneComponent.GetRune(runeId));
+                }
+
+                bool hasRune = runeConfig != null;
+                slot.Find("Image_Lock")?.gameObject.SetActive(!unlocked);
+                slot.Find("Image_Add")?.gameObject.SetActive(unlocked && !hasRune);
+
+                Image iconImage = slot.Find("Mask/Image_Icon")?.GetComponent<Image>();
+                if (iconImage != null)
+                {
+                    iconImage.gameObject.SetActive(hasRune);
+                    if (hasRune)
+                    {
+                        string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.RoleSkillIcon, runeConfig.Icon);
+                        iconImage.sprite = root.GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
+                    }
+                }
+
+                Text lvText = slot.Find("Text_Lv")?.GetComponent<Text>();
+                if (lvText != null)
+                {
+                    lvText.gameObject.SetActive(hasRune);
+                    if (hasRune)
+                    {
+                        lvText.text = CommonViewHelper.GetRomanLevel(runeConfig.Level);
+                    }
+                }
+            }
         }
 
         /// <summary>
         /// 打开技能符文背包：面板挂在技能界面下面，放到最后盖住整个界面
         /// </summary>
-        public static void OpenSkillRune(this ES_SkillLearn self, int skillId, int slotIndex)
+        private static void OpenSkillRune(this ES_SkillLearn self, int slotIndex)
         {
-            //列表项没来得及刷新时，这里再挡一次：孔位不存在或者技能等级不够都不打开
-            if (slotIndex < 0 || slotIndex >= GlobalValueConfigCategory.Instance.SkillRuneSlotCount)
+            if (self.SkillPro == null || slotIndex < 0 || slotIndex >= GlobalValueConfigCategory.Instance.SkillRuneSlotCount)
+            {
+                return;
+            }
+
+            SkillConfig skillConfig = self.GetSelectedWeaponSkill();
+            if (!self.IsZhuDongSkill(skillConfig.SkillType))
             {
                 return;
             }
 
             int unlockLevel = SkillHelp.GetSkillRuneSlotUnlockLevel(slotIndex);
-            SkillConfig skillConfig = SkillConfigCategory.Instance.GetOrDefault(skillId);
-            if (skillConfig == null || skillConfig.SkillLv < unlockLevel)
+            if (skillConfig.SkillLv < unlockLevel)
             {
                 FlyTipComponent.Instance.ShowFlyTip($"技能达到{unlockLevel}级解锁");
                 return;
@@ -390,7 +471,7 @@ namespace ET.Client
 
             skillRune.uiTransform.gameObject.SetActive(true);
             skillRune.uiTransform.SetAsLastSibling();
-            skillRune.OnOpen(skillId, slotIndex);
+            skillRune.OnOpen(skillConfig.Id, slotIndex);
         }
 
         /// <summary>
@@ -409,7 +490,7 @@ namespace ET.Client
         }
 
         /// <summary>
-        /// 镶嵌/卸下成功后刷新列表项上的孔位显示
+        /// 刷新技能列表和当前技能详情的符文孔位
         /// </summary>
         public static void RefreshSkillRuneItems(this ES_SkillLearn self)
         {
@@ -422,6 +503,11 @@ namespace ET.Client
                 }
 
                 item.OnUpdateUI(item.SkillPro);
+            }
+
+            if (self.SkillPro != null)
+            {
+                self.RefreshSkillRuneSlots(self.GetSelectedWeaponSkill());
             }
         }
 

@@ -211,7 +211,7 @@ namespace ET.Client
         }
 
         /// <summary>
-        /// 服务端推送技能符文变化：列表项上的孔位和正开着的符文背包都按最新数据刷一遍
+        /// 服务端推送技能符文变化时刷新技能页的孔位和正开着的符文背包
         /// </summary>
         public static void OnSkillRuneUpdate(this DlgSkill self)
         {

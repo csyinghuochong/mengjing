@@ -9,11 +9,6 @@ namespace ET.Client
 	{
 		public SkillPro SkillPro;
 		public Action<SkillPro> ClickHandler;
-
-		/// <summary>
-		/// 点技能符文孔位的回调，参数：技能id、孔位下标（0 开始）
-		/// </summary>
-		public Action<int, int> SkillRuneClickHandler;
 		
 		public long DataId {get;set;}
 		private bool isCacheNode = false;

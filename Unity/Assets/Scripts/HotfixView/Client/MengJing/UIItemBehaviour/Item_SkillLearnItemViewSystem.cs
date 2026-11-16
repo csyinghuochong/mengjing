@@ -47,14 +47,6 @@ namespace ET.Client
             self.ClickHandler = action;
         }
 
-        /// <summary>
-        /// 点符文孔位的回调：技能id + 孔位下标，由 ES_SkillLearn 打开符文背包
-        /// </summary>
-        public static void SetSkillRuneClickHandler(this Scroll_Item_SkillLearnItem self, Action<int, int> action)
-        {
-            self.SkillRuneClickHandler = action;
-        }
-
         public static void OnUpdateUI(this Scroll_Item_SkillLearnItem self, SkillPro skillPro)
         {
             self.SkillPro = skillPro;
@@ -92,79 +84,65 @@ namespace ET.Client
                 self.E_SkillLvText.text = string.Format("{0}{1}", LanguageComponent.Instance.LoadLocalization("等级 "), skillConfig.SkillLv);
             }
 
-            self.RefreshSkillRuneSlots(weaponskill, skillConfig, isLocked);
+            self.RefreshSkillRuneSlots(skillConfig, isLocked);
         }
 
         /// <summary>
         /// 刷新四个技能符文孔位：锁着显示锁，空孔显示加号，镶了符文显示图标和等级。
         /// 孔位节点是美术在预制体里摆好的，按名字前缀 EG_SkillRune_ 找，节点名后缀就是孔位序号
         /// </summary>
-        private static void RefreshSkillRuneSlots(this Scroll_Item_SkillLearnItem self, int skillId, SkillConfig skillConfig, bool isLocked)
+        private static void RefreshSkillRuneSlots(this Scroll_Item_SkillLearnItem self, SkillConfig skillConfig, bool isLocked)
         {
             bool showSlots = !isLocked && skillConfig != null && IsActiveSkillType(skillConfig.SkillType);
-            SkillRuneComponentC skillRuneComponent = self.Root().GetComponent<SkillRuneComponentC>();
+            Scene root = self.Root();
+            SkillRuneComponentC skillRuneComponent = root.GetComponent<SkillRuneComponentC>();
             int slotCount = GlobalValueConfigCategory.Instance.SkillRuneSlotCount;
 
             for (int childIndex = 0; childIndex < self.uiTransform.childCount; childIndex++)
             {
-                Transform slotTrans = self.uiTransform.GetChild(childIndex);
-                if (!slotTrans.name.StartsWith(SkillRuneSlotPrefix))
+                Transform slot = self.uiTransform.GetChild(childIndex);
+                if (!slot.name.StartsWith(SkillRuneSlotPrefix))
                 {
                     continue;
                 }
 
-                if (!int.TryParse(slotTrans.name.Substring(SkillRuneSlotPrefix.Length), out int slotNumber))
+                if (!int.TryParse(slot.name.Substring(SkillRuneSlotPrefix.Length), out int slotNumber))
                 {
                     continue;
                 }
 
-                //节点名从 1 开始，配置和存档里的孔位下标从 0 开始
                 int slotIndex = slotNumber - 1;
-
-                //没解锁的技能、或者预制体节点数比配置的孔位多时，直接藏掉
                 bool show = showSlots && slotIndex >= 0 && slotIndex < slotCount;
-                slotTrans.gameObject.SetActive(show);
+                slot.gameObject.SetActive(show);
                 if (!show)
                 {
                     continue;
                 }
 
-                int unlockLevel = SkillHelp.GetSkillRuneSlotUnlockLevel(slotIndex);
-                bool unlocked = skillConfig.SkillLv >= unlockLevel;
-                long runeId = skillRuneComponent == null ? 0 : skillRuneComponent.GetSlotRuneId(skillId, slotIndex);
-                SkillRuneConfig runeConfig = skillRuneComponent == null ? null : skillRuneComponent.GetRuneConfig(skillRuneComponent.GetRune(runeId));
-                bool hasRune = unlocked && runeConfig != null;
-
-                Transform lockTrans = slotTrans.Find("Image_Lock");
-                if (lockTrans != null)
+                bool unlocked = skillConfig.SkillLv >= SkillHelp.GetSkillRuneSlotUnlockLevel(slotIndex);
+                SkillRuneConfig runeConfig = null;
+                if (unlocked && skillRuneComponent != null)
                 {
-                    lockTrans.gameObject.SetActive(!unlocked);
+                    long runeId = skillRuneComponent.GetSlotRuneId(skillConfig.Id, slotIndex);
+                    runeConfig = skillRuneComponent.GetRuneConfig(skillRuneComponent.GetRune(runeId));
                 }
 
-                Transform addTrans = slotTrans.Find("Image_Add");
-                if (addTrans != null)
-                {
-                    addTrans.gameObject.SetActive(unlocked && !hasRune);
-                }
+                bool hasRune = runeConfig != null;
+                slot.Find("Image_Lock")?.gameObject.SetActive(!unlocked);
+                slot.Find("Image_Add")?.gameObject.SetActive(unlocked && !hasRune);
 
-                Transform iconTrans = slotTrans.Find("Mask/Image_Icon");
-                Image iconImage = iconTrans == null ? null : iconTrans.GetComponent<Image>();
+                Image iconImage = slot.Find("Mask/Image_Icon")?.GetComponent<Image>();
                 if (iconImage != null)
                 {
                     iconImage.gameObject.SetActive(hasRune);
                     if (hasRune)
                     {
                         string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.RoleSkillIcon, runeConfig.Icon);
-                        Sprite sp = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
-                        if (sp != null)
-                        {
-                            iconImage.sprite = sp;
-                        }
+                        iconImage.sprite = root.GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
                     }
                 }
 
-                Transform lvTrans = slotTrans.Find("Text_Lv");
-                Text lvText = lvTrans == null ? null : lvTrans.GetComponent<Text>();
+                Text lvText = slot.Find("Text_Lv")?.GetComponent<Text>();
                 if (lvText != null)
                 {
                     lvText.gameObject.SetActive(hasRune);
@@ -172,25 +150,6 @@ namespace ET.Client
                     {
                         lvText.text = CommonViewHelper.GetRomanLevel(runeConfig.Level);
                     }
-                }
-
-                Transform buttonTrans = slotTrans.Find("Button_Click");
-                Button button = buttonTrans == null ? null : buttonTrans.GetComponent<Button>();
-                if (button != null)
-                {
-                    button.AddListener(() =>
-                    {
-                        //锁着的孔位只提示解锁条件，不打开符文背包
-                        if (!unlocked)
-                        {
-                            FlyTipComponent.Instance.ShowFlyTip($"技能达到{unlockLevel}级解锁");
-                            return;
-                        }
-
-                        //点孔位先把技能选中，右侧技能信息跟着切
-                        self.ClickHandler?.Invoke(self.SkillPro);
-                        self.SkillRuneClickHandler?.Invoke(skillId, slotIndex);
-                    });
                 }
             }
         }
