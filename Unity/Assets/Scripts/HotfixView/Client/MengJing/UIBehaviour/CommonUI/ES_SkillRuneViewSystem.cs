@@ -231,9 +231,6 @@ namespace ET.Client
 			self.E_RuneLvText.text = CommonViewHelper.GetRomanLevel(runeConfig.Level);
 
 			//描述长短差别比较大，自动缩放保证在文本框里显示完整
-			self.E_RuneDesText.resizeTextForBestFit = true;
-			self.E_RuneDesText.resizeTextMinSize = 16;
-			self.E_RuneDesText.resizeTextMaxSize = 34;
 			self.E_RuneDesText.text = (runeConfig.Des ?? string.Empty).Replace("\\n", "\n");
 		}
 
