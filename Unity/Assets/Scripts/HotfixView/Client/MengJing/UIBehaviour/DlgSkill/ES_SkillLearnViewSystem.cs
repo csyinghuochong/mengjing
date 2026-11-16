@@ -147,7 +147,7 @@ namespace ET.Client
         private static void RefreshSkillList(this ES_SkillLearn self, int page, int selectedSkillId)
         {
             self.EG_SkillInfoPanelRectTransform.gameObject.SetActive(false);
-            self.E_SkillLearnItemsLoopVerticalScrollRect.gameObject.SetActive(true);
+            self.E_SkillLearnItemsScrollRect.gameObject.SetActive(true);
 
             List<SkillPro> skillPros = self.Root().GetComponent<SkillSetComponentC>().SkillList;
             List<SkillPro> showSkillPros = new List<SkillPro>();
@@ -219,7 +219,7 @@ namespace ET.Client
                     }
 
                     GameObject prefab = resourcesLoaderComponent.LoadAssetSync<GameObject>(path);
-                    GameObject go = UnityEngine.Object.Instantiate(prefab, self.E_SkillLearnItemsLoopVerticalScrollRect.transform.Find("Content").gameObject.transform);
+                    GameObject go = UnityEngine.Object.Instantiate(prefab, self.E_SkillLearnItemsScrollRect.transform.Find("Content").gameObject.transform);
                     item.BindTrans(go.transform);
                     self.ScrollItemSkillLearnItems.Add(i, item);
                 }
