@@ -153,29 +153,6 @@ namespace ET
         public const int Rune = 11;
     }
 
-    //1.增加范围
-    //2.技能伤害来源的攻击值系数,为1时表示造成100%攻击力的伤害
-    //3.技能附加固定伤害值
-    //4.减少冷却CD
-    //5.技能持续时间
-    //6.技能附加额外buff
-    public enum SkillAttributeEnum
-    {
-        AddDamageRange = 1,
-        AddDamageCoefficient = 2,
-        AddDamageValue = 3,
-        ReduceSkillCD = 4,
-        AddSkillLiveTime = 5,
-        AddSkillBuffID = 6,
-    }
-
-    //BuffPropertyAdd
-    public enum BuffAttributeEnum
-    {
-        AddParameterValue = 1,
-        AddBuffTime = 2,
-    }
-
     [EnableClass]
     public class SkillCDItem
     {

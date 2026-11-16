@@ -42,7 +42,7 @@ namespace ET.Server
             self.OnDispose();
         }
 
-          public static List<SkillInfo> GetRandomSkills(this SkillManagerComponentS self, C2M_SkillCmd skillcmd, int weaponSkill)
+          public static List<SkillInfo> GetRandomSkills(this SkillManagerComponentS self, C2M_SkillCmd skillcmd, int weaponSkill, IReadOnlyList<SkillRuneEffect> runeEffects = null)
           {
               Unit unit = self.GetParent<Unit>();
               List<SkillInfo> skillInfos = new List<SkillInfo>();
@@ -241,7 +241,7 @@ namespace ET.Server
                               skillInfos.Add(skillInfo);
                               continue;
                           }
-                          self.DelaySkillList.Add(skillInfo);
+                          self.DelaySkillList.Add((skillInfo, runeEffects));
                       }
                       break;
                   case (int)SkillTargetType.SelfOnly:
@@ -528,13 +528,14 @@ namespace ET.Server
 
               SkillSetComponentS skillSetComponent = unit.GetComponent<SkillSetComponentS>();
               int weaponSkill = unit.GetWeaponSkill(skillcmd.SkillID, skillSetComponent!=null ? skillSetComponent.SkillList : null );
+              IReadOnlyList<SkillRuneEffect> runeEffects = skillcmd.ItemId == 0 ? unit.GetComponent<SkillRuneComponent>()?.GetSkillRuneEffects(weaponSkill) : null;
               int tianfuSkill = skillSetComponent != null ? skillSetComponent.GetReplaceSkillId(weaponSkill) : 0;
               if (tianfuSkill != 0)
               {
                   weaponSkill = tianfuSkill;
               }
               SkillConfig weaponSkillConfig = SkillConfigCategory.Instance.Get(weaponSkill);
-              List<SkillInfo> skillList = self.GetRandomSkills(skillcmd, weaponSkill);
+              List<SkillInfo> skillList = self.GetRandomSkills(skillcmd, weaponSkill, runeEffects);
               if (skillList.Count == 0)
               {
                   m2C_Skill.Error = ErrorCode.ERR_UseSkillError;
@@ -550,14 +551,14 @@ namespace ET.Server
               for (int i = 0; i < skillList.Count; i++)
               {
                   skillList[i].SingValue = skillcmd.SingValue;
-                  SkillS skillAction = self.SkillFactory(skillList[i], unit);
+                  SkillS skillAction = self.SkillFactory(skillList[i], unit, runeEffects);
                   skillList[i].SkillBeginTime = skillAction.SkillBeginTime;
                   skillList[i].SkillEndTime = skillAction.SkillEndTime;
                   handlerList.Add(skillAction);
               }
 
               //添加技能CD列表  给客户端发送消息 我创建了一个技能,客户端创建特效等相关功能
-              SkillCDItem skillCd = self.AddSkillCD(skillcmd.ItemId, skillcmd.SkillID, weaponSkillConfig, zhudong);
+              SkillCDItem skillCd = self.AddSkillCD(skillcmd.ItemId, skillcmd.SkillID, weaponSkillConfig, zhudong, runeEffects.GetRuneSkillProperty(SkillAttributeEnum.ReduceSkillCD));
               m2C_Skill.Error = ErrorCode.ERR_Success;
               m2C_Skill.CDEndTime = skillCd != null ? skillCd.CDEndTime : 0;
               m2C_Skill.PublicCDTime = self.SkillPublicCDTime;
@@ -640,7 +641,7 @@ namespace ET.Server
               }
           }
 
-          public static SkillCDItem AddSkillCD(this SkillManagerComponentS self, int itemId, int skillid, SkillConfig weaponConfig, bool zhudong)
+          public static SkillCDItem AddSkillCD(this SkillManagerComponentS self, int itemId, int skillid, SkillConfig weaponConfig, bool zhudong, float runeCooldownReduction = 0f)
           {
               SkillCDItem skillCd = null;
               if (skillid == self.FangunSkillId)
@@ -656,7 +657,7 @@ namespace ET.Server
                   }
                   else
                   {
-                      skillCd = self.UpdateSkillCD(itemId, skillid, weaponConfig.Id, zhudong);
+                      skillCd = self.UpdateSkillCD(itemId, skillid, weaponConfig.Id, zhudong, runeCooldownReduction);
                   }
               }
               else
@@ -665,7 +666,7 @@ namespace ET.Server
                   {
                       return null;
                   }
-                  skillCd = self.UpdateSkillCD(itemId, skillid, weaponConfig.Id, zhudong);
+                  skillCd = self.UpdateSkillCD(itemId, skillid, weaponConfig.Id, zhudong, runeCooldownReduction);
               }
               return skillCd;
           }
@@ -807,7 +808,7 @@ namespace ET.Server
               return null;
           }
 
-          public static SkillCDItem UpdateSkillCD(this SkillManagerComponentS self, int itemid, int skillId, int weaponSkill, bool zhudong)
+          public static SkillCDItem UpdateSkillCD(this SkillManagerComponentS self, int itemid, int skillId, int weaponSkill, bool zhudong, float runeCooldownReduction = 0f)
           {
               Unit unit = self.GetParent<Unit>();
               SkillCDItem skillcd = null;
@@ -861,6 +862,7 @@ namespace ET.Server
               {
                   keyValuePairs.TryGetValue((int)SkillAttributeEnum.ReduceSkillCD, out reduceCD);
               }
+              float cooldownSeconds = Math.Max(0f, (float)skillcdTime - reduceCD - runeCooldownReduction);
               
               int cdRate = 1;
               if (itemid > 0 && unit.Type == UnitType.Player)
@@ -878,12 +880,12 @@ namespace ET.Server
               if (zhudong)
               {
                   skillcd.SkillID = skillId;
-                  skillcd.CDEndTime = TimeHelper.ServerNow() +  (int)(1000 * ( (float)skillcdTime - reduceCD) * cdRate);
+                  skillcd.CDEndTime = TimeHelper.ServerNow() + (int)(1000 * cooldownSeconds * cdRate);
               }
               else
               {
                   skillcd.SkillID = skillId;
-                  skillcd.CDPassive = TimeHelper.ServerNow() + (int)(1000 * ((float)skillcdTime - reduceCD));
+                  skillcd.CDPassive = TimeHelper.ServerNow() + (int)(1000 * cooldownSeconds);
               }
 
               if (zhudong && skillConfig.IfPublicSkillCD == 0)
@@ -990,11 +992,12 @@ namespace ET.Server
               return ErrorCode.ERR_Success;
           }
   
-          public static SkillS SkillFactory(this SkillManagerComponentS self, SkillInfo skillcmd, Unit from)
+          public static SkillS SkillFactory(this SkillManagerComponentS self, SkillInfo skillcmd, Unit from, IReadOnlyList<SkillRuneEffect> runeEffects = null)
           {
               SkillS skillS = self.AddChild<SkillS>();
               skillS.SkillInfo = skillcmd;
               skillS.SkillConf = SkillConfigCategory.Instance.Get(skillcmd.WeaponSkillID);
+              skillS.RuneEffects = runeEffects;
               SkillHandlerS aaiHandler = SkillDispatcherComponentS.Instance.Get(skillS.SkillConf.GameObjectName);
               aaiHandler.OnInit(skillS, from  );
               return skillS;
@@ -1171,7 +1174,7 @@ namespace ET.Server
               int dalaycnt = self.DelaySkillList.Count;
               for (int i = dalaycnt - 1; i >= 0; i--)
               {
-                  SkillInfo skillInfo = self.DelaySkillList[i];
+                  (SkillInfo skillInfo, IReadOnlyList<SkillRuneEffect> runeEffects) = self.DelaySkillList[i];
                   
                   Unit target = self.SelfUnitComponent.Get(skillInfo.TargetID);
                   if (target != null && !target.IsDisposed)
@@ -1186,7 +1189,7 @@ namespace ET.Server
                   }
                   
                   //Unit from = self.GetParent<Unit>();
-                  SkillS skillAction = self.SkillFactory(skillInfo, self.SelfUnit);
+                  SkillS skillAction = self.SkillFactory(skillInfo, self.SelfUnit, runeEffects);
                   skillInfo.SkillBeginTime = skillAction.SkillBeginTime;
                   skillInfo.SkillEndTime = skillAction.SkillEndTime;
                   self.Skills.Add(skillAction);

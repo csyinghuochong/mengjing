@@ -355,7 +355,7 @@ namespace ET.Server
             float addDodgeLvPro = LvProChange(numericComponentDefend.GetAsLong(NumericType.Now_DodgeLv), attackUnitLv);
 
 
-            addHitPro += addHitLvPro;
+            addHitPro += addHitLvPro + skillHandlerS.GetSkillPropertyAdd(SkillAttributeEnum.AddHitChance);
             addDodgePro += addDodgeLvPro;
 
             //等级差命中
@@ -520,7 +520,7 @@ namespace ET.Server
                 }
 
                 //判定是否无视防御
-                float wushiPro = numericComponentAttack.GetAsFloat(NumericType.Now_WuShiFangYuPro);
+                float wushiPro = numericComponentAttack.GetAsFloat(NumericType.Now_WuShiFangYuPro) + skillHandlerS.GetSkillPropertyAdd(SkillAttributeEnum.IgnoreDefenseChance);
                 if (RandomHelper.RandFloat() <= wushiPro)
                 {
                     defValue = 0;
@@ -602,6 +602,12 @@ namespace ET.Server
                             actValue = (long)((float)actValue * 1.2f);
                         }
                     }
+                }
+
+                float runeIgnoreDefense = skillHandlerS.GetSkillPropertyAdd(SkillAttributeEnum.IgnoreDefense);
+                if (runeIgnoreDefense > 0f)
+                {
+                    nowdef = (long)(nowdef * (1f - Math.Min(1f, runeIgnoreDefense)));
                 }
 
                 //计算战斗公式
@@ -745,7 +751,7 @@ namespace ET.Server
                     actDamgeValue = skillconfig.DamgeChiXuValue;
                 }
 
-                //damge = (long)(damge * (actDamge + skillHandler.ActTargetTemporaryAddPro + skillHandler.ActTargetAddPro + skillHandler.GetTianfuProAdd((int)SkillAttributeEnum.AddDamageCoefficient) + skillProAdd)) + actDamgeValue;
+                //damge = (long)(damge * (actDamge + skillHandler.ActTargetTemporaryAddPro + skillHandler.ActTargetAddPro + skillHandler.GetSkillPropertyAdd(SkillAttributeEnum.AddDamageCoefficient) + skillProAdd)) + actDamgeValue;
                 damge = (long)(damge * (actDamge + skillHandlerS.ActTargetTemporaryAddPro + skillHandlerS.ActTargetAddPro + skillProAdd)) + actDamgeValue;
 
                 float damgePro = 1;
@@ -1054,7 +1060,7 @@ namespace ET.Server
                 //真实伤害
                 damge += numericComponentAttack.GetAsLong(NumericType.Now_ZhenShi);
 
-                damge += (long)skillHandlerS.GetTianfuProAdd((int)SkillAttributeEnum.AddDamageValue);
+                damge += (long)skillHandlerS.GetSkillPropertyAdd(SkillAttributeEnum.AddDamageValue);
 
                 //二次限定
                 if (damge < 1)
@@ -1073,7 +1079,7 @@ namespace ET.Server
                     float addCriLvPro = LvProChange(numericComponentAttack.GetAsLong(NumericType.Now_CriLv), defendUnitLv);
                     float addResLvPro = LvProChange(numericComponentAttack.GetAsLong(NumericType.Now_ResLv), attackUnitLv);
 
-                    addCriPro += addCriLvPro;
+                    addCriPro += addCriLvPro + skillHandlerS.GetSkillPropertyAdd(SkillAttributeEnum.AddCriticalChance);
                     addResPro += addResLvPro;
 
                     float CriPro = addCriPro + attackPet_cri - addResPro;
@@ -1114,7 +1120,7 @@ namespace ET.Server
                     if (RandomHelper.RandFloat() <= CriPro)
                     {
                         DamgeType = 1;
-                        float criDamge = 1.7f + numericComponentAttack.GetAsFloat(NumericType.Now_CriDamgeAdd_Pro) + numericComponentDefend.GetAsFloat(NumericType.Now_CriHitDamgeAdd_Pro);
+                        float criDamge = 1.7f + numericComponentAttack.GetAsFloat(NumericType.Now_CriDamgeAdd_Pro) + numericComponentDefend.GetAsFloat(NumericType.Now_CriHitDamgeAdd_Pro) + skillHandlerS.GetSkillPropertyAdd(SkillAttributeEnum.AddCriticalDamage);
                         damge = (long)((float)damge * criDamge);
                         
                         //闪避触发被动技能
@@ -1127,6 +1133,12 @@ namespace ET.Server
                         }
                     }
                     
+                    float runeDamage = skillHandlerS.GetSkillPropertyAdd(SkillAttributeEnum.AddTotalDamage, defHpPro);
+                    if (runeDamage != 0f)
+                    {
+                        damge = (long)(damge * (1f + runeDamage));
+                    }
+
                     //是否触发秒杀
                     if (defHpPro <= 0.2f)
                     {

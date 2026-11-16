@@ -25,7 +25,7 @@ namespace ET
         public BuffPropertyAdd(ByteBuf _buf) : base(_buf) 
         {
             {int n0 = _buf.ReadSize(); BuffIds = new System.Collections.Generic.List<int>(n0);for(var i0 = 0 ; i0 < n0 ; i0++) { int _e0;  _e0 = _buf.ReadInt(); BuffIds.Add(_e0);}}
-            Attribute = _buf.ReadInt();
+            Attribute = (BuffAttributeEnum)_buf.ReadInt();
             Value = _buf.ReadDouble();
 
             PostInit();
@@ -42,9 +42,9 @@ namespace ET
         public System.Collections.Generic.List<int> BuffIds;
 
         /// <summary>
-        /// BuffAttributeEnum
+        /// Buff属性
         /// </summary>
-        public int Attribute;
+        public BuffAttributeEnum Attribute;
 
         /// <summary>
         /// 数值

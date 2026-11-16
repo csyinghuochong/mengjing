@@ -89,8 +89,15 @@ namespace ET.Server
                 //属性类buff
                 case 1:
                     int NowBuffParameterType = buffS.mBuffConfig.buffParameterType;
-                    float NowBuffParameterValue = (float)buffS.mBuffConfig.buffParameterValue  * buffNumber +
-                            buffS.GetTianfuProAdd((int)BuffAttributeEnum.AddParameterValue);
+                    float NowBuffParameterValue = (float)buffS.mBuffConfig.buffParameterValue  * buffNumber + buffS.GetTianfuProAdd((int)BuffAttributeEnum.AddParameterValue);
+                    if (buffS.RuneParameterAdd != 0f)
+                    {
+                        NowBuffParameterValue += buffS.RuneParameterAdd;
+                        if (NowBuffParameterType == NumericType.Extra_Buff_Speed_Mul)
+                        {
+                            NowBuffParameterValue = Math.Max(-1f, NowBuffParameterValue);
+                        }
+                    }
                     int NowBuffParameterValueType = buffS.mBuffConfig.buffParameterValueType;
 
                     int ValueType = buffS.mBuffConfig.buffParameterValueDef; //0 表示整数  1表示浮点数
@@ -328,7 +335,11 @@ namespace ET.Server
                     break;
                 case 2:
                     NowBuffParameterType = buffS.mBuffConfig.buffParameterType;
-                    buffS.TheUnitBelongto.GetComponent<StateComponentS>().StateTypeRemove(1 << NowBuffParameterType);
+                    long state = 1 << NowBuffParameterType;
+                    if (state != StateTypeEnum.Dizziness || !buffS.TheUnitBelongto.GetComponent<BuffManagerComponentS>().HasActiveStateBuff(NowBuffParameterType))
+                    {
+                        buffS.TheUnitBelongto.GetComponent<StateComponentS>().StateTypeRemove(state);
+                    }
                     break;
                 case 4:
                     buffS.TheUnitBelongto.GetComponent<SkillPassiveComponent>().RemovePassiveSkill(buffS.mBuffConfig.buffParameterType);

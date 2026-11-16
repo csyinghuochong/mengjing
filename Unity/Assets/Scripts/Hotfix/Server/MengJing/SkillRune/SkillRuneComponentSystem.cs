@@ -5,7 +5,7 @@ namespace ET.Server
     /// <summary>
     /// 技能符文数据系统：技能符文背包、每个技能的孔位、获得/镶嵌/卸下。
     /// 孔位数量读 GlobalValueConfig.SkillRuneSlotCount，
-    /// 这里只负责记录数据，符文效果由后续的技能属性/效果读取流程按孔位去取
+    /// 施法时按当前技能的孔位读取生效的符文属性。
     /// </summary>
     [EntitySystemOf(typeof(SkillRuneComponent))]
     [FriendOf(typeof(SkillRuneComponent))]
@@ -362,7 +362,6 @@ namespace ET.Server
 
         /// <summary>
         /// 某个技能上已经镶嵌的符文配置，按孔位顺序。
-        /// 技能符文的效果不配作用技能 id，读取技能效果时用这个接口把效果算到该技能上
         /// </summary>
         public static List<SkillRuneConfig> GetSkillRuneConfigs(this SkillRuneComponent self, int skillId)
         {
@@ -383,6 +382,73 @@ namespace ET.Server
             }
 
             return configs;
+        }
+
+        public static IReadOnlyList<SkillRuneEffect> GetSkillRuneEffects(this SkillRuneComponent self, int skillId)
+        {
+            if (self.SlotList.Count == 0)
+            {
+                return null;
+            }
+
+            SkillRuneSlotInfo slotData = self.GetSlotData(skillId);
+            if (slotData == null)
+            {
+                return null;
+            }
+
+            SkillConfig skillConfig = SkillConfigCategory.Instance.Get(skillId);
+            List<SkillRuneEffect> effects = null;
+            for (int i = 0; i < slotData.RuneIds.Count && skillConfig.SkillLv >= SkillHelp.GetSkillRuneSlotUnlockLevel(i); i++)
+            {
+                SkillRuneConfig runeConfig = self.GetRuneConfig(slotData.RuneIds[i]);
+                if (runeConfig?.AddPropreList?.Count > 0)
+                {
+                    effects ??= new List<SkillRuneEffect>();
+                    effects.AddRange(runeConfig.AddPropreList);
+                }
+            }
+
+            return effects;
+        }
+
+        public static float GetRuneSkillProperty(this IReadOnlyList<SkillRuneEffect> effects, SkillAttributeEnum attribute, float targetHpRatio = 1f)
+        {
+            float value = 0f;
+            if (effects == null)
+            {
+                return value;
+            }
+
+            for (int i = 0; i < effects.Count; i++)
+            {
+                if (effects[i] is SkillRunePropertyAdd property && property.Attribute == attribute
+                    && (property.TargetHpBelow == 0f || targetHpRatio < property.TargetHpBelow))
+                {
+                    value += property.Value;
+                }
+            }
+
+            return value;
+        }
+
+        public static float GetRuneBuffProperty(this IReadOnlyList<SkillRuneEffect> effects, SkillRuneBuffTarget target, BuffAttributeEnum attribute)
+        {
+            float value = 0f;
+            if (effects == null || target == SkillRuneBuffTarget.None)
+            {
+                return value;
+            }
+
+            for (int i = 0; i < effects.Count; i++)
+            {
+                if (effects[i] is SkillRuneBuffPropertyAdd property && property.Target == target && property.Attribute == attribute)
+                {
+                    value += property.Value;
+                }
+            }
+
+            return value;
         }
 
         #endregion

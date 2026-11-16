@@ -6,7 +6,7 @@ namespace ET.Server
     public class SkillManagerComponentS: Entity, IAwake, IDestroy
     {
         public List<EntityRef<SkillS>> Skills = new List<EntityRef<SkillS>>();
-        public List<SkillInfo> DelaySkillList = new List<SkillInfo>();
+        public List<(SkillInfo Skill, IReadOnlyList<SkillRuneEffect> RuneEffects)> DelaySkillList = new();
         public Dictionary<int, SkillCDItem> SkillCDs { get; set; } = new Dictionary<int, SkillCDItem>(); //技能CD列表
         public Dictionary<int, int> SkillSecond { get; set; } = new Dictionary<int, int>();
         public long SkillPublicCDTime;      //公共CD

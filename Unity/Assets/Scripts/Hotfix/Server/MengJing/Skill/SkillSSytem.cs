@@ -39,7 +39,7 @@ namespace ET.Server
              self.SkillBeginTime = TimeHelper.ServerNow();
              self.DamgeChiXuLastTime = TimeHelper.ServerNow();
              self.SkillExcuteHurtTime = self.SkillBeginTime + (long)(1000 * self.SkillConf.SkillDelayTime);
-             self.SkillEndTime = self.SkillBeginTime + self.SkillConf.SkillLiveTime + (long)(1000* self.GetTianfuProAdd((int)SkillAttributeEnum.AddSkillLiveTime));
+             self.SkillEndTime = self.SkillBeginTime + self.SkillConf.SkillLiveTime + (long)(1000* self.GetSkillPropertyAdd(SkillAttributeEnum.AddSkillLiveTime));
              self.TargetPosition = new float3(skillcmd.PosX, skillcmd.PosY, skillcmd.PosZ); //获取起始坐标
              self.ICheckShape = new List<Shape>() { self.CreateCheckShape(self.SkillInfo.TargetAngle) };
              self.NowPosition = self.TargetPosition;              //获取技能起始的坐标点
@@ -83,13 +83,11 @@ namespace ET.Server
              }
          }
 
-         public static float GetTianfuProAdd(this SkillS self, int key)
+         public static float GetSkillPropertyAdd(this SkillS self, SkillAttributeEnum attribute, float targetHpRatio = 1f)
          {
              float value = 0f;
-             if (self.TianfuProAdd == null)
-                 return value;
-             self.TianfuProAdd.TryGetValue(key, out value);
-             return value;
+             self.TianfuProAdd?.TryGetValue((int)attribute, out value);
+             return value + self.RuneEffects.GetRuneSkillProperty(attribute, targetHpRatio);
          }
 
          //初始化
@@ -413,7 +411,7 @@ namespace ET.Server
          public static Shape CreateCheckShape(this SkillS self,  int targetAngle)
          {
              Shape ishape = null;
-             float addRange = self.GetTianfuProAdd((int)SkillAttributeEnum.AddDamageRange);
+             float addRange = self.GetSkillPropertyAdd(SkillAttributeEnum.AddDamageRange);
 
              switch (self.SkillConf.DamgeRangeType)
              {

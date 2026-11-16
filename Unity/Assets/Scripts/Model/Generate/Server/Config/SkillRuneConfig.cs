@@ -25,7 +25,7 @@ namespace ET
             Name = _buf.ReadString();
             NextId = _buf.ReadInt();
             Level = _buf.ReadInt();
-            AddPropreList = _buf.ReadString();
+            {int n0 = _buf.ReadSize(); AddPropreList = new System.Collections.Generic.List<SkillRuneEffect>(n0);for(var i0 = 0 ; i0 < n0 ; i0++) { SkillRuneEffect _e0;  _e0 = global::ET.SkillRuneEffect.DeserializeSkillRuneEffect(_buf); AddPropreList.Add(_e0);}}
 
             PostInit();
         }
@@ -56,9 +56,9 @@ namespace ET
         public int Level;
 
         /// <summary>
-        /// 附加
+        /// 附加效果：SkillRunePropertyAdd;技能属性;数值;目标血量阈值 或 SkillRuneBuffPropertyAdd;Buff类型;Buff属性;数值，多条用@分隔
         /// </summary>
-        public string AddPropreList;
+        public System.Collections.Generic.List<SkillRuneEffect> AddPropreList;
 
 
         public const int __ID__ = 1779015725;
@@ -70,7 +70,7 @@ namespace ET
             
             
             
-            
+            foreach (var _e in AddPropreList) { _e?.ResolveRef(); }
         }
 
         public override string ToString()
@@ -80,7 +80,7 @@ namespace ET
             + "Name:" + Name + ","
             + "NextId:" + NextId + ","
             + "Level:" + Level + ","
-            + "AddPropreList:" + AddPropreList + ","
+            + "AddPropreList:" + Luban.StringUtil.CollectionToString(AddPropreList) + ","
             + "}";
         }
 

@@ -29,9 +29,7 @@ namespace ET.Server
             self.mSkillConf = SkillConfigCategory.Instance.Get(buffData.SkillId);
             self.mBuffConfig = SkillBuffConfigCategory.Instance.Get(buffData.BuffId);
             self.DelayTime = self.mBuffConfig.BuffDelayTime;
-            self.BuffEndTime = CheckBuffTime(theUnitBelongto, self.mBuffConfig) +
-                    1000 * (int)self.GetTianfuProAdd((int)BuffAttributeEnum.AddBuffTime) + TimeHelper.ServerNow();
-            self.BuffEndTime = buffData.BuffEndTime > 0? buffData.BuffEndTime : self.BuffEndTime;
+            self.BuffEndTime = GetBuffEndTime(buffData, self.mBuffConfig, theUnitFrom, theUnitBelongto, self.BeginTime);
             self.InterValTime = self.mBuffConfig.BuffLoopTime * 1000;
             self.InterValTimeBegin = TimeHelper.ServerNow();
             self.NowBuffValue = 0f;
@@ -66,16 +64,39 @@ namespace ET.Server
 
         public static float GetTianfuProAdd(this BuffS self, int key)
         {
-            SkillSetComponentS skillSetComponent = self.TheUnitFrom.GetComponent<SkillSetComponentS>();
-            if (skillSetComponent == null)
-                return 0f;
+            return GetTianfuProAdd(self.TheUnitFrom, self.mBuffConfig.Id, key);
+        }
 
-            float addValue = 0f;
-            Dictionary<int, float> keyValuePairs = skillSetComponent.GetBuffPropertyAdd(self.mBuffConfig.Id);
-            if (keyValuePairs == null)
-                return addValue;
-            keyValuePairs.TryGetValue(key, out addValue);
-            return addValue;
+        private static float GetTianfuProAdd(Unit from, int buffId, int key)
+        {
+            Dictionary<int, float> properties = from.GetComponent<SkillSetComponentS>()?.GetBuffPropertyAdd(buffId);
+            return properties != null && properties.TryGetValue(key, out float value) ? value : 0f;
+        }
+
+        public static long GetBuffEndTime(BuffData buffData, SkillBuffConfig config, Unit from, Unit target, long now)
+        {
+            if (buffData.BuffEndTime > 0)
+            {
+                return buffData.BuffEndTime;
+            }
+
+            float talentDuration = GetTianfuProAdd(from, config.Id, (int)BuffAttributeEnum.AddBuffTime);
+            return now + CheckBuffTime(target, config) + 1000 * (int)talentDuration;
+        }
+
+        public static SkillRuneBuffTarget GetRuneBuffTarget(SkillBuffConfig config)
+        {
+            if (config.BuffType == 2 && (1 << config.buffParameterType) == StateTypeEnum.Dizziness)
+            {
+                return SkillRuneBuffTarget.Dizziness;
+            }
+
+            if (config.BuffType == 1 && config.buffParameterType == NumericType.Extra_Buff_Speed_Mul && config.buffParameterValue < 0)
+            {
+                return SkillRuneBuffTarget.MoveSpeedSlow;
+            }
+
+            return SkillRuneBuffTarget.None;
         }
 
         public static void OnFinished(this BuffS self)

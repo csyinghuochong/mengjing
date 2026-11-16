@@ -10,6 +10,7 @@ namespace ET.Server
         public List<long> HurtIds { get; set; }= new List<long>();
         public Dictionary<long, long> LastHurtTimes{ get; set; }=  new Dictionary<long, long>();
         public Dictionary<int, float> TianfuProAdd;
+        public IReadOnlyList<SkillRuneEffect> RuneEffects { get; set; }
 
         //1 正在执行   2完成使命
         public SkillState SkillState;

@@ -39,13 +39,13 @@
 
     <bean name="SkillPropertyAdd" parent="PropEffect" sep=";" comment="技能属性">
         <var name="SkillIds" type="(list#sep=,),int" comment="作用的技能ID"/>
-        <var name="Attribute" type="int" comment="SkillAttributeEnum"/>
+        <var name="Attribute" type="SkillAttributeEnum" comment="技能属性"/>
         <var name="Value" type="double" comment="Attribute=AddSkillBuffID 时这里是 BuffID"/>
     </bean>
 
     <bean name="BuffPropertyAdd" parent="PropEffect" sep=";" comment="Buff属性">
         <var name="BuffIds" type="(list#sep=,),int" comment="作用的BuffID"/>
-        <var name="Attribute" type="int" comment="BuffAttributeEnum"/>
+        <var name="Attribute" type="BuffAttributeEnum" comment="Buff属性"/>
         <var name="Value" type="double" comment="数值"/>
     </bean>
 
@@ -76,6 +76,47 @@
     <bean name="SkillSingingCancel" parent="PropEffect" sep=";" comment="施法可移动">
         <var name="SkillIds" type="(list#sep=,),int" comment="作用的技能ID"/>
     </bean>
+
+    <enum name="SkillAttributeEnum" comment="技能附加属性">
+        <var name="AddDamageRange" value="1" comment="增加范围"/>
+        <var name="AddDamageCoefficient" value="2" comment="增加技能伤害来源的攻击值系数"/>
+        <var name="AddDamageValue" value="3" comment="增加固定伤害值"/>
+        <var name="ReduceSkillCD" value="4" comment="减少冷却秒数"/>
+        <var name="AddSkillLiveTime" value="5" comment="延长技能持续秒数"/>
+        <var name="AddSkillBuffID" value="6" comment="附加Buff ID"/>
+        <var name="AddTotalDamage" value="7" comment="增加总伤害比例"/>
+        <var name="AddCriticalChance" value="8" comment="增加暴击概率"/>
+        <var name="AddHitChance" value="9" comment="增加命中概率"/>
+        <var name="AddCriticalDamage" value="10" comment="增加暴击伤害倍率"/>
+        <var name="IgnoreDefenseChance" value="11" comment="增加完全无视防御的概率"/>
+        <var name="IgnoreDefense" value="12" comment="增加忽视防御的比例"/>
+    </enum>
+
+    <enum name="BuffAttributeEnum" comment="Buff附加属性">
+        <var name="AddParameterValue" value="1" comment="增加Buff参数值，减速填负值"/>
+        <var name="AddBuffTime" value="2" comment="延长Buff持续秒数"/>
+    </enum>
+
+    <!-- 技能符文按实际镶嵌的技能生效，多条效果用 @ 分隔。 -->
+    <bean name="SkillRuneEffect" comment="一条技能符文效果"/>
+
+    <bean name="SkillRunePropertyAdd" parent="SkillRuneEffect" sep=";" comment="镶嵌技能的附加属性">
+        <var name="Attribute" type="SkillAttributeEnum" comment="技能属性"/>
+        <var name="Value" type="float" comment="属性数值"/>
+        <var name="TargetHpBelow" type="float" comment="增伤触发的目标血量比例上限，0 表示无条件"/>
+    </bean>
+
+    <bean name="SkillRuneBuffPropertyAdd" parent="SkillRuneEffect" sep=";" comment="镶嵌技能施加的Buff附加属性">
+        <var name="Target" type="SkillRuneBuffTarget" comment="技能所施加的Buff类型"/>
+        <var name="Attribute" type="BuffAttributeEnum" comment="Buff属性"/>
+        <var name="Value" type="float" comment="属性数值"/>
+    </bean>
+
+    <enum name="SkillRuneBuffTarget" comment="技能符文匹配的Buff类型">
+        <var name="None" value="0"/>
+        <var name="Dizziness" value="1" comment="眩晕"/>
+        <var name="MoveSpeedSlow" value="2" comment="降低移速"/>
+    </enum>
 
     <enum name="LongYinType" comment="龙印类型" unique="TRUE" flags="FALSE">
         <var name="None" alias="" value="0"/>

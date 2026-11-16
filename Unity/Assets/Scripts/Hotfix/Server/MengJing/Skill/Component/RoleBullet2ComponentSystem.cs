@@ -45,9 +45,9 @@ namespace ET.Server
             NumericComponentS numericComponent = unit.GetComponent<NumericComponentS>();
             self.BeginTime = numericComponent.GetAsLong(NumericType.StartTime);
             self.DelayTime = (long)(1000 * skillS.SkillConf.SkillDelayTime);
-            self.DamageRange = skillS.GetTianfuProAdd((int)SkillAttributeEnum.AddDamageRange) +
+            self.DamageRange = skillS.GetSkillPropertyAdd(SkillAttributeEnum.AddDamageRange) +
                     (float)skillS.SkillConf.DamgeRange[0];
-            self.BuffEndTime = 1000 * (int)skillS.GetTianfuProAdd((int)SkillAttributeEnum.AddSkillLiveTime) +
+            self.BuffEndTime = 1000 * (int)skillS.GetSkillPropertyAdd(SkillAttributeEnum.AddSkillLiveTime) +
                     skillS.SkillConf.SkillLiveTime + TimeHelper.ServerNow();
             self.StartAngle = numericComponent.GetAsInt(NumericType.StartAngle);
             self.TheUnitBelongto = unit.GetParent<UnitComponent>().Get(masterid);

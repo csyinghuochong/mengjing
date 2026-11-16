@@ -797,7 +797,7 @@ namespace ET.Server
             {
                 if (effects[i] is SkillPropertyAdd effect && effect.SkillIds.Contains(skillId))
                 {
-                    PropEffectHelper.AddOrMerge(HideProList, effect.Attribute, (float)effect.Value);
+                    PropEffectHelper.AddOrMerge(HideProList, (int)effect.Attribute, (float)effect.Value);
                 }
             }
 
@@ -889,7 +889,7 @@ namespace ET.Server
             {
                 if (effects[i] is BuffPropertyAdd effect && effect.BuffIds.Contains(buffId))
                 {
-                    PropEffectHelper.AddOrMerge(HideProList, effect.Attribute, (float)effect.Value);
+                    PropEffectHelper.AddOrMerge(HideProList, (int)effect.Attribute, (float)effect.Value);
                 }
             }
 

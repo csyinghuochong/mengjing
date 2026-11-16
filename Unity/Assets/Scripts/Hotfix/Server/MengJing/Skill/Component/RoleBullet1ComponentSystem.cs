@@ -47,8 +47,8 @@ namespace ET.Server
             self.SkillS = skillHandler;
             self.BeginTime = TimeHelper.ServerNow();
             self.DelayTime = (long)(1000 * skillHandler.SkillConf.SkillDelayTime);
-            self.DamageRange = skillHandler.GetTianfuProAdd((int)SkillAttributeEnum.AddDamageRange) + (float)skillHandler.SkillConf.DamgeRange[0];
-            self.BuffEndTime = 1000 * (int)skillHandler.GetTianfuProAdd((int)SkillAttributeEnum.AddSkillLiveTime) +
+            self.DamageRange = skillHandler.GetSkillPropertyAdd(SkillAttributeEnum.AddDamageRange) + (float)skillHandler.SkillConf.DamgeRange[0];
+            self.BuffEndTime = 1000 * (int)skillHandler.GetSkillPropertyAdd(SkillAttributeEnum.AddSkillLiveTime) +
                     skillHandler.SkillConf.SkillLiveTime + TimeHelper.ServerNow();
 
             self.Timer = self.Root().GetComponent<TimerComponent>().NewFrameTimer(TimerInvokeType.RoleBullet1Timer, self);

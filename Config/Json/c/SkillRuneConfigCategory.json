@@ -6,7 +6,14 @@
     "Level": 1,
     "Icon": "10001",
     "Des": "技能造成的总伤害额外提升3%",
-    "AddPropreList": ""
+    "AddPropreList": [
+      {
+        "$type": "SkillRunePropertyAdd",
+        "Attribute": 7,
+        "Value": 0.03,
+        "TargetHpBelow": 0
+      }
+    ]
   },
   {
     "Id": 10012,
@@ -15,7 +22,14 @@
     "Level": 2,
     "Icon": "10001",
     "Des": "技能造成的总伤害额外提升6%",
-    "AddPropreList": ""
+    "AddPropreList": [
+      {
+        "$type": "SkillRunePropertyAdd",
+        "Attribute": 7,
+        "Value": 0.06,
+        "TargetHpBelow": 0
+      }
+    ]
   },
   {
     "Id": 10013,
@@ -24,7 +38,14 @@
     "Level": 3,
     "Icon": "10001",
     "Des": "技能造成的总伤害额外提升9%",
-    "AddPropreList": ""
+    "AddPropreList": [
+      {
+        "$type": "SkillRunePropertyAdd",
+        "Attribute": 7,
+        "Value": 0.09,
+        "TargetHpBelow": 0
+      }
+    ]
   },
   {
     "Id": 10014,
@@ -33,7 +54,14 @@
     "Level": 4,
     "Icon": "10001",
     "Des": "技能造成的总伤害额外提升12%",
-    "AddPropreList": ""
+    "AddPropreList": [
+      {
+        "$type": "SkillRunePropertyAdd",
+        "Attribute": 7,
+        "Value": 0.12,
+        "TargetHpBelow": 0
+      }
+    ]
   },
   {
     "Id": 10015,
@@ -42,7 +70,14 @@
     "Level": 5,
     "Icon": "10001",
     "Des": "技能造成的总伤害额外提升15%",
-    "AddPropreList": ""
+    "AddPropreList": [
+      {
+        "$type": "SkillRunePropertyAdd",
+        "Attribute": 7,
+        "Value": 0.15,
+        "TargetHpBelow": 0
+      }
+    ]
   },
   {
     "Id": 10021,
@@ -51,7 +86,14 @@
     "Level": 1,
     "Icon": "10002",
     "Des": "技能对目标造成伤害时，技能的暴击概率提升3%",
-    "AddPropreList": ""
+    "AddPropreList": [
+      {
+        "$type": "SkillRunePropertyAdd",
+        "Attribute": 8,
+        "Value": 0.03,
+        "TargetHpBelow": 0
+      }
+    ]
   },
   {
     "Id": 10022,
@@ -60,7 +102,14 @@
     "Level": 2,
     "Icon": "10002",
     "Des": "技能对目标造成伤害时，技能的暴击概率提升6%",
-    "AddPropreList": ""
+    "AddPropreList": [
+      {
+        "$type": "SkillRunePropertyAdd",
+        "Attribute": 8,
+        "Value": 0.06,
+        "TargetHpBelow": 0
+      }
+    ]
   },
   {
     "Id": 10023,
@@ -69,7 +118,14 @@
     "Level": 3,
     "Icon": "10002",
     "Des": "技能对目标造成伤害时，技能的暴击概率提升9%",
-    "AddPropreList": ""
+    "AddPropreList": [
+      {
+        "$type": "SkillRunePropertyAdd",
+        "Attribute": 8,
+        "Value": 0.09,
+        "TargetHpBelow": 0
+      }
+    ]
   },
   {
     "Id": 10024,
@@ -78,7 +134,14 @@
     "Level": 4,
     "Icon": "10002",
     "Des": "技能对目标造成伤害时，技能的暴击概率提升12%",
-    "AddPropreList": ""
+    "AddPropreList": [
+      {
+        "$type": "SkillRunePropertyAdd",
+        "Attribute": 8,
+        "Value": 0.12,
+        "TargetHpBelow": 0
+      }
+    ]
   },
   {
     "Id": 10025,
@@ -87,7 +150,14 @@
     "Level": 5,
     "Icon": "10002",
     "Des": "技能对目标造成伤害时，技能的暴击概率提升15%",
-    "AddPropreList": ""
+    "AddPropreList": [
+      {
+        "$type": "SkillRunePropertyAdd",
+        "Attribute": 8,
+        "Value": 0.15,
+        "TargetHpBelow": 0
+      }
+    ]
   },
   {
     "Id": 10031,
@@ -96,7 +166,14 @@
     "Level": 1,
     "Icon": "10003",
     "Des": "技能对目标造成伤害时，技能的命中概率提升5%",
-    "AddPropreList": ""
+    "AddPropreList": [
+      {
+        "$type": "SkillRunePropertyAdd",
+        "Attribute": 9,
+        "Value": 0.05,
+        "TargetHpBelow": 0
+      }
+    ]
   },
   {
     "Id": 10032,
@@ -105,7 +182,14 @@
     "Level": 2,
     "Icon": "10003",
     "Des": "技能对目标造成伤害时，技能的命中概率提升10%",
-    "AddPropreList": ""
+    "AddPropreList": [
+      {
+        "$type": "SkillRunePropertyAdd",
+        "Attribute": 9,
+        "Value": 0.1,
+        "TargetHpBelow": 0
+      }
+    ]
   },
   {
     "Id": 10033,
@@ -114,7 +198,14 @@
     "Level": 3,
     "Icon": "10003",
     "Des": "技能对目标造成伤害时，技能的命中概率提升15%",
-    "AddPropreList": ""
+    "AddPropreList": [
+      {
+        "$type": "SkillRunePropertyAdd",
+        "Attribute": 9,
+        "Value": 0.15,
+        "TargetHpBelow": 0
+      }
+    ]
   },
   {
     "Id": 10034,
@@ -123,7 +214,14 @@
     "Level": 4,
     "Icon": "10003",
     "Des": "技能对目标造成伤害时，技能的命中概率提升20%",
-    "AddPropreList": ""
+    "AddPropreList": [
+      {
+        "$type": "SkillRunePropertyAdd",
+        "Attribute": 9,
+        "Value": 0.2,
+        "TargetHpBelow": 0
+      }
+    ]
   },
   {
     "Id": 10035,
@@ -132,7 +230,14 @@
     "Level": 5,
     "Icon": "10003",
     "Des": "技能对目标造成伤害时，技能的命中概率提升25%",
-    "AddPropreList": ""
+    "AddPropreList": [
+      {
+        "$type": "SkillRunePropertyAdd",
+        "Attribute": 9,
+        "Value": 0.25,
+        "TargetHpBelow": 0
+      }
+    ]
   },
   {
     "Id": 10041,
@@ -141,7 +246,14 @@
     "Level": 1,
     "Icon": "10004",
     "Des": "目标血量低于40%，技能伤害提升5%",
-    "AddPropreList": ""
+    "AddPropreList": [
+      {
+        "$type": "SkillRunePropertyAdd",
+        "Attribute": 7,
+        "Value": 0.05,
+        "TargetHpBelow": 0.4
+      }
+    ]
   },
   {
     "Id": 10042,
@@ -150,7 +262,14 @@
     "Level": 2,
     "Icon": "10004",
     "Des": "目标血量低于40%，技能伤害提升10%",
-    "AddPropreList": ""
+    "AddPropreList": [
+      {
+        "$type": "SkillRunePropertyAdd",
+        "Attribute": 7,
+        "Value": 0.1,
+        "TargetHpBelow": 0.4
+      }
+    ]
   },
   {
     "Id": 10043,
@@ -159,7 +278,14 @@
     "Level": 3,
     "Icon": "10004",
     "Des": "目标血量低于40%，技能伤害提升15%",
-    "AddPropreList": ""
+    "AddPropreList": [
+      {
+        "$type": "SkillRunePropertyAdd",
+        "Attribute": 7,
+        "Value": 0.15,
+        "TargetHpBelow": 0.4
+      }
+    ]
   },
   {
     "Id": 10044,
@@ -168,7 +294,14 @@
     "Level": 4,
     "Icon": "10004",
     "Des": "目标血量低于40%，技能伤害提升20%",
-    "AddPropreList": ""
+    "AddPropreList": [
+      {
+        "$type": "SkillRunePropertyAdd",
+        "Attribute": 7,
+        "Value": 0.2,
+        "TargetHpBelow": 0.4
+      }
+    ]
   },
   {
     "Id": 10045,
@@ -177,7 +310,14 @@
     "Level": 5,
     "Icon": "10004",
     "Des": "目标血量低于40%，技能伤害提升25%",
-    "AddPropreList": ""
+    "AddPropreList": [
+      {
+        "$type": "SkillRunePropertyAdd",
+        "Attribute": 7,
+        "Value": 0.25,
+        "TargetHpBelow": 0.4
+      }
+    ]
   },
   {
     "Id": 10051,
@@ -186,7 +326,14 @@
     "Level": 1,
     "Icon": "10005",
     "Des": "此技能造成暴击后会提高暴击伤害10%",
-    "AddPropreList": ""
+    "AddPropreList": [
+      {
+        "$type": "SkillRunePropertyAdd",
+        "Attribute": 10,
+        "Value": 0.1,
+        "TargetHpBelow": 0
+      }
+    ]
   },
   {
     "Id": 10052,
@@ -195,7 +342,14 @@
     "Level": 2,
     "Icon": "10005",
     "Des": "此技能造成暴击后会提高暴击伤害20%",
-    "AddPropreList": ""
+    "AddPropreList": [
+      {
+        "$type": "SkillRunePropertyAdd",
+        "Attribute": 10,
+        "Value": 0.2,
+        "TargetHpBelow": 0
+      }
+    ]
   },
   {
     "Id": 10053,
@@ -204,7 +358,14 @@
     "Level": 3,
     "Icon": "10005",
     "Des": "此技能造成暴击后会提高暴击伤害30%",
-    "AddPropreList": ""
+    "AddPropreList": [
+      {
+        "$type": "SkillRunePropertyAdd",
+        "Attribute": 10,
+        "Value": 0.3,
+        "TargetHpBelow": 0
+      }
+    ]
   },
   {
     "Id": 10054,
@@ -213,7 +374,14 @@
     "Level": 4,
     "Icon": "10005",
     "Des": "此技能造成暴击后会提高暴击伤害40%",
-    "AddPropreList": ""
+    "AddPropreList": [
+      {
+        "$type": "SkillRunePropertyAdd",
+        "Attribute": 10,
+        "Value": 0.4,
+        "TargetHpBelow": 0
+      }
+    ]
   },
   {
     "Id": 10055,
@@ -222,7 +390,14 @@
     "Level": 5,
     "Icon": "10005",
     "Des": "此技能造成暴击后会提高暴击伤害50%",
-    "AddPropreList": ""
+    "AddPropreList": [
+      {
+        "$type": "SkillRunePropertyAdd",
+        "Attribute": 10,
+        "Value": 0.5,
+        "TargetHpBelow": 0
+      }
+    ]
   },
   {
     "Id": 10061,
@@ -231,7 +406,14 @@
     "Level": 1,
     "Icon": "10006",
     "Des": "如果技能本身有眩晕效果，使其眩晕延长0.1秒",
-    "AddPropreList": ""
+    "AddPropreList": [
+      {
+        "$type": "SkillRuneBuffPropertyAdd",
+        "Target": 1,
+        "Attribute": 2,
+        "Value": 0.1
+      }
+    ]
   },
   {
     "Id": 10062,
@@ -240,7 +422,14 @@
     "Level": 2,
     "Icon": "10006",
     "Des": "如果技能本身有眩晕效果，使其眩晕延长0.2秒",
-    "AddPropreList": ""
+    "AddPropreList": [
+      {
+        "$type": "SkillRuneBuffPropertyAdd",
+        "Target": 1,
+        "Attribute": 2,
+        "Value": 0.2
+      }
+    ]
   },
   {
     "Id": 10063,
@@ -249,7 +438,14 @@
     "Level": 3,
     "Icon": "10006",
     "Des": "如果技能本身有眩晕效果，使其眩晕延长0.3秒",
-    "AddPropreList": ""
+    "AddPropreList": [
+      {
+        "$type": "SkillRuneBuffPropertyAdd",
+        "Target": 1,
+        "Attribute": 2,
+        "Value": 0.3
+      }
+    ]
   },
   {
     "Id": 10064,
@@ -258,7 +454,14 @@
     "Level": 4,
     "Icon": "10006",
     "Des": "如果技能本身有眩晕效果，使其眩晕延长0.4秒",
-    "AddPropreList": ""
+    "AddPropreList": [
+      {
+        "$type": "SkillRuneBuffPropertyAdd",
+        "Target": 1,
+        "Attribute": 2,
+        "Value": 0.4
+      }
+    ]
   },
   {
     "Id": 10065,
@@ -267,7 +470,14 @@
     "Level": 5,
     "Icon": "10006",
     "Des": "如果技能本身有眩晕效果，使其眩晕延长0.5秒",
-    "AddPropreList": ""
+    "AddPropreList": [
+      {
+        "$type": "SkillRuneBuffPropertyAdd",
+        "Target": 1,
+        "Attribute": 2,
+        "Value": 0.5
+      }
+    ]
   },
   {
     "Id": 10071,
@@ -276,7 +486,14 @@
     "Level": 1,
     "Icon": "10007",
     "Des": "如果技能本身有减速效果，使其减速效果提升5%",
-    "AddPropreList": ""
+    "AddPropreList": [
+      {
+        "$type": "SkillRuneBuffPropertyAdd",
+        "Target": 2,
+        "Attribute": 1,
+        "Value": -0.05
+      }
+    ]
   },
   {
     "Id": 10072,
@@ -285,7 +502,14 @@
     "Level": 2,
     "Icon": "10007",
     "Des": "如果技能本身有减速效果，使其减速效果提升10%",
-    "AddPropreList": ""
+    "AddPropreList": [
+      {
+        "$type": "SkillRuneBuffPropertyAdd",
+        "Target": 2,
+        "Attribute": 1,
+        "Value": -0.1
+      }
+    ]
   },
   {
     "Id": 10073,
@@ -294,7 +518,14 @@
     "Level": 3,
     "Icon": "10007",
     "Des": "如果技能本身有减速效果，使其减速效果提升15%",
-    "AddPropreList": ""
+    "AddPropreList": [
+      {
+        "$type": "SkillRuneBuffPropertyAdd",
+        "Target": 2,
+        "Attribute": 1,
+        "Value": -0.15
+      }
+    ]
   },
   {
     "Id": 10074,
@@ -303,7 +534,14 @@
     "Level": 4,
     "Icon": "10007",
     "Des": "如果技能本身有减速效果，使其减速效果提升20%",
-    "AddPropreList": ""
+    "AddPropreList": [
+      {
+        "$type": "SkillRuneBuffPropertyAdd",
+        "Target": 2,
+        "Attribute": 1,
+        "Value": -0.2
+      }
+    ]
   },
   {
     "Id": 10075,
@@ -312,7 +550,14 @@
     "Level": 5,
     "Icon": "10007",
     "Des": "如果技能本身有减速效果，使其减速效果提升25%",
-    "AddPropreList": ""
+    "AddPropreList": [
+      {
+        "$type": "SkillRuneBuffPropertyAdd",
+        "Target": 2,
+        "Attribute": 1,
+        "Value": -0.25
+      }
+    ]
   },
   {
     "Id": 10081,
@@ -321,7 +566,14 @@
     "Level": 1,
     "Icon": "10008",
     "Des": "装备此符文，技能冷却时间降低0.2秒",
-    "AddPropreList": ""
+    "AddPropreList": [
+      {
+        "$type": "SkillRunePropertyAdd",
+        "Attribute": 4,
+        "Value": 0.2,
+        "TargetHpBelow": 0
+      }
+    ]
   },
   {
     "Id": 10082,
@@ -330,7 +582,14 @@
     "Level": 2,
     "Icon": "10008",
     "Des": "装备此符文，技能冷却时间降低0.4秒",
-    "AddPropreList": ""
+    "AddPropreList": [
+      {
+        "$type": "SkillRunePropertyAdd",
+        "Attribute": 4,
+        "Value": 0.4,
+        "TargetHpBelow": 0
+      }
+    ]
   },
   {
     "Id": 10083,
@@ -339,7 +598,14 @@
     "Level": 3,
     "Icon": "10008",
     "Des": "装备此符文，技能冷却时间降低0.6秒",
-    "AddPropreList": ""
+    "AddPropreList": [
+      {
+        "$type": "SkillRunePropertyAdd",
+        "Attribute": 4,
+        "Value": 0.6,
+        "TargetHpBelow": 0
+      }
+    ]
   },
   {
     "Id": 10084,
@@ -348,7 +614,14 @@
     "Level": 4,
     "Icon": "10008",
     "Des": "装备此符文，技能冷却时间降低0.8秒",
-    "AddPropreList": ""
+    "AddPropreList": [
+      {
+        "$type": "SkillRunePropertyAdd",
+        "Attribute": 4,
+        "Value": 0.8,
+        "TargetHpBelow": 0
+      }
+    ]
   },
   {
     "Id": 10085,
@@ -357,7 +630,14 @@
     "Level": 5,
     "Icon": "10008",
     "Des": "装备此符文，技能冷却时间降低1秒",
-    "AddPropreList": ""
+    "AddPropreList": [
+      {
+        "$type": "SkillRunePropertyAdd",
+        "Attribute": 4,
+        "Value": 1,
+        "TargetHpBelow": 0
+      }
+    ]
   },
   {
     "Id": 10091,
@@ -366,7 +646,14 @@
     "Level": 1,
     "Icon": "10009",
     "Des": "技能对目标造成伤害时，有5%概率完全忽视对方物理防御和魔法防御",
-    "AddPropreList": ""
+    "AddPropreList": [
+      {
+        "$type": "SkillRunePropertyAdd",
+        "Attribute": 11,
+        "Value": 0.05,
+        "TargetHpBelow": 0
+      }
+    ]
   },
   {
     "Id": 10092,
@@ -375,7 +662,14 @@
     "Level": 2,
     "Icon": "10009",
     "Des": "技能对目标造成伤害时，有10%概率完全忽视对方物理防御和魔法防御",
-    "AddPropreList": ""
+    "AddPropreList": [
+      {
+        "$type": "SkillRunePropertyAdd",
+        "Attribute": 11,
+        "Value": 0.1,
+        "TargetHpBelow": 0
+      }
+    ]
   },
   {
     "Id": 10093,
@@ -384,7 +678,14 @@
     "Level": 3,
     "Icon": "10009",
     "Des": "技能对目标造成伤害时，有15%概率完全忽视对方物理防御和魔法防御",
-    "AddPropreList": ""
+    "AddPropreList": [
+      {
+        "$type": "SkillRunePropertyAdd",
+        "Attribute": 11,
+        "Value": 0.15,
+        "TargetHpBelow": 0
+      }
+    ]
   },
   {
     "Id": 10094,
@@ -393,7 +694,14 @@
     "Level": 4,
     "Icon": "10009",
     "Des": "技能对目标造成伤害时，有20%概率完全忽视对方物理防御和魔法防御",
-    "AddPropreList": ""
+    "AddPropreList": [
+      {
+        "$type": "SkillRunePropertyAdd",
+        "Attribute": 11,
+        "Value": 0.2,
+        "TargetHpBelow": 0
+      }
+    ]
   },
   {
     "Id": 10095,
@@ -402,7 +710,14 @@
     "Level": 5,
     "Icon": "10009",
     "Des": "技能对目标造成伤害时，有25%概率完全忽视对方物理防御和魔法防御",
-    "AddPropreList": ""
+    "AddPropreList": [
+      {
+        "$type": "SkillRunePropertyAdd",
+        "Attribute": 11,
+        "Value": 0.25,
+        "TargetHpBelow": 0
+      }
+    ]
   },
   {
     "Id": 10101,
@@ -411,7 +726,14 @@
     "Level": 1,
     "Icon": "10010",
     "Des": "技能对目标造成伤害时，忽视对方5%物理防御和魔法防御",
-    "AddPropreList": ""
+    "AddPropreList": [
+      {
+        "$type": "SkillRunePropertyAdd",
+        "Attribute": 12,
+        "Value": 0.05,
+        "TargetHpBelow": 0
+      }
+    ]
   },
   {
     "Id": 10102,
@@ -420,7 +742,14 @@
     "Level": 2,
     "Icon": "10010",
     "Des": "技能对目标造成伤害时，忽视对方10%物理防御和魔法防御",
-    "AddPropreList": ""
+    "AddPropreList": [
+      {
+        "$type": "SkillRunePropertyAdd",
+        "Attribute": 12,
+        "Value": 0.1,
+        "TargetHpBelow": 0
+      }
+    ]
   },
   {
     "Id": 10103,
@@ -429,7 +758,14 @@
     "Level": 3,
     "Icon": "10010",
     "Des": "技能对目标造成伤害时，忽视对方15%物理防御和魔法防御",
-    "AddPropreList": ""
+    "AddPropreList": [
+      {
+        "$type": "SkillRunePropertyAdd",
+        "Attribute": 12,
+        "Value": 0.15,
+        "TargetHpBelow": 0
+      }
+    ]
   },
   {
     "Id": 10104,
@@ -438,7 +774,14 @@
     "Level": 4,
     "Icon": "10010",
     "Des": "技能对目标造成伤害时，忽视对方20%物理防御和魔法防御",
-    "AddPropreList": ""
+    "AddPropreList": [
+      {
+        "$type": "SkillRunePropertyAdd",
+        "Attribute": 12,
+        "Value": 0.2,
+        "TargetHpBelow": 0
+      }
+    ]
   },
   {
     "Id": 10105,
@@ -447,6 +790,13 @@
     "Level": 5,
     "Icon": "10010",
     "Des": "技能对目标造成伤害时，忽视对方25%物理防御和魔法防御",
-    "AddPropreList": ""
+    "AddPropreList": [
+      {
+        "$type": "SkillRunePropertyAdd",
+        "Attribute": 12,
+        "Value": 0.25,
+        "TargetHpBelow": 0
+      }
+    ]
   }
 ]

@@ -85,10 +85,22 @@ namespace ET.Server
         
         private static void OnRemoveBuffItem(this BuffManagerComponentS self, BuffS buffHandler)
         {
+            if (buffHandler.mBuffConfig.BuffAddClass == 0 && self.m_Buffs.Exists(
+                    buff => buff != buffHandler && buff.BuffState == BuffState.Running && buff.mBuffConfig.Id == buffHandler.mBuffConfig.Id))
+            {
+                return;
+            }
+
             M2C_UnitBuffRemove m2C_UnitBuffUpdate = M2C_UnitBuffRemove.Create();
             m2C_UnitBuffUpdate.UnitIdBelongTo = self.GetParent<Unit>().Id;
             m2C_UnitBuffUpdate.BuffID = buffHandler.mBuffConfig.Id;
             MapMessageHelper.BroadcastBuff(self.GetParent<Unit>(), m2C_UnitBuffUpdate, buffHandler.mBuffConfig, self.SceneType);
+        }
+
+        public static bool HasActiveStateBuff(this BuffManagerComponentS self, int parameterType)
+        {
+            return self.m_Buffs.Exists(buff => buff.BuffState == BuffState.Running && buff.IsTrigger
+                    && buff.mBuffConfig.BuffType == 2 && buff.mBuffConfig.buffParameterType == parameterType);
         }
         
         public static int GetBuffIndexById(this BuffManagerComponentS self, BuffS buffHandler)
@@ -379,9 +391,34 @@ namespace ET.Server
                 self.OnRemoveBuffByState(StateTypeEnum.Dizziness);
             }
 
-            int addBufStatus = 1; //1新增buff  2 移除 3 重置 4同状态返回
             BuffS buffHandler = null;
             List<BuffS> nowAllBuffList = self.m_Buffs;
+
+            SkillRuneBuffTarget runeBuffTarget = BuffSSystem.GetRuneBuffTarget(skillBuffConfig);
+            IReadOnlyList<SkillRuneEffect> runeEffects = skillHandler?.RuneEffects;
+            float runeDuration = runeEffects.GetRuneBuffProperty(runeBuffTarget, BuffAttributeEnum.AddBuffTime);
+            long now = TimeHelper.ServerNow();
+            if (runeBuffTarget == SkillRuneBuffTarget.Dizziness || runeDuration != 0f)
+            {
+                buffData.BuffEndTime = BuffSSystem.GetBuffEndTime(buffData, skillBuffConfig, from, unit, now) + (long)Math.Round(runeDuration * 1000f);
+            }
+
+            if (skillBuffConfig.BuffType == 2)
+            {
+                long stateEndTime = runeBuffTarget == SkillRuneBuffTarget.Dizziness ? buffData.BuffEndTime : now + skillBuffConfig.BuffTime;
+
+                // 结束时间更晚的同类状态优先保留
+                for (int i = 0; i < nowAllBuffList.Count; i++)
+                {
+                    BuffS existing = nowAllBuffList[i];
+                    if (existing.BuffState == BuffState.Running && existing.mBuffConfig.BuffType == 2
+                        && existing.mBuffConfig.buffParameterType == skillBuffConfig.buffParameterType
+                        && stateEndTime < existing.BuffEndTime)
+                    {
+                        return;
+                    }
+                }
+            }
 
             //判断叠加上限
             if (skillBuffConfig.BuffAddClassMax != 0)
@@ -436,15 +473,7 @@ namespace ET.Server
                 if (tempBuffConfig.BuffType == 2 && tempBuffConfig.BuffType == skillBuffConfig.BuffType
                     && tempBuffConfig.buffParameterType == skillBuffConfig.buffParameterType)
                 {
-                    long newEndTime = TimeHelper.ServerNow() + skillBuffConfig.BuffTime;
-                    if (newEndTime < buffHandler.BuffEndTime)
-                    {
-                        addBufStatus = 4;
-                    }
-                    else
-                    {
-                        remove = true;
-                    }
+                    remove = true;
                 }
 
                 if (remove)
@@ -453,30 +482,14 @@ namespace ET.Server
                 }
             }
 
-            if (addBufStatus == 4)
-            {
-                return;
-            }
-
-            //添加Buff
-            if (addBufStatus == 1)
-            {
-                string BuffClassScript = skillBuffConfig.BuffScript;
-                buffHandler = self.AddChild<BuffS>();
-                buffHandler.BuffData = buffData;
-                buffHandler.mBuffConfig = SkillBuffConfigCategory.Instance.Get(buffData.BuffId);
-
-                if (buffHandler.mBuffConfig == null)
-                {
-                    Console.WriteLine($"buffHandler.mBuffConfig == null:  {buffData.BuffId}");
-                }
-
-                self.m_Buffs.Insert(0, buffHandler); //添加至buff列表中
-                buffHandler.OnInit( from, unit, skillHandler);
-                self.AddTimer();
-
-                self.AddBuffRecord(1, buffHandler.BuffData.BuffId);
-            }
+            buffHandler = self.AddChild<BuffS>();
+            buffHandler.BuffData = buffData;
+            buffHandler.mBuffConfig = skillBuffConfig;
+            buffHandler.RuneParameterAdd = runeEffects.GetRuneBuffProperty(runeBuffTarget, BuffAttributeEnum.AddParameterValue);
+            self.m_Buffs.Insert(0, buffHandler);
+            buffHandler.OnInit(from, unit, skillHandler);
+            self.AddTimer();
+            self.AddBuffRecord(1, buffData.BuffId);
 
             //发送改变属性的相关消息
             //buffData.BuffConfig==null 是子弹之类的buff不广播
@@ -485,7 +498,7 @@ namespace ET.Server
                 M2C_UnitBuffUpdate m2C_UnitBuffUpdate = M2C_UnitBuffUpdate.Create();
                 m2C_UnitBuffUpdate.UnitIdBelongTo = unit.Id;
                 m2C_UnitBuffUpdate.BuffID = skillBuffConfig.Id;
-                m2C_UnitBuffUpdate.BuffOperateType = addBufStatus;
+                m2C_UnitBuffUpdate.BuffOperateType = 1;
                 m2C_UnitBuffUpdate.BuffEndTime = buffHandler.BuffEndTime;
                 m2C_UnitBuffUpdate.TargetPostion.Clear();
                 m2C_UnitBuffUpdate.TargetPostion.Add(buffHandler.TargetPosition.x);
@@ -519,7 +532,7 @@ namespace ET.Server
                 self.BuffRemoveByUnit(from.Id, buffData.BuffId);
             }
 
-            if (notice && addBufStatus == 1 && skillBuffConfig.BuffAddSync == 1)
+            if (notice && skillBuffConfig.BuffAddSync == 1)
             {
                 self.BuffAddSyncTime(buffHandler.BuffEndTime, skillBuffConfig);
             }
