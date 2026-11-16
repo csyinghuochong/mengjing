@@ -22,7 +22,7 @@ namespace ET
         }
 
 
-        public SkillRunePropertyAdd(ByteBuf _buf) : base(_buf)
+        public SkillRunePropertyAdd(ByteBuf _buf) : base(_buf) 
         {
             Attribute = (SkillAttributeEnum)_buf.ReadInt();
             Value = _buf.ReadFloat();
