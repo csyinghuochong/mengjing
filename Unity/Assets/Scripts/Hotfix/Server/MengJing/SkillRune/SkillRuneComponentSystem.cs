@@ -463,6 +463,20 @@ namespace ET.Server
         }
 
         /// <summary>
+        /// 卸下所有技能符文并同步孔位，保留玩家拥有的符文。
+        /// </summary>
+        public static void UnequipAllRunes(this SkillRuneComponent self)
+        {
+            if (self.SlotList.Count == 0)
+            {
+                return;
+            }
+
+            self.SlotList.Clear();
+            self.SyncToClient();
+        }
+
+        /// <summary>
         /// 技能被移除（装备/天赋/龙印等来源的技能收回）时调用：
         /// 清掉这个技能的孔位，上面的符文自动回到背包
         /// </summary>

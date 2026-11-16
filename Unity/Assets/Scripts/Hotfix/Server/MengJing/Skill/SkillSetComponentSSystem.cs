@@ -1628,8 +1628,9 @@ namespace ET.Server
         /// <param name="self"></param>
         public static void OnSkillReset(this SkillSetComponentS self)
         {
+            Unit unit = self.GetParent<Unit>();
             List<int> skilllist = new List<int>();
-            UserInfoComponentS userInfoComponent = self.GetParent<Unit>().GetComponent<UserInfoComponentS>();
+            UserInfoComponentS userInfoComponent = unit.GetComponent<UserInfoComponentS>();
             int[] initskill = OccupationConfigCategory.Instance.Get(userInfoComponent.GetOcc()).InitSkillID;
             int[] baseSkill = OccupationConfigCategory.Instance.Get(userInfoComponent.GetOcc()).BaseSkill;
             skilllist.AddRange(initskill);
@@ -1673,6 +1674,7 @@ namespace ET.Server
             }
 
 			self.ResetSkillAugments();
+            unit.GetComponent<SkillRuneComponent>()?.UnequipAllRunes();
             self.UpdateSkillSet();
         }
 
