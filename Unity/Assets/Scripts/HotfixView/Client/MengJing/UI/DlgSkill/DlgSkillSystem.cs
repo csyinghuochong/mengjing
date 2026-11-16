@@ -183,7 +183,7 @@ namespace ET.Client
         {
             if (self.View.ES_SkillLearn.uiTransform.gameObject.activeSelf)
             {
-                self.View.ES_SkillLearn.E_BtnItemTypeSetToggleGroup.OnSelectIndex(0);
+                self.View.ES_SkillLearn.RefreshSkillList();
             }
 
             if (self.View.ES_SkillSet.uiTransform.gameObject.activeSelf)

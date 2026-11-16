@@ -127,7 +127,24 @@ namespace ET.Client
             return skilltype == 1 || skilltype == 6;
         }
 
+        public static void RefreshSkillList(this ES_SkillLearn self)
+        {
+            int page = self.E_BtnItemTypeSetToggleGroup.GetCurrentIndex();
+            if (page < 0)
+            {
+                self.E_BtnItemTypeSetToggleGroup.OnSelectIndex(0);
+                return;
+            }
+
+            self.RefreshSkillList(page, self.SkillPro?.SkillID ?? 0);
+        }
+
         private static void OnItemTypeSet(this ES_SkillLearn self, int page)
+        {
+            self.RefreshSkillList(page, 0);
+        }
+
+        private static void RefreshSkillList(this ES_SkillLearn self, int page, int selectedSkillId)
         {
             self.EG_SkillInfoPanelRectTransform.gameObject.SetActive(false);
             self.E_SkillLearnItemsLoopVerticalScrollRect.gameObject.SetActive(true);
@@ -223,11 +240,26 @@ namespace ET.Client
                 }
             }
 
-            if (self.ScrollItemSkillLearnItems.Count > 0)
+            self.SkillPro = null;
+            if (self.ShowLearnSkillPros.Count == 0)
             {
-                Scroll_Item_SkillLearnItem scrollItemSkillLearnItem = self.ScrollItemSkillLearnItems[0];
-                scrollItemSkillLearnItem.OnClick();
+                return;
             }
+
+            int selectedIndex = self.ShowLearnSkillPros.FindIndex(skillPro => skillPro.SkillID == selectedSkillId);
+            if (selectedIndex < 0)
+            {
+                // 升级会替换技能 ID，同一技能的各等级共用基础 ID。
+                int baseSkillId = SkillConfigCategory.Instance.GetInitSkill(selectedSkillId);
+                if (baseSkillId != 0)
+                {
+                    selectedIndex = self.ShowLearnSkillPros.FindIndex(skillPro =>
+                        SkillConfigCategory.Instance.GetInitSkill(skillPro.SkillID) == baseSkillId);
+                }
+            }
+
+            Scroll_Item_SkillLearnItem selectedItem = self.ScrollItemSkillLearnItems[Mathf.Max(0, selectedIndex)];
+            selectedItem.OnClick();
         }
 
         private static void OnSelectSkill(this ES_SkillLearn self, SkillPro skillPro)
