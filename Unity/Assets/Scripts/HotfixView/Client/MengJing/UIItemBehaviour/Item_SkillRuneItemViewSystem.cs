@@ -40,16 +40,13 @@ namespace ET.Client
 			}
 
 			self.E_LvText.text = CommonViewHelper.GetRomanLevel(runeConfig.Level);
-			self.E__ClickButton.AddListener(self.OnClick);
+			self.E_ClickButton.AddListener(self.OnClick);
 			self.SetSelected(selectRuneId == rune.Id);
 		}
 
-		/// <summary>
-		/// 预制体里没有选中框，选中的图标保持原色，没选中的压暗
-		/// </summary>
 		public static void SetSelected(this Scroll_Item_SkillRuneItem self, bool selected)
 		{
-			self.E_IconImage.color = selected ? Color.white : new Color(0.55f, 0.55f, 0.55f, 1f);
+			self.E_SelectImage.gameObject.SetActive(selected);
 		}
 
 		private static void OnClick(this Scroll_Item_SkillRuneItem self)
