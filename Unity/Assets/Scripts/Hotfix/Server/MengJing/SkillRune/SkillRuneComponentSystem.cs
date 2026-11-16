@@ -411,10 +411,9 @@ namespace ET.Server
                 return ErrorCode.ERR_RuneNotExist;
             }
 
-            int error = self.GetSkillEquipError(baseSkillId);
-            if (error != ErrorCode.ERR_Success)
+            if (!self.HasLearnedActiveSkill(baseSkillId))
             {
-                return error;
+                return ErrorCode.ERR_ModifyData;
             }
 
             //同一枚符文只能装在一个孔里
@@ -474,54 +473,46 @@ namespace ET.Server
         }
 
         /// <summary>
-        /// 镶嵌前检查技能：必须是玩家已经学会的主动技能，道具技能不能镶
+        /// 道具技能不能镶嵌。武器技能按当前装备转换后，再匹配客户端提交的技能所属等级链。
         /// </summary>
-        private static int GetSkillEquipError(this SkillRuneComponent self, int baseSkillId)
+        private static bool HasLearnedActiveSkill(this SkillRuneComponent self, int baseSkillId)
         {
             Unit unit = self.GetParent<Unit>();
             SkillSetComponentS skillSetComponent = unit.GetComponent<SkillSetComponentS>();
             if (skillSetComponent == null)
             {
-                return ErrorCode.ERR_ModifyData;
+                return false;
             }
 
-            SkillPro skillPro = FindLearnedSkill(skillSetComponent, baseSkillId);
-            if (skillPro == null || skillPro.SkillSetType == SkillSetEnum.Item)
-            {
-                return ErrorCode.ERR_ModifyData;
-            }
-
-            SkillConfig skillConfig = SkillConfigCategory.Instance.GetOrDefault(skillPro.SkillID);
-            if (skillConfig == null || skillConfig.SkillType != (int)SkillTypeEnum.ActiveSkill)
-            {
-                return ErrorCode.ERR_ModifyData;
-            }
-
-            return ErrorCode.ERR_Success;
-        }
-
-        /// <summary>
-        /// 在技能列表里找基础技能 id 相同的技能。技能升级后列表里存的是当前等级的 id，
-        /// 所以不能直接按 id 相等判断
-        /// </summary>
-        private static SkillPro FindLearnedSkill(SkillSetComponentS skillSetComponent, int baseSkillId)
-        {
             List<SkillPro> skillList = skillSetComponent.GetSkillList();
-            for (int i = 0; i < skillList.Count; i++)
+            int weaponType = unit.GetEquipType();
+            SkillConfigCategory skillConfigs = SkillConfigCategory.Instance;
+            foreach (SkillPro skill in skillList)
             {
-                SkillPro skillPro = skillList[i];
-                if (!SkillConfigCategory.Instance.Contain(skillPro.SkillID))
+                SkillConfig skillConfig = skillConfigs.GetOrDefault(skill.SkillID);
+                if (skill.SkillSetType == SkillSetEnum.Item || skillConfig == null)
                 {
                     continue;
                 }
 
-                if (SkillConfigCategory.Instance.GetInitSkill(skillPro.SkillID) == baseSkillId)
+                if (self.IsMatchingActiveSkill(skillConfig, baseSkillId))
                 {
-                    return skillPro;
+                    return true;
+                }
+
+                int weaponSkillId = SkillHelp.GetWeaponSkill(skill.SkillID, weaponType, skillList);
+                if (weaponSkillId != skill.SkillID && self.IsMatchingActiveSkill(skillConfigs.GetOrDefault(weaponSkillId), baseSkillId))
+                {
+                    return true;
                 }
             }
 
-            return null;
+            return false;
+        }
+
+        private static bool IsMatchingActiveSkill(this SkillRuneComponent self, SkillConfig skillConfig, int baseSkillId)
+        {
+            return skillConfig?.SkillType == (int)SkillTypeEnum.ActiveSkill && self.ToBaseSkillId(skillConfig.Id) == baseSkillId;
         }
 
         /// <summary>
