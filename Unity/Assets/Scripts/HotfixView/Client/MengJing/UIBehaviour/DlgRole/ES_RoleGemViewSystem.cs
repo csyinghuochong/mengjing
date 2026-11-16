@@ -2,6 +2,7 @@ using UnityEngine;
 
 namespace ET.Client
 {
+    [FriendOf(typeof(ES_GemTalent))]
     [FriendOf(typeof(ES_RoleGemHole))]
     [FriendOf(typeof(ES_CommonItem))]
     [FriendOf(typeof(Scroll_Item_CommonItem))]
@@ -9,6 +10,8 @@ namespace ET.Client
     [FriendOfAttribute(typeof(ES_RoleGem))]
     public static partial class ES_RoleGemSystem
     {
+        private const string GemTalentPrefabPath = "Assets/Bundles/UI/Common/ES_GemTalent.prefab";
+
         [EntitySystem]
         private static void Awake(this ES_RoleGem self, Transform transform)
         {
@@ -35,11 +38,15 @@ namespace ET.Client
         [EntitySystem]
         private static void Destroy(this ES_RoleGem self)
         {
+            self.Root()?.GetComponent<ResourcesLoaderComponent>()?.UnLoadAsset(GemTalentPrefabPath);
             self.DestroyWidget();
         }
 
         public static void OnUpdateUI(this ES_RoleGem self)
         {
+            ES_GemTalent gemTalent = self.GemTalent;
+            gemTalent?.uiTransform.gameObject.SetActive(false);
+
             self.XiangQianItem = null;
             self.XiangQianIndex = -1;
             self.ResetHole();
@@ -180,7 +187,24 @@ namespace ET.Client
 
         private static void OnGemTalentButton(this ES_RoleGem self)
         {
-            self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgRole>()?.OpenGemTalent();
+            ES_GemTalent gemTalent = self.GemTalent;
+            if (gemTalent == null)
+            {
+                GameObject prefab = self.Root().GetComponent<ResourcesLoaderComponent>()
+                        .LoadAssetSync<GameObject>(GemTalentPrefabPath);
+                if (prefab == null)
+                {
+                    Log.Error($"宝石天赋预制体加载失败：{GemTalentPrefabPath}");
+                    return;
+                }
+
+                GameObject go = UnityEngine.Object.Instantiate(prefab, self.uiTransform);
+                gemTalent = self.AddChild<ES_GemTalent, Transform>(go.transform);
+                self.GemTalent = gemTalent;
+            }
+
+            gemTalent.uiTransform.gameObject.SetActive(true);
+            gemTalent.OnUpdateUI();
         }
     }
 }
