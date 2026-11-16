@@ -129,7 +129,8 @@ namespace ET.Client
                     continue;
                 }
 
-                bool unlocked = skillConfig.SkillLv >= SkillRuneComponentCSystem.GetSlotUnlockLevel(slotIndex);
+                int unlockLevel = SkillHelp.GetSkillRuneSlotUnlockLevel(slotIndex);
+                bool unlocked = skillConfig.SkillLv >= unlockLevel;
                 long runeId = skillRuneComponent == null ? 0 : skillRuneComponent.GetSlotRuneId(skillId, slotIndex);
                 SkillRuneConfig runeConfig = skillRuneComponent == null ? null : skillRuneComponent.GetRuneConfig(skillRuneComponent.GetRune(runeId));
                 bool hasRune = unlocked && runeConfig != null;
@@ -177,7 +178,6 @@ namespace ET.Client
                 Button button = buttonTrans == null ? null : buttonTrans.GetComponent<Button>();
                 if (button != null)
                 {
-                    int unlockLevel = SkillRuneComponentCSystem.GetSlotUnlockLevel(slotIndex);
                     button.AddListener(() =>
                     {
                         //锁着的孔位只提示解锁条件，不打开符文背包

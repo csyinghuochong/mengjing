@@ -302,17 +302,5 @@ namespace ET.Client
 
         #endregion
 
-        #region 孔位解锁
-
-        /// <summary>
-        /// 技能符文孔位的解锁等级：第 slotIndex 个孔位需要技能等级达到 slotIndex + 1 级。
-        /// 目前没有配置表，先按孔位下标递增；以后要改成配置驱动只改这里
-        /// </summary>
-        public static int GetSlotUnlockLevel(int slotIndex)
-        {
-            return slotIndex + 1;
-        }
-
-        #endregion
     }
 }

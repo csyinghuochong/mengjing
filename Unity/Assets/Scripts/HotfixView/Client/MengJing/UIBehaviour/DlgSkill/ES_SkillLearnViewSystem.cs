@@ -342,8 +342,9 @@ namespace ET.Client
                 return;
             }
 
-            int unlockLevel = SkillRuneComponentCSystem.GetSlotUnlockLevel(slotIndex);
-            if (!self.IsSkillRuneSlotUnlocked(skillId, unlockLevel))
+            int unlockLevel = SkillHelp.GetSkillRuneSlotUnlockLevel(slotIndex);
+            SkillConfig skillConfig = SkillConfigCategory.Instance.GetOrDefault(skillId);
+            if (skillConfig == null || skillConfig.SkillLv < unlockLevel)
             {
                 FlyTipComponent.Instance.ShowFlyTip($"技能达到{unlockLevel}级解锁");
                 return;
@@ -358,22 +359,6 @@ namespace ET.Client
             skillRune.uiTransform.gameObject.SetActive(true);
             skillRune.uiTransform.SetAsLastSibling();
             skillRune.OnOpen(skillId, slotIndex);
-        }
-
-        /// <summary>
-        /// 技能当前等级（和技能界面显示的等级一致）是否达到孔位要求
-        /// </summary>
-        private static bool IsSkillRuneSlotUnlocked(this ES_SkillLearn self, int skillId, int unlockLevel)
-        {
-            if (skillId == 0)
-            {
-                return false;
-            }
-
-            SkillSetComponentC skillSetComponent = self.Root().GetComponent<SkillSetComponentC>();
-            int weaponSkillId = SkillHelp.GetWeaponSkill(skillId, UnitHelper.GetEquipType(self.Root()), skillSetComponent.SkillList);
-            SkillConfig skillConfig = SkillConfigCategory.Instance.GetOrDefault(weaponSkillId);
-            return skillConfig != null && skillConfig.SkillLv >= unlockLevel;
         }
 
         /// <summary>

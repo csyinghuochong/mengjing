@@ -411,9 +411,15 @@ namespace ET.Server
                 return ErrorCode.ERR_RuneNotExist;
             }
 
-            if (!self.HasLearnedActiveSkill(baseSkillId))
+            SkillConfig skillConfig = self.FindLearnedActiveSkillConfig(baseSkillId);
+            if (skillConfig == null)
             {
                 return ErrorCode.ERR_ModifyData;
+            }
+
+            if (skillConfig.SkillLv < SkillHelp.GetSkillRuneSlotUnlockLevel(slotIndex))
+            {
+                return ErrorCode.ERR_RuneSlotLock;
             }
 
             //同一枚符文只能装在一个孔里
@@ -475,18 +481,19 @@ namespace ET.Server
         /// <summary>
         /// 道具技能不能镶嵌。武器技能按当前装备转换后，再匹配客户端提交的技能所属等级链。
         /// </summary>
-        private static bool HasLearnedActiveSkill(this SkillRuneComponent self, int baseSkillId)
+        private static SkillConfig FindLearnedActiveSkillConfig(this SkillRuneComponent self, int baseSkillId)
         {
             Unit unit = self.GetParent<Unit>();
             SkillSetComponentS skillSetComponent = unit.GetComponent<SkillSetComponentS>();
             if (skillSetComponent == null)
             {
-                return false;
+                return null;
             }
 
             List<SkillPro> skillList = skillSetComponent.GetSkillList();
             int weaponType = unit.GetEquipType();
             SkillConfigCategory skillConfigs = SkillConfigCategory.Instance;
+            SkillConfig matchingConfig = null;
             foreach (SkillPro skill in skillList)
             {
                 SkillConfig skillConfig = skillConfigs.GetOrDefault(skill.SkillID);
@@ -495,19 +502,24 @@ namespace ET.Server
                     continue;
                 }
 
-                if (self.IsMatchingActiveSkill(skillConfig, baseSkillId))
+                int weaponSkillId = SkillHelp.GetWeaponSkill(skill.SkillID, weaponType, skillList);
+                SkillConfig weaponSkillConfig = skillConfigs.GetOrDefault(weaponSkillId);
+                if (self.IsMatchingActiveSkill(weaponSkillConfig, baseSkillId))
                 {
-                    return true;
+                    skillConfig = weaponSkillConfig;
+                }
+                else if (!self.IsMatchingActiveSkill(skillConfig, baseSkillId))
+                {
+                    continue;
                 }
 
-                int weaponSkillId = SkillHelp.GetWeaponSkill(skill.SkillID, weaponType, skillList);
-                if (weaponSkillId != skill.SkillID && self.IsMatchingActiveSkill(skillConfigs.GetOrDefault(weaponSkillId), baseSkillId))
+                if (matchingConfig == null || skillConfig.SkillLv > matchingConfig.SkillLv)
                 {
-                    return true;
+                    matchingConfig = skillConfig;
                 }
             }
 
-            return false;
+            return matchingConfig;
         }
 
         private static bool IsMatchingActiveSkill(this SkillRuneComponent self, SkillConfig skillConfig, int baseSkillId)

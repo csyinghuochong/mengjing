@@ -187,6 +187,14 @@ namespace ET
             }
         }
 
+        /// <summary>
+        /// 技能符文第 1 至 4 个孔位分别在技能达到 2 至 5 级时解锁。
+        /// </summary>
+        public static int GetSkillRuneSlotUnlockLevel(int slotIndex)
+        {
+            return slotIndex + 2;
+        }
+
         public static int GetSkillLevelByAugmentBaseSkill(List<SkillPro> skillPros, int baseSkillId, params int[] weaponTypes)
         {
             if (skillPros == null || baseSkillId == 0 || weaponTypes == null || weaponTypes.Length == 0)
