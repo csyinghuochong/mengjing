@@ -151,14 +151,19 @@ namespace ET.Client
         {
             string title = string.IsNullOrEmpty(chapter.Name) ? chapter.ChapterName : $"{chapter.ChapterName} {chapter.Name}";
             Transform unselected = chapterHeader.transform.Find("ImageSelect_0/TaskTypeName_0");
-            Transform selected = chapterHeader.transform.Find("ImageSelect_1/TaskTypeName_1");
+            Transform selectedName0 = chapterHeader.transform.Find("ImageSelect_1/TaskTypeName_0");
+            Transform selectedName1 = chapterHeader.transform.Find("ImageSelect_1/TaskTypeName_1");
             if (unselected != null)
             {
                 unselected.GetComponent<Text>().text = title;
             }
-            if (selected != null)
+            if (selectedName0 != null)
             {
-                selected.GetComponent<Text>().text = title;
+                selectedName0.GetComponent<Text>().text = title;
+            }
+            if (selectedName1 != null)
+            {
+                selectedName1.GetComponent<Text>().text = title;
             }
         }
 
