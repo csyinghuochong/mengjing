@@ -34,6 +34,11 @@ namespace ET.Client
                 self.BGHuiButton.onClick.RemoveListener(self.OnBGHuiButton);
             }
 
+            if (self.E_ImageSelectImage != null && self.uiTransform != null)
+            {
+                self.SetSelectionVisible(false);
+            }
+
             self.GemTalentId = 0;
             self.uiTransform = null;
             self.BGHuiButton = null;
@@ -58,6 +63,24 @@ namespace ET.Client
             self.BGHuiButton.interactable = unlocked;
             self.BGOpen.SetActive(unlocked);
             self.BGActivate.SetActive(unlocked && active);
+            self.SetSelectionVisible(selected);
+        }
+
+        private static void SetSelectionVisible(this ES_GemTalentItem self, bool selected)
+        {
+            RectTransform selection = self.E_ImageSelectImage.rectTransform;
+            Transform parent = selected ? self.GetParent<ES_GemTalent>().UITransform : self.uiTransform;
+            if (selection.parent != parent)
+            {
+                // 切换绘制层级时保持选中框和节点对齐。
+                selection.SetParent(parent, true);
+            }
+
+            if (selected)
+            {
+                selection.SetAsLastSibling();
+            }
+
             self.E_ImageSelectImage.gameObject.SetActive(selected);
         }
 
