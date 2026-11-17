@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 namespace ET.Client
@@ -10,7 +10,7 @@ namespace ET.Client
 		public int ItemSubType;
 		public List<EntityRef<ES_RoleQiangHuaItem>> QiangHuaItemList = new();
 		
-		public UnityEngine.UI.Image E_ImageSelectImage
+		public UnityEngine.RectTransform EG_RoleQiangHuaItem_1RectTransform
      	{
      		get
      		{
@@ -19,15 +19,15 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_E_ImageSelectImage == null )
+     			if( this.m_EG_RoleQiangHuaItem_1RectTransform == null )
      			{
-		    		this.m_E_ImageSelectImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Left/E_ImageSelect");
+		    		this.m_EG_RoleQiangHuaItem_1RectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"Left/EG_RoleQiangHuaItem_1");
      			}
-     			return this.m_E_ImageSelectImage;
+     			return this.m_EG_RoleQiangHuaItem_1RectTransform;
      		}
      	}
 
-		public ES_RoleQiangHuaItem ES_RoleQiangHuaItem_1
+		public UnityEngine.RectTransform EG_RoleQiangHuaItem_2RectTransform
      	{
      		get
      		{
@@ -36,18 +36,15 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			ES_RoleQiangHuaItem es = this.m_es_roleqianghuaitem_1;
-     			if( es == null )
-
+     			if( this.m_EG_RoleQiangHuaItem_2RectTransform == null )
      			{
-		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"Left/ES_RoleQiangHuaItem_1");
-		    	   this.m_es_roleqianghuaitem_1 = this.AddChild<ES_RoleQiangHuaItem,Transform>(subTrans);
+		    		this.m_EG_RoleQiangHuaItem_2RectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"Left/EG_RoleQiangHuaItem_2");
      			}
-     			return this.m_es_roleqianghuaitem_1;
+     			return this.m_EG_RoleQiangHuaItem_2RectTransform;
      		}
      	}
 
-		public ES_RoleQiangHuaItem ES_RoleQiangHuaItem_2
+		public UnityEngine.RectTransform EG_RoleQiangHuaItem_3RectTransform
      	{
      		get
      		{
@@ -56,18 +53,15 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			ES_RoleQiangHuaItem es = this.m_es_roleqianghuaitem_2;
-     			if( es == null )
-
+     			if( this.m_EG_RoleQiangHuaItem_3RectTransform == null )
      			{
-		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"Left/ES_RoleQiangHuaItem_2");
-		    	   this.m_es_roleqianghuaitem_2 = this.AddChild<ES_RoleQiangHuaItem,Transform>(subTrans);
+		    		this.m_EG_RoleQiangHuaItem_3RectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"Left/EG_RoleQiangHuaItem_3");
      			}
-     			return this.m_es_roleqianghuaitem_2;
+     			return this.m_EG_RoleQiangHuaItem_3RectTransform;
      		}
      	}
 
-		public ES_RoleQiangHuaItem ES_RoleQiangHuaItem_3
+		public UnityEngine.RectTransform EG_RoleQiangHuaItem_4RectTransform
      	{
      		get
      		{
@@ -76,18 +70,15 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			ES_RoleQiangHuaItem es = this.m_es_roleqianghuaitem_3;
-     			if( es == null )
-
+     			if( this.m_EG_RoleQiangHuaItem_4RectTransform == null )
      			{
-		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"Left/ES_RoleQiangHuaItem_3");
-		    	   this.m_es_roleqianghuaitem_3 = this.AddChild<ES_RoleQiangHuaItem,Transform>(subTrans);
+		    		this.m_EG_RoleQiangHuaItem_4RectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"Left/EG_RoleQiangHuaItem_4");
      			}
-     			return this.m_es_roleqianghuaitem_3;
+     			return this.m_EG_RoleQiangHuaItem_4RectTransform;
      		}
      	}
 
-		public ES_RoleQiangHuaItem ES_RoleQiangHuaItem_4
+		public UnityEngine.RectTransform EG_RoleQiangHuaItem_5RectTransform
      	{
      		get
      		{
@@ -96,18 +87,15 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			ES_RoleQiangHuaItem es = this.m_es_roleqianghuaitem_4;
-     			if( es == null )
-
+     			if( this.m_EG_RoleQiangHuaItem_5RectTransform == null )
      			{
-		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"Left/ES_RoleQiangHuaItem_4");
-		    	   this.m_es_roleqianghuaitem_4 = this.AddChild<ES_RoleQiangHuaItem,Transform>(subTrans);
+		    		this.m_EG_RoleQiangHuaItem_5RectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"Left/EG_RoleQiangHuaItem_5");
      			}
-     			return this.m_es_roleqianghuaitem_4;
+     			return this.m_EG_RoleQiangHuaItem_5RectTransform;
      		}
      	}
 
-		public ES_RoleQiangHuaItem ES_RoleQiangHuaItem_5
+		public UnityEngine.RectTransform EG_RoleQiangHuaItem_6RectTransform
      	{
      		get
      		{
@@ -116,18 +104,15 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			ES_RoleQiangHuaItem es = this.m_es_roleqianghuaitem_5;
-     			if( es == null )
-
+     			if( this.m_EG_RoleQiangHuaItem_6RectTransform == null )
      			{
-		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"Left/ES_RoleQiangHuaItem_5");
-		    	   this.m_es_roleqianghuaitem_5 = this.AddChild<ES_RoleQiangHuaItem,Transform>(subTrans);
+		    		this.m_EG_RoleQiangHuaItem_6RectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"Left/EG_RoleQiangHuaItem_6");
      			}
-     			return this.m_es_roleqianghuaitem_5;
+     			return this.m_EG_RoleQiangHuaItem_6RectTransform;
      		}
      	}
 
-		public ES_RoleQiangHuaItem ES_RoleQiangHuaItem_6
+		public UnityEngine.RectTransform EG_RoleQiangHuaItem_7RectTransform
      	{
      		get
      		{
@@ -136,18 +121,15 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			ES_RoleQiangHuaItem es = this.m_es_roleqianghuaitem_6;
-     			if( es == null )
-
+     			if( this.m_EG_RoleQiangHuaItem_7RectTransform == null )
      			{
-		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"Left/ES_RoleQiangHuaItem_6");
-		    	   this.m_es_roleqianghuaitem_6 = this.AddChild<ES_RoleQiangHuaItem,Transform>(subTrans);
+		    		this.m_EG_RoleQiangHuaItem_7RectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"Left/EG_RoleQiangHuaItem_7");
      			}
-     			return this.m_es_roleqianghuaitem_6;
+     			return this.m_EG_RoleQiangHuaItem_7RectTransform;
      		}
      	}
 
-		public ES_RoleQiangHuaItem ES_RoleQiangHuaItem_7
+		public UnityEngine.RectTransform EG_RoleQiangHuaItem_8RectTransform
      	{
      		get
      		{
@@ -156,18 +138,15 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			ES_RoleQiangHuaItem es = this.m_es_roleqianghuaitem_7;
-     			if( es == null )
-
+     			if( this.m_EG_RoleQiangHuaItem_8RectTransform == null )
      			{
-		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"Left/ES_RoleQiangHuaItem_7");
-		    	   this.m_es_roleqianghuaitem_7 = this.AddChild<ES_RoleQiangHuaItem,Transform>(subTrans);
+		    		this.m_EG_RoleQiangHuaItem_8RectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"Left/EG_RoleQiangHuaItem_8");
      			}
-     			return this.m_es_roleqianghuaitem_7;
+     			return this.m_EG_RoleQiangHuaItem_8RectTransform;
      		}
      	}
 
-		public ES_RoleQiangHuaItem ES_RoleQiangHuaItem_8
+		public UnityEngine.RectTransform EG_RoleQiangHuaItem_9RectTransform
      	{
      		get
      		{
@@ -176,18 +155,15 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			ES_RoleQiangHuaItem es = this.m_es_roleqianghuaitem_8;
-     			if( es == null )
-
+     			if( this.m_EG_RoleQiangHuaItem_9RectTransform == null )
      			{
-		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"Left/ES_RoleQiangHuaItem_8");
-		    	   this.m_es_roleqianghuaitem_8 = this.AddChild<ES_RoleQiangHuaItem,Transform>(subTrans);
+		    		this.m_EG_RoleQiangHuaItem_9RectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"Left/EG_RoleQiangHuaItem_9");
      			}
-     			return this.m_es_roleqianghuaitem_8;
+     			return this.m_EG_RoleQiangHuaItem_9RectTransform;
      		}
      	}
 
-		public ES_RoleQiangHuaItem ES_RoleQiangHuaItem_9
+		public UnityEngine.RectTransform EG_RoleQiangHuaItem_10RectTransform
      	{
      		get
      		{
@@ -196,54 +172,11 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			ES_RoleQiangHuaItem es = this.m_es_roleqianghuaitem_9;
-     			if( es == null )
-
+     			if( this.m_EG_RoleQiangHuaItem_10RectTransform == null )
      			{
-		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"Left/ES_RoleQiangHuaItem_9");
-		    	   this.m_es_roleqianghuaitem_9 = this.AddChild<ES_RoleQiangHuaItem,Transform>(subTrans);
+		    		this.m_EG_RoleQiangHuaItem_10RectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"Left/EG_RoleQiangHuaItem_10");
      			}
-     			return this.m_es_roleqianghuaitem_9;
-     		}
-     	}
-
-		public ES_RoleQiangHuaItem ES_RoleQiangHuaItem_10
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			ES_RoleQiangHuaItem es = this.m_es_roleqianghuaitem_10;
-     			if( es == null )
-
-     			{
-		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"Left/ES_RoleQiangHuaItem_10");
-		    	   this.m_es_roleqianghuaitem_10 = this.AddChild<ES_RoleQiangHuaItem,Transform>(subTrans);
-     			}
-     			return this.m_es_roleqianghuaitem_10;
-     		}
-     	}
-
-		public ES_RoleQiangHuaItem ES_RoleQiangHuaItem_11
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			ES_RoleQiangHuaItem es = this.m_es_roleqianghuaitem_11;
-     			if( es == null )
-
-     			{
-		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"Left/ES_RoleQiangHuaItem_11");
-		    	   this.m_es_roleqianghuaitem_11 = this.AddChild<ES_RoleQiangHuaItem,Transform>(subTrans);
-     			}
-     			return this.m_es_roleqianghuaitem_11;
+     			return this.m_EG_RoleQiangHuaItem_10RectTransform;
      		}
      	}
 
@@ -417,23 +350,6 @@ namespace ET.Client
      		}
      	}
 
-		public UnityEngine.UI.Text E_QiangHuaNameText
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_QiangHuaNameText == null )
-     			{
-		    		this.m_E_QiangHuaNameText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Right/E_QiangHuaName");
-     			}
-     			return this.m_E_QiangHuaNameText;
-     		}
-     	}
-
 		public UnityEngine.UI.Text E_QiangHuaTipText
      	{
      		get
@@ -485,7 +401,7 @@ namespace ET.Client
      		}
      	}
 
-		public ES_EquipSetItem ES_EquipSetItem
+		public UnityEngine.UI.Image EquipBack1Image
      	{
      		get
      		{
@@ -494,18 +410,15 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			ES_EquipSetItem es = this.m_es_equipsetitem;
-     			if( es == null )
-
+     			if( this.m_EquipBack1Image == null )
      			{
-		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"Center/ES_EquipSetItem");
-		    	   this.m_es_equipsetitem = this.AddChild<ES_EquipSetItem,Transform>(subTrans);
+		    		this.m_EquipBack1Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Center/EquipBack (1)");
      			}
-     			return this.m_es_equipsetitem;
+     			return this.m_EquipBack1Image;
      		}
      	}
 
-		public UnityEngine.UI.Text E_QiangItemNameText
+		public UnityEngine.UI.Image EquipBack9Image
      	{
      		get
      		{
@@ -514,11 +427,62 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_E_QiangItemNameText == null )
+     			if( this.m_EquipBack9Image == null )
      			{
-		    		this.m_E_QiangItemNameText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Center/E_QiangItemName");
+		    		this.m_EquipBack9Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Center/EquipBack (9)");
      			}
-     			return this.m_E_QiangItemNameText;
+     			return this.m_EquipBack9Image;
+     		}
+     	}
+
+		public UnityEngine.UI.Text E_QiangHuaNameText
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_QiangHuaNameText == null )
+     			{
+		    		this.m_E_QiangHuaNameText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Center/E_QiangHuaName");
+     			}
+     			return this.m_E_QiangHuaNameText;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_EquipIconImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_EquipIconImage == null )
+     			{
+		    		this.m_E_EquipIconImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Center/E_EquipIcon");
+     			}
+     			return this.m_E_EquipIconImage;
+     		}
+     	}
+
+		public UnityEngine.UI.Text E_QiangHuaLvText
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_QiangHuaLvText == null )
+     			{
+		    		this.m_E_QiangHuaLvText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Center/E_QiangHuaLv");
+     			}
+     			return this.m_E_QiangHuaLvText;
      		}
      	}
 
@@ -590,23 +554,6 @@ namespace ET.Client
      		}
      	}
 
-		public UnityEngine.UI.Image E_Img_LodingImage
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_Img_LodingImage == null )
-     			{
-		    		this.m_E_Img_LodingImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Center/E_Img_Loding");
-     			}
-     			return this.m_E_Img_LodingImage;
-     		}
-     	}
-
 		public UnityEngine.UI.Text E_QiangHuaProgressText
      	{
      		get
@@ -658,18 +605,16 @@ namespace ET.Client
 
 		public void DestroyWidget()
 		{
-			this.m_E_ImageSelectImage = null;
-			this.m_es_roleqianghuaitem_1 = null;
-			this.m_es_roleqianghuaitem_2 = null;
-			this.m_es_roleqianghuaitem_3 = null;
-			this.m_es_roleqianghuaitem_4 = null;
-			this.m_es_roleqianghuaitem_5 = null;
-			this.m_es_roleqianghuaitem_6 = null;
-			this.m_es_roleqianghuaitem_7 = null;
-			this.m_es_roleqianghuaitem_8 = null;
-			this.m_es_roleqianghuaitem_9 = null;
-			this.m_es_roleqianghuaitem_10 = null;
-			this.m_es_roleqianghuaitem_11 = null;
+			this.m_EG_RoleQiangHuaItem_1RectTransform = null;
+			this.m_EG_RoleQiangHuaItem_2RectTransform = null;
+			this.m_EG_RoleQiangHuaItem_3RectTransform = null;
+			this.m_EG_RoleQiangHuaItem_4RectTransform = null;
+			this.m_EG_RoleQiangHuaItem_5RectTransform = null;
+			this.m_EG_RoleQiangHuaItem_6RectTransform = null;
+			this.m_EG_RoleQiangHuaItem_7RectTransform = null;
+			this.m_EG_RoleQiangHuaItem_8RectTransform = null;
+			this.m_EG_RoleQiangHuaItem_9RectTransform = null;
+			this.m_EG_RoleQiangHuaItem_10RectTransform = null;
 			this.m_EG_QiangHuaLevelListRectTransform = null;
 			this.m_EG_MaxNodeRectTransform = null;
 			this.m_EG_NextNodeRectTransform = null;
@@ -680,34 +625,33 @@ namespace ET.Client
 			this.m_E_TextGoldText = null;
 			this.m_E_TextGoldDiText = null;
 			this.m_E_Attribute1Text = null;
-			this.m_E_QiangHuaNameText = null;
 			this.m_E_QiangHuaTipText = null;
 			this.m_E_SuccessRateText = null;
 			this.m_E_SuccessAdditionText = null;
-			this.m_es_equipsetitem = null;
-			this.m_E_QiangItemNameText = null;
+			this.m_EquipBack1Image = null;
+			this.m_EquipBack9Image = null;
+			this.m_E_QiangHuaNameText = null;
+			this.m_E_EquipIconImage = null;
+			this.m_E_QiangHuaLvText = null;
 			this.m_E_ToggleLuckyToggle = null;
 			this.m_E_Img_LodingValueImage = null;
 			this.m_E_CostTip2Text = null;
 			this.m_E_QiangHuaLevelText = null;
-			this.m_E_Img_LodingImage = null;
 			this.m_E_QiangHuaProgressText = null;
 			this.m_es_costlist = null;
 			this.uiTransform = null;
 		}
 
-		private UnityEngine.UI.Image m_E_ImageSelectImage = null;
-		private EntityRef<ES_RoleQiangHuaItem> m_es_roleqianghuaitem_1 = null;
-		private EntityRef<ES_RoleQiangHuaItem> m_es_roleqianghuaitem_2 = null;
-		private EntityRef<ES_RoleQiangHuaItem> m_es_roleqianghuaitem_3 = null;
-		private EntityRef<ES_RoleQiangHuaItem> m_es_roleqianghuaitem_4 = null;
-		private EntityRef<ES_RoleQiangHuaItem> m_es_roleqianghuaitem_5 = null;
-		private EntityRef<ES_RoleQiangHuaItem> m_es_roleqianghuaitem_6 = null;
-		private EntityRef<ES_RoleQiangHuaItem> m_es_roleqianghuaitem_7 = null;
-		private EntityRef<ES_RoleQiangHuaItem> m_es_roleqianghuaitem_8 = null;
-		private EntityRef<ES_RoleQiangHuaItem> m_es_roleqianghuaitem_9 = null;
-		private EntityRef<ES_RoleQiangHuaItem> m_es_roleqianghuaitem_10 = null;
-		private EntityRef<ES_RoleQiangHuaItem> m_es_roleqianghuaitem_11 = null;
+		private UnityEngine.RectTransform m_EG_RoleQiangHuaItem_1RectTransform = null;
+		private UnityEngine.RectTransform m_EG_RoleQiangHuaItem_2RectTransform = null;
+		private UnityEngine.RectTransform m_EG_RoleQiangHuaItem_3RectTransform = null;
+		private UnityEngine.RectTransform m_EG_RoleQiangHuaItem_4RectTransform = null;
+		private UnityEngine.RectTransform m_EG_RoleQiangHuaItem_5RectTransform = null;
+		private UnityEngine.RectTransform m_EG_RoleQiangHuaItem_6RectTransform = null;
+		private UnityEngine.RectTransform m_EG_RoleQiangHuaItem_7RectTransform = null;
+		private UnityEngine.RectTransform m_EG_RoleQiangHuaItem_8RectTransform = null;
+		private UnityEngine.RectTransform m_EG_RoleQiangHuaItem_9RectTransform = null;
+		private UnityEngine.RectTransform m_EG_RoleQiangHuaItem_10RectTransform = null;
 		private UnityEngine.RectTransform m_EG_QiangHuaLevelListRectTransform = null;
 		private UnityEngine.RectTransform m_EG_MaxNodeRectTransform = null;
 		private UnityEngine.RectTransform m_EG_NextNodeRectTransform = null;
@@ -718,17 +662,18 @@ namespace ET.Client
 		private UnityEngine.UI.Text m_E_TextGoldText = null;
 		private UnityEngine.UI.Text m_E_TextGoldDiText = null;
 		private UnityEngine.UI.Text m_E_Attribute1Text = null;
-		private UnityEngine.UI.Text m_E_QiangHuaNameText = null;
 		private UnityEngine.UI.Text m_E_QiangHuaTipText = null;
 		private UnityEngine.UI.Text m_E_SuccessRateText = null;
 		private UnityEngine.UI.Text m_E_SuccessAdditionText = null;
-		private EntityRef<ES_EquipSetItem> m_es_equipsetitem = null;
-		private UnityEngine.UI.Text m_E_QiangItemNameText = null;
+		private UnityEngine.UI.Image m_EquipBack1Image = null;
+		private UnityEngine.UI.Image m_EquipBack9Image = null;
+		private UnityEngine.UI.Text m_E_QiangHuaNameText = null;
+		private UnityEngine.UI.Image m_E_EquipIconImage = null;
+		private UnityEngine.UI.Text m_E_QiangHuaLvText = null;
 		private UnityEngine.UI.Toggle m_E_ToggleLuckyToggle = null;
 		private UnityEngine.UI.Image m_E_Img_LodingValueImage = null;
 		private UnityEngine.UI.Text m_E_CostTip2Text = null;
 		private UnityEngine.UI.Text m_E_QiangHuaLevelText = null;
-		private UnityEngine.UI.Image m_E_Img_LodingImage = null;
 		private UnityEngine.UI.Text m_E_QiangHuaProgressText = null;
 		private EntityRef<ES_CostList> m_es_costlist = null;
 		public Transform uiTransform = null;

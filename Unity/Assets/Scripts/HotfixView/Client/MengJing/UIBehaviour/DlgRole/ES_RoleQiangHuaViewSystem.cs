@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace ET.Client
@@ -16,60 +14,44 @@ namespace ET.Client
             self.uiTransform = transform;
 
             self.E_QiangHuaButton.AddListenerAsync(self.OnQiangHuaButton);
-            
-            self.ES_RoleQiangHuaItem_1.SetClickHandler(self.OnBtn_EquipHandler);
-            self.QiangHuaItemList.Add(self.ES_RoleQiangHuaItem_1);
-            self.ES_RoleQiangHuaItem_2.SetClickHandler(self.OnBtn_EquipHandler);
-            self.QiangHuaItemList.Add(self.ES_RoleQiangHuaItem_2);
-            self.ES_RoleQiangHuaItem_3.SetClickHandler(self.OnBtn_EquipHandler);
-            self.QiangHuaItemList.Add(self.ES_RoleQiangHuaItem_3);
-            self.ES_RoleQiangHuaItem_4.SetClickHandler(self.OnBtn_EquipHandler);
-            self.QiangHuaItemList.Add(self.ES_RoleQiangHuaItem_4);
-            self.ES_RoleQiangHuaItem_5.SetClickHandler(self.OnBtn_EquipHandler);
-            self.QiangHuaItemList.Add(self.ES_RoleQiangHuaItem_5);
-            self.ES_RoleQiangHuaItem_6.SetClickHandler(self.OnBtn_EquipHandler);
-            self.QiangHuaItemList.Add(self.ES_RoleQiangHuaItem_6);
-            self.ES_RoleQiangHuaItem_7.SetClickHandler(self.OnBtn_EquipHandler);
-            self.QiangHuaItemList.Add(self.ES_RoleQiangHuaItem_7);
-            self.ES_RoleQiangHuaItem_8.SetClickHandler(self.OnBtn_EquipHandler);
-            self.QiangHuaItemList.Add(self.ES_RoleQiangHuaItem_8);
-            self.ES_RoleQiangHuaItem_9.SetClickHandler(self.OnBtn_EquipHandler);
-            self.QiangHuaItemList.Add(self.ES_RoleQiangHuaItem_9);
-            self.ES_RoleQiangHuaItem_10.SetClickHandler(self.OnBtn_EquipHandler);
-            self.QiangHuaItemList.Add(self.ES_RoleQiangHuaItem_10);
-            self.ES_RoleQiangHuaItem_11.SetClickHandler(self.OnBtn_EquipHandler);
-            self.QiangHuaItemList.Add(self.ES_RoleQiangHuaItem_11);
+
+            self.AddQiangHuaItem(self.EG_RoleQiangHuaItem_1RectTransform, 10);
+            self.AddQiangHuaItem(self.EG_RoleQiangHuaItem_2RectTransform, 2);
+            self.AddQiangHuaItem(self.EG_RoleQiangHuaItem_3RectTransform, 1);
+            self.AddQiangHuaItem(self.EG_RoleQiangHuaItem_4RectTransform, 7);
+            self.AddQiangHuaItem(self.EG_RoleQiangHuaItem_5RectTransform, 6);
+            self.AddQiangHuaItem(self.EG_RoleQiangHuaItem_6RectTransform, 11);
+            self.AddQiangHuaItem(self.EG_RoleQiangHuaItem_7RectTransform, 9);
+            self.AddQiangHuaItem(self.EG_RoleQiangHuaItem_8RectTransform, 4);
+            self.AddQiangHuaItem(self.EG_RoleQiangHuaItem_9RectTransform, 8);
+            self.AddQiangHuaItem(self.EG_RoleQiangHuaItem_10RectTransform, 3);
         }
 
         [EntitySystem]
         private static void Destroy(this ES_RoleQiangHua self)
         {
+            self.QiangHuaItemList.Clear();
             self.DestroyWidget();
+        }
+
+        private static void AddQiangHuaItem(this ES_RoleQiangHua self, Transform transform, int subType)
+        {
+            ES_RoleQiangHuaItem item = self.AddChild<ES_RoleQiangHuaItem, Transform>(transform);
+            item.ItemSubType = subType;
+            item.SetClickHandler(self.OnBtn_EquipHandler);
+            self.QiangHuaItemList.Add(item);
         }
 
         public static void OnUpdateUI(this ES_RoleQiangHua self)
         {
-            self.ES_RoleQiangHuaItem_1.OnInitUI(10);
-            self.ES_RoleQiangHuaItem_2.OnInitUI(2);
-            self.ES_RoleQiangHuaItem_3.OnInitUI(1);
-            self.ES_RoleQiangHuaItem_4.OnInitUI(7);
-            self.ES_RoleQiangHuaItem_5.OnInitUI(6);
-            self.ES_RoleQiangHuaItem_6.OnInitUI(11);
-            self.ES_RoleQiangHuaItem_7.OnInitUI(9);
-            self.ES_RoleQiangHuaItem_8.OnInitUI(4);
-            self.ES_RoleQiangHuaItem_9.OnInitUI(8);
-            self.ES_RoleQiangHuaItem_10.OnInitUI(3);
-            self.ES_RoleQiangHuaItem_11.OnInitUI(5);
-            
             BagComponentC bagComponent = self.Root().GetComponent<BagComponentC>();
-            for (int i = 0; i < self.QiangHuaItemList.Count; i++)
+            foreach (ES_RoleQiangHuaItem item in self.QiangHuaItemList)
             {
-                ES_RoleQiangHuaItem esRoleQiangHuaItem = self.QiangHuaItemList[i];
-                esRoleQiangHuaItem.OnUpateUI(bagComponent.QiangHuaLevel[i + 1]);
+                item.OnUpdateUI(bagComponent.QiangHuaLevel[item.ItemSubType]);
             }
 
-            ES_RoleQiangHuaItem item = self.QiangHuaItemList[0];
-            item.OnEquipButton();
+            ES_RoleQiangHuaItem firstItem = self.QiangHuaItemList[0];
+            firstItem.OnEquipButton();
         }
 
         public static void OnBtn_EquipHandler(this ES_RoleQiangHua self, int index)
@@ -80,45 +62,38 @@ namespace ET.Client
 
         public static void OnUpdateQiangHuaUI(this ES_RoleQiangHua self, int subType)
         {
-            self.ES_EquipSetItem.InitUI(subType);
+            ES_RoleQiangHuaItem selectedItem = null;
+            foreach (ES_RoleQiangHuaItem item in self.QiangHuaItemList)
+            {
+                bool isSelected = item.ItemSubType == subType;
+                item.Image_SelectImage.gameObject.SetActive(isSelected);
+                if (isSelected)
+                {
+                    selectedItem = item;
+                }
+            }
+            if (selectedItem == null)
+            {
+                return;
+            }
 
             BagComponentC bagComponent = self.Root().GetComponent<BagComponentC>();
             int qianghuaLevel = bagComponent.QiangHuaLevel[subType];
             int maxLevel = QiangHuaHelper.GetQiangHuaMaxLevel(subType);
-            ItemInfo bagInfo = bagComponent.GetEquipBySubType(ItemLocType.ItemLocEquip, subType);
-            self.ES_EquipSetItem.UpdateData(bagInfo, 0, ItemOperateEnum.None, new List<ItemInfo>());
-            self.E_QiangItemNameText.text = bagInfo != null ? ItemConfigCategory.Instance.Get(bagInfo.ItemID).ItemName : String.Empty;
             self.EG_MaxNodeRectTransform.gameObject.SetActive(qianghuaLevel >= maxLevel - 1);
             self.EG_NextNodeRectTransform.gameObject.SetActive(!self.EG_MaxNodeRectTransform.gameObject.activeSelf);
 
-            ES_RoleQiangHuaItem esRoleQiangHuaItem = null;
-            foreach (ES_RoleQiangHuaItem item in self.QiangHuaItemList)
-            {
-                if (item.ItemSubType == subType)
-                {
-                    esRoleQiangHuaItem = item;
-                    break;
-                }
-            }
-            if (esRoleQiangHuaItem == null)
-            {
-                return;
-            }
-            CommonViewHelper.SetParent(self.E_ImageSelectImage.gameObject, esRoleQiangHuaItem.uiTransform.gameObject);
-            self.E_ImageSelectImage.transform.localPosition = new Vector3(1f, -2f, 0f);
-            string qianghuaName = ItemViewData.EquipWeiZhiToName[subType].Name;
-            self.E_QiangHuaNameText.text = string.Format("{0}共鸣 +{1}", qianghuaName, qianghuaLevel);
+            self.E_EquipIconImage.sprite = selectedItem.Image_EquipIconImage.sprite;
+            self.E_QiangHuaNameText.text = ItemViewData.ItemSubType3Name[subType];
+            self.E_QiangHuaLvText.text = $"+{qianghuaLevel}";
             self.E_QiangHuaLevelText.text = string.Format("{0}级", qianghuaLevel);
+            selectedItem.OnUpdateUI(qianghuaLevel);
 
             EquipQiangHuaConfig equipQiangHuaConfig = QiangHuaHelper.GetQiangHuaConfig(subType, qianghuaLevel);
 
             float fvalue = float.Parse(equipQiangHuaConfig.EquipPropreAdd) * 100f;
             string svalue = fvalue.ToString("0.#####");
             self.E_Attribute1Text.text = string.Format("对应部位提升 {0}%属性", svalue);
-            self.ES_EquipSetItem.E_QiangHuaLvText.text = string.Format("+{0}", qianghuaLevel);
-
-            self.E_QiangHuaNameText.text = ItemViewData.EquipWeiZhiToName[subType].Name;
-            esRoleQiangHuaItem.OnUpateUI(qianghuaLevel);
 
             for (int i = 0; i < self.EG_QiangHuaLevelListRectTransform.transform.childCount; i++)
             {

@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace ET.Client
 {
@@ -10,42 +11,20 @@ namespace ET.Client
         [EntitySystem]
         private static void Awake(this ES_RoleQiangHuaItem self, Transform transform)
         {
-            self.uiTransform = transform;
-            self.E_EquipButton.AddListener(self.OnEquipButton);
+            self.Image_EquipIconImage = UIFindHelper.FindDeepChild<Image>(transform.gameObject, "Image_EquipIcon");
+            self.Image_SelectImage = UIFindHelper.FindDeepChild<Image>(transform.gameObject, "Image_Select");
+            self.Text_QiangHuaText = UIFindHelper.FindDeepChild<Text>(transform.gameObject, "Text_QiangHua");
+            Button equipButton = UIFindHelper.FindDeepChild<Button>(transform.gameObject, "Button_Equip");
+            equipButton.AddListener(self.OnEquipButton);
         }
 
         [EntitySystem]
         private static void Destroy(this ES_RoleQiangHuaItem self)
         {
-            self.DestroyWidget();
-        }
-
-        public static void OnInitUI(this ES_RoleQiangHuaItem self, int index)
-        {
-            self.ItemSubType = index;
-            
-            BagComponentC bagComponent = self.Root().GetComponent<BagComponentC>();
-            ItemInfo bagInfo = bagComponent.GetEquipBySubType(ItemLocType.ItemLocEquip, index);
-            
-            self.E_EquipIconImage.gameObject.SetActive(false);
-            self.E_EquipQualityImage.gameObject.SetActive(false);
-            self.E_QiangText.gameObject.SetActive(true);
-            if (bagInfo != null)
-            {
-                self.E_EquipIconImage.gameObject.SetActive(true);
-                self.E_EquipQualityImage.gameObject.SetActive(true);
-                self.E_QiangText.gameObject.SetActive(false);
-                
-                ItemConfig itemConfig = ItemConfigCategory.Instance.Get(bagInfo.ItemID);
-                string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemIcon, itemConfig.Icon);
-                Sprite sp = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
-                self.E_EquipIconImage.sprite = sp;
-                
-                string qualityiconStr = FunctionUI.ItemQualiytoPath(itemConfig.ItemQuality);
-                string path2 = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemQualityIcon, qualityiconStr);
-                Sprite sp2 = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path2);
-                self.E_EquipQualityImage.sprite = sp2;
-            }
+            self.Image_EquipIconImage = null;
+            self.Image_SelectImage = null;
+            self.Text_QiangHuaText = null;
+            self.ClickHandler = null;
         }
 
         public static void OnEquipButton(this ES_RoleQiangHuaItem self)
@@ -58,9 +37,9 @@ namespace ET.Client
             self.ClickHandler = action;
         }
 
-        public static void OnUpateUI(this ES_RoleQiangHuaItem self, int qianghuaLevel)
+        public static void OnUpdateUI(this ES_RoleQiangHuaItem self, int qianghuaLevel)
         {
-            self.E_QiangHuaText.text = string.Format("共鸣+{0}", qianghuaLevel);
+            self.Text_QiangHuaText.text = $"+{qianghuaLevel}";
         }
     }
 }
