@@ -292,6 +292,9 @@ namespace ET.Client
             }
 
             MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(monsterId);
+            bool isBoss = monsterConfig.MonsterType == MonsterTypeEnum.Boss;
+            self.E_MonsterIcon_1Image.gameObject.SetActive(isBoss);
+            self.E_MonsterIcon_2Image.gameObject.SetActive(!isBoss);
             self.E_Text_NameText.text = monsterConfig.MonsterName;
             self.E_MonsterTypeText.text = GetMonsterTypeName(monsterConfig.MonsterType);
             self.E_BackstoryText.text = !string.IsNullOrEmpty(monsterConfig.Backstory)
@@ -441,6 +444,8 @@ namespace ET.Client
 
         private static void ClearMonsterDetail(this ES_MonsterTuJian self)
         {
+            self.E_MonsterIcon_1Image.gameObject.SetActive(false);
+            self.E_MonsterIcon_2Image.gameObject.SetActive(false);
             self.E_Text_NameText.text = "暂无怪物";
             self.E_MonsterTypeText.text = string.Empty;
             self.E_BackstoryText.text = "暂无背景故事";
