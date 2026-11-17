@@ -11297,7 +11297,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8911491441933053899}
-  - component: {fileID: 7872804835509437484}
   m_Layer: 5
   m_Name: ES_RoleQiangHua
   m_TagString: Untagged
@@ -11329,128 +11328,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &7872804835509437484
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8911491441911290183}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 502d8cafd6a5a0447ab1db9a24cdcb10, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  data:
-  - key: EquipSet
-    gameObject: {fileID: 5368321973080075027}
-  - key: QiangHuaLevelList
-    gameObject: {fileID: 4081556963720850783}
-  - key: QiangHuaEquipItem
-    gameObject: {fileID: 0}
-  - key: ButtonQiangHua
-    gameObject: {fileID: 3087313337754575421}
-  - key: TextAttribute2
-    gameObject: {fileID: 6788645636690222092}
-  - key: TextSuccessRate
-    gameObject: {fileID: 2934720316632483729}
-  - key: TextSuccessAddition
-    gameObject: {fileID: 8951087218230903861}
-  - key: QiangHuaCostNode
-    gameObject: {fileID: 0}
-  - key: TextAttribute1
-    gameObject: {fileID: 8911491441911287241}
-  - key: TextQiangHuaName
-    gameObject: {fileID: 8911491441911328523}
-  - key: MaxNode
-    gameObject: {fileID: 7229819639881606420}
-  - key: NextNode
-    gameObject: {fileID: 1948382482508048352}
-  - key: Text_QiangHuaName
-    gameObject: {fileID: 2713632332524469415}
-  - key: Text_QiangHuaLv
-    gameObject: {fileID: 7371823814983356687}
-  - key: ImageSelect
-    gameObject: {fileID: 0}
---- !u!1 &8911491441911328523
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 8911491441933109075}
-  - component: {fileID: 8911491441933367303}
-  - component: {fileID: 8911491441921019603}
-  m_Layer: 5
-  m_Name: E_QiangHuaName
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!224 &8911491441933109075
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8911491441911328523}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 8698329035926088959}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 403, y: 57}
-  m_SizeDelta: {x: 300, y: 60}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!222 &8911491441933367303
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8911491441911328523}
-  m_CullTransparentMesh: 1
---- !u!114 &8911491441921019603
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8911491441911328523}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_FontData:
-    m_Font: {fileID: 12800000, guid: 4e783a2b04b82dc4d90d0f3a579dc8be, type: 3}
-    m_FontSize: 30
-    m_FontStyle: 0
-    m_BestFit: 0
-    m_MinSize: 3
-    m_MaxSize: 40
-    m_Alignment: 4
-    m_AlignByGeometry: 0
-    m_RichText: 1
-    m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
-    m_LineSpacing: 1
-  m_Text: "\u5934\u90E8\u5F3A\u5316+1"
 --- !u!1 &8912189889274219087
 GameObject:
   m_ObjectHideFlags: 0
@@ -11489,7 +11366,6 @@ RectTransform:
   - {fileID: 6376644251069224765}
   - {fileID: 484552374818237923}
   - {fileID: 8911491441933085173}
-  - {fileID: 8911491441933109075}
   - {fileID: 1531252066606869167}
   m_Father: {fileID: 8911491441933053899}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
