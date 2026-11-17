@@ -1,14 +1,17 @@
 ﻿
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class ES_TaskDetail : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy
+	public  class ES_TaskDetail : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy,IUILogic
 	{
 		public int TaskId { get; set; }
 		public TaskPro TaskPro;
+		public List<RewardItem> RewardItems = new();
+		public Dictionary<int, EntityRef<Scroll_Item_CommonItem>> ScrollItemRewardItems;
 		public ES_TaskType ES_TaskType_1 { get; set; }
 		public ES_TaskType ES_TaskType_2 { get; set; }
 
@@ -49,7 +52,7 @@ namespace ET.Client
      		}
      	}
 
-		public ES_RewardList ES_RewardList
+		public UnityEngine.UI.Image E_RewardListImage
      	{
      		get
      		{
@@ -58,14 +61,28 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			ES_RewardList es = this.m_es_rewardlist;
-     			if( es == null )
-
+     			if( this.m_E_RewardListImage == null )
      			{
-		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_Right/ES_RewardList");
-		    	   this.m_es_rewardlist = this.AddChild<ES_RewardList,Transform>(subTrans);
+		    		this.m_E_RewardListImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_Right/E_RewardList");
      			}
-     			return this.m_es_rewardlist;
+     			return this.m_E_RewardListImage;
+     		}
+     	}
+
+		public UnityEngine.UI.LoopVerticalScrollRect E_RewardListLoopVerticalScrollRect
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_RewardListLoopVerticalScrollRect == null )
+     			{
+		    		this.m_E_RewardListLoopVerticalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.LoopVerticalScrollRect>(this.uiTransform.gameObject,"EG_Right/E_RewardList");
+     			}
+     			return this.m_E_RewardListLoopVerticalScrollRect;
      		}
      	}
 
@@ -255,7 +272,8 @@ namespace ET.Client
 		{
 			this.m_es_tasktype_0 = null;
 			this.m_EG_RightRectTransform = null;
-			this.m_es_rewardlist = null;
+			this.m_E_RewardListImage = null;
+			this.m_E_RewardListLoopVerticalScrollRect = null;
 			this.m_E_ZhuizongButton = null;
 			this.m_E_ZhuizongImage = null;
 			this.m_E_CancelZhuizongButton = null;
@@ -271,7 +289,8 @@ namespace ET.Client
 
 		private EntityRef<ES_TaskType> m_es_tasktype_0 = null;
 		private UnityEngine.RectTransform m_EG_RightRectTransform = null;
-		private EntityRef<ES_RewardList> m_es_rewardlist = null;
+		private UnityEngine.UI.Image m_E_RewardListImage = null;
+		private UnityEngine.UI.LoopVerticalScrollRect m_E_RewardListLoopVerticalScrollRect = null;
 		private UnityEngine.UI.Button m_E_ZhuizongButton = null;
 		private UnityEngine.UI.Image m_E_ZhuizongImage = null;
 		private UnityEngine.UI.Button m_E_CancelZhuizongButton = null;

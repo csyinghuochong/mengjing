@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -45,6 +46,7 @@ namespace ET.Client
     }
 
     [FriendOf(typeof(ES_TaskType))]
+    [FriendOf(typeof(Scroll_Item_CommonItem))]
     [FriendOf(typeof(UserInfoComponentC))]
     [EntitySystemOf(typeof(ES_TaskDetail))]
     [FriendOf(typeof(ES_TaskDetail))]
@@ -72,6 +74,7 @@ namespace ET.Client
 
             self.E_GiveupButton.AddListener(self.OnGiveupButton);
             self.E_GoingButton.AddListener(self.OnGoingButton);
+            self.E_RewardListLoopVerticalScrollRect.AddItemRefreshListener(self.OnRewardItemRefresh);
 
             self.EG_RightRectTransform.gameObject.SetActive(false);
 
@@ -127,6 +130,7 @@ namespace ET.Client
 
         public static void RefreshTaskInfo(this ES_TaskDetail self, TaskPro taskPro)
         {
+            bool taskChanged = self.TaskPro?.taskID != taskPro?.taskID;
             self.TaskPro = taskPro;
 
             if (taskPro == null)
@@ -221,9 +225,12 @@ namespace ET.Client
                 }
             }
 
-            List<RewardItem> rewardItems = ItemHelper.GetRewardItems(rewardStr);
-
-            self.ES_RewardList.Refresh(rewardItems, showNumber: true, showName: true, showNameOutline: false);
+            self.RewardItems = ItemHelper.GetRewardItems(rewardStr)
+                    .OrderByDescending(item => ItemConfigCategory.Instance.Get(item.ItemID).ItemQuality)
+                    .ThenBy(item => ItemConfigCategory.Instance.Get(item.ItemID).ItemType == 3 ? 0 : 1)
+                    .ToList();
+            self.AddUIScrollItems(ref self.ScrollItemRewardItems, self.RewardItems.Count);
+            self.E_RewardListLoopVerticalScrollRect.SetVisible(true, self.RewardItems.Count, reStart: taskChanged);
 
             self.E_GoingButton.transform.GetComponentInChildren<Text>().text = "前往任务";
             if (taskConfig.TargetType == TaskTargetType.GiveItem_10)
@@ -241,6 +248,27 @@ namespace ET.Client
             {
                 self.E_GoingButton.transform.GetComponentInChildren<Text>().text = "完成任务";
             }
+        }
+
+        private static void OnRewardItemRefresh(this ES_TaskDetail self, Transform transform, int index)
+        {
+            if (index < 0 || index >= self.RewardItems.Count)
+            {
+                return;
+            }
+
+            foreach (Scroll_Item_CommonItem item in self.ScrollItemRewardItems.Values)
+            {
+                if (item.uiTransform == transform)
+                {
+                    item.uiTransform = null;
+                }
+            }
+
+            RewardItem reward = self.RewardItems[index];
+            Scroll_Item_CommonItem rewardItem = self.ScrollItemRewardItems[index].BindTrans(transform);
+            rewardItem.Refresh(new ItemInfo { ItemID = reward.ItemID, ItemNum = reward.ItemNum }, ItemOperateEnum.None);
+            rewardItem.HideItemName();
         }
 
         private static void OnGiveupButton(this ES_TaskDetail self)
