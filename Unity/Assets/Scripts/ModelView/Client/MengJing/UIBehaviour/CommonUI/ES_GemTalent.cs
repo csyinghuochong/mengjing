@@ -9,7 +9,7 @@ namespace ET.Client
 	public  class ES_GemTalent : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy 
 	{
 		/// <summary>
-		/// 天赋树上的节点，按 Left 下的 GemTalentItem_xxxxx 静态节点创建
+		/// 天赋树上的节点，按 Left 各组下的 EG_GemTalentItem_xxxxx 静态节点创建
 		/// </summary>
 		public List<EntityRef<ES_GemTalentItem>> GemTalentItems = new();
 		/// <summary>

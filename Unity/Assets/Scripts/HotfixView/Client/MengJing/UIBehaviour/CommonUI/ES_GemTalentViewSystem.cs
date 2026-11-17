@@ -10,11 +10,6 @@ namespace ET.Client
 	public static partial class ES_GemTalentSystem 
 	{
 		/// <summary>
-		/// 预制体里天赋节点的名字前缀，完整名字形如 GemTalentItem_11001
-		/// </summary>
-		private const string GemTalentItemPrefix = "GemTalentItem_";
-
-		/// <summary>
 		/// 配置 AddPropreType 的取值：0=属性效果，1=技能效果
 		/// </summary>
 		private const int AddPropreTypeSkill = 1;
@@ -41,12 +36,29 @@ namespace ET.Client
 				self.AreaLockNameTexts[i] = UIFindHelper.FindDeepChild<Text>(self.AreaLockRectTransforms[i].gameObject, "Name");
 			}
 
-			self.RefreshGemTalentItems();
+			self.AddGemTalentItem(11001, self.EG_GemTalentItem_11001RectTransform);
+			self.AddGemTalentItem(11002, self.EG_GemTalentItem_11002RectTransform);
+			self.AddGemTalentItem(11003, self.EG_GemTalentItem_11003RectTransform);
+			self.AddGemTalentItem(11004, self.EG_GemTalentItem_11004RectTransform);
+			self.AddGemTalentItem(11005, self.EG_GemTalentItem_11005RectTransform);
+
+			self.AddGemTalentItem(12001, self.EG_GemTalentItem_12001RectTransform);
+			self.AddGemTalentItem(12002, self.EG_GemTalentItem_12002RectTransform);
+			self.AddGemTalentItem(12003, self.EG_GemTalentItem_12003RectTransform);
+			self.AddGemTalentItem(12004, self.EG_GemTalentItem_12004RectTransform);
+			self.AddGemTalentItem(12005, self.EG_GemTalentItem_12005RectTransform);
+
+			self.AddGemTalentItem(13001, self.EG_GemTalentItem_13001RectTransform);
+			self.AddGemTalentItem(13002, self.EG_GemTalentItem_13002RectTransform);
+			self.AddGemTalentItem(13003, self.EG_GemTalentItem_13003RectTransform);
+			self.AddGemTalentItem(13004, self.EG_GemTalentItem_13004RectTransform);
+			self.AddGemTalentItem(13005, self.EG_GemTalentItem_13005RectTransform);
 		}
 
 		[EntitySystem]
 		private static void Destroy(this ES_GemTalent self)
 		{
+			self.GemTalentItems.Clear();
 			self.DestroyWidget();
 		}
 
@@ -55,41 +67,17 @@ namespace ET.Client
 			self.uiTransform.gameObject.SetActive(false);
 		}
 
-		/// <summary>
-		/// 天赋节点是美术在预制体里摆好的静态节点，这里按节点名里的id创建实体，只创建一次
-		/// </summary>
-		private static void RefreshGemTalentItems(this ES_GemTalent self)
+		private static void AddGemTalentItem(this ES_GemTalent self, int gemTalentId, Transform itemTransform)
 		{
-			if (self.GemTalentItems.Count > 0)
+			if (itemTransform == null)
 			{
+				Log.Error($"ES_GemTalent 预制体缺少天赋节点：{gemTalentId}");
 				return;
 			}
 
-			Transform leftTrans = self.uiTransform.Find("Left");
-			if (leftTrans == null)
-			{
-				Log.Error("ES_GemTalent 预制体缺少 Left 节点");
-				return;
-			}
-
-			for (int i = 0; i < leftTrans.childCount; i++)
-			{
-				Transform child = leftTrans.GetChild(i);
-				if (!child.name.StartsWith(GemTalentItemPrefix))
-				{
-					continue;
-				}
-
-				if (!int.TryParse(child.name.Substring(GemTalentItemPrefix.Length), out int gemTalentId))
-				{
-					Log.Error($"宝石天赋节点名无法解析出天赋id：{child.name}");
-					continue;
-				}
-
-				ES_GemTalentItem item = self.AddChild<ES_GemTalentItem, Transform>(child);
-				item.Init(gemTalentId);
-				self.GemTalentItems.Add(item);
-			}
+			ES_GemTalentItem item = self.AddChild<ES_GemTalentItem, Transform>(itemTransform);
+			item.Init(gemTalentId);
+			self.GemTalentItems.Add(item);
 		}
 
 		/// <summary>
@@ -140,6 +128,7 @@ namespace ET.Client
 				self.SelectGemTalentId = self.GetDefaultSelectGemTalentId(maxPoint);
 			}
 
+			Sprite selectedIcon = null;
 			for (int i = 0; i < self.GemTalentItems.Count; i++)
 			{
 				ES_GemTalentItem item = self.GemTalentItems[i];
@@ -152,10 +141,15 @@ namespace ET.Client
 
 				bool unlocked = GemTalentHelper.IsAreaUnlocked(gemTalentConfig.Area, maxPoint);
 				bool active = gemTalentComponent.HaveGemTalent(item.GemTalentId);
-				item.OnUpdateUI(unlocked, active, self.SelectGemTalentId == item.GemTalentId);
+				bool selected = self.SelectGemTalentId == item.GemTalentId;
+				item.OnUpdateUI(unlocked, active, selected);
+				if (selected)
+				{
+					selectedIcon = item.E_ImageIconImage.sprite;
+				}
 			}
 
-			self.RefreshGemTalentInfo();
+			self.RefreshGemTalentInfo(selectedIcon);
 		}
 
 		private static int GetDefaultSelectGemTalentId(this ES_GemTalent self, int maxPoint)
@@ -202,8 +196,11 @@ namespace ET.Client
 		/// <summary>
 		/// 刷新右侧天赋详情：已激活隐藏整个激活区(消耗点数和激活按钮)，点数不足时按钮置灰
 		/// </summary>
-		private static void RefreshGemTalentInfo(this ES_GemTalent self)
+		private static void RefreshGemTalentInfo(this ES_GemTalent self, Sprite selectedIcon)
 		{
+			self.E_GemTalentIconImage.sprite = selectedIcon;
+			self.E_GemTalentIconImage.enabled = selectedIcon != null;
+
 			GemTalentConfig gemTalentConfig = GemTalentConfigCategory.Instance.GetOrDefault(self.SelectGemTalentId);
 			if (gemTalentConfig == null)
 			{
@@ -211,8 +208,6 @@ namespace ET.Client
 				return;
 			}
 
-			string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.RoleSkillIcon, gemTalentConfig.Icon.ToString());
-			self.E_GemTalentIconImage.sprite = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
 			self.E_GemTalentNameText.text = gemTalentConfig.Name;
 			self.E_AddPropreTypeText.text = gemTalentConfig.AddPropreType == AddPropreTypeSkill ? SkillEffectName : PropertyEffectName;
 			self.E_GemTalentDescText.text = gemTalentConfig.Des;

@@ -23,7 +23,6 @@ namespace ET
         {
             Id = _buf.ReadInt();
             Name = _buf.ReadString();
-            Icon = _buf.ReadInt();
             Area = _buf.ReadInt();
             Area_Ref = null;
             CostPoint = _buf.ReadInt();
@@ -48,11 +47,6 @@ namespace ET
         /// 名称
         /// </summary>
         public string Name;
-
-        /// <summary>
-        /// Icon
-        /// </summary>
-        public int Icon;
 
         /// <summary>
         /// 区域
@@ -89,7 +83,6 @@ namespace ET
         {
             
             
-            
             Area_Ref = GemTalentAreaConfigCategory.Instance.GetOrDefault(Area);
             
             
@@ -102,7 +95,6 @@ namespace ET
             return "{ "
             + "Id:" + Id + ","
             + "Name:" + Name + ","
-            + "Icon:" + Icon + ","
             + "Area:" + Area + ","
             + "CostPoint:" + CostPoint + ","
             + "AddPropreType:" + AddPropreType + ","
