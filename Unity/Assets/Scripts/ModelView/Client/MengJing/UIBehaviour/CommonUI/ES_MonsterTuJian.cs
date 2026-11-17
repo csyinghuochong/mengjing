@@ -21,6 +21,40 @@ namespace ET.Client
 		public List<ItemInfo> ShowRewardItems { get; set; } = new();
 		public int SelectedChapterId;
 		public int SelectedMonsterId;
+		
+		public UnityEngine.UI.Image E_MonsterIcon_1Image
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_MonsterIcon_1Image == null )
+     			{
+		    		this.m_E_MonsterIcon_1Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Right/E_MonsterIcon_1");
+     			}
+     			return this.m_E_MonsterIcon_1Image;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_MonsterIcon_2Image
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_MonsterIcon_2Image == null )
+     			{
+		    		this.m_E_MonsterIcon_2Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Right/E_MonsterIcon_2");
+     			}
+     			return this.m_E_MonsterIcon_2Image;
+     		}
+     	}
 
 		public UnityEngine.UI.Text E_Text_NameText
      	{
@@ -110,6 +144,40 @@ namespace ET.Client
      		}
      	}
 
+		public UnityEngine.UI.Image E_CommonSkillItemsImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_CommonSkillItemsImage == null )
+     			{
+		    		this.m_E_CommonSkillItemsImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Right/E_CommonSkillItems");
+     			}
+     			return this.m_E_CommonSkillItemsImage;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_RewardListImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_RewardListImage == null )
+     			{
+		    		this.m_E_RewardListImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Right/E_RewardList");
+     			}
+     			return this.m_E_RewardListImage;
+     		}
+     	}
+
 		public UnityEngine.UI.LoopVerticalScrollRect E_RewardListLoopVerticalScrollRect
      	{
      		get
@@ -141,20 +209,28 @@ namespace ET.Client
 
 		public void DestroyWidget()
 		{
+			this.m_E_MonsterIcon_1Image = null;
+			this.m_E_MonsterIcon_2Image = null;
 			this.m_E_Text_NameText = null;
 			this.m_E_MonsterTypeText = null;
 			this.m_E_BackstoryText = null;
 			this.m_es_modelshow = null;
 			this.m_E_CommonSkillItemsScrollRect = null;
+			this.m_E_CommonSkillItemsImage = null;
+			this.m_E_RewardListImage = null;
 			this.m_E_RewardListLoopVerticalScrollRect = null;
 			this.uiTransform = null;
 		}
 
+		private UnityEngine.UI.Image m_E_MonsterIcon_1Image = null;
+		private UnityEngine.UI.Image m_E_MonsterIcon_2Image = null;
 		private UnityEngine.UI.Text m_E_Text_NameText = null;
 		private UnityEngine.UI.Text m_E_MonsterTypeText = null;
 		private UnityEngine.UI.Text m_E_BackstoryText = null;
 		private EntityRef<ES_ModelShow> m_es_modelshow = null;
 		private UnityEngine.UI.ScrollRect m_E_CommonSkillItemsScrollRect = null;
+		private UnityEngine.UI.Image m_E_CommonSkillItemsImage = null;
+		private UnityEngine.UI.Image m_E_RewardListImage = null;
 		private UnityEngine.UI.LoopVerticalScrollRect m_E_RewardListLoopVerticalScrollRect = null;
 		public Transform uiTransform = null;
 	}
