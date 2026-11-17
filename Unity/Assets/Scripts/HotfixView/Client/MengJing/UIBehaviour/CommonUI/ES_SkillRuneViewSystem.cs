@@ -242,7 +242,7 @@ namespace ET.Client
 		}
 
 		/// <summary>
-		/// 检查替换后是否超过同种符文上限，当前孔位不计入。
+		/// 检查替换后是否超过该类符文上限，当前孔位不计入。
 		/// </summary>
 		private static void RefreshEquipButton(this ES_SkillRune self, SkillRuneComponentC skillRuneComponent)
 		{
@@ -251,7 +251,6 @@ namespace ET.Client
 			bool reachedTypeLimit = false;
 			if (selectConfig != null)
 			{
-				int runeTypeId = SkillHelp.GetSkillRuneTypeId(selectConfig);
 				int sameTypeCount = 0;
 				int slotCount = GlobalValueConfigCategory.Instance.SkillRuneSlotCount;
 				for (int i = 0; i < slotCount; i++)
@@ -263,7 +262,7 @@ namespace ET.Client
 
 					long runeId = skillRuneComponent.GetSlotRuneId(self.SkillId, i);
 					SkillRuneConfig runeConfig = skillRuneComponent.GetRuneConfig(skillRuneComponent.GetRune(runeId));
-					if (runeConfig != null && SkillHelp.GetSkillRuneTypeId(runeConfig) == runeTypeId)
+					if (runeConfig != null && runeConfig.Type == selectConfig.Type)
 					{
 						sameTypeCount++;
 						if (sameTypeCount >= SkillHelp.MaxSameTypeSkillRunes)

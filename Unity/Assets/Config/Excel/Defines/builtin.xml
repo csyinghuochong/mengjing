@@ -97,6 +97,12 @@
         <var name="AddBuffTime" value="2" comment="延长Buff持续秒数"/>
     </enum>
 
+    <enum name="SkillRuneType" comment="技能符文类型">
+        <var name="Damage" alias="伤害符文" value="1"/>
+        <var name="Control" alias="控制符文" value="2"/>
+        <var name="Penetration" alias="穿透符文" value="3"/>
+    </enum>
+
     <!-- 技能符文按实际镶嵌的技能生效，多条效果用 @ 分隔。 -->
     <bean name="SkillRuneEffect" comment="一条技能符文效果"/>
 

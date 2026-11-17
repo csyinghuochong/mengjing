@@ -25,6 +25,7 @@ namespace ET
             Name = _buf.ReadString();
             NextId = _buf.ReadInt();
             Level = _buf.ReadInt();
+            Type = (SkillRuneType)_buf.ReadInt();
             Icon = _buf.ReadString();
             Des = _buf.ReadString();
             {int n0 = _buf.ReadSize(); AddPropreList = new System.Collections.Generic.List<SkillRuneEffect>(n0);for(var i0 = 0 ; i0 < n0 ; i0++) { SkillRuneEffect _e0;  _e0 = global::ET.SkillRuneEffect.DeserializeSkillRuneEffect(_buf); AddPropreList.Add(_e0);}}
@@ -58,6 +59,11 @@ namespace ET
         public int Level;
 
         /// <summary>
+        /// 类型
+        /// </summary>
+        public SkillRuneType Type;
+
+        /// <summary>
         /// Icon
         /// </summary>
         public string Icon;
@@ -84,6 +90,7 @@ namespace ET
             
             
             
+            
             foreach (var _e in AddPropreList) { _e?.ResolveRef(); }
         }
 
@@ -94,6 +101,7 @@ namespace ET
             + "Name:" + Name + ","
             + "NextId:" + NextId + ","
             + "Level:" + Level + ","
+            + "Type:" + Type + ","
             + "Icon:" + Icon + ","
             + "Des:" + Des + ","
             + "AddPropreList:" + Luban.StringUtil.CollectionToString(AddPropreList) + ","

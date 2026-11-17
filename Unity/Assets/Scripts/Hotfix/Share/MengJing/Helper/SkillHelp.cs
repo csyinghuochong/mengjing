@@ -197,25 +197,6 @@ namespace ET
 
         public const int MaxSameTypeSkillRunes = 2;
 
-        /// <summary>
-        /// 同一升级链使用最高等级的配置 ID 标识符文种类。
-        /// </summary>
-        public static int GetSkillRuneTypeId(SkillRuneConfig config)
-        {
-            while (config.NextId != 0)
-            {
-                SkillRuneConfig next = SkillRuneConfigCategory.Instance.GetOrDefault(config.NextId);
-                if (next == null || next.Level <= config.Level)
-                {
-                    break;
-                }
-
-                config = next;
-            }
-
-            return config.Id;
-        }
-
         public static int GetSkillLevelByAugmentBaseSkill(List<SkillPro> skillPros, int baseSkillId, params int[] weaponTypes)
         {
             if (skillPros == null || baseSkillId == 0 || weaponTypes == null || weaponTypes.Length == 0)

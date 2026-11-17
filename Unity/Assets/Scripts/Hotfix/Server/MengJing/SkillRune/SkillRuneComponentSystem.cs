@@ -499,7 +499,6 @@ namespace ET.Server
             SkillRuneSlotInfo slotData = self.GetSlotData(baseSkillId);
             if (slotData != null)
             {
-                int runeTypeId = SkillHelp.GetSkillRuneTypeId(selectedRuneConfig);
                 int sameTypeCount = 0;
                 for (int i = 0; i < slotData.RuneIds.Count; i++)
                 {
@@ -509,7 +508,7 @@ namespace ET.Server
                     }
 
                     SkillRuneConfig equippedConfig = self.GetRuneConfig(slotData.RuneIds[i]);
-                    if (equippedConfig != null && SkillHelp.GetSkillRuneTypeId(equippedConfig) == runeTypeId)
+                    if (equippedConfig != null && equippedConfig.Type == selectedRuneConfig.Type)
                     {
                         sameTypeCount++;
                         if (sameTypeCount >= SkillHelp.MaxSameTypeSkillRunes)
