@@ -472,7 +472,8 @@ namespace ET.Server
                 return ErrorCode.ERR_RuneSlotNotExist;
             }
 
-            if (self.GetRune(runeId) == null)
+            SkillRuneConfig selectedRuneConfig = self.GetRuneConfig(runeId);
+            if (selectedRuneConfig == null)
             {
                 return ErrorCode.ERR_RuneNotExist;
             }
@@ -490,13 +491,36 @@ namespace ET.Server
 
             //同一枚符文只能装在一个孔里
             int equippedSkillId = self.GetEquippedSkillId(runeId);
-            if (equippedSkillId != 0
-                && !(equippedSkillId == baseSkillId && self.GetSlotRuneId(baseSkillId, slotIndex) == runeId))
+            if (equippedSkillId != 0 && !(equippedSkillId == baseSkillId && self.GetSlotRuneId(baseSkillId, slotIndex) == runeId))
             {
                 return ErrorCode.ERR_RuneEquipped;
             }
 
-            SkillRuneSlotInfo slotData = self.GetOrCreateSlotData(baseSkillId);
+            SkillRuneSlotInfo slotData = self.GetSlotData(baseSkillId);
+            if (slotData != null)
+            {
+                int runeTypeId = SkillHelp.GetSkillRuneTypeId(selectedRuneConfig);
+                int sameTypeCount = 0;
+                for (int i = 0; i < slotData.RuneIds.Count; i++)
+                {
+                    if (i == slotIndex)
+                    {
+                        continue;
+                    }
+
+                    SkillRuneConfig equippedConfig = self.GetRuneConfig(slotData.RuneIds[i]);
+                    if (equippedConfig != null && SkillHelp.GetSkillRuneTypeId(equippedConfig) == runeTypeId)
+                    {
+                        sameTypeCount++;
+                        if (sameTypeCount >= SkillHelp.MaxSameTypeSkillRunes)
+                        {
+                            return ErrorCode.ERR_SkillRuneTypeLimit;
+                        }
+                    }
+                }
+            }
+
+            slotData ??= self.GetOrCreateSlotData(baseSkillId);
             slotData.RuneIds[slotIndex] = runeId;
             return ErrorCode.ERR_Success;
         }

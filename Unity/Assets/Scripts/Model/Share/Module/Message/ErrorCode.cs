@@ -78,6 +78,7 @@ namespace ET
         public const int ERR_RuneSlotLevel = 200061;                                //玩家等级不足，槽位无法解锁
         public const int ERR_RuneSlotTotalLv = 200062;                              //符文总等级不足，槽位无法解锁
         public const int ERR_RuneSlotEmpty = 200063;                                //槽位没有镶嵌符文
+        public const int ERR_SkillRuneTypeLimit = 200064;                           //技能已达同种符文镶嵌上限
 
         //登录
         public const int ERR_AccountAlreadyRegister = 200101;                       //表示账号已经被注册

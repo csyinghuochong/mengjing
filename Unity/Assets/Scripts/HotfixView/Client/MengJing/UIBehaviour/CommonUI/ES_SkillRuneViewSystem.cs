@@ -242,15 +242,17 @@ namespace ET.Client
 		}
 
 		/// <summary>
-		/// 同一种符文一个技能上只能镶一枚：选中背包里的符文时检查这个技能其它孔位
+		/// 检查替换后是否超过同种符文上限，当前孔位不计入。
 		/// </summary>
 		private static void RefreshEquipButton(this ES_SkillRune self, SkillRuneComponentC skillRuneComponent)
 		{
 			SkillRuneConfig selectConfig = skillRuneComponent.GetRuneConfig(skillRuneComponent.GetRune(self.SelectRuneId));
 
-			bool sameRuneEquipped = false;
+			bool reachedTypeLimit = false;
 			if (selectConfig != null)
 			{
+				int runeTypeId = SkillHelp.GetSkillRuneTypeId(selectConfig);
+				int sameTypeCount = 0;
 				int slotCount = GlobalValueConfigCategory.Instance.SkillRuneSlotCount;
 				for (int i = 0; i < slotCount; i++)
 				{
@@ -261,17 +263,21 @@ namespace ET.Client
 
 					long runeId = skillRuneComponent.GetSlotRuneId(self.SkillId, i);
 					SkillRuneConfig runeConfig = skillRuneComponent.GetRuneConfig(skillRuneComponent.GetRune(runeId));
-					if (runeConfig != null && runeConfig.Id == selectConfig.Id)
+					if (runeConfig != null && SkillHelp.GetSkillRuneTypeId(runeConfig) == runeTypeId)
 					{
-						sameRuneEquipped = true;
-						break;
+						sameTypeCount++;
+						if (sameTypeCount >= SkillHelp.MaxSameTypeSkillRunes)
+						{
+							reachedTypeLimit = true;
+							break;
+						}
 					}
 				}
 			}
 
-			self.ShowTip(sameRuneEquipped);
+			self.ShowTip(reachedTypeLimit);
 
-			bool canEquip = self.SelectRuneId != 0 && !sameRuneEquipped;
+			bool canEquip = selectConfig != null && !reachedTypeLimit;
 			self.E_EquipRuneButton.interactable = canEquip;
 			CommonViewHelper.SetImageGray(self.Root(), self.E_EquipRuneButton.gameObject, !canEquip);
 		}

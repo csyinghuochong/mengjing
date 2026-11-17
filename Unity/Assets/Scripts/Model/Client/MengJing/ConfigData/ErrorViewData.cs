@@ -229,6 +229,7 @@ namespace ET.Client
             { ErrorCode.ERR_RuneSlotLevel, "玩家等级不足，槽位无法解锁" },
             { ErrorCode.ERR_RuneSlotTotalLv, "符文总等级不足，槽位无法解锁" },
             { ErrorCode.ERR_RuneSlotEmpty, "该槽位没有镶嵌符文" },
+            { ErrorCode.ERR_SkillRuneTypeLimit, "同种符文最多镶嵌2枚" },
         };
     }
 }
