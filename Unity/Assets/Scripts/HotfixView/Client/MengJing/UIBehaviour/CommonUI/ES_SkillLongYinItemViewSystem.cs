@@ -72,7 +72,7 @@ namespace ET.Client
             Color activeIconColor = new Color(0.2f, 0.85f, 1f, 0.55f);
             self.ImageIcon.color = active ? activeIconColor : Color.white;
             
-            string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.RoleSkillIcon, longYinConfig.Icon.ToString());
+            string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.RoleSkillIcon, longYinConfig.Icon);
             Sprite sprite = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
             self.ImageIcon.sprite = sprite;
         }

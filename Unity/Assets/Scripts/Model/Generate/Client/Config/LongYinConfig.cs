@@ -28,7 +28,7 @@ namespace ET
             Type = (LongYinType)_buf.ReadInt();
             {int __n0 = _buf.ReadSize(); PreId = new int[__n0];for(var __index0 = 0 ; __index0 < __n0 ; __index0++) { int __e0;__e0 = _buf.ReadInt(); PreId[__index0] = __e0;}}
             {int __n0 = _buf.ReadSize(); NeedKillBoss = new int[__n0];for(var __index0 = 0 ; __index0 < __n0 ; __index0++) { int __e0;__e0 = _buf.ReadInt(); NeedKillBoss[__index0] = __e0;}}
-            Icon = _buf.ReadInt();
+            Icon = _buf.ReadString();
             Des = _buf.ReadString();
             {int n0 = _buf.ReadSize(); AddPropreList = new System.Collections.Generic.List<System.Collections.Generic.List<PropEffect>>(n0);for(var i0 = 0 ; i0 < n0 ; i0++) { System.Collections.Generic.List<PropEffect> _e0;  {int n1 = _buf.ReadSize(); _e0 = new System.Collections.Generic.List<PropEffect>(n1);for(var i1 = 0 ; i1 < n1 ; i1++) { PropEffect _e1;  _e1 = global::ET.PropEffect.DeserializePropEffect(_buf); _e0.Add(_e1);}} AddPropreList.Add(_e0);}}
 
@@ -78,7 +78,7 @@ namespace ET
         /// <summary>
         /// Icon
         /// </summary>
-        public int Icon;
+        public string Icon;
 
         /// <summary>
         /// 描述

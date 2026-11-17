@@ -325,7 +325,7 @@ namespace ET.Client
             Image icon = UIFindHelper.FindDeepChild<Image>(self.uiTransform.gameObject, "EG_LongYinAwaken/Icon");
             if (icon != null)
             {
-                string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.RoleSkillIcon, longYinConfig.Icon.ToString());
+                string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.RoleSkillIcon, longYinConfig.Icon);
                 icon.sprite = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
             }
 
@@ -435,7 +435,7 @@ namespace ET.Client
                 self.E_NeedKillBossText.text = $"需击杀：{needKillBossNames}";
             }
 
-            string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.RoleSkillIcon, longYinConfig.Icon.ToString());
+            string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.RoleSkillIcon, longYinConfig.Icon);
             Sprite sprite = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
             self.E_LongYinIconImage.sprite = sprite;
             CommonViewHelper.SetImageGray(self.Root(), self.E_LongYinIconImage.gameObject, curLevel <= 0);
