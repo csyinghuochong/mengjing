@@ -59,6 +59,261 @@ namespace ET.Client
      		}
      	}
 
+		public UnityEngine.RectTransform EG_GemTalentItem_11001RectTransform
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_EG_GemTalentItem_11001RectTransform == null )
+     			{
+		    		this.m_EG_GemTalentItem_11001RectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"Left/Groud_1/EG_GemTalentItem_11001");
+     			}
+     			return this.m_EG_GemTalentItem_11001RectTransform;
+     		}
+     	}
+
+		public UnityEngine.RectTransform EG_GemTalentItem_11002RectTransform
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_EG_GemTalentItem_11002RectTransform == null )
+     			{
+		    		this.m_EG_GemTalentItem_11002RectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"Left/Groud_1/EG_GemTalentItem_11002");
+     			}
+     			return this.m_EG_GemTalentItem_11002RectTransform;
+     		}
+     	}
+
+		public UnityEngine.RectTransform EG_GemTalentItem_11003RectTransform
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_EG_GemTalentItem_11003RectTransform == null )
+     			{
+		    		this.m_EG_GemTalentItem_11003RectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"Left/Groud_1/EG_GemTalentItem_11003");
+     			}
+     			return this.m_EG_GemTalentItem_11003RectTransform;
+     		}
+     	}
+
+		public UnityEngine.RectTransform EG_GemTalentItem_11004RectTransform
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_EG_GemTalentItem_11004RectTransform == null )
+     			{
+		    		this.m_EG_GemTalentItem_11004RectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"Left/Groud_1/EG_GemTalentItem_11004");
+     			}
+     			return this.m_EG_GemTalentItem_11004RectTransform;
+     		}
+     	}
+
+		public UnityEngine.RectTransform EG_GemTalentItem_11005RectTransform
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_EG_GemTalentItem_11005RectTransform == null )
+     			{
+		    		this.m_EG_GemTalentItem_11005RectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"Left/Groud_1/EG_GemTalentItem_11005");
+     			}
+     			return this.m_EG_GemTalentItem_11005RectTransform;
+     		}
+     	}
+
+		public UnityEngine.RectTransform EG_GemTalentItem_12001RectTransform
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_EG_GemTalentItem_12001RectTransform == null )
+     			{
+		    		this.m_EG_GemTalentItem_12001RectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"Left/Groud_2/EG_GemTalentItem_12001");
+     			}
+     			return this.m_EG_GemTalentItem_12001RectTransform;
+     		}
+     	}
+
+		public UnityEngine.RectTransform EG_GemTalentItem_12002RectTransform
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_EG_GemTalentItem_12002RectTransform == null )
+     			{
+		    		this.m_EG_GemTalentItem_12002RectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"Left/Groud_2/EG_GemTalentItem_12002");
+     			}
+     			return this.m_EG_GemTalentItem_12002RectTransform;
+     		}
+     	}
+
+		public UnityEngine.RectTransform EG_GemTalentItem_12003RectTransform
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_EG_GemTalentItem_12003RectTransform == null )
+     			{
+		    		this.m_EG_GemTalentItem_12003RectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"Left/Groud_2/EG_GemTalentItem_12003");
+     			}
+     			return this.m_EG_GemTalentItem_12003RectTransform;
+     		}
+     	}
+
+		public UnityEngine.RectTransform EG_GemTalentItem_12004RectTransform
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_EG_GemTalentItem_12004RectTransform == null )
+     			{
+		    		this.m_EG_GemTalentItem_12004RectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"Left/Groud_2/EG_GemTalentItem_12004");
+     			}
+     			return this.m_EG_GemTalentItem_12004RectTransform;
+     		}
+     	}
+
+		public UnityEngine.RectTransform EG_GemTalentItem_12005RectTransform
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_EG_GemTalentItem_12005RectTransform == null )
+     			{
+		    		this.m_EG_GemTalentItem_12005RectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"Left/Groud_2/EG_GemTalentItem_12005");
+     			}
+     			return this.m_EG_GemTalentItem_12005RectTransform;
+     		}
+     	}
+
+		public UnityEngine.RectTransform EG_GemTalentItem_13001RectTransform
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_EG_GemTalentItem_13001RectTransform == null )
+     			{
+		    		this.m_EG_GemTalentItem_13001RectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"Left/Groud_3/EG_GemTalentItem_13001");
+     			}
+     			return this.m_EG_GemTalentItem_13001RectTransform;
+     		}
+     	}
+
+		public UnityEngine.RectTransform EG_GemTalentItem_13002RectTransform
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_EG_GemTalentItem_13002RectTransform == null )
+     			{
+		    		this.m_EG_GemTalentItem_13002RectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"Left/Groud_3/EG_GemTalentItem_13002");
+     			}
+     			return this.m_EG_GemTalentItem_13002RectTransform;
+     		}
+     	}
+
+		public UnityEngine.RectTransform EG_GemTalentItem_13003RectTransform
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_EG_GemTalentItem_13003RectTransform == null )
+     			{
+		    		this.m_EG_GemTalentItem_13003RectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"Left/Groud_3/EG_GemTalentItem_13003");
+     			}
+     			return this.m_EG_GemTalentItem_13003RectTransform;
+     		}
+     	}
+
+		public UnityEngine.RectTransform EG_GemTalentItem_13004RectTransform
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_EG_GemTalentItem_13004RectTransform == null )
+     			{
+		    		this.m_EG_GemTalentItem_13004RectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"Left/Groud_3/EG_GemTalentItem_13004");
+     			}
+     			return this.m_EG_GemTalentItem_13004RectTransform;
+     		}
+     	}
+
+		public UnityEngine.RectTransform EG_GemTalentItem_13005RectTransform
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_EG_GemTalentItem_13005RectTransform == null )
+     			{
+		    		this.m_EG_GemTalentItem_13005RectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"Left/Groud_3/EG_GemTalentItem_13005");
+     			}
+     			return this.m_EG_GemTalentItem_13005RectTransform;
+     		}
+     	}
+
 		public UnityEngine.RectTransform EG_AreaLock_1RectTransform
      	{
      		get
@@ -141,6 +396,23 @@ namespace ET.Client
 		    		this.m_E_LeftPointText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Left/E_LeftPoint");
      			}
      			return this.m_E_LeftPointText;
+     		}
+     	}
+
+		public UnityEngine.UI.Text E_HintText
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_HintText == null )
+     			{
+		    		this.m_E_HintText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Left/E_Hint");
+     			}
+     			return this.m_E_HintText;
      		}
      	}
 
@@ -330,11 +602,27 @@ namespace ET.Client
 		{
 			this.m_E_ReturnButton = null;
 			this.m_E_ReturnImage = null;
+			this.m_EG_GemTalentItem_11001RectTransform = null;
+			this.m_EG_GemTalentItem_11002RectTransform = null;
+			this.m_EG_GemTalentItem_11003RectTransform = null;
+			this.m_EG_GemTalentItem_11004RectTransform = null;
+			this.m_EG_GemTalentItem_11005RectTransform = null;
+			this.m_EG_GemTalentItem_12001RectTransform = null;
+			this.m_EG_GemTalentItem_12002RectTransform = null;
+			this.m_EG_GemTalentItem_12003RectTransform = null;
+			this.m_EG_GemTalentItem_12004RectTransform = null;
+			this.m_EG_GemTalentItem_12005RectTransform = null;
+			this.m_EG_GemTalentItem_13001RectTransform = null;
+			this.m_EG_GemTalentItem_13002RectTransform = null;
+			this.m_EG_GemTalentItem_13003RectTransform = null;
+			this.m_EG_GemTalentItem_13004RectTransform = null;
+			this.m_EG_GemTalentItem_13005RectTransform = null;
 			this.m_EG_AreaLock_1RectTransform = null;
 			this.m_EG_AreaLock_2RectTransform = null;
 			this.m_EG_AreaLock_3RectTransform = null;
 			this.m_E_AllPointText = null;
 			this.m_E_LeftPointText = null;
+			this.m_E_HintText = null;
 			this.m_E_GemTalentIconImage = null;
 			this.m_E_GemTalentNameText = null;
 			this.m_E_GemTalentDescText = null;
@@ -350,11 +638,27 @@ namespace ET.Client
 
 		private UnityEngine.UI.Button m_E_ReturnButton = null;
 		private UnityEngine.UI.Image m_E_ReturnImage = null;
+		private UnityEngine.RectTransform m_EG_GemTalentItem_11001RectTransform = null;
+		private UnityEngine.RectTransform m_EG_GemTalentItem_11002RectTransform = null;
+		private UnityEngine.RectTransform m_EG_GemTalentItem_11003RectTransform = null;
+		private UnityEngine.RectTransform m_EG_GemTalentItem_11004RectTransform = null;
+		private UnityEngine.RectTransform m_EG_GemTalentItem_11005RectTransform = null;
+		private UnityEngine.RectTransform m_EG_GemTalentItem_12001RectTransform = null;
+		private UnityEngine.RectTransform m_EG_GemTalentItem_12002RectTransform = null;
+		private UnityEngine.RectTransform m_EG_GemTalentItem_12003RectTransform = null;
+		private UnityEngine.RectTransform m_EG_GemTalentItem_12004RectTransform = null;
+		private UnityEngine.RectTransform m_EG_GemTalentItem_12005RectTransform = null;
+		private UnityEngine.RectTransform m_EG_GemTalentItem_13001RectTransform = null;
+		private UnityEngine.RectTransform m_EG_GemTalentItem_13002RectTransform = null;
+		private UnityEngine.RectTransform m_EG_GemTalentItem_13003RectTransform = null;
+		private UnityEngine.RectTransform m_EG_GemTalentItem_13004RectTransform = null;
+		private UnityEngine.RectTransform m_EG_GemTalentItem_13005RectTransform = null;
 		private UnityEngine.RectTransform m_EG_AreaLock_1RectTransform = null;
 		private UnityEngine.RectTransform m_EG_AreaLock_2RectTransform = null;
 		private UnityEngine.RectTransform m_EG_AreaLock_3RectTransform = null;
 		private UnityEngine.UI.Text m_E_AllPointText = null;
 		private UnityEngine.UI.Text m_E_LeftPointText = null;
+		private UnityEngine.UI.Text m_E_HintText = null;
 		private UnityEngine.UI.Image m_E_GemTalentIconImage = null;
 		private UnityEngine.UI.Text m_E_GemTalentNameText = null;
 		private UnityEngine.UI.Text m_E_GemTalentDescText = null;
