@@ -57,6 +57,23 @@ namespace ET.Client
      		}
      	}
 
+		public UnityEngine.UI.Text E_Program_AffinityText
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Program_AffinityText == null )
+     			{
+		    		this.m_E_Program_AffinityText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"EG_Main/Left/E_Program_Affinity");
+     			}
+     			return this.m_E_Program_AffinityText;
+     		}
+     	}
+
 		public UnityEngine.UI.Image E_LodingValue_FunImage
      	{
      		get
@@ -74,6 +91,23 @@ namespace ET.Client
      		}
      	}
 
+		public UnityEngine.UI.Text E_Program_FunText
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Program_FunText == null )
+     			{
+		    		this.m_E_Program_FunText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"EG_Main/Left/E_Program_Fun");
+     			}
+     			return this.m_E_Program_FunText;
+     		}
+     	}
+
 		public UnityEngine.UI.Image E_LodingValue_ViolenceImage
      	{
      		get
@@ -88,6 +122,23 @@ namespace ET.Client
 		    		this.m_E_LodingValue_ViolenceImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_Main/Left/E_LodingValue_Violence");
      			}
      			return this.m_E_LodingValue_ViolenceImage;
+     		}
+     	}
+
+		public UnityEngine.UI.Text E_Program_ViolenceText
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Program_ViolenceText == null )
+     			{
+		    		this.m_E_Program_ViolenceText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"EG_Main/Left/E_Program_Violence");
+     			}
+     			return this.m_E_Program_ViolenceText;
      		}
      	}
 
@@ -413,8 +464,11 @@ namespace ET.Client
 		{
 			this.m_EG_MainRectTransform = null;
 			this.m_E_LodingValue_AffinityImage = null;
+			this.m_E_Program_AffinityText = null;
 			this.m_E_LodingValue_FunImage = null;
+			this.m_E_Program_FunText = null;
 			this.m_E_LodingValue_ViolenceImage = null;
+			this.m_E_Program_ViolenceText = null;
 			this.m_EG_MainRightRectTransform = null;
 			this.m_E_StoryEndingText = null;
 			this.m_E_StoryEndingRewardListImage = null;
@@ -438,8 +492,11 @@ namespace ET.Client
 
 		private UnityEngine.RectTransform m_EG_MainRectTransform = null;
 		private UnityEngine.UI.Image m_E_LodingValue_AffinityImage = null;
+		private UnityEngine.UI.Text m_E_Program_AffinityText = null;
 		private UnityEngine.UI.Image m_E_LodingValue_FunImage = null;
+		private UnityEngine.UI.Text m_E_Program_FunText = null;
 		private UnityEngine.UI.Image m_E_LodingValue_ViolenceImage = null;
+		private UnityEngine.UI.Text m_E_Program_ViolenceText = null;
 		private UnityEngine.RectTransform m_EG_MainRightRectTransform = null;
 		private UnityEngine.UI.Text m_E_StoryEndingText = null;
 		private UnityEngine.UI.Image m_E_StoryEndingRewardListImage = null;

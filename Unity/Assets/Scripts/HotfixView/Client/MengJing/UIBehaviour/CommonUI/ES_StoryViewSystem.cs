@@ -356,8 +356,11 @@ namespace ET.Client
 
             GlobalValueConfigCategory globalValueConfig = GlobalValueConfigCategory.Instance;
             self.E_LodingValue_AffinityImage.fillAmount = GetValueProgress(affinity, globalValueConfig.AffinityMax);
+            self.E_Program_AffinityText.text = $"{affinity}/{globalValueConfig.AffinityMax}";
             self.E_LodingValue_FunImage.fillAmount = GetValueProgress(fun, globalValueConfig.Fun);
+            self.E_Program_FunText.text = $"{fun}/{globalValueConfig.Fun}";
             self.E_LodingValue_ViolenceImage.fillAmount = GetValueProgress(violence, globalValueConfig.Violence);
+            self.E_Program_ViolenceText.text = $"{violence}/{globalValueConfig.Violence}";
 
             self.RefreshStoryEnding(affinity, fun, violence);
         }
