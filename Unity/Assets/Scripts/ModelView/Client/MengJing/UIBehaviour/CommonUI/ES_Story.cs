@@ -208,7 +208,7 @@ namespace ET.Client
      		}
      	}
 
-		public UnityEngine.UI.ScrollRect E_StoryChapterItemsScrollRect
+		public UnityEngine.UI.ScrollRect E_StoryItemsScrollRect
      	{
      		get
      		{
@@ -217,28 +217,11 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_E_StoryChapterItemsScrollRect == null )
+     			if( this.m_E_StoryItemsScrollRect == null )
      			{
-		    		this.m_E_StoryChapterItemsScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.ScrollRect>(this.uiTransform.gameObject,"EG_Story/Left/E_StoryChapterItems");
+		    		this.m_E_StoryItemsScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.ScrollRect>(this.uiTransform.gameObject,"EG_Story/Left/E_StoryItems");
      			}
-     			return this.m_E_StoryChapterItemsScrollRect;
-     		}
-     	}
-
-		public UnityEngine.UI.Image E_StoryChapterItemsImage
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_StoryChapterItemsImage == null )
-     			{
-		    		this.m_E_StoryChapterItemsImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_Story/Left/E_StoryChapterItems");
-     			}
-     			return this.m_E_StoryChapterItemsImage;
+     			return this.m_E_StoryItemsScrollRect;
      		}
      	}
 
@@ -259,7 +242,7 @@ namespace ET.Client
      		}
      	}
 
-		public UnityEngine.UI.ScrollRect E_StoryItemsScrollRect
+		public UnityEngine.UI.Text E_StoryTitleText
      	{
      		get
      		{
@@ -268,45 +251,11 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_E_StoryItemsScrollRect == null )
+     			if( this.m_E_StoryTitleText == null )
      			{
-		    		this.m_E_StoryItemsScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.ScrollRect>(this.uiTransform.gameObject,"EG_Story/EG_StoryRight/E_StoryItems");
+		    		this.m_E_StoryTitleText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"EG_Story/EG_StoryRight/E_StoryTitle");
      			}
-     			return this.m_E_StoryItemsScrollRect;
-     		}
-     	}
-
-		public UnityEngine.UI.Image E_StoryItemsImage
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_StoryItemsImage == null )
-     			{
-		    		this.m_E_StoryItemsImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_Story/EG_StoryRight/E_StoryItems");
-     			}
-     			return this.m_E_StoryItemsImage;
-     		}
-     	}
-
-		public UnityEngine.UI.Text E_StoryNameText
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_StoryNameText == null )
-     			{
-		    		this.m_E_StoryNameText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"EG_Story/EG_StoryRight/E_StoryName");
-     			}
-     			return this.m_E_StoryNameText;
+     			return this.m_E_StoryTitleText;
      		}
      	}
 
@@ -324,6 +273,23 @@ namespace ET.Client
 		    		this.m_E_StoryDesText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"EG_Story/EG_StoryRight/E_StoryDes");
      			}
      			return this.m_E_StoryDesText;
+     		}
+     	}
+
+		public UnityEngine.UI.Text E_StoryNameText
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_StoryNameText == null )
+     			{
+		    		this.m_E_StoryNameText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"EG_Story/EG_StoryRight/E_StoryName");
+     			}
+     			return this.m_E_StoryNameText;
      		}
      	}
 
@@ -454,13 +420,11 @@ namespace ET.Client
 			this.m_E_StoryEndingReceiveButton = null;
 			this.m_E_StoryEndingReceiveImage = null;
 			this.m_EG_StoryRectTransform = null;
-			this.m_E_StoryChapterItemsScrollRect = null;
-			this.m_E_StoryChapterItemsImage = null;
-			this.m_EG_StoryRightRectTransform = null;
 			this.m_E_StoryItemsScrollRect = null;
-			this.m_E_StoryItemsImage = null;
-			this.m_E_StoryNameText = null;
+			this.m_EG_StoryRightRectTransform = null;
+			this.m_E_StoryTitleText = null;
 			this.m_E_StoryDesText = null;
+			this.m_E_StoryNameText = null;
 			this.m_E_StoryChoiceListScrollRect = null;
 			this.m_E_StoryChoiceListImage = null;
 			this.m_E_StoryReplyText = null;
@@ -481,13 +445,11 @@ namespace ET.Client
 		private UnityEngine.UI.Button m_E_StoryEndingReceiveButton = null;
 		private UnityEngine.UI.Image m_E_StoryEndingReceiveImage = null;
 		private UnityEngine.RectTransform m_EG_StoryRectTransform = null;
-		private UnityEngine.UI.ScrollRect m_E_StoryChapterItemsScrollRect = null;
-		private UnityEngine.UI.Image m_E_StoryChapterItemsImage = null;
-		private UnityEngine.RectTransform m_EG_StoryRightRectTransform = null;
 		private UnityEngine.UI.ScrollRect m_E_StoryItemsScrollRect = null;
-		private UnityEngine.UI.Image m_E_StoryItemsImage = null;
-		private UnityEngine.UI.Text m_E_StoryNameText = null;
+		private UnityEngine.RectTransform m_EG_StoryRightRectTransform = null;
+		private UnityEngine.UI.Text m_E_StoryTitleText = null;
 		private UnityEngine.UI.Text m_E_StoryDesText = null;
+		private UnityEngine.UI.Text m_E_StoryNameText = null;
 		private UnityEngine.UI.ScrollRect m_E_StoryChoiceListScrollRect = null;
 		private UnityEngine.UI.Image m_E_StoryChoiceListImage = null;
 		private UnityEngine.UI.Text m_E_StoryReplyText = null;
