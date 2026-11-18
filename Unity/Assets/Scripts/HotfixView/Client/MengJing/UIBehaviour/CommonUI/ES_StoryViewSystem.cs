@@ -276,9 +276,9 @@ namespace ET.Client
                 Scroll_Item_StoryChoiceItem item = itemRef;
                 StoryChoiceConfig choiceConfig = self.ShowStoryChoiceConfigs[i];
                 item.OnUpdateUI(choiceConfig, self.OnSelectChoice);
-                item.SetSelected(hasChosen ? chosenChoiceId : self.SelectedChoiceId);
+                item.SetChoiceState(hasChosen ? chosenChoiceId : self.SelectedChoiceId, hasChosen);
 
-                // 已选择的剧情只显示被选中的那个选项，并保持其高亮
+                // 确认后只显示已确认的选项。
                 item.uiTransform.gameObject.SetActive(!hasChosen || choiceConfig.Id == chosenChoiceId);
             }
 
@@ -305,7 +305,7 @@ namespace ET.Client
                 Scroll_Item_StoryChoiceItem item = itemRef;
                 if (item?.uiTransform != null)
                 {
-                    item.SetSelected(choiceId);
+                    item.SetChoiceState(choiceId, false);
                 }
             }
         }

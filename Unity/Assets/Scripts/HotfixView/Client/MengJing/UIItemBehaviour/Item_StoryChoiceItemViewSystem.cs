@@ -1,12 +1,17 @@
 ﻿
 using System;
-using System.Collections.Generic;
+using UnityEngine;
+
 namespace ET.Client
 {
 	[FriendOf(typeof(Scroll_Item_StoryChoiceItem))]
+	[FriendOf(typeof(Scroll_Item_CommonItem))]
 	[EntitySystemOf(typeof(Scroll_Item_StoryChoiceItem))]
 	public static partial class Scroll_Item_StoryChoiceItemSystem 
 	{
+		private const string CommonItemPrefabPath = "Assets/Bundles/UI/Item/Item_CommonItem.prefab";
+		private const float MaxRewardScale = 0.7f;
+
 		[EntitySystem]
 		private static void Awake(this Scroll_Item_StoryChoiceItem self )
 		{
@@ -17,6 +22,7 @@ namespace ET.Client
 		{
 			self.StoryChoiceConfig = null;
 			self.ClickHandler = null;
+			self.RewardItems.Clear();
 			self.DestroyWidget();
 		}
 
@@ -27,15 +33,19 @@ namespace ET.Client
 			self.ClickHandler = clickHandler;
 
 			self.E_NameText.text = storyChoiceConfig.ChoiceText;
-			self.E_AddText.text = GetAddText(storyChoiceConfig);
-			self.E_RewardText.text = GetRewardText(storyChoiceConfig.Reward);
-			self.E_HighlightImage.gameObject.SetActive(false);
+			self.E_AddAffinityText.text = GetAddText("亲和", storyChoiceConfig.Affinity);
+			self.E_AddFunText.text = GetAddText("趣味", storyChoiceConfig.Fun);
+			self.E_AddViolenceText.text = GetAddText("暴力", storyChoiceConfig.Violence);
+			self.RefreshRewards(storyChoiceConfig.Reward);
 			self.E_ClickButton.AddListener(self.OnClick);
+			self.E_CompleteButton.enabled = false;
 		}
 
-		public static void SetSelected(this Scroll_Item_StoryChoiceItem self, int choiceId)
+		public static void SetChoiceState(this Scroll_Item_StoryChoiceItem self, int choiceId, bool confirmed)
 		{
-			self.E_HighlightImage.gameObject.SetActive(self.StoryChoiceConfig != null && self.StoryChoiceConfig.Id == choiceId);
+			bool matches = self.StoryChoiceConfig != null && self.StoryChoiceConfig.Id == choiceId;
+			self.E_SelectImage.gameObject.SetActive(matches && !confirmed);
+			self.E_CompleteImage.gameObject.SetActive(matches && confirmed);
 		}
 
 		private static void OnClick(this Scroll_Item_StoryChoiceItem self)
@@ -48,40 +58,65 @@ namespace ET.Client
 			self.ClickHandler?.Invoke(self.StoryChoiceConfig.Id);
 		}
 
-		private static string GetAddText(StoryChoiceConfig config)
+		private static string GetAddText(string label, int value)
 		{
-			List<string> values = new();
-			if (config.Affinity != 0)
-			{
-				values.Add($"亲和 {config.Affinity:+#;-#;0}");
-			}
-			if (config.Fun != 0)
-			{
-				values.Add($"趣味 {config.Fun:+#;-#;0}");
-			}
-			if (config.Violence != 0)
-			{
-				values.Add($"暴力 {config.Violence:+#;-#;0}");
-			}
-
-			return string.Join("  ", values);
+			return $"{label} {value:+0;-0;+0}";
 		}
 
-		private static string GetRewardText(string reward)
+		private static void RefreshRewards(this Scroll_Item_StoryChoiceItem self, string reward)
 		{
-			if (string.IsNullOrEmpty(reward))
+			RectTransform rewardList = self.EG_RewardListRectTransform;
+			GameObject prefab = null;
+			int visibleCount = 0;
+			foreach (string entry in (reward ?? string.Empty).Split('@', StringSplitOptions.RemoveEmptyEntries))
 			{
-				return string.Empty;
+				string[] itemInfo = entry.Split(';');
+				if (itemInfo.Length < 2 || !int.TryParse(itemInfo[0], out int itemId) ||
+					!int.TryParse(itemInfo[1], out int itemNum) || itemNum <= 0 || !ItemConfigCategory.Instance.Contain(itemId))
+				{
+					continue;
+				}
+
+				if (visibleCount == self.RewardItems.Count)
+				{
+					prefab ??= self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(CommonItemPrefabPath);
+					Scroll_Item_CommonItem newItem = self.AddChild<Scroll_Item_CommonItem>();
+					newItem.BindTrans(UnityEngine.Object.Instantiate(prefab, rewardList).transform);
+					newItem.SetCacheMode(true);
+					self.RewardItems.Add(newItem);
+				}
+
+				Scroll_Item_CommonItem item = self.RewardItems[visibleCount++];
+				item.Refresh(new ItemInfo { ItemID = itemId, ItemNum = itemNum }, ItemOperateEnum.None);
+				item.HideItemName();
+				item.uiTransform.gameObject.SetActive(true);
 			}
 
-			string[] rewardInfo = reward.Split(';');
-			if (rewardInfo.Length < 2 || !int.TryParse(rewardInfo[0], out int itemId))
+			for (int i = visibleCount; i < self.RewardItems.Count; i++)
 			{
-				return reward;
+				Scroll_Item_CommonItem item = self.RewardItems[i];
+				item.uiTransform.gameObject.SetActive(false);
 			}
 
-			ItemConfig itemConfig = ItemConfigCategory.Instance.GetOrDefault(itemId);
-			return itemConfig == null ? reward : $"{itemConfig.ItemName} x{rewardInfo[1]}";
+			rewardList.gameObject.SetActive(visibleCount > 0);
+			if (visibleCount == 0)
+			{
+				return;
+			}
+
+			// 预制体的奖励区没有布局组件，按可用空间把道具图标横向居中。
+			Scroll_Item_CommonItem firstItem = self.RewardItems[0];
+			Vector2 itemSize = ((RectTransform)firstItem.uiTransform).rect.size;
+			Rect rewardArea = rewardList.rect;
+			float scale = Mathf.Min(MaxRewardScale, rewardArea.width / (itemSize.x * visibleCount), rewardArea.height / itemSize.y);
+			float spacing = itemSize.x * scale;
+			for (int i = 0; i < visibleCount; i++)
+			{
+				Scroll_Item_CommonItem item = self.RewardItems[i];
+				RectTransform itemRect = (RectTransform)item.uiTransform;
+				itemRect.localScale = Vector3.one * scale;
+				itemRect.anchoredPosition = new Vector2((i - (visibleCount - 1) * 0.5f) * spacing, 0f);
+			}
 		}
 	}
 }

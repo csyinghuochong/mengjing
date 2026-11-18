@@ -1,5 +1,6 @@
 ﻿
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 namespace ET.Client
@@ -10,6 +11,7 @@ namespace ET.Client
 	{
 		public StoryChoiceConfig StoryChoiceConfig;
 		public Action<int> ClickHandler;
+		public readonly List<EntityRef<Scroll_Item_CommonItem>> RewardItems = new();
 		
 		public long DataId {get;set;}
 		private bool isCacheNode = false;
