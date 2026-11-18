@@ -10,7 +10,7 @@ namespace ET.Client
 	{
 		public StoryChoiceConfig StoryChoiceConfig;
 		public Action<int> ClickHandler;
-
+		
 		public long DataId {get;set;}
 		private bool isCacheNode = false;
 		public void SetCacheMode(bool isCache)
@@ -24,7 +24,7 @@ namespace ET.Client
 			return this;
 		}
 
-		public UnityEngine.UI.Image E_HighlightImage
+		public UnityEngine.UI.Image E_SelectImage
      	{
      		get
      		{
@@ -35,39 +35,15 @@ namespace ET.Client
      			}
      			if (this.isCacheNode)
      			{
-     				if( this.m_E_HighlightImage == null )
+     				if( this.m_E_SelectImage == null )
      				{
-		    			this.m_E_HighlightImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Highlight");
+		    			this.m_E_SelectImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Select");
      				}
-     				return this.m_E_HighlightImage;
+     				return this.m_E_SelectImage;
      			}
      			else
      			{
-		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Highlight");
-     			}
-     		}
-     	}
-
-		public UnityEngine.UI.Image E_DianImage
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if (this.isCacheNode)
-     			{
-     				if( this.m_E_DianImage == null )
-     				{
-		    			this.m_E_DianImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Dian");
-     				}
-     				return this.m_E_DianImage;
-     			}
-     			else
-     			{
-		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Dian");
+		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Select");
      			}
      		}
      	}
@@ -96,7 +72,7 @@ namespace ET.Client
      		}
      	}
 
-		public UnityEngine.UI.Text E_AddText
+		public UnityEngine.UI.Text E_AddAffinityText
      	{
      		get
      		{
@@ -107,20 +83,20 @@ namespace ET.Client
      			}
      			if (this.isCacheNode)
      			{
-     				if( this.m_E_AddText == null )
+     				if( this.m_E_AddAffinityText == null )
      				{
-		    			this.m_E_AddText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_Add");
+		    			this.m_E_AddAffinityText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_AddAffinity");
      				}
-     				return this.m_E_AddText;
+     				return this.m_E_AddAffinityText;
      			}
      			else
      			{
-		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_Add");
+		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_AddAffinity");
      			}
      		}
      	}
 
-		public UnityEngine.UI.Text E_RewardText
+		public UnityEngine.UI.Text E_AddFunText
      	{
      		get
      		{
@@ -131,15 +107,111 @@ namespace ET.Client
      			}
      			if (this.isCacheNode)
      			{
-     				if( this.m_E_RewardText == null )
+     				if( this.m_E_AddFunText == null )
      				{
-		    			this.m_E_RewardText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_Reward");
+		    			this.m_E_AddFunText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_AddFun");
      				}
-     				return this.m_E_RewardText;
+     				return this.m_E_AddFunText;
      			}
      			else
      			{
-		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_Reward");
+		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_AddFun");
+     			}
+     		}
+     	}
+
+		public UnityEngine.UI.Text E_AddViolenceText
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if (this.isCacheNode)
+     			{
+     				if( this.m_E_AddViolenceText == null )
+     				{
+		    			this.m_E_AddViolenceText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_AddViolence");
+     				}
+     				return this.m_E_AddViolenceText;
+     			}
+     			else
+     			{
+		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_AddViolence");
+     			}
+     		}
+     	}
+
+		public UnityEngine.RectTransform EG_RewardListRectTransform
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if (this.isCacheNode)
+     			{
+     				if( this.m_EG_RewardListRectTransform == null )
+     				{
+		    			this.m_EG_RewardListRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_RewardList");
+     				}
+     				return this.m_EG_RewardListRectTransform;
+     			}
+     			else
+     			{
+		    		return UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_RewardList");
+     			}
+     		}
+     	}
+
+		public UnityEngine.UI.Button E_CompleteButton
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if (this.isCacheNode)
+     			{
+     				if( this.m_E_CompleteButton == null )
+     				{
+		    			this.m_E_CompleteButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_Complete");
+     				}
+     				return this.m_E_CompleteButton;
+     			}
+     			else
+     			{
+		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_Complete");
+     			}
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_CompleteImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if (this.isCacheNode)
+     			{
+     				if( this.m_E_CompleteImage == null )
+     				{
+		    			this.m_E_CompleteImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Complete");
+     				}
+     				return this.m_E_CompleteImage;
+     			}
+     			else
+     			{
+		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Complete");
      			}
      		}
      	}
@@ -194,22 +266,28 @@ namespace ET.Client
 
 		public void DestroyWidget()
 		{
-			this.m_E_HighlightImage = null;
-			this.m_E_DianImage = null;
+			this.m_E_SelectImage = null;
 			this.m_E_NameText = null;
-			this.m_E_AddText = null;
-			this.m_E_RewardText = null;
+			this.m_E_AddAffinityText = null;
+			this.m_E_AddFunText = null;
+			this.m_E_AddViolenceText = null;
+			this.m_EG_RewardListRectTransform = null;
+			this.m_E_CompleteButton = null;
+			this.m_E_CompleteImage = null;
 			this.m_E_ClickButton = null;
 			this.m_E_ClickImage = null;
 			this.uiTransform = null;
 			this.DataId = 0;
 		}
 
-		private UnityEngine.UI.Image m_E_HighlightImage = null;
-		private UnityEngine.UI.Image m_E_DianImage = null;
+		private UnityEngine.UI.Image m_E_SelectImage = null;
 		private UnityEngine.UI.Text m_E_NameText = null;
-		private UnityEngine.UI.Text m_E_AddText = null;
-		private UnityEngine.UI.Text m_E_RewardText = null;
+		private UnityEngine.UI.Text m_E_AddAffinityText = null;
+		private UnityEngine.UI.Text m_E_AddFunText = null;
+		private UnityEngine.UI.Text m_E_AddViolenceText = null;
+		private UnityEngine.RectTransform m_EG_RewardListRectTransform = null;
+		private UnityEngine.UI.Button m_E_CompleteButton = null;
+		private UnityEngine.UI.Image m_E_CompleteImage = null;
 		private UnityEngine.UI.Button m_E_ClickButton = null;
 		private UnityEngine.UI.Image m_E_ClickImage = null;
 		public Transform uiTransform = null;
