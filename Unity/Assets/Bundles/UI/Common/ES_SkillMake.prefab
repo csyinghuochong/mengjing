@@ -1502,7 +1502,6 @@ GameObject:
   - component: {fileID: 877825649528224697}
   - component: {fileID: 7485196706330049118}
   - component: {fileID: 8872094937513060728}
-  - component: {fileID: 4401491821943020427}
   m_Layer: 5
   m_Name: Image_Icon
   m_TagString: Untagged
@@ -1567,23 +1566,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &4401491821943020427
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 667108996858556549}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 025f064ebede0924499c79f11e4b373d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveTypeEnum: 2
-  moveDistance: 20
-  isLoop: 1
-  MoveToTime: 1
-  ShouldPlay: 1
 --- !u!1 &672237515318066567
 GameObject:
   m_ObjectHideFlags: 0
@@ -3434,7 +3416,7 @@ GameObject:
   - component: {fileID: 5669857134210211002}
   - component: {fileID: 4064172588459337325}
   m_Layer: 5
-  m_Name: RewardList
+  m_Name: E_BagItems
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15444,7 +15426,7 @@ GameObject:
   - component: {fileID: 1776897112647258532}
   - component: {fileID: 5700175739905233814}
   m_Layer: 5
-  m_Name: E_ItemDi (2)
+  m_Name: ItemDi (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -17304,7 +17286,6 @@ GameObject:
   - component: {fileID: 4070228618962958146}
   - component: {fileID: 5436809604258533194}
   - component: {fileID: 5710291701085976270}
-  - component: {fileID: 7482866014001823760}
   m_Layer: 5
   m_Name: Image_Icon
   m_TagString: Untagged
@@ -17369,23 +17350,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &7482866014001823760
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4056360486173127974}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 025f064ebede0924499c79f11e4b373d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveTypeEnum: 2
-  moveDistance: 20
-  isLoop: 1
-  MoveToTime: 1
-  ShouldPlay: 1
 --- !u!1 &4077875478481929443
 GameObject:
   m_ObjectHideFlags: 0
@@ -18231,7 +18195,6 @@ GameObject:
   - component: {fileID: 6908460648748545798}
   - component: {fileID: 8538497332164835088}
   - component: {fileID: 1041087646413077181}
-  - component: {fileID: 5814447118350895976}
   m_Layer: 5
   m_Name: Image_Icon
   m_TagString: Untagged
@@ -18296,23 +18259,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &5814447118350895976
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4519709042575898204}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 025f064ebede0924499c79f11e4b373d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveTypeEnum: 2
-  moveDistance: 20
-  isLoop: 1
-  MoveToTime: 1
-  ShouldPlay: 1
 --- !u!1 &4527641202000620791
 GameObject:
   m_ObjectHideFlags: 0
@@ -30776,7 +30722,6 @@ GameObject:
   - component: {fileID: 4696087463310093757}
   - component: {fileID: 2582919569646195472}
   - component: {fileID: 8632268217680842740}
-  - component: {fileID: 3532782889496756337}
   m_Layer: 5
   m_Name: Image_Icon
   m_TagString: Untagged
@@ -30841,23 +30786,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &3532782889496756337
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8200431692837579059}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 025f064ebede0924499c79f11e4b373d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveTypeEnum: 2
-  moveDistance: 20
-  isLoop: 1
-  MoveToTime: 1
-  ShouldPlay: 1
 --- !u!1 &8287688613279159877
 GameObject:
   m_ObjectHideFlags: 0
@@ -31973,7 +31901,7 @@ GameObject:
   - component: {fileID: 3583338823079004565}
   - component: {fileID: 3452209183651207138}
   m_Layer: 5
-  m_Name: E_ItemDi (1)
+  m_Name: ItemDi (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

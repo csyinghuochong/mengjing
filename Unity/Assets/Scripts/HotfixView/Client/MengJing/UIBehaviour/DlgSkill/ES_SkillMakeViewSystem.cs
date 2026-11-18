@@ -41,14 +41,14 @@ namespace ET.Client
             
             self.E_Btn_MeltButton.AddListener(self.OnBtn_MeltButton);
             self.EG_SelectRectTransform.gameObject.SetActive(true);
-            self.E_Select_1Image.transform.Find("Button_Select").GetComponent<Button>().AddListener(() => { self.RequestMakeSelect(1); });
-            self.E_Select_2Image.transform.Find("Button_Select").GetComponent<Button>().AddListener(() => { self.RequestMakeSelect(2); });
-            self.E_Select_3Image.transform.Find("Button_Select").GetComponent<Button>().AddListener(() => { self.RequestMakeSelect(3); });
-            self.E_Select_6Image.transform.Find("Button_Select").GetComponent<Button>().AddListener(() => { self.RequestMakeSelect(6); });
-            self.InitMakeItem(self.E_Select_1Image.transform.Find("RewardList"), 1);
-            self.InitMakeItem(self.E_Select_2Image.transform.Find("RewardList"), 2);
-            self.InitMakeItem(self.E_Select_3Image.transform.Find("RewardList"), 3);
-            self.InitMakeItem(self.E_Select_6Image.transform.Find("RewardList"), 6);
+            Transform selectInfo = self.EG_SelectInfoRectTransform;
+            self.SelectRewardList = self.AddChild<ES_RewardList, Transform>(selectInfo);
+            self.BindMakeSelectItem(self.EG_SelectItem_1RectTransform, 1);
+            self.BindMakeSelectItem(self.EG_SelectItem_2RectTransform, 2);
+            self.BindMakeSelectItem(self.EG_SelectItem_3RectTransform, 3);
+            self.BindMakeSelectItem(self.EG_SelectItem_6RectTransform, 6);
+            selectInfo.Find("Button_Select").GetComponent<Button>().AddListener(() => { self.RequestMakeSelect(self.SelectedMakeType); });
+            self.RefreshMakeSelectInfo(self.EG_SelectItem_1RectTransform, 1);
             
             self.E_Btn_ResetButton.AddListener(self.OnBtn_ResetButton);
             self.E_Btn_LearnButton.AddListener(self.OnBtn_LearnButton);
@@ -75,19 +75,30 @@ namespace ET.Client
             self.DestroyWidget();
         }
 
-        private static void InitMakeItem(this ES_SkillMake self, Transform transform, int type)
+        private static void BindMakeSelectItem(this ES_SkillMake self, Transform item, int makeType)
         {
+            item.Find("Button_Click").GetComponent<Button>().AddListener(() => { self.RefreshMakeSelectInfo(item, makeType); });
+        }
+
+        private static void RefreshMakeSelectInfo(this ES_SkillMake self, Transform item, int makeType)
+        {
+            self.SelectedMakeType = makeType;
+            self.EG_SelectItem_1RectTransform.Find("Image_Select").gameObject.SetActive(makeType == 1);
+            self.EG_SelectItem_2RectTransform.Find("Image_Select").gameObject.SetActive(makeType == 2);
+            self.EG_SelectItem_3RectTransform.Find("Image_Select").gameObject.SetActive(makeType == 3);
+            self.EG_SelectItem_6RectTransform.Find("Image_Select").gameObject.SetActive(makeType == 6);
+
+            Transform selectInfo = self.EG_SelectInfoRectTransform;
+            selectInfo.Find("Image_Icon").GetComponent<Image>().sprite = item.Find("Image_Icon").GetComponent<Image>().sprite;
+            selectInfo.Find("Text_Name").GetComponent<Text>().text = item.Find("Text_Name").GetComponent<Text>().text;
+
             List<RewardItem> rewardItems = new List<RewardItem>();
-            
-            string[] itemList = ConfigData.SkillMakeConfig[type].Split(';');
-            foreach (string itemId in itemList)
+            foreach (string itemId in ConfigData.SkillMakeConfig[makeType].Split(';'))
             {
-                RewardItem rewardItem = new RewardItem();
-                rewardItem.ItemID = int.Parse(itemId);
-                rewardItems.Add(rewardItem);
+                rewardItems.Add(new RewardItem { ItemID = int.Parse(itemId) });
             }
-            
-            ES_RewardList rewardList = self.AddChild<ES_RewardList,Transform>(transform);
+
+            ES_RewardList rewardList = self.SelectRewardList;
             rewardList.Refresh(rewardItems, showNumber: false, showName: false);
         }
         

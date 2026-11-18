@@ -10,6 +10,8 @@ namespace ET.Client
 		public int MakeId;
 		public long Timer;
 		public int Plan = -1;
+		public int SelectedMakeType;
+		public EntityRef<ES_RewardList> SelectRewardList;
 
 		public List<(int, int)> ShowMakeNeed = new();
 		public Dictionary<int, EntityRef<Scroll_Item_MakeNeedItem>> ScrollItemMakeNeedItems;
@@ -88,74 +90,6 @@ namespace ET.Client
 		    		this.m_E_HuoLiImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_Right/E_HuoLi");
      			}
      			return this.m_E_HuoLiImage;
-     		}
-     	}
-
-		public UnityEngine.UI.Button E_ItemDi (1)Button
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_ItemDi (1)Button == null )
-     			{
-		    		this.m_E_ItemDi (1)Button = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"EG_Right/E_ItemDi (1)");
-     			}
-     			return this.m_E_ItemDi (1)Button;
-     		}
-     	}
-
-		public UnityEngine.UI.Image E_ItemDi (1)Image
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_ItemDi (1)Image == null )
-     			{
-		    		this.m_E_ItemDi (1)Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_Right/E_ItemDi (1)");
-     			}
-     			return this.m_E_ItemDi (1)Image;
-     		}
-     	}
-
-		public UnityEngine.UI.Button E_ItemDi (2)Button
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_ItemDi (2)Button == null )
-     			{
-		    		this.m_E_ItemDi (2)Button = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"EG_Right/E_ItemDi (2)");
-     			}
-     			return this.m_E_ItemDi (2)Button;
-     		}
-     	}
-
-		public UnityEngine.UI.Image E_ItemDi (2)Image
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_ItemDi (2)Image == null )
-     			{
-		    		this.m_E_ItemDi (2)Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_Right/E_ItemDi (2)");
-     			}
-     			return this.m_E_ItemDi (2)Image;
      		}
      	}
 
@@ -892,10 +826,6 @@ namespace ET.Client
 			this.m_E_Lab_HuoLiText = null;
 			this.m_E_Text_CurrentText = null;
 			this.m_E_HuoLiImage = null;
-			this.m_E_ItemDi (1)Button = null;
-			this.m_E_ItemDi (1)Image = null;
-			this.m_E_ItemDi (2)Button = null;
-			this.m_E_ItemDi (2)Image = null;
 			this.m_EG_MakeINeedNodeRectTransform = null;
 			this.m_E_MakeNeedItemsLoopVerticalScrollRect = null;
 			this.m_E_Btn_MakeButton = null;
@@ -944,10 +874,6 @@ namespace ET.Client
 		private UnityEngine.UI.Text m_E_Lab_HuoLiText = null;
 		private UnityEngine.UI.Text m_E_Text_CurrentText = null;
 		private UnityEngine.UI.Image m_E_HuoLiImage = null;
-		private UnityEngine.UI.Button m_E_ItemDi (1)Button = null;
-		private UnityEngine.UI.Image m_E_ItemDi (1)Image = null;
-		private UnityEngine.UI.Button m_E_ItemDi (2)Button = null;
-		private UnityEngine.UI.Image m_E_ItemDi (2)Image = null;
 		private UnityEngine.RectTransform m_EG_MakeINeedNodeRectTransform = null;
 		private UnityEngine.UI.LoopVerticalScrollRect m_E_MakeNeedItemsLoopVerticalScrollRect = null;
 		private UnityEngine.UI.Button m_E_Btn_MakeButton = null;
