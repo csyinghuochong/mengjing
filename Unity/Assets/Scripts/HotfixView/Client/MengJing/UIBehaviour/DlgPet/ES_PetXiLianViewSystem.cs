@@ -165,8 +165,8 @@ namespace ET.Client
             if (bagInfo == null)
             {
                 self.E_Img_ItemIconImage.gameObject.SetActive(false);
-                self.E_Img_ItemQualityImage.gameObject.SetActive(false);
                 self.E_Text_ItemNameText.text = "";
+                self.E_Text_ItemNumText.text = "";
                 return;
             }
 
@@ -175,14 +175,10 @@ namespace ET.Client
             string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemIcon, itemconfig.Icon);
             Sprite sp = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
             self.E_Img_ItemIconImage.sprite = sp;
-            
-            self.E_Img_ItemQualityImage.gameObject.SetActive(true);
-            string qualityiconStr = FunctionUI.ItemQualiytoPath(itemconfig.ItemQuality);
-            string path2 = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemQualityIcon, qualityiconStr);
-            Sprite sp2 = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path2);
 
-            self.E_Img_ItemQualityImage.sprite = sp2;
             self.E_Text_ItemNameText.text = itemconfig.ItemName;
+            self.E_Text_ItemNameText.color = FunctionUI.QualityReturnColor(itemconfig.ItemQuality);
+            self.E_Text_ItemNumText.text = $"数量：{bagInfo.ItemNum}";
         }
 
         public static void OnUpdateUI(this ES_PetXiLian self)
