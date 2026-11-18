@@ -123,23 +123,6 @@ namespace ET.Client
      		}
      	}
 
-		public UnityEngine.UI.Image E_Img_ItemQualityImage
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_Img_ItemQualityImage == null )
-     			{
-		    		this.m_E_Img_ItemQualityImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Right/E_Img_ItemQuality");
-     			}
-     			return this.m_E_Img_ItemQualityImage;
-     		}
-     	}
-
 		public UnityEngine.UI.Image E_Img_ItemIconImage
      	{
      		get
@@ -174,6 +157,23 @@ namespace ET.Client
      		}
      	}
 
+		public UnityEngine.UI.Text E_Text_ItemNumText
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Text_ItemNumText == null )
+     			{
+		    		this.m_E_Text_ItemNumText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Right/E_Text_ItemNum");
+     			}
+     			return this.m_E_Text_ItemNumText;
+     		}
+     	}
+
 		    public Transform UITransform
          {
      	    get
@@ -194,9 +194,9 @@ namespace ET.Client
 			this.m_E_CommonItemsLoopVerticalScrollRect = null;
 			this.m_E_Btn_XiLianButton = null;
 			this.m_E_Btn_XiLianImage = null;
-			this.m_E_Img_ItemQualityImage = null;
 			this.m_E_Img_ItemIconImage = null;
 			this.m_E_Text_ItemNameText = null;
+			this.m_E_Text_ItemNumText = null;
 			this.uiTransform = null;
 		}
 
@@ -206,9 +206,9 @@ namespace ET.Client
 		private UnityEngine.UI.LoopVerticalScrollRect m_E_CommonItemsLoopVerticalScrollRect = null;
 		private UnityEngine.UI.Button m_E_Btn_XiLianButton = null;
 		private UnityEngine.UI.Image m_E_Btn_XiLianImage = null;
-		private UnityEngine.UI.Image m_E_Img_ItemQualityImage = null;
 		private UnityEngine.UI.Image m_E_Img_ItemIconImage = null;
 		private UnityEngine.UI.Text m_E_Text_ItemNameText = null;
+		private UnityEngine.UI.Text m_E_Text_ItemNumText = null;
 		public Transform uiTransform = null;
 	}
 }
