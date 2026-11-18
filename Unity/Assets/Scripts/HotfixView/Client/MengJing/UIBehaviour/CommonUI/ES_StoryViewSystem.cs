@@ -1,18 +1,15 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace ET.Client
 {
     [EntitySystemOf(typeof(ES_Story))]
     [FriendOf(typeof(ES_Story))]
-    [FriendOf(typeof(Scroll_Item_StoryChapterItem))]
-    [FriendOf(typeof(Scroll_Item_StoryItem))]
     [FriendOf(typeof(Scroll_Item_StoryChoiceItem))]
     [FriendOf(typeof(Scroll_Item_CommonItem))]
     public static partial class ES_StorySystem
     {
-        private const string StoryChapterItemPrefabPath = "Assets/Bundles/UI/Item/Item_StoryChapterItem.prefab";
-        private const string StoryItemPrefabPath = "Assets/Bundles/UI/Item/Item_StoryItem.prefab";
         private const string StoryChoiceItemPrefabPath = "Assets/Bundles/UI/Item/Item_StoryChoiceItem.prefab";
 
         [EntitySystem]
@@ -38,12 +35,13 @@ namespace ET.Client
             }
 
             self.AssetList.Clear();
-            self.ShowStoryChapterConfigs.Clear();
             self.ShowStoryConfigs.Clear();
             self.ShowStoryChoiceConfigs.Clear();
             self.ShowEndingRewardItems.Clear();
-            self.ScrollItemStoryChapterItems.Clear();
-            self.ScrollItemStoryItems.Clear();
+            self.ChapterHeaders.Clear();
+            self.StoryItems.Clear();
+            self.ChapterStoryList = null;
+            self.StoryItemTemplate = null;
             self.ScrollItemStoryChoiceItems.Clear();
             self.ScrollItemEndingRewardItems.Clear();
             self.DestroyWidget();
@@ -53,60 +51,59 @@ namespace ET.Client
         {
             self.EG_MainRectTransform.gameObject.SetActive(index == 0);
             self.EG_StoryRectTransform.gameObject.SetActive(index == 1);
+            if (index == 1)
+            {
+                self.RefreshChapterItems();
+                self.RefreshExpandedChapter();
+            }
         }
 
         private static void InitializeStoryView(this ES_Story self)
         {
-            self.ShowStoryChapterConfigs.Clear();
+            RectTransform content = self.E_StoryItemsScrollRect.content;
+            Transform chapterTemplate = content.Find("UIStoryChapterType");
+            self.ChapterStoryList = (RectTransform)content.Find("UIStoryChapterItemListNode");
+            self.StoryItemTemplate = self.ChapterStoryList.Find("UIStoryItem");
+            chapterTemplate.gameObject.SetActive(false);
+            self.StoryItemTemplate.gameObject.SetActive(false);
+            self.ChapterStoryList.gameObject.SetActive(false);
+
+            int firstUnlockedChapterId = 0;
             foreach (StoryChapterConfig config in StoryChapterConfigCategory.Instance.DataList)
             {
-                self.ShowStoryChapterConfigs.Add(config);
-            }
+                Transform header = UnityEngine.Object.Instantiate(chapterTemplate, content);
+                header.name = $"StoryChapter_{config.Id}";
+                header.Find("Text_Name_Active").GetComponent<Text>().text = config.Name;
+                header.Find("Text_Name_NoActive").GetComponent<Text>().text = config.Name;
+                header.Find("Button_Click").GetComponent<Button>().AddListenerWithId(self.OnSelectChapter, config.Id);
+                self.ChapterHeaders.Add(config.Id, header);
+                header.gameObject.SetActive(true);
 
-            self.RefreshChapterItems();
-
-            for (int i = 0; i < self.ShowStoryChapterConfigs.Count; i++)
-            {
-                StoryChapterConfig config = self.ShowStoryChapterConfigs[i];
-                if (!self.IsChapterUnlocked(config))
+                if (firstUnlockedChapterId == 0 && self.IsChapterUnlocked(config))
                 {
-                    continue;
+                    firstUnlockedChapterId = config.Id;
                 }
-
-                self.OnSelectChapter(config.Id);
-                return;
             }
 
-            self.ClearStoryDetails();
+            self.SetExpandedChapter(firstUnlockedChapterId);
         }
 
         private static void RefreshChapterItems(this ES_Story self)
         {
-            Transform content = self.E_StoryChapterItemsScrollRect.content;
-            GameObject prefab = self.LoadItemPrefab(StoryChapterItemPrefabPath);
-
-            for (int i = 0; i < self.ShowStoryChapterConfigs.Count; i++)
+            foreach (StoryChapterConfig config in StoryChapterConfigCategory.Instance.DataList)
             {
-                if (!self.ScrollItemStoryChapterItems.TryGetValue(i, out EntityRef<Scroll_Item_StoryChapterItem> itemRef))
-                {
-                    Scroll_Item_StoryChapterItem newItem = self.AddChild<Scroll_Item_StoryChapterItem>();
-                    GameObject itemGameObject = UnityEngine.Object.Instantiate(prefab, content);
-                    newItem.BindTrans(itemGameObject.transform);
-                    self.ScrollItemStoryChapterItems.Add(i, newItem);
-                    itemRef = newItem;
-                }
+                Transform header = self.ChapterHeaders[config.Id];
+                bool unlocked = self.IsChapterUnlocked(config);
+                bool expanded = unlocked && self.ExpandedChapterId == config.Id;
+                header.Find("Button_Click").GetComponent<Button>().interactable = unlocked;
+                header.Find("Image_Select").gameObject.SetActive(expanded);
+                header.Find("Text_Name_Active").gameObject.SetActive(unlocked);
+                header.Find("Text_Name_NoActive").gameObject.SetActive(!unlocked);
+                header.Find("Image_Lock").gameObject.SetActive(!unlocked);
 
-                Scroll_Item_StoryChapterItem item = itemRef;
-                StoryChapterConfig config = self.ShowStoryChapterConfigs[i];
-                item.OnUpdateUI(config, self.IsChapterUnlocked(config), self.OnSelectChapter);
-                item.SetSelected(self.SelectedChapterId);
-                item.uiTransform.gameObject.SetActive(true);
-            }
-
-            for (int i = self.ShowStoryChapterConfigs.Count; i < self.ScrollItemStoryChapterItems.Count; i++)
-            {
-                Scroll_Item_StoryChapterItem item = self.ScrollItemStoryChapterItems[i];
-                item.uiTransform.gameObject.SetActive(false);
+                Transform arrow = header.Find("Image_ShouSuo");
+                arrow.gameObject.SetActive(unlocked);
+                arrow.localRotation = expanded ? Quaternion.Euler(0f, 0f, -90f) : Quaternion.identity;
             }
         }
 
@@ -118,26 +115,47 @@ namespace ET.Client
                 return;
             }
 
-            self.SelectedChapterId = chapterId;
-            foreach (EntityRef<Scroll_Item_StoryChapterItem> itemRef in self.ScrollItemStoryChapterItems.Values)
+            self.SetExpandedChapter(self.ExpandedChapterId == chapterId ? 0 : chapterId);
+        }
+
+        private static void SetExpandedChapter(this ES_Story self, int chapterId)
+        {
+            self.ExpandedChapterId = chapterId;
+            if (chapterId != 0)
             {
-                Scroll_Item_StoryChapterItem item = itemRef;
-                if (item?.uiTransform != null && item.uiTransform.gameObject.activeSelf)
-                {
-                    item.SetSelected(chapterId);
-                }
+                // 先把共用列表移到末尾，再插到展开的章节标题之后。
+                self.ChapterStoryList.SetAsLastSibling();
+                self.ChapterStoryList.SetSiblingIndex(self.ChapterHeaders[chapterId].GetSiblingIndex() + 1);
             }
 
+            self.RefreshChapterItems();
+            self.RefreshExpandedChapter();
+        }
+
+        private static void RefreshExpandedChapter(this ES_Story self)
+        {
             self.RefreshShowStoryConfigs();
             self.RefreshStoryItems();
-            if (self.ShowStoryConfigs.Count > 0)
-            {
-                self.OnSelectStory(self.ShowStoryConfigs[0].Id);
-            }
-            else
+            bool hasStories = self.ShowStoryConfigs.Count > 0;
+            self.ChapterStoryList.gameObject.SetActive(hasStories);
+            if (!hasStories)
             {
                 self.ClearStoryDetails();
             }
+            else if (!self.ContainsCurrentStory(self.SelectedStoryId))
+            {
+                self.OnSelectStory(self.ShowStoryConfigs[0]);
+            }
+            else
+            {
+                self.RefreshSelectedStoryChoice();
+            }
+
+            if (hasStories)
+            {
+                LayoutRebuilder.ForceRebuildLayoutImmediate(self.ChapterStoryList);
+            }
+            LayoutRebuilder.ForceRebuildLayoutImmediate(self.E_StoryItemsScrollRect.content);
         }
 
         /// <summary>
@@ -146,7 +164,7 @@ namespace ET.Client
         private static void RefreshShowStoryConfigs(this ES_Story self)
         {
             self.ShowStoryConfigs.Clear();
-            StoryChapterConfig chapterConfig = StoryChapterConfigCategory.Instance.GetOrDefault(self.SelectedChapterId);
+            StoryChapterConfig chapterConfig = StoryChapterConfigCategory.Instance.GetOrDefault(self.ExpandedChapterId);
             if (chapterConfig == null || chapterConfig.Stories == null)
             {
                 return;
@@ -164,50 +182,44 @@ namespace ET.Client
 
         private static void RefreshStoryItems(this ES_Story self)
         {
-            Transform content = self.E_StoryItemsScrollRect.content;
-            GameObject prefab = self.LoadItemPrefab(StoryItemPrefabPath);
-
             for (int i = 0; i < self.ShowStoryConfigs.Count; i++)
             {
-                if (!self.ScrollItemStoryItems.TryGetValue(i, out EntityRef<Scroll_Item_StoryItem> itemRef))
+                if (i == self.StoryItems.Count)
                 {
-                    Scroll_Item_StoryItem newItem = self.AddChild<Scroll_Item_StoryItem>();
-                    GameObject itemGameObject = UnityEngine.Object.Instantiate(prefab, content);
-                    newItem.BindTrans(itemGameObject.transform);
-                    self.ScrollItemStoryItems.Add(i, newItem);
-                    itemRef = newItem;
+                    Transform newItem = UnityEngine.Object.Instantiate(self.StoryItemTemplate, self.ChapterStoryList);
+                    newItem.Find("Button_Click").GetComponent<Button>().AddListenerWithId(self.OnStoryItemClicked, i);
+                    self.StoryItems.Add(newItem);
                 }
 
-                Scroll_Item_StoryItem item = itemRef;
+                Transform item = self.StoryItems[i];
                 StoryConfig config = self.ShowStoryConfigs[i];
-                item.OnUpdateUI(config, self.GetStoryInfo(config.Id) != null, self.OnSelectStory);
-                item.SetSelected(self.SelectedStoryId);
-                item.uiTransform.gameObject.SetActive(true);
+                item.Find("Text_Name").GetComponent<Text>().text = config.Name;
+                item.Find("Image_Complete").gameObject.SetActive(self.GetStoryInfo(config.Id) != null);
+                item.Find("Image_Select").gameObject.SetActive(config.Id == self.SelectedStoryId);
+                item.gameObject.SetActive(true);
             }
 
-            for (int i = self.ShowStoryConfigs.Count; i < self.ScrollItemStoryItems.Count; i++)
+            for (int i = self.ShowStoryConfigs.Count; i < self.StoryItems.Count; i++)
             {
-                Scroll_Item_StoryItem item = self.ScrollItemStoryItems[i];
-                item.uiTransform.gameObject.SetActive(false);
+                self.StoryItems[i].gameObject.SetActive(false);
             }
         }
 
-        private static void OnSelectStory(this ES_Story self, int storyId)
+        private static void OnStoryItemClicked(this ES_Story self, int index)
         {
-            StoryConfig storyConfig = StoryConfigCategory.Instance.GetOrDefault(storyId);
-            if (storyConfig == null || !self.ContainsCurrentStory(storyId))
+            if (index < self.ShowStoryConfigs.Count && self.ShowStoryConfigs[index].Id != self.SelectedStoryId)
             {
-                return;
+                self.OnSelectStory(self.ShowStoryConfigs[index]);
             }
+        }
 
-            self.SelectedStoryId = storyId;
-            foreach (EntityRef<Scroll_Item_StoryItem> itemRef in self.ScrollItemStoryItems.Values)
+        private static void OnSelectStory(this ES_Story self, StoryConfig storyConfig)
+        {
+            self.SelectedStoryId = storyConfig.Id;
+            self.SelectedChoiceId = 0;
+            for (int i = 0; i < self.ShowStoryConfigs.Count; i++)
             {
-                Scroll_Item_StoryItem item = itemRef;
-                if (item?.uiTransform != null && item.uiTransform.gameObject.activeSelf)
-                {
-                    item.SetSelected(storyId);
-                }
+                self.StoryItems[i].Find("Image_Select").gameObject.SetActive(self.ShowStoryConfigs[i].Id == storyConfig.Id);
             }
 
             self.E_StoryNameText.text = storyConfig.Name;
@@ -226,8 +238,16 @@ namespace ET.Client
                 }
             }
 
-            StoryInfo storyInfo = self.GetStoryInfo(storyId);
-            self.SelectedChoiceId = storyInfo?.ChoiceId ?? 0;
+            self.RefreshSelectedStoryChoice();
+        }
+
+        private static void RefreshSelectedStoryChoice(this ES_Story self)
+        {
+            StoryInfo storyInfo = self.GetStoryInfo(self.SelectedStoryId);
+            if (storyInfo != null)
+            {
+                self.SelectedChoiceId = storyInfo.ChoiceId;
+            }
             self.RefreshChoiceItems();
             self.RefreshStoryReply(storyInfo);
         }
@@ -235,7 +255,7 @@ namespace ET.Client
         private static void RefreshChoiceItems(this ES_Story self)
         {
             Transform content = self.E_StoryChoiceListScrollRect.content;
-            GameObject prefab = self.LoadItemPrefab(StoryChoiceItemPrefabPath);
+            GameObject prefab = null;
 
             StoryInfo storyInfo = self.SelectedStoryId == 0 ? null : self.GetStoryInfo(self.SelectedStoryId);
             int chosenChoiceId = storyInfo?.ChoiceId ?? 0;
@@ -245,6 +265,7 @@ namespace ET.Client
             {
                 if (!self.ScrollItemStoryChoiceItems.TryGetValue(i, out EntityRef<Scroll_Item_StoryChoiceItem> itemRef))
                 {
+                    prefab ??= self.LoadItemPrefab(StoryChoiceItemPrefabPath);
                     Scroll_Item_StoryChoiceItem newItem = self.AddChild<Scroll_Item_StoryChoiceItem>();
                     GameObject itemGameObject = UnityEngine.Object.Instantiate(prefab, content);
                     newItem.BindTrans(itemGameObject.transform);
@@ -278,6 +299,7 @@ namespace ET.Client
             }
 
             self.SelectedChoiceId = choiceId;
+            self.E_ConfirmChoiceButton.interactable = !self.IsConfirmingChoice;
             foreach (EntityRef<Scroll_Item_StoryChoiceItem> itemRef in self.ScrollItemStoryChoiceItems.Values)
             {
                 Scroll_Item_StoryChoiceItem item = itemRef;
@@ -290,34 +312,41 @@ namespace ET.Client
 
         private static async ETTask OnConfirmChoice(this ES_Story self)
         {
-            if (self.SelectedStoryId == 0 || self.SelectedChoiceId == 0 ||
-                self.GetStoryInfo(self.SelectedStoryId) != null || !self.ContainsCurrentChoice(self.SelectedChoiceId))
+            int storyId = self.SelectedStoryId;
+            int choiceId = self.SelectedChoiceId;
+            if (self.IsConfirmingChoice || storyId == 0 || choiceId == 0 ||
+                self.GetStoryInfo(storyId) != null || !self.ContainsCurrentChoice(choiceId))
             {
                 return;
             }
 
-            int errorCode = await TaskClientNetHelper.StoryChoiceRequest(self.Root(), self.SelectedStoryId, self.SelectedChoiceId);
-            if (self.IsDisposed)
+            self.IsConfirmingChoice = true;
+            self.E_ConfirmChoiceButton.interactable = false;
+            try
             {
-                return;
-            }
-            if (errorCode != ErrorCode.ERR_Success)
-            {
-                HintHelp.ShowErrorHint(self.Root(), errorCode);
-                return;
-            }
+                int errorCode = await TaskClientNetHelper.StoryChoiceRequest(self.Root(), storyId, choiceId);
+                if (self.IsDisposed)
+                {
+                    return;
+                }
+                if (errorCode != ErrorCode.ERR_Success)
+                {
+                    HintHelp.ShowErrorHint(self.Root(), errorCode);
+                    return;
+                }
 
-            StoryInfo storyInfo = self.GetStoryInfo(self.SelectedStoryId);
-            if (storyInfo != null)
-            {
-                self.SelectedChoiceId = storyInfo.ChoiceId;
+                self.RefreshChapterItems();
+                self.RefreshExpandedChapter();
+                self.RefreshStoryValueBars();
             }
-            self.RefreshChapterItems();
-            self.RefreshShowStoryConfigs();
-            self.RefreshStoryItems();
-            self.RefreshChoiceItems();
-            self.RefreshStoryReply(storyInfo);
-            self.RefreshStoryValueBars();
+            finally
+            {
+                if (!self.IsDisposed)
+                {
+                    self.IsConfirmingChoice = false;
+                    self.E_ConfirmChoiceButton.interactable = self.SelectedChoiceId != 0;
+                }
+            }
         }
 
         private static void RefreshStoryValueBars(this ES_Story self)
@@ -485,7 +514,8 @@ namespace ET.Client
 
             self.E_StoryReplyText.text = showReply ? choiceConfig.ReplyText : string.Empty;
             self.E_StoryReplyText.gameObject.SetActive(showReply);
-            self.E_ConfirmChoiceButton.gameObject.SetActive(storyInfo == null);
+            self.E_ConfirmChoiceButton.gameObject.SetActive(storyInfo == null && self.ShowStoryChoiceConfigs.Count > 0);
+            self.E_ConfirmChoiceButton.interactable = !self.IsConfirmingChoice && self.SelectedChoiceId != 0;
         }
 
         /// <summary>
@@ -595,15 +625,11 @@ namespace ET.Client
         {
             self.SelectedStoryId = 0;
             self.SelectedChoiceId = 0;
-            self.ShowStoryConfigs.Clear();
             self.ShowStoryChoiceConfigs.Clear();
             self.E_StoryNameText.text = string.Empty;
             self.E_StoryDesText.text = string.Empty;
-            self.E_StoryReplyText.text = string.Empty;
-            self.E_StoryReplyText.gameObject.SetActive(false);
-            self.E_StoryItemsScrollRect.gameObject.SetActive(true);
-            self.RefreshStoryItems();
             self.RefreshChoiceItems();
+            self.RefreshStoryReply(null);
         }
     }
 }

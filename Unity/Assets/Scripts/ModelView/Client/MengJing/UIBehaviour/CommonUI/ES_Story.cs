@@ -8,18 +8,20 @@ namespace ET.Client
 	[EnableMethod]
 	public  class ES_Story : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy 
 	{
-		public readonly List<StoryChapterConfig> ShowStoryChapterConfigs = new();
 		public readonly List<StoryConfig> ShowStoryConfigs = new();
 		public readonly List<StoryChoiceConfig> ShowStoryChoiceConfigs = new();
-		public readonly Dictionary<int, EntityRef<Scroll_Item_StoryChapterItem>> ScrollItemStoryChapterItems = new();
-		public readonly Dictionary<int, EntityRef<Scroll_Item_StoryItem>> ScrollItemStoryItems = new();
+		public readonly Dictionary<int, Transform> ChapterHeaders = new();
+		public readonly List<Transform> StoryItems = new();
+		public RectTransform ChapterStoryList;
+		public Transform StoryItemTemplate;
 		public Dictionary<int, EntityRef<Scroll_Item_StoryChoiceItem>> ScrollItemStoryChoiceItems = new();
 		public readonly List<EntityRef<ItemInfo>> ShowEndingRewardItems = new();
 		public readonly Dictionary<int, EntityRef<Scroll_Item_CommonItem>> ScrollItemEndingRewardItems = new();
 		public readonly List<string> AssetList = new();
-		public int SelectedChapterId;
+		public int ExpandedChapterId;
 		public int SelectedStoryId;
 		public int SelectedChoiceId;
+		public bool IsConfirmingChoice;
 
 		public UnityEngine.RectTransform EG_MainRectTransform
      	{
