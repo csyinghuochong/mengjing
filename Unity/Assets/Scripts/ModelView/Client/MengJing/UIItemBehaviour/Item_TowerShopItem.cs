@@ -21,6 +21,30 @@ namespace ET.Client
 			return this;
 		}
 
+		public UnityEngine.UI.Image E_BGImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if (this.isCacheNode)
+     			{
+     				if( this.m_E_BGImage == null )
+     				{
+		    			this.m_E_BGImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_BG");
+     				}
+     				return this.m_E_BGImage;
+     			}
+     			else
+     			{
+		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_BG");
+     			}
+     		}
+     	}
+
 		public UnityEngine.UI.Image E_Image_goldImage
      	{
      		get
@@ -163,6 +187,7 @@ namespace ET.Client
 
 		public void DestroyWidget()
 		{
+			this.m_E_BGImage = null;
 			this.m_E_Image_goldImage = null;
 			this.m_es_commonitem = null;
 			this.m_E_ButtonBuyButton = null;
@@ -172,6 +197,7 @@ namespace ET.Client
 			this.DataId = 0;
 		}
 
+		private UnityEngine.UI.Image m_E_BGImage = null;
 		private UnityEngine.UI.Image m_E_Image_goldImage = null;
 		private EntityRef<ES_CommonItem> m_es_commonitem = null;
 		private UnityEngine.UI.Button m_E_ButtonBuyButton = null;
