@@ -103,7 +103,7 @@ namespace ET.Client
 
                 Transform arrow = header.Find("Image_ShouSuo");
                 arrow.gameObject.SetActive(unlocked);
-                arrow.localRotation = expanded ? Quaternion.Euler(0f, 0f, -90f) : Quaternion.identity;
+                arrow.localScale = expanded ? new Vector3(1, 1, 1) : new Vector3(-1, 1, 1);
             }
         }
 
