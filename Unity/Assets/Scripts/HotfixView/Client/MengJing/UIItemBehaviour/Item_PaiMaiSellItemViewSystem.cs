@@ -39,7 +39,9 @@ namespace ET.Client
             DateTime dateTime = TimeInfo.Instance.ToDateTime(serverTime);
             self.E_TextTimeText.text = TimeHelper.ShowTimeDifferenceStr(dateTime, TimeInfo.Instance.ToDateTime(self.PaiMaiItemInfo.SellTime));
 
-            self.E_TextNameText.text = ItemConfigCategory.Instance.Get(paiMaiItemInfo.BagInfo.ItemID).ItemName;
+            ItemConfig itemConfig = ItemConfigCategory.Instance.Get(paiMaiItemInfo.BagInfo.ItemID);
+            self.E_TextNameText.text = itemConfig.ItemName;
+            self.E_TextNameText.color = FunctionUI.QualityReturnColor(itemConfig.ItemQuality);
 
             ItemInfo itemInfo = new ItemInfo();
             itemInfo.FromMessage(self.PaiMaiItemInfo.BagInfo);
