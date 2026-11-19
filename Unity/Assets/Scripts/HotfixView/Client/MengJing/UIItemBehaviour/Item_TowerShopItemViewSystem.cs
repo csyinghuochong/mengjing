@@ -48,11 +48,18 @@ namespace ET.Client
             self.ES_CommonItem.E_ItemNumText.gameObject.SetActive(false);
             self.ES_CommonItem.E_ItemQualityImage.gameObject.SetActive(false);
             self.ES_CommonItem.E_ItemNameText.gameObject.SetActive(true);
-            self.ES_CommonItem.E_ItemNameText.GetComponent<Outline>().effectColor = FunctionUI.QualityReturnColor(ItemConfigCategory.Instance.Get(storeSellConfig.SellItemID).ItemQuality);
+            int itemQuality = ItemConfigCategory.Instance.Get(storeSellConfig.SellItemID).ItemQuality;
+            self.ES_CommonItem.E_ItemNameText.GetComponent<Outline>().effectColor = FunctionUI.QualityReturnColor(itemQuality);
+
+            ResourcesLoaderComponent resourcesLoader = self.Root().GetComponent<ResourcesLoaderComponent>();
+            self.E_BGImage.overrideSprite = itemQuality >= 2 && itemQuality <= 5
+                    ? resourcesLoader.LoadAssetSync<Sprite>(ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemQualityIcon,
+                        FunctionUI.BigItemQualiytoPath(itemQuality)))
+                    : null;
 
             ItemConfig itemConfig = ItemConfigCategory.Instance.Get(storeSellConfig.SellType);
             string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemIcon, itemConfig.Icon);
-            Sprite sp = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
+            Sprite sp = resourcesLoader.LoadAssetSync<Sprite>(path);
 
             self.E_Image_goldImage.sprite = sp;
         }
