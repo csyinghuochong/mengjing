@@ -17,7 +17,7 @@ namespace ET.Client
             self.TypeButtonComponents.Clear();
         }
 
-        public static async ETTask OnInitUI(this UITypeViewComponent self, int page = 0, int subPage = 0)
+        public static async ETTask OnInitUI(this UITypeViewComponent self, int page = 0, int subPage = 0, Action<GameObject, int> initializeTypeButton = null)
         {
             long instanceid = self.InstanceId;
             GameObject bundleObj = await self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetAsync<GameObject>(self.TypeButtonAsset);
@@ -28,12 +28,14 @@ namespace ET.Client
 
             for (int i = 0; i < self.TypeButtonInfos.Count; i++)
             {
+                TypeButtonInfo typeButtonInfo = self.TypeButtonInfos[i];
                 GameObject taskTypeItem = UnityEngine.Object.Instantiate(bundleObj);
+                initializeTypeButton?.Invoke(taskTypeItem, typeButtonInfo.TypeId);
                 CommonViewHelper.SetParent(taskTypeItem, self.GameObject);
 
                 UITypeButtonComponent uIItemComponent = self.AddChild<UITypeButtonComponent, GameObject>(taskTypeItem);
                 uIItemComponent.TypeItemAsset = self.TypeButtonItemAsset;
-                uIItemComponent.OnUpdateData(self.TypeButtonInfos[i], subPage);
+                uIItemComponent.OnUpdateData(typeButtonInfo, subPage);
                 uIItemComponent.SetClickTypeHandler((int typeid) => { self.OnClickType(typeid); });
                 uIItemComponent.SetClickTypeItemHandler((int typeid, int chapterId) => { self.OnClickTypeItem(typeid, chapterId); });
 

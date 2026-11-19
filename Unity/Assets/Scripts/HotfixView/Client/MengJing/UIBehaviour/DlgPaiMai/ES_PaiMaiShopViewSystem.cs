@@ -54,7 +54,27 @@ namespace ET.Client
             self.UITypeViewComponent.ClickTypeItemHandler = (itemType, itemSubType) => { self.OnClickTypeItem(itemType, itemSubType); };
 
             self.UITypeViewComponent.TypeButtonInfos = self.InitTypeButtonInfos();
-            self.UITypeViewComponent.OnInitUI().Coroutine();
+            self.UITypeViewComponent.OnInitUI(initializeTypeButton: SetTypeIcon).Coroutine();
+        }
+
+        private static void SetTypeIcon(GameObject typeButton, int typeId)
+        {
+            int iconIndex = (PaiMaiTypeEnum)typeId switch
+            {
+                PaiMaiTypeEnum.CaiLiao => 0,
+                PaiMaiTypeEnum.CostItem => 1,
+                PaiMaiTypeEnum.PetItem => 2,
+                _ => -1,
+            };
+
+            for (int i = 0; i < 3; i++)
+            {
+                Transform icon = typeButton.transform.Find($"Image_TypeIcon_{i}");
+                if (icon != null)
+                {
+                    icon.gameObject.SetActive(i == iconIndex);
+                }
+            }
         }
 
         public static List<TypeButtonInfo> InitTypeButtonInfos(this ES_PaiMaiShop self)
