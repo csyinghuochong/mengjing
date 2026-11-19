@@ -41,6 +41,40 @@ namespace ET.Client
      		}
      	}
 
+		public UnityEngine.UI.Button E_Button_CloseButton
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Button_CloseButton == null )
+     			{
+		    		this.m_E_Button_CloseButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Center/E_Button_Close");
+     			}
+     			return this.m_E_Button_CloseButton;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_Button_CloseImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Button_CloseImage == null )
+     			{
+		    		this.m_E_Button_CloseImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Center/E_Button_Close");
+     			}
+     			return this.m_E_Button_CloseImage;
+     		}
+     	}
+
 		public ES_RewardList ES_RewardList_1
      	{
      		get
@@ -292,6 +326,8 @@ namespace ET.Client
 		{
 			this.m_E_ImageButtonButton = null;
 			this.m_E_ImageButtonImage = null;
+			this.m_E_Button_CloseButton = null;
+			this.m_E_Button_CloseImage = null;
 			this.m_es_rewardlist_1 = null;
 			this.m_es_rewardlist_2 = null;
 			this.m_es_rewardlist_3 = null;
@@ -311,6 +347,8 @@ namespace ET.Client
 
 		private UnityEngine.UI.Button m_E_ImageButtonButton = null;
 		private UnityEngine.UI.Image m_E_ImageButtonImage = null;
+		private UnityEngine.UI.Button m_E_Button_CloseButton = null;
+		private UnityEngine.UI.Image m_E_Button_CloseImage = null;
 		private EntityRef<ES_RewardList> m_es_rewardlist_1 = null;
 		private EntityRef<ES_RewardList> m_es_rewardlist_2 = null;
 		private EntityRef<ES_RewardList> m_es_rewardlist_3 = null;

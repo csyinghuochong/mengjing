@@ -8,8 +8,8 @@ namespace ET.Client
             self.View.E_Button_Get_1Button.AddListener(() => { self.RequestGetFirstWinSelf(1).Coroutine(); });
             self.View.E_Button_Get_2Button.AddListener(() => { self.RequestGetFirstWinSelf(2).Coroutine(); });
             self.View.E_Button_Get_3Button.AddListener(() => { self.RequestGetFirstWinSelf(3).Coroutine(); });
-            self.View.E_ImageButtonButton.AddListener(
-                () => { self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_FirstWinReward); });
+            self.View.E_ImageButtonButton.AddListener(() => { self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_FirstWinReward); });
+            self.View.E_Button_CloseButton.AddListener(() => { self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_FirstWinReward); });
             
             self.View.E_Button_Get_3Button.gameObject.SetActive(false);
             self.View.E_Button_Get_2Button.gameObject.SetActive(false);
