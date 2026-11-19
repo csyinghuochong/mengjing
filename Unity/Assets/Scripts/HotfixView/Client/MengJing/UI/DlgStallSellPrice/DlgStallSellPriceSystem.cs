@@ -159,7 +159,7 @@ namespace ET.Client
 		     self.SellNum = bagInfo.ItemNum;
 		     
 		     self.View.E_Lab_TuijianText.text = self.oldPrice.ToString();
-		     self.View.E_Text_PriceText.text = self.SellNum.ToString();
+		     self.View.E_Text_NumText.text = self.SellNum.ToString();
 		     
 		     self.View.ES_CommonItem.UpdateItem(bagInfo, ItemOperateEnum.None);
 		     self.View.ES_CommonItem.HideItemName();
@@ -209,7 +209,7 @@ namespace ET.Client
 				self.SellNum = self.BagInfo.ItemNum;
 			}
 
-			self.View.E_Text_PriceText.text = self.SellNum.ToString();
+			self.View.E_Text_NumText.text = self.SellNum.ToString();
 			//调整价格
 			//self.PriceInputField.GetComponent<InputField>().text = self.nowPrice.ToString();
 			self.View.E_Lab_SellSumProText.text = ((int)(self.oldPrice * (1f + 0.1f * self.priceProNum) * self.SellNum)).ToString();
@@ -223,7 +223,7 @@ namespace ET.Client
 				self.SellNum = 1;
 			}
 
-			self.View.E_Text_PriceText.text= self.SellNum.ToString();
+			self.View.E_Text_NumText.text= self.SellNum.ToString();
 			//调整价格
 			//self.PriceInputField.GetComponent<InputField>().text = self.nowPrice.ToString();
 			self.View.E_Lab_SellSumProText.text = ((int)(self.oldPrice * (1f + 0.1f * self.priceProNum) * self.SellNum)).ToString();

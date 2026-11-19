@@ -129,74 +129,6 @@ namespace ET.Client
      		}
      	}
 
-		public UnityEngine.UI.Button E_Btn_AddButton
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_Btn_AddButton == null )
-     			{
-		    		this.m_E_Btn_AddButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Right/E_Btn_Add");
-     			}
-     			return this.m_E_Btn_AddButton;
-     		}
-     	}
-
-		public UnityEngine.UI.Image E_Btn_AddImage
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_Btn_AddImage == null )
-     			{
-		    		this.m_E_Btn_AddImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Right/E_Btn_Add");
-     			}
-     			return this.m_E_Btn_AddImage;
-     		}
-     	}
-
-		public UnityEngine.UI.Button E_Btn_CostButton
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_Btn_CostButton == null )
-     			{
-		    		this.m_E_Btn_CostButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Right/E_Btn_Cost");
-     			}
-     			return this.m_E_Btn_CostButton;
-     		}
-     	}
-
-		public UnityEngine.UI.Image E_Btn_CostImage
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_Btn_CostImage == null )
-     			{
-		    		this.m_E_Btn_CostImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Right/E_Btn_Cost");
-     			}
-     			return this.m_E_Btn_CostImage;
-     		}
-     	}
-
 		public UnityEngine.UI.Button E_Btn_AddNumButton
      	{
      		get
@@ -333,6 +265,91 @@ namespace ET.Client
      		}
      	}
 
+		public UnityEngine.UI.Text E_Text_NumText
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Text_NumText == null )
+     			{
+		    		this.m_E_Text_NumText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Right/E_Text_Num");
+     			}
+     			return this.m_E_Text_NumText;
+     		}
+     	}
+
+		public UnityEngine.UI.Button E_Btn_AddButton
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Btn_AddButton == null )
+     			{
+		    		this.m_E_Btn_AddButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Right/E_Btn_Add");
+     			}
+     			return this.m_E_Btn_AddButton;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_Btn_AddImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Btn_AddImage == null )
+     			{
+		    		this.m_E_Btn_AddImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Right/E_Btn_Add");
+     			}
+     			return this.m_E_Btn_AddImage;
+     		}
+     	}
+
+		public UnityEngine.UI.Button E_Btn_CostButton
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Btn_CostButton == null )
+     			{
+		    		this.m_E_Btn_CostButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Right/E_Btn_Cost");
+     			}
+     			return this.m_E_Btn_CostButton;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_Btn_CostImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Btn_CostImage == null )
+     			{
+		    		this.m_E_Btn_CostImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Right/E_Btn_Cost");
+     			}
+     			return this.m_E_Btn_CostImage;
+     		}
+     	}
+
 		public UnityEngine.UI.Text E_Text_Price11Text
      	{
      		get
@@ -367,23 +384,6 @@ namespace ET.Client
      		}
      	}
 
-		public UnityEngine.UI.Text E_Text_PriceText
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_Text_PriceText == null )
-     			{
-		    		this.m_E_Text_PriceText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Right/E_Text_Price");
-     			}
-     			return this.m_E_Text_PriceText;
-     		}
-     	}
-
 		public void DestroyWidget()
 		{
 			this.m_E_ImageButtonButton = null;
@@ -393,10 +393,6 @@ namespace ET.Client
 			this.m_E_Lab_TuijianText = null;
 			this.m_E_Btn_ChuShouButton = null;
 			this.m_E_Btn_ChuShouImage = null;
-			this.m_E_Btn_AddButton = null;
-			this.m_E_Btn_AddImage = null;
-			this.m_E_Btn_CostButton = null;
-			this.m_E_Btn_CostImage = null;
 			this.m_E_Btn_AddNumButton = null;
 			this.m_E_Btn_AddNumImage = null;
 			this.m_E_Btn_AddNumEventTrigger = null;
@@ -405,9 +401,13 @@ namespace ET.Client
 			this.m_E_Btn_CostNumEventTrigger = null;
 			this.m_E_PriceInputFieldInputField = null;
 			this.m_E_PriceInputFieldImage = null;
+			this.m_E_Text_NumText = null;
+			this.m_E_Btn_AddButton = null;
+			this.m_E_Btn_AddImage = null;
+			this.m_E_Btn_CostButton = null;
+			this.m_E_Btn_CostImage = null;
 			this.m_E_Text_Price11Text = null;
 			this.m_E_Lab_SellSumProText = null;
-			this.m_E_Text_PriceText = null;
 			this.uiTransform = null;
 		}
 
@@ -418,10 +418,6 @@ namespace ET.Client
 		private UnityEngine.UI.Text m_E_Lab_TuijianText = null;
 		private UnityEngine.UI.Button m_E_Btn_ChuShouButton = null;
 		private UnityEngine.UI.Image m_E_Btn_ChuShouImage = null;
-		private UnityEngine.UI.Button m_E_Btn_AddButton = null;
-		private UnityEngine.UI.Image m_E_Btn_AddImage = null;
-		private UnityEngine.UI.Button m_E_Btn_CostButton = null;
-		private UnityEngine.UI.Image m_E_Btn_CostImage = null;
 		private UnityEngine.UI.Button m_E_Btn_AddNumButton = null;
 		private UnityEngine.UI.Image m_E_Btn_AddNumImage = null;
 		private UnityEngine.EventSystems.EventTrigger m_E_Btn_AddNumEventTrigger = null;
@@ -430,9 +426,13 @@ namespace ET.Client
 		private UnityEngine.EventSystems.EventTrigger m_E_Btn_CostNumEventTrigger = null;
 		private UnityEngine.UI.InputField m_E_PriceInputFieldInputField = null;
 		private UnityEngine.UI.Image m_E_PriceInputFieldImage = null;
+		private UnityEngine.UI.Text m_E_Text_NumText = null;
+		private UnityEngine.UI.Button m_E_Btn_AddButton = null;
+		private UnityEngine.UI.Image m_E_Btn_AddImage = null;
+		private UnityEngine.UI.Button m_E_Btn_CostButton = null;
+		private UnityEngine.UI.Image m_E_Btn_CostImage = null;
 		private UnityEngine.UI.Text m_E_Text_Price11Text = null;
 		private UnityEngine.UI.Text m_E_Lab_SellSumProText = null;
-		private UnityEngine.UI.Text m_E_Text_PriceText = null;
 		public Transform uiTransform = null;
 	}
 }

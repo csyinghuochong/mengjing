@@ -877,7 +877,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3449621505677508150}
-  - component: {fileID: 5005980823002171796}
   - component: {fileID: 8339602905617407497}
   - component: {fileID: 6519319925553975374}
   - component: {fileID: 533976971892414195}
@@ -911,45 +910,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &5005980823002171796
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3225910114860896296}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 502d8cafd6a5a0447ab1db9a24cdcb10, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  data:
-  - key: Btn_ChuShou
-    gameObject: {fileID: 0}
-  - key: ImageButton
-    gameObject: {fileID: 0}
-  - key: ItemShowSet
-    gameObject: {fileID: 0}
-  - key: Lab_Name
-    gameObject: {fileID: 0}
-  - key: Btn_Add
-    gameObject: {fileID: 0}
-  - key: Btn_Cost
-    gameObject: {fileID: 0}
-  - key: Text_Price
-    gameObject: {fileID: 0}
-  - key: Lab_Tuijian
-    gameObject: {fileID: 0}
-  - key: Lab_SellNumber
-    gameObject: {fileID: 0}
-  - key: Btn_AddNum
-    gameObject: {fileID: 0}
-  - key: Btn_CostNum
-    gameObject: {fileID: 0}
-  - key: PriceInputField
-    gameObject: {fileID: 0}
-  - key: Lab_SellSumPro
-    gameObject: {fileID: 0}
 --- !u!223 &8339602905617407497
 Canvas:
   m_ObjectHideFlags: 0
