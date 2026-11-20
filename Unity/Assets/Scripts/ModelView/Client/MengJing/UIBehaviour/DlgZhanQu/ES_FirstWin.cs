@@ -101,7 +101,7 @@ namespace ET.Client
      		}
      	}
 
-		public ES_RewardList ES_RewardList
+		public UnityEngine.UI.LoopVerticalScrollRect E_RewardListLoopVerticalScrollRect
      	{
      		get
      		{
@@ -110,14 +110,11 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			ES_RewardList es = this.m_es_rewardlist;
-     			if( es == null )
-
+     			if( this.m_E_RewardListLoopVerticalScrollRect == null )
      			{
-		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"Right/ES_RewardList");
-		    	   this.m_es_rewardlist = this.AddChild<ES_RewardList,Transform>(subTrans);
+		    		this.m_E_RewardListLoopVerticalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.LoopVerticalScrollRect>(this.uiTransform.gameObject,"Right/E_RewardList");
      			}
-     			return this.m_es_rewardlist;
+     			return this.m_E_RewardListLoopVerticalScrollRect;
      		}
      	}
 
@@ -449,7 +446,7 @@ namespace ET.Client
 			this.m_E_Text_JiSha_2Text = null;
 			this.m_E_Text_JiSha_3Text = null;
 			this.m_E_ImageProgressImage = null;
-			this.m_es_rewardlist = null;
+			this.m_E_RewardListLoopVerticalScrollRect = null;
 			this.m_E_Button_FirstWinButton = null;
 			this.m_E_Button_FirstWinImage = null;
 			this.m_E_Button_FirstWinSelfButton = null;
@@ -476,7 +473,7 @@ namespace ET.Client
 		private UnityEngine.UI.Text m_E_Text_JiSha_2Text = null;
 		private UnityEngine.UI.Text m_E_Text_JiSha_3Text = null;
 		private UnityEngine.UI.Image m_E_ImageProgressImage = null;
-		private EntityRef<ES_RewardList> m_es_rewardlist = null;
+		private UnityEngine.UI.LoopVerticalScrollRect m_E_RewardListLoopVerticalScrollRect = null;
 		private UnityEngine.UI.Button m_E_Button_FirstWinButton = null;
 		private UnityEngine.UI.Image m_E_Button_FirstWinImage = null;
 		private UnityEngine.UI.Button m_E_Button_FirstWinSelfButton = null;
