@@ -4185,7 +4185,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 0.92941177, b: 0.69411767, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -6376,7 +6376,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -7053,7 +7053,7 @@ GameObject:
   - component: {fileID: 3354417354406114046}
   - component: {fileID: 4243087683130072792}
   m_Layer: 5
-  m_Name: Lab_TaskName_Select
+  m_Name: Lab_TaskName
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7637,9 +7637,9 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6334401124517953922}
+  - {fileID: 6335305917597115310}
   - {fileID: 4415369528495689899}
   - {fileID: 7597222684139870492}
-  - {fileID: 6335305917597115310}
   - {fileID: 4094630882134833449}
   - {fileID: 1883244595715875442}
   - {fileID: 3502775484850967182}
@@ -7665,9 +7665,15 @@ MonoBehaviour:
   data:
   - key: Ima_Di
     gameObject: {fileID: 6121722053069206730}
+  - key: Ima_Icon
+    gameObject: {fileID: 5212442066158853269}
+  - key: Ima_Icon_Select
+    gameObject: {fileID: 3850969348539451295}
   - key: Ima_SelectStatus
     gameObject: {fileID: 6121768734683102826}
   - key: Lab_TaskName
+    gameObject: {fileID: 5580079043100059969}
+  - key: Lab_TaskName_Select
     gameObject: {fileID: 8585650932132472475}
   - key: RedDot
     gameObject: {fileID: 4339864633682104175}
@@ -9647,7 +9653,7 @@ GameObject:
   - component: {fileID: 8337239051019675243}
   - component: {fileID: 5970737109051305793}
   m_Layer: 5
-  m_Name: Lab_TaskName
+  m_Name: Lab_TaskName_Select
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -15,6 +15,9 @@ namespace ET.Client
             ReferenceCollector rc = gameObject.GetComponent<ReferenceCollector>();
 
             self.Lab_TaskName = rc.Get<GameObject>("Lab_TaskName");
+            self.Lab_TaskName_Select = rc.Get<GameObject>("Lab_TaskName_Select");
+            self.Ima_Icon = rc.Get<GameObject>("Ima_Icon");
+            self.Ima_Icon_Select = rc.Get<GameObject>("Ima_Icon_Select");
             self.Ima_SelectStatus = rc.Get<GameObject>("Ima_SelectStatus");
             self.Ima_Di = rc.Get<GameObject>("Ima_Di");
             self.RedDot = rc.Get<GameObject>("RedDot");
@@ -35,14 +38,21 @@ namespace ET.Client
 
         public static void OnSelected(this UIShouJiTreasureTypeComponent self, int chapter)
         {
-            self.Ima_SelectStatus.SetActive(self.Chapter == chapter);
+            bool selected = self.Chapter == chapter;
+            self.Ima_SelectStatus.SetActive(selected);
+            self.Ima_Icon.SetActive(!selected);
+            self.Ima_Icon_Select.SetActive(selected);
+            self.Lab_TaskName.SetActive(!selected);
+            self.Lab_TaskName_Select.SetActive(selected);
         }
 
         public static void OnInitData(this UIShouJiTreasureTypeComponent self, int chapter)
         {
             self.Chapter = chapter;
             
-            self.Lab_TaskName.GetComponent<Text>().text = $"第{chapter}章";
+            string chapterName = $"第{chapter}章";
+            self.Lab_TaskName.GetComponent<Text>().text = chapterName;
+            self.Lab_TaskName_Select.GetComponent<Text>().text = chapterName;
 
             self.UpdateRedDot();
         }
