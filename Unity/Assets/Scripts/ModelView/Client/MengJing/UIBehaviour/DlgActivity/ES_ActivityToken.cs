@@ -1,16 +1,17 @@
-﻿using System.Collections.Generic;
+﻿
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class ES_ActivityToken : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy,IUILogic
+	public  class ES_ActivityToken : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy 
 	{
 		public List<ActivityConfig> ShowActivityConfigs = new();
 		public Dictionary<int, EntityRef<Scroll_Item_ActivityTokenItem>> ScrollItemActivityTokenItems;
 		
-		public UnityEngine.UI.Image E_Image98Image
+		public UnityEngine.UI.Image E_Image0_ClosedImage
      	{
      		get
      		{
@@ -19,15 +20,15 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_E_Image98Image == null )
+     			if( this.m_E_Image0_ClosedImage == null )
      			{
-		    		this.m_E_Image98Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Left/E_Image98");
+		    		this.m_E_Image0_ClosedImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Left/E_Image0_Closed");
      			}
-     			return this.m_E_Image98Image;
+     			return this.m_E_Image0_ClosedImage;
      		}
      	}
 
-		public UnityEngine.UI.Image E_Image298Image
+		public UnityEngine.UI.Image E_Image0_OpenImage
      	{
      		get
      		{
@@ -36,11 +37,79 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_E_Image298Image == null )
+     			if( this.m_E_Image0_OpenImage == null )
      			{
-		    		this.m_E_Image298Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Left/E_Image298");
+		    		this.m_E_Image0_OpenImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Left/E_Image0_Open");
      			}
-     			return this.m_E_Image298Image;
+     			return this.m_E_Image0_OpenImage;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_Image98_ClosedImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Image98_ClosedImage == null )
+     			{
+		    		this.m_E_Image98_ClosedImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Left/E_Image98_Closed");
+     			}
+     			return this.m_E_Image98_ClosedImage;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_Image98_OpenImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Image98_OpenImage == null )
+     			{
+		    		this.m_E_Image98_OpenImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Left/E_Image98_Open");
+     			}
+     			return this.m_E_Image98_OpenImage;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_Image298_ClosedImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Image298_ClosedImage == null )
+     			{
+		    		this.m_E_Image298_ClosedImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Left/E_Image298_Closed");
+     			}
+     			return this.m_E_Image298_ClosedImage;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_Image298_OpenImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Image298_OpenImage == null )
+     			{
+		    		this.m_E_Image298_OpenImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Left/E_Image298_Open");
+     			}
+     			return this.m_E_Image298_OpenImage;
      		}
      	}
 
@@ -160,8 +229,12 @@ namespace ET.Client
 
 		public void DestroyWidget()
 		{
-			this.m_E_Image98Image = null;
-			this.m_E_Image298Image = null;
+			this.m_E_Image0_ClosedImage = null;
+			this.m_E_Image0_OpenImage = null;
+			this.m_E_Image98_ClosedImage = null;
+			this.m_E_Image98_OpenImage = null;
+			this.m_E_Image298_ClosedImage = null;
+			this.m_E_Image298_OpenImage = null;
 			this.m_E_ZanZhuHint_1Text = null;
 			this.m_E_ZanZhuHint_2Text = null;
 			this.m_E_Btn_GoPayButton = null;
@@ -171,8 +244,12 @@ namespace ET.Client
 			this.uiTransform = null;
 		}
 
-		private UnityEngine.UI.Image m_E_Image98Image = null;
-		private UnityEngine.UI.Image m_E_Image298Image = null;
+		private UnityEngine.UI.Image m_E_Image0_ClosedImage = null;
+		private UnityEngine.UI.Image m_E_Image0_OpenImage = null;
+		private UnityEngine.UI.Image m_E_Image98_ClosedImage = null;
+		private UnityEngine.UI.Image m_E_Image98_OpenImage = null;
+		private UnityEngine.UI.Image m_E_Image298_ClosedImage = null;
+		private UnityEngine.UI.Image m_E_Image298_OpenImage = null;
 		private UnityEngine.UI.Text m_E_ZanZhuHint_1Text = null;
 		private UnityEngine.UI.Text m_E_ZanZhuHint_2Text = null;
 		private UnityEngine.UI.Button m_E_Btn_GoPayButton = null;
