@@ -64,13 +64,20 @@ namespace ET.Client
             self.E_ActivityTokenItemsLoopHorizontalScrollRect.SetVisible(true, self.ShowActivityConfigs.Count);
 
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
-            int selfRechage = unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.RechargeNumber);
-            self.E_TextRechargeText.text = string.Format("当前额度：{0}/298", selfRechage);
+            int rechargeNumber = unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.RechargeNumber);
+            bool reached0 = rechargeNumber >= 0;
+            bool reached98 = rechargeNumber >= 98;
+            bool reached298 = rechargeNumber >= 298;
 
-            self.E_TextRechargeText.gameObject.SetActive(selfRechage < 298);
-            
-            CommonViewHelper.SetImageGrayAllChild( self.Root(),  self.E_Image98Image.gameObject,  selfRechage < 98);
-            CommonViewHelper.SetImageGrayAllChild( self.Root(),  self.E_Image298Image.gameObject,  selfRechage < 298);
+            self.E_TextRechargeText.text = string.Format("当前额度：{0}/298", rechargeNumber);
+            self.E_TextRechargeText.gameObject.SetActive(!reached298);
+
+            self.E_Image0_OpenImage.gameObject.SetActive(reached0);
+            self.E_Image0_ClosedImage.gameObject.SetActive(!reached0);
+            self.E_Image98_OpenImage.gameObject.SetActive(reached98);
+            self.E_Image98_ClosedImage.gameObject.SetActive(!reached98);
+            self.E_Image298_OpenImage.gameObject.SetActive(reached298);
+            self.E_Image298_ClosedImage.gameObject.SetActive(!reached298);
         }
     }
 }

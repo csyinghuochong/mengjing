@@ -6,7 +6,7 @@ namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class ES_ActivityToken : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy 
+	public  class ES_ActivityToken : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy,IUILogic
 	{
 		public List<ActivityConfig> ShowActivityConfigs = new();
 		public Dictionary<int, EntityRef<Scroll_Item_ActivityTokenItem>> ScrollItemActivityTokenItems;
