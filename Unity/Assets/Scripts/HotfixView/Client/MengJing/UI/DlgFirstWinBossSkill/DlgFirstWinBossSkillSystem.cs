@@ -63,7 +63,7 @@ namespace ET.Client
                 }
 
                 SkillConfig skillConfig = SkillConfigCategory.Instance.Get(skilllist[i]);
-                skilldesc += string.Format("{1} {2}\n", skillConfig.SkillName, skillConfig.SkillDescribe);
+                skilldesc += string.Format("{0} {1}\n", skillConfig.SkillName, skillConfig.SkillDescribe);
             }
 
             //self.E_Text_SkillJieShaoText.text = skilldesc;

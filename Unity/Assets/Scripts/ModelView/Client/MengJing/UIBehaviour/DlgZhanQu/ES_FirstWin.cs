@@ -5,11 +5,13 @@ namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class ES_FirstWin : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy 
+	public  class ES_FirstWin : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy,IUILogic
 	{
 		public List<GameObject> SkillDescriptionList = new();
 		public GameObject TypeListNode;
 		public UITypeViewComponent UITypeViewComponent { get; set; }
+		public List<RewardItem> DropRewards = new();
+		public Dictionary<int, EntityRef<Scroll_Item_CommonItem>> ScrollItemDropRewards;
 
 		public List<FirstWinInfo> FirstWinInfos = new();
 		public int FirstWinId;

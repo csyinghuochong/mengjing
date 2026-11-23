@@ -8,6 +8,7 @@ namespace ET.Client
 {
     [EntitySystemOf(typeof(ES_FirstWin))]
     [FriendOfAttribute(typeof(ES_FirstWin))]
+    [FriendOf(typeof(Scroll_Item_CommonItem))]
     public static partial class ES_FirstWinSystem
     {
         [EntitySystem]
@@ -21,6 +22,7 @@ namespace ET.Client
             self.E_Button_FirstWinButton.AddListenerAsync(self.OnButton_FirstWinButton);
             self.E_Button_FirstWinSelfButton.AddListenerAsync(self.OnButton_FirstWinSelfButton);
             self.E_Button_SkillDesButton.AddListenerAsync(self.OnButton_ClickSkillDes);
+            self.E_RewardListLoopVerticalScrollRect.AddItemRefreshListener(self.OnDropRewardItemRefresh);
             
             self.TypeListNode = rc.Get<GameObject>("TypeListNode");
             self.UITypeViewComponent = self.AddChild<UITypeViewComponent, GameObject>(self.TypeListNode);
@@ -35,6 +37,14 @@ namespace ET.Client
         [EntitySystem]
         private static void Destroy(this ES_FirstWin self)
         {
+            LoopVerticalScrollRect rewardList = self.E_RewardListLoopVerticalScrollRect;
+            if (rewardList != null)
+            {
+                rewardList.dataSource.scrollMoveEvent = null;
+            }
+
+            self.DropRewards.Clear();
+            self.ScrollItemDropRewards = null;
             self.DestroyWidget();
         }
 
@@ -239,7 +249,7 @@ namespace ET.Client
                 }
 
                 SkillConfig skillConfig = SkillConfigCategory.Instance.Get(skilllist[i]);
-                skilldesc += string.Format("{1} {2}\n", skillConfig.SkillName, skillConfig.SkillDescribe);
+                skilldesc += $"{skillConfig.SkillName} {skillConfig.SkillDescribe}\n";
             }
 
             self.E_Text_SkillJieShaoText.text = skilldesc;
@@ -302,7 +312,12 @@ namespace ET.Client
                 itemIdList.Add(droplist[i].ItemID);
             }
 
-            self.ES_RewardList.Refresh(droplist);
+            self.DropRewards = droplist
+                    .OrderByDescending(reward => ItemConfigCategory.Instance.Get(reward.ItemID).ItemQuality)
+                    .ThenBy(reward => ItemConfigCategory.Instance.Get(reward.ItemID).ItemType == 3 ? 0 : 1)
+                    .ToList();
+            self.AddUIScrollItems(ref self.ScrollItemDropRewards, self.DropRewards.Count);
+            self.E_RewardListLoopVerticalScrollRect.SetVisible(true, self.DropRewards.Count, reStart: true);
 
             FirstWinInfo firstWinInfo_1 = self.GetFirstWinInfo(firstwinId, 1);
             FirstWinInfo firstWinInfo_2 = self.GetFirstWinInfo(firstwinId, 2);
@@ -310,6 +325,29 @@ namespace ET.Client
             self.ShowJiShaTime(firstWinInfo_1, self.E_Text_JiSha_1Text.gameObject);
             self.ShowJiShaTime(firstWinInfo_2, self.E_Text_JiSha_2Text.gameObject);
             self.ShowJiShaTime(firstWinInfo_3, self.E_Text_JiSha_3Text.gameObject);
+        }
+
+        private static void OnDropRewardItemRefresh(this ES_FirstWin self, Transform transform, int index)
+        {
+            if (index < 0 || index >= self.DropRewards.Count)
+            {
+                return;
+            }
+
+            foreach (Scroll_Item_CommonItem item in self.ScrollItemDropRewards.Values)
+            {
+                if (item.uiTransform == transform)
+                {
+                    item.uiTransform = null;
+                    break;
+                }
+            }
+
+            RewardItem reward = self.DropRewards[index];
+            Scroll_Item_CommonItem rewardItem = self.ScrollItemDropRewards[index].BindTrans(transform);
+            rewardItem.Refresh(new ItemInfo { ItemID = reward.ItemID, ItemNum = reward.ItemNum }, ItemOperateEnum.None);
+            rewardItem.HideItemName();
+            transform.localScale = Vector3.one;
         }
 
         public static void ShowJiShaTime(this ES_FirstWin self, FirstWinInfo firstWinInfo, GameObject Text_JiSha_1)
