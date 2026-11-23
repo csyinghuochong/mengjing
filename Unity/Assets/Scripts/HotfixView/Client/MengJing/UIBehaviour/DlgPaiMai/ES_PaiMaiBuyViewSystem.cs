@@ -27,7 +27,28 @@ namespace ET.Client
             self.UITypeViewComponent.ClickTypeItemHandler = (itemType, itemSubType) => { self.OnClickTypeItem(itemType, itemSubType).Coroutine(); };
 
             self.UITypeViewComponent.TypeButtonInfos = self.InitTypeButtonInfos();
-            self.UITypeViewComponent.OnInitUI().Coroutine();
+            self.UITypeViewComponent.OnInitUI(initializeTypeButton: SetTypeIcon).Coroutine();
+        }
+
+        private static void SetTypeIcon(GameObject typeButton, int typeId)
+        {
+            int iconIndex = typeId switch
+            {
+                ItemTypeEnum.Consume => 0,
+                ItemTypeEnum.Material => 1,
+                ItemTypeEnum.Equipment => 2,
+                ItemTypeEnum.Gemstone => 3,
+                _ => -1,
+            };
+
+            for (int i = 0; i < 4; i++)
+            {
+                Transform icon = typeButton.transform.Find($"Checkmark_{i}");
+                if (icon != null)
+                {
+                    icon.gameObject.SetActive(i == iconIndex);
+                }
+            }
         }
 
         [EntitySystem]
@@ -92,7 +113,7 @@ namespace ET.Client
                 typeButtonInfo.typeButtonItems.Add(new TypeButtonItem() { SubTypeId = key, ItemName = ItemViewData.ItemSubType1Name[key] });
             }
 
-            typeButtonInfo.TypeId = 1;
+            typeButtonInfo.TypeId = ItemTypeEnum.Consume;
             typeButtonInfo.TypeName = ItemViewData.ItemTypeName[ItemTypeEnum.Consume];
             typeButtonInfos.Add(typeButtonInfo);
 
@@ -102,7 +123,7 @@ namespace ET.Client
                 typeButtonInfo.typeButtonItems.Add(new TypeButtonItem() { SubTypeId = key, ItemName = ItemViewData.ItemSubType2Name[key] });
             }
 
-            typeButtonInfo.TypeId = 2;
+            typeButtonInfo.TypeId = ItemTypeEnum.Material;
             typeButtonInfo.TypeName = ItemViewData.ItemTypeName[ItemTypeEnum.Material];
             typeButtonInfos.Add(typeButtonInfo);
 
@@ -112,7 +133,7 @@ namespace ET.Client
                 typeButtonInfo.typeButtonItems.Add(new TypeButtonItem() { SubTypeId = key, ItemName = ItemViewData.ItemSubType3Name[key] });
             }
 
-            typeButtonInfo.TypeId = 3;
+            typeButtonInfo.TypeId = ItemTypeEnum.Equipment;
             typeButtonInfo.TypeName = ItemViewData.ItemTypeName[ItemTypeEnum.Equipment];
             typeButtonInfos.Add(typeButtonInfo);
 
@@ -122,7 +143,7 @@ namespace ET.Client
                 typeButtonInfo.typeButtonItems.Add(new TypeButtonItem() { SubTypeId = key, ItemName = ItemViewData.ItemSubType4Name[key] });
             }
 
-            typeButtonInfo.TypeId = 4;
+            typeButtonInfo.TypeId = ItemTypeEnum.Gemstone;
             typeButtonInfo.TypeName = ItemViewData.ItemTypeName[ItemTypeEnum.Gemstone];
             typeButtonInfos.Add(typeButtonInfo);
 
