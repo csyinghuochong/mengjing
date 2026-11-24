@@ -1,0 +1,94 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: FX_Wing_high 11
+  m_Shader: {fileID: 4800000, guid: 59151be3ed9a7574eaca1d63ba85e2a4, type: 3}
+  m_ValidKeywords: []
+  m_InvalidKeywords:
+  - _TEX_DISSOLVE_SWITCH1_ON
+  - _TEX_MASK_LL_SWITCH_ON
+  - _TEX_MASK_SWITCH_ON
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _MainTex:
+        m_Texture: {fileID: 2800000, guid: 6dea60abde266ce41ba7538201a8d5b9, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Tex_Dissolve:
+        m_Texture: {fileID: 2800000, guid: 919b531e9bfcc8e43b320c5c650fe826, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Tex_Mask:
+        m_Texture: {fileID: 2800000, guid: 13679ed304e82c148b045557169ecc0a, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Tex_MaskllAnim:
+        m_Texture: {fileID: 2800000, guid: 265e64754ec0fee488a9a14e81e7a92c, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Tex_Noise:
+        m_Texture: {fileID: 2800000, guid: 423b56893048d8f4cad77b837eceda5e, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _texcoord:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _Dissolve_Emissive: 0.85
+    - _Dissolve_Intensity: 0.02
+    - _Dissolve_Line: 3
+    - _Dissolve_Smooth: 1
+    - _InvFade: 1
+    - _NOAlphaRChannel: 0
+    - _Tex_Dissolve_Switch: 0
+    - _Tex_Dissolve_Switch1: 1
+    - _Tex_Mask_Opacity: 1
+    - _Tex_Mask_Rorator: 0
+    - _Tex_Mask_Rorator_invert: 1
+    - _Tex_Mask_Switch: 1
+    - _Tex_Mask_invert: 1
+    - _Tex_Mask_ll_Switch: 1
+    - _Tex_Maskll_IOpacity: 5
+    - _Tex_Noise_Intensity: 1
+    - _Tex_Noise_Switch: 0
+    - _Texture_Emissive: 1
+    - _Texture_OffsetU: 1
+    - _Texture_OffsetV: 1
+    - _Texture_Opacity: 1
+    - _Texture_Power: 1
+    - _Texture_Rorator: 0
+    - _Texture_Rorator_Speed: 0
+    - _Texture_SpeedU: 0.5
+    - _Texture_SpeedV: 0
+    - _Texture_TilingU: 1
+    - _Texture_TilingV: 1
+    - __CullMode__: 0
+    - __DstBlendMode__: 1
+    - __SrcBlendMode__: 5
+    - __ZDepth__: 4
+    - __ZWrite__: 0
+    m_Colors:
+    - _Diss_XYtilingZWspeed: {r: 4, g: 4, b: 0.5, a: 0}
+    - _Dissolve_Color: {r: 0, g: 0.43048343, b: 4.6492147, a: 1}
+    - _MaskXY_tilingZW_offsrt: {r: 1, g: 1, b: 0, a: 0}
+    - _NoiseXYtilingZWspeed: {r: 1, g: 1, b: 0, a: 0}
+    - _TintColor: {r: 1, g: 1, b: 1, a: 1}
+    - _XY_tilingZW_offsrt: {r: 1, g: 1, b: 0, a: 0}
+    - _XY_tilingZW_speed: {r: 1, g: 1, b: 1, a: 0}
+    - _XYtilingZWspeed: {r: 1, g: 1, b: -0.1, a: 0}
+  m_BuildTextureStacks: []

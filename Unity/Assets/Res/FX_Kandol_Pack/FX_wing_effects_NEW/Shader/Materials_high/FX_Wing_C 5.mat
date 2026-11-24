@@ -1,0 +1,117 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: FX_Wing_C 5
+  m_Shader: {fileID: 4800000, guid: 59151be3ed9a7574eaca1d63ba85e2a4, type: 3}
+  m_ValidKeywords: []
+  m_InvalidKeywords:
+  - _TEX_DISSOLVE_SWITCH_ON
+  - _TEX_MASK_SWITCH_ON
+  - _TEX_NOISE_SWITCH_ON
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _MainTex:
+        m_Texture: {fileID: 2800000, guid: 52ee16b5b62807a448d8d02421200c93, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Tex_Dissolve:
+        m_Texture: {fileID: 2800000, guid: 01132165882409145b199ec7891541e8, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Tex_Flowmap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Tex_Mask:
+        m_Texture: {fileID: 2800000, guid: 13679ed304e82c148b045557169ecc0a, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Tex_Noise:
+        m_Texture: {fileID: 2800000, guid: 01132165882409145b199ec7891541e8, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Tex_WPO:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _texcoord:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _Dissolve_Alpha_Switch: 0
+    - _Dissolve_Emissive: 0
+    - _Dissolve_Intensity: 0.05
+    - _Dissolve_Line: 0
+    - _Dissolve_Smooth: 0.05
+    - _Dissolve_Switch: 0
+    - _Flow_Emissive: 0
+    - _Flow_Intensity: 0
+    - _Flow_Speed: 0
+    - _Flowmap_Switch: 0
+    - _Fresnel_Alpha_Switch: 0
+    - _Fresnel_Emissive: 1.97
+    - _Fresnel_Intensity_A: 7.96
+    - _Fresnel_Intensity_B: 1.56
+    - _Fresnel_Invert_Switch: 0
+    - _Fresnel_Switch: 0
+    - _InvFade: 1
+    - _NOAlphaRChannel: 0
+    - _Tex_Dissolve_Switch: 1
+    - _Tex_Mask_Opacity: 1
+    - _Tex_Mask_Rorator: 0
+    - _Tex_Mask_Switch: 1
+    - _Tex_Mask_invert: 1
+    - _Tex_Noise_Intensity: 0.1
+    - _Tex_Noise_Switch: 1
+    - _Tex_Noise_speed: 1
+    - _Tex_WPO_Intensity: 0.1
+    - _Tex_WPO_Switch: 0
+    - _Tex_WPO_speed: 1
+    - _Texture_Emissive: 5
+    - _Texture_OffsetU: 1
+    - _Texture_OffsetV: 1
+    - _Texture_Opacity: 1
+    - _Texture_Power: 1
+    - _Texture_Rorator: 0
+    - _Texture_Rorator_Speed: 0
+    - _Texture_SpeedU: 1
+    - _Texture_SpeedV: 0
+    - _Texture_TilingU: 2
+    - _Texture_TilingV: 1
+    - __CullMode__: 0
+    - __DstBlendMode__: 1
+    - __SrcBlendMode__: 1
+    - __ZDepth__: 4
+    - __ZWrite__: 0
+    m_Colors:
+    - _Diss_XYtilingZWspeed: {r: 2, g: 1, b: 1, a: 0}
+    - _Dissolve_Color: {r: 1, g: 1, b: 1, a: 0}
+    - _Fresnel_Color_IN: {r: 0, g: 0.137574, b: 1, a: 0}
+    - _Fresnel_Color_OUT: {r: 1, g: 0, b: 0, a: 0}
+    - _MaskXY_tilingZW_offsrt: {r: 1, g: 1, b: 0, a: 0}
+    - _NoiseXYtilingZWspeed: {r: 2, g: 1, b: 0.5, a: 0}
+    - _Tex_Noise_Tiling: {r: 1, g: 1, b: 0, a: 0}
+    - _Tex_Noise_TilingSped: {r: 0, g: 0, b: 0, a: 0}
+    - _Tex_Noise_XTTilingSWSpeed: {r: 0, g: 0, b: 0, a: 0}
+    - _Tex_Noise_XTtilingZWspeed: {r: 1, g: 1, b: 0, a: 0}
+    - _Tex_WPO_Tiling: {r: 1, g: 1, b: 0, a: 0}
+    - _TintColor: {r: 1, g: 1, b: 1, a: 1}
+    - _Vector1: {r: 1, g: 1, b: 0, a: 0}
+    - _XY_tilingZW_offsrt: {r: 1, g: 1, b: 0, a: 0}
+    - _XYtilingZWspeed: {r: 1, g: 1, b: 0, a: 0}
+  m_BuildTextureStacks: []
