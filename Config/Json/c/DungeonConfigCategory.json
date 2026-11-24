@@ -1,7 +1,7 @@
 [
   {
     "Id": 10001,
-    "ChapterName": "洛兰郊外",
+    "ChapterName": "地图一",
     "Music": "Forest_1",
     "MapType": 0,
     "EnterLv": 1,
@@ -10,19 +10,20 @@
     "MapID": 10001,
     "LoadingRes": "101",
     "BornPosLeft": [
-      1438,
-      19,
-      -3223
+      8618,
+      17,
+      -3136
     ],
     "CameraPos": [
-      0,
+      25,
       50,
-      0,
-      0,
-      45
+      25,
+      90,
+      70
     ],
     "TransmitPos": [
-      10001
+      10001,
+      10011
     ],
     "AutoPath": "10001,1002;10003,1010;10004,1001;10005,1011",
     "NpcList": [
@@ -33,7 +34,7 @@
   },
   {
     "Id": 10002,
-    "ChapterName": "洛兰深处",
+    "ChapterName": "地图二",
     "Music": "Forest_2",
     "MapType": 0,
     "EnterLv": 3,
@@ -42,20 +43,20 @@
     "MapID": 10002,
     "LoadingRes": "101",
     "BornPosLeft": [
-      -2179,
-      210,
-      1963
+      1736,
+      42,
+      1465
     ],
     "CameraPos": [
-      25,
+      50,
       120,
-      0,
-      0,
-      40
+      50,
+      90,
+      50
     ],
     "TransmitPos": [
       10002,
-      10011
+      10012
     ],
     "AutoPath": "10001,1002;10003,1010;10004,1001;10005,1011",
     "NpcList": [
@@ -66,7 +67,7 @@
   },
   {
     "Id": 10003,
-    "ChapterName": "荒谷",
+    "ChapterName": "地图三",
     "Music": "Forest_3",
     "MapType": 0,
     "EnterLv": 5,
@@ -75,20 +76,20 @@
     "MapID": 10003,
     "LoadingRes": "101",
     "BornPosLeft": [
-      7042,
-      209,
-      -2473
+      1900,
+      700,
+      4200
     ],
     "CameraPos": [
-      25,
+      60,
       120,
+      65,
       0,
-      0,
-      40
+      45
     ],
     "TransmitPos": [
       10003,
-      10012
+      10013
     ],
     "AutoPath": "10001,1002;10002,1003;10004,1001;10005,1011",
     "NpcList": [
@@ -99,7 +100,7 @@
   },
   {
     "Id": 10004,
-    "ChapterName": "荒灵之地",
+    "ChapterName": "地图四",
     "Music": "Forest_4",
     "MapType": 0,
     "EnterLv": 6,
@@ -108,20 +109,20 @@
     "MapID": 10004,
     "LoadingRes": "101",
     "BornPosLeft": [
-      -1641,
-      215,
-      -262
+      928,
+      358,
+      1678
     ],
     "CameraPos": [
-      25,
+      50,
       120,
-      0,
+      45,
       0,
       40
     ],
     "TransmitPos": [
       10004,
-      10013
+      10014
     ],
     "AutoPath": "10001,1004;10002,1009;10003,1010;10005,1011",
     "NpcList": [
@@ -132,7 +133,7 @@
   },
   {
     "Id": 10005,
-    "ChapterName": "失落营地",
+    "ChapterName": "地图五",
     "Music": "Forest_4",
     "MapType": 0,
     "EnterLv": 6,
@@ -141,19 +142,19 @@
     "MapID": 10005,
     "LoadingRes": "101",
     "BornPosLeft": [
-      -1784,
-      215,
-      -496
+      7200,
+      1335,
+      -1870
     ],
     "CameraPos": [
-      25,
+      72,
       120,
-      -2,
-      0,
-      35
+      60,
+      90,
+      85
     ],
     "TransmitPos": [
-      10014
+      10015
     ],
     "AutoPath": "10001,1004;10002,1009;10003,1010;10004,1005",
     "NpcList": [
