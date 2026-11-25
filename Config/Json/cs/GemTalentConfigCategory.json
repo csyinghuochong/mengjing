@@ -3,14 +3,14 @@
     "Id": 11001,
     "Name": "火",
     "Area": 1,
-    "CostPoint": 25,
+    "CostPoint": 30,
     "AddPropreType": 0,
-    "Des": "攻击力+1%",
+    "Des": "生命提升1000点",
     "AddPropreList": [
       {
         "$type": "RolePropertyAdd",
-        "NumericKey": 100402,
-        "Value": 0.01
+        "NumericKey": 100203,
+        "Value": 1000
       }
     ]
   },
@@ -18,23 +18,39 @@
     "Id": 11002,
     "Name": "攻",
     "Area": 1,
-    "CostPoint": 25,
-    "AddPropreType": 1,
-    "Des": "技能：裂地击范围+1",
-    "AddPropreList": []
+    "CostPoint": 30,
+    "AddPropreType": 0,
+    "Des": "物防提升100点",
+    "AddPropreList": [
+      {
+        "$type": "RolePropertyAdd",
+        "NumericKey": 100503,
+        "Value": 100
+      },
+      {
+        "$type": "RolePropertyAdd",
+        "NumericKey": 100603,
+        "Value": 100
+      }
+    ]
   },
   {
     "Id": 11003,
     "Name": "风",
     "Area": 1,
-    "CostPoint": 25,
+    "CostPoint": 30,
     "AddPropreType": 0,
-    "Des": "攻击力+1%",
+    "Des": "魔防提升100点",
     "AddPropreList": [
       {
         "$type": "RolePropertyAdd",
-        "NumericKey": 100402,
-        "Value": 0.01
+        "NumericKey": 100703,
+        "Value": 100
+      },
+      {
+        "$type": "RolePropertyAdd",
+        "NumericKey": 100803,
+        "Value": 100
       }
     ]
   },
@@ -42,14 +58,14 @@
     "Id": 11004,
     "Name": "旋",
     "Area": 1,
-    "CostPoint": 25,
+    "CostPoint": 30,
     "AddPropreType": 0,
-    "Des": "攻击力+1%",
+    "Des": "技能伤害提升100点",
     "AddPropreList": [
       {
         "$type": "RolePropertyAdd",
-        "NumericKey": 100402,
-        "Value": 0.01
+        "NumericKey": 101003,
+        "Value": 100
       }
     ]
   },
@@ -57,14 +73,19 @@
     "Id": 11005,
     "Name": "星",
     "Area": 1,
-    "CostPoint": 25,
+    "CostPoint": 50,
     "AddPropreType": 0,
-    "Des": "攻击力+1%",
+    "Des": "攻击提升100点",
     "AddPropreList": [
       {
         "$type": "RolePropertyAdd",
-        "NumericKey": 100402,
-        "Value": 0.01
+        "NumericKey": 100303,
+        "Value": 100
+      },
+      {
+        "$type": "RolePropertyAdd",
+        "NumericKey": 100403,
+        "Value": 100
       }
     ]
   },
@@ -72,14 +93,14 @@
     "Id": 12001,
     "Name": "火",
     "Area": 2,
-    "CostPoint": 25,
+    "CostPoint": 30,
     "AddPropreType": 0,
-    "Des": "攻击力+1%",
+    "Des": "生命提升2000点",
     "AddPropreList": [
       {
         "$type": "RolePropertyAdd",
-        "NumericKey": 100402,
-        "Value": 0.01
+        "NumericKey": 100203,
+        "Value": 2000
       }
     ]
   },
@@ -87,14 +108,19 @@
     "Id": 12002,
     "Name": "攻",
     "Area": 2,
-    "CostPoint": 25,
+    "CostPoint": 30,
     "AddPropreType": 0,
-    "Des": "攻击力+1%",
+    "Des": "物防提升200点",
     "AddPropreList": [
       {
         "$type": "RolePropertyAdd",
-        "NumericKey": 100402,
-        "Value": 0.01
+        "NumericKey": 100503,
+        "Value": 200
+      },
+      {
+        "$type": "RolePropertyAdd",
+        "NumericKey": 100603,
+        "Value": 200
       }
     ]
   },
@@ -102,14 +128,19 @@
     "Id": 12003,
     "Name": "风",
     "Area": 2,
-    "CostPoint": 25,
+    "CostPoint": 30,
     "AddPropreType": 0,
-    "Des": "攻击力+1%",
+    "Des": "魔防提升200点",
     "AddPropreList": [
       {
         "$type": "RolePropertyAdd",
-        "NumericKey": 100402,
-        "Value": 0.01
+        "NumericKey": 100703,
+        "Value": 200
+      },
+      {
+        "$type": "RolePropertyAdd",
+        "NumericKey": 100803,
+        "Value": 200
       }
     ]
   },
@@ -117,14 +148,19 @@
     "Id": 12004,
     "Name": "旋",
     "Area": 2,
-    "CostPoint": 25,
+    "CostPoint": 30,
     "AddPropreType": 0,
-    "Des": "攻击力+1%",
+    "Des": "攻击提升200点",
     "AddPropreList": [
       {
         "$type": "RolePropertyAdd",
-        "NumericKey": 100402,
-        "Value": 0.01
+        "NumericKey": 100303,
+        "Value": 200
+      },
+      {
+        "$type": "RolePropertyAdd",
+        "NumericKey": 100403,
+        "Value": 200
       }
     ]
   },
@@ -132,14 +168,14 @@
     "Id": 12005,
     "Name": "星",
     "Area": 2,
-    "CostPoint": 25,
+    "CostPoint": 50,
     "AddPropreType": 0,
-    "Des": "攻击力+1%",
+    "Des": "技能伤害提升200点",
     "AddPropreList": [
       {
         "$type": "RolePropertyAdd",
-        "NumericKey": 100402,
-        "Value": 0.01
+        "NumericKey": 101003,
+        "Value": 200
       }
     ]
   },
@@ -147,14 +183,14 @@
     "Id": 13001,
     "Name": "火",
     "Area": 3,
-    "CostPoint": 25,
+    "CostPoint": 30,
     "AddPropreType": 0,
-    "Des": "攻击力+1%",
+    "Des": "生命提升3000点",
     "AddPropreList": [
       {
         "$type": "RolePropertyAdd",
-        "NumericKey": 100402,
-        "Value": 0.01
+        "NumericKey": 100203,
+        "Value": 3000
       }
     ]
   },
@@ -162,14 +198,19 @@
     "Id": 13002,
     "Name": "攻",
     "Area": 3,
-    "CostPoint": 25,
+    "CostPoint": 30,
     "AddPropreType": 0,
-    "Des": "攻击力+1%",
+    "Des": "物防提升300点",
     "AddPropreList": [
       {
         "$type": "RolePropertyAdd",
-        "NumericKey": 100402,
-        "Value": 0.01
+        "NumericKey": 100503,
+        "Value": 300
+      },
+      {
+        "$type": "RolePropertyAdd",
+        "NumericKey": 100603,
+        "Value": 300
       }
     ]
   },
@@ -177,14 +218,19 @@
     "Id": 13003,
     "Name": "风",
     "Area": 3,
-    "CostPoint": 25,
+    "CostPoint": 30,
     "AddPropreType": 0,
-    "Des": "攻击力+1%",
+    "Des": "魔防提升300点",
     "AddPropreList": [
       {
         "$type": "RolePropertyAdd",
-        "NumericKey": 100402,
-        "Value": 0.01
+        "NumericKey": 100703,
+        "Value": 300
+      },
+      {
+        "$type": "RolePropertyAdd",
+        "NumericKey": 100803,
+        "Value": 300
       }
     ]
   },
@@ -192,14 +238,14 @@
     "Id": 13004,
     "Name": "旋",
     "Area": 3,
-    "CostPoint": 25,
+    "CostPoint": 30,
     "AddPropreType": 0,
-    "Des": "攻击力+1%",
+    "Des": "技能伤害提升300点",
     "AddPropreList": [
       {
         "$type": "RolePropertyAdd",
-        "NumericKey": 100402,
-        "Value": 0.01
+        "NumericKey": 101003,
+        "Value": 300
       }
     ]
   },
@@ -207,14 +253,19 @@
     "Id": 13005,
     "Name": "星",
     "Area": 3,
-    "CostPoint": 25,
+    "CostPoint": 50,
     "AddPropreType": 0,
-    "Des": "攻击力+1%",
+    "Des": "攻击提升300点",
     "AddPropreList": [
       {
         "$type": "RolePropertyAdd",
-        "NumericKey": 100402,
-        "Value": 0.01
+        "NumericKey": 100303,
+        "Value": 300
+      },
+      {
+        "$type": "RolePropertyAdd",
+        "NumericKey": 100403,
+        "Value": 300
       }
     ]
   }
