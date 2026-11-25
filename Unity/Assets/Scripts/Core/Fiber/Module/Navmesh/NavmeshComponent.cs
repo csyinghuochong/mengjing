@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using DotRecast.Detour;
+using DotRecast.Detour.Io;
 
 namespace ET
 {
@@ -11,9 +14,26 @@ namespace ET
         }
 
         private readonly Dictionary<string, byte[]> navmeshs = new();
+        private readonly Dictionary<string, DtNavMesh> parsedMeshes = new();
         
         public void Awake()
         {
+        }
+
+        public DtNavMesh GetMesh(string name)
+        {
+            lock (this)
+            {
+                if (!this.parsedMeshes.TryGetValue(name, out DtNavMesh mesh))
+                {
+                    using MemoryStream stream = new(this.Get(name), writable: false);
+                    using BinaryReader reader = new(stream);
+                    mesh = new DtMeshSetReader().Read32Bit(reader, 6)
+                            ?? throw new InvalidDataException($"nav load fail: {name}");
+                    this.parsedMeshes.Add(name, mesh);
+                }
+                return mesh;
+            }
         }
         
         public byte[] Get(string name)

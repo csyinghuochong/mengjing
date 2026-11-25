@@ -1,9 +1,7 @@
 using System;
 using System.Collections.Generic;
-using System.IO;
-using DotRecast.Core;
+using DotRecast.Core.Numerics;
 using DotRecast.Detour;
-using DotRecast.Detour.Io;
 using Unity.Mathematics;
 
 namespace ET
@@ -16,18 +14,7 @@ namespace ET
         private static void Awake(this PathfindingComponent self, int name)
         {
             self.Name = name;
-            byte[] buffer = NavmeshComponent.Instance.Get(name.ToString());
-
-            DtMeshSetReader reader = new();
-            using MemoryStream ms = new(buffer);
-            using BinaryReader br = new(ms);
-            self.navMesh = reader.Read32Bit(br, 6); // cpp recast导出来的要用Read32Bit读取，DotRecast导出来的还没试过
-
-            if (self.navMesh == null)
-            {
-                throw new Exception($"nav load fail: {name}");
-            }
-
+            self.navMesh = NavmeshComponent.Instance.GetMesh(name.ToString());
             self.filter = new DtQueryDefaultFilter();
             self.query = new DtNavMeshQuery(self.navMesh);
         }
@@ -36,6 +23,8 @@ namespace ET
         private static void Destroy(this PathfindingComponent self)
         {
             self.Name = 0;
+            self.query = null;
+            self.filter = null;
             self.navMesh = null;
         }
 
@@ -47,42 +36,46 @@ namespace ET
                 throw new Exception($"pathfinding ptr is zero: {self.Scene().Name}");
             }
 
+            Find(self.query, self.extents, self.filter, ref self.polys, start, target, result);
+        }
+
+        public static void Find(DtNavMeshQuery query, RcVec3f extents, IDtQueryFilter filter, ref long[] polys,
+            float3 start, float3 target, List<float3> result)
+        {
             RcVec3f startPos = new(-start.x, start.y, start.z);
             RcVec3f endPos = new(-target.x, target.y, target.z);
-
-            long startRef;
-            long endRef;
-            RcVec3f startPt;
-            RcVec3f endPt;
-
-            self.query.FindNearestPoly(startPos, self.extents, self.filter, out startRef, out startPt, out _);
-            self.query.FindNearestPoly(endPos, self.extents, self.filter, out endRef, out endPt, out _);
-
-            self.query.FindPath(startRef, endRef, startPt, endPt, self.filter, ref self.polys, new DtFindPathOption(0, float.MaxValue));
-
-            if (0 >= self.polys.Count)
+            query.FindNearestPoly(startPos, extents, filter, out long startRef, out RcVec3f startPt, out _);
+            query.FindNearestPoly(endPos, extents, filter, out long endRef, out RcVec3f endPt, out _);
+            if (startRef == 0 || endRef == 0)
             {
                 return;
             }
 
-            // In case of partial path, make sure the end point is clamped to the last polygon.
-            RcVec3f epos = RcVec3f.Of(endPt.x, endPt.y, endPt.z);
-            if (self.polys[^1] != endRef)
+            DtStatus status = query.FindPath(startRef, endRef, startPt, endPt, filter, polys, out int polyCount, polys.Length);
+            while (status.Has(DtStatus.DT_BUFFER_TOO_SMALL))
             {
-                DtStatus dtStatus = self.query.ClosestPointOnPoly(self.polys[^1], endPt, out RcVec3f closest, out bool _);
-                if (dtStatus.Succeeded())
-                {
-                    epos = closest;
-                }
+                polys = new long[polys.Length * 2];
+                status = query.FindPath(startRef, endRef, startPt, endPt, filter, polys, out polyCount, polys.Length);
+            }
+            if (status.Failed() || polyCount == 0)
+            {
+                return;
             }
 
-            self.query.FindStraightPath(startPt, epos, self.polys, ref self.straightPath, PathfindingComponent.MAX_POLYS,
-                DtNavMeshQuery.DT_STRAIGHTPATH_ALL_CROSSINGS);
-
-            for (int i = 0; i < self.straightPath.Count; ++i)
+            // 部分路径的终点落在最后一个可到达的多边形上。
+            long lastPoly = polys[polyCount - 1];
+            if (lastPoly != endRef && query.ClosestPointOnPoly(lastPoly, endPt, out RcVec3f closest, out _).Succeeded())
             {
-                RcVec3f pos = self.straightPath[i].pos;
-                result.Add(new float3(-pos.x, pos.y, pos.z));
+                endPt = closest;
+            }
+
+            Span<DtStraightPath> straightPath = stackalloc DtStraightPath[PathfindingComponent.MAX_POLYS];
+            query.FindStraightPath(startPt, endPt, polys, polyCount, straightPath, out int straightCount, straightPath.Length,
+                DtStraightPathOptions.DT_STRAIGHTPATH_ALL_CROSSINGS);
+            for (int i = 0; i < straightCount; ++i)
+            {
+                RcVec3f pos = straightPath[i].pos;
+                result.Add(new float3(-pos.X, pos.Y, pos.Z));
             }
         }
 

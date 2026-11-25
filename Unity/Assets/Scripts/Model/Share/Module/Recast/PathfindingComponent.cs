@@ -1,5 +1,4 @@
-using System.Collections.Generic;
-using DotRecast.Core;
+using DotRecast.Core.Numerics;
 using DotRecast.Detour;
 
 namespace ET
@@ -20,12 +19,10 @@ namespace ET
         
         public DtNavMesh navMesh;
         
-        public List<long> polys = new(MAX_POLYS);
+        public long[] polys = new long[MAX_POLYS];
 
         public IDtQueryFilter filter;
         
-        public List<StraightPathItem> straightPath = new();
-
         public DtNavMeshQuery query;
     }
 }
