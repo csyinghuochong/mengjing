@@ -1,7 +1,7 @@
 /*
 Copyright (c) 2009-2010 Mikko Mononen memon@inside.org
 recast4j copyright (c) 2015-2019 Piotr Piastucki piotr@jtilia.org
-DotRecast Copyright (c) 2023 Choi Ikpil ikpil@naver.com
+DotRecast Copyright (c) 2023-2024 Choi Ikpil ikpil@naver.com
 
 This software is provided 'as-is', without any express or implied
 warranty.  In no event will the authors be held liable for any damages
@@ -23,9 +23,9 @@ using DotRecast.Core;
 
 namespace DotRecast.Detour.TileCache.Io
 {
-    public class DtTileCacheLayerHeaderReader
+    public static class DtTileCacheLayerHeaderReader
     {
-        public DtTileCacheLayerHeader Read(RcByteBuffer data, bool cCompatibility)
+        public static DtTileCacheLayerHeader Read(RcByteBuffer data, bool cCompatibility)
         {
             DtTileCacheLayerHeader header = new DtTileCacheLayerHeader();
             header.magic = data.GetInt();
@@ -39,13 +39,13 @@ namespace DotRecast.Detour.TileCache.Io
             header.tx = data.GetInt();
             header.ty = data.GetInt();
             header.tlayer = data.GetInt();
-            
-            header.bmin.x = data.GetFloat();
-            header.bmin.y = data.GetFloat();
-            header.bmin.z = data.GetFloat();
-            header.bmax.x = data.GetFloat();
-            header.bmax.y = data.GetFloat();
-            header.bmax.z = data.GetFloat();
+
+            header.bmin.X = data.GetFloat();
+            header.bmin.Y = data.GetFloat();
+            header.bmin.Z = data.GetFloat();
+            header.bmax.X = data.GetFloat();
+            header.bmax.Y = data.GetFloat();
+            header.bmax.Z = data.GetFloat();
 
             header.hmin = data.GetShort() & 0xFFFF;
             header.hmax = data.GetShort() & 0xFFFF;

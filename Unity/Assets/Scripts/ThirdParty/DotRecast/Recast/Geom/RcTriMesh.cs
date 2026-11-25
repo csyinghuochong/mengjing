@@ -1,7 +1,7 @@
 /*
 Copyright (c) 2009-2010 Mikko Mononen memon@inside.org
 recast4j copyright (c) 2015-2019 Piotr Piastucki piotr@jtilia.org
-DotRecast Copyright (c) 2023 Choi Ikpil ikpil@naver.com
+DotRecast Copyright (c) 2023-2024 Choi Ikpil ikpil@naver.com
 
 This software is provided 'as-is', without any express or implied
 warranty.  In no event will the authors be held liable for any damages
@@ -19,6 +19,7 @@ freely, subject to the following restrictions:
 */
 
 using System.Collections.Generic;
+using DotRecast.Core.Numerics;
 
 namespace DotRecast.Recast.Geom
 {
@@ -32,7 +33,8 @@ namespace DotRecast.Recast.Geom
         {
             this.vertices = vertices;
             this.faces = faces;
-            chunkyTriMesh = new RcChunkyTriMesh(vertices, faces, faces.Length / 3, 32);
+            chunkyTriMesh = new RcChunkyTriMesh();
+            RcChunkyTriMeshs.CreateChunkyTriMesh(vertices, faces, faces.Length / 3, 32, chunkyTriMesh);
         }
 
         public int[] GetTris()
@@ -45,9 +47,9 @@ namespace DotRecast.Recast.Geom
             return vertices;
         }
 
-        public List<RcChunkyTriMeshNode> GetChunksOverlappingRect(float[] bmin, float[] bmax)
+        public List<RcChunkyTriMeshNode> GetChunksOverlappingRect(RcVec2f bmin, RcVec2f bmax)
         {
-            return chunkyTriMesh.GetChunksOverlappingRect(bmin, bmax);
+            return RcChunkyTriMeshs.GetChunksOverlappingRect(chunkyTriMesh, bmin, bmax);
         }
     }
 }

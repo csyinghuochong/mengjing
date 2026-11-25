@@ -1,12 +1,10 @@
-﻿using System;
-using DotRecast.Core;
+using System;
+using DotRecast.Core.Numerics;
 
 namespace DotRecast.Detour
 {
     public static class DtUtils
     {
-        private static readonly float EQUAL_THRESHOLD = RcMath.Sqr(1.0f / 16384.0f);
-
         public static int NextPow2(int v)
         {
             v--;
@@ -38,24 +36,6 @@ namespace DotRecast.Detour
             return r;
         }
 
-        /// Performs a 'sloppy' colocation check of the specified points.
-        /// @param[in] p0 A point. [(x, y, z)]
-        /// @param[in] p1 A point. [(x, y, z)]
-        /// @return True if the points are considered to be at the same location.
-        ///
-        /// Basically, this function will return true if the specified points are
-        /// close enough to eachother to be considered colocated.
-        public static bool VEqual(RcVec3f p0, RcVec3f p1)
-        {
-            return VEqual(p0, p1, EQUAL_THRESHOLD);
-        }
-
-        public static bool VEqual(RcVec3f p0, RcVec3f p1, float thresholdSqr)
-        {
-            float d = RcVec3f.DistSqr(p0, p1);
-            return d < thresholdSqr;
-        }
-
         /// Determines if two axis-aligned bounding boxes overlap.
         /// @param[in] amin Minimum bounds of box A. [(x, y, z)]
         /// @param[in] amax Maximum bounds of box A. [(x, y, z)]
@@ -63,12 +43,12 @@ namespace DotRecast.Detour
         /// @param[in] bmax Maximum bounds of box B. [(x, y, z)]
         /// @return True if the two AABB's overlap.
         /// @see dtOverlapBounds
-        public static bool OverlapQuantBounds(int[] amin, int[] amax, int[] bmin, int[] bmax)
+        public static bool OverlapQuantBounds(RcVec3i amin, RcVec3i amax, RcVec3i bmin, RcVec3i bmax)
         {
             bool overlap = true;
-            overlap = (amin[0] > bmax[0] || amax[0] < bmin[0]) ? false : overlap;
-            overlap = (amin[1] > bmax[1] || amax[1] < bmin[1]) ? false : overlap;
-            overlap = (amin[2] > bmax[2] || amax[2] < bmin[2]) ? false : overlap;
+            overlap = (amin.X > bmax.X || amax.X < bmin.X) ? false : overlap;
+            overlap = (amin.Y > bmax.Y || amax.Y < bmin.Y) ? false : overlap;
+            overlap = (amin.Z > bmax.Z || amax.Z < bmin.Z) ? false : overlap;
             return overlap;
         }
 
@@ -82,9 +62,9 @@ namespace DotRecast.Detour
         public static bool OverlapBounds(RcVec3f amin, RcVec3f amax, RcVec3f bmin, RcVec3f bmax)
         {
             bool overlap = true;
-            overlap = (amin.x > bmax.x || amax.x < bmin.x) ? false : overlap;
-            overlap = (amin.y > bmax.y || amax.y < bmin.y) ? false : overlap;
-            overlap = (amin.z > bmax.z || amax.z < bmin.z) ? false : overlap;
+            overlap = (amin.X > bmax.X || amax.X < bmin.X) ? false : overlap;
+            overlap = (amin.Y > bmax.Y || amax.Y < bmin.Y) ? false : overlap;
+            overlap = (amin.Z > bmax.Z || amax.Z < bmin.Z) ? false : overlap;
             return overlap;
         }
 
@@ -96,7 +76,7 @@ namespace DotRecast.Detour
         /// @par
         ///
         /// All vertices are projected onto the xz-plane, so the y-values are ignored.
-        public static bool OverlapPolyPoly2D(float[] polya, int npolya, float[] polyb, int npolyb)
+        public static bool OverlapPolyPoly2D(Span<float> polya, int npolya, Span<float> polyb, int npolyb)
         {
             const float eps = 1e-4f;
             for (int i = 0, j = npolya - 1; i < npolya; j = i++)
@@ -104,11 +84,11 @@ namespace DotRecast.Detour
                 int va = j * 3;
                 int vb = i * 3;
 
-                RcVec3f n = RcVec3f.Of(polya[vb + 2] - polya[va + 2], 0, -(polya[vb + 0] - polya[va + 0]));
+                RcVec3f n = new RcVec3f(polya[vb + 2] - polya[va + 2], 0, -(polya[vb + 0] - polya[va + 0]));
 
                 RcVec2f aminmax = ProjectPoly(n, polya, npolya);
                 RcVec2f bminmax = ProjectPoly(n, polyb, npolyb);
-                if (!OverlapRange(aminmax.x, aminmax.y, bminmax.x, bminmax.y, eps))
+                if (!OverlapRange(aminmax.X, aminmax.Y, bminmax.X, bminmax.Y, eps))
                 {
                     // Found separating axis
                     return false;
@@ -120,11 +100,11 @@ namespace DotRecast.Detour
                 int va = j * 3;
                 int vb = i * 3;
 
-                RcVec3f n = RcVec3f.Of(polyb[vb + 2] - polyb[va + 2], 0, -(polyb[vb + 0] - polyb[va + 0]));
+                RcVec3f n = new RcVec3f(polyb[vb + 2] - polyb[va + 2], 0, -(polyb[vb + 0] - polyb[va + 0]));
 
                 RcVec2f aminmax = ProjectPoly(n, polya, npolya);
                 RcVec2f bminmax = ProjectPoly(n, polyb, npolyb);
-                if (!OverlapRange(aminmax.x, aminmax.y, bminmax.x, bminmax.y, eps))
+                if (!OverlapRange(aminmax.X, aminmax.Y, bminmax.X, bminmax.Y, eps))
                 {
                     // Found separating axis
                     return false;
@@ -144,7 +124,7 @@ namespace DotRecast.Detour
         /// @param[in] b Vertex B. [(x, y, z)]
         /// @param[in] c Vertex C. [(x, y, z)]
         /// @return The signed xz-plane area of the triangle.
-        public static float TriArea2D(float[] verts, int a, int b, int c)
+        public static float TriArea2D(Span<float> verts, int a, int b, int c)
         {
             float abx = verts[b] - verts[a];
             float abz = verts[b + 2] - verts[a + 2];
@@ -155,16 +135,16 @@ namespace DotRecast.Detour
 
         public static float TriArea2D(RcVec3f a, RcVec3f b, RcVec3f c)
         {
-            float abx = b.x - a.x;
-            float abz = b.z - a.z;
-            float acx = c.x - a.x;
-            float acz = c.z - a.z;
+            float abx = b.X - a.X;
+            float abz = b.Z - a.Z;
+            float acx = c.X - a.X;
+            float acz = c.Z - a.Z;
             return acx * abz - abx * acz;
         }
 
         // Returns a random point in a convex polygon.
         // Adapted from Graphics Gems article.
-        public static RcVec3f RandomPointInConvexPoly(float[] pts, int npts, float[] areas, float s, float t)
+        public static void RandomPointInConvexPoly(Span<float> pts, int npts, Span<float> areas, float s, float t, out RcVec3f @out)
         {
             // Calc triangle araes
             float areasum = 0.0f;
@@ -192,7 +172,7 @@ namespace DotRecast.Detour
                 acc += dacc;
             }
 
-            float v = (float)Math.Sqrt(t);
+            float v = MathF.Sqrt(t);
 
             float a = 1 - v;
             float b = (1 - u) * v;
@@ -201,11 +181,11 @@ namespace DotRecast.Detour
             int pb = (tri - 1) * 3;
             int pc = tri * 3;
 
-            return new RcVec3f()
+            @out = new RcVec3f()
             {
-                x = a * pts[pa] + b * pts[pb] + c * pts[pc],
-                y = a * pts[pa + 1] + b * pts[pb + 1] + c * pts[pc + 1],
-                z = a * pts[pa + 2] + b * pts[pb + 2] + c * pts[pc + 2]
+                X = a * pts[pa] + b * pts[pb] + c * pts[pc],
+                Y = a * pts[pa + 1] + b * pts[pb + 1] + c * pts[pc + 1],
+                Z = a * pts[pa + 2] + b * pts[pb + 2] + c * pts[pc + 2]
             };
         }
 
@@ -214,19 +194,19 @@ namespace DotRecast.Detour
             const float EPS = 1e-6f;
 
             h = 0;
-            RcVec3f v0 = c.Subtract(a);
-            RcVec3f v1 = b.Subtract(a);
-            RcVec3f v2 = p.Subtract(a);
+            RcVec3f v0 = RcVec3f.Subtract(c, a);
+            RcVec3f v1 = RcVec3f.Subtract(b, a);
+            RcVec3f v2 = RcVec3f.Subtract(p, a);
 
             // Compute scaled barycentric coordinates
-            float denom = v0.x * v1.z - v0.z * v1.x;
-            if (Math.Abs(denom) < EPS)
+            float denom = v0.X * v1.Z - v0.Z * v1.X;
+            if (MathF.Abs(denom) < EPS)
             {
                 return false;
             }
 
-            float u = v1.z * v2.x - v1.x * v2.z;
-            float v = v0.x * v2.z - v0.z * v2.x;
+            float u = v1.Z * v2.X - v1.X * v2.Z;
+            float v = v0.X * v2.Z - v0.Z * v2.X;
 
             if (denom < 0)
             {
@@ -238,35 +218,35 @@ namespace DotRecast.Detour
             // If point lies inside the triangle, return interpolated ycoord.
             if (u >= 0.0f && v >= 0.0f && (u + v) <= denom)
             {
-                h = a.y + (v0.y * u + v1.y * v) / denom;
+                h = a.Y + (v0.Y * u + v1.Y * v) / denom;
                 return true;
             }
 
             return false;
         }
 
-        public static RcVec2f ProjectPoly(RcVec3f axis, float[] poly, int npoly)
+        public static RcVec2f ProjectPoly(RcVec3f axis, Span<float> poly, int npoly)
         {
             float rmin, rmax;
-            rmin = rmax = axis.Dot2D(poly, 0);
+            rmin = rmax = axis.Dot2D(poly.ToVec3());
             for (int i = 1; i < npoly; ++i)
             {
-                float d = axis.Dot2D(poly, i * 3);
+                float d = axis.Dot2D(poly.ToVec3(i * 3));
                 rmin = Math.Min(rmin, d);
                 rmax = Math.Max(rmax, d);
             }
 
             return new RcVec2f
             {
-                x = rmin,
-                y = rmax,
+                X = rmin,
+                Y = rmax,
             };
         }
 
         /// @par
         ///
         /// All points are projected onto the xz-plane, so the y-values are ignored.
-        public static bool PointInPolygon(RcVec3f pt, float[] verts, int nverts)
+        public static bool PointInPolygon(RcVec3f pt, Span<float> verts, int nverts)
         {
             // TODO: Replace pnpoly with triArea2D tests?
             int i, j;
@@ -275,8 +255,8 @@ namespace DotRecast.Detour
             {
                 int vi = i * 3;
                 int vj = j * 3;
-                if (((verts[vi + 2] > pt.z) != (verts[vj + 2] > pt.z)) && (pt.x < (verts[vj + 0] - verts[vi + 0])
-                        * (pt.z - verts[vi + 2]) / (verts[vj + 2] - verts[vi + 2]) + verts[vi + 0]))
+                if (((verts[vi + 2] > pt.Z) != (verts[vj + 2] > pt.Z)) && (pt.X < (verts[vj + 0] - verts[vi + 0])
+                        * (pt.Z - verts[vi + 2]) / (verts[vj + 2] - verts[vi + 2]) + verts[vi + 0]))
                 {
                     c = !c;
                 }
@@ -285,7 +265,7 @@ namespace DotRecast.Detour
             return c;
         }
 
-        public static bool DistancePtPolyEdgesSqr(RcVec3f pt, float[] verts, int nverts, float[] ed, float[] et)
+        public static bool DistancePtPolyEdgesSqr(RcVec3f pt, Span<float> verts, int nverts, Span<float> ed, Span<float> et)
         {
             // TODO: Replace pnpoly with triArea2D tests?
             int i, j;
@@ -294,8 +274,8 @@ namespace DotRecast.Detour
             {
                 int vi = i * 3;
                 int vj = j * 3;
-                if (((verts[vi + 2] > pt.z) != (verts[vj + 2] > pt.z)) &&
-                    (pt.x < (verts[vj + 0] - verts[vi + 0]) * (pt.z - verts[vi + 2]) / (verts[vj + 2] - verts[vi + 2]) + verts[vi + 0]))
+                if (((verts[vi + 2] > pt.Z) != (verts[vj + 2] > pt.Z)) &&
+                    (pt.X < (verts[vj + 0] - verts[vi + 0]) * (pt.Z - verts[vi + 2]) / (verts[vj + 2] - verts[vi + 2]) + verts[vi + 0]))
                 {
                     c = !c;
                 }
@@ -306,19 +286,19 @@ namespace DotRecast.Detour
             return c;
         }
 
-        public static float DistancePtSegSqr2D(RcVec3f pt, float[] verts, int p, int q, out float t)
+        public static float DistancePtSegSqr2D(RcVec3f pt, Span<float> verts, int p, int q, out float t)
         {
-            var vp = RcVec3f.Of(verts, p);
-            var vq = RcVec3f.Of(verts, q);
+            var vp = verts.ToVec3(p);
+            var vq = verts.ToVec3(q);
             return DistancePtSegSqr2D(pt, vp, vq, out t);
         }
 
         public static float DistancePtSegSqr2D(RcVec3f pt, RcVec3f p, RcVec3f q, out float t)
         {
-            float pqx = q.x - p.x;
-            float pqz = q.z - p.z;
-            float dx = pt.x - p.x;
-            float dz = pt.z - p.z;
+            float pqx = q.X - p.X;
+            float pqz = q.Z - p.Z;
+            float dx = pt.X - p.X;
+            float dz = pt.Z - p.Z;
             float d = pqx * pqx + pqz * pqz;
             t = pqx * dx + pqz * dz;
             if (d > 0)
@@ -335,13 +315,13 @@ namespace DotRecast.Detour
                 t = 1;
             }
 
-            dx = p.x + t * pqx - pt.x;
-            dz = p.z + t * pqz - pt.z;
+            dx = p.X + t * pqx - pt.X;
+            dz = p.Z + t * pqz - pt.Z;
             return dx * dx + dz * dz;
         }
 
         public static bool IntersectSegmentPoly2D(RcVec3f p0, RcVec3f p1,
-            RcVec3f[] verts, int nverts,
+            Span<RcVec3f> verts, int nverts,
             out float tmin, out float tmax,
             out int segMin, out int segMax)
         {
@@ -352,18 +332,18 @@ namespace DotRecast.Detour
             segMin = -1;
             segMax = -1;
 
-            var dir = p1.Subtract(p0);
+            var dir = RcVec3f.Subtract(p1, p0);
 
             var p0v = p0;
             for (int i = 0, j = nverts - 1; i < nverts; j = i++)
             {
                 RcVec3f vpj = verts[j];
                 RcVec3f vpi = verts[i];
-                var edge = vpi.Subtract(vpj);
-                var diff = p0v.Subtract(vpj);
-                float n = RcVec3f.Perp2D(edge, diff);
-                float d = RcVec3f.Perp2D(dir, edge);
-                if (Math.Abs(d) < EPS)
+                var edge = RcVec3f.Subtract(vpi, vpj);
+                var diff = RcVec3f.Subtract(p0v, vpj);
+                float n = RcVec.Perp2D(edge, diff);
+                float d = RcVec.Perp2D(dir, edge);
+                if (MathF.Abs(d) < EPS)
                 {
                     // S is nearly parallel to this edge
                     if (n < 0)
@@ -421,17 +401,17 @@ namespace DotRecast.Detour
             s = 0;
             t = 0;
 
-            RcVec3f u = aq.Subtract(ap);
-            RcVec3f v = bq.Subtract(bp);
-            RcVec3f w = ap.Subtract(bp);
-            float d = RcVec3f.PerpXZ(u, v);
-            if (Math.Abs(d) < 1e-6f)
+            RcVec3f u = RcVec3f.Subtract(aq, ap);
+            RcVec3f v = RcVec3f.Subtract(bq, bp);
+            RcVec3f w = RcVec3f.Subtract(ap, bp);
+            float d = RcVec.PerpXZ(u, v);
+            if (MathF.Abs(d) < 1e-6f)
             {
                 return false;
             }
 
-            s = RcVec3f.PerpXZ(v, w) / d;
-            t = RcVec3f.PerpXZ(u, w) / d;
+            s = RcVec.PerpXZ(v, w) / d;
+            t = RcVec.PerpXZ(u, w) / d;
 
             return true;
         }

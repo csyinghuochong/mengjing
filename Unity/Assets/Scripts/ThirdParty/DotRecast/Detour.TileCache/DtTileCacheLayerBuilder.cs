@@ -1,7 +1,7 @@
 /*
 Copyright (c) 2009-2010 Mikko Mononen memon@inside.org
 recast4j copyright (c) 2015-2019 Piotr Piastucki piotr@jtilia.org
-DotRecast Copyright (c) 2023 Choi Ikpil ikpil@naver.com
+DotRecast Copyright (c) 2023-2024 Choi Ikpil ikpil@naver.com
 
 This software is provided 'as-is', without any express or implied
 warranty.  In no event will the authors be held liable for any damages
@@ -18,12 +18,10 @@ freely, subject to the following restrictions:
 3. This notice may not be removed or altered from any source distribution.
 */
 
-using System;
-using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using DotRecast.Core;
+using DotRecast.Core.Numerics;
 using DotRecast.Detour.TileCache.Io.Compress;
 using DotRecast.Recast;
 using DotRecast.Recast.Geom;
@@ -39,7 +37,7 @@ namespace DotRecast.Detour.TileCache
             _compFactory = compFactory;
         }
 
-        public List<DtTileCacheLayerBuildResult> Build(IInputGeomProvider geom, RcConfig cfg, DtTileCacheStorageParams storageParams, int threads, int tw, int th)
+        public List<DtTileCacheLayerBuildResult> Build(IRcInputGeomProvider geom, RcConfig cfg, DtTileCacheStorageParams storageParams, int threads, int tw, int th)
         {
             if (threads == 1)
             {
@@ -49,7 +47,7 @@ namespace DotRecast.Detour.TileCache
             return BuildMultiThread(geom, cfg, storageParams, tw, th, threads);
         }
 
-        private List<DtTileCacheLayerBuildResult> BuildSingleThread(IInputGeomProvider geom, RcConfig cfg, DtTileCacheStorageParams storageParams, int tw, int th)
+        private List<DtTileCacheLayerBuildResult> BuildSingleThread(IRcInputGeomProvider geom, RcConfig cfg, DtTileCacheStorageParams storageParams, int tw, int th)
         {
             var results = new List<DtTileCacheLayerBuildResult>();
             for (int y = 0; y < th; ++y)
@@ -65,7 +63,7 @@ namespace DotRecast.Detour.TileCache
         }
 
 
-        private List<DtTileCacheLayerBuildResult> BuildMultiThread(IInputGeomProvider geom, RcConfig cfg, DtTileCacheStorageParams storageParams, int tw, int th, int threads)
+        private List<DtTileCacheLayerBuildResult> BuildMultiThread(IRcInputGeomProvider geom, RcConfig cfg, DtTileCacheStorageParams storageParams, int tw, int th, int threads)
         {
             var results = new List<Task<DtTileCacheLayerBuildResult>>();
             for (int y = 0; y < th; ++y)
@@ -84,23 +82,22 @@ namespace DotRecast.Detour.TileCache
                 .ToList();
         }
 
-        protected virtual RcHeightfieldLayerSet BuildHeightfieldLayerSet(IInputGeomProvider geom, RcConfig cfg, int tx, int ty)
+        protected virtual RcHeightfieldLayerSet BuildHeightfieldLayerSet(IRcInputGeomProvider geom, RcConfig cfg, int tx, int ty)
         {
-            RecastBuilder rcBuilder = new RecastBuilder();
+            RcBuilder rcBuilder = new RcBuilder();
             RcVec3f bmin = geom.GetMeshBoundsMin();
             RcVec3f bmax = geom.GetMeshBoundsMax();
-            RecastBuilderConfig builderCfg = new RecastBuilderConfig(cfg, bmin, bmax, tx, ty);
+            RcBuilderConfig builderCfg = new RcBuilderConfig(cfg, bmin, bmax, tx, ty);
             RcHeightfieldLayerSet lset = rcBuilder.BuildLayers(geom, builderCfg);
             return lset;
         }
 
-        protected virtual DtTileCacheLayerBuildResult BuildTileCacheLayer(IInputGeomProvider geom, RcConfig cfg, int tx, int ty, DtTileCacheStorageParams storageParams)
+        protected virtual DtTileCacheLayerBuildResult BuildTileCacheLayer(IRcInputGeomProvider geom, RcConfig cfg, int tx, int ty, DtTileCacheStorageParams storageParams)
         {
             RcHeightfieldLayerSet lset = BuildHeightfieldLayerSet(geom, cfg, tx, ty);
             List<byte[]> result = new List<byte[]>();
             if (lset != null)
             {
-                DtTileCacheBuilder builder = new DtTileCacheBuilder();
                 for (int i = 0; i < lset.layers.Length; ++i)
                 {
                     RcHeightfieldLayer layer = lset.layers[i];
@@ -128,7 +125,7 @@ namespace DotRecast.Detour.TileCache
                     header.hmax = layer.hmax;
 
                     var comp = _compFactory.Create(storageParams.Compatibility ? 0 : 1);
-                    var bytes = builder.CompressTileCacheLayer(header, layer.heights, layer.areas, layer.cons, storageParams.Order, storageParams.Compatibility, comp);
+                    var bytes = DtTileCacheBuilder.CompressTileCacheLayer(header, layer.heights, layer.areas, layer.cons, storageParams.Order, storageParams.Compatibility, comp);
                     result.Add(bytes);
                 }
             }

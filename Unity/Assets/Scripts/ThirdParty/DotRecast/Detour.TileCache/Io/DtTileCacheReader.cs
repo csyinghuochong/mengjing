@@ -1,7 +1,7 @@
 /*
 Copyright (c) 2009-2010 Mikko Mononen memon@inside.org
 recast4j copyright (c) 2015-2019 Piotr Piastucki piotr@jtilia.org
-DotRecast Copyright (c) 2023 Choi Ikpil ikpil@naver.com
+DotRecast Copyright (c) 2023-2024 Choi Ikpil ikpil@naver.com
 
 This software is provided 'as-is', without any express or implied
 warranty.  In no event will the authors be held liable for any damages
@@ -37,7 +37,7 @@ namespace DotRecast.Detour.TileCache.Io
 
         public DtTileCache Read(BinaryReader @is, int maxVertPerPoly, IDtTileCacheMeshProcess meshProcessor)
         {
-            RcByteBuffer bb = IOUtils.ToByteBuffer(@is);
+            RcByteBuffer bb = RcIO.ToByteBuffer(@is);
             return Read(bb, maxVertPerPoly, meshProcessor);
         }
 
@@ -47,7 +47,7 @@ namespace DotRecast.Detour.TileCache.Io
             header.magic = bb.GetInt();
             if (header.magic != DtTileCacheSetHeader.TILECACHESET_MAGIC)
             {
-                header.magic = IOUtils.SwapEndianness(header.magic);
+                header.magic = RcIO.SwapEndianness(header.magic);
                 if (header.magic != DtTileCacheSetHeader.TILECACHESET_MAGIC)
                 {
                     throw new IOException("Invalid magic");
@@ -69,7 +69,8 @@ namespace DotRecast.Detour.TileCache.Io
             header.numTiles = bb.GetInt();
             header.meshParams = paramReader.Read(bb);
             header.cacheParams = ReadCacheParams(bb, cCompatibility);
-            DtNavMesh mesh = new DtNavMesh(header.meshParams, maxVertPerPoly);
+            DtNavMesh mesh = new DtNavMesh();
+            mesh.Init(header.meshParams, maxVertPerPoly);
             IRcCompressor comp = _compFactory.Create(cCompatibility ? 0 : 1);
             DtTileCacheStorageParams storageParams = new DtTileCacheStorageParams(bb.Order(), cCompatibility);
             DtTileCache tc = new DtTileCache(header.cacheParams, storageParams, mesh, comp, meshProcessor);
@@ -98,9 +99,9 @@ namespace DotRecast.Detour.TileCache.Io
         {
             DtTileCacheParams option = new DtTileCacheParams();
 
-            option.orig.x = bb.GetFloat();
-            option.orig.y = bb.GetFloat();
-            option.orig.z = bb.GetFloat();
+            option.orig.X = bb.GetFloat();
+            option.orig.Y = bb.GetFloat();
+            option.orig.Z = bb.GetFloat();
 
             option.cs = bb.GetFloat();
             option.ch = bb.GetFloat();

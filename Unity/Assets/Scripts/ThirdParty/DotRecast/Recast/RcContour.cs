@@ -1,7 +1,7 @@
 /*
 Copyright (c) 2009-2010 Mikko Mononen memon@inside.org
 recast4j copyright (c) 2015-2019 Piotr Piastucki piotr@jtilia.org
-DotRecast Copyright (c) 2023 Choi Ikpil ikpil@naver.com
+DotRecast Copyright (c) 2023-2024 Choi Ikpil ikpil@naver.com
 
 This software is provided 'as-is', without any express or implied
 warranty.  In no event will the authors be held liable for any damages
@@ -20,25 +20,14 @@ freely, subject to the following restrictions:
 
 namespace DotRecast.Recast
 {
-    /** Represents a simple, non-overlapping contour in field space. */
+    /// Represents a simple, non-overlapping contour in field space.
     public class RcContour
     {
-        /** Simplified contour vertex and connection data. [Size: 4 * #nverts] */
-        public int[] verts;
-
-        /** The number of vertices in the simplified contour. */
-        public int nverts;
-
-        /** Raw contour vertex and connection data. [Size: 4 * #nrverts] */
-        public int[] rverts;
-
-        /** The number of vertices in the raw contour. */
-        public int nrverts;
-
-        /** The region id of the contour. */
-        public int area;
-
-        /** The area id of the contour. */
-        public int reg;
+        public int[] verts; //< Simplified contour vertex and connection data. [Size: 4 * #nverts]
+        public int nverts; //< The number of vertices in the simplified contour.
+        public int[] rverts; //< Raw contour vertex and connection data. [Size: 4 * #nrverts]
+        public int nrverts; //< The number of vertices in the raw contour.
+        public int reg; //< The region id of the contour.
+        public int area; //< The area id of the contour.
     }
 }

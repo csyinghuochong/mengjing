@@ -1,7 +1,7 @@
 /*
 Copyright (c) 2009-2010 Mikko Mononen memon@inside.org
 recast4j copyright (c) 2015-2019 Piotr Piastucki piotr@jtilia.org
-DotRecast Copyright (c) 2023 Choi Ikpil ikpil@naver.com
+DotRecast Copyright (c) 2023-2024 Choi Ikpil ikpil@naver.com
 
 This software is provided 'as-is', without any express or implied
 warranty.  In no event will the authors be held liable for any damages
@@ -22,44 +22,45 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using DotRecast.Core;
+using DotRecast.Core.Numerics;
 using DotRecast.Detour.TileCache.Io;
-using DotRecast.Detour.TileCache.Io.Compress;
-using static DotRecast.Core.RcMath;
+using DotRecast.Recast;
+
 
 namespace DotRecast.Detour.TileCache
 {
-    public class DtTileCacheBuilder
+    public static class DtTileCacheBuilder
     {
-        public const int DT_TILECACHE_NULL_AREA = 0;
-        public const int DT_TILECACHE_WALKABLE_AREA = 63;
+        public const byte DT_TILECACHE_NULL_AREA = 0;
+        public const byte DT_TILECACHE_WALKABLE_AREA = 63;
         public const int DT_TILECACHE_NULL_IDX = 0xffff;
+        public const uint VERTEX_BUCKET_COUNT2 = (1 << 8);
+
         private static readonly int[] DirOffsetX = { -1, 0, 1, 0, };
         private static readonly int[] DirOffsetY = { 0, 1, 0, -1 };
 
-        private readonly DtTileCacheLayerHeaderReader reader = new DtTileCacheLayerHeaderReader();
-
-        public void BuildTileCacheRegions(DtTileCacheLayer layer, int walkableClimb)
+        public static void BuildTileCacheRegions(DtTileCacheLayer layer, int walkableClimb)
         {
             int w = layer.header.width;
             int h = layer.header.height;
 
-            Array.Fill(layer.regs, (short)0x00FF);
+            Array.Fill(layer.regs, (byte)0xFF);
             int nsweeps = w;
-            DtLayerSweepSpan[] sweeps = new DtLayerSweepSpan[nsweeps];
+            RcLayerSweepSpan[] sweeps = new RcLayerSweepSpan[nsweeps];
             for (int i = 0; i < sweeps.Length; i++)
             {
-                sweeps[i] = new DtLayerSweepSpan();
+                sweeps[i] = new RcLayerSweepSpan();
             }
 
             // Partition walkable area into monotone regions.
-            int[] prevCount = new int[256];
-            int regId = 0;
+            Span<byte> prevCount = stackalloc byte[256];
+            byte regId = 0;
 
             for (int y = 0; y < h; ++y)
             {
                 if (regId > 0)
                 {
-                    Array.Fill(prevCount, 0, 0, regId);
+                    RcSpans.Fill<byte>(prevCount, 0, 0, regId);
                 }
 
                 // Memset(prevCount,0,Sizeof(char)*regId);
@@ -92,7 +93,7 @@ namespace DotRecast.Detour.TileCache
                     int yidx = x + (y - 1) * w;
                     if (y > 0 && IsConnected(layer, idx, yidx, walkableClimb))
                     {
-                        int nr = layer.regs[yidx];
+                        byte nr = layer.regs[yidx];
                         if (nr != 0xff)
                         {
                             // Set neighbour when first valid neighbour is
@@ -146,12 +147,12 @@ namespace DotRecast.Detour.TileCache
                 {
                     int idx = x + y * w;
                     if (layer.regs[idx] != 0xff)
-                        layer.regs[idx] = (short)sweeps[layer.regs[idx]].id;
+                        layer.regs[idx] = sweeps[layer.regs[idx]].id;
                 }
             }
 
             // Allocate and init layer regions.
-            int nregs = regId;
+            byte nregs = regId;
             DtLayerMonotoneRegion[] regs = new DtLayerMonotoneRegion[nregs];
 
             for (int i = 0; i < nregs; ++i)
@@ -166,7 +167,7 @@ namespace DotRecast.Detour.TileCache
                 for (int x = 0; x < w; ++x)
                 {
                     int idx = x + y * w;
-                    int ri = layer.regs[idx];
+                    byte ri = layer.regs[idx];
                     if (ri == 0xff)
                         continue;
 
@@ -178,17 +179,17 @@ namespace DotRecast.Detour.TileCache
                     int ymi = x + (y - 1) * w;
                     if (y > 0 && IsConnected(layer, idx, ymi, walkableClimb))
                     {
-                        int rai = layer.regs[ymi];
+                        byte rai = layer.regs[ymi];
                         if (rai != 0xff && rai != ri)
                         {
-                            AddUniqueLast(regs[ri].neis, rai);
-                            AddUniqueLast(regs[rai].neis, ri);
+                            AddUniqueLast(regs[ri].neis, ref regs[ri].nneis, rai);
+                            AddUniqueLast(regs[rai].neis, ref regs[rai].nneis, ri);
                         }
                     }
                 }
             }
 
-            for (int i = 0; i < nregs; ++i)
+            for (byte i = 0; i < nregs; ++i)
                 regs[i].regId = i;
 
             for (int i = 0; i < nregs; ++i)
@@ -197,8 +198,9 @@ namespace DotRecast.Detour.TileCache
 
                 int merge = -1;
                 int mergea = 0;
-                foreach (int nei in reg.neis)
+                for (int j = 0; j < reg.nneis; ++j)
                 {
+                    byte nei = reg.neis[j];
                     DtLayerMonotoneRegion regn = regs[nei];
                     if (reg.regId == regn.regId)
                         continue;
@@ -217,7 +219,7 @@ namespace DotRecast.Detour.TileCache
                 if (merge != -1)
                 {
                     int oldId = reg.regId;
-                    int newId = regs[merge].regId;
+                    byte newId = regs[merge].regId;
                     for (int j = 0; j < nregs; ++j)
                         if (regs[j].regId == oldId)
                             regs[j].regId = newId;
@@ -225,7 +227,7 @@ namespace DotRecast.Detour.TileCache
             }
 
             // Compact ids.
-            int[] remap = new int[256];
+            Span<byte> remap = stackalloc byte[256];
             // Find number of unique regions.
             regId = 0;
             for (int i = 0; i < nregs; ++i)
@@ -242,28 +244,29 @@ namespace DotRecast.Detour.TileCache
             for (int i = 0; i < w * h; ++i)
             {
                 if (layer.regs[i] != 0xff)
-                    layer.regs[i] = (short)regs[layer.regs[i]].regId;
+                    layer.regs[i] = regs[layer.regs[i]].regId;
             }
         }
 
-        void AddUniqueLast(List<int> a, int v)
+        public static void AddUniqueLast(byte[] a, ref byte an, byte v)
         {
-            int n = a.Count;
+            int n = an;
             if (n > 0 && a[n - 1] == v)
                 return;
-            a.Add(v);
+            a[an] = v;
+            an++;
         }
 
-        bool IsConnected(DtTileCacheLayer layer, int ia, int ib, int walkableClimb)
+        public static bool IsConnected(DtTileCacheLayer layer, int ia, int ib, int walkableClimb)
         {
             if (layer.areas[ia] != layer.areas[ib])
                 return false;
-            if (Math.Abs(layer.heights[ia] - layer.heights[ib]) > walkableClimb)
+            if (MathF.Abs(layer.heights[ia] - layer.heights[ib]) > walkableClimb)
                 return false;
             return true;
         }
 
-        bool CanMerge(int oldRegId, int newRegId, DtLayerMonotoneRegion[] regs, int nregs)
+        public static bool CanMerge(int oldRegId, int newRegId, DtLayerMonotoneRegion[] regs, int nregs)
         {
             int count = 0;
             for (int i = 0; i < nregs; ++i)
@@ -271,9 +274,11 @@ namespace DotRecast.Detour.TileCache
                 DtLayerMonotoneRegion reg = regs[i];
                 if (reg.regId != oldRegId)
                     continue;
-                foreach (int nei in reg.neis)
+
+                int nnei = reg.nneis;
+                for (int j = 0; j < nnei; ++j)
                 {
-                    if (regs[nei].regId == newRegId)
+                    if (regs[reg.neis[j]].regId == newRegId)
                         count++;
                 }
             }
@@ -281,7 +286,7 @@ namespace DotRecast.Detour.TileCache
             return count == 1;
         }
 
-        private void AppendVertex(DtTempContour cont, int x, int y, int z, int r)
+        public static void AppendVertex(DtTempContour cont, int x, int y, int z, int r)
         {
             // Try to merge with existing segments.
             if (cont.nverts > 1)
@@ -315,7 +320,7 @@ namespace DotRecast.Detour.TileCache
             cont.nverts++;
         }
 
-        private int GetNeighbourReg(DtTileCacheLayer layer, int ax, int ay, int dir)
+        public static int GetNeighbourReg(DtTileCacheLayer layer, int ax, int ay, int dir)
         {
             int w = layer.header.width;
             int ia = ax + ay * w;
@@ -338,22 +343,23 @@ namespace DotRecast.Detour.TileCache
             return layer.regs[ib];
         }
 
-        private int GetDirOffsetX(int dir)
+        public static int GetDirOffsetX(int dir)
         {
             return DirOffsetX[dir & 0x03];
         }
 
-        private int GetDirOffsetY(int dir)
+        public static int GetDirOffsetY(int dir)
         {
             return DirOffsetY[dir & 0x03];
         }
 
-        private void WalkContour(DtTileCacheLayer layer, int x, int y, DtTempContour cont)
+        public static void WalkContour(DtTileCacheLayer layer, int x, int y, DtTempContour cont)
         {
             int w = layer.header.width;
             int h = layer.header.height;
 
-            cont.Clear();
+            cont.nverts = 0;
+            cont.verts.Clear();
 
             int startX = x;
             int startY = y;
@@ -433,7 +439,7 @@ namespace DotRecast.Detour.TileCache
                 cont.nverts--;
         }
 
-        private float DistancePtSeg(int x, int z, int px, int pz, int qx, int qz)
+        public static float DistancePtSeg(int x, int z, int px, int pz, int qx, int qz)
         {
             float pqx = qx - px;
             float pqz = qz - pz;
@@ -454,7 +460,7 @@ namespace DotRecast.Detour.TileCache
             return dx * dx + dz * dz;
         }
 
-        private void SimplifyContour(DtTempContour cont, float maxError)
+        public static void SimplifyContour(DtTempContour cont, float maxError)
         {
             cont.poly.Clear();
 
@@ -468,7 +474,7 @@ namespace DotRecast.Detour.TileCache
                     cont.poly.Add(i);
             }
 
-            if (cont.Npoly() < 2)
+            if (cont.poly.Count < 2)
             {
                 // If there is no transitions at all,
                 // create some initial points for the simplification process.
@@ -505,9 +511,9 @@ namespace DotRecast.Detour.TileCache
 
             // Add points until all raw points are within
             // error tolerance to the simplified shape.
-            for (int i = 0; i < cont.Npoly();)
+            for (int i = 0; i < cont.poly.Count;)
             {
-                int ii = (i + 1) % cont.Npoly();
+                int ii = (i + 1) % cont.poly.Count;
 
                 int ai = cont.poly[i];
                 int ax = cont.verts[ai * 4];
@@ -565,14 +571,14 @@ namespace DotRecast.Detour.TileCache
 
             // Remap vertices
             int start = 0;
-            for (int i = 1; i < cont.Npoly(); ++i)
+            for (int i = 1; i < cont.poly.Count; ++i)
                 if (cont.poly[i] < cont.poly[start])
                     start = i;
 
             cont.nverts = 0;
-            for (int i = 0; i < cont.Npoly(); ++i)
+            for (int i = 0; i < cont.poly.Count; ++i)
             {
-                int j = (start + i) % cont.Npoly();
+                int j = (start + i) % cont.poly.Count;
                 int src = cont.poly[j] * 4;
                 int dst = cont.nverts * 4;
                 cont.verts[dst] = cont.verts[src];
@@ -583,7 +589,7 @@ namespace DotRecast.Detour.TileCache
             }
         }
 
-        static int GetCornerHeight(DtTileCacheLayer layer, int x, int y, int z, int walkableClimb, out bool shouldRemove)
+        public static int GetCornerHeight(DtTileCacheLayer layer, int x, int y, int z, int walkableClimb, out bool shouldRemove)
         {
             int w = layer.header.width;
             int h = layer.header.height;
@@ -605,7 +611,7 @@ namespace DotRecast.Detour.TileCache
                     {
                         int idx = px + pz * w;
                         int lh = layer.heights[idx];
-                        if (Math.Abs(lh - y) <= walkableClimb && layer.areas[idx] != DT_TILECACHE_NULL_AREA)
+                        if (MathF.Abs(lh - y) <= walkableClimb && layer.areas[idx] != DT_TILECACHE_NULL_AREA)
                         {
                             height = Math.Max(height, (char)lh);
                             portal &= (layer.cons[idx] >> 4);
@@ -633,7 +639,7 @@ namespace DotRecast.Detour.TileCache
         }
 
         // TODO: move this somewhere else, once the layer meshing is done.
-        public DtTileCacheContourSet BuildTileCacheContours(DtTileCacheLayer layer, int walkableClimb, float maxError)
+        public static DtTileCacheContourSet BuildTileCacheContours(DtTileCacheAlloc alloc, DtTileCacheLayer layer, int walkableClimb, float maxError)
         {
             int w = layer.header.width;
             int h = layer.header.height;
@@ -647,6 +653,16 @@ namespace DotRecast.Detour.TileCache
             }
 
             // Allocate temp buffer for contour tracing.
+            // TODO: @ikpil, improve pooling system
+            // int maxTempVerts = (w + h) * 2 * 2; // Twice around the layer.
+            // dtFixedArray<unsigned char> tempVerts(alloc, maxTempVerts*4);
+            // if (!tempVerts)
+            //     return DT_FAILURE | DT_OUT_OF_MEMORY;
+	           //
+            // dtFixedArray<unsigned short> tempPoly(alloc, maxTempVerts);
+            // if (!tempPoly)
+            //     return DT_FAILURE | DT_OUT_OF_MEMORY;
+
             DtTempContour temp = new DtTempContour();
 
             // Find contours.
@@ -655,7 +671,7 @@ namespace DotRecast.Detour.TileCache
                 for (int x = 0; x < w; ++x)
                 {
                     int idx = x + y * w;
-                    int ri = layer.regs[idx];
+                    byte ri = layer.regs[idx];
                     if (ri == 0xff)
                         continue;
 
@@ -708,9 +724,8 @@ namespace DotRecast.Detour.TileCache
             return lcset;
         }
 
-        const uint VERTEX_BUCKET_COUNT2 = (1 << 8);
 
-        private int ComputeVertexHash2(int x, int y, int z)
+        public static int ComputeVertexHash2(int x, int y, int z)
         {
             uint h1 = 0x8da6b343; // Large multiplicative constants;
             uint h2 = 0xd8163841; // here arbitrarily chosen primes
@@ -719,14 +734,14 @@ namespace DotRecast.Detour.TileCache
             return (int)(n & (VERTEX_BUCKET_COUNT2 - 1));
         }
 
-        private int AddVertex(int x, int y, int z, int[] verts, int[] firstVert, int[] nextVert, int nv)
+        public static int AddVertex(int x, int y, int z, int[] verts, int[] firstVert, int[] nextVert, int nv)
         {
             int bucket = ComputeVertexHash2(x, 0, z);
             int i = firstVert[bucket];
             while (i != DT_TILECACHE_NULL_IDX)
             {
                 int tv = i * 3;
-                if (verts[tv] == x && verts[tv + 2] == z && (Math.Abs(verts[tv + 1] - y) <= 2))
+                if (verts[tv] == x && verts[tv + 2] == z && (MathF.Abs(verts[tv + 1] - y) <= 2))
                     return i;
                 i = nextVert[i]; // next
             }
@@ -742,7 +757,7 @@ namespace DotRecast.Detour.TileCache
             return i;
         }
 
-        private void BuildMeshAdjacency(int[] polys, int npolys, int[] verts, int nverts, DtTileCacheContourSet lcset,
+        public static void BuildMeshAdjacency(int[] polys, int npolys, int[] verts, int nverts, DtTileCacheContourSet lcset,
             int maxVertsPerPoly)
         {
             // Based on code by Eric Lengyel from:
@@ -953,22 +968,22 @@ namespace DotRecast.Detour.TileCache
             }
         }
 
-        private bool OverlapRangeExl(int amin, int amax, int bmin, int bmax)
+        public static bool OverlapRangeExl(int amin, int amax, int bmin, int bmax)
         {
             return (amin >= bmax || amax <= bmin) ? false : true;
         }
 
-        private int Prev(int i, int n)
+        public static int Prev(int i, int n)
         {
             return i - 1 >= 0 ? i - 1 : n - 1;
         }
 
-        private int Next(int i, int n)
+        public static int Next(int i, int n)
         {
             return i + 1 < n ? i + 1 : 0;
         }
 
-        private int Area2(int[] verts, int a, int b, int c)
+        public static int Area2(int[] verts, int a, int b, int c)
         {
             return (verts[b] - verts[a]) * (verts[c + 2] - verts[a + 2])
                    - (verts[c] - verts[a]) * (verts[b + 2] - verts[a + 2]);
@@ -976,17 +991,17 @@ namespace DotRecast.Detour.TileCache
 
         // Returns true iff c is strictly to the left of the directed
         // line through a to b.
-        private bool Left(int[] verts, int a, int b, int c)
+        public static bool Left(int[] verts, int a, int b, int c)
         {
             return Area2(verts, a, b, c) < 0;
         }
 
-        private bool LeftOn(int[] verts, int a, int b, int c)
+        public static bool LeftOn(int[] verts, int a, int b, int c)
         {
             return Area2(verts, a, b, c) <= 0;
         }
 
-        private bool Collinear(int[] verts, int a, int b, int c)
+        public static bool Collinear(int[] verts, int a, int b, int c)
         {
             return Area2(verts, a, b, c) == 0;
         }
@@ -994,7 +1009,7 @@ namespace DotRecast.Detour.TileCache
         // Returns true iff ab properly intersects cd: they share
         // a point interior to both segments. The properness of the
         // intersection is ensured by using strict leftness.
-        private bool IntersectProp(int[] verts, int a, int b, int c, int d)
+        public static bool IntersectProp(int[] verts, int a, int b, int c, int d)
         {
             // Eliminate improper cases.
             if (Collinear(verts, a, b, c) || Collinear(verts, a, b, d) || Collinear(verts, c, d, a)
@@ -1006,7 +1021,7 @@ namespace DotRecast.Detour.TileCache
 
         // Returns T iff (a,b,c) are collinear and point c lies
         // on the closed segment ab.
-        private bool Between(int[] verts, int a, int b, int c)
+        public static bool Between(int[] verts, int a, int b, int c)
         {
             if (!Collinear(verts, a, b, c))
                 return false;
@@ -1020,7 +1035,7 @@ namespace DotRecast.Detour.TileCache
         }
 
         // Returns true iff segments ab and cd intersect, properly or improperly.
-        private bool Intersect(int[] verts, int a, int b, int c, int d)
+        public static bool Intersect(int[] verts, int a, int b, int c, int d)
         {
             if (IntersectProp(verts, a, b, c, d))
                 return true;
@@ -1031,14 +1046,14 @@ namespace DotRecast.Detour.TileCache
                 return false;
         }
 
-        private bool Vequal(int[] verts, int a, int b)
+        public static bool Vequal(int[] verts, int a, int b)
         {
             return verts[a] == verts[b] && verts[a + 2] == verts[b + 2];
         }
 
         // Returns T iff (v_i, v_j) is a proper internal *or* external
         // diagonal of P, *ignoring edges incident to v_i and v_j*.
-        private bool Diagonalie(int i, int j, int n, int[] verts, int[] indices)
+        public static bool Diagonalie(int i, int j, int n, int[] verts, int[] indices)
         {
             int d0 = (indices[i] & 0x7fff) * 4;
             int d1 = (indices[j] & 0x7fff) * 4;
@@ -1066,7 +1081,7 @@ namespace DotRecast.Detour.TileCache
 
         // Returns true iff the diagonal (i,j) is strictly internal to the
         // polygon P in the neighborhood of the i endpoint.
-        private bool InCone(int i, int j, int n, int[] verts, int[] indices)
+        public static bool InCone(int i, int j, int n, int[] verts, int[] indices)
         {
             int pi = (indices[i] & 0x7fff) * 4;
             int pj = (indices[j] & 0x7fff) * 4;
@@ -1083,12 +1098,12 @@ namespace DotRecast.Detour.TileCache
 
         // Returns T iff (v_i, v_j) is a proper internal
         // diagonal of P.
-        private bool Diagonal(int i, int j, int n, int[] verts, int[] indices)
+        public static bool Diagonal(int i, int j, int n, int[] verts, int[] indices)
         {
             return InCone(i, j, n, verts, indices) && Diagonalie(i, j, n, verts, indices);
         }
 
-        private int Triangulate(int n, int[] verts, int[] indices, int[] tris)
+        public static int Triangulate(int n, int[] verts, int[] indices, int[] tris)
         {
             int ntris = 0;
             int dst = 0; // tris;
@@ -1173,7 +1188,7 @@ namespace DotRecast.Detour.TileCache
             return ntris;
         }
 
-        private int CountPolyVerts(int[] polys, int p, int maxVertsPerPoly)
+        public static int CountPolyVerts(int[] polys, int p, int maxVertsPerPoly)
         {
             for (int i = 0; i < maxVertsPerPoly; ++i)
                 if (polys[p + i] == DT_TILECACHE_NULL_IDX)
@@ -1181,13 +1196,13 @@ namespace DotRecast.Detour.TileCache
             return maxVertsPerPoly;
         }
 
-        private bool Uleft(int[] verts, int a, int b, int c)
+        public static bool Uleft(int[] verts, int a, int b, int c)
         {
             return (verts[b] - verts[a]) * (verts[c + 2] - verts[a + 2])
                 - (verts[c] - verts[a]) * (verts[b + 2] - verts[a + 2]) < 0;
         }
 
-        private int GetPolyMergeValue(int[] polys, int pa, int pb, int[] verts, out int ea, out int eb, int maxVertsPerPoly)
+        public static int GetPolyMergeValue(int[] polys, int pa, int pb, int[] verts, out int ea, out int eb, int maxVertsPerPoly)
         {
             ea = 0;
             eb = 0;
@@ -1258,7 +1273,7 @@ namespace DotRecast.Detour.TileCache
             return (dx * dx) + (dy * dy);
         }
 
-        private void MergePolys(int[] polys, int pa, int pb, int ea, int eb, int maxVertsPerPoly)
+        public static void MergePolys(int[] polys, int pa, int pb, int ea, int eb, int maxVertsPerPoly)
         {
             int[] tmp = new int[maxVertsPerPoly * 2];
 
@@ -1274,22 +1289,22 @@ namespace DotRecast.Detour.TileCache
             // Add pb
             for (int i = 0; i < nb - 1; ++i)
                 tmp[n++] = polys[pb + (eb + 1 + i) % nb];
-            Array.Copy(tmp, 0, polys, pa, maxVertsPerPoly);
+            RcArrays.Copy(tmp, 0, polys, pa, maxVertsPerPoly);
         }
 
-        private int PushFront(int v, List<int> arr)
+        public static int PushFront(int v, List<int> arr)
         {
             arr.Insert(0, v);
             return arr.Count;
         }
 
-        private int PushBack(int v, List<int> arr)
+        public static int PushBack(int v, List<int> arr)
         {
             arr.Add(v);
             return arr.Count;
         }
 
-        private bool CanRemoveVertex(DtTileCachePolyMesh mesh, int rem)
+        public static bool CanRemoveVertex(DtTileCachePolyMesh mesh, int rem)
         {
             // Count number of polygons to remove.
             int maxVertsPerPoly = mesh.nvp;
@@ -1387,21 +1402,10 @@ namespace DotRecast.Detour.TileCache
             return true;
         }
 
-        private void RemoveVertex(DtTileCachePolyMesh mesh, int rem, int maxTris)
+        public static void RemoveVertex(DtTileCachePolyMesh mesh, int rem, int maxTris)
         {
             // Count number of polygons to remove.
             int maxVertsPerPoly = mesh.nvp;
-            int numRemovedVerts = 0;
-            for (int i = 0; i < mesh.npolys; ++i)
-            {
-                int p = i * maxVertsPerPoly * 2;
-                int nv = CountPolyVerts(mesh.polys, p, maxVertsPerPoly);
-                for (int j = 0; j < nv; ++j)
-                {
-                    if (mesh.polys[p + j] == rem)
-                        numRemovedVerts++;
-                }
-            }
 
             int nedges = 0;
             List<int> edges = new List<int>();
@@ -1415,8 +1419,13 @@ namespace DotRecast.Detour.TileCache
                 int nv = CountPolyVerts(mesh.polys, p, maxVertsPerPoly);
                 bool hasRem = false;
                 for (int j = 0; j < nv; ++j)
+                {
                     if (mesh.polys[p + j] == rem)
+                    {
                         hasRem = true;
+                    }
+                }
+
                 if (hasRem)
                 {
                     // Collect edges which does not touch the removed vertex.
@@ -1433,7 +1442,7 @@ namespace DotRecast.Detour.TileCache
 
                     // Remove the polygon.
                     int p2 = (mesh.npolys - 1) * maxVertsPerPoly * 2;
-                    Array.Copy(mesh.polys, p2, mesh.polys, p, maxVertsPerPoly);
+                    RcArrays.Copy(mesh.polys, p2, mesh.polys, p, maxVertsPerPoly);
                     Array.Fill(mesh.polys, DT_TILECACHE_NULL_IDX, p + maxVertsPerPoly, maxVertsPerPoly);
                     mesh.areas[i] = mesh.areas[mesh.npolys - 1];
                     mesh.npolys--;
@@ -1457,8 +1466,12 @@ namespace DotRecast.Detour.TileCache
                 int p = i * maxVertsPerPoly * 2;
                 int nv = CountPolyVerts(mesh.polys, p, maxVertsPerPoly);
                 for (int j = 0; j < nv; ++j)
+                {
                     if (mesh.polys[p + j] > rem)
+                    {
                         mesh.polys[p + j]--;
+                    }
+                }
             }
 
             for (int i = 0; i < nedges; ++i)
@@ -1596,7 +1609,7 @@ namespace DotRecast.Detour.TileCache
                         int pa = bestPa * maxVertsPerPoly;
                         int pb = bestPb * maxVertsPerPoly;
                         MergePolys(polys, pa, pb, bestEa, bestEb, maxVertsPerPoly);
-                        Array.Copy(polys, (npolys - 1) * maxVertsPerPoly, polys, pb, maxVertsPerPoly);
+                        RcArrays.Copy(polys, (npolys - 1) * maxVertsPerPoly, polys, pb, maxVertsPerPoly);
                         pareas[bestPb] = pareas[npolys - 1];
                         npolys--;
                     }
@@ -1613,10 +1626,13 @@ namespace DotRecast.Detour.TileCache
             {
                 if (mesh.npolys >= maxTris)
                     break;
+
                 int p = mesh.npolys * maxVertsPerPoly * 2;
                 Array.Fill(mesh.polys, DT_TILECACHE_NULL_IDX, p, maxVertsPerPoly * 2);
+
                 for (int j = 0; j < maxVertsPerPoly; ++j)
                     mesh.polys[p + j] = polys[i * maxVertsPerPoly + j];
+
                 mesh.areas[mesh.npolys] = pareas[i];
                 mesh.npolys++;
                 if (mesh.npolys > maxTris)
@@ -1626,7 +1642,7 @@ namespace DotRecast.Detour.TileCache
             }
         }
 
-        public DtTileCachePolyMesh BuildTileCachePolyMesh(DtTileCacheContourSet lcset, int maxVertsPerPoly)
+        public static DtTileCachePolyMesh BuildTileCachePolyMesh(DtTileCacheContourSet lcset, int maxVertsPerPoly)
         {
             int maxVertices = 0;
             int maxTris = 0;
@@ -1752,7 +1768,7 @@ namespace DotRecast.Detour.TileCache
                             int pa = bestPa * maxVertsPerPoly;
                             int pb = bestPb * maxVertsPerPoly;
                             MergePolys(polys, pa, pb, bestEa, bestEb, maxVertsPerPoly);
-                            Array.Copy(polys, (npolys - 1) * maxVertsPerPoly, polys, pb, maxVertsPerPoly);
+                            RcArrays.Copy(polys, (npolys - 1) * maxVertsPerPoly, polys, pb, maxVertsPerPoly);
                             npolys--;
                         }
                         else
@@ -1800,32 +1816,32 @@ namespace DotRecast.Detour.TileCache
             return mesh;
         }
 
-        public void MarkCylinderArea(DtTileCacheLayer layer, RcVec3f orig, float cs, float ch, RcVec3f pos, float radius, float height, int areaId)
+        public static void MarkCylinderArea(DtTileCacheLayer layer, RcVec3f orig, float cs, float ch, RcVec3f pos, float radius, float height, byte areaId)
         {
             RcVec3f bmin = new RcVec3f();
             RcVec3f bmax = new RcVec3f();
-            bmin.x = pos.x - radius;
-            bmin.y = pos.y;
-            bmin.z = pos.z - radius;
-            bmax.x = pos.x + radius;
-            bmax.y = pos.y + height;
-            bmax.z = pos.z + radius;
-            float r2 = Sqr(radius / cs + 0.5f);
+            bmin.X = pos.X - radius;
+            bmin.Y = pos.Y;
+            bmin.Z = pos.Z - radius;
+            bmax.X = pos.X + radius;
+            bmax.Y = pos.Y + height;
+            bmax.Z = pos.Z + radius;
+            float r2 = RcMath.Sqr(radius / cs + 0.5f);
 
             int w = layer.header.width;
             int h = layer.header.height;
             float ics = 1.0f / cs;
             float ich = 1.0f / ch;
 
-            float px = (pos.x - orig.x) * ics;
-            float pz = (pos.z - orig.z) * ics;
+            float px = (pos.X - orig.X) * ics;
+            float pz = (pos.Z - orig.Z) * ics;
 
-            int minx = (int)Math.Floor((bmin.x - orig.x) * ics);
-            int miny = (int)Math.Floor((bmin.y - orig.y) * ich);
-            int minz = (int)Math.Floor((bmin.z - orig.z) * ics);
-            int maxx = (int)Math.Floor((bmax.x - orig.x) * ics);
-            int maxy = (int)Math.Floor((bmax.y - orig.y) * ich);
-            int maxz = (int)Math.Floor((bmax.z - orig.z) * ics);
+            int minx = (int)MathF.Floor((bmin.X - orig.X) * ics);
+            int miny = (int)MathF.Floor((bmin.Y - orig.Y) * ich);
+            int minz = (int)MathF.Floor((bmin.Z - orig.Z) * ics);
+            int maxx = (int)MathF.Floor((bmax.X - orig.X) * ics);
+            int maxy = (int)MathF.Floor((bmax.Y - orig.Y) * ich);
+            int maxz = (int)MathF.Floor((bmax.Z - orig.Z) * ics);
 
             if (maxx < 0)
                 return;
@@ -1856,24 +1872,24 @@ namespace DotRecast.Detour.TileCache
                     int y = layer.heights[x + z * w];
                     if (y < miny || y > maxy)
                         continue;
-                    layer.areas[x + z * w] = (short)areaId;
+                    layer.areas[x + z * w] = areaId;
                 }
             }
         }
 
-        public void MarkBoxArea(DtTileCacheLayer layer, RcVec3f orig, float cs, float ch, RcVec3f bmin, RcVec3f bmax, int areaId)
+        public static void MarkBoxArea(DtTileCacheLayer layer, RcVec3f orig, float cs, float ch, RcVec3f bmin, RcVec3f bmax, byte areaId)
         {
             int w = layer.header.width;
             int h = layer.header.height;
             float ics = 1.0f / cs;
             float ich = 1.0f / ch;
 
-            int minx = (int)Math.Floor((bmin.x - orig.x) * ics);
-            int miny = (int)Math.Floor((bmin.y - orig.y) * ich);
-            int minz = (int)Math.Floor((bmin.z - orig.z) * ics);
-            int maxx = (int)Math.Floor((bmax.x - orig.x) * ics);
-            int maxy = (int)Math.Floor((bmax.y - orig.y) * ich);
-            int maxz = (int)Math.Floor((bmax.z - orig.z) * ics);
+            int minx = (int)MathF.Floor((bmin.X - orig.X) * ics);
+            int miny = (int)MathF.Floor((bmin.Y - orig.Y) * ich);
+            int minz = (int)MathF.Floor((bmin.Z - orig.Z) * ics);
+            int maxx = (int)MathF.Floor((bmax.X - orig.X) * ics);
+            int maxy = (int)MathF.Floor((bmax.Y - orig.Y) * ich);
+            int maxz = (int)MathF.Floor((bmax.Z - orig.Z) * ics);
 
             if (maxx < 0)
                 return;
@@ -1900,12 +1916,12 @@ namespace DotRecast.Detour.TileCache
                     int y = layer.heights[x + z * w];
                     if (y < miny || y > maxy)
                         continue;
-                    layer.areas[x + z * w] = (short)areaId;
+                    layer.areas[x + z * w] = areaId;
                 }
             }
         }
 
-        public byte[] CompressTileCacheLayer(IRcCompressor comp, DtTileCacheLayer layer, RcByteOrder order, bool cCompatibility)
+        public static byte[] CompressTileCacheLayer(IRcCompressor comp, DtTileCacheLayer layer, RcByteOrder order, bool cCompatibility)
         {
             using var ms = new MemoryStream();
             using var bw = new BinaryWriter(ms);
@@ -1932,7 +1948,7 @@ namespace DotRecast.Detour.TileCache
             }
         }
 
-        public byte[] CompressTileCacheLayer(DtTileCacheLayerHeader header, int[] heights, int[] areas, int[] cons, RcByteOrder order, bool cCompatibility, IRcCompressor comp)
+        public static byte[] CompressTileCacheLayer(DtTileCacheLayerHeader header, int[] heights, int[] areas, int[] cons, RcByteOrder order, bool cCompatibility, IRcCompressor comp)
         {
             using var ms = new MemoryStream();
             using var bw = new BinaryWriter(ms);
@@ -1959,14 +1975,14 @@ namespace DotRecast.Detour.TileCache
             }
         }
 
-        public DtTileCacheLayer DecompressTileCacheLayer(IRcCompressor comp, byte[] compressed, RcByteOrder order, bool cCompatibility)
+        public static DtTileCacheLayer DecompressTileCacheLayer(IRcCompressor comp, byte[] compressed, RcByteOrder order, bool cCompatibility)
         {
             RcByteBuffer buf = new RcByteBuffer(compressed);
             buf.Order(order);
             DtTileCacheLayer layer = new DtTileCacheLayer();
             try
             {
-                layer.header = reader.Read(buf, cCompatibility);
+                layer.header = DtTileCacheLayerHeaderReader.Read(buf, cCompatibility);
             }
             catch (IOException e)
             {
@@ -1975,38 +1991,38 @@ namespace DotRecast.Detour.TileCache
 
             int gridSize = layer.header.width * layer.header.height;
             byte[] grids = comp.Decompress(compressed, buf.Position(), compressed.Length - buf.Position(), gridSize * 3);
-            layer.heights = new short[gridSize];
-            layer.areas = new short[gridSize];
-            layer.cons = new short[gridSize];
-            layer.regs = new short[gridSize];
+            layer.heights = new byte[gridSize];
+            layer.areas = new byte[gridSize];
+            layer.cons = new byte[gridSize];
+            layer.regs = new byte[gridSize];
             for (int i = 0; i < gridSize; i++)
             {
-                layer.heights[i] = (short)(grids[i] & 0xFF);
-                layer.areas[i] = (short)(grids[i + gridSize] & 0xFF);
-                layer.cons[i] = (short)(grids[i + gridSize * 2] & 0xFF);
+                layer.heights[i] = (byte)(grids[i] & 0xFF);
+                layer.areas[i] = (byte)(grids[i + gridSize] & 0xFF);
+                layer.cons[i] = (byte)(grids[i + gridSize * 2] & 0xFF);
             }
 
             return layer;
         }
 
-        public void MarkBoxArea(DtTileCacheLayer layer, RcVec3f orig, float cs, float ch, RcVec3f center, RcVec3f extents,
-            float[] rotAux, int areaId)
+        public static void MarkBoxArea(DtTileCacheLayer layer, RcVec3f orig, float cs, float ch, RcVec3f center, RcVec3f extents,
+            float[] rotAux, byte areaId)
         {
             int w = layer.header.width;
             int h = layer.header.height;
             float ics = 1.0f / cs;
             float ich = 1.0f / ch;
 
-            float cx = (center.x - orig.x) * ics;
-            float cz = (center.z - orig.z) * ics;
+            float cx = (center.X - orig.X) * ics;
+            float cz = (center.Z - orig.Z) * ics;
 
-            float maxr = 1.41f * Math.Max(extents.x, extents.z);
-            int minx = (int)Math.Floor(cx - maxr * ics);
-            int maxx = (int)Math.Floor(cx + maxr * ics);
-            int minz = (int)Math.Floor(cz - maxr * ics);
-            int maxz = (int)Math.Floor(cz + maxr * ics);
-            int miny = (int)Math.Floor((center.y - extents.y - orig.y) * ich);
-            int maxy = (int)Math.Floor((center.y + extents.y - orig.y) * ich);
+            float maxr = 1.41f * Math.Max(extents.X, extents.Z);
+            int minx = (int)MathF.Floor(cx - maxr * ics);
+            int maxx = (int)MathF.Floor(cx + maxr * ics);
+            int minz = (int)MathF.Floor(cz - maxr * ics);
+            int maxz = (int)MathF.Floor(cz + maxr * ics);
+            int miny = (int)MathF.Floor((center.Y - extents.Y - orig.Y) * ich);
+            int maxy = (int)MathF.Floor((center.Y + extents.Y - orig.Y) * ich);
 
             if (maxx < 0)
                 return;
@@ -2026,8 +2042,8 @@ namespace DotRecast.Detour.TileCache
             if (maxz >= h)
                 maxz = h - 1;
 
-            float xhalf = extents.x * ics + 0.5f;
-            float zhalf = extents.z * ics + 0.5f;
+            float xhalf = extents.X * ics + 0.5f;
+            float zhalf = extents.Z * ics + 0.5f;
             for (int z = minz; z <= maxz; ++z)
             {
                 for (int x = minx; x <= maxx; ++x)
@@ -2043,7 +2059,7 @@ namespace DotRecast.Detour.TileCache
                     int y = layer.heights[x + z * w];
                     if (y < miny || y > maxy)
                         continue;
-                    layer.areas[x + z * w] = (short)areaId;
+                    layer.areas[x + z * w] = areaId;
                 }
             }
         }

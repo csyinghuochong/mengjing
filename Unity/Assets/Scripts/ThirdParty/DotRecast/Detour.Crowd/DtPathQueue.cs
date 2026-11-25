@@ -1,7 +1,7 @@
 /*
 Copyright (c) 2009-2010 Mikko Mononen memon@inside.org
 recast4j copyright (c) 2015-2019 Piotr Piastucki piotr@jtilia.org
-DotRecast Copyright (c) 2023 Choi Ikpil ikpil@naver.com
+DotRecast Copyright (c) 2023-2024 Choi Ikpil ikpil@naver.com
 
 This software is provided 'as-is', without any express or implied
 warranty.  In no event will the authors be held liable for any damages
@@ -19,35 +19,44 @@ freely, subject to the following restrictions:
 */
 
 using System.Collections.Generic;
-using DotRecast.Core;
+using DotRecast.Core.Numerics;
 
 
 namespace DotRecast.Detour.Crowd
 {
     public class DtPathQueue
     {
-        private readonly DtCrowdConfig config;
-        private readonly LinkedList<DtPathQuery> queue = new LinkedList<DtPathQuery>();
+        private readonly DtCrowdConfig m_config;
+        private LinkedList<DtPathQuery> m_queue;
+        private int m_maxPathSize;
 
         public DtPathQueue(DtCrowdConfig config)
         {
-            this.config = config;
+            m_config = config;
         }
+
+        public bool Init(int maxPathSize)
+        {
+            m_queue = new LinkedList<DtPathQuery>();
+            m_maxPathSize = maxPathSize;
+            return true;
+        }
+
 
         public void Update(DtNavMesh navMesh)
         {
-            // Update path request until there is nothing to update or up to maxIters pathfinder iterations has been
-            // consumed.
-            int iterCount = config.maxFindPathIterations;
+            // Update path request until there is nothing to update
+            // or upto maxIters pathfinder iterations has been consumed.
+            int iterCount = m_config.maxFindPathIterations;
             while (iterCount > 0)
             {
-                DtPathQuery q = queue.First?.Value;
+                DtPathQuery q = m_queue.First?.Value;
                 if (q == null)
                 {
                     break;
                 }
 
-                queue.RemoveFirst();
+                m_queue.RemoveFirst();
 
                 // Handle query start.
                 if (q.result.status.IsEmpty())
@@ -65,19 +74,19 @@ namespace DotRecast.Detour.Crowd
 
                 if (q.result.status.Succeeded())
                 {
-                    q.result.status = q.navQuery.FinalizeSlicedFindPath(ref q.result.path);
+                    q.result.status = q.navQuery.FinalizeSlicedFindPath(q.result.path, out q.result.npath, m_maxPathSize);
                 }
 
                 if (!(q.result.status.Failed() || q.result.status.Succeeded()))
                 {
-                    queue.AddFirst(q);
+                    m_queue.AddFirst(q);
                 }
             }
         }
 
         public DtPathQueryResult Request(long startRef, long endRef, RcVec3f startPos, RcVec3f endPos, IDtQueryFilter filter)
         {
-            if (queue.Count >= config.pathQueueSize)
+            if (m_queue.Count >= m_config.pathQueueSize)
             {
                 return null;
             }
@@ -88,7 +97,8 @@ namespace DotRecast.Detour.Crowd
             q.endPos = endPos;
             q.endRef = endRef;
             q.filter = filter;
-            queue.AddLast(q);
+            q.result.path = new long[m_maxPathSize];
+            m_queue.AddLast(q);
             return q.result;
         }
     }

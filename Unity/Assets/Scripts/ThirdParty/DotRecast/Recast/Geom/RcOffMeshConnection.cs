@@ -1,7 +1,7 @@
 /*
 Copyright (c) 2009-2010 Mikko Mononen memon@inside.org
 recast4j copyright (c) 2015-2019 Piotr Piastucki piotr@jtilia.org
-DotRecast Copyright (c) 2023 Choi Ikpil ikpil@naver.com
+DotRecast Copyright (c) 2023-2024 Choi Ikpil ikpil@naver.com
 
 This software is provided 'as-is', without any express or implied
 warranty.  In no event will the authors be held liable for any damages
@@ -18,7 +18,7 @@ freely, subject to the following restrictions:
 3. This notice may not be removed or altered from any source distribution.
 */
 
-using DotRecast.Core;
+using DotRecast.Core.Numerics;
 
 namespace DotRecast.Recast.Geom
 {
@@ -36,12 +36,12 @@ namespace DotRecast.Recast.Geom
         public RcOffMeshConnection(RcVec3f start, RcVec3f end, float radius, bool bidir, int area, int flags)
         {
             verts = new float[6];
-            verts[0] = start.x;
-            verts[1] = start.y;
-            verts[2] = start.z;
-            verts[3] = end.x;
-            verts[4] = end.y;
-            verts[5] = end.z;
+            verts[0] = start.X;
+            verts[1] = start.Y;
+            verts[2] = start.Z;
+            verts[3] = end.X;
+            verts[4] = end.Y;
+            verts[5] = end.Z;
             this.radius = radius;
             this.bidir = bidir;
             this.area = area;

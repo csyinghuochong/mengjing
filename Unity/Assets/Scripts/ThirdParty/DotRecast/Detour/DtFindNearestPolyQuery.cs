@@ -1,50 +1,57 @@
 using System;
-using DotRecast.Core;
+using DotRecast.Core.Numerics;
 
 namespace DotRecast.Detour
 {
-    public class DtFindNearestPolyQuery : IDtPolyQuery
+    public struct DtFindNearestPolyQuery : IDtPolyQuery
     {
         private readonly DtNavMeshQuery _query;
         private readonly RcVec3f _center;
-        private long _nearestRef;
-        private RcVec3f _nearestPt;
-        private bool _overPoly;
         private float _nearestDistanceSqr;
+        private long _nearestRef;
+        private RcVec3f _nearestPoint;
+        private bool _overPoly;
 
         public DtFindNearestPolyQuery(DtNavMeshQuery query, RcVec3f center)
         {
-            this._query = query;
-            this._center = center;
+            _query = query;
+            _center = center;
             _nearestDistanceSqr = float.MaxValue;
-            _nearestPt = center;
+            _nearestRef = 0;
+            _nearestPoint = center;
+            _overPoly = false;
         }
 
-        public void Process(DtMeshTile tile, DtPoly poly, long refs)
+        public void Process(DtMeshTile tile, ReadOnlySpan<int> polys, ReadOnlySpan<long> refs, int count)
         {
-            // Find nearest polygon amongst the nearby polygons.
-            _query.ClosestPointOnPoly(refs, _center, out var closestPtPoly, out var posOverPoly);
+            for (int i = 0; i < count; ++i)
+            {
+                long polyRef = refs[i];
+                float d;
+                
+                // Find nearest polygon amongst the nearby polygons.
+                _query.ClosestPointOnPoly(polyRef, _center, out var closestPtPoly, out var posOverPoly);
 
-            // If a point is directly over a polygon and closer than
-            // climb height, favor that instead of straight line nearest point.
-            float d = 0;
-            RcVec3f diff = _center.Subtract(closestPtPoly);
-            if (posOverPoly)
-            {
-                d = Math.Abs(diff.y) - tile.data.header.walkableClimb;
-                d = d > 0 ? d * d : 0;
-            }
-            else
-            {
-                d = RcVec3f.LenSqr(diff);
-            }
+                // If a point is directly over a polygon and closer than
+                // climb height, favor that instead of straight line nearest point.
+                RcVec3f diff = RcVec3f.Subtract(_center, closestPtPoly);
+                if (posOverPoly)
+                {
+                    d = MathF.Abs(diff.Y) - tile.data.header.walkableClimb;
+                    d = d > 0 ? d * d : 0;
+                }
+                else
+                {
+                    d = diff.LengthSquared();
+                }
 
-            if (d < _nearestDistanceSqr)
-            {
-                _nearestPt = closestPtPoly;
-                _nearestDistanceSqr = d;
-                _nearestRef = refs;
-                _overPoly = posOverPoly;
+                if (d < _nearestDistanceSqr)
+                {
+                    _nearestPoint = closestPtPoly;
+                    _nearestDistanceSqr = d;
+                    _nearestRef = polyRef;
+                    _overPoly = posOverPoly;
+                }
             }
         }
 
@@ -55,7 +62,7 @@ namespace DotRecast.Detour
 
         public RcVec3f NearestPt()
         {
-            return _nearestPt;
+            return _nearestPoint;
         }
 
         public bool OverPoly()

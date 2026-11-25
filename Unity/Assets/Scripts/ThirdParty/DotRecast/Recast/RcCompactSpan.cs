@@ -1,7 +1,7 @@
 /*
 Copyright (c) 2009-2010 Mikko Mononen memon@inside.org
 recast4j copyright (c) 2015-2019 Piotr Piastucki piotr@jtilia.org
-DotRecast Copyright (c) 2023 Choi Ikpil ikpil@naver.com
+DotRecast Copyright (c) 2023-2024 Choi Ikpil ikpil@naver.com
 
 This software is provided 'as-is', without any express or implied
 warranty.  In no event will the authors be held liable for any damages
@@ -21,18 +21,26 @@ freely, subject to the following restrictions:
 namespace DotRecast.Recast
 {
     /** Represents a span of unobstructed space within a compact heightfield. */
-    public class RcCompactSpan
+    public readonly struct RcCompactSpan
     {
         /** The lower extent of the span. (Measured from the heightfield's base.) */
-        public int y;
+        public readonly int y;
 
         /** The id of the region the span belongs to. (Or zero if not in a region.) */
-        public int reg;
+        public readonly int reg;
 
         /** Packed neighbor connection data. */
-        public int con;
+        public readonly int con;
 
         /** The height of the span. (Measured from #y.) */
-        public int h;
+        public readonly int h;
+
+        public RcCompactSpan(RcCompactSpanBuilder span)
+        {
+            y = span.y;
+            reg = span.reg;
+            con = span.con;
+            h = span.h;
+        }
     }
 }

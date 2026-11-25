@@ -1,7 +1,7 @@
 /*
 Copyright (c) 2009-2010 Mikko Mononen memon@inside.org
 recast4j copyright (c) 2015-2019 Piotr Piastucki piotr@jtilia.org
-DotRecast Copyright (c) 2023 Choi Ikpil ikpil@naver.com
+DotRecast Copyright (c) 2023-2024 Choi Ikpil ikpil@naver.com
 
 This software is provided 'as-is', without any express or implied
 warranty.  In no event will the authors be held liable for any damages
@@ -23,24 +23,13 @@ namespace DotRecast.Detour.TileCache
     public class DtTileCachePolyMesh
     {
         public int nvp;
-        public int nverts;
+        public int nverts; // < Number of vertices.
+        public int npolys; // < Number of polygons.
+        public int[] verts; // < Vertices of the mesh, 3 elements per vertex.
+        public int[] polys; // < Polygons of the mesh, nvp*2 elements per polygon.
+        public int[] flags; // < Per polygon flags.
+        public int[] areas; // < Area ID of polygons.
 
-        /// < Number of vertices.
-        public int npolys;
-
-        /// < Number of polygons.
-        public int[] verts;
-
-        /// < Vertices of the mesh, 3 elements per vertex.
-        public int[] polys;
-
-        /// < Polygons of the mesh, nvp*2 elements per polygon.
-        public int[] flags;
-
-        /// < Per polygon flags.
-        public int[] areas;
-
-        /// < Area ID of polygons.
         public DtTileCachePolyMesh(int nvp)
         {
             this.nvp = nvp;

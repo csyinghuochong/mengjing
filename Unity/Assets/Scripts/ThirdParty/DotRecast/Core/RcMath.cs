@@ -1,7 +1,7 @@
 /*
 Copyright (c) 2009-2010 Mikko Mononen memon@inside.org
 recast4j copyright (c) 2015-2019 Piotr Piastucki piotr@jtilia.org
-DotRecast Copyright (c) 2023 Choi Ikpil ikpil@naver.com
+DotRecast Copyright (c) 2023-2024 Choi Ikpil ikpil@naver.com
 
 This software is provided 'as-is', without any express or implied
 warranty.  In no event will the authors be held liable for any damages
@@ -18,7 +18,6 @@ freely, subject to the following restrictions:
 3. This notice may not be removed or altered from any source distribution.
 */
 
-using System;
 using System.Runtime.CompilerServices;
 
 namespace DotRecast.Core
@@ -30,17 +29,11 @@ namespace DotRecast.Core
         {
             return f * f;
         }
-
+        
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static float Clamp(float v, float min, float max)
+        public static float Lerp(float value1, float value2, float amount)
         {
-            return Math.Max(Math.Min(v, max), min);
-        }
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static int Clamp(int v, int min, int max)
-        {
-            return Math.Max(Math.Min(v, max), min);
+            return (value1 * (1.0f - amount)) + (value2 * amount);
         }
     }
 }

@@ -1,7 +1,7 @@
 /*
 Copyright (c) 2009-2010 Mikko Mononen memon@inside.org
 recast4j copyright (c) 2015-2019 Piotr Piastucki piotr@jtilia.org
-DotRecast Copyright (c) 2023 Choi Ikpil ikpil@naver.com
+DotRecast Copyright (c) 2023-2024 Choi Ikpil ikpil@naver.com
 
 This software is provided 'as-is', without any express or implied
 warranty.  In no event will the authors be held liable for any damages
@@ -22,14 +22,14 @@ namespace DotRecast.Detour.TileCache
 {
     public class DtTileCacheLayer
     {
+        // This value specifies how many layers (or "floors") each navmesh tile is expected to have.
+        public const int EXPECTED_LAYERS_PER_TILE = 4;
+
         public DtTileCacheLayerHeader header;
-        public int regCount;
-
-        /// < Region count.
-        public short[] heights; // char
-
-        public short[] areas; // char
-        public short[] cons; // char
-        public short[] regs; // char
+        public byte regCount; // < Region count.
+        public byte[] heights; // unsigned char
+        public byte[] areas; // unsigned char
+        public byte[] cons; // unsigned char
+        public byte[] regs; // unsigned char
     }
 }

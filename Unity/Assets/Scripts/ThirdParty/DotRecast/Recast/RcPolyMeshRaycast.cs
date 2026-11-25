@@ -1,6 +1,6 @@
 /*
 recast4j copyright (c) 2021 Piotr Piastucki piotr@jtilia.org
-DotRecast Copyright (c) 2023 Choi Ikpil ikpil@naver.com
+DotRecast Copyright (c) 2023-2024 Choi Ikpil ikpil@naver.com
 
 This software is provided 'as-is', without any express or implied
 warranty.  In no event will the authors be held liable for any damages
@@ -17,21 +17,23 @@ freely, subject to the following restrictions:
 3. This notice may not be removed or altered from any source distribution.
 */
 
+using System;
 using System.Collections.Generic;
 using DotRecast.Core;
+using DotRecast.Core.Numerics;
 
 namespace DotRecast.Recast
 {
     public static class RcPolyMeshRaycast
     {
-        public static bool Raycast(IList<RecastBuilderResult> results, RcVec3f src, RcVec3f dst, out float hitTime)
+        public static bool Raycast(IList<RcBuilderResult> results, RcVec3f src, RcVec3f dst, out float hitTime)
         {
             hitTime = 0.0f;
-            foreach (RecastBuilderResult result in results)
+            foreach (RcBuilderResult result in results)
             {
-                if (result.GetMeshDetail() != null)
+                if (result.MeshDetail != null)
                 {
-                    if (Raycast(result.GetMesh(), result.GetMeshDetail(), src, dst, out hitTime))
+                    if (Raycast(result.Mesh, result.MeshDetail, src, dst, out hitTime))
                     {
                         return true;
                     }
@@ -44,6 +46,7 @@ namespace DotRecast.Recast
         private static bool Raycast(RcPolyMesh poly, RcPolyMeshDetail meshDetail, RcVec3f sp, RcVec3f sq, out float hitTime)
         {
             hitTime = 0;
+            Span<RcVec3f> tempVs = stackalloc RcVec3f[3];
             if (meshDetail != null)
             {
                 for (int i = 0; i < meshDetail.nmeshes; ++i)
@@ -56,15 +59,15 @@ namespace DotRecast.Recast
                     int tris = btris * 4;
                     for (int j = 0; j < ntris; ++j)
                     {
-                        RcVec3f[] vs = new RcVec3f[3];
+                        Span<RcVec3f> vs = tempVs;
                         for (int k = 0; k < 3; ++k)
                         {
-                            vs[k].x = meshDetail.verts[verts + meshDetail.tris[tris + j * 4 + k] * 3];
-                            vs[k].y = meshDetail.verts[verts + meshDetail.tris[tris + j * 4 + k] * 3 + 1];
-                            vs[k].z = meshDetail.verts[verts + meshDetail.tris[tris + j * 4 + k] * 3 + 2];
+                            vs[k].X = meshDetail.verts[verts + meshDetail.tris[tris + j * 4 + k] * 3];
+                            vs[k].Y = meshDetail.verts[verts + meshDetail.tris[tris + j * 4 + k] * 3 + 1];
+                            vs[k].Z = meshDetail.verts[verts + meshDetail.tris[tris + j * 4 + k] * 3 + 2];
                         }
 
-                        if (Intersections.IntersectSegmentTriangle(sp, sq, vs[0], vs[1], vs[2], out hitTime))
+                        if (RcIntersections.IntersectSegmentTriangle(sp, sq, vs[0], vs[1], vs[2], out hitTime))
                         {
                             return true;
                         }

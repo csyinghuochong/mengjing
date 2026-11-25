@@ -1,7 +1,7 @@
 /*
 Copyright (c) 2009-2010 Mikko Mononen memon@inside.org
 recast4j copyright (c) 2015-2019 Piotr Piastucki piotr@jtilia.org
-DotRecast Copyright (c) 2023 Choi Ikpil ikpil@naver.com
+DotRecast Copyright (c) 2023-2024 Choi Ikpil ikpil@naver.com
 
 This software is provided 'as-is', without any express or implied
 warranty.  In no event will the authors be held liable for any damages
@@ -26,7 +26,7 @@ namespace DotRecast.Detour
     {
         // High level status.
         public static readonly DtStatus DT_FAILURE = new DtStatus(1u << 31); // Operation failed. 
-        public static readonly DtStatus DT_SUCCSESS = new DtStatus(1u << 30); // Operation succeed. 
+        public static readonly DtStatus DT_SUCCESS = new DtStatus(1u << 30); // Operation succeed. 
         public static readonly DtStatus DT_IN_PROGRESS = new DtStatus(1u << 29); // Operation still in progress. 
 
         // Detail information for status.
@@ -57,7 +57,7 @@ namespace DotRecast.Detour
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool Succeeded()
         {
-            return 0 != (Value & (DT_SUCCSESS.Value | DT_PARTIAL_RESULT.Value));
+            return 0 != (Value & (DT_SUCCESS.Value | DT_PARTIAL_RESULT.Value));
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -76,6 +76,12 @@ namespace DotRecast.Detour
         public bool IsPartial()
         {
             return 0 != (Value & DT_PARTIAL_RESULT.Value);
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public bool Has(DtStatus has)
+        {
+            return 0 != (Value & has.Value);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]

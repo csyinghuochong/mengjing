@@ -1,4 +1,5 @@
-﻿using DotRecast.Core;
+using System;
+using DotRecast.Core.Numerics;
 
 namespace DotRecast.Detour
 {
@@ -10,9 +11,11 @@ namespace DotRecast.Detour
         {
         }
 
-        public float[] Apply(float[] polyVerts, RcVec3f circleCenter, float radius)
+        public bool Apply(Span<float> polyVerts, RcVec3f circleCenter, float radius, Span<float> constrainedVerts, out int constrainedVertCount)
         {
-            return polyVerts;
+            polyVerts.CopyTo(constrainedVerts);
+            constrainedVertCount = polyVerts.Length;
+            return true;
         }
     }
 }

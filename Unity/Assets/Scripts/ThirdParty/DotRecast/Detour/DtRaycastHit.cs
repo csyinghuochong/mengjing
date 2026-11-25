@@ -1,7 +1,7 @@
 /*
 Copyright (c) 2009-2010 Mikko Mononen memon@inside.org
 recast4j copyright (c) 2015-2019 Piotr Piastucki piotr@jtilia.org
-DotRecast Copyright (c) 2023 Choi Ikpil ikpil@naver.com
+DotRecast Copyright (c) 2023-2024 Choi Ikpil ikpil@naver.com
 
 This software is provided 'as-is', without any express or implied
 warranty.  In no event will the authors be held liable for any damages
@@ -18,29 +18,35 @@ freely, subject to the following restrictions:
 3. This notice may not be removed or altered from any source distribution.
 */
 
-using System.Collections.Generic;
-using DotRecast.Core;
+using System;
+using DotRecast.Core.Numerics;
 
 namespace DotRecast.Detour
 {
-    /**
- * Provides information about raycast hit. Filled by NavMeshQuery::raycast
- */
-    public class DtRaycastHit
+    /// Provides information about raycast hit
+    /// filled by dtNavMeshQuery::raycast
+    /// @ingroup detour
+    public ref struct DtRaycastHit
     {
-        /** The hit parameter. (float.MaxValue if no wall hit.) */
+        /// The hit parameter. (FLT_MAX if no wall hit.)
         public float t;
 
-        /** hitNormal The normal of the nearest wall hit. [(x, y, z)] */
-        public RcVec3f hitNormal = new RcVec3f();
+        /// hitNormal	The normal of the nearest wall hit. [(x, y, z)]
+        public RcVec3f hitNormal;
 
-        /** Visited polygons. */
-        public readonly List<long> path = new List<long>();
-
-        /** The cost of the path until hit. */
-        public float pathCost;
-
-        /** The index of the edge on the readonly polygon where the wall was hit. */
+        /// The index of the edge on the final polygon where the wall was hit.
         public int hitEdgeIndex;
+
+        /// Pointer to an array of reference ids of the visited polygons. [opt]
+        public Span<long> path;
+        
+        /// The number of visited polygons. [opt]
+        public int pathCount;
+
+        /// The maximum number of polygons the @p path array can hold.
+        public int maxPath;
+
+        ///  The cost of the path until hit.
+        public float pathCost;
     }
 }

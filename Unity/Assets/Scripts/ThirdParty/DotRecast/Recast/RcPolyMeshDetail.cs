@@ -1,7 +1,7 @@
 /*
 Copyright (c) 2009-2010 Mikko Mononen memon@inside.org
 recast4j copyright (c) 2015-2019 Piotr Piastucki piotr@jtilia.org
-DotRecast Copyright (c) 2023 Choi Ikpil ikpil@naver.com
+DotRecast Copyright (c) 2023-2024 Choi Ikpil ikpil@naver.com
 
 This software is provided 'as-is', without any express or implied
 warranty.  In no event will the authors be held liable for any damages
@@ -20,28 +20,16 @@ freely, subject to the following restrictions:
 
 namespace DotRecast.Recast
 {
-    /**
- * Contains triangle meshes that represent detailed height data associated with the polygons in its associated polygon
- * mesh object.
- */
+    /// Contains triangle meshes that represent detailed height data associated 
+    /// with the polygons in its associated polygon mesh object.
+    /// @ingroup recast
     public class RcPolyMeshDetail
     {
-        /** The sub-mesh data. [Size: 4*#nmeshes] */
-        public int[] meshes;
-
-        /** The mesh vertices. [Size: 3*#nverts] */
-        public float[] verts;
-
-        /** The mesh triangles. [Size: 4*#ntris] */
-        public int[] tris;
-
-        /** The number of sub-meshes defined by #meshes. */
-        public int nmeshes;
-
-        /** The number of vertices in #verts. */
-        public int nverts;
-
-        /** The number of triangles in #tris. */
-        public int ntris;
+        public int[] meshes; //< The sub-mesh data. [Size: 4*#nmeshes] 
+        public float[] verts; //< The mesh vertices. [Size: 3*#nverts] 
+        public int[] tris; //< The mesh triangles. [Size: 4*#ntris] 
+        public int nmeshes; //< The number of sub-meshes defined by #meshes.
+        public int nverts; //< The number of vertices in #verts.
+        public int ntris; //< The number of triangles in #tris.
     }
 }

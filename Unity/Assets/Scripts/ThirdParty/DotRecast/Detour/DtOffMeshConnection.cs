@@ -1,7 +1,7 @@
 /*
 Copyright (c) 2009-2010 Mikko Mononen memon@inside.org
 recast4j copyright (c) 2015-2019 Piotr Piastucki piotr@jtilia.org
-DotRecast Copyright (c) 2023 Choi Ikpil ikpil@naver.com
+DotRecast Copyright (c) 2023-2024 Choi Ikpil ikpil@naver.com
 
 This software is provided 'as-is', without any express or implied
 warranty.  In no event will the authors be held liable for any damages
@@ -18,6 +18,8 @@ freely, subject to the following restrictions:
 3. This notice may not be removed or altered from any source distribution.
 */
 
+using DotRecast.Core.Numerics;
+
 namespace DotRecast.Detour
 {
     /// Defines an navigation mesh off-mesh connection within a dtMeshTile object.
@@ -25,7 +27,7 @@ namespace DotRecast.Detour
     public class DtOffMeshConnection
     {
         /// The endpoints of the connection. [(ax, ay, az, bx, by, bz)]
-        public float[] pos = new float[6];
+        public RcVec3f[] pos = new RcVec3f[2];
 
         /// The radius of the endpoints. [Limit: >= 0]
         public float rad;

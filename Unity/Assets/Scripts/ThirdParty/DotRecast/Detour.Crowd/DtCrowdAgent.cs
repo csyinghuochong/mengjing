@@ -1,7 +1,7 @@
 /*
 Copyright (c) 2009-2010 Mikko Mononen memon@inside.org
 recast4j copyright (c) 2015-2019 Piotr Piastucki piotr@jtilia.org
-DotRecast Copyright (c) 2023 Choi Ikpil ikpil@naver.com
+DotRecast Copyright (c) 2023-2024 Choi Ikpil ikpil@naver.com
 
 This software is provided 'as-is', without any express or implied
 warranty.  In no event will the authors be held liable for any damages
@@ -19,8 +19,7 @@ freely, subject to the following restrictions:
 */
 
 using System;
-using System.Collections.Generic;
-using DotRecast.Core;
+using DotRecast.Core.Numerics;
 
 namespace DotRecast.Detour.Crowd
 {
@@ -28,75 +27,53 @@ namespace DotRecast.Detour.Crowd
     /// @ingroup crowd
     public class DtCrowdAgent
     {
-        public readonly long idx;
+        public readonly int idx;
 
         /// The type of mesh polygon the agent is traversing. (See: #CrowdAgentState)
         public DtCrowdAgentState state;
 
-        /// True if the agent has valid path (targetState == DT_CROWDAGENT_TARGET_VALID) and the path does not lead to the
-        /// requested position, else false.
+        /// True if the agent has valid path (targetState == DT_CROWDAGENT_TARGET_VALID) and the path does not lead to the requested position, else false.
         public bool partial;
 
         /// The path corridor the agent is using.
-        public DtPathCorridor corridor;
+        public readonly DtPathCorridor corridor;
 
         /// The local boundary data for the agent.
-        public DtLocalBoundary boundary;
+        public readonly DtLocalBoundary boundary;
 
         /// Time since the agent's path corridor was optimized.
         public float topologyOptTime;
 
         /// The known neighbors of the agent.
-        public List<DtCrowdNeighbour> neis = new List<DtCrowdNeighbour>();
+        public readonly DtCrowdNeighbour[] neis = new DtCrowdNeighbour[DtCrowdConst.DT_CROWDAGENT_MAX_NEIGHBOURS];
+        
+        /// The number of neighbors.
+        public int nneis;
 
         /// The desired speed.
         public float desiredSpeed;
 
-        public RcVec3f npos = new RcVec3f();
+        public RcVec3f npos = new RcVec3f(); // < The current agent position. [(x, y, z)]
+        public RcVec3f disp = new RcVec3f(); // < A temporary value used to accumulate agent displacement during iterative collision resolution. [(x, y, z)]
+        public RcVec3f dvel = new RcVec3f(); // < The desired velocity of the agent. Based on the current path, calculated from scratch each frame. [(x, y, z)]
+        public RcVec3f nvel = new RcVec3f(); // < The desired velocity adjusted by obstacle avoidance, calculated from scratch each frame. [(x, y, z)]
+        public RcVec3f vel = new RcVec3f(); // < The actual velocity of the agent. The change from nvel -> vel is constrained by max acceleration. [(x, y, z)]
 
-        /// < The current agent position. [(x, y, z)]
-        public RcVec3f disp = new RcVec3f();
-
-        /// < A temporary value used to accumulate agent displacement during iterative
-        /// collision resolution. [(x, y, z)]
-        public RcVec3f dvel = new RcVec3f();
-
-        /// < The desired velocity of the agent. Based on the current path, calculated
-        /// from
-        /// scratch each frame. [(x, y, z)]
-        public RcVec3f nvel = new RcVec3f();
-
-        /// < The desired velocity adjusted by obstacle avoidance, calculated from scratch each
-        /// frame. [(x, y, z)]
-        public RcVec3f vel = new RcVec3f();
-
-        /// < The actual velocity of the agent. The change from nvel -> vel is
-        /// constrained by max acceleration. [(x, y, z)]
         /// The agent's configuration parameters.
         public DtCrowdAgentParams option;
 
         /// The local path corridor corners for the agent.
-        public List<StraightPathItem> corners = new List<StraightPathItem>();
+        public DtStraightPath[] corners = new DtStraightPath[DtCrowdConst.DT_CROWDAGENT_MAX_CORNERS];
 
-        public DtMoveRequestState targetState;
+        /// The number of corners.
+        public int ncorners;
 
-        /// < State of the movement request.
-        public long targetRef;
-
-        /// < Target polyref of the movement request.
-        public RcVec3f targetPos = new RcVec3f();
-
-        /// < Target position of the movement request (or velocity in case of
-        /// DT_CROWDAGENT_TARGET_VELOCITY).
-        public DtPathQueryResult targetPathQueryResult;
-
-        /// < Path finder query
-        public bool targetReplan;
-
-        /// < Flag indicating that the current path is being replanned.
-        public float targetReplanTime;
-
-        /// <Time since the agent's target was replanned.
+        public DtMoveRequestState targetState; // < State of the movement request.
+        public long targetRef; // < Target polyref of the movement request.
+        public RcVec3f targetPos = new RcVec3f(); // < Target position of the movement request (or velocity in case of DT_CROWDAGENT_TARGET_VELOCITY).
+        public DtPathQueryResult targetPathQueryResult; // < Path finder query
+        public bool targetReplan; // < Flag indicating that the current path is being replanned.
+        public float targetReplanTime; // <Time since the agent's target was replanned.
         public float targetReplanWaitTime;
 
         public DtCrowdAgentAnimation animation;
@@ -113,31 +90,31 @@ namespace DotRecast.Detour.Crowd
         {
             // Fake dynamic constraint.
             float maxDelta = option.maxAcceleration * dt;
-            RcVec3f dv = nvel.Subtract(vel);
+            RcVec3f dv = RcVec3f.Subtract(nvel, vel);
             float ds = dv.Length();
             if (ds > maxDelta)
-                dv = dv.Scale(maxDelta / ds);
-            vel = vel.Add(dv);
+                dv = dv * (maxDelta / ds);
+            vel = RcVec3f.Add(vel, dv);
 
             // Integrate
             if (vel.Length() > 0.0001f)
-                npos = RcVec3f.Mad(npos, vel, dt);
+                npos = RcVec.Mad(npos, vel, dt);
             else
                 vel = RcVec3f.Zero;
         }
 
         public bool OverOffmeshConnection(float radius)
         {
-            if (0 == corners.Count)
+            if (0 == ncorners)
                 return false;
 
-            bool offMeshConnection = ((corners[corners.Count - 1].flags
-                                       & DtNavMeshQuery.DT_STRAIGHTPATH_OFFMESH_CONNECTION) != 0)
+            bool offMeshConnection = ((corners[ncorners - 1].flags
+                                       & DtStraightPathFlags.DT_STRAIGHTPATH_OFFMESH_CONNECTION) != 0)
                 ? true
                 : false;
             if (offMeshConnection)
             {
-                float distSq = RcVec3f.Dist2DSqr(npos, corners[corners.Count - 1].pos);
+                float distSq = RcVec.Dist2DSqr(npos, corners[ncorners - 1].pos);
                 if (distSq < radius * radius)
                     return true;
             }
@@ -147,12 +124,12 @@ namespace DotRecast.Detour.Crowd
 
         public float GetDistanceToGoal(float range)
         {
-            if (0 == corners.Count)
+            if (0 == ncorners)
                 return range;
 
-            bool endOfPath = ((corners[corners.Count - 1].flags & DtNavMeshQuery.DT_STRAIGHTPATH_END) != 0) ? true : false;
+            bool endOfPath = ((corners[ncorners - 1].flags & DtStraightPathFlags.DT_STRAIGHTPATH_END) != 0) ? true : false;
             if (endOfPath)
-                return Math.Min(RcVec3f.Dist2D(npos, corners[corners.Count - 1].pos), range);
+                return Math.Min(RcVec.Dist2D(npos, corners[ncorners - 1].pos), range);
 
             return range;
         }
@@ -160,27 +137,27 @@ namespace DotRecast.Detour.Crowd
         public RcVec3f CalcSmoothSteerDirection()
         {
             RcVec3f dir = new RcVec3f();
-            if (0 < corners.Count)
+            if (0 < ncorners)
             {
                 int ip0 = 0;
-                int ip1 = Math.Min(1, corners.Count - 1);
+                int ip1 = Math.Min(1, ncorners - 1);
                 var p0 = corners[ip0].pos;
                 var p1 = corners[ip1].pos;
 
-                var dir0 = p0.Subtract(npos);
-                var dir1 = p1.Subtract(npos);
-                dir0.y = 0;
-                dir1.y = 0;
+                var dir0 = RcVec3f.Subtract(p0, npos);
+                var dir1 = RcVec3f.Subtract(p1, npos);
+                dir0.Y = 0;
+                dir1.Y = 0;
 
                 float len0 = dir0.Length();
                 float len1 = dir1.Length();
                 if (len1 > 0.001f)
-                    dir1 = dir1.Scale(1.0f / len1);
+                    dir1 = dir1 * (1.0f / len1);
 
-                dir.x = dir0.x - dir1.x * len0 * 0.5f;
-                dir.y = 0;
-                dir.z = dir0.z - dir1.z * len0 * 0.5f;
-                dir.Normalize();
+                dir.X = dir0.X - dir1.X * len0 * 0.5f;
+                dir.Y = 0;
+                dir.Z = dir0.Z - dir1.Z * len0 * 0.5f;
+                dir = RcVec3f.Normalize(dir);
             }
 
             return dir;
@@ -189,11 +166,11 @@ namespace DotRecast.Detour.Crowd
         public RcVec3f CalcStraightSteerDirection()
         {
             RcVec3f dir = new RcVec3f();
-            if (0 < corners.Count)
+            if (0 < ncorners)
             {
-                dir = corners[0].pos.Subtract(npos);
-                dir.y = 0;
-                dir.Normalize();
+                dir = RcVec3f.Subtract(corners[0].pos, npos);
+                dir.Y = 0;
+                dir = RcVec3f.Normalize(dir);
             }
 
             return dir;

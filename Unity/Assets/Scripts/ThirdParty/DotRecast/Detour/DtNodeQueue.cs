@@ -1,7 +1,7 @@
 /*
 Copyright (c) 2009-2010 Mikko Mononen memon@inside.org
 recast4j copyright (c) 2015-2019 Piotr Piastucki piotr@jtilia.org
-DotRecast Copyright (c) 2023 Choi Ikpil ikpil@naver.com
+DotRecast Copyright (c) 2023-2024 Choi Ikpil ikpil@naver.com
 
 This software is provided 'as-is', without any express or implied
 warranty.  In no event will the authors be held liable for any damages
@@ -18,13 +18,18 @@ freely, subject to the following restrictions:
 3. This notice may not be removed or altered from any source distribution.
 */
 
-using DotRecast.Core;
+using DotRecast.Core.Collections;
 
 namespace DotRecast.Detour
 {
     public class DtNodeQueue
     {
-        private readonly RcSortedQueue<DtNode> m_heap = new RcSortedQueue<DtNode>((n1, n2) => n1.total.CompareTo(n2.total));
+        private readonly RcSortedQueue<DtNode> m_heap;
+
+        public DtNodeQueue()
+        {
+            m_heap = new RcSortedQueue<DtNode>(DtNode.ComparisonNodeTotal);
+        }
 
         public int Count()
         {
@@ -43,9 +48,7 @@ namespace DotRecast.Detour
 
         public DtNode Pop()
         {
-            var node = Peek();
-            m_heap.Remove(node);
-            return node;
+            return m_heap.Dequeue();
         }
 
         public void Push(DtNode node)
@@ -61,7 +64,7 @@ namespace DotRecast.Detour
 
         public bool IsEmpty()
         {
-            return 0 == m_heap.Count();
+            return m_heap.IsEmpty();
         }
     }
 }

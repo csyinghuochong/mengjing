@@ -1,7 +1,7 @@
 /*
 Copyright (c) 2009-2010 Mikko Mononen memon@inside.org
 recast4j copyright (c) 2015-2019 Piotr Piastucki piotr@jtilia.org
-DotRecast Copyright (c) 2023 Choi Ikpil ikpil@naver.com
+DotRecast Copyright (c) 2023-2024 Choi Ikpil ikpil@naver.com
 
 This software is provided 'as-is', without any express or implied
 warranty.  In no event will the authors be held liable for any damages
@@ -20,19 +20,13 @@ freely, subject to the following restrictions:
 
 namespace DotRecast.Recast
 {
-    /** Represents a span in a heightfield. */
+    /// Represents a span in a heightfield.
+    /// @see rcHeightfield
     public class RcSpan
     {
-        /** The lower limit of the span. [Limit: &lt; smax] */
-        public int smin;
-
-        /** The upper limit of the span. [Limit: &lt;= SPAN_MAX_HEIGHT] */
-        public int smax;
-
-        /** The area id assigned to the span. */
-        public int area;
-
-        /** The next span higher up in column. */
-        public RcSpan next;
+        public int smin; //< The lower limit of the span. (Inclusive) [Limit: < #smax]
+        public int smax; //< The upper limit of the span. (Exclusive) [Limit: <= #RC_SPAN_MAX_HEIGHT]
+        public int area; //< The area id assigned to the span.
+        public RcSpan next; //< The next span higher up in column.
     }
 }

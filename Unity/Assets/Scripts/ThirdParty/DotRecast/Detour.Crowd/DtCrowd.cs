@@ -1,7 +1,7 @@
 /*
 Copyright (c) 2009-2010 Mikko Mononen memon@inside.org
 recast4j copyright (c) 2015-2019 Piotr Piastucki piotr@jtilia.org
-DotRecast Copyright (c) 2023 Choi Ikpil ikpil@naver.com
+DotRecast Copyright (c) 2023-2024 Choi Ikpil ikpil@naver.com
 
 This software is provided 'as-is', without any express or implied
 warranty.  In no event will the authors be held liable for any damages
@@ -19,174 +19,168 @@ freely, subject to the following restrictions:
 */
 
 using System;
-using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
+using System.Diagnostics;
 using DotRecast.Core;
-using DotRecast.Detour.Crowd.Tracking;
-
+using DotRecast.Core.Collections;
+using DotRecast.Core.Numerics;
 
 namespace DotRecast.Detour.Crowd
 {
-    using static DotRecast.Core.RcMath;
+    ///////////////////////////////////////////////////////////////////////////
+
+// This section contains detailed documentation for members that don't have
+// a source file. It reduces clutter in the main section of the header.
 
     /**
- * Members in this module implement local steering and dynamic avoidance features.
- *
- * The crowd is the big beast of the navigation features. It not only handles a lot of the path management for you, but
- * also local steering and dynamic avoidance between members of the crowd. I.e. It can keep your agents from running
- * into each other.
- *
- * Main class: Crowd
- *
- * The #dtNavMeshQuery and #dtPathCorridor classes provide perfectly good, easy to use path planning features. But in
- * the end they only give you points that your navigation client should be moving toward. When it comes to deciding
- * things like agent velocity and steering to avoid other agents, that is up to you to implement. Unless, of course, you
- * decide to use Crowd.
- *
- * Basically, you add an agent to the crowd, providing various configuration settings such as maximum speed and
- * acceleration. You also provide a local target to move toward. The crowd manager then provides, with every update, the
- * new agent position and velocity for the frame. The movement will be constrained to the navigation mesh, and steering
- * will be applied to ensure agents managed by the crowd do not collide with each other.
- *
- * This is very powerful feature set. But it comes with limitations.
- *
- * The biggest limitation is that you must give control of the agent's position completely over to the crowd manager.
- * You can update things like maximum speed and acceleration. But in order for the crowd manager to do its thing, it
- * can't allow you to constantly be giving it overrides to position and velocity. So you give up direct control of the
- * agent's movement. It belongs to the crowd.
- *
- * The second biggest limitation revolves around the fact that the crowd manager deals with local planning. So the
- * agent's target should never be more than 256 polygons away from its current position. If it is, you risk your agent
- * failing to reach its target. So you may still need to do long distance planning and provide the crowd manager with
- * intermediate targets.
- *
- * Other significant limitations:
- *
- * - All agents using the crowd manager will use the same #dtQueryFilter. - Crowd management is relatively expensive.
- * The maximum agents under crowd management at any one time is between 20 and 30. A good place to start is a maximum of
- * 25 agents for 0.5ms per frame.
- *
- * @note This is a summary list of members. Use the index or search feature to find minor members.
- *
- * @struct dtCrowdAgentParams
- * @see CrowdAgent, Crowd::AddAgent(), Crowd::UpdateAgentParameters()
- *
- * @var dtCrowdAgentParams::obstacleAvoidanceType
- * @par
- *
- * 		#dtCrowd permits agents to use different avoidance configurations. This value is the index of the
- *      #dtObstacleAvoidanceParams within the crowd.
- *
- * @see dtObstacleAvoidanceParams, dtCrowd::SetObstacleAvoidanceParams(), dtCrowd::GetObstacleAvoidanceParams()
- *
- * @var dtCrowdAgentParams::collisionQueryRange
- * @par
- *
- * 		Collision elements include other agents and navigation mesh boundaries.
- *
- *      This value is often based on the agent radius and/or maximum speed. E.g. radius * 8
- *
- * @var dtCrowdAgentParams::pathOptimizationRange
- * @par
- *
- * 		Only applicable if #updateFlags includes the #DT_CROWD_OPTIMIZE_VIS flag.
- *
- *      This value is often based on the agent radius. E.g. radius * 30
- *
- * @see dtPathCorridor::OptimizePathVisibility()
- *
- * @var dtCrowdAgentParams::separationWeight
- * @par
- *
- * 		A higher value will result in agents trying to stay farther away from each other at the cost of more difficult
- *      steering in tight spaces.
- *
- */
-    /**
-     * This is the core class of the refs crowd module. See the refs crowd documentation for a summary of the crowd
-     * features. A common method for setting up the crowd is as follows: -# Allocate the crowd -# Set the avoidance
-     * configurations using #SetObstacleAvoidanceParams(). -# Add agents using #AddAgent() and make an initial movement
-     * request using #RequestMoveTarget(). A common process for managing the crowd is as follows: -# Call #Update() to allow
-     * the crowd to manage its agents. -# Retrieve agent information using #GetActiveAgents(). -# Make movement requests
-     * using #RequestMoveTarget() when movement goal changes. -# Repeat every frame. Some agent configuration settings can
-     * be updated using #UpdateAgentParameters(). But the crowd owns the agent position. So it is not possible to update an
-     * active agent's position. If agent position must be fed back into the crowd, the agent must be removed and re-added.
-     * Notes: - Path related information is available for newly added agents only after an #Update() has been performed. -
-     * Agent objects are kept in a pool and re-used. So it is important when using agent objects to check the value of
-     * #dtCrowdAgent::active to determine if the agent is actually in use or not. - This class is meant to provide 'local'
-     * movement. There is a limit of 256 polygons in the path corridor. So it is not meant to provide automatic pathfinding
-     * services over long distances.
-     *
-     * @see DtAllocCrowd(), DtFreeCrowd(), Init(), dtCrowdAgent
-     */
+
+    @defgroup crowd Crowd
+
+    Members in this module implement local steering and dynamic avoidance features.
+
+    The crowd is the big beast of the navigation features. It not only handles a
+    lot of the path management for you, but also local steering and dynamic
+    avoidance between members of the crowd. I.e. It can keep your agents from
+    running into each other.
+
+    Main class: #dtCrowd
+
+    The #dtNavMeshQuery and #dtPathCorridor classes provide perfectly good, easy
+    to use path planning features. But in the end they only give you points that
+    your navigation client should be moving toward. When it comes to deciding things
+    like agent velocity and steering to avoid other agents, that is up to you to
+    implement. Unless, of course, you decide to use #dtCrowd.
+
+    Basically, you add an agent to the crowd, providing various configuration
+    settings such as maximum speed and acceleration. You also provide a local
+    target to more toward. The crowd manager then provides, with every update, the
+    new agent position and velocity for the frame. The movement will be
+    constrained to the navigation mesh, and steering will be applied to ensure
+    agents managed by the crowd do not collide with each other.
+
+    This is very powerful feature set. But it comes with limitations.
+
+    The biggest limitation is that you must give control of the agent's position
+    completely over to the crowd manager. You can update things like maximum speed
+    and acceleration. But in order for the crowd manager to do its thing, it can't
+    allow you to constantly be giving it overrides to position and velocity. So
+    you give up direct control of the agent's movement. It belongs to the crowd.
+
+    The second biggest limitation revolves around the fact that the crowd manager
+    deals with local planning. So the agent's target should never be more than
+    256 polygons aways from its current position. If it is, you risk
+    your agent failing to reach its target. So you may still need to do long
+    distance planning and provide the crowd manager with intermediate targets.
+
+    Other significant limitations:
+
+    - All agents using the crowd manager will use the same #dtQueryFilter.
+    - Crowd management is relatively expensive. The maximum agents under crowd
+      management at any one time is between 20 and 30.  A good place to start
+      is a maximum of 25 agents for 0.5ms per frame.
+
+    @note This is a summary list of members.  Use the index or search
+    feature to find minor members.
+
+    @struct dtCrowdAgentParams
+    @see dtCrowdAgent, dtCrowd::addAgent(), dtCrowd::updateAgentParameters()
+
+    @var dtCrowdAgentParams::obstacleAvoidanceType
+    @par
+
+    #dtCrowd permits agents to use different avoidance configurations.  This value
+    is the index of the #dtObstacleAvoidanceParams within the crowd.
+
+    @see dtObstacleAvoidanceParams, dtCrowd::setObstacleAvoidanceParams(),
+         dtCrowd::getObstacleAvoidanceParams()
+
+    @var dtCrowdAgentParams::collisionQueryRange
+    @par
+
+    Collision elements include other agents and navigation mesh boundaries.
+
+    This value is often based on the agent radius and/or maximum speed. E.g. radius * 8
+
+    @var dtCrowdAgentParams::pathOptimizationRange
+    @par
+
+    Only applicable if #updateFlags includes the #DT_CROWD_OPTIMIZE_VIS flag.
+
+    This value is often based on the agent radius. E.g. radius * 30
+
+    @see dtPathCorridor::optimizePathVisibility()
+
+    @var dtCrowdAgentParams::separationWeight
+    @par
+
+    A higher value will result in agents trying to stay farther away from each other at
+    the cost of more difficult steering in tight spaces.
+    */
+    /// Provides local steering behaviors for a group of agents. 
+    /// @ingroup crowd
     public class DtCrowd
     {
-        /// The maximum number of corners a crowd agent will look ahead in the path.
-        /// This value is used for sizing the crowd agent corner buffers.
-        /// Due to the behavior of the crowd manager, the actual number of useful
-        /// corners will be one less than this number.
-        /// @ingroup crowd
-        public const int DT_CROWDAGENT_MAX_CORNERS = 4;
+        private readonly RcAtomicInteger _agentIdx;
+        private readonly Dictionary<int, DtCrowdAgent> _agents;
+        private readonly List<DtCrowdAgent> _activeAgents;
 
-        /// The maximum number of crowd avoidance configurations supported by the
-        /// crowd manager.
-        /// @ingroup crowd
-        /// @see dtObstacleAvoidanceParams, dtCrowd::SetObstacleAvoidanceParams(), dtCrowd::GetObstacleAvoidanceParams(),
-        /// dtCrowdAgentParams::obstacleAvoidanceType
-        public const int DT_CROWD_MAX_OBSTAVOIDANCE_PARAMS = 8;
-
-        /// The maximum number of query filter types supported by the crowd manager.
-        /// @ingroup crowd
-        /// @see dtQueryFilter, dtCrowd::GetFilter() dtCrowd::GetEditableFilter(),
-        /// dtCrowdAgentParams::queryFilterType
-        public const int DT_CROWD_MAX_QUERY_FILTER_TYPE = 16;
-
-        private readonly RcAtomicInteger _agentId = new RcAtomicInteger();
-        private readonly List<DtCrowdAgent> _agents;
         private readonly DtPathQueue _pathQ;
-        private readonly DtObstacleAvoidanceParams[] _obstacleQueryParams = new DtObstacleAvoidanceParams[DT_CROWD_MAX_OBSTAVOIDANCE_PARAMS];
+
+        private readonly DtObstacleAvoidanceParams[] _obstacleQueryParams;
         private readonly DtObstacleAvoidanceQuery _obstacleQuery;
-        private DtProximityGrid _grid;
-        private readonly RcVec3f _ext = new RcVec3f();
-        private readonly IDtQueryFilter[] _filters = new IDtQueryFilter[DT_CROWD_MAX_QUERY_FILTER_TYPE];
-        private DtNavMeshQuery _navQuery;
-        private DtNavMesh _navMesh;
+
+        private readonly DtProximityGrid _grid;
+
+        private int _maxPathResult;
+        private readonly RcVec3f _agentPlacementHalfExtents;
+
+        private readonly IDtQueryFilter[] _filters;
+
         private readonly DtCrowdConfig _config;
-        private readonly DtCrowdTelemetry _telemetry = new DtCrowdTelemetry();
         private int _velocitySampleCount;
 
-        public DtCrowd(DtCrowdConfig config, DtNavMesh nav) :
-            this(config, nav, i => new DtQueryDefaultFilter())
+        private DtNavMeshQuery _navQuery;
+
+        private DtNavMesh _navMesh;
+        private readonly DtCrowdTelemetry _telemetry = new DtCrowdTelemetry();
+
+        public DtCrowd(DtCrowdConfig config, DtNavMesh nav) : this(config, nav, i => new DtQueryDefaultFilter())
         {
         }
 
         public DtCrowd(DtCrowdConfig config, DtNavMesh nav, Func<int, IDtQueryFilter> queryFilterFactory)
         {
             _config = config;
-            _ext.Set(config.maxAgentRadius * 2.0f, config.maxAgentRadius * 1.5f, config.maxAgentRadius * 2.0f);
+            _agentPlacementHalfExtents = new RcVec3f(config.maxAgentRadius * 2.0f, config.maxAgentRadius * 1.5f, config.maxAgentRadius * 2.0f);
 
             _obstacleQuery = new DtObstacleAvoidanceQuery(config.maxObstacleAvoidanceCircles, config.maxObstacleAvoidanceSegments);
 
-            for (int i = 0; i < DT_CROWD_MAX_QUERY_FILTER_TYPE; i++)
+            _filters = new IDtQueryFilter[DtCrowdConst.DT_CROWD_MAX_QUERY_FILTER_TYPE];
+            for (int i = 0; i < DtCrowdConst.DT_CROWD_MAX_QUERY_FILTER_TYPE; i++)
             {
                 _filters[i] = queryFilterFactory.Invoke(i);
             }
 
             // Init obstacle query option.
-            for (int i = 0; i < DT_CROWD_MAX_OBSTAVOIDANCE_PARAMS; ++i)
+            _obstacleQueryParams = new DtObstacleAvoidanceParams[DtCrowdConst.DT_CROWD_MAX_OBSTAVOIDANCE_PARAMS];
+            for (int i = 0; i < DtCrowdConst.DT_CROWD_MAX_OBSTAVOIDANCE_PARAMS; ++i)
             {
                 _obstacleQueryParams[i] = new DtObstacleAvoidanceParams();
             }
 
             // Allocate temp buffer for merging paths.
+            _maxPathResult = DtCrowdConst.MAX_PATH_RESULT;
             _pathQ = new DtPathQueue(config);
-            _agents = new List<DtCrowdAgent>();
+            _agentIdx = new RcAtomicInteger(0);
+            _agents = new Dictionary<int, DtCrowdAgent>();
+            _activeAgents = new List<DtCrowdAgent>();
+            _grid = new DtProximityGrid(_config.maxAgentRadius * 3);
+
+            //
+            _pathQ.Init(_maxPathResult);
 
             // The navQuery is mostly used for local searches, no need for large node pool.
-            _navMesh = nav;
-            _navQuery = new DtNavMeshQuery(nav);
+            SetNavMesh(nav);
         }
 
         public void SetNavMesh(DtNavMesh nav)
@@ -195,13 +189,23 @@ namespace DotRecast.Detour.Crowd
             _navQuery = new DtNavMeshQuery(nav);
         }
 
+        public DtNavMesh GetNavMesh()
+        {
+            return _navMesh;
+        }
+
+        public DtNavMeshQuery GetNavMeshQuery()
+        {
+            return _navQuery;
+        }
+
         /// Sets the shared avoidance configuration for the specified index.
         /// @param[in] idx The index. [Limits: 0 <= value <
         /// #DT_CROWD_MAX_OBSTAVOIDANCE_PARAMS]
         /// @param[in] option The new configuration.
         public void SetObstacleAvoidanceParams(int idx, DtObstacleAvoidanceParams option)
         {
-            if (idx >= 0 && idx < DT_CROWD_MAX_OBSTAVOIDANCE_PARAMS)
+            if (idx >= 0 && idx < DtCrowdConst.DT_CROWD_MAX_OBSTAVOIDANCE_PARAMS)
             {
                 _obstacleQueryParams[idx] = new DtObstacleAvoidanceParams(option);
             }
@@ -213,7 +217,7 @@ namespace DotRecast.Detour.Crowd
         /// @return The requested configuration.
         public DtObstacleAvoidanceParams GetObstacleAvoidanceParams(int idx)
         {
-            if (idx >= 0 && idx < DT_CROWD_MAX_OBSTAVOIDANCE_PARAMS)
+            if (idx >= 0 && idx < DtCrowdConst.DT_CROWD_MAX_OBSTAVOIDANCE_PARAMS)
             {
                 return _obstacleQueryParams[idx];
             }
@@ -229,23 +233,23 @@ namespace DotRecast.Detour.Crowd
             agent.option = option;
         }
 
-        /**
-     * Adds a new agent to the crowd.
-     *
-     * @param pos
-     *            The requested position of the agent. [(x, y, z)]
-     * @param params
-     *            The configuration of the agent.
-     * @return The newly created agent object
-     */
+        /// @par
+        ///
+        /// The agent's position will be constrained to the surface of the navigation mesh.
+        /// Adds a new agent to the crowd.
+        ///  @param[in]		pos		The requested position of the agent. [(x, y, z)]
+        ///  @param[in]		params	The configuration of the agent.
+        /// @return The index of the agent in the agent pool. Or -1 if the agent could not be added.
         public DtCrowdAgent AddAgent(RcVec3f pos, DtCrowdAgentParams option)
         {
-            DtCrowdAgent ag = new DtCrowdAgent(_agentId.GetAndIncrement());
-            _agents.Add(ag);
+            int idx = _agentIdx.GetAndIncrement();
+            DtCrowdAgent ag = new DtCrowdAgent(idx);
+            ag.corridor.Init(_maxPathResult);
+            AddAgent(ag);
             UpdateAgentParameters(ag, option);
 
             // Find nearest position on navmesh and place the agent there.
-            var status = _navQuery.FindNearestPoly(pos, _ext, _filters[ag.option.queryFilterType], out var refs, out var nearestPt, out var _);
+            var status = _navQuery.FindNearestPoly(pos, _agentPlacementHalfExtents, _filters[ag.option.queryFilterType], out var refs, out var nearestPt, out var _);
             if (status.Failed())
             {
                 nearestPt = pos;
@@ -258,6 +262,7 @@ namespace DotRecast.Detour.Crowd
 
             ag.topologyOptTime = 0;
             ag.targetReplanTime = 0;
+            ag.nneis = 0;
 
             ag.dvel = RcVec3f.Zero;
             ag.nvel = RcVec3f.Zero;
@@ -280,15 +285,27 @@ namespace DotRecast.Detour.Crowd
             return ag;
         }
 
-        /**
-     * Removes the agent from the crowd.
-     *
-     * @param agent
-     *            Agent to be removed
-     */
+        public DtCrowdAgent GetAgent(int idx)
+        {
+            return _agents.GetValueOrDefault(idx);
+        }
+
+        // Add the agent from the crowd.
+        public void AddAgent(DtCrowdAgent agent)
+        {
+            if (_agents.TryAdd(agent.idx, agent))
+            {
+                _activeAgents.Add(agent);
+            }
+        }
+
+        // Removes the agent from the crowd.
         public void RemoveAgent(DtCrowdAgent agent)
         {
-            _agents.Remove(agent);
+            if (_agents.Remove(agent.idx))
+            {
+                _activeAgents.Remove(agent);
+            }
         }
 
         private bool RequestMoveTargetReplan(DtCrowdAgent ag, long refs, RcVec3f pos)
@@ -360,17 +377,17 @@ namespace DotRecast.Detour.Crowd
      */
         public IList<DtCrowdAgent> GetActiveAgents()
         {
-            return _agents;
+            return _activeAgents;
         }
 
         public RcVec3f GetQueryExtents()
         {
-            return _ext;
+            return _agentPlacementHalfExtents;
         }
 
         public IDtQueryFilter GetFilter(int i)
         {
-            return i >= 0 && i < DT_CROWD_MAX_QUERY_FILTER_TYPE ? _filters[i] : null;
+            return i >= 0 && i < DtCrowdConst.DT_CROWD_MAX_QUERY_FILTER_TYPE ? _filters[i] : null;
         }
 
         public DtProximityGrid GetGrid()
@@ -446,8 +463,9 @@ namespace DotRecast.Detour.Crowd
         {
             using var timer = _telemetry.ScopedTimer(DtCrowdTimerLabel.CheckPathValidity);
 
-            foreach (DtCrowdAgent ag in agents)
+            for (var i = 0; i < agents.Count; i++)
             {
+                var ag = agents[i];
                 if (ag.state != DtCrowdAgentState.DT_CROWDAGENT_STATE_WALKING)
                 {
                     continue;
@@ -465,7 +483,7 @@ namespace DotRecast.Detour.Crowd
                 {
                     // Current location is not valid, try to reposition.
                     // TODO: this can snap agents, how to handle that?
-                    _navQuery.FindNearestPoly(ag.npos, _ext, _filters[ag.option.queryFilterType], out agentRef, out var nearestPt, out var _);
+                    _navQuery.FindNearestPoly(ag.npos, _agentPlacementHalfExtents, _filters[ag.option.queryFilterType], out agentRef, out var nearestPt, out var _);
                     agentPos = nearestPt;
 
                     if (agentRef == 0)
@@ -505,7 +523,7 @@ namespace DotRecast.Detour.Crowd
                     if (!_navQuery.IsValidPolyRef(ag.targetRef, _filters[ag.option.queryFilterType]))
                     {
                         // Current target is not valid, try to reposition.
-                        _navQuery.FindNearestPoly(ag.targetPos, _ext, _filters[ag.option.queryFilterType], out ag.targetRef, out var nearestPt, out var _);
+                        _navQuery.FindNearestPoly(ag.targetPos, _agentPlacementHalfExtents, _filters[ag.option.queryFilterType], out ag.targetRef, out var nearestPt, out var _);
                         ag.targetPos = nearestPt;
                         replan = true;
                     }
@@ -529,8 +547,7 @@ namespace DotRecast.Detour.Crowd
                     replan = true;
                 }
 
-                // If the end of the path is near and it is not the requested
-                // location, replan.
+                // If the end of the path is near and it is not the requested location, replan.
                 if (ag.targetState == DtMoveRequestState.DT_CROWDAGENT_TARGET_VALID)
                 {
                     if (ag.targetReplanTime > _config.targetReplanDelay && ag.corridor.GetPathCount() < _config.checkLookAhead
@@ -558,9 +575,9 @@ namespace DotRecast.Detour.Crowd
             RcSortedQueue<DtCrowdAgent> queue = new RcSortedQueue<DtCrowdAgent>((a1, a2) => a2.targetReplanTime.CompareTo(a1.targetReplanTime));
 
             // Fire off new requests.
-            List<long> reqPath = new List<long>();
-            foreach (DtCrowdAgent ag in agents)
+            for (var i = 0; i < agents.Count; i++)
             {
+                var ag = agents[i];
                 if (ag.state == DtCrowdAgentState.DT_CROWDAGENT_STATE_INVALID)
                 {
                     continue;
@@ -574,42 +591,47 @@ namespace DotRecast.Detour.Crowd
 
                 if (ag.targetState == DtMoveRequestState.DT_CROWDAGENT_TARGET_REQUESTING)
                 {
-                    List<long> path = ag.corridor.GetPath();
-                    if (0 == path.Count)
-                    {
-                        throw new ArgumentException("Empty path");
-                    }
+                    Span<long> path = ag.corridor.GetPath();
+                    int npath = ag.corridor.GetPathCount();
+                    RcDebug.Assert(0 != npath);
 
+                    const int MAX_RES = 32;
+                    RcVec3f reqPos = new RcVec3f();
+                    RcFixedArray32<long> reqPath = new RcFixedArray32<long>(); // The path to the request location
+                    int reqPathCount = 0;
+
+                    RcDebug.Assert(reqPath.Length == MAX_RES);
 
                     // Quick search towards the goal.
-                    _navQuery.InitSlicedFindPath(path[0], ag.targetRef, ag.npos, ag.targetPos,
-                        _filters[ag.option.queryFilterType], 0);
+                    const int MAX_ITER = 20;
+                    RcDebug.Unused(MAX_ITER); // warning CS0219
+                    
+                    _navQuery.InitSlicedFindPath(path[0], ag.targetRef, ag.npos, ag.targetPos, _filters[ag.option.queryFilterType], 0);
                     _navQuery.UpdateSlicedFindPath(_config.maxTargetFindPathIterations, out var _);
 
-                    DtStatus status;
+                    DtStatus status = DtStatus.DT_STATUS_NOTHING;
                     if (ag.targetReplan) // && npath > 10)
                     {
                         // Try to use existing steady path during replan if possible.
-                        status = _navQuery.FinalizeSlicedFindPathPartial(path, ref reqPath);
+                        status = _navQuery.FinalizeSlicedFindPathPartial(path, npath, reqPath.AsSpan(), out reqPathCount, MAX_RES);
                     }
                     else
                     {
                         // Try to move towards target when goal changes.
-                        status = _navQuery.FinalizeSlicedFindPath(ref reqPath);
+                        status = _navQuery.FinalizeSlicedFindPath(reqPath.AsSpan(), out reqPathCount, MAX_RES);
                     }
 
-                    RcVec3f reqPos = new RcVec3f();
-                    if (status.Succeeded() && reqPath.Count > 0)
+                    if (status.Succeeded() && reqPathCount > 0)
                     {
                         // In progress or succeed.
-                        if (reqPath[reqPath.Count - 1] != ag.targetRef)
+                        if (reqPath[reqPathCount - 1] != ag.targetRef)
                         {
                             // Partial path, constrain target position inside the
                             // last polygon.
-                            var cr = _navQuery.ClosestPointOnPoly(reqPath[reqPath.Count - 1], ag.targetPos, out reqPos, out var _);
+                            var cr = _navQuery.ClosestPointOnPoly(reqPath[reqPathCount - 1], ag.targetPos, out reqPos, out var _);
                             if (cr.Failed())
                             {
-                                reqPath = new List<long>();
+                                reqPathCount = 0;
                             }
                         }
                         else
@@ -619,18 +641,17 @@ namespace DotRecast.Detour.Crowd
                     }
                     else
                     {
-                        // Could not find path, start the request from current
-                        // location.
+                        // Could not find path, start the request from current location.
                         reqPos = ag.npos;
-                        reqPath = new List<long>();
-                        reqPath.Add(path[0]);
+                        reqPath[0] = path[0];
+                        reqPathCount = 1;
                     }
 
-                    ag.corridor.SetCorridor(reqPos, reqPath);
+                    ag.corridor.SetCorridor(reqPos, reqPath.AsSpan(), reqPathCount);
                     ag.boundary.Reset();
                     ag.partial = false;
 
-                    if (reqPath[reqPath.Count - 1] == ag.targetRef)
+                    if (reqPath[reqPathCount - 1] == ag.targetRef)
                     {
                         ag.targetState = DtMoveRequestState.DT_CROWDAGENT_TARGET_VALID;
                         ag.targetReplanTime = 0;
@@ -672,10 +693,10 @@ namespace DotRecast.Detour.Crowd
             }
 
             // Process path results.
-            foreach (DtCrowdAgent ag in agents)
+            for (var i = 0; i < agents.Count; i++)
             {
-                if (ag.targetState == DtMoveRequestState.DT_CROWDAGENT_TARGET_NONE
-                    || ag.targetState == DtMoveRequestState.DT_CROWDAGENT_TARGET_VELOCITY)
+                var ag = agents[i];
+                if (ag.targetState == DtMoveRequestState.DT_CROWDAGENT_TARGET_NONE || ag.targetState == DtMoveRequestState.DT_CROWDAGENT_TARGET_VELOCITY)
                 {
                     continue;
                 }
@@ -687,8 +708,7 @@ namespace DotRecast.Detour.Crowd
                     DtStatus status = ag.targetPathQueryResult.status;
                     if (status.Failed())
                     {
-                        // Path find failed, retry if the target location is still
-                        // valid.
+                        // Path find failed, retry if the target location is still valid.
                         ag.targetPathQueryResult = null;
                         if (ag.targetRef != 0)
                         {
@@ -703,18 +723,18 @@ namespace DotRecast.Detour.Crowd
                     }
                     else if (status.Succeeded())
                     {
-                        List<long> path = ag.corridor.GetPath();
-                        if (0 == path.Count)
-                        {
-                            throw new ArgumentException("Empty path");
-                        }
+                        Span<long> path = ag.corridor.GetPath();
+                        int npath = ag.corridor.GetPathCount();
+                        RcDebug.Assert(0 != npath);
 
                         // Apply results.
                         var targetPos = ag.targetPos;
 
                         bool valid = true;
-                        List<long> res = ag.targetPathQueryResult.path;
-                        if (status.Failed() || 0 == res.Count)
+                        Span<long> res = ag.targetPathQueryResult.path;
+                        int nres = ag.targetPathQueryResult.npath;
+                        status = ag.targetPathQueryResult.status;
+                        if (status.Failed() || 0 == nres)
                         {
                             valid = false;
                         }
@@ -737,7 +757,7 @@ namespace DotRecast.Detour.Crowd
 
                         // The last ref in the old path should be the same as
                         // the location where the request was issued..
-                        if (valid && path[path.Count - 1] != res[0])
+                        if (valid && path[npath - 1] != res[0])
                         {
                             valid = false;
                         }
@@ -745,33 +765,39 @@ namespace DotRecast.Detour.Crowd
                         if (valid)
                         {
                             // Put the old path infront of the old path.
-                            if (path.Count > 1)
+                            if (npath > 1)
                             {
-                                path.RemoveAt(path.Count - 1);
-                                path.AddRange(res);
-                                res = path;
+                                // Make space for the old path.
+                                if ((npath - 1) + nres > _maxPathResult)
+                                    nres = _maxPathResult - (npath - 1);
+
+                                RcSpans.Move(res, 0, npath - 1, nres);
+                                // Copy old path in the beginning.
+                                RcSpans.Copy(path, 0, res, 0, npath - 1);
+                                nres += npath - 1;
+
                                 // Remove trackbacks
-                                for (int j = 1; j < res.Count - 1; ++j)
+                                for (int j = 0; j < nres; ++j)
                                 {
-                                    if (j - 1 >= 0 && j + 1 < res.Count)
+                                    if (j - 1 >= 0 && j + 1 < nres)
                                     {
                                         if (res[j - 1] == res[j + 1])
                                         {
-                                            res.RemoveAt(j + 1);
-                                            res.RemoveAt(j);
+                                            RcSpans.Move(res, j + 1, (j - 1), nres - (j + 1));
+                                            nres -= 2;
                                             j -= 2;
                                         }
                                     }
                                 }
                             }
 
+
                             // Check for partial path.
-                            if (res[res.Count - 1] != ag.targetRef)
+                            if (res[nres - 1] != ag.targetRef)
                             {
-                                // Partial path, constrain target position inside
-                                // the last polygon.
-                                var cr = _navQuery.ClosestPointOnPoly(res[res.Count - 1], targetPos, out var nearest, out var _);
-                                if (cr.Succeeded())
+                                // Partial path, constrain target position inside the last polygon.
+                                status = _navQuery.ClosestPointOnPoly(res[nres - 1], targetPos, out var nearest, out var _);
+                                if (status.Succeeded())
                                 {
                                     targetPos = nearest;
                                 }
@@ -785,7 +811,7 @@ namespace DotRecast.Detour.Crowd
                         if (valid)
                         {
                             // Set current corridor.
-                            ag.corridor.SetCorridor(targetPos, res);
+                            ag.corridor.SetCorridor(targetPos, res, nres);
                             // Force to update boundary.
                             ag.boundary.Reset();
                             ag.targetState = DtMoveRequestState.DT_CROWDAGENT_TARGET_VALID;
@@ -811,8 +837,9 @@ namespace DotRecast.Detour.Crowd
 
             RcSortedQueue<DtCrowdAgent> queue = new RcSortedQueue<DtCrowdAgent>((a1, a2) => a2.topologyOptTime.CompareTo(a1.topologyOptTime));
 
-            foreach (DtCrowdAgent ag in agents)
+            for (var i = 0; i < agents.Count; i++)
             {
+                var ag = agents[i];
                 if (ag.state != DtCrowdAgentState.DT_CROWDAGENT_STATE_WALKING)
                 {
                     continue;
@@ -824,7 +851,7 @@ namespace DotRecast.Detour.Crowd
                     continue;
                 }
 
-                if ((ag.option.updateFlags & DtCrowdAgentParams.DT_CROWD_OPTIMIZE_TOPO) == 0)
+                if ((ag.option.updateFlags & DtCrowdAgentUpdateFlags.DT_CROWD_OPTIMIZE_TOPO) == 0)
                 {
                     continue;
                 }
@@ -848,13 +875,14 @@ namespace DotRecast.Detour.Crowd
         {
             using var timer = _telemetry.ScopedTimer(DtCrowdTimerLabel.BuildProximityGrid);
 
-            _grid = new DtProximityGrid(_config.maxAgentRadius * 3);
+            _grid.Clear();
 
-            foreach (DtCrowdAgent ag in agents)
+            for (var i = 0; i < agents.Count; i++)
             {
+                var ag = agents[i];
                 RcVec3f p = ag.npos;
                 float r = ag.option.radius;
-                _grid.AddItem(ag, p.x - r, p.z - r, p.x + r, p.z + r);
+                _grid.AddItem(ag, p.X - r, p.Z - r, p.X + r, p.Z + r);
             }
         }
 
@@ -862,8 +890,9 @@ namespace DotRecast.Detour.Crowd
         {
             using var timer = _telemetry.ScopedTimer(DtCrowdTimerLabel.BuildNeighbours);
 
-            foreach (DtCrowdAgent ag in agents)
+            for (var i = 0; i < agents.Count; i++)
             {
+                var ag = agents[i];
                 if (ag.state != DtCrowdAgentState.DT_CROWDAGENT_STATE_WALKING)
                 {
                     continue;
@@ -872,7 +901,7 @@ namespace DotRecast.Detour.Crowd
                 // Update the collision boundary after certain distance has been passed or
                 // if it has become invalid.
                 float updateThr = ag.option.collisionQueryRange * 0.25f;
-                if (RcVec3f.Dist2DSqr(ag.npos, ag.boundary.GetCenter()) > Sqr(updateThr)
+                if (RcVec.Dist2DSqr(ag.npos, ag.boundary.GetCenter()) > RcMath.Sqr(updateThr)
                     || !ag.boundary.IsValid(_navQuery, _filters[ag.option.queryFilterType]))
                 {
                     ag.boundary.Update(ag.corridor.GetFirstPoly(), ag.npos, ag.option.collisionQueryRange, _navQuery,
@@ -880,43 +909,89 @@ namespace DotRecast.Detour.Crowd
                 }
 
                 // Query neighbour agents
-                GetNeighbours(ag.npos, ag.option.height, ag.option.collisionQueryRange, ag, ref ag.neis, _grid);
+                ag.nneis = GetNeighbours(ag.npos, ag.option.height, ag.option.collisionQueryRange, ag, ag.neis, DtCrowdConst.DT_CROWDAGENT_MAX_NEIGHBOURS, _grid);
             }
         }
 
-
-        private int GetNeighbours(RcVec3f pos, float height, float range, DtCrowdAgent skip, ref List<DtCrowdNeighbour> result, DtProximityGrid grid)
+        public static int AddNeighbour(DtCrowdAgent idx, float dist, Span<DtCrowdNeighbour> neis, int nneis, int maxNeis)
         {
-            result.Clear();
-
-            var proxAgents = new HashSet<DtCrowdAgent>();
-            int nids = grid.QueryItems(pos.x - range, pos.z - range, pos.x + range, pos.z + range, ref proxAgents);
-            foreach (DtCrowdAgent ag in proxAgents)
+            // Insert neighbour based on the distance.
+            int nei = 0;
+            if (0 == nneis)
             {
+                nei = nneis;
+            }
+            else if (dist >= neis[nneis - 1].dist)
+            {
+                if (nneis >= maxNeis)
+                    return nneis;
+                nei = nneis;
+            }
+            else
+            {
+                int i;
+                for (i = 0; i < nneis; ++i)
+                {
+                    if (dist <= neis[i].dist)
+                    {
+                        break;
+                    }
+                }
+
+                int tgt = i + 1;
+                int n = Math.Min(nneis - i, maxNeis - tgt);
+
+                RcDebug.Assert(tgt + n <= maxNeis);
+
+                if (n > 0)
+                {
+                    RcSpans.Move(neis, i, tgt, n);
+                }
+
+                nei = i;
+            }
+
+            neis[nei] = new DtCrowdNeighbour(idx, dist);
+
+            return Math.Min(nneis + 1, maxNeis);
+        }
+
+        private int GetNeighbours(RcVec3f pos, float height, float range, DtCrowdAgent skip, DtCrowdNeighbour[] result, int maxResult, DtProximityGrid grid)
+        {
+            int n = 0;
+
+            const int MAX_NEIS = 32;
+            Span<int> ids = stackalloc int[MAX_NEIS];
+            int nids = grid.QueryItems(pos.X - range, pos.Z - range,
+                pos.X + range, pos.Z + range,
+                ids, ids.Length);
+
+            for (int i = 0; i < nids; ++i)
+            {
+                var ag = GetAgent(ids[i]);
                 if (ag == skip)
                 {
                     continue;
                 }
 
                 // Check for overlap.
-                RcVec3f diff = pos.Subtract(ag.npos);
-                if (Math.Abs(diff.y) >= (height + ag.option.height) / 2.0f)
+                RcVec3f diff = RcVec3f.Subtract(pos, ag.npos);
+                if (MathF.Abs(diff.Y) >= (height + ag.option.height) / 2.0f)
                 {
                     continue;
                 }
 
-                diff.y = 0;
-                float distSqr = RcVec3f.LenSqr(diff);
-                if (distSqr > Sqr(range))
+                diff.Y = 0;
+                float distSqr = diff.LengthSquared();
+                if (distSqr > RcMath.Sqr(range))
                 {
                     continue;
                 }
 
-                result.Add(new DtCrowdNeighbour(ag, distSqr));
+                n = AddNeighbour(ag, distSqr, result, n, maxResult);
             }
 
-            result.Sort((o1, o2) => o1.dist.CompareTo(o2.dist));
-            return result.Count;
+            return n;
         }
 
         private void FindCorners(IList<DtCrowdAgent> agents, DtCrowdAgentDebugInfo debug)
@@ -924,8 +999,9 @@ namespace DotRecast.Detour.Crowd
             using var timer = _telemetry.ScopedTimer(DtCrowdTimerLabel.FindCorners);
 
             DtCrowdAgent debugAgent = debug != null ? debug.agent : null;
-            foreach (DtCrowdAgent ag in agents)
+            for (var i = 0; i < agents.Count; i++)
             {
+                var ag = agents[i];
                 if (ag.state != DtCrowdAgentState.DT_CROWDAGENT_STATE_WALKING)
                 {
                     continue;
@@ -938,13 +1014,13 @@ namespace DotRecast.Detour.Crowd
                 }
 
                 // Find corners for steering
-                ag.corridor.FindCorners(ref ag.corners, DT_CROWDAGENT_MAX_CORNERS, _navQuery, _filters[ag.option.queryFilterType]);
+                ag.ncorners = ag.corridor.FindCorners(ag.corners, DtCrowdConst.DT_CROWDAGENT_MAX_CORNERS, _navQuery, _filters[ag.option.queryFilterType]);
 
                 // Check to see if the corner after the next corner is directly visible,
                 // and short cut to there.
-                if ((ag.option.updateFlags & DtCrowdAgentParams.DT_CROWD_OPTIMIZE_VIS) != 0 && ag.corners.Count > 0)
+                if ((ag.option.updateFlags & DtCrowdAgentUpdateFlags.DT_CROWD_OPTIMIZE_VIS) != 0 && ag.ncorners > 0)
                 {
-                    RcVec3f target = ag.corners[Math.Min(1, ag.corners.Count - 1)].pos;
+                    RcVec3f target = ag.corners[Math.Min(1, ag.ncorners - 1)].pos;
                     ag.corridor.OptimizePathVisibility(target, ag.option.pathOptimizationRange, _navQuery,
                         _filters[ag.option.queryFilterType]);
 
@@ -971,8 +1047,9 @@ namespace DotRecast.Detour.Crowd
         {
             using var timer = _telemetry.ScopedTimer(DtCrowdTimerLabel.TriggerOffMeshConnections);
 
-            foreach (DtCrowdAgent ag in agents)
+            for (var i = 0; i < agents.Count; i++)
             {
+                var ag = agents[i];
                 if (ag.state != DtCrowdAgentState.DT_CROWDAGENT_STATE_WALKING)
                 {
                     continue;
@@ -993,18 +1070,18 @@ namespace DotRecast.Detour.Crowd
 
                     // Adjust the path over the off-mesh connection.
                     long[] refs = new long[2];
-                    if (ag.corridor.MoveOverOffmeshConnection(ag.corners[ag.corners.Count - 1].refs, refs, ref anim.startPos,
+                    if (ag.corridor.MoveOverOffmeshConnection(ag.corners[ag.ncorners - 1].refs, refs, ref anim.startPos,
                             ref anim.endPos, _navQuery))
                     {
                         anim.initPos = ag.npos;
                         anim.polyRef = refs[1];
                         anim.active = true;
                         anim.t = 0.0f;
-                        anim.tmax = (RcVec3f.Dist2D(anim.startPos, anim.endPos) / ag.option.maxSpeed) * 0.5f;
+                        anim.tmax = (RcVec.Dist2D(anim.startPos, anim.endPos) / ag.option.maxSpeed) * 0.5f;
 
                         ag.state = DtCrowdAgentState.DT_CROWDAGENT_STATE_OFFMESH;
-                        ag.corners.Clear();
-                        ag.neis.Clear();
+                        ag.ncorners = 0;
+                        ag.nneis = 0;
                         continue;
                     }
                     else
@@ -1019,8 +1096,9 @@ namespace DotRecast.Detour.Crowd
         {
             using var timer = _telemetry.ScopedTimer(DtCrowdTimerLabel.CalculateSteering);
 
-            foreach (DtCrowdAgent ag in agents)
+            for (var i = 0; i < agents.Count; i++)
             {
+                var ag = agents[i];
                 if (ag.state != DtCrowdAgentState.DT_CROWDAGENT_STATE_WALKING)
                 {
                     continue;
@@ -1041,7 +1119,7 @@ namespace DotRecast.Detour.Crowd
                 else
                 {
                     // Calculate steering direction.
-                    if ((ag.option.updateFlags & DtCrowdAgentParams.DT_CROWD_ANTICIPATE_TURNS) != 0)
+                    if ((ag.option.updateFlags & DtCrowdAgentUpdateFlags.DT_CROWD_ANTICIPATE_TURNS) != 0)
                     {
                         dvel = ag.CalcSmoothSteerDirection();
                     }
@@ -1055,11 +1133,11 @@ namespace DotRecast.Detour.Crowd
                     float speedScale = ag.GetDistanceToGoal(slowDownRadius) / slowDownRadius;
 
                     ag.desiredSpeed = ag.option.maxSpeed;
-                    dvel = dvel.Scale(ag.desiredSpeed * speedScale);
+                    dvel = dvel * (ag.desiredSpeed * speedScale);
                 }
 
                 // Separation
-                if ((ag.option.updateFlags & DtCrowdAgentParams.DT_CROWD_SEPARATION) != 0)
+                if ((ag.option.updateFlags & DtCrowdAgentUpdateFlags.DT_CROWD_SEPARATION) != 0)
                 {
                     float separationDist = ag.option.collisionQueryRange;
                     float invSeparationDist = 1.0f / separationDist;
@@ -1068,41 +1146,41 @@ namespace DotRecast.Detour.Crowd
                     float w = 0;
                     RcVec3f disp = new RcVec3f();
 
-                    for (int j = 0; j < ag.neis.Count; ++j)
+                    for (int j = 0; j < ag.nneis; ++j)
                     {
                         DtCrowdAgent nei = ag.neis[j].agent;
 
-                        RcVec3f diff = ag.npos.Subtract(nei.npos);
-                        diff.y = 0;
+                        RcVec3f diff = RcVec3f.Subtract(ag.npos, nei.npos);
+                        diff.Y = 0;
 
-                        float distSqr = RcVec3f.LenSqr(diff);
+                        float distSqr = diff.LengthSquared();
                         if (distSqr < 0.00001f)
                         {
                             continue;
                         }
 
-                        if (distSqr > Sqr(separationDist))
+                        if (distSqr > RcMath.Sqr(separationDist))
                         {
                             continue;
                         }
 
-                        float dist = (float)Math.Sqrt(distSqr);
-                        float weight = separationWeight * (1.0f - Sqr(dist * invSeparationDist));
+                        float dist = MathF.Sqrt(distSqr);
+                        float weight = separationWeight * (1.0f - RcMath.Sqr(dist * invSeparationDist));
 
-                        disp = RcVec3f.Mad(disp, diff, weight / dist);
+                        disp = RcVec.Mad(disp, diff, weight / dist);
                         w += 1.0f;
                     }
 
                     if (w > 0.0001f)
                     {
                         // Adjust desired velocity.
-                        dvel = RcVec3f.Mad(dvel, disp, 1.0f / w);
+                        dvel = RcVec.Mad(dvel, disp, 1.0f / w);
                         // Clamp desired velocity to desired speed.
-                        float speedSqr = RcVec3f.LenSqr(dvel);
-                        float desiredSqr = Sqr(ag.desiredSpeed);
+                        float speedSqr = dvel.LengthSquared();
+                        float desiredSqr = RcMath.Sqr(ag.desiredSpeed);
                         if (speedSqr > desiredSqr)
                         {
-                            dvel = dvel.Scale(desiredSqr / speedSqr);
+                            dvel = dvel * (desiredSqr / speedSqr);
                         }
                     }
                 }
@@ -1117,19 +1195,20 @@ namespace DotRecast.Detour.Crowd
             using var timer = _telemetry.ScopedTimer(DtCrowdTimerLabel.PlanVelocity);
 
             DtCrowdAgent debugAgent = debug != null ? debug.agent : null;
-            foreach (DtCrowdAgent ag in agents)
+            for (var i = 0; i < agents.Count; i++)
             {
+                var ag = agents[i];
                 if (ag.state != DtCrowdAgentState.DT_CROWDAGENT_STATE_WALKING)
                 {
                     continue;
                 }
 
-                if ((ag.option.updateFlags & DtCrowdAgentParams.DT_CROWD_OBSTACLE_AVOIDANCE) != 0)
+                if ((ag.option.updateFlags & DtCrowdAgentUpdateFlags.DT_CROWD_OBSTACLE_AVOIDANCE) != 0)
                 {
                     _obstacleQuery.Reset();
 
                     // Add neighbours as obstacles.
-                    for (int j = 0; j < ag.neis.Count; ++j)
+                    for (int j = 0; j < ag.nneis; ++j)
                     {
                         DtCrowdAgent nei = ag.neis[j].agent;
                         _obstacleQuery.AddCircle(nei.npos, nei.option.radius, nei.vel, nei.dvel);
@@ -1140,7 +1219,7 @@ namespace DotRecast.Detour.Crowd
                     {
                         RcVec3f[] s = ag.boundary.GetSegment(j);
                         RcVec3f s3 = s[1];
-                        //Array.Copy(s, 3, s3, 0, 3);
+                        //RcArrays.Copy(s, 3, s3, 0, 3);
                         if (DtUtils.TriArea2D(ag.npos, s[0], s3) < 0.0f)
                         {
                             continue;
@@ -1186,8 +1265,9 @@ namespace DotRecast.Detour.Crowd
         {
             using var timer = _telemetry.ScopedTimer(DtCrowdTimerLabel.Integrate);
 
-            foreach (DtCrowdAgent ag in agents)
+            for (var i = 0; i < agents.Count; i++)
             {
+                var ag = agents[i];
                 if (ag.state != DtCrowdAgentState.DT_CROWDAGENT_STATE_WALKING)
                 {
                     continue;
@@ -1203,8 +1283,9 @@ namespace DotRecast.Detour.Crowd
 
             for (int iter = 0; iter < 4; ++iter)
             {
-                foreach (DtCrowdAgent ag in agents)
+                for (var i = 0; i < agents.Count; i++)
                 {
+                    var ag = agents[i];
                     long idx0 = ag.idx;
                     if (ag.state != DtCrowdAgentState.DT_CROWDAGENT_STATE_WALKING)
                     {
@@ -1215,31 +1296,31 @@ namespace DotRecast.Detour.Crowd
 
                     float w = 0;
 
-                    for (int j = 0; j < ag.neis.Count; ++j)
+                    for (int j = 0; j < ag.nneis; ++j)
                     {
                         DtCrowdAgent nei = ag.neis[j].agent;
                         long idx1 = nei.idx;
-                        RcVec3f diff = ag.npos.Subtract(nei.npos);
-                        diff.y = 0;
+                        RcVec3f diff = RcVec3f.Subtract(ag.npos, nei.npos);
+                        diff.Y = 0;
 
-                        float dist = RcVec3f.LenSqr(diff);
-                        if (dist > Sqr(ag.option.radius + nei.option.radius))
+                        float dist = diff.LengthSquared();
+                        if (dist > RcMath.Sqr(ag.option.radius + nei.option.radius))
                         {
                             continue;
                         }
 
-                        dist = (float)Math.Sqrt(dist);
+                        dist = MathF.Sqrt(dist);
                         float pen = (ag.option.radius + nei.option.radius) - dist;
                         if (dist < 0.0001f)
                         {
                             // Agents on top of each other, try to choose diverging separation directions.
                             if (idx0 > idx1)
                             {
-                                diff.Set(-ag.dvel.z, 0, ag.dvel.x);
+                                diff = new RcVec3f(-ag.dvel.Z, 0, ag.dvel.X);
                             }
                             else
                             {
-                                diff.Set(ag.dvel.z, 0, -ag.dvel.x);
+                                diff = new RcVec3f(ag.dvel.Z, 0, -ag.dvel.X);
                             }
 
                             pen = 0.01f;
@@ -1249,7 +1330,7 @@ namespace DotRecast.Detour.Crowd
                             pen = (1.0f / dist) * (pen * 0.5f) * _config.collisionResolveFactor;
                         }
 
-                        ag.disp = RcVec3f.Mad(ag.disp, diff, pen);
+                        ag.disp = RcVec.Mad(ag.disp, diff, pen);
 
                         w += 1.0f;
                     }
@@ -1257,18 +1338,19 @@ namespace DotRecast.Detour.Crowd
                     if (w > 0.0001f)
                     {
                         float iw = 1.0f / w;
-                        ag.disp = ag.disp.Scale(iw);
+                        ag.disp = ag.disp * iw;
                     }
                 }
 
-                foreach (DtCrowdAgent ag in agents)
+                for (var i = 0; i < agents.Count; i++)
                 {
+                    var ag = agents[i];
                     if (ag.state != DtCrowdAgentState.DT_CROWDAGENT_STATE_WALKING)
                     {
                         continue;
                     }
 
-                    ag.npos = ag.npos.Add(ag.disp);
+                    ag.npos = RcVec3f.Add(ag.npos, ag.disp);
                 }
             }
         }
@@ -1277,8 +1359,9 @@ namespace DotRecast.Detour.Crowd
         {
             using var timer = _telemetry.ScopedTimer(DtCrowdTimerLabel.MoveAgents);
 
-            foreach (DtCrowdAgent ag in agents)
+            for (var i = 0; i < agents.Count; i++)
             {
+                var ag = agents[i];
                 if (ag.state != DtCrowdAgentState.DT_CROWDAGENT_STATE_WALKING)
                 {
                     continue;
@@ -1303,8 +1386,9 @@ namespace DotRecast.Detour.Crowd
         {
             using var timer = _telemetry.ScopedTimer(DtCrowdTimerLabel.UpdateOffMeshConnections);
 
-            foreach (DtCrowdAgent ag in agents)
+            for (var i = 0; i < agents.Count; i++)
             {
+                var ag = agents[i];
                 DtCrowdAgentAnimation anim = ag.animation;
                 if (!anim.active)
                 {
@@ -1343,7 +1427,7 @@ namespace DotRecast.Detour.Crowd
 
         private float Tween(float t, float t0, float t1)
         {
-            return Clamp((t - t0) / (t1 - t0), 0.0f, 1.0f);
+            return Math.Clamp((t - t0) / (t1 - t0), 0.0f, 1.0f);
         }
     }
 }

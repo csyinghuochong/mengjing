@@ -1,7 +1,7 @@
 /*
 Copyright (c) 2009-2010 Mikko Mononen memon@inside.org
 recast4j copyright (c) 2015-2019 Piotr Piastucki piotr@jtilia.org
-DotRecast Copyright (c) 2023 Choi Ikpil ikpil@naver.com
+DotRecast Copyright (c) 2023-2024 Choi Ikpil ikpil@naver.com
 
 This software is provided 'as-is', without any express or implied
 warranty.  In no event will the authors be held liable for any damages
@@ -45,9 +45,9 @@ namespace DotRecast.Detour.TileCache.Io.Compress
 
         public byte[] Compress(byte[] buf)
         {
-            byte[] output = new byte[FastLZ.CalculateOutputBufferLength(buf.Length)];
-            int len = FastLZ.Compress(buf, 0, buf.Length, output, 0, output.Length);
-            return RcArrayUtils.CopyOf(output, len);
+            byte[] output = new byte[FastLZ.EstimateCompressedSize(buf.Length)];
+            long len = FastLZ.CompressLevel(2, buf, 0, buf.Length, output);
+            return RcArrays.CopyOf(output, len);
         }
     }
 }

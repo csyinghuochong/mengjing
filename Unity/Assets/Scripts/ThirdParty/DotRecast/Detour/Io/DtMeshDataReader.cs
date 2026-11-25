@@ -21,13 +21,17 @@ using DotRecast.Core;
 
 namespace DotRecast.Detour.Io
 {
+    using static DtDetour;
+
     public class DtMeshDataReader
     {
         public const int DT_POLY_DETAIL_SIZE = 10;
+        public const int LINK_SIZEOF = 16;
+        public const int LINK_SIZEOF32BIT = 12;
 
         public DtMeshData Read(BinaryReader stream, int maxVertPerPoly)
         {
-            RcByteBuffer buf = IOUtils.ToByteBuffer(stream);
+            RcByteBuffer buf = RcIO.ToByteBuffer(stream);
             return Read(buf, maxVertPerPoly, false);
         }
 
@@ -38,7 +42,7 @@ namespace DotRecast.Detour.Io
 
         public DtMeshData Read32Bit(BinaryReader stream, int maxVertPerPoly)
         {
-            RcByteBuffer buf = IOUtils.ToByteBuffer(stream);
+            RcByteBuffer buf = RcIO.ToByteBuffer(stream);
             return Read(buf, maxVertPerPoly, true);
         }
 
@@ -53,10 +57,10 @@ namespace DotRecast.Detour.Io
             DtMeshHeader header = new DtMeshHeader();
             data.header = header;
             header.magic = buf.GetInt();
-            if (header.magic != DtMeshHeader.DT_NAVMESH_MAGIC)
+            if (header.magic != DT_NAVMESH_MAGIC)
             {
-                header.magic = IOUtils.SwapEndianness(header.magic);
-                if (header.magic != DtMeshHeader.DT_NAVMESH_MAGIC)
+                header.magic = RcIO.SwapEndianness(header.magic);
+                if (header.magic != DT_NAVMESH_MAGIC)
                 {
                     throw new IOException("Invalid magic");
                 }
@@ -65,16 +69,16 @@ namespace DotRecast.Detour.Io
             }
 
             header.version = buf.GetInt();
-            if (header.version != DtMeshHeader.DT_NAVMESH_VERSION)
+            if (header.version != DT_NAVMESH_VERSION)
             {
-                if (header.version < DtMeshHeader.DT_NAVMESH_VERSION_RECAST4J_FIRST
-                    || header.version > DtMeshHeader.DT_NAVMESH_VERSION_RECAST4J_LAST)
+                if (header.version < DT_NAVMESH_VERSION_RECAST4J_FIRST
+                    || header.version > DT_NAVMESH_VERSION_RECAST4J_LAST)
                 {
                     throw new IOException("Invalid version " + header.version);
                 }
             }
 
-            bool cCompatibility = header.version == DtMeshHeader.DT_NAVMESH_VERSION;
+            bool cCompatibility = header.version == DT_NAVMESH_VERSION;
             header.x = buf.GetInt();
             header.y = buf.GetInt();
             header.layer = buf.GetInt();
@@ -91,14 +95,14 @@ namespace DotRecast.Detour.Io
             header.walkableHeight = buf.GetFloat();
             header.walkableRadius = buf.GetFloat();
             header.walkableClimb = buf.GetFloat();
-            
-            header.bmin.x = buf.GetFloat();
-            header.bmin.y = buf.GetFloat();
-            header.bmin.z = buf.GetFloat();
 
-            header.bmax.x = buf.GetFloat();
-            header.bmax.y = buf.GetFloat();
-            header.bmax.z = buf.GetFloat();
+            header.bmin.X = buf.GetFloat();
+            header.bmin.Y = buf.GetFloat();
+            header.bmin.Z = buf.GetFloat();
+
+            header.bmax.X = buf.GetFloat();
+            header.bmax.Y = buf.GetFloat();
+            header.bmax.Z = buf.GetFloat();
 
             header.bvQuantFactor = buf.GetFloat();
             data.verts = ReadVerts(buf, header.vertCount);
@@ -116,8 +120,6 @@ namespace DotRecast.Detour.Io
             return data;
         }
 
-        public const int LINK_SIZEOF = 16;
-        public const int LINK_SIZEOF32BIT = 12;
 
         public static int GetSizeofLink(bool is32Bit)
         {
@@ -141,7 +143,7 @@ namespace DotRecast.Detour.Io
             for (int i = 0; i < polys.Length; i++)
             {
                 polys[i] = new DtPoly(i, maxVertPerPoly);
-                if (header.version < DtMeshHeader.DT_NAVMESH_VERSION_RECAST4J_NO_POLY_FIRSTLINK)
+                if (header.version < DT_NAVMESH_VERSION_RECAST4J_NO_POLY_FIRSTLINK)
                 {
                     buf.GetInt(); // polys[i].firstLink
                 }
@@ -169,11 +171,11 @@ namespace DotRecast.Detour.Io
             DtPolyDetail[] polys = new DtPolyDetail[header.detailMeshCount];
             for (int i = 0; i < polys.Length; i++)
             {
-                polys[i] = new DtPolyDetail();
-                polys[i].vertBase = buf.GetInt();
-                polys[i].triBase = buf.GetInt();
-                polys[i].vertCount = buf.Get() & 0xFF;
-                polys[i].triCount = buf.Get() & 0xFF;
+                int vertBase = buf.GetInt();
+                int triBase = buf.GetInt();
+                byte vertCount = (byte)(buf.Get() & 0xFF);
+                byte triCount = (byte)(buf.Get() & 0xFF);
+                polys[i] = new DtPolyDetail(vertBase, triBase, vertCount, triCount);
                 if (cCompatibility)
                 {
                     buf.GetShort(); // C struct padding
@@ -200,29 +202,25 @@ namespace DotRecast.Detour.Io
             for (int i = 0; i < nodes.Length; i++)
             {
                 nodes[i] = new DtBVNode();
-                if (header.version < DtMeshHeader.DT_NAVMESH_VERSION_RECAST4J_32BIT_BVTREE)
+                if (header.version < DT_NAVMESH_VERSION_RECAST4J_32BIT_BVTREE)
                 {
-                    for (int j = 0; j < 3; j++)
-                    {
-                        nodes[i].bmin[j] = buf.GetShort() & 0xFFFF;
-                    }
+                    nodes[i].bmin.X = buf.GetShort() & 0xFFFF;
+                    nodes[i].bmin.Y = buf.GetShort() & 0xFFFF;
+                    nodes[i].bmin.Z = buf.GetShort() & 0xFFFF;
 
-                    for (int j = 0; j < 3; j++)
-                    {
-                        nodes[i].bmax[j] = buf.GetShort() & 0xFFFF;
-                    }
+                    nodes[i].bmax.X = buf.GetShort() & 0xFFFF;
+                    nodes[i].bmax.Y = buf.GetShort() & 0xFFFF;
+                    nodes[i].bmax.Z = buf.GetShort() & 0xFFFF;
                 }
                 else
                 {
-                    for (int j = 0; j < 3; j++)
-                    {
-                        nodes[i].bmin[j] = buf.GetInt();
-                    }
+                    nodes[i].bmin.X = buf.GetInt();
+                    nodes[i].bmin.Y = buf.GetInt();
+                    nodes[i].bmin.Z = buf.GetInt();
 
-                    for (int j = 0; j < 3; j++)
-                    {
-                        nodes[i].bmax[j] = buf.GetInt();
-                    }
+                    nodes[i].bmax.X = buf.GetInt();
+                    nodes[i].bmax.Y = buf.GetInt();
+                    nodes[i].bmax.Z = buf.GetInt();
                 }
 
                 nodes[i].i = buf.GetInt();
@@ -237,9 +235,11 @@ namespace DotRecast.Detour.Io
             for (int i = 0; i < cons.Length; i++)
             {
                 cons[i] = new DtOffMeshConnection();
-                for (int j = 0; j < 6; j++)
+                for (int j = 0; j < 2; j++)
                 {
-                    cons[i].pos[j] = buf.GetFloat();
+                    cons[i].pos[j].X = buf.GetFloat();
+                    cons[i].pos[j].Y = buf.GetFloat();
+                    cons[i].pos[j].Z = buf.GetFloat();
                 }
 
                 cons[i].rad = buf.GetFloat();
