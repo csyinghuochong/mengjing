@@ -306,7 +306,7 @@ namespace ET.Client
                     ? monsterConfig.Backstory
                     : "暂无背景故事";
 
-            self.ShowMonsterModel(monsterConfig);
+            self.ShowMonsterModel(monsterConfig).Coroutine();
             self.RefreshSkills(monsterConfig);
             self.RefreshRewards(monsterId);
         }
@@ -324,7 +324,7 @@ namespace ET.Client
             };
         }
 
-        private static void ShowMonsterModel(this ES_MonsterTuJian self, MonsterConfig monsterConfig)
+        private static async ETTask ShowMonsterModel(this ES_MonsterTuJian self, MonsterConfig monsterConfig)
         {
             string[] position = string.IsNullOrEmpty(monsterConfig.ModelShowPosi) ? null : monsterConfig.ModelShowPosi.Split(',');
             if (position != null && position.Length >= 5 &&
@@ -345,7 +345,24 @@ namespace ET.Client
                 self.ES_ModelShow.RotationY = 0f;
             }
 
-            self.ES_ModelShow.ShowOtherModel($"Monster/{monsterConfig.MonsterModelID}").Coroutine();
+            Vector3 modelScale = Vector3.one;
+            string[] scales = monsterConfig.TuJianModelScale?.Split(',');
+
+            if (scales != null && scales.Length == 3 &&
+                float.TryParse(scales[0], out float sx) &&
+                float.TryParse(scales[1], out float sy) &&
+                float.TryParse(scales[2], out float sz))
+            {
+                modelScale = new Vector3(sx, sy, sz);
+            }
+
+            Transform modelParent = self.ES_ModelShow.ModelParent;
+            await self.ES_ModelShow.ShowOtherModel($"Monster/{monsterConfig.MonsterModelID}");
+
+            if (modelParent != null && modelParent.childCount > 0)
+            {
+                modelParent.GetChild(modelParent.childCount - 1).localScale = modelScale;
+            }
         }
 
         private static void RefreshSkills(this ES_MonsterTuJian self, MonsterConfig monsterConfig)

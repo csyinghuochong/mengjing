@@ -76,6 +76,7 @@ namespace ET
             ModelShowPosi = _buf.ReadString();
             Backstory = _buf.ReadString();
             {int __n0 = _buf.ReadSize(); QiYuPetId = new int[__n0];for(var __index0 = 0 ; __index0 < __n0 ; __index0++) { int __e0;__e0 = _buf.ReadInt(); QiYuPetId[__index0] = __e0;}}
+            TuJianModelScale = _buf.ReadString();
 
             PostInit();
         }
@@ -360,12 +361,18 @@ namespace ET
         /// </summary>
         public int[] QiYuPetId;
 
+        /// <summary>
+        /// 图鉴模型Scale
+        /// </summary>
+        public string TuJianModelScale;
+
 
         public const int __ID__ = -55174244;
         public override int GetTypeId() => __ID__;
 
         public  void ResolveRef()
         {
+            
             
             
             
@@ -481,6 +488,7 @@ namespace ET
             + "ModelShowPosi:" + ModelShowPosi + ","
             + "Backstory:" + Backstory + ","
             + "QiYuPetId:" + Luban.StringUtil.CollectionToString(QiYuPetId) + ","
+            + "TuJianModelScale:" + TuJianModelScale + ","
             + "}";
         }
 
