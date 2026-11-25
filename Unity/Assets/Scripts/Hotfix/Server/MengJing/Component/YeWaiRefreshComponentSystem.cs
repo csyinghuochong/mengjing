@@ -74,6 +74,7 @@ namespace ET.Server
                 {
                     Log.Warning($"活动-世界领主: {monsterPosid[0]}");
                     monsterPosid = self.GetShenMiZhiDiMonster(openDay);
+                    self.ClearMonsters();
                 }
 
                 if (functionId == 1061)
@@ -84,6 +85,26 @@ namespace ET.Server
                 FubenHelp.CreateMonsterList(self.Scene(), monsterPosid);
             }
             
+        }
+
+        private static void ClearMonsters(this YeWaiRefreshComponent self)
+        {
+            UnitComponent unitComponent = self.Scene().GetComponent<UnitComponent>();
+            using var monsterIds = ListComponent<long>.Create();
+            foreach (Unit unit in unitComponent.GetAll())
+            {
+                if (unit?.Type == UnitType.Monster)
+                {
+                    monsterIds.Add(unit.Id);
+                }
+            }
+
+            foreach (long monsterId in monsterIds)
+            {
+                unitComponent.Remove(monsterId);
+            }
+            self.RefreshMonsters.Clear();
+            self.Scene().GetComponent<AOIManagerComponent>().RemoveEmptyCells();
         }
 
         /// <summary>

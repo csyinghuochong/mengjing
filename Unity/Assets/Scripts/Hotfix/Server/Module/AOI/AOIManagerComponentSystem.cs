@@ -85,6 +85,23 @@ namespace ET.Server
             }
         }
 
+        public static void RemoveEmptyCells(this AOIManagerComponent self)
+        {
+            using var emptyCells = ListComponent<long>.Create();
+            foreach (Entity child in self.Children.Values)
+            {
+                if (child is Cell cell && cell.AOIUnits.Count == 0 &&
+                    cell.SubsEnterEntities.Count == 0 && cell.SubsLeaveEntities.Count == 0)
+                {
+                    emptyCells.Add(cell.Id);
+                }
+            }
+            foreach (long cellId in emptyCells)
+            {
+                self.RemoveChild(cellId);
+            }
+        }
+
         private static Cell GetCell(this AOIManagerComponent self, long cellId)
         {
             Cell cell = self.GetChild<Cell>(cellId);
