@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,11 +9,6 @@ namespace ET.Client
     [EntitySystemOf(typeof(Scroll_Item_SkillLearnItem))]
     public static partial class Scroll_Item_SkillLearnItemSystem
     {
-        /// <summary>
-        /// 预制体里技能符文孔位的节点名前缀，节点名形如 EG_SkillRune_1
-        /// </summary>
-        private const string SkillRuneSlotPrefix = "EG_SkillRune_";
-
         [EntitySystem]
         private static void Awake(this Scroll_Item_SkillLearnItem self)
         {
@@ -84,82 +80,46 @@ namespace ET.Client
                 self.E_SkillLvText.text = string.Format("{0}{1}", LanguageComponent.Instance.LoadLocalization("等级 "), skillConfig.SkillLv);
             }
 
-            self.RefreshSkillRuneSlots(skillConfig, isLocked);
+            self.RefreshSkillRunes(skillConfig.Id);
         }
 
-        /// <summary>
-        /// 刷新四个技能符文孔位：锁着显示锁，空孔显示加号，镶了符文显示图标和等级。
-        /// 孔位节点是美术在预制体里摆好的，按名字前缀 EG_SkillRune_ 找，节点名后缀就是孔位序号
-        /// </summary>
-        private static void RefreshSkillRuneSlots(this Scroll_Item_SkillLearnItem self, SkillConfig skillConfig, bool isLocked)
+        private static void RefreshSkillRunes(this Scroll_Item_SkillLearnItem self, int skillId)
         {
-            bool showSlots = !isLocked && skillConfig != null && IsActiveSkillType(skillConfig.SkillType);
             Scene root = self.Root();
             SkillRuneComponentC skillRuneComponent = root.GetComponent<SkillRuneComponentC>();
-            int slotCount = GlobalValueConfigCategory.Instance.SkillRuneSlotCount;
-
-            for (int childIndex = 0; childIndex < self.uiTransform.childCount; childIndex++)
+            List<SkillRuneConfig> runeConfigs = skillRuneComponent?.GetSkillRuneConfigs(skillId);
+            int runeCount = runeConfigs?.Count ?? 0;
+            RectTransform[] runeNodes =
             {
-                Transform slot = self.uiTransform.GetChild(childIndex);
-                if (!slot.name.StartsWith(SkillRuneSlotPrefix))
+                self.EG_SkillRune_1RectTransform,
+                self.EG_SkillRune_2RectTransform,
+                self.EG_SkillRune_3RectTransform,
+                self.EG_SkillRune_4RectTransform
+            };
+
+            ResourcesLoaderComponent resourcesLoaderComponent = root.GetComponent<ResourcesLoaderComponent>();
+            for (int i = 0; i < runeNodes.Length; i++)
+            {
+                RectTransform runeNode = runeNodes[i];
+                if (runeNode == null)
                 {
                     continue;
                 }
 
-                if (!int.TryParse(slot.name.Substring(SkillRuneSlotPrefix.Length), out int slotNumber))
+                bool hasRune = i < runeCount;
+                if (hasRune)
                 {
-                    continue;
-                }
-
-                int slotIndex = slotNumber - 1;
-                bool show = showSlots && slotIndex >= 0 && slotIndex < slotCount;
-                slot.gameObject.SetActive(show);
-                if (!show)
-                {
-                    continue;
-                }
-
-                bool unlocked = skillConfig.SkillLv >= SkillHelp.GetSkillRuneSlotUnlockLevel(slotIndex);
-                SkillRuneConfig runeConfig = null;
-                if (unlocked && skillRuneComponent != null)
-                {
-                    long runeId = skillRuneComponent.GetSlotRuneId(skillConfig.Id, slotIndex);
-                    runeConfig = skillRuneComponent.GetRuneConfig(skillRuneComponent.GetRune(runeId));
-                }
-
-                bool hasRune = runeConfig != null;
-                slot.Find("Image_Lock")?.gameObject.SetActive(!unlocked);
-                slot.Find("Image_Add")?.gameObject.SetActive(unlocked && !hasRune);
-
-                Image iconImage = slot.Find("Mask/Image_Icon")?.GetComponent<Image>();
-                if (iconImage != null)
-                {
-                    iconImage.gameObject.SetActive(hasRune);
-                    if (hasRune)
+                    Image iconImage = runeNode.Find("Mask/Image_Icon")?.GetComponent<Image>();
+                    if (iconImage != null)
                     {
-                        string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.RoleSkillIcon, runeConfig.Icon);
-                        iconImage.sprite = root.GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
+                        string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.RoleSkillIcon, runeConfigs[i].Icon);
+                        iconImage.sprite = resourcesLoaderComponent.LoadAssetSync<Sprite>(path);
+                        iconImage.gameObject.SetActive(true);
                     }
                 }
 
-                Text lvText = slot.Find("Text_Lv")?.GetComponent<Text>();
-                if (lvText != null)
-                {
-                    lvText.gameObject.SetActive(hasRune);
-                    if (hasRune)
-                    {
-                        lvText.text = CommonViewHelper.GetRomanLevel(runeConfig.Level);
-                    }
-                }
+                runeNode.gameObject.SetActive(hasRune);
             }
-        }
-
-        /// <summary>
-        /// 1 主动技能，6 武器总技能，技能界面主动技能页就是这两种
-        /// </summary>
-        private static bool IsActiveSkillType(int skillType)
-        {
-            return skillType == (int)SkillTypeEnum.ActiveSkill || skillType == 6;
         }
     }
 }
