@@ -61,6 +61,10 @@ namespace ET.Server
             //根据开服天数创建怪物
             int monsterID = FunctionHelp.GetUnionBossId(openDay);
 
+            // 先清掉上一轮残留的 BOSS，否则每天开活动都会在场景里多堆一只（永久不会消失）。
+            // 这里清场景内所有怪物：2000009 是公会 BOSS 专用地图，只有 BOSS 一种怪。
+            self.RemoveUnionBoss();
+
             long serverTime = TimeHelper.ServerNow();
             float3 initPosi = new float3(0f, 0.5f, 0f);
             SceneConfig sceneConfig = SceneConfigCategory.Instance.Get(2000009);
@@ -73,6 +77,55 @@ namespace ET.Server
         private static void Awake(this ET.Server.UnionDungeonComponet self)
         {
 
+        }
+
+        /// <summary>
+        /// 移除场景里已有的公会 BOSS。
+        /// monsterId 传 0 时移除场景内所有 Monster（活动关闭用）。
+        /// </summary>
+        public static void RemoveUnionBoss(this UnionDungeonComponet self, int monsterId = 0)
+        {
+            Scene scene = self.Scene();
+            if (scene == null || scene.IsDisposed)
+            {
+                return;
+            }
+
+            UnitComponent unitComponent = scene.GetComponent<UnitComponent>();
+            if (unitComponent == null)
+            {
+                return;
+            }
+
+            using (ListComponent<long> removeIds = ListComponent<long>.Create())
+            {
+                List<EntityRef<Unit>> units = unitComponent.GetAll();
+                for (int i = 0; i < units.Count; i++)
+                {
+                    Unit unit = units[i];
+                    if (unit == null || unit.IsDisposed)
+                    {
+                        continue;
+                    }
+
+                    if (unit.Type != UnitType.Monster)
+                    {
+                        continue;
+                    }
+
+                    if (monsterId != 0 && unit.ConfigId != monsterId)
+                    {
+                        continue;
+                    }
+
+                    removeIds.Add(unit.Id);
+                }
+
+                for (int i = 0; i < removeIds.Count; i++)
+                {
+                    unitComponent.Remove(removeIds[i]);
+                }
+            }
         }
     }
 
