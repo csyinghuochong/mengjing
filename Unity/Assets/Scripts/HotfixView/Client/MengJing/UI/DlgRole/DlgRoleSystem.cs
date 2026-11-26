@@ -125,7 +125,7 @@ namespace ET.Client
             UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
             ItemInfo bagInfo = bagComponent.GetEquipBySubType(ItemLocType.ItemLocEquip, (int)ItemSubTypeEnum.Wuqi);
             self.View.ES_ModelShow.SetCameraPosition(new Vector3(0f, 70f, 270f));
-            self.View.ES_ModelShow.ShowPlayerModel(bagInfo, userInfoComponent.UserInfo.Occ, 0, new List<int>(), playAnim: false);
+            self.View.ES_ModelShow.ShowPlayerModel(bagInfo, userInfoComponent.UserInfo.Occ, 0, new List<int>(), playAnim: false, renderTextureSize: new Vector2Int(1024, 1024));
         }
         
         public static void Reddot_RolePoint(this DlgRole self, int num)

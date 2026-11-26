@@ -105,7 +105,8 @@ namespace ET.Client
             self.GetComponent<ChangeEquipHelper>().ChangeWeapon(self.GetWeaponId(bagInfo, occ));
         }
 
-        public static void ShowPlayerModel(this ES_ModelShow self, ItemInfo bagInfo, int occ, int equipIndex, List<int> fashionids, bool canDrag = true, bool playAnim = true)
+        public static void ShowPlayerModel(this ES_ModelShow self, ItemInfo bagInfo, int occ, int equipIndex, List<int> fashionids, bool canDrag = true,
+            bool playAnim = true, Vector2Int renderTextureSize = default)
         {
             self.RemoveModel();
 
@@ -117,7 +118,7 @@ namespace ET.Client
                 self.E_RenderEventTrigger.RegisterEvent(EventTriggerType.PointerUp, (pdata) => { self.PointerUp(pdata as PointerEventData); });
             }
 
-            self.ReSetTexture();
+            self.ReSetTexture(renderTextureSize);
 
             string path = ABPathHelper.GetUnitPath(string.Format("Player/{0}", OccupationConfigCategory.Instance.Get(occ).ModelAsset));
             GameObject prefab = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
@@ -142,7 +143,8 @@ namespace ET.Client
             self.Model.Add(go);
         }
 
-        public static void ShowPlayerPreviewModel(this ES_ModelShow self, ItemInfo bagInfo, List<int> fashionids, int occ, bool canDrag = true)
+        public static void ShowPlayerPreviewModel(this ES_ModelShow self, ItemInfo bagInfo, List<int> fashionids, int occ, bool canDrag = true,
+            Vector2Int renderTextureSize = default)
         {
             self.RemoveModel();
 
@@ -154,7 +156,7 @@ namespace ET.Client
                 self.E_RenderEventTrigger.RegisterEvent(EventTriggerType.PointerUp, (pdata) => { self.PointerUp(pdata as PointerEventData); });
             }
 
-            self.ReSetTexture();
+            self.ReSetTexture(renderTextureSize);
 
             var path = ABPathHelper.GetUnitPath(string.Format("Player/{0}", OccupationConfigCategory.Instance.Get(occ).ModelAsset));
             GameObject prefab = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
@@ -190,7 +192,8 @@ namespace ET.Client
             return weaponId;
         }
 
-        public static async ETTask ShowOtherModel(this ES_ModelShow self, string assetPath, bool isPet = false, bool canDrag = true)
+        public static async ETTask ShowOtherModel(this ES_ModelShow self, string assetPath, bool isPet = false, bool canDrag = true,
+            Vector2Int renderTextureSize = default)
         {
             self.RemoveModel();
             self.ModelParent.transform.localEulerAngles = Vector3.zero;
@@ -202,7 +205,7 @@ namespace ET.Client
                 self.E_RenderEventTrigger.RegisterEvent(EventTriggerType.PointerUp, (pdata) => { self.PointerUp(pdata as PointerEventData); });
             }
 
-            self.ReSetTexture();
+            self.ReSetTexture(renderTextureSize);
 
             string path = ABPathHelper.GetUnitPath(assetPath);
             GameObject prefab = await self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetAsync<GameObject>(path);
@@ -230,9 +233,10 @@ namespace ET.Client
             self.Model.Add(go);
         }
 
-        public static async ETTask ShowModelList(this ES_ModelShow self, string initpath, List<string> assetPath)
+        public static async ETTask ShowModelList(this ES_ModelShow self, string initpath, List<string> assetPath, Vector2Int renderTextureSize = default)
         {
             self.RemoveModel();
+            self.ReSetTexture(renderTextureSize);
             long instanceId = self.InstanceId;
 
             ResourcesLoaderComponent resourcesLoaderComponent = self.Root().GetComponent<ResourcesLoaderComponent>();
@@ -256,18 +260,36 @@ namespace ET.Client
             }
         }
 
-        public static void ReSetTexture(this ES_ModelShow self)
+        public static void ReSetTexture(this ES_ModelShow self, Vector2Int renderTextureSize = default)
         {
-            if (self.RenderTexture != null)
+            if (renderTextureSize.x <= 0 || renderTextureSize.y <= 0)
             {
-                self.RenderTexture.Release();
+                renderTextureSize = new Vector2Int(512, 512);
             }
 
-            RenderTexture renderTexture = new RenderTexture(512, 512, 16, RenderTextureFormat.ARGB32);
-            renderTexture.Create();
+            int maxSize = SystemInfo.maxTextureSize;
+            if (maxSize <= 0)
+            {
+                return;
+            }
+
+            int width = Mathf.Min(renderTextureSize.x, maxSize);
+            int height = Mathf.Min(renderTextureSize.y, maxSize);
+            RenderTexture renderTexture = new RenderTexture(width, height, 16, RenderTextureFormat.ARGB32);
+            if (!renderTexture.Create())
+            {
+                UnityEngine.Object.Destroy(renderTexture);
+                return;
+            }
+
+            RenderTexture previousTexture = self.RenderTexture;
             self.RenderTexture = renderTexture;
             self.E_RenderRawImage.texture = renderTexture;
             self.EG_RootRectTransform.transform.Find("Camera").GetComponent<Camera>().targetTexture = renderTexture;
+            if (previousTexture != null)
+            {
+                previousTexture.Release();
+            }
         }
 
         public static void PlayShowIdelAnimate(this ES_ModelShow self)
