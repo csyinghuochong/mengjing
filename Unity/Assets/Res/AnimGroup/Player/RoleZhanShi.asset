@@ -1,0 +1,65 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea1ccaf882e41cd4d9cc3acea406739c, type: 3}
+  m_Name: RoleZhanShi
+  m_EditorClassIdentifier: 
+  AnimInfos:
+  - StateName: Idle
+    AnimationClip: {fileID: 3393515755650681429, guid: cc9ed1860db53ef488d9110b1ddb05df,
+      type: 3}
+    Speed: 1
+    NextStateName: 
+  - StateName: Walk
+    AnimationClip: {fileID: 1827226128182048838, guid: 8f37833ff7077bf4f9b075803c03e66d,
+      type: 3}
+    Speed: 1
+    NextStateName: 
+  - StateName: Run
+    AnimationClip: {fileID: 889658228849141300, guid: 3660f75acb61dc04c854abbd36bec8d1,
+      type: 3}
+    Speed: 1
+    NextStateName: 
+  - StateName: Attack
+    AnimationClip: {fileID: -2167989987809868982, guid: 6bb94e297e0ec31458d4a02700ba7fb1,
+      type: 3}
+    Speed: 1
+    NextStateName: Idle
+  - StateName: Act_1
+    AnimationClip: {fileID: 1827226128182048838, guid: 9fc584916c4b04649bf7da466bccccd1,
+      type: 3}
+    Speed: 1
+    NextStateName: Idle
+  - StateName: Act_2
+    AnimationClip: {fileID: 1827226128182048838, guid: c1b270d4ca878ee44a17af4a5cb43db5,
+      type: 3}
+    Speed: 1
+    NextStateName: Idle
+  - StateName: Act_3
+    AnimationClip: {fileID: 1827226128182048838, guid: 9afe7c4ff7bc304499da2c9665c0061e,
+      type: 3}
+    Speed: 1
+    NextStateName: Idle
+  - StateName: Death
+    AnimationClip: {fileID: 1669706005763027416, guid: db8c41b5ae36eae419ab24f126e3cebd,
+      type: 3}
+    Speed: 1
+    NextStateName: 
+  - StateName: Hit
+    AnimationClip: {fileID: 7242944874435170695, guid: 08f926159bdd4834bbd13e7b98c5f253,
+      type: 3}
+    Speed: 1
+    NextStateName: Idle
+  - StateName: Dizzy
+    AnimationClip: {fileID: -7703048075201303486, guid: dc82283a38dae7a41a9bceaed109760a,
+      type: 3}
+    Speed: 1
+    NextStateName: 
