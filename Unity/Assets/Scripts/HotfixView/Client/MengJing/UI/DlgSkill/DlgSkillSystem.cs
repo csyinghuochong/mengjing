@@ -53,16 +53,6 @@ namespace ET.Client
     }
 
     [Event(SceneType.Demo)]
-    public class DataUpdate_OnActiveTianFu_Refresh : AEvent<Scene, OnActiveTianFu>
-    {
-        protected override async ETTask Run(Scene scene, OnActiveTianFu args)
-        {
-            scene.GetComponent<UIComponent>().GetDlgLogic<DlgSkill>()?.OnActiveTianFu();
-            await ETTask.CompletedTask;
-        }
-    }
-
-    [Event(SceneType.Demo)]
     public class DataUpdate_HuiShouSelect_Refresh : AEvent<Scene, HuiShouSelect>
     {
         protected override async ETTask Run(Scene scene, HuiShouSelect args)
@@ -75,7 +65,6 @@ namespace ET.Client
     [FriendOf(typeof(ES_SkillLearn))]
     [FriendOf(typeof(ES_SkillSet))]
     [FriendOf(typeof(ES_SkillMake))]
-    [FriendOf(typeof(ES_SkillTianFu))]
     [FriendOf(typeof(ES_SkillLifeShield))]
     [FriendOf(typeof(ES_SkillAugment))]
     [FriendOf(typeof(ES_SkillLongYin))]
@@ -129,9 +118,6 @@ namespace ET.Client
                     self.View.ES_SkillMake.uiTransform.gameObject.SetActive(true);
                     break;
                 case 5:
-                    self.View.ES_SkillTianFu.uiTransform.gameObject.SetActive(true);
-                    break;
-                case 6:
                     self.View.ES_SkillAugment.uiTransform.gameObject.SetActive(true);
                     self.View.ES_SkillAugment.RefreshSkillAugmentItems();
                     break;
@@ -141,14 +127,6 @@ namespace ET.Client
         public static void Reddot_SkillUp(this DlgSkill self, int num)
         {
             self.View.E_Type_0Toggle.transform.Find("Reddot").gameObject.SetActive(num > 0);
-        }
-
-        public static void OnActiveTianFu(this DlgSkill self)
-        {
-            if (self.View.ES_SkillTianFu.uiTransform.gameObject.activeSelf)
-            {
-                self.View.ES_SkillTianFu.RefreshTianFuList();
-            }
         }
 
         public static void OnSkillReset(this DlgSkill self)

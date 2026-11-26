@@ -5,16 +5,16 @@
     {
         protected override async ETTask Run(Unit unit, C2M_TalentReSetRequest request, M2C_TalentReSetResponse response)
         {
-            UserInfoComponentS userInfoComponentS = unit.GetComponent<UserInfoComponentS>();
-            SkillSetComponentS skillSetComponentS = unit.GetComponent<SkillSetComponentS>();
-
-            if (!unit.GetComponent<BagComponentS>().OnCostItemData(GlobalValueConfigCategory.Instance.Value_139))
-            {
-                response.Error = ErrorCode.ERR_ItemNotEnoughError;
-                return;
-            }
-
-            skillSetComponentS.TianFuReSet();
+            // UserInfoComponentS userInfoComponentS = unit.GetComponent<UserInfoComponentS>();
+            // SkillSetComponentS skillSetComponentS = unit.GetComponent<SkillSetComponentS>();
+            //
+            // if (!unit.GetComponent<BagComponentS>().OnCostItemData(GlobalValueConfigCategory.Instance.Value_139))
+            // {
+            //     response.Error = ErrorCode.ERR_ItemNotEnoughError;
+            //     return;
+            // }
+            //
+            // skillSetComponentS.TianFuReSet();
 
             await ETTask.CompletedTask;
         }

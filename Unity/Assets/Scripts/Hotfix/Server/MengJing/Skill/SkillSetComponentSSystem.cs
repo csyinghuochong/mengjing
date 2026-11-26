@@ -81,25 +81,20 @@ namespace ET.Server
             return self.TianFuPlan == 0 ? self.TianFuList1 : self.TianFuList2;
         }
 
-        public static void TianFuReSet(this SkillSetComponentS self)
+        public static void TianFuReSet(this SkillSetComponentS self, bool refreshSkillSet = true)
         {
             List<KeyValuePairInt> tianfus = self.TianFuList();
             foreach (KeyValuePairInt keyValuePairInt in tianfus)
             {
                 self.AddTianFuAttribute(keyValuePairInt.KeyId, false, (int)keyValuePairInt.Value);
             }
+            tianfus.Clear();
 
-            if (self.TianFuPlan == 0)
+            if (refreshSkillSet)
             {
-                self.TianFuList1.Clear();
+                self.GetParent<Unit>().GetComponent<SkillPassiveComponent>().UpdatePassiveSkill();
+                self.UpdateSkillSet();
             }
-            else
-            {
-                self.TianFuList2.Clear();
-            }
-
-            self.GetParent<Unit>().GetComponent<SkillPassiveComponent>().UpdatePassiveSkill();
-            self.UpdateSkillSet();
         }
 
         public static List<KeyValuePairInt> TianFuListAll(this SkillSetComponentS self)
@@ -743,7 +738,7 @@ namespace ET.Server
             for (int i = 0; i < tianfuIds.Count; i++)
             {
                 TalentConfig talentConfig = TalentConfigCategory.Instance.Get(tianfuIds[i].KeyId);
-                effects.AddRange(talentConfig.AddPropreList.GetLevelEffects((int)tianfuIds[i].Value));
+                    effects.AddRange(talentConfig.AddPropreList.GetLevelEffects((int)tianfuIds[i].Value));
             }
 
             return effects;

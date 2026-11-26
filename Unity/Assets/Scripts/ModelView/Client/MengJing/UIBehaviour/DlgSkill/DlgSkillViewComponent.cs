@@ -101,26 +101,6 @@ namespace ET.Client
             }
         }
 
-        public ES_SkillTianFu ES_SkillTianFu
-        {
-            get
-            {
-                ES_SkillTianFu es = this.m_es_skilltianfu;
-                if (es == null)
-                {
-	                string path = "Assets/Bundles/UI/Common/ES_SkillTianFu.prefab";
-                    GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
-                    GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewNodeRectTransform);
-                    go.SetActive(true);
-                    this.AssetList.Add(path);
-                    this.m_es_skilltianfu = this.AddChild<ES_SkillTianFu, Transform>(go.transform);
-                    go.SetActive(false);
-                }
-
-                return this.m_es_skilltianfu;
-            }
-        }
-
         public ES_SkillMake ES_SkillMake
         {
             get
@@ -208,7 +188,6 @@ namespace ET.Client
 			this.m_E_Type_0Toggle = null;
 			this.m_es_skilllearn = null;
 			this.m_es_skillset = null;
-			this.m_es_skilltianfu = null;
 			this.m_es_skillmake = null;
 			this.m_es_skilllifeshield = null;
 			this.m_es_skillAugment = null;
@@ -229,7 +208,6 @@ namespace ET.Client
 		private UnityEngine.UI.Toggle m_E_Type_0Toggle = null;
 		private EntityRef<ES_SkillLearn> m_es_skilllearn = null;
 		private EntityRef<ES_SkillSet> m_es_skillset = null;
-		private EntityRef<ES_SkillTianFu> m_es_skilltianfu = null;
 		private EntityRef<ES_SkillMake> m_es_skillmake = null;
 		private EntityRef<ES_SkillLifeShield> m_es_skilllifeshield = null;
 		private EntityRef<ES_SkillAugment> m_es_skillAugment = null;
