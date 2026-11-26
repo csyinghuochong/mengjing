@@ -60,7 +60,6 @@ namespace ET.Client
 
         public static void OnUpdateUI(this ES_GemTalentItem self, bool unlocked, bool active, bool selected)
         {
-            self.BGHuiButton.interactable = unlocked;
             self.BGOpen.SetActive(unlocked);
             self.BGActivate.SetActive(unlocked && active);
             self.SetSelectionVisible(selected);

@@ -25,7 +25,7 @@ namespace ET.Client
 			self.E_ReturnButton.AddListener(self.OnReturnButton);
 			self.E_ActiveGemTalentButton.AddListenerAsync(self.OnActiveGemTalentButton);
 			self.E_ReSetButton.AddListener(self.OnReSetButton);
-			self.EG_ActiveInfoRectTransform.gameObject.SetActive(false);
+			self.SetActiveInfoVisible(false);
 
 			self.AreaLockRectTransforms[0] = self.EG_AreaLock_1RectTransform;
 			self.AreaLockRectTransforms[1] = self.EG_AreaLock_2RectTransform;
@@ -128,7 +128,8 @@ namespace ET.Client
 				self.SelectGemTalentId = self.GetDefaultSelectGemTalentId(maxPoint);
 			}
 
-			Sprite selectedIcon = null;
+			GemTalentConfig displayConfig = null;
+			Sprite displayIcon = null;
 			for (int i = 0; i < self.GemTalentItems.Count; i++)
 			{
 				ES_GemTalentItem item = self.GemTalentItems[i];
@@ -143,13 +144,14 @@ namespace ET.Client
 				bool active = gemTalentComponent.HaveGemTalent(item.GemTalentId);
 				bool selected = self.SelectGemTalentId == item.GemTalentId;
 				item.OnUpdateUI(unlocked, active, selected);
-				if (selected)
+				if (selected || (self.SelectGemTalentId == 0 && displayConfig == null))
 				{
-					selectedIcon = item.E_ImageIconImage.sprite;
+					displayConfig = gemTalentConfig;
+					displayIcon = item.E_ImageIconImage.sprite;
 				}
 			}
 
-			self.RefreshGemTalentInfo(selectedIcon);
+			self.RefreshGemTalentInfo(displayConfig, displayIcon);
 		}
 
 		private static int GetDefaultSelectGemTalentId(this ES_GemTalent self, int maxPoint)
@@ -173,19 +175,25 @@ namespace ET.Client
 		}
 
 		/// <summary>
-		/// 点击天赋节点：未解锁区域内的天赋不能选中
+		/// 点击天赋节点：未解锁时提示区域所需点数
 		/// </summary>
 		public static void OnClickGemTalentItem(this ES_GemTalent self, int gemTalentId)
 		{
 			GemTalentConfig gemTalentConfig = GemTalentConfigCategory.Instance.GetOrDefault(gemTalentId);
-			if (gemTalentConfig == null)
+			GemTalentComponentC gemTalentComponent = self.Root().GetComponent<GemTalentComponentC>();
+			if (gemTalentConfig == null || gemTalentComponent == null)
 			{
 				return;
 			}
 
-			GemTalentComponentC gemTalentComponent = self.Root().GetComponent<GemTalentComponentC>();
 			if (!GemTalentHelper.IsAreaUnlocked(gemTalentConfig.Area, gemTalentComponent.GetMaxPoint()))
 			{
+				GemTalentAreaConfig areaConfig = GemTalentAreaConfigCategory.Instance.GetOrDefault(gemTalentConfig.Area);
+				if (areaConfig != null)
+				{
+					FlyTipComponent.Instance.ShowFlyTip($"累计{areaConfig.NeedTotalPoint}宝石点数解锁此区域");
+				}
+
 				return;
 			}
 
@@ -194,17 +202,16 @@ namespace ET.Client
 		}
 
 		/// <summary>
-		/// 刷新右侧天赋详情：已激活隐藏整个激活区(消耗点数和激活按钮)，点数不足时按钮置灰
+		/// 刷新右侧天赋详情：预览或已激活时隐藏激活区，点数不足时按钮置灰
 		/// </summary>
-		private static void RefreshGemTalentInfo(this ES_GemTalent self, Sprite selectedIcon)
+		private static void RefreshGemTalentInfo(this ES_GemTalent self, GemTalentConfig gemTalentConfig, Sprite displayIcon)
 		{
-			self.E_GemTalentIconImage.sprite = selectedIcon;
-			self.E_GemTalentIconImage.enabled = selectedIcon != null;
+			self.E_GemTalentIconImage.sprite = displayIcon;
+			self.E_GemTalentIconImage.enabled = displayIcon != null;
 
-			GemTalentConfig gemTalentConfig = GemTalentConfigCategory.Instance.GetOrDefault(self.SelectGemTalentId);
 			if (gemTalentConfig == null)
 			{
-				self.EG_ActiveInfoRectTransform.gameObject.SetActive(false);
+				self.SetActiveInfoVisible(false);
 				return;
 			}
 
@@ -214,18 +221,24 @@ namespace ET.Client
 			self.E_CostPointText.text = $"消耗宝石点数：{gemTalentConfig.CostPoint}";
 
 			GemTalentComponentC gemTalentComponent = self.Root().GetComponent<GemTalentComponentC>();
-			if (gemTalentComponent.HaveGemTalent(gemTalentConfig.Id))
+			if (self.SelectGemTalentId == 0 || gemTalentComponent.HaveGemTalent(gemTalentConfig.Id))
 			{
-				self.EG_ActiveInfoRectTransform.gameObject.SetActive(false);
+				self.SetActiveInfoVisible(false);
 				return;
 			}
 
-			self.EG_ActiveInfoRectTransform.gameObject.SetActive(true);
+			self.SetActiveInfoVisible(true);
 
 			int leftPoint = gemTalentComponent.GetLeftPoint();
 			bool canActive = leftPoint >= gemTalentConfig.CostPoint;
 			self.E_ActiveGemTalentButton.interactable = canActive;
 			CommonViewHelper.SetImageGray(self.Root(), self.E_ActiveGemTalentButton.gameObject, !canActive);
+		}
+
+		private static void SetActiveInfoVisible(this ES_GemTalent self, bool visible)
+		{
+			self.EG_ActiveInfoRectTransform.gameObject.SetActive(visible);
+			self.E_GemPointIconImage?.gameObject.SetActive(visible);
 		}
 
 		private static async ETTask OnActiveGemTalentButton(this ES_GemTalent self)
