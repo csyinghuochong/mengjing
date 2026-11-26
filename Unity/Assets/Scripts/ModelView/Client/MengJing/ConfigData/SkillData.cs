@@ -8,8 +8,8 @@ namespace ET.Client
         public static Dictionary<string, long> AckExitTime = new()
         {
             { "Act_1", 700 },
-            { "Act_2", 1100 },
-            { "Act_3", 1100 },
+            { "Act_2", 700 },
+            { "Act_3", 700 },
             { "Act_11", 900 },
             { "Act_12", 900 },
             { "Act_13", 900 }
