@@ -124,7 +124,8 @@ namespace ET.Client
             BagComponentC bagComponent = self.Root().GetComponent<BagComponentC>();
             UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
             ItemInfo bagInfo = bagComponent.GetEquipBySubType(ItemLocType.ItemLocEquip, (int)ItemSubTypeEnum.Wuqi);
-            self.View.ES_ModelShow.SetCameraPosition(new Vector3(0f, 70f, 270f));
+            self.View.ES_ModelShow.SetCameraPosition(new Vector3(0f, 60f, 270f));
+            self.View.ES_ModelShow.Camera.fieldOfView = 45;
             self.View.ES_ModelShow.ShowPlayerModel(bagInfo, userInfoComponent.UserInfo.Occ, 0, new List<int>(), playAnim: false, renderTextureSize: new Vector2Int(1024, 1024));
         }
         
