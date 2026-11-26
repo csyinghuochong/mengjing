@@ -5,7 +5,6 @@ namespace ET.Client
     [FriendOf(typeof (ES_TaskGrowUp))]
     [FriendOf(typeof (ES_TaskDetail))]
     [FriendOf(typeof (ES_TaskShop))]
-    [FriendOf(typeof (ES_MonsterTuJian))]
     [FriendOf(typeof (ES_Story))]
     [FriendOf(typeof (DlgTask))]
     public static class DlgTaskSystem
@@ -37,9 +36,6 @@ namespace ET.Client
                     self.View.ES_TaskShop.uiTransform.gameObject.SetActive(true);
                     break;
                 case 3:
-                    self.View.ES_MonsterTuJian.uiTransform.gameObject.SetActive(true);
-                    break;
-                case 4:
                     self.View.ES_Story.uiTransform.gameObject.SetActive(true);
                     break;
                 default:

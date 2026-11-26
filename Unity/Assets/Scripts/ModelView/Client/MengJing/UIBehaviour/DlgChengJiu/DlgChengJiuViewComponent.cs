@@ -144,6 +144,26 @@ namespace ET.Client
 			}
 		}
 		
+		public ES_MonsterTuJian ES_MonsterTuJian
+		{
+			get
+			{
+				ES_MonsterTuJian es = this.m_es_monsterTuJian;
+				if (es == null)
+				{
+					string path = "Assets/Bundles/UI/Common/ES_MonsterTuJian.prefab";
+					GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
+					GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
+					go.SetActive(true);
+					this.AssetList.Add(path);
+					this.m_es_monsterTuJian = this.AddChild<ES_MonsterTuJian, Transform>(go.transform);
+					go.SetActive(false);
+				}
+
+				return this.m_es_monsterTuJian;
+			}
+		}
+
 		public void DestroyWidget()
 		{
 			this.m_EG_SubViewRectTransform = null;
@@ -154,6 +174,7 @@ namespace ET.Client
 			this.m_es_chengjiujingling = null;
 			this.m_es_pettujian = null;
 			this.m_ES_ChengJiuPetTuJian = null;
+			this.m_es_monsterTuJian = null;
 			this.uiTransform = null;
 			
 			ResourcesLoaderComponent resourcesLoaderComponent = this.Root().GetComponent<ResourcesLoaderComponent>();
@@ -172,6 +193,7 @@ namespace ET.Client
 		private EntityRef<ES_ChengJiuJingling> m_es_chengjiujingling = null;
 		private EntityRef<ES_PetTuJian> m_es_pettujian = null;
 		private EntityRef<ES_ChengJiuPetTuJian> m_ES_ChengJiuPetTuJian = null;
+		private EntityRef<ES_MonsterTuJian> m_es_monsterTuJian = null;
 		
 		public Transform uiTransform = null;
 	}

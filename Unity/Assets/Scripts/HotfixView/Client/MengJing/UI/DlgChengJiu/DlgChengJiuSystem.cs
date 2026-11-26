@@ -4,6 +4,7 @@ namespace ET.Client
 {
     [FriendOf(typeof(ES_ChengJiuPetTuJian))]
     [FriendOf(typeof(ES_PetTuJian))]
+    [FriendOf(typeof(ES_MonsterTuJian))]
     [FriendOf(typeof(ES_ChengJiuJingling))]
     [FriendOf(typeof(ES_ChengJiuShow))]
     [FriendOf(typeof(ES_ChengJiuReward))]
@@ -42,8 +43,11 @@ namespace ET.Client
                     break;
                 case 4:
                     self.View.ES_PetTuJian.uiTransform.gameObject.SetActive(true);
-                    
-                    self.View.ES_PetTuJian.OnUpdateUI();break;
+                    self.View.ES_PetTuJian.OnUpdateUI();
+                    break;
+                case 5:
+                    self.View.ES_MonsterTuJian.uiTransform.gameObject.SetActive(true);
+                    break;
             }
         }
     }
