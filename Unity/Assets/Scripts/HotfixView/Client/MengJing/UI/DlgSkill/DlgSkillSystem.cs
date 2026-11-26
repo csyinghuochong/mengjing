@@ -118,7 +118,8 @@ namespace ET.Client
                     self.View.ES_SkillSet.UpdateSkillListUI();
                     break;
                 case 2:
-                    self.View.ES_SkillTianFu.uiTransform.gameObject.SetActive(true);
+                    self.View.ES_SkillLongYin.uiTransform.gameObject.SetActive(true);
+                    self.View.ES_SkillLongYin.RefreshLongYinList();
                     break;
                 case 3:
                     self.View.ES_SkillLifeShield.uiTransform.gameObject.SetActive(true);
@@ -128,12 +129,11 @@ namespace ET.Client
                     self.View.ES_SkillMake.uiTransform.gameObject.SetActive(true);
                     break;
                 case 5:
-                    self.View.ES_SkillAugment.uiTransform.gameObject.SetActive(true);
-					self.View.ES_SkillAugment.RefreshSkillAugmentItems();
+                    self.View.ES_SkillTianFu.uiTransform.gameObject.SetActive(true);
                     break;
                 case 6:
-                    self.View.ES_SkillLongYin.uiTransform.gameObject.SetActive(true);
-                    self.View.ES_SkillLongYin.RefreshLongYinList();
+                    self.View.ES_SkillAugment.uiTransform.gameObject.SetActive(true);
+                    self.View.ES_SkillAugment.RefreshSkillAugmentItems();
                     break;
             }
         }
