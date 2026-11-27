@@ -17,6 +17,10 @@ namespace ET.Client
 		/// </summary>
 		public int SelectGemTalentId;
 		/// <summary>
+		/// 右侧当前展示的天赋节点 ID，包含预览节点
+		/// </summary>
+		public int DisplayGemTalentId;
+		/// <summary>
 		/// 区域遮罩节点，按区域id-1索引
 		/// </summary>
 		public RectTransform[] AreaLockRectTransforms = new RectTransform[3];

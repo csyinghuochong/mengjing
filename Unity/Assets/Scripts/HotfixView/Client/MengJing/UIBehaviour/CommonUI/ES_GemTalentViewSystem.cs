@@ -202,10 +202,11 @@ namespace ET.Client
 		}
 
 		/// <summary>
-		/// 刷新右侧天赋详情，预览未激活天赋时显示消耗信息并隐藏激活按钮
+		/// 刷新右侧天赋详情，预览未激活的天赋时也显示激活按钮
 		/// </summary>
 		private static void RefreshGemTalentInfo(this ES_GemTalent self, GemTalentConfig gemTalentConfig, Sprite displayIcon)
 		{
+			self.DisplayGemTalentId = gemTalentConfig?.Id ?? 0;
 			self.E_GemTalentIconImage.sprite = displayIcon;
 			self.E_GemTalentIconImage.enabled = displayIcon != null;
 
@@ -220,21 +221,15 @@ namespace ET.Client
 			self.E_GemTalentDescText.text = gemTalentConfig.Des;
 			self.E_CostPointText.text = $"消耗宝石点数：{gemTalentConfig.CostPoint}";
 
-			GemTalentComponentC gemTalentComponent = self.Root().GetComponent<GemTalentComponentC>();
+			Scene root = self.Root();
+			GemTalentComponentC gemTalentComponent = root.GetComponent<GemTalentComponentC>();
 			bool activated = gemTalentComponent.HaveGemTalent(gemTalentConfig.Id);
-			bool showActivationButton = self.SelectGemTalentId != 0 && !activated;
-			Button activationButton = self.E_ActiveGemTalentButton;
-			activationButton.gameObject.SetActive(showActivationButton);
 			self.SetActivationVisibility(activated, !activated);
-			if (!showActivationButton)
+			if (!activated)
 			{
-				return;
+				bool notEnoughPoints = gemTalentComponent.GetLeftPoint() < gemTalentConfig.CostPoint;
+				CommonViewHelper.SetImageGray(root, self.E_ActiveGemTalentButton.gameObject, notEnoughPoints);
 			}
-
-			int leftPoint = gemTalentComponent.GetLeftPoint();
-			bool canActive = leftPoint >= gemTalentConfig.CostPoint;
-			activationButton.interactable = canActive;
-			CommonViewHelper.SetImageGray(self.Root(), activationButton.gameObject, !canActive);
 		}
 
 		private static void SetActivationVisibility(this ES_GemTalent self, bool activated, bool showActiveInfo)
@@ -245,15 +240,30 @@ namespace ET.Client
 
 		private static async ETTask OnActiveGemTalentButton(this ES_GemTalent self)
 		{
-			if (self.SelectGemTalentId == 0)
+			Scene root = self.Root();
+			GemTalentConfig gemTalentConfig = GemTalentConfigCategory.Instance.GetOrDefault(self.DisplayGemTalentId);
+			GemTalentComponentC gemTalentComponent = root.GetComponent<GemTalentComponentC>();
+			if (gemTalentConfig == null || gemTalentComponent == null)
 			{
 				return;
 			}
 
-			int error = await GemTalentNetHelper.ActiveGemTalent(self.Root(), self.SelectGemTalentId);
+			if (!GemTalentHelper.IsAreaUnlocked(gemTalentConfig.Area, gemTalentComponent.GetMaxPoint()))
+			{
+				HintHelp.ShowErrorHint(root, ErrorCode.ERR_GemTalentAreaLock, 0);
+				return;
+			}
+
+			if (gemTalentComponent.GetLeftPoint() < gemTalentConfig.CostPoint)
+			{
+				HintHelp.ShowErrorHint(root, ErrorCode.ERR_GemTalentPointNotEnough, 0);
+				return;
+			}
+
+			int error = await GemTalentNetHelper.ActiveGemTalent(root, gemTalentConfig.Id);
 			if (error != ErrorCode.ERR_Success)
 			{
-				HintHelp.ShowErrorHint(self.Root(), error);
+				HintHelp.ShowErrorHint(root, error);
 				return;
 			}
 

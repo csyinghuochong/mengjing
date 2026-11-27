@@ -18,7 +18,7 @@ namespace ET.Client
             return hintStr;
         }
 
-        public static void ShowErrorHint(Scene root, int code)
+        public static void ShowErrorHint(Scene root, int code, int type = 1)
         {
             if (code == 0)
             {
@@ -34,7 +34,7 @@ namespace ET.Client
                 return;
             }
 
-            ShowHint(root, GetErrorHint(code), 1);
+            ShowHint(root, GetErrorHint(code), type);
         }
 
         public static void ShowHint(Scene root, string str, int type = 0)
