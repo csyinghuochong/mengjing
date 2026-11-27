@@ -25,7 +25,7 @@ namespace ET.Client
 			self.E_ReturnButton.AddListener(self.OnReturnButton);
 			self.E_ActiveGemTalentButton.AddListenerAsync(self.OnActiveGemTalentButton);
 			self.E_ReSetButton.AddListener(self.OnReSetButton);
-			self.SetActiveInfoVisible(false);
+			self.SetActivationVisibility(false, false);
 
 			self.AreaLockRectTransforms[0] = self.EG_AreaLock_1RectTransform;
 			self.AreaLockRectTransforms[1] = self.EG_AreaLock_2RectTransform;
@@ -202,7 +202,7 @@ namespace ET.Client
 		}
 
 		/// <summary>
-		/// 刷新右侧天赋详情：预览或已激活时隐藏激活区，点数不足时按钮置灰
+		/// 刷新右侧天赋详情，预览未激活天赋时显示消耗信息并隐藏激活按钮
 		/// </summary>
 		private static void RefreshGemTalentInfo(this ES_GemTalent self, GemTalentConfig gemTalentConfig, Sprite displayIcon)
 		{
@@ -211,7 +211,7 @@ namespace ET.Client
 
 			if (gemTalentConfig == null)
 			{
-				self.SetActiveInfoVisible(false);
+				self.SetActivationVisibility(false, false);
 				return;
 			}
 
@@ -221,24 +221,26 @@ namespace ET.Client
 			self.E_CostPointText.text = $"消耗宝石点数：{gemTalentConfig.CostPoint}";
 
 			GemTalentComponentC gemTalentComponent = self.Root().GetComponent<GemTalentComponentC>();
-			if (self.SelectGemTalentId == 0 || gemTalentComponent.HaveGemTalent(gemTalentConfig.Id))
+			bool activated = gemTalentComponent.HaveGemTalent(gemTalentConfig.Id);
+			bool showActivationButton = self.SelectGemTalentId != 0 && !activated;
+			Button activationButton = self.E_ActiveGemTalentButton;
+			activationButton.gameObject.SetActive(showActivationButton);
+			self.SetActivationVisibility(activated, !activated);
+			if (!showActivationButton)
 			{
-				self.SetActiveInfoVisible(false);
 				return;
 			}
 
-			self.SetActiveInfoVisible(true);
-
 			int leftPoint = gemTalentComponent.GetLeftPoint();
 			bool canActive = leftPoint >= gemTalentConfig.CostPoint;
-			self.E_ActiveGemTalentButton.interactable = canActive;
-			CommonViewHelper.SetImageGray(self.Root(), self.E_ActiveGemTalentButton.gameObject, !canActive);
+			activationButton.interactable = canActive;
+			CommonViewHelper.SetImageGray(self.Root(), activationButton.gameObject, !canActive);
 		}
 
-		private static void SetActiveInfoVisible(this ES_GemTalent self, bool visible)
+		private static void SetActivationVisibility(this ES_GemTalent self, bool activated, bool showActiveInfo)
 		{
-			self.EG_ActiveInfoRectTransform.gameObject.SetActive(visible);
-			self.E_GemPointIconImage?.gameObject.SetActive(visible);
+			self.EG_ActiveInfoRectTransform.gameObject.SetActive(showActiveInfo);
+			self.E_ActivatedText.gameObject.SetActive(activated);
 		}
 
 		private static async ETTask OnActiveGemTalentButton(this ES_GemTalent self)

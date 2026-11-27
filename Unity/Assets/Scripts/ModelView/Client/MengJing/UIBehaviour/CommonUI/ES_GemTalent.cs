@@ -416,23 +416,6 @@ namespace ET.Client
      		}
      	}
 
-		public UnityEngine.UI.Image E_GemPointIconImage
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_GemPointIconImage == null )
-     			{
-		    		this.m_E_GemPointIconImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Right/E_GemPointIcon");
-     			}
-     			return this.m_E_GemPointIconImage;
-     		}
-     	}
-
 		public UnityEngine.UI.Image E_GemTalentIconImage
      	{
      		get
@@ -569,6 +552,23 @@ namespace ET.Client
      		}
      	}
 
+		public UnityEngine.UI.Text E_ActivatedText
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_ActivatedText == null )
+     			{
+		    		this.m_E_ActivatedText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Right/E_Activated");
+     			}
+     			return this.m_E_ActivatedText;
+     		}
+     	}
+
 		public UnityEngine.UI.Button E_ReSetButton
      	{
      		get
@@ -640,7 +640,6 @@ namespace ET.Client
 			this.m_E_AllPointText = null;
 			this.m_E_LeftPointText = null;
 			this.m_E_HintText = null;
-			this.m_E_GemPointIconImage = null;
 			this.m_E_GemTalentIconImage = null;
 			this.m_E_GemTalentNameText = null;
 			this.m_E_GemTalentDescText = null;
@@ -649,6 +648,7 @@ namespace ET.Client
 			this.m_E_CostPointText = null;
 			this.m_E_ActiveGemTalentButton = null;
 			this.m_E_ActiveGemTalentImage = null;
+			this.m_E_ActivatedText = null;
 			this.m_E_ReSetButton = null;
 			this.m_E_ReSetImage = null;
 			this.uiTransform = null;
@@ -677,7 +677,6 @@ namespace ET.Client
 		private UnityEngine.UI.Text m_E_AllPointText = null;
 		private UnityEngine.UI.Text m_E_LeftPointText = null;
 		private UnityEngine.UI.Text m_E_HintText = null;
-		private UnityEngine.UI.Image m_E_GemPointIconImage = null;
 		private UnityEngine.UI.Image m_E_GemTalentIconImage = null;
 		private UnityEngine.UI.Text m_E_GemTalentNameText = null;
 		private UnityEngine.UI.Text m_E_GemTalentDescText = null;
@@ -686,6 +685,7 @@ namespace ET.Client
 		private UnityEngine.UI.Text m_E_CostPointText = null;
 		private UnityEngine.UI.Button m_E_ActiveGemTalentButton = null;
 		private UnityEngine.UI.Image m_E_ActiveGemTalentImage = null;
+		private UnityEngine.UI.Text m_E_ActivatedText = null;
 		private UnityEngine.UI.Button m_E_ReSetButton = null;
 		private UnityEngine.UI.Image m_E_ReSetImage = null;
 		public Transform uiTransform = null;
