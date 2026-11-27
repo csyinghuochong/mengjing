@@ -336,6 +336,48 @@
     "BuffToSkill": ""
   },
   {
+    "Id": 11100015,
+    "BuffName": "移速降低",
+    "BroadcastType": 0,
+    "BuffLv": 1,
+    "Transfer": 0,
+    "BuffIconType": "0",
+    "BuffIcon": "0",
+    "BuffTime": 3000,
+    "BuffDelayTime": 0,
+    "BuffLoopTime": 0,
+    "TargetType": 4,
+    "BuffScript": "RoleBuff_Attribute",
+    "BuffType": 1,
+    "BuffBenefitType": 2,
+    "buffParameterType": 100912,
+    "buffParameterValue": -0.4,
+    "buffParameterValue2": "",
+    "buffParameterValueType": 0,
+    "buffParameterValueDef": 1,
+    "BuffAddClass": 0,
+    "BuffAddClassMax": 0,
+    "BuffAddSync": 0,
+    "WeiYiBuffID": "0",
+    "DamgeType": 0,
+    "DamgePro": 0,
+    "DamgeValue": 0,
+    "IfImmediatelyUse": 0,
+    "IfShowIconTips": 1,
+    "BuffEffectID": 210004,
+    "BuffDescribe": "移速降低40%",
+    "BuffTargetType": [
+      0
+    ],
+    "Remove": 0,
+    "MoveAction": 0,
+    "AddSkill": [
+      0
+    ],
+    "DeadNoRemove": 0,
+    "BuffToSkill": ""
+  },
+  {
     "Id": 11100210,
     "BuffName": "速度提升",
     "BroadcastType": 0,
